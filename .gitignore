@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+# User files generated work workstation
+*.pro.user
+*.autosave
+*.user
