@@ -85,16 +85,16 @@ void statisticalPrintOut(size_t m, size_t n,
 
 void fitting(size_t m, size_t n, double ftol, double xtol, double gtol, int maxfev,
              double epsfcn, int mode, double factor, int nprint,
-             const struct parameter_constraints *st_ptr, double *x,
+             const struct parameter_constraints *st_ptr,
              struct parameterStr * parametersStr,
              double * xInitial, const size_t interants, const double factorMax,
              const double factorScale);
 
 void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol, int maxfev,
              double epsfcn, int mode, double factor, int nprint,
-             const struct parameter_constraints *st_ptr, double *x,
+             const struct parameter_constraints *st_ptr,
              struct parameterStr * parametersStr, const double ExpStddev,
-             const double *Numerical_Phase,const  double *Analytical_Phase,
+             const double *Numerical_Phase, const  double *Analytical_Phase,
              double *xInitial, const size_t interants, const double factorMax,
              const double factorScale);
 

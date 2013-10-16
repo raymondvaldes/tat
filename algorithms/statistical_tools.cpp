@@ -477,10 +477,11 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
 ///Prepare output file
     std::ofstream myfile;
     std::ostringstream filename;
+    filesystem::makeDir(parametersStr->dir, "debug");
 
     if(debugPrint)
     {
-        filename <<  "debug/perturbationTestLog.dat";
+        filename <<  "../debug/perturbationTestLog.dat";
         myfile.open(filename.str().c_str());
         myfile << std::setprecision(8);
         myfile << spread << "\t" << xnumber << "\t" << parametersStr->N << "\n";
@@ -800,13 +801,14 @@ void lthermalOptimization(const size_t n, const double ftol, const double xtol,
 ///Initial Fit to get initial guesses
     constexpr size_t interants = 0;
     fitting(parametersStr->L_end, parametersStr->N, ftol, xtol, gtol, maxfev,
-            epsfcn, mode, factor, nprint, st_ptr, xInitial, parametersStr,
+            epsfcn, mode, factor, nprint, st_ptr, parametersStr,
             xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
+    filesystem::makeDir(parametersStr->dir, "debug");
     std::ofstream myoutputfile;
     std::stringstream filename1;
-    filename1 <<  "data/ParameterUncertainty.dat";
+    filename1 <<  "../data/ParameterUncertainty.dat";
     myoutputfile.open(filename1.str().c_str());
     myoutputfile << std::setprecision(8);
 
@@ -977,18 +979,18 @@ void statisticalPrintOut(size_t P, size_t N,
     return;
 }
 
-void fitting(size_t P, size_t N, double ftol, double xtol, double gtol, int maxfev,
-             double epsfcn, int mode, double factor, int nprint,
-             const struct parameter_constraints *st_ptr, double *x,
-             struct parameterStr * parametersStr,
-             double *xInitial, const size_t interants, const double factorMax,
+void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
+             int maxfev, double epsfcn, int mode, double factor, int nprint,
+             const struct parameter_constraints *st_ptr,
+             struct parameterStr * parametersStr, double *xInitial,
+             const size_t interants, const double factorMax,
              const double factorScale)
 {
 /// Scale jacobian if enabled
     double *xpredicted = new double[N];
     std::ofstream myfile;
     std::stringstream filename;
-    filename <<  "data/fittingData.dat";
+    filename <<  "../data/fittingData.dat";
     myfile.open(filename.str().c_str());
     myfile << std::setprecision(8);
     myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
@@ -1038,7 +1040,7 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol, int maxf
 
 void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol,
                int maxfev, double epsfcn, int mode, double factor, int nprint,
-               const struct parameter_constraints *st_ptr, double *x,
+               const struct parameter_constraints *st_ptr,
                struct parameterStr * parametersStr, const double ExpStddev,
                const double *Numerical_Phase,const  double *Analytical_Phase,
                double *xInitial, const size_t interants, const double factorMax,
@@ -1049,7 +1051,7 @@ void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol,
 /// Scale jacobian if enabled
     std::ofstream myfile;
     std::stringstream filename;
-    filename <<  "data/fittingData.dat";
+    filename <<  "../data/fittingData.dat";
     myfile.open(filename.str().c_str());
     myfile << std::setprecision(8);
     myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";

@@ -481,7 +481,7 @@ HeatModel2DAna::TemperaturePrintOut(const double omega,
     {
         std::ofstream myfile;
         std::stringstream filename;
-        filename << dir  << "/" <<"data/T2DProfile/T" << n <<".dat";
+        filename << dir  << "/" <<"../data/T2DProfile/T" << n <<".dat";
         myfile.open(filename.str().c_str());
         myfile << std::setprecision(8);
 

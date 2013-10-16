@@ -43,11 +43,8 @@ int main( int argc, char *argv[] )
     pStruct->iter = 1000;
 
 /// Input Directory Information
-    /*  std::stringstream filename;
-        filename << dir << "/data/emissionPredicted.dat" ; */
-//    boost::filesystem::path pProgram (argv[0]);
-//    std::string dir = pProgram.parent_path().string();
-//    pStruct->dir = dir;
+    pStruct->dir = filesystem::workingDir();
+    filesystem::makeDir(pStruct->dir, "data");
 
 /////Parameter Estimation Options
     /* - N number of thermal parameters to be fitted
@@ -203,7 +200,7 @@ int main( int argc, char *argv[] )
     xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
 
  //Many fit test
-    if (false)
+    if (true)
     {
         constexpr size_t interants = 1;
         for(size_t nn = 0; nn < pStruct->L_end; ++nn )
@@ -213,7 +210,7 @@ int main( int argc, char *argv[] )
         }
 
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev, epsfcn,
-                mode, factor, nprint, st_ptr, xInitial, pStruct, xInitial,
+                mode, factor, nprint, st_ptr, pStruct, xInitial,
                 interants, factorMax, factorScale);
     }
 

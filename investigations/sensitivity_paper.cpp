@@ -189,6 +189,7 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
     }
 
     ///Print stuff
+
     std::ofstream myfile;
     std::stringstream filename;
     filename <<  "data/figureSensitivityIntro.dat";
@@ -230,7 +231,7 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
 void CC_APS2(struct parameterStr *pStruct)
 {
-    boost::filesystem::path dir("data/Valdes2013Sensitivity/APS2");
+    filesystem::makeDir(pStruct->dir, "data/APS2");
 
     /* This function is designed to complete the following 5 steps:
      (1) to create the calibration curves for an APS sample
@@ -270,12 +271,12 @@ void CC_APS2(struct parameterStr *pStruct)
 /// Populate the experimental phase values in parameters99
     /* Step 1: l_thermal sweep to create calibration tables */
     constexpr size_t iterates = 20;
-    const std::string filename("data/APS2/calibrationCurves_APS2.dat");
+    const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
 
 /// Setup calibration curves
     constexpr size_t xnumber = 11; //keep this odd!!!!!!
     constexpr double bandSize = 0.1;
-    constexpr double spread = 0.10;
+    constexpr double spread = 0.30;
     constexpr double lmin1 = 0.04;
     constexpr double lmax2 = 4;
     class ::perturbStruct *pertStruct = nullptr;
@@ -327,15 +328,15 @@ void CC_APS2(struct parameterStr *pStruct)
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                epsfcn, mode, factor, nprint, &st_ptr, xInitial, pStruct,
-                xInitial, 0, factorMax, factorScale);
+                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 0,
+                factorMax, factorScale);
         delete[] xInitial;
 
 
         ///output data for printing
         std::ofstream myoutputfile;
         std::stringstream filename1;
-        filename1 <<  "data/APS2/experimentalFitted.dat";
+        filename1 <<  "../data/APS2/experimentalFitted.dat";
         myoutputfile.open(filename1.str().c_str());
         myoutputfile << std::setprecision(8);
 

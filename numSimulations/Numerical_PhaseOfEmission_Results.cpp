@@ -6,7 +6,7 @@ double Print_Emission(const double *phase, const double* num_phase,
     ///output data for printing
     std::ofstream myoutputfile;
     std::stringstream filename;
-    filename <<  "data/Emission.dat";
+    filename <<  "../data/EmissionHERE.dat";
     myoutputfile.open(filename.str().c_str());
     myoutputfile << std::setprecision(16);
 
@@ -20,7 +20,7 @@ double Print_Emission(const double *phase, const double* num_phase,
     ///output data for printing
     std::ofstream myoutputfile1;
     std::stringstream filename2;
-    filename2 <<  "data/Emission_error.dat";
+    filename2 <<  "../data/Emission_error.dat";
     myoutputfile1.open(filename2.str().c_str());
     myoutputfile1 << std::setprecision(16);
 

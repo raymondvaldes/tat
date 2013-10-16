@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     numSimulations/Numerical_PhaseOfEmission_Results.cpp \
     numSimulations/Numerical_PhaseOfEmission.cpp \
     numSimulations/models.cpp \
-    numSimulations/Experimental_PhaseOfEmission.cpp
+    numSimulations/Experimental_PhaseOfEmission.cpp \
+    tools/filesystem.cpp
 
 #header files
 HEADERS += \
@@ -33,7 +34,8 @@ HEADERS += \
     numSimulations/Numerical_PhaseOfEmission_Results.h \
     numSimulations/Numerical_PhaseOfEmission.h \
     numSimulations/models.h \
-    numSimulations/Experimental_PhaseOfEmission.h
+    numSimulations/Experimental_PhaseOfEmission.h \
+    tools/filesystem.hpp
 
 #gsl libraries
 LIBS += -L/usr/lib -lgsl -lgslcblas -lm
