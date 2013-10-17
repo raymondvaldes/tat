@@ -324,9 +324,11 @@ void CC_APS2(struct parameterStr *pStruct)
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 0,
+                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 1,
                 factorMax, factorScale);
         delete[] xInitial;
+
+
 
         ///output data for printing
         std::ofstream myoutputfile;

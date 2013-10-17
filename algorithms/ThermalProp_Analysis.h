@@ -1,6 +1,16 @@
 #ifndef THERMALPROP_ANALYSIS_H_INCLUDED
 #define THERMALPROP_ANALYSIS_H_INCLUDED
 
+int paramter_estimation(const size_t m, const size_t  n, double ftol,
+                        double xtol, double gtol,
+                        int maxfev, double epsfcn, int mode,
+                        double factor, int nprint, int *info, int *nfev,
+                        const struct parameter_constraints *pc_ptr,
+                        double *x,
+                        struct parameterStr * pStruct,
+                        const double factorMax, const double factorScale,
+                        double *xpredicted);
+
 void ThermalProp_Analysis(int P, int N, double*x, double*fvec, int*iflag,
                           const struct parameter_constraints* st_ptr,
                           struct parameterStr * parametersStr );

@@ -1014,6 +1014,12 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
                << pStruct->lambda << "\t"
                << pStruct->MSE << "\n";
 
+        std::cout << "hello again\n" <<pStruct->L_end << "\n\n";
+        for(size_t i = 0 ; i < pStruct->L_end; ++i)
+        {
+            std::cout  << pStruct->predicted[i] << "\n";
+        }
+
         printPEstimates(N, pStruct);
 //        for(size_t j=0; j< N; ++j)
 //            {xInitial[j] = 0;}
@@ -1022,16 +1028,13 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
            xInitial[2] = 42;
            xInitial[3] = 0.8;
            xInitial[4] = 0.57;
-
-        phase99(pStruct->L_end,
-                pStruct, pStruct->predicted);
-
-
-        std::cout << "\n";
     }
+
     myfile.close();
 
     delete []xpredicted;
+
+
 
     return;
 }

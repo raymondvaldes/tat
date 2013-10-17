@@ -20,8 +20,8 @@ void phase99(const size_t L_end,
         arrayVal[n] = PhaseOfEmission1DAna(n , parametersStr);
     }
 
-//    Print_Emission(parametersStr->laser->l_thermal, arrayVal, arrayVal,
-//                   parametersStr->laser->l_thermal, L_end);
+    Print_Emission(parametersStr->laser->l_thermal, arrayVal, arrayVal,
+                   parametersStr->laser->l_thermal, L_end);
     return;
 }
 

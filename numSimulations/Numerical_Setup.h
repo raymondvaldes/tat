@@ -1,14 +1,6 @@
 #ifndef NUMERICAL_SETUP_H_INCLUDED
 #define NUMERICAL_SETUP_H_INCLUDED
-int paramter_estimation(const size_t m, const size_t  n, double ftol,
-                        double xtol, double gtol,
-                        int maxfev, double epsfcn, int mode,
-                        double factor, int nprint, int *info, int *nfev,
-                        const struct parameter_constraints *pc_ptr,
-                        double *x,
-                        struct parameterStr * pStruct,
-                        const double factorMax, const double factorScale,
-                        double *xpredicted);
+
 
 void parameters_update(struct parameterStr * parametersStr, const size_t N);
 
