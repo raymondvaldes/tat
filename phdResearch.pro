@@ -77,5 +77,9 @@ QMAKE_CXXFLAGS += -Wuninitialized
 QMAKE_CXXFLAGS += -flto
 QMAKE_CXXFLAGS += -fwhole-program
 
+#compiler custom flags
+QMAKE_CXXFLAGS_DEBUG += -g
+
+
 #linker flags
 QMAKE_LFLAGS +=  -fopenmp

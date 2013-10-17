@@ -13,10 +13,9 @@ void makeDir(const std::string rootPath, const std::string newDirectory)
 
 std::string workingDir(void)
 {
-    boost::filesystem::path pProgram( boost::filesystem::current_path() );
-    std::string dir = pProgram.parent_path().string();
-
-    const std::string workingDirectory= dir + "/";
+    const boost::filesystem::path pProgram( boost::filesystem::current_path() );
+    std::string workingDirectory = pProgram.parent_path().string();
+    workingDirectory= workingDirectory + "/";
     std::cout << "working directory: " <<  workingDirectory << "\n";
 
     return workingDirectory;

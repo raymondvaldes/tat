@@ -4,6 +4,7 @@
 // Version 0.130108
 #include "Header.h"
 
+
 int main( int argc, char *argv[] )
 {
 /// Mesh Parameters
@@ -32,6 +33,7 @@ int main( int argc, char *argv[] )
     constexpr double beta1 = 100;
     constexpr double split = 0.5;
     class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split);
+
 
 /// Parameter Structure
     struct parameterStr *pStruct =
@@ -97,6 +99,7 @@ int main( int argc, char *argv[] )
                          .95   /*offset*/ ,
                          .05   /*amplitude*/);
     pStruct->laser = &CO2Laser;
+
 
 /// Thermal Properties
     /*
@@ -188,6 +191,10 @@ int main( int argc, char *argv[] )
     st_ptr->R0_min = 0;
     st_ptr->R0_max = 1;
 
+    // Initial Guess
+        double *xInitial;
+        xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
+
 //Optimize stretching in Substrate and declare variables to be fitted
     pStruct->parametersStrSetup(xParametersNames);
 
@@ -195,9 +202,6 @@ int main( int argc, char *argv[] )
     pStruct->thermalSetup(l_min, l_max, LendMinDecade);
     phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
 
-// Initial Guess
-    double *xInitial;
-    xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
 
  //Many fit test
     if (true)
