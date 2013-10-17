@@ -6,7 +6,7 @@ int paramter_estimation(const size_t m, const size_t  n, double ftol,
                         double factor, int nprint, int *info, int *nfev,
                         const struct parameter_constraints *pc_ptr,
                         double *x,
-                        struct parameterStr * parametersStr,
+                        struct parameterStr * pStruct,
                         const double factorMax, const double factorScale,
                         double *xpredicted);
 

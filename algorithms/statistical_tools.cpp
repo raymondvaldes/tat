@@ -589,7 +589,6 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
                                 epsfcn, mode, factor, nprint, &info, &nfev,
                                 st_ptr, xInitial, parametersStr,
                                 factorMax, factorScale, xpredicted);
-
             phase99(parametersStr->L_end,
                     parametersStr, parametersStr->predicted);
 
@@ -698,7 +697,6 @@ void lthermalSweep(const size_t m, const size_t n, const double ftol,
 
 ///Prepare output file
     std::ofstream myfile;
-
     myfile.open(filename);
     myfile << std::setprecision(8);
     myfile << pStruct->spread << "\t" << xnum << "\t" << parametersStr->N;
@@ -982,7 +980,7 @@ void statisticalPrintOut(size_t P, size_t N,
 void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
              int maxfev, double epsfcn, int mode, double factor, int nprint,
              const struct parameter_constraints *st_ptr,
-             struct parameterStr * parametersStr, double *xInitial,
+             struct parameterStr * pStruct, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale)
 {
@@ -1005,19 +1003,18 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
 
         paramter_estimation(P, N, ftol, xtol, gtol, maxfev, epsfcn, mode,
                             factor, nprint, &info, &nfev, st_ptr, xInitial,
-                            parametersStr, factorMax, factorScale, xpredicted);
-        parametersStr->MSE = MSE(parametersStr->L_end,
-                             parametersStr->emissionExperimental,
-                             parametersStr-> predicted);
+                            pStruct, factorMax, factorScale, xpredicted);
+        pStruct->MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
+                           pStruct->predicted);
 
-        myfile << parametersStr->gamma << "\t"
-               << parametersStr->a_sub << "\t"
-               << parametersStr->E_sigma << "\t"
-               << parametersStr->R1 << "\t"
-               << parametersStr->lambda << "\t"
-               << parametersStr->MSE << "\n";
+        myfile << pStruct->gamma << "\t"
+               << pStruct->a_sub << "\t"
+               << pStruct->E_sigma << "\t"
+               << pStruct->R1 << "\t"
+               << pStruct->lambda << "\t"
+               << pStruct->MSE << "\n";
 
-        printPEstimates(N, parametersStr);
+        printPEstimates(N, pStruct);
 //        for(size_t j=0; j< N; ++j)
 //            {xInitial[j] = 0;}
            xInitial[0] = 2.3;
@@ -1026,14 +1023,16 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
            xInitial[3] = 0.8;
            xInitial[4] = 0.57;
 
-        phase99(parametersStr->L_end,
-                parametersStr, parametersStr->predicted);
+        phase99(pStruct->L_end,
+                pStruct, pStruct->predicted);
+
 
         std::cout << "\n";
     }
     myfile.close();
 
     delete []xpredicted;
+
     return;
 }
 

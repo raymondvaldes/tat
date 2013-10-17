@@ -1745,7 +1745,7 @@ L100:
 }
 
 /************************qrsolv.c*************************
-#define BUG 0
+#define BUG0
 void
 qrsolv(n,r,ldr,ipvt,diag,qtb,x,sdiag,wa)
 int n,ldr;

@@ -2,7 +2,7 @@
 
 namespace SensitivityValdes2013
 {
-
+//BUG in emissionPredicted
 /*
 This namespace will hold all the functions necessary to reproduce the work
 in the Valdes2013 Sensitivity Paper.
@@ -226,11 +226,10 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
     delete []emissionExpR2;
 }
 
-
-
-
 void CC_APS2(struct parameterStr *pStruct)
 {
+
+
     filesystem::makeDir(pStruct->dir, "data/APS2");
 
     /* This function is designed to complete the following 5 steps:
@@ -274,18 +273,16 @@ void CC_APS2(struct parameterStr *pStruct)
     const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
 
 /// Setup calibration curves
-    constexpr size_t xnumber = 11; //keep this odd!!!!!!
+    constexpr size_t xnumber = 5; //keep this odd!!!!!!
+    assert( (xnumber) %2 == 1);
     constexpr double bandSize = 0.1;
     constexpr double spread = 0.30;
-    constexpr double lmin1 = 0.04;
-    constexpr double lmax2 = 4;
     class ::perturbStruct *pertStruct = nullptr;
     pertStruct = new class perturbStruct(pStruct->N, xnumber, spread,
-                                         lmin1, lmax2, iterates);
+                                         l_min, l_max, iterates);
     pertStruct->lthermalBands(bandSize);
-    constexpr size_t  lEndMin = 50;
 
-    if(true)
+    if(false)
     {
         /* There are three ways to layout the thermal spread.  The
         deterministic approach systematically varies the thermal penetration
@@ -301,7 +298,7 @@ void CC_APS2(struct parameterStr *pStruct)
         lthermalSweep(pStruct->L_end, pStruct->N, ftol, xtol, gtol,
                       maxfev, epsfcn, mode, factor, nprint, &st_ptr, xInitial,
                       pStruct, factorMax,factorScale, pertStruct, filename,
-                      lEndMin);
+                      LendMinDecade);
         delete[] xInitial;
     }
 
@@ -319,19 +316,17 @@ void CC_APS2(struct parameterStr *pStruct)
     if(true)
     {
         /* Create Initial Experimental Data for figure */
-        pStruct->thermalSetup(l_min, l_max, lEndMin);
-        phase99(pStruct->L_end,
-                pStruct, pStruct->emissionNominal);
-
+        pStruct->thermalSetup(l_min, l_max, LendMinDecade);
+        phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
         pStruct->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
                                pStruct->emissionNominal, l_min, l_max);
+
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
                 epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 0,
                 factorMax, factorScale);
         delete[] xInitial;
-
 
         ///output data for printing
         std::ofstream myoutputfile;
@@ -348,11 +343,10 @@ void CC_APS2(struct parameterStr *pStruct)
             myoutputfile << pStruct->emissionNominal[i] << "\n";
         }
         myoutputfile.close();
-
     }
 
 ///* Optimization Procedure for l-thermal  */
-    if(true)
+    if(false)
     {
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};

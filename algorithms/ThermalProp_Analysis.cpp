@@ -282,47 +282,20 @@ void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
 
 /// Estimates the phase of emission at each heating frequency
     const size_t lends = parametersStr->L_end;
-    double *temp = new double[lends];
-    size_t j;
-/*
-    The phase for each thermal penetration is calculated in parallel using the
-    OpenMP framework.  This gives significant increases in the speed of the code
-    for all ranges of L_end.  This also allows the code to be parallelized at
-    a very high level. No further modifications of the code is necessary.
-*/
-//#pragma omp parallel for schedule(dynamic) private(j)
-    for(j = 0 ; j < lends ; ++j )
-    {
-//        temp[j] = PhaseOfEmission2DAna(j, parametersStr) ;
-//        temp[j] = PhaseOfEmission1DNum(j , parametersStr);
-        temp[j] = PhaseOfEmission1DAna(j , parametersStr);
-    }
+    phase99(lends, parametersStr, parametersStr->predicted);
 
-    /// Evaluate Objective function
+/// Evaluate Objective function
     for(size_t n = 0 ; n < lends ; ++n )
     {
-       parametersStr->predicted[n] =  temp[n];
        fvec[n] =
-       parametersStr->emissionExperimental[n] - temp[n] ;
+       parametersStr->emissionExperimental[n] - parametersStr->predicted[n] ;
        parametersStr->fvec[n] = fvec[n];
     }
 
-/// Implement Weighting function
-//    for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
-//    {
-//       if(parametersStr->l_thermal[n] < .1 ||
-//          parametersStr->l_thermal[n] > 1.6)
-//       {
-//           fvec[n] *= .1;
-//       }
-//    }
-
 /// Print stuff to terminal
-//    parametersStr->MSE = MSE(lends, parametersStr->emissionExperimental, temp);
-//    printPEstimates(N, parametersStr);
-
-///End
-    delete []temp;
+    parametersStr->MSE = MSE(lends, parametersStr->emissionExperimental,
+                             parametersStr->predicted);
+    printPEstimates(N, parametersStr);
 
     return;
 }

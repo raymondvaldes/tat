@@ -37,7 +37,7 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
                         double gtol, int maxfev, double epsfcn, int mode,
                         double factor, int nprint, int *info, int *nfev,
                         const struct parameter_constraints *pc_ptr, double *x,
-                        struct parameterStr * parametersStr,
+                        struct parameterStr * pStruct,
                         const double factorMax, const double factorScale,
                         double *xpredicted)
 {
@@ -65,7 +65,7 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
     int *ipvt = new int[n];
     double *diag = new double[n];
 
-    scaleDiag(mode, n, diag, parametersStr );
+    scaleDiag(mode, n, diag, pStruct );
 
     double *xinitial = new double[n];
     double *xguess = new double[n];
@@ -75,14 +75,14 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
         xinitial[i] = x[i];
     }
 
-    for(size_t iter = 0; iter < parametersStr->iterPE; iter++ )
+    for(size_t iter = 0; iter < pStruct->iterPE; iter++ )
     {
         ///set initial guesses
         if ( x[0] == 0 )
         {
             for(size_t i=0 ; i<n ; ++i)
             {
-                switch ( parametersStr->xParametersNames[i] )
+                switch ( pStruct->xParametersNames[i] )
                 {
                     case asub :
                         x[i] = x_ini(pc_ptr->a_sub_min, pc_ptr->a_sub_max);
@@ -118,7 +118,7 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
         ///Transform inputs
         for(size_t i=0 ; i< n ; i++)
         {
-            switch ( parametersStr->xParametersNames[i] )
+            switch ( pStruct->xParametersNames[i] )
             {
                 case asub :
                     x[i] = kx_limiter2(x[i],pc_ptr->a_sub_min,pc_ptr->a_sub_max);
@@ -148,7 +148,7 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
         ///levenberg-marquardt algorithm
         lmdif(&ThermalProp_Analysis, m, n, x, fvec, ftol, xtol, gtol,
               maxfev, epsfcn, diag, mode, factor, nprint, info, nfev, fjac, m, ipvt,
-              qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr,parametersStr);
+              qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr,pStruct);
 
         ///Exit Routine
     /*
@@ -159,10 +159,10 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
     */
         constexpr double ExpStddev = 0;
         const double ExpVarianceEst = ExpStddev * ExpStddev;
-        parametersStr->fvecTotal = SobjectiveLS(parametersStr->L_end,
-                                          parametersStr->emissionExperimental,
-                                          parametersStr-> predicted);
-        const size_t v1 = parametersStr->L_end - n;
+        pStruct->fvecTotal = SobjectiveLS(pStruct->L_end,
+                                          pStruct->emissionExperimental,
+                                          pStruct-> predicted);
+        const size_t v1 = pStruct->L_end - n;
         double reduceChiSquare;
 
         if(ExpVarianceEst ==0 )
@@ -171,12 +171,12 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
         }
         else
         {
-            reduceChiSquare = (parametersStr->fvecTotal / ExpVarianceEst) / v1;
+            reduceChiSquare = (pStruct->fvecTotal / ExpVarianceEst) / v1;
         }
 
         if( reduceChiSquare < 2
            || factor == factorMax
-           || parametersStr->fvecTotal < parametersStr->MSETol
+           || pStruct->fvecTotal < pStruct->MSETol
            )
         {
 
@@ -185,56 +185,56 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
             const bool
             condition2 = factor == factorMax;
             const bool
-            condition3 = parametersStr->fvecTotal < parametersStr->MSETol;
+            condition3 = pStruct->fvecTotal < pStruct->MSETol;
 
 //            std::cout <<  "\nexit with     "
 //            << condition1 << "\t" << condition2
 //            << "\t" << condition3 <<"\n";
 //
-//            std::cout << "\n"<<reduceChiSquare << "\t" << parametersStr->fvecTotal
-//            << "\t" << parametersStr->MSETol << "\t" << factor << "\n";
+//            std::cout << "\n"<<reduceChiSquare << "\t" << pStruct->fvecTotal
+//            << "\t" << pStruct->MSETol << "\t" << factor << "\n";
 
             ///Transform outputs
             for(size_t i=0 ; i< n ; i++)
             {
-                switch ( parametersStr->xParametersNames[i] )
+                switch ( pStruct->xParametersNames[i] )
                 {
                     case asub :
-                        parametersStr->a_sub =
+                        pStruct->a_sub =
                         x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
-                        xpredicted[i] = parametersStr->a_sub;
+                        xpredicted[i] = pStruct->a_sub;
                         break;
 
                     case E1 :
-                        parametersStr->E_sigma =
+                        pStruct->E_sigma =
                         x_limiter2(x[i], pc_ptr->E_sigma_min,
                                    pc_ptr->E_sigma_max);
-                        xpredicted[i] = parametersStr->E_sigma;
+                        xpredicted[i] = pStruct->E_sigma;
                         break;
 
                     case gammaEff :
-                        parametersStr->gamma =
+                        pStruct->gamma =
                         x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
-                        xpredicted[i] = parametersStr->gamma;
+                        xpredicted[i] = pStruct->gamma;
                         break;
 
                     case R1 :
-                        parametersStr->R1 =
+                        pStruct->R1 =
                         x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
-                        xpredicted[i] = parametersStr->R1;
+                        xpredicted[i] = pStruct->R1;
                         break;
 
                     case lambda :
-                        parametersStr->lambda =
+                        pStruct->lambda =
                         x_limiter2(x[i], pc_ptr->lambda_min,
                                    pc_ptr->lambda_max);
-                        xpredicted[i] = parametersStr->lambda;
+                        xpredicted[i] = pStruct->lambda;
                         break;
 
                     case R0 :
-                        parametersStr->R0 =
+                        pStruct->R0 =
                         x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
-                        xpredicted[i] = parametersStr->R0;
+                        xpredicted[i] = pStruct->R0;
                         break;
 
                     default:
@@ -244,8 +244,11 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
                 }
             }
 
-            parameters_update(parametersStr, n);
-            parametersStr->iterPEnum = iter;
+            parameters_update(pStruct, n);
+            pStruct->iterPEnum = iter;
+
+            phase99(pStruct->L_end, pStruct, pStruct->predicted);
+
 
             delete [] qtf;
             delete [] wa1;
@@ -282,6 +285,14 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
         }
     }
 
+    std::cout << "\n";
+    for(size_t i = 0 ; i < pStruct->L_end; ++i)
+    {
+        std::cout << i <<"\t" <<pStruct->predicted[i] << "\n";
+    }
+    exit(-2);
+
+
     delete [] qtf;
     delete [] wa1;
     delete [] wa2;
@@ -300,31 +311,31 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
 }
 
 void scaleDiag(const int mode, const size_t N, double * diag,
-               const struct parameterStr * parametersStr )
+               const struct parameterStr * pStruct )
 {
     if(mode == 2)
     {
         for(size_t i = 0; i < N; ++i)
         {
-            switch ( parametersStr->xParametersNames[i] )
+            switch ( pStruct->xParametersNames[i] )
             {
                 case asub :
-                    diag[i] = parametersStr->a_sub;;
+                    diag[i] = pStruct->a_sub;;
                     break;
                 case E1 :
-                    diag[i] = parametersStr->E_sigma;
+                    diag[i] = pStruct->E_sigma;
                     break;
                 case gammaEff :
-                    diag[i] = parametersStr->gamma;
+                    diag[i] = pStruct->gamma;
                     break;
                 case R1 :
-                    diag[i] = parametersStr->R1 ;
+                    diag[i] = pStruct->R1 ;
                     break;
                 case lambda :
-                    diag[i] = parametersStr->lambda;
+                    diag[i] = pStruct->lambda;
                     break;
                 case R0 :
-                    diag[i] = parametersStr->R0;
+                    diag[i] = pStruct->R0;
                     break;
                 default:
                     std::cout << "\nSwitch Error!!\n";
@@ -448,69 +459,69 @@ size_t sumVector(const size_t *const vector1,const size_t sizeV)
     return sum;
 }
 
-void parameters_update(struct parameterStr * parametersStr,const size_t N)
+void parameters_update(struct parameterStr * pStruct,const size_t N)
 {
     for(size_t i=0 ; i< N ; ++i)
     {
-        if( parametersStr->xParametersNames[i] == asub ||
-            parametersStr->xParametersNames[i] == gammaEff)
+        if( pStruct->xParametersNames[i] == asub ||
+            pStruct->xParametersNames[i] == gammaEff)
             {
-                parameters_kcp_update(parametersStr, parametersStr->gamma,
-                                      parametersStr->a_sub);
+                parameters_kcp_update(pStruct, pStruct->gamma,
+                                      pStruct->a_sub);
             }
-//        else if( parametersStr->xParametersNames[i] == k_c ||
-//                 parametersStr->xParametersNames[i] == psi_c)
+//        else if( pStruct->xParametersNames[i] == k_c ||
+//                 pStruct->xParametersNames[i] == psi_c)
 //            {
-//                parameters_agamma_update(parametersStr,
-//                                         parametersStr->k1_thermal->offset,
-//                                         parametersStr->psi1_thermal->offset);
+//                parameters_agamma_update(pStruct,
+//                                         pStruct->k1_thermal->offset,
+//                                         pStruct->psi1_thermal->offset);
 //            }
     }
 
   return;
 }
 
-void parameters_kcp_update(struct parameterStr* parametersStr,
+void parameters_kcp_update(struct parameterStr* pStruct,
                            const double gamma, const double a_sub)
 {
-    parametersStr->a_sub = a_sub;
-    parametersStr->gamma = gamma;
+    pStruct->a_sub = a_sub;
+    pStruct->gamma = gamma;
 
-    parametersStr->effusivity_coat  = parametersStr->effusivity_sub;
-    parametersStr->effusivity_coat /= gamma;
+    pStruct->effusivity_coat  = pStruct->effusivity_sub;
+    pStruct->effusivity_coat /= gamma;
 
-    parametersStr->diffusivity_coat = parametersStr->diffusivity_sub ;
-    parametersStr->diffusivity_coat /= a_sub*a_sub;
+    pStruct->diffusivity_coat = pStruct->diffusivity_sub ;
+    pStruct->diffusivity_coat /= a_sub*a_sub;
 
-    parametersStr->psi1_thermal->offset = parametersStr->effusivity_coat;
-    parametersStr->psi1_thermal->offset /= sqrt( parametersStr->diffusivity_coat);
+    pStruct->psi1_thermal->offset = pStruct->effusivity_coat;
+    pStruct->psi1_thermal->offset /= sqrt( pStruct->diffusivity_coat);
 
-    parametersStr->k1_thermal->offset = parametersStr->psi1_thermal->offset;
-    parametersStr->k1_thermal->offset *= parametersStr->diffusivity_coat;
+    pStruct->k1_thermal->offset = pStruct->psi1_thermal->offset;
+    pStruct->k1_thermal->offset *= pStruct->diffusivity_coat;
 
     return;
 
 }
 
-void parameters_agamma_update(struct parameterStr* parametersStr,
+void parameters_agamma_update(struct parameterStr* pStruct,
                               const double k_c, const double psi_c)
 {
-    parametersStr->k1_thermal->offset = k_c;
-    parametersStr->psi1_thermal->offset = psi_c;
+    pStruct->k1_thermal->offset = k_c;
+    pStruct->psi1_thermal->offset = psi_c;
 
-    parametersStr->diffusivity_coat = k_c;
-    parametersStr->diffusivity_coat /= psi_c;
+    pStruct->diffusivity_coat = k_c;
+    pStruct->diffusivity_coat /= psi_c;
 
-    parametersStr->effusivity_coat = k_c;
-    parametersStr->effusivity_coat *= psi_c;
-    parametersStr->effusivity_coat = sqrt( parametersStr->effusivity_coat );
+    pStruct->effusivity_coat = k_c;
+    pStruct->effusivity_coat *= psi_c;
+    pStruct->effusivity_coat = sqrt( pStruct->effusivity_coat );
 
-    parametersStr->gamma  = parametersStr->effusivity_sub;
-    parametersStr->gamma /= parametersStr->effusivity_coat ;
+    pStruct->gamma  = pStruct->effusivity_sub;
+    pStruct->gamma /= pStruct->effusivity_coat ;
 
-    parametersStr->a_sub = parametersStr->diffusivity_sub;
-    parametersStr->a_sub /= parametersStr->diffusivity_coat;
-    parametersStr->a_sub = sqrt( parametersStr->a_sub );
+    pStruct->a_sub = pStruct->diffusivity_sub;
+    pStruct->a_sub /= pStruct->diffusivity_coat;
+    pStruct->a_sub = sqrt( pStruct->a_sub );
 
     return;
 }
@@ -1977,7 +1988,7 @@ void parameterStr::updateNMeasurements(const size_t Lend_)
     fjac = new double[Lend_*N];
     emissionExperimental    = new double[Lend_];
     emissionNominal         = new double[Lend_];
-    predicted                = new double[Lend_];
+    predicted               = new double[Lend_];
     fvec = new double[Lend_];
 }
 
