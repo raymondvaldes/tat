@@ -2,7 +2,6 @@
 
 namespace SensitivityValdes2013
 {
-//BUG in emissionPredicted
 /*
 This namespace will hold all the functions necessary to reproduce the work
 in the Valdes2013 Sensitivity Paper.
@@ -13,15 +12,15 @@ in the Valdes2013 Sensitivity Paper.
  - xtol difference in parameters
  - beta_iter is the total number of iterations to find beta2
  - beta_tol is how close dz_sub is to dz_coat */
-constexpr double ftol = 1.e-8;
-constexpr double xtol = 1.e-8;
-constexpr double gtol = 1.e-8;
+constexpr double ftol = 1.e-12;
+constexpr double xtol = 1.e-12;
+constexpr double gtol = 1.e-12;
 constexpr size_t maxfev = 1e5;
 
 constexpr double epsfcn = 1.e-2;
 constexpr double factor =  .01;
 
-constexpr double factorMax = 100;
+constexpr double factorMax = 1;
 constexpr double factorScale = 5;
 
 constexpr int mode = 1;
@@ -228,16 +227,13 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
 void CC_APS2(struct parameterStr *pStruct)
 {
-
-
-    filesystem::makeDir(pStruct->dir, "data/APS2");
-
     /* This function is designed to complete the following 5 steps:
      (1) to create the calibration curves for an APS sample
      (2) export data to a data-file
      (3) create experimental data and explort to data-file
      (4) fit the experimental data to the model
      (5) report parameteres and uncertainty using the calibration curves */
+    filesystem::makeDir(pStruct->dir, "data/APS2");
     pStruct->L_end = LendMinDecade;
 
     /// Parameter Estimation Constraints
@@ -273,16 +269,16 @@ void CC_APS2(struct parameterStr *pStruct)
     const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
 
 /// Setup calibration curves
-    constexpr size_t xnumber = 5; //keep this odd!!!!!!
+    constexpr size_t xnumber = 3; //keep this odd!!!!!!
     assert( (xnumber) %2 == 1);
-    constexpr double bandSize = 0.1;
-    constexpr double spread = 0.30;
+    constexpr double bandSize = .25;
+    constexpr double spread = 0.15;
     class ::perturbStruct *pertStruct = nullptr;
     pertStruct = new class perturbStruct(pStruct->N, xnumber, spread,
                                          l_min, l_max, iterates);
     pertStruct->lthermalBands(bandSize);
 
-    if(false)
+    if(true)
     {
         /* There are three ways to layout the thermal spread.  The
         deterministic approach systematically varies the thermal penetration
@@ -294,7 +290,7 @@ void CC_APS2(struct parameterStr *pStruct)
         provides the band resolution. */
 
         double *xInitial = nullptr;
-        xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
+        xInitial = new double[5]{0, 0, 0, 0, 0};
         lthermalSweep(pStruct->L_end, pStruct->N, ftol, xtol, gtol,
                       maxfev, epsfcn, mode, factor, nprint, &st_ptr, xInitial,
                       pStruct, factorMax,factorScale, pertStruct, filename,
@@ -313,22 +309,21 @@ void CC_APS2(struct parameterStr *pStruct)
     constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.01*1*0; // normal noise % of pi/2
 
-    if(true)
+    if(false)
     {
         /* Create Initial Experimental Data for figure */
         pStruct->thermalSetup(l_min, l_max, LendMinDecade);
         phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
         pStruct->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
                                pStruct->emissionNominal, l_min, l_max);
-
         double *xInitial = nullptr;
-        xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
+        xInitial = new double[5]
+        {2.3, x_ini(3.5,4), x_ini(35,50), x_ini(.6,1), 0.57};
+
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 1,
+                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 100,
                 factorMax, factorScale);
         delete[] xInitial;
-
-
 
         ///output data for printing
         std::ofstream myoutputfile;

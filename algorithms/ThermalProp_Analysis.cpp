@@ -1,13 +1,14 @@
 #include "../Header.h"
 
-int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
-                        double gtol, int maxfev, double epsfcn, int mode,
-                        double factor, int nprint, int *info, int *nfev,
-                        const struct parameter_constraints *pc_ptr, double *x,
-                        struct parameterStr * pStruct,
+int paramter_estimation(const size_t m, const size_t n, double ftol,
+                        double xtol, double gtol, int maxfev, double epsfcn,
+                        int mode, double factor, int nprint, int *info,
+                        int *nfev, const struct parameter_constraints *pc_ptr,
+                        double *x, struct parameterStr * pStruct,
                         const double factorMax, const double factorScale,
                         double *xpredicted)
 {
+
 /*
     The parameter estimation function takes in the function, fitting parameters,
     initial guess.  If no initial guess is given then it will populate an
@@ -42,10 +43,13 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
         xinitial[i] = x[i];
     }
 
-    for(size_t iter = 0; iter < pStruct->iterPE; iter++ )
+    for(size_t iter = 1; iter <= pStruct->iterPE; iter++ )
     {
         ///set initial guesses
-        if ( x[0] == 0 )
+        /// BUG !
+//        std::cout << "hello!!" << "\t" <<  fabs(x[0] - 0);
+//        x[0] = 0;
+        if ( fabs(x[0] - 0) < 1e-10 )
         {
             for(size_t i=0 ; i<n ; ++i)
             {
@@ -128,7 +132,7 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
         const double ExpVarianceEst = ExpStddev * ExpStddev;
         pStruct->fvecTotal = SobjectiveLS(pStruct->L_end,
                                           pStruct->emissionExperimental,
-                                          pStruct-> predicted);
+                                          pStruct->predicted);
         const size_t v1 = pStruct->L_end - n;
         double reduceChiSquare;
 
@@ -214,11 +218,8 @@ int paramter_estimation(const size_t m,const size_t n, double ftol, double xtol,
             parameters_update(pStruct, n);
             pStruct->iterPEnum = iter;
 
+            ///repulate predicted phase
             phase99(pStruct->L_end, pStruct, pStruct->predicted);
-            for(size_t i =0 ; i < pStruct->L_end ; ++i)
-            {
-                std::cout << pStruct->predicted[i] << "\n";
-            }
 
             delete [] qtf;
             delete [] wa1;
@@ -503,22 +504,9 @@ void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
                           const struct parameter_constraints *pc_ptr,
                           struct parameterStr * parametersStr)
 {
-/*
-    There is an error in the fitting routine in that some parameter estimates
-    go the the boundaries of their domain.  When this is the case and fitting
-    routine detects the boundaries as low points in the algorithm.  This causes
-    the parameter estimation to stop.
-*/
-/// Store previous iteration for future reference
-    for(int i=0; i<N; i++)
-    {
-        parametersStr-> xParameters54[i] = x[i];
-    }
-
 ///Transform estimates from kappa space to k space based on the limits imposed
     for(int i = 0; i < N; ++i)
     {
-
         switch ( parametersStr->xParametersNames[i] )
         {
             case asub :
@@ -556,11 +544,10 @@ void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
     parameters_update(parametersStr, N);
 
 /// Estimates the phase of emission at each heating frequency
-    const size_t lends = parametersStr->L_end;
-    phase99(lends, parametersStr, parametersStr->predicted);
+    phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);
 
 /// Evaluate Objective function
-    for(size_t n = 0 ; n < lends ; ++n )
+    for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
     {
        fvec[n] =
        parametersStr->emissionExperimental[n] - parametersStr->predicted[n] ;
@@ -568,9 +555,9 @@ void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
     }
 
 /// Print stuff to terminal
-//    parametersStr->MSE = MSE(lends, parametersStr->emissionExperimental,
+//    parametersStr->MSE = MSE(parametersStr->L_end,
+//                             parametersStr->emissionExperimental,
 //                             parametersStr->predicted);
 //    printPEstimates(N, parametersStr);
-
     return;
 }

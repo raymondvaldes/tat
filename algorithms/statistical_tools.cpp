@@ -474,11 +474,14 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
     const double R0True       = parametersStr->R0;
     double*xpredicted = new double[n];
 
+//    std::cout << a_subTrue << "\t" << gammaTrue << "\t" << E_sigmaTrue << "\t";
+//    std::cout << lambdaTrue << "\t" << R1True << "\n" ;
+
 ///Prepare output file
     std::ofstream myfile;
     std::ostringstream filename;
-    filesystem::makeDir(parametersStr->dir, "debug");
 
+    filesystem::makeDir(parametersStr->dir, "debug");
     if(debugPrint)
     {
         filename <<  "../debug/perturbationTestLog.dat";
@@ -489,17 +492,15 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
         myfile << lambdaTrue  << "\t" <<R1True  << "\n";
     }
 
-
 ///Implement iteration
     if( parametersStr->N >1)
     {
         parametersStr->N = parametersStr->N95-1;
     }
 
-
+///Reset parameters to be fitted
     for(size_t currentI = 0; currentI <=  parametersStr->N ; ++currentI)
     {
-        ///Reset parameters to be fitted
         size_t iter = 0;
         for(size_t i = 0; i < parametersStr->N95 ; ++i)
         {
@@ -510,105 +511,114 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
             }
         }
 
-//        for(size_t n = 0;  n < 4; ++n)
-//        {
-//            std::cout << parametersStr->xParametersNames[n] << "\n";
-//        }getchar();
-
         double area1 = 0;
         double area2 = 0;
 
         ///Perturb one parameter
         for (size_t xiters = 0; xiters < xnumber;  ++xiters)
         {
+            double multiplier = 0;
+            multiplier = 1-spread + 2*spread*(xiters/double(xnumber-1));
+            switch( parametersStr->xParameters95Names[currentI] )
+            {
+                case asub :
+                    parametersStr->a_sub = a_subTrue * multiplier;
+//                    std::cout << parametersStr->a_sub << "\t";
+                    break;
+                case E1 :
+                    parametersStr->E_sigma = E_sigmaTrue * multiplier;
+//                    std::cout << parametersStr->E_sigma << "\t";
+                    break;
+                case gammaEff :
+                    parametersStr->gamma = gammaTrue * multiplier;
+//                    std::cout << parametersStr->gamma << "\t";
+                    break;
+                case R1 :
+                    parametersStr->R1 = R1True * multiplier;
+//                    std::cout << parametersStr->R1 << "\t";
+                    break;
+                case lambda :
+                    parametersStr->lambda = lambdaTrue * multiplier;
+//                    std::cout << parametersStr->lambda << "\t";
+                    break;
+                case R0 :
+                    parametersStr->R0 = R0True * multiplier;
+//                    std::cout << parametersStr->R0 << "\t";
+                    break;
+                default:
+                    std::cout << "\nSwitch Error!!\n";
+                    exit(-66);
+                    break;
+            }
+
+            parameters_kcp_update(parametersStr, parametersStr->gamma,
+                                  parametersStr->a_sub);
+//            parameters_update(parametersStr, parametersStr->N);
+//            std::cout << "\n";
             for(size_t i = 0 ; i < parametersStr->N ; ++i)
             {
-                double
-                multiplier = 1-spread + 2*spread*(xiters/double(xnumber-1));
-                switch( parametersStr->xParameters95Names[currentI] )
-                {
-                    case asub :
-                        parametersStr->a_sub = a_subTrue * multiplier;
-                        break;
-                    case E1 :
-                        parametersStr->E_sigma = E_sigmaTrue * multiplier;
-                        break;
-                    case gammaEff :
-                        parametersStr->gamma = gammaTrue * multiplier;
-                        break;
-                    case R1 :
-                        parametersStr->R1 = R1True * multiplier;
-                        break;
-                    case lambda :
-                        parametersStr->lambda = lambdaTrue * multiplier;
-                        break;
-                    case R0 :
-                        parametersStr->R0 = R0True * multiplier;
-                        break;
-                    default:
-                        std::cout << "\nSwitch Error!!\n";
-                        exit(-66);
-                        break;
-                }
-
-
-                parameters_kcp_update(parametersStr, parametersStr->gamma,
-                                      parametersStr->a_sub);
-
                 ///Set Initial conditions
                 switch( parametersStr->xParametersNames[i] )
                 {
                     case asub :
-                        xInitial[i] = a_subTrue;
+                        xInitial[i] = x_ini10(a_subTrue);
                         break;
                     case E1 :
-                        xInitial[i] = E_sigmaTrue;
+                        xInitial[i] = x_ini10(E_sigmaTrue);
                         break;
                     case gammaEff :
-                        xInitial[i] = gammaTrue;
+                        xInitial[i] = x_ini10(gammaTrue);
                         break;
                     case R1 :
-                        xInitial[i] = R1True;
+                        xInitial[i] = x_ini10(R1True);
                         break;
                     case lambda :
-                        xInitial[i] = lambdaTrue;
+                        xInitial[i] = x_ini10(lambdaTrue);
                         break;
                     case R0 :
-                        xInitial[i] = R0True;
+                        xInitial[i] = x_ini10(R0True);
                         break;
                     default:
                         std::cout << "\nSwitch Error!!\n";
                         exit(-67);
                         break;
                 }
-//std::cout <<  xInitial[i] <<"\t";
-
+//            std::cout <<  xInitial[i] <<"\t";
             }
+//            std::cout << "<-- initial guess\n";
+
+//            std::cout <<  multiplier << "\t" <<
+//                          parametersStr->xParameters95Names[currentI]
+//                      << "\t";
+//            std::cout << parametersStr->gamma << "\t" <<
+//                         parametersStr->a_sub << "\t\t";
+//            std::cout << parametersStr->k1_thermal->offset << "\t" <<
+//                         parametersStr->psi1_thermal->offset << "\n";
 
             paramter_estimation(m, parametersStr->N, ftol, xtol, gtol, maxfev,
                                 epsfcn, mode, factor, nprint, &info, &nfev,
-                                st_ptr, xInitial, parametersStr,
-                                factorMax, factorScale, xpredicted);
-            phase99(parametersStr->L_end,
-                    parametersStr, parametersStr->predicted);
+                                st_ptr, xInitial, parametersStr, factorMax,
+                                factorScale, xpredicted);
+//            std::cout << "\n";
+            phase99(parametersStr->L_end, parametersStr,
+                    parametersStr->predicted);
 
             const double msearea =
             MSEarea(parametersStr->L_end, parametersStr->emissionNominal,
                     parametersStr->predicted);
-
-
             pStruct->temp[xiters + xnumber*currentI ] = msearea;
 
-            /*Select larger of two possible extremes.*/
-            if(xiters == 0 || xiters == xnumber-1 )
-            {
-                if(xiters == 0) {area1 = msearea;}
-                if(xiters == xnumber-1)
-                {
-                    area2 = msearea;
-                    pStruct->xArea[currentI] = (area1 < area2 ? area1 : area2);
-                }
-            }
+            /*Select larger of two possible extremes.*/ //BUG ??
+            pStruct->xArea[currentI] =  msearea;
+//            if(xiters == 0 || xiters == xnumber-1 )
+//            {
+//                if(xiters == 0) {area1 = msearea;}
+//                if(xiters == xnumber-1)
+//                {
+//                    area2 = msearea;
+//                    pStruct->xArea[currentI] = (area1 < area2 ? area1 : area2);
+//                }
+//            }
 
             if(debugPrint)
             {
@@ -625,10 +635,11 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
         }
 
     }
+    myfile.close();
+    delete []xpredicted;
 
 ///RESET
     parametersStr->N = parametersStr->N95;
-
     for(size_t i = 0; i < parametersStr->N ; ++i)
     {
         parametersStr->xParametersNames[i]
@@ -638,27 +649,27 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
         {
             case asub :
                 parametersStr->a_sub = a_subTrue;
-                std::cout << parametersStr->a_sub << "\t";
+//                std::cout << parametersStr->a_sub << "\t";
                 break;
             case E1 :
                 parametersStr->E_sigma = E_sigmaTrue;
-                std::cout << parametersStr->E_sigma << "\t";
+//                std::cout << parametersStr->E_sigma << "\t";
                 break;
             case gammaEff :
                 parametersStr->gamma = gammaTrue;
-                std::cout << parametersStr->gamma << "\t";
+//                std::cout << parametersStr->gamma << "\t";
                 break;
             case R1 :
                 parametersStr->R1 = R1True;
-                std::cout << parametersStr->R1 << "\t";
+//                std::cout << parametersStr->R1 << "\t";
                 break;
             case lambda :
                 parametersStr->lambda = lambdaTrue;
-                std::cout << parametersStr->lambda << "\t";
+//                std::cout << parametersStr->lambda << "\t";
                 break;
             case R0 :
                 parametersStr->R0 = R0True;
-                std::cout << parametersStr->R0 << "\t";
+//                std::cout << parametersStr->R0 << "\t";
                 break;
             default:
                 std::cout << "\nSwitch Error!!\n";
@@ -668,10 +679,6 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
     }
     parameters_kcp_update(parametersStr, parametersStr->gamma,
                           parametersStr->a_sub);
-
-    myfile.close();
-    delete []xpredicted;
-
     return;
 }
 
@@ -680,26 +687,27 @@ void lthermalSweep(const size_t m, const size_t n, const double ftol,
                    const int maxfev, const double epsfcn, const int mode,
                    double factor, const int nprint,
                    const struct parameter_constraints *st_ptr,
-                   double *xInitial, struct parameterStr * parametersStr,
+                   double *xInitial, struct parameterStr *pStructp,
                    const double factorMax, const double factorScale,
                    class perturbStruct *pStruct, const std::string filename,
                    const size_t lEndMin)
 {
     /*  The idea with the perturbation test is that I have my "perfect fit" and
     then refit each while changing one paramter +-20% for example. */
+
     const int xnum = pStruct->xnumber;
 
-    const double gammaTrue    = parametersStr->gamma;
-    const double a_subTrue    = parametersStr->a_sub;
-    const double R1True       = parametersStr->R1;
-    const double E_sigmaTrue  = parametersStr->E_sigma;
-    const double lambdaTrue   = parametersStr->lambda;
+    const double gammaTrue    = pStructp->gamma;
+    const double a_subTrue    = pStructp->a_sub;
+    const double R1True       = pStructp->R1;
+    const double E_sigmaTrue  = pStructp->E_sigma;
+    const double lambdaTrue   = pStructp->lambda;
 
 ///Prepare output file
     std::ofstream myfile;
     myfile.open(filename);
     myfile << std::setprecision(8);
-    myfile << pStruct->spread << "\t" << xnum << "\t" << parametersStr->N;
+    myfile << pStruct->spread << "\t" << xnum << "\t" << pStructp->N;
     myfile << "\n" << pStruct->iterates << "\n";
     myfile << a_subTrue<< "\t" << gammaTrue << "\t" << E_sigmaTrue  << "\t";
     myfile <<lambdaTrue  << "\t" <<R1True  << "\n";
@@ -717,29 +725,29 @@ void lthermalSweep(const size_t m, const size_t n, const double ftol,
         const double lmin = pStruct->lmin[j];
         const double lmax = pStruct->lmax[j];
 
-        parametersStr->thermalSetup(lmin, lmax, lEndMin);
-        phase99(parametersStr->L_end,
-                parametersStr, parametersStr->emissionNominal);
-        for(size_t i = 0 ; i < parametersStr->L_end; ++i)
+        pStructp->thermalSetup(lmin, lmax, lEndMin);
+        phase99(pStructp->L_end, pStructp, pStructp->emissionNominal);
+        for(size_t i = 0 ; i < pStructp->L_end; ++i)
         {
-            parametersStr->emissionExperimental[i]
-            = parametersStr->emissionNominal[i];
+            pStructp->emissionExperimental[i]
+            = pStructp->emissionNominal[i];
         }
 
-        perturbationTest(parametersStr->L_end, parametersStr->N, ftol, xtol,
+        perturbationTest(pStructp->L_end, pStructp->N, ftol, xtol,
                          gtol, maxfev, epsfcn, mode, factor, nprint, st_ptr,
-                         xInitial, parametersStr,factorMax, factorScale,
+                         xInitial, pStructp,factorMax, factorScale,
                          pStruct);
 
-        std::cout << j <<" "<< pStruct->bands[j]<<" "<< lmin <<" "<< lmax;
-        for(size_t i = 0; i < parametersStr->N; ++i)
-            std::cout << " " << pStruct->xArea[i];
-        std::cout << "\n";
+        ///Print some information to terminal
+//        std::cout << j <<" "<< pStruct->bands[j]<<" "<< lmin <<" "<< lmax;
+//        for(size_t i = 0; i < pStructp->N; ++i)
+//            std::cout << " " << pStruct->xArea[i];
+//        std::cout << "\n";
 
         myfile << j << "\t" <<  pStruct->bands[j] <<  "\t" << lmin << "\t";
         myfile << lmax;
 
-        for( size_t k = 0 ; k < parametersStr->N ; k++)
+        for( size_t k = 0 ; k < pStructp->N ; k++)
         {
             for(size_t i = 0 ; i < pStruct->xnumber ; ++i)
             {
@@ -748,7 +756,6 @@ void lthermalSweep(const size_t m, const size_t n, const double ftol,
         }
         myfile << "\n";
     }
-
     myfile.close();
 
     return;
@@ -994,6 +1001,11 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
     myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
     myfile << "\tasub\tgamma\tEsigma\tR1\tlambda\n";
 
+    double*xSave = new double[N];
+    for(size_t i =0 ; i < N ; ++i)
+    {
+        xSave[i] = xInitial[i];
+    }
 
     for(size_t i=0; i<interants; ++i)
     {
@@ -1014,24 +1026,19 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
                << pStruct->lambda << "\t"
                << pStruct->MSE << "\n";
 
-        std::cout << "hello again\n" <<pStruct->L_end << "\n\n";
-        for(size_t i = 0 ; i < pStruct->L_end; ++i)
-        {
-            std::cout  << pStruct->predicted[i] << "\n";
-        }
-
         printPEstimates(N, pStruct);
 //        for(size_t j=0; j< N; ++j)
-//            {xInitial[j] = 0;}
-           xInitial[0] = 2.3;
-           xInitial[1] = 3.8;
-           xInitial[2] = 42;
-           xInitial[3] = 0.8;
-           xInitial[4] = 0.57;
+//        {
+//            xInitial[j] = xSave[j];
+//        }
+        xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
+                x_ini10(.8), x_ini10(0.57)};
+
     }
 
     myfile.close();
 
+    delete []xSave;
     delete []xpredicted;
 
 

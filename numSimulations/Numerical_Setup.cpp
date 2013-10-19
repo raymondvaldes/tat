@@ -44,7 +44,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
             switch ( pStruct->xParametersNames[i] )
             {
                 case asub :
-                    diag[i] = pStruct->a_sub;;
+                    diag[i] = pStruct->a_sub;
                     break;
                 case E1 :
                     diag[i] = pStruct->E_sigma;
@@ -1101,7 +1101,16 @@ double gs_int(const double eta, const double opt, const double lambda,
 }
 
 
-
+double x_ini10(const double x_ref)
+{
+/*
+    Creates a random parameter between two open bounds
+    x_ref*.9 = minimum value
+    x_ref*1.1 = minimum value
+*/
+    const double percent = .1;
+    return x_ini(x_ref*(1-percent), x_ref*(1+percent));
+}
 
 
 
@@ -1686,7 +1695,6 @@ parameterStr::parameterStr(const size_t d,class Mesh *mesh_)
     k2_thermal = new class property;
     psi2_thermal = new class property;
 
-    xParameters54       = new double[d];
     xParameters         = new size_t[d];
     xParameters95       = new size_t[d];
     xParametersNames   = new enum XParaNames[d];
@@ -1883,7 +1891,6 @@ void parameterStr::cleanup()
     delete [] xParameters;
     delete [] xParameters95;
 
-    delete [] xParameters54;
     delete [] xParametersNames;
     delete [] xParameters95Names;
 

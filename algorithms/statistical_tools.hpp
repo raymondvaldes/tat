@@ -70,7 +70,7 @@ void lthermalSweep(const size_t m, const size_t n, const double ftol,
                       const int maxfev, const double epsfcn, const int mode,
                       double factor, const int nprint,
                       const struct parameter_constraints *pc_ptr,
-                      double *xInitial, struct parameterStr * parametersStr,
+                      double *xInitial, struct parameterStr *pStructp,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct, const std::string filename,
                       const size_t lEndMin);

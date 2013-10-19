@@ -130,6 +130,7 @@ double x_limiter1(const double xi);
 double x_limiter2(const double xi,const double x_min, const double x_max);
 double kx_limiter1(const double ki);
 double kx_limiter2(const double ki,const double k_min,const double k_max);
+double x_ini10(const double x_ref);
 
 double x_ini(double x_min, double x_max);
 
@@ -314,7 +315,6 @@ public:
     ///parameter estimation
     double *emissionExperimental;
     double *emissionNominal;
-    double *xParameters54;
 
     double *emissionCurrent = nullptr;
     double *fjac = nullptr;

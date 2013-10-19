@@ -4,13 +4,6 @@
 // Version 0.130108
 #include "Header.h"
 
-///
-/// TODO get printouts
-///
-///
-///
-///
-
 int main( int argc, char *argv[] )
 {
 /// Mesh Parameters
@@ -29,7 +22,7 @@ int main( int argc, char *argv[] )
 
 /// Heat Transfer and Emission models
     const enum XParaNames
-    xParametersNames[] = {asub, gammaEff, E1, R1, lambda };
+    xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
 
     class ThermalModel
     thermalModel(ThermalModel::HeatX::OneDimAnalytical,
@@ -60,12 +53,12 @@ int main( int argc, char *argv[] )
      - xtol difference in parameters
      - beta_iter is the total number of iterations to find beta2
      - beta_tol is how close dz_sub is to dz_coat */
-    constexpr double ftol = 1.e-8;
-    constexpr double xtol = 1.e-8;
-    constexpr double gtol = 1.e-8;
+    constexpr double ftol = 1.e-10;
+    constexpr double xtol = 1.e-10;
+    constexpr double gtol = 1.e-10;
     constexpr size_t maxfev = 1e5;
 
-    constexpr double epsfcn = 1.e-2;
+    constexpr double epsfcn = 1.e-4;
     constexpr double factor =  .01;
 
     pStruct->MSETol = 1e-8;
@@ -185,7 +178,7 @@ int main( int argc, char *argv[] )
     st_ptr->gamma_min = 2e-0;
     st_ptr->gamma_max = 10;
 
-    st_ptr->E_sigma_min = 1e-3;
+    st_ptr->E_sigma_min = 1;
     st_ptr->E_sigma_max = 200;
 
     st_ptr->R1_min = 0.6;
@@ -199,7 +192,7 @@ int main( int argc, char *argv[] )
 
     // Initial Guess
         double *xInitial;
-        xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
+        xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
 //Optimize stretching in Substrate and declare variables to be fitted
     pStruct->parametersStrSetup(xParametersNames);
@@ -208,15 +201,13 @@ int main( int argc, char *argv[] )
     pStruct->thermalSetup(l_min, l_max, LendMinDecade);
     phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
 
-
  //Many fit test
     if (false)
     {
-        constexpr size_t interants = 1;
+        constexpr size_t interants = 100;
         for(size_t nn = 0; nn < pStruct->L_end; ++nn )
         {
-            pStruct->emissionExperimental[nn]
-                    = pStruct->emissionNominal[nn];
+            pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
         }
 
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev, epsfcn,
@@ -239,6 +230,6 @@ int main( int argc, char *argv[] )
     pStruct->cleanup();
     delete pStruct;
 
-
+    std::cout << "\n\nand done!.";
     return 0;
 }
