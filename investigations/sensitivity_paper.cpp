@@ -278,6 +278,11 @@ void CC_APS2(struct parameterStr *pStruct)
                                          l_min, l_max, iterates);
     pertStruct->lthermalBands(bandSize);
 
+/// Initial guess
+    double *xInitial = nullptr;
+    xInitial = new double[5]
+    {x_ini10(2.3), x_ini10(3.5), x_ini10(35), x_ini10(.8), x_ini10(0.57)};
+
     if(true)
     {
         /* There are three ways to layout the thermal spread.  The
@@ -288,14 +293,10 @@ void CC_APS2(struct parameterStr *pStruct)
         selection of the lmin and lmax for each iteration is determined
         with a random simulation. The argument for teh lthermalMC() function
         provides the band resolution. */
-
-        double *xInitial = nullptr;
-        xInitial = new double[5]{0, 0, 0, 0, 0};
         lthermalSweep(pStruct->L_end, pStruct->N, ftol, xtol, gtol,
                       maxfev, epsfcn, mode, factor, nprint, &st_ptr, xInitial,
                       pStruct, factorMax,factorScale, pertStruct, filename,
                       LendMinDecade);
-        delete[] xInitial;
     }
 
     /*At this point I can output a figure that has the sensitivity curve data
@@ -316,14 +317,10 @@ void CC_APS2(struct parameterStr *pStruct)
         phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
         pStruct->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
                                pStruct->emissionNominal, l_min, l_max);
-        double *xInitial = nullptr;
-        xInitial = new double[5]
-        {x_ini10(2.3), x_ini10(3.5), x_ini10(35), x_ini10(.6), x_ini10(0.57)};
 
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 100,
+                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 1,
                 factorMax, factorScale);
-        delete[] xInitial;
 
         ///output data for printing
         std::ofstream myoutputfile;
@@ -345,16 +342,15 @@ void CC_APS2(struct parameterStr *pStruct)
 ///* Optimization Procedure for l-thermal  */
     if(false)
     {
-        double *xInitial = nullptr;
-        xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
         lthermalOptimization(pStruct->N, ftol, xtol, gtol, maxfev, epsfcn, mode,
                              factor, nprint, &st_ptr, xInitial, pStruct,
                              factorMax, factorScale, pertStruct, a, b, d1, d2,
                              s1, noiseRandom, filename);
         pertStruct->cleanup2();
         delete pertStruct;
-        delete[] xInitial;
     }
+    delete[] xInitial;
+
 }
 
 

@@ -30,6 +30,10 @@ double kx_limiter1(const double ki)
 
 double kx_limiter2(const double ki,const double k_min,const double k_max)
 {
+    assert(ki > k_min  && ki < k_max);
+
+
+
     return log( ( (k_max - k_min) / (ki - k_min) ) - 1.);
 }
 
