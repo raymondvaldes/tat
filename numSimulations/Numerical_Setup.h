@@ -1,6 +1,7 @@
 #ifndef NUMERICAL_SETUP_H_INCLUDED
 #define NUMERICAL_SETUP_H_INCLUDED
 
+double x_ini10(const int x_ref);
 
 void parameters_update(struct parameterStr * parametersStr, const size_t N);
 

@@ -1100,7 +1100,10 @@ double gs_int(const double eta, const double opt, const double lambda,
     return -1;
 }
 
-
+double x_ini10(const int x_ref)
+{
+    return x_ini10(double(x_ref));
+}
 double x_ini10(const double x_ref)
 {
 /*
