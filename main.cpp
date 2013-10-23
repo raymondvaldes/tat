@@ -234,7 +234,6 @@ int main( int argc, char *argv[] )
     delete pStruct;
 
 
-    std::cout << "\n\nExecution is: " << globalStopWatch.display() <<" sec.\t";
-    std::cout << "and done!\n\n";
+    globalStopWatch.displayTime();
     return 0;
 }

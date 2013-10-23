@@ -1,9 +1,6 @@
 #ifndef TIMING_H
 #define TIMING_H
 
-//namespace timing
-//{
-
 class stopwatch
 {
 private:
@@ -19,11 +16,9 @@ public:
     stopwatch(void);
     void start(void);
     void stop(void);
-    double display(void);
+    double returnTime(void);
+    void displayTime(void);
+
 };
-
-
-//}
-
 
 #endif // TIMING_H
