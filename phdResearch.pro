@@ -1,3 +1,4 @@
+###REQUIRED########################
 #application type
 TEMPLATE = app
 CONFIG += console
@@ -20,7 +21,8 @@ SOURCES += main.cpp \
     numSimulations/Numerical_PhaseOfEmission.cpp \
     numSimulations/models.cpp \
     numSimulations/Experimental_PhaseOfEmission.cpp \
-    tools/filesystem.cpp
+    tools/filesystem.cpp \
+    tools/timing.cpp
 
 #header files
 HEADERS += \
@@ -35,7 +37,8 @@ HEADERS += \
     numSimulations/Numerical_PhaseOfEmission.h \
     numSimulations/models.h \
     numSimulations/Experimental_PhaseOfEmission.h \
-    tools/filesystem.hpp
+    tools/filesystem.hpp \
+    tools/timing.h
 
 #gsl libraries
 LIBS += -L/usr/lib -lgsl -lgslcblas -lm
@@ -49,7 +52,12 @@ QMAKE_CXXFLAGS += -O3
 QMAKE_CXXFLAGS += -m64
 QMAKE_CXXFLAGS += -fopenmp
 QMAKE_CXXFLAGS += -march=native
+#linker flags
+QMAKE_LFLAGS +=  -fopenmp
+###################################
 
+
+##Optional#########################
 #compiler warnings
 QMAKE_CXXFLAGS += -Wall
 QMAKE_CXXFLAGS += -Wextra
@@ -79,7 +87,7 @@ QMAKE_CXXFLAGS += -fwhole-program
 
 #compiler custom flags
 QMAKE_CXXFLAGS_DEBUG += -g
+##Optional#########################
 
 
-#linker flags
-QMAKE_LFLAGS +=  -fopenmp
+

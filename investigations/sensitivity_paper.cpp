@@ -269,10 +269,10 @@ void CC_APS2(struct parameterStr *pStruct)
     const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
 
 /// Setup calibration curves
-    constexpr size_t xnumber = 11; //keep this odd!!!!!!
+    constexpr size_t xnumber = 11;
     assert( (xnumber) %2 == 1);
     constexpr double bandSize = .05;
-    constexpr double spread = 0.15;
+    constexpr double spread = 0.20;
     class ::perturbStruct *pertStruct = nullptr;
     pertStruct = new class perturbStruct(pStruct->N, xnumber, spread,
                                          l_min, l_max, iterates);
@@ -283,7 +283,7 @@ void CC_APS2(struct parameterStr *pStruct)
     xInitial = new double[5]
     {x_ini10(2.3), x_ini10(3.5), x_ini10(35), x_ini10(.8), x_ini10(0.57)};
 
-    if(false)
+    if(true)
     {
         /* There are three ways to layout the thermal spread.  The
         deterministic approach systematically varies the thermal penetration

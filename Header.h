@@ -29,7 +29,8 @@
 //-lboost_system in linker
 //-lboost_filesystem in linker
 #include <boost/filesystem.hpp>
-
+//#include <boost/timer.hpp>
+//#include <boost/progress.hpp>
 /*
 When linking libraries you must ensure that the library is built at the same
 number of bits as the program.  Also add library under linker settings in \
@@ -44,6 +45,7 @@ compiler.
 #include <random>
 #include <omp.h>
 #include <cmath>
+#include <chrono>
 
 ///Source headers
 #include "algorithms/parameterEstimationAlgorithms.hpp"
@@ -60,5 +62,6 @@ compiler.
 #include "numSimulations/Numerical_Setup.h"
 
 #include "tools/filesystem.hpp"
+#include "tools/timing.h"
 
 #endif // HEADER_H_INCLUDED

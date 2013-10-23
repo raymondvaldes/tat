@@ -6,7 +6,10 @@
 
 int main( int argc, char *argv[] )
 {
-/// Mesh Parameters
+    ///Setup global timer
+    class stopwatch globalStopWatch;
+
+    /// Mesh Parameters
 /*
      - beta1 set to a high number (5)
      - Ttol greater than -4 is not practical
@@ -230,6 +233,8 @@ int main( int argc, char *argv[] )
     pStruct->cleanup();
     delete pStruct;
 
-    std::cout << "\n\nand done!.";
+
+    std::cout << "\n\nExecution is: " << globalStopWatch.display() <<" sec.\t";
+    std::cout << "and done!\n\n";
     return 0;
 }

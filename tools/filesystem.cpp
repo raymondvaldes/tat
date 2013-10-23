@@ -16,7 +16,7 @@ std::string workingDir(void)
     const boost::filesystem::path pProgram( boost::filesystem::current_path() );
     std::string workingDirectory = pProgram.parent_path().string();
     workingDirectory= workingDirectory + "/";
-    std::cout << "working directory: " <<  workingDirectory << "\n";
+    std::cout << "working directory: " <<  workingDirectory << "\n\n";
 
     return workingDirectory;
 }
