@@ -18,7 +18,6 @@ public:
     void stop(void);
     double returnTime(void);
     void displayTime(void);
-
 };
 
 #endif // TIMING_H
