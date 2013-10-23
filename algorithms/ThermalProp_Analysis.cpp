@@ -462,6 +462,7 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 
 void printPEstimates(const size_t N, struct parameterStr * parametersStr)
 {
+
     parametersStr->MSE = MSE(parametersStr->L_end,
                              parametersStr->emissionExperimental,
                              parametersStr-> predicted);
@@ -504,6 +505,7 @@ void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
                           const struct parameter_constraints *pc_ptr,
                           struct parameterStr * parametersStr)
 {
+
 ///Transform estimates from kappa space to k space based on the limits imposed
     for(int i = 0; i < N; ++i)
     {
