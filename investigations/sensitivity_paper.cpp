@@ -283,7 +283,7 @@ void CC_APS2(struct parameterStr *pStruct)
     xInitial = new double[5]
     {x_ini10(2.3), x_ini10(3.5), x_ini10(35), x_ini10(.8), x_ini10(0.57)};
 
-    if(true)
+    if(false)
     {
         /* There are three ways to layout the thermal spread.  The
         deterministic approach systematically varies the thermal penetration
@@ -303,14 +303,14 @@ void CC_APS2(struct parameterStr *pStruct)
     for each of the five parameters. The figure with the artificial data and
     fitted curve with error bars will be shown next.*/
      ///Noise in Simulated Emission
-    constexpr double a =  .025;  // max % error (%*pi/2) (try .025)
+    constexpr double a =  .02;  // max % error (%*pi/2) (try .025)
     constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
     constexpr bool d1 = false;   //positive  (try false)
     constexpr bool d2 = false;   //monotonic (try true)
     constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
-    constexpr double noiseRandom = 0.01*1*0; // normal noise % of pi/2
+    constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
 
-    if(false)
+    if(true)
     {
         /* Create Initial Experimental Data for figure */
         pStruct->thermalSetup(l_min, l_max, LendMinDecade);
