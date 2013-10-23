@@ -269,9 +269,9 @@ void CC_APS2(struct parameterStr *pStruct)
     const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
 
 /// Setup calibration curves
-    constexpr size_t xnumber = 3; //keep this odd!!!!!!
+    constexpr size_t xnumber = 11; //keep this odd!!!!!!
     assert( (xnumber) %2 == 1);
-    constexpr double bandSize = .25;
+    constexpr double bandSize = .05;
     constexpr double spread = 0.15;
     class ::perturbStruct *pertStruct = nullptr;
     pertStruct = new class perturbStruct(pStruct->N, xnumber, spread,
@@ -293,10 +293,10 @@ void CC_APS2(struct parameterStr *pStruct)
         selection of the lmin and lmax for each iteration is determined
         with a random simulation. The argument for teh lthermalMC() function
         provides the band resolution. */
-        lthermalSweep(pStruct->L_end, pStruct->N, ftol, xtol, gtol,
-                      maxfev, epsfcn, mode, factor, nprint, &st_ptr, xInitial,
-                      pStruct, factorMax,factorScale, pertStruct, filename,
-                      LendMinDecade);
+        calibrationSweep(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
+                         epsfcn, mode, factor, nprint, &st_ptr, xInitial,
+                         pStruct, factorMax,factorScale, pertStruct, filename,
+                         LendMinDecade);
     }
 
     /*At this point I can output a figure that has the sensitivity curve data

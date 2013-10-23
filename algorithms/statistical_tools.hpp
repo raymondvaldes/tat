@@ -65,7 +65,7 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct);
 
-void lthermalSweep(const size_t m, const size_t n, const double ftol,
+void calibrationSweep(const size_t m, const size_t n, const double ftol,
                       const double xtol, const double gtol,
                       const int maxfev, const double epsfcn, const int mode,
                       double factor, const int nprint,
