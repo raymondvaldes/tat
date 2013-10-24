@@ -30,7 +30,7 @@ double x_limiter2(const double xi, const double x_min, const double x_max)
 double kx_limiter1(const double ki)
 {
     //converts value to k-space
-    assert(ki > 0);
+//    assert(ki > 0);
 
     return log(ki);
 }
@@ -40,7 +40,7 @@ double kx_limiter2(const double ki,const double k_min,const double k_max)
 //    std::cout << "\n\n"<< x_min <<"\t" <<  xi<< "\t" << x_max << "\n\n";
 //    std::cout << (xi > x_min) << "\n";
 //    std::cout << (xi < x_max) << "\n\n";
-    assert(ki > k_min  && ki < k_max);
+//    assert(ki > k_min  && ki < k_max);
 
     return log( ( (k_max - k_min) / (ki - k_min) ) - 1.);
 }

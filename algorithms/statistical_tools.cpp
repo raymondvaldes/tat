@@ -610,15 +610,15 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
 
             /*Select larger of two possible extremes.*/ //BUG ??
             pStruct->xArea[currentI] =  msearea;
-//            if(xiters == 0 || xiters == xnumber-1 )
-//            {
-//                if(xiters == 0) {area1 = msearea;}
-//                if(xiters == xnumber-1)
-//                {
-//                    area2 = msearea;
-//                    pStruct->xArea[currentI] = (area1 < area2 ? area1 : area2);
-//                }
-//            }
+            if(xiters == 0 || xiters == xnumber-1 )
+            {
+                if(xiters == 0) {area1 = msearea;}
+                if(xiters == xnumber-1)
+                {
+                    area2 = msearea;
+                    pStruct->xArea[currentI] = (area1 < area2 ? area1 : area2);
+                }
+            }
 
             if(debugPrint)
             {
@@ -739,10 +739,10 @@ void calibrationSweep(const size_t m, const size_t n, const double ftol,
                          pStruct);
 
         ///Print some information to terminal
-//        std::cout << j <<" "<< pStruct->bands[j]<<" "<< lmin <<" "<< lmax;
-//        for(size_t i = 0; i < pStructp->N; ++i)
-//            std::cout << " " << pStruct->xArea[i];
-//        std::cout << "\n";
+        std::cout << j <<" "<< pStruct->bands[j]<<" "<< lmin <<" "<< lmax;
+        for(size_t i = 0; i < pStructp->N; ++i)
+            std::cout << " " << pStruct->xArea[i];
+        std::cout << "\n";
 
         myfile << j << "\t" <<  pStruct->bands[j] <<  "\t" << lmin << "\t";
         myfile << lmax;

@@ -17,7 +17,7 @@ constexpr double xtol = 1.e-12;
 constexpr double gtol = 1.e-12;
 constexpr size_t maxfev = 1e5;
 
-constexpr double epsfcn = 1.e-2;
+constexpr double epsfcn = 1.e-8;
 constexpr double factor =  .01;
 
 constexpr double factorMax = 1;
@@ -269,9 +269,9 @@ void CC_APS2(struct parameterStr *pStruct)
     const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
 
 /// Setup calibration curves
-    constexpr size_t xnumber = 11;
+    constexpr size_t xnumber = 111;
     assert( (xnumber) %2 == 1);
-    constexpr double bandSize = .05;
+    constexpr double bandSize = .01;
     constexpr double spread = 0.20;
     class ::perturbStruct *pertStruct = nullptr;
     pertStruct = new class perturbStruct(pStruct->N, xnumber, spread,
@@ -283,7 +283,7 @@ void CC_APS2(struct parameterStr *pStruct)
     xInitial = new double[5]
     {x_ini10(2.3), x_ini10(3.5), x_ini10(35), x_ini10(.8), x_ini10(0.57)};
 
-    if(true)
+    if(false)
     {
         /* There are three ways to layout the thermal spread.  The
         deterministic approach systematically varies the thermal penetration
@@ -303,10 +303,10 @@ void CC_APS2(struct parameterStr *pStruct)
     for each of the five parameters. The figure with the artificial data and
     fitted curve with error bars will be shown next.*/
      ///Noise in Simulated Emission
-    constexpr double a =  .02;  // max % error (%*pi/2) (try .025)
+    constexpr double a =  .025;  // max % error (%*pi/2) (try .025)
     constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
-    constexpr bool d1 = false;   //positive  (try false)
-    constexpr bool d2 = false;   //monotonic (try true)
+    constexpr bool d1 = true;   //positive  (try false)
+    constexpr bool d2 = true;   //monotonic (try true)
     constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
 
@@ -317,7 +317,6 @@ void CC_APS2(struct parameterStr *pStruct)
         phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
         pStruct->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
                                pStruct->emissionNominal, l_min, l_max);
-
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
                 epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 1,
                 factorMax, factorScale);
@@ -340,7 +339,7 @@ void CC_APS2(struct parameterStr *pStruct)
     }
 
 ///* Optimization Procedure for l-thermal  */
-    if(false)
+    if(true)
     {
         lthermalOptimization(pStruct->N, ftol, xtol, gtol, maxfev, epsfcn, mode,
                              factor, nprint, &st_ptr, xInitial, pStruct,
@@ -350,7 +349,6 @@ void CC_APS2(struct parameterStr *pStruct)
         delete pertStruct;
     }
     delete[] xInitial;
-
 }
 
 
