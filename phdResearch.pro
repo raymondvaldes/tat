@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 ###REQUIRED########################
+=======
+cache()
+
+>>>>>>> Stashed changes
 #application type
 TEMPLATE = app
 CONFIG += console
@@ -6,8 +11,20 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 #paths
+unix:!macx{
 INCLUDEPATH += /usr/lib/
 INCLUDEPATH += /usr/include/
+LIBS += -L/usr/lib -lgsl -lgslcblas -lm
+LIBS += -L/usr/lib -lboost_system -lboost_filesystem
+}
+
+macx {
+  INCLUDEPATH += /opt/local/lib
+  INCLUDEPATH += /opt/local/include
+LIBS += /opt/local/lib -lgsl -lgslcblas -lm
+LIBS += /opt/local/lib -lboost_system -lboost_filesystem
+}
+
 
 #source files
 SOURCES += main.cpp \
@@ -39,12 +56,6 @@ HEADERS += \
     numSimulations/Experimental_PhaseOfEmission.h \
     tools/filesystem.hpp \
     tools/timing.h
-
-#gsl libraries
-LIBS += -L/usr/lib -lgsl -lgslcblas -lm
-
-#boost libraries
-LIBS += -L/usr/lib -lboost_system -lboost_filesystem
 
 #compiler flags
 QMAKE_CXXFLAGS += -std=gnu++11
