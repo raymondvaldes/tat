@@ -761,7 +761,7 @@ void calibrationSweep(const size_t m, const size_t n, const double ftol,
     return;
 }
 
-void lthermalOptimization(const size_t n, const double ftol, const double xtol,
+void parameterUncertainty(const size_t n, const double ftol, const double xtol,
                           const double gtol, const int maxfev,
                           const double epsfcn, const int mode, double factor,
                           const int nprint,
@@ -1172,7 +1172,6 @@ double MSEarea1(size_t N, double* func1, double* func2, double* xvar)
     between the lists.
 
 */
-
     ///Startup and initialization
     struct funcClass *Func1;
     Func1 = new struct funcClass (xvar, func1, N);

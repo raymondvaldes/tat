@@ -310,7 +310,7 @@ void CC_APS2(struct parameterStr *pStruct)
     constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
 
-    if(true)
+    if(false)
     {
         /* Create Initial Experimental Data for figure */
         pStruct->thermalSetup(l_min, l_max, LendMinDecade);
