@@ -341,7 +341,7 @@ void CC_APS2(struct parameterStr *pStruct)
 ///* Optimization Procedure for l-thermal  */
     if(true)
     {
-        lthermalOptimization(pStruct->N, ftol, xtol, gtol, maxfev, epsfcn, mode,
+        parameterUncertainty(pStruct->N, ftol, xtol, gtol, maxfev, epsfcn, mode,
                              factor, nprint, &st_ptr, xInitial, pStruct,
                              factorMax, factorScale, pertStruct, a, b, d1, d2,
                              s1, noiseRandom, filename);

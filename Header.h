@@ -51,6 +51,7 @@ compiler.
 #include "algorithms/parameterEstimationAlgorithms.hpp"
 #include "algorithms/statistical_tools.hpp"
 #include "algorithms/ThermalProp_Analysis.h"
+#include "algorithms/sensitivity_analysis.hpp"
 
 #include "investigations/sensitivity_paper.h"
 

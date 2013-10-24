@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
 ###REQUIRED########################
-=======
 cache()
 
->>>>>>> Stashed changes
 #application type
 TEMPLATE = app
 CONFIG += console
@@ -30,6 +27,7 @@ LIBS += /opt/local/lib -lboost_system -lboost_filesystem
 SOURCES += main.cpp \
     algorithms/ThermalProp_Analysis.cpp \
     algorithms/statistical_tools.cpp \
+    algorithms/sensitivity_analysis.cpp \
     algorithms/parameterEstimationAlgorithms.cpp \
     investigations/sensitivity_paper.cpp \
     numSimulations/Numerical_Temperature.cpp \
@@ -55,7 +53,8 @@ HEADERS += \
     numSimulations/models.h \
     numSimulations/Experimental_PhaseOfEmission.h \
     tools/filesystem.hpp \
-    tools/timing.h
+    tools/timing.h \
+    algorithms/sensitivity_analysis.hpp
 
 #compiler flags
 QMAKE_CXXFLAGS += -std=gnu++11
