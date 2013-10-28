@@ -16,3 +16,9 @@
 *.pro.user
 *.autosave
 *.user
+
+# make files
+MakeFile
+
+# OSX Director information
+*.DS_Store
