@@ -1,10 +1,10 @@
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
 
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
 #include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <cstdlib>
 #include <sstream>
 #include <fstream>
 #include <istream>
@@ -29,8 +29,7 @@
 //-lboost_system in linker
 //-lboost_filesystem in linker
 #include <boost/filesystem.hpp>
-//#include <boost/timer.hpp>
-//#include <boost/progress.hpp>
+
 /*
 When linking libraries you must ensure that the library is built at the same
 number of bits as the program.  Also add library under linker settings in \
@@ -46,6 +45,7 @@ compiler.
 #include <omp.h>
 #include <cmath>
 #include <chrono>
+
 
 ///Source headers
 #include "algorithms/parameterEstimationAlgorithms.hpp"
