@@ -46,7 +46,7 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
     for(size_t iter = 1; iter <= pStruct->iterPE; iter++ )
     {
         ///set initial guesses
-        /// BUG !
+        /// TODO put in function !
 //        std::cout << "hello!!" << "\t" <<  fabs(x[0] - 0);
 //        x[0] = 0;
         if ( fabs(x[0] - 0) < 1e-10 )
@@ -117,17 +117,15 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
         }
 
         ///levenberg-marquardt algorithm
-        lmdif(&ThermalProp_Analysis, m, n, x, fvec, ftol, xtol, gtol,
-              maxfev, epsfcn, diag, mode, factor, nprint, info, nfev, fjac, m, ipvt,
+        lmdif(&ThermalProp_Analysis, m, n, x, fvec, ftol, xtol, gtol, maxfev,
+              epsfcn, diag, mode, factor, nprint, info, nfev, fjac, m, ipvt,
               qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr,pStruct);
 
         ///Exit Routine
-    /*
-        Sets up a condition where the total error in the phase is compared
+        /* Sets up a condition where the total error in the phase is compared
         against a fvec Tolerance.  If the error is greater than this constant,
         then the parameter estimation algorithm is reset with a new set of
-        initial guesses. This is let to run a fixed number of iterations.
-    */
+        initial guesses. This is let to run a fixed number of iterations. */
         constexpr double ExpStddev = 0;
         const double ExpVarianceEst = ExpStddev * ExpStddev;
         pStruct->fvecTotal = SobjectiveLS(pStruct->L_end,

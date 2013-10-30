@@ -1798,9 +1798,8 @@ void parameterStr::update_b(void)
     update_b(laser->radius, L_coat);
 }
 
-void parameterStr::EmissionNoise(const double a, const double b, const bool d1,
-                                 const bool d2, const int s1,
-                                 const double noiseRandom,
+void parameterStr::EmissionNoise(const class
+                                 emissionNoiseParameters myEmissionNoise,
                                  const double* emissionNominal_,
                                  const double lmin, const double lmax)
 {
@@ -1828,6 +1827,14 @@ void parameterStr::EmissionNoise(const double a, const double b, const bool d1,
 //        c = 0.5
 //        d1 = 1 or 0;
 //        d2 = 1 or 0
+
+    const double a  = myEmissionNoise.a;
+    const double b  = myEmissionNoise.b;
+    const bool d1   = myEmissionNoise.d1;
+    const bool d2   = myEmissionNoise.d2;
+    const int s1    = myEmissionNoise.s1;
+    const double noiseRandom = myEmissionNoise.noiseRandom;
+
 
     if( (a < 0) || (b < 1) || (b > M_PI) )
     {
@@ -2092,3 +2099,4 @@ void perturbStruct::cleanup2()
     delete[] lmax;
     delete[] bands;
 }
+

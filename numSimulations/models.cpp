@@ -153,10 +153,10 @@ std::complex<double> HeatModel2DAna::fFunc(const double nu,
     const std::complex<double> nuHAT = nuHat(nu, ltherm);
     const std::complex<double> nuTIlde = nuTilde(nu, ltherm);
 
-    return fFunc(nu, ltherm,nuHAT,nuTIlde );
+    return fFunc(ltherm,nuHAT,nuTIlde );
 }
 
-std::complex<double> HeatModel2DAna::fFunc(const double nu, const double ltherm,
+std::complex<double> HeatModel2DAna::fFunc(const double ltherm,
                                            const std::complex<double> nuHAT,
                                            const std::complex<double> nuTIlde)
                                            const
@@ -180,11 +180,11 @@ std::complex<double> HeatModel2DAna::HFunc(const double nu, const double ltherm,
 {
     const std::complex<double> nuHAT = nuHat(nu, ltherm);
     const std::complex<double> nuTIlde = nuTilde(nu, ltherm);
-    return HFunc(nu, ltherm, z, nuHAT ,nuTIlde );
+    return HFunc(ltherm, z, nuHAT ,nuTIlde );
 }
 
 std::complex<double>
-HeatModel2DAna::HFunc(const double nu, const double ltherm, const double zNorm,
+HeatModel2DAna::HFunc(const double ltherm, const double zNorm,
                       const std::complex<double> nuHAT,
                       const std::complex<double> nuTIlde) const
 {
@@ -230,7 +230,7 @@ HeatModel2DAna::HFunc(const double nu, const double ltherm, const double zNorm,
     retrn2a /= ltherm ;
 
     std::complex<double>
-    retrn2b = fFunc(nu, ltherm, nuHAT, nuTIlde);
+    retrn2b = fFunc(ltherm, nuHAT, nuTIlde);
     retrn2b *= cosh(retrn2a);
 
     std::complex<double>
@@ -289,7 +289,7 @@ HeatModel2DAna::hTildeCoat(const double nu, const double ltherm,
     retrn2 *= exp(-zNorm/lambda);
 
     std::complex<double>
-    retrn3 = HFunc(nu, ltherm, zNorm, nuHAT, nuTIlde);
+    retrn3 = HFunc(ltherm, zNorm, nuHAT, nuTIlde);
     retrn3 *= exp( -1 / lambda );
     retrn3 /=  1 - R0 * R1 * exp( -2 / lambda );
 
@@ -299,7 +299,7 @@ HeatModel2DAna::hTildeCoat(const double nu, const double ltherm,
     retrn4a /= ltherm;
 
     std::complex<double>
-    retrn4b  = fFunc(nu, ltherm, nuHAT, nuTIlde);
+    retrn4b  = fFunc(ltherm, nuHAT, nuTIlde);
     retrn4b *= cosh(retrn4a);
 
     std::complex<double>
@@ -469,8 +469,7 @@ HeatModel2DAna::TemperatureDistro(std::vector<std::vector<std::vector<double>>>
 }
 
 void
-HeatModel2DAna::TemperaturePrintOut(const double omega,
-                                    const std::string dir, const double L_coat)
+HeatModel2DAna::TemperaturePrintOut(const std::string dir, const double L_coat)
                                     const
 {
     /// Setup Temperature[n][r][z] Vector
@@ -605,7 +604,7 @@ void HeatModel2DAna::testing(void) const
         {
             const double nu = nuInc*i;
             std::cout << std::setprecision(2) << nu << "\t";
-            std::cout << std::setprecision(precO) << fFunc(nu, ltherm) << "\n";
+            std::cout << std::setprecision(precO) << fFunc(nu,ltherm) << "\n";
         }
         std::cout << "\n********\n";
 

@@ -38,8 +38,7 @@ public:
 
     void TemperatureDistro(std::vector< std::vector< std::vector< double > > >
                            &Temperature,const double omega) const;
-    void TemperaturePrintOut(const double omega,
-                             const std::string dir, const double L_coat) const;
+    void TemperaturePrintOut(const std::string dir, const double L_coat) const;
     void testing(void) const;
     void cleanup(void) const;
 
@@ -72,12 +71,12 @@ private:
     std::complex<double> nuTilde(const double nu, const double ltherm) const;
     std::complex<double> nuHat(const double nu, const double ltherm) const;
     std::complex<double> fFunc(const double nu, const double ltherm ) const;
-    std::complex<double> fFunc(const double nu, const double ltherm,
+    std::complex<double> fFunc(const double ltherm,
                                const std::complex<double> nuHAT,
                                const std::complex<double> nuTIlde ) const;
     std::complex<double> HFunc(const double nu, const double ltherm,
                                const double zNorm) const;
-    std::complex<double> HFunc(const double nu, const double ltherm,
+    std::complex<double> HFunc(const double ltherm,
                                const double zNorm,
                                const std::complex<double> nuHAT,
                                const std::complex<double> nuTIlde) const;

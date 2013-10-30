@@ -76,6 +76,8 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
     constexpr bool d2 = true;        //monotonic (try true)
     constexpr int s1 = 0;            //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.004; // normal noise % of pi/2
+    const class emissionNoiseParameters myEmissionNoise(a, b, d1, d2, s1,
+                                                        noiseRandom);
 
     double *Analytical_PhaseR1 = nullptr;
     double *lthermalR1 = nullptr;
@@ -100,8 +102,8 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
                 Analytical_PhaseR1);
 
         ///create artificial experimental data
-        pStruct->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
-                               Analytical_PhaseR1, l_min, l_max);
+        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR1, l_min,
+                               l_max);
 
         ///estimate unknown parameters using full range
         double *xpredicted = new double[ pStruct->N];
@@ -158,8 +160,7 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
                 Analytical_PhaseR2);
 
         ///create artificial experimental data
-        pStruct->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
-                               Analytical_PhaseR2, .04, 4);
+        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR2, .04, 4);
 
         ///estimate unknown parameters using full range
         double *xpredicted = new double[ pStruct->N];
@@ -309,16 +310,18 @@ void CC_APS2(struct parameterStr *pStruct)
     constexpr bool d2 = true;   //monotonic (try true)
     constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
+    const class emissionNoiseParameters myEmissionNoise(a, b, d1, d2, s1,
+                                                        noiseRandom);
 
-    if(false)
+    if(true)
     {
         /* Create Initial Experimental Data for figure */
         pStruct->thermalSetup(l_min, l_max, LendMinDecade);
         phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
-        pStruct->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
-                               pStruct->emissionNominal, l_min, l_max);
+        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
+                               l_max);
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 1,
+                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 10,
                 factorMax, factorScale);
 
         ///output data for printing
@@ -339,12 +342,12 @@ void CC_APS2(struct parameterStr *pStruct)
     }
 
 ///* Optimization Procedure for l-thermal  */
-    if(true)
+    if(false)
     {
         parameterUncertainty(pStruct->N, ftol, xtol, gtol, maxfev, epsfcn, mode,
                              factor, nprint, &st_ptr, xInitial, pStruct,
-                             factorMax, factorScale, pertStruct, a, b, d1, d2,
-                             s1, noiseRandom, filename);
+                             factorMax, factorScale, pertStruct, myEmissionNoise
+                             , filename);
         pertStruct->cleanup2();
         delete pertStruct;
     }

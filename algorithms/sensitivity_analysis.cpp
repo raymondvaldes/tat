@@ -162,7 +162,7 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
                     parametersStr->predicted);
             pStruct->temp[xiters + xnumber*currentI ] = msearea;
 
-            /*Select larger of two possible extremes.*/ //BUG ??
+            /*Select larger of two possible extremes.*/ //TODO replace with func
             pStruct->xArea[currentI] =  msearea;
             if(xiters == 0 || xiters == xnumber-1 )
             {
@@ -322,9 +322,8 @@ void parameterUncertainty(const size_t n, const double ftol, const double xtol,
                           const struct parameter_constraints *st_ptr,
                           double *xInitial, struct parameterStr * parametersStr,
                           const double factorMax, const double factorScale,
-                          class perturbStruct *pStruct, const double a,
-                          const double b, const bool d1, const bool d2,
-                          const int s1, const double noiseRandom,
+                          class perturbStruct *pStruct,
+                          const class emissionNoiseParameters myEmissionNoise,
                           const std::string filename)
 {
     /*The idea with the perturbation test is that I have my "perfect fit" and
@@ -348,20 +347,21 @@ void parameterUncertainty(const size_t n, const double ftol, const double xtol,
     CCurves = new class calibration_curves(filename);
 
 ///Create Initial Experimental Data
-    phase99(parametersStr->L_end,
-            parametersStr, parametersStr->emissionNominal);
+    ///setup the nominal data
+    phase99(parametersStr->L_end, parametersStr,parametersStr->emissionNominal);
 
+    ///let the experimental be equal to the nominal data
     for(size_t i =0 ; i < parametersStr->L_end; i++)
     {
         parametersStr->emissionExperimental[i]
-        = parametersStr->emissionNominal[i];
+                = parametersStr->emissionNominal[i];
     }
 
 ///Initial Fit to get initial guesses
     constexpr size_t interants = 0;
     fitting(parametersStr->L_end, parametersStr->N, ftol, xtol, gtol, maxfev,
-            epsfcn, mode, factor, nprint, st_ptr, parametersStr,
-            xInitial, interants, factorMax, factorScale);
+            epsfcn, mode, factor, nprint, st_ptr, parametersStr, xInitial,
+            interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
     filesystem::makeDir(parametersStr->dir, "debug");
@@ -381,8 +381,8 @@ void parameterUncertainty(const size_t n, const double ftol, const double xtol,
         parametersStr->thermalSetup(lmin, lmax, lEndMin);
 
         ///Create Initial Experimental Data
-        phase99(parametersStr->L_end,
-                parametersStr, parametersStr->emissionNominal);
+        phase99(parametersStr->L_end, parametersStr,
+                parametersStr->emissionNominal);
         for(size_t i =0 ; i < parametersStr->L_end; i++)
         {
             parametersStr->emissionExperimental[i]
@@ -390,8 +390,10 @@ void parameterUncertainty(const size_t n, const double ftol, const double xtol,
         }
 
         ///add artificial experimental data
-        parametersStr->EmissionNoise(a, b, d1, d2, s1, noiseRandom,
-                                     parametersStr->emissionNominal, lminN, lmaxN);
+
+        parametersStr->EmissionNoise(myEmissionNoise,
+                                     parametersStr->emissionNominal, lminN,
+                                     lmaxN);
 
         ///estimate unknown parameters
         paramter_estimation(parametersStr->L_end, parametersStr->N, ftol, xtol,

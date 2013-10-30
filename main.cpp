@@ -4,8 +4,7 @@ int main( int argc, char *argv[] )
 {
     ///Setup global timer
     class stopwatch globalStopWatch;
-    for(size_t i = 0 ; i <20 ; ++i)
-      {std::cout <<"hello, raymond!!" << "\n";}
+
     /// Mesh Parameters
 /*
      - beta1 set to a high number (5)

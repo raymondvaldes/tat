@@ -344,8 +344,7 @@ public:
     void parametersStrSetup(const enum XParaNames *xParametersNames_);
     void update_b(const double radius, const double L);
     void update_b(void);
-    void EmissionNoise(const double a, const double b, const bool d1,
-                       const bool d2, const int s1, const double noiseRandom,
+    void EmissionNoise(const emissionNoiseParameters myEmissionNoise,
                        const double* emissionNominal,
                        const double lmin, const double lmax);
     void cleanup();
@@ -354,7 +353,6 @@ private:
     void updateNMeasurements(const size_t Lend_);
 
 };
-
 
 
 #endif // NUMERICAL_SETUP_H_INCLUDED
