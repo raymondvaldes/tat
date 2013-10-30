@@ -156,10 +156,8 @@ void Temperature::cleanup(void)
 
 emissionNoiseParameters::emissionNoiseParameters(const double a1_,
                                                  const double b1_,
-                                                 const double noiseRandom_,
                                                  const bool d1_, const bool d2_,
-                                                 const int s1_):
+                                                 const int s1_,
+                                                 const double noiseRandom_):
     a(a1_), b(b1_), noiseRandom(noiseRandom_), d1(d1_), d2(d2_), s1(s1_)
-{
-
-}
+{}

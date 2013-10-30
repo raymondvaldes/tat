@@ -1828,13 +1828,17 @@ void parameterStr::EmissionNoise(const class
 //        d1 = 1 or 0;
 //        d2 = 1 or 0
 
-    const double a  = myEmissionNoise.a;
-    const double b  = myEmissionNoise.b;
-    const bool d1   = myEmissionNoise.d1;
-    const bool d2   = myEmissionNoise.d2;
-    const int s1    = myEmissionNoise.s1;
-    const double noiseRandom = myEmissionNoise.noiseRandom;
+    double a  = myEmissionNoise.a;
+    double b  = myEmissionNoise.b;
+    bool d1   = myEmissionNoise.d1;
+    bool d2   = myEmissionNoise.d2;
+    int s1    = myEmissionNoise.s1;
+    double noiseRandom = myEmissionNoise.noiseRandom;
 
+//    std::cout << "these are my noise parameters\n";
+//    std::cout << "a = " << a << "\n" << "b = " << b << "\n" << "d1 = " <<  d1;
+//    std::cout << "\n" << "d2 = " << d2 << "\n" << "s1 = "<< s1;
+//    std::cout << "\nnoiseRandom = " << noiseRandom << "\nend\n\n";
 
     if( (a < 0) || (b < 1) || (b > M_PI) )
     {

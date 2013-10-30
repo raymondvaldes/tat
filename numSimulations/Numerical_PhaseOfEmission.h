@@ -27,9 +27,9 @@ public:
     double a, b, noiseRandom;
     bool d1, d2;
     int s1;
-    emissionNoiseParameters(const double a1_, const double b1_,
-                            const double noiseRandom_, const bool d1_,
-                            const bool d2_, const int s1_);
+    emissionNoiseParameters(const double a1_, const double b1_, const bool d1_,
+                            const bool d2_, const int s1_,
+                            const double noiseRandom_);
 };
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED
