@@ -131,4 +131,38 @@ double emissionAxial(const class Temperature Tprofile, const size_t nVal) const;
     const;
 };
 
+
+
+struct layer
+{
+    struct property kthermal;
+    struct property psithermal;
+    double Length;
+};
+
+struct temperatureScale
+{
+    double referance;
+    double rear;
+    double tolerance;
+};
+
+struct optics
+{
+    double R0;
+    double R1;
+    double lambda;
+};
+
+struct modelSystem
+{
+    struct layer coating;
+    struct layer substrate;
+    struct temperatureScale Temp;
+    struct optics optical;
+
+    double gamma;
+    double Rtc;
+};
+
 #endif // THERMAL_MODELS_H_INCLUDED
