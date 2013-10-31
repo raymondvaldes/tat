@@ -1,33 +1,33 @@
 
 #include "../Header.h"
 double PhaseOfEmission1DNum(const int flag,
-                            const struct parameterStr *const parametersStr)
+                            const struct parameterStr *const pStruct)
 {
-    class Temperature Tprofile(parametersStr->mesh->Nend,
-                               parametersStr->mesh->M2);
+    class Temperature Tprofile(pStruct->mesh->Nend,
+                               pStruct->mesh->M2);
 
     /// Acquire Numerical Temperature
-    temperature_1D(parametersStr->T_ref,
-                   parametersStr->laser->Is,    parametersStr->laser->It,
-                   parametersStr->L_coat,       parametersStr->lambda,
-                   parametersStr->R0,           parametersStr->R1,
-                   parametersStr->L_coat,       parametersStr->L_substrate,
-                   parametersStr->q_surface,    parametersStr->Rtc,
-                   parametersStr->Ttol,         parametersStr->iter,
-                   parametersStr->T_rear,
-                   parametersStr->laser->omegas[flag],
-                   parametersStr->gamma,
-                   parametersStr->k1_thermal,   parametersStr->k2_thermal,
-                   parametersStr->psi1_thermal, parametersStr->psi2_thermal,
-                   parametersStr->mesh, Tprofile);
+    temperature_1D(pStruct->T_ref,
+                   pStruct->laser->Is,    pStruct->laser->It,
+                   pStruct->L_coat,       pStruct->lambda,
+                   pStruct->R0,           pStruct->R1,
+                   pStruct->L_coat,       pStruct->L_substrate,
+                   pStruct->q_surface,    pStruct->Rtc,
+                   pStruct->Ttol,         pStruct->iter,
+                   pStruct->T_rear,
+                   pStruct->laser->omegas[flag],
+                   pStruct->gamma,
+                   pStruct->k1_thermal,   pStruct->k2_thermal,
+                   pStruct->psi1_thermal, pStruct->psi2_thermal,
+                   pStruct->mesh, Tprofile);
 
     ///Initiate emission model
     const class Emission*
-    emission = new class Emission(parametersStr->detector_lam,
-                                  parametersStr->T_base,
-                                  parametersStr->mesh,
-                                  parametersStr->bNorm *parametersStr->L_coat,
-                                  parametersStr->E_sigma);
+    emission = new class Emission(pStruct->detector_lam,
+                                  pStruct->T_base,
+                                  pStruct->mesh,
+                                  pStruct->bNorm *pStruct->L_coat,
+                                  pStruct->E_sigma);
     const double
     phase2 = emission->phase1D(Tprofile);
 
