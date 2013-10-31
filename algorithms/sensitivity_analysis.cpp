@@ -236,15 +236,13 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
     return;
 }
 
-void calibrationSweep(const size_t m, const size_t n, const double ftol,
-                   const double xtol, const double gtol,
-                   const int maxfev, const double epsfcn, const int mode,
-                   double factor, const int nprint,
-                   const struct parameter_constraints *st_ptr,
-                   double *xInitial, struct parameterStr *pStructp,
-                   const double factorMax, const double factorScale,
-                   class perturbStruct *pStruct, const std::string filename,
-                   const size_t lEndMin)
+void calibrationSweep(const size_t m, const size_t n,
+                      struct ParameterEstimation::settings ParaEstSetting,
+                      const struct parameter_constraints *st_ptr,
+                      double *xInitial, struct parameterStr *pStructp,
+                      const double factorMax, const double factorScale,
+                      class perturbStruct *pStruct, const std::string filename,
+                      const size_t lEndMin)
 {
     /*  The idea with the perturbation test is that I have my "perfect fit" and
     then refit each while changing one paramter +-20% for example. */
@@ -287,8 +285,16 @@ void calibrationSweep(const size_t m, const size_t n, const double ftol,
             = pStructp->emissionNominal[i];
         }
 
-        perturbationTest(pStructp->L_end, pStructp->N, ftol, xtol,
-                         gtol, maxfev, epsfcn, mode, factor, nprint, st_ptr,
+        perturbationTest(pStructp->L_end, pStructp->N,
+                         ParaEstSetting.ftol,
+                         ParaEstSetting.xtol,
+                         ParaEstSetting.gtol,
+                         ParaEstSetting.maxfev,
+                         ParaEstSetting.epsfcn,
+                         ParaEstSetting.mode,
+                         ParaEstSetting.factor,
+                         ParaEstSetting.nprint,
+                         st_ptr,
                          xInitial, pStructp,factorMax, factorScale,
                          pStruct);
 

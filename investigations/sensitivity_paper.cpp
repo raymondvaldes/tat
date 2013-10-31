@@ -16,15 +16,16 @@ constexpr double ftol = 1.e-12;
 constexpr double xtol = 1.e-12;
 constexpr double gtol = 1.e-12;
 constexpr size_t maxfev = 1e5;
-
 constexpr double epsfcn = 1.e-8;
 constexpr double factor =  .01;
+constexpr int mode = 1;
+constexpr int nprint = 0;
+
+struct ParameterEstimation::settings
+ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
 constexpr double factorMax = 1;
 constexpr double factorScale = 5;
-
-constexpr int mode = 1;
-constexpr int nprint = 0;
 constexpr size_t LendMinDecade = 50;
 
 void figureSensitivityIntro(struct parameterStr *pStruct)
@@ -108,7 +109,7 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         ///estimate unknown parameters using full range
         double *xpredicted = new double[ pStruct->N];
         double *xInitial = nullptr;
-        xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
+        xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};    
         paramter_estimation(pStruct->L_end, pStruct->N, ftol, xtol, gtol,
                             maxfev, epsfcn, mode, factor, nprint, &info, &nfev,
                             &st_ptr, xInitial, pStruct, factorMax, factorScale,
@@ -294,10 +295,9 @@ void CC_APS2(struct parameterStr *pStruct)
         selection of the lmin and lmax for each iteration is determined
         with a random simulation. The argument for teh lthermalMC() function
         provides the band resolution. */
-        calibrationSweep(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                         epsfcn, mode, factor, nprint, &st_ptr, xInitial,
-                         pStruct, factorMax,factorScale, pertStruct, filename,
-                         LendMinDecade);
+        calibrationSweep(pStruct->L_end, pStruct->N, ParaEstSetting, &st_ptr,
+                         xInitial, pStruct, factorMax,factorScale, pertStruct,
+                         filename, LendMinDecade);
     }
 
     /*At this point I can output a figure that has the sensitivity curve data
