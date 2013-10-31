@@ -100,10 +100,10 @@ SOURCES += main.cpp \
     numSimulations/Numerical_Setup.cpp \
     numSimulations/Numerical_PhaseOfEmission_Results.cpp \
     numSimulations/Numerical_PhaseOfEmission.cpp \
-    numSimulations/models.cpp \
     numSimulations/Experimental_PhaseOfEmission.cpp \
     tools/filesystem.cpp \
-    tools/timing.cpp
+    tools/timing.cpp \
+    numSimulations/Thermal_models.cpp
 
 #header files
 HEADERS += \
@@ -116,8 +116,8 @@ HEADERS += \
     numSimulations/Numerical_Setup.h \
     numSimulations/Numerical_PhaseOfEmission_Results.h \
     numSimulations/Numerical_PhaseOfEmission.h \
-    numSimulations/models.h \
     numSimulations/Experimental_PhaseOfEmission.h \
     tools/filesystem.hpp \
     tools/timing.h \
-    algorithms/sensitivity_analysis.hpp
+    algorithms/sensitivity_analysis.hpp \
+    numSimulations/Thermal_models.h
