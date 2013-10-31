@@ -10,16 +10,13 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct);
 
-void calibrationSweep(const size_t m, const size_t n, const double ftol,
-                      const double xtol, const double gtol,
-                      const int maxfev, const double epsfcn, const int mode,
-                      double factor, const int nprint,
-                      const struct parameter_constraints *pc_ptr,
+void calibrationSweep(const size_t m, const size_t n,
+                      struct ParameterEstimation::settings ParaEstSetting,
+                      const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr *pStructp,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct, const std::string filename,
                       const size_t lEndMin);
-
 
 void statisticalPrintOut(size_t m, size_t n,
                         const struct parameter_constraints *pc_ptr,

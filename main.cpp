@@ -83,8 +83,6 @@ int main( int argc, char *argv[] )
 
     // Model system
     struct modelSystem APS2;
-
-
     pStruct->detector_rad = .25e-3;
     pStruct->L_coat = 71.7e-6;
     pStruct->R_domain = pStruct->detector_rad;
@@ -214,6 +212,8 @@ int main( int argc, char *argv[] )
         {
             pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
         }
+
+
 
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev, epsfcn,
                 mode, factor, nprint, st_ptr, pStruct, xInitial,
