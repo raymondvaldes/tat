@@ -1,11 +1,9 @@
 #ifndef SENSITIVITY_ANALYSIS_HPP
 #define SENSITIVITY_ANALYSIS_HPP
 
-void perturbationTest(const size_t m, const size_t n, const double ftol,
-                      const double xtol, const double gtol,
-                      const int maxfev, const double epsfcn, const int mode,
-                      double factor, const int nprint,
-                      const struct parameter_constraints *pc_ptr,
+void perturbationTest(const size_t m, const size_t n,
+                      struct ParameterEstimation::settings ParaEstSetting,
+                      const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr * parametersStr,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct);
@@ -25,8 +23,7 @@ void statisticalPrintOut(size_t m, size_t n,
                         double *Analytical_Phase, const double factorMax,
                         const double factorScale);
 
-void fitting(size_t m, size_t n, double ftol, double xtol, double gtol,
-             int maxfev, double epsfcn, int mode, double factor, int nprint,
+void fitting(size_t m, size_t n, ParameterEstimation::settings ParaEstSetting,
              const struct parameter_constraints *st_ptr,
              struct parameterStr * pStruct, double * xInitial,
              const size_t interants, const double factorMax,
@@ -40,16 +37,15 @@ void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol, int ma
              double *xInitial, const size_t interants, const double factorMax,
              const double factorScale);
 
-void parameterUncertainty(const size_t n, const double ftol, const double xtol,
-                          const double gtol, const int maxfev,
-                          const double epsfcn, const int mode, double factor,
-                          const int nprint,
+void parameterUncertainty(const size_t n,
+                          struct ParameterEstimation::settings ParaEstSetting,
                           const struct parameter_constraints *st_ptr,
                           double *xInitial, struct parameterStr * parametersStr,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,
                           const class emissionNoiseParameters myEmissionNoise,
                           const std::string filename);
+
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,
                            const std::vector<double>& calibrationTable,
                            size_t xnum);

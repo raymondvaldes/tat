@@ -212,12 +212,8 @@ int main( int argc, char *argv[] )
         {
             pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
         }
-
-
-
-        fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev, epsfcn,
-                mode, factor, nprint, st_ptr, pStruct, xInitial,
-                interants, factorMax, factorScale);
+        fitting(pStruct->L_end, pStruct->N, ParaEstSetting, st_ptr, pStruct,
+                xInitial, interants, factorMax, factorScale);
     }
 
 //Prepare figures and data for paper Sensitivity

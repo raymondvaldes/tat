@@ -1,12 +1,11 @@
 #include "../Header.h"
 
-int paramter_estimation(const size_t m, const size_t n, double ftol,
-                        double xtol, double gtol, int maxfev, double epsfcn,
-                        int mode, double factor, int nprint, int *info,
-                        int *nfev, const struct parameter_constraints *pc_ptr,
-                        double *x, struct parameterStr * pStruct,
-                        const double factorMax, const double factorScale,
-                        double *xpredicted)
+int paramter_estimation(const size_t m, const size_t n,
+                        struct ParameterEstimation::settings ParaEstSetting,
+                        int *info, int *nfev,
+                        const struct parameter_constraints *pc_ptr, double *x,
+                        struct parameterStr * pStruct, const double factorMax,
+                        const double factorScale, double *xpredicted)
 {
 
 /*
@@ -33,7 +32,7 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
     int *ipvt = new int[n];
     double *diag = new double[n];
 
-    scaleDiag(mode, n, diag, pStruct );
+    scaleDiag(ParaEstSetting.mode, n, diag, pStruct );
 
     double *xinitial = new double[n];
     double *xguess = new double[n];
@@ -117,9 +116,11 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
         }
 
         ///levenberg-marquardt algorithm
-        lmdif(&ThermalProp_Analysis, m, n, x, fvec, ftol, xtol, gtol, maxfev,
-              epsfcn, diag, mode, factor, nprint, info, nfev, fjac, m, ipvt,
-              qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr,pStruct);
+        lmdif(&ThermalProp_Analysis, m, n, x, fvec, ParaEstSetting.ftol,
+              ParaEstSetting.xtol, ParaEstSetting.gtol, ParaEstSetting.maxfev,
+              ParaEstSetting.epsfcn, diag, ParaEstSetting.mode,
+              ParaEstSetting.factor, ParaEstSetting.nprint, info, nfev, fjac, m,
+              ipvt, qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr,pStruct);
 
         ///Exit Routine
         /* Sets up a condition where the total error in the phase is compared
@@ -144,7 +145,7 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
         }
 
         if( reduceChiSquare < 2
-           || factor == factorMax
+           || ParaEstSetting.factor == factorMax
            || pStruct->fvecTotal < pStruct->MSETol
            )
         {
@@ -152,7 +153,7 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
             const bool
             condition1 = reduceChiSquare < 2;
             const bool
-            condition2 = factor == factorMax;
+            condition2 = ParaEstSetting.factor == factorMax;
             const bool
             condition3 = pStruct->fvecTotal < pStruct->MSETol;
 
@@ -236,16 +237,17 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
 
         }
 
-        else if (factor <= factorMax/factorScale)
+        else if (ParaEstSetting.factor <= factorMax/factorScale)
         {
-            factor *=factorScale;
+            ParaEstSetting.factor *=factorScale;
 //            std::cout << "factor increased to "  << factor <<"\n";
 
         }
-        else if (factor > factorMax/factorScale && factor < factorMax)
+        else if (ParaEstSetting.factor > factorMax/factorScale &&
+                 ParaEstSetting.factor < factorMax)
         {
-            factor = factorMax;
-            std::cout << "factor increased max "  << factor <<"\n";
+            ParaEstSetting.factor = factorMax;
+            std::cout << "factor increased max "<< ParaEstSetting.factor <<"\n";
         }
 
         for(size_t i=0 ; i< n ; i++)
@@ -253,7 +255,6 @@ int paramter_estimation(const size_t m, const size_t n, double ftol,
             x[i] = xinitial[i];
         }
     }
-
 
     delete [] qtf;
     delete [] wa1;

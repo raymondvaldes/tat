@@ -1,8 +1,6 @@
 #include "../Header.h"
-void perturbationTest(const size_t m, const size_t n, const double ftol,
-                      const double xtol, const double gtol,
-                      const int maxfev, const double epsfcn, const int mode,
-                      double factor, const int nprint,
+void perturbationTest(const size_t m, const size_t n,
+                      struct ParameterEstimation::settings ParaEstSetting,
                       const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr * parametersStr,
                       const double factorMax, const double factorScale,
@@ -149,10 +147,9 @@ void perturbationTest(const size_t m, const size_t n, const double ftol,
 //            std::cout << parametersStr->k1_thermal->offset << "\t" <<
 //                         parametersStr->psi1_thermal->offset << "\n";
 
-            paramter_estimation(m, parametersStr->N, ftol, xtol, gtol, maxfev,
-                                epsfcn, mode, factor, nprint, &info, &nfev,
-                                st_ptr, xInitial, parametersStr, factorMax,
-                                factorScale, xpredicted);
+            paramter_estimation(m, parametersStr->N, ParaEstSetting, &info,
+                                &nfev, st_ptr, xInitial, parametersStr,
+                                factorMax, factorScale, xpredicted);
 //            std::cout << "\n";
             phase99(parametersStr->L_end, parametersStr,
                     parametersStr->predicted);
@@ -284,19 +281,8 @@ void calibrationSweep(const size_t m, const size_t n,
             pStructp->emissionExperimental[i]
             = pStructp->emissionNominal[i];
         }
-
-        perturbationTest(pStructp->L_end, pStructp->N,
-                         ParaEstSetting.ftol,
-                         ParaEstSetting.xtol,
-                         ParaEstSetting.gtol,
-                         ParaEstSetting.maxfev,
-                         ParaEstSetting.epsfcn,
-                         ParaEstSetting.mode,
-                         ParaEstSetting.factor,
-                         ParaEstSetting.nprint,
-                         st_ptr,
-                         xInitial, pStructp,factorMax, factorScale,
-                         pStruct);
+        perturbationTest(pStructp->L_end, pStructp->N, ParaEstSetting, st_ptr,
+                         xInitial, pStructp,factorMax, factorScale, pStruct);
 
         ///Print some information to terminal
         std::cout << j <<" "<< pStruct->bands[j]<<" "<< lmin <<" "<< lmax;
@@ -321,10 +307,8 @@ void calibrationSweep(const size_t m, const size_t n,
     return;
 }
 
-void parameterUncertainty(const size_t n, const double ftol, const double xtol,
-                          const double gtol, const int maxfev,
-                          const double epsfcn, const int mode, double factor,
-                          const int nprint,
+void parameterUncertainty(const size_t n,
+                          struct ParameterEstimation::settings ParaEstSetting,
                           const struct parameter_constraints *st_ptr,
                           double *xInitial, struct parameterStr * parametersStr,
                           const double factorMax, const double factorScale,
@@ -365,9 +349,8 @@ void parameterUncertainty(const size_t n, const double ftol, const double xtol,
 
 ///Initial Fit to get initial guesses
     constexpr size_t interants = 0;
-    fitting(parametersStr->L_end, parametersStr->N, ftol, xtol, gtol, maxfev,
-            epsfcn, mode, factor, nprint, st_ptr, parametersStr, xInitial,
-            interants, factorMax, factorScale);
+    fitting(parametersStr->L_end, parametersStr->N, ParaEstSetting,
+            st_ptr, parametersStr, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
     filesystem::makeDir(parametersStr->dir, "debug");
@@ -402,12 +385,10 @@ void parameterUncertainty(const size_t n, const double ftol, const double xtol,
                                      lmaxN);
 
         ///estimate unknown parameters
-        paramter_estimation(parametersStr->L_end, parametersStr->N, ftol, xtol,
-                            gtol, maxfev,epsfcn, mode, factor, nprint, &info,
-                            &nfev, st_ptr, xInitial, parametersStr, factorMax,
-                            factorScale, xpredicted);
-        phase99(parametersStr->L_end,
-                parametersStr, parametersStr->predicted);
+        paramter_estimation(parametersStr->L_end, parametersStr->N,
+                            ParaEstSetting, &info, &nfev, st_ptr, xInitial,
+                            parametersStr, factorMax, factorScale, xpredicted);
+        phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);
 
         ///develop the uncertainties
         double msearea = MSEarea(parametersStr->L_end,
@@ -546,8 +527,8 @@ void statisticalPrintOut(size_t P, size_t N,
     return;
 }
 
-void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
-             int maxfev, double epsfcn, int mode, double factor, int nprint,
+void fitting(size_t P, size_t N,
+             struct ParameterEstimation::settings ParaEstSetting,
              const struct parameter_constraints *st_ptr,
              struct parameterStr * pStruct, double *xInitial,
              const size_t interants, const double factorMax,
@@ -575,9 +556,9 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
         int info = 0;
         myfile << i << "\t";
 
-        paramter_estimation(P, N, ftol, xtol, gtol, maxfev, epsfcn, mode,
-                            factor, nprint, &info, &nfev, st_ptr, xInitial,
-                            pStruct, factorMax, factorScale, xpredicted);
+        paramter_estimation(P, N, ParaEstSetting, &info, &nfev, st_ptr,
+                            xInitial, pStruct, factorMax, factorScale,
+                            xpredicted);
         pStruct->MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
                            pStruct->predicted);
 
@@ -609,83 +590,83 @@ void fitting(size_t P, size_t N, double ftol, double xtol, double gtol,
 }
 
 
-void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol,
-               int maxfev, double epsfcn, int mode, double factor, int nprint,
-               const struct parameter_constraints *st_ptr,
-               struct parameterStr * parametersStr, const double ExpStddev,
-               const double *Numerical_Phase,const  double *Analytical_Phase,
-               double *xInitial, const size_t interants, const double factorMax,
-               const double factorScale)
-{
-    int nfev;
-    int info = 0;
-/// Scale jacobian if enabled
-    std::ofstream myfile;
-    std::stringstream filename;
-    filename <<  "../data/fittingData.dat";
-    myfile.open(filename.str().c_str());
-    myfile << std::setprecision(8);
-    myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
-    myfile << "\taub\tgamma\tEsigma\tR1\tlambda\n";
-    const double ExpVarianceEst = ExpStddev * ExpStddev;
-    const size_t v1 = parametersStr->L_end - N;
-    double*xpredicted = new double[N];
+//void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol,
+//               int maxfev, double epsfcn, int mode, double factor, int nprint,
+//               const struct parameter_constraints *st_ptr,
+//               struct parameterStr * parametersStr, const double ExpStddev,
+//               const double *Numerical_Phase,const  double *Analytical_Phase,
+//               double *xInitial, const size_t interants, const double factorMax,
+//               const double factorScale)
+//{
+//    int nfev;
+//    int info = 0;
+///// Scale jacobian if enabled
+//    std::ofstream myfile;
+//    std::stringstream filename;
+//    filename <<  "../data/fittingData.dat";
+//    myfile.open(filename.str().c_str());
+//    myfile << std::setprecision(8);
+//    myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
+//    myfile << "\taub\tgamma\tEsigma\tR1\tlambda\n";
+//    const double ExpVarianceEst = ExpStddev * ExpStddev;
+//    const size_t v1 = parametersStr->L_end - N;
+//    double*xpredicted = new double[N];
 
-///Setup initial parameter estimation to determine spread of residuals
-    paramter_estimation(P, N, ftol, xtol, gtol, maxfev, epsfcn, mode,
-                        factor, nprint, &info, &nfev, st_ptr, xInitial,
-                        parametersStr, factorMax, factorScale, xpredicted);
+/////Setup initial parameter estimation to determine spread of residuals
+//    paramter_estimation(P, N, ftol, xtol, gtol, maxfev, epsfcn, mode,
+//                        factor, nprint, &info, &nfev, st_ptr, xInitial,
+//                        parametersStr, factorMax, factorScale, xpredicted);
 
-    double *predictedOG = new double[parametersStr->L_end];
-    double *fvecOG = new double[parametersStr->L_end];
+//    double *predictedOG = new double[parametersStr->L_end];
+//    double *fvecOG = new double[parametersStr->L_end];
 
-    for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
-    {
-        predictedOG[n]  = parametersStr-> predicted[n];
-        fvecOG[n] = parametersStr->fvec[n];
-    }
+//    for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
+//    {
+//        predictedOG[n]  = parametersStr-> predicted[n];
+//        fvecOG[n] = parametersStr->fvec[n];
+//    }
 
-    ///Start the bootstrap process
-    for(size_t i=0; i<interants; ++i)
-    {
-        myfile << i << "\t";
-        for(size_t j=0; j < N; j++ )
-            {xInitial[j] = xpredicted[j];}
-        for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
-        {
-            parametersStr-> emissionExperimental[n]  = predictedOG[n];
-            parametersStr-> emissionExperimental[n] +=
-            fvecOG[xINTrandom(0,parametersStr->L_end-1)];
-        }
+//    ///Start the bootstrap process
+//    for(size_t i=0; i<interants; ++i)
+//    {
+//        myfile << i << "\t";
+//        for(size_t j=0; j < N; j++ )
+//            {xInitial[j] = xpredicted[j];}
+//        for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
+//        {
+//            parametersStr-> emissionExperimental[n]  = predictedOG[n];
+//            parametersStr-> emissionExperimental[n] +=
+//            fvecOG[xINTrandom(0,parametersStr->L_end-1)];
+//        }
 
-        paramter_estimation(P, N, ftol, xtol, gtol, maxfev, epsfcn, mode,
-                            factor, nprint, &info, &nfev, st_ptr,
-                            xInitial, parametersStr, factorMax, factorScale,
-                            xpredicted);
+//        paramter_estimation(P, N, ftol, xtol, gtol, maxfev, epsfcn, mode,
+//                            factor, nprint, &info, &nfev, st_ptr,
+//                            xInitial, parametersStr, factorMax, factorScale,
+//                            xpredicted);
 
-        parametersStr->MSE = MSE(parametersStr->L_end,
-                             parametersStr->emissionExperimental,
-                             parametersStr-> predicted);
+//        parametersStr->MSE = MSE(parametersStr->L_end,
+//                             parametersStr->emissionExperimental,
+//                             parametersStr-> predicted);
 
-        myfile << parametersStr->gamma << "\t"
-               << parametersStr->a_sub << "\t"
-               << parametersStr->E_sigma << "\t"
-               << parametersStr->R1 << "\t"
-               << parametersStr->lambda << "\t"
-               << (parametersStr->fvecTotal / ExpVarianceEst) / v1 << "\t"
-               << parametersStr->MSE << "\n";
+//        myfile << parametersStr->gamma << "\t"
+//               << parametersStr->a_sub << "\t"
+//               << parametersStr->E_sigma << "\t"
+//               << parametersStr->R1 << "\t"
+//               << parametersStr->lambda << "\t"
+//               << (parametersStr->fvecTotal / ExpVarianceEst) / v1 << "\t"
+//               << parametersStr->MSE << "\n";
 
-        printPEstimates(N, parametersStr);
-    }
-    myfile.close();
+//        printPEstimates(N, parametersStr);
+//    }
+//    myfile.close();
 
 
-    delete [] predictedOG;
-    delete [] fvecOG;
-    delete []xpredicted;
+//    delete [] predictedOG;
+//    delete [] fvecOG;
+//    delete []xpredicted;
 
-    return;
-}
+//    return;
+//}
 
 
 

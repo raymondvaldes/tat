@@ -110,10 +110,9 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         double *xpredicted = new double[ pStruct->N];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};    
-        paramter_estimation(pStruct->L_end, pStruct->N, ftol, xtol, gtol,
-                            maxfev, epsfcn, mode, factor, nprint, &info, &nfev,
-                            &st_ptr, xInitial, pStruct, factorMax, factorScale,
-                            xpredicted);
+        paramter_estimation(pStruct->L_end, pStruct->N, ParaEstSetting, &info,
+                            &nfev, &st_ptr, xInitial, pStruct, factorMax,
+                            factorScale, xpredicted);
         delete [] xInitial;
         delete [] xpredicted;
         std::cout << info;
@@ -167,10 +166,9 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         double *xpredicted = new double[ pStruct->N];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
-        paramter_estimation(pStruct->L_end, pStruct->N, ftol, xtol, gtol,
-                            maxfev, epsfcn, mode, factor, nprint, &info, &nfev,
-                            &st_ptr, xInitial, pStruct, factorMax, factorScale,
-                            xpredicted);
+        paramter_estimation(pStruct->L_end, pStruct->N, ParaEstSetting, &info,
+                            &nfev, &st_ptr, xInitial, pStruct, factorMax,
+                            factorScale, xpredicted);
         delete [] xInitial;
         delete [] xpredicted;
         std::cout << info;
@@ -320,9 +318,8 @@ void CC_APS2(struct parameterStr *pStruct)
         phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
         pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
                                l_max);
-        fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 1,
-                factorMax, factorScale);
+        fitting(pStruct->L_end, pStruct->N, ParaEstSetting, &st_ptr, pStruct,
+                xInitial, 1, factorMax, factorScale);
 
         ///output data for printing
         std::ofstream myoutputfile;
@@ -344,10 +341,9 @@ void CC_APS2(struct parameterStr *pStruct)
 ///* Optimization Procedure for l-thermal  */
     if(true)
     {
-        parameterUncertainty(pStruct->N, ftol, xtol, gtol, maxfev, epsfcn, mode,
-                             factor, nprint, &st_ptr, xInitial, pStruct,
-                             factorMax, factorScale, pertStruct, myEmissionNoise
-                             , filename);
+        parameterUncertainty(pStruct->N, ParaEstSetting, &st_ptr, xInitial,
+                             pStruct, factorMax, factorScale, pertStruct,
+                             myEmissionNoise, filename);
         pertStruct->cleanup2();
         delete pertStruct;
     }
