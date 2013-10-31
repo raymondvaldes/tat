@@ -32,6 +32,7 @@ public:
                             const double noiseRandom_);
 };
 
+
 struct layer
 {
     struct property kthermal;
@@ -41,15 +42,17 @@ struct layer
 
 struct temperatureScale
 {
-    double T_ref;
-    double T_rear;
-    double Ttol;
+    double referance;
+    double rear;
+    double tolerance;
 };
 
 struct modelSystem
 {
     struct layer coating;
     struct layer substrate;
+    struct temperatureScale Temp;
+
     double gamma;
     double Rtc;
     double R0;
