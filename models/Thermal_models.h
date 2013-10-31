@@ -137,7 +137,11 @@ struct layer
 {
     struct property kthermal;
     struct property psithermal;
-    double Length;
+    double lambda;
+    double length;
+    double radius;
+
+    double opticalPenetration(void);
 };
 
 struct temperatureScale
@@ -145,13 +149,13 @@ struct temperatureScale
     double referance;
     double rear;
     double tolerance;
+    double base;
 };
 
 struct optics
 {
     double R0;
     double R1;
-    double lambda;
 };
 
 struct modelSystem

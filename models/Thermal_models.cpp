@@ -921,3 +921,9 @@ void Emission::cleanup(void) const
     delete[] Ib;
     delete[] EmissionTime;
 }
+
+
+double layer::opticalPenetration(void)
+{
+    return lambda*length;
+}

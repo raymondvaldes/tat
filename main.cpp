@@ -79,6 +79,11 @@ int main( int argc, char *argv[] )
      - E_sigma //ratio of substrate emissivity to optical thickness of the film,
      - thermal contact resistance per area
     */
+
+    // Model system
+    struct modelSystem APS2;
+
+
     pStruct->detector_rad = .25e-3;
     pStruct->L_coat = 71.7e-6;
     pStruct->R_domain = pStruct->detector_rad;
@@ -159,9 +164,9 @@ int main( int argc, char *argv[] )
     0-nonlinear
     1-linear (MUST DEBUG NONLINEAR)
 */
-    pStruct-> temp_output = 0;
-    pStruct-> e_model = 0;
-    pStruct-> prop_linearity = 1;
+    pStruct->temp_output = 0;
+    pStruct->e_model = 0;
+    pStruct->prop_linearity = 1;
 
 /// Parameter Estimation Constraints
 /*
