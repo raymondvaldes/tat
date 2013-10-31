@@ -17,7 +17,7 @@ public:
 double PhaseOfEmission2DAna(const int flag,
                             const struct parameterStr *const parametersStr);
 double PhaseOfEmission1DNum(const int flag,
-                            const struct parameterStr*const parametersStr);
+                            const struct parameterStr*const pStruct);
 double PhaseOfEmission1DAna(const int flag,
                             const struct parameterStr*const parametersStr);
 
@@ -30,6 +30,31 @@ public:
     emissionNoiseParameters(const double a1_, const double b1_, const bool d1_,
                             const bool d2_, const int s1_,
                             const double noiseRandom_);
+};
+
+struct layer
+{
+    struct property kthermal;
+    struct property psithermal;
+    double Length;
+};
+
+struct temperatureScale
+{
+    double T_ref;
+    double T_rear;
+    double Ttol;
+};
+
+struct modelSystem
+{
+    struct layer coating;
+    struct layer substrate;
+    double gamma;
+    double Rtc;
+    double R0;
+    double R1;
+    double lambda;
 };
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED

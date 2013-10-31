@@ -304,21 +304,16 @@ void CC_APS2(struct parameterStr *pStruct)
     for each of the five parameters. The figure with the artificial data and
     fitted curve with error bars will be shown next.*/
      ///Noise in Simulated Emission
-    constexpr double a =  .01;  // max % error (%*pi/2) (try .025)
+    constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
     constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
-    constexpr bool d1 = true;   //positive  (try false)
-    constexpr bool d2 = true;   //monotonic (try true)
+    constexpr bool d1 = true;    //positive  (try false)
+    constexpr bool d2 = true;    //monotonic (try true)
     constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
     const class emissionNoiseParameters myEmissionNoise(a, b, d1, d2, s1,
                                                         noiseRandom);
 
-//    std::cout << "these are my noise parameters\n";
-//    std::cout << "a = " << a << "\n" << "b = " << b << "\n" << "d1 = " <<  d1;
-//    std::cout << "\n" << "d2 = " << d2 << "\n" << "s1 = "<< s1;
-//    std::cout << "\nnoiseRandom = " << noiseRandom << "\nend\n\n";
-
-    if(true)
+    if(false)
     {
         /* Create Initial Experimental Data for figure */
         pStruct->thermalSetup(l_min, l_max, LendMinDecade);
@@ -326,7 +321,7 @@ void CC_APS2(struct parameterStr *pStruct)
         pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
                                l_max);
         fitting(pStruct->L_end, pStruct->N, ftol, xtol, gtol, maxfev,
-                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 10,
+                epsfcn, mode, factor, nprint, &st_ptr, pStruct, xInitial, 1,
                 factorMax, factorScale);
 
         ///output data for printing
@@ -347,7 +342,7 @@ void CC_APS2(struct parameterStr *pStruct)
     }
 
 ///* Optimization Procedure for l-thermal  */
-    if(false)
+    if(true)
     {
         parameterUncertainty(pStruct->N, ftol, xtol, gtol, maxfev, epsfcn, mode,
                              factor, nprint, &st_ptr, xInitial, pStruct,
