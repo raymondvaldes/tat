@@ -47,17 +47,22 @@ struct temperatureScale
     double tolerance;
 };
 
+struct optics
+{
+    double R0;
+    double R1;
+    double lambda;
+};
+
 struct modelSystem
 {
     struct layer coating;
     struct layer substrate;
     struct temperatureScale Temp;
+    struct optics optical;
 
     double gamma;
     double Rtc;
-    double R0;
-    double R1;
-    double lambda;
 };
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED

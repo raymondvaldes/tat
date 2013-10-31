@@ -56,11 +56,12 @@ compiler.
 #include "investigations/sensitivity_paper.h"
 
 #include "numSimulations/Experimental_PhaseOfEmission.h"
-#include "numSimulations/Thermal_models.h"
 #include "numSimulations/Numerical_Temperature.h"
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Setup.h"
+
+#include "models/Thermal_models.h"
 
 #include "tools/filesystem.hpp"
 #include "tools/timing.h"
