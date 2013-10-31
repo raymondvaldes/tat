@@ -57,18 +57,18 @@ int main( int argc, char *argv[] )
     constexpr double xtol = 1.e-10;
     constexpr double gtol = 1.e-10;
     constexpr size_t maxfev = 1e5;
-
     constexpr double epsfcn = 1.e-4;
     constexpr double factor =  .01;
+    constexpr int mode = 1;
+    constexpr int nprint = 0;
+
+    struct ParameterEstimation::settings
+    ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
     pStruct->MSETol = 1e-8;
     pStruct->iterPE = 1;
-
     constexpr double factorMax = .01;
     constexpr double factorScale = 5;
-
-    constexpr int mode = 1;
-    constexpr int nprint = 0;
 
 ///  Physical Properties
     /*

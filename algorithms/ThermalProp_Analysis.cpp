@@ -561,3 +561,12 @@ void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
 //    printPEstimates(N, parametersStr);
     return;
 }
+
+
+
+namespace ParameterEstimation
+{
+    settings::settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
+                       double epsfcn_, double factor_, size_t mode_,
+                       size_t nprint_);
+}

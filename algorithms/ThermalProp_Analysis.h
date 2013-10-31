@@ -42,16 +42,16 @@ struct settings
     double xtol;
     double gtol;
     size_t maxfev;
-
     double epsfcn;
     double factor;
-
-    double MSETol;
-    double iterPE;
-    double factorMax;
-    double factorScale;
     size_t mode;
     size_t nprint;
+
+    settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
+             double epsfcn_, double factor_, size_t mode_, size_t nprint_)
+        :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_),
+          epsfcn(epsfcn_), factor(factor_), mode(mode_), nprint(nprint_)
+    {}
 };
 }
 
