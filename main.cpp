@@ -38,8 +38,6 @@ int main( int argc, char *argv[] )
     new struct parameterStr(N      /*N*/,
                             mesh);
     pStruct->thermalModel = &thermalModel;
-
-    pStruct->Ttol = 1e-3;  //keep this at 1e-3
     pStruct->iter = 1000;
 
 /// Input Directory Information
@@ -52,7 +50,6 @@ int main( int argc, char *argv[] )
      - xtol difference in parameters
      - beta_iter is the total number of iterations to find beta2
      - beta_tol is how close dz_sub is to dz_coat */
-
     constexpr double ftol = 1.e-10;
     constexpr double xtol = 1.e-10;
     constexpr double gtol = 1.e-10;
@@ -61,7 +58,6 @@ int main( int argc, char *argv[] )
     constexpr double factor =  .01;
     constexpr int mode = 1;
     constexpr int nprint = 0;
-
     struct ParameterEstimation::settings
     ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
@@ -80,9 +76,19 @@ int main( int argc, char *argv[] )
      - E_sigma //ratio of substrate emissivity to optical thickness of the film,
      - thermal contact resistance per area
     */
+    pStruct->Ttol = 1e-3;
+    pStruct->T_ref = 300;
+    pStruct->T_base = 273.15;
+    pStruct->T_rear = 0;
+    constexpr double Ttol = 1e-3;
+    constexpr double T_ref =  300;
+    constexpr double T_base = 273.15;
+    constexpr double T_rear = 0;
+//    struct temperatureScale *TemperatureScale(Ttol, T_ref, T_base, T_rear);
+//    pStruct->
 
     // Model system
-    struct modelSystem APS2;
+//    struct physicalModel::system APS2;
     pStruct->detector_rad = .25e-3;
     pStruct->L_coat = 71.7e-6;
     pStruct->R_domain = pStruct->detector_rad;
@@ -116,7 +122,6 @@ int main( int argc, char *argv[] )
      - coating volumetric heat capacity [J/m^3/K]
      - k = m_k * T + b_k
     */
-    pStruct->T_ref = 300;
 
     pStruct->k1_thermal->offset = 1.44;
     pStruct->k2_thermal->offset = 12.7;
@@ -124,8 +129,7 @@ int main( int argc, char *argv[] )
     pStruct->psi1_thermal->offset = 2.1e6;
     pStruct->psi2_thermal->offset = 3.44e6;
 
-    pStruct->T_base = 273.15;
-    pStruct->T_rear = 0;
+
     pStruct->detector_lam = 5e-6;
 
     pStruct->k1_thermal->slope = 0;

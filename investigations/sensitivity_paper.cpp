@@ -20,7 +20,6 @@ constexpr double epsfcn = 1.e-8;
 constexpr double factor =  .01;
 constexpr int mode = 1;
 constexpr int nprint = 0;
-
 struct ParameterEstimation::settings
 ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 

@@ -292,6 +292,7 @@ public:
     class Mesh *mesh;
     class ThermalModel *thermalModel;
     class Laser *laser;
+    struct temperatureScale *TemperatureScale;
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;

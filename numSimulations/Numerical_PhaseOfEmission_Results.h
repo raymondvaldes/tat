@@ -156,52 +156,7 @@ public:
     void cleanup() const;
 };
 
-class property
-{
-private:
-    static constexpr bool tempDependent = false;
-    double Current(const double temperature) const;
 
-    double Projected(const double temperature1, const double temperature2) const;
-
-public:
-    double offset;
-    double slope;
-
-    double Current(const std::vector<std::vector<double>>& T, const size_t n,
-                   const size_t j) const;
-
-    double Current(const std::vector<std::vector<double>>& T, const size_t n,
-                   const size_t j1, const size_t j2) const;
-
-
-    double Current(const class Temperature Tprofile, const size_t n,
-                   const size_t j) const;
-
-    double Current(const class Temperature Tprofile, const size_t n,
-                   const size_t j1, const size_t j2) const;
-
-
-    double Projected(const std::vector<std::vector<double>>& T,
-                               const size_t n, const size_t j) const;
-
-    double Projected(const std::vector<std::vector<double>>& T, const size_t n,
-                     const size_t j1, const size_t j2) const;
-
-    double Projectedt(const std::vector<std::vector<double>>& T,
-                                const size_t n,const size_t n1, const size_t j)
-                                const;
-
-    double Projected(const class Temperature Tprofile,
-                               const size_t n, const size_t j) const;
-
-    double Projected(const class Temperature Tprofile, const size_t n,
-                     const size_t j1, const size_t j2) const;
-
-    double Projectedt(const class Temperature Tprofile,
-                                const size_t n,const size_t n1, const size_t j)
-                                const;
-};
 
 
 #endif // NUMERICAL_PHASEOFEMISSION_RESULTS_H_INCLUDED
