@@ -33,40 +33,5 @@ public:
 };
 
 
-<<<<<<< HEAD
-
-=======
-struct layer
-{
-    struct property kthermal;
-    struct property psithermal;
-    double Length;
-};
-
-struct temperatureScale
-{
-    double referance;
-    double rear;
-    double tolerance;
-};
-
-struct optics
-{
-    double R0;
-    double R1;
-    double lambda;
-};
-
-struct modelSystem
-{
-    struct layer coating;
-    struct layer substrate;
-    struct temperatureScale Temp;
-    struct optics optical;
-
-    double gamma;
-    double Rtc;
-};
->>>>>>> 487274070a938db6bf24ba17abd11275ea26767a
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED

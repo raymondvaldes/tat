@@ -33,4 +33,26 @@ void InformationIndex(const size_t P, const size_t N, double *Index,
 void InformationIndex(const size_t P, const size_t N, std::vector<double> Index,
                       const size_t I, const double ki,
                       const double* fjac);
+
+namespace ParameterEstimation
+{
+struct settings
+{
+    double ftol;
+    double xtol;
+    double gtol;
+    size_t maxfev;
+
+    double epsfcn;
+    double factor;
+
+    double MSETol;
+    double iterPE;
+    double factorMax;
+    double factorScale;
+    size_t mode;
+    size_t nprint;
+};
+}
+
 #endif // THERMALPROP_ANALYSIS_H_INCLUDED

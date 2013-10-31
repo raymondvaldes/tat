@@ -52,6 +52,7 @@ int main( int argc, char *argv[] )
      - xtol difference in parameters
      - beta_iter is the total number of iterations to find beta2
      - beta_tol is how close dz_sub is to dz_coat */
+
     constexpr double ftol = 1.e-10;
     constexpr double xtol = 1.e-10;
     constexpr double gtol = 1.e-10;
