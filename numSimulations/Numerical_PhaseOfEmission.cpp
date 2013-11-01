@@ -7,14 +7,15 @@ double PhaseOfEmission1DNum(const int flag,
                                pStruct->mesh->M2);
 
     /// Acquire Numerical Temperature
-    temperature_1D(pStruct->T_ref,
+    temperature_1D(pStruct->TemperatureScale->referance,
                    pStruct->laser->Is,    pStruct->laser->It,
                    pStruct->L_coat,       pStruct->lambda,
                    pStruct->R0,           pStruct->R1,
                    pStruct->L_coat,       pStruct->L_substrate,
                    pStruct->q_surface,    pStruct->Rtc,
-                   pStruct->Ttol,         pStruct->iter,
-                   pStruct->T_rear,
+                   pStruct->TemperatureScale->tolerance,
+                   pStruct->iter,
+                   pStruct->TemperatureScale->rear,
                    pStruct->laser->omegas[flag],
                    pStruct->gamma,
                    pStruct->k1_thermal,   pStruct->k2_thermal,
@@ -24,7 +25,7 @@ double PhaseOfEmission1DNum(const int flag,
     ///Initiate emission model
     const class Emission*
     emission = new class Emission(pStruct->detector_lam,
-                                  pStruct->T_base,
+                                  pStruct->TemperatureScale->base,
                                   pStruct->mesh,
                                   pStruct->bNorm *pStruct->L_coat,
                                   pStruct->E_sigma);
@@ -67,7 +68,8 @@ double PhaseOfEmission2DAna(const int flag,
 
     ///Initiate emission model
     const class Emission* emission;
-    emission = new class Emission(pStruct->detector_lam, pStruct->T_ref,
+    emission = new class Emission(pStruct->detector_lam,
+                                  pStruct->TemperatureScale->referance,
                                   pStruct->mesh,
                                   pStruct->bNorm * pStruct->L_coat,
                                   pStruct->E_sigma);

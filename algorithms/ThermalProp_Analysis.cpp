@@ -556,10 +556,10 @@ void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
     }
 
 /// Print stuff to terminal
-//    parametersStr->MSE = MSE(parametersStr->L_end,
-//                             parametersStr->emissionExperimental,
-//                             parametersStr->predicted);
-//    printPEstimates(N, parametersStr);
+    parametersStr->MSE = MSE(parametersStr->L_end,
+                             parametersStr->emissionExperimental,
+                             parametersStr->predicted);
+    printPEstimates(N, parametersStr);
     return;
 }
 

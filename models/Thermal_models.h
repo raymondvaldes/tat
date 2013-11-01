@@ -184,8 +184,8 @@ namespace physicalModel
 
 struct layer
 {
-    struct property kthermal;
-    struct property psithermal;
+    struct property *kthermal;
+    struct property *psithermal;
     double lambda;
     double length;
     double radius;
@@ -195,26 +195,27 @@ struct layer
 
 struct temperatureScale
 {
-    double referance;
-    double rear;
     double tolerance;
+    double referance;
     double base;
-    temperatureScale(double referance_, double rear_, double tolerance_,
-                double base_);
+    double rear;
+    temperatureScale(const double tolerance_,const double referance_,
+                     const double base_, const double rear_);
 };
 
 struct optics
 {
     double R0;
     double R1;
+    optics(const double R0_, const double R1_);
 };
 
 struct system
 {
-    struct layer coating;
-    struct layer substrate;
-    struct temperatureScale Temp;
-    struct optics optical;
+    struct layer *coating;
+    struct layer *substrate;
+    struct temperatureScale *Temp;
+    struct optics *optical;
 
     double gamma;
     double Rtc;

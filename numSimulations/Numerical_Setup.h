@@ -292,7 +292,7 @@ public:
     class Mesh *mesh;
     class ThermalModel *thermalModel;
     class Laser *laser;
-    struct temperatureScale *TemperatureScale;
+    struct physicalModel::temperatureScale *TemperatureScale;
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;
@@ -309,7 +309,7 @@ public:
     double a_sub;
 
     ///system
-    double R_domain, T_ref, T_rear, R0, R1;
+    double R_domain, R0, R1;
 
     ///nondimensional
     double gamma, E_sigma, epsilon;
@@ -333,7 +333,7 @@ public:
 
     ///other
     std::string dir;
-    double q_surface, Rtc, T_base;
+    double q_surface, Rtc;
     double detector_lam, bNorm;
     size_t iter, prop_linearity, e_model;
     double detector_rad;

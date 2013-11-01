@@ -8,12 +8,12 @@ void phase99(const size_t L_end,
     for all ranges of L_end.  This also allows the code to be parallelized at
     a very high level. No further modifications of the code is necessary.*/
     size_t n = 0;
-//   #pragma omp parallel for schedule(dynamic) private(n)
+   #pragma omp parallel for schedule(dynamic) private(n)
     for(n = 0 ; n < L_end ; n++ )
     {
-//        arrayVal[n] = PhaseOfEmission1DNum(n , parametersStr);
+        arrayVal[n] = PhaseOfEmission1DNum(n , parametersStr);
 //        arrayVal[n] = PhaseOfEmission2DAna(n, parametersStr) ;
-        arrayVal[n] = PhaseOfEmission1DAna(n , parametersStr);
+//        arrayVal[n] = PhaseOfEmission1DAna(n , parametersStr);
     }
     return;
 }

@@ -1056,16 +1056,20 @@ const
     return mean( Current(Tprofile, n, j) ,  Projected(Tprofile, n, j));
 }
 
-namespace physicalModel{
-temperatureScale::temperatureScale(double referance_, double rear_,
-                                   double tolerance_, double base_):
-    referance(referance_), rear(rear_), tolerance(tolerance_), base(base_)
+namespace physicalModel
 {
+temperatureScale::temperatureScale(const double tolerance_,
+                                   const double referance_,
+                                   const double base_, const double rear_):
+    tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
+{}
 
-}
+optics::optics(double R0_, double R1_): R0(R0_), R1(R1_)
+{}
 
 double layer::opticalPenetration(void)
 {
     return lambda*length;
 }
+
 }

@@ -12,17 +12,16 @@ int main( int argc, char *argv[] )
      - iter is the total number of iterations
      - beta_iter is the total number of iterations to find beta2
      - beta_tol is how close dz_sub is to dz_coat   */
-    constexpr size_t M2 = 200+1; //there must be a problem (KEEP AT 200)
+    constexpr size_t M2 = 220+1; //there must be a problem (KEEP AT 200)
     assert( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
 
     constexpr size_t Rend = 20; //80
-    constexpr size_t Nend = 20;
+    constexpr size_t Nend = 80;
     constexpr size_t N = 5;
 
 /// Heat Transfer and Emission models
     const enum XParaNames
     xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
-
     class ThermalModel
     thermalModel(ThermalModel::HeatX::OneDimAnalytical,
                  ThermalModel::EmissionX::OneDimNonLin);
@@ -31,7 +30,6 @@ int main( int argc, char *argv[] )
     constexpr double beta1 = 100;
     constexpr double split = 0.5;
     class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split);
-
 
 /// Parameter Structure
     struct parameterStr *pStruct =
@@ -50,20 +48,20 @@ int main( int argc, char *argv[] )
      - xtol difference in parameters
      - beta_iter is the total number of iterations to find beta2
      - beta_tol is how close dz_sub is to dz_coat */
-    constexpr double ftol = 1.e-10;
-    constexpr double xtol = 1.e-10;
-    constexpr double gtol = 1.e-10;
+    constexpr double ftol = 1.e-8;
+    constexpr double xtol = 1.e-8;
+    constexpr double gtol = 1.e-8;
     constexpr size_t maxfev = 1e5;
     constexpr double epsfcn = 1.e-4;
-    constexpr double factor =  .01;
-    constexpr int mode = 1;
+    constexpr double factor =  10;
+    constexpr int mode = 0;
     constexpr int nprint = 0;
     struct ParameterEstimation::settings
     ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
     pStruct->MSETol = 1e-8;
     pStruct->iterPE = 1;
-    constexpr double factorMax = .01;
+    constexpr double factorMax = 10;
     constexpr double factorScale = 5;
 
 ///  Physical Properties
@@ -76,16 +74,15 @@ int main( int argc, char *argv[] )
      - E_sigma //ratio of substrate emissivity to optical thickness of the film,
      - thermal contact resistance per area
     */
-    pStruct->Ttol = 1e-3;
-    pStruct->T_ref = 300;
-    pStruct->T_base = 273.15;
-    pStruct->T_rear = 0;
+//    pStruct->T_base = 273.15;
+//    pStruct->T_rear = 0;
     constexpr double Ttol = 1e-3;
     constexpr double T_ref =  300;
     constexpr double T_base = 273.15;
     constexpr double T_rear = 0;
-//    struct temperatureScale *TemperatureScale(Ttol, T_ref, T_base, T_rear);
-//    pStruct->
+    struct physicalModel::temperatureScale *TemperatureScale =
+        new struct physicalModel::temperatureScale(Ttol, T_ref, T_base, T_rear);
+    pStruct->TemperatureScale = TemperatureScale;
 
     // Model system
 //    struct physicalModel::system APS2;
@@ -95,10 +92,17 @@ int main( int argc, char *argv[] )
     pStruct->L_substrate = pStruct->L_coat *99;
     pStruct->lambda = .57;
     pStruct->lambda_Sub = .1;
-    pStruct->R0 = 0.2;
-    pStruct->R1 = 0.8;
+
     pStruct->E_sigma = 42;
     pStruct->Rtc = 1e-14;
+
+    pStruct->R0 = 0.2;
+    pStruct->R1 = 0.8;
+    const double R0 = 0.2;
+    const double R1 = 0.8;
+    struct physicalModel::optics *opticalProp =
+            new struct physicalModel::optics(R0, R1);
+
 
 /// Heat Flux
     /* - units [W/m^2] */
@@ -128,7 +132,6 @@ int main( int argc, char *argv[] )
 
     pStruct->psi1_thermal->offset = 2.1e6;
     pStruct->psi2_thermal->offset = 3.44e6;
-
 
     pStruct->detector_lam = 5e-6;
 
@@ -209,9 +212,9 @@ int main( int argc, char *argv[] )
     phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
 
  //Many fit test
-    if (false)
+    if (true)
     {
-        constexpr size_t interants = 100;
+        constexpr size_t interants = 1;
         for(size_t nn = 0; nn < pStruct->L_end; ++nn )
         {
             pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
@@ -221,10 +224,12 @@ int main( int argc, char *argv[] )
     }
 
 //Prepare figures and data for paper Sensitivity
-    SensitivityValdes2013::CC_APS2(pStruct);
+//    SensitivityValdes2013::CC_APS2(pStruct);
 //    SensitivityValdes2013::figureSensitivityIntro(pStruct);
 
 // Clear memory
+    delete TemperatureScale;
+    delete opticalProp;
     mesh->cleanup();
     delete mesh;
     CO2Laser.cleanup();
