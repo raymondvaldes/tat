@@ -8,8 +8,8 @@ void parameters_update(struct parameterStr * parametersStr, const size_t N);
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         const struct parameter_constraints*,
                         struct parameterStr * parametersStr),
-            int m,int n,double x[],double fvec[], double fjac[],int ldfjac,
-            int *iflag,double epsfcn,double wa[],
+            int m, int n, double x[], double fvec[], double fjac[], int,
+            int *iflag, double epsfcn, double wa[],
             const struct parameter_constraints*st_ptr,
             struct parameterStr * parametersStr);
 
@@ -99,7 +99,7 @@ double beta2_func(double* variable, double* constants);
 double find_beta2(const double beta1, const double M2,const double L_substrate,
                   const double L_coat,const double split);
 
-void cosfcn(int P,int N,double *x,double *fvec,int *iflag, double **variables);
+void cosfcn(int P, int , double *x, double *fvec, int *, double **variables);
 
 double simpson_3_8(const double *Y, const double *X, const size_t A,
                    const size_t B);
@@ -176,7 +176,7 @@ void cosfit(double **dependent, const double *independent, double *x, int j,
 void cosfit(double *dependent, const double *independent, double *x,
             int Nend);
 
-void cosfcn1(int P,int N,double *x,double *fvec,int *iflag, double **variables);
+void cosfcn1(int P, int, double *x, double *fvec, int *, double **variables);
 
 double Iheat(double Isteady, double Itransient, double omega, double t) ;//verified
 

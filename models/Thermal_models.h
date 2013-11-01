@@ -165,8 +165,7 @@ public:
                      const size_t j1, const size_t j2) const;
 
     double Projectedt(const std::vector<std::vector<double>>& T,
-                                const size_t n,const size_t n1, const size_t j)
-                                const;
+                      const size_t n, const size_t, const size_t j) const;
 
     double Projected(const class Temperature Tprofile,
                                const size_t n, const size_t j) const;
@@ -175,7 +174,7 @@ public:
                      const size_t j1, const size_t j2) const;
 
     double Projectedt(const class Temperature Tprofile,
-                                const size_t n,const size_t n1, const size_t j)
+                                const size_t n, const size_t, const size_t j)
                                 const;
 };
 

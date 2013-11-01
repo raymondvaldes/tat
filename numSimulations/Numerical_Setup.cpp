@@ -715,7 +715,8 @@ size_t discretizeSpace(const int nodes,const double beta1,const double beta2,
 
 
 
-void cosfcn(int P,int N,double *x,double *fvec,int *iflag, double **variables)
+void cosfcn(int P,int /*N*/,double *x,double *fvec,int */*iflag*/,
+            double **variables)
 {  // function to be fitted:
    // dependent[i] = x[0]+x[1]*cos(independent[i]*omega+x[2])
    // constants to be found by the fit are: x[0],x[1],x[2] which respectively
@@ -747,7 +748,7 @@ void cosfcn(int P,int N,double *x,double *fvec,int *iflag, double **variables)
     return;
 }
 
-void cosfcn1(int P,int N,double *x,double *fvec,int *iflag, double **variables)
+void cosfcn1(int P,int /*N*/,double *x,double *fvec,int */*iflag*/, double **variables)
 {  // function to be fitted:
    // dependent[i] = x[0]+x[1]*cos(independent[i]*2*PI+x[2])
    // constants to be found by the fit are: x[0],x[1],x[2] which respectively

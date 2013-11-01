@@ -1,9 +1,8 @@
 #include "../Header.h"
 
 
-void temperature_1D(const double T_ref, const double Is, const double It,
-                    const double L, const double lambda,
-                    const double R0,
+void temperature_1D(const double Is, const double It,
+                    const double lambda, const double R0,
                     const double R1, const double L_coat,
                     const double L_substrate, const double q_surface,
                     const double Ttol, const size_t iter,
@@ -27,7 +26,7 @@ void temperature_1D(const double T_ref, const double Is, const double It,
                                       psi1_thermal->offset, omega1);
     const std::complex<double>
     Tinfo = Tac1D_ana(mesh->z_real[0] / L_coat, R0, R1, epsilon,
-                      lambda, l_thermal, It, L_coat);
+                      lambda, l_thermal);
 
     double
     amplitude_T_analytical = fabs ( Tinfo );
@@ -41,20 +40,18 @@ void temperature_1D(const double T_ref, const double Is, const double It,
 
     for(size_t j=0 ; j <= mesh->M1; ++j)
     {
-        Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R0, R1, lambda,
+        Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R1, lambda,
                                       Is, L_coat, (L_coat+L_substrate)/L_coat,
                                       k2_thermal->offset, Iplus0, Iplus1,
-                                      q_surface, k1_thermal->offset,
-                                      psi1_thermal->offset));
+                                      q_surface, k1_thermal->offset));
     }
 
     for (size_t j = mesh->M1+1; j < mesh->M2; j++)
     {
-        Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R0, R1, lambda,
+        Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R1, lambda,
                                       Is,  L_coat, (L_coat+L_substrate)/L_coat,
                                       k2_thermal->offset, Iplus0, Iplus1,
-                                      q_surface, k1_thermal->offset,
-                                      psi1_thermal->offset));
+                                      q_surface, k1_thermal->offset));
     }
 
 ///Transient Solution
@@ -85,14 +82,10 @@ void temperature_1D(const double T_ref, const double Is, const double It,
 
         for (size_t n = 0 ; n < mesh->Nend-1 ; ++n )
         {
-            bMatrixPrepopulate1(n, MatrixArrays->B1, MatrixArrays->B2,
-                                MatrixArrays->B3, b_steady[n], T_ref, mesh->M1,
+            bMatrixPrepopulate1(n, MatrixArrays->B2, b_steady[n], mesh->M1,
                                 MatrixArrays->M2, mesh->tau, Is, It, L_coat,
-                                L_substrate, tau_ref, opt, lambda, R0, R1,
-                                mesh->eta, Iplus0, Iplus1, q_surface,
-                                omega1, mesh->z_jplus, mesh->z_jminus,
-                                mesh->z_j, mesh->deltaZ,
-                                genProfile, T_rear);
+                                tau_ref, R1, Iplus1, omega1, mesh->z_jminus,
+                                mesh->z_j, mesh->deltaZ, genProfile, T_rear);
         }
         delete []genProfile;
     }
@@ -309,25 +302,15 @@ void heatingProfile(const double opt, const double lambda,
     return;
 }
 
-void bMatrixPrepopulate1(const size_t n,
-                          std::vector<double>& B1,
-                          std::vector<double>& B2,
-                          std::vector<double>& B3,
-                          std::vector<double>& b,
-                         const double T_ref,
-                         const size_t M1, const size_t M2,
-                         const double * __restrict__ tau, const double Is,
-                         const double It, const double L_coat,
-                         const double L_substrate, const double tau_ref,
-                         const double opt, const double lambda,const double R0,
-                         const double R1, const double * __restrict__ eta,
-                         const double Iplus0, const double Iplus1,
-                         const double q_surface,
-                         const double omega, const std::vector<double>& z_jplus,
+void bMatrixPrepopulate1(const size_t n, std::vector<double>& B2,
+                         std::vector<double>& b, const size_t M1,
+                         const size_t M2, const double * __restrict__ tau,
+                         const double Is, const double It, const double L_coat,
+                         const double tau_ref, const double R1,
+                         const double Iplus1, const double omega,
                          const std::vector<double>& z_jminus,
-                         const std::vector<double>& z_j,
-                         const double*deltaZ, const double* genProfile,
-                         const double T_rear)
+                         const std::vector<double>& z_j, const double*deltaZ,
+                         const double* genProfile, const double T_rear)
 {
 //Update A matrix based on temperature an time
     const double I_avg  = Iaverage(Is, It, omega, tau_ref, tau, n);
@@ -576,8 +559,7 @@ void Ab_transient(const size_t n,
 
 std::complex<double> Tac1D_ana(const double z,const double R0,const double R1,
                                const double epsilon, const double Lam,
-                               const double Lthrm, const double It,
-                               const double L)
+                               const double Lthrm)
 {
     constexpr   std::complex<double> _i_ (0.0, 1.0);
     const       std::complex<double> sqrtIdivL =  sqrt(_i_) / Lthrm;
@@ -615,11 +597,9 @@ std::complex<double> Tac1D_ana(const double z,const double R0,const double R1,
     return theta;
 }
 
-double Tss1D_ana(const double z,const double R0,const double R1,
-                 const double lambda, const double Is, const double L,
-                 const double d, const double k_ref, const double Iplus0,
-                 const double Iplus1, const double q_surface, const double k_c,
-                 const double psi_c)
+double Tss1D_ana(const double z, const double R1, const double lambda,
+                 const double Is, const double L, const double d, const double k_ref, const double Iplus0,
+                 const double Iplus1, const double q_surface, const double k_c)
 {
     /* This is the steady state 1d analytical solution to volumetric heat
     absorption in a two-layer system.  The front surface is maintained with
@@ -693,8 +673,7 @@ double Gaverage(const double opt, const double lambda, const double R1,
 }
 
 
-double qGenAverage(const double I_avg, const double It, const double opt,
-                   const double lambda, const double R1, const double Iplus0,
+double qGenAverage(const double I_avg, const double opt, const double lambda, const double R1, const double Iplus0,
                    const double Iplus1, const double z1, const double z2)
 {
     double q_gen;

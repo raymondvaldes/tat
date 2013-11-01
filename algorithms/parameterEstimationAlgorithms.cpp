@@ -17,8 +17,8 @@ double dmin1(double a,double b);
 int min0(int a,int b);
 void pmat(int m,int n,double y[]);
 
-void qrfac(int m,int n,double a[],int lda,bool pivot,int ipvt[],int lipvt,
-           double rdiag[],double acnorm[],double wa[]);
+void qrfac(int m, int n, double a[], int, bool pivot, int ipvt[], int,
+           double rdiag[], double acnorm[], double wa[]);
 double dmax1(double a,double b);
 void lmpar(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
            double delta,double *par,double x[],double sdiag[],double wa1[],
@@ -667,7 +667,7 @@ void lmdif(void (*fcn)(int, int, double*, double*, int*, double**), int m,
            double xtol, double gtol, int maxfev, double epsfcn, double *diag,
            int mode, double factor, int nprint, int *info, int *nfev,
            double *fjac, int ldfjac, int *ipvt, double *qtf, double *wa1,
-           double *wa2, double *wa3, double *wa4, double *wa5)
+           double *wa2, double *wa3, double *wa4, double */*wa5*/)
 {
 /*
 *     **********
@@ -1538,8 +1538,8 @@ if(iter == 0)
 */
 }
 
-void qrfac(int m,int n,double a[],int lda,bool pivot,int ipvt[],int lipvt,
-           double rdiag[],double acnorm[],double wa[])
+void qrfac(int m,int n,double a[],int /*lda*/,bool pivot,int ipvt[],
+	   int /*lipvt*/, double rdiag[],double acnorm[],double wa[])
 {
 /*
 *     **********
@@ -2120,7 +2120,7 @@ return(ans);
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         const struct parameter_constraints*,
                         struct parameterStr * parametersStr),
-            int m,int n,double x[],double fvec[], double fjac[],int ldfjac,
+            int m,int n,double x[],double fvec[], double fjac[],int /*ldfjac*/,
             int *iflag,double epsfcn,double wa[],
             const struct parameter_constraints*st_ptr,
             struct parameterStr * parametersStr)
@@ -2245,7 +2245,7 @@ pmat( m, n, fjac );
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
             int m,int n,double x[],double fvec[],double **variables,
-            double fjac[],int ldfjac, int *iflag,double epsfcn,double wa[])
+            double fjac[],int /*ldfjac*/, int *iflag,double epsfcn,double wa[])
 {
 /*
 *     **********

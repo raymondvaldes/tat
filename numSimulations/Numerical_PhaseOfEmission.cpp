@@ -7,10 +7,9 @@ double PhaseOfEmission1DNum(const int flag,
                                pStruct->mesh->M2);
 
     /// Acquire Numerical Temperature
-    temperature_1D(pStruct->TemperatureScale->referance,
-                   pStruct->laser->Is,    pStruct->laser->It,
-                   pStruct->L_coat,       pStruct->lambda,
-                   pStruct->R0,           pStruct->R1,
+    temperature_1D(pStruct->laser->Is,    pStruct->laser->It,
+                   pStruct->lambda,       pStruct->R0,
+                   pStruct->R1,
                    pStruct->L_coat,       pStruct->L_substrate,
                    pStruct->q_surface,
                    pStruct->TemperatureScale->tolerance,

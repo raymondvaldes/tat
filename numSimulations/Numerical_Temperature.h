@@ -38,31 +38,25 @@ void q_gen_steady(int n, double *b, int M1, const int M2, double *tau,
                   double q_surface, double Rtc, double k_c, double psi_c,
                   double omega);
 
-double Tss1D_ana(const double z,const double R0,const double R1,
-                 const double lambda, const double Is, const double L,
-                 const double d, const double k_ref, const double Iplus0,
-                 const double Iplus1, const double q_surface, const double k_c,
-                 const double psi_c);
+double Tss1D_ana(const double z, const double R1, const double lambda,
+                 const double Is, const double L, const double d,
+                 const double k_ref, const double Iplus0, const double Iplus1,
+                 const double q_surface, const double k_c);
 
 std::complex<double> Tac1D_ana(const double z, const double R0, const double R1,
                                const double epsilon, const double Lam,
-                               const double Lthrm, const double It,
-                               const double L);
+                               const double Lthrm);
 
-void temperature_1D(const double T_ref,
-                      const double Is, const double It,
-                      const double L, const double lambda, const double R0,
-                      const double R1, const double L_coat,
-                      const double L_substrate, const double q_surface, const double Ttol, const size_t iter,
-                      const double T_rear,
-                      const double omega1,
-                      const double epsilon,
-                      const class property *k1_thermal,
-                      const class property *k2_thermal,
-                      const class property *psi1_thermal,
-                      const class property *psi2_thermal,
-                      class Mesh *mesh, class Temperature Tprofile
-                      );
+void temperature_1D(const double Is, const double It, const double lambda,
+                    const double R0, const double R1, const double L_coat,
+                    const double L_substrate, const double q_surface,
+                    const double Ttol, const size_t iter, const double T_rear,
+                    const double omega1, const double epsilon,
+                    const class property *k1_thermal,
+                    const class property *k2_thermal,
+                    const class property *psi1_thermal,
+                    const class property *psi2_thermal,
+                    class Mesh *mesh, class Temperature Tprofile);
 
 double A_full(double *A1, double *A2, double *A3, double **A, const int M2);
 
@@ -84,25 +78,15 @@ double abMatrixPrepopulate(std::vector<double>& B1,
                            const double*deltaZ,
                            const double*d_eta_minus);
 
-void bMatrixPrepopulate1(const size_t n,
-                          std::vector<double>& B1,
-                          std::vector<double>& B2,
-                          std::vector<double>& B3,
-                          std::vector<double>& b,
-                         const double T_ref,
-                         const size_t M1, const size_t M2,
-                         const double * __restrict__ tau, const double Is,
-                         const double It, const double L_coat,
-                         const double L_substrate, const double tau_ref,
-                         const double opt, const double lambda,const double R0,
-                         const double R1, const double * __restrict__ eta,
-                         const double Iplus0, const double Iplus1,
-                         const double q_surface,
-                         const double omega, const std::vector<double>& z_jplus,
+void bMatrixPrepopulate1(const size_t n, std::vector<double>& B2,
+                         std::vector<double>& b, const size_t M1,
+                         const size_t M2, const double * __restrict__ tau,
+                         const double Is, const double It, const double L_coat,
+                         const double tau_ref, const double R1,
+                         const double Iplus1, const double omega,
                          const std::vector<double>& z_jminus,
-                         const std::vector<double>& z_j,
-                         const double*deltaZ, const double* genProfile,
-                         const double T_rear);
+                         const std::vector<double>& z_j, const double*deltaZ,
+                         const double* genProfile, const double T_rear);
 
 double Gaverage(const double opt, const double lambda,
                 const double R1, const double Iplus0, const double Iplus1,
@@ -144,10 +128,9 @@ double t_tau(const double tau, const double tau_ref);
 double Iaverage(const double Is, const double It, const double omega,
                 const double tau_ref, const double *tau, const size_t n);
 
-double qGenAverage(const double I_avg, const double It, const double opt,
-                          const double lambda, const double R1,
-                          const double Iplus0, const double Iplus1,
-                          const double z1, const double z2);
+double qGenAverage(const double I_avg, const double opt, const double lambda,
+                   const double R1, const double Iplus0, const double Iplus1,
+                   const double z1, const double z2);
 
 double D_eta(const double z_norm, const double beta1);
 

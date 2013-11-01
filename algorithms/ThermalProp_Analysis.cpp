@@ -150,12 +150,12 @@ int paramter_estimation(const size_t m, const size_t n,
            )
         {
 
-            const bool
-            condition1 = reduceChiSquare < 2;
-            const bool
-            condition2 = ParaEstSetting.factor == factorMax;
-            const bool
-            condition3 = pStruct->fvecTotal < pStruct->MSETol;
+//            const bool
+//            condition1 = reduceChiSquare < 2;
+//            const bool
+//            condition2 = ParaEstSetting.factor == factorMax;
+//            const bool
+//            condition3 = pStruct->fvecTotal < pStruct->MSETol;
 
 //            std::cout <<  "\nexit with     "
 //            << condition1 << "\t" << condition2
@@ -274,7 +274,7 @@ int paramter_estimation(const size_t m, const size_t n,
 }
 
 
-void InformationIndex(const size_t P, const size_t N, double *Index,
+void InformationIndex(const size_t P, double *Index,
                       const size_t I, const double ki, const double *const fjac)
 {
 /*
@@ -286,32 +286,32 @@ void InformationIndex(const size_t P, const size_t N, double *Index,
     for(size_t j = 0; j < P ; ++j)
     {
         Index[j] = fjac[j + P*I];
-//        Index[j] *= ki;
-//        Index[j] *= ki;
-//        Index[j] *= fjac[j + P*I];
+        Index[j] *= ki;
+        Index[j] *= ki;
+        Index[j] *= fjac[j + P*I];
         Index[j] = fabs(Index[j]);
 
     }
 
-//    double maxIndex = fabs(Index[0]);
-//    for(size_t j=0; j<P ; ++j)
-//    {
-//        if(Index[j] > maxIndex)
-//        {
-//            maxIndex = fabs(Index[j]);
-//        }
-//    }
-//
-//    for(size_t j=0; j<P ; ++j)
-//    {
-//        Index[j] /= maxIndex;
-//    }
+    double maxIndex = fabs(Index[0]);
+    for(size_t j=0; j<P ; ++j)
+    {
+        if(Index[j] > maxIndex)
+        {
+            maxIndex = fabs(Index[j]);
+        }
+    }
+
+    for(size_t j=0; j<P ; ++j)
+    {
+        Index[j] /= maxIndex;
+    }
 
 
     return;
 }
 
-void InformationIndex(const size_t P, const size_t N, std::vector<double> Index,
+void InformationIndex(const size_t P, std::vector<double> Index,
                       const size_t I, const double ki,
                       const double* fjac)
 {
@@ -324,112 +324,27 @@ void InformationIndex(const size_t P, const size_t N, std::vector<double> Index,
     for(size_t j = 0; j < P ; ++j)
     {
         Index[j] = fjac[j + P*I];
-//        Index[j] *= ki;
-//        Index[j] *= ki;
-//        Index[j] *= fjac[j + P*I];
+        Index[j] *= ki;
+        Index[j] *= ki;
+        Index[j] *= fjac[j + P*I];
         Index[j] = fabs(Index[j]);
 
     }
 
-//    double maxIndex = fabs(Index[0]);
-//    for(size_t j=0; j<P ; ++j)
-//    {
-//        if(Index[j] > maxIndex)
-//        {
-//            maxIndex = fabs(Index[j]);
-//        }
-//    }
-//
-//    for(size_t j=0; j<P ; ++j)
-//    {
-//        Index[j] /= maxIndex;
-//    }
+    double maxIndex = fabs(Index[0]);
+    for(size_t j=0; j<P ; ++j)
+    {
+        if(Index[j] > maxIndex)
+        {
+            maxIndex = fabs(Index[j]);
+        }
+    }
 
+    for(size_t j=0; j<P ; ++j)
+    {
+        Index[j] /= maxIndex;
+    }
 
-    return;
-}
-
-void InformationIndexAll(const size_t P, const size_t N,
-                         const struct parameterStr * parametersStr)
-{
-//    for(size_t i = 0; i < N; ++i)
-//    {
-//        switch ( parametersStr->xParameters[i] )
-//        {
-//            case 51 :
-//                 InformationIndex(P, N, parametersStr-> InformationIndex_asub,
-//                                  i, parametersStr->a_sub, parametersStr->fjac);
-//                break;
-//            case 28 :
-//                 InformationIndex(P, N, parametersStr->InformationIndex_Esigma,
-//                                  i, parametersStr->E_sigma,
-//                                  parametersStr->fjac);
-//                 break;
-//            case 50 :
-//                 InformationIndex(P, N, parametersStr-> InformationIndex_gamma,
-//                                  i, parametersStr->gamma, parametersStr->fjac);
-//                 break;
-//            case 19 :
-//                 InformationIndex(P, N, parametersStr-> InformationIndex_R1, i,
-//                                  parametersStr->R1, parametersStr->fjac);
-//                break;
-//            case 11 :
-//                 InformationIndex(P, N, parametersStr-> InformationIndex_lambda,
-//                                  i, parametersStr->lambda,
-//                                  parametersStr->fjac);
-//                 break;
-//            case 8 :
-//                 InformationIndex(P, N, parametersStr-> InformationIndex_Lcoat,
-//                                  i, parametersStr->L_coat,
-//                                  parametersStr->fjac);
-//                 break;
-//            case 18 :
-//                 InformationIndex(P, N, parametersStr-> InformationIndex_R0, i,
-//                                  parametersStr-> R0, parametersStr->fjac);
-//                 break;
-//            default:
-//                 break;
-//        }
-//    }
-//
-//    std::ofstream myfile;
-//    myfile.open("InformationIndex.dat");
-//    for(size_t j = 0 ; j < P ; ++j )
-//    {
-//        myfile << parametersStr->l_thermal[j];
-//        for(size_t i = 0 ; i < N; ++i)
-//        {
-//            myfile << "\t";
-//            switch ( parametersStr->xParameters[i] )
-//            {
-//                case 51 :
-//                     myfile << parametersStr-> InformationIndex_asub[j];
-//                    break;
-//                case 28 :
-//                     myfile << parametersStr-> InformationIndex_Esigma[j];
-//                     break;
-//                case 50 :
-//                     myfile << parametersStr-> InformationIndex_gamma[j];
-//                     break;
-//                case 19 :
-//                     myfile << parametersStr-> InformationIndex_R1[j];
-//                    break;
-//                case 11 :
-//                     myfile << parametersStr-> InformationIndex_lambda[j];
-//                     break;
-//                case 8 :
-//                     myfile << parametersStr-> InformationIndex_Lcoat[j];
-//                     break;
-//                case 18 :
-//                     myfile << parametersStr-> InformationIndex_R0[j];
-//                     break;
-//                default:
-//                     break;
-//            }
-//        }
-//        myfile << "\n" ;
-//    }
-//    myfile.close();
 
     return;
 }
@@ -500,7 +415,8 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
     return;
 }
 
-void ThermalProp_Analysis(int P, int N, double *x, double *fvec, int *iflag,
+void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
+                          int * /*iflag*/,
                           const struct parameter_constraints *pc_ptr,
                           struct parameterStr * parametersStr)
 {
