@@ -1,6 +1,6 @@
 #include "Header.h"
 
-int main( int /*argc*/, char /**argv[]*/ )
+int main( int /*argc*/, char** /*argv[]*/ )
 {
     ///Setup global timer
     class stopwatch globalStopWatch;

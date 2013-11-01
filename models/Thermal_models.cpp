@@ -1013,7 +1013,7 @@ const
 }
 
 double property::Projectedt(const std::vector<std::vector<double>>& T,
-                            const size_t n,const size_t n1, const size_t j)
+                            const size_t n,const size_t /*n1*/, const size_t j)
 const
 {
     if(!tempDependent) return offset;
@@ -1048,7 +1048,7 @@ const
 }
 
 double property::Projectedt(const class Temperature Tprofile,
-                            const size_t n,const size_t n1, const size_t j)
+                            const size_t n,const size_t /*n1*/, const size_t j)
 const
 {
     if(!tempDependent) return offset;

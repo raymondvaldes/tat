@@ -8,20 +8,12 @@ void perturbationTest(const size_t m, const size_t n,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct);
 
-void calibrationSweep(const size_t m, const size_t n,
-                      struct ParameterEstimation::settings ParaEstSetting,
+void calibrationSweep(struct ParameterEstimation::settings ParaEstSetting,
                       const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr *pStructp,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct, const std::string filename,
                       const size_t lEndMin);
-
-void statisticalPrintOut(size_t m, size_t n,
-                        const struct parameter_constraints *pc_ptr,
-                        double *xInitial, struct parameterStr * parametersStr,
-                        const double Xstddev,double *Numerical_Phase,
-                        double *Analytical_Phase, const double factorMax,
-                        const double factorScale);
 
 void fitting(size_t m, size_t n, ParameterEstimation::settings ParaEstSetting,
              const struct parameter_constraints *st_ptr,

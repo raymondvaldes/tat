@@ -292,9 +292,8 @@ void CC_APS2(struct parameterStr *pStruct)
         selection of the lmin and lmax for each iteration is determined
         with a random simulation. The argument for teh lthermalMC() function
         provides the band resolution. */
-        calibrationSweep(pStruct->L_end, pStruct->N, ParaEstSetting, &st_ptr,
-                         xInitial, pStruct, factorMax,factorScale, pertStruct,
-                         filename, LendMinDecade);
+        calibrationSweep(ParaEstSetting, &st_ptr, xInitial, pStruct, factorMax,
+                         factorScale, pertStruct, filename, LendMinDecade);
     }
 
     /*At this point I can output a figure that has the sensitivity curve data

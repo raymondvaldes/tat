@@ -2,8 +2,7 @@
 
 
 void temperature_1D(const double T_ref, const double Is, const double It,
-                    const double L, const double lambda,
-                    const double R0,
+                    const double lambda, const double R0,
                     const double R1, const double L_coat,
                     const double L_substrate, const double q_surface,
                     const double Ttol, const size_t iter,

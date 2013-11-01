@@ -8,8 +8,8 @@ void parameters_update(struct parameterStr * parametersStr, const size_t N);
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         const struct parameter_constraints*,
                         struct parameterStr * parametersStr),
-            int m,int n,double x[],double fvec[], double fjac[],int ldfjac,
-            int *iflag,double epsfcn,double wa[],
+            int m, int n, double x[], double fvec[], double fjac[], int,
+            int *iflag, double epsfcn, double wa[],
             const struct parameter_constraints*st_ptr,
             struct parameterStr * parametersStr);
 

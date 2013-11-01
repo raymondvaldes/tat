@@ -233,7 +233,7 @@ void perturbationTest(const size_t m, const size_t n,
     return;
 }
 
-void calibrationSweep(const size_t m, const size_t n,
+void calibrationSweep(
                       struct ParameterEstimation::settings ParaEstSetting,
                       const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr *pStructp,
@@ -476,53 +476,6 @@ void parameterUncertainty(const size_t n,
     delete []xpredicted;
     CCurves->cleanup();
     delete CCurves;
-
-    return;
-}
-
-void statisticalPrintOut(size_t P, size_t N,
-                        const struct parameter_constraints *pc_ptr,
-                        double *xInitial, struct parameterStr * parametersStr,
-                        const double ExpStddev,double *Numerical_Phase,
-                        double *Analytical_Phase, const double factorMax,
-                        const double factorScale)
-{
-    const size_t v1 = parametersStr->L_end - N;
-    const double ExpVarianceEst = ExpStddev * ExpStddev;
-
-    parametersStr->variance = variance(P,N,parametersStr->fvecTotal);
-//    Amatrix(P, N, parametersStr->fjac, parametersStr->Amatrix);
-//    covarianceMatrix(N, parametersStr->variance, parametersStr->Amatrix,
-//                     parametersStr->cov);
-//    standardError(N, parametersStr->cov, parametersStr->standardError);
-//    InformationIndexAll(P, N, parametersStr);
-
-//    parametersStr->ChiSquare = chisquare(parametersStr->L_end,
-//                                         parametersStr->emissionExperimental,
-//                                         parametersStr-> predicted);
-    printfJac(N, P, parametersStr->fjac);
-
-    std::cout <<"\n";
-    std::cout << "Estimated Variance: "<< parametersStr->variance << "\n";
-    std::cout << "Estimated Standard Deviation: " <<
-    sqrt(parametersStr->variance) << "\n";
-    std::cout << "Estimated StDev for each parameter: \n";
-    for(size_t i=0 ; i<N ; ++i)
-    {
-        for(size_t j=0 ; j<N; ++j)
-        {
-//            if(i==j) std::cout << sqrt(parametersStr->cov[i+N*j])<< "\t";
-        }
-    }
-
-    std::cout << "\nChi-Square = " << (parametersStr->fvecTotal /
-                                       ExpVarianceEst) ;
-    std::cout << "\nNormalized Chi-Square = " << (parametersStr->fvecTotal /
-                                                  ExpVarianceEst) / v1;
-    std::cout << "\n\n" << parametersStr->variance << "\n";
-    std::cout << "\n" << ExpVarianceEst << "\n\n";
-    std::cout <<  "\nv1 = " << v1;
-
 
     return;
 }
