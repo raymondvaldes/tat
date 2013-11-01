@@ -56,6 +56,7 @@ compiler.
 #include "investigations/sensitivity_paper.h"
 
 #include "models/Thermal_models.h"
+#include "models/expEquipment.hpp"
 
 #include "numSimulations/Experimental_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Temperature.h"

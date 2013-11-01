@@ -168,6 +168,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
     struct physicalModel::TBCsystem APS1(coating, substrate, TemperatureScale,
                                          opticalProp, R_domain);
 
+    std::cout << APS1.Temp.rear   << "\n\n"; exit(-2);
 
 /// Thermal Penetration
     /*

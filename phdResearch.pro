@@ -103,7 +103,8 @@ SOURCES += main.cpp \
     numSimulations/Experimental_PhaseOfEmission.cpp \
     tools/filesystem.cpp \
     tools/timing.cpp \
-    models/Thermal_models.cpp
+    models/Thermal_models.cpp \
+    models/expEquipment.cpp
 
 #header files
 HEADERS += \
@@ -120,4 +121,5 @@ HEADERS += \
     tools/filesystem.hpp \
     tools/timing.h \
     algorithms/sensitivity_analysis.hpp \
-    models/Thermal_models.h
+    models/Thermal_models.h \
+    models/expEquipment.hpp
