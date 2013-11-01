@@ -1056,6 +1056,13 @@ const
     return mean( Current(Tprofile, n, j) ,  Projected(Tprofile, n, j));
 }
 
+property::property(double offset_, double slope_)
+    : offset(offset_), slope(slope_)
+{}
+property::property(void){};
+
+
+
 namespace physicalModel
 {
 temperatureScale::temperatureScale(const double tolerance_,
@@ -1067,9 +1074,25 @@ temperatureScale::temperatureScale(const double tolerance_,
 optics::optics(double R0_, double R1_): R0(R0_), R1(R1_)
 {}
 
+
+layer::layer(struct property kthermal_, struct property psithermal_,
+             double depth_)
+    : kthermal(kthermal_), psithermal(psithermal_), depth(depth_)
+{}
+
 double layer::opticalPenetration(void)
 {
-    return lambda*length;
+    return lambda*depth;
 }
+
+
+TBCsystem::TBCsystem(struct layer coating_, struct layer substrate_,
+                     struct temperatureScale Temp_, struct optics optical_,
+                     double radius_)
+    : coating(coating_), substrate(substrate_), Temp(Temp_), optical(optical_),
+      radius(radius_)
+{}
+
+
 
 }

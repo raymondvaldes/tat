@@ -138,11 +138,14 @@ private:
     static constexpr bool tempDependent = false;
     double Current(const double temperature) const;
 
-    double Projected(const double temperature1, const double temperature2) const;
+    double Projected(const double temperature1, const double temperature2)const;
 
 public:
     double offset;
     double slope;
+
+    property(double offset_, double slope_);
+    property(void);
 
     double Current(const std::vector<std::vector<double>>& T, const size_t n,
                    const size_t j) const;
@@ -183,13 +186,14 @@ namespace physicalModel
 
 struct layer
 {
-    struct property *kthermal;
-    struct property *psithermal;
+    struct property kthermal;
+    struct property psithermal;
     double lambda;
-    double length;
-    double radius;
+    double depth;
 
     double opticalPenetration(void);
+    layer(struct property kthermal_, struct property psithermal_,
+                 double depth_);
 };
 
 struct temperatureScale
@@ -209,15 +213,19 @@ struct optics
     optics(const double R0_, const double R1_);
 };
 
-struct system
+struct TBCsystem
 {
-    struct layer *coating;
-    struct layer *substrate;
-    struct temperatureScale *Temp;
-    struct optics *optical;
-
+    struct layer coating;
+    struct layer substrate;
+    struct temperatureScale Temp;
+    struct optics optical;
+    double radius;
     double gamma;
     double Rtc;
+
+    TBCsystem(struct layer coating_, struct layer substrate_,
+              struct temperatureScale Temp_, struct optics optical_,
+              double radius_);
 };
 
 }

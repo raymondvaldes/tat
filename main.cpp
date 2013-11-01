@@ -79,27 +79,32 @@ int main( int /*argc*/, char** /*argv[]*/ )
     constexpr double T_ref =  300;
     constexpr double T_base = 273.15;
     constexpr double T_rear = 0;
-    struct physicalModel::temperatureScale *TemperatureScale =
-        new struct physicalModel::temperatureScale(Ttol, T_ref, T_base, T_rear);
-    pStruct->TemperatureScale = TemperatureScale;
+    struct physicalModel::temperatureScale
+            TemperatureScale(Ttol, T_ref, T_base, T_rear);
+    pStruct->TemperatureScale = &TemperatureScale;
 
     // Model system
-//    struct physicalModel::system APS2;
-    pStruct->detector_rad = .25e-3;
-    pStruct->L_coat = 71.7e-6;
-    pStruct->R_domain = pStruct->detector_rad;
-    pStruct->L_substrate = pStruct->L_coat *99;
+    constexpr double detector_rad = .25e-3;
+    constexpr double R_domain = detector_rad;
+    pStruct->detector_rad = detector_rad;
+    pStruct->R_domain = R_domain;
+
+    constexpr double L_coat = 71.7e-6;
+    pStruct->L_coat = L_coat;
+
+    constexpr double L_substrate = L_coat *99;
+    pStruct->L_substrate = L_substrate;
     pStruct->lambda = .57;
     pStruct->lambda_Sub = .1;
 
     pStruct->E_sigma = 42;
     pStruct->Rtc = 1e-14;
 
+    //Optical Properties
     const double R0 = 0.2;
     const double R1 = 0.8;
-    struct physicalModel::optics *opticalProp =
-            new struct physicalModel::optics(R0, R1);
-    pStruct->opticalProp = opticalProp;
+    struct physicalModel::optics opticalProp(R0, R1);
+    pStruct->opticalProp = &opticalProp;
 
     /// Heat Flux
     /* - units [W/m^2] */
@@ -123,6 +128,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
      - coating volumetric heat capacity [J/m^3/K]
      - k = m_k * T + b_k
     */
+    pStruct->detector_lam = 5e-6;
 
     pStruct->k1_thermal->offset = 1.44;
     pStruct->k2_thermal->offset = 12.7;
@@ -130,12 +136,37 @@ int main( int /*argc*/, char** /*argv[]*/ )
     pStruct->psi1_thermal->offset = 2.1e6;
     pStruct->psi2_thermal->offset = 3.44e6;
 
-    pStruct->detector_lam = 5e-6;
-
     pStruct->k1_thermal->slope = 0;
     pStruct->psi1_thermal->slope = 0;
     pStruct->k2_thermal->slope = 0;
     pStruct->psi2_thermal->slope = 0;
+
+
+    constexpr double kcoat_off = 1.44;
+    constexpr double kcoat_slope = 0;
+    struct property kthermalCoating(kcoat_off, kcoat_slope);
+
+    constexpr double psicoat_off = 2.1e6;
+    constexpr double psicoat_slope = 0;
+    struct property psithermalCoating(psicoat_off, psicoat_slope);
+
+    struct physicalModel::layer coating(kthermalCoating,
+                                        psithermalCoating, L_coat);
+
+    constexpr double ksub_off = 12.7;
+    constexpr double ksub_slope = 0;
+    struct property kthermalSubstrate(ksub_off, ksub_slope);
+
+    constexpr double psisub_off = 3.44e6;
+    constexpr double psisub_slope = 0;
+    struct property psithermalSubstrate(psisub_off, psisub_slope);
+
+
+    struct physicalModel::layer substrate(kthermalSubstrate,
+                                          psithermalSubstrate, L_substrate);
+
+    struct physicalModel::TBCsystem APS1(coating, substrate, TemperatureScale,
+                                         opticalProp, R_domain);
 
 
 /// Thermal Penetration
@@ -225,9 +256,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //    SensitivityValdes2013::figureSensitivityIntro(pStruct);
 
 // Clear memory
-    delete TemperatureScale;
-    delete opticalProp;
-
     mesh->cleanup();
     delete mesh;
     CO2Laser.cleanup();

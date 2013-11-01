@@ -288,6 +288,8 @@ public:
     class Laser *laser;
     struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::optics *opticalProp;
+    struct physicalModel::layer *coating;
+    struct physicalModel::layer *substrate;
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;
