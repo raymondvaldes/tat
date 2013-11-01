@@ -1072,7 +1072,8 @@ temperatureScale::temperatureScale(const double tolerance_,
     tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
 {}
 
-radiativeSysProp::radiativeSysProp(double R0_, double R1_): R0(R0_), R1(R1_)
+radiativeSysProp::radiativeSysProp(double R0_, double R1_, double Emit1_)
+    : R0(R0_), R1(R1_), Emit1(Emit1_)
 {}
 
 layer::layer(struct property kthermal_, struct property psithermal_,

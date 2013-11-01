@@ -103,7 +103,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
     //Optical Properties
     const double R0 = 0.2;
     const double R1 = 0.8;
-    struct physicalModel::radiativeSysProp radProp(R0, R1);
+    const double Emit1 = 42;
+    struct physicalModel::radiativeSysProp radProp(R0, R1, Emit1);
     pStruct->opticalProp = &radProp;
 
 /// Thermal Properties

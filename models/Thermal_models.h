@@ -210,7 +210,8 @@ struct radiativeSysProp
 {
     double R0;
     double R1;
-    radiativeSysProp(const double R0_, const double R1_);
+    double Emit1;
+    radiativeSysProp(const double R0_, const double R1_, const double Emit1_);
 };
 
 struct TBCsystem
