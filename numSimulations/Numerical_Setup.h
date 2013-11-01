@@ -99,11 +99,6 @@ double beta2_func(double* variable, double* constants);
 double find_beta2(const double beta1, const double M2,const double L_substrate,
                   const double L_coat,const double split);
 
-int discretize_1d(size_t nodes, size_t Nend, double beta1, double beta2, double split,
-                  double *eta, double *z_norm, double *z_real, double *time,
-                  double L_coat, double L_substrate, double *tau, double omega,
-                  double k_c, double psi_c, double k_ref, double psi_ref);
-
 void cosfcn(int P,int N,double *x,double *fvec,int *iflag, double **variables);
 
 double simpson_3_8(const double *Y, const double *X, const size_t A,
@@ -148,8 +143,7 @@ void minimizer( double (*to_minimize)(double*,double*), double *variable,
 
 double average(const double a, const double b);
 
-double gs_int(const double eta, const double opt, const double lambda,
-              const double R0, const double R1, const double Iplus0,
+double gs_int(const double eta, const double opt, const double lambda, const double R1, const double Iplus0,
               const double Iplus1);
 double psi(const double eta, const double psi_layer1, const double psi_layer2);
 double psi(const std::vector<std::vector<double>>& T, const double eta,

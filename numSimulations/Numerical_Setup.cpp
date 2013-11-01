@@ -1087,7 +1087,7 @@ double average(const double a, const double b)
 
 
 double gs_int(const double eta, const double opt, const double lambda,
-              const double R0, const double R1, const double Iplus0,
+              const double R1, const double Iplus0,
               const double Iplus1)
 {
     // z must be normalized by the coating thickness

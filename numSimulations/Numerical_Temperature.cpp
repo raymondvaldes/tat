@@ -685,8 +685,8 @@ double Gaverage(const double opt, const double lambda, const double R0,
                 const double R1, const double Iplus0, const double Iplus1,
                 const double z1, const double z2)
 {
-    double generation = gs_int( z2, opt, lambda, R0, R1, Iplus0, Iplus1) ;
-    generation -= gs_int( z1, opt, lambda, R0, R1, Iplus0, Iplus1) ;
+    double generation = gs_int( z2, opt, lambda, R1, Iplus0, Iplus1) ;
+    generation -= gs_int( z1, opt, lambda, R1, Iplus0, Iplus1) ;
     generation /= z2 - z1 ;
     return generation;
 }
@@ -698,8 +698,8 @@ double qGenAverage(const double I_avg, const double It, const double opt,
                    const double z1, const double z2)
 {
     double q_gen;
-    q_gen  = gs_int( z2, opt, lambda, R0, R1, Iplus0, Iplus1) ;
-    q_gen -= gs_int( z1, opt, lambda, R0, R1, Iplus0, Iplus1) ;
+    q_gen  = gs_int( z2, opt, lambda, R1, Iplus0, Iplus1) ;
+    q_gen -= gs_int( z1, opt, lambda, R1, Iplus0, Iplus1) ;
     q_gen /= z2 - z1 ;
     q_gen *= I_avg;
 
