@@ -17,7 +17,11 @@ double dmin1(double a,double b);
 int min0(int a,int b);
 void pmat(int m,int n,double y[]);
 
+<<<<<<< HEAD
 void qrfac(int m, int n, double a[], int, bool pivot, int ipvt[], int,
+=======
+void qrfac(int m, int n, double a[], int, bool pivot, int ipvt[], int lipvt,
+>>>>>>> a1a545a8cd07cd4e27b0abb59ab05944efd9e325
            double rdiag[], double acnorm[], double wa[]);
 double dmax1(double a,double b);
 void lmpar(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
@@ -1538,8 +1542,13 @@ if(iter == 0)
 */
 }
 
+<<<<<<< HEAD
 void qrfac(int m,int n,double a[],int /*lda*/,bool pivot,int ipvt[],
 	   int /*lipvt*/, double rdiag[],double acnorm[],double wa[])
+=======
+void qrfac(int m,int n,double a[],int lda,bool pivot,int ipvt[],
+	   int lipvt, double rdiag[],double acnorm[],double wa[])
+>>>>>>> a1a545a8cd07cd4e27b0abb59ab05944efd9e325
 {
 /*
 *     **********

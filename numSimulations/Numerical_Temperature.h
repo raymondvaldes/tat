@@ -45,6 +45,7 @@ double Tss1D_ana(const double z, const double R1, const double lambda,
 
 std::complex<double> Tac1D_ana(const double z, const double R0, const double R1,
                                const double epsilon, const double Lam,
+<<<<<<< HEAD
                                const double Lthrm);
 
 void temperature_1D(const double Is, const double It, const double lambda,
@@ -57,6 +58,23 @@ void temperature_1D(const double Is, const double It, const double lambda,
                     const class property *psi1_thermal,
                     const class property *psi2_thermal,
                     class Mesh *mesh, class Temperature Tprofile);
+=======
+                               const double Lthrm, const double It,
+                               const double L);
+
+void temperature_1D(const double T_ref, const double Is, const double It,
+                    const double lambda, const double R0, const double R1,
+                    const double L_coat, const double L_substrate,
+                    const double q_surface, const double Ttol,
+                    const size_t iter, const double T_rear, const double omega1,
+                      const double epsilon,
+                      const class property *k1_thermal,
+                      const class property *k2_thermal,
+                      const class property *psi1_thermal,
+                      const class property *psi2_thermal,
+                      class Mesh *mesh, class Temperature Tprofile
+                      );
+>>>>>>> a1a545a8cd07cd4e27b0abb59ab05944efd9e325
 
 double A_full(double *A1, double *A2, double *A3, double **A, const int M2);
 
