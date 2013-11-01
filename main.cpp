@@ -134,7 +134,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
     /// Heat Flux
     /* - units [W/m^2] */
-    class Laser CO2Laser(30   /*Watts*/  ,
+    class expEquipment::Laser CO2Laser(30   /*Watts*/  ,
                          20e-4 /*m (500um)*/ ,
                          .95   /*offset*/ ,
                          .05   /*amplitude*/);
