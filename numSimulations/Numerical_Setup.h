@@ -304,7 +304,7 @@ public:
     std::string dir;
     double q_surface;
     double detector_lam, bNorm;
-    size_t iter, prop_linearity, e_model;
+    size_t iter;
     double detector_rad;
 
     void thermalSetup(const double lmin, const double lmax,

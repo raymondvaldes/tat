@@ -138,7 +138,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
     constexpr double radius    = 20e-4 /*m (500um)*/ ;
     constexpr double offset    = .95   /*offset*/ ;
     constexpr double amplitude = .05   /*amplitude*/;
-
     class expEquipment::Laser CO2Laser(power, radius, offset, amplitude);
     pStruct->laser = &CO2Laser;
 
@@ -171,8 +170,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                           psithermalSubstrate, L_substrate,
                                           lambdaSub);
 
-    struct physicalModel::TBCsystem APS1(coating, substrate, TemperatureScale,
-                                         radProp, R_domain);
+    struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
+                                          radProp, R_domain);
 
 /// Thermal Penetration
     /*
@@ -195,17 +194,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
  - temp_output
         0-no
         1-yes
- - e_model
-        0-linear
-        1-nonlinear
-        2-both
- - prop_linearity
-    0-nonlinear
-    1-linear (MUST DEBUG NONLINEAR)
 */
     pStruct->temp_output = 0;
-    pStruct->e_model = 0;
-    pStruct->prop_linearity = 1;
 
 /// Parameter Estimation Constraints
 /*
