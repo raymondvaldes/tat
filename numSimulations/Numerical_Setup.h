@@ -295,7 +295,7 @@ public:
     size_t *xParameters95, *xParameters;
     double Ttol, MSE, MSEinitial, MSETol, ChiSquare, coscheck, fvecTotal;
     double fvecTol, variance;
-    size_t iterPE, iterPEnum, N95, temp_output;
+    size_t iterPE, iterPEnum, N95;
     enum XParaNames *xParameters95Names, *xParametersNames;
     int iterC;
     size_t L_end, N;

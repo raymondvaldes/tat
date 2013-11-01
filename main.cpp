@@ -186,17 +186,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
     pStruct->L_end = LendMinDecade;
     pStruct->q_surface = 0;
 
-/// Solver option
-/*
- - Print_0_Fit_1
-        0 - print emission,
-        1 - read saved emission from file and fit to saved emission
- - temp_output
-        0-no
-        1-yes
-*/
-    pStruct->temp_output = 0;
-
 /// Parameter Estimation Constraints
 /*
     parameter constraints are stored in the
