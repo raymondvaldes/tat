@@ -259,7 +259,7 @@ public:
     class ThermalModel *thermalModel;
     class expEquipment::Laser *laser;
     struct physicalModel::temperatureScale *TemperatureScale;
-    struct physicalModel::optics *opticalProp;
+    struct physicalModel::radiativeSysProp *opticalProp;
     struct physicalModel::layer *coating;
     struct physicalModel::layer *substrate;
 

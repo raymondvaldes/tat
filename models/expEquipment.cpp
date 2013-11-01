@@ -2,8 +2,7 @@
 
 namespace expEquipment{
 
-
-detector::detector(const double wavelength_, const double radius_)
+Detector::Detector(const double wavelength_, const double radius_)
     :wavelength(wavelength_), radius(radius_)
 {}
 
@@ -154,8 +153,11 @@ void Laser::cleanup(void)
     delete [] omegas;
 }
 
-//setup::setup(class Laser_, struct detector_): Laser(Laser_), detector(detector_)
-//{}
+setup::setup(struct Laser laser_, struct Detector detector_)
+    : laser(laser_), detector(detector_)
+{
+
+}
 
 
 

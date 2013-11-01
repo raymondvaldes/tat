@@ -103,8 +103,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
     //Optical Properties
     const double R0 = 0.2;
     const double R1 = 0.8;
-    struct physicalModel::optics opticalProp(R0, R1);
-    pStruct->opticalProp = &opticalProp;
+    struct physicalModel::radiativeSysProp radProp(R0, R1);
+    pStruct->opticalProp = &radProp;
 
 /// Thermal Properties
     /*
@@ -134,14 +134,18 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
     /// Heat Flux
     /* - units [W/m^2] */
-    class expEquipment::Laser CO2Laser(30   /*Watts*/  ,
-                         20e-4 /*m (500um)*/ ,
-                         .95   /*offset*/ ,
-                         .05   /*amplitude*/);
+    constexpr double power     = 30   /*Watts*/ ;
+    constexpr double radius    = 20e-4 /*m (500um)*/ ;
+    constexpr double offset    = .95   /*offset*/ ;
+    constexpr double amplitude = .05   /*amplitude*/;
+
+    class expEquipment::Laser CO2Laser(power, radius, offset, amplitude);
     pStruct->laser = &CO2Laser;
 
     constexpr double detector_lam = 5e-6;
-    struct expEquipment::detector Emissiondetector(detector_lam, detector_rad);
+    struct expEquipment::Detector Emissiondetector(detector_lam, detector_rad);
+
+    struct expEquipment::setup expSetup(CO2Laser, Emissiondetector);
 
     constexpr double kcoat_off = 1.44;
     constexpr double kcoat_slope = 0;
@@ -168,7 +172,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                           lambdaSub);
 
     struct physicalModel::TBCsystem APS1(coating, substrate, TemperatureScale,
-                                         opticalProp, R_domain);
+                                         radProp, R_domain);
 
 /// Thermal Penetration
     /*

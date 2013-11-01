@@ -5,11 +5,11 @@ namespace expEquipment{
 
 
 
-struct detector
+struct Detector
 {
     double wavelength;
     double radius;
-    detector(const double wavelength_, const double radius_);
+    Detector(const double wavelength_, const double radius_);
 };
 
 class Laser
@@ -45,9 +45,9 @@ public:
 
 struct setup
 {
-    class Laser;
-    struct detector;
-//    setup(class Laser_, struct detector_);
+    class Laser laser;
+    struct Detector detector;
+    setup(struct Laser laser_, struct Detector detector_);
 };
 
 

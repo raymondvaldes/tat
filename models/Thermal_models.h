@@ -206,11 +206,11 @@ struct temperatureScale
                      const double base_, const double rear_);
 };
 
-struct optics
+struct radiativeSysProp
 {
     double R0;
     double R1;
-    optics(const double R0_, const double R1_);
+    radiativeSysProp(const double R0_, const double R1_);
 };
 
 struct TBCsystem
@@ -218,13 +218,13 @@ struct TBCsystem
     struct layer coating;
     struct layer substrate;
     struct temperatureScale Temp;
-    struct optics optical;
+    struct radiativeSysProp optical;
     double radius;
     double gamma;
     double Rtc;
 
     TBCsystem(struct layer coating_, struct layer substrate_,
-              struct temperatureScale Temp_, struct optics optical_,
+              struct temperatureScale Temp_, struct radiativeSysProp optical_,
               double radius_);
 };
 
