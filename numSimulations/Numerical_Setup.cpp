@@ -65,13 +65,13 @@ void scaleDiag(const int mode, const size_t N, double * diag,
                     diag[i] = pStruct->gamma;
                     break;
                 case R1 :
-                    diag[i] = pStruct->R1 ;
+                    diag[i] = pStruct->opticalProp->R1 ;
                     break;
                 case lambda :
                     diag[i] = pStruct->lambda;
                     break;
                 case R0 :
-                    diag[i] = pStruct->R0;
+                    diag[i] = pStruct->opticalProp->R0;
                     break;
                 default:
                     std::cout << "\nSwitch Error!!\n";

@@ -287,6 +287,7 @@ public:
     class ThermalModel *thermalModel;
     class Laser *laser;
     struct physicalModel::temperatureScale *TemperatureScale;
+    struct physicalModel::optics *opticalProp;
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;
@@ -303,7 +304,7 @@ public:
     double a_sub;
 
     ///system
-    double R_domain, R0, R1;
+    double R_domain;
 
     ///nondimensional
     double gamma, E_sigma, epsilon;

@@ -19,7 +19,7 @@ double PhaseOfEmission2DAna(const int flag,
 double PhaseOfEmission1DNum(const int flag,
                             const struct parameterStr*const pStruct);
 double PhaseOfEmission1DAna(const int flag,
-                            const struct parameterStr*const parametersStr);
+                            const struct parameterStr*const pStruct);
 
 class emissionNoiseParameters
 {

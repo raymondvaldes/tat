@@ -9,8 +9,8 @@ double PhaseOfEmission1DNum(const int flag,
     /// Acquire Numerical Temperature
     temperature_1D(
                    pStruct->laser->Is,    pStruct->laser->It,
-                   pStruct->lambda,       pStruct->R0,
-                   pStruct->R1,
+                   pStruct->lambda,       pStruct->opticalProp->R0,
+                   pStruct->opticalProp->R1,
                    pStruct->L_coat,       pStruct->L_substrate,
                    pStruct->q_surface,
                    pStruct->TemperatureScale->tolerance,
@@ -47,7 +47,8 @@ double PhaseOfEmission2DAna(const int flag,
     const double k_coat     = pStruct->k1_thermal->offset;
     const double psi_coat   = pStruct->psi1_thermal->offset;
 
-    const class HeatModel2DAna heatmodel2DAna(pStruct->R0, pStruct->R1,
+    const class HeatModel2DAna heatmodel2DAna(pStruct->opticalProp->R0,
+                                              pStruct->opticalProp->R1,
                                               pStruct->lambda,
                                               pStruct->laser->It,
                                               pStruct->c_sub, pStruct->a_sub,
@@ -86,17 +87,17 @@ double PhaseOfEmission2DAna(const int flag,
 
 
 double PhaseOfEmission1DAna(const int flag,
-                            const struct parameterStr*const parametersStr)
+                            const struct parameterStr*const pStruct)
 {
     /*See 2004 emission paper equation 19*/
-    const double omega1 = parametersStr->laser->omegas[flag];
-    const double lambda = parametersStr->lambda;
-    const double Esigma  = parametersStr->E_sigma;
-    const double gamma  = parametersStr->gamma;
-    const double R1     = parametersStr->R1;
-    const double L_coat = parametersStr->L_coat;
-    const double k_c    = parametersStr->k1_thermal->offset;
-    const double psi_c  = parametersStr->psi1_thermal->offset;
+    const double omega1 = pStruct->laser->omegas[flag];
+    const double lambda = pStruct->lambda;
+    const double Esigma  = pStruct->E_sigma;
+    const double gamma  = pStruct->gamma;
+    const double R1     = pStruct->opticalProp->R1;
+    const double L_coat = pStruct->L_coat;
+    const double k_c    = pStruct->k1_thermal->offset;
+    const double psi_c  = pStruct->psi1_thermal->offset;
     const double l = lthermal(L_coat,k_c,psi_c,omega1);
 
 //#define  _i std::complex<double>(0.,1.)

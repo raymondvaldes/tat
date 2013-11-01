@@ -22,8 +22,8 @@ void perturbationTest(const size_t m, const size_t n,
     const double gammaTrue    = parametersStr->gamma;
     const double E_sigmaTrue  = parametersStr->E_sigma;
     const double lambdaTrue   = parametersStr->lambda;
-    const double R1True       = parametersStr->R1;
-    const double R0True       = parametersStr->R0;
+    const double R1True       = parametersStr->opticalProp->R1;
+    const double R0True       = parametersStr->opticalProp->R0;
     double*xpredicted = new double[n];
 
 //    std::cout << a_subTrue << "\t" << gammaTrue << "\t" << E_sigmaTrue << "\t";
@@ -86,7 +86,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                    std::cout << parametersStr->gamma << "\t";
                     break;
                 case R1 :
-                    parametersStr->R1 = R1True * multiplier;
+                    parametersStr->opticalProp->R1 = R1True * multiplier;
 //                    std::cout << parametersStr->R1 << "\t";
                     break;
                 case lambda :
@@ -94,7 +94,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                    std::cout << parametersStr->lambda << "\t";
                     break;
                 case R0 :
-                    parametersStr->R0 = R0True * multiplier;
+                    parametersStr->opticalProp->R0 = R0True * multiplier;
 //                    std::cout << parametersStr->R0 << "\t";
                     break;
                 default:
@@ -179,7 +179,7 @@ void perturbationTest(const size_t m, const size_t n,
                        << parametersStr->gamma << "\t"
                        << parametersStr->E_sigma << "\t"
                        << parametersStr->lambda << "\t"
-                       << parametersStr->R1 << "\t"
+                       << parametersStr->opticalProp->R1 << "\t"
                        << msearea;
                 myfile << "\n";
             }
@@ -211,7 +211,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                std::cout << parametersStr->gamma << "\t";
                 break;
             case R1 :
-                parametersStr->R1 = R1True;
+                parametersStr->opticalProp->R1 = R1True;
 //                std::cout << parametersStr->R1 << "\t";
                 break;
             case lambda :
@@ -219,7 +219,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                std::cout << parametersStr->lambda << "\t";
                 break;
             case R0 :
-                parametersStr->R0 = R0True;
+                parametersStr->opticalProp->R0 = R0True;
 //                std::cout << parametersStr->R0 << "\t";
                 break;
             default:
@@ -248,7 +248,7 @@ void calibrationSweep(
 
     const double gammaTrue    = pStructp->gamma;
     const double a_subTrue    = pStructp->a_sub;
-    const double R1True       = pStructp->R1;
+    const double R1True       = pStructp->opticalProp->R1;
     const double E_sigmaTrue  = pStructp->E_sigma;
     const double lambdaTrue   = pStructp->lambda;
 
@@ -321,10 +321,10 @@ void parameterUncertainty(const size_t n,
     const int xnum = pStruct->xnumber;
     const double gammaTrue    = parametersStr->gamma;
     const double a_subTrue    = parametersStr->a_sub;
-    const double R1True       = parametersStr->R1;
+    const double R1True       = parametersStr->opticalProp->R1;
     const double E_sigmaTrue  = parametersStr->E_sigma;
     const double lambdaTrue   = parametersStr->lambda;
-    const double R0True       = parametersStr->R0;
+    const double R0True       = parametersStr->opticalProp->R0;
     const double lminN  = parametersStr->laser->l_thermal[0];
     const double lmaxN  = parametersStr->laser->l_thermal[parametersStr->L_end-1];
     double*xpredicted = new double[n];
@@ -444,7 +444,7 @@ void parameterUncertainty(const size_t n,
                     break;
 
                 case R1 :
-                    parametersStr->R1 = R1True;
+                    parametersStr->opticalProp->R1 = R1True;
                     break;
 
                 case lambda :
@@ -452,7 +452,7 @@ void parameterUncertainty(const size_t n,
                     break;
 
                 case R0 :
-                    parametersStr->R0 = R0True;
+                    parametersStr->opticalProp->R0 = R0True;
                     break;
 
                 default:
@@ -518,7 +518,7 @@ void fitting(size_t P, size_t N,
         myfile << pStruct->gamma << "\t"
                << pStruct->a_sub << "\t"
                << pStruct->E_sigma << "\t"
-               << pStruct->R1 << "\t"
+               << pStruct->opticalProp->R1 << "\t"
                << pStruct->lambda << "\t"
                << pStruct->MSE << "\n";
 

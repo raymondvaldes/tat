@@ -14,7 +14,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
      - beta_tol is how close dz_sub is to dz_coat   */
     constexpr size_t M2 = 220+1; //there must be a problem (KEEP AT 200)
     assert( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
-
     constexpr size_t Rend = 20; //80
     constexpr size_t Nend = 80;
     constexpr size_t N = 5;
@@ -96,15 +95,13 @@ int main( int /*argc*/, char** /*argv[]*/ )
     pStruct->E_sigma = 42;
     pStruct->Rtc = 1e-14;
 
-    pStruct->R0 = 0.2;
-    pStruct->R1 = 0.8;
     const double R0 = 0.2;
     const double R1 = 0.8;
     struct physicalModel::optics *opticalProp =
             new struct physicalModel::optics(R0, R1);
+    pStruct->opticalProp = opticalProp;
 
-
-/// Heat Flux
+    /// Heat Flux
     /* - units [W/m^2] */
     class Laser CO2Laser(30   /*Watts*/  ,
                          20e-4 /*m (500um)*/ ,
@@ -230,6 +227,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 // Clear memory
     delete TemperatureScale;
     delete opticalProp;
+
     mesh->cleanup();
     delete mesh;
     CO2Laser.cleanup();
