@@ -98,7 +98,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
     pStruct->lambda_Sub = .1;
 
     pStruct->E_sigma = 42;
-    pStruct->Rtc = 1e-14;
 
     //Optical Properties
     const double R0 = 0.2;

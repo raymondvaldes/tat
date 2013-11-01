@@ -24,19 +24,12 @@ class matrixArrays
         B3.resize(length);
         M2 = length;
 
-    };
+    }
 };
 
 double Numerical_Temperature( const double *const *parameters, double **T,
                               const int flag ,
                               const struct parameter_constraints *st_ptr);
-
-void q_gen_steady(int n, double *b, int M1, const int M2, double *tau,
-                  double Is,double It,double L_coat, double tau_ref,
-                  double Iplus1,double *eta,double beta1,double beta2,
-                  double opt,double lambda, double R0, double R1, double Iplus0,
-                  double q_surface, double Rtc, double k_c, double psi_c,
-                  double omega);
 
 double Tss1D_ana(const double z, const double R1, const double lambda,
                  const double Is, const double L, const double d,

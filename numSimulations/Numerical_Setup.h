@@ -302,7 +302,7 @@ public:
 
     ///other
     std::string dir;
-    double q_surface, Rtc;
+    double q_surface;
     double detector_lam, bNorm;
     size_t iter, prop_linearity, e_model;
     double detector_rad;
