@@ -1076,8 +1076,9 @@ optics::optics(double R0_, double R1_): R0(R0_), R1(R1_)
 
 
 layer::layer(struct property kthermal_, struct property psithermal_,
-             double depth_)
-    : kthermal(kthermal_), psithermal(psithermal_), depth(depth_)
+             double depth_, double lambda_)
+    : kthermal(kthermal_), psithermal(psithermal_), depth(depth_),
+      lambda(lambda_)
 {}
 
 double layer::opticalPenetration(void)

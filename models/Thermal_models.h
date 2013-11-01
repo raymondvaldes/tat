@@ -188,12 +188,12 @@ struct layer
 {
     struct property kthermal;
     struct property psithermal;
-    double lambda;
     double depth;
+    double lambda;
 
     double opticalPenetration(void);
     layer(struct property kthermal_, struct property psithermal_,
-                 double depth_);
+                 double depth_, double lambda_);
 };
 
 struct temperatureScale

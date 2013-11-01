@@ -106,15 +106,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
     struct physicalModel::optics opticalProp(R0, R1);
     pStruct->opticalProp = &opticalProp;
 
-    /// Heat Flux
-    /* - units [W/m^2] */
-    class Laser CO2Laser(30   /*Watts*/  ,
-                         20e-4 /*m (500um)*/ ,
-                         .95   /*offset*/ ,
-                         .05   /*amplitude*/);
-    pStruct->laser = &CO2Laser;
-
-
 /// Thermal Properties
     /*
      - T_ref    273 use substrate as reference [K]
@@ -141,6 +132,16 @@ int main( int /*argc*/, char** /*argv[]*/ )
     pStruct->k2_thermal->slope = 0;
     pStruct->psi2_thermal->slope = 0;
 
+    /// Heat Flux
+    /* - units [W/m^2] */
+    class Laser CO2Laser(30   /*Watts*/  ,
+                         20e-4 /*m (500um)*/ ,
+                         .95   /*offset*/ ,
+                         .05   /*amplitude*/);
+    pStruct->laser = &CO2Laser;
+
+    constexpr double detector_lam = 5e-6;
+    struct expEquipment::detector Emissiondetector(detector_lam, detector_rad);
 
     constexpr double kcoat_off = 1.44;
     constexpr double kcoat_slope = 0;
@@ -150,8 +151,9 @@ int main( int /*argc*/, char** /*argv[]*/ )
     constexpr double psicoat_slope = 0;
     struct property psithermalCoating(psicoat_off, psicoat_slope);
 
+    constexpr double lambdaCoat = 0.57;
     struct physicalModel::layer coating(kthermalCoating,
-                                        psithermalCoating, L_coat);
+                                        psithermalCoating, L_coat, lambdaCoat);
 
     constexpr double ksub_off = 12.7;
     constexpr double ksub_slope = 0;
@@ -160,15 +162,13 @@ int main( int /*argc*/, char** /*argv[]*/ )
     constexpr double psisub_off = 3.44e6;
     constexpr double psisub_slope = 0;
     struct property psithermalSubstrate(psisub_off, psisub_slope);
-
-
+    constexpr double lambdaSub = 0;
     struct physicalModel::layer substrate(kthermalSubstrate,
-                                          psithermalSubstrate, L_substrate);
+                                          psithermalSubstrate, L_substrate,
+                                          lambdaSub);
 
     struct physicalModel::TBCsystem APS1(coating, substrate, TemperatureScale,
                                          opticalProp, R_domain);
-
-    std::cout << APS1.Temp.rear   << "\n\n"; exit(-2);
 
 /// Thermal Penetration
     /*
