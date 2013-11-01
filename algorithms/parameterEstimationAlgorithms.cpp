@@ -17,6 +17,7 @@ double dmin1(double a,double b);
 int min0(int a,int b);
 void pmat(int m,int n,double y[]);
 
+
 void qrfac(int m, int n, double a[], int, bool pivot, int ipvt[], int,
            double rdiag[], double acnorm[], double wa[]);
 double dmax1(double a,double b);
