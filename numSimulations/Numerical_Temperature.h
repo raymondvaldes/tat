@@ -49,12 +49,11 @@ std::complex<double> Tac1D_ana(const double z, const double R0, const double R1,
                                const double Lthrm, const double It,
                                const double L);
 
-void temperature_1D(  const double T_ref,
+void temperature_1D(const double T_ref,
                       const double Is, const double It,
                       const double L, const double lambda, const double R0,
                       const double R1, const double L_coat,
-                      const double L_substrate, const double q_surface,
-                      const double Rtc, const double Ttol, const size_t iter,
+                      const double L_substrate, const double q_surface, const double Ttol, const size_t iter,
                       const double T_rear,
                       const double omega1,
                       const double epsilon,
@@ -105,11 +104,11 @@ void bMatrixPrepopulate1(const size_t n,
                          const double*deltaZ, const double* genProfile,
                          const double T_rear);
 
-double Gaverage(const double opt, const double lambda, const double R0,
+double Gaverage(const double opt, const double lambda,
                 const double R1, const double Iplus0, const double Iplus1,
                 const double z1, const double z2);
 
-void heatingProfile(const double opt, const double lambda, const double R0,
+void heatingProfile(const double opt, const double lambda,
                     const double R1, const double Iplus0, const double Iplus1,
                     const std::vector<double>& z_jplus,
                     const std::vector<double>& z_jminus,
@@ -146,7 +145,7 @@ double Iaverage(const double Is, const double It, const double omega,
                 const double tau_ref, const double *tau, const size_t n);
 
 double qGenAverage(const double I_avg, const double It, const double opt,
-                          const double lambda, const double R0,const double R1,
+                          const double lambda, const double R1,
                           const double Iplus0, const double Iplus1,
                           const double z1, const double z2);
 

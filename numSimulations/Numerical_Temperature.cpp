@@ -2,10 +2,11 @@
 
 
 void temperature_1D(const double T_ref, const double Is, const double It,
-                    const double L, const double lambda, const double R0,
+                    const double L, const double lambda,
+                    const double R0,
                     const double R1, const double L_coat,
                     const double L_substrate, const double q_surface,
-                    const double Rtc, const double Ttol, const size_t iter,
+                    const double Ttol, const size_t iter,
                     const double T_rear, const double omega1,
                     const double epsilon,
                     const class property *k1_thermal,
@@ -79,7 +80,7 @@ void temperature_1D(const double T_ref, const double Is, const double It,
 
         double *genProfile = new double[mesh->M1+1];
         const double opt = L_coat * lambda ;
-        heatingProfile(opt, lambda, R0, R1, Iplus0, Iplus1, mesh->z_jplus,
+        heatingProfile(opt, lambda, R1, Iplus0, Iplus1, mesh->z_jplus,
                        mesh->z_jminus, mesh->z_j, genProfile, mesh->M1);
 
         for (size_t n = 0 ; n < mesh->Nend-1 ; ++n )
@@ -286,7 +287,7 @@ double abMatrixPrepopulate(std::vector<double>& B1,
      return B4;
 }
 
-void heatingProfile(const double opt, const double lambda, const double R0,
+void heatingProfile(const double opt, const double lambda,
                     const double R1, const double Iplus0, const double Iplus1,
                     const std::vector<double>& z_jplus,
                     const std::vector<double>& z_jminus,
@@ -294,15 +295,15 @@ void heatingProfile(const double opt, const double lambda, const double R0,
                     const size_t M1 )
 {
     for(size_t j=0; j ==0; ++j)
-        genProfile[j] = Gaverage(opt, lambda, R0, R1, Iplus0, Iplus1, z_j[j],
+        genProfile[j] = Gaverage(opt, lambda, R1, Iplus0, Iplus1, z_j[j],
                                   z_jplus[j]);
     for (size_t j = 1; j < M1 ; ++j)
     {
-        genProfile[j] = Gaverage(opt, lambda, R0, R1, Iplus0, Iplus1,
+        genProfile[j] = Gaverage(opt, lambda, R1, Iplus0, Iplus1,
                                   z_jminus[j], z_jplus[j]);
     }
     for(size_t j=M1; j ==M1; ++j)
-        genProfile[j] = Gaverage(opt, lambda, R0, R1, Iplus0, Iplus1,
+        genProfile[j] = Gaverage(opt, lambda, R1, Iplus0, Iplus1,
                                   z_jminus[j], z_j[j]);
 
     return;
@@ -681,9 +682,9 @@ double Iaverage(const double Is, const double It, const double omega,
     return I_avg;
 }
 
-double Gaverage(const double opt, const double lambda, const double R0,
-                const double R1, const double Iplus0, const double Iplus1,
-                const double z1, const double z2)
+double Gaverage(const double opt, const double lambda, const double R1,
+                const double Iplus0, const double Iplus1, const double z1,
+                const double z2)
 {
     double generation = gs_int( z2, opt, lambda, R1, Iplus0, Iplus1) ;
     generation -= gs_int( z1, opt, lambda, R1, Iplus0, Iplus1) ;
@@ -693,9 +694,8 @@ double Gaverage(const double opt, const double lambda, const double R0,
 
 
 double qGenAverage(const double I_avg, const double It, const double opt,
-                   const double lambda, const double R0,const double R1,
-                   const double Iplus0, const double Iplus1,
-                   const double z1, const double z2)
+                   const double lambda, const double R1, const double Iplus0,
+                   const double Iplus1, const double z1, const double z2)
 {
     double q_gen;
     q_gen  = gs_int( z2, opt, lambda, R1, Iplus0, Iplus1) ;

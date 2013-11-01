@@ -603,8 +603,8 @@ void minimizer(double (*to_minimize)(double *,double *), double *variable,
 // Temperature dependent variables and functions
 
 
-double gspatial(double z, double opt, double lambda, double R0,
-                    double R1, double Iplus0, double Iplus1)
+double gspatial(double z, double opt, double lambda, double R1, double Iplus0,
+                double Iplus1)
 {
     // z must be normalized by the coating thickness
        double gs ;
@@ -614,11 +614,10 @@ double gspatial(double z, double opt, double lambda, double R0,
 
        if( z<=1)
         return gs;
-        else if (z>1)
+       else if (z>1)
         return 0;
 
         return 0;
-//       return gs * ( z <= 1 ? 1. : 0. ) ;
 }
 
 
@@ -714,46 +713,7 @@ size_t discretizeSpace(const int nodes,const double beta1,const double beta2,
     return M1;
 }
 
-int discretize_1d(size_t nodes, size_t Nend, double beta1, double beta2, double split,
-                  double *eta, double *z_norm, double *z_real,
-                  double *time, double L_coat, double L_substrate, double *tau,
-                  double omega, double k_c, double psi_c, double k_ref,
-                  double psi_ref)
-{
-    double L1 = 1; //coating nondimensional thickness
-                    //z transformed to eta from 0-L_coat  to 0-1.
-	double L2 = 1; //substrate ....Do not change these parameters.
-    double tau_ref = tau_0(omega);
-    double M2 = nodes;
-    double period = tau_ref;
 
-    size_t M1 = split * (M2-1);
-
-// Time
-    for (size_t i = 0; i < Nend; i++)
-     {
-        time[i] = ((i)/double (Nend-1)) * period;
-        tau[i] = time[i] / period ;
-     }
-
-// define eta (computational grid)
-    for(size_t j = 0; j <= M1 ; j++)
-        eta[j] =  (double (j) / double (M1)) * L1;
-    for(size_t j = 1 ; j <= (M2-1) - M1 ; j ++)
-        eta[M1+j] = ( double ( j ) / ( double (M2-1) - double (M1) ) ) *
-         L2 + eta[M1];
-
-    for ( size_t j = 0 ; j < M2; j++ )
-       z_norm[j] = z_eta( eta[j], beta1,  beta2) ;
-
-    for (size_t j = 0 ; j < M2 ; j++)
-    {
-        if ( j <= M1) z_real[j] = z_norm[j] * L_coat;
-//        if ( j == M1 || j == M1) z_real[j] = L_coat;
-        if ( j > M1 && j < M2)  z_real[j] = (z_norm[j] - 1.) * L_substrate + L_coat;
-    }
-    return M1;
-}
 
 void cosfcn(int P,int N,double *x,double *fvec,int *iflag, double **variables)
 {  // function to be fitted:

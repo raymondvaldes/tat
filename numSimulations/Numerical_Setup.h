@@ -91,7 +91,7 @@ void parameters_kcp_update(struct parameterStr* parametersStr,
 void parameters_agamma_update(struct parameterStr* parametersStr,
                               const double k_c, const double psi_c);
 
-double gspatial(double eta, double opt, double lambda, double R0,double R1,
+double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);
 
 double beta2_func(double* variable, double* constants);

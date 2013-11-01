@@ -30,7 +30,7 @@ double Print_Emission(const double *phase, const double* num_phase,
         myoutputfile1 <<  100*((num_phase[i]  - ana_phase[i])/M_PI_2) << "\n";
     }
     myoutputfile1.close();
-
+  return 0;
 }
 
 
