@@ -1,16 +1,6 @@
 #include "../Header.h"
 
-
-<<<<<<< HEAD
-
 void temperature_1D(const double T_ref, const double Is, const double It,
-=======
-<<<<<<< HEAD
-void temperature_1D(const double Is, const double It,
-=======
-void temperature_1D(const double T_ref, const double Is, const double It,
->>>>>>> a1a545a8cd07cd4e27b0abb59ab05944efd9e325
->>>>>>> 5109bc3446737499afde86115c6578a3a73d15d6
                     const double lambda, const double R0,
                     const double R1, const double L_coat,
                     const double L_substrate, const double q_surface,
