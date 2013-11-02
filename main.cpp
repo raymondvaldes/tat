@@ -81,7 +81,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
     constexpr double T_rear = 0;
     struct physicalModel::temperatureScale
             TemperatureScale(Ttol, T_ref, T_base, T_rear);
-//    pStruct->TemperatureScale = &TemperatureScale;
+    pStruct->TemperatureScale = &TemperatureScale;
 
     // Model system
     constexpr double detector_rad = .25e-3;
@@ -172,25 +172,9 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
     struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                           radProp, R_domain);
-    pStruct->expSetup = &expSetup;
-    pStruct->TBCSystem = &EBPVD;
 
-//    struct PopTea
-//    {
-//      struct expEquipment::setup expSetup;
-//      struct physicalModel::TBCsystem TBCsystem;
-////      struct emission model and heat model
-////      parameter estimation settings - this means ftol etc
-////      parameter estimation algorithms -
-////      parameter estimation constraints
+    struct PopTea poptea(expSetup, EBPVD);
 
-//      PopTea(struct expEquipment::setup expSetup_,
-//             struct physicalModel::TBCsystem TBCsystem_);
-
-////    function to make experimental noise should go here
-////    function to hold results to should go here too
-//    };
-//    struct PopTea poptea(expSetup, EBPVD);
 
 /// Thermal Penetration
     /* The thermal penetration depth represents the range of the 'operability

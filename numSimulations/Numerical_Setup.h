@@ -260,12 +260,11 @@ public:
     class expEquipment::Laser *laser;
     struct expEquipment::setup *expSetup;
 
-
-//    struct physicalModel::temperatureScale *TemperatureScale;
+    struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::radiativeSysProp *opticalProp;
     struct physicalModel::layer *coating;
     struct physicalModel::layer *substrate;
-    struct physicalModel::TBCsystem *TBCSystem;
+//    struct physicalModel::TBCsystem *TBCSystem;
 
 
     ///layer 1

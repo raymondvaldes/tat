@@ -58,11 +58,14 @@ compiler.
 #include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
 
+#include "system/poptea.h"
+
 #include "numSimulations/Experimental_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Temperature.h"
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Setup.h"
+
 
 
 #include "tools/filesystem.hpp"
