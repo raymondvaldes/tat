@@ -13,9 +13,9 @@ double PhaseOfEmission1DNum(const int flag,
                    pStruct->opticalProp->R1,
                    pStruct->L_coat,       pStruct->L_substrate,
                    pStruct->q_surface,
-                   pStruct->TemperatureScale->tolerance,
+                   pStruct->TBCSystem->Temp.tolerance,
                    pStruct->iter,
-                   pStruct->TemperatureScale->rear,
+                   pStruct->TBCSystem->Temp.rear,
                    pStruct->laser->omegas[flag],
                    pStruct->gamma,
                    pStruct->k1_thermal,   pStruct->k2_thermal,
@@ -25,7 +25,7 @@ double PhaseOfEmission1DNum(const int flag,
     ///Initiate emission model
     const class Emission*
     emission = new class Emission(pStruct->detector_lam,
-                                  pStruct->TemperatureScale->base,
+                                  pStruct->TBCSystem->Temp.base,
                                   pStruct->mesh,
                                   pStruct->bNorm *pStruct->L_coat,
                                   pStruct->E_sigma);
@@ -70,7 +70,7 @@ double PhaseOfEmission2DAna(const int flag,
     ///Initiate emission model
     const class Emission* emission;
     emission = new class Emission(pStruct->detector_lam,
-                                  pStruct->TemperatureScale->referance,
+                                 pStruct->TBCSystem->Temp.referance,
                                   pStruct->mesh,
                                   pStruct->bNorm * pStruct->L_coat,
                                   pStruct->E_sigma);

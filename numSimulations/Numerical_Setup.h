@@ -258,10 +258,15 @@ public:
     class Mesh *mesh;
     class ThermalModel *thermalModel;
     class expEquipment::Laser *laser;
-    struct physicalModel::temperatureScale *TemperatureScale;
+    struct expEquipment::setup *expSetup;
+
+
+//    struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::radiativeSysProp *opticalProp;
     struct physicalModel::layer *coating;
     struct physicalModel::layer *substrate;
+    struct physicalModel::TBCsystem *TBCSystem;
+
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;

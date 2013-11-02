@@ -81,7 +81,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
     constexpr double T_rear = 0;
     struct physicalModel::temperatureScale
             TemperatureScale(Ttol, T_ref, T_base, T_rear);
-    pStruct->TemperatureScale = &TemperatureScale;
+//    pStruct->TemperatureScale = &TemperatureScale;
 
     // Model system
     constexpr double detector_rad = .25e-3;
@@ -172,14 +172,13 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
     struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                           radProp, R_domain);
+//    pStruct->expSetup = &expSetup;
+    pStruct->TBCSystem = &EBPVD;
 
 /// Thermal Penetration
-    /*
-        The thermal penetration depth represents the range of the
-        'operability region'.
-        LendMin is defined to be the minimum number of measurements or the
-        number of measurements per decade (logspace).  Whichever is greater.
-    */
+    /* The thermal penetration depth represents the range of the 'operability
+     * region'. LendMin is defined to be the minimum number of measurements or
+     * the number of measurements per decade (logspace). Whichever is greater.*/
     constexpr double l_min = .04;
     constexpr double l_max = 4;
     constexpr size_t LendMinDecade = 50;
@@ -187,10 +186,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
     pStruct->q_surface = 0;
 
 /// Parameter Estimation Constraints
-/*
-    parameter constraints are stored in the
-    structure parameter_constraints
-*/
+    /* parameter constraints are stored in the
+    structure parameter_constraints */
     struct parameter_constraints *st_ptr;
     st_ptr = new struct parameter_constraints;
 
@@ -213,8 +210,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
     st_ptr->R0_max = 1;
 
     // Initial Guess
-        double *xInitial;
-        xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
+    double *xInitial = nullptr;
+    xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
 //Optimize stretching in Substrate and declare variables to be fitted
     pStruct->parametersStrSetup(xParametersNames);
