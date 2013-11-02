@@ -104,7 +104,8 @@ SOURCES += main.cpp \
     tools/filesystem.cpp \
     tools/timing.cpp \
     models/Thermal_models.cpp \
-    models/expEquipment.cpp
+    models/expEquipment.cpp \
+    system/poptea.cpp
 
 #header files
 HEADERS += \
@@ -122,4 +123,5 @@ HEADERS += \
     tools/timing.h \
     algorithms/sensitivity_analysis.hpp \
     models/Thermal_models.h \
-    models/expEquipment.hpp
+    models/expEquipment.hpp \
+    system/poptea.h
