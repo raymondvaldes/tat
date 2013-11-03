@@ -256,6 +256,8 @@ struct parameterStr
 
 public:
     class Mesh *mesh;
+
+
     class ThermalModel *thermalModel;
     class expEquipment::Laser *laser;
     struct expEquipment::setup *expSetup;
