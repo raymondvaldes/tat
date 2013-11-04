@@ -94,7 +94,6 @@ SOURCES += main.cpp \
     algorithms/ThermalProp_Analysis.cpp \
     algorithms/statistical_tools.cpp \
     algorithms/sensitivity_analysis.cpp \
-    algorithms/parameterEstimationAlgorithms.cpp \
     investigations/sensitivity_paper.cpp \
     numSimulations/Numerical_Temperature.cpp \
     numSimulations/Numerical_Setup.cpp \
@@ -105,14 +104,15 @@ SOURCES += main.cpp \
     tools/timing.cpp \
     models/Thermal_models.cpp \
     models/expEquipment.cpp \
-    system/poptea.cpp
+    system/poptea.cpp \
+    algorithms/lmdiff.cpp \
+    algorithms/parameterestimation.cpp
 
 #header files
 HEADERS += \
     Header.h \
     algorithms/ThermalProp_Analysis.h \
     algorithms/statistical_tools.hpp \
-    algorithms/parameterEstimationAlgorithms.hpp \
     investigations/sensitivity_paper.h \
     numSimulations/Numerical_Temperature.h \
     numSimulations/Numerical_Setup.h \
@@ -124,4 +124,6 @@ HEADERS += \
     algorithms/sensitivity_analysis.hpp \
     models/Thermal_models.h \
     models/expEquipment.hpp \
-    system/poptea.h
+    system/poptea.h \
+    algorithms/lmdiff.h \
+    algorithms/parameterestimation.hpp

@@ -22,30 +22,6 @@ void parametersStrSetup(struct parameterStr *parametersStr,
 
 void mainMemoryFree(struct parameterStr * parametersStr);
 
-struct parameter_constraints
-{
-    double R0_min;
-    double R0_max;
-
-    double R1_min ;
-    double R1_max ;
-
-    double E_sigma_min ;
-    double E_sigma_max ;
-
-    double lambda_min ;
-    double lambda_max ;
-
-    double gamma_min ;
-    double gamma_max ;
-
-    double a_sub_min ;
-    double a_sub_max ;
-
-    double Lcoat_min ;
-    double Lcoat_max ;
-};
-
 class Mesh
 {
 public:

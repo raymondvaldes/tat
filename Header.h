@@ -48,11 +48,11 @@ compiler.
 
 
 ///Source headers
-#include "algorithms/parameterEstimationAlgorithms.hpp"
+#include "algorithms/parameterestimation.hpp"
+#include "algorithms/lmdiff.h"
 #include "algorithms/statistical_tools.hpp"
 #include "algorithms/ThermalProp_Analysis.h"
 #include "algorithms/sensitivity_analysis.hpp"
-
 #include "investigations/sensitivity_paper.h"
 
 #include "models/Thermal_models.h"
