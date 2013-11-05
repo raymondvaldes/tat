@@ -173,7 +173,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                         radProp, R_domain);
 
-  struct PopTea poptea(expSetup, EBPVD, thermalModel);
 
 
 /// Thermal Penetration
@@ -218,6 +217,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct parameterEstimation::constraints::bounds lambda(.1,  1);
   struct parameterEstimation::constraints paraConstraints(a_sub, gamma, E1emit,
                                                           R1, R0, lambda);
+
+  struct PopTea poptea(expSetup, EBPVD, thermalModel, paraConstraints);
   }
 
   // Initial Guess

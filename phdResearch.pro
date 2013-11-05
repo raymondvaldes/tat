@@ -5,7 +5,7 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
-#CONFIG += c++11
+CONFIG += c++11
 
 
 #paths
@@ -46,9 +46,9 @@ unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/libboost_system-mt.a
 }
 
 #compiler flags
-QMAKE_CXXFLAGS += -std=c++11
-QMAKE_CXXFLAGS += -m64
-QMAKE_CXXFLAGS += -O3
+#QMAKE_CXXFLAGS += -std=gnu++11 (automatically applied with c++11 flag)
+#QMAKE_CXXFLAGS += -m64 (automatically applied with release)
+#QMAKE_CXXFLAGS += -O3 (automatically applied with release)
 QMAKE_CXXFLAGS += -fopenmp
 #QMAKE_CXXFLAGS += -march=native
 
