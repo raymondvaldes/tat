@@ -1,7 +1,7 @@
 #include "../Header.h"
 
 int paramter_estimation(const size_t m, const size_t n,
-                        struct ParameterEstimation::settings ParaEstSetting,
+                        struct parameterEstimation::settings ParaEstSetting,
                         int *info, int *nfev,
                         const struct parameter_constraints *pc_ptr, double *x,
                         struct parameterStr * pStruct, const double factorMax,
@@ -481,9 +481,4 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
 
 
 
-namespace ParameterEstimation
-{
-    settings::settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
-                       double epsfcn_, double factor_, size_t mode_,
-                       size_t nprint_);
-}
+

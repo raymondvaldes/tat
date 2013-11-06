@@ -7,7 +7,6 @@ CONFIG -= app_bundle
 CONFIG -= qt
 CONFIG += c++11
 
-
 #paths
 unix:!macx{
 INCLUDEPATH += /usr/lib/
@@ -50,7 +49,7 @@ unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/libboost_system-mt.a
 #QMAKE_CXXFLAGS += -m64 (automatically applied with release)
 #QMAKE_CXXFLAGS += -O3 (automatically applied with release)
 QMAKE_CXXFLAGS += -fopenmp
-#QMAKE_CXXFLAGS += -march=native
+QMAKE_CXXFLAGS += -march=native
 
 #linker flags
 QMAKE_LFLAGS += -fopenmp
@@ -59,34 +58,32 @@ QMAKE_LFLAGS += -fopenmp
 
 ##Optional#########################
 #compiler warnings
-#QMAKE_CXXFLAGS += -Wall
-#QMAKE_CXXFLAGS += -Wextra
-#QMAKE_CXXFLAGS += -Wfatal-errors
+QMAKE_CXXFLAGS += -Wall
+QMAKE_CXXFLAGS += -Wextra
+QMAKE_CXXFLAGS += -Wfatal-errors
 QMAKE_CXXFLAGS += -pedantic
-#QMAKE_CXXFLAGS += -Wmain
-#QMAKE_CXXFLAGS += -Wswitch-default
-#QMAKE_CXXFLAGS += -Wswitch-enum
-#QMAKE_CXXFLAGS += -Wfloat-equal
-#QMAKE_CXXFLAGS += -Wcast-align
-#QMAKE_CXXFLAGS += -Wredundant-decls
-#QMAKE_CXXFLAGS += -Winit-self
-#QMAKE_CXXFLAGS += -Wshadow
+QMAKE_CXXFLAGS += -Wmain
+QMAKE_CXXFLAGS += -Wswitch-default
+QMAKE_CXXFLAGS += -Wswitch-enum
+#QMAKE_CXXFLAGS += -Wfloat-equal (BUG fix this)
+QMAKE_CXXFLAGS += -Wcast-align
+QMAKE_CXXFLAGS += -Wredundant-decls
+QMAKE_CXXFLAGS += -Winit-self
+#QMAKE_CXXFLAGS += -Wshadow (TODO fix this)
 
 #compiler
-#QMAKE_CXXFLAGS += -Wno-unused-parameter
-#QMAKE_CXXFLAGS += -funroll-loops
-#QMAKE_CXXFLAGS += -fmessage-length=0
-#QMAKE_CXXFLAGS += -Wwrite-strings
-#QMAKE_CXXFLAGS += -Wcast-qual
-#QMAKE_CXXFLAGS += -Wpointer-arith
-#QMAKE_CXXFLAGS += -Wstrict-aliasing
-#QMAKE_CXXFLAGS += -Wformat=2
-#QMAKE_CXXFLAGS += -Wuninitialized
-#QMAKE_CXXFLAGS += -flto
-#QMAKE_CXXFLAGS += -fwhole-program
+QMAKE_CXXFLAGS += -Wno-deprecated
+QMAKE_CXXFLAGS += -Wno-unused-parameter
+QMAKE_CXXFLAGS += -fmessage-length=0
+QMAKE_CXXFLAGS += -Wwrite-strings
+QMAKE_CXXFLAGS += -Wcast-qual
+QMAKE_CXXFLAGS += -Wpointer-arith
+QMAKE_CXXFLAGS += -Wstrict-aliasing
+QMAKE_CXXFLAGS += -Wformat=2
+QMAKE_CXXFLAGS += -Wuninitialized
+QMAKE_CXXFLAGS += -flto
+QMAKE_CXXFLAGS += -fwhole-program
 
-#compiler custom flags
-QMAKE_CXXFLAGS_DEBUG += -g
 ##Optional#########################
 
 #source files

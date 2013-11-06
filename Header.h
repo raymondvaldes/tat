@@ -1,14 +1,26 @@
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
 
+#include <cstdlib>
+#include <cstddef>
+#include <cstdio>
 #include <iostream>
 #include <cstring>
-#include <cstdio>
-#include <cstdlib>
 #include <sstream>
 #include <fstream>
 #include <istream>
 #include <vector>
+
+#include <memory>
+#include <complex>
+#include <iomanip>
+#include <map>
+#include <utility>
+#include <ctime>
+#include <random>
+#include <omp.h>
+#include <cmath>
+#include <chrono>
 
 //sudo apt-get install gsl-bin libgsl0-dev  // to install (ubuntu)
 // "-lgsl-lgslcblas -lm" in "Linker Settings in codeblocks (ubuntu)"
@@ -35,18 +47,6 @@ When linking libraries you must ensure that the library is built at the same
 number of bits as the program.  Also add library under linker settings in \
 compiler.
 */
-#include <memory>
-#include <complex>
-#include <iomanip>
-#include <map>
-#include <utility>
-#include <ctime>
-#include <random>
-#include <omp.h>
-#include <cmath>
-#include <chrono>
-
-
 ///Source headers
 #include "algorithms/parameterestimation.hpp"
 #include "algorithms/lmdiff.h"

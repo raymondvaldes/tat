@@ -1,29 +1,10 @@
 #ifndef THERMALPROP_ANALYSIS_H_INCLUDED
 #define THERMALPROP_ANALYSIS_H_INCLUDED
 
-namespace ParameterEstimation
-{
-struct settings
-{
-    double ftol;
-    double xtol;
-    double gtol;
-    size_t maxfev;
-    double epsfcn;
-    double factor;
-    size_t mode;
-    size_t nprint;
 
-    settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
-             double epsfcn_, double factor_, size_t mode_, size_t nprint_)
-        :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_),
-          epsfcn(epsfcn_), factor(factor_), mode(mode_), nprint(nprint_)
-    {}
-};
-}
 
 int paramter_estimation(const size_t m, const size_t  n,
-                        struct ParameterEstimation::settings ParaEstSetting,
+                        struct parameterEstimation::settings ParaEstSetting,
                         int *info, int *nfev,
                         const struct parameter_constraints *pc_ptr,
                         double *x, struct parameterStr * pStruct,

@@ -243,7 +243,7 @@ public:
     struct physicalModel::layer *coating;
     struct physicalModel::layer *substrate;
 //    struct physicalModel::TBCsystem *TBCSystem;
-
+//    struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;

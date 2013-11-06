@@ -1,6 +1,6 @@
 #include "../Header.h"
 void perturbationTest(const size_t m, const size_t n,
-                      struct ParameterEstimation::settings ParaEstSetting,
+                      struct parameterEstimation::settings ParaEstSetting,
                       const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr * parametersStr,
                       const double factorMax, const double factorScale,
@@ -234,7 +234,7 @@ void perturbationTest(const size_t m, const size_t n,
 }
 
 void calibrationSweep(
-                      struct ParameterEstimation::settings ParaEstSetting,
+                      struct parameterEstimation::settings ParaEstSetting,
                       const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr *pStructp,
                       const double factorMax, const double factorScale,
@@ -308,7 +308,7 @@ void calibrationSweep(
 }
 
 void parameterUncertainty(const size_t n,
-                          struct ParameterEstimation::settings ParaEstSetting,
+                          struct parameterEstimation::settings ParaEstSetting,
                           const struct parameter_constraints *st_ptr,
                           double *xInitial, struct parameterStr * parametersStr,
                           const double factorMax, const double factorScale,
@@ -481,7 +481,7 @@ void parameterUncertainty(const size_t n,
 }
 
 void fitting(size_t P, size_t N,
-             struct ParameterEstimation::settings ParaEstSetting,
+             struct parameterEstimation::settings ParaEstSetting,
              const struct parameter_constraints *st_ptr,
              struct parameterStr * pStruct, double *xInitial,
              const size_t interants, const double factorMax,

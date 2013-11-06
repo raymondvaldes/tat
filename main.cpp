@@ -55,7 +55,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double factor =  10;
   constexpr int mode = 0;
   constexpr int nprint = 0;
-  struct ParameterEstimation::settings
+  struct parameterEstimation::settings
   ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
   pStruct->MSETol = 1e-8;
@@ -105,6 +105,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   const double Emit1 = 42;
   struct physicalModel::radiativeSysProp radProp(R0, R1, Emit1);
   pStruct->opticalProp = &radProp;
+
 
 /// Thermal Properties
   /*
@@ -207,19 +208,21 @@ int main( int /*argc*/, char** /*argv[]*/ )
   paraConstraints.R0_min = 0;
   paraConstraints.R0_max = 1;
 
-  //Create useful bounds for the parameter estimatio algorithms
-  {
-  struct parameterEstimation::constraints::bounds a_sub (1e-0, 5);
-  struct parameterEstimation::constraints::bounds gamma (2e-0, 10);
-  struct parameterEstimation::constraints::bounds E1emit(1,   200);
-  struct parameterEstimation::constraints::bounds R1    (0.6, 1);
-  struct parameterEstimation::constraints::bounds R0    (0,   1);
-  struct parameterEstimation::constraints::bounds lambda(.1,  1);
-  struct parameterEstimation::constraints paraConstraints(a_sub, gamma, E1emit,
-                                                          R1, R0, lambda);
+//  //Create useful bounds for the parameter estimatio algorithms
+//  {
+//  struct parameterEstimation::constraints::bounds a_sub (1e-0, 5);
+//  struct parameterEstimation::constraints::bounds gamma (2e-0, 10);
+//  struct parameterEstimation::constraints::bounds E1emit(1,   200);
+//  struct parameterEstimation::constraints::bounds R1    (0.6, 1);
+//  struct parameterEstimation::constraints::bounds R0    (0,   1);
+//  struct parameterEstimation::constraints::bounds lambda(.1,  1);
+//  struct parameterEstimation::constraints paraConstraints(a_sub, gamma, E1emit,
+//                                                          R1, R0, lambda);
 
-  struct PopTea poptea(expSetup, EBPVD, thermalModel, paraConstraints);
-  }
+//  struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD, thermalModel,
+//                                               paraConstraints);
+//  }
+
 
   // Initial Guess
   double *xInitial = nullptr;

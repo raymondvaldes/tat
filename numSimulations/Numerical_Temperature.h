@@ -51,21 +51,6 @@ void temperature_1D(const double Is, const double It, const double lambda,
                     const class property *psi2_thermal,
                     class Mesh *mesh, class Temperature Tprofile);
 
-
-void temperature_1D(const double Is, const double It,
-                    const double lambda, const double R0, const double R1,
-                    const double L_coat, const double L_substrate,
-                    const double q_surface, const double Ttol,
-                    const size_t iter, const double T_rear, const double omega1,
-                      const double epsilon,
-                      const class property *k1_thermal,
-                      const class property *k2_thermal,
-                      const class property *psi1_thermal,
-                      const class property *psi2_thermal,
-                      class Mesh *mesh, class Temperature Tprofile
-                      );
-
-
 double A_full(double *A1, double *A2, double *A3, double **A, const int M2);
 
 double eta_z(const double z,const double beta1,const double beta2);
