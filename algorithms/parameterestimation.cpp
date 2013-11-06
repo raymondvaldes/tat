@@ -20,6 +20,8 @@ settings::settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
   :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_), epsfcn(epsfcn_),
     factor(factor_), mode(mode_), nprint(nprint_){}
 
+
+
 unknown::unknown(const double lower_, const double upper_)
 :constraint(lower_, upper_)
 {
@@ -39,11 +41,12 @@ void unknown::resetInitialGuess(void)
 unknown::bounds::bounds(const double lower_, const double upper_)
 :lower(lower_), upper(upper_){}
 
-
-unknowns::unknowns(const double N_): N(N_)
+unknownList::unknownList(const double N_): N(N_)
 {
-//  unknown.resize(N);
 }
+
+
+//unknowns::unknowns(const double N_): N(N_), uParam(N_) {}
 
 
 

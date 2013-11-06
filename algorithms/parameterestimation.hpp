@@ -43,14 +43,14 @@ public:
   void resetInitialGuess(void);
 };
 
-struct unknowns
+struct unknownList
 {
-
-  std::vector<struct unknown> unknown;
+//  struct unknown *uParam;
   size_t N;
 
-  unknowns(const double N_);
-};
+  unknownList(const double N_);
+}
+;
 
 struct settings
 {
