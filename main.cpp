@@ -211,7 +211,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //  //Create useful bounds for the parameter estimatio algorithms
 //  {
 //  struct parameterEstimation::constraints::bounds a_sub (1e-0, 5);
-//  struct parameterEstimation::constraints::bounds gamma (2e-0, 10);
+//  struct parameterEstimationq::constraints::bounds gamma (2e-0, 10);
 //  struct parameterEstimation::constraints::bounds E1emit(1,   200);
 //  struct parameterEstimation::constraints::bounds R1    (0.6, 1);
 //  struct parameterEstimation::constraints::bounds R0    (0,   1);
@@ -219,10 +219,13 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //  struct parameterEstimation::constraints paraConstraints(a_sub, gamma, E1emit,
 //                                                          R1, R0, lambda);
 
-//  struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD, thermalModel,
-//                                               paraConstraints);
+
 //  }
 
+
+
+//  struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD, thermalModel,
+//                                                ParaEstSetting, unknownList);
 
   // Initial Guess
   double *xInitial = nullptr;

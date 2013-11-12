@@ -3,26 +3,6 @@
 
 namespace parameterEstimation{
 
-//struct constraints
-//{
-//  struct bounds
-//  {
-//    const double lower;
-//    const double upper;
-//    bounds(const double lower_, const double  upper_);
-//  };
-//  const struct bounds a_sub;
-//  const struct bounds gamma;
-//  const struct bounds E1emit;
-//  const struct bounds R1;
-//  const struct bounds R0;
-//  const struct bounds lambda;
-
-//  constraints(const struct bounds a_sub_, const struct bounds gamma_,
-//              const struct bounds E1emit_, const struct bounds R1_,
-//              const struct bounds R0_, const struct bounds lambda_ );
-//};
-
 struct unknown
 {
 private:
@@ -37,6 +17,7 @@ public:
   struct bounds constraint;
   double initialGuess;
   double bestfit;
+//  enum XParaNames name;
 
   unknown(const double lower_, const double upper_);
   unknown(const double lower_, const double upper_, const double initialGuess_);
@@ -49,8 +30,7 @@ struct unknownList
   size_t N;
 
   unknownList(const double N_);
-}
-;
+};
 
 struct settings
 {
@@ -66,6 +46,10 @@ struct settings
     settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
              double epsfcn_, double factor_, size_t mode_, size_t nprint_);
 };
+
+
+//struct
+
 
 }
 

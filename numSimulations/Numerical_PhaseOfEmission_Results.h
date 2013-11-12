@@ -32,7 +32,7 @@ enum XParaNames
     E1,
     R1,
     lambda,
-    R0,
+    R0
 //    k_c,
 //    psi_c
 };
