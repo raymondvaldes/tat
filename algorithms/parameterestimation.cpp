@@ -31,8 +31,13 @@ void unknown::setInitialGuess(void)
 unknown::bounds::bounds(const double lower_, const double upper_)
 :lower(lower_), upper(upper_){}
 
-unknownList::unknownList(const double N_): N(N_)
+
+void unknownList::addUnknown(enum physicalModel::labels::Name name,
+                             const double lower,
+                             const double upper)
 {
+  vectorUnknowns.push_back (unknown(name, lower, upper));
+  return;
 }
 
 

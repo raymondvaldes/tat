@@ -72,9 +72,6 @@ public:
   Name getName(void);
 };
 
-
-
-
 struct layer
 {
     struct property kthermal;

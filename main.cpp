@@ -174,8 +174,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                         radProp, R_domain);
 
-//  struct physicalModel::labels lableName(physicalModel::labels::Name::asub);
-//physicalModel::labels::Name::asub
+
 /// Thermal Penetration
   /* The thermal penetration depth represents the range of the 'operability
    * region'. LendMin is defined to be the minimum number of measurements or
@@ -208,22 +207,18 @@ int main( int /*argc*/, char** /*argv[]*/ )
   paraConstraints.R0_min = 0;
   paraConstraints.R0_max = 1;
 
-//  //Create useful bounds for the parameter estimatio algorithms
-//  {
-//  struct parameterEstimation::constraints::bounds a_sub (1e-0, 5);
-//  struct parameterEstimationq::constraints::bounds gamma (2e-0, 10);
-//  struct parameterEstimation::constraints::bounds E1emit(1,   200);
-//  struct parameterEstimation::constraints::bounds R1    (0.6, 1);
-//  struct parameterEstimation::constraints::bounds R0    (0,   1);
-//  struct parameterEstimation::constraints::bounds lambda(.1,  1);
-//  struct parameterEstimation::constraints paraConstraints(a_sub, gamma, E1emit,
-//                                                          R1, R0, lambda);
-//  }
-
+  using pNames = physicalModel::labels::Name;
+  struct parameterEstimation::unknownList unknownParameters;
+  unknownParameters.addUnknown(pNames::asub,        1e-0, 5);
+  unknownParameters.addUnknown(pNames::gammaEff,    2e-0, 10);
+  unknownParameters.addUnknown(pNames::E1,          1,   200);
+  unknownParameters.addUnknown(pNames::R1,          0.6, 1);
+  unknownParameters.addUnknown(pNames::lambda,      .1,  1);
 
 
 //  struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD, thermalModel,
-//                                                ParaEstSetting, unknownList);
+//                                                ParaEstSetting,
+//                                                  unknownParameters);
 
   // Initial Guess
   double *xInitial = nullptr;

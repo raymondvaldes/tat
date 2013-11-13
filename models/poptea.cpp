@@ -9,8 +9,8 @@ namespace poptea
 
 
 
-//namespace thermalAnalysisMethod
-//{
+namespace thermalAnalysisMethod
+{
 //PopTea::PopTea(struct expEquipment::setup expSetup_,
 //               struct physicalModel::TBCsystem TBCsystem_,
 //               ThermalModel thermalModel_,
@@ -20,3 +20,4 @@ namespace poptea
 //    thermalModel(thermalModel_),
 //    paraConstraints(paraConstraints_)
 //{}
+}

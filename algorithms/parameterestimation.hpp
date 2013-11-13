@@ -31,10 +31,13 @@ public:
 
 struct unknownList
 {
-//  struct unknown *uParam;
-  size_t N;
+private:
+  std::vector<struct unknown> vectorUnknowns;
 
-  unknownList(const double N_);
+public:
+  void addUnknown(physicalModel::labels::Name name_,
+                  const double lower_,
+                  const double upper_);
 };
 
 struct settings
