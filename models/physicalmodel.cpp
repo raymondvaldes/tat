@@ -174,8 +174,7 @@ TBCsystem::TBCsystem(struct layer coating_, struct layer substrate_,
 {}
 
 
-labels::labels(const Name name_):name(name_)
-{}
+labels::labels(const Name name_):name(name_){}
 
 enum labels::Name labels::getName(void)
 {

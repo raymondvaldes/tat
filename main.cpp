@@ -174,8 +174,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                         radProp, R_domain);
 
-  struct physicalModel::labels lableName(physicalModel::labels::Name::asub); 
-
+//  struct physicalModel::labels lableName(physicalModel::labels::Name::asub);
+//physicalModel::labels::Name::asub
 /// Thermal Penetration
   /* The thermal penetration depth represents the range of the 'operability
    * region'. LendMin is defined to be the minimum number of measurements or
