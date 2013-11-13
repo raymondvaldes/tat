@@ -219,7 +219,12 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //  struct parameterEstimation::constraints paraConstraints(a_sub, gamma, E1emit,
 //                                                          R1, R0, lambda);
 
+<<<<<<< HEAD
 
+=======
+//  struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD, thermalModel,
+//                                             ParaEstSetting, unknownList);
+>>>>>>> a5e24464e144748629909890b00569918e7be68c
 //  }
 
 
