@@ -49,7 +49,9 @@ void temperature_1D(const double Is, const double It, const double lambda,
                     const class property *k2_thermal,
                     const class property *psi1_thermal,
                     const class property *psi2_thermal,
-                    class Mesh *mesh, class Temperature Tprofile);
+                    class Mesh *mesh, class Temperature Tprofile,
+                    expEquipment::Laser laser,
+                    physicalModel::TBCsystem TBCsystem);
 
 double A_full(double *A1, double *A2, double *A3, double **A, const int M2);
 

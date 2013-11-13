@@ -11,8 +11,33 @@ void temperature_1D(const double Is, const double It,
                     const class property *k2_thermal,
                     const class property *psi1_thermal,
                     const class property *psi2_thermal,
-                    class Mesh *mesh, class Temperature Tprofile)
+                    class Mesh *mesh, class Temperature Tprofile,
+                    class expEquipment::Laser laser,
+                    struct physicalModel::TBCsystem TBCsystem)
 {
+//  const double Is           =
+//  const double It           =
+//  const double lambda       =
+//  const double R0           =
+//  const double R1           =
+//  const double L_coat       =
+//  const double L_substrate  =
+//  const double q_surface    =
+//  const double Ttol         =
+//  const size_t iter         =
+//  const double T_rear       =
+//  const double omega1       =
+//  const double epsilon      =
+//  const class property *k1_thermal  =
+//  const class property *k2_thermal  =
+//  const class property *psi1_thermal    =
+//  const class property *psi2_thermal    =
+//  class Mesh *mesh          =
+//  class Temperature Tprofile=
+
+
+
+
     class matrixArrays *MatrixArrays = NULL;
     MatrixArrays = new class matrixArrays(mesh->M2);
 

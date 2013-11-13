@@ -7,6 +7,13 @@ double PhaseOfEmission1DNum(const int flag,
                                pStruct->mesh->M2);
 
     /// Acquire Numerical Temperature
+//    pStruct->poptea->expSetup.laser.Is;
+//    pStruct->poptea->expSetup.laser.It;
+//    pStruct->poptea->
+
+
+
+
     temperature_1D(
                    pStruct->laser->Is,    pStruct->laser->It,
                    pStruct->lambda,       pStruct->opticalProp->R0,
@@ -20,7 +27,10 @@ double PhaseOfEmission1DNum(const int flag,
                    pStruct->gamma,
                    pStruct->k1_thermal,   pStruct->k2_thermal,
                    pStruct->psi1_thermal, pStruct->psi2_thermal,
-                   pStruct->mesh, Tprofile);
+                   pStruct->mesh, Tprofile,
+                   pStruct->poptea->expSetup.laser,
+                   pStruct->poptea->TBCsystem
+                   );
 
     ///Initiate emission model
     const class Emission*
@@ -139,7 +149,7 @@ double PhaseOfEmission1DAna(const int flag,
 Temperature::Temperature(const size_t Nend_, const size_t M2_)
 : Nend(Nend_), M2(M2_)
 {
-    temperature = new double[Nend * M2]{0};
+    temperature = new double[Nend * M2];
 }
 
 double Temperature::eval(const size_t i, const size_t j) const
@@ -154,8 +164,13 @@ void Temperature::assgn(const size_t i, const size_t j, const double value)
 
 void Temperature::cleanup(void)
 {
-    delete[]temperature;
+  delete[]temperature;
 }
+
+//Temperature::~Temperature()
+//{
+//  delete[]temperature;
+//}
 
 emissionNoiseParameters::emissionNoiseParameters(const double a1_,
                                                  const double b1_,

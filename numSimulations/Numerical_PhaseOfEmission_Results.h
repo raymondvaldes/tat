@@ -1,18 +1,6 @@
 #ifndef NUMERICAL_PHASEOFEMISSION_RESULTS_H_INCLUDED
 #define NUMERICAL_PHASEOFEMISSION_RESULTS_H_INCLUDED
 
-double validation(size_t M2 , double L_coat , double L_substrate, double R0,
-                  double R1 , double lambda , double k_ref , double q_surface,
-                  double It , double l_thermal, double **T, double *z_real,
-                  double Is, size_t M1, double *eta, size_t Nend,
-                  double *z_norm, double *t, double *tau, double psi_ref,
-                  double * OAPtemp, double coscheck, double **TcheckAN,
-                  double * Tss_error, double k_c, double psi_c,
-                  struct parameter_constraints*st_ptr);
-
-double validation_2(double*LinNonAna_PhaseEmit, double l_thermal,
-                    FILE*phaseerror);
-
 double Print_Emission(const double*phase, const double*num_phase,
                       const double*ana_phase,
                       const double*l_thermal, const size_t L_end);

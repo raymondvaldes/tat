@@ -120,7 +120,7 @@ int paramter_estimation(const size_t m, const size_t n,
               ParaEstSetting.xtol, ParaEstSetting.gtol, ParaEstSetting.maxfev,
               ParaEstSetting.epsfcn, diag, ParaEstSetting.mode,
               ParaEstSetting.factor, ParaEstSetting.nprint, info, nfev, fjac, m,
-              ipvt, qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr,pStruct);
+              ipvt, qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr, pStruct);
 
         ///Exit Routine
         /* Sets up a condition where the total error in the phase is compared

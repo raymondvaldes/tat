@@ -121,7 +121,7 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
     }
 
     double sum = 0;
-    for(size_t i = 0; i < box ; ++i)
+    for(size_t i = 0; i < box-1 ; ++i)
     {
         sum += rangeFills[i];
     }
