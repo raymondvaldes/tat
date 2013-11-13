@@ -103,7 +103,8 @@ SOURCES += main.cpp \
     models/expEquipment.cpp \
     system/poptea.cpp \
     algorithms/lmdiff.cpp \
-    algorithms/parameterestimation.cpp
+    algorithms/parameterestimation.cpp \
+    models/poptea.cpp
 
 #header files
 HEADERS += \
@@ -123,4 +124,5 @@ HEADERS += \
     models/expEquipment.hpp \
     system/poptea.h \
     algorithms/lmdiff.h \
-    algorithms/parameterestimation.hpp
+    algorithms/parameterestimation.hpp \
+    models/poptea.hpp
