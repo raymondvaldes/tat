@@ -4,25 +4,7 @@
 namespace poptea
 {
 
-<<<<<<< HEAD
-=======
-struct parameterLabel
-{
-public:
-  enum class parameterName
-  {
-    gammaEff,
-    asub,
-    E1,
-    R1,
-    lambda,
-    R0
-  } name;
 
-
-//  parameterLabel(const enum parameterName name_);
-};
->>>>>>> fda4aafb162c261a42cdd95e0eb831dcd6ab2dee
 
 
 }

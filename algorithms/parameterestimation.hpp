@@ -17,9 +17,10 @@ public:
   struct bounds constraint;
   double initialGuess;
   double bestfit;
-//  struct physicalModel::labels name;
+//  struct physicalModel::labels name;       ;
 
-
+  
+  
   unknown(const double lower_, const double upper_);
   unknown(const double lower_, const double upper_, const double initialGuess_);
   void resetInitialGuess(void);

@@ -3,12 +3,7 @@
 namespace poptea
 {
 
-<<<<<<< HEAD
 
-=======
-//parameterLabel::parameterLabel(const enum parameterName name_)
-//    :name(name_){}
->>>>>>> fda4aafb162c261a42cdd95e0eb831dcd6ab2dee
 
 }
 
