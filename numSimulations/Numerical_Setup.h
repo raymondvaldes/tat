@@ -232,7 +232,7 @@ struct parameterStr
 
 public:
     class Mesh *mesh;
-    class expEquipment::Laser *laser;
+    class expEquipment::Laser *laser;  //TODO MUST REMOVE
 
     struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::radiativeSysProp *opticalProp;
@@ -240,14 +240,16 @@ public:
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;
-    double L_coat, lambda;
+//    double L_coat;
+    double lambda;
     double diffusivity_coat, effusivity_coat;
     double c_coat = 1.;
     double a_coat;
 
     ///layer 2
     class property *k2_thermal, *psi2_thermal;
-    double L_substrate, lambda_Sub;
+//    double L_substrate;
+    double lambda_Sub;
     double diffusivity_sub, effusivity_sub;
     double c_sub = 1.;
     double a_sub;
@@ -287,7 +289,8 @@ public:
 
     parameterStr(const size_t d, class Mesh *mesh_);
     ~parameterStr();
-    void parametersStrSetup(const enum XParaNames *xParametersNames_);
+    void parametersStrSetup(const enum XParaNames *xParametersNames_,
+                            const double L_coat, const double L_substrate);
     void update_b(const double radius, const double L);
     void update_b(void);
     void EmissionNoise(const emissionNoiseParameters myEmissionNoise,

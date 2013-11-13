@@ -2,8 +2,7 @@
 
 void temperature_1D(
                     const double lambda,
-                    const double R1, const double L_coat,
-                    const double L_substrate, const double q_surface,
+                    const double R1, const double q_surface,
                     const double Ttol, const size_t iter,
                     const double T_rear, const double omega1,
                     const double epsilon,
@@ -20,8 +19,8 @@ void temperature_1D(
 //  const double lambda       =
   const double R0           = TBCsystem.optical.R0;
 //  const double R1           =
-//  const double L_coat       =
-//  const double L_substrate  =
+  const double L_coat       = TBCsystem.coating.depth;
+  const double L_substrate  = TBCsystem.substrate.depth;
 //  const double q_surface    =
 //  const double Ttol         =
 //  const size_t iter         =

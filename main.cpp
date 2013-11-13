@@ -91,10 +91,10 @@ int main( int /*argc*/, char** /*argv[]*/ )
   pStruct->R_domain = R_domain;
 
   constexpr double L_coat = 71.7e-6;
-  pStruct->L_coat = L_coat;
+//  pStruct->L_coat = L_coat;
 
   constexpr double L_substrate = L_coat *99;
-  pStruct->L_substrate = L_substrate;
+//  pStruct->L_substrate = L_substrate;
   pStruct->lambda = .57;
   pStruct->lambda_Sub = .1;
 
@@ -225,7 +225,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
 //Optimize stretching in Substrate and declare variables to be fitted
-  pStruct->parametersStrSetup(xParametersNames);
+  pStruct->parametersStrSetup(xParametersNames, L_coat, L_substrate);
 
 // Populate the experimental phase values in parameters99
   pStruct->thermalSetup(l_min, l_max, LendMinDecade);

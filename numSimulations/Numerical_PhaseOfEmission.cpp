@@ -16,7 +16,6 @@ double PhaseOfEmission1DNum(const int flag,
 
     temperature_1D(pStruct->lambda,
                    pStruct->opticalProp->R1,
-                   pStruct->L_coat,       pStruct->L_substrate,
                    pStruct->q_surface,
                    pStruct->TemperatureScale->tolerance,
                    pStruct->iter,
@@ -31,11 +30,12 @@ double PhaseOfEmission1DNum(const int flag,
                    );
 
     ///Initiate emission model
+    const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
     const class Emission*
     emission = new class Emission(pStruct->detector_lam,
                                   pStruct->TemperatureScale->base,
                                   pStruct->mesh,
-                                  pStruct->bNorm *pStruct->L_coat,
+                                  pStruct->bNorm *Lcoat,
                                   pStruct->E_sigma);
     const double
     phase2 = emission->phase1D(Tprofile);
@@ -55,13 +55,14 @@ double PhaseOfEmission2DAna(const int flag,
     const double k_coat     = pStruct->k1_thermal->offset;
     const double psi_coat   = pStruct->psi1_thermal->offset;
 
+    const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
     const class HeatModel2DAna heatmodel2DAna(pStruct->opticalProp->R0,
                                               pStruct->opticalProp->R1,
                                               pStruct->lambda,
                                               pStruct->laser->It,
                                               pStruct->c_sub, pStruct->a_sub,
                                               pStruct->gamma, pStruct->bNorm,
-                                              k_coat, pStruct->L_coat, psi_coat,
+                                              k_coat, Lcoat, psi_coat,
                                               pStruct->c_coat,
                                               pStruct->lambda_Sub,
                                               pStruct->mesh);
@@ -80,7 +81,7 @@ double PhaseOfEmission2DAna(const int flag,
     emission = new class Emission(pStruct->detector_lam,
                                  pStruct->TemperatureScale->referance,
                                   pStruct->mesh,
-                                  pStruct->bNorm * pStruct->L_coat,
+                                  pStruct->bNorm * Lcoat,
                                   pStruct->E_sigma);
 
     const double
@@ -103,7 +104,7 @@ double PhaseOfEmission1DAna(const int flag,
     const double Esigma  = pStruct->E_sigma;
     const double gamma  = pStruct->gamma;
     const double R1     = pStruct->opticalProp->R1;
-    const double L_coat = pStruct->L_coat;
+    const double L_coat = pStruct->poptea->TBCsystem.coating.depth;
     const double k_c    = pStruct->k1_thermal->offset;
     const double psi_c  = pStruct->psi1_thermal->offset;
     const double l = lthermal(L_coat,k_c,psi_c,omega1);

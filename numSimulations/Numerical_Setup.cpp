@@ -1555,7 +1555,9 @@ void parameterStr::updateNMeasurements(const size_t Lend_)
     fvec = new double[Lend_];
 }
 
-void parameterStr::parametersStrSetup(const enum XParaNames *xParametersNames_)
+void parameterStr::parametersStrSetup(const enum XParaNames *xParametersNames_,
+                                      const double L_coat,
+                                      const double L_substrate)
 {
 
     mesh->meshUpdate(L_coat, L_substrate, laser->radius, R_domain);
@@ -1597,21 +1599,24 @@ void parameterStr::parametersStrSetup(const enum XParaNames *xParametersNames_)
 void parameterStr::thermalSetup(const double lmin_, const double lmax_,
                                 const size_t LendMin)
 {
-    L_end = laser->thermalSetup(lmin_, lmax_, L_coat, k1_thermal->offset,
-                                psi1_thermal->offset, LendMin);
+
+    L_end = laser->thermalSetup(lmin_, lmax_, poptea->TBCsystem.coating.depth,
+                                k1_thermal->offset, psi1_thermal->offset,
+                                LendMin);
     updateNMeasurements(L_end);
 }
 
 void parameterStr::update_b(const double radius, const double L)
 {
     laser->updateRadius(radius);
-    L_coat = L;
+//    L_coat = L;
+    poptea->TBCsystem.coating.depth = L;
     bNorm = radius / L;
 }
 
 void parameterStr::update_b(void)
 {
-    update_b(laser->radius, L_coat);
+    update_b(laser->radius, poptea->TBCsystem.coating.depth);
 }
 
 void parameterStr::EmissionNoise(const class

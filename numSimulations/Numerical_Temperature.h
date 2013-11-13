@@ -40,8 +40,7 @@ std::complex<double> Tac1D_ana(const double z, const double R0, const double R1,
                                const double epsilon, const double Lam,
                                const double Lthrm);
 
-void temperature_1D(const double lambda, const double R1, const double L_coat,
-                    const double L_substrate, const double q_surface,
+void temperature_1D(const double lambda, const double R1, const double q_surface,
                     const double Ttol, const size_t iter, const double T_rear,
                     const double omega1, const double epsilon,
                     const class property *k1_thermal,
