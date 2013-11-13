@@ -35,10 +35,12 @@ private:
   std::vector<struct unknown> vectorUnknowns;
 
 public:
+
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
                   const double upper);
   size_t Nsize(void);
+
 };
 
 struct settings
