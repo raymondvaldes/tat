@@ -3,7 +3,7 @@
 namespace poptea
 {
 
-parameterLabel::parameterLabel(const enum parameterName name_)
-    :name(name_){}
+//parameterLabel::parameterLabel(const enum parameterName name_)
+//    :name(name_){}
 
 }

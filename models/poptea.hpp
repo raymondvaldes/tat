@@ -18,7 +18,7 @@ public:
   } name;
 
 
-  parameterLabel(const enum parameterName name_);
+//  parameterLabel(const enum parameterName name_);
 };
 
 
