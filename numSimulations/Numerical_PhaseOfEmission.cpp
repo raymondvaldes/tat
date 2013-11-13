@@ -15,8 +15,6 @@ double PhaseOfEmission1DNum(const int flag,
                    pStruct->iter,
                    pStruct->laser->omegas[flag],
                    pStruct->gamma,
-                   pStruct->k1_thermal,   pStruct->k2_thermal,
-                   pStruct->psi1_thermal, pStruct->psi2_thermal,
                    pStruct->mesh, Tprofile,
                    pStruct->poptea->expSetup.laser,
                    pStruct->poptea->TBCsystem
@@ -45,8 +43,8 @@ double PhaseOfEmission2DAna(const int flag,
                             const struct parameterStr *const pStruct)
 {
     /// Initiate 2d analytical model
-    const double k_coat     = pStruct->k1_thermal->offset;
-    const double psi_coat   = pStruct->psi1_thermal->offset;
+    const double k_coat  = pStruct->poptea->TBCsystem.coating.kthermal.offset;
+    const double psi_coat= pStruct->poptea->TBCsystem.coating.psithermal.offset;
 
     const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
     const class HeatModel2DAna heatmodel2DAna(pStruct->opticalProp->R0,
@@ -97,8 +95,10 @@ double PhaseOfEmission1DAna(const int flag,
     const double gamma  = pStruct->gamma;
     const double R1     = pStruct->opticalProp->R1;
     const double L_coat = pStruct->poptea->TBCsystem.coating.depth;
-    const double k_c    = pStruct->k1_thermal->offset;
-    const double psi_c  = pStruct->psi1_thermal->offset;
+    const double k_c    = pStruct->poptea->TBCsystem.coating.kthermal.offset;
+    const double psi_c  = pStruct->poptea->TBCsystem.coating.psithermal.offset;
+//    const double k_c    = pStruct->k1_thermal->offset;
+//    const double psi_c  = pStruct->psi1_thermal->offset;
     const double l = lthermal(L_coat,k_c,psi_c,omega1);
 
 //#define  _i std::complex<double>(0.,1.)

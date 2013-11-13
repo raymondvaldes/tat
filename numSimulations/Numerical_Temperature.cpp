@@ -4,36 +4,28 @@ void temperature_1D(const double lambda,
                     const double R1, const double q_surface,
                     const size_t iter, const double omega1,
                     const double epsilon,
-                    const class property *k1_thermal,
-                    const class property *k2_thermal,
-                    const class property *psi1_thermal,
-                    const class property *psi2_thermal,
                     class Mesh *mesh, class Temperature Tprofile,
                     class expEquipment::Laser laser,
                     struct physicalModel::TBCsystem TBCsystem)
 {
   const double Is           = laser.Is;
   const double It           = laser.It;
-//  const double lambda       =
   const double R0           = TBCsystem.optical.R0;
-//  const double R1           =
   const double L_coat       = TBCsystem.coating.depth;
   const double L_substrate  = TBCsystem.substrate.depth;
-//  const double q_surface    =
   const double Ttol         = TBCsystem.Temp.tolerance;
-//  const size_t iter         =
   const double T_rear       = TBCsystem.Temp.rear;
+//  const double lambda       =
+//  const double R1           =
+//  const double q_surface    =
+//  const size_t iter         =
 //  const double omega1       =
-//  const double epsilon      =
-//  const class property *k1_thermal  =
-//  const class property *k2_thermal  =
-//  const class property *psi1_thermal    =
-//  const class property *psi2_thermal    =
+//  const double epsilon      =  
+  const class property *k1_thermal      = &TBCsystem.coating.kthermal;
+  const class property *k2_thermal      = &TBCsystem.substrate.kthermal;
+  const class property *psi1_thermal    = &TBCsystem.coating.psithermal;
+  const class property *psi2_thermal    = &TBCsystem.substrate.psithermal;
 //  class Mesh *mesh          =
-//  class Temperature Tprofile=
-
-
-
 
     class matrixArrays *MatrixArrays = NULL;
     MatrixArrays = new class matrixArrays(mesh->M2);
@@ -54,10 +46,8 @@ void temperature_1D(const double lambda,
     amplitude_T_analytical *= L_coat * It * (1 - R0) ;
     amplitude_T_analytical /= k1_thermal->offset ;
 
-
     const double Iplus0 = Iplus0Func(R0, R1, lambda);
     const double Iplus1 = Iplus1Func(R0, R1, lambda);
-
 
     for(size_t j=0 ; j <= mesh->M1; ++j)
     {

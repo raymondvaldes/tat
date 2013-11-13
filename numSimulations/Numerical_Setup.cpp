@@ -229,11 +229,13 @@ void parameters_kcp_update(struct parameterStr* pStruct,
     pStruct->diffusivity_coat = pStruct->diffusivity_sub ;
     pStruct->diffusivity_coat /= a_sub*a_sub;
 
-    pStruct->psi1_thermal->offset = pStruct->effusivity_coat;
-    pStruct->psi1_thermal->offset /= sqrt( pStruct->diffusivity_coat);
+    pStruct->poptea->TBCsystem.coating.psithermal.offset = pStruct->effusivity_coat;
+    pStruct->poptea->TBCsystem.coating.psithermal.offset /= sqrt( pStruct->diffusivity_coat);
 
-    pStruct->k1_thermal->offset = pStruct->psi1_thermal->offset;
-    pStruct->k1_thermal->offset *= pStruct->diffusivity_coat;
+    pStruct->poptea->TBCsystem.coating.kthermal.offset = pStruct->poptea->TBCsystem.coating.psithermal.offset;
+    pStruct->poptea->TBCsystem.coating.kthermal.offset *= pStruct->diffusivity_coat;
+
+
 
     return;
 
@@ -242,8 +244,8 @@ void parameters_kcp_update(struct parameterStr* pStruct,
 void parameters_agamma_update(struct parameterStr* pStruct,
                               const double k_c, const double psi_c)
 {
-    pStruct->k1_thermal->offset = k_c;
-    pStruct->psi1_thermal->offset = psi_c;
+    pStruct->poptea->TBCsystem.coating.kthermal.offset = k_c;
+    pStruct->poptea->TBCsystem.coating.psithermal.offset = psi_c;
 
     pStruct->diffusivity_coat = k_c;
     pStruct->diffusivity_coat /= psi_c;
@@ -1521,10 +1523,10 @@ void Mesh::meshUpdate(const double L_coat, const double L_substrate,
 parameterStr::parameterStr(const size_t d,class Mesh *mesh_)
              :  mesh(mesh_), N(d)
 {
-    k1_thermal = new class property;
-    psi1_thermal = new class property;
-    k2_thermal = new class property;
-    psi2_thermal = new class property;
+//    k1_thermal = new class property;
+//    psi1_thermal = new class property;
+//    k2_thermal = new class property;
+//    psi2_thermal = new class property;
 
     xParameters         = new size_t[d];
     xParameters95       = new size_t[d];
@@ -1560,23 +1562,23 @@ void parameterStr::parametersStrSetup(const enum XParaNames *xParametersNames_,
                                       const double L_substrate)
 {
 
-    mesh->meshUpdate(L_coat, L_substrate, laser->radius, R_domain);
+    mesh->meshUpdate(L_coat, L_substrate, laser->radius,
+                     poptea->TBCsystem.radius);
     update_b();
 
     /// Populate parameters array based on simulation parameters
+     diffusivity_sub  = poptea->TBCsystem.substrate.kthermal.offset;
+     diffusivity_sub /= poptea->TBCsystem.substrate.psithermal.offset;
 
-     diffusivity_sub  = k2_thermal->offset;
-     diffusivity_sub /= psi2_thermal->offset;
-
-     effusivity_sub = k2_thermal->offset;
-     effusivity_sub *= psi2_thermal->offset;
+     effusivity_sub = poptea->TBCsystem.substrate.kthermal.offset;
+     effusivity_sub *= poptea->TBCsystem.substrate.psithermal.offset;
      effusivity_sub = sqrt( effusivity_sub);
 
-     diffusivity_coat  = k1_thermal->offset;
-     diffusivity_coat /= psi1_thermal->offset;
+     diffusivity_coat  = poptea->TBCsystem.coating.kthermal.offset;
+     diffusivity_coat /= poptea->TBCsystem.coating.psithermal.offset;
 
-     effusivity_coat = k1_thermal->offset;
-     effusivity_coat *= psi1_thermal->offset;
+     effusivity_coat = poptea->TBCsystem.coating.kthermal.offset;
+     effusivity_coat *= poptea->TBCsystem.coating.psithermal.offset;
      effusivity_coat = sqrt( effusivity_coat);
 
      gamma  = effusivity_sub;
@@ -1598,10 +1600,10 @@ void parameterStr::parametersStrSetup(const enum XParaNames *xParametersNames_,
 
 void parameterStr::thermalSetup(const double lmin_, const double lmax_,
                                 const size_t LendMin)
-{
-
+{  
     L_end = laser->thermalSetup(lmin_, lmax_, poptea->TBCsystem.coating.depth,
-                                k1_thermal->offset, psi1_thermal->offset,
+                                poptea->TBCsystem.coating.kthermal.offset,
+                                poptea->TBCsystem.coating.psithermal.offset ,
                                 LendMin);
     updateNMeasurements(L_end);
 }
@@ -1740,10 +1742,10 @@ parameterStr::~parameterStr()
     delete [] xParametersNames;
     delete [] xParameters95Names;
 
-    delete k1_thermal;
-    delete psi1_thermal;
-    delete k2_thermal;
-    delete psi2_thermal;
+//    delete k1_thermal;
+//    delete psi1_thermal;
+//    delete k2_thermal;
+//    delete psi2_thermal;
 }
 
 

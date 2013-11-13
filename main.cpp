@@ -74,27 +74,21 @@ int main( int /*argc*/, char** /*argv[]*/ )
    - E_sigma //ratio of substrate emissivity to optical thickness of the film,
    - thermal contact resistance per area
   */
-//    pStruct->T_base = 273.15;
-//    pStruct->T_rear = 0;
   constexpr double Ttol = 1e-3;
   constexpr double T_ref =  300;
   constexpr double T_base = 273.15;
   constexpr double T_rear = 0;
   struct physicalModel::temperatureScale
           TemperatureScale(Ttol, T_ref, T_base, T_rear);
-//  pStruct->TemperatureScale = &TemperatureScale;
 
   // Model system
   constexpr double detector_rad = .25e-3;
   constexpr double R_domain = detector_rad;
   pStruct->detector_rad = detector_rad;
-  pStruct->R_domain = R_domain;
+//  pStruct->R_domain = R_domain;
 
   constexpr double L_coat = 71.7e-6;
-//  pStruct->L_coat = L_coat;
-
   constexpr double L_substrate = L_coat *99;
-//  pStruct->L_substrate = L_substrate;
   pStruct->lambda = .57;
   pStruct->lambda_Sub = .1;
 
@@ -123,16 +117,16 @@ int main( int /*argc*/, char** /*argv[]*/ )
   */
   pStruct->detector_lam = 5e-6;
 
-  pStruct->k1_thermal->offset = 1.44;
-  pStruct->k2_thermal->offset = 12.7;
+//  pStruct->k1_thermal->offset = 1.44;
+//  pStruct->k2_thermal->offset = 12.7;
 
-  pStruct->psi1_thermal->offset = 2.1e6;
-  pStruct->psi2_thermal->offset = 3.44e6;
+//  pStruct->psi1_thermal->offset = 2.1e6;
+//  pStruct->psi2_thermal->offset = 3.44e6;
 
-  pStruct->k1_thermal->slope = 0;
-  pStruct->psi1_thermal->slope = 0;
-  pStruct->k2_thermal->slope = 0;
-  pStruct->psi2_thermal->slope = 0;
+//  pStruct->k1_thermal->slope = 0;
+//  pStruct->psi1_thermal->slope = 0;
+//  pStruct->k2_thermal->slope = 0;
+//  pStruct->psi2_thermal->slope = 0;
 
   /// Heat Flux
   /* - units [W/m^2] */

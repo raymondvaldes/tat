@@ -40,15 +40,10 @@ std::complex<double> Tac1D_ana(const double z, const double R0, const double R1,
                                const double epsilon, const double Lam,
                                const double Lthrm);
 
-void temperature_1D(const double lambda, const double R1, const double q_surface,
-                    const size_t iter,
-                    const double omega1, const double epsilon,
-                    const class property *k1_thermal,
-                    const class property *k2_thermal,
-                    const class property *psi1_thermal,
-                    const class property *psi2_thermal,
-                    class Mesh *mesh, class Temperature Tprofile,
-                    expEquipment::Laser laser,
+void temperature_1D(const double lambda, const double R1,
+                    const double q_surface, const size_t iter,
+                    const double omega1, const double epsilon, class Mesh *mesh,
+                    class Temperature Tprofile, expEquipment::Laser laser,
                     physicalModel::TBCsystem TBCsystem);
 
 double A_full(double *A1, double *A2, double *A3, double **A, const int M2);

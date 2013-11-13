@@ -72,8 +72,8 @@ QMAKE_CXXFLAGS += -Winit-self
 #QMAKE_CXXFLAGS += -Wshadow (TODO fix this)
 
 #compiler
-QMAKE_CXXFLAGS += -Wno-deprecated
-QMAKE_CXXFLAGS += -Wno-unused-parameter
+QMAKE_CXXFLAGS += -Wdeprecated
+QMAKE_CXXFLAGS += -Wunused-parameter
 QMAKE_CXXFLAGS += -fmessage-length=0
 QMAKE_CXXFLAGS += -Wwrite-strings
 QMAKE_CXXFLAGS += -Wcast-qual

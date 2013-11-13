@@ -80,8 +80,8 @@ struct layer
     double lambda;
 
     double opticalPenetration(void);
-    layer(struct property kthermal_, struct property psithermal_,
-                 double depth_, double lambda_);
+    layer(struct property kthermal_, struct property psithermal_, double depth_,
+          double lambda_);
 };
 
 struct temperatureScale
@@ -100,6 +100,13 @@ struct radiativeSysProp
     double R1;
     double Emit1;
     radiativeSysProp(const double R0_, const double R1_, const double Emit1_);
+};
+
+
+struct nonDimensional
+{
+  double gamma;
+
 };
 
 struct TBCsystem

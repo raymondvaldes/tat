@@ -233,29 +233,23 @@ struct parameterStr
 public:
     class Mesh *mesh;
     class expEquipment::Laser *laser;  //TODO MUST REMOVE
-
-//    struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::radiativeSysProp *opticalProp;
     struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
-    class property *k1_thermal, *psi1_thermal;
-//    double L_coat;
     double lambda;
     double diffusivity_coat, effusivity_coat;
     double c_coat = 1.;
     double a_coat;
 
     ///layer 2
-    class property *k2_thermal, *psi2_thermal;
-//    double L_substrate;
     double lambda_Sub;
     double diffusivity_sub, effusivity_sub;
     double c_sub = 1.;
     double a_sub;
 
     ///system
-    double R_domain;
+//    double R_domain;
 
     ///nondimensional
     double gamma, E_sigma, epsilon;
