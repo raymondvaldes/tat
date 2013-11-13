@@ -1241,7 +1241,7 @@ Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
 }
 
 
-void Mesh::cleanup(void)
+Mesh::~Mesh()
 {
     delete [] tau;
     delete [] time;

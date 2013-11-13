@@ -248,10 +248,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //    SensitivityValdes2013::figureSensitivityIntro(pStruct);
 
 
-
-
 // Clear memory
-  mesh->cleanup();
   delete mesh;
 
   delete[] xInitial;

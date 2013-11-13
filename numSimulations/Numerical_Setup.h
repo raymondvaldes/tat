@@ -40,7 +40,7 @@ public:
 
     void meshUpdate(const double L_coat, const double L_substrate,
                     const double CO2Radius, const double Rdomain);
-    void cleanup(void);
+    ~Mesh();
 
 private:
     const double beta1, split;
