@@ -1,16 +1,8 @@
 #include "../Header.h"
 
-void temperature_1D(
-<<<<<<< HEAD
-                    const double lambda,
+void temperature_1D(const double lambda,
                     const double R1, const double q_surface,
-=======
-                    const double lambda, const double R0,
-                    const double R1, const double L_coat,
-                    const double L_substrate, const double q_surface,
->>>>>>> 84bc33f7ace29e8483eff4c865eeb47176fb9b38
-                    const double Ttol, const size_t iter,
-                    const double T_rear, const double omega1,
+                    const size_t iter, const double omega1,
                     const double epsilon,
                     const class property *k1_thermal,
                     const class property *k2_thermal,
@@ -28,9 +20,9 @@ void temperature_1D(
   const double L_coat       = TBCsystem.coating.depth;
   const double L_substrate  = TBCsystem.substrate.depth;
 //  const double q_surface    =
-//  const double Ttol         =
+  const double Ttol         = TBCsystem.Temp.tolerance;
 //  const size_t iter         =
-//  const double T_rear       =
+  const double T_rear       = TBCsystem.Temp.rear;
 //  const double omega1       =
 //  const double epsilon      =
 //  const class property *k1_thermal  =

@@ -1609,7 +1609,6 @@ void parameterStr::thermalSetup(const double lmin_, const double lmax_,
 void parameterStr::update_b(const double radius, const double L)
 {
     laser->updateRadius(radius);
-//    L_coat = L;
     poptea->TBCsystem.coating.depth = L;
     bNorm = radius / L;
 }

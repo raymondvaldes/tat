@@ -82,7 +82,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double T_rear = 0;
   struct physicalModel::temperatureScale
           TemperatureScale(Ttol, T_ref, T_base, T_rear);
-  pStruct->TemperatureScale = &TemperatureScale;
+//  pStruct->TemperatureScale = &TemperatureScale;
 
   // Model system
   constexpr double detector_rad = .25e-3;

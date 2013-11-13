@@ -234,7 +234,7 @@ public:
     class Mesh *mesh;
     class expEquipment::Laser *laser;  //TODO MUST REMOVE
 
-    struct physicalModel::temperatureScale *TemperatureScale;
+//    struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::radiativeSysProp *opticalProp;
     struct thermalAnalysisMethod::PopTea *poptea;
 
