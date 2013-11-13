@@ -78,6 +78,9 @@ struct layer
     struct property psithermal;
     double depth;
     double lambda;
+    double diffusivity;
+    double effusivity;
+    double c = 1;
 
     double opticalPenetration(void);
     layer(struct property kthermal_, struct property psithermal_, double depth_,

@@ -25,7 +25,6 @@ void temperature_1D(const double lambda,
   const class property *k2_thermal      = &TBCsystem.substrate.kthermal;
   const class property *psi1_thermal    = &TBCsystem.coating.psithermal;
   const class property *psi2_thermal    = &TBCsystem.substrate.psithermal;
-//  class Mesh *mesh          =
 
     class matrixArrays *MatrixArrays = NULL;
     MatrixArrays = new class matrixArrays(mesh->M2);

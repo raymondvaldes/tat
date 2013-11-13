@@ -10,7 +10,7 @@ double PhaseOfEmission1DNum(const int flag,
 
 
     temperature_1D(pStruct->lambda,
-                   pStruct->opticalProp->R1,
+                   pStruct->poptea->TBCsystem.optical.R1,
                    pStruct->q_surface,
                    pStruct->iter,
                    pStruct->laser->omegas[flag],
@@ -27,7 +27,8 @@ double PhaseOfEmission1DNum(const int flag,
                                   pStruct->poptea->TBCsystem.Temp.base,
                                   pStruct->mesh,
                                   pStruct->bNorm *Lcoat,
-                                  pStruct->E_sigma);
+                                  pStruct->poptea->TBCsystem.optical.Emit1
+                                  );
     const double
     phase2 = emission->phase1D(Tprofile);
 
@@ -47,8 +48,8 @@ double PhaseOfEmission2DAna(const int flag,
     const double psi_coat= pStruct->poptea->TBCsystem.coating.psithermal.offset;
 
     const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
-    const class HeatModel2DAna heatmodel2DAna(pStruct->opticalProp->R0,
-                                              pStruct->opticalProp->R1,
+    const class HeatModel2DAna heatmodel2DAna(pStruct->poptea->TBCsystem.optical.R0,
+                                              pStruct->poptea->TBCsystem.optical.R1,
                                               pStruct->lambda,
                                               pStruct->laser->It,
                                               pStruct->c_sub, pStruct->a_sub,
@@ -73,7 +74,8 @@ double PhaseOfEmission2DAna(const int flag,
                                   pStruct->poptea->TBCsystem.Temp.referance,
                                   pStruct->mesh,
                                   pStruct->bNorm * Lcoat,
-                                  pStruct->E_sigma);
+                                  pStruct->poptea->TBCsystem.optical.Emit1
+                                  );
 
     const double phase2d = emission->phase2D(T2DProfile);
 
@@ -91,9 +93,9 @@ double PhaseOfEmission1DAna(const int flag,
     /*See 2004 emission paper equation 19*/
     const double omega1 = pStruct->laser->omegas[flag];
     const double lambda = pStruct->lambda;
-    const double Esigma  = pStruct->E_sigma;
+    const double Esigma = pStruct->poptea->TBCsystem.optical.Emit1;
     const double gamma  = pStruct->gamma;
-    const double R1     = pStruct->opticalProp->R1;
+    const double R1     = pStruct->poptea->TBCsystem.optical.R1;
     const double L_coat = pStruct->poptea->TBCsystem.coating.depth;
     const double k_c    = pStruct->poptea->TBCsystem.coating.kthermal.offset;
     const double psi_c  = pStruct->poptea->TBCsystem.coating.psithermal.offset;

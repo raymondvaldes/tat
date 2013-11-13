@@ -1,14 +1,5 @@
 #include "../Header.h"
 
-namespace poptea
-{
-
-
-
-}
-
-
-
 namespace thermalAnalysisMethod
 {
 
