@@ -34,6 +34,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct parameterStr *pStruct =
   new struct parameterStr(N      /*N*/,
                           mesh);
+
   pStruct->thermalModel = &thermalModel;
   pStruct->iter = 1000;
 
@@ -215,9 +216,10 @@ int main( int /*argc*/, char** /*argv[]*/ )
   unknownParameters.addUnknown(pNames::R1,          0.6, 1);
   unknownParameters.addUnknown(pNames::lambda,      .1,  1);
 
-  struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD, thermalModel,
-                                                ParaEstSetting,
-                                                  unknownParameters);
+//  struct thermalAnalysisMethod::PopTea *poptea(expSetup, EBPVD, thermalModel,
+//                                              ParaEstSetting,
+//                                              unknownParameters);
+//  delete poptea;
 
 
   // Initial Guess
@@ -248,6 +250,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //    SensitivityValdes2013::figureSensitivityIntro(pStruct);
 
 // Clear memory
+
   mesh->cleanup();
   delete mesh;
   CO2Laser.cleanup();
