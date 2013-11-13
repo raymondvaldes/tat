@@ -233,26 +233,22 @@ struct parameterStr
 public:
     class Mesh *mesh;
     class expEquipment::Laser *laser;  //TODO MUST REMOVE
-    struct physicalModel::radiativeSysProp *opticalProp;
     struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
     double lambda;
     double diffusivity_coat, effusivity_coat;
-    double c_coat = 1.;
-    double a_coat;
+//    double c_coat = 1.;
 
     ///layer 2
     double lambda_Sub;
     double diffusivity_sub, effusivity_sub;
-    double c_sub = 1.;
-    double a_sub;
-
-    ///system
-//    double R_domain;
+//    double c_sub = 1.;
 
     ///nondimensional
-    double gamma, E_sigma, epsilon;
+    double a_coat;
+    double a_sub;
+    double gamma, epsilon;
 
     ///parameter estimation
     double *emissionExperimental;
@@ -267,9 +263,11 @@ public:
     double Ttol, MSE, MSEinitial, MSETol, ChiSquare, coscheck, fvecTotal;
     double fvecTol, variance;
     size_t iterPE, iterPEnum, N95;
-    enum XParaNames *xParameters95Names, *xParametersNames;
+    enum XParaNames *xParameters95Names;
+    enum XParaNames *xParametersNames;
     int iterC;
-    size_t L_end, N;
+    size_t L_end;
+    size_t N;
 
     ///other
     std::string dir;

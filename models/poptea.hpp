@@ -1,17 +1,6 @@
 #ifndef POPTEA_HPP
 #define POPTEA_HPP
 
-namespace poptea
-{
-
-
-
-
-}
-
-
-
-
 namespace thermalAnalysisMethod
 {
     struct PopTea
@@ -31,10 +20,6 @@ namespace thermalAnalysisMethod
              class ThermalModel thermalModel_,
              struct parameterEstimation::settings Settings_,
              struct parameterEstimation::unknownList unknownParameters_);
-
-
-//    function to make experimental noise should go here
-//    function to hold results to should go here too
     };
 }
 

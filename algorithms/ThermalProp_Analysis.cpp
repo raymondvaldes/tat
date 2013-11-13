@@ -176,10 +176,11 @@ int paramter_estimation(const size_t m, const size_t n,
                         break;
 
                     case E1 :
-                        pStruct->E_sigma =
+                        pStruct->poptea->TBCsystem.optical.Emit1 =
                         x_limiter2(x[i], pc_ptr->E_sigma_min,
                                    pc_ptr->E_sigma_max);
-                        xpredicted[i] = pStruct->E_sigma;
+                        xpredicted[i] = pStruct->poptea->TBCsystem.optical.Emit1
+;
                         break;
 
                     case gammaEff :
@@ -189,9 +190,9 @@ int paramter_estimation(const size_t m, const size_t n,
                         break;
 
                     case R1 :
-                        pStruct->opticalProp->R1 =
+                        pStruct->poptea->TBCsystem.optical.R1 =
                         x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
-                        xpredicted[i] = pStruct->opticalProp->R1;
+                        xpredicted[i] = pStruct->poptea->TBCsystem.optical.R1;
                         break;
 
                     case lambda :
@@ -202,9 +203,9 @@ int paramter_estimation(const size_t m, const size_t n,
                         break;
 
                     case R0 :
-                        pStruct->opticalProp->R0 =
+                        pStruct->poptea->TBCsystem.optical.R0 =
                         x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
-                        xpredicted[i] = pStruct->opticalProp->R0;
+                        xpredicted[i] = pStruct->poptea->TBCsystem.optical.R0;
                         break;
 
                     default:
@@ -388,19 +389,19 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
                 std::cout << parametersStr->a_sub;
                 break;
             case E1 :
-                std::cout << parametersStr->E_sigma;
+                std::cout << parametersStr->poptea->TBCsystem.optical.Emit1;
                 break;
             case gammaEff :
                 std::cout << parametersStr->gamma;
                 break;
             case R1 :
-                std::cout << parametersStr->opticalProp->R1;
+                std::cout << parametersStr->poptea->TBCsystem.optical.R1;
                 break;
             case lambda :
                 std::cout << parametersStr->lambda;
                 break;
             case R0 :
-                std::cout << parametersStr->opticalProp->R0;
+                std::cout << parametersStr->poptea->TBCsystem.optical.R0;
                 break;
             default:
                 std::cout << "\nSwitch Error!!\n";
@@ -431,7 +432,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                 x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
                 break;
             case E1 :
-                parametersStr->E_sigma =
+                parametersStr->poptea->TBCsystem.optical.Emit1 =
                 x_limiter2(x[i], pc_ptr->E_sigma_min, pc_ptr->E_sigma_max);
                 break;
             case gammaEff :
@@ -439,7 +440,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                 x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
                 break;
             case R1 :
-                parametersStr->opticalProp->R1 =
+                parametersStr->poptea->TBCsystem.optical.R1 =
                 x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
                 break;
             case lambda :
@@ -447,7 +448,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                 x_limiter2(x[i], pc_ptr->lambda_min, pc_ptr->lambda_max);
                 break;
             case R0 :
-                parametersStr->opticalProp->R0 =
+                parametersStr->poptea->TBCsystem.optical.R0 =
                 x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
                 break;
             default:

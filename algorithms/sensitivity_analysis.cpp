@@ -20,10 +20,10 @@ void perturbationTest(const size_t m, const size_t n,
     int info = 0;
     const double a_subTrue    = parametersStr->a_sub;
     const double gammaTrue    = parametersStr->gamma;
-    const double E_sigmaTrue  = parametersStr->E_sigma;
+    const double E_sigmaTrue  = parametersStr->poptea->TBCsystem.optical.Emit1;
     const double lambdaTrue   = parametersStr->lambda;
-    const double R1True       = parametersStr->opticalProp->R1;
-    const double R0True       = parametersStr->opticalProp->R0;
+    const double R1True       = parametersStr->poptea->TBCsystem.optical.R1;
+    const double R0True       = parametersStr->poptea->TBCsystem.optical.R0;
     double*xpredicted = new double[n];
 
 //    std::cout << a_subTrue << "\t" << gammaTrue << "\t" << E_sigmaTrue << "\t";
@@ -78,7 +78,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                    std::cout << parametersStr->a_sub << "\t";
                     break;
                 case E1 :
-                    parametersStr->E_sigma = E_sigmaTrue * multiplier;
+                    parametersStr->poptea->TBCsystem.optical.Emit1 = E_sigmaTrue * multiplier;
 //                    std::cout << parametersStr->E_sigma << "\t";
                     break;
                 case gammaEff :
@@ -86,7 +86,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                    std::cout << parametersStr->gamma << "\t";
                     break;
                 case R1 :
-                    parametersStr->opticalProp->R1 = R1True * multiplier;
+                    parametersStr->poptea->TBCsystem.optical.R1 = R1True * multiplier;
 //                    std::cout << parametersStr->R1 << "\t";
                     break;
                 case lambda :
@@ -94,7 +94,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                    std::cout << parametersStr->lambda << "\t";
                     break;
                 case R0 :
-                    parametersStr->opticalProp->R0 = R0True * multiplier;
+                    parametersStr->poptea->TBCsystem.optical.R0 = R0True * multiplier;
 //                    std::cout << parametersStr->R0 << "\t";
                     break;
                 default:
@@ -177,9 +177,9 @@ void perturbationTest(const size_t m, const size_t n,
                 myfile << std::setprecision(8)
                        << parametersStr->a_sub << "\t"
                        << parametersStr->gamma << "\t"
-                       << parametersStr->E_sigma << "\t"
+                       << parametersStr->poptea->TBCsystem.optical.Emit1 << "\t"
                        << parametersStr->lambda << "\t"
-                       << parametersStr->opticalProp->R1 << "\t"
+                       << parametersStr->poptea->TBCsystem.optical.R1 << "\t"
                        << msearea;
                 myfile << "\n";
             }
@@ -203,7 +203,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                std::cout << parametersStr->a_sub << "\t";
                 break;
             case E1 :
-                parametersStr->E_sigma = E_sigmaTrue;
+                parametersStr->poptea->TBCsystem.optical.Emit1  = E_sigmaTrue;
 //                std::cout << parametersStr->E_sigma << "\t";
                 break;
             case gammaEff :
@@ -211,7 +211,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                std::cout << parametersStr->gamma << "\t";
                 break;
             case R1 :
-                parametersStr->opticalProp->R1 = R1True;
+                parametersStr->poptea->TBCsystem.optical.R1 = R1True;
 //                std::cout << parametersStr->R1 << "\t";
                 break;
             case lambda :
@@ -219,7 +219,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                std::cout << parametersStr->lambda << "\t";
                 break;
             case R0 :
-                parametersStr->opticalProp->R0 = R0True;
+                parametersStr->poptea->TBCsystem.optical.R0 = R0True;
 //                std::cout << parametersStr->R0 << "\t";
                 break;
             default:
@@ -248,8 +248,8 @@ void calibrationSweep(
 
     const double gammaTrue    = pStructp->gamma;
     const double a_subTrue    = pStructp->a_sub;
-    const double R1True       = pStructp->opticalProp->R1;
-    const double E_sigmaTrue  = pStructp->E_sigma;
+    const double R1True       = pStructp->poptea->TBCsystem.optical.R1;
+    const double E_sigmaTrue  = pStructp->poptea->TBCsystem.optical.Emit1;
     const double lambdaTrue   = pStructp->lambda;
 
 ///Prepare output file
@@ -321,10 +321,10 @@ void parameterUncertainty(const size_t n,
     const int xnum = pStruct->xnumber;
     const double gammaTrue    = parametersStr->gamma;
     const double a_subTrue    = parametersStr->a_sub;
-    const double R1True       = parametersStr->opticalProp->R1;
-    const double E_sigmaTrue  = parametersStr->E_sigma;
+    const double R1True       = parametersStr->poptea->TBCsystem.optical.R1;
+    const double E_sigmaTrue  = parametersStr->poptea->TBCsystem.optical.Emit1;
     const double lambdaTrue   = parametersStr->lambda;
-    const double R0True       = parametersStr->opticalProp->R0;
+    const double R0True       = parametersStr->poptea->TBCsystem.optical.R0;
     const double lminN  = parametersStr->laser->l_thermal[0];
     const double lmaxN  = parametersStr->laser->l_thermal[parametersStr->L_end-1];
     double*xpredicted = new double[n];
@@ -436,7 +436,7 @@ void parameterUncertainty(const size_t n,
                     break;
 
                 case E1 :
-                    parametersStr->E_sigma =E_sigmaTrue;
+                    parametersStr->poptea->TBCsystem.optical.Emit1=E_sigmaTrue;
                     break;
 
                 case gammaEff :
@@ -444,7 +444,7 @@ void parameterUncertainty(const size_t n,
                     break;
 
                 case R1 :
-                    parametersStr->opticalProp->R1 = R1True;
+                    parametersStr->poptea->TBCsystem.optical.R1 = R1True;
                     break;
 
                 case lambda :
@@ -452,7 +452,7 @@ void parameterUncertainty(const size_t n,
                     break;
 
                 case R0 :
-                    parametersStr->opticalProp->R0 = R0True;
+                    parametersStr->poptea->TBCsystem.optical.R0 = R0True;
                     break;
 
                 default:
@@ -517,8 +517,8 @@ void fitting(size_t P, size_t N,
 
         myfile << pStruct->gamma << "\t"
                << pStruct->a_sub << "\t"
-               << pStruct->E_sigma << "\t"
-               << pStruct->opticalProp->R1 << "\t"
+               << pStruct->poptea->TBCsystem.optical.Emit1 << "\t"
+               << pStruct->poptea->TBCsystem.optical.R1<< "\t"
                << pStruct->lambda << "\t"
                << pStruct->MSE << "\n";
 

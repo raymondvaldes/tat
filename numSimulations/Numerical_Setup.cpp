@@ -59,19 +59,19 @@ void scaleDiag(const int mode, const size_t N, double * diag,
                     diag[i] = pStruct->a_sub;
                     break;
                 case E1 :
-                    diag[i] = pStruct->E_sigma;
+                    diag[i] = pStruct->poptea->TBCsystem.optical.Emit1;
                     break;
                 case gammaEff :
                     diag[i] = pStruct->gamma;
                     break;
                 case R1 :
-                    diag[i] = pStruct->opticalProp->R1 ;
+                    diag[i] = pStruct->poptea->TBCsystem.optical.R1 ;
                     break;
                 case lambda :
                     diag[i] = pStruct->lambda;
                     break;
                 case R0 :
-                    diag[i] = pStruct->opticalProp->R0;
+                    diag[i] = pStruct->poptea->TBCsystem.optical.R0;
                     break;
                 default:
                     std::cout << "\nSwitch Error!!\n";

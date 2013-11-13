@@ -74,12 +74,16 @@ public:
 
 struct layer
 {
+public:
     struct property kthermal;
     struct property psithermal;
     double depth;
     double lambda;
+    double c = 1;
 
     double opticalPenetration(void);
+    double diffusivity(void);
+    double effusivity(void);
     layer(struct property kthermal_, struct property psithermal_, double depth_,
           double lambda_);
 };
