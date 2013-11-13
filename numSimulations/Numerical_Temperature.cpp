@@ -1,6 +1,6 @@
 #include "../Header.h"
 
-void temperature_1D(const double Is, const double It,
+void temperature_1D(
                     const double lambda, const double R0,
                     const double R1, const double L_coat,
                     const double L_substrate, const double q_surface,
@@ -15,8 +15,8 @@ void temperature_1D(const double Is, const double It,
                     class expEquipment::Laser laser,
                     struct physicalModel::TBCsystem TBCsystem)
 {
-//  const double Is           =
-//  const double It           =
+  const double Is           = laser.Is;
+  const double It           = laser.It;
 //  const double lambda       =
 //  const double R0           =
 //  const double R1           =

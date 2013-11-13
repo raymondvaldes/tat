@@ -14,9 +14,7 @@ double PhaseOfEmission1DNum(const int flag,
 
 
 
-    temperature_1D(
-                   pStruct->laser->Is,    pStruct->laser->It,
-                   pStruct->lambda,       pStruct->opticalProp->R0,
+    temperature_1D(pStruct->lambda,       pStruct->opticalProp->R0,
                    pStruct->opticalProp->R1,
                    pStruct->L_coat,       pStruct->L_substrate,
                    pStruct->q_surface,
