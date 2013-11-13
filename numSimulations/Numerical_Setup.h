@@ -234,16 +234,17 @@ public:
     class Mesh *mesh;
 
 
-    class ThermalModel *thermalModel;
+//    class ThermalModel *thermalModel;
     class expEquipment::Laser *laser;
-    struct expEquipment::setup *expSetup;
+//    struct expEquipment::setup *expSetup;
 
     struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::radiativeSysProp *opticalProp;
-    struct physicalModel::layer *coating;
-    struct physicalModel::layer *substrate;
+//    struct physicalModel::layer *coating;
+//    struct physicalModel::layer *substrate;
 //    struct physicalModel::TBCsystem *TBCSystem;
 //    struct thermalAnalysisMethod::PopTea *poptea;
+    struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
     class property *k1_thermal, *psi1_thermal;

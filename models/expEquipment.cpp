@@ -147,17 +147,16 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
     return L_end;
 }
 
-void Laser::cleanup(void)
+
+Laser::~Laser()
 {
-    delete [] l_thermal;
-    delete [] omegas;
+  delete [] l_thermal;
+  delete [] omegas;
 }
+
 
 setup::setup(struct Laser laser_, struct Detector detector_)
-    : laser(laser_), detector(detector_)
-{
-
-}
+    : laser(laser_), detector(detector_) {}
 
 
 

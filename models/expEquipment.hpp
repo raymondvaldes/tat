@@ -38,9 +38,9 @@ public:
     void updatePower(const double Qpower);
 
     double thermalSetup(const double lmin_, const double lmax_,
-                      const double L_coat, const double kc, const double psic,
-                      const double L_end_);
-    void cleanup(void);
+                        const double L_coat, const double kc, const double psic,
+                        const double L_end_);
+    ~Laser();
 };
 
 struct setup
