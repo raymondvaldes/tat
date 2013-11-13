@@ -14,7 +14,11 @@ double PhaseOfEmission1DNum(const int flag,
 
 
 
+<<<<<<< HEAD
     temperature_1D(pStruct->lambda,
+=======
+    temperature_1D(pStruct->lambda,       pStruct->opticalProp->R0,
+>>>>>>> 84bc33f7ace29e8483eff4c865eeb47176fb9b38
                    pStruct->opticalProp->R1,
                    pStruct->q_surface,
                    pStruct->TemperatureScale->tolerance,
