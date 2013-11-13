@@ -66,8 +66,6 @@ compiler.
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Setup.h"
 
-
-
 #include "tools/filesystem.hpp"
 #include "tools/timing.h"
 

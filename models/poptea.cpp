@@ -1,5 +1,9 @@
 #include "poptea.hpp"
 
-poptea::poptea()
+namespace poptea
 {
+
+parameterLabel::parameterLabel(const enum parameterName name_)
+    :name(name_){}
+
 }

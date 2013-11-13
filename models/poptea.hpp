@@ -1,10 +1,33 @@
 #ifndef POPTEA_HPP
 #define POPTEA_HPP
 
-class poptea
+namespace poptea
+{
+
+struct parameterLabel
 {
 public:
-    poptea();
+  enum class parameterName
+  {
+    gammaEff,
+    asub,
+    E1,
+    R1,
+    lambda,
+    R0
+  } name;
+
+
+  parameterLabel(const enum parameterName name_);
 };
+
+
+
+
+
+}
+
+
+
 
 #endif // POPTEA_HPP
