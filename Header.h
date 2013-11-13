@@ -48,11 +48,9 @@ number of bits as the program.  Also add library under linker settings in \
 compiler.
 */
 ///Source headers
-#include "models/poptea.hpp"
 #include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
-
 
 #include "algorithms/parameterestimation.hpp"
 #include "algorithms/lmdiff.h"
@@ -61,6 +59,7 @@ compiler.
 #include "algorithms/sensitivity_analysis.hpp"
 #include "investigations/sensitivity_paper.h"
 
+#include "models/poptea.hpp"
 
 
 //#include "system/poptea.h"

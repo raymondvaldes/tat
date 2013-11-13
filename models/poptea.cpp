@@ -9,14 +9,17 @@ namespace poptea
 
 
 
-//namespace thermalAnalysisMethod
-//{
-//PopTea::PopTea(struct expEquipment::setup expSetup_,
-//               struct physicalModel::TBCsystem TBCsystem_,
-//               ThermalModel thermalModel_,
-//               parameterEstimation::constraints paraConstraints_)
-//  : expSetup(expSetup_),
-//    TBCsystem(TBCsystem_),
-//    thermalModel(thermalModel_),
-//    paraConstraints(paraConstraints_)
-//{}
+namespace thermalAnalysisMethod
+{
+PopTea::PopTea(struct expEquipment::setup expSetup_,
+               struct physicalModel::TBCsystem TBCsystem_,
+               class ThermalModel thermalModel_,
+               struct parameterEstimation::settings Settings_,
+               struct parameterEstimation::unknownList unknownParameters_)
+  : expSetup(expSetup_),
+    TBCsystem(TBCsystem_),
+    thermalModel(thermalModel_),
+    Settings(Settings_),
+    unknownParameters(unknownParameters_)
+{}
+}

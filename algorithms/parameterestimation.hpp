@@ -31,10 +31,14 @@ public:
 
 struct unknownList
 {
-//  struct unknown *uParam;
-  size_t N;
+private:
+  std::vector<struct unknown> vectorUnknowns;
 
-  unknownList(const double N_);
+public:
+  void addUnknown(physicalModel::labels::Name name,
+                  const double lower,
+                  const double upper);
+  size_t Nsize(void);
 };
 
 struct settings
@@ -51,9 +55,6 @@ struct settings
     settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
              double epsfcn_, double factor_, size_t mode_, size_t nprint_);
 };
-
-
-//struct
 
 
 }
