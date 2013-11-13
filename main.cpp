@@ -243,20 +243,14 @@ int main( int /*argc*/, char** /*argv[]*/ )
               pStruct, xInitial, interants, factorMax, factorScale);
   }
 
-//Prepare figures and data for paper Sensitivity
+  //Prepare figures and data for paper Sensitivity
 //    SensitivityValdes2013::CC_APS2(pStruct);
 //    SensitivityValdes2013::figureSensitivityIntro(pStruct);
 
 
-
-
 // Clear memory
-  mesh->cleanup();
   delete mesh;
-
   delete[] xInitial;
-
-  pStruct->cleanup();
   delete pStruct;
 
 

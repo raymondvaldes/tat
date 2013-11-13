@@ -40,7 +40,7 @@ public:
 
     void meshUpdate(const double L_coat, const double L_substrate,
                     const double CO2Radius, const double Rdomain);
-    void cleanup(void);
+    ~Mesh();
 
 private:
     const double beta1, split;
@@ -232,18 +232,10 @@ struct parameterStr
 
 public:
     class Mesh *mesh;
-
-
-//    class ThermalModel *thermalModel;
     class expEquipment::Laser *laser;
-//    struct expEquipment::setup *expSetup;
 
     struct physicalModel::temperatureScale *TemperatureScale;
     struct physicalModel::radiativeSysProp *opticalProp;
-//    struct physicalModel::layer *coating;
-//    struct physicalModel::layer *substrate;
-//    struct physicalModel::TBCsystem *TBCSystem;
-//    struct thermalAnalysisMethod::PopTea *poptea;
     struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
@@ -294,13 +286,14 @@ public:
                       const size_t LendMin);
 
     parameterStr(const size_t d, class Mesh *mesh_);
+    ~parameterStr();
     void parametersStrSetup(const enum XParaNames *xParametersNames_);
     void update_b(const double radius, const double L);
     void update_b(void);
     void EmissionNoise(const emissionNoiseParameters myEmissionNoise,
                        const double* emissionNominal,
                        const double lmin, const double lmax);
-    void cleanup();
+
 
 private:
     void updateNMeasurements(const size_t Lend_);
