@@ -101,10 +101,10 @@ SOURCES += main.cpp \
     tools/timing.cpp \
     models/Thermal_models.cpp \
     models/expEquipment.cpp \
-    system/poptea.cpp \
     algorithms/lmdiff.cpp \
     algorithms/parameterestimation.cpp \
-    models/poptea.cpp
+    models/poptea.cpp \
+    models/physicalmodel.cpp
 
 #header files
 HEADERS += \
@@ -122,7 +122,7 @@ HEADERS += \
     algorithms/sensitivity_analysis.hpp \
     models/Thermal_models.h \
     models/expEquipment.hpp \
-    system/poptea.h \
     algorithms/lmdiff.h \
     algorithms/parameterestimation.hpp \
-    models/poptea.hpp
+    models/poptea.hpp \
+    models/physicalmodel.hpp

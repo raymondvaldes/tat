@@ -17,7 +17,8 @@ public:
   struct bounds constraint;
   double initialGuess;
   double bestfit;
-//  enum XParaNames name;
+//  struct physicalModel::labels name;
+
 
   unknown(const double lower_, const double upper_);
   unknown(const double lower_, const double upper_, const double initialGuess_);

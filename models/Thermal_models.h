@@ -11,13 +11,13 @@ class ThermalModel
         OneDimNumNonLin,
         TwoDimAnalytical,
         TwoDimNumLin,
-        TwoDimNumNonLin,
+        TwoDimNumNonLin
     };
 
     enum class EmissionX: uint8_t
     {
         OneDimNonLin,
-        TwoDimNonLin,
+        TwoDimNonLin
     };
 
     const enum HeatX heat;
@@ -108,8 +108,7 @@ public:
     double phase2D(std::vector< std::vector< std::vector< double > > >
                            &Temperature) const;
     double phase1D(std::vector< std::vector< double > > &Temperature) const;
-double phase1D(const class Temperature Tprofile) const;
-
+    double phase1D(const class Temperature Tprofile) const;
     void cleanup(void) const;
 
 private:
@@ -124,7 +123,8 @@ private:
     double drArea(const double r0_, const double r1_) const;
     double Ib_plank(const double Temperature) const;
     double emissionAxial(std::vector<double> &Temperature) const;
-double emissionAxial(const class Temperature Tprofile, const size_t nVal) const;
+    double emissionAxial(const class Temperature Tprofile, const size_t nVal)
+    const;
 
     double emissionAxialLinear(std::vector<double> &Temperature) const;
     double emissionVolumetric2D(std::vector<std::vector<double>>&Temperature)
@@ -132,102 +132,7 @@ double emissionAxial(const class Temperature Tprofile, const size_t nVal) const;
 };
 
 
-class property
-{
-private:
-    static constexpr bool tempDependent = false;
-    double Current(const double temperature) const;
-
-    double Projected(const double temperature1, const double temperature2)const;
-
-public:
-    double offset;
-    double slope;
-
-    property(double offset_, double slope_);
-    property(void);
-
-    double Current(const std::vector<std::vector<double>>& T, const size_t n,
-                   const size_t j) const;
-
-    double Current(const std::vector<std::vector<double>>& T, const size_t n,
-                   const size_t j1, const size_t j2) const;
 
 
-    double Current(const class Temperature Tprofile, const size_t n,
-                   const size_t j) const;
 
-    double Current(const class Temperature Tprofile, const size_t n,
-                   const size_t j1, const size_t j2) const;
-
-
-    double Projected(const std::vector<std::vector<double>>& T,
-                               const size_t n, const size_t j) const;
-
-    double Projected(const std::vector<std::vector<double>>& T, const size_t n,
-                     const size_t j1, const size_t j2) const;
-
-    double Projectedt(const std::vector<std::vector<double>>& T,
-                      const size_t n, const size_t, const size_t j) const;
-
-    double Projected(const class Temperature Tprofile,
-                               const size_t n, const size_t j) const;
-
-    double Projected(const class Temperature Tprofile, const size_t n,
-                     const size_t j1, const size_t j2) const;
-
-    double Projectedt(const class Temperature Tprofile,
-                                const size_t n, const size_t, const size_t j)
-                                const;
-};
-
-namespace physicalModel
-{
-
-struct layer
-{
-    struct property kthermal;
-    struct property psithermal;
-    double depth;
-    double lambda;
-
-    double opticalPenetration(void);
-    layer(struct property kthermal_, struct property psithermal_,
-                 double depth_, double lambda_);
-};
-
-struct temperatureScale
-{
-    double tolerance;
-    double referance;
-    double base;
-    double rear;
-    temperatureScale(const double tolerance_,const double referance_,
-                     const double base_, const double rear_);
-};
-
-struct radiativeSysProp
-{
-    double R0;
-    double R1;
-    double Emit1;
-    radiativeSysProp(const double R0_, const double R1_, const double Emit1_);
-};
-
-struct TBCsystem
-{
-    struct layer coating;
-    struct layer substrate;
-    struct temperatureScale Temp;
-    struct radiativeSysProp optical;
-    double radius;
-    double gamma;
-    double Rtc;
-
-    TBCsystem(struct layer coating_, struct layer substrate_,
-              struct temperatureScale Temp_, struct radiativeSysProp optical_,
-              double radius_);
-};
-
-}
 #endif // THERMAL_MODELS_H_INCLUDED
