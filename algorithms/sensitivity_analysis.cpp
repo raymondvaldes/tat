@@ -21,15 +21,7 @@ void perturbationTest(const size_t m, const size_t n,
     const double a_subTrue    = parametersStr->a_sub;
     const double gammaTrue    = parametersStr->gamma;
     const double E_sigmaTrue  = parametersStr->poptea->TBCsystem.optical.Emit1;
-<<<<<<< HEAD
     const double lambdaTrue   = parametersStr->poptea->TBCsystem.coating.lambda;
-=======
-<<<<<<< HEAD
-    const double lambdaTrue   = parametersStr->poptea->TBCsystem.coating.lambda;
-=======
-    const double lambdaTrue   = parametersStr->lambda;
->>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
->>>>>>> 767ffc7badb18dbb744ebe7f8765b53b81b63fa5
     const double R1True       = parametersStr->poptea->TBCsystem.optical.R1;
     const double R0True       = parametersStr->poptea->TBCsystem.optical.R0;
     double*xpredicted = new double[n];
