@@ -115,12 +115,15 @@ struct TBCsystem
     double radius;
     double Rtc;
 
+    double gamma;
+    double a_sub;
+
     TBCsystem(struct layer coating_, struct layer substrate_,
               struct temperatureScale Temp_, struct radiativeSysProp optical_,
               double radius_);
-    double gamma(void);
-    double a_sub(void);
-    void updateCoat(const double gamma, const double a_sub);
+    double gammaEval(void);
+    double a_subEval(void);
+    void updateCoat(void);
 };
 
 }

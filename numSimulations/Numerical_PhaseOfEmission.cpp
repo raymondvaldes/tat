@@ -13,7 +13,7 @@ double PhaseOfEmission1DNum(const int flag,
                    pStruct->q_surface,
                    pStruct->iter,
                    pStruct->laser->omegas[flag],
-                   pStruct->gamma,
+                   pStruct->poptea->TBCsystem.gammaEval(),
                    pStruct->mesh, Tprofile,
                    pStruct->poptea->expSetup.laser,
                    pStruct->poptea->TBCsystem
@@ -53,8 +53,9 @@ double PhaseOfEmission2DAna(const int flag,
                                               pStruct->poptea->TBCsystem.optical.R1,
                                               pStruct->poptea->TBCsystem.coating.lambda,
                                               pStruct->laser->It,
-                                              csub, pStruct->a_sub,
-                                              pStruct->gamma, pStruct->bNorm,
+                                              csub, pStruct->poptea->TBCsystem.a_subEval(),
+                                              pStruct->poptea->TBCsystem.gammaEval(),
+                                              pStruct->bNorm,
                                               k_coat, Lcoat, psi_coat,
                                               ccoat,
                                               pStruct->poptea->TBCsystem.substrate.lambda,
@@ -95,7 +96,7 @@ double PhaseOfEmission1DAna(const int flag,
     const double omega1 = pStruct->laser->omegas[flag];
     const double lambda = pStruct->poptea->TBCsystem.coating.lambda;
     const double Esigma = pStruct->poptea->TBCsystem.optical.Emit1;
-    const double gamma  = pStruct->gamma;
+    const double gamma  = pStruct->poptea->TBCsystem.gammaEval();
     const double R1     = pStruct->poptea->TBCsystem.optical.R1;
     const double L_coat = pStruct->poptea->TBCsystem.coating.depth;
     const double k_c    = pStruct->poptea->TBCsystem.coating.kthermal.offset;

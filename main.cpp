@@ -120,7 +120,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
   constexpr double detector_lam = 5e-6;
   struct expEquipment::Detector Emissiondetector(detector_lam, detector_rad);
-
   struct expEquipment::setup expSetup(CO2Laser, Emissiondetector);
 
   constexpr double kcoat_off = 1.44;

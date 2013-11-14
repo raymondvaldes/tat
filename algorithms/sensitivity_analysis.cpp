@@ -18,8 +18,8 @@ void perturbationTest(const size_t m, const size_t n,
 ///fitting constants set
     int nfev;
     int info = 0;
-    const double a_subTrue    = parametersStr->a_sub;
-    const double gammaTrue    = parametersStr->gamma;
+    const double a_subTrue    = parametersStr->poptea->TBCsystem.a_sub;
+    const double gammaTrue    = parametersStr->poptea->TBCsystem.gamma;
     const double E_sigmaTrue  = parametersStr->poptea->TBCsystem.optical.Emit1;
     const double lambdaTrue   = parametersStr->poptea->TBCsystem.coating.lambda;
     const double R1True       = parametersStr->poptea->TBCsystem.optical.R1;
@@ -74,7 +74,7 @@ void perturbationTest(const size_t m, const size_t n,
             switch( parametersStr->xParameters95Names[currentI] )
             {
                 case asub :
-                    parametersStr->a_sub = a_subTrue * multiplier;
+                    parametersStr->poptea->TBCsystem.a_sub = a_subTrue * multiplier;
 //                    std::cout << parametersStr->a_sub << "\t";
                     break;
                 case E1 :
@@ -82,7 +82,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                    std::cout << parametersStr->E_sigma << "\t";
                     break;
                 case gammaEff :
-                    parametersStr->gamma = gammaTrue * multiplier;
+                    parametersStr->poptea->TBCsystem.gamma = gammaTrue * multiplier;
 //                    std::cout << parametersStr->gamma << "\t";
                     break;
                 case R1 :
@@ -103,9 +103,9 @@ void perturbationTest(const size_t m, const size_t n,
                     break;
             }
 
-            parameters_kcp_update(parametersStr, parametersStr->gamma,
-                                  parametersStr->a_sub);
-//            parameters_update(parametersStr, parametersStr->N);
+            parametersStr->poptea->TBCsystem.updateCoat();
+//            parameters_kcp_update(parametersStr, parametersStr->gamma,
+//                                  parametersStr->a_sub);
 //            std::cout << "\n";
             for(size_t i = 0 ; i < parametersStr->N ; ++i)
             {
@@ -175,8 +175,8 @@ void perturbationTest(const size_t m, const size_t n,
             {
               /*printPEstimates(parametersStr->N, parametersStr);*/
                 myfile << std::setprecision(8)
-                       << parametersStr->a_sub << "\t"
-                       << parametersStr->gamma << "\t"
+                       << parametersStr->poptea->TBCsystem.a_subEval() << "\t"
+                       << parametersStr->poptea->TBCsystem.gammaEval() << "\t"
                        << parametersStr->poptea->TBCsystem.optical.Emit1 << "\t"
                        << parametersStr->poptea->TBCsystem.coating.lambda << "\t"
                        << parametersStr->poptea->TBCsystem.optical.R1 << "\t"
@@ -184,6 +184,8 @@ void perturbationTest(const size_t m, const size_t n,
                 myfile << "\n";
             }
         }
+
+
 
     }
     myfile.close();
@@ -199,7 +201,7 @@ void perturbationTest(const size_t m, const size_t n,
         switch( parametersStr->xParametersNames[i] )
         {
             case asub :
-                parametersStr->a_sub = a_subTrue;
+                parametersStr->poptea->TBCsystem.a_sub = a_subTrue;
 //                std::cout << parametersStr->a_sub << "\t";
                 break;
             case E1 :
@@ -207,7 +209,7 @@ void perturbationTest(const size_t m, const size_t n,
 //                std::cout << parametersStr->E_sigma << "\t";
                 break;
             case gammaEff :
-                parametersStr->gamma = gammaTrue;
+                parametersStr->poptea->TBCsystem.gamma = gammaTrue;
 //                std::cout << parametersStr->gamma << "\t";
                 break;
             case R1 :
@@ -228,8 +230,9 @@ void perturbationTest(const size_t m, const size_t n,
                 break;
         }
     }
-    parameters_kcp_update(parametersStr, parametersStr->gamma,
-                          parametersStr->a_sub);
+    parametersStr->poptea->TBCsystem.updateCoat();
+//    parameters_kcp_update(parametersStr, parametersStr->gamma,
+//                          parametersStr->a_sub);
     return;
 }
 
@@ -246,8 +249,8 @@ void calibrationSweep(
 
     const int xnum = pStruct->xnumber;
 
-    const double gammaTrue    = pStructp->gamma;
-    const double a_subTrue    = pStructp->a_sub;
+    const double gammaTrue    = pStructp->poptea->TBCsystem.gammaEval();
+    const double a_subTrue    = pStructp->poptea->TBCsystem.a_subEval();
     const double R1True       = pStructp->poptea->TBCsystem.optical.R1;
     const double E_sigmaTrue  = pStructp->poptea->TBCsystem.optical.Emit1;
     const double lambdaTrue   = pStructp->poptea->TBCsystem.coating.lambda;
@@ -320,8 +323,8 @@ void parameterUncertainty(const size_t n,
     /*The idea with the perturbation test is that I have my "perfect fit" and
     then refit each while changing one paramter +-20% for example. */
     const int xnum = pStruct->xnumber;
-    const double gammaTrue    = parametersStr->gamma;
-    const double a_subTrue    = parametersStr->a_sub;
+    const double gammaTrue    = parametersStr->poptea->TBCsystem.gammaEval();
+    const double a_subTrue    = parametersStr->poptea->TBCsystem.a_subEval();
     const double R1True       = parametersStr->poptea->TBCsystem.optical.R1;
     const double E_sigmaTrue  = parametersStr->poptea->TBCsystem.optical.Emit1;
     const double lambdaTrue   = parametersStr->poptea->TBCsystem.coating.lambda;
@@ -433,7 +436,7 @@ void parameterUncertainty(const size_t n,
             switch ( parametersStr->xParametersNames[i] )
             {
                 case asub :
-                    parametersStr->a_sub = a_subTrue;
+                    parametersStr->poptea->TBCsystem.a_sub = a_subTrue;
                     break;
 
                 case E1 :
@@ -441,7 +444,7 @@ void parameterUncertainty(const size_t n,
                     break;
 
                 case gammaEff :
-                    parametersStr->gamma = gammaTrue;
+                    parametersStr->poptea->TBCsystem.gamma = gammaTrue;
                     break;
 
                 case R1 :
@@ -516,8 +519,8 @@ void fitting(size_t P, size_t N,
         pStruct->MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
                            pStruct->predicted);
 
-        myfile << pStruct->gamma << "\t"
-               << pStruct->a_sub << "\t"
+        myfile << pStruct->poptea->TBCsystem.gammaEval() << "\t"
+               << pStruct->poptea->TBCsystem.a_subEval() << "\t"
                << pStruct->poptea->TBCsystem.optical.Emit1 << "\t"
                << pStruct->poptea->TBCsystem.optical.R1<< "\t"
                << pStruct->poptea->TBCsystem.coating.lambda << "\t"

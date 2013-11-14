@@ -170,9 +170,9 @@ int paramter_estimation(const size_t m, const size_t n,
                 switch ( pStruct->xParametersNames[i] )
                 {
                     case asub :
-                        pStruct->a_sub =
+                        pStruct->poptea->TBCsystem.a_sub =
                         x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
-                        xpredicted[i] = pStruct->a_sub;
+                        xpredicted[i] = pStruct->poptea->TBCsystem.a_sub;
                         break;
                     case E1 :
                         pStruct->poptea->TBCsystem.optical.Emit1 =
@@ -183,9 +183,9 @@ int paramter_estimation(const size_t m, const size_t n,
                         break;
 
                     case gammaEff :
-                        pStruct->gamma =
+                        pStruct->poptea->TBCsystem.gamma =
                         x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
-                        xpredicted[i] = pStruct->gamma;
+                        xpredicted[i] = pStruct->poptea->TBCsystem.gamma ;
                         break;
 
                     case R1 :
@@ -214,7 +214,7 @@ int paramter_estimation(const size_t m, const size_t n,
                 }
             }
 
-            parameters_update(pStruct, n);
+            pStruct->poptea->TBCsystem.updateCoat();
             pStruct->iterPEnum = iter;
 
             ///repulate predicted phase
@@ -385,13 +385,13 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
         switch ( parametersStr->xParametersNames[j] )
         {
             case asub :
-                std::cout << parametersStr->a_sub;
+                std::cout << parametersStr->poptea->TBCsystem.a_subEval();
                 break;
             case E1 :
                 std::cout << parametersStr->poptea->TBCsystem.optical.Emit1;
                 break;
             case gammaEff :
-                std::cout << parametersStr->gamma;
+                std::cout << parametersStr->poptea->TBCsystem.gammaEval();
                 break;
             case R1 :
                 std::cout << parametersStr->poptea->TBCsystem.optical.R1;
@@ -427,7 +427,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
         switch ( parametersStr->xParametersNames[i] )
         {
             case asub :
-                parametersStr->a_sub =
+                parametersStr->poptea->TBCsystem.a_sub =
                 x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
                 break;
             case E1 :
@@ -435,7 +435,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                 x_limiter2(x[i], pc_ptr->E_sigma_min, pc_ptr->E_sigma_max);
                 break;
             case gammaEff :
-                parametersStr->gamma =
+                parametersStr->poptea->TBCsystem.gamma =
                 x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
                 break;
             case R1 :
@@ -458,7 +458,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
     }
 
 ///Update dependent parameters
-    parameters_update(parametersStr, N);
+    parametersStr->poptea->TBCsystem.updateCoat();
 
 /// Estimates the phase of emission at each heating frequency
     phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);

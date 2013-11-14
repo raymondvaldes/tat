@@ -3,8 +3,6 @@
 
 double x_ini10(const int x_ref);
 
-void parameters_update(struct parameterStr * parametersStr, const size_t N);
-
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         const struct parameter_constraints*,
                         struct parameterStr * parametersStr),
@@ -13,14 +11,8 @@ void fdjac2(void (*fcn)(int, int, double *, double *, int *,
             const struct parameter_constraints*st_ptr,
             struct parameterStr * parametersStr);
 
-double kthermalProj(const std::vector<std::vector<double>>& T,const double eta,
-                  const double eta_j, const size_t j, const size_t n,
-                  const double k_ref);
-
 void parametersStrSetup(struct parameterStr *parametersStr,
                         const enum XParaNames *xParametersNames);
-
-void mainMemoryFree(struct parameterStr * parametersStr);
 
 class Mesh
 {
@@ -235,15 +227,15 @@ public:
     class expEquipment::Laser *laser;  //TODO MUST REMOVE
     struct thermalAnalysisMethod::PopTea *poptea;
 
-    ///layer 1
-    double diffusivity_coat;
-    double effusivity_coat;
-    double diffusivity_sub;
-    double effusivity_sub;
+//    ///layer 1
+//    double diffusivity_coat;
+//    double effusivity_coat;
+//    double diffusivity_sub;
+//    double effusivity_sub;
 
     ///nondimensional
-    double a_sub;
-    double gamma;
+//    double a_sub;
+//    double gamma;
 
     ///parameter estimation
     double *emissionExperimental;

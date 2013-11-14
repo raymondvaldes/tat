@@ -141,7 +141,8 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         pStruct->poptea->TBCsystem.optical.R1 = 0.8;
 
         pStruct->poptea->TBCsystem.coating.lambda = 0.57;
-        parameters_agamma_update(pStruct, 1.44, 2.1e6);
+//        parameters_agamma_update(pStruct, 1.44, 2.1e6);  //BUG??
+        pStruct->poptea->TBCsystem.updateCoat();
 
         ///Set heating constraints
         constexpr double l_min = .2;
