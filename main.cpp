@@ -108,18 +108,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
    - coating volumetric heat capacity [J/m^3/K]
    - k = m_k * T + b_k
   */
-//  pStruct->detector_lam = 5e-6;
-
-//  pStruct->k1_thermal->offset = 1.44;
-//  pStruct->k2_thermal->offset = 12.7;
-
-//  pStruct->psi1_thermal->offset = 2.1e6;
-//  pStruct->psi2_thermal->offset = 3.44e6;
-
-//  pStruct->k1_thermal->slope = 0;
-//  pStruct->psi1_thermal->slope = 0;
-//  pStruct->k2_thermal->slope = 0;
-//  pStruct->psi2_thermal->slope = 0;
 
   /// Heat Flux
   /* - units [W/m^2] */

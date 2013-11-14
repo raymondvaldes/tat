@@ -236,8 +236,10 @@ public:
     struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
-    double diffusivity_coat, effusivity_coat;
-    double diffusivity_sub, effusivity_sub;
+    double diffusivity_coat;
+    double effusivity_coat;
+    double diffusivity_sub;
+    double effusivity_sub;
 
     ///nondimensional
     double a_coat;
@@ -260,14 +262,14 @@ public:
     enum XParaNames *xParameters95Names;
     enum XParaNames *xParametersNames;
     int iterC;
+
     size_t L_end;
     size_t N;
 
     ///other
     std::string dir;
-    double q_surface;
-//    double detector_lam;
     double bNorm;
+    double q_surface;
     size_t iter;
 
     void thermalSetup(const double lmin, const double lmax,
@@ -282,7 +284,6 @@ public:
     void EmissionNoise(const emissionNoiseParameters myEmissionNoise,
                        const double* emissionNominal,
                        const double lmin, const double lmax);
-
 
 private:
     void updateNMeasurements(const size_t Lend_);
