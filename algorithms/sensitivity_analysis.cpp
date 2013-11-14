@@ -178,15 +178,7 @@ void perturbationTest(const size_t m, const size_t n,
                        << parametersStr->a_sub << "\t"
                        << parametersStr->gamma << "\t"
                        << parametersStr->poptea->TBCsystem.optical.Emit1 << "\t"
-<<<<<<< HEAD
                        << parametersStr->poptea->TBCsystem.coating.lambda << "\t"
-=======
-<<<<<<< HEAD
-                       << parametersStr->poptea->TBCsystem.coating.lambda << "\t"
-=======
-                       << parametersStr->lambda << "\t"
->>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
->>>>>>> 767ffc7badb18dbb744ebe7f8765b53b81b63fa5
                        << parametersStr->poptea->TBCsystem.optical.R1 << "\t"
                        << msearea;
                 myfile << "\n";
@@ -258,15 +250,8 @@ void calibrationSweep(
     const double a_subTrue    = pStructp->a_sub;
     const double R1True       = pStructp->poptea->TBCsystem.optical.R1;
     const double E_sigmaTrue  = pStructp->poptea->TBCsystem.optical.Emit1;
-<<<<<<< HEAD
     const double lambdaTrue   = pStructp->poptea->TBCsystem.coating.lambda;
-=======
-<<<<<<< HEAD
-    const double lambdaTrue   = pStructp->poptea->TBCsystem.coating.lambda;
-=======
-    const double lambdaTrue   = pStructp->lambda;
->>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
->>>>>>> 767ffc7badb18dbb744ebe7f8765b53b81b63fa5
+
 
 ///Prepare output file
     std::ofstream myfile;
@@ -339,15 +324,7 @@ void parameterUncertainty(const size_t n,
     const double a_subTrue    = parametersStr->a_sub;
     const double R1True       = parametersStr->poptea->TBCsystem.optical.R1;
     const double E_sigmaTrue  = parametersStr->poptea->TBCsystem.optical.Emit1;
-<<<<<<< HEAD
     const double lambdaTrue   = parametersStr->poptea->TBCsystem.coating.lambda;
-=======
-<<<<<<< HEAD
-    const double lambdaTrue   = parametersStr->poptea->TBCsystem.coating.lambda;
-=======
-    const double lambdaTrue   = parametersStr->lambda;
->>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
->>>>>>> 767ffc7badb18dbb744ebe7f8765b53b81b63fa5
     const double R0True       = parametersStr->poptea->TBCsystem.optical.R0;
     const double lminN  = parametersStr->laser->l_thermal[0];
     const double lmaxN  = parametersStr->laser->l_thermal[parametersStr->L_end-1];
@@ -543,15 +520,7 @@ void fitting(size_t P, size_t N,
                << pStruct->a_sub << "\t"
                << pStruct->poptea->TBCsystem.optical.Emit1 << "\t"
                << pStruct->poptea->TBCsystem.optical.R1<< "\t"
-<<<<<<< HEAD
                << pStruct->poptea->TBCsystem.coating.lambda << "\t"
-=======
-<<<<<<< HEAD
-               << pStruct->poptea->TBCsystem.coating.lambda << "\t"
-=======
-               << pStruct->lambda << "\t"
->>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
->>>>>>> 767ffc7badb18dbb744ebe7f8765b53b81b63fa5
                << pStruct->MSE << "\n";
 
         printPEstimates(N, pStruct);
