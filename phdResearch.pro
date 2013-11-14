@@ -11,6 +11,7 @@ CONFIG += c++11
 unix:!macx{
 INCLUDEPATH += /usr/lib/
 INCLUDEPATH += /usr/include/
+LIBS += -L/usr/lib -lgomp
 LIBS += -L/usr/lib -lgsl -lgslcblas -lm
 LIBS += -L/usr/lib -lboost_system -lboost_filesystem
 }
@@ -53,8 +54,6 @@ QMAKE_CXXFLAGS += -march=native
 
 #linker flags
 QMAKE_LFLAGS += -fopenmp
-
-
 
 ##Optional#########################
 #compiler warnings

@@ -104,12 +104,11 @@ public:
     Emission(const double detector_lam_, const double T_ref_,
              const class Mesh* mesh, const double beamR_,
              const double E_sigma_);
-
+    ~Emission();
     double phase2D(std::vector< std::vector< std::vector< double > > >
                            &Temperature) const;
     double phase1D(std::vector< std::vector< double > > &Temperature) const;
     double phase1D(const class Temperature Tprofile) const;
-    void cleanup(void) const;
 
 private:
     mutable double *Ib;
@@ -117,7 +116,7 @@ private:
 
     const double detector_lam, T_ref;
     const class Mesh*mesh;
-    const double beamR,  E_sigma;
+    const double beamR, E_sigma;
 
     double mean(const double x1, const double x2) const;
     double drArea(const double r0_, const double r1_) const;

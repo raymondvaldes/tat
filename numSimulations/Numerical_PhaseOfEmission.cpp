@@ -7,7 +7,6 @@ double PhaseOfEmission1DNum(const int flag,
                                pStruct->mesh->M2);
 
     /// Acquire Numerical Temperature
-
     temperature_1D(pStruct->poptea->TBCsystem.coating.lambda,
                    pStruct->poptea->TBCsystem.optical.R1,
                    pStruct->q_surface,
@@ -21,20 +20,17 @@ double PhaseOfEmission1DNum(const int flag,
 
     ///Initiate emission model
     const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
-    const class Emission*
-    emission = new class Emission(pStruct->poptea->expSetup.detector.wavelength,
+    const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
                                   pStruct->poptea->TBCsystem.Temp.base,
                                   pStruct->mesh,
                                   pStruct->bNorm *Lcoat,
                                   pStruct->poptea->TBCsystem.optical.Emit1
                                   );
     const double
-    phase2 = emission->phase1D(Tprofile);
+    phase2 = emission.phase1D(Tprofile);
 
     ///clean up
     Tprofile.cleanup();
-    emission->cleanup();
-    delete emission;
 
     return phase2;
 }
@@ -71,19 +67,13 @@ double PhaseOfEmission2DAna(const int flag,
     heatmodel2DAna.cleanup();
 
     ///Initiate emission model
-    const class Emission* emission;
-    emission = new class Emission(pStruct->poptea->expSetup.detector.wavelength,
+    const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
                                   pStruct->poptea->TBCsystem.Temp.referance,
                                   pStruct->mesh,
                                   pStruct->bNorm * Lcoat,
                                   pStruct->poptea->TBCsystem.optical.Emit1
                                   );
-
-    const double phase2d = emission->phase2D(T2DProfile);
-
-    ///clean up
-    emission->cleanup();
-    delete emission;
+    const double phase2d = emission.phase2D(T2DProfile);
 
     return phase2d;
 }

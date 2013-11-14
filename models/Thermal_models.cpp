@@ -705,6 +705,12 @@ Emission::Emission(const double detector_lam_, const double T_ref_,
     EmissionTime = new double[mesh->Nend];
 }
 
+Emission::~Emission()
+{
+  delete[] Ib;
+  delete[] EmissionTime;
+}
+
 double Emission::mean(const double x1, const double x2) const
 {
     return (x1+x2) / 2;
@@ -916,11 +922,11 @@ double Emission::phase1D(const class Temperature Tprofile) const
     return OAPemission[2];
 }
 
-void Emission::cleanup(void) const
-{
-    delete[] Ib;
-    delete[] EmissionTime;
-}
+//void Emission::cleanup(void) const
+//{
+//    delete[] Ib;
+//    delete[] EmissionTime;
+//}
 
 
 namespace thermal{
