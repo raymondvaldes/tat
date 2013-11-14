@@ -235,15 +235,15 @@ public:
     class expEquipment::Laser *laser;  //TODO MUST REMOVE
     struct thermalAnalysisMethod::PopTea *poptea;
 
-//    ///layer 1
-//    double diffusivity_coat;
-//    double effusivity_coat;
-//    double diffusivity_sub;
-//    double effusivity_sub;
+    ///layer 1
+    double diffusivity_coat;
+    double effusivity_coat;
+    double diffusivity_sub;
+    double effusivity_sub;
 
-//    ///nondimensional
-//    double a_sub;
-//    double gamma;
+    ///nondimensional
+    double a_sub;
+    double gamma;
 
     ///parameter estimation
     double *emissionExperimental;

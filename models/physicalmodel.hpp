@@ -119,8 +119,6 @@ struct TBCsystem
               struct temperatureScale Temp_, struct radiativeSysProp optical_,
               double radius_);
     double gamma(void);
-    double epsilon(void);
-    double a_coat(void);
     double a_sub(void);
     void updateCoat(const double gamma, const double a_sub);
 };

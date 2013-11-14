@@ -11,10 +11,6 @@ namespace thermalAnalysisMethod
       struct parameterEstimation::settings Settings;
       struct parameterEstimation::unknownList unknownParameters;
 
-//      struct emission model and heat model
-//      parameter estimation settings - this means ftol etc
-//      parameter estimation algorithms -
-//      parameter estimation constraints
       PopTea(struct expEquipment::setup expSetup_,
              struct physicalModel::TBCsystem TBCsystem_,
              class ThermalModel thermalModel_,

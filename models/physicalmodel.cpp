@@ -161,16 +161,16 @@ layer::layer(struct property kthermal_, struct property psithermal_,
 
 double layer::opticalPenetration(void)
 {
-    return lambda*depth;
+  return lambda*depth;
 }
 
 double layer::thermalDiffusivity(void)
 {
-    return thermal::effusivity(kthermal.offset, psithermal.offset);
+  return thermal::effusivity(kthermal.offset, psithermal.offset);
 }
 double layer::thermalEffusivity(void)
 {
-    return thermal::effusivity(kthermal.offset, psithermal.offset);
+  return thermal::effusivity(kthermal.offset, psithermal.offset);
 }
 
 
@@ -186,27 +186,21 @@ TBCsystem::TBCsystem(struct layer coating_, struct layer substrate_,
 
 double TBCsystem::gamma(void)
 {
-    return 0;
+  return substrate.thermalEffusivity() / coating.thermalEffusivity();
 }
-double TBCsystem::epsilon(void)
-{
-    return 0;
-}
-double TBCsystem::a_coat(void)
-{
-    return 0;
-}
+
 double TBCsystem::a_sub(void)
 {
-    return 0;
+  return sqrt(substrate.thermalDiffusivity() / coating.thermalDiffusivity());
 }
+
 void TBCsystem::updateCoat(const double gamma, const double a_sub)
 {
   const double effusivity_coat = substrate.thermalEffusivity() / gamma;
   const double diffusivty_coat = substrate.thermalDiffusivity() / pow(a_sub,2);
 
   coating.psithermal.offset = effusivity_coat / sqrt(diffusivty_coat);
-  coating.kthermal.offset = coating.psithermal.offset *= diffusivty_coat;
+  coating.kthermal.offset = coating.psithermal.offset * diffusivty_coat;
   return;
 }
 

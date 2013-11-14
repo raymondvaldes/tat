@@ -174,7 +174,6 @@ int paramter_estimation(const size_t m, const size_t n,
                         x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
                         xpredicted[i] = pStruct->a_sub;
                         break;
-
                     case E1 :
                         pStruct->poptea->TBCsystem.optical.Emit1 =
                         x_limiter2(x[i], pc_ptr->E_sigma_min,
