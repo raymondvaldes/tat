@@ -200,8 +200,15 @@ double TBCsystem::a_sub(void)
 {
     return 0;
 }
+void TBCsystem::updateCoat(const double gamma, const double a_sub)
+{
+  const double effusivity_coat = substrate.thermalEffusivity() / gamma;
+  const double diffusivty_coat = substrate.thermalDiffusivity() / pow(a_sub,2);
 
-
+  coating.psithermal.offset = effusivity_coat / sqrt(diffusivty_coat);
+  coating.kthermal.offset = coating.psithermal.offset *= diffusivty_coat;
+  return;
+}
 
 labels::labels(const Name name_):name(name_){}
 

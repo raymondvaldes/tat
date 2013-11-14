@@ -122,6 +122,7 @@ struct TBCsystem
     double epsilon(void);
     double a_coat(void);
     double a_sub(void);
+    void updateCoat(const double gamma, const double a_sub);
 };
 
 }

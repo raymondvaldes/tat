@@ -235,10 +235,7 @@ void parameters_kcp_update(struct parameterStr* pStruct,
     pStruct->poptea->TBCsystem.coating.kthermal.offset = pStruct->poptea->TBCsystem.coating.psithermal.offset;
     pStruct->poptea->TBCsystem.coating.kthermal.offset *= pStruct->diffusivity_coat;
 
-
-
     return;
-
 }
 
 void parameters_agamma_update(struct parameterStr* pStruct,
@@ -258,13 +255,14 @@ void parameters_agamma_update(struct parameterStr* pStruct,
     pStruct->gamma /= pStruct->effusivity_coat ;
 
     pStruct->a_sub = pStruct->diffusivity_sub;
-    pStruct->a_sub /= pStruct->diffusivity_coat;
+    pStruct->a_sub/= pStruct->diffusivity_coat;
     pStruct->a_sub = sqrt( pStruct->a_sub );
 
     return;
 }
 
-double SOR(double **A, double *b,const size_t n,double *phi, double omega, double error)
+double SOR(double **A, double *b,const size_t n,double *phi, double omega,
+           double error)
 {
 	// omega is the relaxation parameter
 	double sigma;

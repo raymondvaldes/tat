@@ -132,7 +132,6 @@ private:
 };
 
 namespace thermal{
-
   double effusivity(const double k, const double rhoCp);
   double diffusivity(const double k, const double rhoCp);
 }
