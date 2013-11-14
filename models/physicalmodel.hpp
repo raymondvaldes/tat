@@ -72,22 +72,6 @@ public:
   Name getName(void);
 };
 
-struct layer
-{
-public:
-    struct property kthermal;
-    struct property psithermal;
-    double depth;
-    double lambda;
-
-    double c = 1;
-    double opticalPenetration(void);
-    double thermalDiffusivity(void);
-    double thermalEffusivity(void);
-    layer(struct property kthermal_, struct property psithermal_, double depth_,
-          double lambda_);
-};
-
 struct temperatureScale
 {
     double tolerance;
@@ -106,10 +90,27 @@ struct radiativeSysProp
     radiativeSysProp(const double R0_, const double R1_, const double Emit1_);
 };
 
-struct TBCsystem
+class layer
 {
-    struct layer coating;
-    struct layer substrate;
+public:
+    class property kthermal;
+    class property psithermal;
+    double depth;
+    double lambda;
+    double c = 1;
+
+    double opticalPenetration(void);
+    double thermalDiffusivity(void);
+    double thermalEffusivity(void);
+    layer(class property kthermal_, class property psithermal_, double depth_,
+          double lambda_);
+};
+
+class TBCsystem
+{
+public:
+    class layer coating;
+    class layer substrate;
     struct temperatureScale Temp;
     struct radiativeSysProp optical;
     double radius;
@@ -118,7 +119,7 @@ struct TBCsystem
     double gamma;
     double a_sub;
 
-    TBCsystem(struct layer coating_, struct layer substrate_,
+    TBCsystem(class layer coating_, class layer substrate_,
               struct temperatureScale Temp_, struct radiativeSysProp optical_,
               double radius_);
     double gammaEval(void);

@@ -92,49 +92,54 @@ double PhaseOfEmission2DAna(const int flag,
 double PhaseOfEmission1DAna(const int flag,
                             const struct parameterStr*const pStruct)
 {
-    /*See 2004 emission paper equation 19*/
-    const double omega1 = pStruct->laser->omegas[flag];
-    const double lambda = pStruct->poptea->TBCsystem.coating.lambda;
-    const double Esigma = pStruct->poptea->TBCsystem.optical.Emit1;
-    const double gamma  = pStruct->poptea->TBCsystem.gammaEval();
-    const double R1     = pStruct->poptea->TBCsystem.optical.R1;
-    const double L_coat = pStruct->poptea->TBCsystem.coating.depth;
-    const double k_c    = pStruct->poptea->TBCsystem.coating.kthermal.offset;
-    const double psi_c  = pStruct->poptea->TBCsystem.coating.psithermal.offset;
-    const double l = lthermal(L_coat,k_c,psi_c,omega1);
+  /*See 2004 emission paper equation 19*/
+  const double omega1 = pStruct->laser->omegas[flag];
+  const double lambda = pStruct->poptea->TBCsystem.coating.lambda;
+  const double Esigma = pStruct->poptea->TBCsystem.optical.Emit1;
+  const double gamma  = pStruct->poptea->TBCsystem.gammaEval();
+  const double R1     = pStruct->poptea->TBCsystem.optical.R1;
+  const double L_coat = pStruct->poptea->TBCsystem.coating.depth;
+  const double k_c    = pStruct->poptea->TBCsystem.coating.kthermal.offset;
+  const double psi_c  = pStruct->poptea->TBCsystem.coating.psithermal.offset;
+  const double l = lthermal(L_coat,k_c,psi_c,omega1);
 
-//#define  _i std::complex<double>(0.,1.)
-    constexpr std::complex<double> _i_ (0.0, 1.0);
+  constexpr std::complex<double> _i_ (0.0, 1.0);
 
-    std::complex<double> M, N, A, B, v, u, t;
-    M = 1;
-    M -= sqrt(_i_) * lambda / l * sinh( sqrt(_i_)/l ) / sinh( 1/lambda ) ;
-    M /=  gamma * cosh( sqrt(_i_)/l ) + sinh( sqrt(_i_)/l ) ;
+  std::complex<double>
+  M = 1;
+  M -= sqrt(_i_) * lambda / l * sinh( sqrt(_i_)/l ) / sinh( 1/lambda ) ;
+  M /=  gamma * cosh( sqrt(_i_)/l ) + sinh( sqrt(_i_)/l ) ;
 
-    N = 1 ;
-    N -= _i_ * lambda * lambda / l / l * cosh( sqrt(_i_)/l ) / cosh( 1/lambda ) ;
-    N /= gamma * cosh( sqrt(_i_)/l ) + sinh( sqrt(_i_)/l ) ;
+  std::complex<double>
+  N = 1 ;
+  N -= _i_ * lambda * lambda / l / l * cosh( sqrt(_i_)/l ) / cosh( 1/lambda ) ;
+  N /= gamma * cosh( sqrt(_i_)/l ) + sinh( sqrt(_i_)/l ) ;
 
-    A =  1 + R1 ;
-    A *= 1 - exp(-2/lambda);
-    A *= M;
+  std::complex<double>
+  A =  1 + R1 ;
+  A *= 1 - exp(-2/lambda);
+  A *= M;
 
-    B =  1 - R1 ;
-    B *= 1 + exp(-2/lambda) ;
-    B *= N;
+  std::complex<double>
+  B =  1 - R1 ;
+  B *= 1 + exp(-2/lambda) ;
+  B *= N;
 
-    v = Esigma * sqrt(_i_) / l - 4 * gamma ;
+  const std::complex<double>
+  v = Esigma * sqrt(_i_) / l - 4 * gamma ;
 
-    u  = 2;
-    u *=  1. - lambda * lambda / l / l * _i_  ;
+  std::complex<double>
+  u  = 2;
+  u *=  1. - lambda * lambda / l / l * _i_  ;
 
-    t = A + B;
+  const std::complex<double>
+  t = A + B;
 
-    double
-    phase_emit_ana_C = std::arg( v/u*t + 4 * ( 1. - R1 * exp(-2/lambda) ) ) ;
-    phase_emit_ana_C -= M_PI_2;
+  double
+  phase_emit_ana_C = std::arg( v/u*t + 4 * ( 1. - R1 * exp(-2/lambda) ) ) ;
+  phase_emit_ana_C -= M_PI_2;
 
-    return phase_emit_ana_C;
+  return phase_emit_ana_C;
 }
 
 
@@ -144,6 +149,11 @@ Temperature::Temperature(const size_t Nend_, const size_t M2_)
 {
     temperature = new double[Nend * M2];
 }
+
+//Temperature::~Temperature()
+//{
+//  delete[]temperature;
+//}
 
 double Temperature::eval(const size_t i, const size_t j) const
 {
@@ -159,11 +169,6 @@ void Temperature::cleanup(void)
 {
   delete[]temperature;
 }
-
-//Temperature::~Temperature()
-//{
-//  delete[]temperature;
-//}
 
 emissionNoiseParameters::emissionNoiseParameters(const double a1_,
                                                  const double b1_,

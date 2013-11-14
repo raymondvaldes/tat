@@ -15,183 +15,171 @@ void temperature_1D(const double lambda,
   const double L_substrate  = TBCsystem.substrate.depth;
   const double Ttol         = TBCsystem.Temp.tolerance;
   const double T_rear       = TBCsystem.Temp.rear;
-//  const double lambda       =
-//  const double R1           =
-//  const double q_surface    =
-//  const size_t iter         =
-//  const double omega1       =
-//  const double epsilon      =  
   const class property *k1_thermal      = &TBCsystem.coating.kthermal;
   const class property *k2_thermal      = &TBCsystem.substrate.kthermal;
   const class property *psi1_thermal    = &TBCsystem.coating.psithermal;
   const class property *psi2_thermal    = &TBCsystem.substrate.psithermal;
 
-    class matrixArrays *MatrixArrays = NULL;
-    MatrixArrays = new class matrixArrays(mesh->M2);
+  class matrixArrays *MatrixArrays = NULL;
+  MatrixArrays = new class matrixArrays(mesh->M2);
 
-    std::vector< std::vector<double> >
-    b_steady(mesh->Nend-1, std::vector<double>(mesh->M2));
-
+  std::vector< std::vector<double> >
+  b_steady(mesh->Nend-1, std::vector<double>(mesh->M2));
 
 /// Setup initial conditions for the transient temperature field:
-    const double l_thermal = lthermal(L_coat, k1_thermal->offset,
-                                      psi1_thermal->offset, omega1);
-    const std::complex<double>
-    Tinfo = Tac1D_ana(mesh->z_real[0] / L_coat, R0, R1, epsilon,
-                      lambda, l_thermal);
+  const double l_thermal = lthermal(L_coat, k1_thermal->offset,
+                                    psi1_thermal->offset, omega1);
+  const std::complex<double>
+  Tinfo = Tac1D_ana(mesh->z_real[0] / L_coat, R0, R1, epsilon,
+                    lambda, l_thermal);
 
-    double
-    amplitude_T_analytical = fabs ( Tinfo );
-    amplitude_T_analytical *= L_coat * It * (1 - R0) ;
-    amplitude_T_analytical /= k1_thermal->offset ;
+  double
+  amplitude_T_analytical = fabs ( Tinfo );
+  amplitude_T_analytical *= L_coat * It * (1 - R0) ;
+  amplitude_T_analytical /= k1_thermal->offset ;
 
-    const double Iplus0 = Iplus0Func(R0, R1, lambda);
-    const double Iplus1 = Iplus1Func(R0, R1, lambda);
+  const double Iplus0 = Iplus0Func(R0, R1, lambda);
+  const double Iplus1 = Iplus1Func(R0, R1, lambda);
 
-    for(size_t j=0 ; j <= mesh->M1; ++j)
-    {
-        Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R1, lambda,
-                                      Is, L_coat, (L_coat+L_substrate)/L_coat,
-                                      k2_thermal->offset, Iplus0, Iplus1,
-                                      q_surface, k1_thermal->offset));
-    }
+  for(size_t j=0 ; j <= mesh->M1; ++j)
+  {
+    Tprofile.assgn(0,j, Tss1D_ana(mesh->z_real[j] / L_coat, R1, lambda, Is,
+                                  L_coat, (L_coat+L_substrate)/L_coat,
+                                  k2_thermal->offset, Iplus0, Iplus1,
+                                  q_surface, k1_thermal->offset));
+  }
 
-    for (size_t j = mesh->M1+1; j < mesh->M2; j++)
-    {
-        Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R1, lambda,
-                                      Is,  L_coat, (L_coat+L_substrate)/L_coat,
-                                      k2_thermal->offset, Iplus0, Iplus1,
-                                      q_surface, k1_thermal->offset));
-    }
+  for (size_t j = mesh->M1+1; j < mesh->M2; j++)
+  {
+      Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R1, lambda,
+                                    Is,  L_coat, (L_coat+L_substrate)/L_coat,
+                                    k2_thermal->offset, Iplus0, Iplus1,
+                                    q_surface, k1_thermal->offset));
+  }
 
 ///Transient Solution
-    /*
-     Transient Solution
-     Convergence criteria should be dependent on the amplitude variation of the
-     transient field.  Ex. At low thermal penetrations the amplitudes will be
-     very small and need a much tighter amplitude control.
-    */
+  /*
+   Transient Solution
+   Convergence criteria should be dependent on the amplitude variation of the
+   transient field.  Ex. At low thermal penetrations the amplitudes will be
+   very small and need a much tighter amplitude control.
+  */
+  {
+    const double tau_ref = tau_0(omega1);
+    MatrixArrays->B4 = abMatrixPrepopulate(MatrixArrays->B1,
+                                           MatrixArrays->B2,
+                                           MatrixArrays->B3, mesh->M1,
+                                           MatrixArrays->M2, mesh->tau,
+                                           L_coat, L_substrate, tau_ref,
+                                           mesh->eta, q_surface,
+                                           mesh->z_jplus,
+                                           mesh->z_jminus, mesh->z_j,
+                                           mesh->d_eta_plus, mesh->deltaZ,
+                                           mesh->d_eta_minus);
+
+
+    double *genProfile = new double[mesh->M1+1];
+    const double opt = L_coat * lambda ;
+    heatingProfile(opt, lambda, R1, Iplus0, Iplus1, mesh->z_jplus,
+                   mesh->z_jminus, mesh->z_j, genProfile, mesh->M1);
+
+    for (size_t n = 0 ; n < mesh->Nend-1 ; ++n )
     {
-        const double tau_ref = tau_0(omega1);
-        MatrixArrays->B4 = abMatrixPrepopulate(MatrixArrays->B1,
-                                               MatrixArrays->B2,
-                                               MatrixArrays->B3, mesh->M1,
-                                               MatrixArrays->M2, mesh->tau,
-                                               L_coat, L_substrate, tau_ref,
-                                               mesh->eta, q_surface,
-                                               mesh->z_jplus,
-                                               mesh->z_jminus, mesh->z_j,
-                                               mesh->d_eta_plus, mesh->deltaZ,
-                                               mesh->d_eta_minus);
-
-
-        double *genProfile = new double[mesh->M1+1];
-        const double opt = L_coat * lambda ;
-        heatingProfile(opt, lambda, R1, Iplus0, Iplus1, mesh->z_jplus,
-                       mesh->z_jminus, mesh->z_j, genProfile, mesh->M1);
-
-        for (size_t n = 0 ; n < mesh->Nend-1 ; ++n )
-        {
-            bMatrixPrepopulate1(n, MatrixArrays->B2, b_steady[n], mesh->M1,
-                                MatrixArrays->M2, mesh->tau, Is, It, L_coat,
-                                tau_ref, R1, Iplus1, omega1, mesh->z_jminus,
-                                mesh->z_j, mesh->deltaZ, genProfile, T_rear);
-        }
-        delete []genProfile;
+      bMatrixPrepopulate1(n, MatrixArrays->B2, b_steady[n], mesh->M1,
+                          MatrixArrays->M2, mesh->tau, Is, It, L_coat,
+                          tau_ref, R1, Iplus1, omega1, mesh->z_jminus,
+                          mesh->z_j, mesh->deltaZ, genProfile, T_rear);
     }
+    delete []genProfile;
+  }
 
 /*
-    Rewrite abtransient so that it accepts two temperature arrays.  This will
-    allow a quicker temperature lookup in the Ab_transient function.  Also,
-    wrap these functions in
+  Rewrite abtransient so that it accepts two temperature arrays.  This will
+  allow a quicker temperature lookup in the Ab_transient function.  Also,
+  wrap these functions in
 */
 
-    for ( size_t p = 1 ; p <= iter ; ++p )
+  for ( size_t p = 1 ; p <= iter ; ++p )
+  {
+    for ( size_t n = 0 ; n < mesh->Nend-1 ; ++n )
     {
-        for ( size_t n = 0 ; n < mesh->Nend-1 ; ++n )
-        {
-            for (size_t j = 0 ; j < mesh->M2 ; ++j )
-            {
-                MatrixArrays->b[j]  = b_steady[n][j];
-            }
+      for (size_t j = 0 ; j < mesh->M2 ; ++j )
+      {
+          MatrixArrays->b[j]  = b_steady[n][j];
+      }
 
-            Ab_transient(n, MatrixArrays->A1, MatrixArrays->A2,
-                         MatrixArrays->A3, MatrixArrays->b, Tprofile,
-                         mesh->M1, MatrixArrays->M2, MatrixArrays->B1,
-                         MatrixArrays->B2, MatrixArrays->B3, MatrixArrays->B4,
-                         k1_thermal, k2_thermal, psi1_thermal, psi2_thermal);
+      Ab_transient(n, MatrixArrays->A1, MatrixArrays->A2,
+                   MatrixArrays->A3, MatrixArrays->b, Tprofile,
+                   mesh->M1, MatrixArrays->M2, MatrixArrays->B1,
+                   MatrixArrays->B2, MatrixArrays->B3, MatrixArrays->B4,
+                   k1_thermal, k2_thermal, psi1_thermal, psi2_thermal);
 
-            solveMatrix(MatrixArrays->M2 , MatrixArrays->A1 , MatrixArrays->A2 ,
-                        MatrixArrays->A3 , MatrixArrays->b ,
-                        MatrixArrays->Temperature);
+      solveMatrix(MatrixArrays->M2 , MatrixArrays->A1 , MatrixArrays->A2 ,
+                  MatrixArrays->A3 , MatrixArrays->b ,
+                  MatrixArrays->Temperature);
 
 
-            for (size_t j = 0 ; j < mesh->M2 ; ++j )
-            {
-                Tprofile.assgn(n+1,j, MatrixArrays->Temperature[j]);
-            }
-        }
-
-
-
-        /// error will be greatest at the surface
-        {
-             /*Setup Convergence Criteria
-             Convergence criteria should be dependent on the amplitude variation
-             of the transient field.  Ex. At low thermal penetrations the
-             amplitudes will be very small and need a much tighter amplitude
-             control.*/
-            double ss_error1 = 0;
-
-            if (p == 0) ss_error1 = 1;
-
-            double
-            ss_error = fabs(Tprofile.eval(mesh->Nend-1, 0) -
-                            Tprofile.eval(0, 0));
-            double ss_errorD = 1;
-
-            if( p >1 )
-            {
-                ss_errorD = fabs(ss_error - ss_error1);
-                ss_errorD /= amplitude_T_analytical ;
-            }
-
-            ss_error1 = ss_error;
-
-            static const size_t iter_min = 3  ;
-            const double TtolPercentage = Ttol *fabs(amplitude_T_analytical);
-
-            if( p >= iter_min )
-            {
-                if (ss_errorD < TtolPercentage)
-                {
-//                    std::cout << p << "\t";
-                    break;
-                }
-                else if (ss_error < TtolPercentage)
-                {
-//                    std::cout << p << "\t";
-
-                    break;
-                }
-                else if (p >= iter)
-                {
-//                    std::cout << p << "\t";
-                    break;
-                }
-            }
-        }
-
-
-        for(size_t j = 0 ; j < mesh->M2; ++j)
-        {
-           Tprofile.assgn(0,j, Tprofile.eval(mesh->Nend-1,j) );
-        }
-
+      for (size_t j = 0 ; j < mesh->M2 ; ++j )
+      {
+        Tprofile.assgn(n+1,j, MatrixArrays->Temperature[j]);
+      }
     }
-    delete MatrixArrays;
 
-    return;
+
+
+      /// error will be greatest at the surface
+    {
+       /*Setup Convergence Criteria
+       Convergence criteria should be dependent on the amplitude variation
+       of the transient field.  Ex. At low thermal penetrations the
+       amplitudes will be very small and need a much tighter amplitude
+       control.*/
+      double ss_error1 = 0;
+
+      if (p == 0) ss_error1 = 1;
+
+      double
+      ss_error = fabs(Tprofile.eval(mesh->Nend-1, 0) -
+                      Tprofile.eval(0, 0));
+      double ss_errorD = 1;
+
+      if( p >1 )
+      {
+        ss_errorD = fabs(ss_error - ss_error1);
+        ss_errorD /= amplitude_T_analytical ;
+      }
+
+      ss_error1 = ss_error;
+
+      static const size_t iter_min = 3  ;
+      const double TtolPercentage = Ttol *fabs(amplitude_T_analytical);
+
+      if( p >= iter_min )
+      {
+        if (ss_errorD < TtolPercentage)
+        {
+            break;
+        }
+        else if (ss_error < TtolPercentage)
+        {
+          break;
+        }
+        else if (p >= iter)
+        {
+          break;
+        }
+      }
+    }
+
+
+    for(size_t j = 0 ; j < mesh->M2; ++j)
+    {
+       Tprofile.assgn(0,j, Tprofile.eval(mesh->Nend-1,j) );
+    }
+  }
+  delete MatrixArrays;
+
+  return;
 }
 
 

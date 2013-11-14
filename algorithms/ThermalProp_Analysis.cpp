@@ -422,61 +422,61 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
 {
 
 ///Transform estimates from kappa space to k space based on the limits imposed
-    for(int i = 0; i < N; ++i)
+  for(int i = 0; i < N; ++i)
+  {
+    switch ( parametersStr->xParametersNames[i] )
     {
-        switch ( parametersStr->xParametersNames[i] )
-        {
-            case asub :
-                parametersStr->poptea->TBCsystem.a_sub =
-                x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
-                break;
-            case E1 :
-                parametersStr->poptea->TBCsystem.optical.Emit1 =
-                x_limiter2(x[i], pc_ptr->E_sigma_min, pc_ptr->E_sigma_max);
-                break;
-            case gammaEff :
-                parametersStr->poptea->TBCsystem.gamma =
-                x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
-                break;
-            case R1 :
-                parametersStr->poptea->TBCsystem.optical.R1 =
-                x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
-                break;
-            case lambda :
-                parametersStr->poptea->TBCsystem.coating.lambda =
-                x_limiter2(x[i], pc_ptr->lambda_min, pc_ptr->lambda_max);
-                break;
-            case R0 :
-                parametersStr->poptea->TBCsystem.optical.R0 =
-                x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
-                break;
-            default:
-                std::cout << "\nSwitch Error!!\n";
-                exit(-68);
-                break;
-        }
+      case asub :
+          parametersStr->poptea->TBCsystem.a_sub =
+          x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
+          break;
+      case E1 :
+          parametersStr->poptea->TBCsystem.optical.Emit1 =
+          x_limiter2(x[i], pc_ptr->E_sigma_min, pc_ptr->E_sigma_max);
+          break;
+      case gammaEff :
+          parametersStr->poptea->TBCsystem.gamma =
+          x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
+          break;
+      case R1 :
+          parametersStr->poptea->TBCsystem.optical.R1 =
+          x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
+          break;
+      case lambda :
+          parametersStr->poptea->TBCsystem.coating.lambda =
+          x_limiter2(x[i], pc_ptr->lambda_min, pc_ptr->lambda_max);
+          break;
+      case R0 :
+          parametersStr->poptea->TBCsystem.optical.R0 =
+          x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
+          break;
+      default:
+          std::cout << "\nSwitch Error!!\n";
+          exit(-68);
+          break;
     }
+  }
 
 ///Update dependent parameters
-    parametersStr->poptea->TBCsystem.updateCoat();
+  parametersStr->poptea->TBCsystem.updateCoat();
 
 /// Estimates the phase of emission at each heating frequency
-    phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);
+  phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);
 
 /// Evaluate Objective function
-    for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
-    {
-       fvec[n] =
-       parametersStr->emissionExperimental[n] - parametersStr->predicted[n] ;
-       parametersStr->fvec[n] = fvec[n];
-    }
+  for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
+  {
+     fvec[n] =
+     parametersStr->emissionExperimental[n] - parametersStr->predicted[n] ;
+     parametersStr->fvec[n] = fvec[n];
+  }
 
 /// Print stuff to terminal
-    parametersStr->MSE = MSE(parametersStr->L_end,
-                             parametersStr->emissionExperimental,
-                             parametersStr->predicted);
-    printPEstimates(N, parametersStr);
-    return;
+  parametersStr->MSE = MSE(parametersStr->L_end,
+                           parametersStr->emissionExperimental,
+                           parametersStr->predicted);
+  printPEstimates(N, parametersStr);
+  return;
 }
 
 

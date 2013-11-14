@@ -3,8 +3,6 @@
 
 namespace expEquipment{
 
-
-
 struct Detector
 {
     double wavelength;

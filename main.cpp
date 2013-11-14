@@ -208,13 +208,13 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //Many fit test
   if (true)
   {
-      constexpr size_t interants = 1;
-      for(size_t nn = 0; nn < pStruct->L_end; ++nn )
-      {
-          pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
-      }
-      fitting(pStruct->L_end, pStruct->N, ParaEstSetting, &paraConstraints,
-              pStruct, xInitial, interants, factorMax, factorScale);
+    constexpr size_t interants = 1;
+    for(size_t nn = 0; nn < pStruct->L_end; ++nn )
+    {
+        pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
+    }
+    fitting(pStruct->L_end, pStruct->N, ParaEstSetting, &paraConstraints,
+            pStruct, xInitial, interants, factorMax, factorScale);
   }
 
   //Prepare figures and data for paper Sensitivity

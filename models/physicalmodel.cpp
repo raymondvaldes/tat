@@ -153,7 +153,7 @@ radiativeSysProp::radiativeSysProp(double R0_, double R1_, double Emit1_)
     : R0(R0_), R1(R1_), Emit1(Emit1_)
 {}
 
-layer::layer(struct property kthermal_, struct property psithermal_,
+layer::layer(class property kthermal_, class property psithermal_,
              double depth_, double lambda_)
     : kthermal(kthermal_), psithermal(psithermal_), depth(depth_),
       lambda(lambda_)
@@ -176,7 +176,7 @@ double layer::thermalEffusivity(void)
 
 
 
-TBCsystem::TBCsystem(struct layer coating_, struct layer substrate_,
+TBCsystem::TBCsystem(class layer coating_, class layer substrate_,
                      struct temperatureScale Temp_,
                      struct radiativeSysProp optical_,
                      double radius_)
