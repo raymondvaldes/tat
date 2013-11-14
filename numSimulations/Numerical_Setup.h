@@ -242,10 +242,9 @@ public:
     double effusivity_sub;
 
     ///nondimensional
-    double a_coat;
+//    double a_coat;
     double a_sub;
     double gamma;
-//    double epsilon;
 
     ///parameter estimation
     double *emissionExperimental;
