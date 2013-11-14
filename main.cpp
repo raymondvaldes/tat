@@ -84,7 +84,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   // Model system
   constexpr double detector_rad = .25e-3;
   constexpr double R_domain = detector_rad;
-  pStruct->detector_rad = detector_rad;
+//  pStruct->detector_rad = detector_rad
 //  pStruct->R_domain = R_domain;
 
   constexpr double L_coat = 71.7e-6;

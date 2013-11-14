@@ -236,7 +236,6 @@ public:
     struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
-//    double lambda;
     double diffusivity_coat, effusivity_coat;
     double diffusivity_sub, effusivity_sub;
 
@@ -269,7 +268,7 @@ public:
     double q_surface;
     double detector_lam, bNorm;
     size_t iter;
-    double detector_rad;
+//    double detector_rad;
 
     void thermalSetup(const double lmin, const double lmax,
                       const size_t LendMin);

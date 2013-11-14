@@ -524,10 +524,6 @@ void fitting(size_t P, size_t N,
                << pStruct->MSE << "\n";
 
         printPEstimates(N, pStruct);
-//        for(size_t j=0; j< N; ++j)
-//        {
-//            xInitial[j] = xSave[j];
-//        }
         xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
                 x_ini10(.8), x_ini10(0.57)};
 
