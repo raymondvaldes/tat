@@ -22,7 +22,7 @@ double PhaseOfEmission1DNum(const int flag,
     ///Initiate emission model
     const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
     const class Emission*
-    emission = new class Emission(pStruct->detector_lam,
+    emission = new class Emission(pStruct->poptea->expSetup.detector.wavelength,
                                   pStruct->poptea->TBCsystem.Temp.base,
                                   pStruct->mesh,
                                   pStruct->bNorm *Lcoat,
@@ -71,7 +71,7 @@ double PhaseOfEmission2DAna(const int flag,
 
     ///Initiate emission model
     const class Emission* emission;
-    emission = new class Emission(pStruct->detector_lam,
+    emission = new class Emission(pStruct->poptea->expSetup.detector.wavelength,
                                   pStruct->poptea->TBCsystem.Temp.referance,
                                   pStruct->mesh,
                                   pStruct->bNorm * Lcoat,

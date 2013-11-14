@@ -84,9 +84,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   // Model system
   constexpr double detector_rad = .25e-3;
   constexpr double R_domain = detector_rad;
-//  pStruct->detector_rad = detector_rad
-//  pStruct->R_domain = R_domain;
-
   constexpr double L_coat = 71.7e-6;
   constexpr double L_substrate = L_coat *99;
 
@@ -111,7 +108,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
    - coating volumetric heat capacity [J/m^3/K]
    - k = m_k * T + b_k
   */
-  pStruct->detector_lam = 5e-6;
+//  pStruct->detector_lam = 5e-6;
 
 //  pStruct->k1_thermal->offset = 1.44;
 //  pStruct->k2_thermal->offset = 12.7;

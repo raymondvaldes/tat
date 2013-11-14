@@ -266,9 +266,9 @@ public:
     ///other
     std::string dir;
     double q_surface;
-    double detector_lam, bNorm;
+//    double detector_lam;
+    double bNorm;
     size_t iter;
-//    double detector_rad;
 
     void thermalSetup(const double lmin, const double lmax,
                       const size_t LendMin);
