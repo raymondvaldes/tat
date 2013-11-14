@@ -89,8 +89,13 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
   constexpr double L_coat = 71.7e-6;
   constexpr double L_substrate = L_coat *99;
+<<<<<<< HEAD
 //  pStruct->lambda = .57;
 //  pStruct->lambda_Sub = .1;
+=======
+  pStruct->lambda = .57;
+  pStruct->lambda_Sub = .1;
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
 
   //Optical Properties
   const double R0 = 0.2;

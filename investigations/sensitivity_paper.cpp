@@ -140,7 +140,11 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         pStruct->poptea->TBCsystem.optical.Emit1 = 42;
 //        pStruct->opticalProp->R1 = 0.8;
         pStruct->poptea->TBCsystem.optical.R1 = 0.8;
+<<<<<<< HEAD
 //        pStruct->lambda = 0.57;
+=======
+        pStruct->lambda = 0.57;
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
         parameters_agamma_update(pStruct, 1.44, 2.1e6);
 
         ///Set heating constraints

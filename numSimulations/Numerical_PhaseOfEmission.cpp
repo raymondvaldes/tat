@@ -9,7 +9,11 @@ double PhaseOfEmission1DNum(const int flag,
     /// Acquire Numerical Temperature
 
 
+<<<<<<< HEAD
     temperature_1D(pStruct->poptea->TBCsystem.coating.lambda,
+=======
+    temperature_1D(pStruct->lambda,
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
                    pStruct->poptea->TBCsystem.optical.R1,
                    pStruct->q_surface,
                    pStruct->iter,
@@ -47,12 +51,18 @@ double PhaseOfEmission2DAna(const int flag,
     const double k_coat  = pStruct->poptea->TBCsystem.coating.kthermal.offset;
     const double psi_coat= pStruct->poptea->TBCsystem.coating.psithermal.offset;
     const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
+<<<<<<< HEAD
     const double csub = pStruct->poptea->TBCsystem.substrate.c;
     const double ccoat = pStruct->poptea->TBCsystem.coating.c;
 
     const class HeatModel2DAna heatmodel2DAna(pStruct->poptea->TBCsystem.optical.R0,
                                               pStruct->poptea->TBCsystem.optical.R1,
                                               pStruct->poptea->TBCsystem.coating.lambda,
+=======
+    const class HeatModel2DAna heatmodel2DAna(pStruct->poptea->TBCsystem.optical.R0,
+                                              pStruct->poptea->TBCsystem.optical.R1,
+                                              pStruct->lambda,
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
                                               pStruct->laser->It,
                                               csub, pStruct->a_sub,
                                               pStruct->gamma, pStruct->bNorm,
@@ -94,7 +104,11 @@ double PhaseOfEmission1DAna(const int flag,
 {
     /*See 2004 emission paper equation 19*/
     const double omega1 = pStruct->laser->omegas[flag];
+<<<<<<< HEAD
     const double lambda = pStruct->poptea->TBCsystem.coating.lambda;
+=======
+    const double lambda = pStruct->lambda;
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
     const double Esigma = pStruct->poptea->TBCsystem.optical.Emit1;
     const double gamma  = pStruct->gamma;
     const double R1     = pStruct->poptea->TBCsystem.optical.R1;
