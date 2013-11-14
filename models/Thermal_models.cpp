@@ -925,6 +925,7 @@ void Emission::cleanup(void) const
 
 namespace thermal{
 
+<<<<<<< HEAD
 double effusivity(const double k, const double rhoCp)
 {
   return sqrt(k * rhoCp);
@@ -935,4 +936,14 @@ double diffusivity(const double k, const double rhoCp)
   return k / rhoCp;
 }
 
+=======
+  double effusivity(const double k, const double rhoCp)
+  {
+      return sqrt(k * rhoCp);
+  }
+  double diffusivity(const double k, const double rhoCp)
+  {
+      return k / rhoCp;
+  }
+>>>>>>> d0cb3661a02f7cd2c53fe0f3acf367b728ce2327
 }
