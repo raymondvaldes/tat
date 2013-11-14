@@ -79,6 +79,7 @@ public:
     struct property psithermal;
     double depth;
     double lambda;
+
     double c = 1;
 
     double opticalPenetration(void);

@@ -9,6 +9,7 @@ double PhaseOfEmission1DNum(const int flag,
     /// Acquire Numerical Temperature
 
 
+
     temperature_1D(pStruct->poptea->TBCsystem.coating.lambda,
                    pStruct->poptea->TBCsystem.optical.R1,
                    pStruct->q_surface,

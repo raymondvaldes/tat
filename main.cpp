@@ -92,6 +92,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 //  pStruct->lambda = .57;
 //  pStruct->lambda_Sub = .1;
 
+
   //Optical Properties
   const double R0 = 0.2;
   const double R1 = 0.8;
