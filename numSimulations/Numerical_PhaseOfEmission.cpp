@@ -3,36 +3,35 @@
 double PhaseOfEmission1DNum(const int flag,
                             const struct parameterStr *const pStruct)
 {
-    class Temperature Tprofile(pStruct->mesh->Nend,
-                               pStruct->mesh->M2);
+  class Temperature Tprofile(pStruct->mesh->Nend,
+                             pStruct->mesh->M2);
 
-    /// Acquire Numerical Temperature
-    temperature_1D(pStruct->poptea->TBCsystem.coating.lambda,
-                   pStruct->poptea->TBCsystem.optical.R1,
-                   pStruct->q_surface,
-                   pStruct->iter,
-                   pStruct->laser->omegas[flag],
-                   pStruct->poptea->TBCsystem.gammaEval(),
-                   pStruct->mesh, Tprofile,
-                   pStruct->poptea->expSetup.laser,
-                   pStruct->poptea->TBCsystem
-                   );
+  /// Acquire Numerical Temperature
+  temperature_1D(pStruct->poptea->TBCsystem.coating.lambda,
+                 pStruct->poptea->TBCsystem.optical.R1,
+                 pStruct->q_surface,
+                 pStruct->iter,
+                 pStruct->laser->omegas[flag],
+                 pStruct->poptea->TBCsystem.gammaEval(),
+                 pStruct->mesh, Tprofile,
+                 pStruct->poptea->expSetup.laser,
+                 pStruct->poptea->TBCsystem
+                 );
 
-    ///Initiate emission model
-    const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
-    const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
-                                  pStruct->poptea->TBCsystem.Temp.base,
-                                  pStruct->mesh,
-                                  pStruct->bNorm *Lcoat,
-                                  pStruct->poptea->TBCsystem.optical.Emit1
-                                  );
-    const double
-    phase2 = emission.phase1D(Tprofile);
+  ///Initiate emission model
+  const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
+  const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
+                                pStruct->poptea->TBCsystem.Temp.base,
+                                pStruct->mesh,
+                                pStruct->bNorm *Lcoat,
+                                pStruct->poptea->TBCsystem.optical.Emit1
+                                );
+  const double
+  phase2 = emission.phase1D(Tprofile);
 
-    ///clean up
-    Tprofile.cleanup();
-
-    return phase2;
+  ///clean up
+  Tprofile.cleanup();
+  return phase2;
 }
 
 double PhaseOfEmission2DAna(const int flag,
@@ -137,7 +136,8 @@ double PhaseOfEmission1DAna(const int flag,
 Temperature::Temperature(const size_t Nend_, const size_t M2_)
 : Nend(Nend_), M2(M2_)
 {
-    temperature = new double[Nend * M2];
+//  temperature.resize(Nend * M2);
+  temperature = new double[Nend_ * M2_];
 }
 
 //Temperature::~Temperature()

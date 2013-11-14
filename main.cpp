@@ -2,7 +2,7 @@
 
 int main( int /*argc*/, char** /*argv[]*/ )
 {
-  ///Setup global timer
+  ///Setup global timer and start
   class stopwatch globalStopWatch;
 
   /// Mesh Parameters
