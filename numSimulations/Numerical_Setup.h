@@ -236,14 +236,10 @@ public:
     struct thermalAnalysisMethod::PopTea *poptea;
 
     ///layer 1
-    double lambda;
+//    double lambda;
     double diffusivity_coat, effusivity_coat;
-//    double c_coat = 1.;
 
-    ///layer 2
-    double lambda_Sub;
     double diffusivity_sub, effusivity_sub;
-//    double c_sub = 1.;
 
     ///nondimensional
     double a_coat;

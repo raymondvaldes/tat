@@ -68,7 +68,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
                     diag[i] = pStruct->poptea->TBCsystem.optical.R1 ;
                     break;
                 case lambda :
-                    diag[i] = pStruct->lambda;
+                diag[i] = pStruct->poptea->TBCsystem.coating.lambda;
                     break;
                 case R0 :
                     diag[i] = pStruct->poptea->TBCsystem.optical.R0;

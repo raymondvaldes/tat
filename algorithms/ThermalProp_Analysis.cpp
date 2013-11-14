@@ -196,10 +196,10 @@ int paramter_estimation(const size_t m, const size_t n,
                         break;
 
                     case lambda :
-                        pStruct->lambda =
+                        pStruct->poptea->TBCsystem.coating.lambda =
                         x_limiter2(x[i], pc_ptr->lambda_min,
                                    pc_ptr->lambda_max);
-                        xpredicted[i] = pStruct->lambda;
+                        xpredicted[i] = pStruct->poptea->TBCsystem.coating.lambda;
                         break;
 
                     case R0 :
@@ -398,7 +398,7 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
                 std::cout << parametersStr->poptea->TBCsystem.optical.R1;
                 break;
             case lambda :
-                std::cout << parametersStr->lambda;
+                std::cout << parametersStr->poptea->TBCsystem.coating.lambda;
                 break;
             case R0 :
                 std::cout << parametersStr->poptea->TBCsystem.optical.R0;
@@ -444,7 +444,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                 x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
                 break;
             case lambda :
-                parametersStr->lambda =
+                parametersStr->poptea->TBCsystem.coating.lambda =
                 x_limiter2(x[i], pc_ptr->lambda_min, pc_ptr->lambda_max);
                 break;
             case R0 :
