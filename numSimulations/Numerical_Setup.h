@@ -244,7 +244,8 @@ public:
     ///nondimensional
     double a_coat;
     double a_sub;
-    double gamma, epsilon;
+    double gamma;
+//    double epsilon;
 
     ///parameter estimation
     double *emissionExperimental;

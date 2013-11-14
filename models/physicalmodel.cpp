@@ -164,6 +164,17 @@ double layer::opticalPenetration(void)
     return lambda*depth;
 }
 
+double layer::thermalDiffusivity(void)
+{
+    return thermal::effusivity(kthermal.offset, psithermal.offset);
+}
+double layer::thermalEffusivity(void)
+{
+    return thermal::effusivity(kthermal.offset, psithermal.offset);
+}
+
+
+
 
 TBCsystem::TBCsystem(struct layer coating_, struct layer substrate_,
                      struct temperatureScale Temp_,
@@ -172,6 +183,24 @@ TBCsystem::TBCsystem(struct layer coating_, struct layer substrate_,
     : coating(coating_), substrate(substrate_), Temp(Temp_), optical(optical_),
       radius(radius_)
 {}
+
+double TBCsystem::gamma(void)
+{
+    return 0;
+}
+double TBCsystem::epsilon(void)
+{
+    return 0;
+}
+double TBCsystem::a_coat(void)
+{
+    return 0;
+}
+double TBCsystem::a_sub(void)
+{
+    return 0;
+}
+
 
 
 labels::labels(const Name name_):name(name_){}

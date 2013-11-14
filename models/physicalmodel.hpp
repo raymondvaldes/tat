@@ -82,8 +82,8 @@ public:
 
     double c = 1;
     double opticalPenetration(void);
-    double diffusivity(void);
-    double effusivity(void);
+    double thermalDiffusivity(void);
+    double thermalEffusivity(void);
     layer(struct property kthermal_, struct property psithermal_, double depth_,
           double lambda_);
 };
@@ -106,13 +106,6 @@ struct radiativeSysProp
     radiativeSysProp(const double R0_, const double R1_, const double Emit1_);
 };
 
-
-struct nonDimensional
-{
-  double gamma;
-
-};
-
 struct TBCsystem
 {
     struct layer coating;
@@ -120,12 +113,15 @@ struct TBCsystem
     struct temperatureScale Temp;
     struct radiativeSysProp optical;
     double radius;
-    double gamma;
     double Rtc;
 
     TBCsystem(struct layer coating_, struct layer substrate_,
               struct temperatureScale Temp_, struct radiativeSysProp optical_,
               double radius_);
+    double gamma(void);
+    double epsilon(void);
+    double a_coat(void);
+    double a_sub(void);
 };
 
 }
