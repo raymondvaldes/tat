@@ -79,7 +79,15 @@ public:
     struct property psithermal;
     double depth;
     double lambda;
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+    double diffusivity;
+    double effusivity;
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
+>>>>>>> 767ffc7badb18dbb744ebe7f8765b53b81b63fa5
     double c = 1;
 
     double opticalPenetration(void);

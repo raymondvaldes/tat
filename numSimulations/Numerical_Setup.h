@@ -238,8 +238,21 @@ public:
     ///layer 1
 //    double lambda;
     double diffusivity_coat, effusivity_coat;
+<<<<<<< HEAD
     double diffusivity_sub, effusivity_sub;
 
+=======
+<<<<<<< HEAD
+=======
+    double c_coat = 1.;
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
+
+    double diffusivity_sub, effusivity_sub;
+<<<<<<< HEAD
+=======
+    double c_sub = 1.;
+>>>>>>> 1d46982be55f85a2901dfa2adfc63ade72ea0b22
+>>>>>>> 767ffc7badb18dbb744ebe7f8765b53b81b63fa5
 
     ///nondimensional
     double a_coat;
