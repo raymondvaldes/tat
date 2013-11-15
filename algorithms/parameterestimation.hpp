@@ -91,7 +91,6 @@ public:
   double *emissionCurrent = nullptr;
 
   double MSE, MSEinitial, MSETol, fvecTotal;
-  double variance;
 };
 
 }

@@ -231,8 +231,6 @@ public:
   double *fvec = nullptr;
 
   double MSETol;
-//  double fvecTotal;
-  double variance;
 
   ///poptea structures
   double *emissionExperimental;
