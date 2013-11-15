@@ -187,7 +187,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                               unknownParameters);
   pStruct->poptea = &poptea;
 
-
   // Initial Guess
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};

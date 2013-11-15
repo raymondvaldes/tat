@@ -16,7 +16,7 @@ namespace thermalAnalysisMethod
     class ThermalModelSelection thermalModel;
     struct parameterEstimation::settings Settings;
     class  parameterEstimation::unknownList unknownParameters;
-    struct parameterEstimation::LMA_workingArrays LMA_workspace;
+    class parameterEstimation::LMA_workingArrays LMA_workspace;
 
     PopTea(class expEquipment::setup expSetup_,
            class physicalModel::TBCsystem TBCsystem_,

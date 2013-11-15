@@ -227,7 +227,7 @@ public:
   size_t *xParameters95;
   enum XParaNames *xParametersNames;
   enum XParaNames *xParameters95Names;
-  size_t N95;
+//  size_t N95;
 
   double *fjac = nullptr;
   double *predicted = nullptr;

@@ -1512,7 +1512,7 @@ parameterStr::parameterStr(const size_t d)
   xParametersNames   = new enum XParaNames[d];
   xParameters95Names = new enum XParaNames[d];
 
-  N95 = d;
+//  N95 = d;
 }
 
 void parameterStr::updateNMeasurements(const size_t Lend_)
