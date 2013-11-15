@@ -128,7 +128,7 @@ int paramter_estimation(const size_t m, const size_t n,
     initial guesses. This is let to run a fixed number of iterations. */
     constexpr double ExpStddev = 0;
     const double ExpVarianceEst = ExpStddev * ExpStddev;
-    pStruct->fvecTotal = SobjectiveLS(pStruct->L_end,
+    pStruct->poptea->LMA_workspace.fvecTotal = SobjectiveLS(pStruct->L_end,
                                       pStruct->emissionExperimental,
                                       pStruct->predicted);
     const size_t v1 = pStruct->L_end - n;
@@ -140,12 +140,12 @@ int paramter_estimation(const size_t m, const size_t n,
     }
     else
     {
-      reduceChiSquare = (pStruct->fvecTotal / ExpVarianceEst) / v1;
+      reduceChiSquare = (pStruct->poptea->LMA_workspace.fvecTotal / ExpVarianceEst) / v1;
     }
 
     if( reduceChiSquare < 2
        || ParaEstSetting.factor == factorMax
-       || pStruct->fvecTotal < pStruct->MSETol
+       || pStruct->poptea->LMA_workspace.fvecTotal < pStruct->MSETol
        )
     {
 

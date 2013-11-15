@@ -90,7 +90,7 @@ public:
   double *emissionNominal;
   double *emissionCurrent = nullptr;
 
-  double MSE, MSEinitial, MSETol, ChiSquare, fvecTotal;
+  double MSE, MSEinitial, MSETol, fvecTotal;
   double variance;
 };
 
