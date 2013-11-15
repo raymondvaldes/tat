@@ -53,17 +53,24 @@ public:
 
 struct settings
 {
-    double ftol;
-    double xtol;
-    double gtol;
-    size_t maxfev;
-    double epsfcn;
-    double factor;
-    size_t mode;
-    size_t nprint;
+  double ftol;
+  double xtol;
+  double gtol;
+  size_t maxfev;
+  double epsfcn;
+  double factor;
+  size_t mode;
+  size_t nprint;
 
-    settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
-             double epsfcn_, double factor_, size_t mode_, size_t nprint_);
+  settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
+           double epsfcn_, double factor_, size_t mode_, size_t nprint_);
+};
+
+struct LMA_workingArrays
+{
+
+
+
 };
 
 }

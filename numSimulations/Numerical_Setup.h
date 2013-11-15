@@ -220,15 +220,13 @@ struct parameterStr
 public:
   class Mesh *mesh;
   class expEquipment::Laser *laser;  //TODO MUST REMOVE
-  struct thermalAnalysisMethod::PopTea *poptea;
-
+  class thermalAnalysisMethod::PopTea *poptea;
 
   ///parameter estimation class structures
   size_t *xParameters95, *xParameters;
   enum XParaNames *xParameters95Names;
   enum XParaNames *xParametersNames;
 
-  //parameter estimation class/structures
   double *fjac = nullptr;
   double *predicted = nullptr;
   double *fvec = nullptr;
@@ -246,6 +244,7 @@ public:
   size_t L_end;
   size_t N;
   double q_surface;
+
   void thermalSetup(const double lmin, const double lmax,
                     const size_t LendMin);
   void EmissionNoise(const emissionNoiseParameters myNoise,
@@ -260,8 +259,6 @@ public:
   parameterStr(const size_t d);
   ~parameterStr();
 
-  void parametersStrSetup(const enum XParaNames *xParametersNames_,
-                          const double L_coat, const double L_substrate);
 
 private:
   void updateNMeasurements(const size_t Lend_);

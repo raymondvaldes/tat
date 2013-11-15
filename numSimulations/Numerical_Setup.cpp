@@ -1545,7 +1545,6 @@ void parameterStr::thermalSetup(const double lmin_, const double lmax_,
   updateNMeasurements(L_end);
 }
 
-
 void parameterStr::EmissionNoise(const class
                                  emissionNoiseParameters myNoise,
                                  const double* emissionNominal_,

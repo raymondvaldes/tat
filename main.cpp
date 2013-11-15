@@ -203,8 +203,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
       pStruct->xParameters95Names[i] = pStruct->xParametersNames[i];
   }
 
-//  pStruct->parametersStrSetup(xParametersNames, L_coat, L_substrate);
-
 // Populate the experimental phase values in parameters99
   pStruct->thermalSetup(l_min, l_max, LendMinDecade);
   phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
