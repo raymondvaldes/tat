@@ -233,7 +233,7 @@ public:
 //  double MSE;
 //  double MSEinitial;
   double MSETol;
-  double ChiSquare;
+//  double ChiSquare;
   double fvecTotal;
   double variance;
 
