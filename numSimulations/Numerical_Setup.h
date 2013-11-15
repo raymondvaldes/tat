@@ -231,8 +231,8 @@ public:
   double *predicted = nullptr;
   double *fvec = nullptr;
 
-  double Ttol, MSE, MSEinitial, MSETol, ChiSquare, coscheck, fvecTotal;
-  double fvecTol, variance;
+  double MSE, MSEinitial, MSETol, ChiSquare, fvecTotal;
+  double variance;
   size_t iterPE, N95;
 
   ///poptea structures
@@ -253,12 +253,13 @@ public:
 
   ///other
   std::string dir;
-  size_t iter;
 
+  //numerical tolerance and iterations
+  double Ttol;
+  size_t iter;
 
   parameterStr(const size_t d);
   ~parameterStr();
-
 
 private:
   void updateNMeasurements(const size_t Lend_);

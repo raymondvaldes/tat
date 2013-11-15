@@ -127,8 +127,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct property psithermalCoating(psicoat_off, psicoat_slope);
 
   constexpr double lambdaCoat = 0.57;
-  struct physicalModel::layer coating(kthermalCoating,
-                                      psithermalCoating, L_coat, lambdaCoat);
+  struct physicalModel::layer coating(kthermalCoating, psithermalCoating,
+                                      L_coat, lambdaCoat);
 
   constexpr double ksub_off = 12.7;
   constexpr double ksub_slope = 0;
@@ -187,6 +187,15 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                               thermalModel, ParaEstSetting,
                                               unknownParameters);
   pStruct->poptea = &poptea;
+
+  std::cout << sizeof(expSetup) << "\t" <<
+               sizeof(CO2Laser)    << "\t" <<
+               sizeof(Emissiondetector)  <<"\n";exit(-2);
+
+
+
+//  coating, substrate, TemperatureScale,
+//                                          radProp, R_domain
 
   // Initial Guess
   double *xInitial = nullptr;
