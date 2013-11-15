@@ -1508,7 +1508,7 @@ parameterStr::parameterStr(const size_t d)
              :  N(d)
 {
 //  xParameters         = new size_t[d];
-  xParameters95       = new size_t[d];
+//  xParameters95       = new size_t[d];
   xParametersNames   = new enum XParaNames[d];
   xParameters95Names = new enum XParaNames[d];
 
@@ -1633,8 +1633,8 @@ parameterStr::~parameterStr()
     delete [] predicted;
     delete [] fvec;
 
-//    delete [] xParameters;
-    delete [] xParameters95;
+//    delete [] xParameters; //removed
+//    delete [] xParameters95; //removed
 
     delete [] xParametersNames;
     delete [] xParameters95Names;

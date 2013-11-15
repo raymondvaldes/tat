@@ -84,7 +84,6 @@ size_t unknownList::Nsize(void)
 
 LMA_workingArrays::LMA_workingArrays(const size_t d)
 {
-//  xParameters         = new size_t[d];
   xParameters95       = new size_t[d];
   xParametersNames   = new enum XParaNames[d];
   xParameters95Names = new enum XParaNames[d];
@@ -100,7 +99,6 @@ LMA_workingArrays::~LMA_workingArrays(void)
 //  delete [] predicted;
 //  delete [] fvec;
 
-//  delete [] xParameters;
   delete [] xParameters95;
 
   delete [] xParametersNames;
