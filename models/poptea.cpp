@@ -12,12 +12,19 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),
     Settings(Settings_),
-    unknownParameters(unknownParameters_),
-    LMA_workspace(unknownParameters.Nsize())
-{}
+    unknownParameters(unknownParameters_)
+{
+  const size_t d = unknownParameters.Nsize();
+  xParametersNames   = new enum XParaNames[d];
+  xParameters95Names = new enum XParaNames[d];
+  N95 = d;
+}
 
 PopTea::~PopTea(void)
-{}
+{
+  delete [] xParametersNames;
+  delete [] xParameters95Names;
+}
 
 double PopTea::bEval(void)
 {

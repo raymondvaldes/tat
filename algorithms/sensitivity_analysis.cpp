@@ -47,14 +47,14 @@ void perturbationTest(const size_t m, const size_t n,
 ///Implement iteration
     if( parametersStr->N >1)
     {
-        parametersStr->N = parametersStr->poptea->LMA_workspace.N95-1;
+        parametersStr->N = parametersStr->poptea->N95-1;
     }
 
 ///Reset parameters to be fitted
     for(size_t currentI = 0; currentI <=  parametersStr->N ; ++currentI)
     {
         size_t iter = 0;
-        for(size_t i = 0; i < parametersStr->poptea->LMA_workspace.N95 ; ++i)
+        for(size_t i = 0; i < parametersStr->poptea->N95 ; ++i)
         {
             if( currentI != i )
             {
@@ -192,7 +192,7 @@ void perturbationTest(const size_t m, const size_t n,
     delete []xpredicted;
 
 ///RESET
-    parametersStr->N = parametersStr->poptea->LMA_workspace.N95;
+    parametersStr->N = parametersStr->poptea->N95;
     for(size_t i = 0; i < parametersStr->N ; ++i)
     {
         parametersStr->xParametersNames[i]

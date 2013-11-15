@@ -57,7 +57,8 @@ private:
   std::vector<class unknown> vectorUnknowns;
 
 public:
-  void addUnknown(physicalModel::labels::Name name, const double lower,
+  void addUnknown(physicalModel::labels::Name name,
+                  const double lower,
                   const double upper);
   size_t Nsize(void);
 };
@@ -80,10 +81,6 @@ struct settings
 class LMA_workingArrays
 {
 public:
-  size_t *xParameters95;
-  enum XParaNames *xParameters95Names;
-  enum XParaNames *xParametersNames;
-
   double *fjac = nullptr;
   double *predicted = nullptr;
   double *fvec = nullptr;
@@ -95,10 +92,6 @@ public:
 
   double MSE, MSEinitial, MSETol, ChiSquare, fvecTotal;
   double variance;
-  size_t N95;
-
-  LMA_workingArrays(const size_t d);
-  ~LMA_workingArrays(void);
 };
 
 }

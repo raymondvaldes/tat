@@ -11,6 +11,10 @@ namespace thermalAnalysisMethod
 //      parameterEstimationArrays <- fvec...etc...
 //    }
   public:
+    enum XParaNames *xParameters95Names;  //MUST BE REMOVEd
+    enum XParaNames *xParametersNames;    // MUST BE REMOVED
+    size_t N95;                           //MUST BE REMOVED
+
     class expEquipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
     class ThermalModelSelection thermalModel;
