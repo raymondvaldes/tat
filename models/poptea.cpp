@@ -12,7 +12,11 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),
     Settings(Settings_),
-    unknownParameters(unknownParameters_)
+    unknownParameters(unknownParameters_),
+    LMA_workspace(unknownParameters.Nsize())
+{}
+
+PopTea::~PopTea(void)
 {}
 
 double PopTea::bEval(void)

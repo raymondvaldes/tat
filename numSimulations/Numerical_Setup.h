@@ -223,9 +223,11 @@ public:
   class thermalAnalysisMethod::PopTea *poptea;
 
   ///parameter estimation class structures
-  size_t *xParameters95, *xParameters;
-  enum XParaNames *xParameters95Names;
+  size_t *xParameters;
+  size_t *xParameters95;
   enum XParaNames *xParametersNames;
+  enum XParaNames *xParameters95Names;
+  size_t N95;
 
   double *fjac = nullptr;
   double *predicted = nullptr;
@@ -233,7 +235,6 @@ public:
 
   double MSE, MSEinitial, MSETol, ChiSquare, fvecTotal;
   double variance;
-  size_t iterPE, N95;
 
   ///poptea structures
   double *emissionExperimental;

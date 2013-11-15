@@ -42,8 +42,7 @@ int paramter_estimation(const size_t m, const size_t n,
       xinitial[i] = x[i];
   }
 
-  for(size_t iter = 1; iter <= pStruct->iterPE; iter++ )
-  {
+
     ///set initial guesses
     /// TODO put in function !
 //        std::cout << "hello!!" << "\t" <<  fabs(x[0] - 0);
@@ -252,7 +251,7 @@ int paramter_estimation(const size_t m, const size_t n,
     {
       x[i] = xinitial[i];
     }
-  }
+
 
   delete [] qtf;
   delete [] wa1;

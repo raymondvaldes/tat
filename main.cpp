@@ -58,7 +58,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
   pStruct->MSETol = 1e-8;
-  pStruct->iterPE = 1;
   constexpr double factorMax = 10;
   constexpr double factorScale = 5;
 
@@ -188,14 +187,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                               unknownParameters);
   pStruct->poptea = &poptea;
 
-  std::cout << sizeof(expSetup) << "\t" <<
-               sizeof(CO2Laser)    << "\t" <<
-               sizeof(Emissiondetector)  <<"\n";exit(-2);
-
-
-
-//  coating, substrate, TemperatureScale,
-//                                          radProp, R_domain
 
   // Initial Guess
   double *xInitial = nullptr;

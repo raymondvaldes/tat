@@ -1624,7 +1624,6 @@ void parameterStr::EmissionNoise(const class
     emissionExperimental[i] += M_PI_2 * noiseRandomGen;
   }
 }
-
 parameterStr::~parameterStr()
 {
     delete [] fjac;

@@ -43,7 +43,6 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
     ///Parameter Estimation Options
     pStruct->MSETol = 1e-8;
-    pStruct->iterPE = 1;
     int nfev;
     int info = 0;
 

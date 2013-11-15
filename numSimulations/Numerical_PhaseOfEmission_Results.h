@@ -13,22 +13,6 @@ inline double mean(const double a, const double b)
     return mean1;
 }
 
-enum XParaNames
-{
-    gammaEff,
-    asub,
-    E1,
-    R1,
-    lambda,
-    R0
-//    k_c,
-//    psi_c
-};
-
-
-
-
-
 struct funcClass
 {
   /*

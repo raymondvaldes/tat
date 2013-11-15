@@ -1,6 +1,17 @@
 #ifndef PARAMETERESTIMATION_HPP
 #define PARAMETERESTIMATION_HPP
 
+
+enum XParaNames
+{
+    gammaEff,
+    asub,
+    E1,
+    R1,
+    lambda,
+    R0
+};
+
 namespace parameterEstimation{
 
 class unknown
@@ -66,11 +77,28 @@ struct settings
            double epsfcn_, double factor_, size_t mode_, size_t nprint_);
 };
 
-struct LMA_workingArrays
+class LMA_workingArrays
 {
+public:
+  size_t *xParameters95, *xParameters;
+  enum XParaNames *xParameters95Names;
+  enum XParaNames *xParametersNames;
 
+  double *fjac = nullptr;
+  double *predicted = nullptr;
+  double *fvec = nullptr;
 
+  ///poptea structures
+  double *emissionExperimental;
+  double *emissionNominal;
+  double *emissionCurrent = nullptr;
 
+  double MSE, MSEinitial, MSETol, ChiSquare, fvecTotal;
+  double variance;
+  size_t N95;
+
+  LMA_workingArrays(const size_t d);
+  ~LMA_workingArrays(void);
 };
 
 }
