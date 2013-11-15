@@ -223,7 +223,7 @@ public:
   class thermalAnalysisMethod::PopTea *poptea;
 
   ///parameter estimation class structures
-  size_t *xParameters;
+//  size_t *xParameters;
   size_t *xParameters95;
   enum XParaNames *xParametersNames;
   enum XParaNames *xParameters95Names;

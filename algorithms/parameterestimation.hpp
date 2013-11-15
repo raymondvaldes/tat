@@ -80,7 +80,7 @@ struct settings
 class LMA_workingArrays
 {
 public:
-  size_t *xParameters95, *xParameters;
+  size_t *xParameters95;
   enum XParaNames *xParameters95Names;
   enum XParaNames *xParametersNames;
 
