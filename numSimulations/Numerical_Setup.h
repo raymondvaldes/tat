@@ -11,8 +11,6 @@ void fdjac2(void (*fcn)(int, int, double *, double *, int *,
             const struct parameter_constraints*st_ptr,
             struct parameterStr * parametersStr);
 
-void parametersStrSetup(struct parameterStr *parametersStr,
-                        const enum XParaNames *xParametersNames);
 
 class Mesh
 {
@@ -29,10 +27,10 @@ public:
 
     Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
          const double beta1_, const double split_);
+    ~Mesh();
 
     void meshUpdate(const double L_coat, const double L_substrate,
                     const double CO2Radius, const double Rdomain);
-    ~Mesh();
 
 private:
     const double beta1, split;
@@ -43,13 +41,10 @@ private:
                    double temp_variable_min, double temp_variable_max,
                    double min_goal, const size_t max_iterations);
     double z_eta(const double eta_, const double beta1_, const double beta2_);
-
     double find_beta2(const double L_coat, const double L_substrate);
     size_t discretizeSpace(const double L_coat, const double L_substrate);
-
     double z_eta(const double eta_);
     double D_eta(const double z_norm_);
-
     void zUpdate();
 
 };
@@ -223,51 +218,55 @@ struct parameterStr
 {
 
 public:
-    class Mesh *mesh;
-    class expEquipment::Laser *laser;  //TODO MUST REMOVE
-    struct thermalAnalysisMethod::PopTea *poptea;
+  class Mesh *mesh;
+  class expEquipment::Laser *laser;  //TODO MUST REMOVE
+  struct thermalAnalysisMethod::PopTea *poptea;
 
-    ///parameter estimation
-    double *emissionExperimental;
-    double *emissionNominal;
 
-    double *emissionCurrent = nullptr;
-    double *fjac = nullptr;
-    double *predicted = nullptr;
-    double *fvec = nullptr;
+  ///parameter estimation class structures
+  size_t *xParameters95, *xParameters;
+  enum XParaNames *xParameters95Names;
+  enum XParaNames *xParametersNames;
 
-    size_t *xParameters95, *xParameters;
-    double Ttol, MSE, MSEinitial, MSETol, ChiSquare, coscheck, fvecTotal;
-    double fvecTol, variance;
-    size_t iterPE, iterPEnum, N95;
-    enum XParaNames *xParameters95Names;
-    enum XParaNames *xParametersNames;
-    int iterC;
+  //parameter estimation class/structures
+  double *fjac = nullptr;
+  double *predicted = nullptr;
+  double *fvec = nullptr;
 
-    size_t L_end;
-    size_t N;
+  double Ttol, MSE, MSEinitial, MSETol, ChiSquare, coscheck, fvecTotal;
+  double fvecTol, variance;
+  size_t iterPE, N95;
 
-    ///other
-    std::string dir;
-    double bNorm;
-    double q_surface;
-    size_t iter;
+  ///poptea structures
+  double *emissionExperimental;
+  double *emissionNominal;
+  double *emissionCurrent = nullptr;
 
-    void thermalSetup(const double lmin, const double lmax,
-                      const size_t LendMin);
+  ///poptea experiment settings structures
+  size_t L_end;
+  size_t N;
+  double q_surface;
+  void thermalSetup(const double lmin, const double lmax,
+                    const size_t LendMin);
+  void EmissionNoise(const emissionNoiseParameters myNoise,
+                     const double* emissionNominal,
+                     const double lmin, const double lmax);
 
-    parameterStr(const size_t d, class Mesh *mesh_);
-    ~parameterStr();
-    void parametersStrSetup(const enum XParaNames *xParametersNames_,
-                            const double L_coat, const double L_substrate);
-    void update_b(const double radius, const double L);
-    void update_b(void);
-    void EmissionNoise(const emissionNoiseParameters myEmissionNoise,
-                       const double* emissionNominal,
-                       const double lmin, const double lmax);
+  ///other
+  std::string dir;
+  size_t iter;
+
+
+  parameterStr(const size_t d, class Mesh *mesh_);
+  ~parameterStr();
+
+  void parametersStrSetup(const enum XParaNames *xParametersNames_,
+                          const double L_coat, const double L_substrate);
+
+
 
 private:
-    void updateNMeasurements(const size_t Lend_);
+  void updateNMeasurements(const size_t Lend_);
 
 };
 

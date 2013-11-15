@@ -31,101 +31,99 @@ enum XParaNames
 
 struct funcClass
 {
-    /*
-    F:          the gsl_function which is the integrand
-    xlow:       lower integration limit
-    xhigh:      higher integration limit
-    abstol:     absolute tolerance
-    reltol:     relative tolerance
-    result:     a pointer to a gdouble in which stores the result
-    error:      a pointer to a gdobuel in which the function stores the
-                estimed error
-    */
+  /*
+  F:          the gsl_function which is the integrand
+  xlow:       lower integration limit
+  xhigh:      higher integration limit
+  abstol:     absolute tolerance
+  reltol:     relative tolerance
+  result:     a pointer to a gdouble in which stores the result
+  error:      a pointer to a gdobuel in which the function stores the
+              estimed error
+  */
 
-    const double* xvar;
-    const double* func;
-    const size_t  N;
+  const double* xvar;
+  const double* func;
+  const size_t  N;
 
-    size_t neval;
-    double epsabs = 1e-8;
-    double epsrel = 1e-8;
+  size_t neval;
+  double epsabs = 1e-8;
+  double epsrel = 1e-8;
 
-    double result, error;
-    int code;
-    const size_t limit = 1001;    //defines size of workspace
+  double result, error;
+  int code;
+  const size_t limit = 1001;    //defines size of workspace
 
-    ///Allocate pointer to interpolation iterator
-    gsl_interp_accel *acc   = gsl_interp_accel_alloc();
+  ///Allocate pointer to interpolation iterator
+  gsl_interp_accel *acc   = gsl_interp_accel_alloc();
 
-    ///Declare pointer to interpolations
-    gsl_spline *spline      = nullptr;
+  ///Declare pointer to interpolations
+  gsl_spline *spline      = nullptr;
 
-    ///Declare pointer to workspace
-    gsl_integration_workspace * workspace  = nullptr;
+  ///Declare pointer to workspace
+  gsl_integration_workspace * workspace  = nullptr;
 
-    funcClass(double* a, double* b, size_t c): xvar(a), func(b), N(c)
-    {
-        /*
-        The arguments include two arrays where
-            a ...independent array
-            b ...dependent array
-            c ...size of array
-        */
-        ///alloc space for the spline anbd assign to pointer
-        spline = gsl_spline_alloc(gsl_interp_cspline, N);
-        gsl_spline_init(spline, xvar, func, N);
-        workspace = gsl_integration_workspace_alloc (limit);
-    }
+  funcClass(double* a, double* b, size_t c): xvar(a), func(b), N(c)
+  {
+      /*The arguments include two arrays where
+          a ...independent array
+          b ...dependent array
+          c ...size of array */
+      ///alloc space for the spline anbd assign to pointer
+      spline = gsl_spline_alloc(gsl_interp_cspline, N);
+      gsl_spline_init(spline, xvar, func, N);
+      workspace = gsl_integration_workspace_alloc (limit);
+  }
 
-    double eval(const double xpos) const
-    {
-        if( xpos < xvar[0] || xpos > xvar[N-1] )
-        {
-            std::cout << "outside range!!\n\n"
-            <<xpos<<" is outside of range "<<xvar[0]<<"\t"<<xvar[N-1]<<"\n";
+  double eval(const double xpos) const
+  {
+      if( xpos < xvar[0] || xpos > xvar[N-1] )
+      {
+          std::cout << "outside range!!\n\n"
+          <<xpos<<" is outside of range "<<xvar[0]<<"\t"<<xvar[N-1]<<"\n";
 
-            exit(-71);
-            return 0;
-        }
+          exit(-71);
+          return 0;
+      }
 
-        return gsl_spline_eval(spline, xpos, acc);
-    }
+      return gsl_spline_eval(spline, xpos, acc);
+  }
 
-    static double CCallback(double d, void*params)
-    {
-        return static_cast<funcClass*>(params)->eval(d);
-    }
+  static double CCallback(double d, void*params)
+  {
+      return static_cast<funcClass*>(params)->eval(d);
+  }
 
-    double integrate_a_b(const double xlow, const double xhigh,
-                         const double epsabs_, const double epsrel_)
-    {
+  double integrate_a_b(const double xlow, const double xhigh,
+                       const double epsabs_, const double epsrel_)
+  {
 //        std::cout << "must debug - integrating outside domain"; exit(67);
-        //http://www.bnikolic.co.uk/nqm/1dinteg/gslgk.html
-        if( (xlow < xvar[0]) || (xhigh > xvar[N-1]) || (xlow > xhigh) )
-        {
-            std::cout << "\n\n" << std::setprecision(4) << (xlow < xvar[0]);
-            std::cout << "\t" << (xhigh > xvar[N-1]) << "\t" << (xlow > xhigh);
-            std::cout << "\t" << xlow <<"\t"<< xhigh << "\t" << xvar[0] << "\t";
-            std::cout << xvar[N-1] << "\n";
-            std::cout << "error - redefine integration domain"; exit(64);
-        }
+      //http://www.bnikolic.co.uk/nqm/1dinteg/gslgk.html
+      if( (xlow < xvar[0]) || (xhigh > xvar[N-1]) || (xlow > xhigh) )
+      {
+          std::cout << "\n\n" << std::setprecision(4) << (xlow < xvar[0]);
+          std::cout << "\t" << (xhigh > xvar[N-1]) << "\t" << (xlow > xhigh);
+          std::cout << "\t" << xlow <<"\t"<< xhigh << "\t" << xvar[0] << "\t";
+          std::cout << xvar[N-1] << "\n";
+          std::cout << "error - redefine integration domain"; exit(64);
+      }
 
-        gsl_function F;
-        F.function = &funcClass::CCallback;
-        F.params = this;
+      gsl_function F;
+      F.function = &funcClass::CCallback;
+      F.params = this;
 
-        code = gsl_integration_qng(&F, xlow, xhigh, epsabs_, epsrel_, &result,
-                                   &error, &neval);
-        return result;
-    }
+      code = gsl_integration_qng(&F, xlow, xhigh, epsabs_, epsrel_, &result,
+                                 &error, &neval);
+      return result;
+  }
 
-    void cleanup() const
-    {
-        gsl_spline_free(spline);
-        gsl_interp_accel_free(acc);
-        gsl_integration_workspace_free(workspace);
-        return;
-    }
+  void cleanup() const
+  {
+      gsl_spline_free(spline);
+      gsl_interp_accel_free(acc);
+      gsl_integration_workspace_free(workspace);
+      return;
+  }
 };
 
 class calibration_curves

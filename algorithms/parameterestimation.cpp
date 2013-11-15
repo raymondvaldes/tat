@@ -13,7 +13,7 @@ unknown::unknown(enum physicalModel::labels::Name name_,
                  const double upper_)
     :name(name_), constraint(lower_, upper_)
 {
-    setInitialGuess();
+    Initialauto();
 }
 
 unknown::unknown(enum physicalModel::labels::Name name_,
@@ -23,10 +23,46 @@ unknown::unknown(enum physicalModel::labels::Name name_,
     :name(name_), constraint(lower_, upper_), initialGuess(initialGuess_)
 {}
 
-void unknown::setInitialGuess(void)
+void unknown::Initialauto(void)
 {
-    initialGuess = average(constraint.lower, constraint.upper);
+  initialGuess = average(constraint.lower, constraint.upper);
 }
+
+void unknown::Initialset(const double initial)
+{
+  initialGuess = initial;
+}
+
+double unknown::initialVal(void)
+{
+  return initialGuess;
+}
+
+double unknown::bestfit(void)
+{
+  return bestfitval;
+}
+
+double unknown::upperBound(void)
+{
+  return constraint.upper;
+}
+double unknown::lowerBound(void)
+{  name.getName();
+  return constraint.lower;
+}
+
+void unknown::bestfitset(const double input)
+{
+  bestfitval = input;
+}
+
+enum physicalModel::labels::Name unknown::label(void)
+{
+  return name.getName();
+}
+
+
 
 unknown::bounds::bounds(const double lower_, const double upper_)
 :lower(lower_), upper(upper_){}

@@ -227,7 +227,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   delete[] xInitial;
   delete pStruct;
 
-
   globalStopWatch.displayTime();
   return 0;
 }

@@ -15,4 +15,9 @@ PopTea::PopTea(struct expEquipment::setup expSetup_,
     unknownParameters(unknownParameters_)
 {}
 
+double PopTea::bEval(void)
+{
+  return expSetup.laser.radius / TBCsystem.coating.depth;
+}
+
 }

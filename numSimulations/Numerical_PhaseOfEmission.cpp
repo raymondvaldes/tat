@@ -23,7 +23,7 @@ double PhaseOfEmission1DNum(const int flag,
   const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
                                 pStruct->poptea->TBCsystem.Temp.base,
                                 pStruct->mesh,
-                                pStruct->bNorm *Lcoat,
+                                pStruct->poptea->bEval() *Lcoat,
                                 pStruct->poptea->TBCsystem.optical.Emit1
                                 );
   const double
@@ -50,7 +50,7 @@ double PhaseOfEmission2DAna(const int flag,
                                               pStruct->laser->It,
                                               csub, pStruct->poptea->TBCsystem.a_subEval(),
                                               pStruct->poptea->TBCsystem.gammaEval(),
-                                              pStruct->bNorm,
+                                              pStruct->poptea->bEval(),
                                               k_coat, Lcoat, psi_coat,
                                               ccoat,
                                               pStruct->poptea->TBCsystem.substrate.lambda,
@@ -69,7 +69,7 @@ double PhaseOfEmission2DAna(const int flag,
     const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
                                   pStruct->poptea->TBCsystem.Temp.referance,
                                   pStruct->mesh,
-                                  pStruct->bNorm * Lcoat,
+                                  pStruct->poptea->bEval() * Lcoat,
                                   pStruct->poptea->TBCsystem.optical.Emit1
                                   );
     const double phase2d = emission.phase2D(T2DProfile);

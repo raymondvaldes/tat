@@ -3,7 +3,7 @@
 
 namespace parameterEstimation{
 
-struct unknown
+class unknown
 {
 private:
   struct bounds
@@ -12,13 +12,12 @@ private:
     const double upper;
     bounds(const double lower_, const double  upper_);
   };
-
-public:
   struct physicalModel::labels name;
   struct bounds constraint;
   double initialGuess;
-  double bestfit;
+  double bestfitval;
 
+public:
   unknown(enum physicalModel::labels::Name name_,
           const double lower_,
           const double upper_);
@@ -26,13 +25,25 @@ public:
           const double lower_,
           const double upper_,
           const double initialGuess_);
-  void setInitialGuess(void);
+
+  void Initialauto(void);
+
+  void Initialset(const double input);
+  void bestfitset(const double input);
+
+  double initialVal(void);
+  double bestfit(void);
+  double upperBound(void);
+  double lowerBound(void);
+
+  enum physicalModel::labels::Name label(void);
+
 };
 
-struct unknownList
+class unknownList
 {
 private:
-  std::vector<struct unknown> vectorUnknowns;
+  std::vector<class unknown> vectorUnknowns;
 
 public:
   void addUnknown(physicalModel::labels::Name name, const double lower,
@@ -54,7 +65,6 @@ struct settings
     settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
              double epsfcn_, double factor_, size_t mode_, size_t nprint_);
 };
-
 
 }
 

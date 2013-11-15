@@ -623,19 +623,19 @@ void minimizer(double (*to_minimize)(double *,double *), double *variable,
 double gspatial(double z, double opt, double lambda, double R1, double Iplus0,
                 double Iplus1)
 {
-    // z must be normalized by the coating thickness
-       double gs ;
-       gs =  Iplus0 * exp( -z / lambda );
-       gs += R1 * Iplus1 * exp( ( z - 1 ) / lambda );
-       gs *= (1. / opt) ;
+// z must be normalized by the coating thickness
+  double gs ;
+  gs =  Iplus0 * exp( -z / lambda );
+  gs += R1 * Iplus1 * exp( ( z - 1 ) / lambda );
+  gs *= (1. / opt) ;
 
-       if( z<=1)
-        return gs;
-       else if (z>1)
-        return 0;
+  if( z<=1)
+    return gs;
+  else if (z>1)
+    return 0;
 
-        return 0;
-}
+  return 0;
+  }
 
 
 double beta2_func(double * variable, double * constants)
@@ -913,34 +913,6 @@ void solveMatrix(const int64_t n, const std::vector<double>& b,
      * u - the answer
      */
 
-
-//    for (int i = 1 ; i < n  ; ++i)
-//    {
-//        m1 = -b[i];
-//        m1 /= dw[i-1];
-//        dw[i] =  m1;
-//        dw[i] *= a[i-1];
-//        dw[i] += d[i];
-//        Cw[i] =  m1;
-//        Cw[i] *= Cw[i-1];
-//        Cw[i] += C[i];
-//    }
-//    u[n-1] = Cw[n-1];
-//    u[n-1] /= dw[n-1];
-//
-//    for (int i = n - 2; i >= 1; --i)
-//    {
-//        u[i]  = u[i+1];
-//        u[i] *= -a[i];
-//        u[i] += Cw[i];
-//        u[i] /= dw[i];
-//    }
-//    constexpr int j = 0;
-//    u[j]  = u[j+1];
-//    u[j] *= -a[j];
-//    u[j] += Cw[j];
-//    u[j] /= dw[j];
-
     double*dw = new double[n];
     double*Cw = new double[n];
 
@@ -1034,10 +1006,10 @@ void solveMatrix(const int64_t n, const std::vector<double>& b,
         u[i-4] /= dw[i-4];
     }
 
-delete[] dw;
-delete[] Cw;
+  delete[] dw;
+  delete[] Cw;
 
-     return;
+  return;
 }
 
 double omega(const double L_coat, const double l_thermal, const double k_c,
@@ -1061,8 +1033,6 @@ double average(const double a, const double b)
 {
     return (a+b)*.5;
 }
-
-
 
 double gs_int(const double eta, const double opt, const double lambda,
               const double R1, const double Iplus0,
@@ -1225,310 +1195,309 @@ Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
            const double beta1_, const double split_)
            :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_)
 {
-    time            = new double[Nend];
-    tau             = new double[Nend];
+  time            = new double[Nend];
+  tau             = new double[Nend];
 
-    eta             = new double[M2];
-    z_real          = new double[M2];
-    z_norm          = new double[M2];
-    zNorm2          = new double[M2];
-    d_eta_plus      = new double[M2];
-    deltaZ          = new double[M2];
-    d_eta_minus     = new double[M2];
+  eta             = new double[M2];
+  z_real          = new double[M2];
+  z_norm          = new double[M2];
+  zNorm2          = new double[M2];
+  d_eta_plus      = new double[M2];
+  deltaZ          = new double[M2];
+  d_eta_minus     = new double[M2];
 
-    rNorm2          = new double[Rend];
-    rNorm           = new double[Rend];
-    rZeta           = new double[Rend];
-    rReal           = new double[Rend];
+  rNorm2          = new double[Rend];
+  rNorm           = new double[Rend];
+  rZeta           = new double[Rend];
+  rReal           = new double[Rend];
 
-    z_jplus.resize(M2);
-    z_jminus.resize(M2);
-    z_j.resize(M2);
+  z_jplus.resize(M2);
+  z_jminus.resize(M2);
+  z_j.resize(M2);
 
-    for (size_t i = 0; i < Nend; ++i)
-    {
-        tau[i]  = double(i)/(Nend-1);
-    }
+  for (size_t i = 0; i < Nend; ++i)
+  {
+    tau[i]  = double(i)/(Nend-1);
+  }
 
-    for (size_t i = 0; i < Rend; ++i)
-    {
-        rZeta[i] = double(i)/(Rend-1);
-    }
-
+  for (size_t i = 0; i < Rend; ++i)
+  {
+    rZeta[i] = double(i)/(Rend-1);
+  }
 }
 
 
 Mesh::~Mesh()
 {
-    delete [] tau;
-    delete [] time;
+  delete [] tau;
+  delete [] time;
 
-    delete [] eta;
-    delete [] z_real;
-    delete [] z_norm;
-    delete [] zNorm2;
-    delete [] d_eta_plus ;
-    delete [] deltaZ     ;
-    delete [] d_eta_minus;
+  delete [] eta;
+  delete [] z_real;
+  delete [] z_norm;
+  delete [] zNorm2;
+  delete [] d_eta_plus ;
+  delete [] deltaZ     ;
+  delete [] d_eta_minus;
 
-    delete [] rNorm;
-    delete [] rZeta;
-    delete [] rNorm2;
-    delete [] rReal;
+  delete [] rNorm;
+  delete [] rZeta;
+  delete [] rNorm2;
+  delete [] rReal;
 }
 
 double Mesh::beta2_func(double * variable, double * constants)
 {
-    double a,b,c,d;
-    std::vector<double> eta_;
-    eta_.resize(int(constants[1]));
+  double a,b,c,d;
+  std::vector<double> eta_;
+  eta_.resize(int(constants[1]));
 
 
 //    double *eta_ = new double[int(constants[1])];
-    double L1 = 1; //coating nondimensional thickness
-                    //z transformed to eta from 0-L_coat  to 0-1.
-    double L2 = 1; //substrate ....Do not change these parameters.
-    size_t M1_ = constants[4] * (constants[1]-1);
+  double L1 = 1; //coating nondimensional thickness
+                  //z transformed to eta from 0-L_coat  to 0-1.
+  double L2 = 1; //substrate ....Do not change these parameters.
+  size_t M1_ = constants[4] * (constants[1]-1);
 
-    for(size_t j = 0; j <= M1_ ; j++)
-        eta_[j] =  (double (j) / double (M1_)) * L1;
+  for(size_t j = 0; j <= M1_ ; j++)
+      eta_[j] =  (double (j) / double (M1_)) * L1;
 
-    for(size_t j = 1 ; j < constants[1] - M1_ ; j ++)
-        eta_[M1_+j] = ( double ( j ) / ( double (constants[1]-1) -double(M1_)))
-         * L2 + eta_[M1_];
+  for(size_t j = 1 ; j < constants[1] - M1_ ; j ++)
+      eta_[M1_+j] = ( double ( j ) / ( double (constants[1]-1) -double(M1_)))
+       * L2 + eta_[M1_];
 
-    a = (z_eta(eta_[M1_+1], constants[0], variable[0])-1.) * constants[2] +
-    constants[3];
-    b = z_eta(eta_[M1_], constants[0], variable[0]) * constants[3];
-    c = z_eta(eta_[M1_-1], constants[0], variable[0]) * constants[3];
-    d = fabs( ( a - b ) - ( b - c ) );
+  a = (z_eta(eta_[M1_+1], constants[0], variable[0])-1.) * constants[2] +
+  constants[3];
+  b = z_eta(eta_[M1_], constants[0], variable[0]) * constants[3];
+  c = z_eta(eta_[M1_-1], constants[0], variable[0]) * constants[3];
+  d = fabs( ( a - b ) - ( b - c ) );
 
 //    delete[] eta_;
-    return d;
+  return d;
 }
 
 void Mesh::minimizer(double *variable, double *constants,
                      double temp_variable_min, double temp_variable_max,
                      double min_goal, const size_t max_iterations)
 {
-    double fraction = 0;
-//    double *temp_to_minimize = new double [max_iterations];
+  double fraction = 0;
+  //    double *temp_to_minimize = new double [max_iterations];
 
-    size_t while_j=0;
-    int best_minimum_element = 0;
-    variable[0] = temp_variable_min;
-//    temp_to_minimize[best_minimum_element] = min_goal*10;
+  size_t while_j=0;
+  int best_minimum_element = 0;
+  variable[0] = temp_variable_min;
+  //    temp_to_minimize[best_minimum_element] = min_goal*10;
 
-    std::vector<double> temp_to_minimize;
-    temp_to_minimize.resize(max_iterations+1);
-    temp_to_minimize[best_minimum_element] = min_goal*10;
+  std::vector<double> temp_to_minimize;
+  temp_to_minimize.resize(max_iterations+1);
+  temp_to_minimize[best_minimum_element] = min_goal*10;
 
 
-    while(temp_to_minimize[best_minimum_element]>=min_goal &&
-          while_j<max_iterations)
-    {
-        fraction = pow(10,-1*double (while_j));
-        variable[0] = temp_variable_min+fraction;
-        temp_to_minimize[0] = beta2_func(variable,constants);
+  while(temp_to_minimize[best_minimum_element]>=min_goal &&
+        while_j<max_iterations)
+  {
+      fraction = pow(10,-1*double (while_j));
+      variable[0] = temp_variable_min+fraction;
+      temp_to_minimize[0] = beta2_func(variable,constants);
 
-        for(size_t for_j=1 ; for_j <= max_iterations ; for_j++ )
-        {
-            variable[0]+=fraction;
-            temp_to_minimize[for_j]= beta2_func(variable,constants);
+      for(size_t for_j=1 ; for_j <= max_iterations ; for_j++ )
+      {
+          variable[0]+=fraction;
+          temp_to_minimize[for_j]= beta2_func(variable,constants);
 
-            if(
-               fabs(temp_to_minimize[for_j]) >=
-               fabs(temp_to_minimize[for_j-1])
-               ||
-               variable[0] >   temp_variable_max)
-            {
-                variable[0]-=fraction;
-                best_minimum_element=for_j-1;
-                break;
-            }
-        }
-        while_j+=1;
+          if(
+             fabs(temp_to_minimize[for_j]) >=
+             fabs(temp_to_minimize[for_j-1])
+             ||
+             variable[0] >   temp_variable_max)
+          {
+              variable[0]-=fraction;
+              best_minimum_element=for_j-1;
+              break;
+          }
+      }
+      while_j+=1;
 
-    }
-    variable[0]+=fraction;
-    temp_to_minimize[best_minimum_element+1]= beta2_func(variable,constants);
-    variable[0]-=fraction;
+  }
+  variable[0]+=fraction;
+  temp_to_minimize[best_minimum_element+1]= beta2_func(variable,constants);
+  variable[0]-=fraction;
 
-//    delete []temp_to_minimize;
+  //    delete []temp_to_minimize;
 
-    return;
+  return;
 }
 
 double Mesh::find_beta2(const double L_coat, const double L_substrate)
 {
-    ////minimizer start (to find beta2)
-    constexpr size_t beta_iter = {100};
-    constexpr double beta_tol  = {1e-6};
-    double variable;
-    double constants[5] = {beta1, double(M2), L_substrate, L_coat, split};
+  ////minimizer start (to find beta2)
+  constexpr size_t beta_iter = {100};
+  constexpr double beta_tol  = {1e-6};
+  double variable;
+  double constants[5] = {beta1, double(M2), L_substrate, L_coat, split};
 
-    minimizer(&variable, constants, 1.001, 15., beta_tol, beta_iter);
+  minimizer(&variable, constants, 1.001, 15., beta_tol, beta_iter);
 
 
-    return variable;
+  return variable;
 }
 
 size_t Mesh::discretizeSpace(const double L_coat, const double L_substrate)
 {
-    constexpr double L1 = 1; //coating nondimensional thickness
-                             //z transformed to eta from 0-L_coat  to 0-1.
-    constexpr double L2 = 1; //substrate ....Do not change these parameters.
+  constexpr double L1 = 1; //coating nondimensional thickness
+                           //z transformed to eta from 0-L_coat  to 0-1.
+  constexpr double L2 = 1; //substrate ....Do not change these parameters.
 
-    const size_t M1_ = split * (M2-1);
+  const size_t M1_ = split * (M2-1);
 
 // define eta (computational grid)
-    for(size_t j = 0; j <= M1_ ; j++)
-    {
-        eta[j] =  double (j) / M1_ * L1;
-    }
+  for(size_t j = 0; j <= M1_ ; j++)
+  {
+      eta[j] =  double (j) / M1_ * L1;
+  }
 
-    for(size_t j = 1 ; j <= (M2-1) - M1_ ; j ++)
-    {
-        eta[M1_+j] = ( double ( j ) / (M2-1 -M1_ ) ) * L2;
-        eta[M1_+j] += eta[M1_];
-    }
+  for(size_t j = 1 ; j <= (M2-1) - M1_ ; j ++)
+  {
+      eta[M1_+j] = ( double ( j ) / (M2-1 -M1_ ) ) * L2;
+      eta[M1_+j] += eta[M1_];
+  }
 
-    for ( size_t j = 0 ; j < M2; j++ )
-    {
-        z_norm[j] = z_eta( eta[j], beta1,  beta2) ;
+  for ( size_t j = 0 ; j < M2; j++ )
+  {
+      z_norm[j] = z_eta( eta[j], beta1,  beta2) ;
 
-        if ( j <= M1_)
-        {
-            z_real[j] = z_norm[j] * L_coat;
-        }
-        else if ( j > M1_ && j < M2)
-        {
-            z_real[j] = (z_norm[j] - 1) * L_substrate + L_coat;
-        }
+      if ( j <= M1_)
+      {
+          z_real[j] = z_norm[j] * L_coat;
+      }
+      else if ( j > M1_ && j < M2)
+      {
+          z_real[j] = (z_norm[j] - 1) * L_substrate + L_coat;
+      }
 
-        if(j <= M1_)
-        {
-            zNorm2[j] = z_norm[j];
-        }
-        else if(j > M1_)
-        {
-            zNorm2[j] = (L_substrate/L_coat) * ( z_norm[j] - 1 ) + 1;
-        }
-    }
+      if(j <= M1_)
+      {
+          zNorm2[j] = z_norm[j];
+      }
+      else if(j > M1_)
+      {
+          zNorm2[j] = (L_substrate/L_coat) * ( z_norm[j] - 1 ) + 1;
+      }
+  }
 
 
-    return M1_;
+  return M1_;
 }
 
 double Mesh::z_eta(const double eta_)
 {
-    return z_eta(eta_, beta1, beta2);
+  return z_eta(eta_, beta1, beta2);
 }
 
 double Mesh::z_eta(const double eta_, const double beta1_, const double beta2_)
 {
-    /* z_norm accounts for z_real after it has been normalized by L_coat
-        and L_substrat double B;*/
-    if (equalto(eta_,0))
-    {
-        return eta_;
-    }
+  /* z_norm accounts for z_real after it has been normalized by L_coat
+      and L_substrat double B;*/
+  if (equalto(eta_,0))
+  {
+      return eta_;
+  }
 
-    else if (equalto(eta_,1))
-    {
-        return eta_;
-    }
+  else if (equalto(eta_,1))
+  {
+      return eta_;
+  }
 
-    else if (eta_ < 1)
-    {
-        const double B = ( beta1_ + 1) / (beta1_ - 1) ;
-        return 1 + beta1_ - ( 2 * B * beta1_ ) / ( B + pow( B , eta_ ) ) ;
-    }
+  else if (eta_ < 1)
+  {
+      const double B = ( beta1_ + 1) / (beta1_ - 1) ;
+      return 1 + beta1_ - ( 2 * B * beta1_ ) / ( B + pow( B , eta_ ) ) ;
+  }
 
-    else if (eta_ > 1)
-    {
-        const double B = ( beta2_ + 1) / ( beta2_ - 1) ;
-        return 2 + beta2_ - (2 * B * B * beta2_) / (B * B + pow( B , eta_));
-    }
+  else if (eta_ > 1)
+  {
+      const double B = ( beta2_ + 1) / ( beta2_ - 1) ;
+      return 2 + beta2_ - (2 * B * B * beta2_) / (B * B + pow( B , eta_));
+  }
 
-    return -1;
+  return -1;
 }
 
 double Mesh::D_eta(const double z_norm_)
 {
-    //z_norm accounts for z_real after it has been normalized by
-    //L_coat and L_substrate
+  //z_norm accounts for z_real after it has been normalized by
+  //L_coat and L_substrate
 
-    if (z_norm_ < 1 || equalto(z_norm_, 1))
-    {
-        const double B = ( beta1 + 1) / ( beta1 - 1) ;
-        return ( -2 * beta1 ) /
-        ( ( ( (-1 + z_norm_)*(-1 +z_norm_)) -(beta1*beta1) ) * ( log( B) ) ) ;
-    }
+  if (z_norm_ < 1 || equalto(z_norm_, 1))
+  {
+      const double B = ( beta1 + 1) / ( beta1 - 1) ;
+      return ( -2 * beta1 ) /
+      ( ( ( (-1 + z_norm_)*(-1 +z_norm_)) -(beta1*beta1) ) * ( log( B) ) ) ;
+  }
 
-    else if (z_norm_ > 1)
-    {
-        const double B = ( beta2 + 1) / ( beta2 - 1) ;
-        return ( -2 * beta2 ) /
-        ( ( ((-2 + z_norm_)*(-2 + z_norm_)) - (beta2*beta2) ) * ( log( B ) ) ) ;
-    }
+  else if (z_norm_ > 1)
+  {
+      const double B = ( beta2 + 1) / ( beta2 - 1) ;
+      return ( -2 * beta2 ) /
+      ( ( ((-2 + z_norm_)*(-2 + z_norm_)) - (beta2*beta2) ) * ( log( B ) ) ) ;
+  }
 
-    return -1;
+  return -1;
 }
 
 void Mesh::zUpdate()
 {
-    /*
-    Attempted to autovectorize the for loop but was unable due to the
-    conditional statements in the z_eta function. Splitting the loop into
-    three loops did not help.
-    */
-    z_jplus[0] = z_eta( ::average(eta[1], eta[0]));
-        z_j[0] = z_eta( eta[0]);
+  /*
+  Attempted to autovectorize the for loop but was unable due to the
+  conditional statements in the z_eta function. Splitting the loop into
+  three loops did not help.
+  */
+  z_jplus[0] = z_eta( ::average(eta[1], eta[0]));
+      z_j[0] = z_eta( eta[0]);
 
-    const size_t endM2 = M2-1;
-    for (size_t j = 1; j < endM2; j++)
-    {
-        z_jplus[j] = z_eta( ::average(eta[j+1], eta[j]) );
-        z_jminus[j] = z_eta( ::average(eta[j-1], eta[j]) );
-        z_j[j] =  z_eta( eta[j]);
-    }
+  const size_t endM2 = M2-1;
+  for (size_t j = 1; j < endM2; j++)
+  {
+      z_jplus[j] = z_eta( ::average(eta[j+1], eta[j]) );
+      z_jminus[j] = z_eta( ::average(eta[j-1], eta[j]) );
+      z_j[j] =  z_eta( eta[j]);
+  }
 
-    z_jminus[M2-1] = z_eta( ::average(eta[M2-2], eta[M2-1]) );
-         z_j[M2-1] = z_eta( eta[M2-1]);
+  z_jminus[M2-1] = z_eta( ::average(eta[M2-2], eta[M2-1]) );
+       z_j[M2-1] = z_eta( eta[M2-1]);
 
 
-    for(size_t j = 0; j==0; j++)
-        d_eta_plus[j]  = D_eta( z_jplus[j] );
-    for (size_t j = 1; j < M2-1 ; ++j)
-    {
-        d_eta_minus[j] = D_eta( z_jminus[j]);
-        d_eta_plus[j]  = D_eta( z_jplus[j]);
-        deltaZ[j] = z_jplus[j] - z_jminus[j];
-    }
+  for(size_t j = 0; j==0; j++)
+      d_eta_plus[j]  = D_eta( z_jplus[j] );
+  for (size_t j = 1; j < M2-1 ; ++j)
+  {
+      d_eta_minus[j] = D_eta( z_jminus[j]);
+      d_eta_plus[j]  = D_eta( z_jplus[j]);
+      deltaZ[j] = z_jplus[j] - z_jminus[j];
+  }
 
-    {
-        const size_t j = M2-1;
-        d_eta_minus[j] = D_eta( z_jminus[j]);
-        d_eta_plus[j]  = D_eta( z_j[j] ) ;
-    }
+  {
+      const size_t j = M2-1;
+      d_eta_minus[j] = D_eta( z_jminus[j]);
+      d_eta_plus[j]  = D_eta( z_j[j] ) ;
+  }
 
-    return;
+  return;
 }
 
 void Mesh::meshUpdate(const double L_coat, const double L_substrate,
                       const double CO2Radius, const double Rdomain)
 {
-    beta2 = find_beta2(L_substrate, L_coat);
-    M1 = discretizeSpace(L_coat, L_substrate);
+  beta2 = find_beta2(L_substrate, L_coat);
+  M1 = discretizeSpace(L_coat, L_substrate);
 
-    for (size_t i = 0; i < Rend; ++i)
-    {
-        rNorm[i] = rZeta[i] * ( Rdomain / CO2Radius ) ;
-        rReal[i] = rNorm[i] * CO2Radius;
-    }
+  for (size_t i = 0; i < Rend; ++i)
+  {
+      rNorm[i] = rZeta[i] * ( Rdomain / CO2Radius ) ;
+      rReal[i] = rNorm[i] * CO2Radius;
+  }
 
-    zUpdate();
+  zUpdate();
 }
 
 
@@ -1543,181 +1512,140 @@ parameterStr::parameterStr(const size_t d,class Mesh *mesh_)
 //    k2_thermal = new class property;
 //    psi2_thermal = new class property;
 
-    xParameters         = new size_t[d];
-    xParameters95       = new size_t[d];
-    xParametersNames   = new enum XParaNames[d];
-    xParameters95Names = new enum XParaNames[d];
+  xParameters         = new size_t[d];
+  xParameters95       = new size_t[d];
+  xParametersNames   = new enum XParaNames[d];
+  xParameters95Names = new enum XParaNames[d];
 
-    N95 = d;
+  N95 = d;
 
 }
 
 void parameterStr::updateNMeasurements(const size_t Lend_)
 {
-    /*Lend_ is the total number of unique measurements in a dataset,
-    this value is based on the range and the set minimum*/
-    if(fjac)
-    {
-        delete [] fjac;
-        delete [] emissionExperimental;
-        delete [] emissionNominal;
-        delete [] predicted;
-        delete [] fvec;
-    }
+  /*Lend_ is the total number of unique measurements in a dataset,
+  this value is based on the range and the set minimum*/
+  if(fjac)
+  {
+      delete [] fjac;
+      delete [] emissionExperimental;
+      delete [] emissionNominal;
+      delete [] predicted;
+      delete [] fvec;
+  }
 
-    fjac = new double[Lend_*N];
-    emissionExperimental    = new double[Lend_];
-    emissionNominal         = new double[Lend_];
-    predicted               = new double[Lend_];
-    fvec = new double[Lend_];
+  fjac = new double[Lend_*N];
+  emissionExperimental    = new double[Lend_];
+  emissionNominal         = new double[Lend_];
+  predicted               = new double[Lend_];
+  fvec = new double[Lend_];
 }
 
 void parameterStr::parametersStrSetup(const enum XParaNames *xParametersNames_,
                                       const double L_coat,
                                       const double L_substrate)
 {
+  mesh->meshUpdate(L_coat, L_substrate, laser->radius,
+                   poptea->TBCsystem.radius);
+  for (size_t i=0; i < N; ++i)
+  {
+      xParametersNames[i] = xParametersNames_[i];
+      xParameters95Names[i] = xParametersNames_[i];
+  }
 
-    mesh->meshUpdate(L_coat, L_substrate, laser->radius,
-                     poptea->TBCsystem.radius);
-    update_b();
-
-    for (size_t i=0; i < N; ++i)
-    {
-        xParametersNames[i] = xParametersNames_[i];
-        xParameters95Names[i] = xParametersNames_[i];
-    }
-
-    return;
+  return;
 }
 
 
 void parameterStr::thermalSetup(const double lmin_, const double lmax_,
                                 const size_t LendMin)
 {  
-    L_end = laser->thermalSetup(lmin_, lmax_, poptea->TBCsystem.coating.depth,
-                                poptea->TBCsystem.coating.kthermal.offset,
-                                poptea->TBCsystem.coating.psithermal.offset ,
-                                LendMin);
-    updateNMeasurements(L_end);
+  L_end = laser->thermalSetup(lmin_, lmax_, poptea->TBCsystem.coating.depth,
+                              poptea->TBCsystem.coating.kthermal.offset,
+                              poptea->TBCsystem.coating.psithermal.offset ,
+                              LendMin);
+  updateNMeasurements(L_end);
 }
 
-void parameterStr::update_b(const double radius, const double L)
-{
-    laser->updateRadius(radius);
-    poptea->TBCsystem.coating.depth = L;
-    bNorm = radius / L;
-}
-
-void parameterStr::update_b(void)
-{
-    update_b(laser->radius, poptea->TBCsystem.coating.depth);
-}
 
 void parameterStr::EmissionNoise(const class
-                                 emissionNoiseParameters myEmissionNoise,
+                                 emissionNoiseParameters myNoise,
                                  const double* emissionNominal_,
                                  const double lmin, const double lmax)
 {
-    /*
-    a is the magnitude of the error at the edges of the range
-    b is the stretching parameter that ranges from 1 < b < pi (use around 3)
-    c is the location of the center and set it to 0.5.
-    d is the orientation options
-        d1    true (positive)
-        d2    true (monotonically)
+  /* a is the magnitude of the error at the edges of the range
+  b is the stretching parameter that ranges from 1 < b < pi (use around 3)
+  c is the location of the center and set it to 0.5.
+  d is the orientation options
+      d1    true (positive)
+      d2    true (monotonically)
 
-    This function needs an emissionProfile already established. This is the
-    nominal emission profile used for the simulation.  The EXPERIMENTAL EMISSION
-    is in the object (this) scope.
+  This function needs an emissionProfile already established. This is the
+  nominal emission profile used for the simulation.  The EXPERIMENTAL EMISSION
+  is in the object (this) scope.
 
-    This function needs l_thermal to be populated with the thermal
-    penetration range.
+  This function needs l_thermal to be populated with the thermal
+  penetration range.
 
-    lmin and lmax are used to determine the nominal limits of the lthermal
-    range.
+  lmin and lmax are used to determine the nominal limits of the lthermal
+  range.*/
 
-    */
-//        a = 0.025;
-//        b = 3.05;
-//        c = 0.5
-//        d1 = 1 or 0;
-//        d2 = 1 or 0
+  double a  = myNoise.a;
+  double b  = myNoise.b;
+  bool d1   = myNoise.d1;
+  bool d2   = myNoise.d2;
+  int s1    = myNoise.s1;
+  double noiseRandom = myNoise.noiseRandom;
 
-    double a  = myEmissionNoise.a;
-    double b  = myEmissionNoise.b;
-    bool d1   = myEmissionNoise.d1;
-    bool d2   = myEmissionNoise.d2;
-    int s1    = myEmissionNoise.s1;
-    double noiseRandom = myEmissionNoise.noiseRandom;
+  if( (a < 0) || (b < 1) || (b > M_PI) )
+  {
+    std::cout << "parameters (a,b) out of range"; exit(-99);
+  }
 
-//    std::cout << "these are my noise parameters\n";
-//    std::cout << "a = " << a << "\n" << "b = " << b << "\n" << "d1 = " <<  d1;
-//    std::cout << "\n" << "d2 = " << d2 << "\n" << "s1 = "<< s1;
-//    std::cout << "\nnoiseRandom = " << noiseRandom << "\nend\n\n";
 
-    if( (a < 0) || (b < 1) || (b > M_PI) )
+  for(size_t i=0 ; i < L_end; ++i)
+  {
+    constexpr double c = 0.5;
+
+    double
+    lthermalPercentile = ::percentilelog10(lmin, lmax, laser->l_thermal[i] );
+
+    ///Determine biased noise
+    const double cotbc = tan(M_PI_2 - ( b * c ) );
+    double
+    noiseBias = -a * cotbc * tan( b * ( c - lthermalPercentile ) );
+
+    if(!d2)
     {
-        std::cout << "parameters (a,b) out of range"; exit(-99);
+      noiseBias = fabs(noiseBias);
     }
 
-
-    for(size_t i=0 ; i < L_end; ++i)
+    if(!d1)
     {
-        constexpr double c = 0.5;
-
-        double
-        lthermalPercentile = ::percentilelog10(lmin, lmax, laser->l_thermal[i] );
-
-        ///Determine biased noise
-        const double cotbc = tan(M_PI_2 - ( b * c ) );
-        double
-        noiseBias = -a * cotbc * tan( b * ( c - lthermalPercentile ) );
-
-        if(!d2)
-        {
-            noiseBias = fabs(noiseBias);
-        }
-
-        if(!d1)
-        {
-            noiseBias *= -1;
-        }
-
-        switch(s1)
-        {
-            case -1:
-                if(lthermalPercentile > 0.5) {noiseBias = 0;}
-                break;
-            case 0:
-                break;
-            case 1:
-                if(lthermalPercentile < 0.5) {noiseBias = 0;}
-                break;
-            default:
-                std::cout << "\n\nerror in symmetry options\n\n"; exit(-1);
-        }
-
-        ///Determine random noise
-        const double noiseRandomGen = x_normal(0, noiseRandom);
-
-        emissionExperimental[i]  = emissionNominal_[i];
-        emissionExperimental[i] += M_PI_2 * noiseBias;
-        emissionExperimental[i] += M_PI_2 * noiseRandomGen;
+      noiseBias *= -1;
     }
-//
-//    std::ofstream myfile;
-//    std::stringstream filename;
-//    filename <<  "data/emissionSimulated.dat";
-//    myfile.open(filename.str().c_str());
-//    myfile << std::setprecision(8);
-//
-//    for(size_t i = 0; i < laser->L_end; ++i)
-//    {
-//        myfile << laser->l_thermal[i] << "\t"
-//        << emissionNominal_[i] << "\t"
-//        << emissionExperimental[i] << "\n";
-//    }
-//    myfile.close();
+
+    switch(s1)
+    {
+      case -1:
+        if(lthermalPercentile > 0.5) {noiseBias = 0;}
+        break;
+      case 0:
+        break;
+      case 1:
+        if(lthermalPercentile < 0.5) {noiseBias = 0;}
+        break;
+      default:
+        std::cout << "\n\nerror in symmetry options\n\n"; exit(-1);
+    }
+
+    ///Determine random noise
+    const double noiseRandomGen = x_normal(0, noiseRandom);
+
+    emissionExperimental[i]  = emissionNominal_[i];
+    emissionExperimental[i] += M_PI_2 * noiseBias;
+    emissionExperimental[i] += M_PI_2 * noiseRandomGen;
+  }
 }
 
 parameterStr::~parameterStr()
@@ -1734,11 +1662,6 @@ parameterStr::~parameterStr()
 
     delete [] xParametersNames;
     delete [] xParameters95Names;
-
-//    delete k1_thermal;
-//    delete psi1_thermal;
-//    delete k2_thermal;
-//    delete psi2_thermal;
 }
 
 
@@ -1918,4 +1841,3 @@ void perturbStruct::cleanup2()
     delete[] lmax;
     delete[] bands;
 }
-

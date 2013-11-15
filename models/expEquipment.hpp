@@ -41,11 +41,12 @@ public:
     ~Laser();
 };
 
-struct setup
+class setup
 {
-    class Laser laser;
-    struct Detector detector;
-    setup(struct Laser laser_, struct Detector detector_);
+public:
+  class Laser laser;
+  struct Detector detector;
+  setup(struct Laser laser_, struct Detector detector_);
 };
 
 

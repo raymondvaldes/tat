@@ -53,7 +53,7 @@ public:
 namespace physicalModel
 {
 
-struct labels
+class labels
 {
 public:
   enum class Name
@@ -66,10 +66,11 @@ public:
     R0
   };
 
-  enum Name name;
-
   labels(const enum Name name_);
   Name getName(void);
+
+private:
+  enum Name name;
 };
 
 struct temperatureScale
@@ -115,7 +116,6 @@ public:
     struct radiativeSysProp optical;
     double radius;
     double Rtc;
-
     double gamma;
     double a_sub;
 
@@ -124,7 +124,7 @@ public:
               double radius_);
     double gammaEval(void);
     double a_subEval(void);
-    void updateCoat(void);
+    void updateCoat(void); //update coat properties
 };
 
 }
