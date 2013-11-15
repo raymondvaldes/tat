@@ -1,6 +1,6 @@
 #include "../Header.h"
-ThermalModel::ThermalModel(const enum HeatX myHeat,
-                           const enum EmissionX myEmission)
+ThermalModelSelection::ThermalModelSelection(const enum HeatX myHeat,
+                                             const enum EmissionX myEmission)
 :heat(myHeat), emission(myEmission){}
 
 HeatModel2DAna::HeatModel2DAna(const double R0_, const double R1_,

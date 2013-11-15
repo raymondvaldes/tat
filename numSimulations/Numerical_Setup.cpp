@@ -1504,21 +1504,15 @@ void Mesh::meshUpdate(const double L_coat, const double L_substrate,
 
 
 
-parameterStr::parameterStr(const size_t d,class Mesh *mesh_)
-             :  mesh(mesh_), N(d)
+parameterStr::parameterStr(const size_t d)
+             :  N(d)
 {
-//    k1_thermal = new class property;
-//    psi1_thermal = new class property;
-//    k2_thermal = new class property;
-//    psi2_thermal = new class property;
-
   xParameters         = new size_t[d];
   xParameters95       = new size_t[d];
   xParametersNames   = new enum XParaNames[d];
   xParameters95Names = new enum XParaNames[d];
 
   N95 = d;
-
 }
 
 void parameterStr::updateNMeasurements(const size_t Lend_)
@@ -1540,22 +1534,6 @@ void parameterStr::updateNMeasurements(const size_t Lend_)
   predicted               = new double[Lend_];
   fvec = new double[Lend_];
 }
-
-void parameterStr::parametersStrSetup(const enum XParaNames *xParametersNames_,
-                                      const double L_coat,
-                                      const double L_substrate)
-{
-  mesh->meshUpdate(L_coat, L_substrate, laser->radius,
-                   poptea->TBCsystem.radius);
-  for (size_t i=0; i < N; ++i)
-  {
-      xParametersNames[i] = xParametersNames_[i];
-      xParameters95Names[i] = xParametersNames_[i];
-  }
-
-  return;
-}
-
 
 void parameterStr::thermalSetup(const double lmin_, const double lmax_,
                                 const size_t LendMin)

@@ -21,9 +21,9 @@ int main( int /*argc*/, char** /*argv[]*/ )
 /// Heat Transfer and Emission models
   const enum XParaNames
   xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
-  class ThermalModel
-  thermalModel(ThermalModel::HeatX::OneDimAnalytical,
-               ThermalModel::EmissionX::OneDimNonLin);
+  class ThermalModelSelection
+  thermalModel(ThermalModelSelection::HeatX::OneDimAnalytical,
+               ThermalModelSelection::EmissionX::OneDimNonLin);
 
 /// Initialize Mesh
   constexpr double beta1 = 100;
@@ -32,10 +32,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
 /// Parameter Structure
   struct parameterStr *pStruct =
-  new struct parameterStr(N      /*N*/,
-                          mesh);
-
-//  pStruct->thermalModel = &thermalModel;
+  new struct parameterStr(N);
+  pStruct->mesh = mesh;
   pStruct->iter = 1000;
 
 /// Input Directory Information
@@ -92,8 +90,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   const double R1 = 0.8;
   const double Emit1 = 42;
   struct physicalModel::radiativeSysProp radProp(R0, R1, Emit1);
-//  pStruct->opticalProp = &radProp;
-
 
 /// Thermal Properties
   /*
@@ -149,7 +145,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                         radProp, R_domain);
 
-
 /// Thermal Penetration
   /* The thermal penetration depth represents the range of the 'operability
    * region'. LendMin is defined to be the minimum number of measurements or
@@ -161,8 +156,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   pStruct->q_surface = 0;
 
 /// Parameter Estimation Constraints
-  /* parameter constraints are stored in the
-  structure parameter_constraints */
   struct parameter_constraints paraConstraints;
   paraConstraints.a_sub_min = 1e-0;
   paraConstraints.a_sub_max = 5;
@@ -194,12 +187,23 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                               thermalModel, ParaEstSetting,
                                               unknownParameters);
   pStruct->poptea = &poptea;
+
   // Initial Guess
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
 //Optimize stretching in Substrate and declare variables to be fitted
-  pStruct->parametersStrSetup(xParametersNames, L_coat, L_substrate);
+  pStruct->mesh->meshUpdate(pStruct->poptea->TBCsystem.coating.depth,
+                            pStruct->poptea->TBCsystem.substrate.depth,
+                            pStruct->poptea->expSetup.laser.radius,
+                            pStruct->poptea->TBCsystem.radius);
+  for (size_t i=0; i < N; ++i)
+  {
+      pStruct->xParametersNames[i] = xParametersNames[i];
+      pStruct->xParameters95Names[i] = pStruct->xParametersNames[i];
+  }
+
+//  pStruct->parametersStrSetup(xParametersNames, L_coat, L_substrate);
 
 // Populate the experimental phase values in parameters99
   pStruct->thermalSetup(l_min, l_max, LendMinDecade);

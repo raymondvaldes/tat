@@ -257,13 +257,11 @@ public:
   size_t iter;
 
 
-  parameterStr(const size_t d, class Mesh *mesh_);
+  parameterStr(const size_t d);
   ~parameterStr();
 
   void parametersStrSetup(const enum XParaNames *xParametersNames_,
                           const double L_coat, const double L_substrate);
-
-
 
 private:
   void updateNMeasurements(const size_t Lend_);

@@ -1,7 +1,7 @@
 #ifndef THERMAL_MODELS_H_INCLUDED
 #define THERMAL_MODELS_H_INCLUDED
 
-class ThermalModel
+class ThermalModelSelection
 {
     public:
     enum class HeatX: uint8_t
@@ -23,8 +23,8 @@ class ThermalModel
     const enum HeatX heat;
     const enum EmissionX emission;
 
-    ThermalModel(const enum HeatX myHeat,
-                 const enum EmissionX myEmission);
+    ThermalModelSelection(const enum HeatX myHeat,
+                          const enum EmissionX myEmission);
 };
 
 class HeatModel2DAna

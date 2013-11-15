@@ -103,7 +103,8 @@ SOURCES += main.cpp \
     algorithms/lmdiff.cpp \
     algorithms/parameterestimation.cpp \
     models/poptea.cpp \
-    models/physicalmodel.cpp
+    models/physicalmodel.cpp \
+    numSimulations/mesh.cpp
 
 #header files
 HEADERS += \
@@ -124,4 +125,5 @@ HEADERS += \
     algorithms/lmdiff.h \
     algorithms/parameterestimation.hpp \
     models/poptea.hpp \
-    models/physicalmodel.hpp
+    models/physicalmodel.hpp \
+    numSimulations/mesh.hpp

@@ -32,13 +32,13 @@ public:
     double *l_thermal = nullptr;
 
     Laser(const double a, const double b, const double c, const double d);
+    ~Laser();
+
     void updateRadius(const double r);
     void updatePower(const double Qpower);
-
     double thermalSetup(const double lmin_, const double lmax_,
                         const double L_coat, const double kc, const double psic,
                         const double L_end_);
-    ~Laser();
 };
 
 class setup
