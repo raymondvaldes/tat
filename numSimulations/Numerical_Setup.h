@@ -230,7 +230,11 @@ public:
   double *predicted = nullptr;
   double *fvec = nullptr;
 
-  double MSE, MSEinitial, MSETol, ChiSquare, fvecTotal;
+//  double MSE;
+  double MSEinitial;
+  double MSETol;
+  double ChiSquare;
+  double fvecTotal;
   double variance;
 
   ///poptea structures

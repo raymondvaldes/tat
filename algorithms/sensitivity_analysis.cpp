@@ -516,7 +516,7 @@ void fitting(size_t P, size_t N,
         paramter_estimation(P, N, ParaEstSetting, &info, &nfev, st_ptr,
                             xInitial, pStruct, factorMax, factorScale,
                             xpredicted);
-        pStruct->MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
+        pStruct->poptea->LMA_workspace.MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
                            pStruct->predicted);
 
         myfile << pStruct->poptea->TBCsystem.gammaEval() << "\t"
@@ -524,7 +524,7 @@ void fitting(size_t P, size_t N,
                << pStruct->poptea->TBCsystem.optical.Emit1 << "\t"
                << pStruct->poptea->TBCsystem.optical.R1<< "\t"
                << pStruct->poptea->TBCsystem.coating.lambda << "\t"
-               << pStruct->MSE << "\n";
+               << pStruct->poptea->LMA_workspace.MSE << "\n";
 
         printPEstimates(N, pStruct);
         xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),

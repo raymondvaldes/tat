@@ -374,7 +374,7 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 void printPEstimates(const size_t N, struct parameterStr * parametersStr)
 {
 
-    parametersStr->MSE = MSE(parametersStr->L_end,
+    parametersStr->poptea->LMA_workspace.MSE = MSE(parametersStr->L_end,
                              parametersStr->emissionExperimental,
                              parametersStr-> predicted);
     for(size_t j = 0 ; j < N; ++j)
@@ -406,7 +406,7 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
         }
         std::cout << "  ";
     }
-    std::cout << std::setprecision(10) << parametersStr->MSE;
+    std::cout << std::setprecision(10) << parametersStr->poptea->LMA_workspace.MSE;
     std::cout << std::setprecision(6)  << "\n";
 
     return;
@@ -417,7 +417,6 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                           const struct parameter_constraints *pc_ptr,
                           struct parameterStr * parametersStr)
 {
-
 ///Transform estimates from kappa space to k space based on the limits imposed
   for(int i = 0; i < N; ++i)
   {
@@ -469,7 +468,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
   }
 
 /// Print stuff to terminal
-  parametersStr->MSE = MSE(parametersStr->L_end,
+  parametersStr->poptea->LMA_workspace.MSE = MSE(parametersStr->L_end,
                            parametersStr->emissionExperimental,
                            parametersStr->predicted);
   printPEstimates(N, parametersStr);
