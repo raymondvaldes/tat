@@ -231,7 +231,7 @@ public:
   double *fvec = nullptr;
 
 //  double MSE;
-  double MSEinitial;
+//  double MSEinitial;
   double MSETol;
   double ChiSquare;
   double fvecTotal;
