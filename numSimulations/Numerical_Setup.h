@@ -211,9 +211,6 @@ class perturbStruct
     void cleanup2();
 };
 
-
-
-
 class parameterStr
 {
 public:
