@@ -145,7 +145,7 @@ int paramter_estimation(const size_t m, const size_t n,
 
     if( reduceChiSquare < 2
        || ParaEstSetting.factor == factorMax
-       || pStruct->poptea->LMA_workspace.fvecTotal < pStruct->MSETol
+       || pStruct->poptea->LMA_workspace.fvecTotal < pStruct->poptea->LMA_workspace.MSETol
        )
     {
 

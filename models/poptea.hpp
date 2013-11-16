@@ -5,11 +5,6 @@ namespace thermalAnalysisMethod
 {
   class PopTea
   {
-//    POPTEA
-//    {
-//      poptea <- lasersweep <- frequencies, omega, lmin, lmax
-//      parameterEstimationArrays <- fvec...etc...
-//    }
   public:
     enum XParaNames *xParameters95Names;  //MUST BE REMOVEd
     enum XParaNames *xParametersNames;    // MUST BE REMOVED

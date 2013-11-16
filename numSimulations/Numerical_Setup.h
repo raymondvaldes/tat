@@ -230,7 +230,7 @@ public:
   double *predicted = nullptr;
   double *fvec = nullptr;
 
-  double MSETol;
+//  double MSETol;
 
   ///poptea structures
   double *emissionExperimental;

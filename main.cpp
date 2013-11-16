@@ -57,7 +57,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct parameterEstimation::settings
   ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
-  pStruct->MSETol = 1e-8;
+//  pStruct->MSETol = 1e-8;
+
   constexpr double factorMax = 10;
   constexpr double factorScale = 5;
 
@@ -185,6 +186,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD,
                                               thermalModel, ParaEstSetting,
                                               unknownParameters);
+  poptea.LMA_workspace.MSETol = 1e-8;
   pStruct->poptea = &poptea;
 
   // Initial Guess

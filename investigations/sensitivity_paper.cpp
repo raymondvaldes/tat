@@ -42,7 +42,9 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
     pStruct->q_surface = 0;
 
     ///Parameter Estimation Options
-    pStruct->MSETol = 1e-8;
+//    pStruct->MSETol = 1e-8;
+    pStruct->poptea->LMA_workspace.MSETol = 1e-8;
+
     int nfev;
     int info = 0;
 
