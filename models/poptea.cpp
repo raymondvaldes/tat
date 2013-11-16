@@ -26,6 +26,18 @@ PopTea::~PopTea(void)
   delete [] xParameters95Names;
 }
 
+
+void PopTea::thermalSetup(const double lmin_, const double lmax_,
+                                const size_t LendMin)
+{
+  L_end = expSetup.laser.thermalSetup(lmin_, lmax_,
+                                      TBCsystem.coating.depth,
+                                      TBCsystem.coating.kthermal.offset,
+                                      TBCsystem.coating.psithermal.offset ,
+                                      LendMin);
+  LMA_workspace.updateArraySize(L_end, unknownParameters.Nsize());
+}
+
 double PopTea::bEval(void)
 {
   return expSetup.laser.radius / TBCsystem.coating.depth;

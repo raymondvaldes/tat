@@ -214,9 +214,8 @@ class perturbStruct
 
 
 
-struct parameterStr
+class parameterStr
 {
-
 public:
   class Mesh *mesh;
   class expEquipment::Laser *laser;  //TODO MUST REMOVE
@@ -229,8 +228,6 @@ public:
   double *fjac = nullptr;
   double *predicted = nullptr;
   double *fvec = nullptr;
-
-//  double MSETol;
 
   ///poptea structures
   double *emissionExperimental;

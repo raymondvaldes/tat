@@ -91,6 +91,12 @@ public:
   double *emissionCurrent = nullptr;
 
   double MSE, MSEinitial, MSETol, fvecTotal;
+
+  ~LMA_workingArrays(void);
+  void updateArraySize(const size_t Lend_, const size_t N);
+  void deleteArray(void);
+
+
 };
 
 }

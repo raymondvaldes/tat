@@ -1515,6 +1515,17 @@ parameterStr::parameterStr(const size_t d)
 //  N95 = d;
 }
 
+
+void parameterStr::thermalSetup(const double lmin_, const double lmax_,
+                                const size_t LendMin)
+{  
+  L_end = laser->thermalSetup(lmin_, lmax_, poptea->TBCsystem.coating.depth,
+                              poptea->TBCsystem.coating.kthermal.offset,
+                              poptea->TBCsystem.coating.psithermal.offset ,
+                              LendMin);
+  updateNMeasurements(L_end);
+}
+
 void parameterStr::updateNMeasurements(const size_t Lend_)
 {
   /*Lend_ is the total number of unique measurements in a dataset,
@@ -1533,16 +1544,6 @@ void parameterStr::updateNMeasurements(const size_t Lend_)
   emissionNominal         = new double[Lend_];
   predicted               = new double[Lend_];
   fvec = new double[Lend_];
-}
-
-void parameterStr::thermalSetup(const double lmin_, const double lmax_,
-                                const size_t LendMin)
-{  
-  L_end = laser->thermalSetup(lmin_, lmax_, poptea->TBCsystem.coating.depth,
-                              poptea->TBCsystem.coating.kthermal.offset,
-                              poptea->TBCsystem.coating.psithermal.offset ,
-                              LendMin);
-  updateNMeasurements(L_end);
 }
 
 void parameterStr::EmissionNoise(const class
