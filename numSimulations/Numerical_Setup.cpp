@@ -1192,7 +1192,9 @@ void range1og10(const double l_min, const double l_max, const size_t L_end,
 }
 
 Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
-           const double beta1_, const double split_)
+           const double beta1_, const double split_, const double L_coat_,
+           const double L_substrate_, const double CO2Radius_,
+           const double Rdomain_)
            :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_)
 {
   time            = new double[Nend];
@@ -1224,6 +1226,9 @@ Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
   {
     rZeta[i] = double(i)/(Rend-1);
   }
+
+  meshUpdate(L_coat_, L_substrate_, CO2Radius_, Rdomain_);
+
 }
 
 

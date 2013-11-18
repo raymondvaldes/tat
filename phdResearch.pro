@@ -104,7 +104,8 @@ SOURCES += main.cpp \
     algorithms/parameterestimation.cpp \
     models/poptea.cpp \
     models/physicalmodel.cpp \
-    numSimulations/mesh.cpp
+    numSimulations/mesh.cpp \
+    models/numericalmodel.cpp
 
 #header files
 HEADERS += \
@@ -126,4 +127,5 @@ HEADERS += \
     algorithms/parameterestimation.hpp \
     models/poptea.hpp \
     models/physicalmodel.hpp \
-    numSimulations/mesh.hpp
+    numSimulations/mesh.hpp \
+    models/numericalmodel.hpp

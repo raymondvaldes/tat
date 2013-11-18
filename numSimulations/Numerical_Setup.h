@@ -15,7 +15,9 @@ void fdjac2(void (*fcn)(int, int, double *, double *, int *,
 class Mesh
 {
 public:
-    std::vector<double> z_jplus, z_jminus, z_j;
+    std::vector<double> z_jplus;
+    std::vector<double> z_jminus;
+    std::vector<double> z_j;
 
     double *rZeta, *rNorm, *rReal, *rNorm2;
     double *tau, *time;
@@ -23,10 +25,14 @@ public:
     double *d_eta_plus, *deltaZ, *d_eta_minus;
 
     mutable size_t M1;
-    const size_t M2, Rend, Nend;
+    const size_t M2;
+    const size_t Rend;
+    const size_t Nend;
 
     Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
-         const double beta1_, const double split_);
+         const double beta1_, const double split_, const double L_coat_,
+         const double L_substrate_, const double CO2Radius_,
+         const double Rdomain_);
     ~Mesh();
 
     void meshUpdate(const double L_coat, const double L_substrate,

@@ -9,7 +9,7 @@ namespace thermalAnalysisMethod
     enum XParaNames *xParameters95Names;  //MUST BE REMOVEd
     enum XParaNames *xParametersNames;    // MUST BE REMOVED
     size_t N95;                           //MUST BE REMOVED
-    size_t L_end;
+    size_t L_end;                         //MUST BE REMOVED
     size_t N;
 
     class expEquipment::setup expSetup;
@@ -27,8 +27,8 @@ namespace thermalAnalysisMethod
     ~PopTea(void);
 
 
-  void thermalSetup(const double lmin_, const double lmax_, const size_t LendMin);
-  double bEval(void);
+  void thermalSetup(const double lmin_, const double lmax_, const size_t LendMin); //MUST BE REMOVED
+  double bEval(void); //MUST BE REMOVED
   };
 }
 

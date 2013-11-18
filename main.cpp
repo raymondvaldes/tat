@@ -28,12 +28,10 @@ int main( int /*argc*/, char** /*argv[]*/ )
 /// Initialize Mesh
   constexpr double beta1 = 100;
   constexpr double split = 0.5;
-  class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split);
 
 /// Parameter Structure
   struct parameterStr *pStruct =
   new struct parameterStr(N);
-  pStruct->mesh = mesh;
   pStruct->iter = 1000;
 
 /// Input Directory Information
@@ -189,17 +187,21 @@ int main( int /*argc*/, char** /*argv[]*/ )
   poptea.LMA_workspace.MSETol = 1e-8;
   pStruct->poptea = &poptea;
 
-  std::cout << "\n\n" << sizeof(poptea) << "\n\n"; exit(-2);
-
   // Initial Guess
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
 //Optimize stretching in Substrate and declare variables to be fitted
-  pStruct->mesh->meshUpdate(pStruct->poptea->TBCsystem.coating.depth,
-                            pStruct->poptea->TBCsystem.substrate.depth,
-                            pStruct->poptea->expSetup.laser.radius,
-                            pStruct->poptea->TBCsystem.radius);
+  class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split,
+                              poptea.TBCsystem.coating.depth,
+                              poptea.TBCsystem.substrate.depth,
+                              poptea.expSetup.laser.radius,
+                              poptea.TBCsystem.radius);
+  pStruct->mesh = mesh;
+//  pStruct->mesh->meshUpdate(pStruct->poptea->TBCsystem.coating.depth,
+//                            pStruct->poptea->TBCsystem.substrate.depth,
+//                            pStruct->poptea->expSetup.laser.radius,
+//                            pStruct->poptea->TBCsystem.radius);
   for (size_t i=0; i < N; ++i)
   {
       pStruct->xParametersNames[i] = xParametersNames[i];
