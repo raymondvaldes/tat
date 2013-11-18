@@ -220,8 +220,10 @@ int main( int /*argc*/, char** /*argv[]*/ )
     {
         pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
     }
-    fitting(pStruct->L_end, pStruct->N, ParaEstSetting, &paraConstraints,
-            pStruct, xInitial, interants, factorMax, factorScale);
+
+    fitting(pStruct->L_end, pStruct->poptea->unknownParameters.Nsize(),
+            ParaEstSetting, &paraConstraints, pStruct, xInitial, interants,
+            factorMax, factorScale);
   }
 
   //Prepare figures and data for paper Sensitivity

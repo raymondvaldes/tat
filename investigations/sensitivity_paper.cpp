@@ -107,10 +107,13 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
                                l_max);
 
         ///estimate unknown parameters using full range
-        double *xpredicted = new double[ pStruct->N];
+        double *xpredicted =
+            new double[ pStruct->poptea->unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};    
-        paramter_estimation(pStruct->L_end, pStruct->N, ParaEstSetting, &info,
+        paramter_estimation(pStruct->L_end,
+                            pStruct->poptea->unknownParameters.Nsize(),
+                            ParaEstSetting, &info,
                             &nfev, &st_ptr, xInitial, pStruct, factorMax,
                             factorScale, xpredicted);
         delete [] xInitial;
@@ -165,12 +168,14 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR2, .04, 4);
 
         ///estimate unknown parameters using full range
-        double *xpredicted = new double[ pStruct->N];
+        double *xpredicted =
+            new double[pStruct->poptea->unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
-        paramter_estimation(pStruct->L_end, pStruct->N, ParaEstSetting, &info,
-                            &nfev, &st_ptr, xInitial, pStruct, factorMax,
-                            factorScale, xpredicted);
+        paramter_estimation(pStruct->L_end,
+                            pStruct->poptea->unknownParameters.Nsize(),
+                            ParaEstSetting, &info, &nfev, &st_ptr, xInitial,
+                            pStruct, factorMax, factorScale, xpredicted);
         delete [] xInitial;
         delete [] xpredicted;
         std::cout << info;
@@ -276,7 +281,8 @@ void CC_APS2(struct parameterStr *pStruct)
     constexpr double bandSize = .01;
     constexpr double spread = 0.20;
     class ::perturbStruct *pertStruct = nullptr;
-    pertStruct = new class perturbStruct(pStruct->N, xnumber, spread,
+    const size_t N = pStruct->poptea->unknownParameters.Nsize();
+    pertStruct = new class perturbStruct(N, xnumber, spread,
                                          l_min, l_max, iterates);
     pertStruct->lthermalBands(bandSize);
 
@@ -319,7 +325,7 @@ void CC_APS2(struct parameterStr *pStruct)
         phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
         pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
                                l_max);
-        fitting(pStruct->L_end, pStruct->N, ParaEstSetting, &st_ptr, pStruct,
+        fitting(pStruct->L_end, N, ParaEstSetting, &st_ptr, pStruct,
                 xInitial, 1, factorMax, factorScale);
 
         ///output data for printing
@@ -342,7 +348,8 @@ void CC_APS2(struct parameterStr *pStruct)
 ///* Optimization Procedure for l-thermal  */
     if(true)
     {
-        parameterUncertainty(pStruct->N, ParaEstSetting, &st_ptr, xInitial,
+        parameterUncertainty(pStruct->poptea->unknownParameters.Nsize(),
+                             ParaEstSetting, &st_ptr, xInitial,
                              pStruct, factorMax, factorScale, pertStruct,
                              myEmissionNoise, filename);
         pertStruct->cleanup2();

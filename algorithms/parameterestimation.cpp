@@ -78,9 +78,14 @@ void unknownList::addUnknown(enum physicalModel::labels::Name name,
 
 size_t unknownList::Nsize(void)
 {
-    return vectorUnknowns.size();
+  N = vectorUnknowns.size();
+  return N;
 }
 
+void unknownList::NAssign(size_t xInput)
+{
+  N = xInput;
+}
 
 
 void LMA_workingArrays::updateArraySize(const size_t Lend_, const size_t N)
@@ -119,5 +124,7 @@ LMA_workingArrays::~LMA_workingArrays(void)
   }
 }
 
+unknownList::~unknownList(){}
+settings::~settings(){}
 
 }

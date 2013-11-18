@@ -14,7 +14,7 @@ void perturbationTest(const size_t m, const size_t n,
     const size_t xnumber = pStruct->xnumber;
     const double spread = pStruct->spread;
     constexpr bool debugPrint = true;
-
+    const size_t N = parametersStr->poptea->unknownParameters.Nsize();
 ///fitting constants set
     int nfev;
     int info = 0;
@@ -39,19 +39,20 @@ void perturbationTest(const size_t m, const size_t n,
         filename <<  "../debug/perturbationTestLog.dat";
         myfile.open(filename.str().c_str());
         myfile << std::setprecision(8);
-        myfile << spread << "\t" << xnumber << "\t" << parametersStr->N << "\n";
+        myfile << spread << "\t" << xnumber << "\t" <<
+                  parametersStr->poptea->unknownParameters.Nsize() << "\n";
         myfile << a_subTrue<< "\t" << gammaTrue << "\t" <<E_sigmaTrue  << "\t";
         myfile << lambdaTrue  << "\t" <<R1True  << "\n";
     }
 
 ///Implement iteration
-    if( parametersStr->N >1)
+    if( parametersStr->poptea->unknownParameters.Nsize() >1)
     {
-        parametersStr->N = parametersStr->poptea->N95-1;
+        parametersStr->poptea->unknownParameters.NAssign(parametersStr->poptea->N95-1);
     }
 
 ///Reset parameters to be fitted
-    for(size_t currentI = 0; currentI <=  parametersStr->N ; ++currentI)
+    for(size_t currentI = 0; currentI <=  parametersStr->poptea->unknownParameters.Nsize() ; ++currentI)
     {
         size_t iter = 0;
         for(size_t i = 0; i < parametersStr->poptea->N95 ; ++i)
@@ -107,7 +108,7 @@ void perturbationTest(const size_t m, const size_t n,
 //            parameters_kcp_update(parametersStr, parametersStr->gamma,
 //                                  parametersStr->a_sub);
 //            std::cout << "\n";
-            for(size_t i = 0 ; i < parametersStr->N ; ++i)
+            for(size_t i = 0 ; i < N ; ++i)
             {
                 ///Set Initial conditions
                 switch( parametersStr->xParametersNames[i] )
@@ -147,7 +148,7 @@ void perturbationTest(const size_t m, const size_t n,
 //            std::cout << parametersStr->k1_thermal->offset << "\t" <<
 //                         parametersStr->psi1_thermal->offset << "\n";
 
-            paramter_estimation(m, parametersStr->N, ParaEstSetting, &info,
+            paramter_estimation(m, N, ParaEstSetting, &info,
                                 &nfev, st_ptr, xInitial, parametersStr,
                                 factorMax, factorScale, xpredicted);
 //            std::cout << "\n";
@@ -192,8 +193,9 @@ void perturbationTest(const size_t m, const size_t n,
     delete []xpredicted;
 
 ///RESET
-    parametersStr->N = parametersStr->poptea->N95;
-    for(size_t i = 0; i < parametersStr->N ; ++i)
+    parametersStr->poptea->unknownParameters.NAssign(parametersStr->poptea->N95);
+//    parametersStr->N = parametersStr->poptea->N95;
+    for(size_t i = 0; i < parametersStr->poptea->unknownParameters.Nsize(); ++i)
     {
         parametersStr->xParametersNames[i]
         = parametersStr->xParameters95Names[i];
@@ -236,8 +238,7 @@ void perturbationTest(const size_t m, const size_t n,
     return;
 }
 
-void calibrationSweep(
-                      struct parameterEstimation::settings ParaEstSetting,
+void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
                       const struct parameter_constraints *st_ptr,
                       double *xInitial, struct parameterStr *pStructp,
                       const double factorMax, const double factorScale,
@@ -260,7 +261,8 @@ void calibrationSweep(
     std::ofstream myfile;
     myfile.open(filename);
     myfile << std::setprecision(8);
-    myfile << pStruct->spread << "\t" << xnum << "\t" << pStructp->N;
+    myfile << pStruct->spread << "\t" << xnum << "\t" <<
+              pStructp->poptea->unknownParameters.Nsize();
     myfile << "\n" << pStruct->iterates << "\n";
     myfile << a_subTrue<< "\t" << gammaTrue << "\t" << E_sigmaTrue  << "\t";
     myfile <<lambdaTrue  << "\t" <<R1True  << "\n";
@@ -285,19 +287,22 @@ void calibrationSweep(
             pStructp->emissionExperimental[i]
             = pStructp->emissionNominal[i];
         }
-        perturbationTest(pStructp->L_end, pStructp->N, ParaEstSetting, st_ptr,
-                         xInitial, pStructp,factorMax, factorScale, pStruct);
+
+        perturbationTest(pStructp->L_end,
+                         pStructp->poptea->unknownParameters.Nsize(),
+                         ParaEstSetting, st_ptr, xInitial, pStructp, factorMax,
+                         factorScale, pStruct);
 
         ///Print some information to terminal
         std::cout << j <<" "<< pStruct->bands[j]<<" "<< lmin <<" "<< lmax;
-        for(size_t i = 0; i < pStructp->N; ++i)
+        for(size_t i = 0; i < pStructp->poptea->unknownParameters.Nsize(); ++i)
             std::cout << " " << pStruct->xArea[i];
         std::cout << "\n";
 
         myfile << j << "\t" <<  pStruct->bands[j] <<  "\t" << lmin << "\t";
         myfile << lmax;
 
-        for( size_t k = 0 ; k < pStructp->N ; k++)
+        for( size_t k = 0 ; k < pStructp->poptea->unknownParameters.Nsize() ; k++)
         {
             for(size_t i = 0 ; i < pStruct->xnumber ; ++i)
             {
@@ -353,7 +358,8 @@ void parameterUncertainty(const size_t n,
 
 ///Initial Fit to get initial guesses
     constexpr size_t interants = 0;
-    fitting(parametersStr->L_end, parametersStr->N, ParaEstSetting,
+    fitting(parametersStr->L_end,
+            parametersStr->poptea->unknownParameters.Nsize(), ParaEstSetting,
             st_ptr, parametersStr, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
@@ -389,7 +395,8 @@ void parameterUncertainty(const size_t n,
                                      lmaxN);
 
         ///estimate unknown parameters
-        paramter_estimation(parametersStr->L_end, parametersStr->N,
+        paramter_estimation(parametersStr->L_end,
+                            parametersStr->poptea->unknownParameters.Nsize(),
                             ParaEstSetting, &info, &nfev, st_ptr, xInitial,
                             parametersStr, factorMax, factorScale, xpredicted);
         phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);

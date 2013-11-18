@@ -1510,7 +1510,7 @@ void Mesh::meshUpdate(const double L_coat, const double L_substrate,
 
 
 parameterStr::parameterStr(const size_t d)
-             :  N(d)
+             :  Num(d)
 {
 //  xParameters         = new size_t[d];
 //  xParameters95       = new size_t[d];
@@ -1535,6 +1535,7 @@ void parameterStr::updateNMeasurements(const size_t Lend_)
 {
   /*Lend_ is the total number of unique measurements in a dataset,
   this value is based on the range and the set minimum*/
+  const size_t N = poptea->unknownParameters.Nsize();
   if(fjac)
   {
       delete [] fjac;

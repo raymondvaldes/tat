@@ -55,12 +55,15 @@ class unknownList
 {
 private:
   std::vector<class unknown> vectorUnknowns;
+  size_t N;
 
 public:
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
                   const double upper);
+  ~unknownList();
   size_t Nsize(void);
+  void NAssign(size_t xInput);
 };
 
 struct settings
@@ -76,6 +79,7 @@ struct settings
 
   settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
            double epsfcn_, double factor_, size_t mode_, size_t nprint_);
+  ~settings();
 };
 
 class LMA_workingArrays
@@ -89,7 +93,6 @@ public:
   double *emissionExperimental;
   double *emissionNominal;
   double *emissionCurrent = nullptr;
-
   double MSE, MSEinitial, MSETol, fvecTotal;
 
   ~LMA_workingArrays(void);

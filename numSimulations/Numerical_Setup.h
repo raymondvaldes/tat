@@ -238,7 +238,7 @@ public:
 
   ///poptea experiment settings structures
   size_t L_end;
-  size_t N;
+  size_t Num;
   double q_surface;
 
   void thermalSetup(const double lmin, const double lmax,
