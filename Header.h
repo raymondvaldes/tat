@@ -51,6 +51,7 @@ compiler.
 #include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
+#include "models/numericalmodel.hpp"
 
 #include "algorithms/parameterestimation.hpp"
 #include "algorithms/lmdiff.h"

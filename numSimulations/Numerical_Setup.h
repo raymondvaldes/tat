@@ -52,7 +52,6 @@ private:
     double z_eta(const double eta_);
     double D_eta(const double z_norm_);
     void zUpdate();
-
 };
 
 void parameters_kcp_update(struct parameterStr* parametersStr,

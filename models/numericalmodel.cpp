@@ -1,5 +1,9 @@
-#include "numericalmodel.hpp"
+#include "../Header.h"
 
-numericalModel::numericalModel()
+namespace numericalModel
 {
+
+
+
 }
+

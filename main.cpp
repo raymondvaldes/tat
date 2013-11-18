@@ -180,10 +180,19 @@ int main( int /*argc*/, char** /*argv[]*/ )
   unknownParameters.addUnknown(pNames::E1,          1,   200);
   unknownParameters.addUnknown(pNames::R1,          0.6, 1);
   unknownParameters.addUnknown(pNames::lambda,      .1,  1);
-
   struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD,
                                               thermalModel, ParaEstSetting,
                                               unknownParameters);
+  //Optimize stretching in Substrate and declare variables to be fitted
+    class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split,
+                                poptea.TBCsystem.coating.depth,
+                                poptea.TBCsystem.substrate.depth,
+                                poptea.expSetup.laser.radius,
+                                poptea.TBCsystem.radius);
+    pStruct->mesh = mesh;
+
+
+
   poptea.LMA_workspace.MSETol = 1e-8;
   pStruct->poptea = &poptea;
 
@@ -191,17 +200,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
-//Optimize stretching in Substrate and declare variables to be fitted
-  class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split,
-                              poptea.TBCsystem.coating.depth,
-                              poptea.TBCsystem.substrate.depth,
-                              poptea.expSetup.laser.radius,
-                              poptea.TBCsystem.radius);
-  pStruct->mesh = mesh;
-//  pStruct->mesh->meshUpdate(pStruct->poptea->TBCsystem.coating.depth,
-//                            pStruct->poptea->TBCsystem.substrate.depth,
-//                            pStruct->poptea->expSetup.laser.radius,
-//                            pStruct->poptea->TBCsystem.radius);
+
+
   for (size_t i=0; i < N; ++i)
   {
       pStruct->xParametersNames[i] = xParametersNames[i];
