@@ -21,9 +21,9 @@ int main( int /*argc*/, char** /*argv[]*/ )
 /// Heat Transfer and Emission models
   const enum XParaNames
   xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
-  class ThermalModelSelection
-  thermalModel(ThermalModelSelection::HeatX::OneDimAnalytical,
-               ThermalModelSelection::EmissionX::OneDimNonLin);
+  class thermal::ThermalModelSelection
+  thermalModel(thermal::ThermalModelSelection::HeatX::OneDimAnalytical,
+               thermal::ThermalModelSelection::EmissionX::OneDimNonLin);
 
 /// Initialize Mesh
   constexpr double beta1 = 100;

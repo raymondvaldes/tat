@@ -5,7 +5,7 @@ namespace thermalAnalysisMethod
 
 PopTea::PopTea(class expEquipment::setup expSetup_,
                class physicalModel::TBCsystem TBCsystem_,
-               class ThermalModelSelection thermalModel_,
+               class thermal::ThermalModelSelection thermalModel_,
                class parameterEstimation::settings Settings_,
                class parameterEstimation::unknownList unknownParameters_)
   : expSetup(expSetup_),
