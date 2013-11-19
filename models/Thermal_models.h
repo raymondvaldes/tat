@@ -131,8 +131,55 @@ private:
 };
 
 namespace thermal{
-  double effusivity(const double k, const double rhoCp);
-  double diffusivity(const double k, const double rhoCp);
+
+double effusivity(const double k, const double rhoCp);
+double diffusivity(const double k, const double rhoCp);
+
+
+class ThermalModelSelection
+{
+public:
+  enum class HeatX: uint8_t
+  {
+    OneDimAnalytical,
+    OneDimNumLin,
+    OneDimNumNonLin,
+    TwoDimAnalytical,
+    TwoDimNumLin,
+    TwoDimNumNonLin
+  };
+
+  enum class EmissionX: uint8_t
+  {
+    OneDimNonLin,
+    TwoDimNonLin
+  };
+
+  const enum HeatX heat;
+  const enum EmissionX emission;
+
+  ThermalModelSelection(const enum HeatX myHeat,
+                        const enum EmissionX myEmission);
+  ~ThermalModelSelection(void);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

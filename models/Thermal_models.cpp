@@ -942,5 +942,11 @@ double diffusivity(const double k, const double rhoCp)
   return k / rhoCp;
 }
 
+ThermalModelSelection::ThermalModelSelection(const enum HeatX myHeat,
+                                             const enum EmissionX myEmission)
+  :heat(myHeat), emission(myEmission){}
+
+ThermalModelSelection::~ThermalModelSelection(void){}
+
 
 }
