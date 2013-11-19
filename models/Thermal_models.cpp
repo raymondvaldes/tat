@@ -1,7 +1,4 @@
 #include "../Header.h"
-//ThermalModelSelection::ThermalModelSelection(const enum HeatX myHeat,
-//                                             const enum EmissionX myEmission)
-//:heat(myHeat), emission(myEmission){}
 
 HeatModel2DAna::HeatModel2DAna(const double R0_, const double R1_,
                                const double lambda_, const double It_,
@@ -34,6 +31,12 @@ HeatModel2DAna::HeatModel2DAna(const double R0_, const double R1_,
 
     ::range(nuSpace, nuStart, nuEnd, nuSize);
 }
+
+HeatModel2DAna::~HeatModel2DAna(void)
+{
+  cleanup();
+}
+
 
 void HeatModel2DAna::cleanup(void) const
 {

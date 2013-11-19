@@ -63,7 +63,6 @@ double PhaseOfEmission2DAna(const int flag,
 
     ///Populate Temperature Vector
     heatmodel2DAna.TemperatureDistro(T2DProfile, pStruct->laser->omegas[flag]);
-    heatmodel2DAna.cleanup();
 
     ///Initiate emission model
     const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
