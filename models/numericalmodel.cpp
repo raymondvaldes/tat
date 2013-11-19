@@ -315,5 +315,8 @@ void Mesh::meshUpdate(const double L_coat, const double L_substrate,
 }
 
 
+simulations::simulations(void){}
+
+
 }
 

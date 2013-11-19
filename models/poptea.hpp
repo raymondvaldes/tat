@@ -16,7 +16,6 @@ namespace thermalAnalysisMethod
     class physicalModel::TBCsystem TBCsystem;
     class ThermalModelSelection thermalModel;
     class parameterEstimation::LMA LMA;
-    class numericalModel::simulations numSimu;
 
     PopTea(class expEquipment::setup expSetup_,
            class physicalModel::TBCsystem TBCsystem_,

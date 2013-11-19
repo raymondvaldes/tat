@@ -45,6 +45,13 @@ private:
   void zUpdate();
 };
 
+class simulations
+{
+public:
+  simulations(void);
+};
+
+
 
 }
 
