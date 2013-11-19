@@ -100,6 +100,15 @@ public:
   void deleteArray(void);
 };
 
+
+class LMA
+{
+  struct settings Settings;
+  class unknownList unknownParameters;
+  class LMA_workingArrays LMA_workspace;
+};
+
+
 }
 
 struct parameter_constraints
