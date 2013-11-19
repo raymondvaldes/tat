@@ -124,6 +124,16 @@ LMA_workingArrays::~LMA_workingArrays(void)
   }
 }
 
+LMA::LMA(const struct settings Settings_,
+         const class unknownList unknownParameters_,
+         class LMA_workingArrays LMA_workspace_)
+  : Settings(Settings_), unknownParameters(unknownParameters_),
+    LMA_workspace(LMA_workspace_)
+{
+
+}
+LMA::~LMA(void){}
+
 unknownList::~unknownList(){}
 settings::~settings(){}
 

@@ -106,6 +106,11 @@ class LMA
   struct settings Settings;
   class unknownList unknownParameters;
   class LMA_workingArrays LMA_workspace;
+
+  LMA(const struct settings Settings_,
+      const class unknownList unknownParameters_,
+      class LMA_workingArrays LMA_workspace_);
+  ~LMA(void);
 };
 
 
