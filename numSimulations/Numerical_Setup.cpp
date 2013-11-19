@@ -53,7 +53,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
     {
         for(size_t i = 0; i < N; ++i)
         {
-            switch ( pStruct->xParametersNames[i] )
+            switch ( pStruct->poptea->xParametersNames[i] )
             {
                 case asub :
                     diag[i] = pStruct->poptea->TBCsystem.a_sub;
@@ -1509,13 +1509,13 @@ void Mesh::meshUpdate(const double L_coat, const double L_substrate,
 
 
 
-parameterStr::parameterStr(const size_t d)
-             :  Num(d)
+parameterStr::parameterStr()
+//             :  Num(d)
 {
 //  xParameters         = new size_t[d];
 //  xParameters95       = new size_t[d];
-  xParametersNames   = new enum XParaNames[d];
-  xParameters95Names = new enum XParaNames[d];
+//  xParametersNames   = new enum XParaNames[d];
+//  xParameters95Names = new enum XParaNames[d];
 
 //  N95 = d;
 }
@@ -1643,8 +1643,8 @@ parameterStr::~parameterStr()
 //    delete [] xParameters; //removed
 //    delete [] xParameters95; //removed
 
-    delete [] xParametersNames;
-    delete [] xParameters95Names;
+//    delete [] xParametersNames;
+//    delete [] xParameters95Names;
 }
 
 

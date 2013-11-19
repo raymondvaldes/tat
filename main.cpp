@@ -31,7 +31,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
 /// Parameter Structure
   struct parameterStr *pStruct =
-  new struct parameterStr(N);
+  new struct parameterStr();
   pStruct->iter = 1000;
 
 /// Input Directory Information
@@ -200,12 +200,12 @@ int main( int /*argc*/, char** /*argv[]*/ )
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
-
-
   for (size_t i=0; i < N; ++i)
   {
-      pStruct->xParametersNames[i] = xParametersNames[i];
-      pStruct->xParameters95Names[i] = pStruct->xParametersNames[i];
+//      pStruct->xParametersNames[i] = xParametersNames[i];
+//      pStruct->xParameters95Names[i] = pStruct->xParametersNames[i];
+      pStruct->poptea->xParametersNames[i] = xParametersNames[i];
+      pStruct->poptea->xParameters95Names[i] = xParametersNames[i];
   }
 
 // Populate the experimental phase values in parameters99

@@ -59,8 +59,8 @@ void perturbationTest(const size_t m, const size_t n,
         {
             if( currentI != i )
             {
-                parametersStr->xParametersNames[iter++]
-                = parametersStr->xParameters95Names[i];
+                parametersStr->poptea->xParametersNames[iter++]
+                = parametersStr->poptea->xParameters95Names[i];
             }
         }
 
@@ -72,7 +72,7 @@ void perturbationTest(const size_t m, const size_t n,
         {
             double multiplier = 0;
             multiplier = 1-spread + 2*spread*(xiters/double(xnumber-1));
-            switch( parametersStr->xParameters95Names[currentI] )
+            switch( parametersStr->poptea->xParameters95Names[currentI] )
             {
                 case asub :
                     parametersStr->poptea->TBCsystem.a_sub = a_subTrue * multiplier;
@@ -111,7 +111,7 @@ void perturbationTest(const size_t m, const size_t n,
             for(size_t i = 0 ; i < N ; ++i)
             {
                 ///Set Initial conditions
-                switch( parametersStr->xParametersNames[i] )
+                switch( parametersStr->poptea->xParametersNames[i] )
                 {
                     case asub :
                         xInitial[i] = x_ini10(a_subTrue);
@@ -197,10 +197,10 @@ void perturbationTest(const size_t m, const size_t n,
 //    parametersStr->N = parametersStr->poptea->N95;
     for(size_t i = 0; i < parametersStr->poptea->unknownParameters.Nsize(); ++i)
     {
-        parametersStr->xParametersNames[i]
-        = parametersStr->xParameters95Names[i];
+        parametersStr->poptea->xParametersNames[i]
+        = parametersStr->poptea->xParameters95Names[i];
         ///Set Initial conditions
-        switch( parametersStr->xParametersNames[i] )
+        switch( parametersStr->poptea->xParametersNames[i] )
         {
             case asub :
                 parametersStr->poptea->TBCsystem.a_sub = a_subTrue;
@@ -440,7 +440,7 @@ void parameterUncertainty(const size_t n,
         ///Reset Inputs
         for(size_t i=0 ; i< n ; i++)
         {
-            switch ( parametersStr->xParametersNames[i] )
+            switch ( parametersStr->poptea->xParametersNames[i] )
             {
                 case asub :
                     parametersStr->poptea->TBCsystem.a_sub = a_subTrue;

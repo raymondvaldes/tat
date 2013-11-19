@@ -51,7 +51,7 @@ int paramter_estimation(const size_t m, const size_t n,
     {
       for(size_t i=0 ; i<n ; ++i)
       {
-        switch ( pStruct->xParametersNames[i] )
+        switch ( pStruct->poptea->xParametersNames[i] )
         {
           case asub :
               x[i] = x_ini(pc_ptr->a_sub_min, pc_ptr->a_sub_max);
@@ -87,7 +87,7 @@ int paramter_estimation(const size_t m, const size_t n,
     ///Transform inputs
     for(size_t i=0 ; i< n ; i++)
     {
-      switch ( pStruct->xParametersNames[i] )
+      switch ( pStruct->poptea->xParametersNames[i] )
       {
         case asub :
             x[i] = kx_limiter2(x[i],pc_ptr->a_sub_min,pc_ptr->a_sub_max);
@@ -166,7 +166,7 @@ int paramter_estimation(const size_t m, const size_t n,
       ///Transform outputs
       for(size_t i=0 ; i< n ; i++)
       {
-        switch ( pStruct->xParametersNames[i] )
+        switch ( pStruct->poptea->xParametersNames[i] )
         {
           case asub :
               pStruct->poptea->TBCsystem.a_sub =
@@ -379,7 +379,7 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
                              parametersStr-> predicted);
     for(size_t j = 0 ; j < N; ++j)
     {
-        switch ( parametersStr->xParametersNames[j] )
+        switch ( parametersStr->poptea->xParametersNames[j] )
         {
             case asub :
                 std::cout << parametersStr->poptea->TBCsystem.a_subEval();
@@ -420,7 +420,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
 ///Transform estimates from kappa space to k space based on the limits imposed
   for(int i = 0; i < N; ++i)
   {
-    switch ( parametersStr->xParametersNames[i] )
+    switch ( parametersStr->poptea->xParametersNames[i] )
     {
       case asub :
           parametersStr->poptea->TBCsystem.a_sub =

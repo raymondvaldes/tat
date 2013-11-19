@@ -224,8 +224,8 @@ public:
   class thermalAnalysisMethod::PopTea *poptea;
 
   ///parameter estimation class structures
-  enum XParaNames *xParametersNames;
-  enum XParaNames *xParameters95Names;
+//  enum XParaNames *xParametersNames;
+//  enum XParaNames *xParameters95Names;
 
   double *fjac = nullptr;
   double *predicted = nullptr;
@@ -254,7 +254,7 @@ public:
   double Ttol;
   size_t iter;
 
-  parameterStr(const size_t d);
+  parameterStr();
   ~parameterStr();
 
 private:
