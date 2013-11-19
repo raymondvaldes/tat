@@ -1535,7 +1535,7 @@ void parameterStr::updateNMeasurements(const size_t Lend_)
 {
   /*Lend_ is the total number of unique measurements in a dataset,
   this value is based on the range and the set minimum*/
-  const size_t N = poptea->unknownParameters.Nsize();
+  const size_t N = poptea->LMA.unknownParameters.Nsize();
   if(fjac)
   {
       delete [] fjac;

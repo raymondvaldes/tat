@@ -43,7 +43,7 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
     ///Parameter Estimation Options
 //    pStruct->MSETol = 1e-8;
-    pStruct->poptea->LMA_workspace.MSETol = 1e-8;
+    pStruct->poptea->LMA.LMA_workspace.MSETol = 1e-8;
 
     int nfev;
     int info = 0;
@@ -108,11 +108,11 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
         ///estimate unknown parameters using full range
         double *xpredicted =
-            new double[ pStruct->poptea->unknownParameters.Nsize()];
+            new double[ pStruct->poptea->LMA.unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};    
         paramter_estimation(pStruct->L_end,
-                            pStruct->poptea->unknownParameters.Nsize(),
+                            pStruct->poptea->LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info,
                             &nfev, &st_ptr, xInitial, pStruct, factorMax,
                             factorScale, xpredicted);
@@ -169,11 +169,11 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
         ///estimate unknown parameters using full range
         double *xpredicted =
-            new double[pStruct->poptea->unknownParameters.Nsize()];
+            new double[pStruct->poptea->LMA.unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
         paramter_estimation(pStruct->L_end,
-                            pStruct->poptea->unknownParameters.Nsize(),
+                            pStruct->poptea->LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info, &nfev, &st_ptr, xInitial,
                             pStruct, factorMax, factorScale, xpredicted);
         delete [] xInitial;
@@ -281,7 +281,7 @@ void CC_APS2(struct parameterStr *pStruct)
     constexpr double bandSize = .01;
     constexpr double spread = 0.20;
     class ::perturbStruct *pertStruct = nullptr;
-    const size_t N = pStruct->poptea->unknownParameters.Nsize();
+    const size_t N = pStruct->poptea->LMA.unknownParameters.Nsize();
     pertStruct = new class perturbStruct(N, xnumber, spread,
                                          l_min, l_max, iterates);
     pertStruct->lthermalBands(bandSize);
@@ -348,7 +348,7 @@ void CC_APS2(struct parameterStr *pStruct)
 ///* Optimization Procedure for l-thermal  */
     if(true)
     {
-        parameterUncertainty(pStruct->poptea->unknownParameters.Nsize(),
+        parameterUncertainty(pStruct->poptea->LMA.unknownParameters.Nsize(),
                              ParaEstSetting, &st_ptr, xInitial,
                              pStruct, factorMax, factorScale, pertStruct,
                              myEmissionNoise, filename);

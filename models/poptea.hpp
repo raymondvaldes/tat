@@ -17,8 +17,8 @@ namespace thermalAnalysisMethod
     class ThermalModelSelection thermalModel;
 
 //    struct parameterEstimation::settings Settings;
-    class parameterEstimation::unknownList unknownParameters;
-    class parameterEstimation::LMA_workingArrays LMA_workspace;
+//    class parameterEstimation::unknownList unknownParameters;
+//    class parameterEstimation::LMA_workingArrays LMA_workspace;
 
     class parameterEstimation::LMA LMA;
 

@@ -329,7 +329,7 @@ PRINT( "lmdif\n" );
 iflag = 1;
 
 fcn(m,n,x,fvec,&iflag,st_ptr,parametersStr);
-parametersStr->poptea->LMA_workspace.MSEinitial = parametersStr->poptea->LMA_workspace.MSE;
+parametersStr->poptea->LMA.LMA_workspace.MSEinitial = parametersStr->poptea->LMA.LMA_workspace.MSE;
 
 *nfev = 1;
 if(iflag < 0)

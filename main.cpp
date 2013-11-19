@@ -194,7 +194,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
 
 
-  poptea.LMA_workspace.MSETol = 1e-8;
+  poptea.LMA.LMA_workspace.MSETol = 1e-8;
   pStruct->poptea = &poptea;
 
   // Initial Guess
@@ -222,7 +222,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
         pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
     }
 
-    fitting(pStruct->L_end, pStruct->poptea->unknownParameters.Nsize(),
+    fitting(pStruct->L_end, pStruct->poptea->LMA.unknownParameters.Nsize(),
             ParaEstSetting, &paraConstraints, pStruct, xInitial, interants,
             factorMax, factorScale);
   }

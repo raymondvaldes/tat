@@ -11,11 +11,11 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),
-    Settings(Settings_),
-    unknownParameters(unknownParameters_),
+//    Settings(Settings_),
+//    unknownParameters(unknownParameters_),
     LMA(Settings_, unknownParameters_)
 {
-  const size_t d = unknownParameters.Nsize();
+  const size_t d = LMA.unknownParameters.Nsize();
   xParametersNames   = new enum XParaNames[d];
   xParameters95Names = new enum XParaNames[d];
   N95 = d;
@@ -36,7 +36,7 @@ void PopTea::thermalSetup(const double lmin_, const double lmax_,
                                       TBCsystem.coating.kthermal.offset,
                                       TBCsystem.coating.psithermal.offset ,
                                       LendMin);
-  LMA_workspace.updateArraySize(L_end, unknownParameters.Nsize());
+  LMA.LMA_workspace.updateArraySize(L_end, LMA.unknownParameters.Nsize());
 }
 
 double PopTea::bEval(void)

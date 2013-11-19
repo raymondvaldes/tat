@@ -128,24 +128,23 @@ int paramter_estimation(const size_t m, const size_t n,
     initial guesses. This is let to run a fixed number of iterations. */
     constexpr double ExpStddev = 0;
     const double ExpVarianceEst = ExpStddev * ExpStddev;
-    pStruct->poptea->LMA_workspace.fvecTotal = SobjectiveLS(pStruct->L_end,
+    pStruct->poptea->LMA.LMA_workspace.fvecTotal = SobjectiveLS(pStruct->L_end,
                                       pStruct->emissionExperimental,
                                       pStruct->predicted);
     const size_t v1 = pStruct->L_end - n;
     double reduceChiSquare;
-
     if(ExpVarianceEst ==0 )
     {
       reduceChiSquare = 100;
     }
     else
     {
-      reduceChiSquare = (pStruct->poptea->LMA_workspace.fvecTotal / ExpVarianceEst) / v1;
+      reduceChiSquare = (pStruct->poptea->LMA.LMA_workspace.fvecTotal / ExpVarianceEst) / v1;
     }
 
     if( reduceChiSquare < 2
        || ParaEstSetting.factor == factorMax
-       || pStruct->poptea->LMA_workspace.fvecTotal < pStruct->poptea->LMA_workspace.MSETol
+       || pStruct->poptea->LMA.LMA_workspace.fvecTotal < pStruct->poptea->LMA.LMA_workspace.MSETol
        )
     {
 
@@ -374,7 +373,7 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 void printPEstimates(const size_t N, struct parameterStr * parametersStr)
 {
 
-    parametersStr->poptea->LMA_workspace.MSE = MSE(parametersStr->L_end,
+    parametersStr->poptea->LMA.LMA_workspace.MSE = MSE(parametersStr->L_end,
                              parametersStr->emissionExperimental,
                              parametersStr-> predicted);
     for(size_t j = 0 ; j < N; ++j)
@@ -406,7 +405,7 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
         }
         std::cout << "  ";
     }
-    std::cout << std::setprecision(10) << parametersStr->poptea->LMA_workspace.MSE;
+    std::cout << std::setprecision(10) << parametersStr->poptea->LMA.LMA_workspace.MSE;
     std::cout << std::setprecision(6)  << "\n";
 
     return;
@@ -468,7 +467,7 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
   }
 
 /// Print stuff to terminal
-  parametersStr->poptea->LMA_workspace.MSE = MSE(parametersStr->L_end,
+  parametersStr->poptea->LMA.LMA_workspace.MSE = MSE(parametersStr->L_end,
                            parametersStr->emissionExperimental,
                            parametersStr->predicted);
   printPEstimates(N, parametersStr);

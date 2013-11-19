@@ -14,7 +14,7 @@ void perturbationTest(const size_t m, const size_t n,
     const size_t xnumber = pStruct->xnumber;
     const double spread = pStruct->spread;
     constexpr bool debugPrint = true;
-    const size_t N = parametersStr->poptea->unknownParameters.Nsize();
+    const size_t N = parametersStr->poptea->LMA.unknownParameters.Nsize();
 ///fitting constants set
     int nfev;
     int info = 0;
@@ -40,19 +40,19 @@ void perturbationTest(const size_t m, const size_t n,
         myfile.open(filename.str().c_str());
         myfile << std::setprecision(8);
         myfile << spread << "\t" << xnumber << "\t" <<
-                  parametersStr->poptea->unknownParameters.Nsize() << "\n";
+                  parametersStr->poptea->LMA.unknownParameters.Nsize() << "\n";
         myfile << a_subTrue<< "\t" << gammaTrue << "\t" <<E_sigmaTrue  << "\t";
         myfile << lambdaTrue  << "\t" <<R1True  << "\n";
     }
 
 ///Implement iteration
-    if( parametersStr->poptea->unknownParameters.Nsize() >1)
+    if( parametersStr->poptea->LMA.unknownParameters.Nsize() >1)
     {
-        parametersStr->poptea->unknownParameters.NAssign(parametersStr->poptea->N95-1);
+        parametersStr->poptea->LMA.unknownParameters.NAssign(parametersStr->poptea->N95-1);
     }
 
 ///Reset parameters to be fitted
-    for(size_t currentI = 0; currentI <=  parametersStr->poptea->unknownParameters.Nsize() ; ++currentI)
+    for(size_t currentI = 0; currentI <=  parametersStr->poptea->LMA.unknownParameters.Nsize() ; ++currentI)
     {
         size_t iter = 0;
         for(size_t i = 0; i < parametersStr->poptea->N95 ; ++i)
@@ -193,9 +193,9 @@ void perturbationTest(const size_t m, const size_t n,
     delete []xpredicted;
 
 ///RESET
-    parametersStr->poptea->unknownParameters.NAssign(parametersStr->poptea->N95);
+    parametersStr->poptea->LMA.unknownParameters.NAssign(parametersStr->poptea->N95);
 //    parametersStr->N = parametersStr->poptea->N95;
-    for(size_t i = 0; i < parametersStr->poptea->unknownParameters.Nsize(); ++i)
+    for(size_t i = 0; i < parametersStr->poptea->LMA.unknownParameters.Nsize(); ++i)
     {
         parametersStr->poptea->xParametersNames[i]
         = parametersStr->poptea->xParameters95Names[i];
@@ -262,7 +262,7 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
     myfile.open(filename);
     myfile << std::setprecision(8);
     myfile << pStruct->spread << "\t" << xnum << "\t" <<
-              pStructp->poptea->unknownParameters.Nsize();
+              pStructp->poptea->LMA.unknownParameters.Nsize();
     myfile << "\n" << pStruct->iterates << "\n";
     myfile << a_subTrue<< "\t" << gammaTrue << "\t" << E_sigmaTrue  << "\t";
     myfile <<lambdaTrue  << "\t" <<R1True  << "\n";
@@ -289,20 +289,20 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
         }
 
         perturbationTest(pStructp->L_end,
-                         pStructp->poptea->unknownParameters.Nsize(),
+                         pStructp->poptea->LMA.unknownParameters.Nsize(),
                          ParaEstSetting, st_ptr, xInitial, pStructp, factorMax,
                          factorScale, pStruct);
 
         ///Print some information to terminal
         std::cout << j <<" "<< pStruct->bands[j]<<" "<< lmin <<" "<< lmax;
-        for(size_t i = 0; i < pStructp->poptea->unknownParameters.Nsize(); ++i)
+        for(size_t i = 0; i < pStructp->poptea->LMA.unknownParameters.Nsize(); ++i)
             std::cout << " " << pStruct->xArea[i];
         std::cout << "\n";
 
         myfile << j << "\t" <<  pStruct->bands[j] <<  "\t" << lmin << "\t";
         myfile << lmax;
 
-        for( size_t k = 0 ; k < pStructp->poptea->unknownParameters.Nsize() ; k++)
+        for( size_t k = 0 ; k < pStructp->poptea->LMA.unknownParameters.Nsize() ; k++)
         {
             for(size_t i = 0 ; i < pStruct->xnumber ; ++i)
             {
@@ -359,7 +359,7 @@ void parameterUncertainty(const size_t n,
 ///Initial Fit to get initial guesses
     constexpr size_t interants = 0;
     fitting(parametersStr->L_end,
-            parametersStr->poptea->unknownParameters.Nsize(), ParaEstSetting,
+            parametersStr->poptea->LMA.unknownParameters.Nsize(), ParaEstSetting,
             st_ptr, parametersStr, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
@@ -396,7 +396,7 @@ void parameterUncertainty(const size_t n,
 
         ///estimate unknown parameters
         paramter_estimation(parametersStr->L_end,
-                            parametersStr->poptea->unknownParameters.Nsize(),
+                            parametersStr->poptea->LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info, &nfev, st_ptr, xInitial,
                             parametersStr, factorMax, factorScale, xpredicted);
         phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);
@@ -523,7 +523,7 @@ void fitting(size_t P, size_t N,
         paramter_estimation(P, N, ParaEstSetting, &info, &nfev, st_ptr,
                             xInitial, pStruct, factorMax, factorScale,
                             xpredicted);
-        pStruct->poptea->LMA_workspace.MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
+        pStruct->poptea->LMA.LMA_workspace.MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
                            pStruct->predicted);
 
         myfile << pStruct->poptea->TBCsystem.gammaEval() << "\t"
@@ -531,7 +531,7 @@ void fitting(size_t P, size_t N,
                << pStruct->poptea->TBCsystem.optical.Emit1 << "\t"
                << pStruct->poptea->TBCsystem.optical.R1<< "\t"
                << pStruct->poptea->TBCsystem.coating.lambda << "\t"
-               << pStruct->poptea->LMA_workspace.MSE << "\n";
+               << pStruct->poptea->LMA.LMA_workspace.MSE << "\n";
 
         printPEstimates(N, pStruct);
         xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
