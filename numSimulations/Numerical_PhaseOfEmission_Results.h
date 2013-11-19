@@ -15,6 +15,7 @@ inline double mean(const double a, const double b)
 
 struct funcClass
 {
+public:
   /*
   F:          the gsl_function which is the integrand
   xlow:       lower integration limit
@@ -58,6 +59,10 @@ struct funcClass
       gsl_spline_init(spline, xvar, func, N);
       workspace = gsl_integration_workspace_alloc (limit);
   }
+  ~funcClass(void)
+  {
+    cleanup();
+  }
 
   double eval(const double xpos) const
   {
@@ -81,7 +86,6 @@ struct funcClass
   double integrate_a_b(const double xlow, const double xhigh,
                        const double epsabs_, const double epsrel_)
   {
-//        std::cout << "must debug - integrating outside domain"; exit(67);
       //http://www.bnikolic.co.uk/nqm/1dinteg/gslgk.html
       if( (xlow < xvar[0]) || (xhigh > xvar[N-1]) || (xlow > xhigh) )
       {
@@ -101,12 +105,12 @@ struct funcClass
       return result;
   }
 
-  void cleanup() const
+private:
+  void cleanup(void)
   {
-      gsl_spline_free(spline);
-      gsl_interp_accel_free(acc);
-      gsl_integration_workspace_free(workspace);
-      return;
+    gsl_spline_free(spline);
+    gsl_interp_accel_free(acc);
+    gsl_integration_workspace_free(workspace);
   }
 };
 

@@ -534,8 +534,8 @@ double MSEarea1(size_t N, double* func1, double* func2, double* xvar)
 
 
     ///Cleanup
-    Func1->cleanup();
-    Func2->cleanup();
+//    Func1->cleanup();
+//    Func2->cleanup();
     delete Func1;
     delete Func2;
 
