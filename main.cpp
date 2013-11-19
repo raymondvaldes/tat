@@ -181,9 +181,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   unknownParameters.addUnknown(pNames::R1,          0.6, 1);
   unknownParameters.addUnknown(pNames::lambda,      .1,  1);
 
-//  class LM
-
-
   struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD,
                                               thermalModel, ParaEstSetting,
                                               unknownParameters);

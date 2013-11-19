@@ -15,9 +15,12 @@ namespace thermalAnalysisMethod
     class expEquipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
     class ThermalModelSelection thermalModel;
-    struct parameterEstimation::settings Settings;
+
+//    struct parameterEstimation::settings Settings;
     class parameterEstimation::unknownList unknownParameters;
     class parameterEstimation::LMA_workingArrays LMA_workspace;
+
+    class parameterEstimation::LMA LMA;
 
     PopTea(class expEquipment::setup expSetup_,
            class physicalModel::TBCsystem TBCsystem_,
@@ -27,7 +30,8 @@ namespace thermalAnalysisMethod
     ~PopTea(void);
 
 
-  void thermalSetup(const double lmin_, const double lmax_, const size_t LendMin); //MUST BE REMOVED
+  void thermalSetup(const double lmin_, const double lmax_,
+                    const size_t LendMin); //MUST BE REMOVED
   double bEval(void); //MUST BE REMOVED
   };
 }

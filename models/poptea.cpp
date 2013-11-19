@@ -12,7 +12,8 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),
     Settings(Settings_),
-    unknownParameters(unknownParameters_)
+    unknownParameters(unknownParameters_),
+    LMA(Settings_, unknownParameters_)
 {
   const size_t d = unknownParameters.Nsize();
   xParametersNames   = new enum XParaNames[d];
