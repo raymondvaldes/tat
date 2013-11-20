@@ -148,7 +148,7 @@ double variance(const size_t P, const size_t N, const double S)
     return S / (P-N);
 }
 
-double SobjectiveLS(const size_t N, const double*emissionExp,
+double SobjectiveLS(const size_t N, const std::vector<double>& emissionExp,
                     const std::vector<double>& emissionEst)
 {
     /*
@@ -222,8 +222,8 @@ double Sobjective(const size_t L_end, const double*emissionExp,
     return sqrt(fvec_objective / L_end );
 }
 
-double MSE(const size_t N, const double* const emissionExp,
-           const std::vector<double>& emissionEst)
+double MSE(const size_t N, std::vector<double> &emissionExp,
+           std::vector<double> &emissionEst)
 {
     /*
         The objective function is evaluated for all the measurements and the
@@ -468,8 +468,8 @@ double integrate(struct funcClass *Func, double xlow, double xhigh)
     return Func->result;
 }
 
-double MSEarea(const size_t N, const double* const func1,
-               const double* const func2)
+double MSEarea(const size_t N, std::vector<double> &func1,
+               std::vector<double> &func2)
 {
     ///Startup and initialization
     double sum = 0;

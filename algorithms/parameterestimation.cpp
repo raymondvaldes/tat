@@ -92,37 +92,44 @@ void LMA_workingArrays::updateArraySize(const size_t Lend_, const size_t N)
 {
   /*Lend_ is the total number of unique measurements in a dataset,
   this value is based on the range and the set minimum*/
-  if(fjac)
-  {
-      deleteArray();
-  }
+//  if(fjac)
+//  {
+//      deleteArray();
+//  }
 
-  fjac = new double[Lend_*N];
-  emissionExperimental    = new double[Lend_];
-  emissionNominal         = new double[Lend_];
-  emissionCurrent         = new double[Lend_];
-  predicted               = new double[Lend_];
-  fvec = new double[Lend_];
+  fjac.resize(Lend_*N);
+  emissionExperimental.resize(Lend_);
+  emissionNominal.resize(Lend_);
+  emissionCurrent.resize(Lend_);
+  predicted.resize(Lend_);
+  fvec.resize(Lend_);
+
+//  fjac = new double[Lend_*N];
+//  emissionExperimental    = new double[Lend_];
+//  emissionNominal         = new double[Lend_];
+//  emissionCurrent         = new double[Lend_];
+//  predicted               = new double[Lend_];
+//  fvec = new double[Lend_];
 }
 
 void LMA_workingArrays::deleteArray(void)
 {
 
-  delete [] fjac;
-  delete [] emissionExperimental;
-  delete [] emissionCurrent;
-  delete [] emissionNominal;
-  delete [] predicted;
-  delete [] fvec;
+//  delete [] fjac;
+//  delete [] emissionExperimental;
+//  delete [] emissionCurrent;
+//  delete [] emissionNominal;
+//  delete [] predicted;
+//  delete [] fvec;
 }
 
 
 LMA_workingArrays::~LMA_workingArrays(void)
 {
-  if(fjac)
-  {
-      deleteArray();
-  }
+//  if(fjac)
+//  {
+//      deleteArray();
+//  }
 }
 
 LMA::LMA(const struct settings Settings_,

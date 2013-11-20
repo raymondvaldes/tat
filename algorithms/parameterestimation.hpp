@@ -74,14 +74,20 @@ struct settings
 class LMA_workingArrays
 {
 public:
-  double *fjac = nullptr;
-  double *predicted = nullptr;
-  double *fvec = nullptr;
+  std::vector<double> fjac;
+  std::vector<double> predicted;
+  std::vector<double> fvec;
+  std::vector<double> emissionExperimental;
+  std::vector<double> emissionNominal;
+  std::vector<double> emissionCurrent;
 
-  ///poptea structures
-  double *emissionExperimental;
-  double *emissionNominal;
-  double *emissionCurrent = nullptr;
+//  double *fjac = nullptr;
+//  double *predicted = nullptr;
+//  double *fvec = nullptr;
+//  double *emissionExperimental;
+//  double *emissionNominal;
+//  double *emissionCurrent = nullptr;
+
   double MSE, MSEinitial, MSETol, fvecTotal;
 
   ~LMA_workingArrays(void);

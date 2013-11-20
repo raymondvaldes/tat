@@ -19,10 +19,10 @@ double Sobjective(const size_t L_end, const double*emissionExp,
 
 double SobjectiveLS(const size_t N, const double*emissionExp,
                     const double* emissionEst);
-double SobjectiveLS(const size_t N, const double*emissionExp,
+double SobjectiveLS(const size_t N, const std::vector<double> &emissionExp,
                     const std::vector<double>& emissionEst);
-double MSE(const size_t N, const double* const emissionExp,
-           const std::vector<double>& emissionEst);
+double MSE(const size_t N, std::vector<double> &emissionExp,
+           std::vector<double> &emissionEst);
 double MSE(const size_t N, const double*emissionExp,
                     const double* emissionEst);
 double MSEarea1(size_t N, double* func1, double* func2, double* xvar);
@@ -64,8 +64,8 @@ double arrayMin(const double* x, const size_t I);
 
 double fintegrate(double x, void *p);
 double integrate(struct funcClass *Func, double xlow, double xhigh);
-double MSEarea(const size_t N, const double* const func1,
-               const double* const func2);
+double MSEarea(const size_t N, std::vector<double> &func1,
+               std::vector<double> &func2);
 
 
 

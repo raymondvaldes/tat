@@ -14,15 +14,18 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
     LMA(Settings_, unknownParameters_)
 {
   const size_t d = LMA.unknownParameters.Nsize();
-  xParametersNames   = new enum XParaNames[d];
-  xParameters95Names = new enum XParaNames[d];
+
+  xParametersNames.resize(d);
+  xParameters95Names.resize(d);
+//  xParametersNames   = new enum XParaNames[d];
+//  xParameters95Names = new enum XParaNames[d];
   N95 = d;
 }
 
 PopTea::~PopTea(void)
 {
-  delete [] xParametersNames;
-  delete [] xParameters95Names;
+//  delete [] xParametersNames;
+//  delete [] xParameters95Names;
 }
 
 

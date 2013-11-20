@@ -16,8 +16,11 @@ namespace thermalAnalysisMethod
   class PopTea
   {
   public:
-    enum XParaNames *xParameters95Names;  //MUST BE REMOVEd
-    enum XParaNames *xParametersNames;    // MUST BE REMOVED
+//    enum XParaNames *xParameters95Names;  //MUST BE REMOVEd
+//    enum XParaNames *xParametersNames;    // MUST BE REMOVED
+    std::vector<enum XParaNames> xParametersNames;
+    std::vector<enum XParaNames> xParameters95Names;
+
     size_t N95;                           //MUST BE REMOVED
 
     class expEquipment::setup expSetup;
