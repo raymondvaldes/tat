@@ -85,7 +85,7 @@ double rss(const double N, const double* exp, const double* x_hat)
 }
 
 //double VarianceEst(const size_t num, const size_t P, const size_t N,
-//                   const double* l_thermal, struct parameterStr * parametersStr,
+//                   const double* l_thermal, class thermalAnalysisMethod::PopTea parametersStr,
 //                   const double stddevExperimental)
 //
 //{

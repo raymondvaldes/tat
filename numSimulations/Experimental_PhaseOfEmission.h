@@ -3,7 +3,7 @@
 
 double Experimental_PhaseOfEmission(double*phase, const size_t L_end);
 void phase99(const size_t L_end,
-             const struct parameterStr * parametersStr,
+             const class thermalAnalysisMethod::PopTea poptea,
              double *Numerical_Phase);
 
 

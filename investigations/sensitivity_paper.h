@@ -5,10 +5,10 @@
 namespace SensitivityValdes2013
 {
     struct parameter_constraints;
-    void figureSensitivityIntro(struct parameterStr *pStruct);
+    void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea);
 
 
-    void CC_APS2(struct parameterStr *pStruct);
+    void CC_APS2(class thermalAnalysisMethod::PopTea poptea);
 
 }
 

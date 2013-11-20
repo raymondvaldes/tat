@@ -54,16 +54,14 @@ compiler.
 #include "models/numericalmodel.hpp"
 
 #include "algorithms/parameterestimation.hpp"
+#include "models/poptea.hpp"
+
 #include "algorithms/lmdiff.h"
 #include "algorithms/statistical_tools.hpp"
 #include "algorithms/ThermalProp_Analysis.h"
 #include "algorithms/sensitivity_analysis.hpp"
 #include "investigations/sensitivity_paper.h"
 
-#include "models/poptea.hpp"
-
-
-//#include "system/poptea.h"
 
 #include "numSimulations/Experimental_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Temperature.h"

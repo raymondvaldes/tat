@@ -3,11 +3,11 @@
 double enorm(int n,double x[]);
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         const struct parameter_constraints*,
-                        struct parameterStr * parametersStr),
+                        class thermalAnalysisMethod::PopTea poptea),
             int m,int n,double x[],double fvec[],double **variables,
             double fjac[],int ldfjac, int *iflag,double epsfcn,double wa[],
             const struct parameter_constraints*st_ptr,
-            struct parameterStr * parametersStr);
+            class thermalAnalysisMethod::PopTea poptea);
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
             int m,int n,double x[],double fvec[],double **variables,
             double fjac[],int ldfjac, int *iflag,double epsfcn,double wa[]);
@@ -90,14 +90,14 @@ double wa1[], wa2[], wa3[], wa4[];
 int ipvt[]; */
 void lmdif(void (*fcn)(int, int, double*, double*, int*,
                        const struct parameter_constraints*,
-                       struct parameterStr *), int m, int n, double *x,
-           double *fvec,double ftol, double xtol,
+                       class thermalAnalysisMethod::PopTea),
+           int m, int n, double *x, double *fvec,double ftol, double xtol,
            double gtol, int maxfev, double epsfcn, double *diag, int mode,
            double factor, int nprint, int *info, int *nfev, double *fjac,
            int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
            double *wa3, double *wa4, double *wa5,
            const struct parameter_constraints*st_ptr,
-           struct parameterStr *parametersStr)
+           class thermalAnalysisMethod::PopTea poptea)
 {
 /*
 *     **********
@@ -328,8 +328,8 @@ PRINT( "lmdif\n" );
 */
 iflag = 1;
 
-fcn(m,n,x,fvec,&iflag,st_ptr,parametersStr);
-parametersStr->poptea->LMA.LMA_workspace.MSEinitial = parametersStr->poptea->LMA.LMA_workspace.MSE;
+fcn(m,n,x,fvec,&iflag,st_ptr,poptea);
+poptea.LMA.LMA_workspace.MSEinitial = poptea.LMA.LMA_workspace.MSE;
 
 *nfev = 1;
 if(iflag < 0)
@@ -353,7 +353,7 @@ iflag = 2;
 
 ////////////////////////////////////////////////////////////////////////////////////
 fdjac2(fcn, m, n, x, fvec, fjac, ldfjac, &iflag, epsfcn, wa4, st_ptr,
-       parametersStr);
+       poptea);
 
 //Store a forward difference jacobian
 ij = 0;
@@ -361,7 +361,7 @@ for(j = 0 ; j < n ; ++j)
 	for(i = 0 ; i < m ; ++i)
     {
             wa5[ij] = fjac[ij];    //  fjac[i+m*j]
-            parametersStr->poptea->LMA.LMA_workspace.fjac[ij] = wa5[ij] ;
+            poptea.LMA.LMA_workspace.fjac[ij] = wa5[ij] ;
             ij++;
     }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -379,7 +379,7 @@ if( nprint > 0 )
 	iflag = 0;
 	if(mod(iter-1,nprint) == 0)
 		{
-		fcn(m,n,x,fvec,&iflag,st_ptr,parametersStr);
+		fcn(m,n,x,fvec,&iflag,st_ptr,poptea);
 		if(iflag < 0)
 			goto L300;
 //z		PRINT("\n   fnorm %.15e\n", enorm(m,fvec) );
@@ -517,7 +517,7 @@ if(iter == 1)
 *	    evaluate the function at x + p and calculate its norm.
 */
 iflag = 1;
-fcn(m,n,wa2,wa4,&iflag,st_ptr,parametersStr);
+fcn(m,n,wa2,wa4,&iflag,st_ptr,poptea);
 
 
 
@@ -658,7 +658,7 @@ if(iflag < 0)
 	*info = iflag;
 iflag = 0;
 if(nprint > 0)
-	fcn(m,n,x,fvec,&iflag,st_ptr,parametersStr);
+        fcn(m,n,x,fvec,&iflag,st_ptr,poptea);
 /*
       last card of subroutine lmdif.
 */
@@ -2122,11 +2122,11 @@ return(ans);
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         const struct parameter_constraints*,
-                        struct parameterStr * parametersStr),
+                        class thermalAnalysisMethod::PopTea poptea),
             int m,int n,double x[],double fvec[], double fjac[],int /*ldfjac*/,
             int *iflag,double epsfcn,double wa[],
             const struct parameter_constraints*st_ptr,
-            struct parameterStr * parametersStr)
+            class thermalAnalysisMethod::PopTea poptea)
 {
 /*
 *     **********
@@ -2226,7 +2226,7 @@ for( j=0; j<n; j++ )
 		h = eps;
 	x[j] = temp + h;
 
-	fcn(m,n,x,wa,iflag,st_ptr,parametersStr);
+	fcn(m,n,x,wa,iflag,st_ptr,poptea);
 
 	if( *iflag < 0)
 		return;

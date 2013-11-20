@@ -100,9 +100,9 @@ public:
     double lambda;
     double c = 1;
 
-    double opticalPenetration(void);
-    double thermalDiffusivity(void);
-    double thermalEffusivity(void);
+    double opticalPenetration(void) const;
+    double thermalDiffusivity(void) const;
+    double thermalEffusivity(void) const;
     layer(class property kthermal_, class property psithermal_, double depth_,
           double lambda_);
 };
@@ -122,8 +122,8 @@ public:
     TBCsystem(class layer coating_, class layer substrate_,
               struct temperatureScale Temp_, struct radiativeSysProp optical_,
               double radius_);
-    double gammaEval(void);
-    double a_subEval(void);
+    double gammaEval(void) const ;
+    double a_subEval(void) const;
     void updateCoat(void); //update coat properties
 };
 

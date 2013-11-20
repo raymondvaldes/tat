@@ -47,31 +47,31 @@ double kx_limiter2(const double ki,const double k_min,const double k_max)
 
 
 void scaleDiag(const int mode, const size_t N, double * diag,
-               const struct parameterStr * pStruct )
+               const class thermalAnalysisMethod::PopTea poptea )
 {
     if(mode == 2)
     {
         for(size_t i = 0; i < N; ++i)
         {
-            switch ( pStruct->poptea->xParametersNames[i] )
+            switch ( poptea.xParametersNames[i] )
             {
                 case asub :
-                    diag[i] = pStruct->poptea->TBCsystem.a_sub;
+                    diag[i] = poptea.TBCsystem.a_sub;
                     break;
                 case E1 :
-                    diag[i] = pStruct->poptea->TBCsystem.optical.Emit1;
+                    diag[i] = poptea.TBCsystem.optical.Emit1;
                     break;
                 case gammaEff :
-                    diag[i] = pStruct->poptea->TBCsystem.gamma ;
+                    diag[i] = poptea.TBCsystem.gamma ;
                     break;
                 case R1 :
-                    diag[i] = pStruct->poptea->TBCsystem.optical.R1 ;
+                    diag[i] = poptea.TBCsystem.optical.R1 ;
                     break;
                 case lambda :
-                diag[i] = pStruct->poptea->TBCsystem.coating.lambda;
+                diag[i] = poptea.TBCsystem.coating.lambda;
                     break;
                 case R0 :
-                    diag[i] = pStruct->poptea->TBCsystem.optical.R0;
+                    diag[i] = poptea.TBCsystem.optical.R0;
                     break;
                 default:
                     std::cout << "\nSwitch Error!!\n";
@@ -194,89 +194,6 @@ size_t sumVector(const size_t *const vector1,const size_t sizeV)
 
     return sum;
 }
-
-//void parameters_update(struct parameterStr * pStruct,const size_t N)
-//{
-//    for(size_t i=0 ; i< N ; ++i)
-//    {
-//        if( pStruct->xParametersNames[i] == asub ||
-//            pStruct->xParametersNames[i] == gammaEff)
-//            {
-//                parameters_kcp_update(pStruct, pStruct->gamma,
-//                                      pStruct->a_sub);
-//            }
-////        else if( pStruct->xParametersNames[i] == k_c ||
-////                 pStruct->xParametersNames[i] == psi_c)
-////            {
-////                parameters_agamma_update(pStruct,
-////                                         pStruct->k1_thermal->offset,
-////                                         pStruct->psi1_thermal->offset);
-////            }
-//    }
-
-//  return;
-//}
-
-//void parameters_kcp_update(struct parameterStr* pStruct,
-//                           const double gamma, const double a_sub)
-//{
-//    pStruct->a_sub = a_sub;
-//    pStruct->gamma = gamma;
-
-////    double
-////    effusivity_coat  = pStruct->effusivity_sub;
-////    effusivity_coat /= gamma;
-//    const double
-//    effusivity_coat  = pStruct->poptea->TBCsystem.coating.thermalEffusivity();
-
-////    double
-////    diffusivity_coat = pStruct->diffusivity_sub ;
-////    diffusivity_coat /= a_sub*a_sub;
-//    const double
-//    diffusivity_coat  = pStruct->poptea->TBCsystem.coating.thermalDiffusivity();
-
-//    pStruct->poptea->TBCsystem.coating.psithermal.offset = effusivity_coat;
-//    pStruct->poptea->TBCsystem.coating.psithermal.offset /= sqrt( diffusivity_coat);
-
-//    pStruct->poptea->TBCsystem.coating.kthermal.offset = pStruct->poptea->TBCsystem.coating.psithermal.offset;
-//    pStruct->poptea->TBCsystem.coating.kthermal.offset *= diffusivity_coat;
-
-//    return;
-//}
-
-//void parameters_agamma_update(struct parameterStr* pStruct,
-//                              const double k_c, const double psi_c)
-//{
-//    pStruct->poptea->TBCsystem.coating.kthermal.offset = k_c;
-//    pStruct->poptea->TBCsystem.coating.psithermal.offset = psi_c;
-
-////    double
-////    diffusivity_coat = k_c;
-////    diffusivity_coat /= psi_c;
-
-//    const double
-//    diffusivity_coat  = pStruct->poptea->TBCsystem.coating.thermalDiffusivity();
-
-////    double
-////    effusivity_coat = k_c;
-////    effusivity_coat *= psi_c;
-////    effusivity_coat = sqrt( effusivity_coat );
-//    const double
-//    effusivity_coat  = pStruct->poptea->TBCsystem.coating.thermalEffusivity();
-
-
-//    const double effusivity_sub = pStruct->poptea->TBCsystem.substrate.thermalEffusivity();
-//    const double diffusivity_sub= pStruct->poptea->TBCsystem.substrate.thermalDiffusivity();
-
-//    pStruct->gamma  = effusivity_sub;
-//    pStruct->gamma /= effusivity_coat ;
-
-//    pStruct->a_sub = diffusivity_sub;
-//    pStruct->a_sub/= diffusivity_coat;
-//    pStruct->a_sub = sqrt( pStruct->a_sub );
-
-//    return;
-//}
 
 double SOR(double **A, double *b,const size_t n,double *phi, double omega,
            double error)

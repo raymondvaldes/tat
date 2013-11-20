@@ -1,7 +1,7 @@
 #include "../Header.h"
 
 void phase99(const size_t L_end,
-             const struct parameterStr *parametersStr, double *arrayVal)
+             const class thermalAnalysisMethod::PopTea poptea, double *arrayVal)
 {
   /*The phase for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
@@ -12,9 +12,9 @@ void phase99(const size_t L_end,
   #pragma omp parallel for schedule(dynamic) private(n)
   for(n = 0 ; n < L_end ; n++ )
   {
-    arrayVal[n] = PhaseOfEmission1DNum(n , parametersStr);
-//        arrayVal[n] = PhaseOfEmission2DAna(n, parametersStr);
-//        arrayVal[n] = PhaseOfEmission1DAna(n , parametersStr);
+    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
+//        arrayVal[n] = PhaseOfEmission2DAna(n, poptea);
+//        arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
   }
 
   return;

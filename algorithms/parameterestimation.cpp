@@ -107,6 +107,7 @@ void LMA_workingArrays::updateArraySize(const size_t Lend_, const size_t N)
 
 void LMA_workingArrays::deleteArray(void)
 {
+
   delete [] fjac;
   delete [] emissionExperimental;
   delete [] emissionCurrent;

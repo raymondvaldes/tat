@@ -1,6 +1,16 @@
 #ifndef POPTEA_HPP
 #define POPTEA_HPP
 
+enum XParaNames
+{
+    gammaEff,
+    asub,
+    E1,
+    R1,
+    lambda,
+    R0
+};
+
 namespace thermalAnalysisMethod
 {
   class PopTea
@@ -26,7 +36,7 @@ namespace thermalAnalysisMethod
 
   void thermalSetup(const double lmin_, const double lmax_,
                     const size_t LendMin); //MUST BE REMOVED
-  double bEval(void); //MUST BE REMOVED
+  double bEval(void) const; //MUST BE REMOVED
   };
 }
 

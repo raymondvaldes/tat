@@ -4,7 +4,8 @@ int paramter_estimation(const size_t m, const size_t n,
                         struct parameterEstimation::settings ParaEstSetting,
                         int *info, int *nfev,
                         const struct parameter_constraints *pc_ptr, double *x,
-                        struct parameterStr * pStruct, const double factorMax,
+                        class thermalAnalysisMethod::PopTea poptea,
+                        const double factorMax,
                         const double factorScale, double *xpredicted)
 {
 
@@ -32,7 +33,7 @@ int paramter_estimation(const size_t m, const size_t n,
   int *ipvt = new int[n];
   double *diag = new double[n];
 
-  scaleDiag(ParaEstSetting.mode, n, diag, pStruct );
+  scaleDiag(ParaEstSetting.mode, n, diag, poptea );
 
   double *xinitial = new double[n];
   double *xguess = new double[n];
@@ -49,7 +50,7 @@ int paramter_estimation(const size_t m, const size_t n,
     {
       for(size_t i=0 ; i<n ; ++i)
       {
-        switch ( pStruct->poptea->xParametersNames[i] )
+        switch ( poptea.xParametersNames[i] )
         {
           case asub :
               x[i] = x_ini(pc_ptr->a_sub_min, pc_ptr->a_sub_max);
@@ -85,7 +86,7 @@ int paramter_estimation(const size_t m, const size_t n,
     ///Transform inputs
     for(size_t i=0 ; i< n ; i++)
     {
-      switch ( pStruct->poptea->xParametersNames[i] )
+      switch ( poptea.xParametersNames[i] )
       {
         case asub :
             x[i] = kx_limiter2(x[i],pc_ptr->a_sub_min,pc_ptr->a_sub_max);
@@ -117,7 +118,7 @@ int paramter_estimation(const size_t m, const size_t n,
           ParaEstSetting.xtol, ParaEstSetting.gtol, ParaEstSetting.maxfev,
           ParaEstSetting.epsfcn, diag, ParaEstSetting.mode,
           ParaEstSetting.factor, ParaEstSetting.nprint, info, nfev, fjac, m,
-          ipvt, qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr, pStruct);
+          ipvt, qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr, poptea);
 
     ///Exit Routine
     /* Sets up a condition where the total error in the phase is compared
@@ -126,11 +127,11 @@ int paramter_estimation(const size_t m, const size_t n,
     initial guesses. This is let to run a fixed number of iterations. */
     constexpr double ExpStddev = 0;
     const double ExpVarianceEst = ExpStddev * ExpStddev;
-    pStruct->poptea->LMA.LMA_workspace.fvecTotal = SobjectiveLS(
-                                      pStruct->poptea->expSetup.laser.L_end,
-                                      pStruct->poptea->LMA.LMA_workspace.emissionExperimental,
-                                      pStruct->poptea->LMA.LMA_workspace.predicted);
-    const size_t v1 = pStruct->poptea->expSetup.laser.L_end - n;
+    poptea.LMA.LMA_workspace.fvecTotal = SobjectiveLS(
+                                      poptea.expSetup.laser.L_end,
+                                      poptea.LMA.LMA_workspace.emissionExperimental,
+                                      poptea.LMA.LMA_workspace.predicted);
+    const size_t v1 = poptea.expSetup.laser.L_end - n;
     double reduceChiSquare;
     if(ExpVarianceEst ==0 )
     {
@@ -138,13 +139,13 @@ int paramter_estimation(const size_t m, const size_t n,
     }
     else
     {
-      reduceChiSquare = (pStruct->poptea->LMA.LMA_workspace.fvecTotal /
+      reduceChiSquare = (poptea.LMA.LMA_workspace.fvecTotal /
                          ExpVarianceEst) / v1;
     }
 
     if( reduceChiSquare < 2
        || ParaEstSetting.factor == factorMax
-       || pStruct->poptea->LMA.LMA_workspace.fvecTotal < pStruct->poptea->LMA.LMA_workspace.MSETol
+       || poptea.LMA.LMA_workspace.fvecTotal < poptea.LMA.LMA_workspace.MSETol
        )
     {
 
@@ -153,55 +154,55 @@ int paramter_estimation(const size_t m, const size_t n,
 //            const bool
 //            condition2 = ParaEstSetting.factor == factorMax;
 //            const bool
-//            condition3 = pStruct->fvecTotal < pStruct->MSETol;
+//            condition3 = poptea->fvecTotal < poptea->MSETol;
 
 //            std::cout <<  "\nexit with     "
 //            << condition1 << "\t" << condition2
 //            << "\t" << condition3 <<"\n";
 //
-//            std::cout << "\n"<<reduceChiSquare << "\t" << pStruct->fvecTotal
-//            << "\t" << pStruct->MSETol << "\t" << factor << "\n";
+//            std::cout << "\n"<<reduceChiSquare << "\t" << poptea->fvecTotal
+//            << "\t" << poptea->MSETol << "\t" << factor << "\n";
 
       ///Transform outputs
       for(size_t i=0 ; i< n ; i++)
       {
-        switch ( pStruct->poptea->xParametersNames[i] )
+        switch ( poptea.xParametersNames[i] )
         {
           case asub :
-              pStruct->poptea->TBCsystem.a_sub =
+              poptea.TBCsystem.a_sub =
               x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
-              xpredicted[i] = pStruct->poptea->TBCsystem.a_sub;
+              xpredicted[i] = poptea.TBCsystem.a_sub;
               break;
           case E1 :
-              pStruct->poptea->TBCsystem.optical.Emit1 =
+              poptea.TBCsystem.optical.Emit1 =
               x_limiter2(x[i], pc_ptr->E_sigma_min,
                          pc_ptr->E_sigma_max);
-              xpredicted[i] = pStruct->poptea->TBCsystem.optical.Emit1;
+              xpredicted[i] = poptea.TBCsystem.optical.Emit1;
               break;
 
           case gammaEff :
-              pStruct->poptea->TBCsystem.gamma =
+              poptea.TBCsystem.gamma =
               x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
-              xpredicted[i] = pStruct->poptea->TBCsystem.gamma ;
+              xpredicted[i] = poptea.TBCsystem.gamma ;
               break;
 
           case R1 :
-              pStruct->poptea->TBCsystem.optical.R1 =
+              poptea.TBCsystem.optical.R1 =
               x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
-              xpredicted[i] = pStruct->poptea->TBCsystem.optical.R1;
+              xpredicted[i] = poptea.TBCsystem.optical.R1;
               break;
 
           case lambda :
-              pStruct->poptea->TBCsystem.coating.lambda =
+              poptea.TBCsystem.coating.lambda =
               x_limiter2(x[i], pc_ptr->lambda_min,
                          pc_ptr->lambda_max);
-              xpredicted[i] = pStruct->poptea->TBCsystem.coating.lambda;
+              xpredicted[i] = poptea.TBCsystem.coating.lambda;
               break;
 
           case R0 :
-              pStruct->poptea->TBCsystem.optical.R0 =
+              poptea.TBCsystem.optical.R0 =
               x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
-              xpredicted[i] = pStruct->poptea->TBCsystem.optical.R0;
+              xpredicted[i] = poptea.TBCsystem.optical.R0;
               break;
 
           default:
@@ -211,11 +212,11 @@ int paramter_estimation(const size_t m, const size_t n,
         }
       }
 
-      pStruct->poptea->TBCsystem.updateCoat();
+      poptea.TBCsystem.updateCoat();
 
       ///repulate predicted phase
-      phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
-              pStruct->poptea->LMA.LMA_workspace.predicted);
+      phase99(poptea.expSetup.laser.L_end, poptea,
+              poptea.LMA.LMA_workspace.predicted);
 
       delete [] qtf;
       delete [] wa1;
@@ -371,35 +372,35 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 }
 
 
-void printPEstimates(const size_t N, struct parameterStr * parametersStr)
+void printPEstimates(const size_t N, class thermalAnalysisMethod::PopTea poptea)
 {
 
-    parametersStr->poptea->LMA.LMA_workspace.MSE = MSE(
-          parametersStr->poptea->expSetup.laser.L_end,
-          parametersStr->poptea->LMA.LMA_workspace.emissionExperimental,
-          parametersStr->poptea->LMA.LMA_workspace.predicted);
+    poptea.LMA.LMA_workspace.MSE = MSE(
+          poptea.expSetup.laser.L_end,
+          poptea.LMA.LMA_workspace.emissionExperimental,
+          poptea.LMA.LMA_workspace.predicted);
 
     for(size_t j = 0 ; j < N; ++j)
     {
-        switch ( parametersStr->poptea->xParametersNames[j] )
+        switch ( poptea.xParametersNames[j] )
         {
             case asub :
-                std::cout << parametersStr->poptea->TBCsystem.a_subEval();
+                std::cout << poptea.TBCsystem.a_subEval();
                 break;
             case E1 :
-                std::cout << parametersStr->poptea->TBCsystem.optical.Emit1;
+                std::cout << poptea.TBCsystem.optical.Emit1;
                 break;
             case gammaEff :
-                std::cout << parametersStr->poptea->TBCsystem.gammaEval();
+                std::cout << poptea.TBCsystem.gammaEval();
                 break;
             case R1 :
-                std::cout << parametersStr->poptea->TBCsystem.optical.R1;
+                std::cout << poptea.TBCsystem.optical.R1;
                 break;
             case lambda :
-                std::cout << parametersStr->poptea->TBCsystem.coating.lambda;
+                std::cout << poptea.TBCsystem.coating.lambda;
                 break;
             case R0 :
-                std::cout << parametersStr->poptea->TBCsystem.optical.R0;
+                std::cout << poptea.TBCsystem.optical.R0;
                 break;
             default:
                 std::cout << "\nSwitch Error!!\n";
@@ -408,7 +409,7 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
         }
         std::cout << "  ";
     }
-    std::cout << std::setprecision(10) << parametersStr->poptea->LMA.LMA_workspace.MSE;
+    std::cout << std::setprecision(10) << poptea.LMA.LMA_workspace.MSE;
     std::cout << std::setprecision(6)  << "\n";
 
     return;
@@ -417,35 +418,35 @@ void printPEstimates(const size_t N, struct parameterStr * parametersStr)
 void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                           int * /*iflag*/,
                           const struct parameter_constraints *pc_ptr,
-                          struct parameterStr * parametersStr)
+                          class thermalAnalysisMethod::PopTea poptea)
 {
 ///Transform estimates from kappa space to k space based on the limits imposed
   for(int i = 0; i < N; ++i)
   {
-    switch ( parametersStr->poptea->xParametersNames[i] )
+    switch ( poptea.xParametersNames[i] )
     {
       case asub :
-          parametersStr->poptea->TBCsystem.a_sub =
+          poptea.TBCsystem.a_sub =
           x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
           break;
       case E1 :
-          parametersStr->poptea->TBCsystem.optical.Emit1 =
+          poptea.TBCsystem.optical.Emit1 =
           x_limiter2(x[i], pc_ptr->E_sigma_min, pc_ptr->E_sigma_max);
           break;
       case gammaEff :
-          parametersStr->poptea->TBCsystem.gamma =
+          poptea.TBCsystem.gamma =
           x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
           break;
       case R1 :
-          parametersStr->poptea->TBCsystem.optical.R1 =
+          poptea.TBCsystem.optical.R1 =
           x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
           break;
       case lambda :
-          parametersStr->poptea->TBCsystem.coating.lambda =
+          poptea.TBCsystem.coating.lambda =
           x_limiter2(x[i], pc_ptr->lambda_min, pc_ptr->lambda_max);
           break;
       case R0 :
-          parametersStr->poptea->TBCsystem.optical.R0 =
+          poptea.TBCsystem.optical.R0 =
           x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
           break;
       default:
@@ -456,27 +457,27 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
   }
 
 ///Update dependent parameters
-  parametersStr->poptea->TBCsystem.updateCoat();
+  poptea.TBCsystem.updateCoat();
 
 /// Estimates the phase of emission at each heating frequency
-  phase99(parametersStr->poptea->expSetup.laser.L_end, parametersStr,
-          parametersStr->poptea->LMA.LMA_workspace.predicted);
+  phase99(poptea.expSetup.laser.L_end, poptea,
+          poptea.LMA.LMA_workspace.predicted);
 
 /// Evaluate Objective function
-  for(size_t n = 0 ; n < parametersStr->poptea->expSetup.laser.L_end ; ++n )
+  for(size_t n = 0 ; n < poptea.expSetup.laser.L_end ; ++n )
   {
      fvec[n] =
-     parametersStr->poptea->LMA.LMA_workspace.emissionExperimental[n] -
-         parametersStr->poptea->LMA.LMA_workspace.predicted[n] ;
-     parametersStr->poptea->LMA.LMA_workspace.fvec[n] = fvec[n];
+     poptea.LMA.LMA_workspace.emissionExperimental[n] -
+         poptea.LMA.LMA_workspace.predicted[n] ;
+     poptea.LMA.LMA_workspace.fvec[n] = fvec[n];
   }
 
 /// Print stuff to terminal
-  parametersStr->poptea->LMA.LMA_workspace.MSE =
-      MSE(parametersStr->poptea->expSetup.laser.L_end,
-          parametersStr->poptea->LMA.LMA_workspace.emissionExperimental,
-          parametersStr->poptea->LMA.LMA_workspace.predicted);
-  printPEstimates(N, parametersStr);
+  poptea.LMA.LMA_workspace.MSE =
+      MSE(poptea.expSetup.laser.L_end,
+          poptea.LMA.LMA_workspace.emissionExperimental,
+          poptea.LMA.LMA_workspace.predicted);
+  printPEstimates(N, poptea);
   return;
 }
 

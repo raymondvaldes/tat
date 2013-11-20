@@ -1,17 +1,6 @@
 #ifndef PARAMETERESTIMATION_HPP
 #define PARAMETERESTIMATION_HPP
 
-
-enum XParaNames
-{
-    gammaEff,
-    asub,
-    E1,
-    R1,
-    lambda,
-    R0
-};
-
 namespace parameterEstimation{
 
 class unknown

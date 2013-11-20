@@ -159,16 +159,16 @@ layer::layer(class property kthermal_, class property psithermal_,
       lambda(lambda_)
 {}
 
-double layer::opticalPenetration(void)
+double layer::opticalPenetration(void) const
 {
   return lambda*depth;
 }
 
-double layer::thermalDiffusivity(void)
+double layer::thermalDiffusivity(void) const
 {
   return thermal::diffusivity(kthermal.offset, psithermal.offset);
 }
-double layer::thermalEffusivity(void)
+double layer::thermalEffusivity(void) const
 {
   return thermal::effusivity(kthermal.offset, psithermal.offset);
 }
@@ -187,12 +187,12 @@ TBCsystem::TBCsystem(class layer coating_, class layer substrate_,
     a_sub = a_subEval();
 }
 
-double TBCsystem::gammaEval(void)
+double TBCsystem::gammaEval(void) const
 {
   return substrate.thermalEffusivity() / coating.thermalEffusivity();
 }
 
-double TBCsystem::a_subEval(void)
+double TBCsystem::a_subEval(void) const
 {
   return sqrt(substrate.thermalDiffusivity() / coating.thermalDiffusivity());
 }

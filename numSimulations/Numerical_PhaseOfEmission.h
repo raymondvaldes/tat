@@ -29,11 +29,11 @@ public:
 };
 
 double PhaseOfEmission2DAna(const int flag,
-                            const struct parameterStr *const parametersStr);
+                            const thermalAnalysisMethod::PopTea poptea);
 double PhaseOfEmission1DNum(const int flag,
-                            const struct parameterStr*const pStruct);
+                            const thermalAnalysisMethod::PopTea poptea);
 double PhaseOfEmission1DAna(const int flag,
-                            const struct parameterStr*const pStruct);
+                            const thermalAnalysisMethod::PopTea poptea);
 
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED

@@ -5,11 +5,11 @@ double x_ini10(const int x_ref);
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         const struct parameter_constraints*,
-                        struct parameterStr * parametersStr),
+                        class thermalAnalysisMethod::PopTea poptea),
             int m, int n, double x[], double fvec[], double fjac[], int,
             int *iflag, double epsfcn, double wa[],
             const struct parameter_constraints*st_ptr,
-            struct parameterStr * parametersStr);
+            class thermalAnalysisMethod::PopTea poptea);
 
 
 class Mesh
@@ -54,10 +54,10 @@ private:
     void zUpdate();
 };
 
-void parameters_kcp_update(struct parameterStr* parametersStr,
-                           const double gamma, const double a_sub);
-void parameters_agamma_update(struct parameterStr* parametersStr,
-                              const double k_c, const double psi_c);
+//void parameters_kcp_update(struct parameterStr* parametersStr,
+//                           const double gamma, const double a_sub);
+//void parameters_agamma_update(struct parameterStr* parametersStr,
+//                              const double k_c, const double psi_c);
 
 double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);
@@ -127,7 +127,7 @@ double Kappa(const std::vector<std::vector<double>>& T, const double eta,
              const double eta_j, const size_t j, const size_t n,
              const double k_ref, const int prop_linearity, const double k_c);
 void scaleDiag(const int mode, const size_t N, double * diag,
-               const struct parameterStr * parametersStr );
+               const class thermalAnalysisMethod::PopTea poptea );
 
 double x_normal(const double Xmean, const double Xstddev);
 
@@ -169,7 +169,7 @@ double lthermal(const double L_coat, const double k_c, const double psi_c,
 
 double x_ini(const double x_min, const double x_max, const size_t position,
              const size_t gN);
-void mainMemoryAllocate(struct parameterStr * parametersStr);
+void mainMemoryAllocate(class thermalAnalysisMethod::PopTea poptea);
 
 size_t xINTrandom(const size_t xmin, const size_t xmax);
 void range1og10(const double l_min, const double l_max, const size_t L_end,

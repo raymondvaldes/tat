@@ -29,10 +29,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double beta1 = 100;
   constexpr double split = 0.5;
 
-/// Parameter Structure
-  struct parameterStr *pStruct =
-  new struct parameterStr;
-
 /////Parameter Estimation Options
   /* - N number of thermal parameters to be fitted
    - ftol difference in error
@@ -174,8 +170,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD,
                                               thermalModel, ParaEstSetting,
                                               unknownParameters);
-  poptea.thermalModel.iter = 1000;
   /// Input Directory Information
+  poptea.thermalModel.iter = 1000;
   poptea.dir = filesystem::workingDir();
   filesystem::makeDir(poptea.dir, "data");
 
@@ -197,43 +193,38 @@ int main( int /*argc*/, char** /*argv[]*/ )
     poptea.xParametersNames[i] = xParametersNames[i];
     poptea.xParameters95Names[i] = xParametersNames[i];
   }
-
 // Populate the experimental phase values in parameters99
   poptea.expSetup.laser.L_end = LendMinDecade;
   poptea.expSetup.q_surface = 0;
   poptea.thermalSetup(l_min, l_max, LendMinDecade);
 
-  pStruct->poptea = &poptea;
-  phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
-          pStruct->poptea->LMA.LMA_workspace.emissionNominal);
-
-
+  phase99(poptea.expSetup.laser.L_end, poptea,
+          poptea.LMA.LMA_workspace.emissionNominal);
 
   //Many fit test
   if (true)
   {
     constexpr size_t interants = 1;
-    for(size_t nn = 0; nn < pStruct->poptea->expSetup.laser.L_end; ++nn )
+    for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
     {
-        pStruct->poptea->LMA.LMA_workspace.emissionExperimental[nn] =
-            pStruct->poptea->LMA.LMA_workspace.emissionNominal[nn];
+        poptea.LMA.LMA_workspace.emissionExperimental[nn] =
+            poptea.LMA.LMA_workspace.emissionNominal[nn];
     }
 
-    fitting(pStruct->poptea->expSetup.laser.L_end,
-            pStruct->poptea->LMA.unknownParameters.Nsize(),
-            ParaEstSetting, &paraConstraints, pStruct, xInitial, interants,
+    fitting(poptea.expSetup.laser.L_end,
+            poptea.LMA.unknownParameters.Nsize(),
+            ParaEstSetting, &paraConstraints, poptea, xInitial, interants,
             factorMax, factorScale);
   }
 
   //Prepare figures and data for paper Sensitivity
-//    SensitivityValdes2013::CC_APS2(pStruct);
-//    SensitivityValdes2013::figureSensitivityIntro(pStruct);
+//    SensitivityValdes2013::CC_APS2(poptea);
+//    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
 
 // Clear memory
   delete mesh;
   delete[] xInitial;
-  delete pStruct;
 
   globalStopWatch.displayTime();
   return 0;

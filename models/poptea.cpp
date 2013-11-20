@@ -11,8 +11,6 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),
-//    Settings(Settings_),
-//    unknownParameters(unknownParameters_),
     LMA(Settings_, unknownParameters_)
 {
   const size_t d = LMA.unknownParameters.Nsize();
@@ -41,7 +39,7 @@ void PopTea::thermalSetup(const double lmin_, const double lmax_,
                                     LMA.unknownParameters.Nsize());
 }
 
-double PopTea::bEval(void)
+double PopTea::bEval(void) const
 {
   return expSetup.laser.radius / TBCsystem.coating.depth;
 }
