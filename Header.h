@@ -51,10 +51,12 @@ compiler.
 #include "tools/filesystem.hpp"
 #include "tools/timing.h"
 
+#include "models/numericalmodel.hpp"
 #include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
-#include "models/numericalmodel.hpp"
+
+
 
 #include "algorithms/parameterestimation.hpp"
 #include "models/poptea.hpp"

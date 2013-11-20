@@ -7,7 +7,7 @@ HeatModel2DAna::HeatModel2DAna(const double R0_, const double R1_,
                                const double k_coat_, const double L_,
                                const double psi_coat_, const double ccoat_,
                                const double lambda_Sub_,
-                               const class Mesh *mesh_):
+                               const class numericalModel::Mesh *mesh_):
                                R0(R0_), R1(R1_), lambda(lambda_), It(It_),
                                csub(csub_), asub(asub_), gamma(gamma_),
                                beam(beam_), k_coat(k_coat_), L(L_),
@@ -699,7 +699,7 @@ void HeatModel2DAna::testing(void) const
 
 
 Emission::Emission(const double detector_lam_, const double T_ref_,
-                   const class Mesh *mesh_, const double beamR_,
+                   const class numericalModel::Mesh *mesh_, const double beamR_,
                    const double E_sigma_):
                    detector_lam(detector_lam_), T_ref(T_ref_), mesh(mesh_),
                    beamR(beamR_), E_sigma(E_sigma_)

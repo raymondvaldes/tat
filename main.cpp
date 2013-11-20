@@ -178,7 +178,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   poptea.DataDirectory.mkdir("data");
 
   //Optimize stretching in Substrate and declare variables to be fitted
-  class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split,
+  class numericalModel::Mesh *mesh =
+      new numericalModel::Mesh(M2, Rend, Nend, beta1, split,
                               poptea.TBCsystem.coating.depth,
                               poptea.TBCsystem.substrate.depth,
                               poptea.expSetup.laser.radius,

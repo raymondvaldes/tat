@@ -5,14 +5,13 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     const class expEquipment::setup expSetup,
                     const double omega1,
                     class Temperature Tprofile)
-{     ;
-
+{
   const double lambda     = TBCsystem.coating.lambda;
   const double R1         = TBCsystem.optical.R1;
   const double epsilon    = TBCsystem.gammaEval();
 
   const size_t iter       = thermalModel.iter;
-  class Mesh *mesh        = thermalModel.mesh;
+  class numericalModel::Mesh *mesh        = thermalModel.mesh;
 
   const double q_surface = expSetup.q_surface;
 

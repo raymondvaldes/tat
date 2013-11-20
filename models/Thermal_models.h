@@ -9,7 +9,8 @@ public:
                  const double It_, const double csub_, const double asub_,
                  const double gamma_, const double beam_, const double k_coat,
                  const double L_, const double psi_coat_, const double ccoat_,
-                 const double lambda_Sub_, const class Mesh *mesh_);
+                 const double lambda_Sub_,
+                 const class numericalModel::Mesh *mesh_);
 
   ~HeatModel2DAna(void);
   void TemperatureDistro(std::vector< std::vector< std::vector< double > > >
@@ -20,7 +21,7 @@ public:
 private:
   const double R0, R1, lambda, It, csub, asub, gamma, beam;
   const double k_coat, L, psi_coat, ccoat, lambda_Sub;
-  const class Mesh *mesh;
+  const class numericalModel::Mesh *mesh;
 
   const double epsabs = 1e-4;
   const double epsrel = 1e-4;
@@ -78,7 +79,7 @@ class Emission
 {
 public:
   Emission(const double detector_lam_, const double T_ref_,
-           const class Mesh* mesh, const double beamR_,
+           const class numericalModel::Mesh* mesh, const double beamR_,
            const double E_sigma_);
   ~Emission();
   double phase2D(std::vector< std::vector< std::vector< double > > >
@@ -90,7 +91,7 @@ private:
   mutable double *EmissionTime;
 
   const double detector_lam, T_ref;
-  const class Mesh*mesh;
+  const class numericalModel::Mesh*mesh;
   const double beamR, E_sigma;
 
   double mean(const double x1, const double x2) const;
@@ -115,7 +116,7 @@ class ThermalModelSelection
 {
 public:
   size_t iter;
-  class Mesh *mesh;
+  class numericalModel::Mesh *mesh;
 
   enum class HeatX: uint8_t
   {
