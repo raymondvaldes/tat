@@ -50,8 +50,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct parameterEstimation::settings
   ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
-//  pStruct->MSETol = 1e-8;
-
   constexpr double factorMax = 10;
   constexpr double factorScale = 5;
 
@@ -105,7 +103,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double offset    = .95   /*offset*/ ;
   constexpr double amplitude = .05   /*amplitude*/;
   class expEquipment::Laser CO2Laser(power, radius, offset, amplitude);
-//  pStruct->laser = &CO2Laser;
 
   constexpr double detector_lam = 5e-6;
   struct expEquipment::Detector Emissiondetector(detector_lam, detector_rad);
@@ -189,9 +186,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
                               poptea.expSetup.laser.radius,
                               poptea.TBCsystem.radius);
   poptea.thermalModel.mesh = mesh;
-//  pStruct->mesh = mesh;
   poptea.LMA.LMA_workspace.MSETol = 1e-8;
-  pStruct->poptea = &poptea;
 
   // Initial Guess
   double *xInitial = nullptr;
@@ -199,15 +194,16 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
   for (size_t i=0; i < N; ++i)
   {
-    pStruct->poptea->xParametersNames[i] = xParametersNames[i];
-    pStruct->poptea->xParameters95Names[i] = xParametersNames[i];
+    poptea.xParametersNames[i] = xParametersNames[i];
+    poptea.xParameters95Names[i] = xParametersNames[i];
   }
 
 // Populate the experimental phase values in parameters99
-  pStruct->poptea->expSetup.laser.L_end = LendMinDecade;
-  pStruct->poptea->expSetup.q_surface = 0;
-  pStruct->poptea->thermalSetup(l_min, l_max, LendMinDecade);
+  poptea.expSetup.laser.L_end = LendMinDecade;
+  poptea.expSetup.q_surface = 0;
+  poptea.thermalSetup(l_min, l_max, LendMinDecade);
 
+  pStruct->poptea = &poptea;
   phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
           pStruct->poptea->LMA.LMA_workspace.emissionNominal);
 
