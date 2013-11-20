@@ -56,7 +56,6 @@ void temperature_1D(const double lambda,
                                     k2_thermal->offset, Iplus0, Iplus1,
                                     q_surface, k1_thermal->offset));
   }
-
 ///Transient Solution
   /*
    Transient Solution
@@ -92,7 +91,6 @@ void temperature_1D(const double lambda,
     }
     delete []genProfile;
   }
-
 /*
   Rewrite abtransient so that it accepts two temperature arrays.  This will
   allow a quicker temperature lookup in the Ab_transient function.  Also,
@@ -177,9 +175,8 @@ void temperature_1D(const double lambda,
        Tprofile.assgn(0,j, Tprofile.eval(mesh->Nend-1,j) );
     }
   }
-  delete MatrixArrays;
 
-  return;
+  delete MatrixArrays;
 }
 
 

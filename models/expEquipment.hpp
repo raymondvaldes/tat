@@ -20,7 +20,6 @@ private:
   double offset, amplitude;
   void update(void);
   double l_min, l_max;
-  void updateNMeasurements();
 
 public:
   double Qlaser;
@@ -29,8 +28,9 @@ public:
   double It;
 
   size_t L_end;
-  double *omegas = nullptr;
-  double *l_thermal = nullptr;
+
+  std::vector<double> omegas;
+  std::vector<double> l_thermal;
 
   Laser(const double a, const double b, const double c, const double d);
   ~Laser();
@@ -40,6 +40,7 @@ public:
   double thermalSetup(const double lmin_, const double lmax_,
                       const double L_coat, const double kc, const double psic,
                       const double L_end_);
+  void updateNMeasurements();
 };
 
 class setup
@@ -47,6 +48,8 @@ class setup
 public:
   class Laser laser;
   struct Detector detector;
+  double q_surface;
+
   setup(struct Laser laser_, struct Detector detector_);
 };
 

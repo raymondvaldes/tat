@@ -115,6 +115,9 @@ double diffusivity(const double k, const double rhoCp);
 class ThermalModelSelection
 {
 public:
+  size_t iter;
+  class Mesh *mesh;
+
   enum class HeatX: uint8_t
   {
     OneDimAnalytical,

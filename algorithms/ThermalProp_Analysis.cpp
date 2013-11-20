@@ -45,8 +45,6 @@ int paramter_estimation(const size_t m, const size_t n,
 
     ///set initial guesses
     /// TODO put in function !
-//        std::cout << "hello!!" << "\t" <<  fabs(x[0] - 0);
-//        x[0] = 0;
     if ( fabs(x[0] - 0) < 1e-10 )
     {
       for(size_t i=0 ; i<n ; ++i)
@@ -128,10 +126,11 @@ int paramter_estimation(const size_t m, const size_t n,
     initial guesses. This is let to run a fixed number of iterations. */
     constexpr double ExpStddev = 0;
     const double ExpVarianceEst = ExpStddev * ExpStddev;
-    pStruct->poptea->LMA.LMA_workspace.fvecTotal = SobjectiveLS(pStruct->L_end,
-                                      pStruct->emissionExperimental,
-                                      pStruct->predicted);
-    const size_t v1 = pStruct->L_end - n;
+    pStruct->poptea->LMA.LMA_workspace.fvecTotal = SobjectiveLS(
+                                      pStruct->poptea->expSetup.laser.L_end,
+                                      pStruct->poptea->LMA.LMA_workspace.emissionExperimental,
+                                      pStruct->poptea->LMA.LMA_workspace.predicted);
+    const size_t v1 = pStruct->poptea->expSetup.laser.L_end - n;
     double reduceChiSquare;
     if(ExpVarianceEst ==0 )
     {
@@ -139,7 +138,8 @@ int paramter_estimation(const size_t m, const size_t n,
     }
     else
     {
-      reduceChiSquare = (pStruct->poptea->LMA.LMA_workspace.fvecTotal / ExpVarianceEst) / v1;
+      reduceChiSquare = (pStruct->poptea->LMA.LMA_workspace.fvecTotal /
+                         ExpVarianceEst) / v1;
     }
 
     if( reduceChiSquare < 2
@@ -214,7 +214,8 @@ int paramter_estimation(const size_t m, const size_t n,
       pStruct->poptea->TBCsystem.updateCoat();
 
       ///repulate predicted phase
-      phase99(pStruct->L_end, pStruct, pStruct->predicted);
+      phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
+              pStruct->poptea->LMA.LMA_workspace.predicted);
 
       delete [] qtf;
       delete [] wa1;
@@ -373,9 +374,11 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 void printPEstimates(const size_t N, struct parameterStr * parametersStr)
 {
 
-    parametersStr->poptea->LMA.LMA_workspace.MSE = MSE(parametersStr->L_end,
-                             parametersStr->emissionExperimental,
-                             parametersStr-> predicted);
+    parametersStr->poptea->LMA.LMA_workspace.MSE = MSE(
+          parametersStr->poptea->expSetup.laser.L_end,
+          parametersStr->poptea->LMA.LMA_workspace.emissionExperimental,
+          parametersStr->poptea->LMA.LMA_workspace.predicted);
+
     for(size_t j = 0 ; j < N; ++j)
     {
         switch ( parametersStr->poptea->xParametersNames[j] )
@@ -456,20 +459,23 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
   parametersStr->poptea->TBCsystem.updateCoat();
 
 /// Estimates the phase of emission at each heating frequency
-  phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);
+  phase99(parametersStr->poptea->expSetup.laser.L_end, parametersStr,
+          parametersStr->poptea->LMA.LMA_workspace.predicted);
 
 /// Evaluate Objective function
-  for(size_t n = 0 ; n < parametersStr->L_end ; ++n )
+  for(size_t n = 0 ; n < parametersStr->poptea->expSetup.laser.L_end ; ++n )
   {
      fvec[n] =
-     parametersStr->emissionExperimental[n] - parametersStr->predicted[n] ;
-     parametersStr->fvec[n] = fvec[n];
+     parametersStr->poptea->LMA.LMA_workspace.emissionExperimental[n] -
+         parametersStr->poptea->LMA.LMA_workspace.predicted[n] ;
+     parametersStr->poptea->LMA.LMA_workspace.fvec[n] = fvec[n];
   }
 
 /// Print stuff to terminal
-  parametersStr->poptea->LMA.LMA_workspace.MSE = MSE(parametersStr->L_end,
-                           parametersStr->emissionExperimental,
-                           parametersStr->predicted);
+  parametersStr->poptea->LMA.LMA_workspace.MSE =
+      MSE(parametersStr->poptea->expSetup.laser.L_end,
+          parametersStr->poptea->LMA.LMA_workspace.emissionExperimental,
+          parametersStr->poptea->LMA.LMA_workspace.predicted);
   printPEstimates(N, parametersStr);
   return;
 }

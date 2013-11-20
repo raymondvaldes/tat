@@ -174,6 +174,8 @@ void mainMemoryAllocate(struct parameterStr * parametersStr);
 size_t xINTrandom(const size_t xmin, const size_t xmax);
 void range1og10(const double l_min, const double l_max, const size_t L_end,
              double* l_thermal);
+void range1og10(const double l_min, const double l_max, const size_t L_end,
+                std::vector<double> &l_thermal);
 
 void range(double* l_thermal, const double l_min, const double l_max,
            const size_t L_end);
@@ -219,47 +221,7 @@ class perturbStruct
 class parameterStr
 {
 public:
-  class Mesh *mesh;
-  class expEquipment::Laser *laser;  //TODO MUST REMOVE
   class thermalAnalysisMethod::PopTea *poptea;
-
-  ///parameter estimation class structures
-//  enum XParaNames *xParametersNames;
-//  enum XParaNames *xParameters95Names;
-
-  double *fjac = nullptr;
-  double *predicted = nullptr;
-  double *fvec = nullptr;
-
-  ///poptea structures
-  double *emissionExperimental;
-  double *emissionNominal;
-  double *emissionCurrent = nullptr;
-
-  ///poptea experiment settings structures
-  size_t L_end;
-  size_t Num;
-  double q_surface;
-
-  void thermalSetup(const double lmin, const double lmax,
-                    const size_t LendMin);
-  void EmissionNoise(const emissionNoiseParameters myNoise,
-                     const double* emissionNominal,
-                     const double lmin, const double lmax);
-
-  ///other
-  std::string dir;
-
-  //numerical tolerance and iterations
-  double Ttol;
-  size_t iter;
-
-  parameterStr();
-  ~parameterStr();
-
-private:
-  void updateNMeasurements(const size_t Lend_);
-
 };
 
 

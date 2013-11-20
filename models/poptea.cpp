@@ -31,12 +31,14 @@ PopTea::~PopTea(void)
 void PopTea::thermalSetup(const double lmin_, const double lmax_,
                                 const size_t LendMin)
 {
-  L_end = expSetup.laser.thermalSetup(lmin_, lmax_,
+  expSetup.laser.L_end = expSetup.laser.thermalSetup(lmin_, lmax_,
                                       TBCsystem.coating.depth,
                                       TBCsystem.coating.kthermal.offset,
                                       TBCsystem.coating.psithermal.offset ,
                                       LendMin);
-  LMA.LMA_workspace.updateArraySize(L_end, LMA.unknownParameters.Nsize());
+
+  LMA.LMA_workspace.updateArraySize(expSetup.laser.L_end,
+                                    LMA.unknownParameters.Nsize());
 }
 
 double PopTea::bEval(void)

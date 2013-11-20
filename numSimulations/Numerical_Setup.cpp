@@ -1153,6 +1153,45 @@ void range(std::vector<double>& l_thermal, const double l_min,
 }
 
 void range1og10(const double l_min, const double l_max, const size_t L_end,
+                std::vector<double> &l_thermal)
+{
+    /*
+    Creates a closed logarithmic distribution from l_min to l_max.
+    log base 10
+    */
+    if( (L_end < 1) || (l_min > l_max) || (equalto(l_min,l_max))
+        || (l_min <= 0))
+    {
+        std::cout << "\nerror in range1og10()";
+        exit(-69);
+    }
+
+    if (L_end == 1)
+    {
+        l_thermal[0] = l_min;
+    }
+    else if(L_end == 2)
+    {
+        l_thermal[0] = l_min;
+        l_thermal[L_end-1] = l_max;
+    }
+    else if(L_end > 2)
+    {
+        const double start1 = log10(l_min * 10);
+        const double end1   = log10(l_max * 10);
+        const double increments = (end1 - start1) / (L_end -1);
+        double rangeI = start1;
+
+        for(size_t n = 0 ; n < L_end-1 ; ++n )
+        {
+            l_thermal[n] = pow(10, rangeI - 1);
+            rangeI += increments;
+        }
+        l_thermal[L_end-1] = l_max;
+    }
+}
+
+void range1og10(const double l_min, const double l_max, const size_t L_end,
                 double* l_thermal)
 {
     /*
@@ -1503,148 +1542,6 @@ void Mesh::meshUpdate(const double L_coat, const double L_substrate,
   }
 
   zUpdate();
-}
-
-
-
-
-
-parameterStr::parameterStr()
-//             :  Num(d)
-{
-//  xParameters         = new size_t[d];
-//  xParameters95       = new size_t[d];
-//  xParametersNames   = new enum XParaNames[d];
-//  xParameters95Names = new enum XParaNames[d];
-
-//  N95 = d;
-}
-
-
-void parameterStr::thermalSetup(const double lmin_, const double lmax_,
-                                const size_t LendMin)
-{  
-  L_end = laser->thermalSetup(lmin_, lmax_, poptea->TBCsystem.coating.depth,
-                              poptea->TBCsystem.coating.kthermal.offset,
-                              poptea->TBCsystem.coating.psithermal.offset ,
-                              LendMin);
-  updateNMeasurements(L_end);
-}
-
-void parameterStr::updateNMeasurements(const size_t Lend_)
-{
-  /*Lend_ is the total number of unique measurements in a dataset,
-  this value is based on the range and the set minimum*/
-  const size_t N = poptea->LMA.unknownParameters.Nsize();
-  if(fjac)
-  {
-      delete [] fjac;
-      delete [] emissionExperimental;
-      delete [] emissionNominal;
-      delete [] predicted;
-      delete [] fvec;
-  }
-
-  fjac = new double[Lend_*N];
-  emissionExperimental    = new double[Lend_];
-  emissionNominal         = new double[Lend_];
-  predicted               = new double[Lend_];
-  fvec = new double[Lend_];
-}
-
-void parameterStr::EmissionNoise(const class
-                                 emissionNoiseParameters myNoise,
-                                 const double* emissionNominal_,
-                                 const double lmin, const double lmax)
-{
-  /* a is the magnitude of the error at the edges of the range
-  b is the stretching parameter that ranges from 1 < b < pi (use around 3)
-  c is the location of the center and set it to 0.5.
-  d is the orientation options
-      d1    true (positive)
-      d2    true (monotonically)
-
-  This function needs an emissionProfile already established. This is the
-  nominal emission profile used for the simulation.  The EXPERIMENTAL EMISSION
-  is in the object (this) scope.
-
-  This function needs l_thermal to be populated with the thermal
-  penetration range.
-
-  lmin and lmax are used to determine the nominal limits of the lthermal
-  range.*/
-
-  double a  = myNoise.a;
-  double b  = myNoise.b;
-  bool d1   = myNoise.d1;
-  bool d2   = myNoise.d2;
-  int s1    = myNoise.s1;
-  double noiseRandom = myNoise.noiseRandom;
-
-  if( (a < 0) || (b < 1) || (b > M_PI) )
-  {
-    std::cout << "parameters (a,b) out of range"; exit(-99);
-  }
-
-
-  for(size_t i=0 ; i < L_end; ++i)
-  {
-    constexpr double c = 0.5;
-
-    double
-    lthermalPercentile = ::percentilelog10(lmin, lmax, laser->l_thermal[i] );
-
-    ///Determine biased noise
-    const double cotbc = tan(M_PI_2 - ( b * c ) );
-    double
-    noiseBias = -a * cotbc * tan( b * ( c - lthermalPercentile ) );
-
-    if(!d2)
-    {
-      noiseBias = fabs(noiseBias);
-    }
-
-    if(!d1)
-    {
-      noiseBias *= -1;
-    }
-
-    switch(s1)
-    {
-      case -1:
-        if(lthermalPercentile > 0.5) {noiseBias = 0;}
-        break;
-      case 0:
-        break;
-      case 1:
-        if(lthermalPercentile < 0.5) {noiseBias = 0;}
-        break;
-      default:
-        std::cout << "\n\nerror in symmetry options\n\n"; exit(-1);
-    }
-
-    ///Determine random noise
-    const double noiseRandomGen = x_normal(0, noiseRandom);
-
-    emissionExperimental[i]  = emissionNominal_[i];
-    emissionExperimental[i] += M_PI_2 * noiseBias;
-    emissionExperimental[i] += M_PI_2 * noiseRandomGen;
-  }
-}
-parameterStr::~parameterStr()
-{
-    delete [] fjac;
-    delete [] emissionExperimental;
-    delete [] emissionNominal;
-
-    delete [] predicted;
-    delete [] fvec;
-
-//    delete [] xParameters; //removed
-//    delete [] xParameters95; //removed
-
-//    delete [] xParametersNames;
-//    delete [] xParameters95Names;
 }
 
 

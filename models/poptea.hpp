@@ -9,13 +9,12 @@ namespace thermalAnalysisMethod
     enum XParaNames *xParameters95Names;  //MUST BE REMOVEd
     enum XParaNames *xParametersNames;    // MUST BE REMOVED
     size_t N95;                           //MUST BE REMOVED
-    size_t L_end;                         //MUST BE REMOVED
-    size_t N;
 
     class expEquipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
     class thermal::ThermalModelSelection thermalModel;
     class parameterEstimation::LMA LMA;
+    std::string dir;
 
     PopTea(class expEquipment::setup expSetup_,
            class physicalModel::TBCsystem TBCsystem_,

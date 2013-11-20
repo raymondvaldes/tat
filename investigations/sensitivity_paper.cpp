@@ -36,10 +36,10 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
     To create these curves
     */
-    pStruct->L_end = LendMinDecade;
+    pStruct->poptea->expSetup.laser.L_end = LendMinDecade;
 
     ///heating constraints
-    pStruct->q_surface = 0;
+    pStruct->poptea->expSetup.q_surface = 0;
 
     ///Parameter Estimation Options
 //    pStruct->MSETol = 1e-8;
@@ -90,28 +90,29 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         ///Set heating constraints
         constexpr double l_min = .04;
         constexpr double l_max = 4;
-        pStruct->thermalSetup(l_min, l_max, LendMinDecade);
+        pStruct->poptea->thermalSetup(l_min, l_max, LendMinDecade);
+//        pStruct->thermalSetup(l_min, l_max, LendMinDecade);
 
         /// Populate the experimental phase values in parameters99
-        Analytical_PhaseR1  = new double[pStruct->L_end]();
-        lthermalR1          = new double[pStruct->L_end]();
-        predictedR1         = new double[pStruct->L_end]();
-        emissionExpR1       = new double[pStruct->L_end]();
+        Analytical_PhaseR1  = new double[pStruct->poptea->expSetup.laser.L_end]();
+        lthermalR1          = new double[pStruct->poptea->expSetup.laser.L_end]();
+        predictedR1         = new double[pStruct->poptea->expSetup.laser.L_end]();
+        emissionExpR1       = new double[pStruct->poptea->expSetup.laser.L_end]();
 
         ///Populate arrays
-        phase99(pStruct->L_end, pStruct,
+        phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
                 Analytical_PhaseR1);
 
         ///create artificial experimental data
-        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR1, l_min,
-                               l_max);
+//        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR1, l_min,
+//                               l_max); //BUG
 
         ///estimate unknown parameters using full range
         double *xpredicted =
             new double[ pStruct->poptea->LMA.unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};    
-        paramter_estimation(pStruct->L_end,
+        paramter_estimation(pStruct->poptea->expSetup.laser.L_end,
                             pStruct->poptea->LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info,
                             &nfev, &st_ptr, xInitial, pStruct, factorMax,
@@ -122,16 +123,17 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        phase99(pStruct->L_end,  pStruct,
-                pStruct->predicted);
-        for(size_t i = 0; i < pStruct->laser->L_end; ++i)
+        phase99(pStruct->poptea->expSetup.laser.L_end,  pStruct,
+                pStruct->poptea->LMA.LMA_workspace.predicted);
+
+        for(size_t i = 0; i < pStruct->poptea->expSetup.laser.L_end; ++i)
         {
-            lthermalR1[i]       = pStruct->laser->l_thermal[i];
-            predictedR1[i]      = pStruct->predicted[i];
-            emissionExpR1[i]    = pStruct->emissionExperimental[i];
+            lthermalR1[i]       = pStruct->poptea->expSetup.laser.l_thermal[i];
+            predictedR1[i]      = pStruct->poptea->LMA.LMA_workspace.predicted[i];
+            emissionExpR1[i]    = pStruct->poptea->LMA.LMA_workspace.emissionExperimental[i];
         }
 
-        LendR1 = pStruct->laser->L_end;
+        LendR1 = pStruct->poptea->expSetup.laser.L_end;
     }
 
     double *Analytical_PhaseR2 = nullptr;
@@ -151,28 +153,28 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
         ///Set heating constraints
         constexpr double l_min = .2;
         constexpr double l_max = .8;
-        pStruct->thermalSetup(l_min, l_max, LendMinDecade);
-        LendR2 = pStruct->laser->L_end;
+        pStruct->poptea->thermalSetup(l_min, l_max, LendMinDecade);
+        LendR2 = pStruct->poptea->expSetup.laser.L_end;
 
         /// Populate the experimental phase values in parameters99
-        Analytical_PhaseR2  = new double[pStruct->L_end]();
-        lthermalR2          = new double[pStruct->L_end]();
-        predictedR2         = new double[pStruct->L_end]();
-        emissionExpR2       = new double[pStruct->L_end]();
+        Analytical_PhaseR2  = new double[pStruct->poptea->expSetup.laser.L_end]();
+        lthermalR2          = new double[pStruct->poptea->expSetup.laser.L_end]();
+        predictedR2         = new double[pStruct->poptea->expSetup.laser.L_end]();
+        emissionExpR2       = new double[pStruct->poptea->expSetup.laser.L_end]();
 
         ///Populate arrays
-        phase99(pStruct->L_end,  pStruct,
+        phase99(pStruct->poptea->expSetup.laser.L_end,  pStruct,
                 Analytical_PhaseR2);
 
         ///create artificial experimental data
-        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR2, .04, 4);
+//        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR2, .04, 4); //BUG MUST IMPLEMENT
 
         ///estimate unknown parameters using full range
         double *xpredicted =
             new double[pStruct->poptea->LMA.unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
-        paramter_estimation(pStruct->L_end,
+        paramter_estimation(pStruct->poptea->expSetup.laser.L_end,
                             pStruct->poptea->LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info, &nfev, &st_ptr, xInitial,
                             pStruct, factorMax, factorScale, xpredicted);
@@ -182,15 +184,15 @@ void figureSensitivityIntro(struct parameterStr *pStruct)
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        phase99(pStruct->L_end, pStruct,
-                pStruct->predicted);
-        LendR2 = pStruct->laser->L_end;
+        phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
+                pStruct->poptea->LMA.LMA_workspace.predicted);
+        LendR2 = pStruct->poptea->expSetup.laser.L_end;
 
-        for(size_t i = 0; i < pStruct->laser->L_end; ++i)
+        for(size_t i = 0; i < LendR2; ++i)
         {
-            lthermalR2[i]       = pStruct->laser->l_thermal[i];
-            predictedR2[i]      = pStruct->predicted[i];
-            emissionExpR2[i]    = pStruct->emissionExperimental[i];
+            lthermalR2[i]       = pStruct->poptea->expSetup.laser.l_thermal[i];
+            predictedR2[i]      = pStruct->poptea->LMA.LMA_workspace.predicted[i];
+            emissionExpR2[i]    = pStruct->poptea->LMA.LMA_workspace.emissionExperimental[i];
         }
     }
 
@@ -240,8 +242,8 @@ void CC_APS2(struct parameterStr *pStruct)
      (3) create experimental data and explort to data-file
      (4) fit the experimental data to the model
      (5) report parameteres and uncertainty using the calibration curves */
-    filesystem::makeDir(pStruct->dir, "data/APS2");
-    pStruct->L_end = LendMinDecade;
+    filesystem::makeDir(pStruct->poptea->dir, "data/APS2");
+    pStruct->poptea->expSetup.laser.L_end = LendMinDecade;
 
     /// Parameter Estimation Constraints
     /*  parameter constraints are stored in the
@@ -268,7 +270,7 @@ void CC_APS2(struct parameterStr *pStruct)
 ///Set heating constraints
     constexpr double l_min = .04;
     constexpr double l_max = 4;
-    pStruct->thermalSetup(l_min, l_max, LendMinDecade);
+    pStruct->poptea->thermalSetup(l_min, l_max, LendMinDecade);
 
 /// Populate the experimental phase values in parameters99
     /* Step 1: l_thermal sweep to create calibration tables */
@@ -321,11 +323,12 @@ void CC_APS2(struct parameterStr *pStruct)
     if(false)
     {
         /* Create Initial Experimental Data for figure */
-        pStruct->thermalSetup(l_min, l_max, LendMinDecade);
-        phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
-        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
-                               l_max);
-        fitting(pStruct->L_end, N, ParaEstSetting, &st_ptr, pStruct,
+        pStruct->poptea->thermalSetup(l_min, l_max, LendMinDecade);
+        phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
+                pStruct->poptea->LMA.LMA_workspace.emissionNominal);
+//        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
+//                               l_max); //BUG MUST IMPLEMENT
+        fitting(pStruct->poptea->expSetup.laser.L_end, N, ParaEstSetting, &st_ptr, pStruct,
                 xInitial, 1, factorMax, factorScale);
 
         ///output data for printing
@@ -335,12 +338,12 @@ void CC_APS2(struct parameterStr *pStruct)
         myoutputfile.open(filename1.str().c_str());
         myoutputfile << std::setprecision(8);
 
-        for(size_t i = 0 ; i < pStruct->L_end; ++i)
+        for(size_t i = 0 ; i < pStruct->poptea->expSetup.laser.L_end; ++i)
         {
-            myoutputfile << pStruct->laser->l_thermal[i] << "\t";
-            myoutputfile << pStruct->emissionExperimental[i] << "\t";
-            myoutputfile << pStruct->predicted[i] << "\t";
-            myoutputfile << pStruct->emissionNominal[i] << "\n";
+            myoutputfile << pStruct->poptea->expSetup.laser.l_thermal[i] << "\t";
+            myoutputfile << pStruct->poptea->LMA.LMA_workspace.emissionExperimental[i] << "\t";
+            myoutputfile << pStruct->poptea->LMA.LMA_workspace.predicted[i] << "\t";
+            myoutputfile << pStruct->poptea->LMA.LMA_workspace.emissionNominal[i] << "\n";
         }
         myoutputfile.close();
     }

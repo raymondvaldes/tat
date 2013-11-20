@@ -50,18 +50,6 @@ double Laser::IntensityTransient(void) const
     return IntensitySteady() * amplitude;
 }
 
-void Laser::updateNMeasurements()
-{
-    if(l_thermal)
-    {
-        delete [] l_thermal;
-        delete [] omegas;
-    }
-
-    omegas      = new double[L_end];
-    l_thermal   = new double[L_end];
-}
-
 double Laser::thermalSetup(const double lmin_, const double lmax_,
                            const double L_coat, const double kc,
                            const double psic, const double L_end_)
@@ -136,6 +124,7 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
     L_end = L_end_;
   }
 
+
   updateNMeasurements();
   ::range1og10(l_min, l_max, L_end, l_thermal);
 
@@ -148,11 +137,18 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
 }
 
 
-Laser::~Laser()
+void Laser::updateNMeasurements()
 {
-  delete [] l_thermal;
-  delete [] omegas;
+
+  std::cout << "this is the size.." << L_end <<"\n\n";
+
+
+  omegas.resize(L_end);
+  l_thermal.resize(L_end);
+
 }
+
+Laser::~Laser(){}
 
 
 setup::setup(struct Laser laser_, struct Detector detector_)

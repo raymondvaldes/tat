@@ -31,12 +31,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
 /// Parameter Structure
   struct parameterStr *pStruct =
-  new struct parameterStr();
-  pStruct->iter = 1000;
-
-/// Input Directory Information
-  pStruct->dir = filesystem::workingDir();
-  filesystem::makeDir(pStruct->dir, "data");
+  new struct parameterStr;
 
 /////Parameter Estimation Options
   /* - N number of thermal parameters to be fitted
@@ -110,7 +105,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double offset    = .95   /*offset*/ ;
   constexpr double amplitude = .05   /*amplitude*/;
   class expEquipment::Laser CO2Laser(power, radius, offset, amplitude);
-  pStruct->laser = &CO2Laser;
+//  pStruct->laser = &CO2Laser;
 
   constexpr double detector_lam = 5e-6;
   struct expEquipment::Detector Emissiondetector(detector_lam, detector_rad);
@@ -150,10 +145,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double l_min = .04;
   constexpr double l_max = 4;
   constexpr size_t LendMinDecade = 50;
-  pStruct->L_end = LendMinDecade;
-  pStruct->q_surface = 0;
 
-/// Parameter Estimation Constraints
+  /// Parameter Estimation Constraints
   struct parameter_constraints paraConstraints;
   paraConstraints.a_sub_min = 1e-0;
   paraConstraints.a_sub_max = 5;
@@ -184,16 +177,19 @@ int main( int /*argc*/, char** /*argv[]*/ )
   struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD,
                                               thermalModel, ParaEstSetting,
                                               unknownParameters);
+  poptea.thermalModel.iter = 1000;
+  /// Input Directory Information
+  poptea.dir = filesystem::workingDir();
+  filesystem::makeDir(poptea.dir, "data");
+
   //Optimize stretching in Substrate and declare variables to be fitted
-    class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split,
-                                poptea.TBCsystem.coating.depth,
-                                poptea.TBCsystem.substrate.depth,
-                                poptea.expSetup.laser.radius,
-                                poptea.TBCsystem.radius);
-    pStruct->mesh = mesh;
-
-
-
+  class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split,
+                              poptea.TBCsystem.coating.depth,
+                              poptea.TBCsystem.substrate.depth,
+                              poptea.expSetup.laser.radius,
+                              poptea.TBCsystem.radius);
+  poptea.thermalModel.mesh = mesh;
+//  pStruct->mesh = mesh;
   poptea.LMA.LMA_workspace.MSETol = 1e-8;
   pStruct->poptea = &poptea;
 
@@ -203,26 +199,32 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
   for (size_t i=0; i < N; ++i)
   {
-//      pStruct->xParametersNames[i] = xParametersNames[i];
-//      pStruct->xParameters95Names[i] = pStruct->xParametersNames[i];
-      pStruct->poptea->xParametersNames[i] = xParametersNames[i];
-      pStruct->poptea->xParameters95Names[i] = xParametersNames[i];
+    pStruct->poptea->xParametersNames[i] = xParametersNames[i];
+    pStruct->poptea->xParameters95Names[i] = xParametersNames[i];
   }
 
 // Populate the experimental phase values in parameters99
-  pStruct->thermalSetup(l_min, l_max, LendMinDecade);
-  phase99(pStruct->L_end, pStruct, pStruct->emissionNominal);
+  pStruct->poptea->expSetup.laser.L_end = LendMinDecade;
+  pStruct->poptea->expSetup.q_surface = 0;
+  pStruct->poptea->thermalSetup(l_min, l_max, LendMinDecade);
 
-//Many fit test
+  phase99(pStruct->poptea->expSetup.laser.L_end, pStruct,
+          pStruct->poptea->LMA.LMA_workspace.emissionNominal);
+
+
+
+  //Many fit test
   if (true)
   {
     constexpr size_t interants = 1;
-    for(size_t nn = 0; nn < pStruct->L_end; ++nn )
+    for(size_t nn = 0; nn < pStruct->poptea->expSetup.laser.L_end; ++nn )
     {
-        pStruct->emissionExperimental[nn] = pStruct->emissionNominal[nn];
+        pStruct->poptea->LMA.LMA_workspace.emissionExperimental[nn] =
+            pStruct->poptea->LMA.LMA_workspace.emissionNominal[nn];
     }
 
-    fitting(pStruct->L_end, pStruct->poptea->LMA.unknownParameters.Nsize(),
+    fitting(pStruct->poptea->expSetup.laser.L_end,
+            pStruct->poptea->LMA.unknownParameters.Nsize(),
             ParaEstSetting, &paraConstraints, pStruct, xInitial, interants,
             factorMax, factorScale);
   }

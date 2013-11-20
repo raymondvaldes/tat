@@ -361,7 +361,7 @@ for(j = 0 ; j < n ; ++j)
 	for(i = 0 ; i < m ; ++i)
     {
             wa5[ij] = fjac[ij];    //  fjac[i+m*j]
-            parametersStr-> fjac[ij] = wa5[ij] ;
+            parametersStr->poptea->LMA.LMA_workspace.fjac[ij] = wa5[ij] ;
             ij++;
     }
 ////////////////////////////////////////////////////////////////////////////////////

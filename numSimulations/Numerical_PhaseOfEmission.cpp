@@ -3,17 +3,17 @@
 double PhaseOfEmission1DNum(const int flag,
                             const struct parameterStr *const pStruct)
 {
-  class Temperature Tprofile(pStruct->mesh->Nend,
-                             pStruct->mesh->M2);
+  class Temperature Tprofile(pStruct->poptea->thermalModel.mesh->Nend,
+                             pStruct->poptea->thermalModel.mesh->M2);
 
-  /// Acquire Numerical Temperature
+  //// Acquire Numerical Temperature
   temperature_1D(pStruct->poptea->TBCsystem.coating.lambda,
                  pStruct->poptea->TBCsystem.optical.R1,
-                 pStruct->q_surface,
-                 pStruct->iter,
-                 pStruct->laser->omegas[flag],
+                 pStruct->poptea->expSetup.q_surface,
+                 pStruct->poptea->thermalModel.iter,
+                 pStruct->poptea->expSetup.laser.omegas[flag],
                  pStruct->poptea->TBCsystem.gammaEval(),
-                 pStruct->mesh, Tprofile,
+                 pStruct->poptea->thermalModel.mesh, Tprofile,
                  pStruct->poptea->expSetup.laser,
                  pStruct->poptea->TBCsystem
                  );
@@ -22,15 +22,13 @@ double PhaseOfEmission1DNum(const int flag,
   const double Lcoat = pStruct->poptea->TBCsystem.coating.depth;
   const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
                                 pStruct->poptea->TBCsystem.Temp.base,
-                                pStruct->mesh,
+                                pStruct->poptea->thermalModel.mesh,
                                 pStruct->poptea->bEval() *Lcoat,
                                 pStruct->poptea->TBCsystem.optical.Emit1
                                 );
-  const double
-  phase2 = emission.phase1D(Tprofile);
-
-  ///clean up
+  const double phase2 = emission.phase1D(Tprofile);
   Tprofile.cleanup();
+
   return phase2;
 }
 
@@ -47,32 +45,34 @@ double PhaseOfEmission2DAna(const int flag,
     const class HeatModel2DAna heatmodel2DAna(pStruct->poptea->TBCsystem.optical.R0,
                                               pStruct->poptea->TBCsystem.optical.R1,
                                               pStruct->poptea->TBCsystem.coating.lambda,
-                                              pStruct->laser->It,
+                                              pStruct->poptea->expSetup.laser.It,
                                               csub, pStruct->poptea->TBCsystem.a_subEval(),
                                               pStruct->poptea->TBCsystem.gammaEval(),
                                               pStruct->poptea->bEval(),
                                               k_coat, Lcoat, psi_coat,
                                               ccoat,
                                               pStruct->poptea->TBCsystem.substrate.lambda,
-                                              pStruct->mesh);
+                                              pStruct->poptea->thermalModel.mesh);
 
     /// Setup Temperature[n][r][z] Vector
     std::vector< std::vector< std::vector< double > > > T2DProfile;
-    vector3DSetup(T2DProfile, pStruct->mesh->Nend, pStruct->mesh->Rend,
-                  pStruct->mesh->M2);
+    vector3DSetup(T2DProfile, pStruct->poptea->thermalModel.mesh->Nend,
+                  pStruct->poptea->thermalModel.mesh->Rend,
+                  pStruct->poptea->thermalModel.mesh->M2);
 
     ///Populate Temperature Vector
-    heatmodel2DAna.TemperatureDistro(T2DProfile, pStruct->laser->omegas[flag]);
+    heatmodel2DAna.TemperatureDistro(T2DProfile,
+                                     pStruct->poptea->expSetup.laser.omegas[flag]);
 
     ///Initiate emission model
     const class Emission emission(pStruct->poptea->expSetup.detector.wavelength,
                                   pStruct->poptea->TBCsystem.Temp.referance,
-                                  pStruct->mesh,
+                                  pStruct->poptea->thermalModel.mesh,
                                   pStruct->poptea->bEval() * Lcoat,
                                   pStruct->poptea->TBCsystem.optical.Emit1
                                   );
-    const double phase2d = emission.phase2D(T2DProfile);
 
+    const double phase2d = emission.phase2D(T2DProfile);
     return phase2d;
 }
 
@@ -81,7 +81,8 @@ double PhaseOfEmission1DAna(const int flag,
                             const struct parameterStr*const pStruct)
 {
   /*See 2004 emission paper equation 19*/
-  const double omega1 = pStruct->laser->omegas[flag];
+//  const double omega1 = pStruct->laser->omegas[flag];
+  const double omega1 = pStruct->poptea->expSetup.laser.omegas[flag];
   const double lambda = pStruct->poptea->TBCsystem.coating.lambda;
   const double Esigma = pStruct->poptea->TBCsystem.optical.Emit1;
   const double gamma  = pStruct->poptea->TBCsystem.gammaEval();
@@ -138,11 +139,6 @@ Temperature::Temperature(const size_t Nend_, const size_t M2_)
 //  temperature.resize(Nend * M2);
   temperature = new double[Nend_ * M2_];
 }
-
-//Temperature::~Temperature()
-//{
-//  delete[]temperature;
-//}
 
 double Temperature::eval(const size_t i, const size_t j) const
 {

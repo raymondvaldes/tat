@@ -33,7 +33,7 @@ void perturbationTest(const size_t m, const size_t n,
     std::ofstream myfile;
     std::ostringstream filename;
 
-    filesystem::makeDir(parametersStr->dir, "debug");
+    filesystem::makeDir(parametersStr->poptea->dir, "debug");
     if(debugPrint)
     {
         filename <<  "../debug/perturbationTestLog.dat";
@@ -152,15 +152,15 @@ void perturbationTest(const size_t m, const size_t n,
                                 &nfev, st_ptr, xInitial, parametersStr,
                                 factorMax, factorScale, xpredicted);
 //            std::cout << "\n";
-            phase99(parametersStr->L_end, parametersStr,
-                    parametersStr->predicted);
+            phase99(parametersStr->poptea->expSetup.laser.L_end, parametersStr,
+                    parametersStr->poptea->LMA.LMA_workspace.predicted);
 
             const double msearea =
-            MSEarea(parametersStr->L_end, parametersStr->emissionNominal,
-                    parametersStr->predicted);
+            MSEarea(parametersStr->poptea->expSetup.laser.L_end,
+                    parametersStr->poptea->LMA.LMA_workspace.emissionNominal,
+                    parametersStr->poptea->LMA.LMA_workspace.predicted);
             pStruct->temp[xiters + xnumber*currentI ] = msearea;
 
-            /*Select larger of two possible extremes.*/ //TODO replace with func
             pStruct->xArea[currentI] =  msearea;
             if(xiters == 0 || xiters == xnumber-1 )
             {
@@ -279,16 +279,17 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
     {
         const double lmin = pStruct->lmin[j];
         const double lmax = pStruct->lmax[j];
-
-        pStructp->thermalSetup(lmin, lmax, lEndMin);
-        phase99(pStructp->L_end, pStructp, pStructp->emissionNominal);
-        for(size_t i = 0 ; i < pStructp->L_end; ++i)
+        pStructp->poptea->thermalSetup(lmin, lmax, lEndMin);
+//        pStructp->thermalSetup(lmin, lmax, lEndMin);
+        phase99(pStructp->poptea->expSetup.laser.L_end, pStructp,
+                pStructp->poptea->LMA.LMA_workspace.emissionNominal);
+        for(size_t i = 0 ; i < pStructp->poptea->expSetup.laser.L_end; ++i)
         {
-            pStructp->emissionExperimental[i]
-            = pStructp->emissionNominal[i];
+            pStructp->poptea->LMA.LMA_workspace.emissionExperimental[i]
+            = pStructp->poptea->LMA.LMA_workspace.emissionNominal[i];
         }
 
-        perturbationTest(pStructp->L_end,
+        perturbationTest(pStructp->poptea->expSetup.laser.L_end,
                          pStructp->poptea->LMA.unknownParameters.Nsize(),
                          ParaEstSetting, st_ptr, xInitial, pStructp, factorMax,
                          factorScale, pStruct);
@@ -334,10 +335,9 @@ void parameterUncertainty(const size_t n,
     const double E_sigmaTrue  = parametersStr->poptea->TBCsystem.optical.Emit1;
     const double lambdaTrue   = parametersStr->poptea->TBCsystem.coating.lambda;
     const double R0True       = parametersStr->poptea->TBCsystem.optical.R0;
-    const double lminN  = parametersStr->laser->l_thermal[0];
-    const double lmaxN  = parametersStr->laser->l_thermal[parametersStr->L_end-1];
+    const double lminN  = parametersStr->poptea->expSetup.laser.l_thermal[0];
+    const double lmaxN  = parametersStr->poptea->expSetup.laser.l_thermal[parametersStr->poptea->expSetup.laser.L_end-1];
     double*xpredicted = new double[n];
-
     int nfev;
     int info = 0;
 
@@ -347,23 +347,25 @@ void parameterUncertainty(const size_t n,
 
 ///Create Initial Experimental Data
     ///setup the nominal data
-    phase99(parametersStr->L_end, parametersStr,parametersStr->emissionNominal);
+    phase99(parametersStr->poptea->expSetup.laser.L_end,
+            parametersStr,
+            parametersStr->poptea->LMA.LMA_workspace.emissionNominal);
 
     ///let the experimental be equal to the nominal data
-    for(size_t i =0 ; i < parametersStr->L_end; i++)
+    for(size_t i =0 ; i < parametersStr->poptea->expSetup.laser.L_end; i++)
     {
-        parametersStr->emissionExperimental[i]
-                = parametersStr->emissionNominal[i];
+        parametersStr->poptea->LMA.LMA_workspace.emissionExperimental[i]
+                = parametersStr->poptea->LMA.LMA_workspace.emissionNominal[i];
     }
 
 ///Initial Fit to get initial guesses
     constexpr size_t interants = 0;
-    fitting(parametersStr->L_end,
+    fitting(parametersStr->poptea->expSetup.laser.L_end,
             parametersStr->poptea->LMA.unknownParameters.Nsize(), ParaEstSetting,
             st_ptr, parametersStr, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
-    filesystem::makeDir(parametersStr->dir, "debug");
+    filesystem::makeDir(parametersStr->poptea->dir, "debug");
     std::ofstream myoutputfile;
     std::stringstream filename1;
     filename1 <<  "../data/ParameterUncertainty.dat";
@@ -377,34 +379,36 @@ void parameterUncertainty(const size_t n,
         const double lmin = pStruct->lmin[j];
         const double lmax = pStruct->lmax[j];
         constexpr size_t lEndMin = 50;
-        parametersStr->thermalSetup(lmin, lmax, lEndMin);
+        parametersStr->poptea->thermalSetup(lmin, lmax, lEndMin);
+//        parametersStr->thermalSetup(lmin, lmax, lEndMin);
 
         ///Create Initial Experimental Data
-        phase99(parametersStr->L_end, parametersStr,
-                parametersStr->emissionNominal);
-        for(size_t i =0 ; i < parametersStr->L_end; i++)
+        phase99(parametersStr->poptea->expSetup.laser.L_end, parametersStr,
+                parametersStr->poptea->LMA.LMA_workspace.emissionNominal);
+        for(size_t i =0 ; i < parametersStr->poptea->expSetup.laser.L_end; i++)
         {
-            parametersStr->emissionExperimental[i]
-            = parametersStr->emissionNominal[i];
+            parametersStr->poptea->LMA.LMA_workspace.emissionExperimental[i]
+            = parametersStr->poptea->LMA.LMA_workspace.emissionNominal[i];
         }
 
         ///add artificial experimental data
 
-        parametersStr->EmissionNoise(myEmissionNoise,
-                                     parametersStr->emissionNominal, lminN,
-                                     lmaxN);
+//        parametersStr->EmissionNoise(myEmissionNoise,
+//                                     parametersStr->emissionNominal, lminN,
+//                                     lmaxN); //BUG MUST MOVE
 
         ///estimate unknown parameters
-        paramter_estimation(parametersStr->L_end,
+        paramter_estimation(parametersStr->poptea->expSetup.laser.L_end,
                             parametersStr->poptea->LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info, &nfev, st_ptr, xInitial,
                             parametersStr, factorMax, factorScale, xpredicted);
-        phase99(parametersStr->L_end, parametersStr, parametersStr->predicted);
+        phase99(parametersStr->poptea->expSetup.laser.L_end, parametersStr,
+                parametersStr->poptea->LMA.LMA_workspace.predicted);
 
         ///develop the uncertainties
-        double msearea = MSEarea(parametersStr->L_end,
-                                 parametersStr->emissionNominal,
-                                 parametersStr->predicted);
+        double msearea = MSEarea(parametersStr->poptea->expSetup.laser.L_end,
+                                 parametersStr->poptea->LMA.LMA_workspace.emissionNominal,
+                                 parametersStr->poptea->LMA.LMA_workspace.predicted);
         double
         diffUncerntainty = evaluateUncertainty(msearea,
                                                CCurves->perturbation,
@@ -523,8 +527,10 @@ void fitting(size_t P, size_t N,
         paramter_estimation(P, N, ParaEstSetting, &info, &nfev, st_ptr,
                             xInitial, pStruct, factorMax, factorScale,
                             xpredicted);
-        pStruct->poptea->LMA.LMA_workspace.MSE = MSE(pStruct->L_end, pStruct->emissionExperimental,
-                           pStruct->predicted);
+        pStruct->poptea->LMA.LMA_workspace.MSE =
+            MSE(pStruct->poptea->expSetup.laser.L_end,
+                pStruct->poptea->LMA.LMA_workspace.emissionExperimental,
+                pStruct->poptea->LMA.LMA_workspace.predicted);
 
         myfile << pStruct->poptea->TBCsystem.gammaEval() << "\t"
                << pStruct->poptea->TBCsystem.a_subEval() << "\t"
