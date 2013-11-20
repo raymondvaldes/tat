@@ -7,26 +7,23 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
                class physicalModel::TBCsystem TBCsystem_,
                class thermal::ThermalModelSelection thermalModel_,
                class parameterEstimation::settings Settings_,
-               class parameterEstimation::unknownList unknownParameters_)
+               class parameterEstimation::unknownList unknownParameters_
+//               , std::string dir_
+               )
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),
     LMA(Settings_, unknownParameters_)
+//    , dir(dir_)
 {
   const size_t d = LMA.unknownParameters.Nsize();
 
   xParametersNames.resize(d);
   xParameters95Names.resize(d);
-//  xParametersNames   = new enum XParaNames[d];
-//  xParameters95Names = new enum XParaNames[d];
   N95 = d;
 }
 
-PopTea::~PopTea(void)
-{
-//  delete [] xParametersNames;
-//  delete [] xParameters95Names;
-}
+PopTea::~PopTea(void){}
 
 
 void PopTea::thermalSetup(const double lmin_, const double lmax_,

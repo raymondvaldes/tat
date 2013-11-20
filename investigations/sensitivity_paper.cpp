@@ -239,7 +239,7 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
      (3) create experimental data and explort to data-file
      (4) fit the experimental data to the model
      (5) report parameteres and uncertainty using the calibration curves */
-    filesystem::makeDir(poptea.dir, "data/APS2");
+    poptea.DataDirectory.mkdir("data/APS2");
     poptea.expSetup.laser.L_end = LendMinDecade;
 
     /// Parameter Estimation Constraints

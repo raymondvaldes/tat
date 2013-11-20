@@ -34,7 +34,7 @@ void perturbationTest(const size_t m, const size_t n,
     std::ofstream myfile;
     std::ostringstream filename;
 
-    filesystem::makeDir(poptea.dir, "debug");
+    poptea.DataDirectory.mkdir("debug");
     if(debugPrint)
     {
         filename <<  "../debug/perturbationTestLog.dat";
@@ -347,7 +347,7 @@ void parameterUncertainty(const size_t n,
             st_ptr, poptea, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
-    filesystem::makeDir(poptea.dir, "debug");
+    poptea.DataDirectory.mkdir("debug");
     std::ofstream myoutputfile;
     std::stringstream filename1;
     filename1 <<  "../data/ParameterUncertainty.dat";

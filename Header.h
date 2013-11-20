@@ -48,6 +48,9 @@ number of bits as the program.  Also add library under linker settings in \
 compiler.
 */
 ///Source headers
+#include "tools/filesystem.hpp"
+#include "tools/timing.h"
+
 #include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
@@ -69,7 +72,6 @@ compiler.
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Setup.h"
 
-#include "tools/filesystem.hpp"
-#include "tools/timing.h"
+
 
 #endif // HEADER_H_INCLUDED

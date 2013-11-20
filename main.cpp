@@ -167,13 +167,15 @@ int main( int /*argc*/, char** /*argv[]*/ )
   unknownParameters.addUnknown(pNames::R1,          0.6, 1);
   unknownParameters.addUnknown(pNames::lambda,      .1,  1);
 
-  struct thermalAnalysisMethod::PopTea poptea(expSetup, EBPVD,
-                                              thermalModel, ParaEstSetting,
+  struct thermalAnalysisMethod::PopTea poptea(expSetup,
+                                              EBPVD,
+                                              thermalModel,
+                                              ParaEstSetting,
                                               unknownParameters);
+
   /// Input Directory Information
   poptea.thermalModel.iter = 1000;
-  poptea.dir = filesystem::workingDir();
-  filesystem::makeDir(poptea.dir, "data");
+  poptea.DataDirectory.mkdir("data");
 
   //Optimize stretching in Substrate and declare variables to be fitted
   class Mesh *mesh = new Mesh(M2, Rend, Nend, beta1, split,
