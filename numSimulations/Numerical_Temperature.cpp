@@ -1,15 +1,23 @@
 #include "../Header.h"
 
-void temperature_1D(const double lambda,
-                    const double R1, const double q_surface,
-                    const size_t iter, const double omega1,
-                    const double epsilon,
-                    class Mesh *mesh, class Temperature Tprofile,
-                    class expEquipment::Laser laser,
-                    struct physicalModel::TBCsystem TBCsystem)
-{
-  const double Is           = laser.Is;
-  const double It           = laser.It;
+void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
+                    const class thermal::ThermalModelSelection thermalModel,
+                    const class expEquipment::setup expSetup,
+                    const double omega1,
+                    class Temperature Tprofile)
+{     ;
+
+  const double lambda     = TBCsystem.coating.lambda;
+  const double R1         = TBCsystem.optical.R1;
+  const double epsilon    = TBCsystem.gammaEval();
+
+  const size_t iter       = thermalModel.iter;
+  class Mesh *mesh        = thermalModel.mesh;
+
+  const double q_surface = expSetup.q_surface;
+
+  const double Is           = expSetup.laser.Is;
+  const double It           = expSetup.laser.It;
   const double R0           = TBCsystem.optical.R0;
   const double L_coat       = TBCsystem.coating.depth;
   const double L_substrate  = TBCsystem.substrate.depth;

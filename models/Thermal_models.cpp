@@ -866,35 +866,6 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
     return OAPemission[2];
 }
 
-double Emission::phase1D(std::vector< std::vector< double > > &
-                                 Temperature) const
-{
-    /*
-    The volumetric emission is determined for one unique period of heating
-    and then a cosine function is fitted.  The resulting phase is reported.
-    */
-    for (size_t n = 0 ; n < mesh->Nend ; ++n )
-    {
-        EmissionTime[n] = emissionAxial(Temperature[n]);
-    }
-
-    const double
-    offsetInitial = ::average(::arrayMax(EmissionTime, mesh->Nend),
-                              ::arrayMin(EmissionTime, mesh->Nend));
-    const double
-    amplitudeInitial = (::arrayMax(EmissionTime, mesh->Nend)
-                        -::arrayMin(EmissionTime, mesh->Nend)) / 2;
-
-    constexpr double
-    phaseInitial = -M_PI_2;
-
-    double OAPemission[3] = {offsetInitial, amplitudeInitial, phaseInitial};
-
-    ::cosfit(EmissionTime, mesh->tau, OAPemission, mesh->Nend);
-
-    return OAPemission[2];
-}
-
 double Emission::phase1D(const class Temperature Tprofile) const
 {
     /*
@@ -919,8 +890,6 @@ double Emission::phase1D(const class Temperature Tprofile) const
     double OAPemission[3] = {offsetInitial, amplitudeInitial, phaseInitial};
 
     ::cosfit(EmissionTime, mesh->tau, OAPemission, mesh->Nend);
-
-//    exit(-1);
 
     return OAPemission[2];
 }

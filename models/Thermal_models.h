@@ -83,7 +83,6 @@ public:
   ~Emission();
   double phase2D(std::vector< std::vector< std::vector< double > > >
                          &Temperature) const;
-  double phase1D(std::vector< std::vector< double > > &Temperature) const;
   double phase1D(const class Temperature Tprofile) const;
 
 private:

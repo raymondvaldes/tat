@@ -7,16 +7,10 @@ double PhaseOfEmission1DNum(const int flag,
                              poptea.thermalModel.mesh->M2);
 
   //// Acquire Numerical Temperature
-  temperature_1D(poptea.TBCsystem.coating.lambda,
-                 poptea.TBCsystem.optical.R1,
-                 poptea.expSetup.q_surface,
-                 poptea.thermalModel.iter,
-                 poptea.expSetup.laser.omegas[flag],
-                 poptea.TBCsystem.gammaEval(),
-                 poptea.thermalModel.mesh, Tprofile,
-                 poptea.expSetup.laser,
-                 poptea.TBCsystem
-                 );
+  const double omega = poptea.expSetup.laser.omegas[flag];
+  temperature_1D(poptea.TBCsystem,
+                 poptea.thermalModel,
+                 poptea.expSetup, omega, Tprofile);
 
   ///Initiate emission model
   const double Lcoat = poptea.TBCsystem.coating.depth;
