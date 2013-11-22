@@ -389,9 +389,19 @@ void cosfit(double **dependent, const double *independent, double *x, int j,
     return;
 }
 
-
-void cosfit(double *dependent, const double *independent, double *x, int Nend)
+void cosfit(double *dependent,const std::vector<double> &independentVec,
+            double *x, int Nend)
 {
+///Must replace const double *independent by vector.  However, will create a
+///new object replace back in.
+
+  double*independent = new double[Nend];
+  for(int i=0 ; i< Nend; ++i)
+  {
+      independent[i] = independentVec[i];
+  }
+
+
     constexpr size_t N = 3; // number  of constants to be fitted
     const size_t P = Nend-1;
     //number of datapoints to be used in the fitting process
@@ -451,6 +461,8 @@ void cosfit(double *dependent, const double *independent, double *x, int Nend)
             newdependent[g]   = dependent[g];
             newindependent[g] = g*(independent[1]-independent[0]);
         }
+        delete[] independent;
+
 
         double *variables[3];
         for(size_t a=0; a<=2 ; ++a)
@@ -792,6 +804,41 @@ double simpson_3_8(const std::vector<double>& Y, const double *X,
     return S;
 }
 
+double simpson_3_8(const double *Y, const std::vector<double>& X,
+                   const size_t A,const size_t B)
+{
+    //A is lower limit element number, B is upper limit element number
+    //calculates integral of Y dX from X[A] to X[B] using Y[n][i]
+    double S = 0;
+    size_t i = A;
+
+    if( (B-A)%3==1)
+    {
+        S  = X[i+3] - X[i];
+        S /= 8.;
+        S *= (Y[i]+3.*Y[i+1]+3.*Y[i+2]+Y[i+3]);
+        S -= (X[i+3]-X[i+1])/6.*(Y[i+1]+4.*Y[i+2]+Y[i+3]);
+        i+=1;
+    }
+
+    if((B-A)%3==2)
+    {
+        S=(X[i+3]-X[i])/8.*(Y[i]+3.*Y[i+1]+3.*Y[i+2]+Y[i+3]);
+        S-=(X[i+3]-X[i+1])/6.*(Y[i+1]+4.*Y[i+2]+Y[i+3]);
+        i+=1;
+        S+=(X[i+3]-X[i])/8.*(Y[i]+3.*Y[i+1]+3.*Y[i+2]+Y[i+3]);
+        S-=(X[i+3]-X[i+1])/6.*(Y[i+1]+4.*Y[i+2]+Y[i+3]);
+        i+=1;
+    }
+
+    while(i+3.<=B)
+    {
+        S+=(X[i+3]-X[i])/8.*(Y[i]+3.*Y[i+1]+3.*Y[i+2]+Y[i+3]);
+        i+=3;
+    }
+
+    return S;
+}
 
 std::complex<double> simpson_3_8Complex(const double* YReal,
                                         const double* YCPLX,

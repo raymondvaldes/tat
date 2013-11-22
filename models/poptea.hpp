@@ -30,8 +30,7 @@ namespace thermalAnalysisMethod
            class physicalModel::TBCsystem TBCsystem_,
            class thermal::ThermalModelSelection thermalModel_,
            class parameterEstimation::settings Settings_,
-           class parameterEstimation::unknownList unknownParameters_
-           );
+           class parameterEstimation::unknownList unknownParameters_);
     ~PopTea(void);
 
 

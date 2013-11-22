@@ -11,7 +11,7 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
   const double epsilon    = TBCsystem.gammaEval();
 
   const size_t iter       = thermalModel.iter;
-  class numericalModel::Mesh *mesh        = thermalModel.mesh;
+  class numericalModel::Mesh mesh        = thermalModel.mesh;
 
   const double q_surface = expSetup.q_surface;
 
@@ -28,16 +28,16 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
   const class property *psi2_thermal    = &TBCsystem.substrate.psithermal;
 
   class matrixArrays *MatrixArrays = NULL;
-  MatrixArrays = new class matrixArrays(mesh->M2);
+  MatrixArrays = new class matrixArrays(mesh.M2);
 
   std::vector< std::vector<double> >
-  b_steady(mesh->Nend-1, std::vector<double>(mesh->M2));
+  b_steady(mesh.Nend-1, std::vector<double>(mesh.M2));
 
 /// Setup initial conditions for the transient temperature field:
   const double l_thermal = lthermal(L_coat, k1_thermal->offset,
                                     psi1_thermal->offset, omega1);
   const std::complex<double>
-  Tinfo = Tac1D_ana(mesh->z_real[0] / L_coat, R0, R1, epsilon,
+  Tinfo = Tac1D_ana(mesh.z_real[0] / L_coat, R0, R1, epsilon,
                     lambda, l_thermal);
 
   double
@@ -48,17 +48,17 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
   const double Iplus0 = Iplus0Func(R0, R1, lambda);
   const double Iplus1 = Iplus1Func(R0, R1, lambda);
 
-  for(size_t j=0 ; j <= mesh->M1; ++j)
+  for(size_t j=0 ; j <= mesh.M1; ++j)
   {
-    Tprofile.assgn(0,j, Tss1D_ana(mesh->z_real[j] / L_coat, R1, lambda, Is,
+    Tprofile.assgn(0,j, Tss1D_ana(mesh.z_real[j] / L_coat, R1, lambda, Is,
                                   L_coat, (L_coat+L_substrate)/L_coat,
                                   k2_thermal->offset, Iplus0, Iplus1,
                                   q_surface, k1_thermal->offset));
   }
 
-  for (size_t j = mesh->M1+1; j < mesh->M2; j++)
+  for (size_t j = mesh.M1+1; j < mesh.M2; j++)
   {
-      Tprofile.assgn(0,j, Tss1D_ana( mesh->z_real[j] / L_coat, R1, lambda,
+      Tprofile.assgn(0,j, Tss1D_ana( mesh.z_real[j] / L_coat, R1, lambda,
                                     Is,  L_coat, (L_coat+L_substrate)/L_coat,
                                     k2_thermal->offset, Iplus0, Iplus1,
                                     q_surface, k1_thermal->offset));
@@ -74,27 +74,27 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
     const double tau_ref = tau_0(omega1);
     MatrixArrays->B4 = abMatrixPrepopulate(MatrixArrays->B1,
                                            MatrixArrays->B2,
-                                           MatrixArrays->B3, mesh->M1,
-                                           MatrixArrays->M2, mesh->tau,
+                                           MatrixArrays->B3, mesh.M1,
+                                           MatrixArrays->M2, mesh.tau,
                                            L_coat, L_substrate, tau_ref,
-                                           mesh->eta, q_surface,
-                                           mesh->z_jplus,
-                                           mesh->z_jminus, mesh->z_j,
-                                           mesh->d_eta_plus, mesh->deltaZ,
-                                           mesh->d_eta_minus);
+                                           mesh.eta, q_surface,
+                                           mesh.z_jplus,
+                                           mesh.z_jminus, mesh.z_j,
+                                           mesh.d_eta_plus, mesh.deltaZ,
+                                           mesh.d_eta_minus);
 
 
-    double *genProfile = new double[mesh->M1+1];
+    double *genProfile = new double[mesh.M1+1];
     const double opt = L_coat * lambda ;
-    heatingProfile(opt, lambda, R1, Iplus0, Iplus1, mesh->z_jplus,
-                   mesh->z_jminus, mesh->z_j, genProfile, mesh->M1);
+    heatingProfile(opt, lambda, R1, Iplus0, Iplus1, mesh.z_jplus,
+                   mesh.z_jminus, mesh.z_j, genProfile, mesh.M1);
 
-    for (size_t n = 0 ; n < mesh->Nend-1 ; ++n )
+    for (size_t n = 0 ; n < mesh.Nend-1 ; ++n )
     {
-      bMatrixPrepopulate1(n, MatrixArrays->B2, b_steady[n], mesh->M1,
-                          MatrixArrays->M2, mesh->tau, Is, It, L_coat,
-                          tau_ref, R1, Iplus1, omega1, mesh->z_jminus,
-                          mesh->z_j, mesh->deltaZ, genProfile, T_rear);
+      bMatrixPrepopulate1(n, MatrixArrays->B2, b_steady[n], mesh.M1,
+                          MatrixArrays->M2, mesh.tau, Is, It, L_coat,
+                          tau_ref, R1, Iplus1, omega1, mesh.z_jminus,
+                          mesh.z_j, mesh.deltaZ, genProfile, T_rear);
     }
     delete []genProfile;
   }
@@ -106,16 +106,16 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
 
   for ( size_t p = 1 ; p <= iter ; ++p )
   {
-    for ( size_t n = 0 ; n < mesh->Nend-1 ; ++n )
+    for ( size_t n = 0 ; n < mesh.Nend-1 ; ++n )
     {
-      for (size_t j = 0 ; j < mesh->M2 ; ++j )
+      for (size_t j = 0 ; j < mesh.M2 ; ++j )
       {
           MatrixArrays->b[j]  = b_steady[n][j];
       }
 
       Ab_transient(n, MatrixArrays->A1, MatrixArrays->A2,
                    MatrixArrays->A3, MatrixArrays->b, Tprofile,
-                   mesh->M1, MatrixArrays->M2, MatrixArrays->B1,
+                   mesh.M1, MatrixArrays->M2, MatrixArrays->B1,
                    MatrixArrays->B2, MatrixArrays->B3, MatrixArrays->B4,
                    k1_thermal, k2_thermal, psi1_thermal, psi2_thermal);
 
@@ -124,7 +124,7 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                   MatrixArrays->Temperature);
 
 
-      for (size_t j = 0 ; j < mesh->M2 ; ++j )
+      for (size_t j = 0 ; j < mesh.M2 ; ++j )
       {
         Tprofile.assgn(n+1,j, MatrixArrays->Temperature[j]);
       }
@@ -144,7 +144,7 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
       if (p == 0) ss_error1 = 1;
 
       double
-      ss_error = fabs(Tprofile.eval(mesh->Nend-1, 0) -
+      ss_error = fabs(Tprofile.eval(mesh.Nend-1, 0) -
                       Tprofile.eval(0, 0));
       double ss_errorD = 1;
 
@@ -177,9 +177,9 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
     }
 
 
-    for(size_t j = 0 ; j < mesh->M2; ++j)
+    for(size_t j = 0 ; j < mesh.M2; ++j)
     {
-       Tprofile.assgn(0,j, Tprofile.eval(mesh->Nend-1,j) );
+       Tprofile.assgn(0,j, Tprofile.eval(mesh.Nend-1,j) );
     }
   }
 
@@ -192,17 +192,17 @@ double abMatrixPrepopulate(std::vector<double>& B1,
                            std::vector<double>& B2,
                            std::vector<double>& B3,
                            const size_t M1, const size_t M2,
-                           const double * __restrict__ tau,
+                           const std::vector<double>&tau,
                            const double L_coat, const double L_substrate,
                            const double tau_ref,
-                           const double * __restrict__ eta,
+                           const std::vector<double>& eta,
                            const double q_surface,
                            const std::vector<double>& z_jplus,
                            const std::vector<double>& z_jminus,
                            const std::vector<double>& z_j,
-                           const double*d_eta_plus,
-                           const double*deltaZ,
-                           const double*d_eta_minus)
+                           const std::vector<double>&d_eta_plus,
+                           const std::vector<double>&deltaZ,
+                           const std::vector<double>&d_eta_minus)
 {
 //Front Surface
     const double delEta =  eta[1] - eta[0] ;
@@ -306,12 +306,14 @@ void heatingProfile(const double opt, const double lambda,
 
 void bMatrixPrepopulate1(const size_t n, std::vector<double>& B2,
                          std::vector<double>& b, const size_t M1,
-                         const size_t M2, const double * __restrict__ tau,
+                         const size_t M2,
+                         const std::vector<double>& tau,
                          const double Is, const double It, const double L_coat,
                          const double tau_ref, const double R1,
                          const double Iplus1, const double omega,
                          const std::vector<double>& z_jminus,
-                         const std::vector<double>& z_j, const double*deltaZ,
+                         const std::vector<double>& z_j,
+                         const std::vector<double>&deltaZ,
                          const double* genProfile, const double T_rear)
 {
 //Update A matrix based on temperature an time
@@ -655,7 +657,9 @@ double t_tau(const double tau, const double tau_ref)
 }
 
 double Iaverage(const double Is, const double It, const double omega,
-                        const double tau_ref, const double *tau, const size_t n)
+                const double tau_ref,
+                const std::vector<double>&tau,
+                const size_t n)
 {
     double I_avg;
     I_avg  = Iheat_int( Is,It,omega, t_tau(tau[n+1], tau_ref) ) ;

@@ -8,21 +8,21 @@ Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
            const double Rdomain_)
            :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_)
 {
-  time            = new double[Nend];
-  tau             = new double[Nend];
+  time.resize(Nend);
+  tau.resize(Nend);
 
-  eta             = new double[M2];
-  z_real          = new double[M2];
-  z_norm          = new double[M2];
-  zNorm2          = new double[M2];
-  d_eta_plus      = new double[M2];
-  deltaZ          = new double[M2];
-  d_eta_minus     = new double[M2];
+  eta.resize(M2);
+  z_real.resize(M2);
+  z_norm.resize(M2);
+  zNorm2.resize(M2);
+  d_eta_plus.resize(M2);
+  deltaZ.resize(M2);
+  d_eta_minus.resize(M2);
 
-  rNorm2          = new double[Rend];
-  rNorm           = new double[Rend];
-  rZeta           = new double[Rend];
-  rReal           = new double[Rend];
+  rNorm2.resize(Rend);
+  rNorm.resize(Rend);
+  rZeta.resize(Rend);
+  rReal.resize(Rend);
 
   z_jplus.resize(M2);
   z_jminus.resize(M2);
@@ -39,27 +39,10 @@ Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
   }
 
   meshUpdate(L_coat_, L_substrate_, CO2Radius_, Rdomain_);
-
 }
-
 
 Mesh::~Mesh()
 {
-  delete [] tau;
-  delete [] time;
-
-  delete [] eta;
-  delete [] z_real;
-  delete [] z_norm;
-  delete [] zNorm2;
-  delete [] d_eta_plus ;
-  delete [] deltaZ     ;
-  delete [] d_eta_minus;
-
-  delete [] rNorm;
-  delete [] rZeta;
-  delete [] rNorm2;
-  delete [] rReal;
 }
 
 double Mesh::beta2_func(double * variable, double * constants)

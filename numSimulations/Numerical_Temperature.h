@@ -54,26 +54,26 @@ double abMatrixPrepopulate(std::vector<double>& B1,
                            std::vector<double>& B2,
                            std::vector<double>& B3,
                            const size_t M1, const size_t M2,
-                           const double * __restrict__ tau,
+                           const std::vector<double> &tau,
                            const double L_coat, const double L_substrate,
                            const double tau_ref,
-                           const double * __restrict__ eta,
+                           const std::vector<double> &eta,
                            const double q_surface,
                            const std::vector<double>& z_jplus,
                            const std::vector<double>& z_jminus,
                            const std::vector<double>& z_j,
-                           const double*d_eta_plus,
-                           const double*deltaZ,
-                           const double*d_eta_minus);
+                           const std::vector<double> &d_eta_plus,
+                           const std::vector<double> &deltaZ,
+                           const std::vector<double> &d_eta_minus);
 
 void bMatrixPrepopulate1(const size_t n, std::vector<double>& B2,
                          std::vector<double>& b, const size_t M1,
-                         const size_t M2, const double * __restrict__ tau,
+                         const size_t M2, const std::vector<double> &tau,
                          const double Is, const double It, const double L_coat,
                          const double tau_ref, const double R1,
                          const double Iplus1, const double omega,
                          const std::vector<double>& z_jminus,
-                         const std::vector<double>& z_j, const double*deltaZ,
+                         const std::vector<double>& z_j, const std::vector<double> &deltaZ,
                          const double* genProfile, const double T_rear);
 
 double Gaverage(const double opt, const double lambda,
@@ -114,7 +114,7 @@ void Ab_transient(const size_t n,
 double t_tau(const double tau, const double tau_ref);
 
 double Iaverage(const double Is, const double It, const double omega,
-                const double tau_ref, const double *tau, const size_t n);
+                const double tau_ref, const std::vector<double> &tau, const size_t n);
 
 double qGenAverage(const double I_avg, const double opt, const double lambda,
                    const double R1, const double Iplus0, const double Iplus1,

@@ -1,7 +1,8 @@
 #include "Header.h"
 
 int main( int /*argc*/, char** /*argv[]*/ )
-{
+{  getchar();
+
   ///Setup global timer and start
   class stopwatch globalStopWatch;
 
@@ -21,9 +22,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
 /// Heat Transfer and Emission models
   const enum XParaNames
   xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
-  class thermal::ThermalModelSelection
-  thermalModel(thermal::ThermalModelSelection::HeatX::OneDimAnalytical,
-               thermal::ThermalModelSelection::EmissionX::OneDimNonLin);
 
 /// Initialize Mesh
   constexpr double beta1 = 100;
@@ -167,26 +165,31 @@ int main( int /*argc*/, char** /*argv[]*/ )
   unknownParameters.addUnknown(pNames::R1,          0.6, 1);
   unknownParameters.addUnknown(pNames::lambda,      .1,  1);
 
+  //Optimize stretching in Substrate and declare variables to be fitted
+  class numericalModel::Mesh mesh(M2, Rend, Nend, beta1, split,
+                                  EBPVD.coating.depth,
+                                  EBPVD.substrate.depth,
+                                  expSetup.laser.radius,
+                                  EBPVD.radius);
+
+  class thermal::ThermalModelSelection
+  thermalModel(thermal::ThermalModelSelection::HeatX::OneDimAnalytical,
+               thermal::ThermalModelSelection::EmissionX::OneDimNonLin,
+               mesh);
+
   struct thermalAnalysisMethod::PopTea poptea(expSetup,
                                               EBPVD,
                                               thermalModel,
                                               ParaEstSetting,
                                               unknownParameters);
-
+   std::cout << "\nwaiting here 1"; getchar();
   /// Input Directory Information
   poptea.thermalModel.iter = 1000;
+  poptea.LMA.LMA_workspace.MSETol = 1e-8;
   poptea.DataDirectory.mkdir("data");
 
-  //Optimize stretching in Substrate and declare variables to be fitted
-  class numericalModel::Mesh *mesh =
-      new numericalModel::Mesh(M2, Rend, Nend, beta1, split,
-                              poptea.TBCsystem.coating.depth,
-                              poptea.TBCsystem.substrate.depth,
-                              poptea.expSetup.laser.radius,
-                              poptea.TBCsystem.radius);
-  poptea.thermalModel.mesh = mesh;
-  poptea.LMA.LMA_workspace.MSETol = 1e-8;
 
+//  std::cout << sizeof(class numericalModel::Mesh) << "\n\n"; exit(-2);
   // Initial Guess
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
@@ -201,8 +204,10 @@ int main( int /*argc*/, char** /*argv[]*/ )
   poptea.expSetup.q_surface = 0;
   poptea.thermalSetup(l_min, l_max, LendMinDecade);
 
+  std::cout << "\nwaiting here 2"; getchar();
   phase99(poptea.expSetup.laser.L_end, poptea,
           poptea.LMA.LMA_workspace.emissionNominal);
+   std::cout << "\nwaiting here 3"; getchar();
 
   //Many fit test
   if (true)
@@ -226,9 +231,9 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
 
 // Clear memory
-  delete mesh;
   delete[] xInitial;
 
   globalStopWatch.displayTime();
+  getchar();
   return 0;
 }

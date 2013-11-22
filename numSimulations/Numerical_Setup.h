@@ -77,6 +77,7 @@ double simpson_3_8(const std::vector<double>& Y, const std::vector<double>&X,
                    const size_t A,const size_t B);
 double simpson_3_8(const double* Y, const std::vector<double>& X,
                    const size_t A, const size_t B);
+
 std::complex<double> simpson_3_8Complex(const double* YReal,
                                         const double* YCPLX,
                                         const std::vector<double>& X,
@@ -141,8 +142,8 @@ double Psi_non(const std::vector<std::vector<double>>& T, const double eta,
 void cosfit(double **dependent, const double *independent, double *x, int j,
             double omega1, int Nend);
 
-void cosfit(double *dependent, const double *independent, double *x,
-            int Nend);
+void cosfit(double *dependent,const std::vector<double> &independentVec,
+            double *x, int Nend);
 
 void cosfcn1(int P, int, double *x, double *fvec, int *, double **variables);
 

@@ -10,10 +10,21 @@ public:
   std::vector<double> z_jminus;
   std::vector<double> z_j;
 
-  double *rZeta, *rNorm, *rReal, *rNorm2;
-  double *tau, *time;
-  double *eta, *z_real, *z_norm,  *zNorm2;
-  double *d_eta_plus, *deltaZ, *d_eta_minus;
+  std::vector<double> rZeta;
+  std::vector<double> rNorm;
+  std::vector<double> rReal;
+  std::vector<double> rNorm2;
+
+  std::vector<double> tau;
+  std::vector<double> time;
+  std::vector<double> eta;
+  std::vector<double> z_real;
+
+  std::vector<double> z_norm;
+  std::vector<double> zNorm2;
+  std::vector<double> d_eta_plus;
+  std::vector<double> deltaZ;
+  std::vector<double> d_eta_minus;
 
   mutable size_t M1;
   const size_t M2;

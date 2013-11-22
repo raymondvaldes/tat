@@ -7,7 +7,7 @@ HeatModel2DAna::HeatModel2DAna(const double R0_, const double R1_,
                                const double k_coat_, const double L_,
                                const double psi_coat_, const double ccoat_,
                                const double lambda_Sub_,
-                               const class numericalModel::Mesh *mesh_):
+                               const class numericalModel::Mesh mesh_):
                                R0(R0_), R1(R1_), lambda(lambda_), It(It_),
                                csub(csub_), asub(asub_), gamma(gamma_),
                                beam(beam_), k_coat(k_coat_), L(L_),
@@ -22,8 +22,8 @@ HeatModel2DAna::HeatModel2DAna(const double R0_, const double R1_,
     }
 
     funcComplex = new std::complex<double>[nuSize];
-    funcComplexR = new std::complex<double>[nuSize * mesh->Rend];
-    funcComplexZ = new std::complex<double>[nuSize * mesh->M2];
+    funcComplexR = new std::complex<double>[nuSize * mesh.Rend];
+    funcComplexZ = new std::complex<double>[nuSize * mesh.M2];
     nuSpace = new double[nuSize];
 
     funcReal = new double[nuSize];
@@ -423,8 +423,8 @@ HeatModel2DAna::iHankel(const size_t r, const size_t z) const
 {
     for(size_t n = 0; n < nuSize ;  ++n)
     {
-        funcComplex[n]  = funcComplexZ[z + n*mesh->M2];
-        funcComplex[n] *= funcComplexR[r + n*mesh->Rend];
+        funcComplex[n]  = funcComplexZ[z + n*mesh.M2];
+        funcComplex[n] *= funcComplexR[r + n*mesh.Rend];
 
         funcReal[n] = funcComplex[n].real();
         funcImag[n] = funcComplex[n].imag();
@@ -450,17 +450,17 @@ HeatModel2DAna::TemperatureDistro(std::vector<std::vector<std::vector<double>>>
     CPLXWorkingArrays(ltherm);
 
     ///Implement with working arrays
-    for(size_t r = 0; r < mesh->Rend; ++r)
+    for(size_t r = 0; r < mesh.Rend; ++r)
     {
-        for(size_t z = 0; z < mesh->M2; ++z)
+        for(size_t z = 0; z < mesh.M2; ++z)
         {
             const std::complex<double> TempTComplexSol =
             iHankel(r, z) * ( L * It * ( 1 - R0 ) / k_coat );
 
-            for(size_t n = 0; n < mesh->Nend; ++n)
+            for(size_t n = 0; n < mesh.Nend; ++n)
             {
                 const std::complex<double> TempTComplexI =
-                TempTComplexSol * exp( _i_ * 2. * M_PI * mesh->tau[n] );
+                TempTComplexSol * exp( _i_ * 2. * M_PI * mesh.tau[n] );
 
                 Temperature[n][r][z]  = real(TempTComplexI);
             }
@@ -475,9 +475,9 @@ HeatModel2DAna::TemperaturePrintOut(const std::string dir, const double L_coat)
 {
     /// Setup Temperature[n][r][z] Vector
     std::vector< std::vector< std::vector< double > > > T2DProfile;
-    vector3DSetup(T2DProfile, mesh->Nend, mesh->Rend, mesh->M2);
+    vector3DSetup(T2DProfile, mesh.Nend, mesh.Rend, mesh.M2);
 
-    for(size_t n = 0; n < mesh->Nend; ++n)
+    for(size_t n = 0; n < mesh.Nend; ++n)
     {
         std::ofstream myfile;
         std::stringstream filename;
@@ -485,20 +485,20 @@ HeatModel2DAna::TemperaturePrintOut(const std::string dir, const double L_coat)
         myfile.open(filename.str().c_str());
         myfile << std::setprecision(8);
 
-        for(size_t i = 0; i < mesh->Rend; ++i)
+        for(size_t i = 0; i < mesh.Rend; ++i)
         {
-            for(size_t j = 0; j < mesh->M2; ++j)
+            for(size_t j = 0; j < mesh.M2; ++j)
             {
-                if(j <= mesh->M1)
+                if(j <= mesh.M1)
                 {
-                    myfile << mesh->zNorm2[j] << "\t" ;
-                    myfile << mesh->rReal[i] / L_coat << "\t";
+                    myfile << mesh.zNorm2[j] << "\t" ;
+                    myfile << mesh.rReal[i] / L_coat << "\t";
                     myfile << T2DProfile[n][i][j] << "\n";
                 }
-                else if(j > mesh->M1)
+                else if(j > mesh.M1)
                 {
-                    myfile << mesh->zNorm2[j] << "\t" ;
-                    myfile << mesh->rReal[i] / L_coat << "\t";
+                    myfile << mesh.zNorm2[j] << "\t" ;
+                    myfile << mesh.rReal[i] / L_coat << "\t";
                     myfile << T2DProfile[n][i][j] << "\n";
                 }
             }
@@ -514,26 +514,26 @@ HeatModel2DAna::CPLXWorkingArrays(const double ltherm) const
     for(size_t n = 0 ; n < nuSize; ++n)
     {
         const double nu = nuSpace[n];
-        for(size_t z = 0; z < mesh->M2; ++z)
+        for(size_t z = 0; z < mesh.M2; ++z)
         {
 
-            if(z <= mesh->M1)
+            if(z <= mesh.M1)
             {
-                funcComplexZ[z + n*mesh->M2] = hTildeCoat(nu, ltherm,
-                                                          mesh->zNorm2[z]);
+                funcComplexZ[z + n*mesh.M2] = hTildeCoat(nu, ltherm,
+                                                          mesh.zNorm2[z]);
 
             }
-            else if(z > mesh->M1 && z < mesh->M2)
+            else if(z > mesh.M1 && z < mesh.M2)
             {
-                funcComplexZ[z + n*mesh->M2] = hTildeSubstrate(nu, ltherm,
-                                                               mesh->zNorm2[z]);
+                funcComplexZ[z + n*mesh.M2] = hTildeSubstrate(nu, ltherm,
+                                                               mesh.zNorm2[z]);
             }
         }
 
-        for(size_t r = 0; r < mesh->Rend; ++r)
+        for(size_t r = 0; r < mesh.Rend; ++r)
         {
-            funcComplexR[r + n*mesh->Rend] =
-            gsl_sf_bessel_J0( nu * mesh->rNorm[r] ) * nu;
+            funcComplexR[r + n*mesh.Rend] =
+            gsl_sf_bessel_J0( nu * mesh.rNorm[r] ) * nu;
         }
     }
 }
@@ -699,13 +699,13 @@ void HeatModel2DAna::testing(void) const
 
 
 Emission::Emission(const double detector_lam_, const double T_ref_,
-                   const class numericalModel::Mesh *mesh_, const double beamR_,
+                   const numericalModel::Mesh mesh_, const double beamR_,
                    const double E_sigma_):
                    detector_lam(detector_lam_), T_ref(T_ref_), mesh(mesh_),
                    beamR(beamR_), E_sigma(E_sigma_)
 {
-    Ib = new double[mesh->M1+1];
-    EmissionTime = new double[mesh->Nend];
+    Ib = new double[mesh.M1+1];
+    EmissionTime = new double[mesh.Nend];
 }
 
 Emission::~Emission()
@@ -767,15 +767,15 @@ double Emission::emissionAxial(std::vector<double> &Temperature) const
     direction. The Temperature variable is a pointer to the axial
     temperature.
     */
-    for(size_t j = 0 ; j <= mesh->M1 ; ++j)
+    for(size_t j = 0 ; j <= mesh.M1 ; ++j)
     {
         Ib[j] = Ib_plank(Temperature[j]);
     }
 
     constexpr   size_t z0 = 0;
-    const       size_t z1 = mesh->M1;
+    const       size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh->z_norm, z0, z1);
+    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
 double Emission::emissionAxial(const class Temperature Tprofile,
@@ -786,15 +786,15 @@ double Emission::emissionAxial(const class Temperature Tprofile,
     direction. The Temperature variable is a pointer to the axial
     temperature.
     */
-    for(size_t j = 0 ; j <= mesh->M1 ; ++j)
+    for(size_t j = 0 ; j <= mesh.M1 ; ++j)
     {
         Ib[j] = Ib_plank(Tprofile.eval(nVal,j));
     }
 
     constexpr   size_t z0 = 0;
-    const       size_t z1 = mesh->M1;
+    const       size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh->z_norm, z0, z1);
+    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
 double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
@@ -804,14 +804,14 @@ double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
     direction. The Temperature variable is a pointer to the axial
     temperature.
     */
-    for(size_t j = 0 ; j <= mesh->M1 ; ++j)
+    for(size_t j = 0 ; j <= mesh.M1 ; ++j)
     {
         Ib[j] = Temperature[j];
     }
     const size_t z0 = 0;
-    const size_t z1 = mesh->M1;
+    const size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh->z_norm, z0, z1);
+    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
 
@@ -827,21 +827,21 @@ double Emission::emissionVolumetric2D(std::vector<std::vector<double>>&
     {
         constexpr   size_t  r = 0;
         constexpr   double  r0 = 0;
-        const       double  r1 = mean(mesh->rNorm[r], mesh->rNorm[r+1]);
+        const       double  r1 = mean(mesh.rNorm[r], mesh.rNorm[r+1]);
         emission += emissionAxial(Temperature[r]) * drArea(r0,r1);
     }
 
-    for(size_t r = 1 ; r < mesh->Rend - 1 ; r++)
+    for(size_t r = 1 ; r < mesh.Rend - 1 ; r++)
     {
-        const double r0 = mean(mesh->rNorm[r], mesh->rNorm[r-1]);
-        const double r1 = mean(mesh->rNorm[r], mesh->rNorm[r+1]);
+        const double r0 = mean(mesh.rNorm[r], mesh.rNorm[r-1]);
+        const double r1 = mean(mesh.rNorm[r], mesh.rNorm[r+1]);
         emission += emissionAxial(Temperature[r]) * drArea(r0,r1);
     }
 
     {
-        const size_t r = mesh->Rend - 1;
-        const double r0 = mean(mesh->rNorm[r], mesh->rNorm[r-1]);
-        const double r1 = mesh->rNorm[r];
+        const size_t r = mesh.Rend - 1;
+        const double r0 = mean(mesh.rNorm[r], mesh.rNorm[r-1]);
+        const double r1 = mesh.rNorm[r];
         emission += emissionAxial(Temperature[r]) * drArea(r0,r1);
     }
     return emission;
@@ -856,12 +856,12 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
     */
     double OAPemission[3] = {1, 1, -M_PI_2};
 
-    for (size_t n = 0 ; n < mesh->Nend ; ++n )
+    for (size_t n = 0 ; n < mesh.Nend ; ++n )
     {
         EmissionTime[n] = emissionVolumetric2D( Temperature[n] );
     }
 
-    ::cosfit(EmissionTime, mesh->tau, OAPemission, mesh->Nend);
+    ::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
 
     return OAPemission[2];
 }
@@ -872,24 +872,24 @@ double Emission::phase1D(const class Temperature Tprofile) const
     The volumetric emission is determined for one unique period of heating
     and then a cosine function is fitted.  The resulting phase is reported.
     */
-    for (size_t n = 0 ; n < mesh->Nend ; ++n )
+    for (size_t n = 0 ; n < mesh.Nend ; ++n )
     {
         EmissionTime[n] = emissionAxial(Tprofile, n);
     }
 
     const double
-    offsetInitial = ::average(::arrayMax(EmissionTime, mesh->Nend),
-                              ::arrayMin(EmissionTime, mesh->Nend));
+    offsetInitial = ::average(::arrayMax(EmissionTime, mesh.Nend),
+                              ::arrayMin(EmissionTime, mesh.Nend));
     const double
-    amplitudeInitial = (::arrayMax(EmissionTime, mesh->Nend)
-                        -::arrayMin(EmissionTime, mesh->Nend)) / 2;
+    amplitudeInitial = (::arrayMax(EmissionTime, mesh.Nend)
+                        -::arrayMin(EmissionTime, mesh.Nend)) / 2;
 
     constexpr double
     phaseInitial = -M_PI_2;
 
     double OAPemission[3] = {offsetInitial, amplitudeInitial, phaseInitial};
 
-    ::cosfit(EmissionTime, mesh->tau, OAPemission, mesh->Nend);
+    ::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
 
     return OAPemission[2];
 }
@@ -915,8 +915,9 @@ double diffusivity(const double k, const double rhoCp)
 }
 
 ThermalModelSelection::ThermalModelSelection(const enum HeatX myHeat,
-                                             const enum EmissionX myEmission)
-  :heat(myHeat), emission(myEmission){}
+                                             const enum EmissionX myEmission,
+                                             class numericalModel::Mesh mesh_)
+  :heat(myHeat), emission(myEmission), mesh(mesh_){}
 
 ThermalModelSelection::~ThermalModelSelection(void){}
 

@@ -3,8 +3,8 @@
 double PhaseOfEmission1DNum(const int flag,
                             const class thermalAnalysisMethod::PopTea poptea)
 {
-  class Temperature Tprofile(poptea.thermalModel.mesh->Nend,
-                             poptea.thermalModel.mesh->M2);
+  class Temperature Tprofile(poptea.thermalModel.mesh.Nend,
+                             poptea.thermalModel.mesh.M2);
 
   //// Acquire Numerical Temperature
   const double omega = poptea.expSetup.laser.omegas[flag];
@@ -51,9 +51,9 @@ double PhaseOfEmission2DAna(const int flag,
 
     /// Setup Temperature[n][r][z] Vector
     std::vector< std::vector< std::vector< double > > > T2DProfile;
-    vector3DSetup(T2DProfile, poptea.thermalModel.mesh->Nend,
-                  poptea.thermalModel.mesh->Rend,
-                  poptea.thermalModel.mesh->M2);
+    vector3DSetup(T2DProfile, poptea.thermalModel.mesh.Nend,
+                  poptea.thermalModel.mesh.Rend,
+                  poptea.thermalModel.mesh.M2);
 
     ///Populate Temperature Vector
     heatmodel2DAna.TemperatureDistro(T2DProfile,
