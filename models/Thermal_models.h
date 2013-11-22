@@ -116,7 +116,6 @@ class ThermalModelSelection
 {
 public:
   size_t iter;
-  class numericalModel::Mesh mesh;
 
   enum class HeatX: uint8_t
   {
@@ -136,6 +135,7 @@ public:
 
   const enum HeatX heat;
   const enum EmissionX emission;
+  class numericalModel::Mesh mesh;
 
   ThermalModelSelection(const enum HeatX myHeat,
                         const enum EmissionX myEmission,

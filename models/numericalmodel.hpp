@@ -44,7 +44,7 @@ private:
   const double beta1, split;
   mutable double beta2;
 
-  double beta2_func(double * variable, double * constants);
+  double beta2_func(const double *variable, const double *constants);
   void minimizer(double *variable, double *constants,
                  double temp_variable_min, double temp_variable_max,
                  double min_goal, const size_t max_iterations);

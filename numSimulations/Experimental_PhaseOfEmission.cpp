@@ -1,7 +1,7 @@
 #include "../Header.h"
 
 void phase99(const size_t L_end,
-             const class thermalAnalysisMethod::PopTea poptea, double *arrayVal)
+             class thermalAnalysisMethod::PopTea &poptea, double *arrayVal)
 {
   /*The phase for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
@@ -21,7 +21,7 @@ void phase99(const size_t L_end,
 }
 
 void phase99(const size_t L_end,
-             const class thermalAnalysisMethod::PopTea poptea,
+             const class thermalAnalysisMethod::PopTea &poptea,
              std::vector<double> &arrayVal)
 {
   /*The phase for each thermal penetration is calculated in parallel using the

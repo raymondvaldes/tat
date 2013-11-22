@@ -3,10 +3,10 @@
 
 double Experimental_PhaseOfEmission(double*phase, const size_t L_end);
 void phase99(const size_t L_end,
-             const class thermalAnalysisMethod::PopTea poptea,
+             class thermalAnalysisMethod::PopTea &poptea,
              double *Numerical_Phase);
 void phase99(const size_t L_end,
-             const class thermalAnalysisMethod::PopTea poptea,
+             const thermalAnalysisMethod::PopTea &poptea,
              std::vector<double> &arrayVal);
 
 #endif // EXPERIMENTAL_PHASEOFEMISSION_H_INCLUDED

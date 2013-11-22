@@ -1,7 +1,7 @@
 
 #include "../Header.h"
 double PhaseOfEmission1DNum(const int flag,
-                            const class thermalAnalysisMethod::PopTea poptea)
+                            const class thermalAnalysisMethod::PopTea &poptea)
 {
   class Temperature Tprofile(poptea.thermalModel.mesh.Nend,
                              poptea.thermalModel.mesh.M2);
@@ -28,7 +28,7 @@ double PhaseOfEmission1DNum(const int flag,
 }
 
 double PhaseOfEmission2DAna(const int flag,
-                            const class thermalAnalysisMethod::PopTea poptea)
+                            const class thermalAnalysisMethod::PopTea &poptea)
 {
     /// Initiate 2d analytical model
     const double k_coat  = poptea.TBCsystem.coating.kthermal.offset;
@@ -73,7 +73,7 @@ double PhaseOfEmission2DAna(const int flag,
 
 
 double PhaseOfEmission1DAna(const int flag,
-                            const class thermalAnalysisMethod::PopTea poptea)
+                            const thermalAnalysisMethod::PopTea &poptea)
 {
   /*See 2004 emission paper equation 19*/
   const double omega1 = poptea.expSetup.laser.omegas[flag];

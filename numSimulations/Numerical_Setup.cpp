@@ -567,50 +567,7 @@ double gspatial(double z, double opt, double lambda, double R1, double Iplus0,
   }
 
 
-double beta2_func(double * variable, double * constants)
-{
-    double a,b,c,d;
 
-    double *eta = new double[int(constants[1])];
-
-
-    double L1 = 1; //coating nondimensional thickness
-                    //z transformed to eta from 0-L_coat  to 0-1.
-	double L2 = 1; //substrate ....Do not change these parameters.
-    size_t M1 = constants[4] * (constants[1]-1);
-
-    for(size_t j = 0; j <= M1 ; j++)
-        eta[j] =  (double (j) / double (M1)) * L1;
-
-    for(size_t j = 1 ; j < constants[1] - M1 ; j ++)
-        eta[M1+j] = ( double ( j ) / ( double (constants[1]-1) - double (M1) ) )
-         * L2 + eta[M1];
-
-    a = (z_eta(eta[M1+1], constants[0], variable[0])-1.) * constants[2] +
-    constants[3];
-    b = z_eta(eta[M1], constants[0], variable[0]) * constants[3];
-    c = z_eta(eta[M1-1], constants[0], variable[0]) * constants[3];
-    d = fabs((a-b)-(b-c));
-     //  the two delta_z's are to be the same, this is the error between them
-
-    delete []eta;
-    return d;
-}
-
-double find_beta2(const double beta1, const double M2,const double L_substrate,
-                  const double L_coat,const double split)
-{
-    ////minimizer start (to find beta2)
-    constexpr size_t beta_iter = {100};
-    constexpr double beta_tol  = {1e-6};
-
-    double variable;
-    double constants[5] = {beta1, M2, L_substrate, L_coat, split};
-
-    minimizer(&beta2_func, &variable, constants, 1., 15., beta_tol, beta_iter);
-
-    return variable;
-}
 
 
 size_t discretizeSpace(const int nodes,const double beta1,const double beta2,

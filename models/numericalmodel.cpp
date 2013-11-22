@@ -45,34 +45,43 @@ Mesh::~Mesh()
 {
 }
 
-double Mesh::beta2_func(double * variable, double * constants)
+double Mesh::beta2_func(const double *variable, const double *constants)
 {
-  double a,b,c,d;
-  std::vector<double> eta_;
-  eta_.resize(int(constants[1]));
+  std::vector<double> eta_(int(constants[1]), 0);
 
+  constexpr double L1 = 1; //coating nondimensional thickness
+                           //z transformed to eta from 0-L_coat  to 0-1.
+  constexpr double L2 = 1; //substrate ....Do not change these parameters.
 
-//    double *eta_ = new double[int(constants[1])];
-  double L1 = 1; //coating nondimensional thickness
-                  //z transformed to eta from 0-L_coat  to 0-1.
-  double L2 = 1; //substrate ....Do not change these parameters.
-  size_t M1_ = constants[4] * (constants[1]-1);
+  const size_t M1_ = constants[4] * ( constants[1] - 1 );
 
   for(size_t j = 0; j <= M1_ ; j++)
-      eta_[j] =  (double (j) / double (M1_)) * L1;
+  {
+      eta_[j] = L1 *  double (j) / double (M1_);
+  }
 
   for(size_t j = 1 ; j < constants[1] - M1_ ; j ++)
-      eta_[M1_+j] = ( double ( j ) / ( double (constants[1]-1) -double(M1_)))
+  {
+      eta_[M1_+j] = ( double ( j ) /
+                      ( double( constants[1] - 1 ) - double( M1_ ) ) )
        * L2 + eta_[M1_];
+  }
 
-  a = (z_eta(eta_[M1_+1], constants[0], variable[0])-1.) * constants[2] +
+
+  const double
+  a = ( z_eta(eta_[M1_+1], constants[0], variable[0]) - 1 ) * constants[2] +
   constants[3];
+
+  const double
   b = z_eta(eta_[M1_], constants[0], variable[0]) * constants[3];
+
+  const double
   c = z_eta(eta_[M1_-1], constants[0], variable[0]) * constants[3];
+
+  const double
   d = fabs( ( a - b ) - ( b - c ) );
 
-//    delete[] eta_;
-  return d;
+  return  d  ;
 }
 
 void Mesh::minimizer(double *variable, double *constants,

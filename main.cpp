@@ -1,8 +1,7 @@
 #include "Header.h"
 
 int main( int /*argc*/, char** /*argv[]*/ )
-{  getchar();
-
+{
   ///Setup global timer and start
   class stopwatch globalStopWatch;
 
@@ -182,7 +181,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                               thermalModel,
                                               ParaEstSetting,
                                               unknownParameters);
-   std::cout << "\nwaiting here 1"; getchar();
   /// Input Directory Information
   poptea.thermalModel.iter = 1000;
   poptea.LMA.LMA_workspace.MSETol = 1e-8;
@@ -204,10 +202,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   poptea.expSetup.q_surface = 0;
   poptea.thermalSetup(l_min, l_max, LendMinDecade);
 
-  std::cout << "\nwaiting here 2"; getchar();
   phase99(poptea.expSetup.laser.L_end, poptea,
           poptea.LMA.LMA_workspace.emissionNominal);
-   std::cout << "\nwaiting here 3"; getchar();
 
   //Many fit test
   if (true)
@@ -234,6 +230,5 @@ int main( int /*argc*/, char** /*argv[]*/ )
   delete[] xInitial;
 
   globalStopWatch.displayTime();
-  getchar();
   return 0;
 }
