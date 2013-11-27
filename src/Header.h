@@ -74,6 +74,4 @@ compiler.
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Setup.h"
 
-
-
 #endif // HEADER_H_INCLUDED
