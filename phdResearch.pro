@@ -111,23 +111,23 @@ SOURCES += \
 
 #header files
 HEADERS += \
-    include/Header.h \
-    include/algorithms/ThermalProp_Analysis.h \
-    include/algorithms/statistical_tools.hpp \
-    include/investigations/sensitivity_paper.h \
-    include/numSimulations/Numerical_Temperature.h \
-    include/numSimulations/Numerical_Setup.h \
-    include/numSimulations/Numerical_PhaseOfEmission_Results.h \
-    include/numSimulations/Numerical_PhaseOfEmission.h \
-    include/numSimulations/Experimental_PhaseOfEmission.h \
-    include/tools/filesystem.hpp \
-    include/tools/timing.h \
-    include/algorithms/sensitivity_analysis.hpp \
-    include/models/Thermal_models.h \
-    include/models/expEquipment.hpp \
-    include/algorithms/lmdiff.h \
-    include/algorithms/parameterestimation.hpp \
-    include/models/poptea.hpp \
-    include/models/physicalmodel.hpp \
-    include/numSimulations/mesh.hpp \
-    include/models/numericalmodel.hpp
+    src/Header.h \
+    src/algorithms/ThermalProp_Analysis.h \
+    src/algorithms/statistical_tools.hpp \
+    src/investigations/sensitivity_paper.h \
+    src/numSimulations/Numerical_Temperature.h \
+    src/numSimulations/Numerical_Setup.h \
+    src/numSimulations/Numerical_PhaseOfEmission_Results.h \
+    src/numSimulations/Numerical_PhaseOfEmission.h \
+    src/numSimulations/Experimental_PhaseOfEmission.h \
+    src/tools/filesystem.hpp \
+    src/tools/timing.h \
+    src/algorithms/sensitivity_analysis.hpp \
+    src/models/Thermal_models.h \
+    src/models/expEquipment.hpp \
+    src/algorithms/lmdiff.h \
+    src/algorithms/parameterestimation.hpp \
+    src/models/poptea.hpp \
+    src/models/physicalmodel.hpp \
+    src/numSimulations/mesh.hpp \
+    src/models/numericalmodel.hpp
