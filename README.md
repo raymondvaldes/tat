@@ -8,7 +8,6 @@ The second part includes link to the Boost Libraries
 The third part are the linker and compiler flags used for compilation.
 
 The boost and gsl libraries can be downloaded using with the following:
-
 sudo port install boost-dev
 sudo port install gsl-dev
 
