@@ -4,7 +4,7 @@
 class mesh
 {
 public:
-  mesh();
+  explicit mesh();
 };
 
 #endif // MESH_HPP

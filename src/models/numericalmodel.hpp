@@ -31,7 +31,7 @@ public:
   const size_t Rend;
   const size_t Nend;
 
-  Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
+  explicit Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
        const double beta1_, const double split_, const double L_coat_,
        const double L_substrate_, const double CO2Radius_,
        const double Rdomain_);
@@ -59,7 +59,7 @@ private:
 class simulations
 {
 public:
-  simulations(void);
+  explicit simulations(void);
 };
 
 

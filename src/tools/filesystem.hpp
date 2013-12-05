@@ -14,7 +14,7 @@ private:
   const std::string workingDirectory = workingDir();
 
 public:
-  directory(void);
+  explicit directory(void);
   ~directory(void);
 
   void mkdir(const std::string newDirectory) const;

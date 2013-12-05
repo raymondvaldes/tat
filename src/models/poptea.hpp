@@ -26,7 +26,7 @@ namespace thermalAnalysisMethod
     class parameterEstimation::LMA LMA;
     class filesystem::directory DataDirectory;
 
-    PopTea(class expEquipment::setup expSetup_,
+    explicit PopTea(class expEquipment::setup expSetup_,
            class physicalModel::TBCsystem TBCsystem_,
            class thermal::ThermalModelSelection thermalModel_,
            class parameterEstimation::settings Settings_,

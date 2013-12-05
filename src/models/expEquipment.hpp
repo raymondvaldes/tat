@@ -32,7 +32,7 @@ public:
   std::vector<double> omegas;
   std::vector<double> l_thermal;
 
-  Laser(const double a, const double b, const double c, const double d);
+  explicit Laser(const double a, const double b, const double c, const double d);
   ~Laser();
 
   void updateRadius(const double r);
@@ -50,7 +50,7 @@ public:
   struct Detector detector;
   double q_surface;
 
-  setup(struct Laser laser_, struct Detector detector_);
+  explicit setup(struct Laser laser_, struct Detector detector_);
 };
 
 

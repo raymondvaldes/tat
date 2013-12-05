@@ -13,8 +13,8 @@ public:
     double offset;
     double slope;
 
-    property(double offset_, double slope_);
-    property(void);
+    explicit property(double offset_, double slope_);
+    explicit property(void);
 
     double Current(const std::vector<std::vector<double>>& T, const size_t n,
                    const size_t j) const;
@@ -66,7 +66,7 @@ public:
     R0
   };
 
-  labels(const enum Name name_);
+  explicit labels(const enum Name name_);
   Name getName(void);
 
 private:
@@ -103,7 +103,7 @@ public:
     double opticalPenetration(void) const;
     double thermalDiffusivity(void) const;
     double thermalEffusivity(void) const;
-    layer(class property kthermal_, class property psithermal_, double depth_,
+    explicit layer(class property kthermal_, class property psithermal_, double depth_,
           double lambda_);
 };
 
@@ -119,7 +119,7 @@ public:
     double gamma;
     double a_sub;
 
-    TBCsystem(class layer coating_, class layer substrate_,
+    explicit TBCsystem(class layer coating_, class layer substrate_,
               struct temperatureScale Temp_, struct radiativeSysProp optical_,
               double radius_);
     double gammaEval(void) const ;

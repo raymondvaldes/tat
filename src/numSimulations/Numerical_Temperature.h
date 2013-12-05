@@ -12,7 +12,7 @@ class matrixArrays
     size_t M2;
     double B4;
 
-    matrixArrays(const size_t length)
+    explicit matrixArrays(const size_t length)
     {
         A1.resize(length);
         A2.resize(length);

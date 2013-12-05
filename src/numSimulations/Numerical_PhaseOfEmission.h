@@ -4,7 +4,7 @@
 class Temperature
 {
 public:
-    Temperature(const size_t Nend_, const size_t M2_);
+    explicit Temperature(const size_t Nend_, const size_t M2_);
 
     double eval(const size_t Nvalue, const size_t M2Value) const;
     void assgn(const size_t i, const size_t j, const double value);
@@ -23,7 +23,7 @@ public:
     double a, b, noiseRandom;
     bool d1, d2;
     int s1;
-    emissionNoiseParameters(const double a1_, const double b1_, const bool d1_,
+    explicit emissionNoiseParameters(const double a1_, const double b1_, const bool d1_,
                             const bool d2_, const int s1_,
                             const double noiseRandom_);
 };

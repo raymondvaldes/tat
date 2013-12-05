@@ -48,7 +48,7 @@ public:
   ///Declare pointer to workspace
   gsl_integration_workspace * workspace  = nullptr;
 
-  funcClass(double* a, double* b, size_t c): xvar(a), func(b), N(c)
+  explicit funcClass(double* a, double* b, size_t c): xvar(a), func(b), N(c)
   {
       /*The arguments include two arrays where
           a ...independent array
@@ -126,7 +126,7 @@ public:
     std::vector<std::vector<double>>
     caliDiff, caliEff, caliR1, caliEmission, caliOptical;
 
-    calibration_curves(const std::string filename);
+    explicit calibration_curves(const std::string filename);
     void cleanup() const;
 };
 

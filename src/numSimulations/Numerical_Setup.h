@@ -157,8 +157,8 @@ class perturbStruct
     double* temp;
     double* bands;
 
-    perturbStruct(const size_t a, const size_t b, const double c );
-    perturbStruct(const size_t a, const size_t b, const double c,
+    explicit perturbStruct(const size_t a, const size_t b, const double c );
+    explicit perturbStruct(const size_t a, const size_t b, const double c,
                   const double e, const double h, const size_t i);
     void lThermalMC();
     void lthermalDeterministic();

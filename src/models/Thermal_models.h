@@ -5,7 +5,7 @@
 class HeatModel2DAna
 {
 public:
-  HeatModel2DAna(const double R0_, const double R1_, const double lambda_,
+  explicit HeatModel2DAna(const double R0_, const double R1_, const double lambda_,
                  const double It_, const double csub_, const double asub_,
                  const double gamma_, const double beam_, const double k_coat,
                  const double L_, const double psi_coat_, const double ccoat_,
@@ -78,7 +78,7 @@ private:
 class Emission
 {
 public:
-  Emission(const double detector_lam_, const double T_ref_,
+  explicit Emission(const double detector_lam_, const double T_ref_,
            const class numericalModel::Mesh mesh, const double beamR_,
            const double E_sigma_);
   ~Emission();
@@ -137,7 +137,7 @@ public:
   const enum EmissionX emission;
   class numericalModel::Mesh mesh;
 
-  ThermalModelSelection(const enum HeatX myHeat,
+  explicit ThermalModelSelection(const enum HeatX myHeat,
                         const enum EmissionX myEmission,
                         class numericalModel::Mesh mesh_);
   ~ThermalModelSelection(void);
