@@ -66,7 +66,7 @@ struct settings
   size_t mode;
   size_t nprint;
 
-  settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
+  explicit settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
            double epsfcn_, double factor_, size_t mode_, size_t nprint_);
   ~settings();
 };
