@@ -1,5 +1,5 @@
 ###REQUIRED########################
-cache()
+#cache()
 #application type
 TEMPLATE = app
 CONFIG += console
@@ -7,6 +7,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 CONFIG += c++11
 DEFINES -= UNICODE QT_LARGEFILE_SUPPORT
+QMAKE_CXXFLAGS += -std=c++11
 
 #paths
 unix:!macx{

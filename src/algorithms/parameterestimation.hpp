@@ -18,10 +18,10 @@ private:
   double bestfitval;
 
 public:
-  unknown(enum physicalModel::labels::Name name_,
+  explicit unknown(enum physicalModel::labels::Name name_,
           const double lower_,
           const double upper_);
-  unknown(enum physicalModel::labels::Name name_,
+  explicit unknown(enum physicalModel::labels::Name name_,
           const double lower_,
           const double upper_,
           const double initialGuess_);
@@ -103,7 +103,7 @@ public:
   struct settings Settings;
   class unknownList unknownParameters;
 
-  LMA(const struct settings Settings_,
+  explicit LMA(const struct settings Settings_,
       const class unknownList unknownParameters);
   ~LMA(void);
 };

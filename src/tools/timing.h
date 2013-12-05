@@ -13,7 +13,7 @@ private:
     std::chrono::high_resolution_clock::time_point checktime(void);
 
 public:
-    stopwatch(void);
+    explicit stopwatch(void);
     void start(void);
     void stop(void);
     double returnTime(void);
