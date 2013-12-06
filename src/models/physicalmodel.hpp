@@ -87,12 +87,19 @@ public:
     void save(const std::string &filename);
 };
 
-struct radiativeSysProp
+class radiativeSysProp
 {
+public:
     double R0;
     double R1;
     double Emit1;
-    radiativeSysProp(const double R0_, const double R1_, const double Emit1_);
+    explicit radiativeSysProp(const double R0_, const double R1_,
+                              const double Emit1_);
+    explicit radiativeSysProp(const std::string &filename);
+    void load(const std::string &filename);
+    void save(const std::string &filename);
+    ~radiativeSysProp(void);
+
 };
 
 class layer

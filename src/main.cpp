@@ -5,88 +5,34 @@ int main( int /*argc*/, char** /*argv[]*/ )
   ///Setup global timer and start
   class stopwatch globalStopWatch;
 
-  /// Mesh Parameters
-/*
-   - beta1 set to a high number (5)
-   - Ttol greater than -4 is not practical
-   - iter is the total number of iterations
-   - beta_iter is the total number of iterations to find beta2
-   - beta_tol is how close dz_sub is to dz_coat   */
-  constexpr size_t M2 = 220+1; //there must be a problem (KEEP AT 200)
-  assert( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
-  constexpr size_t Rend = 20; //80
-  constexpr size_t Nend = 80;
-  constexpr size_t N = 5;
 
 /// Heat Transfer and Emission models
   const enum XParaNames
   xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
 
-/// Initialize Mesh
-  constexpr double beta1 = 100;
-  constexpr double split = 0.5;
+
 
 /// Input file
   const std::string filename = "config.xml";
   class parameterEstimation::settings ParaEstSetting(filename);
   class physicalModel::temperatureScale TemperatureScale(filename);
+  class physicalModel::radiativeSysProp radProp(filename);
+  class expEquipment::Laser CO2Laser(filename);
+  class expEquipment::Detector Emissiondetector(filename);
 
-  /*
-   - L_coat = 71.7e-6 71.7e-6 [m]
-   - L_substrate = L_coat *67.;
-   - lambda ..optical penetration (bug when lambda > 5)
-   - R0 no effect on solution
-   - Reflection; R0 at surface; R1 at interface
-   - E_sigma //ratio of substrate emissivity to optical thickness of the film,
-   - thermal contact resistance per area
-  */
+  class expEquipment::setup expSetup(CO2Laser, Emissiondetector);
 
   // Model system
-  constexpr double detector_rad = .25e-3;
-  constexpr double R_domain = detector_rad;
-  constexpr double L_coat = 71.7e-6;
-  constexpr double L_substrate = L_coat *99;
-
-  //Optical Properties
-  const double R0 = 0.2;
-  const double R1 = 0.8;
-  const double Emit1 = 42;
-  struct physicalModel::radiativeSysProp radProp(R0, R1, Emit1);
-
-/// Thermal Properties
-  /*
-   - T_ref    273 use substrate as reference [K]
-   - k_ref    12.7 use substrate as reference [W/mK]
-   - psi_ref  3.44 use substrate as reference [J/m^3/K]
-   - T_base   temperature of thermal reservoir [K]
-   - T_ref    273 use substrate as reference [K]
-   - detector_lam 5um detector wavelength
-   - k_c     1.44 coating conductivity [W/mK]
-   - psi_c   2.1e6 coating volumetric heat capacity [J/m^3/K]
-   - coating volumetric heat capacity [J/m^3/K]
-   - k = m_k * T + b_k
-  */
-
-  /// Heat Flux
-  /* - units [W/m^2] */
-  constexpr double power     = 30   /*Watts*/ ;
-  constexpr double radius    = 20e-4 /*m (500um)*/ ;
-  constexpr double offset    = .95   /*offset*/ ;
-  constexpr double amplitude = .05   /*amplitude*/;
-  class expEquipment::Laser CO2Laser(power, radius, offset, amplitude);
-
-  constexpr double detector_lam = 5e-6;
-  struct expEquipment::Detector Emissiondetector(detector_lam, detector_rad);
-  struct expEquipment::setup expSetup(CO2Laser, Emissiondetector);
 
   constexpr double kcoat_off = 1.44;
   constexpr double kcoat_slope = 0;
-  struct property kthermalCoating(kcoat_off, kcoat_slope);
+  class property kthermalCoating(kcoat_off, kcoat_slope);
 
   constexpr double psicoat_off = 2.1e6;
   constexpr double psicoat_slope = 0;
-  struct property psithermalCoating(psicoat_off, psicoat_slope);
+  class property psithermalCoating(psicoat_off, psicoat_slope);
 
+  constexpr double L_coat = 71.7e-6;
   constexpr double lambdaCoat = 0.57;
   struct physicalModel::layer coating(kthermalCoating, psithermalCoating,
                                       L_coat, lambdaCoat);
@@ -98,11 +44,13 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double psisub_off = 3.44e6;
   constexpr double psisub_slope = 0;
   struct property psithermalSubstrate(psisub_off, psisub_slope);
+
+  constexpr double L_substrate = L_coat *99;
   constexpr double lambdaSub = 0;
   struct physicalModel::layer substrate(kthermalSubstrate,
                                         psithermalSubstrate, L_substrate,
                                         lambdaSub);
-
+  constexpr double R_domain = 0.25e-3;
   struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                         radProp, R_domain);
 
@@ -142,7 +90,23 @@ int main( int /*argc*/, char** /*argv[]*/ )
   unknownParameters.addUnknown(pNames::R1,          0.6, 1);
   unknownParameters.addUnknown(pNames::lambda,      .1,  1);
 
-  //Optimize stretching in Substrate and declare variables to be fitted
+  /// Initialize Mesh
+  /// Mesh Parameters
+/*`
+   - beta1 set to a high number (5)
+   - Ttol greater than -4 is not practical
+   - iter is the total number of iterations
+   - beta_iter is the total number of iterations to find beta2
+   - beta_tol is how close dz_sub is to dz_coat   */
+  constexpr size_t M2 = 220+1; //there must be a problem (KEEP AT 200)
+  assert( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
+  constexpr size_t Rend = 20; //80
+  constexpr size_t Nend = 80;
+  constexpr size_t N = 5;
+
+  constexpr double beta1 = 100;
+  constexpr double split = 0.5;
+
   class numericalModel::Mesh mesh(M2, Rend, Nend, beta1, split,
                                   EBPVD.coating.depth,
                                   EBPVD.substrate.depth,

@@ -187,22 +187,55 @@ void temperatureScale::save(const std::string &filename)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 radiativeSysProp::radiativeSysProp(double R0_, double R1_, double Emit1_)
     : R0(R0_), R1(R1_), Emit1(Emit1_)
 {}
+radiativeSysProp::~radiativeSysProp(void){}
+
+radiativeSysProp::radiativeSysProp(const std::string &filename)
+{
+    load(filename);
+}
+
+void radiativeSysProp::load(const std::string &filename)
+{
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  read_xml(filename, pt);
+
+  R0 = pt.get<double>( "RadiationProperties.R0" );
+  R1 = pt.get<double>( "RadiationProperties.R1" );
+  Emit1 = pt.get<double>( "RadiationProperties.Emit1" );
+}
+
+void radiativeSysProp::save(const std::string &filename)
+{
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  pt.put<double>( "RadiationProperties.R0", R0 );
+  pt.put<double>( "RadiationProperties.R1", R1 );
+  pt.put<double>( "RadiationProperties.Emit1", Emit1 );
+
+  write_xml(filename, pt);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 layer::layer(class property kthermal_, class property psithermal_,
              double depth_, double lambda_)

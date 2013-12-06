@@ -3,11 +3,17 @@
 
 namespace expEquipment{
 
-struct Detector
+class Detector
 {
+public:
   double wavelength;
   double radius;
-  Detector(const double wavelength_, const double radius_);
+
+  explicit Detector(const double wavelength_, const double radius_);
+  explicit Detector(const std::string &filename);
+  void load(const std::string &filename);
+  void save(const std::string &filename);
+  ~Detector(void);
 };
 
 class Laser
@@ -32,7 +38,11 @@ public:
   std::vector<double> omegas;
   std::vector<double> l_thermal;
 
-  explicit Laser(const double a, const double b, const double c, const double d);
+  explicit Laser(const double a, const double b, const double c,
+                 const double d);
+  explicit Laser(const std::string &filename);
+  void load(const std::string &filename);
+  void save(const std::string &filename);
   ~Laser();
 
   void updateRadius(const double r);
