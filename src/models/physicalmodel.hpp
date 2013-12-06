@@ -73,14 +73,18 @@ private:
   enum Name name;
 };
 
-struct temperatureScale
+class temperatureScale
 {
+public:
     double tolerance;
     double referance;
     double base;
     double rear;
-    temperatureScale(const double tolerance_,const double referance_,
-                     const double base_, const double rear_);
+    explicit temperatureScale(const double tolerance_,const double referance_,
+                              const double base_, const double rear_);
+    explicit temperatureScale(const std::string &filename);
+    void load(const std::string &filename);
+    void save(const std::string &filename);
 };
 
 struct radiativeSysProp

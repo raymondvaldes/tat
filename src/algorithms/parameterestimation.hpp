@@ -68,7 +68,8 @@ public:
   size_t nprint;
 
   explicit settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
-           double epsfcn_, double factor_, size_t mode_, size_t nprint_);
+                    double epsfcn_, double factor_, size_t mode_,
+                    size_t nprint_);
   explicit settings(const std::string &filename);
   ~settings();
   void load(const std::string &filename);

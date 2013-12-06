@@ -5,8 +5,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   ///Setup global timer and start
   class stopwatch globalStopWatch;
 
-//  globalStopWatch.displayTime();
-//  return 0;
   /// Mesh Parameters
 /*
    - beta1 set to a high number (5)
@@ -28,13 +26,11 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double beta1 = 100;
   constexpr double split = 0.5;
 
-/////Parameter Estimation Options
-  class parameterEstimation::settings ParaEstSetting("config.xml");
+/// Input file
+  const std::string filename = "config.xml";
+  class parameterEstimation::settings ParaEstSetting(filename);
+  class physicalModel::temperatureScale TemperatureScale(filename);
 
-
-
-
-///  Physical Properties
   /*
    - L_coat = 71.7e-6 71.7e-6 [m]
    - L_substrate = L_coat *67.;
@@ -44,12 +40,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
    - E_sigma //ratio of substrate emissivity to optical thickness of the film,
    - thermal contact resistance per area
   */
-  constexpr double Ttol = 1e-3;
-  constexpr double T_ref =  300;
-  constexpr double T_base = 273.15;
-  constexpr double T_rear = 0;
-  struct physicalModel::temperatureScale
-          TemperatureScale(Ttol, T_ref, T_base, T_rear);
 
   // Model system
   constexpr double detector_rad = .25e-3;

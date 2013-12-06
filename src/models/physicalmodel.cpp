@@ -149,6 +149,57 @@ temperatureScale::temperatureScale(const double tolerance_,
     tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
 {}
 
+temperatureScale::temperatureScale(const std::string &filename)
+{
+  load(filename);
+}
+
+
+void temperatureScale::load(const std::string &filename)
+{
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  // Load XML file and put its contents in property tree.
+  // No namespace qualification is needed, because of Koenig
+  // lookup on the second argument. If reading fails, exception
+  // is thrown.
+  read_xml(filename, pt);
+
+  tolerance = pt.get<double>( "TemperatureScale.tolerance" );
+  referance = pt.get<double>( "TemperatureScale.referance" );
+  base = pt.get<double>( "TemperatureScale.base" );
+  rear = pt.get<double>( "TemperatureScale.rear" );
+}
+
+void temperatureScale::save(const std::string &filename)
+{
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  pt.put<double>( "TemperatureScale.tolerance", tolerance );
+  pt.put<double>( "TemperatureScale.referance", referance );
+  pt.put<double>( "TemperatureScale.base", base );
+  pt.put<double>( "TemperatureScale.rear", rear );
+
+  write_xml(filename, pt);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 radiativeSysProp::radiativeSysProp(double R0_, double R1_, double Emit1_)
     : R0(R0_), R1(R1_), Emit1(Emit1_)
 {}
