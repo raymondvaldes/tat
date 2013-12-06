@@ -108,7 +108,8 @@ SOURCES += \
     src/models/poptea.cpp \
     src/models/physicalmodel.cpp \
     src/numSimulations/mesh.cpp \
-    src/models/numericalmodel.cpp
+    src/models/numericalmodel.cpp \
+    src/tools/configuration.cpp
 
 #header files
 HEADERS += \
@@ -131,4 +132,5 @@ HEADERS += \
     src/models/poptea.hpp \
     src/models/physicalmodel.hpp \
     src/numSimulations/mesh.hpp \
-    src/models/numericalmodel.hpp
+    src/models/numericalmodel.hpp \
+    src/tools/configuration.hpp

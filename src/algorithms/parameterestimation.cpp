@@ -2,11 +2,7 @@
 
 namespace parameterEstimation{
 
-settings::settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
-                 double epsfcn_, double factor_, size_t mode_,
-                 size_t nprint_)
-  :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_), epsfcn(epsfcn_),
-    factor(factor_), mode(mode_), nprint(nprint_){}
+
 
 unknown::unknown(enum physicalModel::labels::Name name_,
                  const double lower_,
@@ -141,6 +137,59 @@ LMA::LMA(const struct settings Settings_,
 LMA::~LMA(void){}
 
 unknownList::~unknownList(){}
+
+
+settings::settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
+                 double epsfcn_, double factor_, size_t mode_,
+                 size_t nprint_)
+  :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_), epsfcn(epsfcn_),
+    factor(factor_), mode(mode_), nprint(nprint_){}
+
+settings::settings(const std::string &filename)
+{
+  load(filename);
+}
+
+
 settings::~settings(){}
+
+void settings::load(const std::string &filename)
+{
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  // Load XML file and put its contents in property tree.
+  // No namespace qualification is needed, because of Koenig
+  // lookup on the second argument. If reading fails, exception
+  // is thrown.
+  read_xml(filename, pt);
+
+  ftol = pt.get<double>( "ParameterEstimationSettings.ftol" );
+  xtol = pt.get<double>( "ParameterEstimationSettings.xtol" );
+  gtol = pt.get<double>( "ParameterEstimationSettings.gtol" );
+  maxfev = pt.get<size_t>( "ParameterEstimationSettings.maxfev" );
+  epsfcn = pt.get<double>( "ParameterEstimationSettings.epsfcn" );
+  factor = pt.get<double>( "ParameterEstimationSettings.factor" );
+  mode = pt.get<size_t>( "ParameterEstimationSettings.mode" );
+  nprint = pt.get<size_t>( "ParameterEstimationSettings.nprint" );
+}
+
+void settings::save(const std::string &filename)
+{
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  pt.put<double>( "ParameterEstimationSettings.ftol", ftol );
+  pt.put<double>( "ParameterEstimationSettings.xtol", xtol );
+  pt.put<double>( "ParameterEstimationSettings.gtol", gtol );
+  pt.put<size_t>( "ParameterEstimationSettings.maxfev", maxfev );
+  pt.put<double>( "ParameterEstimationSettings.epsfcn", epsfcn );
+  pt.put<double>( "ParameterEstimationSettings.factor", factor );
+  pt.put<size_t>( "ParameterEstimationSettings.mode", mode );
+  pt.put<size_t>( "ParameterEstimationSettings.nprint", nprint );
+
+   write_xml(filename, pt);
+}
 
 }

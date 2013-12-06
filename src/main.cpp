@@ -5,6 +5,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   ///Setup global timer and start
   class stopwatch globalStopWatch;
 
+//  globalStopWatch.displayTime();
+//  return 0;
   /// Mesh Parameters
 /*
    - beta1 set to a high number (5)
@@ -27,24 +29,10 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double split = 0.5;
 
 /////Parameter Estimation Options
-  /* - N number of thermal parameters to be fitted
-   - ftol difference in error
-   - xtol difference in parameters
-   - beta_iter is the total number of iterations to find beta2
-   - beta_tol is how close dz_sub is to dz_coat */
-  constexpr double ftol = 1.e-8;
-  constexpr double xtol = 1.e-8;
-  constexpr double gtol = 1.e-8;
-  constexpr size_t maxfev = 1e5;
-  constexpr double epsfcn = 1.e-4;
-  constexpr double factor =  10;
-  constexpr int mode = 0;
-  constexpr int nprint = 0;
-  struct parameterEstimation::settings
-  ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
+  class parameterEstimation::settings ParaEstSetting("config.xml");
 
-  constexpr double factorMax = 10;
-  constexpr double factorScale = 5;
+
+
 
 ///  Physical Properties
   /*
@@ -214,7 +202,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
         poptea.LMA.LMA_workspace.emissionExperimental[nn] =
             poptea.LMA.LMA_workspace.emissionNominal[nn];
     }
-
+    constexpr double factorMax = 10;
+    constexpr double factorScale = 5;
     fitting(poptea.expSetup.laser.L_end,
             poptea.LMA.unknownParameters.Nsize(),
             ParaEstSetting, &paraConstraints, poptea, xInitial, interants,
