@@ -5,15 +5,18 @@ int main( int /*argc*/, char** /*argv[]*/ )
   ///Setup global timer and start
   class stopwatch globalStopWatch;
 
-
-/// Heat Transfer and Emission models
-  const enum XParaNames
-  xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
-
-
-
-/// Input file
+  /// Input file
   const std::string filename = "config.xml";
+
+
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+  read_xml(filename, pt);
+  const double stuff = pt.get<double>( "poptea.experimentalSetup.Laser.power" );
+  std::cout << stuff << "\n\n";
+  exit(-3);
+
   class parameterEstimation::settings ParaEstSetting(filename);
   class physicalModel::temperatureScale TemperatureScale(filename);
   class physicalModel::radiativeSysProp radProp(filename);
@@ -23,7 +26,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   class expEquipment::setup expSetup(CO2Laser, Emissiondetector);
 
   // Model system
-
   constexpr double kcoat_off = 1.44;
   constexpr double kcoat_slope = 0;
   class property kthermalCoating(kcoat_off, kcoat_slope);
@@ -51,7 +53,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                         psithermalSubstrate, L_substrate,
                                         lambdaSub);
   constexpr double R_domain = 0.25e-3;
-  struct physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
+  class physicalModel::TBCsystem EBPVD(coating, substrate, TemperatureScale,
                                         radProp, R_domain);
 
 /// Thermal Penetration
@@ -92,18 +94,14 @@ int main( int /*argc*/, char** /*argv[]*/ )
 
   /// Initialize Mesh
   /// Mesh Parameters
-/*`
+/*
    - beta1 set to a high number (5)
    - Ttol greater than -4 is not practical
-   - iter is the total number of iterations
-   - beta_iter is the total number of iterations to find beta2
-   - beta_tol is how close dz_sub is to dz_coat   */
-  constexpr size_t M2 = 220+1; //there must be a problem (KEEP AT 200)
-  assert( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
-  constexpr size_t Rend = 20; //80
-  constexpr size_t Nend = 80;
-  constexpr size_t N = 5;
+   - iter is the total number of iterations */
 
+  constexpr size_t M2 = 220+1;
+  constexpr size_t Rend = 20;
+  constexpr size_t Nend = 80;
   constexpr double beta1 = 100;
   constexpr double split = 0.5;
 
@@ -123,16 +121,21 @@ int main( int /*argc*/, char** /*argv[]*/ )
                                               thermalModel,
                                               ParaEstSetting,
                                               unknownParameters);
+//  struct thermalAnalysisMethod::PopTea poptea = InitilizeConfigFile();
+
   /// Input Directory Information
   poptea.thermalModel.iter = 1000;
   poptea.LMA.LMA_workspace.MSETol = 1e-8;
   poptea.DataDirectory.mkdir("data");
 
-
-//  std::cout << sizeof(class numericalModel::Mesh) << "\n\n"; exit(-2);
   // Initial Guess
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
+
+  /// Heat Transfer and Emission models
+  const enum XParaNames
+  xParametersNames[] = {asub, gammaEff, E1 ,R1, lambda};
+  constexpr size_t N = 5;
 
   for (size_t i=0; i < N; ++i)
   {
@@ -163,14 +166,12 @@ int main( int /*argc*/, char** /*argv[]*/ )
             ParaEstSetting, &paraConstraints, poptea, xInitial, interants,
             factorMax, factorScale);
   }
+  delete[] xInitial;
 
   //Prepare figures and data for paper Sensitivity
 //    SensitivityValdes2013::CC_APS2(poptea);
 //    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
-
-// Clear memory
-  delete[] xInitial;
 
   globalStopWatch.displayTime();
   return 0;

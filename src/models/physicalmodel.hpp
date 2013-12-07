@@ -114,8 +114,8 @@ public:
     double opticalPenetration(void) const;
     double thermalDiffusivity(void) const;
     double thermalEffusivity(void) const;
-    explicit layer(class property kthermal_, class property psithermal_, double depth_,
-          double lambda_);
+    explicit layer(class property kthermal_, class property psithermal_,
+                   double depth_, double lambda_);
 };
 
 class TBCsystem
@@ -123,16 +123,18 @@ class TBCsystem
 public:
     class layer coating;
     class layer substrate;
-    struct temperatureScale Temp;
-    struct radiativeSysProp optical;
+    class temperatureScale Temp;
+    class radiativeSysProp optical;
     double radius;
     double Rtc;
     double gamma;
     double a_sub;
 
     explicit TBCsystem(class layer coating_, class layer substrate_,
-              struct temperatureScale Temp_, struct radiativeSysProp optical_,
-              double radius_);
+                       class temperatureScale Temp_,
+                       class radiativeSysProp optical_, double radius_);
+    ~TBCsystem(void);
+
     double gammaEval(void) const ;
     double a_subEval(void) const;
     void updateCoat(void); //update coat properties

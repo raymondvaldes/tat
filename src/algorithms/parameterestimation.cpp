@@ -158,11 +158,6 @@ void settings::load(const std::string &filename)
   // Create empty property tree object
   using boost::property_tree::ptree;
   ptree pt;
-
-  // Load XML file and put its contents in property tree.
-  // No namespace qualification is needed, because of Koenig
-  // lookup on the second argument. If reading fails, exception
-  // is thrown.
   read_xml(filename, pt);
 
   ftol = pt.get<double>( "ParameterEstimationSettings.ftol" );

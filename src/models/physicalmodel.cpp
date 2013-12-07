@@ -222,21 +222,6 @@ void radiativeSysProp::save(const std::string &filename)
   write_xml(filename, pt);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 layer::layer(class property kthermal_, class property psithermal_,
              double depth_, double lambda_)
     : kthermal(kthermal_), psithermal(psithermal_), depth(depth_),
@@ -270,6 +255,9 @@ TBCsystem::TBCsystem(class layer coating_, class layer substrate_,
     gamma = gammaEval();
     a_sub = a_subEval();
 }
+
+
+TBCsystem::~TBCsystem(void){}
 
 double TBCsystem::gammaEval(void) const
 {
