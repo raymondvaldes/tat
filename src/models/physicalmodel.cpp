@@ -149,6 +149,32 @@ temperatureScale::temperatureScale(const double tolerance_,
     tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
 {}
 
+struct temperatureScale
+        temperatureScale::loadfromConfig(const std::string &filename)
+{
+  ///Initialize the config file into memory
+  using boost::property_tree::ptree;
+  ptree pt;
+  read_xml(filename, pt);
+
+  //initialize parameter estimation settings
+  const double
+  tolerance = pt.get<double>( "poptea.TBCsystem.TemperatureScale.tolerance" );
+
+  const double
+  referance = pt.get<double>( "poptea.TBCsystem.TemperatureScale.referance" );
+
+  const double
+  base = pt.get<double>( "poptea.TBCsystem.TemperatureScale.base" );
+
+  const double
+  rear = pt.get<double>( "poptea.TBCsystem.TemperatureScale.rear" );
+
+  struct temperatureScale TemperatureScale(tolerance, referance, base, rear);
+  return TemperatureScale;
+}
+
+
 radiativeSysProp::radiativeSysProp(double R0_, double R1_, double Emit1_)
     : R0(R0_), R1(R1_), Emit1(Emit1_)
 {}

@@ -81,6 +81,8 @@ struct temperatureScale
     double rear;
     temperatureScale(const double tolerance_,const double referance_,
                      const double base_, const double rear_);
+
+    static struct temperatureScale loadfromConfig(const std::string &filename);
 };
 
 struct radiativeSysProp

@@ -5,6 +5,9 @@ int main( int /*argc*/, char** /*argv[]*/ )
   ///Setup global timer and start
   class stopwatch globalStopWatch;
 
+  /// Setup configuration file
+  const std::string filename = "config.xml";
+
   /// Mesh Parameters
 /*
    - beta1 set to a high number (5)
@@ -26,46 +29,20 @@ int main( int /*argc*/, char** /*argv[]*/ )
   constexpr double beta1 = 100;
   constexpr double split = 0.5;
 
-/////Parameter Estimation Options
-  /* - N number of thermal parameters to be fitted
-   - ftol difference in error
-   - xtol difference in parameters
-   - beta_iter is the total number of iterations to find beta2
-   - beta_tol is how close dz_sub is to dz_coat */
-  constexpr double ftol = 1.e-8;
-  constexpr double xtol = 1.e-8;
-  constexpr double gtol = 1.e-8;
-  constexpr size_t maxfev = 1e5;
-  constexpr double epsfcn = 1.e-4;
-  constexpr double factor =  10;
-  constexpr int mode = 0;
-  constexpr int nprint = 0;
-  struct parameterEstimation::settings
-  ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
+  struct parameterEstimation::settings ParaEstSetting(
+    parameterEstimation::loadfromConfigFile(filename));
 
   constexpr double factorMax = 10;
   constexpr double factorScale = 5;
 
 ///  Physical Properties
-  /*
-   - L_coat = 71.7e-6 71.7e-6 [m]
-   - L_substrate = L_coat *67.;
-   - lambda ..optical penetration (bug when lambda > 5)
-   - R0 no effect on solution
-   - Reflection; R0 at surface; R1 at interface
-   - E_sigma //ratio of substrate emissivity to optical thickness of the film,
-   - thermal contact resistance per area
-  */
-  constexpr double Ttol = 1e-3;
-  constexpr double T_ref =  300;
-  constexpr double T_base = 273.15;
-  constexpr double T_rear = 0;
   struct physicalModel::temperatureScale
-          TemperatureScale(Ttol, T_ref, T_base, T_rear);
+    TemperatureScale(physicalModel::temperatureScale::loadfromConfig(filename));
+
+
 
   // Model system
-  constexpr double detector_rad = .25e-3;
-  constexpr double R_domain = detector_rad;
+  constexpr double R_domain = .25e-3;
   constexpr double L_coat = 71.7e-6;
   constexpr double L_substrate = L_coat *99;
 
@@ -74,6 +51,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   const double R1 = 0.8;
   const double Emit1 = 42;
   struct physicalModel::radiativeSysProp radProp(R0, R1, Emit1);
+
 
 /// Thermal Properties
   /*
@@ -90,16 +68,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   */
 
   /// Heat Flux
-  /* - units [W/m^2] */
-  constexpr double power     = 30   /*Watts*/ ;
-  constexpr double radius    = 20e-4 /*m (500um)*/ ;
-  constexpr double offset    = .95   /*offset*/ ;
-  constexpr double amplitude = .05   /*amplitude*/;
-  class expEquipment::Laser CO2Laser(power, radius, offset, amplitude);
-
-  constexpr double detector_lam = 5e-6;
-  struct expEquipment::Detector Emissiondetector(detector_lam, detector_rad);
-  struct expEquipment::setup expSetup(CO2Laser, Emissiondetector);
+  struct expEquipment::setup expSetup(
+              expEquipment::setup::loadfromConfig( filename ) );
 
   constexpr double kcoat_off = 1.44;
   constexpr double kcoat_slope = 0;
@@ -186,9 +156,6 @@ int main( int /*argc*/, char** /*argv[]*/ )
   poptea.LMA.LMA_workspace.MSETol = 1e-8;
   poptea.DataDirectory.mkdir("data");
 
-
-//  std::cout << sizeof(class numericalModel::Mesh) << "\n\n"; exit(-2);
-  // Initial Guess
   double *xInitial = nullptr;
   xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
@@ -197,6 +164,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
     poptea.xParametersNames[i] = xParametersNames[i];
     poptea.xParameters95Names[i] = xParametersNames[i];
   }
+
 // Populate the experimental phase values in parameters99
   poptea.expSetup.laser.L_end = LendMinDecade;
   poptea.expSetup.q_surface = 0;

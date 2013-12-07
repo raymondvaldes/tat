@@ -141,6 +141,31 @@ LMA::LMA(const struct settings Settings_,
 LMA::~LMA(void){}
 
 unknownList::~unknownList(){}
-settings::~settings(){}
+settings::~settings(void){}
+
+class settings loadfromConfigFile(const std::string &filename)
+{
+  ///Initialize the config file into memory
+  using boost::property_tree::ptree;
+  ptree pt;
+  read_xml(filename, pt);
+
+  //initialize parameter estimation settings
+  const double ftol     = pt.get<double>(   "poptea.ParaEstSettings.ftol" );
+  const double xtol     = pt.get<double>(   "poptea.ParaEstSettings.xtol" );
+  const double gtol     = pt.get<double>(   "poptea.ParaEstSettings.gtol" );
+  const size_t maxfev   = pt.get<size_t>(   "poptea.ParaEstSettings.maxfev" );
+  const double epsfcn   = pt.get<double>(   "poptea.ParaEstSettings.epsfcn" );
+  const double factor   = pt.get<double>(   "poptea.ParaEstSettings.factor" );
+  const int mode        = pt.get<int>(      "poptea.ParaEstSettings.mode" );
+  const int nprint      = pt.get<int>(      "poptea.ParaEstSettings.nprint" );
+
+  class parameterEstimation::settings
+  ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
+
+  return ParaEstSetting;
+}
 
 }
+
+

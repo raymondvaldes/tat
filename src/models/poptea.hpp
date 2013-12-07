@@ -31,6 +31,7 @@ namespace thermalAnalysisMethod
            class thermal::ThermalModelSelection thermalModel_,
            class parameterEstimation::settings Settings_,
            class parameterEstimation::unknownList unknownParameters_);
+    explicit PopTea(void);
     ~PopTea(void);
 
 

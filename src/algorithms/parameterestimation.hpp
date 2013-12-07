@@ -68,7 +68,7 @@ struct settings
 
   settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
            double epsfcn_, double factor_, size_t mode_, size_t nprint_);
-  ~settings();
+  ~settings(void);
 };
 
 class LMA_workingArrays
@@ -108,6 +108,8 @@ public:
   ~LMA(void);
 };
 
+class settings loadfromConfigFile(const std::string &filename);
+
 
 }
 
@@ -134,6 +136,7 @@ struct parameter_constraints
   double Lcoat_min ;
   double Lcoat_max ;
 };
+
 
 
 #endif // PARAMETERESTIMATION_HPP

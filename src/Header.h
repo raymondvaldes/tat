@@ -41,6 +41,8 @@
 //-lboost_system in linker
 //-lboost_filesystem in linker
 #include <boost/filesystem.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 
 /*
 When linking libraries you must ensure that the library is built at the same
