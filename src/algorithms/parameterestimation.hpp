@@ -70,22 +70,12 @@ public:
   size_t mode;
   size_t nprint;
 
-<<<<<<< HEAD
-  settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
-           double epsfcn_, double factor_, size_t mode_, size_t nprint_);
-  static struct settings loadConfig(const std::string &filename);
   static struct settings loadConfigfromXML(const boost::property_tree::ptree pt);
-
   ~settings(void);
-=======
-  explicit settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
-                    double epsfcn_, double factor_, size_t mode_,
-                    size_t nprint_);
-  explicit settings(const std::string &filename);
-  ~settings();
-  void load(const std::string &filename);
-  void save(const std::string &filename);
->>>>>>> master
+  explicit settings( const double ftol_, const double xtol_, const double gtol_,
+                     const size_t maxfev_, const double epsfcn_,
+                     const double factor_, const size_t mode_,
+                     const size_t nprint_ );
 };
 
 class LMA_workingArrays
@@ -97,13 +87,6 @@ public:
   std::vector<double> emissionExperimental;
   std::vector<double> emissionNominal;
   std::vector<double> emissionCurrent;
-
-//  double *fjac = nullptr;
-//  double *predicted = nullptr;
-//  double *fvec = nullptr;
-//  double *emissionExperimental;
-//  double *emissionNominal;
-//  double *emissionCurrent = nullptr;
 
   double MSE, MSEinitial, MSETol, fvecTotal;
 

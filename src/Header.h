@@ -43,7 +43,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
-<<<<<<< HEAD
 #include <boost/foreach.hpp>
 #include <boost/bimap.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
@@ -51,8 +50,6 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/assign/list_inserter.hpp>
 
-=======
->>>>>>> master
 /*
 When linking libraries you must ensure that the library is built at the same
 number of bits as the program.  Also add library under linker settings in \
