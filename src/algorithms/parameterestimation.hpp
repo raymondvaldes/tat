@@ -51,6 +51,9 @@ public:
                   const double lower,
                   const double upper);
   ~unknownList();
+  static class unknownList
+      loadConfigfromXML(const boost::property_tree::ptree pt);
+
   size_t Nsize(void);
   void NAssign(size_t xInput);
 };
@@ -68,6 +71,9 @@ struct settings
 
   settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
            double epsfcn_, double factor_, size_t mode_, size_t nprint_);
+  static struct settings loadConfig(const std::string &filename);
+  static struct settings loadConfigfromXML(const boost::property_tree::ptree pt);
+
   ~settings(void);
 };
 
@@ -108,7 +114,7 @@ public:
   ~LMA(void);
 };
 
-class settings loadfromConfigFile(const std::string &filename);
+class settings loadConfig(const std::string &filename);
 
 
 }

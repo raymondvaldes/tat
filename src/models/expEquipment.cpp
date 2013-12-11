@@ -154,7 +154,28 @@ Laser::~Laser(){}
 setup::setup(struct Laser laser_, struct Detector detector_)
     : laser(laser_), detector(detector_) {}
 
-class setup setup::loadfromConfig(const std::string &filename)
+class setup setup::loadConfigfromXML( const boost::property_tree::ptree pt )
+{
+    //initialize laser
+    const double power      = pt.get< double >( "Laser.power" );
+    const double radius     = pt.get< double >( "Laser.radius" );
+    const double offset     = pt.get< double >( "Laser.offset" );
+    const double amplitude  = pt.get< double >( "Laser.amplitude" );
+    const class Laser CO2Laser( power, radius, offset, amplitude );
+
+    //initialize detector
+    const double detector_rad = pt.get< double >( "Detector.radius" );
+    const double detector_lam = pt.get< double >( "Detector.lambda" );
+    const class Detector Emissiondetector( detector_lam, detector_rad );
+
+    //initialize experimental setup object
+    const class setup expSetup( CO2Laser, Emissiondetector );
+
+    return expSetup;
+}
+
+
+class setup setup::loadConfig(const std::string &filename)
 {
   //Initialize the config file into memory
   using boost::property_tree::ptree;
@@ -181,10 +202,11 @@ class setup setup::loadfromConfig(const std::string &filename)
   const double
   detector_lam = pt.get<double>( "poptea.experimentalSetup.Detector.lambda" );
 
-  class Laser CO2Laser(power, radius, offset, amplitude);
-  class Detector Emissiondetector(detector_lam, detector_rad);
+  //initialize experimental setup object
+  const class Laser CO2Laser( power, radius, offset, amplitude );
+  const class Detector Emissiondetector( detector_lam, detector_rad );
 
-  class setup expSetup( CO2Laser, Emissiondetector );
+  const class setup expSetup( CO2Laser, Emissiondetector );
 
   return expSetup;
 }

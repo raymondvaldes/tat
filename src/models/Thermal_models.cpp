@@ -922,4 +922,22 @@ ThermalModelSelection::ThermalModelSelection(const enum HeatX myHeat,
 ThermalModelSelection::~ThermalModelSelection(void){}
 
 
+class ThermalModelSelection ThermalModelSelection::
+        loadConfigfromXML(const boost::property_tree::ptree pt,
+                          const class numericalModel::Mesh mesh_)
+{
+// retrieve string and map it to enum
+  const std::string heatLabel = pt.get<std::string>( "heatModel" );
+  const enum HeatX heatModel = HeatXMap.right.at(heatLabel);
+
+  const std::string emissionLabel = pt.get<std::string>( "emissionModel" );
+  const enum EmissionX emissionModel = EmissionXMap.right.at(emissionLabel);
+
+  const class ThermalModelSelection thermalModel( heatModel, emissionModel,
+                                                    mesh_ );
+
+  return thermalModel;
+}
+
+
 }

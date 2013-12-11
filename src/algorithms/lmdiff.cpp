@@ -1066,7 +1066,7 @@ for( j=0; j<n; j++ )
        wa1[j] = -wa1[j];
        wa2[j] = x[j] + wa1[j];
        wa3[j] = diag[j]*wa1[j];
-	}
+    }
 pnorm = enorm(n,wa3);
 /*
 *	    on the first iteration, adjust the initial step bound.

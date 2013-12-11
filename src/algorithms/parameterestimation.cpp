@@ -72,7 +72,7 @@ void unknownList::addUnknown(enum physicalModel::labels::Name name,
                              const double lower,
                              const double upper)
 {
-  vectorUnknowns.push_back (unknown(name, lower, upper));
+  vectorUnknowns.push_back ( unknown( name, lower, upper ) );
   return;
 }
 
@@ -87,6 +87,31 @@ void unknownList::NAssign(size_t xInput)
   N = xInput;
 }
 
+class unknownList unknownList::
+        loadConfigfromXML(const boost::property_tree::ptree pt)
+{
+  using boost::property_tree::ptree;
+  class unknownList unknownListObj;
+
+  // Iterate over 'unknown' branches
+  class physicalModel::labels labels;
+  BOOST_FOREACH( const ptree::value_type &v,
+                 pt.get_child( "unknownParameters" ) )
+  {
+    //retrieve subtree
+    const ptree& child = v.second;
+
+    //access members of subtree
+    const std::string nameLabel = child.get< std::string >( "label" );
+    const enum physicalModel::labels::Name
+        mylabel = labels.nameMap.right.at(nameLabel);
+
+    const double myMin = child.get<double>( "min" );
+    const double myMax = child.get<double>( "max" );
+    unknownListObj.addUnknown(mylabel, myMin, myMax);
+  }
+  return unknownListObj;
+}
 
 void LMA_workingArrays::updateArraySize(const size_t Lend_, const size_t N)
 {
@@ -143,7 +168,27 @@ LMA::~LMA(void){}
 unknownList::~unknownList(){}
 settings::~settings(void){}
 
-class settings loadfromConfigFile(const std::string &filename)
+struct settings settings::
+    loadConfigfromXML(const boost::property_tree::ptree pt)
+{
+    //initialize parameter estimation settings
+    const double ftol     = pt.get<double>( "ftol" );
+    const double xtol     = pt.get<double>( "xtol" );
+    const double gtol     = pt.get<double>( "gtol" );
+    const size_t maxfev   = pt.get<size_t>( "maxfev" );
+    const double epsfcn   = pt.get<double>( "epsfcn" );
+    const double factor   = pt.get<double>( "factor" );
+    const int mode        = pt.get<int>( "mode" );
+    const int nprint      = pt.get<int>( "nprint" );
+
+    class parameterEstimation::settings
+    ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
+
+    return ParaEstSetting;
+}
+
+struct settings settings::
+  loadConfig(const std::string &filename)
 {
   ///Initialize the config file into memory
   using boost::property_tree::ptree;
@@ -151,14 +196,15 @@ class settings loadfromConfigFile(const std::string &filename)
   read_xml(filename, pt);
 
   //initialize parameter estimation settings
-  const double ftol     = pt.get<double>(   "poptea.ParaEstSettings.ftol" );
-  const double xtol     = pt.get<double>(   "poptea.ParaEstSettings.xtol" );
-  const double gtol     = pt.get<double>(   "poptea.ParaEstSettings.gtol" );
-  const size_t maxfev   = pt.get<size_t>(   "poptea.ParaEstSettings.maxfev" );
-  const double epsfcn   = pt.get<double>(   "poptea.ParaEstSettings.epsfcn" );
-  const double factor   = pt.get<double>(   "poptea.ParaEstSettings.factor" );
-  const int mode        = pt.get<int>(      "poptea.ParaEstSettings.mode" );
-  const int nprint      = pt.get<int>(      "poptea.ParaEstSettings.nprint" );
+  const std::string conjunto = "poptea.ParaEstSettings.";
+  const double ftol     = pt.get<double>( conjunto + "ftol" );
+  const double xtol     = pt.get<double>( conjunto + "xtol" );
+  const double gtol     = pt.get<double>( conjunto + "gtol" );
+  const size_t maxfev   = pt.get<size_t>( conjunto + "maxfev" );
+  const double epsfcn   = pt.get<double>( conjunto + "epsfcn" );
+  const double factor   = pt.get<double>( conjunto + "factor" );
+  const int mode        = pt.get<int>( conjunto + "mode" );
+  const int nprint      = pt.get<int>( conjunto + "nprint" );
 
   class parameterEstimation::settings
   ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);

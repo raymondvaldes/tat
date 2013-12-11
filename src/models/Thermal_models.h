@@ -111,35 +111,55 @@ namespace thermal{
 double effusivity(const double k, const double rhoCp);
 double diffusivity(const double k, const double rhoCp);
 
+enum class HeatX: uint8_t
+{
+  OneDimAnalytical,
+  OneDimNumLin,
+  OneDimNumNonLin,
+  TwoDimAnalytical,
+  TwoDimNumLin,
+  TwoDimNumNonLin
+};
+
+typedef boost::bimap< enum HeatX , std::string > HeatXBiTYPE;
+const HeatXBiTYPE HeatXMap =
+    boost::assign::list_of < HeatXBiTYPE::relation >
+ ( HeatX::OneDimAnalytical , "OneDimAnalytical")
+ ( HeatX::OneDimNumLin     , "OneDimNumLin")
+ ( HeatX::OneDimNumNonLin  , "OneDimNumNonLin")
+ ( HeatX::TwoDimAnalytical , "TwoDimAnalytical")
+ ( HeatX::TwoDimNumLin     , "TwoDimNumLin")
+ ( HeatX::TwoDimNumNonLin  , "TwoDimNumNonLin");
+
+
+enum class EmissionX: uint8_t
+{
+  OneDimNonLin,
+  TwoDimNonLin
+};
+
+typedef boost::bimap < enum EmissionX , std::string > emission_bimap;
+const emission_bimap EmissionXMap = \
+    boost::assign::list_of < emission_bimap::relation >
+ ( EmissionX::OneDimNonLin , "OneDimNonLin")
+ ( EmissionX::TwoDimNonLin , "TwoDimNonLin");
+
 
 class ThermalModelSelection
 {
+
 public:
   size_t iter;
-
-  enum class HeatX: uint8_t
-  {
-    OneDimAnalytical,
-    OneDimNumLin,
-    OneDimNumNonLin,
-    TwoDimAnalytical,
-    TwoDimNumLin,
-    TwoDimNumNonLin
-  };
-
-  enum class EmissionX: uint8_t
-  {
-    OneDimNonLin,
-    TwoDimNonLin
-  };
-
   const enum HeatX heat;
   const enum EmissionX emission;
   class numericalModel::Mesh mesh;
 
   explicit ThermalModelSelection(const enum HeatX myHeat,
-                        const enum EmissionX myEmission,
-                        class numericalModel::Mesh mesh_);
+                                 const enum EmissionX myEmission,
+                                 class numericalModel::Mesh mesh_);
+  static class ThermalModelSelection
+      loadConfigfromXML(const boost::property_tree::ptree pt,
+                        const class numericalModel::Mesh mesh_);
   ~ThermalModelSelection(void);
 };
 

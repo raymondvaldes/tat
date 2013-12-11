@@ -131,14 +131,19 @@ const
     return mean( Current(Tprofile, n, j) ,  Projected(Tprofile, n, j));
 }
 
-property::property(double offset_, double slope_)
+property::property(const double offset_,const double slope_)
     : offset(offset_), slope(slope_)
 {}
 
 property::property(void){}
 
-
-
+class property
+    property::loadConfigfromXMLTree(const boost::property_tree::ptree pt)
+{
+  const double offset_ = pt.get<double>( "offset" );
+  const double slope_ = pt.get<double>( "slope" );
+  return property(offset_, slope_);
+}
 
 
 namespace physicalModel
@@ -149,8 +154,23 @@ temperatureScale::temperatureScale(const double tolerance_,
     tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
 {}
 
+temperatureScale::~temperatureScale( void ) { }
+
 struct temperatureScale
-        temperatureScale::loadfromConfig(const std::string &filename)
+        temperatureScale::loadConfigfromXML( const boost::property_tree::ptree pt )
+{
+  //initialize parameter estimation settings
+  const double tolerance    = pt.get<double>( "tolerance" );
+  const double referance    = pt.get<double>( "referance" );
+  const double base         = pt.get<double>( "base" );
+  const double rear         = pt.get<double>( "rear" );
+
+  struct temperatureScale TemperatureScale(tolerance, referance, base, rear);
+  return TemperatureScale;
+}
+
+struct temperatureScale
+        temperatureScale::loadConfig(const std::string &filename)
 {
   ///Initialize the config file into memory
   using boost::property_tree::ptree;
@@ -175,43 +195,97 @@ struct temperatureScale
 }
 
 
-radiativeSysProp::radiativeSysProp(double R0_, double R1_, double Emit1_)
+radiativeSysProp::radiativeSysProp( const double R0_, const double R1_,
+                                    const double Emit1_)
     : R0(R0_), R1(R1_), Emit1(Emit1_)
 {}
 
-layer::layer(class property kthermal_, class property psithermal_,
-             double depth_, double lambda_)
-    : kthermal(kthermal_), psithermal(psithermal_), depth(depth_),
-      lambda(lambda_)
+radiativeSysProp::~radiativeSysProp( void ) {}
+
+class radiativeSysProp
+    radiativeSysProp::loadConfig( const boost::property_tree::ptree pt )
+{
+  const double R0_ = pt.get<double>("R0");
+  const double R1_ = pt.get<double>("R1");
+  const double Emit1_ = pt.get<double>("Emit1");
+
+  class radiativeSysProp Obj( R0_, R1_, Emit1_);
+
+  return Obj;
+}
+
+layer::layer( const property kthermal_, const property psithermal_,
+              const double depth_, const double lambda_ )
+    : kthermal( kthermal_ ), psithermal( psithermal_ ), depth( depth_ ),
+      lambda( lambda_ )
 {}
 
 double layer::opticalPenetration(void) const
 {
-  return lambda*depth;
+  return lambda * depth;
 }
 
-double layer::thermalDiffusivity(void) const
+double layer::thermalDiffusivity( void ) const
 {
-  return thermal::diffusivity(kthermal.offset, psithermal.offset);
+  return thermal::diffusivity( kthermal.offset, psithermal.offset );
 }
-double layer::thermalEffusivity(void) const
+double layer::thermalEffusivity( void ) const
 {
-  return thermal::effusivity(kthermal.offset, psithermal.offset);
+  return thermal::effusivity( kthermal.offset, psithermal.offset );
 }
 
+layer::~layer(void){}
 
+class layer layer::loadConfigfromXMLTree(const boost::property_tree::ptree pt)
+{
+  const boost::property_tree::ptree branch1 = pt.get_child("conductivity");
+  const property conductivity_ = property::loadConfigfromXMLTree(branch1);
 
+  const boost::property_tree::ptree branch2 = pt.get_child("thermalmass");
+  const property thermalMass_  = property::loadConfigfromXMLTree(branch2);
 
-TBCsystem::TBCsystem(class layer coating_, class layer substrate_,
-                     struct temperatureScale Temp_,
-                     struct radiativeSysProp optical_,
-                     double radius_)
+  const double lambda_ = pt.get<double>("lambda");
+  const double length_ = pt.get<double>("length");
+
+  class layer layerObj(conductivity_, thermalMass_, length_, lambda_ );
+  return layerObj;
+}
+
+TBCsystem::TBCsystem( const class layer coating_, const class layer substrate_,
+                      const struct temperatureScale Temp_,
+                      const struct radiativeSysProp optical_,
+                      const double radius_)
     : coating(coating_), substrate(substrate_), Temp(Temp_), optical(optical_),
       radius(radius_)
 {
     gamma = gammaEval();
     a_sub = a_subEval();
 }
+TBCsystem::~TBCsystem(void){}
+
+class TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree pt)
+{  
+  using boost::property_tree::ptree;
+
+  const ptree pcoat = pt.get_child( "coating" );
+  const class layer coating_( layer::loadConfigfromXMLTree( pcoat ) );
+
+  const ptree psub = pt.get_child( "substrate" );
+  const class layer substrate_( layer::loadConfigfromXMLTree( psub ) );
+
+  const ptree ptmp = pt.get_child( "TemperatureScale" );
+  const class temperatureScale Temp_( temperatureScale::loadConfigfromXML( ptmp ) );
+
+  const ptree prad = pt.get_child( "RadiationProperties" );
+  const class radiativeSysProp optical_( radiativeSysProp::loadConfig( prad ) );
+
+  const double radius_ = pt.get< double >( "radialDomain" );
+
+  const class TBCsystem TBCsystemObj( coating_, substrate_, Temp_, optical_,
+                                     radius_ );
+  return  TBCsystemObj;
+}
+
 
 double TBCsystem::gammaEval(void) const
 {
@@ -232,6 +306,8 @@ void TBCsystem::updateCoat(void)
   coating.kthermal.offset = coating.psithermal.offset * diffusivty_coat;
   return;
 }
+
+labels::labels(void) {}
 
 labels::labels(const Name name_):name(name_){}
 

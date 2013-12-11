@@ -51,7 +51,8 @@ public:
   double q_surface;
 
   explicit setup(struct Laser laser_, struct Detector detector_);
-  static class setup loadfromConfig(const std::string &filename);
+  static class setup loadConfig(const std::string &filename);
+  static class setup loadConfigfromXML( const boost::property_tree::ptree pt );
 };
 
 
