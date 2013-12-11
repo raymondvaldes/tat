@@ -43,6 +43,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
+<<<<<<< HEAD
 #include <boost/foreach.hpp>
 #include <boost/bimap.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
@@ -50,12 +51,15 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/assign/list_inserter.hpp>
 
+=======
+>>>>>>> master
 /*
 When linking libraries you must ensure that the library is built at the same
 number of bits as the program.  Also add library under linker settings in \
 compiler.
 */
 ///Source headers
+#include "tools/configuration.hpp"
 #include "tools/filesystem.hpp"
 #include "tools/timing.h"
 
@@ -63,8 +67,6 @@ compiler.
 #include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
-
-
 
 #include "algorithms/parameterestimation.hpp"
 #include "models/poptea.hpp"
@@ -74,7 +76,6 @@ compiler.
 #include "algorithms/ThermalProp_Analysis.h"
 #include "algorithms/sensitivity_analysis.hpp"
 #include "investigations/sensitivity_paper.h"
-
 
 #include "numSimulations/Experimental_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Temperature.h"

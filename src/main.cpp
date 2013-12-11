@@ -49,16 +49,19 @@ int main( int /*argc*/, char** /*argv[]*/ )
   {
     constexpr size_t interants = 1;
     for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
-    {  poptea.LMA.LMA_workspace.emissionExperimental[nn] = poptea.LMA.LMA_workspace.emissionNominal[nn];}
+    {
+        poptea.LMA.LMA_workspace.emissionExperimental[nn] = poptea.LMA.LMA_workspace.emissionNominal[nn];
+    }
     fitting(poptea.expSetup.laser.L_end, poptea.LMA.unknownParameters.Nsize(),
             poptea.LMA.Settings, &paraConstraints, poptea, xInitial, interants, 10, 5);
   }
-
   //Prepare figures and data for paper Sensitivity
 //    SensitivityValdes2013::CC_APS2(poptea);
 //    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
 // Clear memory
-  delete[] xInitial; globalStopWatch.displayTime();
+  delete[] xInitial;
+  globalStopWatch.displayTime();
+
   return 0;
 }

@@ -89,29 +89,49 @@ private:
   enum Name name;
 };
 
-struct temperatureScale
+class temperatureScale
 {
+public:
     double tolerance;
     double referance;
     double base;
     double rear;
+<<<<<<< HEAD
     temperatureScale(const double tolerance_,const double referance_,
                      const double base_, const double rear_);
     ~temperatureScale( void );
     static struct temperatureScale loadConfig(const std::string &filename);
     static struct temperatureScale
         loadConfigfromXML( const boost::property_tree::ptree pt );
+=======
+    explicit temperatureScale(const double tolerance_,const double referance_,
+                              const double base_, const double rear_);
+    explicit temperatureScale(const std::string &filename);
+    void load(const std::string &filename);
+    void save(const std::string &filename);
+>>>>>>> master
 };
 
-struct radiativeSysProp
+class radiativeSysProp
 {
+public:
     double R0;
     double R1;
     double Emit1;
+<<<<<<< HEAD
     radiativeSysProp(const double R0_, const double R1_, const double Emit1_);
     static class radiativeSysProp
         loadConfig( const boost::property_tree::ptree pt );
     ~radiativeSysProp( void );
+=======
+    explicit radiativeSysProp(const double R0_, const double R1_,
+                              const double Emit1_);
+    explicit radiativeSysProp(const std::string &filename);
+    void load(const std::string &filename);
+    void save(const std::string &filename);
+    ~radiativeSysProp(void);
+
+>>>>>>> master
 };
 
 class layer
@@ -126,12 +146,17 @@ public:
     double opticalPenetration(void) const;
     double thermalDiffusivity(void) const;
     double thermalEffusivity(void) const;
+<<<<<<< HEAD
     explicit layer( const class property kthermal_,
                     const class property psithermal_,
                     const double depth_, const double lambda_);
     ~layer(void);
     static class layer
       loadConfigfromXMLTree( const boost::property_tree::ptree pt );
+=======
+    explicit layer(class property kthermal_, class property psithermal_,
+                   double depth_, double lambda_);
+>>>>>>> master
 };
 
 class TBCsystem
@@ -139,13 +164,14 @@ class TBCsystem
 public:
     class layer coating;
     class layer substrate;
-    struct temperatureScale Temp;
-    struct radiativeSysProp optical;
+    class temperatureScale Temp;
+    class radiativeSysProp optical;
     double radius;
     double Rtc;
     double gamma;
     double a_sub;
 
+<<<<<<< HEAD
     explicit TBCsystem( const class layer coating_,
                         const class layer substrate_,
                         const struct temperatureScale Temp_,
@@ -153,6 +179,13 @@ public:
                         const double radius_);
     ~TBCsystem(void);
     static class TBCsystem loadConfig(const boost::property_tree::ptree pt);
+=======
+    explicit TBCsystem(class layer coating_, class layer substrate_,
+                       class temperatureScale Temp_,
+                       class radiativeSysProp optical_, double radius_);
+    ~TBCsystem(void);
+
+>>>>>>> master
     double gammaEval(void) const ;
     double a_subEval(void) const;
     void updateCoat(void); //update coat properties

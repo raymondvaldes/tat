@@ -58,8 +58,9 @@ public:
   void NAssign(size_t xInput);
 };
 
-struct settings
-{
+class settings
+{       
+public:
   double ftol;
   double xtol;
   double gtol;
@@ -69,12 +70,22 @@ struct settings
   size_t mode;
   size_t nprint;
 
+<<<<<<< HEAD
   settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
            double epsfcn_, double factor_, size_t mode_, size_t nprint_);
   static struct settings loadConfig(const std::string &filename);
   static struct settings loadConfigfromXML(const boost::property_tree::ptree pt);
 
   ~settings(void);
+=======
+  explicit settings(double ftol_, double xtol_, double gtol_, size_t maxfev_,
+                    double epsfcn_, double factor_, size_t mode_,
+                    size_t nprint_);
+  explicit settings(const std::string &filename);
+  ~settings();
+  void load(const std::string &filename);
+  void save(const std::string &filename);
+>>>>>>> master
 };
 
 class LMA_workingArrays

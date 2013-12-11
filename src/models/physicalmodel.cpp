@@ -154,6 +154,7 @@ temperatureScale::temperatureScale(const double tolerance_,
     tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
 {}
 
+<<<<<<< HEAD
 temperatureScale::~temperatureScale( void ) { }
 
 struct temperatureScale
@@ -197,8 +198,80 @@ struct temperatureScale
 
 radiativeSysProp::radiativeSysProp( const double R0_, const double R1_,
                                     const double Emit1_)
+=======
+temperatureScale::temperatureScale(const std::string &filename)
+{
+  load(filename);
+}
+
+
+void temperatureScale::load(const std::string &filename)
+{
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  // Load XML file and put its contents in property tree.
+  // No namespace qualification is needed, because of Koenig
+  // lookup on the second argument. If reading fails, exception
+  // is thrown.
+  read_xml(filename, pt);
+
+  tolerance = pt.get<double>( "TemperatureScale.tolerance" );
+  referance = pt.get<double>( "TemperatureScale.referance" );
+  base = pt.get<double>( "TemperatureScale.base" );
+  rear = pt.get<double>( "TemperatureScale.rear" );
+}
+
+void temperatureScale::save(const std::string &filename)
+{
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  pt.put<double>( "TemperatureScale.tolerance", tolerance );
+  pt.put<double>( "TemperatureScale.referance", referance );
+  pt.put<double>( "TemperatureScale.base", base );
+  pt.put<double>( "TemperatureScale.rear", rear );
+
+  write_xml(filename, pt);
+}
+
+
+radiativeSysProp::radiativeSysProp(double R0_, double R1_, double Emit1_)
+>>>>>>> master
     : R0(R0_), R1(R1_), Emit1(Emit1_)
 {}
+radiativeSysProp::~radiativeSysProp(void){}
+
+radiativeSysProp::radiativeSysProp(const std::string &filename)
+{
+    load(filename);
+}
+
+void radiativeSysProp::load(const std::string &filename)
+{
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  read_xml(filename, pt);
+
+  R0 = pt.get<double>( "RadiationProperties.R0" );
+  R1 = pt.get<double>( "RadiationProperties.R1" );
+  Emit1 = pt.get<double>( "RadiationProperties.Emit1" );
+}
+
+void radiativeSysProp::save(const std::string &filename)
+{
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  pt.put<double>( "RadiationProperties.R0", R0 );
+  pt.put<double>( "RadiationProperties.R1", R1 );
+  pt.put<double>( "RadiationProperties.Emit1", Emit1 );
+
+  write_xml(filename, pt);
+}
 
 radiativeSysProp::~radiativeSysProp( void ) {}
 
@@ -286,6 +359,9 @@ class TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree pt)
   return  TBCsystemObj;
 }
 
+
+
+TBCsystem::~TBCsystem(void){}
 
 double TBCsystem::gammaEval(void) const
 {

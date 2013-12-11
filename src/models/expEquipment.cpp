@@ -6,11 +6,77 @@ Detector::Detector(const double wavelength_, const double radius_)
     :wavelength(wavelength_), radius(radius_)
 {}
 
+Detector::Detector(const std::string &filename)
+{
+  load(filename);
+}
+
+void Detector::load(const std::string &filename)
+{
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  read_xml(filename, pt);
+
+  radius = pt.get<double>( "Detector.radius" );
+  wavelength = pt.get<double>( "Detector.lambda" );
+}
+
+void Detector::save(const std::string &filename)
+{
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  pt.put<double>( "Detector.radius", radius );
+  pt.put<double>( "Detector.lambda", wavelength );
+
+  write_xml(filename, pt);
+}
+
+Detector::~Detector(void){}
+
 Laser::Laser(const double a, const double b, const double c, const double d):
              offset(c), amplitude(d), Qlaser(a), radius(b)
 {
     update();
 }
+
+Laser::Laser(const std::string &filename)
+{
+    load(filename);
+    update();
+}
+
+void Laser::load(const std::string &filename)
+{
+  // Create empty property tree object
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  read_xml(filename, pt);
+
+  Qlaser = pt.get<double>( "Laser.power" );
+  radius = pt.get<double>( "Laser.radius" );
+  offset = pt.get<double>( "Laser.offset" );
+  amplitude = pt.get<double>( "Laser.amplitude" );
+
+}
+
+void Laser::save(const std::string &filename)
+{
+  using boost::property_tree::ptree;
+  ptree pt;
+
+  pt.put<double>( "Laser.power", Qlaser );
+  pt.put<double>( "Laser.radius", radius );
+  pt.put<double>( "Laser.offset", offset );
+  pt.get<double>( "Laser.amplitude", amplitude);
+
+  write_xml(filename, pt);
+}
+
+
 
 void Laser::update(void)
 {

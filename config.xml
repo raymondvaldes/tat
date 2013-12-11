@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ParameterEstimationSettings>
+<!-- 
+  /* - N number of thermal parameters to be fitted
+   - ftol difference in error
+   - xtol difference in parameters
+   - beta_iter is the total number of iterations to find beta2
+   - beta_tol is how close dz_sub is to dz_coat */
+-->
+  <ftol>1e-08</ftol>
+  <xtol>1e-08</xtol>
+  <gtol>1e-08</gtol>
+  <maxfev>100000</maxfev>
+  <epsfcn>0.0001</epsfcn>
+  <factor>10</factor>
+  <mode>0</mode>
+  <nprint>0</nprint>
+</ParameterEstimationSettings>
+
+<TemperatureScale>
+<!--
+	Temperature scales must be in Kelvin
+-->
+  <tolerance>1e-3</tolerance>
+  <referance>300</referance>
+  <base>273.15</base>
+  <rear>0</rear>
+</TemperatureScale>
+
+<RadiationProperties>
+<!--
+- Reflection; R0 at surface; R1 at interface
+-->
+  <R0>0.2</R0>
+  <R1>0.8</R1>
+  <Emit1>42</Emit1>
+</RadiationProperties>
+
+<Laser>
+<!--
+  power - Watts
+  radius - m
+-->
+  <power>30</power>
+  <radius>20e-4</radius>
+  <offset>0.95</offset>
+  <amplitude>.05</amplitude>
+</Laser>
+
