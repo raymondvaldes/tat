@@ -24,6 +24,7 @@ int main( int /*argc*/, char* argv[] )
 
     constexpr size_t interants = 1;
     phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
+
     for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
     {
       poptea.LMA.LMA_workspace.emissionExperimental[nn]
