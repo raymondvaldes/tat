@@ -9,22 +9,13 @@ class matrixArrays
     std::vector<double> Temperature;
     std::vector<double> B1, B2, B3;
 
-    size_t M2;
+    const size_t M2;
     double B4;
 
-    explicit matrixArrays(const size_t length)
-    {
-        A1.resize(length);
-        A2.resize(length);
-        A3.resize(length);
-        b.resize(length);
-        Temperature.resize(length);
-        B1.resize(length);
-        B2.resize(length);
-        B3.resize(length);
-        M2 = length;
-
-    }
+    explicit matrixArrays(const size_t length): A1(length), A2(length),
+      A3(length), b(length), Temperature(length), B1(length), B2(length),
+      B3(length), M2(length)
+    {    }
 };
 
 double Numerical_Temperature( const double *const *parameters, double **T,
@@ -120,15 +111,7 @@ double qGenAverage(const double I_avg, const double opt, const double lambda,
                    const double R1, const double Iplus0, const double Iplus1,
                    const double z1, const double z2);
 
-double D_eta(const double z_norm, const double beta1);
-
-double D_xi(const double z_norm, const double beta1);
-
-double D_eta(const double z_norm, const double beta1, const double beta2);
-
 double r_xi(const double xi, const double beta);
-
-double z_eta(const double eta, const double beta1, const double beta2);
 
 void discretizeTime(const size_t Nend, double*time,
                     const double*tau,

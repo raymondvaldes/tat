@@ -502,50 +502,6 @@ void cosfit(double *dependent,const std::vector<double> &independentVec,
     return;
 }
 
-void minimizer(double (*to_minimize)(double *,double *), double *variable,
-               double *constants, double temp_variable_min,
-               double temp_variable_max, double min_goal,
-               const size_t max_iterations)
-{
-    double fraction = 0;
-    double *temp_to_minimize = new double [max_iterations];
-
-    size_t while_j=0;
-    int best_minimum_element = 0;
-    variable[0] = temp_variable_min;
-    temp_to_minimize[best_minimum_element] = min_goal*10;
-
-    while(temp_to_minimize[best_minimum_element]>=min_goal &&
-          while_j<max_iterations)
-    {
-        fraction = pow(10,-1*double (while_j));
-        variable[0] = temp_variable_min+fraction;
-        temp_to_minimize[0] = to_minimize(variable,constants);
-        for(size_t for_j=1 ; for_j <= max_iterations ; for_j++ )
-        {
-            variable[0]+=fraction;
-            temp_to_minimize[for_j]=to_minimize(variable,constants);
-            if(fabs(temp_to_minimize[for_j])>=fabs(temp_to_minimize[for_j-1]) ||
-               variable[0]>   temp_variable_max)
-            {
-                variable[0]-=fraction;
-                best_minimum_element=for_j-1;
-                break;
-            }
-        }
-        while_j+=1;
-    }
-    variable[0]+=fraction;
-    temp_to_minimize[best_minimum_element+1]=to_minimize(variable,constants);
-    variable[0]-=fraction;
-
-
-    delete []temp_to_minimize;
-    return;
-}
-
-
-
 // Temperature dependent variables and functions
 
 
@@ -567,51 +523,6 @@ double gspatial(double z, double opt, double lambda, double R1, double Iplus0,
   }
 
 
-
-
-
-size_t discretizeSpace(const int nodes,const double beta1,const double beta2,
-                       const double split, double *z_norm, double *z_real,
-                       const double L_coat,const double L_substrate, double*eta,
-                       double* zNorm2)
-{
-    const double L1 = 1; //coating nondimensional thickness
-                    //z transformed to eta from 0-L_coat  to 0-1.
-	const double L2 = 1; //substrate ....Do not change these parameters.
-    const double M2 = nodes;
-
-    size_t M1 = split * (M2-1);
-
-// define eta (computational grid)
-    for(size_t j = 0; j <= M1 ; j++)
-        eta[j] =  (double (j) / double (M1)) * L1;
-    for(size_t j = 1 ; j <= (M2-1) - M1 ; j ++)
-        eta[M1+j] = ( double ( j ) / ( double (M2-1) - double (M1) ) ) * L2 + eta[M1];
-
-    for ( size_t j = 0 ; j < M2; j++ )
-       z_norm[j] = z_eta( eta[j], beta1,  beta2) ;
-
-    for (size_t j = 0 ; j < M2 ; j++)
-    {
-        if ( j <= M1) z_real[j] = z_norm[j] * L_coat;
-//        if ( j == M1 || j == M1) z_real[j] = L_coat;
-        if ( j > M1 && j < M2)  z_real[j] = (z_norm[j] - 1) * L_substrate + L_coat;
-    }
-
-    for(size_t i = 0 ; i < M2 ; i++)
-    {
-        if(i <= M1)
-        {
-            zNorm2[i] = z_norm[i];
-        }
-        else if(i > M1)
-        {
-            zNorm2[i] = (L_substrate/L_coat) * ( z_norm[i] - 1 ) + 1;
-        }
-    }
-
-    return M1;
-}
 
 
 
@@ -648,7 +559,8 @@ void cosfcn(int P,int /*N*/,double *x,double *fvec,int */*iflag*/,
     return;
 }
 
-void cosfcn1(int P,int /*N*/,double *x,double *fvec,int */*iflag*/, double **variables)
+void cosfcn1( int P, int /*N*/, double *x, double *fvec, int */*iflag*/,
+              double **variables)
 {  // function to be fitted:
    // dependent[i] = x[0]+x[1]*cos(independent[i]*2*PI+x[2])
    // constants to be found by the fit are: x[0],x[1],x[2] which respectively
@@ -677,8 +589,8 @@ void cosfcn1(int P,int /*N*/,double *x,double *fvec,int */*iflag*/, double **var
 
     return;
 }
-double simpson_3_8(const double *Y, const double *X, const size_t A,
-                   const size_t B)
+double simpson_3_8( const double *Y, const double *X, const size_t A,
+                    const size_t B)
 {
     //A is lower limit element number, B is upper limit element number
     //calculates integral of Y dX from X[A] to X[B] using Y[n][i]
@@ -761,8 +673,8 @@ double simpson_3_8(const std::vector<double>& Y, const double *X,
     return S;
 }
 
-double simpson_3_8(const double *Y, const std::vector<double>& X,
-                   const size_t A,const size_t B)
+double simpson_3_8( const double *Y, const std::vector<double>& X,
+                    const size_t A, const size_t B )
 {
     //A is lower limit element number, B is upper limit element number
     //calculates integral of Y dX from X[A] to X[B] using Y[n][i]

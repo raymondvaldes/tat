@@ -54,10 +54,6 @@ void solveMatrix(const int n, const std::vector<double>& b,
 double SOR(double**A, double*b, const size_t M2, double*phi, double omega,
            double error);
 
-void minimizer( double (*to_minimize)(double*,double*), double *variable,
-               double *constants, double temp_variable_min,
-               double temp_variable_max, double min_goal,const size_t max_iterations);
-
 double average(const double a, const double b);
 
 double gs_int(const double eta, const double opt, const double lambda, const double R1, const double Iplus0,
@@ -105,11 +101,6 @@ double Iheat_int(const double Isteady,const double Itransient,
 double tau_0(const double omega);
 double x_bias(const double Xmean, const double Xstddev);
 
-size_t discretizeSpace(const int nodes,const double beta1,const double beta2,
-                       const double split, double *z_norm, double *z_real,
-                       const double L_coat,const double L_substrate, double*eta,
-                       double* zNorm2);
-
 double omega(const double L_coat, const double l_thermal, const double k_c,
              const double psi_c);
 
@@ -118,7 +109,6 @@ double lthermal(const double L_coat, const double k_c, const double psi_c,
 
 double x_ini(const double x_min, const double x_max, const size_t position,
              const size_t gN);
-void mainMemoryAllocate(class thermalAnalysisMethod::PopTea poptea);
 
 size_t xINTrandom(const size_t xmin, const size_t xmax);
 void range1og10(const double l_min, const double l_max, const size_t L_end,
