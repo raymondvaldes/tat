@@ -421,12 +421,6 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
                           class thermalAnalysisMethod::PopTea poptea)
 {
 ///Transform estimates from kappa space to k space based on the limits imposed
-//physicalModel::labels::Name::asub;
-// physicalModel::labels::Name::E1;
-//    physicalModel::labels::Name::gammaEff;
-//    physicalModel::labels::Name::lambda;
-//    physicalModel::labels::Name::R1;
-
   int i = 0;
   BOOST_FOREACH(class parameterEstimation::unknown &unknown,
                 poptea.LMA.unknownParameters.vectorUnknowns)
@@ -457,43 +451,6 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
     }
     i++;
   }
-//    exit(-2);
-
-//  for(int i = 0; i < N; ++i)
-//  {
-//    switch ( poptea.xParametersNames[i] )
-//    {
-//      case asub :
-//          poptea.TBCsystem.a_sub =
-//          x_limiter2(x[i], pc_ptr->a_sub_min, pc_ptr->a_sub_max);
-//          break;
-//      case E1 :
-//          poptea.TBCsystem.optical.Emit1 =
-//          x_limiter2(x[i], pc_ptr->E_sigma_min, pc_ptr->E_sigma_max);
-//          break;
-//      case gammaEff :
-//          poptea.TBCsystem.gamma =
-//          x_limiter2(x[i], pc_ptr->gamma_min, pc_ptr->gamma_max);
-//          break;
-//      case R1 :
-//          poptea.TBCsystem.optical.R1 =
-//          x_limiter2(x[i], pc_ptr->R1_min, pc_ptr->R1_max);
-//          break;
-//      case lambda :
-//          poptea.TBCsystem.coating.lambda =
-//          x_limiter2(x[i], pc_ptr->lambda_min, pc_ptr->lambda_max);
-//          break;
-//      case R0 :
-//          poptea.TBCsystem.optical.R0 =
-//          x_limiter2(x[i], pc_ptr->R0_min, pc_ptr->R0_max);
-//          break;
-//      default:
-//          std::cout << "\nSwitch Error!!\n";
-//          exit(-68);
-//          break;
-//    }
-//  }
-
 
 ///Update dependent parameters
   poptea.TBCsystem.updateCoat();
