@@ -281,8 +281,7 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
                 poptea.LMA.LMA_workspace.emissionNominal);
 //        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
 //                               l_max); //BUG MUST IMPLEMENT
-        fitting(poptea.expSetup.laser.L_end, N, ParaEstSetting, poptea,
-                xInitial, 1, factorMax, factorScale);
+        fitting(poptea, xInitial, 1, factorMax, factorScale);
 
         ///output data for printing
         std::ofstream myoutputfile;

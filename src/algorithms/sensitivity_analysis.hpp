@@ -15,8 +15,7 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
                       class perturbStruct *pStruct, const std::string filename,
                       const size_t lEndMin);
 
-void fitting(size_t m, size_t n, parameterEstimation::settings ParaEstSetting,
-             class thermalAnalysisMethod::PopTea poptea, double * xInitial,
+void fitting(class thermalAnalysisMethod::PopTea poptea, double * xInitial,
              const size_t interants, const double factorMax,
              const double factorScale);
 

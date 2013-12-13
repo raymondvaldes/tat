@@ -337,9 +337,7 @@ void parameterUncertainty(const size_t n,
 
 ///Initial Fit to get initial guesses
     constexpr size_t interants = 0;
-    fitting(poptea.expSetup.laser.L_end,
-            poptea.LMA.unknownParameters.Nsize(), ParaEstSetting,
-            poptea, xInitial, interants, factorMax, factorScale);
+    fitting(poptea, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
     poptea.DataDirectory.mkdir("debug");
@@ -471,67 +469,66 @@ void parameterUncertainty(const size_t n,
     return;
 }
 
-void fitting(size_t P, size_t N,
-             struct parameterEstimation::settings ParaEstSetting,
-             class thermalAnalysisMethod::PopTea poptea, double *xInitial,
+void fitting(class thermalAnalysisMethod::PopTea poptea, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale)
 {
-
-
+  const size_t P = poptea.expSetup.laser.L_end;
+  const size_t N = poptea.LMA.unknownParameters.Nsize();
+  struct parameterEstimation::settings ParaEstSetting(poptea.LMA.Settings);
 
 
 /// Scale jacobian if enabled
-    double *xpredicted = new double[N];
-    std::ofstream myfile;
-    std::stringstream filename;
-    filename <<  "../data/fittingData.dat";
-    myfile.open(filename.str().c_str());
-    myfile << std::setprecision(8);
-    myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
-    myfile << "\tasub\tgamma\tEsigma\tR1\tlambda\n";
+  double *xpredicted = new double[N];
+  std::ofstream myfile;
+  std::stringstream filename;
+  filename <<  "../data/fittingData.dat";
+  myfile.open(filename.str().c_str());
+  myfile << std::setprecision(8);
+  myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
+  myfile << "\tasub\tgamma\tEsigma\tR1\tlambda\n";
 
-    double*xSave = new double[N];
-    for(size_t i =0 ; i < N ; ++i)
-    {
-        xSave[i] = xInitial[i];
-    }
+  double*xSave = new double[N];
+  for(size_t i =0 ; i < N ; ++i)
+  {
+      xSave[i] = xInitial[i];
+  }
 
-    for(size_t i=0; i<interants; ++i)
-    {
-        int nfev;
-        int info = 0;
-        myfile << i << "\t";
+  for(size_t i=0; i<interants; ++i)
+  {
+      int nfev;
+      int info = 0;
+      myfile << i << "\t";
 
-        paramter_estimation(P, N, ParaEstSetting, &info, &nfev,
-                            xInitial, poptea, factorMax, factorScale,
-                            xpredicted);
-        poptea.LMA.LMA_workspace.MSE =
-            MSE(poptea.expSetup.laser.L_end,
-                poptea.LMA.LMA_workspace.emissionExperimental,
-                poptea.LMA.LMA_workspace.predicted);
+      paramter_estimation(P, N, ParaEstSetting, &info, &nfev,
+                          xInitial, poptea, factorMax, factorScale,
+                          xpredicted);
+      poptea.LMA.LMA_workspace.MSE =
+          MSE(poptea.expSetup.laser.L_end,
+              poptea.LMA.LMA_workspace.emissionExperimental,
+              poptea.LMA.LMA_workspace.predicted);
 
-        myfile << poptea.TBCsystem.gammaEval() << "\t"
-               << poptea.TBCsystem.a_subEval() << "\t"
-               << poptea.TBCsystem.optical.Emit1 << "\t"
-               << poptea.TBCsystem.optical.R1<< "\t"
-               << poptea.TBCsystem.coating.lambda << "\t"
-               << poptea.LMA.LMA_workspace.MSE << "\n";
+      myfile << poptea.TBCsystem.gammaEval() << "\t"
+             << poptea.TBCsystem.a_subEval() << "\t"
+             << poptea.TBCsystem.optical.Emit1 << "\t"
+             << poptea.TBCsystem.optical.R1<< "\t"
+             << poptea.TBCsystem.coating.lambda << "\t"
+             << poptea.LMA.LMA_workspace.MSE << "\n";
 
-        printPEstimates(N, poptea);
-        xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
-                x_ini10(.8), x_ini10(0.57)};
+      printPEstimates(N, poptea);
+      xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
+              x_ini10(.8), x_ini10(0.57)};
 
-    }
+  }
 
-    myfile.close();
+  myfile.close();
 
-    delete []xSave;
-    delete []xpredicted;
+  delete []xSave;
+  delete []xpredicted;
 
 
 
-    return;
+  return;
 }
 
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,

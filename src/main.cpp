@@ -32,9 +32,7 @@ int main( int /*argc*/, char* argv[] )
       poptea.LMA.LMA_workspace.emissionExperimental[nn]
             = poptea.LMA.LMA_workspace.emissionNominal[nn];
     }
-
-    fitting(poptea.expSetup.laser.L_end, poptea.LMA.unknownParameters.Nsize(),
-            poptea.LMA.Settings, poptea, xInitial, interants, 10, 5);
+    fitting(poptea, xInitial, interants, 10, 5);
   }
 
   //Prepare figures and data for paper Sensitivity
