@@ -27,21 +27,10 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
   LMA.LMA_workspace.MSETol = 1e-8;
 
   /// Heat Transfer and Emission models
-  const enum XParaNames xParametersNames_[] = {asub, gammaEff, E1 ,R1, lambda};
-
-
-
-
-
   const double l_min = .04;
   const double l_max = 4;
   const size_t LendMinDecade = 50;
 
-  for (size_t i=0; i < LMA.unknownParameters.Nsize(); ++i)
-  {
-    xParametersNames[i] = xParametersNames_[i];
-    xParameters95Names[i] = xParametersNames_[i];
-  }
   // Populate the experimental phase values in parameters99
   expSetup.laser.L_end = LendMinDecade;
   expSetup.q_surface = 0;

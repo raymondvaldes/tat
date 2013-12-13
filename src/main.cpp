@@ -15,24 +15,23 @@ int main( int /*argc*/, char* argv[] )
     poptea( thermalAnalysisMethod::PopTea::loadConfig(
               DataDirectory.abs(filename),DataDirectory ) );
 
-  phase99(poptea.expSetup.laser.L_end, poptea,
-          poptea.LMA.LMA_workspace.emissionNominal);
-
-  /// Input Directory Information
-  double *xInitial = nullptr;
-  xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
-
+  /// Test loop
   //Many fit test
   if (true)
   {
-    constexpr size_t interants = 1;
+    double *xInitial = nullptr;
+    xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
+    constexpr size_t interants = 1;
+    phase99(poptea.expSetup.laser.L_end, poptea,
+            poptea.LMA.LMA_workspace.emissionNominal);
     for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
     {
       poptea.LMA.LMA_workspace.emissionExperimental[nn]
             = poptea.LMA.LMA_workspace.emissionNominal[nn];
     }
     fitting(poptea, xInitial, interants, 10, 5);
+    delete[] xInitial;
   }
 
   //Prepare figures and data for paper Sensitivity
@@ -40,6 +39,6 @@ int main( int /*argc*/, char* argv[] )
 //    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
 // Clear memory
-  delete[] xInitial; globalStopWatch.displayTime();
+  globalStopWatch.displayTime();
   return 0;
 }

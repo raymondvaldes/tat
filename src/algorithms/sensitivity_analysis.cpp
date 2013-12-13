@@ -50,7 +50,8 @@ void perturbationTest(const size_t m, const size_t n,
     }
 
 ///Reset parameters to be fitted
-    for(size_t currentI = 0; currentI <=  poptea.LMA.unknownParameters.Nsize() ; ++currentI)
+    for(size_t currentI = 0;
+        currentI <= poptea.LMA.unknownParameters.Nsize() ; ++currentI)
     {
         size_t iter = 0;
         for(size_t i = 0; i < poptea.N95 ; ++i)
@@ -518,15 +519,12 @@ void fitting(class thermalAnalysisMethod::PopTea poptea, double *xInitial,
       printPEstimates(N, poptea);
       xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
               x_ini10(.8), x_ini10(0.57)};
-
   }
 
   myfile.close();
 
   delete []xSave;
   delete []xpredicted;
-
-
 
   return;
 }

@@ -53,7 +53,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
     {
         for(size_t i = 0; i < N; ++i)
         {
-            switch ( poptea.xParametersNames[i] )
+            switch( poptea.xParametersNames[i] )
             {
                 case asub :
                     diag[i] = poptea.TBCsystem.a_sub;
@@ -68,7 +68,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
                     diag[i] = poptea.TBCsystem.optical.R1 ;
                     break;
                 case lambda :
-                diag[i] = poptea.TBCsystem.coating.lambda;
+                    diag[i] = poptea.TBCsystem.coating.lambda;
                     break;
                 case R0 :
                     diag[i] = poptea.TBCsystem.optical.R0;
