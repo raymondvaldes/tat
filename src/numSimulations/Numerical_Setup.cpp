@@ -814,7 +814,7 @@ std::complex<double> simpson_3_8Complex(const double* YReal,
     return sum;
 }
 
-void solveMatrix(const int64_t n, const std::vector<double>& b,
+void solveMatrix(const int n, const std::vector<double>& b,
                  const std::vector<double>& d,
                  const std::vector<double>& a,
                  const std::vector<double>& C,
@@ -839,13 +839,14 @@ void solveMatrix(const int64_t n, const std::vector<double>& b,
 
     double m1;
     {
-        const int i = 1;
+        constexpr int i = 1;
         m1 = b[i] / d[i-1];
         dw[i] = d[i] - m1 * a[i-1];
         Cw[i] = C[i] - m1 * C[i-1];
     }
 
-    for (int64_t i = 1 ; i+4 < n  ; i += 5)
+
+    for (int i = 1 ; i < n  ; i++)
     {
         m1 = -b[i];
         m1 /= dw[i-1];
@@ -855,73 +856,17 @@ void solveMatrix(const int64_t n, const std::vector<double>& b,
         Cw[i] =  m1;
         Cw[i] *= Cw[i-1];
         Cw[i] += C[i];
-
-        m1 = -b[i+1];
-        m1 /= dw[i];
-        dw[i+1] =  m1;
-        dw[i+1] *= a[i];
-        dw[i+1] += d[i+1];
-        Cw[i+1] =  m1;
-        Cw[i+1] *= Cw[i];
-        Cw[i+1] += C[i+1];
-
-        m1 = -b[i+2];
-        m1 /= dw[i+1];
-        dw[i+2] = m1;
-        dw[i+2] *= a[i+1];
-        dw[i+2] += d[i+2];
-        Cw[i+2] =  m1;
-        Cw[i+2] *= Cw[i+1];
-        Cw[i+2] += C[i+2];
-
-        m1 = -b[i+3];
-        m1 /= dw[i+2];
-        dw[i+3] =  m1;
-        dw[i+3] *= a[i+2];
-        dw[i+3] += d[i+3];
-        Cw[i+3] =  m1;
-        Cw[i+3] *= Cw[i+2];
-        Cw[i+3] += C[i+3];
-
-        m1 = -b[i+4];
-        m1 /= dw[i+3];
-        dw[i+4] =  m1;
-        dw[i+4] *= a[i+3];
-        dw[i+4] += d[i+4];
-        Cw[i+4] =  m1;
-        Cw[i+4] *= Cw[i+3];
-        Cw[i+4] += C[i+4];
     }
 
     u[n-1] = Cw[n-1];
     u[n-1] /= dw[n-1];
 
-    for (int64_t i = n - 2; i >= 4; i= i-5)
+    for (int i = n - 2; i >= 0; i--)
     {
         u[i]  = u[i+1];
         u[i] *= -a[i];
         u[i] += Cw[i];
         u[i] /= dw[i];
-
-        u[i-1]  = u[i];
-        u[i-1] *= -a[i-1];
-        u[i-1] += Cw[i-1];
-        u[i-1] /= dw[i-1];
-
-        u[i-2]  = u[i-1];
-        u[i-2] *= -a[i-2];
-        u[i-2] += Cw[i-2];
-        u[i-2] /= dw[i-2];
-
-        u[i-3]  = u[i-2];
-        u[i-3] *= -a[i-3];
-        u[i-3] += Cw[i-3];
-        u[i-3] /= dw[i-3];
-
-        u[i-4]  = u[i-3];
-        u[i-4] *= -a[i-4];
-        u[i-4] += Cw[i-4];
-        u[i-4] /= dw[i-4];
     }
 
   delete[] dw;
@@ -1064,49 +1009,42 @@ void range(double* l_thermal, const double l_min, const double l_max,
 void range(std::vector<double>& l_thermal, const double l_min,
            const double l_max, const size_t L_end)
 {
-    for(size_t i = 0 ; i <  L_end; ++i)
-    {
-        l_thermal[i] = (l_max-l_min)*(double(i)/(L_end-1));
-    }
+  for(size_t i = 0 ; i <  L_end; ++i)
+  {
+    l_thermal[i] = (l_max-l_min)*(double(i)/(L_end-1));
+  }
 }
 
 void range1og10(const double l_min, const double l_max, const size_t L_end,
                 std::vector<double> &l_thermal)
 {
-    /*
-    Creates a closed logarithmic distribution from l_min to l_max.
-    log base 10
-    */
-    if( (L_end < 1) || (l_min > l_max) || (equalto(l_min,l_max))
-        || (l_min <= 0))
-    {
-        std::cout << "\nerror in range1og10()";
-        exit(-69);
-    }
+  BOOST_ASSERT_MSG( L_end >= 1 , "check inputs \n\n" );
+  BOOST_ASSERT_MSG( l_min < l_max , "check inputs \n\n" );
+  BOOST_ASSERT_MSG( l_min > 0 , "check inputs \n\n" );
 
-    if (L_end == 1)
-    {
-        l_thermal[0] = l_min;
-    }
-    else if(L_end == 2)
-    {
-        l_thermal[0] = l_min;
-        l_thermal[L_end-1] = l_max;
-    }
-    else if(L_end > 2)
-    {
-        const double start1 = log10(l_min * 10);
-        const double end1   = log10(l_max * 10);
-        const double increments = (end1 - start1) / (L_end -1);
-        double rangeI = start1;
+  if (L_end == 1)
+  {
+    l_thermal[0] = l_min;
+  }
+  else if(L_end == 2)
+  {
+    l_thermal[0] = l_min;
+    l_thermal[L_end-1] = l_max;
+  }
+  else if(L_end > 2)
+  {
+    const double start1 = log10(l_min * 10);
+    const double end1   = log10(l_max * 10);
+    const double increments = (end1 - start1) / (L_end -1);
+    double rangeI = start1;
 
-        for(size_t n = 0 ; n < L_end-1 ; ++n )
-        {
-            l_thermal[n] = pow(10, rangeI - 1);
-            rangeI += increments;
-        }
-        l_thermal[L_end-1] = l_max;
+    for(size_t n = 0 ; n < L_end-1 ; ++n )
+    {
+        l_thermal[n] = pow(10, rangeI - 1);
+        rangeI += increments;
     }
+    l_thermal[L_end-1] = l_max;
+  }
 }
 
 void range1og10(const double l_min, const double l_max, const size_t L_end,
@@ -1147,321 +1085,6 @@ void range1og10(const double l_min, const double l_max, const size_t L_end,
         l_thermal[L_end-1] = l_max;
     }
 }
-
-//Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
-//           const double beta1_, const double split_, const double L_coat_,
-//           const double L_substrate_, const double CO2Radius_,
-//           const double Rdomain_)
-//           :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_)
-//{
-//  time            = new double[Nend];
-//  tau             = new double[Nend];
-
-//  eta             = new double[M2];
-//  z_real          = new double[M2];
-//  z_norm          = new double[M2];
-//  zNorm2          = new double[M2];
-//  d_eta_plus      = new double[M2];
-//  deltaZ          = new double[M2];
-//  d_eta_minus     = new double[M2];
-
-//  rNorm2          = new double[Rend];
-//  rNorm           = new double[Rend];
-//  rZeta           = new double[Rend];
-//  rReal           = new double[Rend];
-
-//  z_jplus.resize(M2);
-//  z_jminus.resize(M2);
-//  z_j.resize(M2);
-
-//  for (size_t i = 0; i < Nend; ++i)
-//  {
-//    tau[i]  = double(i)/(Nend-1);
-//  }
-
-//  for (size_t i = 0; i < Rend; ++i)
-//  {
-//    rZeta[i] = double(i)/(Rend-1);
-//  }
-
-//  meshUpdate(L_coat_, L_substrate_, CO2Radius_, Rdomain_);
-
-//}
-
-
-//Mesh::~Mesh()
-//{
-//  delete [] tau;
-//  delete [] time;
-
-//  delete [] eta;
-//  delete [] z_real;
-//  delete [] z_norm;
-//  delete [] zNorm2;
-//  delete [] d_eta_plus ;
-//  delete [] deltaZ     ;
-//  delete [] d_eta_minus;
-
-//  delete [] rNorm;
-//  delete [] rZeta;
-//  delete [] rNorm2;
-//  delete [] rReal;
-//}
-
-//double Mesh::beta2_func(double * variable, double * constants)
-//{
-//  double a,b,c,d;
-//  std::vector<double> eta_;
-//  eta_.resize(int(constants[1]));
-
-
-////    double *eta_ = new double[int(constants[1])];
-//  double L1 = 1; //coating nondimensional thickness
-//                  //z transformed to eta from 0-L_coat  to 0-1.
-//  double L2 = 1; //substrate ....Do not change these parameters.
-//  size_t M1_ = constants[4] * (constants[1]-1);
-
-//  for(size_t j = 0; j <= M1_ ; j++)
-//      eta_[j] =  (double (j) / double (M1_)) * L1;
-
-//  for(size_t j = 1 ; j < constants[1] - M1_ ; j ++)
-//      eta_[M1_+j] = ( double ( j ) / ( double (constants[1]-1) -double(M1_)))
-//       * L2 + eta_[M1_];
-
-//  a = (z_eta(eta_[M1_+1], constants[0], variable[0])-1.) * constants[2] +
-//  constants[3];
-//  b = z_eta(eta_[M1_], constants[0], variable[0]) * constants[3];
-//  c = z_eta(eta_[M1_-1], constants[0], variable[0]) * constants[3];
-//  d = fabs( ( a - b ) - ( b - c ) );
-
-////    delete[] eta_;
-//  return d;
-//}
-
-//void Mesh::minimizer(double *variable, double *constants,
-//                     double temp_variable_min, double temp_variable_max,
-//                     double min_goal, const size_t max_iterations)
-//{
-//  double fraction = 0;
-//  //    double *temp_to_minimize = new double [max_iterations];
-
-//  size_t while_j=0;
-//  int best_minimum_element = 0;
-//  variable[0] = temp_variable_min;
-//  //    temp_to_minimize[best_minimum_element] = min_goal*10;
-
-//  std::vector<double> temp_to_minimize;
-//  temp_to_minimize.resize(max_iterations+1);
-//  temp_to_minimize[best_minimum_element] = min_goal*10;
-
-
-//  while(temp_to_minimize[best_minimum_element]>=min_goal &&
-//        while_j<max_iterations)
-//  {
-//      fraction = pow(10,-1*double (while_j));
-//      variable[0] = temp_variable_min+fraction;
-//      temp_to_minimize[0] = beta2_func(variable,constants);
-
-//      for(size_t for_j=1 ; for_j <= max_iterations ; for_j++ )
-//      {
-//          variable[0]+=fraction;
-//          temp_to_minimize[for_j]= beta2_func(variable,constants);
-
-//          if(
-//             fabs(temp_to_minimize[for_j]) >=
-//             fabs(temp_to_minimize[for_j-1])
-//             ||
-//             variable[0] >   temp_variable_max)
-//          {
-//              variable[0]-=fraction;
-//              best_minimum_element=for_j-1;
-//              break;
-//          }
-//      }
-//      while_j+=1;
-
-//  }
-//  variable[0]+=fraction;
-//  temp_to_minimize[best_minimum_element+1]= beta2_func(variable,constants);
-//  variable[0]-=fraction;
-
-//  //    delete []temp_to_minimize;
-
-//  return;
-//}
-
-//double Mesh::find_beta2(const double L_coat, const double L_substrate)
-//{
-//  ////minimizer start (to find beta2)
-//  constexpr size_t beta_iter = {100};
-//  constexpr double beta_tol  = {1e-6};
-//  double variable;
-//  double constants[5] = {beta1, double(M2), L_substrate, L_coat, split};
-
-//  minimizer(&variable, constants, 1.001, 15., beta_tol, beta_iter);
-
-
-//  return variable;
-//}
-
-//size_t Mesh::discretizeSpace(const double L_coat, const double L_substrate)
-//{
-//  constexpr double L1 = 1; //coating nondimensional thickness
-//                           //z transformed to eta from 0-L_coat  to 0-1.
-//  constexpr double L2 = 1; //substrate ....Do not change these parameters.
-
-//  const size_t M1_ = split * (M2-1);
-
-//// define eta (computational grid)
-//  for(size_t j = 0; j <= M1_ ; j++)
-//  {
-//      eta[j] =  double (j) / M1_ * L1;
-//  }
-
-//  for(size_t j = 1 ; j <= (M2-1) - M1_ ; j ++)
-//  {
-//      eta[M1_+j] = ( double ( j ) / (M2-1 -M1_ ) ) * L2;
-//      eta[M1_+j] += eta[M1_];
-//  }
-
-//  for ( size_t j = 0 ; j < M2; j++ )
-//  {
-//      z_norm[j] = z_eta( eta[j], beta1,  beta2) ;
-
-//      if ( j <= M1_)
-//      {
-//          z_real[j] = z_norm[j] * L_coat;
-//      }
-//      else if ( j > M1_ && j < M2)
-//      {
-//          z_real[j] = (z_norm[j] - 1) * L_substrate + L_coat;
-//      }
-
-//      if(j <= M1_)
-//      {
-//          zNorm2[j] = z_norm[j];
-//      }
-//      else if(j > M1_)
-//      {
-//          zNorm2[j] = (L_substrate/L_coat) * ( z_norm[j] - 1 ) + 1;
-//      }
-//  }
-
-
-//  return M1_;
-//}
-
-//double Mesh::z_eta(const double eta_)
-//{
-//  return z_eta(eta_, beta1, beta2);
-//}
-
-//double Mesh::z_eta(const double eta_, const double beta1_, const double beta2_)
-//{
-//  /* z_norm accounts for z_real after it has been normalized by L_coat
-//      and L_substrat double B;*/
-//  if (equalto(eta_,0))
-//  {
-//      return eta_;
-//  }
-
-//  else if (equalto(eta_,1))
-//  {
-//      return eta_;
-//  }
-
-//  else if (eta_ < 1)
-//  {
-//      const double B = ( beta1_ + 1) / (beta1_ - 1) ;
-//      return 1 + beta1_ - ( 2 * B * beta1_ ) / ( B + pow( B , eta_ ) ) ;
-//  }
-
-//  else if (eta_ > 1)
-//  {
-//      const double B = ( beta2_ + 1) / ( beta2_ - 1) ;
-//      return 2 + beta2_ - (2 * B * B * beta2_) / (B * B + pow( B , eta_));
-//  }
-
-//  return -1;
-//}
-
-//double Mesh::D_eta(const double z_norm_)
-//{
-//  //z_norm accounts for z_real after it has been normalized by
-//  //L_coat and L_substrate
-
-//  if (z_norm_ < 1 || equalto(z_norm_, 1))
-//  {
-//      const double B = ( beta1 + 1) / ( beta1 - 1) ;
-//      return ( -2 * beta1 ) /
-//      ( ( ( (-1 + z_norm_)*(-1 +z_norm_)) -(beta1*beta1) ) * ( log( B) ) ) ;
-//  }
-
-//  else if (z_norm_ > 1)
-//  {
-//      const double B = ( beta2 + 1) / ( beta2 - 1) ;
-//      return ( -2 * beta2 ) /
-//      ( ( ((-2 + z_norm_)*(-2 + z_norm_)) - (beta2*beta2) ) * ( log( B ) ) ) ;
-//  }
-
-//  return -1;
-//}
-
-//void Mesh::zUpdate()
-//{
-//  /*
-//  Attempted to autovectorize the for loop but was unable due to the
-//  conditional statements in the z_eta function. Splitting the loop into
-//  three loops did not help.
-//  */
-//  z_jplus[0] = z_eta( ::average(eta[1], eta[0]));
-//      z_j[0] = z_eta( eta[0]);
-
-//  const size_t endM2 = M2-1;
-//  for (size_t j = 1; j < endM2; j++)
-//  {
-//      z_jplus[j] = z_eta( ::average(eta[j+1], eta[j]) );
-//      z_jminus[j] = z_eta( ::average(eta[j-1], eta[j]) );
-//      z_j[j] =  z_eta( eta[j]);
-//  }
-
-//  z_jminus[M2-1] = z_eta( ::average(eta[M2-2], eta[M2-1]) );
-//       z_j[M2-1] = z_eta( eta[M2-1]);
-
-
-//  for(size_t j = 0; j==0; j++)
-//      d_eta_plus[j]  = D_eta( z_jplus[j] );
-//  for (size_t j = 1; j < M2-1 ; ++j)
-//  {
-//      d_eta_minus[j] = D_eta( z_jminus[j]);
-//      d_eta_plus[j]  = D_eta( z_jplus[j]);
-//      deltaZ[j] = z_jplus[j] - z_jminus[j];
-//  }
-
-//  {
-//      const size_t j = M2-1;
-//      d_eta_minus[j] = D_eta( z_jminus[j]);
-//      d_eta_plus[j]  = D_eta( z_j[j] ) ;
-//  }
-
-//  return;
-//}
-
-//void Mesh::meshUpdate(const double L_coat, const double L_substrate,
-//                      const double CO2Radius, const double Rdomain)
-//{
-//  beta2 = find_beta2(L_substrate, L_coat);
-//  M1 = discretizeSpace(L_coat, L_substrate);
-
-//  for (size_t i = 0; i < Rend; ++i)
-//  {
-//      rNorm[i] = rZeta[i] * ( Rdomain / CO2Radius ) ;
-//      rReal[i] = rNorm[i] * CO2Radius;
-//  }
-
-//  zUpdate();
-//}
-
 
 perturbStruct::perturbStruct(const size_t a, const size_t b, const double c)
                              : pNum(a), xnumber(b), spread(c)

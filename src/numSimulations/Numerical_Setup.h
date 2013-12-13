@@ -47,7 +47,7 @@ double x_ini10(const double x_ref);
 
 double x_ini(double x_min, double x_max);
 
-void solveMatrix(const int64_t n, const std::vector<double>& b,
+void solveMatrix(const int n, const std::vector<double>& b,
                  const std::vector<double>& d, const std::vector<double>& a,
                  const std::vector<double>& C, std::vector<double>& u);
 

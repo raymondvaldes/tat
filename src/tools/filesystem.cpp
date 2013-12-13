@@ -10,6 +10,7 @@ void makeDir(const std::string rootPath, const std::string newDirectory)
     return;
 }
 
+
 directory::directory(const std::string workingDirectory_):
   workingDirectory(workingDirectory_){}
 

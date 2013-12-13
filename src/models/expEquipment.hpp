@@ -10,9 +10,6 @@ public:
   double radius;
 
   explicit Detector(const double wavelength_, const double radius_);
-  explicit Detector(const std::string &filename);
-  void load(const std::string &filename);
-  void save(const std::string &filename);
   ~Detector(void);
 };
 
@@ -47,7 +44,7 @@ public:
   void updatePower(const double Qpower);
   double thermalSetup(const double lmin_, const double lmax_,
                       const double L_coat, const double kc, const double psic,
-                      const double L_end_);
+                      const size_t L_end_);
   void updateNMeasurements();
 };
 

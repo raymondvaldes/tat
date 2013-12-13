@@ -4,34 +4,10 @@ namespace expEquipment{
 
 Detector::Detector(const double wavelength_, const double radius_)
     :wavelength(wavelength_), radius(radius_)
-{}
-
-Detector::Detector(const std::string &filename)
 {
-  load(filename);
-}
-
-void Detector::load(const std::string &filename)
-{
-  // Create empty property tree object
-  using boost::property_tree::ptree;
-  ptree pt;
-
-  read_xml(filename, pt);
-
-  radius = pt.get<double>( "Detector.radius" );
-  wavelength = pt.get<double>( "Detector.lambda" );
-}
-
-void Detector::save(const std::string &filename)
-{
-  using boost::property_tree::ptree;
-  ptree pt;
-
-  pt.put<double>( "Detector.radius", radius );
-  pt.put<double>( "Detector.lambda", wavelength );
-
-  write_xml(filename, pt);
+  BOOST_ASSERT_MSG( ( wavelength > 0 )     &&
+                    ( radius > 0 ),
+                    "check detector inputs\n\n" );
 }
 
 Detector::~Detector(void){}
@@ -39,7 +15,14 @@ Detector::~Detector(void){}
 Laser::Laser(const double a, const double b, const double c, const double d):
              offset(c), amplitude(d), Qlaser(a), radius(b)
 {
-    update();
+  BOOST_ASSERT_MSG( ( offset > 0 && offset < 1 )     &&
+                    ( amplitude > 0 )                &&
+                    ( ( amplitude + offset ) <= 1 )  &&
+                    ( amplitude <= offset )          &&
+                    ( Qlaser > 0 )                   &&
+                    ( radius > 0 ),
+                    "check laser inputs\n\n" );
+  update();
 }
 
 void Laser::update(void)
@@ -50,14 +33,16 @@ void Laser::update(void)
 
 void Laser::updateRadius(const double r)
 {
-    radius = r;
-    update();
+  BOOST_ASSERT_MSG( ( r > 0 ), "check laser radius inputs\n\n" );
+  radius = r;
+  update();
 }
 
 void Laser::updatePower(const double Qpower)
 {
-    Qlaser = Qpower;
-    update();
+  BOOST_ASSERT_MSG(Qpower >= 0, "power can't be negaitve \n\n");
+  Qlaser = Qpower;
+  update();
 }
 
 double Laser::area(void) const
@@ -82,24 +67,23 @@ double Laser::IntensityTransient(void) const
 
 double Laser::thermalSetup(const double lmin_, const double lmax_,
                            const double L_coat, const double kc,
-                           const double psic, const double L_end_)
+                           const double psic, const size_t L_end_)
 {
+  BOOST_ASSERT_MSG( ( lmin_ < lmax_ ) , "check min-max logic\n\n" );
+  BOOST_ASSERT_MSG( ( L_coat > 0 ) && ( L_end_ > 0 ) , "check L inputs\n\n" );
+  BOOST_ASSERT_MSG( ( kc > 0 ) && ( psic > 0 ) , "check kc inputs\n\n" );
+
+  constexpr size_t box = 7;
+  constexpr double rangeLim[box] = {1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3};
+
+  BOOST_ASSERT_MSG( ( lmin_ >= rangeLim[0] ) &&
+                    ( lmax_ <= rangeLim[box-1] )  , "check min-max range\n\n" );
   l_min = lmin_;
   l_max = lmax_;
   /* I need to create a function that determines the number of measurements
   necessary to satisfy L_end_ which is the minimum  number of measurements per
   decade. Once I determine the number of measurements I need then I can use
   the ::rangelog10 function to populate the range.*/
-
-  constexpr size_t box = 7;
-  const double rangeLim[box] = {1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3};
-
-  /*check to verify inputs*/
-  if(l_min < rangeLim[0] || l_max > rangeLim[box-1])
-  {
-    std::cout << "error in Laser::thermalSetup" << "\n";
-    exit(-1);
-  }
 
   double rangeFills[box-1] = {0};
   for(size_t i = 0; i < box-1 ; ++i)
@@ -154,7 +138,6 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
     L_end = L_end_;
   }
 
-
   updateNMeasurements();
   ::range1og10(l_min, l_max, L_end, l_thermal);
 
@@ -169,13 +152,10 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
 
 void Laser::updateNMeasurements()
 {
-
   std::cout << "this is the size.." << L_end <<"\n\n";
-
 
   omegas.resize(L_end);
   l_thermal.resize(L_end);
-
 }
 
 Laser::~Laser(){}
