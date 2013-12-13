@@ -47,28 +47,6 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
     int nfev;
     int info = 0;
 
-    /// Parameter Estimation Constraints
-    /*  parameter constraints are stored in the
-        structure parameter_constraints */
-    struct ::parameter_constraints st_ptr;
-    st_ptr.a_sub_min = 1e-0;
-    st_ptr.a_sub_max = 5;
-
-    st_ptr.gamma_min = 2e-0;
-    st_ptr.gamma_max = 10;
-
-    st_ptr.E_sigma_min = 1e-3;
-    st_ptr.E_sigma_max = 200;
-
-    st_ptr.R1_min = 0.6;
-    st_ptr.R1_max = 1;
-
-    st_ptr.lambda_min = .1;
-    st_ptr.lambda_max = 1;
-
-    st_ptr.R0_min = 0;
-    st_ptr.R0_max = 1;
-
     ///Noise in Simulated Emission
     constexpr double a =  .05;      // max % error (%*pi/2) (try .025)
     constexpr double b = 2.8;       // stretching parameter  (try 2.95) (1->pi)
@@ -113,7 +91,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         paramter_estimation(poptea.expSetup.laser.L_end,
                             poptea.LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info,
-                            &nfev, &st_ptr, xInitial, poptea, factorMax,
+                            &nfev, xInitial, poptea, factorMax,
                             factorScale, xpredicted);
         delete [] xInitial;
         delete [] xpredicted;
@@ -173,7 +151,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
         paramter_estimation(poptea.expSetup.laser.L_end,
                             poptea.LMA.unknownParameters.Nsize(),
-                            ParaEstSetting, &info, &nfev, &st_ptr, xInitial,
+                            ParaEstSetting, &info, &nfev, xInitial,
                             poptea, factorMax, factorScale, xpredicted);
         delete [] xInitial;
         delete [] xpredicted;
@@ -242,28 +220,6 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
     poptea.DataDirectory.mkdir("data/APS2");
     poptea.expSetup.laser.L_end = LendMinDecade;
 
-    /// Parameter Estimation Constraints
-    /*  parameter constraints are stored in the
-        structure parameter_constraints */
-    struct ::parameter_constraints st_ptr;
-    st_ptr.a_sub_min = 1e-0;
-    st_ptr.a_sub_max = 5;
-
-    st_ptr.gamma_min = 2e-0;
-    st_ptr.gamma_max = 10;
-
-    st_ptr.E_sigma_min = 1e-3;
-    st_ptr.E_sigma_max = 200;
-
-    st_ptr.R1_min = 0.6;
-    st_ptr.R1_max = 1;
-
-    st_ptr.lambda_min = .1;
-    st_ptr.lambda_max = 1;
-
-    st_ptr.R0_min = 0;
-    st_ptr.R0_max = 1;
-
 ///Set heating constraints
     constexpr double l_min = .04;
     constexpr double l_max = 4;
@@ -300,7 +256,7 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
         selection of the lmin and lmax for each iteration is determined
         with a random simulation. The argument for teh lthermalMC() function
         provides the band resolution. */
-        calibrationSweep(ParaEstSetting, &st_ptr, xInitial, poptea, factorMax,
+        calibrationSweep(ParaEstSetting, xInitial, poptea, factorMax,
                          factorScale, pertStruct, filename, LendMinDecade);
     }
 
@@ -325,7 +281,7 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
                 poptea.LMA.LMA_workspace.emissionNominal);
 //        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
 //                               l_max); //BUG MUST IMPLEMENT
-        fitting(poptea.expSetup.laser.L_end, N, ParaEstSetting, &st_ptr, poptea,
+        fitting(poptea.expSetup.laser.L_end, N, ParaEstSetting, poptea,
                 xInitial, 1, factorMax, factorScale);
 
         ///output data for printing
@@ -349,7 +305,7 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
     if(true)
     {
         parameterUncertainty(poptea.LMA.unknownParameters.Nsize(),
-                             ParaEstSetting, &st_ptr, xInitial,
+                             ParaEstSetting, xInitial,
                              poptea, factorMax, factorScale, pertStruct,
                              myEmissionNoise, filename);
         pertStruct->cleanup2();

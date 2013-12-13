@@ -67,8 +67,7 @@ public:
     asub,
     E1,
     R1,
-    lambda,
-    R0
+    lambda
   };
 
   typedef boost::bimap< enum Name , std::string > NameBiTYPE;
@@ -78,8 +77,7 @@ public:
    ( Name::asub     , "asub")
    ( Name::E1       , "E1")
    ( Name::R1       , "R1")
-   ( Name::lambda   , "lambda")
-   ( Name::R0       , "R0");
+   ( Name::lambda   , "lambda");
 
   explicit labels(void);
   explicit labels(const enum Name name_);

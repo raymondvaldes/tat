@@ -3,14 +3,12 @@
 
 void perturbationTest(const size_t m, const size_t n,
                       struct parameterEstimation::settings ParaEstSetting,
-                      const struct parameter_constraints *st_ptr,
                       double *xInitial,
                       class thermalAnalysisMethod::PopTea poptea,
                       const double factorMax, const double factorScale,
                       class perturbStruct *pStruct);
 
 void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
-                      const struct parameter_constraints *st_ptr,
                       double *xInitial,
                       class thermalAnalysisMethod::PopTea poptea,
                       const double factorMax, const double factorScale,
@@ -18,7 +16,6 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
                       const size_t lEndMin);
 
 void fitting(size_t m, size_t n, parameterEstimation::settings ParaEstSetting,
-             const struct parameter_constraints *st_ptr,
              class thermalAnalysisMethod::PopTea poptea, double * xInitial,
              const size_t interants, const double factorMax,
              const double factorScale);
@@ -34,7 +31,6 @@ void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol,
 
 void parameterUncertainty(const size_t n,
                           struct parameterEstimation::settings ParaEstSetting,
-                          const struct parameter_constraints *st_ptr,
                           double *xInitial, class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,

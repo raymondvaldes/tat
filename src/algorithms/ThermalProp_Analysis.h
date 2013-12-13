@@ -6,7 +6,6 @@
 int paramter_estimation(const size_t m, const size_t  n,
                         struct parameterEstimation::settings ParaEstSetting,
                         int *info, int *nfev,
-                        const struct parameter_constraints *pc_ptr,
                         double *x, class thermalAnalysisMethod::PopTea poptea,
                         const double factorMax, const double factorScale,
                         double *xpredicted);

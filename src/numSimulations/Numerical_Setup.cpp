@@ -35,7 +35,7 @@ double kx_limiter1(const double ki)
     return log(ki);
 }
 
-double kx_limiter2(const double ki,const double k_min,const double k_max)
+double kx_limiter2( const double ki, const double k_min, const double k_max )
 {
 //    std::cout << "\n\n"<< x_min <<"\t" <<  xi<< "\t" << x_max << "\n\n";
 //    std::cout << (xi > x_min) << "\n";

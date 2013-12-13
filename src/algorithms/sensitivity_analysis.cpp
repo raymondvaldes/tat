@@ -1,7 +1,6 @@
 #include "../Header.h"
 void perturbationTest(const size_t m, const size_t n,
                       struct parameterEstimation::settings ParaEstSetting,
-                      const struct parameter_constraints *st_ptr,
                       double *xInitial,
                       class thermalAnalysisMethod::PopTea poptea,
                       const double factorMax, const double factorScale,
@@ -137,7 +136,7 @@ void perturbationTest(const size_t m, const size_t n,
             }
 
             paramter_estimation(m, N, ParaEstSetting, &info,
-                                &nfev, st_ptr, xInitial, poptea,
+                                &nfev, xInitial, poptea,
                                 factorMax, factorScale, xpredicted);
             phase99(poptea.expSetup.laser.L_end, poptea,
                     poptea.LMA.LMA_workspace.predicted);
@@ -217,7 +216,6 @@ void perturbationTest(const size_t m, const size_t n,
 }
 
 void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
-                      const struct parameter_constraints *st_ptr,
                       double *xInitial,
                       class thermalAnalysisMethod::PopTea poptea,
                       const double factorMax, const double factorScale,
@@ -270,7 +268,7 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
 
         perturbationTest(poptea.expSetup.laser.L_end,
                          poptea.LMA.unknownParameters.Nsize(),
-                         ParaEstSetting, st_ptr, xInitial, poptea, factorMax,
+                         ParaEstSetting, xInitial, poptea, factorMax,
                          factorScale, pStruct);
 
         ///Print some information to terminal
@@ -298,7 +296,6 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
 
 void parameterUncertainty(const size_t n,
                           struct parameterEstimation::settings ParaEstSetting,
-                          const struct parameter_constraints *st_ptr,
                           double *xInitial,
                           class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,
@@ -342,7 +339,7 @@ void parameterUncertainty(const size_t n,
     constexpr size_t interants = 0;
     fitting(poptea.expSetup.laser.L_end,
             poptea.LMA.unknownParameters.Nsize(), ParaEstSetting,
-            st_ptr, poptea, xInitial, interants, factorMax, factorScale);
+            poptea, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
     poptea.DataDirectory.mkdir("debug");
@@ -379,7 +376,7 @@ void parameterUncertainty(const size_t n,
         ///estimate unknown parameters
         paramter_estimation(poptea.expSetup.laser.L_end,
                             poptea.LMA.unknownParameters.Nsize(),
-                            ParaEstSetting, &info, &nfev, st_ptr, xInitial,
+                            ParaEstSetting, &info, &nfev, xInitial,
                             poptea, factorMax, factorScale, xpredicted);
         phase99(poptea.expSetup.laser.L_end, poptea,
                 poptea.LMA.LMA_workspace.predicted);
@@ -476,11 +473,14 @@ void parameterUncertainty(const size_t n,
 
 void fitting(size_t P, size_t N,
              struct parameterEstimation::settings ParaEstSetting,
-             const struct parameter_constraints *st_ptr,
              class thermalAnalysisMethod::PopTea poptea, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale)
 {
+
+
+
+
 /// Scale jacobian if enabled
     double *xpredicted = new double[N];
     std::ofstream myfile;
@@ -503,7 +503,7 @@ void fitting(size_t P, size_t N,
         int info = 0;
         myfile << i << "\t";
 
-        paramter_estimation(P, N, ParaEstSetting, &info, &nfev, st_ptr,
+        paramter_estimation(P, N, ParaEstSetting, &info, &nfev,
                             xInitial, poptea, factorMax, factorScale,
                             xpredicted);
         poptea.LMA.LMA_workspace.MSE =
