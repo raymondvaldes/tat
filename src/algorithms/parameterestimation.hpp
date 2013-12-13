@@ -17,6 +17,8 @@ private:
   double initialGuess;
   double bestfitval;
 
+
+
 public:
   explicit unknown(enum physicalModel::labels::Name name_,
           const double lower_,
@@ -26,15 +28,14 @@ public:
           const double upper_,
           const double initialGuess_);
 
-  void Initialauto(void);
-
-  void Initialset(const double input);
   void bestfitset(const double input);
-
-  double initialVal(void);
   double bestfit(void);
   double upperBound(void);
   double lowerBound(void);
+  void Initialauto(void);
+  void Initialset(const double input);
+  double initialVal(void);
+
 
   enum physicalModel::labels::Name label(void);
 
@@ -43,19 +44,20 @@ public:
 class unknownList
 {
 private:
-  std::vector<class unknown> vectorUnknowns;
   size_t N;
 
 public:
+  std::vector<class unknown> vectorUnknowns;
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
                   const double upper);
-  ~unknownList();
-  static class unknownList
-      loadConfigfromXML(const boost::property_tree::ptree pt);
-
   size_t Nsize(void);
   void NAssign(size_t xInput);
+
+
+  static class unknownList
+      loadConfigfromXML(const boost::property_tree::ptree pt);
+  ~unknownList();
 };
 
 class settings

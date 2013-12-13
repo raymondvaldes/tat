@@ -84,58 +84,6 @@ double rss(const double N, const double* exp, const double* x_hat)
     return sum;
 }
 
-//double VarianceEst(const size_t num, const size_t P, const size_t N,
-//                   const double* l_thermal, class thermalAnalysisMethod::PopTea parametersStr,
-//                   const double stddevExperimental)
-//
-//{
-///*
-//    The estimate of the variance (sigma^2)  is obtained from the degrees of
-//    freedom and the objective function. This is valid if the
-//
-//        S ... objective function
-//        P ... number of unique measurements
-//        N ... number of unknown parameters
-//        num...  number of measurements used to estimate each unique measurement
-//        parametersStr   ... structure with parameter values
-//        stddevExperimental ...stddev used to create artificial experimental data
-//        l_thermal ... values for thermal penetration used
-//*/
-//    double data[P][num];
-//    double average[P];
-//    double SSall[P][num];
-//    double sum;
-//
-//    for(size_t n = 0 ; n < P ; ++n )
-//    {
-//        double temp = emission_analytical(parametersStr->lambda,
-//                                          l_thermal[n], parametersStr->E_sigma,
-//                                          parametersStr->gamma,
-//                                          parametersStr->R1);
-//        sum = 0;
-//        for(size_t i = 0; i < num ; ++i)
-//        {
-//            data[n][i] = x_normal(temp, temp*stddevExperimental);
-//            sum += data[n][i];
-//        }
-//        average[n] = sum / num;
-//    }
-//
-//    sum = 0;
-//    for(size_t n = 0 ; n<P ; ++n )
-//    {
-//        for(size_t i = 0; i < num ; ++i)
-//        {
-//            SSall[n][i] = pow(data[n][i] - average[n] , 2 );
-//            sum += SSall[n][i];
-//        }
-//    }
-//
-//    return sum / ( P*num - N ) ;
-//}
-
-
-
 double variance(const size_t P, const size_t N, const double S)
 {
     /*

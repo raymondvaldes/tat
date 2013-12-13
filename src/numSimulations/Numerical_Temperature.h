@@ -37,8 +37,6 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     const double omega1,
                     class Temperature Tprofile);
 
-double A_full(double *A1, double *A2, double *A3, double **A, const int M2);
-
 double eta_z(const double z,const double beta1,const double beta2);
 
 double abMatrixPrepopulate(std::vector<double>& B1,
@@ -78,12 +76,6 @@ void heatingProfile(const double opt, const double lambda,
                     const std::vector<double>& z_j, double*genProfile,
                     const size_t M1 );
 
-void zUpdate(const size_t M2, const double* const eta, const double beta1,
-             const double beta2, std::vector<double>& z_jplus,
-             std::vector<double>& z_jminus, std::vector<double>& z_j,
-             double* __restrict__ d_eta_plus, double* __restrict__  deltaZ,
-             double* __restrict__ d_eta_minus);
-
 void Ab_transient(const size_t n,
                   std::vector<double>& A1,
                   std::vector<double>& A2,
@@ -112,10 +104,6 @@ double qGenAverage(const double I_avg, const double opt, const double lambda,
                    const double z1, const double z2);
 
 double r_xi(const double xi, const double beta);
-
-void discretizeTime(const size_t Nend, double*time,
-                    const double*tau,
-                    const double omega);
 
 double Iplus1Func(const double R0, const double R1, const double lambda);
 double Iplus0Func(const double R0, const double R1, const double lambda);

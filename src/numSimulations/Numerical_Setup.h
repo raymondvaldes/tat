@@ -78,11 +78,6 @@ double x_normal(const double Xmean, const double Xstddev);
 
 double x_normal(const double Xmean, const double Xstddev, const double seed1);
 
-double Psi_non(const std::vector<std::vector<double>>& T, const double eta,
-               const double eta_j, const size_t j, const size_t n,
-               const double psi_ref, const int prop_linearity,
-               const double psi_c);
-
 void cosfit(double **dependent, const double *independent, double *x, int j,
             double omega1, int Nend);
 

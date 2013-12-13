@@ -20,7 +20,7 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
   const size_t d = LMA.unknownParameters.Nsize();
 
   xParametersNames.resize(d);
-  xParameters95Names.resize(d);
+  xParameters95Names  .resize(d);
   N95 = d;
 
   thermalModel.iter = 1000;
@@ -28,6 +28,11 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
 
   /// Heat Transfer and Emission models
   const enum XParaNames xParametersNames_[] = {asub, gammaEff, E1 ,R1, lambda};
+
+
+
+
+
   const double l_min = .04;
   const double l_max = 4;
   const size_t LendMinDecade = 50;
