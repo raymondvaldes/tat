@@ -145,8 +145,7 @@ int paramter_estimation(const size_t m, const size_t n,
     poptea.TBCsystem.updateCoat();
 
     ///repulate predicted phase
-    phase99(poptea.expSetup.laser.L_end, poptea,
-            poptea.LMA.LMA_workspace.predicted);
+    phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
     delete [] qtf;
     delete [] wa1;
@@ -384,8 +383,7 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
   poptea.TBCsystem.updateCoat();
 
 /// Estimates the phase of emission at each heating frequency
-  phase99(poptea.expSetup.laser.L_end, poptea,
-          poptea.LMA.LMA_workspace.predicted);
+  phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
 /// Evaluate Objective function
   for(size_t n = 0 ; n < poptea.expSetup.laser.L_end ; ++n )

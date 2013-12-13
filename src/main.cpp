@@ -23,8 +23,7 @@ int main( int /*argc*/, char* argv[] )
     xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
 
     constexpr size_t interants = 1;
-    phase99(poptea.expSetup.laser.L_end, poptea,
-            poptea.LMA.LMA_workspace.emissionNominal);
+    phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
     for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
     {
       poptea.LMA.LMA_workspace.emissionExperimental[nn]
@@ -38,7 +37,7 @@ int main( int /*argc*/, char* argv[] )
 //    SensitivityValdes2013::CC_APS2(poptea);
 //    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
-// Clear memory
+  /// end
   globalStopWatch.displayTime();
   return 0;
 }

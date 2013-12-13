@@ -76,8 +76,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         emissionExpR1       = new double[poptea.expSetup.laser.L_end]();
 
         ///Populate arrays
-        phase99(poptea.expSetup.laser.L_end, poptea,
-                Analytical_PhaseR1);
+        phase99(poptea, Analytical_PhaseR1);
 
         ///create artificial experimental data
 //        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR1, l_min,
@@ -99,8 +98,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        phase99(poptea.expSetup.laser.L_end,  poptea,
-                poptea.LMA.LMA_workspace.predicted);
+        phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
         for(size_t i = 0; i < poptea.expSetup.laser.L_end; ++i)
         {
@@ -138,8 +136,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         emissionExpR2       = new double[poptea.expSetup.laser.L_end]();
 
         ///Populate arrays
-        phase99(poptea.expSetup.laser.L_end,  poptea,
-                Analytical_PhaseR2);
+        phase99(poptea, Analytical_PhaseR2);
 
         ///create artificial experimental data
 //        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR2, .04, 4); //BUG MUST IMPLEMENT
@@ -159,8 +156,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        phase99(poptea.expSetup.laser.L_end, poptea,
-                poptea.LMA.LMA_workspace.predicted);
+        phase99(poptea, poptea.LMA.LMA_workspace.predicted);
         LendR2 = poptea.expSetup.laser.L_end;
 
         for(size_t i = 0; i < LendR2; ++i)
@@ -277,8 +273,7 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
     {
         /* Create Initial Experimental Data for figure */
         poptea.thermalSetup(l_min, l_max, LendMinDecade);
-        phase99(poptea.expSetup.laser.L_end, poptea,
-                poptea.LMA.LMA_workspace.emissionNominal);
+        phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
 //        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
 //                               l_max); //BUG MUST IMPLEMENT
         fitting(poptea, xInitial, 1, factorMax, factorScale);

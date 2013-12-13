@@ -139,8 +139,7 @@ void perturbationTest(const size_t m, const size_t n,
             paramter_estimation(m, N, ParaEstSetting, &info,
                                 &nfev, xInitial, poptea,
                                 factorMax, factorScale, xpredicted);
-            phase99(poptea.expSetup.laser.L_end, poptea,
-                    poptea.LMA.LMA_workspace.predicted);
+            phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
             const double msearea =
             MSEarea(poptea.expSetup.laser.L_end,
@@ -259,8 +258,7 @@ void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
         const double lmax = pStruct->lmax[j];
         poptea.thermalSetup(lmin, lmax, lEndMin);
 
-        phase99(poptea.expSetup.laser.L_end, poptea,
-                poptea.LMA.LMA_workspace.emissionNominal);
+        phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
         for(size_t i = 0 ; i < poptea.expSetup.laser.L_end; ++i)
         {
             poptea.LMA.LMA_workspace.emissionExperimental[i]
@@ -325,9 +323,7 @@ void parameterUncertainty(const size_t n,
 
 ///Create Initial Experimental Data
     ///setup the nominal data
-    phase99(poptea.expSetup.laser.L_end,
-            poptea,
-            poptea.LMA.LMA_workspace.emissionNominal);
+    phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
 
     ///let the experimental be equal to the nominal data
     for(size_t i =0 ; i < poptea.expSetup.laser.L_end; i++)
@@ -358,8 +354,7 @@ void parameterUncertainty(const size_t n,
         poptea.thermalSetup(lmin, lmax, lEndMin);
 
         ///Create Initial Experimental Data
-        phase99(poptea.expSetup.laser.L_end, poptea,
-                poptea.LMA.LMA_workspace.emissionNominal);
+        phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
         for(size_t i =0 ; i < poptea.expSetup.laser.L_end; i++)
         {
             poptea.LMA.LMA_workspace.emissionExperimental[i]
@@ -377,8 +372,7 @@ void parameterUncertainty(const size_t n,
                             poptea.LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info, &nfev, xInitial,
                             poptea, factorMax, factorScale, xpredicted);
-        phase99(poptea.expSetup.laser.L_end, poptea,
-                poptea.LMA.LMA_workspace.predicted);
+        phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
         ///develop the uncertainties
         double msearea = MSEarea(poptea.expSetup.laser.L_end,
