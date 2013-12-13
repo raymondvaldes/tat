@@ -3,7 +3,6 @@
 namespace filesystem
 {
 
-
 void makeDir(const std::string rootPath, const std::string newDirectory)
 {
     boost::filesystem::path directory(rootPath + "/" +newDirectory);
@@ -24,8 +23,6 @@ std::string directory::pwd(void) const
 {
   return workingDirectory;
 }
-
-
 
 std::string directory::abs(const std::string relativePath) const
 {

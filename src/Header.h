@@ -49,7 +49,7 @@
 #include <boost/bimap/list_of.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/assign/list_inserter.hpp>
-
+#include <boost/assert.hpp>
 /*
 When linking libraries you must ensure that the library is built at the same
 number of bits as the program.  Also add library under linker settings in \

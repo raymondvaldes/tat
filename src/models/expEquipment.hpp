@@ -40,9 +40,7 @@ public:
 
   explicit Laser(const double a, const double b, const double c,
                  const double d);
-  explicit Laser(const std::string &filename);
-  void load(const std::string &filename);
-  void save(const std::string &filename);
+
   ~Laser();
 
   void updateRadius(const double r);

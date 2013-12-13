@@ -8,8 +8,9 @@ int main( int /*argc*/, char* argv[] )
   namespace bf = boost::filesystem;
   const bf::path pProgram(bf::system_complete(argv[0]));
   class filesystem::directory DataDirectory(pProgram.parent_path().string());
-  const std::string filename = "config.xml";
 
+  /// poptea
+  const std::string filename = "config.xml";
   struct thermalAnalysisMethod::PopTea
     poptea( thermalAnalysisMethod::PopTea::loadConfig( DataDirectory.abs(filename),
                                                        DataDirectory ) );
@@ -33,6 +34,7 @@ int main( int /*argc*/, char* argv[] )
   if (true)
   {
     constexpr size_t interants = 1;
+
     for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
     {
       poptea.LMA.LMA_workspace.emissionExperimental[nn]

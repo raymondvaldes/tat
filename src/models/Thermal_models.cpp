@@ -51,24 +51,14 @@ void HeatModel2DAna::cleanup(void) const
 
 double HeatModel2DAna::radJ0(void) const
 {
-    /*
-    Radiosity J0 is the flux into the coating from the top surface
-    */
-
-//    std::cout << R0 <<"\t"<<R1<<"\t" << "\t" << lambda;
-//    exit(-24);
-    const double
-    product =  R0 * R1 * exp(-2./lambda);
-
+    /* Radiosity J0 is the flux into the coating from the top surface */
+    const double product =  R0 * R1 * exp(-2./lambda);
     return 1 + product / (1.- product);
 }
 
 double HeatModel2DAna::radJ1(void) const
 {
-    /*
-    Radiosity J1 is the flux into the coating from the interface
-    */
-
+    /* Radiosity J1 is the flux into the coating from the interface */
     double
     radiosity  = R1 * exp(-1./lambda);
     radiosity /= 1 - R0 * R1 * exp(-2./lambda);
@@ -78,9 +68,7 @@ double HeatModel2DAna::radJ1(void) const
 
 double HeatModel2DAna::radJ2(void) const
 {
-    /*
-    Radiosity J2 is the flux into the substrate from the interface
-    */
+    /* Radiosity J2 is the flux into the substrate from the interface */
     double
     radiosity  = 1;
     radiosity -= R1;
@@ -93,31 +81,27 @@ double HeatModel2DAna::radJ2(void) const
 
 double HeatModel2DAna::gSpatial(const double zNorm) const
 {
-    /*
-    zNorm is the axial spatial parameter of the volumetric heating
-    distribution.  Care must be taken to ensure that zNorm is normalized
-    for the coating thickness
-    */
+  /*
+  zNorm is the axial spatial parameter of the volumetric heating
+  distribution.  Care must be taken to ensure that zNorm is normalized
+  for the coating thickness
+  */
+  BOOST_ASSERT(zNorm >= 0);
 
-    const double J0 = radJ0();
-    const double J1 = radJ1();
-    const double J2 = radJ2();
+  const double J0 = radJ0();
+  const double J1 = radJ1();
+  const double J2 = radJ2();
 
-    const double z = zNorm;
-    if(z <= 1)
-    {
-        return J0 * exp( -z * lambda ) + J1 * exp( ( z - 1 ) * lambda);
-    }
-    else if (z > 1)
-    {
-        return J2 * exp( ( 1 - z ) * lambda_Sub ) ;
-    }
-    else if(z < 0)
-    {
-        std::cout << "error in gspatial!\n\n";
-        exit(-55);
-    }
-    return 0;
+  const double z = zNorm;
+  if(z <= 1)
+  {
+      return J0 * exp( -z * lambda ) + J1 * exp( ( z - 1 ) * lambda);
+  }
+  else if (z > 1)
+  {
+      return J2 * exp( ( 1 - z ) * lambda_Sub ) ;
+  }
+  return 0;
 }
 
 std::complex<double> HeatModel2DAna::nuTilde(const double nu,

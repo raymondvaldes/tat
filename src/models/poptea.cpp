@@ -45,7 +45,7 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
 
 class thermalAnalysisMethod::PopTea
         PopTea::loadConfig(const std::string &filename,
-                           class filesystem::directory DataDirectory_)
+                           const filesystem::directory DataDirectory_)
 {
   using boost::property_tree::ptree;
   ptree pt;

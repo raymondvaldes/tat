@@ -42,42 +42,6 @@ Laser::Laser(const double a, const double b, const double c, const double d):
     update();
 }
 
-Laser::Laser(const std::string &filename)
-{
-    load(filename);
-    update();
-}
-
-void Laser::load(const std::string &filename)
-{
-  // Create empty property tree object
-  using boost::property_tree::ptree;
-  ptree pt;
-
-  read_xml(filename, pt);
-
-  Qlaser = pt.get<double>( "Laser.power" );
-  radius = pt.get<double>( "Laser.radius" );
-  offset = pt.get<double>( "Laser.offset" );
-  amplitude = pt.get<double>( "Laser.amplitude" );
-
-}
-
-void Laser::save(const std::string &filename)
-{
-  using boost::property_tree::ptree;
-  ptree pt;
-
-  pt.put<double>( "Laser.power", Qlaser );
-  pt.put<double>( "Laser.radius", radius );
-  pt.put<double>( "Laser.offset", offset );
-  pt.get<double>( "Laser.amplitude", amplitude);
-
-  write_xml(filename, pt);
-}
-
-
-
 void Laser::update(void)
 {
     Is = IntensitySteady();

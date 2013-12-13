@@ -34,7 +34,8 @@ namespace thermalAnalysisMethod
                      class filesystem::directory DataDirectory_
                      );
     static thermalAnalysisMethod::PopTea
-      loadConfig( const std::string &filename, class filesystem::directory DataDirectory_);
+      loadConfig( const std::string &filename,
+                  const class filesystem::directory DataDirectory_);
 
     ~PopTea( void );
 
