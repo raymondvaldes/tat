@@ -2,6 +2,7 @@
 
 int main( int /*argc*/, char* argv[] )
 {
+  std::cout << "Welcome back, Raymond!\n\n";
   class stopwatch globalStopWatch;
 
   /// Figure out working directory

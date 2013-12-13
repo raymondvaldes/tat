@@ -152,8 +152,6 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
 
 void Laser::updateNMeasurements()
 {
-  std::cout << "this is the size.." << L_end <<"\n\n";
-
   omegas.resize(L_end);
   l_thermal.resize(L_end);
 }
