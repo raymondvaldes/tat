@@ -7,21 +7,45 @@ PopTea::PopTea(class expEquipment::setup expSetup_,
                class physicalModel::TBCsystem TBCsystem_,
                class thermal::ThermalModelSelection thermalModel_,
                class parameterEstimation::settings Settings_,
-               class parameterEstimation::unknownList unknownParameters_)
+               class parameterEstimation::unknownList unknownParameters_,
+               class filesystem::directory DataDirectory_)
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),
-    LMA(Settings_, unknownParameters_)
+    LMA(Settings_, unknownParameters_),
+    DataDirectory(DataDirectory_)
 {
+  DataDirectory.mkdir("data");
+
   const size_t d = LMA.unknownParameters.Nsize();
 
   xParametersNames.resize(d);
   xParameters95Names.resize(d);
   N95 = d;
+
+  thermalModel.iter = 1000;
+  LMA.LMA_workspace.MSETol = 1e-8;
+
+  /// Heat Transfer and Emission models
+  const enum XParaNames xParametersNames_[] = {asub, gammaEff, E1 ,R1, lambda};
+  const double l_min = .04;
+  const double l_max = 4;
+  const size_t LendMinDecade = 50;
+
+  for (size_t i=0; i < LMA.unknownParameters.Nsize(); ++i)
+  {
+    xParametersNames[i] = xParametersNames_[i];
+    xParameters95Names[i] = xParametersNames_[i];
+  }
+  // Populate the experimental phase values in parameters99
+  expSetup.laser.L_end = LendMinDecade;
+  expSetup.q_surface = 0;
+  thermalSetup(l_min, l_max, LendMinDecade);
 }
 
 class thermalAnalysisMethod::PopTea
-        PopTea::loadConfig(const std::string &filename)
+        PopTea::loadConfig(const std::string &filename,
+                           class filesystem::directory DataDirectory_)
 {
   using boost::property_tree::ptree;
   ptree pt;
@@ -63,7 +87,7 @@ class thermalAnalysisMethod::PopTea
     Obj5( parameterEstimation::unknownList::loadConfigfromXML( ptchild5 ) );
 
     //Load class object from previous objects
-  class PopTea popTea( Obj1, Obj2, Obj3, Obj4, Obj5 );
+  class PopTea popTea( Obj1, Obj2, Obj3, Obj4, Obj5 , DataDirectory_);
 
   return popTea;
 }

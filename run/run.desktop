@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=run
+Exec=bash -c '/home/raymond/code/phdresearch/run/phdResearch ; read'
+Terminal=true

@@ -27,8 +27,6 @@ void perturbationTest(const size_t m, const size_t n,
     const double R0True       = poptea.TBCsystem.optical.R0;
     double*xpredicted = new double[n];
 
-//    std::cout << a_subTrue << "\t" << gammaTrue << "\t" << E_sigmaTrue << "\t";
-//    std::cout << lambdaTrue << "\t" << R1True << "\n" ;
 
 ///Prepare output file
     std::ofstream myfile;

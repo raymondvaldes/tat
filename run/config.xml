@@ -1,9 +1,10 @@
 ﻿<poptea>
 	<experimentalSetup>
 		<Laser>
-			<!--power - Watts-->
-      <!--radius - m-->
-    
+			<!--
+				power - Watts
+				radius - m
+			-->
 			<power>30</power>
 			<radius>20e-4</radius>
 			<offset>0.95</offset>
@@ -11,12 +12,13 @@
 		</Laser>
 
 		<Detector>
-			<!--radius  ** detector viewing radius-->
-      <!--lambda  ** detector wavelength-->
-    
+			<!--
+				radius  ** detector viewing radius
+				lambda  ** detector wavelength
+			-->
 			<radius>0.25e-3</radius>
 			<lambda>5e-6</lambda>
-		</Detector>
+		</Detector>		
 	</experimentalSetup>
 	
 	<TBCsystem>

@@ -6,12 +6,14 @@ namespace filesystem
 
 void makeDir(const std::string rootPath, const std::string newDirectory)
 {
-    boost::filesystem::path directory(rootPath + newDirectory);
+    boost::filesystem::path directory(rootPath + "/" +newDirectory);
     boost::filesystem::create_directory(directory);
     return;
 }
 
-directory::directory(void){}
+directory::directory(const std::string workingDirectory_):
+  workingDirectory(workingDirectory_){}
+
 directory::~directory(void){}
 void directory::mkdir(const std::string newDirectory) const
 {
@@ -23,17 +25,12 @@ std::string directory::pwd(void) const
   return workingDirectory;
 }
 
-std::string directory::workingDir(void) const
+
+
+std::string directory::abs(const std::string relativePath) const
 {
-    //Report back the working library in as a std::string
-
-    const boost::filesystem::path pProgram( boost::filesystem::current_path() );
-    std::string workingDirectory = pProgram.parent_path().string();
-
-    workingDirectory= workingDirectory + "/";
-    std::cout << "working directory: " <<  workingDirectory << "\n\n";
-
-    return workingDirectory;
+  return workingDirectory + "/" + relativePath;
 }
+
 
 }

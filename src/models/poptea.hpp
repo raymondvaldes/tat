@@ -26,20 +26,22 @@ namespace thermalAnalysisMethod
     class parameterEstimation::LMA LMA;
     class filesystem::directory DataDirectory;
 
-    explicit PopTea(class expEquipment::setup expSetup_,
-                    class physicalModel::TBCsystem TBCsystem_,
-                    class thermal::ThermalModelSelection thermalModel_,
-                    class parameterEstimation::settings Settings_,
-                    class parameterEstimation::unknownList unknownParameters_);
+    explicit PopTea( class expEquipment::setup expSetup_,
+                     class physicalModel::TBCsystem TBCsystem_,
+                     class thermal::ThermalModelSelection thermalModel_,
+                     class parameterEstimation::settings Settings_,
+                     class parameterEstimation::unknownList unknownParameters_,
+                     class filesystem::directory DataDirectory_
+                     );
     static thermalAnalysisMethod::PopTea
-      loadConfig( const std::string &filename );
+      loadConfig( const std::string &filename, class filesystem::directory DataDirectory_);
 
     ~PopTea( void );
 
 
-  void thermalSetup(const double lmin_, const double lmax_,
-                    const size_t LendMin); //MUST BE REMOVED
-  double bEval(void) const; //MUST BE REMOVED
+  void thermalSetup( const double lmin_, const double lmax_, //MUST BE REMOVED
+                     const size_t LendMin);                  //MUST BE REMOVED
+  double bEval(void) const;                                 //MUST BE REMOVED
   };
 }
 
