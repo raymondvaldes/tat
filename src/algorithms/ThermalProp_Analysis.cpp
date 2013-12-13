@@ -118,7 +118,7 @@ int paramter_estimation(const size_t m, const size_t n,
           ParaEstSetting.xtol, ParaEstSetting.gtol, ParaEstSetting.maxfev,
           ParaEstSetting.epsfcn, diag, ParaEstSetting.mode,
           ParaEstSetting.factor, ParaEstSetting.nprint, info, nfev, fjac, m,
-          ipvt, qtf, wa1, wa2, wa3, wa4, wa5, pc_ptr, poptea);
+          ipvt, qtf, wa1, wa2, wa3, wa4, wa5, poptea);
 
     ///Exit Routine
     /* Sets up a condition where the total error in the phase is compared
@@ -415,10 +415,9 @@ void printPEstimates(const size_t N, class thermalAnalysisMethod::PopTea poptea)
     return;
 }
 
-void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
-                          int * /*iflag*/,
-                          const struct parameter_constraints *pc_ptr,
-                          class thermalAnalysisMethod::PopTea poptea)
+void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
+                           int * /*iflag*/,
+                           class thermalAnalysisMethod::PopTea poptea)
 {
 ///Transform estimates from kappa space to k space based on the limits imposed
   int i = 0;
@@ -476,7 +475,3 @@ void ThermalProp_Analysis(int /*P*/, int N, double *x, double *fvec,
   printPEstimates(N, poptea);
   return;
 }
-
-
-
-

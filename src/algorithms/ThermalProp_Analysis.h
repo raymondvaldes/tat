@@ -12,15 +12,7 @@ int paramter_estimation(const size_t m, const size_t  n,
                         double *xpredicted);
 
 void ThermalProp_Analysis(int, int N, double*x, double*fvec, int*,
-                          const struct parameter_constraints* st_ptr,
                           class thermalAnalysisMethod::PopTea poptea );
-
-double ThermalProp_error(void (*fcn)(size_t, size_t, double *, double *, int*,
-                                     double **, struct parameter_constraints*,
-                                     struct parameterStr*), size_t m, size_t n,
-                         double *x, double *fvec,double **variables,
-                         struct parameter_constraints*st_ptr,
-                         class thermalAnalysisMethod::PopTea poptea);
 
 void printPEstimates(const size_t N, class thermalAnalysisMethod::PopTea poptea);
 void printfJac(const size_t N, const size_t P, const double*fjac);

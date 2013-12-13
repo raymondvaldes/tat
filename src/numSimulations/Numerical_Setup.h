@@ -4,11 +4,9 @@
 double x_ini10(const int x_ref);
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
-                        const struct parameter_constraints*,
                         class thermalAnalysisMethod::PopTea poptea),
             int m, int n, double x[], double fvec[], double fjac[], int,
             int *iflag, double epsfcn, double wa[],
-            const struct parameter_constraints*st_ptr,
             class thermalAnalysisMethod::PopTea poptea);
 
 double gspatial(double eta, double opt, double lambda, double R1,
