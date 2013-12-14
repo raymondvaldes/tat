@@ -89,48 +89,48 @@ QMAKE_CXXFLAGS += -fwhole-program
 
 #source files
 SOURCES += \
-    src/main.cpp \
-    src/algorithms/ThermalProp_Analysis.cpp \
-    src/algorithms/statistical_tools.cpp \
-    src/algorithms/sensitivity_analysis.cpp \
-    src/investigations/sensitivity_paper.cpp \
-    src/numSimulations/Numerical_Temperature.cpp \
-    src/numSimulations/Numerical_Setup.cpp \
-    src/numSimulations/Numerical_PhaseOfEmission_Results.cpp \
-    src/numSimulations/Numerical_PhaseOfEmission.cpp \
-    src/numSimulations/Experimental_PhaseOfEmission.cpp \
-    src/tools/filesystem.cpp \
-    src/tools/timing.cpp \
-    src/models/Thermal_models.cpp \
-    src/models/expEquipment.cpp \
-    src/algorithms/lmdiff.cpp \
-    src/algorithms/parameterestimation.cpp \
-    src/models/poptea.cpp \
-    src/models/physicalmodel.cpp \
-    src/numSimulations/mesh.cpp \
-    src/models/numericalmodel.cpp \
-    src/tools/configuration.cpp
+    main.cpp \
+    algorithms/ThermalProp_Analysis.cpp \
+    algorithms/statistical_tools.cpp \
+    algorithms/sensitivity_analysis.cpp \
+    investigations/sensitivity_paper.cpp \
+    numSimulations/Numerical_Temperature.cpp \
+    numSimulations/Numerical_Setup.cpp \
+    numSimulations/Numerical_PhaseOfEmission_Results.cpp \
+    numSimulations/Numerical_PhaseOfEmission.cpp \
+    numSimulations/Experimental_PhaseOfEmission.cpp \
+    tools/filesystem.cpp \
+    tools/timing.cpp \
+    models/Thermal_models.cpp \
+    models/expEquipment.cpp \
+    algorithms/lmdiff.cpp \
+    algorithms/parameterestimation.cpp \
+    models/poptea.cpp \
+    models/physicalmodel.cpp \
+    numSimulations/mesh.cpp \
+    models/numericalmodel.cpp \
+    tools/configuration.cpp
 
 #header files
 HEADERS += \
-    src/Header.h \
-    src/algorithms/ThermalProp_Analysis.h \
-    src/algorithms/statistical_tools.hpp \
-    src/investigations/sensitivity_paper.h \
-    src/numSimulations/Numerical_Temperature.h \
-    src/numSimulations/Numerical_Setup.h \
-    src/numSimulations/Numerical_PhaseOfEmission_Results.h \
-    src/numSimulations/Numerical_PhaseOfEmission.h \
-    src/numSimulations/Experimental_PhaseOfEmission.h \
-    src/tools/filesystem.hpp \
-    src/tools/timing.h \
-    src/algorithms/sensitivity_analysis.hpp \
-    src/models/Thermal_models.h \
-    src/models/expEquipment.hpp \
-    src/algorithms/lmdiff.h \
-    src/algorithms/parameterestimation.hpp \
-    src/models/poptea.hpp \
-    src/models/physicalmodel.hpp \
-    src/numSimulations/mesh.hpp \
-    src/models/numericalmodel.hpp \
-    src/tools/configuration.hpp
+    Header.h \
+    algorithms/ThermalProp_Analysis.h \
+    algorithms/statistical_tools.hpp \
+    investigations/sensitivity_paper.h \
+    numSimulations/Numerical_Temperature.h \
+    numSimulations/Numerical_Setup.h \
+    numSimulations/Numerical_PhaseOfEmission_Results.h \
+    numSimulations/Numerical_PhaseOfEmission.h \
+    numSimulations/Experimental_PhaseOfEmission.h \
+    tools/filesystem.hpp \
+    tools/timing.h \
+    algorithms/sensitivity_analysis.hpp \
+    models/Thermal_models.h \
+    models/expEquipment.hpp \
+    algorithms/lmdiff.h \
+    algorithms/parameterestimation.hpp \
+    models/poptea.hpp \
+    models/physicalmodel.hpp \
+    numSimulations/mesh.hpp \
+    models/numericalmodel.hpp \
+    tools/configuration.hpp
