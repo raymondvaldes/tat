@@ -1,4 +1,12 @@
-#include "../Header.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cstring>
+#include <iomanip>
+#include <gsl/gsl_math.h>
+
+#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
+
 double Print_Emission(const double *phase, const double* num_phase,
                       const double *ana_phase,const double *l_thermal,
                       const size_t L_end)

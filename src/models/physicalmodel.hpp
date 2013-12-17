@@ -1,10 +1,14 @@
 #ifndef PHYSICALMODEL_HPP
 #define PHYSICALMODEL_HPP
+
 #include <boost/bimap.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
 #include <boost/bimap/list_of.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/assign/list_inserter.hpp>
+#include <boost/property_tree/ptree.hpp>
+//#include "numSimulations/Numerical_PhaseOfEmission.h"
+
 class property
 {
 private:
@@ -60,7 +64,6 @@ public:
 
 namespace physicalModel
 {
-
 
 class labels
 {
@@ -166,7 +169,7 @@ public:
 
     double gammaEval(void) const ;
     double a_subEval(void) const;
-    void updateCoat(void); //update coat properties
+    void updateCoat(void);
 };
 
 }

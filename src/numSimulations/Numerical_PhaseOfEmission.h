@@ -1,14 +1,16 @@
 #ifndef NUMERICAL_PHASEOFEMISSION_H_INCLUDED
 #define NUMERICAL_PHASEOFEMISSION_H_INCLUDED
 
+#include "numSimulations/Numerical_Temperature.h"
+#include "models/poptea.hpp"
+
 class Temperature
 {
 public:
-    explicit Temperature(const size_t Nend_, const size_t M2_);
-
-    double eval(const size_t Nvalue, const size_t M2Value) const;
-    void assgn(const size_t i, const size_t j, const double value);
-    void cleanup(void);
+    explicit Temperature( const size_t Nend_, const size_t M2_ );
+    double eval( const size_t Nvalue, const size_t M2Value ) const;
+    void assgn( const size_t i, const size_t j, const double value );
+    void cleanup( void );
 
 private:
     const size_t Nend;

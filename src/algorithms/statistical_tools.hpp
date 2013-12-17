@@ -1,10 +1,16 @@
 #ifndef STATISTICAL_TOOLS_HPP_INCLUDED
 #define STATISTICAL_TOOLS_HPP_INCLUDED
+
+#include <vector>
+#include <cstddef>
+#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
+
 bool equalto(const double a, const double b);
 bool equalto(const double a, const int b);
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
                    const size_t x, const size_t y, const size_t z);
+
 void vector2DSetup(std::vector< std::vector< double > > &Vnew,
                    const size_t x, const size_t y);
 

@@ -1,6 +1,8 @@
 #ifndef PARAMETERESTIMATION_HPP
 #define PARAMETERESTIMATION_HPP
 
+#include "models/physicalmodel.hpp"
+
 namespace parameterEstimation{
 
 class unknown
@@ -16,8 +18,6 @@ private:
   struct bounds constraint;
   double initialGuess;
   double bestfitval;
-
-
 
 public:
   explicit unknown(enum physicalModel::labels::Name name_,

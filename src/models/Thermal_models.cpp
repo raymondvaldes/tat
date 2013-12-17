@@ -1,5 +1,10 @@
-#include "../Header.h"
+#include <complex>
 
+#include "models/Thermal_models.h"
+#include "models/numericalmodel.hpp"
+#include "numSimulations/Numerical_Setup.h"
+#include "algorithms/statistical_tools.hpp"
+#include "numSimulations/Numerical_PhaseOfEmission.h"
 
 HeatModel2DAna::HeatModel2DAna(const double R0_, const double R1_,
                                const double lambda_, const double It_,

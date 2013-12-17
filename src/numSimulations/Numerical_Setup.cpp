@@ -1,5 +1,9 @@
-#include "../Header.h"
+#include <cmath>
+#include <iostream>
 
+#include "models/poptea.hpp"
+#include "algorithms/statistical_tools.hpp"
+#include "numSimulations/Numerical_Setup.h"
 
 double x_limiter1(const double xi)
 {

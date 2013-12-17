@@ -1,4 +1,8 @@
-#include "../Header.h"
+#include <cassert>
+#include <cmath>
+#include "models/numericalmodel.hpp"
+#include "algorithms/statistical_tools.hpp"
+#include "numSimulations/Numerical_Setup.h"
 
 namespace numericalModel
 {
@@ -81,7 +85,7 @@ double Mesh::beta2_func(const double *variable, const double *constants)
   c = z_eta(eta_[M1_-1], constants[0], variable[0]) * constants[3];
 
   const double
-  d = fabs( ( a - b ) - ( b - c ) );
+  d = std::abs( ( a - b ) - ( b - c ) );
 
   return  d  ;
 }

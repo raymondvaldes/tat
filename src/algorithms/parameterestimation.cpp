@@ -1,8 +1,7 @@
-#include "../Header.h"
+#include "algorithms/parameterestimation.hpp"
+#include "numSimulations/Numerical_Setup.h"
 
 namespace parameterEstimation{
-
-
 
 unknown::unknown(enum physicalModel::labels::Name name_,
                  const double lower_,

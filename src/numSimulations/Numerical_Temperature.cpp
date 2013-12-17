@@ -1,4 +1,8 @@
-#include "../Header.h"
+#include "models/physicalmodel.hpp"
+#include "models/Thermal_models.h"
+#include "numSimulations/Numerical_Setup.h"
+#include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "algorithms/statistical_tools.hpp"
 
 void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     const class thermal::ThermalModelSelection thermalModel,
@@ -679,47 +683,6 @@ double Gaverage(const double opt, const double lambda, const double R1,
     return generation;
 }
 
-
-double qGenAverage(const double I_avg, const double opt, const double lambda, const double R1, const double Iplus0,
-                   const double Iplus1, const double z1, const double z2)
-{
-    double q_gen;
-    q_gen  = gs_int( z2, opt, lambda, R1, Iplus0, Iplus1) ;
-    q_gen -= gs_int( z1, opt, lambda, R1, Iplus0, Iplus1) ;
-    q_gen /= z2 - z1 ;
-    q_gen *= I_avg;
-
-    return q_gen;
-}
-
-//Functions  for stretching
-double eta_z(const double z,const double beta1,const double beta2)
-{
-    double A,B,beta;
-    double eta1 = 0;
-    //z_norm accounts for z_real after it has been normalized by L_coat and
-    //L_substrate
-
-    if (z <= 1)
-    {
-        beta = beta1;
-        A = ( beta + ( 1. - z  ) )
-          / ( beta - ( 1. - z  ) ) ;
-        B = ( beta + 1.) / ( beta - 1.) ;
-        eta1 = 1. - log(A)/log(B);
-    }
-    else if (z > 1)
-    {
-        beta = beta2;
-        A  = ( beta + ( 2. - z ) ) ;
-        A /= ( beta - ( 2. - z ) ) ;
-
-        B = ( beta + 1.) / ( beta - 1.) ;
-        eta1 = 2. - log(A)/log(B) ;
-    }
-    return eta1;
-}
-
 double r_xi(const double xi, const double beta)
 {
     //z_norm accounts for z_real after it has been normalized by
@@ -738,8 +701,6 @@ double r_xi(const double xi, const double beta)
         const double B = ( beta + 1) / (beta - 1) ;
         return 1 + beta - ( 2 * B * beta ) / ( B + pow( B , xi ) ) ;
     }
-
-
 
     return -1;
 }

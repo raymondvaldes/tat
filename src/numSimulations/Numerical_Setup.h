@@ -1,6 +1,9 @@
 #ifndef NUMERICAL_SETUP_H_INCLUDED
 #define NUMERICAL_SETUP_H_INCLUDED
 
+#include "algorithms/ThermalProp_Analysis.h"
+#include "models/poptea.hpp"
+
 double x_ini10(const int x_ref);
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,

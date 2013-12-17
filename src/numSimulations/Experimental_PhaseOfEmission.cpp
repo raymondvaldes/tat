@@ -1,7 +1,10 @@
-#include "../Header.h"
+#include <cstddef>
 
-void phase99(const class thermalAnalysisMethod::PopTea &poptea,
-             double *arrayVal)
+#include "models/poptea.hpp"
+#include "numSimulations/Numerical_PhaseOfEmission.h"
+
+void phase99( const class thermalAnalysisMethod::PopTea &poptea,
+              double *arrayVal )
 {
   /*The phase for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
@@ -20,8 +23,8 @@ void phase99(const class thermalAnalysisMethod::PopTea &poptea,
   return;
 }
 
-void phase99(const class thermalAnalysisMethod::PopTea &poptea,
-             std::vector<double> &arrayVal)
+void phase99( const class thermalAnalysisMethod::PopTea &poptea,
+              std::vector<double> &arrayVal )
 {
   /*The phase for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
@@ -40,7 +43,7 @@ void phase99(const class thermalAnalysisMethod::PopTea &poptea,
   return;
 }
 
-double Experimental_PhaseOfEmission(double*phase, const size_t L_end)
+double Experimental_PhaseOfEmission( double*phase, const size_t L_end )
 {
     size_t n=0;
     double *dump = new double[L_end+1];

@@ -1,11 +1,17 @@
-#include "../Header.h"
+#include <vector>
+#include <cmath>
+#include <limits>
+#include <cstddef>
+#include <iostream>
+
+#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 
 bool equalto(const double a, const double b)
 {
     const double multi = a > b ? a : b;
     const double multi2 = multi >= 1 ? multi  : 1;
 
-    return std::fabs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
+    return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
 }
 
 bool equalto(const double a, const int b)
@@ -13,7 +19,7 @@ bool equalto(const double a, const int b)
     const double multi = a > b ? a : b;
     const double multi2 = multi > 1 ? multi  : 1;
 
-    return std::fabs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
+    return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
 }
 
 
@@ -44,16 +50,17 @@ double arrayMin(const double* x, const size_t I)
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
                    const size_t x, const size_t y, const size_t z)
 {
-    Vnew.resize(x);
-    for(size_t i = 0; i < x ; ++i )
-    {
-        Vnew[i].resize(y);
+  Vnew.resize(x);
+  for(size_t i = 0; i < x ; ++i )
+  {
+    Vnew[i].resize(y);
 
-        for(size_t j = 0; j < y ; ++j)
-        {
-               Vnew[i][j].resize(z);
-        }
+    for(size_t j = 0; j < y ; ++j)
+    {
+       Vnew[i][j].resize(z);
     }
+  }
+  return;
 }
 
 void vector2DSetup(std::vector< std::vector< double > > &Vnew,
@@ -395,9 +402,8 @@ void Amatrix(const size_t P, const size_t N, const double*fjac, double* Amatrix)
 
 double fintegrate(double x, void *p)
 {
-    struct funcClass &params = *reinterpret_cast<struct funcClass *>(p);
-
-    return params.eval(x);
+  struct funcClass &params = *reinterpret_cast<struct funcClass *>(p);
+  return params.eval(x);
 }
 
 double integrate(struct funcClass *Func, double xlow, double xhigh)

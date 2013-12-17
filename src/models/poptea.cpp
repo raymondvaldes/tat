@@ -1,16 +1,19 @@
-#include "../Header.h"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
+#include "models/poptea.hpp"
+#include "models/expEquipment.hpp"
+#include "models/Thermal_models.h"
+#include "models/numericalmodel.hpp"
+#include "algorithms/parameterestimation.hpp"
+#include "tools/filesystem.hpp"
 
 namespace thermalAnalysisMethod
 {
 
-PopTea::PopTea(class expEquipment::setup expSetup_,
-               class physicalModel::TBCsystem TBCsystem_,
-               class thermal::ThermalModelSelection thermalModel_,
-               class parameterEstimation::settings Settings_,
-               class parameterEstimation::unknownList unknownParameters_,
-               class filesystem::directory DataDirectory_)
+PopTea::PopTea( class expEquipment::setup expSetup_,
+                class physicalModel::TBCsystem TBCsystem_,
+                class thermal::ThermalModelSelection thermalModel_,
+                class parameterEstimation::settings Settings_,
+                class parameterEstimation::unknownList unknownParameters_,
+                class filesystem::directory DataDirectory_ )
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
     thermalModel(thermalModel_),

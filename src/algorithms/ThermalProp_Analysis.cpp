@@ -1,4 +1,6 @@
-#include "../Header.h"
+#include "algorithms/ThermalProp_Analysis.h"
+#include "algorithms/statistical_tools.hpp"
+#include "numSimulations/Experimental_PhaseOfEmission.h"
 
 int paramter_estimation(const size_t m, const size_t n,
                         struct parameterEstimation::settings ParaEstSetting,
@@ -8,7 +10,6 @@ int paramter_estimation(const size_t m, const size_t n,
                         const double factorMax,
                         const double factorScale, double *xpredicted)
 {
-
 /*
   The parameter estimation function takes in the function, fitting parameters,
   initial guess.  If no initial guess is given then it will populate an

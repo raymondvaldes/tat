@@ -1,6 +1,13 @@
 #ifndef SENSITIVITY_ANALYSIS_HPP
 #define SENSITIVITY_ANALYSIS_HPP
 
+#include "numSimulations/Numerical_Temperature.h"
+#include "numSimulations/Numerical_Setup.h"
+#include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
+#include "algorithms/statistical_tools.hpp"
+#include "algorithms/ThermalProp_Analysis.h"
+
 void perturbationTest(const size_t m, const size_t n,
                       struct parameterEstimation::settings ParaEstSetting,
                       double *xInitial,

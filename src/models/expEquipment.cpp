@@ -1,4 +1,8 @@
-#include "../Header.h"
+#include <boost/assert.hpp>
+
+#include "models/expEquipment.hpp"
+#include "numSimulations/Numerical_Setup.h"
+
 
 namespace expEquipment{
 

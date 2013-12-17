@@ -1,6 +1,8 @@
 #ifndef EXPERIMENTAL_PHASEOFEMISSION_H_INCLUDED
 #define EXPERIMENTAL_PHASEOFEMISSION_H_INCLUDED
 
+#include "models/poptea.hpp"
+
 double Experimental_PhaseOfEmission(double*phase, const size_t L_end);
 void phase99(const thermalAnalysisMethod::PopTea &poptea,
              double *Numerical_Phase);

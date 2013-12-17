@@ -1,6 +1,9 @@
 #ifndef THERMALPROP_ANALYSIS_H_INCLUDED
 #define THERMALPROP_ANALYSIS_H_INCLUDED
+
 #include <boost/foreach.hpp>
+#include "numSimulations/Numerical_Setup.h"
+#include "algorithms/lmdiff.h"
 
 int paramter_estimation(const size_t m, const size_t  n,
                         struct parameterEstimation::settings ParaEstSetting,

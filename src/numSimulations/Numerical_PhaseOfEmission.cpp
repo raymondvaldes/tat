@@ -1,5 +1,8 @@
+#include "models/physicalmodel.hpp"
+#include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "algorithms/statistical_tools.hpp"
+#include "numSimulations/Numerical_Setup.h"
 
-#include "../Header.h"
 double PhaseOfEmission1DNum(const int flag,
                             const class thermalAnalysisMethod::PopTea &poptea)
 {

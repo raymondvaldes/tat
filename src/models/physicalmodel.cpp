@@ -1,4 +1,9 @@
-#include "../Header.h"
+#include <vector>
+#include <cmath>
+
+#include "models/physicalmodel.hpp"
+#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
+#include "numSimulations/Numerical_PhaseOfEmission.h"
 
 double property::Current(const double temperature) const
 {

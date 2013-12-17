@@ -1,6 +1,13 @@
 #ifndef POPTEA_HPP
 #define POPTEA_HPP
 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include "algorithms/parameterestimation.hpp"
+#include "models/expEquipment.hpp"
+#include "models/Thermal_models.h"
+#include "tools/filesystem.hpp"
+
 enum XParaNames
 {
     gammaEff,

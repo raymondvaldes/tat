@@ -1,4 +1,4 @@
-#include "../Header.h"
+#include "investigations/sensitivity_paper.h"
 
 namespace SensitivityValdes2013
 {

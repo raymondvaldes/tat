@@ -1,5 +1,8 @@
 #ifndef LMDIFF_H_INCLUDED
 #define LMDIFF_H_INCLUDED
+
+#include "models/poptea.hpp"
+
 void lmdif(void (*fcn)(int, int, double*, double*, int*, double**), int m,
            int n, double *x, double *fvec, double **variables, double ftol,
            double xtol, double gtol, int maxfev, double epsfcn, double *diag,

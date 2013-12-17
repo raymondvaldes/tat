@@ -1,23 +1,21 @@
-#include "../Header.h"
+#include "models/poptea.hpp"
 
-double enorm(int n,double x[]);
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
-                        const struct parameter_constraints*,
-                        class thermalAnalysisMethod::PopTea poptea),
-            int m,int n,double x[],double fvec[],double **variables,
-            double fjac[],int ldfjac, int *iflag,double epsfcn,double wa[],
+                        class thermalAnalysisMethod::PopTea),
+            int m, int n, double x[], double fvec[], double fjac[], int ldfjac,
+            int *iflag, double epsfcn, double wa[],
             class thermalAnalysisMethod::PopTea poptea);
-void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
+
+void fdjac2(void (*fcn)(int, int, double*, double*, int*,double **),
             int m,int n,double x[],double fvec[],double **variables,
             double fjac[],int ldfjac, int *iflag,double epsfcn,double wa[]);
+
+double enorm(int n,double x[]);
 
 int mod(int k,int m);
 double dmin1(double a,double b);
 int min0(int a,int b);
 void pmat(int m,int n,double y[]);
-
-
-
 
 void qrfac(int m, int n, double a[], int, bool pivot, int ipvt[], int,
            double rdiag[], double acnorm[], double wa[]);

@@ -1,6 +1,9 @@
 #ifndef NUMERICALMODEL_HPP
 #define NUMERICALMODEL_HPP
 
+#include <vector>
+#include <cstddef>
+
 namespace numericalModel
 {
 class Mesh
