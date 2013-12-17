@@ -1,5 +1,7 @@
 #ifndef NUMERICAL_PHASEOFEMISSION_RESULTS_H_INCLUDED
 #define NUMERICAL_PHASEOFEMISSION_RESULTS_H_INCLUDED
+#include <gsl/gsl_spline.h>
+#include <gsl/gsl_integration.h>
 
 double Print_Emission(const double*phase, const double*num_phase,
                       const double*ana_phase,

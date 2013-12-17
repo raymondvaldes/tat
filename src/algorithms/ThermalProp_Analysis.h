@@ -1,7 +1,6 @@
 #ifndef THERMALPROP_ANALYSIS_H_INCLUDED
 #define THERMALPROP_ANALYSIS_H_INCLUDED
-
-
+#include <boost/foreach.hpp>
 
 int paramter_estimation(const size_t m, const size_t  n,
                         struct parameterEstimation::settings ParaEstSetting,
@@ -24,7 +23,5 @@ void InformationIndex(const size_t P, double *Index,
 void InformationIndex(const size_t P, std::vector<double> Index,
                       const size_t I, const double ki,
                       const double* fjac);
-
-
 
 #endif // THERMALPROP_ANALYSIS_H_INCLUDED

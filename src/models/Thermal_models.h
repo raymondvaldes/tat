@@ -1,6 +1,13 @@
 #ifndef THERMAL_MODELS_H_INCLUDED
 #define THERMAL_MODELS_H_INCLUDED
-
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include <boost/bimap.hpp>
+#include <boost/bimap/unordered_set_of.hpp>
+#include <boost/bimap/list_of.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/assign/list_inserter.hpp>
+#include <gsl/gsl_sf.h>
 
 class HeatModel2DAna
 {
@@ -162,23 +169,6 @@ public:
                         const class numericalModel::Mesh mesh_);
   ~ThermalModelSelection(void);
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

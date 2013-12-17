@@ -4,11 +4,11 @@
 #include <cstdlib>
 #include <cstddef>
 #include <cstdio>
-#include <iostream>
 #include <cstring>
+#include <iostream>
+
 #include <sstream>
 #include <fstream>
-#include <istream>
 #include <vector>
 
 #include <memory>
@@ -21,40 +21,20 @@
 #include <omp.h>
 #include <cmath>
 
-
-//sudo apt-get install gsl-bin libgsl0-dev  // to install (ubuntu)
-// "-lgsl-lgslcblas -lm" in "Linker Settings in codeblocks (ubuntu)"
-// to install in Windows download GNUWin32 library from sourceforge
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_rng.h>
-#include <gsl/gsl_statistics.h>
-#include <gsl/gsl_randist.h>
-#include <gsl/gsl_integration.h>
-#include <gsl/gsl_spline.h>
-#include <gsl/gsl_errno.h>
-#include <gsl/gsl_sf.h>
-#include <gsl/gsl_dht.h>
-#include <gsl/gsl_linalg.h>
+///GSL Library
+/* sudo apt-get install gsl-bin libgsl0-dev  // to install (ubuntu)
+ "-lgsl -lgslcblas -lm" in "Linker Settings in codeblocks (ubuntu)"
+ to install in Windows download GNUWin32 library from sourceforge */
 
 ///Boost Library
 // use linker and install in ubuntu using sudo apt-get install libboost-all-dev
-//-lboost_system in linker
-//-lboost_filesystem in linker
+//     -lboost_system     -lboost_filesystem
 #include <boost/filesystem.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
-#include <boost/foreach.hpp>
-#include <boost/bimap.hpp>
-#include <boost/bimap/unordered_set_of.hpp>
-#include <boost/bimap/list_of.hpp>
-#include <boost/assign/list_of.hpp>
-#include <boost/assign/list_inserter.hpp>
-#include <boost/assert.hpp>
-/*
-When linking libraries you must ensure that the library is built at the same
+
+/*When linking libraries you must ensure that the library is built at the same
 number of bits as the program.  Also add library under linker settings in \
-compiler.
-*/
+compiler.*/
+
 ///Source headers
 #include "tools/configuration.hpp"
 #include "tools/filesystem.hpp"

@@ -1,4 +1,5 @@
 #include "../Header.h"
+#include <boost/filesystem.hpp>
 
 std::chrono::high_resolution_clock::time_point stopwatch::checktime(void)
 {

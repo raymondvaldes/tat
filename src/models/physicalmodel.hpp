@@ -1,6 +1,10 @@
 #ifndef PHYSICALMODEL_HPP
 #define PHYSICALMODEL_HPP
-
+#include <boost/bimap.hpp>
+#include <boost/bimap/unordered_set_of.hpp>
+#include <boost/bimap/list_of.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/assign/list_inserter.hpp>
 class property
 {
 private:
