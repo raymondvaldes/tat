@@ -20,7 +20,7 @@
 #include <random>
 #include <omp.h>
 #include <cmath>
-#include <chrono>
+
 
 //sudo apt-get install gsl-bin libgsl0-dev  // to install (ubuntu)
 // "-lgsl-lgslcblas -lm" in "Linker Settings in codeblocks (ubuntu)"
