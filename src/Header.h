@@ -1,3 +1,18 @@
+/*  This file is part of phdresearch.
+
+    phdResearch is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    phdResearch is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with phdResearch.  If not, see <http://www.gnu.org/licenses/>.*/
+
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
 
@@ -9,19 +24,7 @@
 #include <iostream>
 
 ///External Libraries
-  ///GSL Library
-  /* sudo apt-get install gsl-bin libgsl0-dev  // to install (ubuntu)
-   "-lgsl -lgslcblas -lm" in "Linker Settings in codeblocks (ubuntu)"
-   to install in Windows download GNUWin32 library from sourceforge */
-
-  ///Boost Library
-  // use linker and install in ubuntu using sudo apt-get install libboost-all-dev
-  //     -lboost_system     -lboost_filesystem
 #include <boost/filesystem.hpp>
-
-/*When linking libraries you must ensure that the library is built at the same
-number of bits as the program.  Also add library under linker settings in \
-compiler.*/
 
 ///Internal dependencies
 #include "tools/timing.h"
