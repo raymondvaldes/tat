@@ -1,4 +1,4 @@
-phdResearch
+tat: thermal analysis toolbox
 ===========
 
 program can be compiled and executed with the following information:
