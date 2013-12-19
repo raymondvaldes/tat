@@ -49,9 +49,8 @@ public:
     bool d1, d2;
     int s1;
     explicit emissionNoiseParameters( const double a1_, const double b1_,
-                                      const bool d1_,
-                                      const bool d2_, const int s1_,
-                                      const double noiseRandom_);
+                                      const bool d1_, const bool d2_,
+                                      const int s1_, const double noiseRandom_);
 };
 
 double PhaseOfEmission2DAna(const int flag,

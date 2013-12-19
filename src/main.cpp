@@ -31,22 +31,20 @@ int main( int /*argc*/, char* argv[] )
 
   /// Figure out working directory
   namespace bf = boost::filesystem;
-  const bf::path pProgram(bf::system_complete(argv[0]));
-  class filesystem::directory DataDirectory(pProgram.parent_path().string());
+  const bf::path pProgram = bf::system_complete( argv[0] );
+  class filesystem::directory Directory(pProgram.parent_path().string());
 
-  /// poptea by inputting configuration files
+  /// initiate poptea by importing configuration info
   const std::string filename = "config.xml";
-  class thermalAnalysisMethod::PopTea
-    poptea( thermalAnalysisMethod::PopTea::loadConfig(
-              DataDirectory.abs(filename),DataDirectory ) );
+  class thermalAnalysisMethod::PopTea poptea =
+      thermalAnalysisMethod::PopTea::
+      loadConfig( Directory.abs( filename ), Directory ) ;
 
   /// Test loop
   //Many fit test
   if (true)
   {
-    double *xInitial = nullptr;
-    xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
-
+    double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
     constexpr size_t interants = 1;
     phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
 

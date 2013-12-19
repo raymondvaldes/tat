@@ -157,18 +157,17 @@ double PhaseOfEmission1DAna(const int flag,
 Temperature::Temperature(const size_t Nend_, const size_t M2_)
 : Nend(Nend_), M2(M2_)
 {
-//  temperature.resize(Nend * M2);
   temperature = new double[Nend_ * M2_];
 }
 
 double Temperature::eval(const size_t i, const size_t j) const
 {
-    return temperature[j + M2 * i];
+  return temperature[j + M2 * i];
 }
 
 void Temperature::assgn(const size_t i, const size_t j, const double value)
 {
-    temperature[j + M2 * i] = value;
+  temperature[j + M2 * i] = value;
 }
 
 void Temperature::cleanup(void)
