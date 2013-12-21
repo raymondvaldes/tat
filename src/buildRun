@@ -16,5 +16,6 @@ else
   echo 'symlink to bin/config.xml'
 fi
 
+./tat
 #cleanup
 #rm Makefile
