@@ -1,10 +1,10 @@
 /*----------------------------------------------------------------------------*\
-  ========      	        |
-     || 	 T Thermal      | TAT: Thermal Analysis Toolbox
-     ||  	 A Analysis     |
-     || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||  		            |
--------------------------------------------------------------------------------
+  ========                  |
+     ||     T Thermal       | TAT: Thermal Analysis Toolbox
+     ||     A Analysis      |
+     ||     T Toolbox       | Copyright (C) 2013 Raymond Valdes
+     ||                     |
+--------------------------------------------------------------------------------
 License                                                                         
     This file is part of Thermal Analysis Toolbox.
 
@@ -31,17 +31,16 @@ int main( int /*argc*/, char* argv[] )
 
   /// Figure out working directory
   namespace bf = boost::filesystem;
-  const bf::path pProgram = bf::system_complete( argv[0] );
-  class filesystem::directory Directory(pProgram.parent_path().string());
+  std::string path("/Users/raymondvaldes/code/tat/bin/"); //MUST BE PASSED
+  const bf::path pProgram(path);
+  class filesystem::directory dir(pProgram.string());
 
   /// initiate poptea by importing configuration info
+  namespace TAM = thermalAnalysisMethod;
   const std::string filename = "config.xml";
-  class thermalAnalysisMethod::PopTea poptea =
-      thermalAnalysisMethod::PopTea::
-      loadConfig( Directory.abs( filename ), Directory ) ;
+  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
 
   /// Test loop
-  //Many fit test
   if (true)
   {
     double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};

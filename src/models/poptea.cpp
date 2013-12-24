@@ -44,7 +44,7 @@ PopTea::PopTea( class expEquipment::setup expSetup_,
     LMA(Settings_, unknownParameters_),
     DataDirectory(DataDirectory_)
 {
-  DataDirectory.mkdir("data");
+//  DataDirectory.mkdir("data");
 
   const size_t d = LMA.unknownParameters.Nsize();
 
@@ -74,7 +74,6 @@ class thermalAnalysisMethod::PopTea
   ptree pt;
   read_xml(filename, pt);
   const std::string conjunto = "poptea.";
-
   const ptree ptchild1 = pt.get_child( conjunto + "experimentalSetup" );
   const class expEquipment::setup
     Obj1( expEquipment::setup::loadConfigfromXML( ptchild1 ) );
@@ -84,7 +83,7 @@ class thermalAnalysisMethod::PopTea
     Obj2( physicalModel::TBCsystem::loadConfig( ptchild2 ) );
 
   const ptree ptchild3 = pt.get_child( conjunto + "thermalModel" );
-
+  
   ////TODO BUG REMOVE THIS TEMPORARY FIX
   const size_t M2     = ptchild3.get<size_t>( "mesh.M2" );
   const size_t Rend   = ptchild3.get<size_t>( "mesh.Rend");
@@ -96,20 +95,20 @@ class thermalAnalysisMethod::PopTea
                                   Obj2.substrate.depth,
                                   Obj1.laser.radius,
                                   Obj2.radius);
-
   ////TODO BUG REMOVE THIS TEMPORARY
+  
   const class thermal::ThermalModelSelection
     Obj3( thermal::ThermalModelSelection::loadConfigfromXML( ptchild3, mesh ) );
 
   const ptree ptchild4 = pt.get_child( conjunto + "ParaEstSettings" );
   const class parameterEstimation::settings
     Obj4( parameterEstimation::settings::loadConfigfromXML( ptchild4 ) );
-
+  
   const ptree ptchild5 = pt.get_child( conjunto );
   const class parameterEstimation::unknownList
     Obj5( parameterEstimation::unknownList::loadConfigfromXML( ptchild5 ) );
 
-    //Load class object from previous objects
+  //Load class object from previous objects
   class PopTea popTea( Obj1, Obj2, Obj3, Obj4, Obj5 , DataDirectory_);
 
   return popTea;

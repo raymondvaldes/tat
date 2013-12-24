@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <cmath>
 #include <iostream>
+#include <random>
 
 #include "models/poptea.hpp"
 #include "algorithms/statistical_tools.hpp"
@@ -114,9 +115,9 @@ void scaleDiag(const int mode, const size_t N, double * diag,
 size_t xINTrandom(const size_t xmin, const size_t xmax)
 {
     std::mt19937 gen;
-    gen.seed(std::time(NULL)+rand());
+    gen.seed( std::time( NULL ) + rand() );
 
-    std::uniform_int_distribution<> distribution(xmin,xmax);
+    std::uniform_int_distribution<> distribution( xmin , xmax );
     return distribution(gen);
 }
 

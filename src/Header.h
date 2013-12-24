@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                  |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |        
      ||   	 T Toolbox      | Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||                     |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -32,7 +32,7 @@ License
 #include <cstdio>
 #include <cstring>
 #include <iostream>
-
+     
 ///External Libraries
 #include <boost/filesystem.hpp>
 
@@ -40,5 +40,10 @@ License
 #include "tools/timing.h"
 #include "numSimulations/Experimental_PhaseOfEmission.h"
 #include "algorithms/sensitivity_analysis.hpp"
+
+#include "tools/filesystem.hpp"
+#include "models/poptea.hpp"
+#include "algorithms/sensitivity_analysis.hpp"
+
 
 #endif // HEADER_H_INCLUDED
