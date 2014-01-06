@@ -27,25 +27,25 @@ License
 #include "models/poptea.hpp"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 
-void phase99( const class thermalAnalysisMethod::PopTea &poptea,
-              double *arrayVal )
-{
-  /*The phase for each thermal penetration is calculated in parallel using the
-  OpenMP framework.  This gives significant increases in the speed of the code
-  for all ranges of L_end.  This also allows the code to be parallelized at
-  a very high level. No further modifications of the code is necessary.*/
-  const size_t L_end = poptea.expSetup.laser.L_end;
-  size_t n = 0;
-  #pragma omp parallel for schedule(dynamic) private(n)
-  for(n = 0 ; n < L_end ; n++ )
-  {
-//    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
-//        arrayVal[n] = PhaseOfEmission2DAna(n, poptea);
-        arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
-  }
+//void phase99( const class thermalAnalysisMethod::PopTea &poptea,
+//              double *arrayVal )
+//{
+//  /*The phase for each thermal penetration is calculated in parallel using the
+//  OpenMP framework.  This gives significant increases in the speed of the code
+//  for all ranges of L_end.  This also allows the code to be parallelized at
+//  a very high level. No further modifications of the code is necessary.*/
+//  const size_t L_end = poptea.expSetup.laser.L_end;
+//  size_t n = 0;
+//  #pragma omp parallel for schedule(dynamic) private(n)
+//  for(n = 0 ; n < L_end ; n++ )
+//  {
+////    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
+////        arrayVal[n] = PhaseOfEmission2DAna(n, poptea);
+//        arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
+//  }
 
-  return;
-}
+//  return;
+//}
 
 void phase99( const class thermalAnalysisMethod::PopTea &poptea,
               std::vector<double> &arrayVal )

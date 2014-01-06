@@ -28,8 +28,8 @@ License
 #include "models/poptea.hpp"
 
 double Experimental_PhaseOfEmission(double*phase, const size_t L_end);
-void phase99(const thermalAnalysisMethod::PopTea &poptea,
-             double *Numerical_Phase);
+//void phase99(const thermalAnalysisMethod::PopTea &poptea,
+//             double *Numerical_Phase);
 void phase99(const thermalAnalysisMethod::PopTea &poptea,
              std::vector<double> &arrayVal);
 
