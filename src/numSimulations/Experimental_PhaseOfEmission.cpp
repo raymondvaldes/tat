@@ -36,12 +36,12 @@ void phase99( const class thermalAnalysisMethod::PopTea &poptea,
   a very high level. No further modifications of the code is necessary.*/
   const size_t L_end = poptea.expSetup.laser.L_end;
   size_t n = 0;
-//  #pragma omp parallel for schedule(dynamic) private(n)
+  #pragma omp parallel for schedule(dynamic) private(n)
   for(n = 0 ; n < L_end ; n++ )
   {
-    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
+//    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
 //        arrayVal[n] = PhaseOfEmission2DAna(n, poptea);
-//        arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
+        arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
   }
 
   return;
@@ -56,12 +56,12 @@ void phase99( const class thermalAnalysisMethod::PopTea &poptea,
   a very high level. No further modifications of the code is necessary.*/
   const size_t L_end = poptea.expSetup.laser.L_end;
   size_t n = 0;
-//  #pragma omp parallel for schedule(dynamic) private(n)
+  #pragma omp parallel for schedule(dynamic) private(n)
   for(n = 0 ; n < L_end ; n++ )
   {
-    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
+//    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
 //        arrayVal[n] = PhaseOfEmission2DAna(n, poptea);
-//        arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
+        arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
   }
 
   return;
