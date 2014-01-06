@@ -379,6 +379,7 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
   {
     const double val =
         x_limiter2(x[i] , unknown.lowerBound(), unknown.upperBound());
+
     switch( unknown.label() )
     {
       case physicalModel::labels::Name::asub :

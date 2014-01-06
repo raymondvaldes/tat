@@ -31,7 +31,7 @@ int main( int /*argc*/, char* argv[] )
 
   /// Figure out working directory
   namespace bf = boost::filesystem;
-  std::string path("/Users/raymondvaldes/code/tat/bin/"); //MUST BE PASSED
+  std::string path("/home/raymond/code/tat/bin"); //MUST BE PASSED
   const bf::path pProgram(path);
   class filesystem::directory dir(pProgram.string());
 
