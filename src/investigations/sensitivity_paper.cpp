@@ -81,7 +81,9 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
     const class emissionNoiseParameters myEmissionNoise(a, b, d1, d2, s1,
                                                         noiseRandom);
 
-    double *Analytical_PhaseR1 = nullptr;
+//    double *Analytical_PhaseR1 = nullptr;
+    std::vector<double> Analytical_PhaseR1;
+
     double *lthermalR1 = nullptr;
     double *predictedR1 = nullptr;
     double *emissionExpR1 = nullptr;
@@ -94,7 +96,9 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         poptea.thermalSetup(l_min, l_max, LendMinDecade);
 
         /// Populate the experimental phase values in parameters99
-        Analytical_PhaseR1  = new double[poptea.expSetup.laser.L_end]();
+//        Analytical_PhaseR1  = new double[poptea.expSetup.laser.L_end]();
+        Analytical_PhaseR1.resize(poptea.expSetup.laser.L_end);
+
         lthermalR1          = new double[poptea.expSetup.laser.L_end]();
         predictedR1         = new double[poptea.expSetup.laser.L_end]();
         emissionExpR1       = new double[poptea.expSetup.laser.L_end]();
@@ -134,7 +138,10 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         LendR1 = poptea.expSetup.laser.L_end;
     }
 
-    double *Analytical_PhaseR2 = nullptr;
+//    double *Analytical_PhaseR2 = nullptr;
+    std::vector<double> Analytical_PhaseR2;
+
+
     double *lthermalR2 = nullptr;
     double *predictedR2 = nullptr;
     double *emissionExpR2 = nullptr;
@@ -154,7 +161,9 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         LendR2 = poptea.expSetup.laser.L_end;
 
         /// Populate the experimental phase values in parameters99
-        Analytical_PhaseR2  = new double[poptea.expSetup.laser.L_end]();
+//        Analytical_PhaseR2  = new double[poptea.expSetup.laser.L_end]();
+        Analytical_PhaseR2.resize(poptea.expSetup.laser.L_end);
+
         lthermalR2          = new double[poptea.expSetup.laser.L_end]();
         predictedR2         = new double[poptea.expSetup.laser.L_end]();
         emissionExpR2       = new double[poptea.expSetup.laser.L_end]();
@@ -219,12 +228,12 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
 
 
     delete []lthermalR1;
-    delete []Analytical_PhaseR1;
+//    delete []Analytical_PhaseR1;
     delete []predictedR1;
     delete []emissionExpR1;
 
     delete []lthermalR2;
-    delete []Analytical_PhaseR2;
+//    delete []Analytical_PhaseR2;
     delete []predictedR2;
     delete []emissionExpR2;
 }
