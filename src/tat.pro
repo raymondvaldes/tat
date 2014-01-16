@@ -156,4 +156,5 @@ HEADERS += \
     models/poptea.hpp \
     models/physicalmodel.hpp \
     models/numericalmodel.hpp \
-    tools/configuration.hpp
+    tools/configuration.hpp \
+    math/bisection.hpp
