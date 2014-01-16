@@ -132,7 +132,8 @@ SOURCES += \
     models/poptea.cpp \
     models/physicalmodel.cpp \
     models/numericalmodel.cpp \
-    tools/configuration.cpp
+    tools/configuration.cpp \
+    math/bisection.cpp
 
 #header files
 HEADERS += \
