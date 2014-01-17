@@ -25,11 +25,17 @@ License
 #include "Header.h"
 #include "math/bisection.hpp"
 
-struct FunctionToApproximate  {
-  double operator() (double x)  {
-    return pow(x,3) -.5 ;  // Replace with your function
-  }
-};
+//struct FunctionToApproximate  {
+//  double operator() (double x)  {
+//    return pow(x,3) -.5 ;  // Replace with your function
+//  }
+//};
+
+
+double Funct2( double x)
+{
+  return pow(x,3) - .5;
+}
 
 int main( int /*argc*/, char** /*argv[]*/ )
 {
@@ -37,21 +43,20 @@ int main( int /*argc*/, char** /*argv[]*/ )
   class stopwatch globalStopWatch;
 
 
-  math::solve<struct FunctionToApproximate>
-      funcSoln = math::solve<struct FunctionToApproximate>( FunctionToApproximate(), 0 , 0 , .5);
+  math::solve funcSoln( &Funct2, 0 , 0 , 1);
   std::cout << "this is my result\t" << funcSoln.returnSoln();
 
 
-//  /// Figure out working directory
-//  namespace bf = boost::filesystem;
-//  std::string path("/home/raymond/code/tat/bin"); //MUST BE PASSED
-//  const bf::path pProgram(path);
-//  class filesystem::directory dir(pProgram.string());
+  /// Figure out working directory
+  namespace bf = boost::filesystem;
+  std::string path("/home/raymond/code/tat/bin"); //MUST BE PASSED
+  const bf::path pProgram(path);
+  class filesystem::directory dir(pProgram.string());
 
-//  /// initiate poptea by importing configuration info
-//  namespace TAM = thermalAnalysisMethod;
-//  const std::string filename = "config.xml";
-//  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
+  /// initiate poptea by importing configuration info
+  namespace TAM = thermalAnalysisMethod;
+  const std::string filename = "config.xml";
+  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
 
 //  /// Test loop
 //  if (true)

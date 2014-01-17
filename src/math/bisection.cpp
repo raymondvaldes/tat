@@ -33,7 +33,49 @@ size_t PrecisionToBits(const size_t precision)
   /*Enter the number of decimal precision required*/
   constexpr double log10of2 = log10(2);
   const double bits = precision / log10of2;
+
   return ceil(bits);
 }
+
+solve::solve( double(*myF_)(double), const double phi_, const double min_,
+              const double max_)
+  : myF(myF_), phi(phi_), min(min_), max(max_)
+{
+  namespace BMT =  boost::math::tools;
+
+//  constexpr size_t digitsPrecision = 32;
+//  constexpr size_t digitsBitsofPrecision = PrecisionToBits(digitsPrecision);
+  constexpr size_t digitsBitsofPrecision = 64; //same as double
+  BMT::eps_tolerance<double> tol = digitsBitsofPrecision;
+
+  try
+  {
+    std::pair<double, double> result = BMT::bisect( myF, min, max, tol, maxInt);
+    solnTolerance = abs( result.first - result.second );
+    bestGuess = (result.first + result.second) / 2;
+  }
+  catch (std::exception const&  ex)
+  {
+    std::cout << "\noutside range or no roots \n\n" << "\n";
+    bestGuess = max;
+  }
+}
+
+double solve::returnSoln(void)
+{
+  return bestGuess;
+}
+
+size_t solve::returnIterations(void)
+{
+  return maxInt;
+}
+
+double solve::returnSolnTolerance(void)
+{
+  return solnTolerance;
+}
+
+solve::~solve(void){}
 
 }
