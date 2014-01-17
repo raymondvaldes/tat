@@ -558,7 +558,6 @@ double evaluateUncertainty(const double MSEarea, double* perturbationTable,
         return 0;
     }
 
-
     double value = 0;
     double*calibration = new double[xnum];
     for(size_t i=0; i<xnum ; ++i)
@@ -598,10 +597,6 @@ double evaluateUncertainty(const double MSEarea, double* perturbationTable,
             break;
         }
     }
-
-
-
-
 
     delete Func1;
     delete[]calibration;

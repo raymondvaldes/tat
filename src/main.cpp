@@ -23,42 +23,55 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "Header.h"
+#include "math/bisection.hpp"
 
-int main( int /*argc*/, char* /*argv[]*/ )
+struct FunctionToApproximate  {
+  double operator() (double x)  {
+    return pow(x,3) -.5 ;  // Replace with your function
+  }
+};
+
+int main( int /*argc*/, char** /*argv[]*/ )
 {
   std::cout << "Welcome back, Raymond!\n\n";
   class stopwatch globalStopWatch;
 
-  /// Figure out working directory
-  namespace bf = boost::filesystem;
-  std::string path("/home/raymond/code/tat/bin"); //MUST BE PASSED
-  const bf::path pProgram(path);
-  class filesystem::directory dir(pProgram.string());
 
-  /// initiate poptea by importing configuration info
-  namespace TAM = thermalAnalysisMethod;
-  const std::string filename = "config.xml";
-  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
+  math::solve<struct FunctionToApproximate>
+      funcSoln = math::solve<struct FunctionToApproximate>( FunctionToApproximate(), 0 , 0 , .5);
+  std::cout << "this is my result\t" << funcSoln.returnSoln();
 
-  /// Test loop
-  if (true)
-  {
-    double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
-    constexpr size_t interants = 1;
-    phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
 
-    for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
-    {
-      poptea.LMA.LMA_workspace.emissionExperimental[nn]
-            = poptea.LMA.LMA_workspace.emissionNominal[nn];
-    }
-    fitting(poptea, xInitial, interants, 10, 5);
-    delete[] xInitial;
-  }
+//  /// Figure out working directory
+//  namespace bf = boost::filesystem;
+//  std::string path("/home/raymond/code/tat/bin"); //MUST BE PASSED
+//  const bf::path pProgram(path);
+//  class filesystem::directory dir(pProgram.string());
 
-  //Prepare figures and data for paper Sensitivity
-//    SensitivityValdes2013::CC_APS2(poptea);
-//    SensitivityValdes2013::figureSensitivityIntro(poptea);
+//  /// initiate poptea by importing configuration info
+//  namespace TAM = thermalAnalysisMethod;
+//  const std::string filename = "config.xml";
+//  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
+
+//  /// Test loop
+//  if (true)
+//  {
+//    double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
+//    constexpr size_t interants = 1;
+//    phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
+
+//    for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
+//    {
+//      poptea.LMA.LMA_workspace.emissionExperimental[nn]
+//            = poptea.LMA.LMA_workspace.emissionNominal[nn];
+//    }
+//    fitting(poptea, xInitial, interants, 10, 5);
+//    delete[] xInitial;
+//  }
+
+//  //Prepare figures and data for paper Sensitivity
+////    SensitivityValdes2013::CC_APS2(poptea);
+////    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
   /// end
   globalStopWatch.displayTime();
