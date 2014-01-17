@@ -1,16 +1,16 @@
 /*----------------------------------------------------------------------------*\
-  ========                  |
+  ========                      |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
-     ||  	 A Analysis     |        
+     ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  				|
+     ||   	  		|
 -------------------------------------------------------------------------------
-License                                                                         
-	  This file is part of Thermal Analysis Toolbox.
+License
+    This file is part of Thermal Analysis Toolbox.
 
-    Thermal Analysis Toolbox is free software: you can redistribute it and/or 
+    Thermal Analysis Toolbox is free software: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or (at your 
+    the Free Software Foundation, either version 3 of the License, or (at your
     option) any later version.
 
     Thermal Analysis Toolbox is distributed in the hope that it will be useful,
@@ -18,7 +18,7 @@ License
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along with 
+    You should have received a copy of the GNU General Public License along with
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
@@ -30,6 +30,7 @@ namespace SensitivityValdes2013
 This namespace will hold all the functions necessary to reproduce the work
 in the Valdes2013 Sensitivity Paper.
 */
+
 ///Parameter Estimation Options
 /* - N number of thermal parameters to be fitted
  - ftol difference in error
