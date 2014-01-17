@@ -22,9 +22,12 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <functional>
+#include <iostream>
 #include <math.h>
 #include <boost/math/tools/roots.hpp>
 #include "math/bisection.hpp"
+
 
 namespace math{
 
@@ -37,22 +40,21 @@ size_t PrecisionToBits(const size_t precision)
   return ceil(bits);
 }
 
-solve::solve( double(*myF_)(double), const double phi_, const double min_,
+
+ double solve::myRootFunc(const double x) const
+{
+  return myF(x) - phi;
+}
+
+solve::solve( double(*myF_)( double), const double phi_, const double min_,
               const double max_)
   : myF(myF_), phi(phi_), min(min_), max(max_)
 {
-  namespace BMT =  boost::math::tools;
-
-//  constexpr size_t digitsPrecision = 32;
-//  constexpr size_t digitsBitsofPrecision = PrecisionToBits(digitsPrecision);
-  constexpr size_t digitsBitsofPrecision = 64; //same as double
-  BMT::eps_tolerance<double> tol = digitsBitsofPrecision;
+  assert(min < max);
 
   try
   {
-    std::pair<double, double> result = BMT::bisect( myF, min, max, tol, maxInt);
-    solnTolerance = abs( result.first - result.second );
-    bestGuess = (result.first + result.second) / 2;
+    BisectMethod();
   }
   catch (std::exception const&  ex)
   {
@@ -61,17 +63,34 @@ solve::solve( double(*myF_)(double), const double phi_, const double min_,
   }
 }
 
-double solve::returnSoln(void)
+void solve::BisectMethod(void)
+{
+  using std::placeholders::_1;
+  const std::function<double(double)>
+      myFuncReduced = std::bind( &solve::myRootFunc, this , _1 );
+
+  namespace BMT =  boost::math::tools;
+  constexpr size_t digitsBitsofPrecision = 64; //same as double
+  const BMT::eps_tolerance<double> tol = digitsBitsofPrecision;
+
+  const std::pair<double, double> result =
+      BMT::bisect( myFuncReduced, min, max, tol, maxInt);
+
+  solnTolerance = abs( result.first - result.second );
+  bestGuess = (result.first + result.second) / 2;
+}
+
+double solve::returnSoln(void) const
 {
   return bestGuess;
 }
 
-size_t solve::returnIterations(void)
+size_t solve::returnIterations(void) const
 {
   return maxInt;
 }
 
-double solve::returnSolnTolerance(void)
+double solve::returnSolnTolerance(void) const
 {
   return solnTolerance;
 }

@@ -25,16 +25,9 @@ License
 #include "Header.h"
 #include "math/bisection.hpp"
 
-//struct FunctionToApproximate  {
-//  double operator() (double x)  {
-//    return pow(x,3) -.5 ;  // Replace with your function
-//  }
-//};
-
-
 double Funct2( double x)
 {
-  return pow(x,3) - .5;
+  return x*x ;
 }
 
 int main( int /*argc*/, char** /*argv[]*/ )
@@ -42,10 +35,10 @@ int main( int /*argc*/, char** /*argv[]*/ )
   std::cout << "Welcome back, Raymond!\n\n";
   class stopwatch globalStopWatch;
 
-
-  math::solve funcSoln( &Funct2, 0 , 0 , 1);
-  std::cout << "this is my result\t" << funcSoln.returnSoln();
-
+  math::solve funcSoln( &Funct2, 4 , -5 , 0);
+  std::cout << "this is my result\t" << funcSoln.returnSoln() << "\n"
+            << "number of iterations\t" << funcSoln.returnIterations() << "\n"
+            << "tolerance\t" << funcSoln.returnSolnTolerance() << "\n";
 
   /// Figure out working directory
   namespace bf = boost::filesystem;
