@@ -22,4 +22,18 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <math.h>
 #include <boost/math/tools/roots.hpp>
+#include "math/bisection.hpp"
+
+namespace math{
+
+size_t PrecisionToBits(const size_t precision)
+{
+  /*Enter the number of decimal precision required*/
+  constexpr double log10of2 = log10(2);
+  const double bits = precision / log10of2;
+  return ceil(bits);
+}
+
+}

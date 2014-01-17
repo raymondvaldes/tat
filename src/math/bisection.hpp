@@ -23,3 +23,90 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <boost/math/tools/roots.hpp>
+
+#ifndef BISECTION_HPP_INCLUDED
+#define BISECTION_HPP_INCLUDED
+/*This class solves the function:                        f(x) = phi
+  by using the bisection method to solve :  abs( f(x) - phi ) =  0
+*/
+
+
+
+
+namespace math{
+
+size_t PrecisionToBits(const size_t precision);
+
+template<class callback_function>
+class solve
+{
+private:
+  boost::uintmax_t maxInt = 100;
+  const size_t digitsPrecision = 32;
+  const callback_function myF;
+  const double phi;
+  const double min;
+  const double max;
+  size_t digitsBitsofPrecision;
+  boost::math::tools::eps_tolerance<double> tol = PrecisionToBits(digitsPrecision);
+  double bestGuess;
+  void soln(void);
+  double solnTolerance;
+
+public:
+  solve( callback_function myF_, const double phi_, const double min_,
+          const double max_);
+  ~solve(void);
+
+  double returnSoln(void);
+  size_t returnIterations(void);
+  double returnSolnTolerance(void);
+
+};
+
+template<class callback_function>
+solve<callback_function>::solve( callback_function myF_, const double phi_,
+                                 const double min_, const double max_)
+  :myF(myF_), phi(phi_), min(min_), max(max_)
+{
+  namespace BMT =  boost::math::tools;
+
+  try
+  {
+    std::pair<double, double> result = BMT::bisect( myF, min, max, tol, maxInt);
+    solnTolerance = abs( result.first - result.second );
+    bestGuess = (result.first + result.second) / 2;
+  }
+  catch (std::exception const&  ex)
+  {
+    std::cout << "\noutside range or no roots \n\n" << "\n";
+    bestGuess = max;
+  }
+
+}
+
+template<class callback_function>
+double solve<callback_function>::returnSoln(void)
+{
+  return bestGuess;
+}
+
+template<class callback_function>
+size_t solve<callback_function>::returnIterations(void)
+{
+  return maxInt;
+}
+
+template<class callback_function>
+double solve<callback_function>::returnSolnTolerance(void)
+{
+  return solnTolerance;
+}
+
+template<class callback_function>
+solve<callback_function>::~solve(void){}
+
+}
+
+
+#endif // BISECTION_HPP_INCLUDED
