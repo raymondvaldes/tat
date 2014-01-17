@@ -25,5 +25,16 @@ License
 #ifndef CONFIGURATION_HPP
 #define CONFIGURATION_HPP
 
+#include <functional>
+class EventHandler
+{
+    public:
+        void addHandler(std::function<double(double)> callback)
+        {
+            cout << "Handler added..." << endl;
+            // Let's pretend an event just occured
+            callback(1);
+        }
+};
 
 #endif // CONFIGURATION_HPP

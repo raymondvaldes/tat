@@ -23,11 +23,12 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <boost/math/tools/roots.hpp>
+#include <functional>
 
 #ifndef BISECTION_HPP_INCLUDED
 #define BISECTION_HPP_INCLUDED
 /*This class solves the function:                        f(x) = phi
-  by using the bisection method to solve :  abs( f(x) - phi ) =  0
+  by using the bisection method to solve :   f(x) - phi  =  0
 */
 
 namespace math{
@@ -37,7 +38,6 @@ size_t PrecisionToBits(const size_t precision);
 class solve
 {
 private:
-//  const callback_function myF;
   double (*myF)(double) ;
   const double phi;
   const double min;
@@ -45,15 +45,17 @@ private:
   double bestGuess;
   double solnTolerance;
   boost::uintmax_t maxInt = 100;
+  double myRootFunc(const double x) const;
+  void BisectMethod(void);
 
 public:
-  solve(double(*myF_)(double) , const double phi_, const double min_,
+  solve( double(*myF_)( double) , const double phi_, const double min_,
          const double max_);
   ~solve(void);
 
-  double returnSoln(void);
-  size_t returnIterations(void);
-  double returnSolnTolerance(void);
+  double returnSoln(void) const ;
+  size_t returnIterations(void) const ;
+  double returnSolnTolerance(void) const;
 };
 
 }

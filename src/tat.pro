@@ -133,7 +133,8 @@ SOURCES += \
     models/physicalmodel.cpp \
     models/numericalmodel.cpp \
     tools/configuration.cpp \
-    math/bisection.cpp
+    math/bisection.cpp \
+    math/sensitivityAnalysis/parameterEstimationInterval.cpp
 
 #header files
 HEADERS += \
@@ -157,4 +158,5 @@ HEADERS += \
     models/physicalmodel.hpp \
     models/numericalmodel.hpp \
     tools/configuration.hpp \
-    math/bisection.hpp
+    math/bisection.hpp \
+    math/sensitivityAnalysis/parameterEstimationInterval.hpp
