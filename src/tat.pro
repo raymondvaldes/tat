@@ -134,7 +134,8 @@ SOURCES += \
     models/numericalmodel.cpp \
     tools/configuration.cpp \
     math/bisection.cpp \
-    math/sensitivityAnalysis/parameterEstimationInterval.cpp
+    math/sensitivityAnalysis/parameterEstimationInterval.cpp \
+    investigations/sensitivityvaldes2013.cpp
 
 #header files
 HEADERS += \
@@ -159,4 +160,5 @@ HEADERS += \
     models/numericalmodel.hpp \
     tools/configuration.hpp \
     math/bisection.hpp \
-    math/sensitivityAnalysis/parameterEstimationInterval.hpp
+    math/sensitivityAnalysis/parameterEstimationInterval.hpp \
+    investigations/sensitivityvaldes2013.hpp
