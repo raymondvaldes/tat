@@ -163,4 +163,5 @@ HEADERS += \
     math/bisection.hpp \
     math/sensitivityAnalysis/parameterEstimationInterval.hpp \
     investigations/sensitivityvaldes2013.hpp \
-    investigations/manyfit.hpp
+    investigations/manyfit.hpp \
+    investigations/all.hpp
