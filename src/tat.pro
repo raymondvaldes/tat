@@ -135,7 +135,8 @@ SOURCES += \
     tools/configuration.cpp \
     math/bisection.cpp \
     math/sensitivityAnalysis/parameterEstimationInterval.cpp \
-    investigations/sensitivityvaldes2013.cpp
+    investigations/sensitivityvaldes2013.cpp \
+    investigations/manyfit.cpp
 
 #header files
 HEADERS += \
@@ -161,4 +162,5 @@ HEADERS += \
     tools/configuration.hpp \
     math/bisection.hpp \
     math/sensitivityAnalysis/parameterEstimationInterval.hpp \
-    investigations/sensitivityvaldes2013.hpp
+    investigations/sensitivityvaldes2013.hpp \
+    investigations/manyfit.hpp

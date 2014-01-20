@@ -40,9 +40,7 @@ License
 #include "tools/timing.h"
 #include "tools/filesystem.hpp"
 
-#include "numSimulations/Experimental_PhaseOfEmission.h"
-#include "models/poptea.hpp"
-#include "algorithms/sensitivity_analysis.hpp"
-
 #include "investigations/sensitivityvaldes2013.hpp"
+#include "investigations/manyfit.hpp"
+
 #endif // HEADER_H_INCLUDED
