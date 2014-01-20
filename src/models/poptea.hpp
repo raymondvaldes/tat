@@ -31,6 +31,8 @@ License
 #include "models/expEquipment.hpp"
 #include "models/Thermal_models.h"
 #include "tools/filesystem.hpp"
+#include "thermal/thermal.hpp"
+#include "thermal/construct.hpp"
 
 enum XParaNames
 {
@@ -53,13 +55,13 @@ namespace thermalAnalysisMethod
 
     class expEquipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
-    class thermal::ThermalModelSelection thermalModel;
+    class thermal::construct thermalModel;
     class parameterEstimation::LMA LMA;
     class filesystem::directory DataDirectory;
 
     explicit PopTea( class expEquipment::setup expSetup_,
                      class physicalModel::TBCsystem TBCsystem_,
-                     class thermal::ThermalModelSelection thermalModel_,
+                     class thermal::construct thermalModel_,
                      class parameterEstimation::settings Settings_,
                      class parameterEstimation::unknownList unknownParameters_,
                      class filesystem::directory DataDirectory_
@@ -67,7 +69,6 @@ namespace thermalAnalysisMethod
     static thermalAnalysisMethod::PopTea
       loadConfig( const std::string &filename,
                   const class filesystem::directory DataDirectory_);
-
     ~PopTea( void );
 
 
