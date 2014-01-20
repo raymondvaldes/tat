@@ -22,7 +22,9 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "../Header.h"
+#include <boost/filesystem.hpp>
+
+#include "tools/filesystem.hpp"
 
 namespace filesystem
 {

@@ -22,24 +22,21 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
 
-///Standard Template Library
+//Standard Template Libraries
 #include <cstdlib>
 #include <cstddef>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
-     
-///External Libraries
-#include <boost/filesystem.hpp>
 
-///Internal dependencies
+//Internal dependencies
 #include "tools/timing.h"
 #include "tools/filesystem.hpp"
 
+//Investiations
 #include "investigations/all.hpp"
 
 #endif // HEADER_H_INCLUDED
