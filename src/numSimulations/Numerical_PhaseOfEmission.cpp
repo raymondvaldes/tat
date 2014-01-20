@@ -26,6 +26,7 @@ License
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "algorithms/statistical_tools.hpp"
 #include "numSimulations/Numerical_Setup.h"
+#include "thermal/emission.hpp"
 
 double PhaseOfEmission1DNum(const int flag,
                             const class thermalAnalysisMethod::PopTea &poptea)
@@ -41,7 +42,7 @@ double PhaseOfEmission1DNum(const int flag,
 
   ///Initiate emission model
   const double Lcoat = poptea.TBCsystem.coating.depth;
-  const class Emission emission(poptea.expSetup.detector.wavelength,
+  const class thermal::Emission emission(poptea.expSetup.detector.wavelength,
                                 poptea.TBCsystem.Temp.base,
                                 poptea.thermalModel.mesh,
                                 poptea.bEval() *Lcoat,
@@ -87,7 +88,7 @@ double PhaseOfEmission2DAna(const int flag,
                                      poptea.expSetup.laser.omegas[flag]);
 
     ///Initiate emission model
-    const class Emission emission(poptea.expSetup.detector.wavelength,
+    const class thermal::Emission emission(poptea.expSetup.detector.wavelength,
                                   poptea.TBCsystem.Temp.referance,
                                   poptea.thermalModel.mesh,
                                   poptea.bEval() * Lcoat,
