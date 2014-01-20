@@ -38,26 +38,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   /// Run investigations
   investigations::sensitivityvaldes2013::run( dir );
 
-//  /// initiate poptea by importing configuration info
-//  namespace TAM = thermalAnalysisMethod;
-//  const std::string filename = "config.xml";
-//  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
-
-//  /// Test loop
-//  if (true)
-//  {
-//    double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
-//    constexpr size_t interants = 1;
-//    phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
-
-//    for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
-//    {
-//      poptea.LMA.LMA_workspace.emissionExperimental[nn]
-//            = poptea.LMA.LMA_workspace.emissionNominal[nn];
-//    }
-//    fitting(poptea, xInitial, interants, 10, 5);
-//    delete[] xInitial;
-//  }
+  /// Test investigation
+  investigations::manyfit::run( dir );
 
 //  //Prepare figures and data for paper Sensitivity
 ////    SensitivityValdes2013::CC_APS2(poptea);
