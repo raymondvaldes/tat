@@ -177,7 +177,7 @@ const emission_bimap EmissionXMap = \
  ( EmissionX::TwoDimNonLin , "TwoDimNonLin");
 
 
-class ThermalModelSelection
+class ModelSelection
 {
 
 public:
@@ -186,17 +186,26 @@ public:
   const enum EmissionX emission;
   class numericalModel::Mesh mesh;
 
-  explicit ThermalModelSelection(const enum HeatX myHeat,
-                                 const enum EmissionX myEmission,
-                                 class numericalModel::Mesh mesh_);
-  static class ThermalModelSelection
+  explicit ModelSelection( const enum HeatX myHeat,
+                           const enum EmissionX myEmission,
+                           class numericalModel::Mesh mesh_);
+
+  static class ModelSelection
       loadConfigfromXML(const boost::property_tree::ptree pt,
                         const class numericalModel::Mesh mesh_);
-  ~ThermalModelSelection(void);
+  ~ModelSelection(void);
 };
 
+class model
+{
+public:
+  class construct;
+  class mesh;
+
+  explicit model ( const class construct, const class mesh);
+  ~model(void);
+};
+
+
 }
-
-
-
 #endif // THERMAL_MODELS_H_INCLUDED

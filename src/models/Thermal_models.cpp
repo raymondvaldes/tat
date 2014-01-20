@@ -908,12 +908,6 @@ double Emission::phase1D(const class Temperature Tprofile) const
     return OAPemission[2];
 }
 
-//void Emission::cleanup(void) const
-//{
-//    delete[] Ib;
-//    delete[] EmissionTime;
-//}
-
 
 namespace thermal{
 
@@ -928,15 +922,15 @@ double diffusivity(const double k, const double rhoCp)
   return k / rhoCp;
 }
 
-ThermalModelSelection::ThermalModelSelection(const enum HeatX myHeat,
-                                             const enum EmissionX myEmission,
-                                             class numericalModel::Mesh mesh_)
+ModelSelection::ModelSelection(const enum HeatX myHeat,
+                               const enum EmissionX myEmission,
+                               class numericalModel::Mesh mesh_)
   :heat(myHeat), emission(myEmission), mesh(mesh_){}
 
-ThermalModelSelection::~ThermalModelSelection(void){}
+ModelSelection::~ModelSelection(void){}
 
 
-class ThermalModelSelection ThermalModelSelection::
+class ModelSelection ModelSelection::
         loadConfigfromXML(const boost::property_tree::ptree pt,
                           const class numericalModel::Mesh mesh_)
 {
@@ -947,7 +941,7 @@ class ThermalModelSelection ThermalModelSelection::
   const std::string emissionLabel = pt.get<std::string>( "emissionModel" );
   const enum EmissionX emissionModel = EmissionXMap.right.at(emissionLabel);
 
-  const class ThermalModelSelection thermalModel( heatModel, emissionModel,
+  const class ModelSelection thermalModel( heatModel, emissionModel,
                                                     mesh_ );
 
   return thermalModel;
