@@ -40,7 +40,6 @@ License
 #include "tools/timing.h"
 #include "tools/filesystem.hpp"
 
-#include "investigations/sensitivityvaldes2013.hpp"
-#include "investigations/manyfit.hpp"
+#include "investigations/all.hpp"
 
 #endif // HEADER_H_INCLUDED
