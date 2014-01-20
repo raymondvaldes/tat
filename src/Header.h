@@ -44,4 +44,5 @@ License
 #include "models/poptea.hpp"
 #include "algorithms/sensitivity_analysis.hpp"
 
+#include "investigations/sensitivityvaldes2013.hpp"
 #endif // HEADER_H_INCLUDED

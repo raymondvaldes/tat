@@ -23,33 +23,25 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "Header.h"
-#include "math/bisection.hpp"
-
-double Funct2( double x)
-{
-  return x*x ;
-}
 
 int main( int /*argc*/, char** /*argv[]*/ )
 {
   std::cout << "Welcome back, Raymond!\n\n";
   class stopwatch globalStopWatch;
 
-  math::solve funcSoln( &Funct2, 4 , -5 , 0);
-  std::cout << "this is my result\t" << funcSoln.returnSoln() << "\n"
-            << "number of iterations\t" << funcSoln.returnIterations() << "\n"
-            << "tolerance\t" << funcSoln.returnSolnTolerance() << "\n";
-
   /// Figure out working directory
   namespace bf = boost::filesystem;
-  std::string path("/home/raymond/code/tat/bin"); //MUST BE PASSED
+  std::string path("/home/raymond/code/tat/bin");
   const bf::path pProgram(path);
   class filesystem::directory dir(pProgram.string());
 
-  /// initiate poptea by importing configuration info
-  namespace TAM = thermalAnalysisMethod;
-  const std::string filename = "config.xml";
-  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
+  /// Run investigations
+  investigations::sensitivityvaldes2013::run( dir );
+
+//  /// initiate poptea by importing configuration info
+//  namespace TAM = thermalAnalysisMethod;
+//  const std::string filename = "config.xml";
+//  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
 
 //  /// Test loop
 //  if (true)
