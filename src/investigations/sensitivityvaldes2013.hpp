@@ -24,11 +24,40 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef SENSITIVITYVALDES2013_HPP
 #define SENSITIVITYVALDES2013_HPP
+#include "algorithms/sensitivity_analysis.hpp"
+#include "models/poptea.hpp"
+#include "tools/filesystem.hpp"
 
-class sensitivityValdes2013
+namespace investigations
 {
-public:
-  sensitivityValdes2013();
-};
+namespace sensitivityvaldes2013{
 
+  class thermalAnalysisMethod::PopTea
+      loadWorkingDirectory(const class filesystem::directory dir);
+  void run(const class filesystem::directory dir);
+
+
+
+
+
+}
+}
 #endif // SENSITIVITYVALDES2013_HPP
+
+
+
+
+
+
+
+
+
+//#include "math/bisection.hpp"
+//double Funct2( double x)
+//{
+//  return x*x ;
+//}
+//  math::solve funcSoln( &Funct2, 4 , -5 , 0);
+//  std::cout << "this is my result\t" << funcSoln.returnSoln() << "\n"
+//            << "number of iterations\t" << funcSoln.returnIterations() << "\n"
+//            << "tolerance\t" << funcSoln.returnSolnTolerance() << "\n";

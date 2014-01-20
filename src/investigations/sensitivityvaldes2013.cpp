@@ -23,7 +23,34 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "sensitivityvaldes2013.hpp"
+#include "models/poptea.hpp"
 
-sensitivityValdes2013::sensitivityValdes2013()
+
+namespace investigations
 {
+  namespace sensitivityvaldes2013{
+
+  class thermalAnalysisMethod::PopTea
+      loadWorkingDirectory(const class filesystem::directory dir)
+  {
+    /// initiate poptea by importing configuration info
+    namespace TAM = thermalAnalysisMethod;
+    const std::string filename = "config.xml";
+    return TAM::PopTea::loadConfig( dir.abs( filename ), dir);
+  }
+
+  void run(const class filesystem::directory dir)
+  {
+    class thermalAnalysisMethod::PopTea poptea = loadWorkingDirectory(dir);
+    return;
+  }
+
+
+
+
+
+
+
+
+  }
 }
