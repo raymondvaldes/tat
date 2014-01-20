@@ -29,21 +29,20 @@ int main( int /*argc*/, char** /*argv[]*/ )
   std::cout << "Welcome back, Raymond!\n\n";
   class stopwatch globalStopWatch;
 
-  /// Figure out working directory
+  /// Retrieve working directory
   std::string path("/home/raymond/code/tat/bin");
   class filesystem::directory dir(path);
 
   /// Run investigations
   investigations::sensitivityvaldes2013::run( dir );
 
-  /// Test investigation
-  investigations::manyfit::run( dir );
-
 //  //Prepare figures and data for paper Sensitivity
 ////    SensitivityValdes2013::CC_APS2(poptea);
 ////    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
-  /// end
+  /// Test investigation
+  investigations::manyfit::run( dir );
+
   globalStopWatch.displayTime();
   return 0;
 }
