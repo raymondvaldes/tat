@@ -30,10 +30,8 @@ int main( int /*argc*/, char** /*argv[]*/ )
   class stopwatch globalStopWatch;
 
   /// Figure out working directory
-  namespace bf = boost::filesystem;
   std::string path("/home/raymond/code/tat/bin");
-  const bf::path pProgram(path);
-  class filesystem::directory dir(pProgram.string());
+  class filesystem::directory dir(path);
 
   /// Run investigations
   investigations::sensitivityvaldes2013::run( dir );

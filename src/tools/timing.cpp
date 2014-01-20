@@ -22,9 +22,10 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "../Header.h"
-//#include <boost/filesystem.hpp>
 #include <chrono>
+#include <iostream>
+
+#include "tools/timing.h"
 
 std::chrono::high_resolution_clock::time_point stopwatch::checktime(void)
 {
