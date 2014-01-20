@@ -31,6 +31,8 @@ License
 #include "models/physicalmodel.hpp"
 #include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
+#include "thermal/thermal.hpp"
+#include "thermal/construct.hpp"
 
 class matrixArrays
 {
@@ -63,7 +65,7 @@ std::complex<double> Tac1D_ana( const double z, const double R0,
                                 const double Lam, const double Lthrm);
 
 void temperature_1D( const class physicalModel::TBCsystem TBCsystem,
-                     const class thermal::ThermalModelSelection thermalModel,
+                     const class thermal::construct thermalModel,
                      const expEquipment::setup expSetup, const double omega1,
                      class Temperature Tprofile );
 
@@ -85,6 +87,7 @@ double abMatrixPrepopulate(std::vector<double>& B1,
 
 void bMatrixPrepopulate1( const size_t n, std::vector<double>& B2,
                           std::vector<double>& b, const size_t M1,
+
                           const size_t M2, const std::vector<double> &tau,
                           const double Is, const double It, const double L_coat,
                           const double tau_ref, const double R1,

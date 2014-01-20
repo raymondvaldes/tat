@@ -34,7 +34,7 @@ namespace thermalAnalysisMethod
 
 PopTea::PopTea( class expEquipment::setup expSetup_,
                 class physicalModel::TBCsystem TBCsystem_,
-                class thermal::ThermalModelSelection thermalModel_,
+                class thermal::construct thermalModel_,
                 class parameterEstimation::settings Settings_,
                 class parameterEstimation::unknownList unknownParameters_,
                 class filesystem::directory DataDirectory_ )
@@ -84,7 +84,7 @@ class thermalAnalysisMethod::PopTea
 
   const ptree ptchild3 = pt.get_child( conjunto + "thermalModel" );
   
-  ////TODO BUG REMOVE THIS TEMPORARY FIX
+  /// Mesh is intrinsically linked the TBCsystem and experimental setup
   const size_t M2     = ptchild3.get<size_t>( "mesh.M2" );
   const size_t Rend   = ptchild3.get<size_t>( "mesh.Rend");
   const size_t Nend   = ptchild3.get<size_t>( "mesh.Nend" );
@@ -95,10 +95,9 @@ class thermalAnalysisMethod::PopTea
                                   Obj2.substrate.depth,
                                   Obj1.laser.radius,
                                   Obj2.radius);
-  ////TODO BUG REMOVE THIS TEMPORARY
   
-  const class thermal::ThermalModelSelection
-    Obj3( thermal::ThermalModelSelection::loadConfigfromXML( ptchild3, mesh ) );
+  const class thermal::construct
+    Obj3( thermal::construct::loadConfigfromXML( ptchild3, mesh ) );
 
   const ptree ptchild4 = pt.get_child( conjunto + "ParaEstSettings" );
   const class parameterEstimation::settings

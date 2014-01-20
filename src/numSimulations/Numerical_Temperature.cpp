@@ -29,7 +29,7 @@ License
 #include "algorithms/statistical_tools.hpp"
 
 void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
-                    const class thermal::ThermalModelSelection thermalModel,
+                    const class thermal::construct thermalModel,
                     const class expEquipment::setup expSetup,
                     const double omega1,
                     class Temperature Tprofile)

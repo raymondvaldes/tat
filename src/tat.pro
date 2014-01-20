@@ -136,7 +136,10 @@ SOURCES += \
     math/bisection.cpp \
     math/sensitivityAnalysis/parameterEstimationInterval.cpp \
     investigations/sensitivityvaldes2013.cpp \
-    investigations/manyfit.cpp
+    investigations/manyfit.cpp \
+    thermal/thermal.cpp \
+    thermal/construct.cpp \
+    thermal/emission.cpp
 
 #header files
 HEADERS += \
@@ -164,4 +167,7 @@ HEADERS += \
     math/sensitivityAnalysis/parameterEstimationInterval.hpp \
     investigations/sensitivityvaldes2013.hpp \
     investigations/manyfit.hpp \
-    investigations/all.hpp
+    investigations/all.hpp \
+    thermal/thermal.hpp \
+    thermal/construct.hpp \
+    thermal/emission.hpp
