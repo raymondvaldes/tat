@@ -45,10 +45,9 @@ class matrixArrays
     const size_t M2;
     double B4;
 
-    explicit matrixArrays(const size_t length): A1(length), A2(length),
-      A3(length), b(length), Temperature(length), B1(length), B2(length),
-      B3(length), M2(length)
-    {    }
+    explicit matrixArrays( const size_t length )
+      : A1(length), A2(length), A3(length), b(length), Temperature(length),
+        B1(length), B2(length), B3(length), M2(length){}
 };
 
 double Numerical_Temperature( const double *const *parameters, double **T,
@@ -69,21 +68,21 @@ void temperature_1D( const class physicalModel::TBCsystem TBCsystem,
                      const expEquipment::setup expSetup, const double omega1,
                      class Temperature Tprofile );
 
-double abMatrixPrepopulate(std::vector<double>& B1,
-                           std::vector<double>& B2,
-                           std::vector<double>& B3,
-                           const size_t M1, const size_t M2,
-                           const std::vector<double> &tau,
-                           const double L_coat, const double L_substrate,
-                           const double tau_ref,
-                           const std::vector<double> &eta,
-                           const double q_surface,
-                           const std::vector<double>& z_jplus,
-                           const std::vector<double>& z_jminus,
-                           const std::vector<double>& z_j,
-                           const std::vector<double> &d_eta_plus,
-                           const std::vector<double> &deltaZ,
-                           const std::vector<double> &d_eta_minus);
+double abMatrixPrepopulate( std::vector<double>& B1,
+                            std::vector<double>& B2,
+                            std::vector<double>& B3,
+                            const size_t M1, const size_t M2,
+                            const std::vector<double> &tau,
+                            const double L_coat, const double L_substrate,
+                            const double tau_ref,
+                            const std::vector<double> &eta,
+                            const double q_surface,
+                            const std::vector<double>& z_jplus,
+                            const std::vector<double>& z_jminus,
+                            const std::vector<double>& z_j,
+                            const std::vector<double> &d_eta_plus,
+                            const std::vector<double> &deltaZ,
+                            const std::vector<double> &d_eta_minus);
 
 void bMatrixPrepopulate1( const size_t n, std::vector<double>& B2,
                           std::vector<double>& b, const size_t M1,
