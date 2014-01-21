@@ -27,6 +27,7 @@ License
 
 #include <vector>
 #include <cstddef>
+
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 
 bool equalto(const double a, const double b);

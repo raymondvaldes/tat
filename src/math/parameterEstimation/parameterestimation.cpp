@@ -22,7 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "algorithms/parameterestimation.hpp"
+#include "math/sensitivityAnalysis/parameterEstimationInterval.hpp"
 #include "numSimulations/Numerical_Setup.h"
 
 namespace parameterEstimation{
