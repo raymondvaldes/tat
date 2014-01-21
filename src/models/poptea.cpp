@@ -46,14 +46,6 @@ PopTea::PopTea( class expEquipment::setup expSetup_,
     LMA(Settings_, unknownParameters_),
     DataDirectory(DataDirectory_)
 {
-//  DataDirectory.mkdir("data");
-
-  const size_t d = LMA.unknownParameters.Nsize();
-
-  xParametersNames.resize(d);
-  xParameters95Names  .resize(d);
-  N95 = d;
-
   thermalsys.mesh.iter = 1000;
   LMA.LMA_workspace.MSETol = 1e-8;
 
