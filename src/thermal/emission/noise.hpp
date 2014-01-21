@@ -38,14 +38,38 @@ public:
   bool d1, d2;
   int s1;
   explicit ExpNoiseSetting( const double a1_, const double b1_,
-                                    const bool d1_, const bool d2_,
-                                    const int s1_, const double noiseRandom_);
+                            const bool d1_, const bool d2_,
+                            const int s1_, const double noiseRandom_);
 };
 
-void addNoise( const class emissionNoiseParameters myEmissionNoise,
-               const std::vector<double> lthermal,
-               const std::vector<double> emissionNominal_,
-               std::vector<double> emissionExperimental );
+std::vector<double>
+addNoise( const class thermal::emission::ExpNoiseSetting myEmissionNoise,
+          const std::vector<double> lthermal,
+          std::vector<double> emissionNominal_);
+/*
+a is the magnitude of the error at the edges of the range
+b is the stretching parameter that ranges from 1 < b < pi (use around 3)
+c is the location of the center and set it to 0.5.
+d is the orientation options
+d1 true (positive)
+d2 true (monotonically)
+
+This function needs an emissionProfile already established. This is the
+nominal emission profile used for the simulation. The EXPERIMENTAL EMISSION
+is in the object (this) scope.
+
+This function needs l_thermal to be populated with the thermal
+penetration range.
+
+lmin and lmax are used to determine the nominal limits of the lthermal
+range.
+
+*/
+// a = 0.025;
+// b = 3.05;
+// c = 0.5
+// d1 = 1 or 0;
+// d2 = 1 or 0
 
   }
 }

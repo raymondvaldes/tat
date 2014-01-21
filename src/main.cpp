@@ -41,7 +41,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
 ////    SensitivityValdes2013::figureSensitivityIntro(poptea);
 
   /// Test investigation
-  investigations::manyfit::run( dir );
+//  investigations::manyfit::run( dir );
 
   globalStopWatch.displayTime();
   return 0;
