@@ -139,7 +139,8 @@ SOURCES += \
     investigations/manyfit.cpp \
     thermal/thermal.cpp \
     thermal/construct.cpp \
-    thermal/emission.cpp
+    thermal/emission.cpp \
+    thermal/model.cpp
 
 #header files
 HEADERS += \
@@ -170,4 +171,5 @@ HEADERS += \
     investigations/all.hpp \
     thermal/thermal.hpp \
     thermal/construct.hpp \
-    thermal/emission.hpp
+    thermal/emission.hpp \
+    thermal/model.hpp

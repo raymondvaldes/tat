@@ -22,28 +22,17 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef CONSTRUCT_HPP
-#define CONSTRUCT_HPP
+#include "thermal/construct.hpp"
+#include "models/numericalmodel.hpp"
+#include "thermal/model.hpp"
 
-#include "thermal/thermal.hpp"
-
-namespace thermal{
-
-class construct
+namespace thermal
 {
 
-public:
-  const enum HeatX heat;
-  const enum EmissionX emission;
+model::model ( const class construct Construct_,
+               const class numericalModel::Mesh mesh_ )
+  : Construct(Construct_), mesh(mesh_){}
 
-  explicit construct( const enum HeatX myHeat,
-                      const enum EmissionX myEmission);
-
-  static class construct
-      loadConfigfromXML(const boost::property_tree::ptree pt);
-  ~construct(void);
-};
+model::~model(void){}
 
 }
-
-#endif // CONSTRUCT_HPP

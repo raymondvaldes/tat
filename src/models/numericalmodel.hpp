@@ -33,6 +33,7 @@ namespace numericalModel
 class Mesh
 {
 public:
+  size_t iter;
   std::vector<double> z_jplus;
   std::vector<double> z_jminus;
   std::vector<double> z_j;

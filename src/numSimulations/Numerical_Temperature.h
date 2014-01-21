@@ -33,6 +33,7 @@ License
 #include "models/expEquipment.hpp"
 #include "thermal/thermal.hpp"
 #include "thermal/construct.hpp"
+#include "thermal/model.hpp"
 
 class matrixArrays
 {
@@ -47,7 +48,8 @@ class matrixArrays
 
     explicit matrixArrays( const size_t length )
       : A1(length), A2(length), A3(length), b(length), Temperature(length),
-        B1(length), B2(length), B3(length), M2(length){}
+      B1(length), B2(length), B3(length), M2(length){}
+
 };
 
 double Numerical_Temperature( const double *const *parameters, double **T,
@@ -63,10 +65,11 @@ std::complex<double> Tac1D_ana( const double z, const double R0,
                                 const double R1, const double epsilon,
                                 const double Lam, const double Lthrm);
 
-void temperature_1D( const class physicalModel::TBCsystem TBCsystem,
-                     const class thermal::construct thermalModel,
-                     const expEquipment::setup expSetup, const double omega1,
-                     class Temperature Tprofile );
+void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
+                    const class thermal::model thermalsys,
+                    const class expEquipment::setup expSetup,
+                    const double omega1,
+                    class Temperature Tprofile);
 
 double abMatrixPrepopulate( std::vector<double>& B1,
                             std::vector<double>& B2,
@@ -112,7 +115,6 @@ void Ab_transient( const size_t n,
                    std::vector<double>& A2,
                    std::vector<double>& A3,
                    std::vector<double>& b, const class Temperature Tprofile,
-//                  const std::vector<std::vector<double>>& T,
                    const size_t M1,
                    const size_t M2,
                    const std::vector<double>& B1,
@@ -124,15 +126,16 @@ void Ab_transient( const size_t n,
                    const class property *psiLayer1,
                    const class property *psiLayer2);
 
-double t_tau(const double tau, const double tau_ref);
+double t_tau( const double tau, const double tau_ref );
 
-double Iaverage(const double Is, const double It, const double omega,
-                const double tau_ref, const std::vector<double> &tau, const size_t n);
+double Iaverage( const double Is, const double It, const double omega,
+                 const double tau_ref, const std::vector<double> &tau,
+                 const size_t n);
 
-double r_xi(const double xi, const double beta);
+double r_xi( const double xi, const double beta );
 
-double Iplus1Func(const double R0, const double R1, const double lambda);
-double Iplus0Func(const double R0, const double R1, const double lambda);
+double Iplus1Func( const double R0, const double R1, const double lambda );
+double Iplus0Func( const double R0, const double R1, const double lambda );
 
 
 #endif // NUMERICAL_TEMPERATURE_H_INCLUDED

@@ -34,7 +34,7 @@ int main( int /*argc*/, char** /*argv[]*/ )
   class filesystem::directory dir(path);
 
   /// Run investigations
-  investigations::sensitivityvaldes2013::run( dir );
+//  investigations::sensitivityvaldes2013::run( dir );
 
 //  //Prepare figures and data for paper Sensitivity
 ////    SensitivityValdes2013::CC_APS2(poptea);

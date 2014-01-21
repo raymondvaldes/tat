@@ -29,19 +29,7 @@ License
 #include <boost/assign.hpp>
 #include <boost/property_tree/ptree.hpp>
 
-#include "models/numericalmodel.hpp"
-
 namespace thermal{
-
-class model
-{
-public:
-  class construct;
-  class mesh;
-
-  explicit model ( const class construct, const class mesh);
-  ~model(void);
-};
 
 double effusivity(const double k, const double rhoCp);
 double diffusivity(const double k, const double rhoCp);

@@ -22,20 +22,19 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "construct.hpp"
+#include "thermal/thermal.hpp"
+#include "thermal/construct.hpp"
 
 namespace thermal{
 
-construct::construct( const enum HeatX myHeat, const enum EmissionX myEmission,
-                      class numericalModel::Mesh mesh_)
-  :heat(myHeat), emission(myEmission), mesh(mesh_){}
+construct::construct( const enum HeatX myHeat, const enum EmissionX myEmission)
+  :heat(myHeat), emission(myEmission){}
 
 construct::~construct(void){}
 
 
 class construct
-    construct::loadConfigfromXML( const boost::property_tree::ptree pt,
-                                  const class numericalModel::Mesh mesh_)
+    construct::loadConfigfromXML( const boost::property_tree::ptree pt)
   {
   // retrieve string and map it to enum
     const std::string heatLabel = pt.get<std::string>( "heatModel" );
@@ -44,8 +43,7 @@ class construct
     const std::string emissionLabel = pt.get<std::string>( "emissionModel" );
     const enum EmissionX emissionModel = EmissionXMap.right.at(emissionLabel);
 
-    const class construct thermalModel( heatModel, emissionModel,
-                                                      mesh_ );
+    const class construct thermalModel( heatModel, emissionModel);
 
     return thermalModel;
   }

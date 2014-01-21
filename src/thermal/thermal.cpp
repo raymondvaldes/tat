@@ -22,12 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <boost/bimap.hpp>
-#include <boost/assign.hpp>
-#include <boost/property_tree/ptree.hpp>
-
-#include "thermal/thermal.hpp"
-#include "models/numericalmodel.hpp"
+#include <cmath>
 
 namespace thermal{
 
@@ -40,6 +35,8 @@ double diffusivity( const double k, const double rhoCp )
 {
   return k / rhoCp;
 }
+
+
 
 
 }

@@ -27,12 +27,12 @@ License
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
-#include "algorithms/parameterestimation.hpp"
+
 #include "models/expEquipment.hpp"
-#include "models/Thermal_models.h"
+#include "models/physicalmodel.hpp"
+#include "algorithms/parameterestimation.hpp"
 #include "tools/filesystem.hpp"
-#include "thermal/thermal.hpp"
-#include "thermal/construct.hpp"
+#include "thermal/model.hpp"
 
 enum XParaNames
 {
@@ -55,13 +55,13 @@ namespace thermalAnalysisMethod
 
     class expEquipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
-    class thermal::construct thermalModel;
+    class thermal::model thermalsys;
     class parameterEstimation::LMA LMA;
     class filesystem::directory DataDirectory;
 
     explicit PopTea( class expEquipment::setup expSetup_,
                      class physicalModel::TBCsystem TBCsystem_,
-                     class thermal::construct thermalModel_,
+                     class thermal::model thermalsys_,
                      class parameterEstimation::settings Settings_,
                      class parameterEstimation::unknownList unknownParameters_,
                      class filesystem::directory DataDirectory_

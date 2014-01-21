@@ -26,10 +26,11 @@ License
 #include "models/Thermal_models.h"
 #include "numSimulations/Numerical_Setup.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "numSimulations/Numerical_Temperature.h"
 #include "algorithms/statistical_tools.hpp"
 
 void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
-                    const class thermal::construct thermalModel,
+                    const class thermal::model thermalsys,
                     const class expEquipment::setup expSetup,
                     const double omega1,
                     class Temperature Tprofile)
@@ -38,8 +39,8 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
   const double R1         = TBCsystem.optical.R1;
   const double epsilon    = TBCsystem.gammaEval();
 
-  const size_t iter       = thermalModel.iter;
-  class numericalModel::Mesh mesh        = thermalModel.mesh;
+  const size_t iter       = thermalsys.mesh.iter;
+  class numericalModel::Mesh mesh        = thermalsys.mesh;
 
   const double q_surface = expSetup.q_surface;
 
@@ -56,7 +57,7 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
   const class property *psi2_thermal    = &TBCsystem.substrate.psithermal;
 
   class matrixArrays *MatrixArrays = NULL;
-  MatrixArrays = new class matrixArrays(mesh.M2);
+  MatrixArrays = new class matrixArrays( mesh.M2 );
 
   std::vector< std::vector<double> >
   b_steady(mesh.Nend-1, std::vector<double>(mesh.M2));
