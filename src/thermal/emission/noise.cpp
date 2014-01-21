@@ -35,8 +35,6 @@ ExpNoiseSetting::ExpNoiseSetting( const double a1_, const double b1_,
 {}
 
 
-
-
 // EmissionNoise
 void addNoise( const class ExpNoiseSetting myEmissionNoise,
                const std::vector<double> lthermal,

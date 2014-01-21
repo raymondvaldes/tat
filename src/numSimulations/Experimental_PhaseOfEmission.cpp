@@ -37,39 +37,29 @@ void phase99( const class thermalAnalysisMethod::PopTea &poptea,
   const size_t L_end = poptea.expSetup.laser.L_end;
   size_t n = 0;
 
-  #pragma omp parallel for schedule(dynamic) private(n)
-  for(n = 0 ; n < L_end ; n++ )
+  if( poptea.thermalsys.Construct.heat ==  thermal::HeatX::OneDimNumLin )
   {
-//    arrayVal[n] = PhaseOfEmission1DNum(n , poptea);
-//    arrayVal[n] = PhaseOfEmission2DAna(n, poptea);
-    arrayVal[n] = PhaseOfEmission1DAna(n , poptea);
+    #pragma omp parallel for schedule(dynamic) private(n)
+    for(n = 0 ; n < L_end ; n++ )
+        { arrayVal[n] = PhaseOfEmission1DNum(n , poptea); }
   }
+
+  if( poptea.thermalsys.Construct.heat ==  thermal::HeatX::TwoDimAnalytical )
+  {
+    #pragma omp parallel for schedule(dynamic) private(n)
+    for(n = 0 ; n < L_end ; n++ )
+      { arrayVal[n] = PhaseOfEmission2DAna(n, poptea);}
+  }
+
+  if( poptea.thermalsys.Construct.heat ==  thermal::HeatX::OneDimAnalytical )
+  {
+      for(n = 0 ; n < L_end ; n++ )
+        { arrayVal[n] = PhaseOfEmission1DAna(n , poptea); }
+  }
+
+
 
   return;
 }
 
-double Experimental_PhaseOfEmission( double*phase, const size_t L_end )
-{
-    size_t n=0;
-    double *dump = new double[L_end+1];
-
-    ///Open file
-    std::ifstream Emission_Dat;
-    Emission_Dat.open("data/Emission.dat"); //or whatever the file name is
-
-    while(!Emission_Dat.eof())
-    {
-        Emission_Dat >> dump[n] >> phase[n];
-        if(n>L_end)
-            break;
-        n++;
-    }
-    Emission_Dat.close();
-
-    ///Clean Up
-    delete [] dump;
-    dump = NULL;
-
-    return 0;
-}
 

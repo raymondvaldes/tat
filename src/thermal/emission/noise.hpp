@@ -42,13 +42,10 @@ public:
                                     const int s1_, const double noiseRandom_);
 };
 
-void EmissionNoise( const class emissionNoiseParameters myEmissionNoise,
-                    const std::vector<double> lthermal,
-                    const std::vector<double> emissionNominal_,
-                    std::vector<double> emissionExperimental );
-
-
-
+void addNoise( const class emissionNoiseParameters myEmissionNoise,
+               const std::vector<double> lthermal,
+               const std::vector<double> emissionNominal_,
+               std::vector<double> emissionExperimental );
 
   }
 }
