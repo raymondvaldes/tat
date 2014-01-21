@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include "algorithms/sensitivity_analysis.hpp"
 #include "numSimulations/Experimental_PhaseOfEmission.h"
+#include "thermal/emission/noise.hpp"
 
 //void perturbationTest(const size_t m, const size_t n,
 //                      struct parameterEstimation::settings ParaEstSetting,
@@ -333,7 +334,7 @@ void parameterUncertainty(const size_t n,
                           class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,
-                          const class emissionNoiseParameters myEmissionNoise,
+                          const class thermal::emission::emissionNoiseParameters myEmissionNoise,
                           const std::string filename)
 {
   /*The idea with the perturbation test is that I have my "perfect fit" and

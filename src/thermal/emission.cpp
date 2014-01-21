@@ -224,4 +224,6 @@ double Emission::phase1D(const class Temperature Tprofile) const
 }
 
 
+
+
 }

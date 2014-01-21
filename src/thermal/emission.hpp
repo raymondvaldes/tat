@@ -27,6 +27,8 @@ License
 
 #include <vector>
 #include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "numSimulations/Numerical_Setup.h"
+
 
 namespace thermal{
 class Emission
@@ -59,5 +61,12 @@ private:
   double emissionVolumetric2D(std::vector<std::vector<double>>&Temperature)
   const;
 };
+
+
+
+
+
+
+
 }
 #endif // EMISSION_HPP
