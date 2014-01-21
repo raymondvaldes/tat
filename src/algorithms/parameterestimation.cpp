@@ -76,7 +76,7 @@ void unknown::bestfitset(const double input)
   bestfitval = input;
 }
 
-enum physicalModel::labels::Name unknown::label(void)
+enum physicalModel::labels::Name unknown::label(void) const
 {
   return name.getName();
 }

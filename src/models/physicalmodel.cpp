@@ -314,7 +314,7 @@ labels::labels(void) {}
 
 labels::labels(const Name name_):name(name_){}
 
-enum labels::Name labels::getName(void)
+enum labels::Name labels::getName(void) const
 {
   return name;
 }

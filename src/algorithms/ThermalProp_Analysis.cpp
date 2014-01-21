@@ -68,7 +68,6 @@ int paramter_estimation(const size_t m, const size_t n,
       xinitial[i] = x[i];
   }
 
-
   ///set initial guesses
   /// TODO put in function !
   if ( fabs(x[0] - 0) < 1e-10 )

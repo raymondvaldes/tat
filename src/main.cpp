@@ -30,11 +30,11 @@ int main( int /*argc*/, char** /*argv[]*/ )
   class stopwatch globalStopWatch;
 
   /// Retrieve working directory
-  std::string path("/home/raymond/code/tat/bin");
-  class filesystem::directory dir(path);
+  const std::string path("/home/raymond/code/tat/bin");
+  const class filesystem::directory dir(path);
 
   /// Run investigations
-//  investigations::sensitivityvaldes2013::run( dir );
+  investigations::sensitivityvaldes2013::run( dir );
 
 //  //Prepare figures and data for paper Sensitivity
 ////    SensitivityValdes2013::CC_APS2(poptea);
