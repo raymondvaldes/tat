@@ -36,6 +36,10 @@ int paramter_estimation(const size_t m, const size_t  n,
                         const double factorMax, const double factorScale,
                         double *xpredicted);
 
+std::vector<double>
+paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
+                    int *nfev);
+
 void ThermalProp_Analysis(int, int N, double*x, double*fvec, int*,
                           class thermalAnalysisMethod::PopTea poptea );
 

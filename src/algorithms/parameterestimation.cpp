@@ -180,7 +180,19 @@ LMA::LMA(const struct settings Settings_,
          const class unknownList unknownParameters_)
   : Settings(Settings_), unknownParameters(unknownParameters_)
 {
+  const size_t n = unknownParameters.vectorUnknowns.size();
+  xpredicted.resize(n);
+  xguessAuto.resize(n);
 }
+
+void LMA::resetInitialGuess(const std::vector<double> input)
+{
+  if( input.size() == xInitial.size() )
+    { xInitial = input; }
+  else
+    { std::cout << "check xInitial"; exit(-3); }
+}
+
 
 LMA::~LMA(void){}
 

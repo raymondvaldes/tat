@@ -70,7 +70,7 @@ private:
   size_t N;
 
 public:
-  std::vector<class unknown> vectorUnknowns;
+  std::vector<class parameterEstimation::unknown> vectorUnknowns;
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
                   const double upper);
@@ -94,6 +94,8 @@ public:
   double factor;
   size_t mode;
   size_t nprint;
+  const size_t factorMax = 10;
+  const size_t factorScale = 5;
 
   static struct settings loadConfigfromXML(const boost::property_tree::ptree pt);
   ~settings(void);
@@ -127,10 +129,14 @@ public:
   class LMA_workingArrays LMA_workspace;
   struct settings Settings;
   class unknownList unknownParameters;
+  std::vector<double> xInitial{ 2.1, 3.7, 40, 0.75, 0.5 } ; //FIX THIS TODO BUG
+  std::vector<double> xpredicted;  //FIX THIS TODO BUG
+  std::vector<double> xguessAuto;  //FIX THIS TODO BUG
 
   explicit LMA(const struct settings Settings_,
       const class unknownList unknownParameters);
   ~LMA(void);
+  void resetInitialGuess(const std::vector<double> input);
 };
 
 class settings loadConfig(const std::string &filename);
