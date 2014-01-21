@@ -80,63 +80,33 @@ void scaleDiag(const int mode, const size_t N, double * diag,
 {
   if(mode == 2)
   {
-      int i = 0;
-      BOOST_FOREACH( const class parameterEstimation::unknown &unknown,
-                     poptea.LMA.unknownParameters.vectorUnknowns )
+    int i = 0;
+    BOOST_FOREACH( const class parameterEstimation::unknown &unknown,
+                   poptea.LMA.unknownParameters.vectorUnknowns )
+    {
+      switch( unknown.label() )
       {
-        switch( unknown.label() )
-        {
-          case physicalModel::labels::Name::asub :
-            diag[i] = poptea.TBCsystem.a_sub;
-            break;
-          case physicalModel::labels::Name::E1 :
-            diag[i] = poptea.TBCsystem.optical.Emit1;
-            break;
-          case physicalModel::labels::Name::gammaEff :
-            diag[i] = poptea.TBCsystem.gamma;
-            break;
-          case physicalModel::labels::Name::lambda :
-            diag[i] = poptea.TBCsystem.coating.lambda;
-            break;
-          case physicalModel::labels::Name::R1 :
-            diag[i] = poptea.TBCsystem.optical.R1 ;
-            break;
-          default:
-            std::cout << "\nSwitch Error!!\n";
-            exit(-69);
-            break;
-        }
+        case physicalModel::labels::Name::asub :
+          diag[i] = poptea.TBCsystem.a_sub;
+          break;
+        case physicalModel::labels::Name::E1 :
+          diag[i] = poptea.TBCsystem.optical.Emit1;
+          break;
+        case physicalModel::labels::Name::gammaEff :
+          diag[i] = poptea.TBCsystem.gamma;
+          break;
+        case physicalModel::labels::Name::lambda :
+          diag[i] = poptea.TBCsystem.coating.lambda;
+          break;
+        case physicalModel::labels::Name::R1 :
+          diag[i] = poptea.TBCsystem.optical.R1 ;
+          break;
+        default:
+          std::cout << "\nSwitch Error!!\n";
+          exit(-69);
+          break;
       }
-
-
-//      for(size_t i = 0; i < N; ++i)
-//      {
-//        switch( poptea.xParametersNames[i] )
-//        {
-//          case asub :
-//              diag[i] = poptea.TBCsystem.a_sub;
-//              break;
-//          case E1 :
-//              diag[i] = poptea.TBCsystem.optical.Emit1;
-//              break;
-//          case gammaEff :
-//              diag[i] = poptea.TBCsystem.gamma ;
-//              break;
-//          case R1 :
-//              diag[i] = poptea.TBCsystem.optical.R1 ;
-//              break;
-//          case lambda :
-//              diag[i] = poptea.TBCsystem.coating.lambda;
-//              break;
-//          case R0 :
-//              diag[i] = poptea.TBCsystem.optical.R0;
-//              break;
-//          default:
-//              std::cout << "\nSwitch Error!!\n";
-//              exit(-69);
-//              break;
-//        }
-//      }
+    }
   }
   return;
 }
