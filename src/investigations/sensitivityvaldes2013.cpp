@@ -22,9 +22,12 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <vector>
 #include "sensitivityvaldes2013.hpp"
 #include "models/poptea.hpp"
 #include "thermal/emission/phase99.hpp"
+#include "math/bisection.hpp"
+#include "algorithms/parameterestimation.hpp"
 
 namespace investigations
 {
@@ -37,20 +40,17 @@ class thermalAnalysisMethod::PopTea
   return thermalAnalysisMethod::PopTea::loadConfig( dir.abs( filename ), dir);
 }
 
-
-
-
-
 void run(const class filesystem::directory dir)
 {
   class thermalAnalysisMethod::PopTea poptea = loadWorkingDirectory(dir);
   thermal::emission::phase99( poptea, poptea.LMA.LMA_workspace.emissionNominal);
 
-
+  /// STEP 0
   /*At this point I can output a figure that has the sensitivity curve data
   for each of the five parameters. The figure with the artificial data and
   fitted curve with error bars will be shown next.*/
-   ///Noise in Simulated Emission
+
+  //Noise in Simulated Emission
   constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
   constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
   constexpr bool d1 = true;    //positive  (try false)
@@ -67,20 +67,49 @@ void run(const class filesystem::directory dir)
                                poptea.expSetup.laser.l_thermal,
                                poptea.LMA.LMA_workspace.emissionNominal ) ;
 
-  ///Output noise to test
-  for( size_t i = 0 ; i < 100 ; ++i)
-  {
-    std::cout <<  poptea.expSetup.laser.l_thermal[i] << "\t"
-              <<  poptea.LMA.LMA_workspace.emissionNominal[i] << "\t"
-              <<  poptea.LMA.LMA_workspace.emissionExperimental[i] << "\n" ;
-  }
+//  ///Output noise to test
+//  for( size_t i = 0 ; i < poptea.expSetup.laser.l_thermal.size() ; ++i)
+//  {
+//    std::cout <<  poptea.expSetup.laser.l_thermal[i] << "\t"
+//              <<  poptea.LMA.LMA_workspace.emissionNominal[i] << "\t"
+//              <<  poptea.LMA.LMA_workspace.emissionExperimental[i] << "\n" ;
+//  }
+
+  /// STEP 1
+  int nfev;
+  int info = 0;
+  poptea.LMA.xpredicted = paramter_estimation( poptea, &info, &nfev );
+
+//  for( size_t i = 0 ; i < poptea.LMA.xpredicted.size() ;  i++)
+//  {
+//    std::cout << poptea.LMA.xpredicted[i] << "\n";
+//  }
+
+  /// STEP 2
+  thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+  poptea.LMA.LMA_workspace.MSE =
+      MSE(poptea.expSetup.laser.L_end,
+          poptea.LMA.LMA_workspace.emissionExperimental,
+          poptea.LMA.LMA_workspace.predicted);
+//  std::cout << poptea.LMA.LMA_workspace.MSE << "\n";
+
+  /// STEP 3
+
+  /// STEP 4
+//  class parameterEstimation::unknown
+//      first( parameterEstimation::unknownList.vectorUnknowns[0] );
+
+//  math::solve( parameterEstimation(), 0, 0, 1 );
 
 
 
 
-
-  std::cout << "hello, from investigations::sensitivityvaldes2013!\n";
 }
+
+
+
+
+
 
   }
 }

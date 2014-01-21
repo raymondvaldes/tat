@@ -32,11 +32,18 @@ namespace investigations
 {
 namespace sensitivityvaldes2013{
 
-  class thermalAnalysisMethod::PopTea
-      loadWorkingDirectory(const class filesystem::directory dir);
-  void run(const class filesystem::directory dir);
+class thermalAnalysisMethod::PopTea
+    loadWorkingDirectory(const class filesystem::directory dir);
+void run(const class filesystem::directory dir);
 
 
+class gfunc
+{
+  double operator() (double x)
+  {
+    return x*x - 3*x + 1;  // Replace with your function
+  }
+};
 
 
 

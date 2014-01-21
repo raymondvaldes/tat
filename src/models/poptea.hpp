@@ -62,6 +62,7 @@ namespace thermalAnalysisMethod
                      class parameterEstimation::unknownList unknownParameters_,
                      class filesystem::directory DataDirectory_
                    );
+
     static thermalAnalysisMethod::PopTea
       loadConfig( const std::string &filename,
                   const class filesystem::directory DataDirectory_);

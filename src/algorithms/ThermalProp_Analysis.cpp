@@ -225,6 +225,204 @@ int paramter_estimation(const size_t m, const size_t n,
 }
 
 
+std::vector<double>
+paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
+                    int *nfev)
+{
+
+/*
+  The parameter estimation function takes in the function, fitting parameters,
+  initial guess.  If no initial guess is given then it will populate an
+  initial guess based on a random distribution of the parameter range. The
+  initial guess is then transformed based on the parameter estimation ranges.
+  The parameter estimation employed is the levenberg-marquardt algorithm(LMA).
+  The the objective function is evaluated and compared against a tolerance.
+  If it is larger than the tolerance than a new initial guess will be
+  initialized.  This process is repeated until the objective function
+  satisfies the tolerance or the number of iterations maxes out. The final
+  values are populated back into the parameter structure and the dependent
+  parameters are updated.
+*/
+  const size_t m = poptea.expSetup.laser.l_thermal.size();
+  const size_t n = poptea.LMA.unknownParameters.vectorUnknowns.size();
+  struct parameterEstimation::settings ParaEstSetting = poptea.LMA.Settings;
+
+  const double factorMax = poptea.LMA.Settings.factorMax;
+  const double factorScale = poptea.LMA.Settings.factorScale;
+
+  double *x = new double[n];
+
+  double *fvec = new double[m];
+  double *qtf = new double[n];
+  double *wa1 = new double[n];
+  double *wa2 = new double[n];
+  double *wa3 = new double[n];
+  double *wa4 = new double[m];
+  double *fjac = new double[m*n];
+  double *wa5 = new double[m*n];
+  int *ipvt = new int[n];
+  double *diag = new double[n];
+
+  scaleDiag(ParaEstSetting.mode, n, diag, poptea );
+
+  for(size_t i=0 ; i< n ; i++)
+  {
+    x[i] = poptea.LMA.xInitial[i];
+  }
+
+  ///set initial guesses
+  /// TODO put in function !
+  if ( fabs(x[0] - 0) < 1e-10 )
+  {
+    int i = 0;
+    BOOST_FOREACH(class parameterEstimation::unknown &unknown,
+                  poptea.LMA.unknownParameters.vectorUnknowns)
+    {
+      x[i++] = x_ini( unknown.lowerBound(), unknown.upperBound() );
+    }
+  }
+
+  for(size_t i=0; i< n; i++)
+  {
+    poptea.LMA.xguessAuto[i] = x[i];
+  }
+
+  ///Transform inputs
+  int i = 0;
+  BOOST_FOREACH(class parameterEstimation::unknown &unknown,
+                poptea.LMA.unknownParameters.vectorUnknowns)
+  {
+    x[i] = kx_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
+    i++;
+  }
+
+  ///levenberg-marquardt algorithm
+  lmdif(&ThermalProp_Analysis, m, n, x, fvec, ParaEstSetting.ftol,
+        ParaEstSetting.xtol, ParaEstSetting.gtol, ParaEstSetting.maxfev,
+        ParaEstSetting.epsfcn, diag, ParaEstSetting.mode,
+        ParaEstSetting.factor, ParaEstSetting.nprint, info, nfev, fjac, m,
+        ipvt, qtf, wa1, wa2, wa3, wa4, wa5, poptea);
+
+  ///Exit Routine
+  /* Sets up a condition where the total error in the phase is compared
+  against a fvec Tolerance.  If the error is greater than this constant,
+  then the parameter estimation algorithm is reset with a new set of
+  initial guesses. This is let to run a fixed number of iterations. */
+  constexpr double ExpStddev = 0;
+  const double ExpVarianceEst = ExpStddev * ExpStddev;
+  poptea.LMA.LMA_workspace.fvecTotal =
+      SobjectiveLS( poptea.expSetup.laser.L_end,
+                    poptea.LMA.LMA_workspace.emissionExperimental,
+                    poptea.LMA.LMA_workspace.predicted);
+  const size_t v1 = poptea.expSetup.laser.L_end - n;
+  double reduceChiSquare;
+  if(ExpVarianceEst ==0 )
+  {
+    reduceChiSquare = 100;
+  }
+  else
+  {
+    reduceChiSquare = (poptea.LMA.LMA_workspace.fvecTotal /
+                       ExpVarianceEst) / v1;
+  }
+
+  if( reduceChiSquare < 2
+     || ParaEstSetting.factor == factorMax
+     || poptea.LMA.LMA_workspace.fvecTotal < poptea.LMA.LMA_workspace.MSETol
+     )
+  {
+    ///Transform outputs
+    int i = 0;
+    BOOST_FOREACH(class parameterEstimation::unknown &unknown,
+                  poptea.LMA.unknownParameters.vectorUnknowns)
+    {
+      const double val =
+          x_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
+      switch ( unknown.label() )
+      {
+        case physicalModel::labels::Name::asub :
+            poptea.TBCsystem.a_sub = val;
+            poptea.LMA.xpredicted[i] = poptea.TBCsystem.a_sub;
+            break;
+        case physicalModel::labels::Name::gammaEff :
+            poptea.TBCsystem.gamma = val;
+            poptea.LMA.xpredicted[i] = poptea.TBCsystem.gamma ;
+            break;
+        case physicalModel::labels::Name::E1 :
+            poptea.TBCsystem.optical.Emit1 = val;
+            poptea.LMA.xpredicted[i] = poptea.TBCsystem.optical.Emit1;
+            break;
+        case physicalModel::labels::Name::R1 :
+            poptea.TBCsystem.optical.R1 = val;
+            poptea.LMA.xpredicted[i] = poptea.TBCsystem.optical.R1;
+            break;
+        case physicalModel::labels::Name::lambda :
+            poptea.TBCsystem.coating.lambda = val;
+            poptea.LMA.xpredicted[i] = poptea.TBCsystem.coating.lambda;
+            break;
+        default:
+            std::cout << "\nSwitch Error!!\n";
+            exit(-69);
+            break;
+      }
+    i++;
+    }
+
+    poptea.TBCsystem.updateCoat();
+
+    ///repopulate predicted phase
+    thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+
+    delete [] qtf;
+    delete [] wa1;
+    delete [] wa2;
+    delete [] wa3;
+    delete [] wa4;
+    delete [] wa5;
+    delete [] ipvt;
+    delete [] fvec;
+    delete [] fjac;
+    delete [] diag;
+    delete [] x;
+
+    return poptea.LMA.xpredicted;
+  }
+
+  else if (ParaEstSetting.factor <= factorMax/factorScale)
+  {
+    ParaEstSetting.factor *=factorScale;
+//            std::cout << "factor increased to "  << factor <<"\n";
+
+  }
+  else if (ParaEstSetting.factor > factorMax/factorScale &&
+           ParaEstSetting.factor < factorMax)
+  {
+    ParaEstSetting.factor = factorMax;
+    std::cout << "factor increased max "<< ParaEstSetting.factor <<"\n";
+  }
+
+  for(size_t i=0 ; i< n ; i++)
+  {
+    x[i] = poptea.LMA.xInitial[i];
+  }
+
+
+  delete [] qtf;
+  delete [] wa1;
+  delete [] wa2;
+  delete [] wa3;
+  delete [] wa4;
+  delete [] wa5;
+  delete [] ipvt;
+  delete [] fvec;
+  delete [] fjac;
+  delete [] diag;
+  delete [] x;
+
+  return poptea.LMA.xpredicted;
+}
+
+
 void InformationIndex(const size_t P, double *Index,
                       const size_t I, const double ki, const double *const fjac)
 {
@@ -424,6 +622,6 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
       MSE(poptea.expSetup.laser.L_end,
           poptea.LMA.LMA_workspace.emissionExperimental,
           poptea.LMA.LMA_workspace.predicted);
-  printPEstimates(N, poptea);
+//  printPEstimates(N, poptea);
   return;
 }
