@@ -49,10 +49,6 @@ namespace thermalAnalysisMethod
   class PopTea
   {
   public:
-    std::vector<enum XParaNames> xParametersNames;    //MUST BE REMOVED
-    std::vector<enum XParaNames> xParameters95Names;  //MUST BE REMOVED
-    size_t N95;                                       //MUST BE REMOVED
-
     class expEquipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
     class thermal::model thermalsys;
@@ -65,7 +61,7 @@ namespace thermalAnalysisMethod
                      class parameterEstimation::settings Settings_,
                      class parameterEstimation::unknownList unknownParameters_,
                      class filesystem::directory DataDirectory_
-                     );
+                   );
     static thermalAnalysisMethod::PopTea
       loadConfig( const std::string &filename,
                   const class filesystem::directory DataDirectory_);
