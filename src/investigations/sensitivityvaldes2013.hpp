@@ -28,6 +28,7 @@ License
 #include "models/poptea.hpp"
 #include "tools/filesystem.hpp"
 #include "math/bisection.hpp"
+#include "math/sensitivityAnalysis/parameterEstimationInterval.hpp"
 
 namespace investigations
 {
@@ -36,27 +37,6 @@ namespace sensitivityvaldes2013{
 class thermalAnalysisMethod::PopTea
     loadWorkingDirectory(const class filesystem::directory dir);
 void run(const class filesystem::directory dir);
-
-
-class step4
-{
-public:
-  double solve()
-  {
-    using std::placeholders::_1;
-    const std::function<double(double)>
-        myFuncReduced = std::bind( &step4::gfunc, this , _1 );
-    math::solve ojb( myFuncReduced, 0, 0, 1 );
-    return ojb.returnSoln();
-  }
-
-  double gfunc(double x)
-  {
-    return x*x - 3*x + 1;  // Replace with your function
-  }
-};
-
-
 
 }
 }

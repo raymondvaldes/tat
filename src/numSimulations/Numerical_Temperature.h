@@ -66,7 +66,7 @@ std::complex<double> Tac1D_ana( const double z, const double R0,
 
 void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     const class thermal::model thermalsys,
-                    const class expEquipment::setup expSetup,
+                    const class equipment::setup expSetup,
                     const double omega1,
                     class Temperature Tprofile);
 

@@ -43,7 +43,6 @@ size_t PrecisionToBits(const size_t precision);
 class solve
 {
 private:
-//  double (*myF)(double) ;
   std::function<double(double)> myF;
 
   const double phi;

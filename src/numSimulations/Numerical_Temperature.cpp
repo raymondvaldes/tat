@@ -31,7 +31,7 @@ License
 
 void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     const class thermal::model thermalsys,
-                    const class expEquipment::setup expSetup,
+                    const class equipment::setup expSetup,
                     const double omega1,
                     class Temperature Tprofile)
 {
