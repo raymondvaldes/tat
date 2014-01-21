@@ -112,7 +112,7 @@ public:
 
   explicit labels(void);
   explicit labels(const enum Name name_);
-  Name getName(void);
+  Name getName(void) const;
 
 private:
   enum Name name;

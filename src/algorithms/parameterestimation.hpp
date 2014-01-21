@@ -60,8 +60,7 @@ public:
   void Initialset(const double input);
   double initialVal(void);
 
-
-  enum physicalModel::labels::Name label(void);
+  enum physicalModel::labels::Name label(void) const;
 
 };
 

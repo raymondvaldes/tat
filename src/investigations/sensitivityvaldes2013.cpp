@@ -33,23 +33,34 @@ namespace investigations
   class thermalAnalysisMethod::PopTea
       loadWorkingDirectory(const class filesystem::directory dir)
   {
-    /// initiate poptea by importing configuration info
     const std::string filename = "config.xml";
     return thermalAnalysisMethod::PopTea::loadConfig( dir.abs( filename ), dir);
   }
+
+
+
+
 
   void run(const class filesystem::directory dir)
   {
     class thermalAnalysisMethod::PopTea poptea = loadWorkingDirectory(dir);
 
+
+
+    std::vector<double> experimentalData;
+
+
+
+
+
+
+
+
+
+
+
+
   }
-
-
-
-
-
-
-
 
   }
 }

@@ -85,7 +85,9 @@ class thermalAnalysisMethod::PopTea
     Obj2( physicalModel::TBCsystem::loadConfig( ptchild2 ) );
 
   const ptree ptchild3 = pt.get_child( conjunto + "thermalModel" );
-  
+  const class thermal::construct
+    Construct( thermal::construct::loadConfigfromXML( ptchild3 ) );
+
   /// Mesh is intrinsically linked the TBCsystem and experimental setup
   const size_t M2     = ptchild3.get<size_t>( "mesh.M2" );
   const size_t Rend   = ptchild3.get<size_t>( "mesh.Rend");
@@ -97,11 +99,8 @@ class thermalAnalysisMethod::PopTea
                                   Obj2.substrate.depth,
                                   Obj1.laser.radius,
                                   Obj2.radius);
-  
-  const class thermal::construct
-    Obj3( thermal::construct::loadConfigfromXML( ptchild3 ) );
 
-  const class thermal::model Ojb3NEW( Obj3 , mesh);
+  const class thermal::model Ojb3NEW( Construct , mesh);
 
   const ptree ptchild4 = pt.get_child( conjunto + "ParaEstSettings" );
   const class parameterEstimation::settings
