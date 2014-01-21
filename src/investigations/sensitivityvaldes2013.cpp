@@ -91,12 +91,12 @@ void run(const class filesystem::directory dir)
       MSE(poptea.expSetup.laser.L_end,
           poptea.LMA.LMA_workspace.emissionExperimental,
           poptea.LMA.LMA_workspace.predicted);
-//  std::cout << poptea.LMA.LMA_workspace.MSE << "\n";
+  std::cout << poptea.LMA.LMA_workspace.MSE << "\n";
 
   /// STEP 3
 
   /// STEP 4
-  class parameterEstimation::unknown
+  class math::parameterEstimation::unknown
       first(poptea.LMA.unknownParameters.vectorUnknowns[0]);
 
   class math::sensitivityAnalysis::step4 Step4;

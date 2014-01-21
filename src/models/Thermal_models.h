@@ -37,18 +37,20 @@ License
 class HeatModel2DAna
 {
 public:
-  explicit HeatModel2DAna(const double R0_, const double R1_, const double lambda_,
-                 const double It_, const double csub_, const double asub_,
-                 const double gamma_, const double beam_, const double k_coat,
-                 const double L_, const double psi_coat_, const double ccoat_,
-                 const double lambda_Sub_,
-                 const class numericalModel::Mesh mesh_);
+  explicit HeatModel2DAna( const double R0_, const double R1_,
+                           const double lambda_, const double It_,
+                           const double csub_, const double asub_,
+                           const double gamma_, const double beam_,
+                           const double k_coat, const double L_,
+                           const double psi_coat_, const double ccoat_,
+                           const double lambda_Sub_,
+                           const class numericalModel::Mesh mesh_ ) ;
 
-  ~HeatModel2DAna(void);
-  void TemperatureDistro(std::vector< std::vector< std::vector< double > > >
-                         &Temperature,const double omega) const;
-  void TemperaturePrintOut(const std::string dir, const double L_coat) const;
-  void testing(void) const;
+  ~HeatModel2DAna(void) ;
+  void TemperatureDistro( std::vector< std::vector< std::vector< double > > >
+                          &Temperature,const double omega) const;
+  void TemperaturePrintOut( const std::string dir, const double L_coat ) const;
+  void testing( void ) const;
 
 private:
   const double R0, R1, lambda, It, csub, asub, gamma, beam;

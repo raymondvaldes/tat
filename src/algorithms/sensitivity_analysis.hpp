@@ -33,26 +33,12 @@ License
 #include "algorithms/ThermalProp_Analysis.h"
 #include "thermal/emission/noise.hpp"
 
-void perturbationTest(const size_t m, const size_t n,
-                      struct parameterEstimation::settings ParaEstSetting,
-                      double *xInitial,
-                      class thermalAnalysisMethod::PopTea poptea,
-                      const double factorMax, const double factorScale,
-                      class perturbStruct *pStruct);
-
-void calibrationSweep(struct parameterEstimation::settings ParaEstSetting,
-                      double *xInitial,
-                      class thermalAnalysisMethod::PopTea poptea,
-                      const double factorMax, const double factorScale,
-                      class perturbStruct *pStruct, const std::string filename,
-                      const size_t lEndMin);
-
 void fitting(class thermalAnalysisMethod::PopTea poptea, double * xInitial,
              const size_t interants, const double factorMax,
              const double factorScale);
 
 void parameterUncertainty(const size_t n,
-                          struct parameterEstimation::settings ParaEstSetting,
+                          class math::parameterEstimation::settings ParaEstSetting,
                           double *xInitial,
                           class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,

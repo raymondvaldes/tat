@@ -27,7 +27,8 @@ License
 
 #include "models/physicalmodel.hpp"
 
-namespace parameterEstimation{
+namespace math{
+  namespace parameterEstimation{
 
 class unknown
 {
@@ -83,8 +84,30 @@ public:
   ~unknownList();
 };
 
+
+
+class LMA_workingArrays
+{
+public:
+  std::vector<double> fjac;
+  std::vector<double> predicted;
+  std::vector<double> fvec;
+  std::vector<double> emissionExperimental;
+  std::vector<double> emissionNominal;
+  std::vector<double> emissionCurrent;
+
+  double MSE, MSEinitial, MSETol, fvecTotal;
+
+  ~LMA_workingArrays(void);
+  void updateArraySize(const size_t Lend_, const size_t N);
+  void deleteArray(void);
+};
+
+
+class settings loadConfig(const std::string &filename);
+
 class settings
-{       
+{
 public:
   double ftol;
   double xtol;
@@ -105,24 +128,6 @@ public:
                      const size_t nprint_ );
 };
 
-class LMA_workingArrays
-{
-public:
-  std::vector<double> fjac;
-  std::vector<double> predicted;
-  std::vector<double> fvec;
-  std::vector<double> emissionExperimental;
-  std::vector<double> emissionNominal;
-  std::vector<double> emissionCurrent;
-
-  double MSE, MSEinitial, MSETol, fvecTotal;
-
-  ~LMA_workingArrays(void);
-  void updateArraySize(const size_t Lend_, const size_t N);
-  void deleteArray(void);
-};
-
-
 class LMA
 {
 public:
@@ -139,9 +144,9 @@ public:
   void resetInitialGuess(const std::vector<double> input);
 };
 
-class settings loadConfig(const std::string &filename);
 
-
+  }
 }
+
 
 #endif // PARAMETERESTIMATION_HPP
