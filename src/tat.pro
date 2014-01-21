@@ -141,7 +141,8 @@ SOURCES += \
     thermal/construct.cpp \
     thermal/emission.cpp \
     thermal/model.cpp \
-    thermal/emission/noise.cpp
+    thermal/emission/noise.cpp \
+    thermal/emission/phase99.cpp
 
 #header files
 HEADERS += \
@@ -174,4 +175,5 @@ HEADERS += \
     thermal/construct.hpp \
     thermal/emission.hpp \
     thermal/model.hpp \
-    thermal/emission/noise.hpp
+    thermal/emission/noise.hpp \
+    thermal/emission/phase99.hpp

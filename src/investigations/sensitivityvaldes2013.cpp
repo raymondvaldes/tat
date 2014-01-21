@@ -25,7 +25,6 @@ License
 #include "sensitivityvaldes2013.hpp"
 #include "models/poptea.hpp"
 
-
 namespace investigations
 {
   namespace sensitivityvaldes2013{
@@ -44,19 +43,6 @@ namespace investigations
   void run(const class filesystem::directory dir)
   {
     class thermalAnalysisMethod::PopTea poptea = loadWorkingDirectory(dir);
-
-
-
-    std::vector<double> experimentalData;
-
-
-
-
-
-
-
-
-
 
 
 
