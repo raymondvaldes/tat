@@ -24,29 +24,64 @@ License
 \*----------------------------------------------------------------------------*/
 #include "sensitivityvaldes2013.hpp"
 #include "models/poptea.hpp"
+#include "thermal/emission/phase99.hpp"
 
 namespace investigations
 {
   namespace sensitivityvaldes2013{
 
-  class thermalAnalysisMethod::PopTea
-      loadWorkingDirectory(const class filesystem::directory dir)
+class thermalAnalysisMethod::PopTea
+    loadWorkingDirectory(const class filesystem::directory dir)
+{
+  const std::string filename = "config.xml";
+  return thermalAnalysisMethod::PopTea::loadConfig( dir.abs( filename ), dir);
+}
+
+
+
+
+
+void run(const class filesystem::directory dir)
+{
+  class thermalAnalysisMethod::PopTea poptea = loadWorkingDirectory(dir);
+  thermal::emission::phase99( poptea, poptea.LMA.LMA_workspace.emissionNominal);
+
+
+  /*At this point I can output a figure that has the sensitivity curve data
+  for each of the five parameters. The figure with the artificial data and
+  fitted curve with error bars will be shown next.*/
+   ///Noise in Simulated Emission
+  constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
+  constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
+  constexpr bool d1 = true;    //positive  (try false)
+  constexpr bool d2 = true;    //monotonic (try true)
+  constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
+  constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
+
+  const class thermal::emission::ExpNoiseSetting
+      myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
+
+  ///Output noise to test
+  poptea.LMA.LMA_workspace.emissionExperimental =
+  thermal::emission::addNoise( myEmissionNoise,
+                               poptea.expSetup.laser.l_thermal,
+                               poptea.LMA.LMA_workspace.emissionNominal ) ;
+
+  ///Output noise to test
+  for( size_t i = 0 ; i < 100 ; ++i)
   {
-    const std::string filename = "config.xml";
-    return thermalAnalysisMethod::PopTea::loadConfig( dir.abs( filename ), dir);
+    std::cout <<  poptea.expSetup.laser.l_thermal[i] << "\t"
+              <<  poptea.LMA.LMA_workspace.emissionNominal[i] << "\t"
+              <<  poptea.LMA.LMA_workspace.emissionExperimental[i] << "\n" ;
   }
 
 
 
 
 
-  void run(const class filesystem::directory dir)
-  {
-    class thermalAnalysisMethod::PopTea poptea = loadWorkingDirectory(dir);
-
-
-
-  }
+  std::cout << "hello, from investigations::sensitivityvaldes2013!\n";
+}
 
   }
 }
+
