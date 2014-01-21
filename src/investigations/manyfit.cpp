@@ -24,10 +24,9 @@ License
 \*----------------------------------------------------------------------------*/
 #include "manyfit.hpp"
 #include "tools/filesystem.hpp"
-
-#include "numSimulations/Experimental_PhaseOfEmission.h"
 #include "models/poptea.hpp"
 #include "algorithms/sensitivity_analysis.hpp"
+#include "thermal/emission/phase99.hpp"
 
 namespace investigations{
 namespace manyfit{
@@ -41,7 +40,7 @@ void run(const class filesystem::directory dir)
 
   double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
   constexpr size_t interants = 1;
-  phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
+  thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
 
   for(size_t nn = 0; nn < poptea.expSetup.laser.L_end; ++nn )
   {

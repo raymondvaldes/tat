@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include "investigations/sensitivity_paper.h"
 #include "thermal/emission/noise.hpp"
+#include "thermal/emission/phase99.hpp"
 
 namespace SensitivityValdes2013
 {
@@ -106,7 +107,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         emissionExpR1       = new double[poptea.expSetup.laser.L_end]();
 
         ///Populate arrays
-        phase99(poptea, Analytical_PhaseR1);
+        thermal::emission::phase99(poptea, Analytical_PhaseR1);
 
         ///create artificial experimental data
 //        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR1, l_min,
@@ -128,13 +129,13 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+        thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
         for(size_t i = 0; i < poptea.expSetup.laser.L_end; ++i)
         {
-            lthermalR1[i]       = poptea.expSetup.laser.l_thermal[i];
-            predictedR1[i]      = poptea.LMA.LMA_workspace.predicted[i];
-            emissionExpR1[i]    = poptea.LMA.LMA_workspace.emissionExperimental[i];
+          lthermalR1[i]       = poptea.expSetup.laser.l_thermal[i];
+          predictedR1[i]      = poptea.LMA.LMA_workspace.predicted[i];
+          emissionExpR1[i]    = poptea.LMA.LMA_workspace.emissionExperimental[i];
         }
 
         LendR1 = poptea.expSetup.laser.L_end;
@@ -171,7 +172,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
         emissionExpR2       = new double[poptea.expSetup.laser.L_end]();
 
         ///Populate arrays
-        phase99(poptea, Analytical_PhaseR2);
+        thermal::emission::phase99(poptea, Analytical_PhaseR2);
 
         ///create artificial experimental data
 //        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR2, .04, 4); //BUG MUST IMPLEMENT
@@ -191,14 +192,14 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+        thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
         LendR2 = poptea.expSetup.laser.L_end;
 
         for(size_t i = 0; i < LendR2; ++i)
         {
-            lthermalR2[i]       = poptea.expSetup.laser.l_thermal[i];
-            predictedR2[i]      = poptea.LMA.LMA_workspace.predicted[i];
-            emissionExpR2[i]    = poptea.LMA.LMA_workspace.emissionExperimental[i];
+          lthermalR2[i]     = poptea.expSetup.laser.l_thermal[i];
+          predictedR2[i]    = poptea.LMA.LMA_workspace.predicted[i];
+          emissionExpR2[i]  = poptea.LMA.LMA_workspace.emissionExperimental[i];
         }
     }
 
@@ -306,28 +307,28 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
 
     if(false)
     {
-        /* Create Initial Experimental Data for figure */
-        poptea.thermalSetup(l_min, l_max, LendMinDecade);
-        phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
+      /* Create Initial Experimental Data for figure */
+      poptea.thermalSetup(l_min, l_max, LendMinDecade);
+      thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
 //        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
 //                               l_max); //BUG MUST IMPLEMENT
-        fitting(poptea, xInitial, 1, factorMax, factorScale);
+      fitting(poptea, xInitial, 1, factorMax, factorScale);
 
-        ///output data for printing
-        std::ofstream myoutputfile;
-        std::stringstream filename1;
-        filename1 <<  "../data/APS2/experimentalFitted.dat";
-        myoutputfile.open(filename1.str().c_str());
-        myoutputfile << std::setprecision(8);
+      ///output data for printing
+      std::ofstream myoutputfile;
+      std::stringstream filename1;
+      filename1 <<  "../data/APS2/experimentalFitted.dat";
+      myoutputfile.open(filename1.str().c_str());
+      myoutputfile << std::setprecision(8);
 
-        for(size_t i = 0 ; i < poptea.expSetup.laser.L_end; ++i)
-        {
-            myoutputfile << poptea.expSetup.laser.l_thermal[i] << "\t";
-            myoutputfile << poptea.LMA.LMA_workspace.emissionExperimental[i] << "\t";
-            myoutputfile << poptea.LMA.LMA_workspace.predicted[i] << "\t";
-            myoutputfile << poptea.LMA.LMA_workspace.emissionNominal[i] << "\n";
-        }
-        myoutputfile.close();
+      for(size_t i = 0 ; i < poptea.expSetup.laser.L_end; ++i)
+      {
+          myoutputfile << poptea.expSetup.laser.l_thermal[i] << "\t";
+          myoutputfile << poptea.LMA.LMA_workspace.emissionExperimental[i] << "\t";
+          myoutputfile << poptea.LMA.LMA_workspace.predicted[i] << "\t";
+          myoutputfile << poptea.LMA.LMA_workspace.emissionNominal[i] << "\n";
+      }
+      myoutputfile.close();
     }
 
 ///* Optimization Procedure for l-thermal  */
