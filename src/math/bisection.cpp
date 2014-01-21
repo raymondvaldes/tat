@@ -46,8 +46,8 @@ size_t PrecisionToBits(const size_t precision)
   return myF(x) - phi;
 }
 
-solve::solve( double(*myF_)( double), const double phi_, const double min_,
-              const double max_)
+solve::  solve( std::function<double(double)> myF_ , const double phi_,
+                const double min_, const double max_)
   : myF(myF_), phi(phi_), min(min_), max(max_)
 {
   assert(min < max);

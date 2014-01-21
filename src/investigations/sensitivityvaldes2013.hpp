@@ -27,6 +27,7 @@ License
 #include "algorithms/sensitivity_analysis.hpp"
 #include "models/poptea.hpp"
 #include "tools/filesystem.hpp"
+#include "math/bisection.hpp"
 
 namespace investigations
 {
@@ -37,9 +38,19 @@ class thermalAnalysisMethod::PopTea
 void run(const class filesystem::directory dir);
 
 
-class gfunc
+class step4
 {
-  double operator() (double x)
+public:
+  double solve()
+  {
+    using std::placeholders::_1;
+    const std::function<double(double)>
+        myFuncReduced = std::bind( &step4::gfunc, this , _1 );
+    math::solve ojb( myFuncReduced, 0, 0, 1 );
+    return ojb.returnSoln();
+  }
+
+  double gfunc(double x)
   {
     return x*x - 3*x + 1;  // Replace with your function
   }

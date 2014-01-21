@@ -43,7 +43,9 @@ size_t PrecisionToBits(const size_t precision);
 class solve
 {
 private:
-  double (*myF)(double) ;
+//  double (*myF)(double) ;
+  std::function<double(double)> myF;
+
   const double phi;
   const double min;
   const double max;
@@ -54,8 +56,8 @@ private:
   void BisectMethod(void);
 
 public:
-  solve( double(*myF_)( double) , const double phi_, const double min_,
-         const double max_);
+  solve( std::function<double(double)> myF_ , const double phi_,
+         const double min_, const double max_);
   ~solve(void);
 
   double returnSoln(void) const ;
