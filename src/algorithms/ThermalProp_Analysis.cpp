@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include "algorithms/ThermalProp_Analysis.h"
 #include "algorithms/statistical_tools.hpp"
-#include "numSimulations/Experimental_PhaseOfEmission.h"
+#include "thermal/emission/phase99.hpp"
 
 int paramter_estimation(const size_t m, const size_t n,
                         struct parameterEstimation::settings ParaEstSetting,
@@ -169,7 +169,7 @@ int paramter_estimation(const size_t m, const size_t n,
     poptea.TBCsystem.updateCoat();
 
     ///repulate predicted phase
-    phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+    thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
     delete [] qtf;
     delete [] wa1;
@@ -408,7 +408,7 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
   poptea.TBCsystem.updateCoat();
 
 /// Estimates the phase of emission at each heating frequency
-  phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+  thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
 /// Evaluate Objective function
   for(size_t n = 0 ; n < poptea.expSetup.laser.L_end ; ++n )

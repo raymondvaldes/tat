@@ -122,7 +122,6 @@ SOURCES += \
     numSimulations/Numerical_Setup.cpp \
     numSimulations/Numerical_PhaseOfEmission_Results.cpp \
     numSimulations/Numerical_PhaseOfEmission.cpp \
-    numSimulations/Experimental_PhaseOfEmission.cpp \
     tools/filesystem.cpp \
     tools/timing.cpp \
     models/Thermal_models.cpp \
@@ -154,7 +153,6 @@ HEADERS += \
     numSimulations/Numerical_Setup.h \
     numSimulations/Numerical_PhaseOfEmission_Results.h \
     numSimulations/Numerical_PhaseOfEmission.h \
-    numSimulations/Experimental_PhaseOfEmission.h \
     tools/filesystem.hpp \
     tools/timing.h \
     algorithms/sensitivity_analysis.hpp \

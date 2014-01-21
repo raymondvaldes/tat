@@ -27,7 +27,6 @@ License
 
 #include "numSimulations/Numerical_Setup.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
-#include "numSimulations/Experimental_PhaseOfEmission.h"
 #include "algorithms/sensitivity_analysis.hpp"
 #include "algorithms/ThermalProp_Analysis.h"
 
