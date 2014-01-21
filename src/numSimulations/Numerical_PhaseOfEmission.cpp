@@ -22,41 +22,44 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "models/physicalmodel.hpp"
+#include "models/poptea.hpp"
+
+//#include "models/physicalmodel.hpp"
+#include "numSimulations/Numerical_Temperature.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "algorithms/statistical_tools.hpp"
 #include "numSimulations/Numerical_Setup.h"
 #include "thermal/emission.hpp"
+#include "thermal/model.hpp"
 
-double PhaseOfEmission1DNum(const int flag,
-                            const class thermalAnalysisMethod::PopTea &poptea)
+double PhaseOfEmission1DNum( const int flag,
+                             const class thermalAnalysisMethod::PopTea &poptea)
 {
-  class Temperature Tprofile(poptea.thermalModel.mesh.Nend,
-                             poptea.thermalModel.mesh.M2);
+  class Temperature Tprofile( poptea.thermalsys.mesh.Nend,
+                              poptea.thermalsys.mesh.M2);
 
   //// Acquire Numerical Temperature
   const double omega = poptea.expSetup.laser.omegas[flag];
-  temperature_1D(poptea.TBCsystem,
-                 poptea.thermalModel,
-                 poptea.expSetup, omega, Tprofile);
+  temperature_1D( poptea.TBCsystem,
+                  poptea.thermalsys,
+                  poptea.expSetup, omega, Tprofile);
 
   ///Initiate emission model
   const double Lcoat = poptea.TBCsystem.coating.depth;
-  const class thermal::Emission emission(poptea.expSetup.detector.wavelength,
-                                poptea.TBCsystem.Temp.base,
-                                poptea.thermalModel.mesh,
-                                poptea.bEval() *Lcoat,
-                                poptea.TBCsystem.optical.Emit1
-                                );
+  const class thermal::Emission emission( poptea.expSetup.detector.wavelength,
+                                          poptea.TBCsystem.Temp.base,
+                                          poptea.thermalsys.mesh,
+                                          poptea.bEval() *Lcoat,
+                                          poptea.TBCsystem.optical.Emit1 );
 
-  const double phase2 = emission.phase1D(Tprofile);
+  const double phase2 = emission.phase1D( Tprofile );
   Tprofile.cleanup();
 
   return phase2;
 }
 
-double PhaseOfEmission2DAna(const int flag,
-                            const class thermalAnalysisMethod::PopTea &poptea)
+double PhaseOfEmission2DAna( const int flag,
+                             const class thermalAnalysisMethod::PopTea &poptea )
 {
     /// Initiate 2d analytical model
     const double k_coat  = poptea.TBCsystem.coating.kthermal.offset;
@@ -75,13 +78,13 @@ double PhaseOfEmission2DAna(const int flag,
                                               k_coat, Lcoat, psi_coat,
                                               ccoat,
                                               poptea.TBCsystem.substrate.lambda,
-                                              poptea.thermalModel.mesh);
+                                              poptea.thermalsys.mesh);
 
     /// Setup Temperature[n][r][z] Vector
     std::vector< std::vector< std::vector< double > > > T2DProfile;
-    vector3DSetup(T2DProfile, poptea.thermalModel.mesh.Nend,
-                  poptea.thermalModel.mesh.Rend,
-                  poptea.thermalModel.mesh.M2);
+    vector3DSetup(T2DProfile, poptea.thermalsys.mesh.Nend,
+                  poptea.thermalsys.mesh.Rend,
+                  poptea.thermalsys.mesh.M2);
 
     ///Populate Temperature Vector
     heatmodel2DAna.TemperatureDistro(T2DProfile,
@@ -90,7 +93,7 @@ double PhaseOfEmission2DAna(const int flag,
     ///Initiate emission model
     const class thermal::Emission emission(poptea.expSetup.detector.wavelength,
                                   poptea.TBCsystem.Temp.referance,
-                                  poptea.thermalModel.mesh,
+                                  poptea.thermalsys.mesh,
                                   poptea.bEval() * Lcoat,
                                   poptea.TBCsystem.optical.Emit1
                                   );

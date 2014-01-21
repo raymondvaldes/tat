@@ -29,18 +29,20 @@ License
 #include "algorithms/parameterestimation.hpp"
 #include "tools/filesystem.hpp"
 
+#include "thermal/model.hpp"
+
 namespace thermalAnalysisMethod
 {
 
 PopTea::PopTea( class expEquipment::setup expSetup_,
                 class physicalModel::TBCsystem TBCsystem_,
-                class thermal::construct thermalModel_,
+                class thermal::model thermalsys_,
                 class parameterEstimation::settings Settings_,
                 class parameterEstimation::unknownList unknownParameters_,
                 class filesystem::directory DataDirectory_ )
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
-    thermalModel(thermalModel_),
+    thermalsys(thermalsys_),
     LMA(Settings_, unknownParameters_),
     DataDirectory(DataDirectory_)
 {
@@ -52,7 +54,7 @@ PopTea::PopTea( class expEquipment::setup expSetup_,
   xParameters95Names  .resize(d);
   N95 = d;
 
-  thermalModel.iter = 1000;
+  thermalsys.mesh.iter = 1000;
   LMA.LMA_workspace.MSETol = 1e-8;
 
   /// Heat Transfer and Emission models
@@ -97,7 +99,9 @@ class thermalAnalysisMethod::PopTea
                                   Obj2.radius);
   
   const class thermal::construct
-    Obj3( thermal::construct::loadConfigfromXML( ptchild3, mesh ) );
+    Obj3( thermal::construct::loadConfigfromXML( ptchild3 ) );
+
+  const class thermal::model Ojb3NEW( Obj3 , mesh);
 
   const ptree ptchild4 = pt.get_child( conjunto + "ParaEstSettings" );
   const class parameterEstimation::settings
@@ -108,7 +112,7 @@ class thermalAnalysisMethod::PopTea
     Obj5( parameterEstimation::unknownList::loadConfigfromXML( ptchild5 ) );
 
   //Load class object from previous objects
-  class PopTea popTea( Obj1, Obj2, Obj3, Obj4, Obj5 , DataDirectory_);
+  class PopTea popTea( Obj1, Obj2, Ojb3NEW, Obj4, Obj5 , DataDirectory_);
 
   return popTea;
 }
