@@ -37,11 +37,11 @@ ExpNoiseSetting::ExpNoiseSetting( const double a1_, const double b1_,
 
 
 
-
-void EmissionNoise( const class ExpNoiseSetting myEmissionNoise,
-                    const std::vector<double> lthermal,
-                    const std::vector<double> emissionNominal_,
-                    std::vector<double> emissionExperimental )
+// EmissionNoise
+void addNoise( const class ExpNoiseSetting myEmissionNoise,
+               const std::vector<double> lthermal,
+               const std::vector<double> emissionNominal_,
+               std::vector<double> emissionExperimental )
 
 {
   const double lmin = lthermal.front();
@@ -114,12 +114,12 @@ void EmissionNoise( const class ExpNoiseSetting myEmissionNoise,
     switch(s1)
     {
       case -1:
-          if(lthermalPercentile > 0.5) {noiseBias = 0;}
+          if( lthermalPercentile > 0.5 ) { noiseBias = 0; }
           break;
       case 0:
           break;
       case 1:
-          if(lthermalPercentile < 0.5) {noiseBias = 0;}
+          if( lthermalPercentile < 0.5 ) { noiseBias = 0; }
           break;
       default:
           std::cout << "\n\nerror in symmetry options\n\n"; exit(-1);
@@ -132,6 +132,7 @@ void EmissionNoise( const class ExpNoiseSetting myEmissionNoise,
     emissionExperimental[i] += M_PI_2 * noiseBias;
     emissionExperimental[i] += M_PI_2 * noiseRandomGen;
   }
+
 //
 // std::ofstream myfile;
 // std::stringstream filename;
@@ -147,10 +148,6 @@ void EmissionNoise( const class ExpNoiseSetting myEmissionNoise,
 // }
 // myfile.close();
 }
-
-
-
-
 
   }
 }
