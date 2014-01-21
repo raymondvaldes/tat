@@ -27,7 +27,7 @@ License
 #include "models/poptea.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "math/bisection.hpp"
-#include "algorithms/parameterestimation.hpp"
+#include "math/sensitivityAnalysis/parameterEstimationInterval.hpp"
 
 namespace investigations
 {

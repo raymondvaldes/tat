@@ -26,6 +26,7 @@ License
 #define THERMALPROP_ANALYSIS_H_INCLUDED
 
 #include <boost/foreach.hpp>
+
 #include "numSimulations/Numerical_Setup.h"
 #include "algorithms/lmdiff.h"
 
