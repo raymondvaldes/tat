@@ -96,14 +96,13 @@ void run(const class filesystem::directory dir)
   /// STEP 3
 
   /// STEP 4
-//  class parameterEstimation::unknown
-//      first( parameterEstimation::unknownList.vectorUnknowns[0] );
+  class parameterEstimation::unknown
+      first(poptea.LMA.unknownParameters.vectorUnknowns[0]);
 
-//  math::solve( parameterEstimation(), 0, 0, 1 );
+  class step4 Step4;
+  std::cout << "this is the output\n\n" << Step4.solve();
 
-
-
-
+  return;
 }
 
 
