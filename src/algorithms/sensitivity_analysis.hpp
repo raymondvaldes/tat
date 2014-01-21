@@ -31,6 +31,7 @@ License
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 #include "algorithms/statistical_tools.hpp"
 #include "algorithms/ThermalProp_Analysis.h"
+#include "thermal/emission/noise.hpp"
 
 void perturbationTest(const size_t m, const size_t n,
                       struct parameterEstimation::settings ParaEstSetting,
@@ -61,10 +62,12 @@ void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol,
 
 void parameterUncertainty(const size_t n,
                           struct parameterEstimation::settings ParaEstSetting,
-                          double *xInitial, class thermalAnalysisMethod::PopTea poptea,
+                          double *xInitial,
+                          class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,
-                          const class emissionNoiseParameters myEmissionNoise,
+                          const class thermal::emission::emissionNoiseParameters
+                          myEmissionNoise,
                           const std::string filename);
 
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,

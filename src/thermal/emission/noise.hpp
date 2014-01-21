@@ -22,28 +22,35 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef CONSTRUCT_HPP
-#define CONSTRUCT_HPP
-
-#include "thermal/thermal.hpp"
+#ifndef NOISE_HPP
+#define NOISE_HPP
+#include <vector>
+#include "numSimulations/Numerical_Setup.h"
 
 namespace thermal{
+  namespace emission{
 
-class construct
+
+class emissionNoiseParameters
 {
-
 public:
-  const enum HeatX heat;
-  const enum EmissionX emission;
-
-  explicit construct( const enum HeatX myHeat,
-                      const enum EmissionX myEmission);
-
-  static class construct
-      loadConfigfromXML(const boost::property_tree::ptree pt);
-  ~construct(void);
+  double a, b, noiseRandom;
+  bool d1, d2;
+  int s1;
+  explicit emissionNoiseParameters( const double a1_, const double b1_,
+                                    const bool d1_, const bool d2_,
+                                    const int s1_, const double noiseRandom_);
 };
 
+void EmissionNoise( const class emissionNoiseParameters myEmissionNoise,
+                    const std::vector<double> lthermal,
+                    const std::vector<double> emissionNominal_,
+                    std::vector<double> emissionExperimental );
+
+
+
+
+  }
 }
 
-#endif // CONSTRUCT_HPP
+#endif // NOISE_HPP
