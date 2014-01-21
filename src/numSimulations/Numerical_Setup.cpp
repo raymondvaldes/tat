@@ -29,6 +29,7 @@ License
 #include "models/poptea.hpp"
 #include "algorithms/statistical_tools.hpp"
 #include "numSimulations/Numerical_Setup.h"
+#include "math/parameterEstimation/lmdiff.hpp"
 
 double x_limiter1(const double xi)
 {
@@ -81,7 +82,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
   if(mode == 2)
   {
     int i = 0;
-    BOOST_FOREACH( const class parameterEstimation::unknown &unknown,
+    BOOST_FOREACH( const class math::parameterEstimation::unknown &unknown,
                    poptea.LMA.unknownParameters.vectorUnknowns )
     {
       switch( unknown.label() )
@@ -390,9 +391,11 @@ void cosfit(double **dependent, const double *independent, double *x, int j,
         }
         variables[2][0]=omega1;
 
-        lmdif(&cosfcn,P,N,x,fvec,variables,ftol,xtol,gtol,maxfev,epsfcn,diag,
-              mode,factor,nprint,&info,&nfev,fjac,P,ipvt,qtf,wa1,wa2,wa3,wa4,
-              wa5);
+        math::parameterEstimation::lmdif( &cosfcn, P, N, x, fvec, variables,
+                                          ftol, xtol, gtol, maxfev, epsfcn,
+                                          diag, mode, factor, nprint, &info,
+                                          &nfev, fjac, P, ipvt, qtf, wa1, wa2,
+                                          wa3, wa4, wa5 ) ;
 
         ///Clean Up
         for(size_t a=0; a<=2 ; ++a)
@@ -503,9 +506,11 @@ void cosfit(double *dependent,const std::vector<double> &independentVec,
         }
         variables[2][0]=0;
 
-        lmdif(&cosfcn1,P,N,x,fvec,variables,ftol,xtol,gtol,maxfev,epsfcn,diag,
-              mode,factor,nprint,&info,&nfev,fjac,P,ipvt,qtf,wa1,wa2,wa3,wa4,
-              wa5);
+        math::parameterEstimation::lmdif( &cosfcn1, P, N, x, fvec, variables,
+                                          ftol, xtol, gtol, maxfev, epsfcn,
+                                          diag, mode, factor, nprint, &info,
+                                          &nfev, fjac, P, ipvt, qtf, wa1, wa2,
+                                          wa3, wa4, wa5);
 
         ///Clean Up
         for(size_t a=0; a<=2 ; ++a)

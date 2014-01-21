@@ -27,15 +27,17 @@ License
 
 #include <boost/foreach.hpp>
 
+#include "math/parameterEstimation/parameterestimation.hpp"
+#include "models/poptea.hpp"
 #include "numSimulations/Numerical_Setup.h"
-#include "algorithms/lmdiff.h"
+#include "algorithms/ThermalProp_Analysis.h"
 
-int paramter_estimation(const size_t m, const size_t  n,
-                        struct parameterEstimation::settings ParaEstSetting,
-                        int *info, int *nfev,
-                        double *x, class thermalAnalysisMethod::PopTea poptea,
-                        const double factorMax, const double factorScale,
-                        double *xpredicted);
+int paramter_estimation( const size_t m, const size_t  n,
+                         class math::parameterEstimation::settings ParaEstSetting,
+                         int *info, int *nfev,
+                         double *x, class thermalAnalysisMethod::PopTea poptea,
+                         const double factorMax, const double factorScale,
+                         double *xpredicted);
 
 std::vector<double>
 paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
@@ -44,7 +46,7 @@ paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
 void ThermalProp_Analysis(int, int N, double*x, double*fvec, int*,
                           class thermalAnalysisMethod::PopTea poptea );
 
-void printPEstimates(const size_t N, class thermalAnalysisMethod::PopTea poptea);
+void printPEstimates( class thermalAnalysisMethod::PopTea poptea ) ;
 void printfJac(const size_t N, const size_t P, const double*fjac);
 void InformationIndexAll(const size_t P, const size_t N,
                          const class thermalAnalysisMethod::PopTea poptea);

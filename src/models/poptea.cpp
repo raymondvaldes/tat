@@ -37,8 +37,8 @@ namespace thermalAnalysisMethod
 PopTea::PopTea( class equipment::setup expSetup_,
                 class physicalModel::TBCsystem TBCsystem_,
                 class thermal::model thermalsys_,
-                class parameterEstimation::settings Settings_,
-                class parameterEstimation::unknownList unknownParameters_,
+                class math::parameterEstimation::settings Settings_,
+                class math::parameterEstimation::unknownList unknownParameters_,
                 class filesystem::directory DataDirectory_ )
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
@@ -95,12 +95,12 @@ class thermalAnalysisMethod::PopTea
   const class thermal::model Ojb3NEW( Construct , mesh);
 
   const ptree ptchild4 = pt.get_child( conjunto + "ParaEstSettings" );
-  const class parameterEstimation::settings
-    Obj4( parameterEstimation::settings::loadConfigfromXML( ptchild4 ) );
+  const class math::parameterEstimation::settings
+    Obj4( math::parameterEstimation::settings::loadConfigfromXML( ptchild4 ) );
   
   const ptree ptchild5 = pt.get_child( conjunto );
-  const class parameterEstimation::unknownList
-    Obj5( parameterEstimation::unknownList::loadConfigfromXML( ptchild5 ) );
+  const class math::parameterEstimation::unknownList
+    Obj5( math::parameterEstimation::unknownList::loadConfigfromXML( ptchild5 ) );
 
   //Load class object from previous objects
   class PopTea popTea( Obj1, Obj2, Ojb3NEW, Obj4, Obj5 , DataDirectory_);

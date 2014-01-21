@@ -34,7 +34,7 @@ namespace SensitivityValdes2013
 {
     void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea);
 
-    void CC_APS2(class thermalAnalysisMethod::PopTea poptea);
+//    void CC_APS2(class thermalAnalysisMethod::PopTea poptea);
 
 }
 

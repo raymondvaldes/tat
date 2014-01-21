@@ -81,8 +81,9 @@ double SOR(double**A, double*b, const size_t M2, double*phi, double omega,
 
 double average(const double a, const double b);
 
-double gs_int(const double eta, const double opt, const double lambda, const double R1, const double Iplus0,
-              const double Iplus1);
+double gs_int(const double eta, const double opt, const double lambda,
+              const double R1, const double Iplus0, const double Iplus1);
+
 double psi(const double eta, const double psi_layer1, const double psi_layer2);
 double psi(const std::vector<std::vector<double>>& T, const double eta,
            const size_t j, const size_t n, const double psi_c,

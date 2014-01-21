@@ -25,7 +25,8 @@ License
 #include "math/sensitivityAnalysis/parameterEstimationInterval.hpp"
 #include "numSimulations/Numerical_Setup.h"
 
-namespace parameterEstimation{
+namespace math{
+  namespace parameterEstimation{
 
 unknown::unknown(enum physicalModel::labels::Name name_,
                  const double lower_,
@@ -198,6 +199,8 @@ LMA::~LMA(void){}
 
 unknownList::~unknownList(){}
 
+
+
 settings::~settings(void){}
 
 struct settings settings::
@@ -226,4 +229,8 @@ settings::settings( const double ftol_, const double xtol_, const double gtol_,
   :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_), epsfcn(epsfcn_),
     factor(factor_), mode(mode_), nprint(nprint_){}
 
+
+
+
+  }
 }

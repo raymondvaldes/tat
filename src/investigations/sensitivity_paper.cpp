@@ -47,7 +47,7 @@ constexpr double epsfcn = 1.e-8;
 constexpr double factor =  .01;
 constexpr int mode = 1;
 constexpr int nprint = 0;
-struct parameterEstimation::settings
+class math::parameterEstimation::settings
 ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
 constexpr double factorMax = 1;
@@ -241,108 +241,108 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
     delete []emissionExpR2;
 }
 
-void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
-{
-    /* This function is designed to complete the following 5 steps:
-     (1) to create the calibration curves for an APS sample
-     (2) export data to a data-file
-     (3) create experimental data and explort to data-file
-     (4) fit the experimental data to the model
-     (5) report parameteres and uncertainty using the calibration curves */
-    poptea.DataDirectory.mkdir("data/APS2");
-    poptea.expSetup.laser.L_end = LendMinDecade;
+//void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
+//{
+//    /* This function is designed to complete the following 5 steps:
+//     (1) to create the calibration curves for an APS sample
+//     (2) export data to a data-file
+//     (3) create experimental data and explort to data-file
+//     (4) fit the experimental data to the model
+//     (5) report parameteres and uncertainty using the calibration curves */
+//    poptea.DataDirectory.mkdir("data/APS2");
+//    poptea.expSetup.laser.L_end = LendMinDecade;
 
-///Set heating constraints
-    constexpr double l_min = .04;
-    constexpr double l_max = 4;
-    poptea.thermalSetup(l_min, l_max, LendMinDecade);
+/////Set heating constraints
+//    constexpr double l_min = .04;
+//    constexpr double l_max = 4;
+//    poptea.thermalSetup(l_min, l_max, LendMinDecade);
 
-/// Populate the experimental phase values in parameters99
-    /* Step 1: l_thermal sweep to create calibration tables */
-    constexpr size_t iterates = 20;
-    const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
+///// Populate the experimental phase values in parameters99
+//    /* Step 1: l_thermal sweep to create calibration tables */
+//    constexpr size_t iterates = 20;
+//    const std::string filename("../data/APS2/calibrationCurves_APS2.dat");
 
-/// Setup calibration curves
-    constexpr size_t xnumber = 111;
-    assert( (xnumber) %2 == 1);
-    constexpr double bandSize = .01;
-    constexpr double spread = 0.20;
-    class ::perturbStruct *pertStruct = nullptr;
-    const size_t N = poptea.LMA.unknownParameters.Nsize();
-    pertStruct = new class perturbStruct(N, xnumber, spread,
-                                         l_min, l_max, iterates);
-    pertStruct->lthermalBands(bandSize);
+///// Setup calibration curves
+//    constexpr size_t xnumber = 111;
+//    assert( (xnumber) %2 == 1);
+//    constexpr double bandSize = .01;
+//    constexpr double spread = 0.20;
+//    class ::perturbStruct *pertStruct = nullptr;
+//    const size_t N = poptea.LMA.unknownParameters.Nsize();
+//    pertStruct = new class perturbStruct(N, xnumber, spread,
+//                                         l_min, l_max, iterates);
+//    pertStruct->lthermalBands(bandSize);
 
-/// Initial guess
-    double *xInitial = nullptr;
-    xInitial = new double[5]
-    {x_ini10(2.3), x_ini10(3.5), x_ini10(35), x_ini10(.8), x_ini10(0.57)};
+///// Initial guess
+//    double *xInitial = nullptr;
+//    xInitial = new double[5]
+//    {x_ini10(2.3), x_ini10(3.5), x_ini10(35), x_ini10(.8), x_ini10(0.57)};
 
-    if(false)
-    {
-        /* There are three ways to layout the thermal spread.  The
-        deterministic approach systematically varies the thermal penetration
-        spread from lmin1 to lmin2 and lmax1 to lmax2.
+//    if(false)
+//    {
+//        /* There are three ways to layout the thermal spread.  The
+//        deterministic approach systematically varies the thermal penetration
+//        spread from lmin1 to lmin2 and lmax1 to lmax2.
 
-        The lthermalMC() function results in a similar result; however, the
-        selection of the lmin and lmax for each iteration is determined
-        with a random simulation. The argument for teh lthermalMC() function
-        provides the band resolution. */
-        calibrationSweep(ParaEstSetting, xInitial, poptea, factorMax,
-                         factorScale, pertStruct, filename, LendMinDecade);
-    }
+//        The lthermalMC() function results in a similar result; however, the
+//        selection of the lmin and lmax for each iteration is determined
+//        with a random simulation. The argument for teh lthermalMC() function
+//        provides the band resolution. */
+//        calibrationSweep(ParaEstSetting, xInitial, poptea, factorMax,
+//                         factorScale, pertStruct, filename, LendMinDecade);
+//    }
 
-    /*At this point I can output a figure that has the sensitivity curve data
-    for each of the five parameters. The figure with the artificial data and
-    fitted curve with error bars will be shown next.*/
-     ///Noise in Simulated Emission
-    constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
-    constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
-    constexpr bool d1 = true;    //positive  (try false)
-    constexpr bool d2 = true;    //monotonic (try true)
-    constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
-    constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
-    const class thermal::emission::ExpNoiseSetting
-        myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
+//    /*At this point I can output a figure that has the sensitivity curve data
+//    for each of the five parameters. The figure with the artificial data and
+//    fitted curve with error bars will be shown next.*/
+//     ///Noise in Simulated Emission
+//    constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
+//    constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
+//    constexpr bool d1 = true;    //positive  (try false)
+//    constexpr bool d2 = true;    //monotonic (try true)
+//    constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
+//    constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
+//    const class thermal::emission::ExpNoiseSetting
+//        myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
-    if(false)
-    {
-      /* Create Initial Experimental Data for figure */
-      poptea.thermalSetup(l_min, l_max, LendMinDecade);
-      thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
-//        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
-//                               l_max); //BUG MUST IMPLEMENT
-      fitting(poptea, xInitial, 1, factorMax, factorScale);
+//    if(false)
+//    {
+//      /* Create Initial Experimental Data for figure */
+//      poptea.thermalSetup(l_min, l_max, LendMinDecade);
+//      thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
+////        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
+////                               l_max); //BUG MUST IMPLEMENT
+//      fitting(poptea, xInitial, 1, factorMax, factorScale);
 
-      ///output data for printing
-      std::ofstream myoutputfile;
-      std::stringstream filename1;
-      filename1 <<  "../data/APS2/experimentalFitted.dat";
-      myoutputfile.open(filename1.str().c_str());
-      myoutputfile << std::setprecision(8);
+//      ///output data for printing
+//      std::ofstream myoutputfile;
+//      std::stringstream filename1;
+//      filename1 <<  "../data/APS2/experimentalFitted.dat";
+//      myoutputfile.open(filename1.str().c_str());
+//      myoutputfile << std::setprecision(8);
 
-      for(size_t i = 0 ; i < poptea.expSetup.laser.L_end; ++i)
-      {
-          myoutputfile << poptea.expSetup.laser.l_thermal[i] << "\t";
-          myoutputfile << poptea.LMA.LMA_workspace.emissionExperimental[i] << "\t";
-          myoutputfile << poptea.LMA.LMA_workspace.predicted[i] << "\t";
-          myoutputfile << poptea.LMA.LMA_workspace.emissionNominal[i] << "\n";
-      }
-      myoutputfile.close();
-    }
+//      for(size_t i = 0 ; i < poptea.expSetup.laser.L_end; ++i)
+//      {
+//          myoutputfile << poptea.expSetup.laser.l_thermal[i] << "\t";
+//          myoutputfile << poptea.LMA.LMA_workspace.emissionExperimental[i] << "\t";
+//          myoutputfile << poptea.LMA.LMA_workspace.predicted[i] << "\t";
+//          myoutputfile << poptea.LMA.LMA_workspace.emissionNominal[i] << "\n";
+//      }
+//      myoutputfile.close();
+//    }
 
-///* Optimization Procedure for l-thermal  */
-    if(true)
-    {
-        parameterUncertainty(poptea.LMA.unknownParameters.Nsize(),
-                             ParaEstSetting, xInitial,
-                             poptea, factorMax, factorScale, pertStruct,
-                             myEmissionNoise, filename);
-        pertStruct->cleanup2();
-        delete pertStruct;
-    }
-    delete[] xInitial;
-}
+/////* Optimization Procedure for l-thermal  */
+//    if(true)
+//    {
+//        parameterUncertainty(poptea.LMA.unknownParameters.Nsize(),
+//                             ParaEstSetting, xInitial,
+//                             poptea, factorMax, factorScale, pertStruct,
+//                             myEmissionNoise, filename);
+//        pertStruct->cleanup2();
+//        delete pertStruct;
+//    }
+//    delete[] xInitial;
+//}
 
 
 

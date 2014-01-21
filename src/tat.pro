@@ -126,7 +126,6 @@ SOURCES += \
     tools/timing.cpp \
     models/Thermal_models.cpp \
     models/expEquipment.cpp \
-    algorithms/lmdiff.cpp \
     models/poptea.cpp \
     models/physicalmodel.cpp \
     models/numericalmodel.cpp \
@@ -141,7 +140,8 @@ SOURCES += \
     thermal/model.cpp \
     thermal/emission/noise.cpp \
     thermal/emission/phase99.cpp \
-    math/parameterEstimation/parameterestimation.cpp
+    math/parameterEstimation/parameterestimation.cpp \
+    math/parameterEstimation/lmdiff.cpp
 
 #header files
 HEADERS += \
@@ -158,7 +158,6 @@ HEADERS += \
     algorithms/sensitivity_analysis.hpp \
     models/Thermal_models.h \
     models/expEquipment.hpp \
-    algorithms/lmdiff.h \
     models/poptea.hpp \
     models/physicalmodel.hpp \
     models/numericalmodel.hpp \
@@ -174,4 +173,5 @@ HEADERS += \
     thermal/model.hpp \
     thermal/emission/noise.hpp \
     thermal/emission/phase99.hpp \
-    math/parameterEstimation/parameterestimation.hpp
+    math/parameterEstimation/parameterestimation.hpp \
+    math/parameterEstimation/lmdiff.hpp
