@@ -28,17 +28,17 @@ namespace thermal{
   namespace emission{
 
 
-emissionNoiseParameters::emissionNoiseParameters(const double a1_,
-                                                 const double b1_,
-                                                 const bool d1_, const bool d2_,
-                                                 const int s1_,
-                                                 const double noiseRandom_):
+ExpNoiseSetting::ExpNoiseSetting( const double a1_, const double b1_,
+                                  const bool d1_, const bool d2_,
+                                  const int s1_, const double noiseRandom_):
     a(a1_), b(b1_), noiseRandom(noiseRandom_), d1(d1_), d2(d2_), s1(s1_)
 {}
 
 
 
-void EmissionNoise( const class emissionNoiseParameters myEmissionNoise,
+
+
+void EmissionNoise( const class ExpNoiseSetting myEmissionNoise,
                     const std::vector<double> lthermal,
                     const std::vector<double> emissionNominal_,
                     std::vector<double> emissionExperimental )

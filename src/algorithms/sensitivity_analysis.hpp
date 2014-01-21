@@ -66,8 +66,8 @@ void parameterUncertainty(const size_t n,
                           class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,
-                          const class thermal::emission::emissionNoiseParameters
-                          myEmissionNoise,
+                          const class thermal::emission::ExpNoiseSetting
+                          noise,
                           const std::string filename);
 
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,
