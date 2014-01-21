@@ -80,7 +80,7 @@ void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea)
     constexpr bool d2 = true;        //monotonic (try true)
     constexpr int s1 = 0;            //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.004; // normal noise % of pi/2
-    const class thermal::emission::emissionNoiseParameters
+    const class thermal::emission::ExpNoiseSetting
         myEmissionNoise(a, b, d1, d2, s1, noiseRandom);
 
 //    double *Analytical_PhaseR1 = nullptr;
@@ -301,7 +301,7 @@ void CC_APS2(class thermalAnalysisMethod::PopTea poptea)
     constexpr bool d2 = true;    //monotonic (try true)
     constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
     constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
-    const class thermal::emission::emissionNoiseParameters
+    const class thermal::emission::ExpNoiseSetting
         myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
     if(false)

@@ -334,7 +334,7 @@ void parameterUncertainty(const size_t n,
                           class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,
-                          const class thermal::emission::emissionNoiseParameters myEmissionNoise,
+                          const class thermal::emission::ExpNoiseSetting myEmissionNoise,
                           const std::string filename)
 {
   /*The idea with the perturbation test is that I have my "perfect fit" and
