@@ -99,7 +99,7 @@ void run(const class filesystem::directory dir)
   class parameterEstimation::unknown
       first(poptea.LMA.unknownParameters.vectorUnknowns[0]);
 
-  class step4 Step4;
+  class math::sensitivityAnalysis::step4 Step4;
   std::cout << "this is the output\n\n" << Step4.solve();
 
   return;
@@ -109,7 +109,6 @@ void run(const class filesystem::directory dir)
 
 
 
-
-  }
+}
 }
 

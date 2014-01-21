@@ -34,7 +34,7 @@ License
 namespace thermalAnalysisMethod
 {
 
-PopTea::PopTea( class expEquipment::setup expSetup_,
+PopTea::PopTea( class equipment::setup expSetup_,
                 class physicalModel::TBCsystem TBCsystem_,
                 class thermal::model thermalsys_,
                 class parameterEstimation::settings Settings_,
@@ -69,8 +69,8 @@ class thermalAnalysisMethod::PopTea
   read_xml(filename, pt);
   const std::string conjunto = "poptea.";
   const ptree ptchild1 = pt.get_child( conjunto + "experimentalSetup" );
-  const class expEquipment::setup
-    Obj1( expEquipment::setup::loadConfigfromXML( ptchild1 ) );
+  const class equipment::setup
+    Obj1( equipment::setup::loadConfigfromXML( ptchild1 ) );
 
   const ptree ptchild2 = pt.get_child( conjunto + "TBCsystem" );
   const class physicalModel::TBCsystem

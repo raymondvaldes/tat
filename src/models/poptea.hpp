@@ -49,13 +49,13 @@ namespace thermalAnalysisMethod
   class PopTea
   {
   public:
-    class expEquipment::setup expSetup;
+    class equipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
     class thermal::model thermalsys;
     class parameterEstimation::LMA LMA;
     class filesystem::directory DataDirectory;
 
-    explicit PopTea( class expEquipment::setup expSetup_,
+    explicit PopTea( class equipment::setup expSetup_,
                      class physicalModel::TBCsystem TBCsystem_,
                      class thermal::model thermalsys_,
                      class parameterEstimation::settings Settings_,

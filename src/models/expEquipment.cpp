@@ -28,7 +28,7 @@ License
 #include "numSimulations/Numerical_Setup.h"
 
 
-namespace expEquipment{
+namespace equipment{
 
 Detector::Detector(const double wavelength_, const double radius_)
     :wavelength(wavelength_), radius(radius_)
@@ -211,41 +211,41 @@ class setup setup::loadConfigfromXML( const boost::property_tree::ptree pt )
 }
 
 
-class setup setup::loadConfig(const std::string &filename)
-{
-  //Initialize the config file into memory
-  using boost::property_tree::ptree;
-  ptree pt;
-  read_xml(filename, pt);
+//class setup setup::loadConfig(const std::string &filename)
+//{
+//  //Initialize the config file into memory
+//  using boost::property_tree::ptree;
+//  ptree pt;
+//  read_xml(filename, pt);
 
-  //initialize laser
-  const double
-  power = pt.get<double>( "poptea.experimentalSetup.Laser.power" );
+//  //initialize laser
+//  const double
+//  power = pt.get<double>( "poptea.experimentalSetup.Laser.power" );
 
-  const double
-  radius = pt.get<double>( "poptea.experimentalSetup.Laser.radius" );
+//  const double
+//  radius = pt.get<double>( "poptea.experimentalSetup.Laser.radius" );
 
-  const double
-  offset = pt.get<double>( "poptea.experimentalSetup.Laser.offset" );
+//  const double
+//  offset = pt.get<double>( "poptea.experimentalSetup.Laser.offset" );
 
-  const double
-  amplitude = pt.get<double>( "poptea.experimentalSetup.Laser.amplitude" );
+//  const double
+//  amplitude = pt.get<double>( "poptea.experimentalSetup.Laser.amplitude" );
 
-  //initialize detector
-  const double
-  detector_rad = pt.get<double>( "poptea.experimentalSetup.Detector.radius" );
+//  //initialize detector
+//  const double
+//  detector_rad = pt.get<double>( "poptea.experimentalSetup.Detector.radius" );
 
-  const double
-  detector_lam = pt.get<double>( "poptea.experimentalSetup.Detector.lambda" );
+//  const double
+//  detector_lam = pt.get<double>( "poptea.experimentalSetup.Detector.lambda" );
 
-  //initialize experimental setup object
-  const class Laser CO2Laser( power, radius, offset, amplitude );
-  const class Detector Emissiondetector( detector_lam, detector_rad );
+//  //initialize experimental setup object
+//  const class Laser CO2Laser( power, radius, offset, amplitude );
+//  const class Detector Emissiondetector( detector_lam, detector_rad );
 
-  const class setup expSetup( CO2Laser, Emissiondetector );
+//  const class setup expSetup( CO2Laser, Emissiondetector );
 
-  return expSetup;
-}
+//  return expSetup;
+//}
 
 
 

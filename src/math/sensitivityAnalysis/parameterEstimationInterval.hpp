@@ -24,6 +24,8 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef PARAMETERESTIMATIONINTERVAL_HPP_INCLUDED
 #define PARAMETERESTIMATIONINTERVAL_HPP_INCLUDED
+#include <functional>
+#include "math/bisection.hpp"
 
 namespace math
 {
@@ -31,10 +33,31 @@ namespace sensitivityAnalysis
 {
 
 
+class step4
+{
+public:
+  double solve()
+  {
+    using std::placeholders::_1;
+    const std::function<double(double)>
+        myFuncReduced = std::bind( &step4::gfunc, this , _1 );
+    math::solve ojb( myFuncReduced, 0, 0, 1 );
+
+    return ojb.returnSoln();
+  }
+
+  double gfunc(double x)
+  {
+    return x*x - 3*x + 1;  // Replace with your function
+  }
+};
 
 
-
-
+/// let's say I make a function that outputs the parameter estimates intervals
+/// this function inputs will include -> poptea (fixed)
+///                                   -> experimental data (fixed)
+///                                   -> best guess AND goodness-of-fit
+///                                   -> upper and lowerbounds PI
 
 
 }
