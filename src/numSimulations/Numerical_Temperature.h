@@ -51,10 +51,6 @@ class matrixArrays
       B1(length), B2(length), B3(length), M2(length){}
 };
 
-double Numerical_Temperature( const double *const *parameters, double **T,
-                              const int flag ,
-                              const struct parameter_constraints *st_ptr);
-
 double Tss1D_ana( const double z, const double R1, const double lambda,
                   const double Is, const double L, const double d,
                   const double k_ref, const double Iplus0, const double Iplus1,

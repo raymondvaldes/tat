@@ -51,15 +51,6 @@ void fitting(class thermalAnalysisMethod::PopTea poptea, double * xInitial,
              const size_t interants, const double factorMax,
              const double factorScale);
 
-void bootstrap(size_t P, size_t N, double ftol, double xtol, double gtol,
-               int maxfev, double epsfcn, int mode, double factor, int nprint,
-               const struct parameter_constraints *st_ptr,
-               class thermalAnalysisMethod::PopTea poptea,
-               const double ExpStddev, const double *Numerical_Phase,
-               const double *Analytical_Phase, double *xInitial,
-               const size_t interants, const double factorMax,
-               const double factorScale);
-
 void parameterUncertainty(const size_t n,
                           struct parameterEstimation::settings ParaEstSetting,
                           double *xInitial,
