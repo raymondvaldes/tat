@@ -193,7 +193,6 @@ public:
 
     void updateVal(const enum labels::Name mylabel , const double val);
     double returnVal( const enum labels::Name mylabel ) const;
-    void printVal( const enum labels::Name mylabel );
 
     static class TBCsystem loadConfig(const boost::property_tree::ptree pt);
 

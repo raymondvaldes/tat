@@ -345,36 +345,6 @@ double TBCsystem::returnVal( const enum labels::Name mylabel ) const
   return val;
 }
 
-
-void TBCsystem::printVal( const enum labels::Name mylabel )
-{
-  switch ( mylabel )
-  {
-    case labels::Name::asub :
-      std::cout << a_subEval();
-      break;
-    case labels::Name::E1 :
-      std::cout << optical.Emit1;
-      break;
-    case labels::Name::gammaEff :
-      std::cout << gammaEval();
-      break;
-    case labels::Name::R1 :
-      std::cout << optical.R1;
-      break;
-    case labels::Name::lambda :
-      std::cout << coating.lambda;
-      break;
-    default:
-      std::cout << "\nSwitch Error!!\n";
-      exit(-69);
-      break;
-  }
-}
-
-
-
-
 double TBCsystem::gammaEval(void) const
 {
   return substrate.thermalEffusivity() / coating.thermalEffusivity();
