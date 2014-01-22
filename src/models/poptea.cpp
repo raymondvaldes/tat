@@ -22,13 +22,14 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <exception>
+
 #include "models/poptea.hpp"
 #include "models/expEquipment.hpp"
 #include "models/Thermal_models.h"
 #include "models/numericalmodel.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "tools/filesystem.hpp"
-
 #include "thermal/model.hpp"
 
 namespace thermalAnalysisMethod
@@ -66,7 +67,17 @@ class thermalAnalysisMethod::PopTea
 {
   using boost::property_tree::ptree;
   ptree pt;
-  read_xml(filename, pt);
+
+  try
+  {
+    read_xml(filename, pt);
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << filename << " not found! See --help\n";
+    exit(-2);
+  }
+
   const std::string conjunto = "poptea.";
   const ptree ptchild1 = pt.get_child( conjunto + "experimentalSetup" );
   const class equipment::setup
