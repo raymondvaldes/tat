@@ -30,7 +30,7 @@ License
 int paramter_estimation( const size_t m, const size_t n,
                          class math::estimation::settings ParaEstSetting,
                          int *info, int *nfev, double *x,
-                         class thermal::analysis::Kernal poptea,
+                         class thermal::analysis::Kernal popteaCore,
                          const double factorMax, const double factorScale,
                          double *xpredicted )
 {
@@ -58,7 +58,7 @@ int paramter_estimation( const size_t m, const size_t n,
   int *ipvt = new int[n];
   double *diag = new double[n];
 
-  scaleDiag(ParaEstSetting.mode, n, diag, poptea );
+  scaleDiag(ParaEstSetting.mode, n, diag, popteaCore );
 
   double *xinitial = new double[n];
   double *xguess = new double[n];
@@ -74,7 +74,7 @@ int paramter_estimation( const size_t m, const size_t n,
   {
     int i = 0;
     BOOST_FOREACH(class math::estimation::unknown &unknown,
-                  poptea.LMA.unknownParameters.vectorUnknowns)
+                  popteaCore.LMA.unknownParameters.vectorUnknowns)
     {
       x[i++] = x_ini( unknown.lowerBound(), unknown.upperBound() );
     }
@@ -88,7 +88,7 @@ int paramter_estimation( const size_t m, const size_t n,
   ///Transform inputs
   int i = 0;
   BOOST_FOREACH(class math::estimation::unknown &unknown,
-                poptea.LMA.unknownParameters.vectorUnknowns)
+                popteaCore.LMA.unknownParameters.vectorUnknowns)
   {
     x[i] = kx_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
     i++;
@@ -102,7 +102,7 @@ int paramter_estimation( const size_t m, const size_t n,
                                    ParaEstSetting.epsfcn, diag,
                                    ParaEstSetting.mode, ParaEstSetting.factor,
                                    ParaEstSetting.nprint, info, nfev, fjac, m,
-                                   ipvt, qtf, wa1, wa2, wa3, wa4, wa5, poptea);
+                                   ipvt, qtf, wa1, wa2, wa3, wa4, wa5, popteaCore);
 
   ///Exit Routine
   /* Sets up a condition where the total error in the phase is compared
@@ -111,11 +111,11 @@ int paramter_estimation( const size_t m, const size_t n,
   initial guesses. This is let to run a fixed number of iterations. */
   constexpr double ExpStddev = 0;
   const double ExpVarianceEst = ExpStddev * ExpStddev;
-  poptea.LMA.LMA_workspace.fvecTotal = SobjectiveLS(
-                                    poptea.expSetup.laser.L_end,
-                                    poptea.LMA.LMA_workspace.emissionExperimental,
-                                    poptea.LMA.LMA_workspace.predicted);
-  const size_t v1 = poptea.expSetup.laser.L_end - n;
+  popteaCore.LMA.LMA_workspace.fvecTotal = SobjectiveLS(
+                                    popteaCore.expSetup.laser.L_end,
+                                    popteaCore.LMA.LMA_workspace.emissionExperimental,
+                                    popteaCore.LMA.LMA_workspace.predicted);
+  const size_t v1 = popteaCore.expSetup.laser.L_end - n;
   double reduceChiSquare;
   if(ExpVarianceEst ==0 )
   {
@@ -123,31 +123,31 @@ int paramter_estimation( const size_t m, const size_t n,
   }
   else
   {
-    reduceChiSquare = (poptea.LMA.LMA_workspace.fvecTotal /
+    reduceChiSquare = (popteaCore.LMA.LMA_workspace.fvecTotal /
                        ExpVarianceEst) / v1;
   }
 
   if( reduceChiSquare < 2
      || ParaEstSetting.factor == factorMax
-     || poptea.LMA.LMA_workspace.fvecTotal < poptea.LMA.LMA_workspace.MSETol
+     || popteaCore.LMA.LMA_workspace.fvecTotal < popteaCore.LMA.LMA_workspace.MSETol
      )
   {
     ///Transform outputs
     int i = 0;
     BOOST_FOREACH(class math::estimation::unknown &unknown,
-                  poptea.LMA.unknownParameters.vectorUnknowns)
+                  popteaCore.LMA.unknownParameters.vectorUnknowns)
     {
       const double val =
           x_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
 
-      poptea.TBCsystem.updateVal ( unknown.label() , val );
+      popteaCore.TBCsystem.updateVal ( unknown.label() , val );
       xpredicted[i++] = val;
     }
 
-    poptea.TBCsystem.updateCoat();
+    popteaCore.TBCsystem.updateCoat();
 
     ///repulate predicted phase
-    thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+    thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
 
     delete [] qtf;
     delete [] wa1;
@@ -204,7 +204,7 @@ int paramter_estimation( const size_t m, const size_t n,
 
 
 std::vector<double>
-paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
+paramter_estimation(class thermal::analysis::Kernal popteaCore, int *info,
                     int *nfev)
 {
 
@@ -221,12 +221,12 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
   values are populated back into the parameter structure and the dependent
   parameters are updated.
 */
-  const size_t m = poptea.expSetup.laser.l_thermal.size();
-  const size_t n = poptea.LMA.unknownParameters.vectorUnknowns.size();
-  class math::estimation::settings ParaEstSetting = poptea.LMA.Settings;
+  const size_t m = popteaCore.expSetup.laser.l_thermal.size();
+  const size_t n = popteaCore.LMA.unknownParameters.vectorUnknowns.size();
+  class math::estimation::settings ParaEstSetting = popteaCore.LMA.Settings;
 
-  const double factorMax = poptea.LMA.Settings.factorMax;
-  const double factorScale = poptea.LMA.Settings.factorScale;
+  const double factorMax = popteaCore.LMA.Settings.factorMax;
+  const double factorScale = popteaCore.LMA.Settings.factorScale;
 
   double *x = new double[n];
 
@@ -241,11 +241,11 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
   int *ipvt = new int[n];
   double *diag = new double[n];
 
-  scaleDiag(ParaEstSetting.mode, n, diag, poptea );
+  scaleDiag(ParaEstSetting.mode, n, diag, popteaCore );
 
   for(size_t i=0 ; i< n ; i++)
   {
-    x[i] = poptea.LMA.xInitial[i];
+    x[i] = popteaCore.LMA.xInitial[i];
   }
 
   ///set initial guesses
@@ -254,7 +254,7 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
   {
     int i = 0;
     BOOST_FOREACH( class math::estimation::unknown &unknown,
-                   poptea.LMA.unknownParameters.vectorUnknowns )
+                   popteaCore.LMA.unknownParameters.vectorUnknowns )
     {
       x[i++] = x_ini( unknown.lowerBound(), unknown.upperBound() );
     }
@@ -262,13 +262,13 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
 
   for(size_t i=0; i< n; i++)
   {
-    poptea.LMA.xguessAuto[i] = x[i];
+    popteaCore.LMA.xguessAuto[i] = x[i];
   }
 
   ///Transform inputs
   int i = 0;
   BOOST_FOREACH( class math::estimation::unknown &unknown,
-                 poptea.LMA.unknownParameters.vectorUnknowns )
+                 popteaCore.LMA.unknownParameters.vectorUnknowns )
   {
     x[i] = kx_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
     i++;
@@ -282,7 +282,7 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
                                     ParaEstSetting.mode, ParaEstSetting.factor,
                                     ParaEstSetting.nprint, info, nfev, fjac, m,
                                     ipvt, qtf, wa1, wa2, wa3, wa4, wa5,
-                                    poptea ) ;
+                                    popteaCore ) ;
 
   ///Exit Routine
   /* Sets up a condition where the total error in the phase is compared
@@ -291,11 +291,11 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
   initial guesses. This is let to run a fixed number of iterations. */
   constexpr double ExpStddev = 0;
   const double ExpVarianceEst = ExpStddev * ExpStddev;
-  poptea.LMA.LMA_workspace.fvecTotal =
-      SobjectiveLS( poptea.expSetup.laser.L_end,
-                    poptea.LMA.LMA_workspace.emissionExperimental,
-                    poptea.LMA.LMA_workspace.predicted);
-  const size_t v1 = poptea.expSetup.laser.L_end - n;
+  popteaCore.LMA.LMA_workspace.fvecTotal =
+      SobjectiveLS( popteaCore.expSetup.laser.L_end,
+                    popteaCore.LMA.LMA_workspace.emissionExperimental,
+                    popteaCore.LMA.LMA_workspace.predicted);
+  const size_t v1 = popteaCore.expSetup.laser.L_end - n;
   double reduceChiSquare;
   if(ExpVarianceEst ==0 )
   {
@@ -303,31 +303,31 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
   }
   else
   {
-    reduceChiSquare = (poptea.LMA.LMA_workspace.fvecTotal /
+    reduceChiSquare = (popteaCore.LMA.LMA_workspace.fvecTotal /
                        ExpVarianceEst) / v1;
   }
 
   if( reduceChiSquare < 2
      || ParaEstSetting.factor == factorMax
-     || poptea.LMA.LMA_workspace.fvecTotal < poptea.LMA.LMA_workspace.MSETol
+     || popteaCore.LMA.LMA_workspace.fvecTotal < popteaCore.LMA.LMA_workspace.MSETol
      )
   {
     ///Transform outputs
     int i = 0;
     BOOST_FOREACH(class math::estimation::unknown &unknown,
-                  poptea.LMA.unknownParameters.vectorUnknowns)
+                  popteaCore.LMA.unknownParameters.vectorUnknowns)
     {
       const double val =
           x_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
 
-      poptea.TBCsystem.updateVal ( unknown.label() , val );
-      poptea.LMA.xpredicted[i++] = val;
+      popteaCore.TBCsystem.updateVal ( unknown.label() , val );
+      popteaCore.LMA.xpredicted[i++] = val;
     }
 
-    poptea.TBCsystem.updateCoat();
+    popteaCore.TBCsystem.updateCoat();
 
     ///repopulate predicted phase
-    thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+    thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
 
     delete [] qtf;
     delete [] wa1;
@@ -341,7 +341,7 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
     delete [] diag;
     delete [] x;
 
-    return poptea.LMA.xpredicted;
+    return popteaCore.LMA.xpredicted;
   }
 
   else if (ParaEstSetting.factor <= factorMax/factorScale)
@@ -359,7 +359,7 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
 
   for(size_t i=0 ; i< n ; i++)
   {
-    x[i] = poptea.LMA.xInitial[i];
+    x[i] = popteaCore.LMA.xInitial[i];
   }
 
 
@@ -375,7 +375,7 @@ paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
   delete [] diag;
   delete [] x;
 
-  return poptea.LMA.xpredicted;
+  return popteaCore.LMA.xpredicted;
 }
 
 
@@ -479,20 +479,20 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 }
 
 
-void printPEstimates( class thermal::analysis::Kernal poptea )
+void printPEstimates( class thermal::analysis::Kernal popteaCore )
 {
   BOOST_FOREACH(class math::estimation::unknown &unknown,
-                poptea.LMA.unknownParameters.vectorUnknowns)
+                popteaCore.LMA.unknownParameters.vectorUnknowns)
   {
-    std::cout << poptea.TBCsystem.returnVal( unknown.label() ) << "  ";
+    std::cout << popteaCore.TBCsystem.returnVal( unknown.label() ) << "  ";
   }
 
-  poptea.LMA.LMA_workspace.MSE = MSE(
-        poptea.expSetup.laser.L_end,
-        poptea.LMA.LMA_workspace.emissionExperimental,
-        poptea.LMA.LMA_workspace.predicted);
+  popteaCore.LMA.LMA_workspace.MSE = MSE(
+        popteaCore.expSetup.laser.L_end,
+        popteaCore.LMA.LMA_workspace.emissionExperimental,
+        popteaCore.LMA.LMA_workspace.predicted);
 
-  std::cout << std::setprecision(10) << poptea.LMA.LMA_workspace.MSE;
+  std::cout << std::setprecision(10) << popteaCore.LMA.LMA_workspace.MSE;
   std::cout << std::setprecision(6)  << "\n";
 
   return;
@@ -500,37 +500,37 @@ void printPEstimates( class thermal::analysis::Kernal poptea )
 
 void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
                            int * /*iflag*/,
-                           class thermal::analysis::Kernal poptea)
+                           class thermal::analysis::Kernal popteaCore)
 {
   //Update parameters
   int i = 0;
   BOOST_FOREACH( class math::estimation::unknown &unknown,
-                 poptea.LMA.unknownParameters.vectorUnknowns)
+                 popteaCore.LMA.unknownParameters.vectorUnknowns)
   {
     const double val =
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
 
-    poptea.TBCsystem.updateVal( unknown.label() , val );
+    popteaCore.TBCsystem.updateVal( unknown.label() , val );
   }
-  poptea.TBCsystem.updateCoat();
+  popteaCore.TBCsystem.updateCoat();
 
   // Estimates the phase of emission at each heating frequency
-  thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+  thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
 
 /// Evaluate Objective function
-  for(size_t n = 0 ; n < poptea.expSetup.laser.L_end ; ++n )
+  for(size_t n = 0 ; n < popteaCore.expSetup.laser.L_end ; ++n )
   {
      fvec[n] =
-     poptea.LMA.LMA_workspace.emissionExperimental[n] -
-         poptea.LMA.LMA_workspace.predicted[n] ;
-     poptea.LMA.LMA_workspace.fvec[n] = fvec[n];
+     popteaCore.LMA.LMA_workspace.emissionExperimental[n] -
+         popteaCore.LMA.LMA_workspace.predicted[n] ;
+     popteaCore.LMA.LMA_workspace.fvec[n] = fvec[n];
   }
 
 /// Print stuff to terminal
-  poptea.LMA.LMA_workspace.MSE =
-      MSE( poptea.expSetup.laser.L_end,
-           poptea.LMA.LMA_workspace.emissionExperimental,
-           poptea.LMA.LMA_workspace.predicted );
-//  printPEstimates( poptea ) ;
+  popteaCore.LMA.LMA_workspace.MSE =
+      MSE( popteaCore.expSetup.laser.L_end,
+           popteaCore.LMA.LMA_workspace.emissionExperimental,
+           popteaCore.LMA.LMA_workspace.predicted );
+//  printPEstimates( popteaCore ) ;
   return;
 }

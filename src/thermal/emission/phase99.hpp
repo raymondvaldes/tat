@@ -30,7 +30,7 @@ License
 namespace thermal{
   namespace emission{
 
-void phase99( const thermal::analysis::Kernal &poptea,
+void phase99( const thermal::analysis::Kernal &popteaCore,
               std::vector<double> &arrayVal );
 
   }

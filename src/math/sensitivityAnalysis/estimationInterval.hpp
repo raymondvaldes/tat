@@ -54,7 +54,7 @@ public:
 
 
 /// let's say I make a function that outputs the parameter estimates intervals
-/// this function inputs will include -> poptea (fixed)
+/// this function inputs will include -> popteaCore (fixed)
 ///                                   -> experimental data (fixed)
 ///                                   -> best guess AND goodness-of-fit
 ///                                   -> upper and lowerbounds PI

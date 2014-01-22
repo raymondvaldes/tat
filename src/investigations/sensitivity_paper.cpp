@@ -54,7 +54,7 @@ constexpr double factorMax = 1;
 constexpr double factorScale = 5;
 constexpr size_t LendMinDecade = 50;
 
-void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
+void figureSensitivityIntro(class thermal::analysis::Kernal popteaCore)
 {
     /*
     This figure serves as an introduction to the sensitivity concept.  It will
@@ -63,13 +63,13 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 
     To create these curves
     */
-    poptea.expSetup.laser.L_end = LendMinDecade;
+    popteaCore.expSetup.laser.L_end = LendMinDecade;
 
     ///heating constraints
-    poptea.expSetup.q_surface = 0;
+    popteaCore.expSetup.q_surface = 0;
 
     ///Parameter Estimation Options
-    poptea.LMA.LMA_workspace.MSETol = 1e-8;
+    popteaCore.LMA.LMA_workspace.MSETol = 1e-8;
 
     int nfev;
     int info = 0;
@@ -96,18 +96,18 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
         ///Set heating constraints
         constexpr double l_min = .04;
         constexpr double l_max = 4;
-        poptea.thermalSetup(l_min, l_max, LendMinDecade);
+        popteaCore.thermalSetup(l_min, l_max, LendMinDecade);
 
         /// Populate the experimental phase values in parameters99
-//        Analytical_PhaseR1  = new double[poptea.expSetup.laser.L_end]();
-        Analytical_PhaseR1.resize(poptea.expSetup.laser.L_end);
+//        Analytical_PhaseR1  = new double[popteaCore.expSetup.laser.L_end]();
+        Analytical_PhaseR1.resize(popteaCore.expSetup.laser.L_end);
 
-        lthermalR1          = new double[poptea.expSetup.laser.L_end]();
-        predictedR1         = new double[poptea.expSetup.laser.L_end]();
-        emissionExpR1       = new double[poptea.expSetup.laser.L_end]();
+        lthermalR1          = new double[popteaCore.expSetup.laser.L_end]();
+        predictedR1         = new double[popteaCore.expSetup.laser.L_end]();
+        emissionExpR1       = new double[popteaCore.expSetup.laser.L_end]();
 
         ///Populate arrays
-        thermal::emission::phase99(poptea, Analytical_PhaseR1);
+        thermal::emission::phase99(popteaCore, Analytical_PhaseR1);
 
         ///create artificial experimental data
 //        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR1, l_min,
@@ -115,13 +115,13 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 
         ///estimate unknown parameters using full range
         double *xpredicted =
-            new double[ poptea.LMA.unknownParameters.Nsize()];
+            new double[ popteaCore.LMA.unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};    
-        paramter_estimation(poptea.expSetup.laser.L_end,
-                            poptea.LMA.unknownParameters.Nsize(),
+        paramter_estimation(popteaCore.expSetup.laser.L_end,
+                            popteaCore.LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info,
-                            &nfev, xInitial, poptea, factorMax,
+                            &nfev, xInitial, popteaCore, factorMax,
                             factorScale, xpredicted);
         delete [] xInitial;
         delete [] xpredicted;
@@ -129,16 +129,16 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+        thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
 
-        for(size_t i = 0; i < poptea.expSetup.laser.L_end; ++i)
+        for(size_t i = 0; i < popteaCore.expSetup.laser.L_end; ++i)
         {
-          lthermalR1[i]       = poptea.expSetup.laser.l_thermal[i];
-          predictedR1[i]      = poptea.LMA.LMA_workspace.predicted[i];
-          emissionExpR1[i]    = poptea.LMA.LMA_workspace.emissionExperimental[i];
+          lthermalR1[i]       = popteaCore.expSetup.laser.l_thermal[i];
+          predictedR1[i]      = popteaCore.LMA.LMA_workspace.predicted[i];
+          emissionExpR1[i]    = popteaCore.LMA.LMA_workspace.emissionExperimental[i];
         }
 
-        LendR1 = poptea.expSetup.laser.L_end;
+        LendR1 = popteaCore.expSetup.laser.L_end;
     }
 
 //    double *Analytical_PhaseR2 = nullptr;
@@ -151,55 +151,55 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 
     {
         ///Reset properties
-        poptea.TBCsystem.optical.Emit1 = 42;
-        poptea.TBCsystem.optical.R1 = 0.8;
+        popteaCore.TBCsystem.optical.Emit1 = 42;
+        popteaCore.TBCsystem.optical.R1 = 0.8;
 
-        poptea.TBCsystem.coating.lambda = 0.57;
-        poptea.TBCsystem.updateCoat();
+        popteaCore.TBCsystem.coating.lambda = 0.57;
+        popteaCore.TBCsystem.updateCoat();
 
         ///Set heating constraints
         constexpr double l_min = .2;
         constexpr double l_max = .8;
-        poptea.thermalSetup(l_min, l_max, LendMinDecade);
-        LendR2 = poptea.expSetup.laser.L_end;
+        popteaCore.thermalSetup(l_min, l_max, LendMinDecade);
+        LendR2 = popteaCore.expSetup.laser.L_end;
 
         /// Populate the experimental phase values in parameters99
-//        Analytical_PhaseR2  = new double[poptea.expSetup.laser.L_end]();
-        Analytical_PhaseR2.resize(poptea.expSetup.laser.L_end);
+//        Analytical_PhaseR2  = new double[popteaCore.expSetup.laser.L_end]();
+        Analytical_PhaseR2.resize(popteaCore.expSetup.laser.L_end);
 
-        lthermalR2          = new double[poptea.expSetup.laser.L_end]();
-        predictedR2         = new double[poptea.expSetup.laser.L_end]();
-        emissionExpR2       = new double[poptea.expSetup.laser.L_end]();
+        lthermalR2          = new double[popteaCore.expSetup.laser.L_end]();
+        predictedR2         = new double[popteaCore.expSetup.laser.L_end]();
+        emissionExpR2       = new double[popteaCore.expSetup.laser.L_end]();
 
         ///Populate arrays
-        thermal::emission::phase99(poptea, Analytical_PhaseR2);
+        thermal::emission::phase99(popteaCore, Analytical_PhaseR2);
 
         ///create artificial experimental data
 //        pStruct->EmissionNoise(myEmissionNoise, Analytical_PhaseR2, .04, 4); //BUG MUST IMPLEMENT
 
         ///estimate unknown parameters using full range
         double *xpredicted =
-            new double[poptea.LMA.unknownParameters.Nsize()];
+            new double[popteaCore.LMA.unknownParameters.Nsize()];
         double *xInitial = nullptr;
         xInitial = new double[5]{2.3, 3.8, 42, 0.80, 0.57};
-        paramter_estimation(poptea.expSetup.laser.L_end,
-                            poptea.LMA.unknownParameters.Nsize(),
+        paramter_estimation(popteaCore.expSetup.laser.L_end,
+                            popteaCore.LMA.unknownParameters.Nsize(),
                             ParaEstSetting, &info, &nfev, xInitial,
-                            poptea, factorMax, factorScale, xpredicted);
+                            popteaCore, factorMax, factorScale, xpredicted);
         delete [] xInitial;
         delete [] xpredicted;
         std::cout << info;
 
         /// populate the "predicted" array using the model and the new parameter
         /// estimations
-        thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
-        LendR2 = poptea.expSetup.laser.L_end;
+        thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
+        LendR2 = popteaCore.expSetup.laser.L_end;
 
         for(size_t i = 0; i < LendR2; ++i)
         {
-          lthermalR2[i]     = poptea.expSetup.laser.l_thermal[i];
-          predictedR2[i]    = poptea.LMA.LMA_workspace.predicted[i];
-          emissionExpR2[i]  = poptea.LMA.LMA_workspace.emissionExperimental[i];
+          lthermalR2[i]     = popteaCore.expSetup.laser.l_thermal[i];
+          predictedR2[i]    = popteaCore.LMA.LMA_workspace.predicted[i];
+          emissionExpR2[i]  = popteaCore.LMA.LMA_workspace.emissionExperimental[i];
         }
     }
 
@@ -241,7 +241,7 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
     delete []emissionExpR2;
 }
 
-//void CC_APS2(class thermal::analysis::Kernal poptea)
+//void CC_APS2(class thermal::analysis::Kernal popteaCore)
 //{
 //    /* This function is designed to complete the following 5 steps:
 //     (1) to create the calibration curves for an APS sample
@@ -249,13 +249,13 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 //     (3) create experimental data and explort to data-file
 //     (4) fit the experimental data to the model
 //     (5) report parameteres and uncertainty using the calibration curves */
-//    poptea.DataDirectory.mkdir("data/APS2");
-//    poptea.expSetup.laser.L_end = LendMinDecade;
+//    popteaCore.DataDirectory.mkdir("data/APS2");
+//    popteaCore.expSetup.laser.L_end = LendMinDecade;
 
 /////Set heating constraints
 //    constexpr double l_min = .04;
 //    constexpr double l_max = 4;
-//    poptea.thermalSetup(l_min, l_max, LendMinDecade);
+//    popteaCore.thermalSetup(l_min, l_max, LendMinDecade);
 
 ///// Populate the experimental phase values in parameters99
 //    /* Step 1: l_thermal sweep to create calibration tables */
@@ -268,7 +268,7 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 //    constexpr double bandSize = .01;
 //    constexpr double spread = 0.20;
 //    class ::perturbStruct *pertStruct = nullptr;
-//    const size_t N = poptea.LMA.unknownParameters.Nsize();
+//    const size_t N = popteaCore.LMA.unknownParameters.Nsize();
 //    pertStruct = new class perturbStruct(N, xnumber, spread,
 //                                         l_min, l_max, iterates);
 //    pertStruct->lthermalBands(bandSize);
@@ -288,7 +288,7 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 //        selection of the lmin and lmax for each iteration is determined
 //        with a random simulation. The argument for teh lthermalMC() function
 //        provides the band resolution. */
-//        calibrationSweep(ParaEstSetting, xInitial, poptea, factorMax,
+//        calibrationSweep(ParaEstSetting, xInitial, popteaCore, factorMax,
 //                         factorScale, pertStruct, filename, LendMinDecade);
 //    }
 
@@ -308,11 +308,11 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 //    if(false)
 //    {
 //      /* Create Initial Experimental Data for figure */
-//      poptea.thermalSetup(l_min, l_max, LendMinDecade);
-//      thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
+//      popteaCore.thermalSetup(l_min, l_max, LendMinDecade);
+//      thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.emissionNominal);
 ////        pStruct->EmissionNoise(myEmissionNoise, pStruct->emissionNominal, l_min,
 ////                               l_max); //BUG MUST IMPLEMENT
-//      fitting(poptea, xInitial, 1, factorMax, factorScale);
+//      fitting(popteaCore, xInitial, 1, factorMax, factorScale);
 
 //      ///output data for printing
 //      std::ofstream myoutputfile;
@@ -321,12 +321,12 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 //      myoutputfile.open(filename1.str().c_str());
 //      myoutputfile << std::setprecision(8);
 
-//      for(size_t i = 0 ; i < poptea.expSetup.laser.L_end; ++i)
+//      for(size_t i = 0 ; i < popteaCore.expSetup.laser.L_end; ++i)
 //      {
-//          myoutputfile << poptea.expSetup.laser.l_thermal[i] << "\t";
-//          myoutputfile << poptea.LMA.LMA_workspace.emissionExperimental[i] << "\t";
-//          myoutputfile << poptea.LMA.LMA_workspace.predicted[i] << "\t";
-//          myoutputfile << poptea.LMA.LMA_workspace.emissionNominal[i] << "\n";
+//          myoutputfile << popteaCore.expSetup.laser.l_thermal[i] << "\t";
+//          myoutputfile << popteaCore.LMA.LMA_workspace.emissionExperimental[i] << "\t";
+//          myoutputfile << popteaCore.LMA.LMA_workspace.predicted[i] << "\t";
+//          myoutputfile << popteaCore.LMA.LMA_workspace.emissionNominal[i] << "\n";
 //      }
 //      myoutputfile.close();
 //    }
@@ -334,9 +334,9 @@ void figureSensitivityIntro(class thermal::analysis::Kernal poptea)
 /////* Optimization Procedure for l-thermal  */
 //    if(true)
 //    {
-//        parameterUncertainty(poptea.LMA.unknownParameters.Nsize(),
+//        parameterUncertainty(popteaCore.LMA.unknownParameters.Nsize(),
 //                             ParaEstSetting, xInitial,
-//                             poptea, factorMax, factorScale, pertStruct,
+//                             popteaCore, factorMax, factorScale, pertStruct,
 //                             myEmissionNoise, filename);
 //        pertStruct->cleanup2();
 //        delete pertStruct;

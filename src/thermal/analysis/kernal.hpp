@@ -22,8 +22,8 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef POPTEA_HPP
-#define POPTEA_HPP
+#ifndef popteaCore_HPP
+#define popteaCore_HPP
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
@@ -67,4 +67,4 @@ double bEval(void) const;                                 //MUST BE REMOVED
 
 }}
 
-#endif // POPTEA_HPP
+#endif // popteaCore_HPP

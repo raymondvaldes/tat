@@ -31,10 +31,10 @@ License
 double x_ini10(const int x_ref);
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
-                        class thermal::analysis::Kernal poptea),
+                        class thermal::analysis::Kernal popteaCore),
             int m, int n, double x[], double fvec[], double fjac[], int,
             int *iflag, double epsfcn, double wa[],
-            class thermal::analysis::Kernal poptea);
+            class thermal::analysis::Kernal popteaCore);
 
 double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);
@@ -98,7 +98,7 @@ double Kappa(const std::vector<std::vector<double>>& T, const double eta,
              const double eta_j, const size_t j, const size_t n,
              const double k_ref, const int prop_linearity, const double k_c);
 void scaleDiag(const int mode, const size_t N, double * diag,
-               const class thermal::analysis::Kernal poptea );
+               const class thermal::analysis::Kernal popteaCore );
 
 double x_normal(const double Xmean, const double Xstddev);
 
@@ -181,7 +181,7 @@ class perturbStruct
 class parameterStr
 {
 public:
-  class thermal::analysis::Kernal *poptea;
+  class thermal::analysis::Kernal *popteaCore;
 };
 
 

@@ -77,15 +77,15 @@ double kx_limiter2( const double ki, const double k_min, const double k_max )
 
 
 void scaleDiag(const int mode, const size_t N, double * diag,
-               const class thermal::analysis::Kernal poptea )
+               const class thermal::analysis::Kernal popteaCore )
 {
   if(mode == 2)
   {
     int i = 0;
     BOOST_FOREACH( const class math::estimation::unknown &unknown,
-                   poptea.LMA.unknownParameters.vectorUnknowns )
+                   popteaCore.LMA.unknownParameters.vectorUnknowns )
     {
-      diag[i++] = poptea.TBCsystem.returnVal( unknown.label() );
+      diag[i++] = popteaCore.TBCsystem.returnVal( unknown.label() );
     }
   }
   return;

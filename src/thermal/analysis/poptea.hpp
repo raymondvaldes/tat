@@ -22,8 +22,9 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef POPTEA_HPP
-#define POPTEA_HPP
+#ifndef poptea_HPP
+#define poptea_HPP
+
 #include "math/estimation/parameterestimation.hpp"
 
 namespace thermal {
@@ -37,4 +38,4 @@ class method
 
 
 }}
-#endif // POPTEA_HPP
+#endif // poptea_HPP
