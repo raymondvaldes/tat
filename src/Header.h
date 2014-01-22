@@ -35,6 +35,7 @@ License
 //Internal dependencies
 #include "tools/timing.h"
 #include "tools/filesystem.hpp"
+#include "tools/programoptions.hpp"
 
 //Investiations
 #include "investigations/all.hpp"
