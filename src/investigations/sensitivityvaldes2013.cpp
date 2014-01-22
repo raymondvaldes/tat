@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <vector>
 #include "sensitivityvaldes2013.hpp"
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "math/bisection.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"

@@ -22,9 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "models/poptea.hpp"
-
-//#include "models/physicalmodel.hpp"
+#include "thermal/analysis/kernal.hpp"
 #include "numSimulations/Numerical_Temperature.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "algorithms/statistical_tools.hpp"

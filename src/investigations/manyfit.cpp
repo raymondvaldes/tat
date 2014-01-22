@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include "manyfit.hpp"
 #include "tools/filesystem.hpp"
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 #include "algorithms/sensitivity_analysis.hpp"
 #include "thermal/emission/phase99.hpp"
 

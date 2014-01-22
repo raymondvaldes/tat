@@ -26,7 +26,7 @@ License
 #include <iostream>
 #include <random>
 
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 #include "algorithms/statistical_tools.hpp"
 #include "numSimulations/Numerical_Setup.h"
 #include "math/estimation/lmdiff.hpp"
