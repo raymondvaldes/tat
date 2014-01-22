@@ -29,7 +29,6 @@ License
 namespace thermal {
 namespace analysis{
 
-
 class method
 {
   class math::estimation::LMA LMA;

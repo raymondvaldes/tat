@@ -35,21 +35,21 @@ License
 int paramter_estimation( const size_t m, const size_t  n,
                          class math::estimation::settings ParaEstSetting,
                          int *info, int *nfev,
-                         double *x, class thermalAnalysis::Kernal poptea,
+                         double *x, class thermal::analysis::Kernal poptea,
                          const double factorMax, const double factorScale,
                          double *xpredicted);
 
 std::vector<double>
-paramter_estimation(class thermalAnalysis::Kernal poptea, int *info,
+paramter_estimation(class thermal::analysis::Kernal poptea, int *info,
                     int *nfev);
 
 void ThermalProp_Analysis(int, int N, double*x, double*fvec, int*,
-                          class thermalAnalysis::Kernal poptea );
+                          class thermal::analysis::Kernal poptea );
 
-void printPEstimates( class thermalAnalysis::Kernal poptea ) ;
+void printPEstimates( class thermal::analysis::Kernal poptea ) ;
 void printfJac(const size_t N, const size_t P, const double*fjac);
 void InformationIndexAll(const size_t P, const size_t N,
-                         const class thermalAnalysis::Kernal poptea);
+                         const class thermal::analysis::Kernal poptea);
 
 void InformationIndex(const size_t P, double *Index,
                       const size_t I, const double ki, const double *const fjac);
