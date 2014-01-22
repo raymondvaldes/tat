@@ -27,7 +27,7 @@ License
 
 #include <boost/foreach.hpp>
 
-#include "math/estimation/estimation.hpp"
+#include "math/estimation/parameterestimation.hpp"
 #include "models/poptea.hpp"
 #include "numSimulations/Numerical_Setup.h"
 #include "algorithms/ThermalProp_Analysis.h"

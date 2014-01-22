@@ -25,7 +25,7 @@ License
 #include "algorithms/ThermalProp_Analysis.h"
 #include "algorithms/statistical_tools.hpp"
 #include "thermal/emission/phase99.hpp"
-#include "math/parameterEstimation/lmdiff.hpp"
+#include "math/estimation/lmdiff.hpp"
 
 int paramter_estimation( const size_t m, const size_t n,
                          class math::estimation::settings ParaEstSetting,
