@@ -76,7 +76,33 @@ namespace thermalAnalysis
   double bEval(void) const;                                 //MUST BE REMOVED
   };
 
+  class Kernal
+  {
+  public:
+    class equipment::setup expSetup;
+    class physicalModel::TBCsystem TBCsystem;
+    class thermal::model thermalsys;
+    class math::estimation::LMA LMA;
+    class filesystem::directory DataDirectory;
 
+    Kernal( class equipment::setup expSetup_,
+            class physicalModel::TBCsystem TBCsystem_,
+            class thermal::model thermalsys_,
+            class math::estimation::settings Settings_,
+            class math::estimation::unknownList unknownParameters_,
+            class filesystem::directory DataDirectory_ ) ;
+
+    static thermalAnalysis::Kernal
+      loadConfig( const std::string &filename,
+                  const class filesystem::directory DataDirectory_);
+
+    ~Kernal( void );
+
+
+  void thermalSetup( const double lmin_, const double lmax_, //MUST BE REMOVED
+                     const size_t LendMin);                  //MUST BE REMOVED
+  double bEval(void) const;                                 //MUST BE REMOVED
+  };
 
 
 }
