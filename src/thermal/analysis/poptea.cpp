@@ -29,8 +29,8 @@ License
 namespace thermal {
 namespace analysis{
 
-Poptea::Poptea(class Kernal popteaCore_ )
-  : popteaCore(popteaCore_) {}
+Poptea::Poptea( const class Kernal coreSystem_ )
+  : coreSystem( coreSystem_ ) {}
 
 Poptea::~Poptea(void){}
 

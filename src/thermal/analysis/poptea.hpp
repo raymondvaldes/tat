@@ -35,12 +35,12 @@ namespace analysis{
 class Poptea
 {
 public:
-  class Kernal popteaCore;
+  class Kernal coreSystem;
 //  class math::estimation::LMA BFsolve;
 //  class math::sensitivityAnalysis::estIntervals BFintervals;
 
-  explicit Poptea( class Kernal popteaCore_);
-  ~Poptea(void);
+  explicit Poptea( const class Kernal coreSystem_) ;
+  ~Poptea( void );
 };
 
 
