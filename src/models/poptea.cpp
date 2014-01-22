@@ -32,7 +32,7 @@ License
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
 
-namespace thermalAnalysisMethod
+namespace thermalAnalysis
 {
 
 PopTea::PopTea( class equipment::setup expSetup_,
@@ -61,7 +61,7 @@ PopTea::PopTea( class equipment::setup expSetup_,
   thermalSetup(l_min, l_max, LendMinDecade);
 }
 
-class thermalAnalysisMethod::PopTea
+class thermalAnalysis::PopTea
         PopTea::loadConfig(const std::string &filename,
                            const filesystem::directory DataDirectory_)
 {

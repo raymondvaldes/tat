@@ -34,7 +34,7 @@ namespace investigations
 {
 namespace sensitivityvaldes2013{
 
-class thermalAnalysisMethod::PopTea
+class thermalAnalysis::PopTea
     loadWorkingDirectory(const class filesystem::directory dir);
 void run(const class filesystem::directory dir);
 

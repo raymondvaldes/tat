@@ -30,7 +30,7 @@ License
 int paramter_estimation( const size_t m, const size_t n,
                          class math::estimation::settings ParaEstSetting,
                          int *info, int *nfev, double *x,
-                         class thermalAnalysisMethod::PopTea poptea,
+                         class thermalAnalysis::PopTea poptea,
                          const double factorMax, const double factorScale,
                          double *xpredicted )
 {
@@ -204,7 +204,7 @@ int paramter_estimation( const size_t m, const size_t n,
 
 
 std::vector<double>
-paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
+paramter_estimation(class thermalAnalysis::PopTea poptea, int *info,
                     int *nfev)
 {
 
@@ -479,7 +479,7 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 }
 
 
-void printPEstimates( class thermalAnalysisMethod::PopTea poptea )
+void printPEstimates( class thermalAnalysis::PopTea poptea )
 {
   BOOST_FOREACH(class math::estimation::unknown &unknown,
                 poptea.LMA.unknownParameters.vectorUnknowns)
@@ -500,7 +500,7 @@ void printPEstimates( class thermalAnalysisMethod::PopTea poptea )
 
 void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
                            int * /*iflag*/,
-                           class thermalAnalysisMethod::PopTea poptea)
+                           class thermalAnalysis::PopTea poptea)
 {
   //Update parameters
   int i = 0;

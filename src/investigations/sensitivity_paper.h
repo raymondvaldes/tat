@@ -32,9 +32,9 @@ License
 
 namespace SensitivityValdes2013
 {
-    void figureSensitivityIntro(class thermalAnalysisMethod::PopTea poptea);
+    void figureSensitivityIntro(class thermalAnalysis::PopTea poptea);
 
-//    void CC_APS2(class thermalAnalysisMethod::PopTea poptea);
+//    void CC_APS2(class thermalAnalysis::PopTea poptea);
 
 }
 

@@ -34,8 +34,20 @@ License
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
 
-namespace thermalAnalysisMethod
+namespace thermalAnalysis
 {
+  namespace poptea{
+
+//    class method
+//    {
+//      class kernal poptea;
+//      class math::estimation::LMA LMA;
+//      method( class kernal poptea_ , class math::estimation::LMA LMA_ );
+//    }
+
+
+  }
+
   class PopTea
   {
   public:
@@ -52,11 +64,9 @@ namespace thermalAnalysisMethod
             class math::estimation::unknownList unknownParameters_,
             class filesystem::directory DataDirectory_ ) ;
 
-    static thermalAnalysisMethod::PopTea
+    static thermalAnalysis::PopTea
       loadConfig( const std::string &filename,
                   const class filesystem::directory DataDirectory_);
-
-
 
     ~PopTea( void );
 
@@ -65,6 +75,10 @@ namespace thermalAnalysisMethod
                      const size_t LendMin);                  //MUST BE REMOVED
   double bEval(void) const;                                 //MUST BE REMOVED
   };
+
+
+
+
 }
 
 #endif // POPTEA_HPP

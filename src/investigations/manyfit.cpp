@@ -34,7 +34,7 @@ namespace manyfit{
 void run(const class filesystem::directory dir)
 {
   /// initiate poptea by importing configuration info
-  namespace TAM = thermalAnalysisMethod;
+  namespace TAM = thermalAnalysis;
   const std::string filename = "config.xml";
   class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
 
