@@ -39,7 +39,7 @@ INCLUDEPATH += /usr/lib/
 INCLUDEPATH += /usr/include/
 LIBS += -L/usr/lib -lgomp
 LIBS += -L/usr/lib -lgsl -lgslcblas -lm
-LIBS += -L/usr/lib -lboost_system -lboost_filesystem
+LIBS += -L/usr/lib -lboost_system -lboost_filesystem -lboost_program_options
 }
 
 macx {
@@ -141,7 +141,8 @@ SOURCES += \
     thermal/emission/phase99.cpp \
     math/estimation/lmdiff.cpp \
     math/estimation/parameterestimation.cpp \
-    math/sensitivityAnalysis/estimationInterval.cpp
+    math/sensitivityAnalysis/estimationInterval.cpp \
+    tools/programoptions.cpp
 
 #header files
 HEADERS += \
@@ -175,4 +176,5 @@ HEADERS += \
     math/estimation/parameterestimation.hpp \
     math/sensitivityAnalysis/parameterEstimationInterval.hpp \
     math/estimation/lmdiff.hpp \
-    math/sensitivityAnalysis/estimationInterval.hpp
+    math/sensitivityAnalysis/estimationInterval.hpp \
+    tools/programoptions.hpp
