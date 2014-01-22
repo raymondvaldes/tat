@@ -142,7 +142,8 @@ SOURCES += \
     math/estimation/parameterestimation.cpp \
     math/sensitivityAnalysis/estimationInterval.cpp \
     tools/programoptions.cpp \
-    thermal/analysis/kernal.cpp
+    thermal/analysis/kernal.cpp \
+    thermal/analysis/poptea.cpp
 
 #header files
 HEADERS += \
@@ -176,4 +177,5 @@ HEADERS += \
     math/estimation/lmdiff.hpp \
     math/sensitivityAnalysis/estimationInterval.hpp \
     tools/programoptions.hpp \
-    thermal/analysis/kernal.hpp
+    thermal/analysis/kernal.hpp \
+    thermal/analysis/poptea.hpp
