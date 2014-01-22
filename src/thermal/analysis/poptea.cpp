@@ -29,8 +29,8 @@ License
 namespace thermal {
 namespace analysis{
 
-Poptea::Poptea( class Kernal popteaCore_ , class math::estimation::LMA BFsolve_)
-  : popteaCore(popteaCore_), BFsolve(BFsolve_) {}
+Poptea::Poptea(class Kernal popteaCore_ )
+  : popteaCore(popteaCore_) {}
 
 Poptea::~Poptea(void){}
 
