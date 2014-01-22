@@ -26,7 +26,7 @@ License
 #include "models/expEquipment.hpp"
 #include "models/Thermal_models.h"
 #include "models/numericalmodel.hpp"
-#include "math/parameterEstimation/estimation.hpp"
+#include "math/estimation/parameterestimation.hpp"
 #include "tools/filesystem.hpp"
 
 #include "thermal/model.hpp"

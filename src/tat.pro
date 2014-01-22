@@ -131,7 +131,6 @@ SOURCES += \
     models/numericalmodel.cpp \
     tools/configuration.cpp \
     math/bisection.cpp \
-    math/sensitivityAnalysis/estimationInterval.cpp \
     investigations/sensitivityvaldes2013.cpp \
     investigations/manyfit.cpp \
     thermal/thermal.cpp \
@@ -140,10 +139,9 @@ SOURCES += \
     thermal/model.cpp \
     thermal/emission/noise.cpp \
     thermal/emission/phase99.cpp \
-    math/parameterEstimation/estimation.cpp \
-    math/parameterEstimation/lmdiff.cpp \
-    math/parameterEstimation/parameterestimation.cpp \
-    math/sensitivityAnalysis/parameterEstimationInterval.cpp
+    math/estimation/lmdiff.cpp \
+    math/estimation/parameterestimation.cpp \
+    math/sensitivityAnalysis/estimationInterval.cpp
 
 #header files
 HEADERS += \
@@ -165,7 +163,6 @@ HEADERS += \
     models/numericalmodel.hpp \
     tools/configuration.hpp \
     math/bisection.hpp \
-    math/sensitivityAnalysis/estimationInterval.hpp \
     investigations/sensitivityvaldes2013.hpp \
     investigations/manyfit.hpp \
     investigations/all.hpp \
@@ -175,7 +172,7 @@ HEADERS += \
     thermal/model.hpp \
     thermal/emission/noise.hpp \
     thermal/emission/phase99.hpp \
-    math/parameterEstimation/estimation.hpp \
-    math/parameterEstimation/lmdiff.hpp \
-    math/parameterEstimation/parameterestimation.hpp \
-    math/sensitivityAnalysis/parameterEstimationInterval.hpp
+    math/estimation/parameterestimation.hpp \
+    math/sensitivityAnalysis/parameterEstimationInterval.hpp \
+    math/estimation/lmdiff.hpp \
+    math/sensitivityAnalysis/estimationInterval.hpp

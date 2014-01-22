@@ -30,7 +30,7 @@ License
 
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
-#include "math/estimation/estimation.hpp"
+#include "math/estimation/parameterestimation.hpp"
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
 

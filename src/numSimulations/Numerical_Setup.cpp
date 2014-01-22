@@ -29,7 +29,7 @@ License
 #include "models/poptea.hpp"
 #include "algorithms/statistical_tools.hpp"
 #include "numSimulations/Numerical_Setup.h"
-#include "math/parameterEstimation/lmdiff.hpp"
+#include "math/estimation/lmdiff.hpp"
 
 double x_limiter1(const double xi)
 {
