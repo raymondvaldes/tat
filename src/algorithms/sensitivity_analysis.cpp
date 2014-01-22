@@ -27,7 +27,7 @@ License
 #include "thermal/emission/phase99.hpp"
 
 void parameterUncertainty(const size_t n,
-                          class math::parameterEstimation::settings ParaEstSetting,
+                          class math::estimation::settings ParaEstSetting,
                           double *xInitial,
                           class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,
@@ -144,7 +144,7 @@ void parameterUncertainty(const size_t n,
 
     ///Reset Inputs
 
-    BOOST_FOREACH( class math::parameterEstimation::unknown &unknown,
+    BOOST_FOREACH( class math::estimation::unknown &unknown,
                    poptea.LMA.unknownParameters.vectorUnknowns )
     {
       switch( unknown.label() )
@@ -200,7 +200,7 @@ void fitting(class thermalAnalysisMethod::PopTea poptea, double *xInitial,
 {
   const size_t P = poptea.expSetup.laser.L_end;
   const size_t N = poptea.LMA.unknownParameters.Nsize();
-  class math::parameterEstimation::settings ParaEstSetting(poptea.LMA.Settings);
+  class math::estimation::settings ParaEstSetting(poptea.LMA.Settings);
 
 
 /// Scale jacobian if enabled

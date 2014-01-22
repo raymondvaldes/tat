@@ -27,7 +27,7 @@ License
 #include "models/poptea.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "math/bisection.hpp"
-#include "math/sensitivityAnalysis/parameterEstimationInterval.hpp"
+#include "math/sensitivityAnalysis/estimationInterval.hpp"
 
 namespace investigations
 {
@@ -83,20 +83,20 @@ void run(const class filesystem::directory dir)
 //  for( size_t i = 0 ; i < poptea.LMA.xpredicted.size() ;  i++)
 //  {
 //    std::cout << poptea.LMA.xpredicted[i] << "\n";
-//  }
+//  }t
 
   /// STEP 2
-  thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+  thermal::emission::phase99( poptea, poptea.LMA.LMA_workspace.predicted );
   poptea.LMA.LMA_workspace.MSE =
-      MSE(poptea.expSetup.laser.L_end,
-          poptea.LMA.LMA_workspace.emissionExperimental,
-          poptea.LMA.LMA_workspace.predicted);
+      MSE( poptea.expSetup.laser.L_end,
+           poptea.LMA.LMA_workspace.emissionExperimental,
+           poptea.LMA.LMA_workspace.predicted ) ;
   std::cout << poptea.LMA.LMA_workspace.MSE << "\n";
 
   /// STEP 3
 
   /// STEP 4
-  class math::parameterEstimation::unknown
+  class math::estimation::unknown
       first(poptea.LMA.unknownParameters.vectorUnknowns[0]);
 
   class math::sensitivityAnalysis::step4 Step4;

@@ -28,7 +28,7 @@ License
 #include "models/poptea.hpp"
 #include "tools/filesystem.hpp"
 #include "math/bisection.hpp"
-#include "math/sensitivityAnalysis/parameterEstimationInterval.hpp"
+#include "math/sensitivityAnalysis/estimationInterval.hpp"
 
 namespace investigations
 {

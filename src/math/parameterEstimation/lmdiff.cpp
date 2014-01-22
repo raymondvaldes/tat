@@ -25,7 +25,7 @@ License
 #include "models/poptea.hpp"
 
 namespace math{
-  namespace parameterEstimation{
+  namespace estimation{
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         class thermalAnalysisMethod::PopTea),

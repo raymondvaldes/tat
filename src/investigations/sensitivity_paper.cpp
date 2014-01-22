@@ -47,7 +47,7 @@ constexpr double epsfcn = 1.e-8;
 constexpr double factor =  .01;
 constexpr int mode = 1;
 constexpr int nprint = 0;
-class math::parameterEstimation::settings
+class math::estimation::settings
 ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
 constexpr double factorMax = 1;

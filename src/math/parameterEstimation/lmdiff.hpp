@@ -3,7 +3,7 @@
 
 #include "models/poptea.hpp"
 namespace math{
-  namespace parameterEstimation{
+  namespace estimation{
 
 void lmdif(void (*fcn)(int, int, double*, double*, int*, double**), int m,
            int n, double *x, double *fvec, double **variables, double ftol,
