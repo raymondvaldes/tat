@@ -85,28 +85,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
     BOOST_FOREACH( const class math::estimation::unknown &unknown,
                    poptea.LMA.unknownParameters.vectorUnknowns )
     {
-      switch( unknown.label() )
-      {
-        case physicalModel::labels::Name::asub :
-          diag[i] = poptea.TBCsystem.a_sub;
-          break;
-        case physicalModel::labels::Name::E1 :
-          diag[i] = poptea.TBCsystem.optical.Emit1;
-          break;
-        case physicalModel::labels::Name::gammaEff :
-          diag[i] = poptea.TBCsystem.gamma;
-          break;
-        case physicalModel::labels::Name::lambda :
-          diag[i] = poptea.TBCsystem.coating.lambda;
-          break;
-        case physicalModel::labels::Name::R1 :
-          diag[i] = poptea.TBCsystem.optical.R1 ;
-          break;
-        default:
-          std::cout << "\nSwitch Error!!\n";
-          exit(-69);
-          break;
-      }
+      diag[i++] = poptea.TBCsystem.returnVal( unknown.label() );
     }
   }
   return;

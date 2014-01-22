@@ -29,6 +29,7 @@ License
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 
+
 double property::Current(const double temperature) const
 {
     if(!tempDependent) return offset;
@@ -289,6 +290,90 @@ class TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree pt)
                                      radius_ );
   return  TBCsystemObj;
 }
+
+void TBCsystem::updateVal( const enum labels::Name mylabel , const double val )
+{
+  switch( mylabel )
+  {
+    case labels::Name::asub :
+        a_sub = val;
+        break;
+    case labels::Name::E1 :
+        optical.Emit1 = val;
+        break;
+    case labels::Name::gammaEff :
+        gamma = val;
+        break;
+    case labels::Name::R1 :
+        optical.R1 = val;
+        break;
+    case labels::Name::lambda :
+        coating.lambda = val;
+        break;
+    default:
+        std::cout << "\nSwitch Error!!\n";
+        exit(-68);
+        break;
+  }
+}
+double TBCsystem::returnVal( const enum labels::Name mylabel ) const
+{
+  double val(0);
+
+  switch ( mylabel )
+  {
+    case labels::Name::asub :
+      val = a_sub ;
+      break;
+    case labels::Name::E1 :
+      val = gamma;
+      break;
+    case labels::Name::gammaEff :
+      val = optical.Emit1 ;
+      break;
+    case labels::Name::R1 :
+      val = optical.R1;
+      break;
+    case labels::Name::lambda :
+      val = coating.lambda;
+      break;
+    default:
+      std::cout << "\nSwitch Error!!\n";
+      exit(-69);
+      break;
+  }
+  return val;
+}
+
+
+void TBCsystem::printVal( const enum labels::Name mylabel )
+{
+  switch ( mylabel )
+  {
+    case labels::Name::asub :
+      std::cout << a_subEval();
+      break;
+    case labels::Name::E1 :
+      std::cout << optical.Emit1;
+      break;
+    case labels::Name::gammaEff :
+      std::cout << gammaEval();
+      break;
+    case labels::Name::R1 :
+      std::cout << optical.R1;
+      break;
+    case labels::Name::lambda :
+      std::cout << coating.lambda;
+      break;
+    default:
+      std::cout << "\nSwitch Error!!\n";
+      exit(-69);
+      break;
+  }
+}
+
+
+
 
 double TBCsystem::gammaEval(void) const
 {

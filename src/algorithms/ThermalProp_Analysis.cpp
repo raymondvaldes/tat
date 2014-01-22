@@ -139,34 +139,9 @@ int paramter_estimation( const size_t m, const size_t n,
     {
       const double val =
           x_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
-      switch ( unknown.label() )
-      {
-        case physicalModel::labels::Name::asub :
-            poptea.TBCsystem.a_sub = val;
-            xpredicted[i] = poptea.TBCsystem.a_sub;
-            break;
-        case physicalModel::labels::Name::gammaEff :
-            poptea.TBCsystem.gamma = val;
-            xpredicted[i] = poptea.TBCsystem.gamma ;
-            break;
-        case physicalModel::labels::Name::E1 :
-            poptea.TBCsystem.optical.Emit1 = val;
-            xpredicted[i] = poptea.TBCsystem.optical.Emit1;
-            break;
-        case physicalModel::labels::Name::R1 :
-            poptea.TBCsystem.optical.R1 = val;
-            xpredicted[i] = poptea.TBCsystem.optical.R1;
-            break;
-        case physicalModel::labels::Name::lambda :
-            poptea.TBCsystem.coating.lambda = val;
-            xpredicted[i] = poptea.TBCsystem.coating.lambda;
-            break;
-        default:
-            std::cout << "\nSwitch Error!!\n";
-            exit(-69);
-            break;
-      }
-    i++;
+
+      poptea.TBCsystem.updateVal ( unknown.label() , val );
+      xpredicted[i++] = val;
     }
 
     poptea.TBCsystem.updateCoat();
@@ -344,34 +319,9 @@ paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
     {
       const double val =
           x_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
-      switch ( unknown.label() )
-      {
-        case physicalModel::labels::Name::asub :
-            poptea.TBCsystem.a_sub = val;
-            poptea.LMA.xpredicted[i] = poptea.TBCsystem.a_sub;
-            break;
-        case physicalModel::labels::Name::gammaEff :
-            poptea.TBCsystem.gamma = val;
-            poptea.LMA.xpredicted[i] = poptea.TBCsystem.gamma ;
-            break;
-        case physicalModel::labels::Name::E1 :
-            poptea.TBCsystem.optical.Emit1 = val;
-            poptea.LMA.xpredicted[i] = poptea.TBCsystem.optical.Emit1;
-            break;
-        case physicalModel::labels::Name::R1 :
-            poptea.TBCsystem.optical.R1 = val;
-            poptea.LMA.xpredicted[i] = poptea.TBCsystem.optical.R1;
-            break;
-        case physicalModel::labels::Name::lambda :
-            poptea.TBCsystem.coating.lambda = val;
-            poptea.LMA.xpredicted[i] = poptea.TBCsystem.coating.lambda;
-            break;
-        default:
-            std::cout << "\nSwitch Error!!\n";
-            exit(-69);
-            break;
-      }
-    i++;
+
+      poptea.TBCsystem.updateVal ( unknown.label() , val );
+      poptea.LMA.xpredicted[i++] = val;
     }
 
     poptea.TBCsystem.updateCoat();
@@ -531,39 +481,16 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 
 void printPEstimates( class thermalAnalysisMethod::PopTea poptea )
 {
+  BOOST_FOREACH(class math::estimation::unknown &unknown,
+                poptea.LMA.unknownParameters.vectorUnknowns)
+  {
+    std::cout << poptea.TBCsystem.returnVal( unknown.label() ) << "  ";
+  }
 
   poptea.LMA.LMA_workspace.MSE = MSE(
         poptea.expSetup.laser.L_end,
         poptea.LMA.LMA_workspace.emissionExperimental,
         poptea.LMA.LMA_workspace.predicted);
-
-  BOOST_FOREACH(class math::estimation::unknown &unknown,
-                poptea.LMA.unknownParameters.vectorUnknowns)
-  {
-    switch ( unknown.label() )
-    {
-      case physicalModel::labels::Name::asub :
-        std::cout << poptea.TBCsystem.a_subEval();
-        break;
-      case physicalModel::labels::Name::E1 :
-        std::cout << poptea.TBCsystem.optical.Emit1;
-        break;
-      case physicalModel::labels::Name::gammaEff :
-        std::cout << poptea.TBCsystem.gammaEval();
-        break;
-      case physicalModel::labels::Name::R1 :
-        std::cout << poptea.TBCsystem.optical.R1;
-        break;
-      case physicalModel::labels::Name::lambda :
-        std::cout << poptea.TBCsystem.coating.lambda;
-        break;
-      default:
-        std::cout << "\nSwitch Error!!\n";
-        exit(-69);
-        break;
-    }
-    std::cout << "  ";
-  }
 
   std::cout << std::setprecision(10) << poptea.LMA.LMA_workspace.MSE;
   std::cout << std::setprecision(6)  << "\n";
@@ -575,37 +502,15 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
                            int * /*iflag*/,
                            class thermalAnalysisMethod::PopTea poptea)
 {
-///Transform estimates from kappa space to k space based on the limits imposed
+///Update independent parameter after transformation
   int i = 0;
-  BOOST_FOREACH(class math::estimation::unknown &unknown,
-                poptea.LMA.unknownParameters.vectorUnknowns)
+  BOOST_FOREACH( class math::estimation::unknown &unknown,
+                 poptea.LMA.unknownParameters.vectorUnknowns)
   {
     const double val =
-        x_limiter2(x[i] , unknown.lowerBound(), unknown.upperBound());
+        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
 
-    switch( unknown.label() )
-    {
-      case physicalModel::labels::Name::asub :
-          poptea.TBCsystem.a_sub = val;
-          break;
-      case physicalModel::labels::Name::E1 :
-          poptea.TBCsystem.optical.Emit1 = val;
-          break;
-      case physicalModel::labels::Name::gammaEff :
-          poptea.TBCsystem.gamma = val;
-          break;
-      case physicalModel::labels::Name::R1 :
-          poptea.TBCsystem.optical.R1 = val;
-          break;
-      case physicalModel::labels::Name::lambda :
-          poptea.TBCsystem.coating.lambda = val;
-          break;
-      default:
-          std::cout << "\nSwitch Error!!\n";
-          exit(-68);
-          break;
-    }
-    i++;
+    poptea.TBCsystem.updateVal( unknown.label() , val );
   }
 
 ///Update dependent parameters
@@ -625,9 +530,9 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
 
 /// Print stuff to terminal
   poptea.LMA.LMA_workspace.MSE =
-      MSE(poptea.expSetup.laser.L_end,
-          poptea.LMA.LMA_workspace.emissionExperimental,
-          poptea.LMA.LMA_workspace.predicted);
+      MSE( poptea.expSetup.laser.L_end,
+           poptea.LMA.LMA_workspace.emissionExperimental,
+           poptea.LMA.LMA_workspace.predicted );
 //  printPEstimates( poptea ) ;
   return;
 }
