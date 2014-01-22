@@ -29,7 +29,7 @@ License
 void parameterUncertainty(const size_t n,
                           class math::estimation::settings ParaEstSetting,
                           double *xInitial,
-                          class thermal::analysis::Kernal poptea,
+                          class thermal::analysis::Kernal popteaCore,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,
                           const class thermal::emission::ExpNoiseSetting myEmissionNoise,
@@ -38,14 +38,14 @@ void parameterUncertainty(const size_t n,
   /*The idea with the perturbation test is that I have my "perfect fit" and
   then refit each while changing one paramter +-20% for example. */
   const int xnum = pStruct->xnumber;
-  const double gammaTrue    = poptea.TBCsystem.gammaEval();
-  const double a_subTrue    = poptea.TBCsystem.a_subEval();
-  const double R1True       = poptea.TBCsystem.optical.R1;
-  const double E_sigmaTrue  = poptea.TBCsystem.optical.Emit1;
-  const double lambdaTrue   = poptea.TBCsystem.coating.lambda;
-  const double R0True       = poptea.TBCsystem.optical.R0;
-  const double lminN  = poptea.expSetup.laser.l_thermal[0];
-  const double lmaxN  = poptea.expSetup.laser.l_thermal[poptea.expSetup.laser.L_end-1];
+  const double gammaTrue    = popteaCore.TBCsystem.gammaEval();
+  const double a_subTrue    = popteaCore.TBCsystem.a_subEval();
+  const double R1True       = popteaCore.TBCsystem.optical.R1;
+  const double E_sigmaTrue  = popteaCore.TBCsystem.optical.Emit1;
+  const double lambdaTrue   = popteaCore.TBCsystem.coating.lambda;
+  const double R0True       = popteaCore.TBCsystem.optical.R0;
+  const double lminN  = popteaCore.expSetup.laser.l_thermal[0];
+  const double lmaxN  = popteaCore.expSetup.laser.l_thermal[popteaCore.expSetup.laser.L_end-1];
   double*xpredicted = new double[n];
   int nfev;
   int info = 0;
@@ -56,21 +56,21 @@ void parameterUncertainty(const size_t n,
 
 ///Create Initial Experimental Data
   ///setup the nominal data
-  thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
+  thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.emissionNominal);
 
   ///let the experimental be equal to the nominal data
-  for(size_t i =0 ; i < poptea.expSetup.laser.L_end; i++)
+  for(size_t i =0 ; i < popteaCore.expSetup.laser.L_end; i++)
   {
-      poptea.LMA.LMA_workspace.emissionExperimental[i]
-              = poptea.LMA.LMA_workspace.emissionNominal[i];
+      popteaCore.LMA.LMA_workspace.emissionExperimental[i]
+              = popteaCore.LMA.LMA_workspace.emissionNominal[i];
   }
 
 ///Initial Fit to get initial guesses
   constexpr size_t interants = 0;
-  fitting(poptea, xInitial, interants, factorMax, factorScale);
+  fitting(popteaCore, xInitial, interants, factorMax, factorScale);
 
 ///prepare output file with parameter uncertainty data
-  poptea.DataDirectory.mkdir("debug");
+  popteaCore.DataDirectory.mkdir("debug");
   std::ofstream myoutputfile;
   std::stringstream filename1;
   filename1 <<  "../data/ParameterUncertainty.dat";
@@ -84,32 +84,32 @@ void parameterUncertainty(const size_t n,
     const double lmin = pStruct->lmin[j];
     const double lmax = pStruct->lmax[j];
     constexpr size_t lEndMin = 50;
-    poptea.thermalSetup(lmin, lmax, lEndMin);
+    popteaCore.thermalSetup(lmin, lmax, lEndMin);
 
     ///Create Initial Experimental Data
-    thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.emissionNominal);
-    for(size_t i =0 ; i < poptea.expSetup.laser.L_end; i++)
+    thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.emissionNominal);
+    for(size_t i =0 ; i < popteaCore.expSetup.laser.L_end; i++)
     {
-        poptea.LMA.LMA_workspace.emissionExperimental[i]
-        = poptea.LMA.LMA_workspace.emissionNominal[i];
+        popteaCore.LMA.LMA_workspace.emissionExperimental[i]
+        = popteaCore.LMA.LMA_workspace.emissionNominal[i];
     }
 
     ///add artificial experimental data
-//        poptea.EmissionNoise(myEmissionNoise,
-//                                     poptea->emissionNominal, lminN,
+//        popteaCore.EmissionNoise(myEmissionNoise,
+//                                     popteaCore->emissionNominal, lminN,
 //                                     lmaxN); //BUG MUST MOVE
 
     ///estimate unknown parameters
-    paramter_estimation(poptea.expSetup.laser.L_end,
-                        poptea.LMA.unknownParameters.Nsize(),
+    paramter_estimation(popteaCore.expSetup.laser.L_end,
+                        popteaCore.LMA.unknownParameters.Nsize(),
                         ParaEstSetting, &info, &nfev, xInitial,
-                        poptea, factorMax, factorScale, xpredicted);
-    thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
+                        popteaCore, factorMax, factorScale, xpredicted);
+    thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
 
     ///develop the uncertainties
-    double msearea = MSEarea(poptea.expSetup.laser.L_end,
-                             poptea.LMA.LMA_workspace.emissionNominal,
-                             poptea.LMA.LMA_workspace.predicted);
+    double msearea = MSEarea(popteaCore.expSetup.laser.L_end,
+                             popteaCore.LMA.LMA_workspace.emissionNominal,
+                             popteaCore.LMA.LMA_workspace.predicted);
     double
     diffUncerntainty = evaluateUncertainty(msearea,
                                            CCurves->perturbation,
@@ -145,28 +145,28 @@ void parameterUncertainty(const size_t n,
     ///Reset Inputs
 
     BOOST_FOREACH( class math::estimation::unknown &unknown,
-                   poptea.LMA.unknownParameters.vectorUnknowns )
+                   popteaCore.LMA.unknownParameters.vectorUnknowns )
     {
       switch( unknown.label() )
       {
         case physicalModel::labels::Name::asub :
-          poptea.TBCsystem.a_sub = a_subTrue;
+          popteaCore.TBCsystem.a_sub = a_subTrue;
           break;
 
         case physicalModel::labels::Name::E1 :
-          poptea.TBCsystem.optical.Emit1=E_sigmaTrue;
+          popteaCore.TBCsystem.optical.Emit1=E_sigmaTrue;
           break;
 
         case physicalModel::labels::Name::gammaEff :
-          poptea.TBCsystem.gamma = gammaTrue;
+          popteaCore.TBCsystem.gamma = gammaTrue;
           break;
 
         case physicalModel::labels::Name::lambda :
-          poptea.TBCsystem.coating.lambda = lambdaTrue;
+          popteaCore.TBCsystem.coating.lambda = lambdaTrue;
           break;
 
         case physicalModel::labels::Name::R1 :
-          poptea.TBCsystem.optical.R1 = R1True;
+          popteaCore.TBCsystem.optical.R1 = R1True;
           break;
 
         default:
@@ -194,13 +194,13 @@ void parameterUncertainty(const size_t n,
   return;
 }
 
-void fitting(class thermal::analysis::Kernal poptea, double *xInitial,
+void fitting(class thermal::analysis::Kernal popteaCore, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale)
 {
-  const size_t P = poptea.expSetup.laser.L_end;
-  const size_t N = poptea.LMA.unknownParameters.Nsize();
-  class math::estimation::settings ParaEstSetting(poptea.LMA.Settings);
+  const size_t P = popteaCore.expSetup.laser.L_end;
+  const size_t N = popteaCore.LMA.unknownParameters.Nsize();
+  class math::estimation::settings ParaEstSetting(popteaCore.LMA.Settings);
 
 
 /// Scale jacobian if enabled
@@ -226,21 +226,21 @@ void fitting(class thermal::analysis::Kernal poptea, double *xInitial,
       myfile << i << "\t";
 
       paramter_estimation(P, N, ParaEstSetting, &info, &nfev,
-                          xInitial, poptea, factorMax, factorScale,
+                          xInitial, popteaCore, factorMax, factorScale,
                           xpredicted);
-      poptea.LMA.LMA_workspace.MSE =
-          MSE(poptea.expSetup.laser.L_end,
-              poptea.LMA.LMA_workspace.emissionExperimental,
-              poptea.LMA.LMA_workspace.predicted);
+      popteaCore.LMA.LMA_workspace.MSE =
+          MSE(popteaCore.expSetup.laser.L_end,
+              popteaCore.LMA.LMA_workspace.emissionExperimental,
+              popteaCore.LMA.LMA_workspace.predicted);
 
-      myfile << poptea.TBCsystem.gammaEval() << "\t"
-             << poptea.TBCsystem.a_subEval() << "\t"
-             << poptea.TBCsystem.optical.Emit1 << "\t"
-             << poptea.TBCsystem.optical.R1<< "\t"
-             << poptea.TBCsystem.coating.lambda << "\t"
-             << poptea.LMA.LMA_workspace.MSE << "\n";
+      myfile << popteaCore.TBCsystem.gammaEval() << "\t"
+             << popteaCore.TBCsystem.a_subEval() << "\t"
+             << popteaCore.TBCsystem.optical.Emit1 << "\t"
+             << popteaCore.TBCsystem.optical.R1<< "\t"
+             << popteaCore.TBCsystem.coating.lambda << "\t"
+             << popteaCore.LMA.LMA_workspace.MSE << "\n";
 
-      printPEstimates( poptea ) ;
+      printPEstimates( popteaCore ) ;
       xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
               x_ini10(.8), x_ini10(0.57)};
   }

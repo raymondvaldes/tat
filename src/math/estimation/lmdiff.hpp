@@ -19,7 +19,7 @@ void lmdif(void (*fcn)(int, int, double*, double*, int*,
            double factor, int nprint, int *info, int *nfev, double *fjac,
            int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
            double *wa3, double *wa4, double *wa5,
-           class thermal::analysis::Kernal poptea);
+           class thermal::analysis::Kernal popteaCore);
 
   }
 }

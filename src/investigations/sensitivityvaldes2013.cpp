@@ -42,8 +42,8 @@ class thermal::analysis::Kernal
 
 void run(const class filesystem::directory dir)
 {
-  class thermal::analysis::Kernal poptea = loadWorkingDirectory(dir);
-  thermal::emission::phase99( poptea, poptea.LMA.LMA_workspace.emissionNominal);
+  class thermal::analysis::Kernal popteaCore = loadWorkingDirectory(dir);
+  thermal::emission::phase99( popteaCore, popteaCore.LMA.LMA_workspace.emissionNominal);
 
   /// STEP 0
   /*At this point I can output a figure that has the sensitivity curve data
@@ -62,42 +62,42 @@ void run(const class filesystem::directory dir)
       myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
   ///Output noise to test
-  poptea.LMA.LMA_workspace.emissionExperimental =
+  popteaCore.LMA.LMA_workspace.emissionExperimental =
   thermal::emission::addNoise( myEmissionNoise,
-                               poptea.expSetup.laser.l_thermal,
-                               poptea.LMA.LMA_workspace.emissionNominal ) ;
+                               popteaCore.expSetup.laser.l_thermal,
+                               popteaCore.LMA.LMA_workspace.emissionNominal ) ;
 
 //  ///Output noise to test
-//  for( size_t i = 0 ; i < poptea.expSetup.laser.l_thermal.size() ; ++i)
+//  for( size_t i = 0 ; i < popteaCore.expSetup.laser.l_thermal.size() ; ++i)
 //  {
-//    std::cout <<  poptea.expSetup.laser.l_thermal[i] << "\t"
-//              <<  poptea.LMA.LMA_workspace.emissionNominal[i] << "\t"
-//              <<  poptea.LMA.LMA_workspace.emissionExperimental[i] << "\n" ;
+//    std::cout <<  popteaCore.expSetup.laser.l_thermal[i] << "\t"
+//              <<  popteaCore.LMA.LMA_workspace.emissionNominal[i] << "\t"
+//              <<  popteaCore.LMA.LMA_workspace.emissionExperimental[i] << "\n" ;
 //  }
 
   /// STEP 1
   int nfev;
   int info = 0;
-  poptea.LMA.xpredicted = paramter_estimation( poptea, &info, &nfev );
+  popteaCore.LMA.xpredicted = paramter_estimation( popteaCore, &info, &nfev );
 
-//  for( size_t i = 0 ; i < poptea.LMA.xpredicted.size() ;  i++)
+//  for( size_t i = 0 ; i < popteaCore.LMA.xpredicted.size() ;  i++)
 //  {
-//    std::cout << poptea.LMA.xpredicted[i] << "\n";
+//    std::cout << popteaCore.LMA.xpredicted[i] << "\n";
 //  }t
 
   /// STEP 2
-  thermal::emission::phase99( poptea, poptea.LMA.LMA_workspace.predicted );
-  poptea.LMA.LMA_workspace.MSE =
-      MSE( poptea.expSetup.laser.L_end,
-           poptea.LMA.LMA_workspace.emissionExperimental,
-           poptea.LMA.LMA_workspace.predicted ) ;
-  std::cout << poptea.LMA.LMA_workspace.MSE << "\n";
+  thermal::emission::phase99( popteaCore, popteaCore.LMA.LMA_workspace.predicted );
+  popteaCore.LMA.LMA_workspace.MSE =
+      MSE( popteaCore.expSetup.laser.L_end,
+           popteaCore.LMA.LMA_workspace.emissionExperimental,
+           popteaCore.LMA.LMA_workspace.predicted ) ;
+  std::cout << popteaCore.LMA.LMA_workspace.MSE << "\n";
 
   /// STEP 3
 
   /// STEP 4
   class math::estimation::unknown
-      first(poptea.LMA.unknownParameters.vectorUnknowns[0]);
+      first(popteaCore.LMA.unknownParameters.vectorUnknowns[0]);
 
   class math::sensitivityAnalysis::step4 Step4;
   std::cout << "this is the output\n\n" << Step4.solve();

@@ -31,7 +31,7 @@ void fdjac2(void (*fcn)(int, int, double *, double *, int *,
                         class thermal::analysis::Kernal),
             int m, int n, double x[], double fvec[], double fjac[], int ldfjac,
             int *iflag, double epsfcn, double wa[],
-            class thermal::analysis::Kernal poptea);
+            class thermal::analysis::Kernal popteaCore);
 
 void fdjac2(void (*fcn)(int, int, double*, double*, int*,double **),
             int m,int n,double x[],double fvec[],double **variables,
@@ -119,7 +119,7 @@ void lmdif(void (*fcn)(int, int, double*, double*, int*,
            double factor, int nprint, int *info, int *nfev, double *fjac,
            int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
            double *wa3, double *wa4, double *wa5,
-           class thermal::analysis::Kernal poptea)
+           class thermal::analysis::Kernal popteaCore)
 {
 /*
 *     **********
@@ -350,9 +350,9 @@ PRINT( "lmdif\n" );
 */
 iflag = 1;
 
-fcn(m,n,x,fvec,&iflag,poptea);
+fcn(m,n,x,fvec,&iflag,popteaCore);
 
-poptea.LMA.LMA_workspace.MSEinitial = poptea.LMA.LMA_workspace.MSE;
+popteaCore.LMA.LMA_workspace.MSEinitial = popteaCore.LMA.LMA_workspace.MSE;
 
 *nfev = 1;
 if(iflag < 0)
@@ -375,7 +375,7 @@ L30:
 iflag = 2;
 
 ////////////////////////////////////////////////////////////////////////////////////
-fdjac2(fcn, m, n, x, fvec, fjac, ldfjac, &iflag, epsfcn, wa4, poptea);
+fdjac2(fcn, m, n, x, fvec, fjac, ldfjac, &iflag, epsfcn, wa4, popteaCore);
 
 //Store a forward difference jacobian
 ij = 0;
@@ -383,7 +383,7 @@ for(j = 0 ; j < n ; ++j)
         for(i = 0 ; i < m ; ++i)
     {
             wa5[ij] = fjac[ij];    //  fjac[i+m*j]
-            poptea.LMA.LMA_workspace.fjac[ij] = wa5[ij] ;
+            popteaCore.LMA.LMA_workspace.fjac[ij] = wa5[ij] ;
             ij++;
     }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -401,7 +401,7 @@ if( nprint > 0 )
 	iflag = 0;
 	if(mod(iter-1,nprint) == 0)
 		{
-		fcn(m,n,x,fvec,&iflag,poptea);
+		fcn(m,n,x,fvec,&iflag,popteaCore);
 		if(iflag < 0)
 			goto L300;
 //z		PRINT("\n   fnorm %.15e\n", enorm(m,fvec) );
@@ -539,7 +539,7 @@ if(iter == 1)
 *	    evaluate the function at x + p and calculate its norm.
 */
 iflag = 1;
-fcn(m,n,wa2,wa4,&iflag,poptea);
+fcn(m,n,wa2,wa4,&iflag,popteaCore);
 
 
 
@@ -680,7 +680,7 @@ if(iflag < 0)
         *info = iflag;
 iflag = 0;
 if(nprint > 0)
-        fcn(m,n,x,fvec,&iflag,poptea);
+        fcn(m,n,x,fvec,&iflag,popteaCore);
 /*
       last card of subroutine lmdif.
 */
@@ -2143,10 +2143,10 @@ return(ans);
 
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
-                        class thermal::analysis::Kernal poptea),
+                        class thermal::analysis::Kernal popteaCore),
             int m,int n,double x[],double fvec[], double fjac[],int /*ldfjac*/,
             int *iflag,double epsfcn,double wa[],
-            class thermal::analysis::Kernal poptea)
+            class thermal::analysis::Kernal popteaCore)
 {
 /*
 *     **********
@@ -2246,7 +2246,7 @@ for( j=0; j<n; j++ )
 		h = eps;
 	x[j] = temp + h;
 
-	fcn(m,n,x,wa,iflag,poptea);
+	fcn(m,n,x,wa,iflag,popteaCore);
 
 	if( *iflag < 0)
 		return;

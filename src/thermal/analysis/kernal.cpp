@@ -77,7 +77,7 @@ class thermal::analysis::Kernal
     exit(-2);
   }
 
-  const std::string conjunto = "poptea.";
+  const std::string conjunto = "kernal.";
   const ptree ptchild1 = pt.get_child( conjunto + "experimentalSetup" );
   const class equipment::setup
     Obj1( equipment::setup::loadConfigfromXML( ptchild1 ) );
