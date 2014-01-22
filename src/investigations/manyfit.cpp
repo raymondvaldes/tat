@@ -36,7 +36,7 @@ void run(const class filesystem::directory dir)
   /// initiate poptea by importing configuration info
   namespace TAM = thermalAnalysis;
   const std::string filename = "config.xml";
-  class TAM::PopTea poptea = TAM::PopTea::loadConfig( dir.abs( filename ), dir);
+  class TAM::Kernal poptea = TAM::Kernal::loadConfig( dir.abs( filename ), dir);
 
   double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
   constexpr size_t interants = 1;

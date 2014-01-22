@@ -54,7 +54,7 @@ constexpr double factorMax = 1;
 constexpr double factorScale = 5;
 constexpr size_t LendMinDecade = 50;
 
-void figureSensitivityIntro(class thermalAnalysis::PopTea poptea)
+void figureSensitivityIntro(class thermalAnalysis::Kernal poptea)
 {
     /*
     This figure serves as an introduction to the sensitivity concept.  It will
@@ -241,7 +241,7 @@ void figureSensitivityIntro(class thermalAnalysis::PopTea poptea)
     delete []emissionExpR2;
 }
 
-//void CC_APS2(class thermalAnalysis::PopTea poptea)
+//void CC_APS2(class thermalAnalysis::Kernal poptea)
 //{
 //    /* This function is designed to complete the following 5 steps:
 //     (1) to create the calibration curves for an APS sample

@@ -36,45 +36,33 @@ License
 
 namespace thermalAnalysis
 {
-  namespace poptea{
+//  class PopTea
+//  {
+//  public:
+//    class equipment::setup expSetup;
+//    class physicalModel::TBCsystem TBCsystem;
+//    class thermal::model thermalsys;
+//    class math::estimation::LMA LMA;
+//    class filesystem::directory DataDirectory;
 
-//    class method
-//    {
-//      class kernal poptea;
-//      class math::estimation::LMA LMA;
-//      method( class kernal poptea_ , class math::estimation::LMA LMA_ );
-//    }
+//    PopTea( class equipment::setup expSetup_,
+//            class physicalModel::TBCsystem TBCsystem_,
+//            class thermal::model thermalsys_,
+//            class math::estimation::settings Settings_,
+//            class math::estimation::unknownList unknownParameters_,
+//            class filesystem::directory DataDirectory_ ) ;
 
+//    static PopTea
+//      loadConfig( const std::string &filename,
+//                  const class filesystem::directory DataDirectory_);
 
-  }
-
-  class PopTea
-  {
-  public:
-    class equipment::setup expSetup;
-    class physicalModel::TBCsystem TBCsystem;
-    class thermal::model thermalsys;
-    class math::estimation::LMA LMA;
-    class filesystem::directory DataDirectory;
-
-    PopTea( class equipment::setup expSetup_,
-            class physicalModel::TBCsystem TBCsystem_,
-            class thermal::model thermalsys_,
-            class math::estimation::settings Settings_,
-            class math::estimation::unknownList unknownParameters_,
-            class filesystem::directory DataDirectory_ ) ;
-
-    static thermalAnalysis::PopTea
-      loadConfig( const std::string &filename,
-                  const class filesystem::directory DataDirectory_);
-
-    ~PopTea( void );
+//    ~PopTea( void );
 
 
-  void thermalSetup( const double lmin_, const double lmax_, //MUST BE REMOVED
-                     const size_t LendMin);                  //MUST BE REMOVED
-  double bEval(void) const;                                 //MUST BE REMOVED
-  };
+//  void thermalSetup( const double lmin_, const double lmax_, //MUST BE REMOVED
+//                     const size_t LendMin);                  //MUST BE REMOVED
+//  double bEval(void) const;                                 //MUST BE REMOVED
+//  };
 
   class Kernal
   {
@@ -92,8 +80,7 @@ namespace thermalAnalysis
             class math::estimation::unknownList unknownParameters_,
             class filesystem::directory DataDirectory_ ) ;
 
-    static thermalAnalysis::Kernal
-      loadConfig( const std::string &filename,
+    static Kernal loadConfig( const std::string &filename,
                   const class filesystem::directory DataDirectory_);
 
     ~Kernal( void );
@@ -104,6 +91,25 @@ namespace thermalAnalysis
   double bEval(void) const;                                 //MUST BE REMOVED
   };
 
+
+
+
+
+
+
+
+
+  namespace poptea{
+
+//    class method
+//    {
+//      class kernal poptea;
+//      class math::estimation::LMA LMA;
+//      method( class kernal poptea_ , class math::estimation::LMA LMA_ );
+//    }
+
+
+  }
 
 }
 
