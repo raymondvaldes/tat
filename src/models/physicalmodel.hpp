@@ -31,6 +31,7 @@ License
 #include <boost/assign/list_of.hpp>
 #include <boost/assign/list_inserter.hpp>
 #include <boost/property_tree/ptree.hpp>
+
 //#include "numSimulations/Numerical_PhaseOfEmission.h"
 
 class property
@@ -189,6 +190,11 @@ public:
                         const struct radiativeSysProp optical_,
                         const double radius_);
     ~TBCsystem(void);
+
+    void updateVal(const enum labels::Name mylabel , const double val);
+    double returnVal( const enum labels::Name mylabel ) const;
+    void printVal( const enum labels::Name mylabel );
+
     static class TBCsystem loadConfig(const boost::property_tree::ptree pt);
 
     double gammaEval(void) const ;

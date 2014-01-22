@@ -22,7 +22,19 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "Header.h"
+//Standard Template Libraries
+#include <cstdlib>
+#include <cstddef>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+
+//Internal dependencies
+#include "tools/timing.h"
+#include "tools/filesystem.hpp"
+#include "tools/programoptions.hpp"
+#include "investigations/all.hpp"
+
 int main( int argc, char *argv[ ] )
 {
   std::string path;
@@ -48,6 +60,5 @@ int main( int argc, char *argv[ ] )
 
       globalStopWatch.displayTime();
   }
-
   return 0;
 }

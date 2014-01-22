@@ -146,7 +146,6 @@ SOURCES += \
 
 #header files
 HEADERS += \
-    Header.h \
     algorithms/ThermalProp_Analysis.h \
     algorithms/statistical_tools.hpp \
     investigations/sensitivity_paper.h \
