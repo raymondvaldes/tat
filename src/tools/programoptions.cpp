@@ -58,7 +58,8 @@ bool loadProgramOptions( int argc, char** argv, std::string& path )
   if (vm.count("version"))
   {
     std::cout << "tat (Ubuntu) 0.54\n" ;
-    std::cout << "Copyright (C) 2013 Raymond Valdes\n" ;
+    std::cout << "Thermal Analysis Toolbox\n";
+    std::cout << "Copyright (C) 2013 Raymond Valdes\n\n" ;
     std::cout << "This is free software; see the source for copying " ;
     std::cout << "conditions.  There is NO\n" ;
     std::cout << "warranty; not even for MERCHANTABILITY or FITNESS FOR A" ;
