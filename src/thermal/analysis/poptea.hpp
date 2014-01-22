@@ -36,11 +36,10 @@ class Poptea
 {
 public:
   class Kernal popteaCore;
-  class math::estimation::LMA BFsolve;
-  class math::sensitivityAnalysis::estIntervals BFintervals;
+//  class math::estimation::LMA BFsolve;
+//  class math::sensitivityAnalysis::estIntervals BFintervals;
 
-  explicit Poptea( class Kernal popteaCore_ ,
-                   class math::estimation::LMA BFsolve_);
+  explicit Poptea( class Kernal popteaCore_);
   ~Poptea(void);
 };
 
