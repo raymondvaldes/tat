@@ -498,11 +498,11 @@ void printPEstimates( class thermalAnalysisMethod::PopTea poptea )
   return;
 }
 
-void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
+void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
                            int * /*iflag*/,
                            class thermalAnalysisMethod::PopTea poptea)
 {
-///Update independent parameter after transformation
+  //Update parameters
   int i = 0;
   BOOST_FOREACH( class math::estimation::unknown &unknown,
                  poptea.LMA.unknownParameters.vectorUnknowns)
@@ -512,11 +512,9 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
 
     poptea.TBCsystem.updateVal( unknown.label() , val );
   }
-
-///Update dependent parameters
   poptea.TBCsystem.updateCoat();
 
-/// Estimates the phase of emission at each heating frequency
+  // Estimates the phase of emission at each heating frequency
   thermal::emission::phase99(poptea, poptea.LMA.LMA_workspace.predicted);
 
 /// Evaluate Objective function
