@@ -22,8 +22,8 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef PARAMETERESTIMATIONINTERVAL_HPP_INCLUDED
-#define PARAMETERESTIMATIONINTERVAL_HPP_INCLUDED
+#ifndef estimationINTERVAL_HPP_INCLUDED
+#define estimationINTERVAL_HPP_INCLUDED
 #include <functional>
 #include "math/bisection.hpp"
 
@@ -63,4 +63,4 @@ public:
 }
 }
 
-#endif // PARAMETERESTIMATIONINTERVAL_HPP_INCLUDED
+#endif // estimationINTERVAL_HPP_INCLUDED

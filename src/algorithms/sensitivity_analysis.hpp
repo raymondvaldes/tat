@@ -38,7 +38,7 @@ void fitting(class thermalAnalysisMethod::PopTea poptea, double * xInitial,
              const double factorScale);
 
 void parameterUncertainty(const size_t n,
-                          class math::parameterEstimation::settings ParaEstSetting,
+                          class math::estimation::settings ParaEstSetting,
                           double *xInitial,
                           class thermalAnalysisMethod::PopTea poptea,
                           const double factorMax, const double factorScale,

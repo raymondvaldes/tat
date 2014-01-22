@@ -28,7 +28,7 @@ License
 #include "math/parameterEstimation/lmdiff.hpp"
 
 int paramter_estimation( const size_t m, const size_t n,
-                         class math::parameterEstimation::settings ParaEstSetting,
+                         class math::estimation::settings ParaEstSetting,
                          int *info, int *nfev, double *x,
                          class thermalAnalysisMethod::PopTea poptea,
                          const double factorMax, const double factorScale,
@@ -73,7 +73,7 @@ int paramter_estimation( const size_t m, const size_t n,
   if ( fabs(x[0] - 0) < 1e-10 )
   {
     int i = 0;
-    BOOST_FOREACH(class math::parameterEstimation::unknown &unknown,
+    BOOST_FOREACH(class math::estimation::unknown &unknown,
                   poptea.LMA.unknownParameters.vectorUnknowns)
     {
       x[i++] = x_ini( unknown.lowerBound(), unknown.upperBound() );
@@ -87,7 +87,7 @@ int paramter_estimation( const size_t m, const size_t n,
 
   ///Transform inputs
   int i = 0;
-  BOOST_FOREACH(class math::parameterEstimation::unknown &unknown,
+  BOOST_FOREACH(class math::estimation::unknown &unknown,
                 poptea.LMA.unknownParameters.vectorUnknowns)
   {
     x[i] = kx_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
@@ -96,7 +96,7 @@ int paramter_estimation( const size_t m, const size_t n,
 
   ///levenberg-marquardt algorithm
 
-  math::parameterEstimation::lmdif(&ThermalProp_Analysis, m, n, x, fvec,
+  math::estimation::lmdif(&ThermalProp_Analysis, m, n, x, fvec,
                                    ParaEstSetting.ftol, ParaEstSetting.xtol,
                                    ParaEstSetting.gtol, ParaEstSetting.maxfev,
                                    ParaEstSetting.epsfcn, diag,
@@ -134,7 +134,7 @@ int paramter_estimation( const size_t m, const size_t n,
   {
     ///Transform outputs
     int i = 0;
-    BOOST_FOREACH(class math::parameterEstimation::unknown &unknown,
+    BOOST_FOREACH(class math::estimation::unknown &unknown,
                   poptea.LMA.unknownParameters.vectorUnknowns)
     {
       const double val =
@@ -248,7 +248,7 @@ paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
 */
   const size_t m = poptea.expSetup.laser.l_thermal.size();
   const size_t n = poptea.LMA.unknownParameters.vectorUnknowns.size();
-  class math::parameterEstimation::settings ParaEstSetting = poptea.LMA.Settings;
+  class math::estimation::settings ParaEstSetting = poptea.LMA.Settings;
 
   const double factorMax = poptea.LMA.Settings.factorMax;
   const double factorScale = poptea.LMA.Settings.factorScale;
@@ -278,7 +278,7 @@ paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
   if ( fabs(x[0] - 0) < 1e-10 )
   {
     int i = 0;
-    BOOST_FOREACH( class math::parameterEstimation::unknown &unknown,
+    BOOST_FOREACH( class math::estimation::unknown &unknown,
                    poptea.LMA.unknownParameters.vectorUnknowns )
     {
       x[i++] = x_ini( unknown.lowerBound(), unknown.upperBound() );
@@ -292,7 +292,7 @@ paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
 
   ///Transform inputs
   int i = 0;
-  BOOST_FOREACH( class math::parameterEstimation::unknown &unknown,
+  BOOST_FOREACH( class math::estimation::unknown &unknown,
                  poptea.LMA.unknownParameters.vectorUnknowns )
   {
     x[i] = kx_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
@@ -300,7 +300,7 @@ paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
   }
 
   ///levenberg-marquardt algorithm
-  math::parameterEstimation::lmdif( &ThermalProp_Analysis, m, n, x, fvec,
+  math::estimation::lmdif( &ThermalProp_Analysis, m, n, x, fvec,
                                     ParaEstSetting.ftol, ParaEstSetting.xtol,
                                     ParaEstSetting.gtol, ParaEstSetting.maxfev,
                                     ParaEstSetting.epsfcn, diag,
@@ -339,7 +339,7 @@ paramter_estimation(class thermalAnalysisMethod::PopTea poptea, int *info,
   {
     ///Transform outputs
     int i = 0;
-    BOOST_FOREACH(class math::parameterEstimation::unknown &unknown,
+    BOOST_FOREACH(class math::estimation::unknown &unknown,
                   poptea.LMA.unknownParameters.vectorUnknowns)
     {
       const double val =
@@ -537,7 +537,7 @@ void printPEstimates( class thermalAnalysisMethod::PopTea poptea )
         poptea.LMA.LMA_workspace.emissionExperimental,
         poptea.LMA.LMA_workspace.predicted);
 
-  BOOST_FOREACH(class math::parameterEstimation::unknown &unknown,
+  BOOST_FOREACH(class math::estimation::unknown &unknown,
                 poptea.LMA.unknownParameters.vectorUnknowns)
   {
     switch ( unknown.label() )
@@ -577,7 +577,7 @@ void ThermalProp_Analysis( int /*P*/, int N, double *x, double *fvec,
 {
 ///Transform estimates from kappa space to k space based on the limits imposed
   int i = 0;
-  BOOST_FOREACH(class math::parameterEstimation::unknown &unknown,
+  BOOST_FOREACH(class math::estimation::unknown &unknown,
                 poptea.LMA.unknownParameters.vectorUnknowns)
   {
     const double val =

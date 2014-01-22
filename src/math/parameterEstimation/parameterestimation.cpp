@@ -22,11 +22,11 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "math/sensitivityAnalysis/parameterEstimationInterval.hpp"
+#include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "numSimulations/Numerical_Setup.h"
 
 namespace math{
-  namespace parameterEstimation{
+  namespace estimation{
 
 unknown::unknown(enum physicalModel::labels::Name name_,
                  const double lower_,
@@ -216,7 +216,7 @@ struct settings settings::
     const int mode        = pt.get<int>( "mode" );
     const int nprint      = pt.get<int>( "nprint" );
 
-    class parameterEstimation::settings
+    class estimation::settings
     ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
 
     return ParaEstSetting;

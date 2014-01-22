@@ -22,13 +22,13 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef PARAMETERESTIMATION_HPP
-#define PARAMETERESTIMATION_HPP
+#ifndef estimation_HPP
+#define estimation_HPP
 
 #include "models/physicalmodel.hpp"
 
 namespace math{
-  namespace parameterEstimation{
+  namespace estimation{
 
 class unknown
 {
@@ -71,7 +71,7 @@ private:
   size_t N;
 
 public:
-  std::vector<class parameterEstimation::unknown> vectorUnknowns;
+  std::vector<class estimation::unknown> vectorUnknowns;
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
                   const double upper);
@@ -144,9 +144,16 @@ public:
   void resetInitialGuess(const std::vector<double> input);
 };
 
+//class tools
+//{
+//  class LMA myLMA;
+//  class
+
+//}
+
 
   }
 }
 
 
-#endif // PARAMETERESTIMATION_HPP
+#endif // estimation_HPP

@@ -82,7 +82,7 @@ void scaleDiag(const int mode, const size_t N, double * diag,
   if(mode == 2)
   {
     int i = 0;
-    BOOST_FOREACH( const class math::parameterEstimation::unknown &unknown,
+    BOOST_FOREACH( const class math::estimation::unknown &unknown,
                    poptea.LMA.unknownParameters.vectorUnknowns )
     {
       switch( unknown.label() )
@@ -391,7 +391,7 @@ void cosfit(double **dependent, const double *independent, double *x, int j,
         }
         variables[2][0]=omega1;
 
-        math::parameterEstimation::lmdif( &cosfcn, P, N, x, fvec, variables,
+        math::estimation::lmdif( &cosfcn, P, N, x, fvec, variables,
                                           ftol, xtol, gtol, maxfev, epsfcn,
                                           diag, mode, factor, nprint, &info,
                                           &nfev, fjac, P, ipvt, qtf, wa1, wa2,
@@ -506,7 +506,7 @@ void cosfit(double *dependent,const std::vector<double> &independentVec,
         }
         variables[2][0]=0;
 
-        math::parameterEstimation::lmdif( &cosfcn1, P, N, x, fvec, variables,
+        math::estimation::lmdif( &cosfcn1, P, N, x, fvec, variables,
                                           ftol, xtol, gtol, maxfev, epsfcn,
                                           diag, mode, factor, nprint, &info,
                                           &nfev, fjac, P, ipvt, qtf, wa1, wa2,

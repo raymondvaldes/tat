@@ -30,7 +30,7 @@ License
 
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
-#include "math/parameterEstimation/parameterestimation.hpp"
+#include "math/estimation/estimation.hpp"
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
 
@@ -42,14 +42,14 @@ namespace thermalAnalysisMethod
     class equipment::setup expSetup;
     class physicalModel::TBCsystem TBCsystem;
     class thermal::model thermalsys;
-    class math::parameterEstimation::LMA LMA;
+    class math::estimation::LMA LMA;
     class filesystem::directory DataDirectory;
 
     PopTea( class equipment::setup expSetup_,
             class physicalModel::TBCsystem TBCsystem_,
             class thermal::model thermalsys_,
-            class math::parameterEstimation::settings Settings_,
-            class math::parameterEstimation::unknownList unknownParameters_,
+            class math::estimation::settings Settings_,
+            class math::estimation::unknownList unknownParameters_,
             class filesystem::directory DataDirectory_ ) ;
 
     static thermalAnalysisMethod::PopTea

@@ -27,13 +27,13 @@ License
 
 #include <boost/foreach.hpp>
 
-#include "math/parameterEstimation/parameterestimation.hpp"
+#include "math/estimation/estimation.hpp"
 #include "models/poptea.hpp"
 #include "numSimulations/Numerical_Setup.h"
 #include "algorithms/ThermalProp_Analysis.h"
 
 int paramter_estimation( const size_t m, const size_t  n,
-                         class math::parameterEstimation::settings ParaEstSetting,
+                         class math::estimation::settings ParaEstSetting,
                          int *info, int *nfev,
                          double *x, class thermalAnalysisMethod::PopTea poptea,
                          const double factorMax, const double factorScale,
