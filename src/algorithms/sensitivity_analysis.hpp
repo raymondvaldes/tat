@@ -32,20 +32,14 @@ License
 #include "algorithms/statistical_tools.hpp"
 #include "algorithms/ThermalProp_Analysis.h"
 #include "thermal/emission/noise.hpp"
+#include "thermal/analysis/kernal.hpp"
+#include "thermal/analysis/poptea.hpp"
 
-void fitting(class thermal::analysis::Kernal popteaCore, double * xInitial,
+void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale);
 
-void parameterUncertainty(const size_t n,
-                          class math::estimation::settings ParaEstSetting,
-                          double *xInitial,
-                          class thermal::analysis::Kernal popteaCore,
-                          const double factorMax, const double factorScale,
-                          class perturbStruct *pStruct,
-                          const class thermal::emission::ExpNoiseSetting
-                          noise,
-                          const std::string filename);
+
 
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,
                            const std::vector<double>& calibrationTable,

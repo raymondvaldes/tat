@@ -27,6 +27,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "algorithms/sensitivity_analysis.hpp"
 #include "thermal/emission/phase99.hpp"
+#include "thermal/analysis/poptea.hpp"
 
 namespace investigations{
 namespace manyfit{
@@ -34,24 +35,26 @@ namespace manyfit{
 void run(const class filesystem::directory dir)
 {
   /// initiate popteaCore by importing configuration info
-  namespace TAM = thermal::analysis;
+  using namespace thermal::analysis;
+
   const std::string filename = "config.xml";
-  class TAM::Kernal
-      popteaCore = TAM::Kernal::loadConfig( dir.abs( filename ), dir);
+  const class Kernal popteaCore = Kernal::loadConfig( dir.abs( filename ), dir);
+  class Poptea poptea( popteaCore );
 
   /// Create initial guess
   double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
   constexpr size_t interants = 1;
-  thermal::emission::phase99( popteaCore,
-                              popteaCore.LMA.LMA_workspace.emissionNominal );
+
+  thermal::emission::phase99( poptea.coreSystem,
+                              poptea.coreSystem.LMA.LMA_workspace.emissionNominal );
 
   /// execute
-  for(size_t nn = 0; nn < popteaCore.expSetup.laser.L_end; ++nn )
+  for(size_t nn = 0; nn < poptea.coreSystem.expSetup.laser.L_end; ++nn )
   {
-    popteaCore.LMA.LMA_workspace.emissionExperimental[nn]
-          = popteaCore.LMA.LMA_workspace.emissionNominal[nn];
+    poptea.coreSystem.LMA.LMA_workspace.emissionExperimental[nn]
+          = poptea.coreSystem.LMA.LMA_workspace.emissionNominal[nn];
   }
-  fitting( popteaCore, xInitial, interants, 10, 5 );
+  fitting( poptea, xInitial, interants, 10, 5 );
   delete[] xInitial;
 
 }
