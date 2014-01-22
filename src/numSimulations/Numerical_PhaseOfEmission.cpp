@@ -33,7 +33,7 @@ License
 #include "thermal/model.hpp"
 
 double PhaseOfEmission1DNum( const int flag,
-                             const class thermalAnalysis::PopTea &poptea)
+                             const class thermalAnalysis::Kernal &poptea)
 {
   class Temperature Tprofile( poptea.thermalsys.mesh.Nend,
                               poptea.thermalsys.mesh.M2);
@@ -59,7 +59,7 @@ double PhaseOfEmission1DNum( const int flag,
 }
 
 double PhaseOfEmission2DAna( const int flag,
-                             const class thermalAnalysis::PopTea &poptea )
+                             const class thermalAnalysis::Kernal &poptea )
 {
     /// Initiate 2d analytical model
     const double k_coat  = poptea.TBCsystem.coating.kthermal.offset;
@@ -104,7 +104,7 @@ double PhaseOfEmission2DAna( const int flag,
 
 
 double PhaseOfEmission1DAna(const int flag,
-                            const thermalAnalysis::PopTea &poptea)
+                            const thermalAnalysis::Kernal &poptea)
 {
   /*See 2004 emission paper equation 19*/
   const double omega1 = poptea.expSetup.laser.omegas[flag];

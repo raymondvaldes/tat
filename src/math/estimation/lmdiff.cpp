@@ -28,10 +28,10 @@ namespace math{
   namespace estimation{
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
-                        class thermalAnalysis::PopTea),
+                        class thermalAnalysis::Kernal),
             int m, int n, double x[], double fvec[], double fjac[], int ldfjac,
             int *iflag, double epsfcn, double wa[],
-            class thermalAnalysis::PopTea poptea);
+            class thermalAnalysis::Kernal poptea);
 
 void fdjac2(void (*fcn)(int, int, double*, double*, int*,double **),
             int m,int n,double x[],double fvec[],double **variables,
@@ -113,13 +113,13 @@ double x[], fvec[], diag[], fjac[], qtf[];
 double wa1[], wa2[], wa3[], wa4[];
 int ipvt[]; */
 void lmdif(void (*fcn)(int, int, double*, double*, int*,
-                       class thermalAnalysis::PopTea),
+                       class thermalAnalysis::Kernal),
            int m, int n, double *x, double *fvec,double ftol, double xtol,
            double gtol, int maxfev, double epsfcn, double *diag, int mode,
            double factor, int nprint, int *info, int *nfev, double *fjac,
            int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
            double *wa3, double *wa4, double *wa5,
-           class thermalAnalysis::PopTea poptea)
+           class thermalAnalysis::Kernal poptea)
 {
 /*
 *     **********
@@ -2143,10 +2143,10 @@ return(ans);
 
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,
-                        class thermalAnalysis::PopTea poptea),
+                        class thermalAnalysis::Kernal poptea),
             int m,int n,double x[],double fvec[], double fjac[],int /*ldfjac*/,
             int *iflag,double epsfcn,double wa[],
-            class thermalAnalysis::PopTea poptea)
+            class thermalAnalysis::Kernal poptea)
 {
 /*
 *     **********
