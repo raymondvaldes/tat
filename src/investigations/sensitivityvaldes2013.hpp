@@ -34,7 +34,7 @@ namespace investigations
 {
 namespace sensitivityvaldes2013{
 
-class thermalAnalysis::Kernal
+class thermal::analysis::Kernal
     loadWorkingDirectory(const class filesystem::directory dir);
 void run(const class filesystem::directory dir);
 

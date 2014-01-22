@@ -31,8 +31,8 @@ License
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
 
-namespace thermalAnalysis
-{
+namespace thermal {
+namespace analysis{
 
 Kernal::Kernal( class equipment::setup expSetup_,
                 class physicalModel::TBCsystem TBCsystem_,
@@ -60,7 +60,7 @@ Kernal::Kernal( class equipment::setup expSetup_,
   thermalSetup(l_min, l_max, LendMinDecade);
 }
 
-class thermalAnalysis::Kernal
+class thermal::analysis::Kernal
         Kernal::loadConfig(const std::string &filename,
                            const filesystem::directory DataDirectory_)
 {
@@ -139,4 +139,5 @@ double Kernal::bEval(void) const
   return expSetup.laser.radius / TBCsystem.coating.depth;
 }
 
-}
+
+}}

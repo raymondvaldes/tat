@@ -29,7 +29,7 @@ License
 void parameterUncertainty(const size_t n,
                           class math::estimation::settings ParaEstSetting,
                           double *xInitial,
-                          class thermalAnalysis::Kernal poptea,
+                          class thermal::analysis::Kernal poptea,
                           const double factorMax, const double factorScale,
                           class perturbStruct *pStruct,
                           const class thermal::emission::ExpNoiseSetting myEmissionNoise,
@@ -194,7 +194,7 @@ void parameterUncertainty(const size_t n,
   return;
 }
 
-void fitting(class thermalAnalysis::Kernal poptea, double *xInitial,
+void fitting(class thermal::analysis::Kernal poptea, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale)
 {
