@@ -33,16 +33,16 @@ namespace investigations
 {
   namespace sensitivityvaldes2013{
 
-class thermalAnalysisMethod::PopTea
+class thermalAnalysis::PopTea
     loadWorkingDirectory(const class filesystem::directory dir)
 {
   const std::string filename = "config.xml";
-  return thermalAnalysisMethod::PopTea::loadConfig( dir.abs( filename ), dir);
+  return thermalAnalysis::PopTea::loadConfig( dir.abs( filename ), dir);
 }
 
 void run(const class filesystem::directory dir)
 {
-  class thermalAnalysisMethod::PopTea poptea = loadWorkingDirectory(dir);
+  class thermalAnalysis::PopTea poptea = loadWorkingDirectory(dir);
   thermal::emission::phase99( poptea, poptea.LMA.LMA_workspace.emissionNominal);
 
   /// STEP 0

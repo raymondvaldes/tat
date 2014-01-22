@@ -77,7 +77,7 @@ double kx_limiter2( const double ki, const double k_min, const double k_max )
 
 
 void scaleDiag(const int mode, const size_t N, double * diag,
-               const class thermalAnalysisMethod::PopTea poptea )
+               const class thermalAnalysis::PopTea poptea )
 {
   if(mode == 2)
   {

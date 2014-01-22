@@ -28,7 +28,7 @@ License
 namespace thermal{
   namespace emission{
 
-void phase99( const class thermalAnalysisMethod::PopTea &poptea,
+void phase99( const class thermalAnalysis::PopTea &poptea,
               std::vector<double> &arrayVal )
 {
   /*The phase for each thermal penetration is calculated in parallel using the

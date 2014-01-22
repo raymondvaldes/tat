@@ -44,11 +44,11 @@ private:
 
 
 double PhaseOfEmission2DAna( const int flag,
-                             const thermalAnalysisMethod::PopTea &poptea);
+                             const thermalAnalysis::PopTea &poptea);
 double PhaseOfEmission1DNum( const int flag,
-                             const thermalAnalysisMethod::PopTea &poptea);
+                             const thermalAnalysis::PopTea &poptea);
 double PhaseOfEmission1DAna( const int flag,
-                             const thermalAnalysisMethod::PopTea &poptea);
+                             const thermalAnalysis::PopTea &poptea);
 
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED
