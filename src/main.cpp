@@ -23,54 +23,31 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "Header.h"
-#include "boost/program_options.hpp"
-
 int main( int argc, char *argv[ ] )
 {
-  namespace po = boost::program_options;
-  po::options_description desc("Allowed options");
-  desc.add_options()
-      ("help", "produce help message")
-      ("compression", po::value<int>(), "set compression level") ;
+  std::string path;
+  bool run = tools::loadProgramOptions( argc, argv, path );
 
-  po::variables_map vm;
-  po::store( po::command_line_parser( argc, argv ).options( desc ).run(), vm );
-  po::notify(vm);
-
-  if (vm.count("help"))
+  if(run)
   {
-    std::cout << desc << "\n";
-    return 1;
+      std::cout << "Welcome back, Raymond!\n\n";
+      class stopwatch globalStopWatch;
+
+      /// Retrieve working directory
+      const class filesystem::directory dir(path);
+
+      /// Run investigations
+      investigations::sensitivityvaldes2013::run( dir );
+
+    //  //Prepare figures and data for paper Sensitivity
+    ////    SensitivityValdes2013::CC_APS2(poptea);
+    ////    SensitivityValdes2013::figureSensitivityIntro(poptea);
+
+      /// Test investigation
+    //  investigations::manyfit::run( dir );
+
+      globalStopWatch.displayTime();
   }
 
-  if (vm.count("compression"))
-  {
-    std::cout << "Compression level was set to "
-         << vm["compression"].as<int>() << ".\n";
-  }
-  else
-  {
-    std::cout << "Compression level was not set.\n";
-  }
-
-
-  std::cout << "Welcome back, Raymond!\n\n";
-  class stopwatch globalStopWatch;
-
-  /// Retrieve working directory
-  const std::string path("/home/raymond/code/tat/bin");
-  const class filesystem::directory dir(path);
-
-  /// Run investigations
-  investigations::sensitivityvaldes2013::run( dir );
-
-//  //Prepare figures and data for paper Sensitivity
-////    SensitivityValdes2013::CC_APS2(poptea);
-////    SensitivityValdes2013::figureSensitivityIntro(poptea);
-
-  /// Test investigation
-//  investigations::manyfit::run( dir );
-
-  globalStopWatch.displayTime();
   return 0;
 }

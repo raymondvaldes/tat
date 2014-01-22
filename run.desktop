@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Name=run
-Exec=bash -c '/home/raymond/code/tat/bin/tat'
+Exec=bash -c '/home/raymond/code/tat/bin/tat --config /home/raymond/code/tat/bin '
 Terminal=true
