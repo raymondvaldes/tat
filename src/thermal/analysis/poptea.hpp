@@ -25,15 +25,23 @@ License
 #ifndef poptea_HPP
 #define poptea_HPP
 
+#include "thermal/analysis/kernal.hpp"
 #include "math/estimation/parameterestimation.hpp"
+#include "math/sensitivityAnalysis/estimationInterval.hpp"
 
 namespace thermal {
 namespace analysis{
 
-class method
+class Poptea
 {
-  class math::estimation::LMA LMA;
-  method( class math::estimation::LMA LMA_ );
+public:
+  class Kernal popteaCore;
+  class math::estimation::LMA BFsolve;
+  class math::sensitivityAnalysis::estIntervals BFintervals;
+
+  explicit Poptea( class Kernal popteaCore_ ,
+                   class math::estimation::LMA BFsolve_);
+  ~Poptea(void);
 };
 
 

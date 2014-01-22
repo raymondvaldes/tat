@@ -60,6 +60,10 @@ public:
 ///                                   -> upper and lowerbounds PI
 
 
+class estIntervals
+{};
+
+
 }
 }
 
