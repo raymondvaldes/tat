@@ -1,7 +1,7 @@
 #ifndef LMDIFF_HPP
 #define LMDIFF_HPP
 
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 namespace math{
   namespace estimation{
 

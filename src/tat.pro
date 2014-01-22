@@ -126,7 +126,6 @@ SOURCES += \
     tools/timing.cpp \
     models/Thermal_models.cpp \
     models/expEquipment.cpp \
-    models/poptea.cpp \
     models/physicalmodel.cpp \
     models/numericalmodel.cpp \
     tools/configuration.cpp \
@@ -142,7 +141,8 @@ SOURCES += \
     math/estimation/lmdiff.cpp \
     math/estimation/parameterestimation.cpp \
     math/sensitivityAnalysis/estimationInterval.cpp \
-    tools/programoptions.cpp
+    tools/programoptions.cpp \
+    thermal/analysis/kernal.cpp
 
 #header files
 HEADERS += \
@@ -158,7 +158,6 @@ HEADERS += \
     algorithms/sensitivity_analysis.hpp \
     models/Thermal_models.h \
     models/expEquipment.hpp \
-    models/poptea.hpp \
     models/physicalmodel.hpp \
     models/numericalmodel.hpp \
     tools/configuration.hpp \
@@ -176,4 +175,5 @@ HEADERS += \
     math/sensitivityAnalysis/parameterEstimationInterval.hpp \
     math/estimation/lmdiff.hpp \
     math/sensitivityAnalysis/estimationInterval.hpp \
-    tools/programoptions.hpp
+    tools/programoptions.hpp \
+    thermal/analysis/kernal.hpp

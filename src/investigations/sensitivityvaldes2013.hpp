@@ -25,7 +25,7 @@ License
 #ifndef SENSITIVITYVALDES2013_HPP
 #define SENSITIVITYVALDES2013_HPP
 #include "algorithms/sensitivity_analysis.hpp"
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 #include "tools/filesystem.hpp"
 #include "math/bisection.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"

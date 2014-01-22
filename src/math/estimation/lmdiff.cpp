@@ -22,7 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 
 namespace math{
   namespace estimation{

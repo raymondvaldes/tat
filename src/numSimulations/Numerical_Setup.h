@@ -26,7 +26,7 @@ License
 #define NUMERICAL_SETUP_H_INCLUDED
 
 #include "algorithms/ThermalProp_Analysis.h"
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 
 double x_ini10(const int x_ref);
 

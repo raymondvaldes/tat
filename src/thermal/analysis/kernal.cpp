@@ -23,8 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <exception>
-
-#include "models/poptea.hpp"
+#include "thermal/analysis/kernal.hpp"
 #include "models/expEquipment.hpp"
 #include "models/Thermal_models.h"
 #include "models/numericalmodel.hpp"
