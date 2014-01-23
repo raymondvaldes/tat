@@ -149,7 +149,8 @@ SOURCES += \
     math/estimation/constrained.cpp \
     math/utility.cpp \
     math/numIntegration/simpsons_3_8.cpp \
-    math/estimation/cosfit.cpp
+    math/estimation/cosfit.cpp \
+    math/numIntegration/gslfunc.cpp
 
 #header files
 HEADERS += \
@@ -190,4 +191,5 @@ HEADERS += \
     math/estimation/constrained.hpp \
     math/utility.hpp \
     math/numIntegration/simpsons_3_8.hpp \
-    math/estimation/cosfit.hpp
+    math/estimation/cosfit.hpp \
+    math/numIntegration/gslfunc.hpp

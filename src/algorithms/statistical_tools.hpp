@@ -86,10 +86,6 @@ double MSE(const size_t N, const double*emissionExp,
                     const double* emissionEst);
 double MSEarea1(size_t N, double* func1, double* func2, double* xvar);
 
-
-double fintegrate(double x, void *p);
-double integrate(struct funcClass *Func, double xlow, double xhigh);
-
 double MSEarea(const size_t N, std::vector<double> &func1,
                std::vector<double> &func2);
 

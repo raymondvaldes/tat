@@ -64,6 +64,14 @@ void range1og10( const double l_min, const double l_max, const size_t L_end,
 void range1og10( const double l_min, const double l_max, const size_t L_end,
                  double* l_thermal ) ;
 
+inline double mean(const double a, const double b)
+{
+    double mean1 = a;
+    mean1 +=b;
+    mean1 *=0.5;
+    return mean1;
+}
+
 }
 
 

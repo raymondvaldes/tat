@@ -28,7 +28,7 @@ License
 #include "models/physicalmodel.hpp"
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
-
+#include "math/utility.hpp"
 
 double property::Current(const double temperature) const
 {
@@ -71,7 +71,7 @@ double property::Current(const std::vector<std::vector<double>>& T, const size_t
 {
     if(!tempDependent) return offset;
 
-    return mean( Current( T[n][j1] ) , Current( T[n][j2] ) );
+    return math::mean( Current( T[n][j1] ) , Current( T[n][j2] ) );
 }
 
 
@@ -88,7 +88,7 @@ double property::Current(const class Temperature Tprofile, const size_t n,
 {
     if(!tempDependent) return offset;
 
-    return mean( Current( Tprofile.eval(n, j1 ) ) ,
+    return math::mean( Current( Tprofile.eval(n, j1 ) ) ,
                  Current( Tprofile.eval(n,j2  ) ) );
 }
 
@@ -111,10 +111,10 @@ const
     if(!tempDependent) return offset;
     if( n == 0 )
     {
-        return mean( Current(  T[n][j1] ) , Current( T[n][j2] ) );
+        return math::mean( Current(  T[n][j1] ) , Current( T[n][j2] ) );
     }
 
-    return mean( Projected(T, n, j1), Projected(T, n, j2) );
+    return math::mean( Projected(T, n, j1), Projected(T, n, j2) );
 }
 
 double property::Projectedt(const std::vector<std::vector<double>>& T,
@@ -123,7 +123,7 @@ const
 {
     if(!tempDependent) return offset;
 
-    return mean( Current(T, n, j) ,  Projected(T, n, j));
+    return math::mean( Current(T, n, j) ,  Projected(T, n, j));
 }
 
 double property::Projected(const class Temperature Tprofile,
@@ -145,11 +145,11 @@ const
     if(!tempDependent) return offset;
     if( n == 0 )
     {
-        return mean( Current(  Tprofile.eval(n,j1) ) ,
+        return math::mean( Current(  Tprofile.eval(n,j1) ) ,
                     Current( Tprofile.eval(n,j2) ) );
     }
 
-    return mean( Projected(Tprofile, n, j1), Projected(Tprofile, n, j2) );
+    return math::mean( Projected(Tprofile, n, j1), Projected(Tprofile, n, j2) );
 }
 
 double property::Projectedt(const class Temperature Tprofile,
@@ -158,7 +158,7 @@ const
 {
     if(!tempDependent) return offset;
 
-    return mean( Current(Tprofile, n, j) ,  Projected(Tprofile, n, j));
+    return math::mean( Current(Tprofile, n, j) ,  Projected(Tprofile, n, j));
 }
 
 property::property(const double offset_,const double slope_)
