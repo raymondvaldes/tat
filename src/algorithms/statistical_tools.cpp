@@ -28,7 +28,6 @@ License
 #include <cstddef>
 #include <iostream>
 
-#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 #include "math/numIntegration/gslfunc.hpp"
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
@@ -167,7 +166,6 @@ double MSE(const size_t N, std::vector<double> &emissionExp,
     /*
         The objective function is evaluated for all the measurements and the
         mean square is returned.
-
     */
     double fvec_objective = 0;
 

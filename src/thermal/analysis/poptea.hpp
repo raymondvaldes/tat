@@ -43,15 +43,22 @@ namespace analysis{
 class Poptea
 {
 private:
-  class math::estimation::unknownList unknownParameters;
-  enum physicalModel::labels::Name currentParameterX;
-  double S1_ref;
-  double S1_X;
-  std::vector<double> predicted_ref;
   class math::estimation::unknownList unknownParameterswithBFdata;
+  class math::estimation::unknownList unknownParameters;
 
+  enum physicalModel::labels::Name currentParameterX;
+//  class math::estimation::unknown currentParameter;
+
+
+  std::vector<double> ref_PHASE_BF;          //phase
+  std::vector<double> experimental_PHASE_BF; //phase
+  std::vector<double> current_PHASE_BF;      //phase
 
 public:
+  double S1_BF;
+  double S1_X;
+  double S1_current;
+
   class Kernal coreSystem;
 
    explicit Poptea( const class Kernal coreSystem_) ;
@@ -59,14 +66,23 @@ public:
 
   void setThermalRange(const double lmin, const double lmax);
   void loadExperimentalData( const std::vector<double> data );
-  void setParametertoFit( class math::estimation::unknownList parameters );
+  void setParameterstoFit( class math::estimation::unknownList parameters );
   void setParametertoHoldX(enum physicalModel::labels::Name currentParameterX_);
+  void saveListunknowns(  );
 
-  double bestFit( void );
+  double meanError( const std::vector<double> curveBF,
+                    const std::vector<double> curveRef );
+
+  double bestFit( class Kernal core );
+
+  std::pair< double, double >
+  parameterInterval( const enum physicalModel::labels::Name currentPx,
+                     std::vector<double> emissionExperimentalOriginal );
+
 
   double Gfunc( const double x );
- ///Gfunc must work by updating kernal with unknown parameters
- ///updating experimental with predicted values;
+   ///Gfunc must work by updating kernal with unknown parameters
+   ///updating experimental with predicted values;
 
   std::pair< double, double >
   Gsolve( enum physicalModel::labels::Name currentParameterX_ );

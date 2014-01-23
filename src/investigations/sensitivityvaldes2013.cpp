@@ -23,8 +23,10 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <vector>
+#include <iostream>
 #include "sensitivityvaldes2013.hpp"
 #include "thermal/analysis/kernal.hpp"
+#include "thermal/analysis/poptea.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "math/bisection.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
@@ -44,14 +46,11 @@ class thermal::analysis::Kernal
 
 void run(const class filesystem::directory dir)
 {
+  ///Initialize kernals
   class thermal::analysis::Kernal popteaCore = loadWorkingDirectory(dir);
-  thermal::emission::phase99( popteaCore, popteaCore.LMA.LMA_workspace.emissionNominal);
+  class thermal::analysis::Poptea poptea( popteaCore );
 
   /// STEP 0
-  /*At this point I can output a figure that has the sensitivity curve data
-  for each of the five parameters. The figure with the artificial data and
-  fitted curve with error bars will be shown next.*/
-
   //Noise in Simulated Emission
   constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
   constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
@@ -64,10 +63,16 @@ void run(const class filesystem::directory dir)
       myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
   ///Output noise to test
-  popteaCore.LMA.LMA_workspace.emissionExperimental =
-  thermal::emission::addNoise( myEmissionNoise,
-                               popteaCore.expSetup.laser.l_thermal,
-                               popteaCore.LMA.LMA_workspace.emissionNominal ) ;
+  std::vector<double>
+      emissionNominal =  thermal::emission::phase99( poptea.coreSystem );
+
+  std::vector<double> emissionExperimental =
+        thermal::emission::addNoise( emissionNominal,
+                                     poptea.coreSystem.expSetup.laser.l_thermal,
+                                     myEmissionNoise ) ;
+//poptea.coreSystem.LMA.LMA_workspace.emissionExperimental//
+
+  poptea.loadExperimentalData( emissionExperimental );
 
 //  ///Output noise to test
 //  for( size_t i = 0 ; i < popteaCore.expSetup.laser.l_thermal.size() ; ++i)
@@ -78,31 +83,69 @@ void run(const class filesystem::directory dir)
 //  }
 
   /// STEP 1
-  int nfev;
-  int info = 0;
-  popteaCore.LMA.xpredicted = paramter_estimation( popteaCore, &info, &nfev );
+//  poptea.setParametertoFit( poptea.coreSystem.LMA.unknownParameters );
+//  poptea.saveListunknowns();
+//  poptea.bestFit( poptea.coreSystem );
+
+
+
 
 //  for( size_t i = 0 ; i < popteaCore.LMA.xpredicted.size() ;  i++)
 //  {
 //    std::cout << popteaCore.LMA.xpredicted[i] << "\n";
-//  }t
+//  }
 
-  /// STEP 2
-  thermal::emission::phase99( popteaCore, popteaCore.LMA.LMA_workspace.predicted );
-  popteaCore.LMA.LMA_workspace.MSE =
-      MSE( popteaCore.expSetup.laser.L_end,
-           popteaCore.LMA.LMA_workspace.emissionExperimental,
-           popteaCore.LMA.LMA_workspace.predicted ) ;
-  std::cout << popteaCore.LMA.LMA_workspace.MSE << "\n";
+//  /// STEP 2
+////  thermal::emission::phase99( popteaCore, popteaCore.LMA.LMA_workspace.predicted );
 
-  /// STEP 3
+//  poptea.coreSystem.LMA.LMA_workspace.predicted =
+//  thermal::emission::phase99( poptea.coreSystem );
 
-  /// STEP 4
-  class math::estimation::unknown
-      first(popteaCore.LMA.unknownParameters.vectorUnknowns[0]);
+//  poptea.coreSystem.LMA.LMA_workspace.MSE =
+//      MSE( poptea.coreSystem.expSetup.laser.L_end,
+//           poptea.coreSystem.LMA.LMA_workspace.emissionExperimental,
+//           poptea.coreSystem.LMA.LMA_workspace.predicted ) ;
 
-  class math::sensitivityAnalysis::step4 Step4;
-  std::cout << "this is the output\n\n" << Step4.solve();
+//  std::cout << poptea.coreSystem.LMA.LMA_workspace.MSE << "\n";
+
+//  /// STEP 3
+
+//  /// STEP 4
+//  class math::estimation::unknown
+//      first(poptea.coreSystem.LMA.unknownParameters.vectorUnknowns[0]);
+
+//  class math::sensitivityAnalysis::step4 Step4;
+//  std::cout << "this is the output\n\n" << Step4.solve() << "\n";
+
+//  std::cout << "**********************************************\n" ;
+//  std::cout << "**********************************************\n" ;
+//  std::cout << "**********************************************\n" ;
+//  std::cout << "**********************************************\n" ;
+//  std::cout << "**********************************************\n" ;
+
+
+
+
+
+//  void setThermalRange(const double lmin, const double lmax);
+//  void setParametertoFit( class math::estimation::unknownList parameters );
+//  void setParametertoHoldX(enum physicalModel::labels::Name currentParameterX_);
+
+
+//  double Gfunc( const double x );
+// ///Gfunc must work by updating kernal with unknown parameters
+// ///updating experimental with predicted values;
+
+//  std::pair< double, double >
+//  Gsolve( enum physicalModel::labels::Name currentParameterX_ );
+
+//  void saveBestFitParameters( void );
+//  void setG1(void);
+
+
+
+
+
 
   return;
 }

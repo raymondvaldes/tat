@@ -33,6 +33,9 @@ namespace thermal{
 void phase99( const thermal::analysis::Kernal &popteaCore,
               std::vector<double> &arrayVal );
 
+std::vector<double>
+phase99( const class thermal::analysis::Kernal &popteaCore);
+
   }
 }
 

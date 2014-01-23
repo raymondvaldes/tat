@@ -39,191 +39,148 @@ namespace thermal {
 namespace analysis{  
 
 Poptea::Poptea( const class Kernal coreSystem_ )
-  : coreSystem( coreSystem_ ) {}
+  : coreSystem( coreSystem_ )
+{
+  const size_t N = coreSystem.expSetup.laser.l_thermal.size();
+  ref_PHASE_BF.resize(N);
+  experimental_PHASE_BF.resize(N);
+  current_PHASE_BF.resize(N);
+}
 
 Poptea::~Poptea(void){}
 
 
-void loadExperimentalData( std::vector<double> data);
+
+void Poptea::setThermalRange( const double lmin, const double lmax )
+{
+
+}
+
+void Poptea::loadExperimentalData( const std::vector<double> data )
+{
+  experimental_PHASE_BF.resize( data.size() );
+  experimental_PHASE_BF = data;
+  ref_PHASE_BF = data;
+}
+
+void Poptea::setParameterstoFit( class math::estimation::unknownList parameters )
+{
+//  unknownParameters = parameters;
+}
+
+void Poptea::setParametertoHoldX( enum physicalModel::labels::Name currentParameterX_)
+{
+  currentParameterX = currentParameterX_;
+//  currentParameter = unknownParameterswithBFdata.getParameter( currentParameterX_ );
+
+
+  return;
+}
 
 
 
-//std::vector<double>
-//Poptea::paramter_estimation( int *info, int *nfev )
-//{
+double Poptea::Gfunc( const double x )
+{
+  ///Gfunc must work by updating kernal with unknown parameters
+  ///updating experimental with predicted values;
 
-///*
-//  The parameter estimation function takes in the function, fitting parameters,
-//  initial guess.  If no initial guess is given then it will populate an
-//  initial guess based on a random distribution of the parameter range. The
-//  initial guess is then transformed based on the parameter estimation ranges.
-//  The parameter estimation employed is the levenberg-marquardt algorithm(LMA).
-//  The the objective function is evaluated and compared against a tolerance.
-//  If it is larger than the tolerance than a new initial guess will be
-//  initialized.  This process is repeated until the objective function
-//  satisfies the tolerance or the number of iterations maxes out. The final
-//  values are populated back into the parameter structure and the dependent
-//  parameters are updated.
-//*/
+//  unknownParameterswithBFdata.
 
-//  using namespace math::estimation;
-//  const size_t m = coreSystem.expSetup.laser.l_thermal.size();
-//  const size_t n = coreSystem.LMA.unknownParameters.vectorUnknowns.size();
-//  class math::estimation::settings ParaEstSetting = coreSystem.LMA.Settings;
-
-//  const double factorMax = coreSystem.LMA.Settings.factorMax;
-//  const double factorScale = coreSystem.LMA.Settings.factorScale;
-
-//  double *x = new double[n];
-
-//  double *fvec = new double[m];
-//  double *qtf = new double[n];
-//  double *wa1 = new double[n];
-//  double *wa2 = new double[n];
-//  double *wa3 = new double[n];
-//  double *wa4 = new double[m];
-//  double *fjac = new double[m*n];
-//  double *wa5 = new double[m*n];
-//  int *ipvt = new int[n];
-//  double *diag = new double[n];
-
-//  scaleDiag(ParaEstSetting.mode, n, diag, coreSystem );
-
-//  for(size_t i=0 ; i< n ; i++)
-//  {
-//    x[i] = coreSystem.LMA.xInitial[i];
-//  }
-
-//  ///set initial guesses
-//  /// TODO put in function !
-//  if ( fabs(x[0] - 0) < 1e-10 )
-//  {
-//    int i = 0;
-//    BOOST_FOREACH( class unknown &unknown,
-//                   coreSystem.LMA.unknownParameters.vectorUnknowns )
-//    {
-//      x[i++] = math::x_ini( unknown.lowerBound(), unknown.upperBound() );
-//    }
-//  }
-
-//  for(size_t i=0; i< n; i++)
-//  {
-//    coreSystem.LMA.xguessAuto[i] = x[i];
-//  }
-
-//  ///Transform inputs
-//  int i = 0;
-//  BOOST_FOREACH( class math::estimation::unknown &unknown,
-//                 coreSystem.LMA.unknownParameters.vectorUnknowns )
-//  {
-//    x[i] = math::estimation::kx_limiter2( x[i], unknown.lowerBound(),
-//                                          unknown.upperBound() ) ;
-//    i++;
-//  }
-
-//  ///levenberg-marquardt algorithm
-//  math::estimation::lmdif( &ThermalProp_Analysis, m, n, x, fvec,
-//                                    ParaEstSetting.ftol, ParaEstSetting.xtol,
-//                                    ParaEstSetting.gtol, ParaEstSetting.maxfev,
-//                                    ParaEstSetting.epsfcn, diag,
-//                                    ParaEstSetting.mode, ParaEstSetting.factor,
-//                                    ParaEstSetting.nprint, info, nfev, fjac, m,
-//                                    ipvt, qtf, wa1, wa2, wa3, wa4, wa5,
-//                                    coreSystem ) ;
-
-//  ///Exit Routine
-//  /* Sets up a condition where the total error in the phase is compared
-//  against a fvec Tolerance.  If the error is greater than this constant,
-//  then the parameter estimation algorithm is reset with a new set of
-//  initial guesses. This is let to run a fixed number of iterations. */
-//  constexpr double ExpStddev = 0;
-//  const double ExpVarianceEst = ExpStddev * ExpStddev;
-//  coreSystem.LMA.LMA_workspace.fvecTotal =
-//      SobjectiveLS( coreSystem.expSetup.laser.L_end,
-//                    coreSystem.LMA.LMA_workspace.emissionExperimental,
-//                    coreSystem.LMA.LMA_workspace.predicted);
-//  const size_t v1 = coreSystem.expSetup.laser.L_end - n;
-//  double reduceChiSquare;
-//  if(ExpVarianceEst ==0 )
-//  {
-//    reduceChiSquare = 100;
-//  }
-//  else
-//  {
-//    reduceChiSquare = (coreSystem.LMA.LMA_workspace.fvecTotal /
-//                       ExpVarianceEst) / v1;
-//  }
-
-//  if( reduceChiSquare < 2
-//     || ParaEstSetting.factor == factorMax
-//     || coreSystem.LMA.LMA_workspace.fvecTotal < coreSystem.LMA.LMA_workspace.MSETol
-//     )
-//  {
-//    ///Transform outputs
-//    int i = 0;
-//    BOOST_FOREACH( class math::estimation::unknown &unknown,
-//                   coreSystem.LMA.unknownParameters.vectorUnknowns)
-//    {
-//      const double val =
-//          x_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
-
-//      coreSystem.TBCsystem.updateVal ( unknown.label() , val );
-//      coreSystem.LMA.xpredicted[i++] = val;
-//    }
-
-//    coreSystem.TBCsystem.updateCoat();
-
-//    ///repopulate predicted phase
-//    thermal::emission::phase99( coreSystem,
-//                                coreSystem.LMA.LMA_workspace.predicted);
-
-//    delete [] qtf;
-//    delete [] wa1;
-//    delete [] wa2;
-//    delete [] wa3;
-//    delete [] wa4;
-//    delete [] wa5;
-//    delete [] ipvt;
-//    delete [] fvec;
-//    delete [] fjac;
-//    delete [] diag;
-//    delete [] x;
-
-//    return coreSystem.LMA.xpredicted;
-//  }
-
-//  else if (ParaEstSetting.factor <= factorMax/factorScale)
-//  {
-//    ParaEstSetting.factor *=factorScale;
-////            std::cout << "factor increased to "  << factor <<"\n";
-
-//  }
-//  else if (ParaEstSetting.factor > factorMax/factorScale &&
-//           ParaEstSetting.factor < factorMax)
-//  {
-//    ParaEstSetting.factor = factorMax;
-//    std::cout << "factor increased max "<< ParaEstSetting.factor <<"\n";
-//  }
-
-//  for(size_t i=0 ; i< n ; i++)
-//  {
-//    x[i] = coreSystem.LMA.xInitial[i];
-//  }
+  double val = x * 1;
 
 
-//  delete [] qtf;
-//  delete [] wa1;
-//  delete [] wa2;
-//  delete [] wa3;
-//  delete [] wa4;
-//  delete [] wa5;
-//  delete [] ipvt;
-//  delete [] fvec;
-//  delete [] fjac;
-//  delete [] diag;
-//  delete [] x;
+//  TBCsystem::updateVal( currentParameterX , val );
 
-//  return coreSystem.LMA.xpredicted;
-//}
+
+//  current_PHASE_BF
+
+
+  return meanError( current_PHASE_BF , ref_PHASE_BF );
+
+}
+
+
+std::pair< double, double >
+Poptea::Gsolve( enum physicalModel::labels::Name currentParameterX_ )
+{
+  double lowerLimit(1);
+  double upperLimit(2);
+
+  std::pair <double,double> limits (lowerLimit, upperLimit);
+  return limits;
+}
+
+void Poptea::saveBestFitParameters( void )
+{
+
+}
+void Poptea::setG1(void)
+{
+
+}
+
+double Poptea::meanError( const std::vector<double> curveBF,
+                          const std::vector<double> curveRef )
+{
+  const size_t N = curveBF.size();
+  double error = 0;
+
+
+  for(size_t n=0 ; n < N ;  ++n)
+  {
+      error += pow( ( curveBF[n] / curveRef[n] - 1 ), 2);
+  }
+
+  return sqrt(error / N );
+}
+
+double Poptea::bestFit( class Kernal core )
+{
+  int nfev;
+  int info = 0;
+
+  core.LMA.xpredicted = paramter_estimation( core, &info, &nfev );
+  current_PHASE_BF = core.LMA.LMA_workspace.emissionCurrent;
+  S1_current = meanError( current_PHASE_BF , ref_PHASE_BF );
+
+  return S1_current;
+}
+
+std::pair< double, double >
+Poptea::parameterInterval(const enum physicalModel::labels::Name currentPx ,
+                          std::vector<double> emissionExperimental)
+{
+  //Step 1
+  loadExperimentalData( emissionExperimental );
+
+  //Step 2
+  bestFit( coreSystem );
+
+  //Step 3 Rebuild Core
+  //rebuild unknown list;
+
+//  class kernal coreRebuild( coreSystem.expSetup ,
+//                            coreSystem.TBCsystem,
+//                            coreSystem.thermalsys,
+//                            coreSystem.LMA.Settings,
+//                            rebuiltSubSystem,
+//                            coreSystem.DataDirectory
+//                            )
+
+//      Kernal( class equipment::setup expSetup_,
+//              class physicalModel::TBCsystem TBCsystem_,
+//              class thermal::model thermalsys_,
+//              class math::estimation::settings Settings_,
+//              class math::estimation::unknownList unknownParameters_,
+//              class filesystem::directory DataDirectory_ ) ;
+
+
+  double lowerLimit(1);
+  double upperLimit(2);
+  std::pair <double,double> limits (lowerLimit, upperLimit);
+  return limits;
+}
+
+
 
 }}

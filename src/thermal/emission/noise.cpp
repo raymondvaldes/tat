@@ -36,9 +36,9 @@ ExpNoiseSetting::ExpNoiseSetting( const double a1_, const double b1_,
 {}
 
 std::vector<double>
-addNoise( const class thermal::emission::ExpNoiseSetting para,
+addNoise( const std::vector<double> emissionNominal_,
           const std::vector<double> lthermal,
-          const std::vector<double> emissionNominal_)
+          const class thermal::emission::ExpNoiseSetting para )
 
 {
   const double lmin = lthermal.front();
@@ -55,11 +55,12 @@ addNoise( const class thermal::emission::ExpNoiseSetting para,
      std::cout << "parameters (a,b) out of range"; exit(-99);
   }
 
-  std::vector<double> output = emissionNominal_;
-  for( size_t i=0 ; i < lthermal.size(); ++i)
+  std::vector<double> output(emissionNominal_);
+  for( size_t i=0 ; i < lthermal.size() ; ++i )
   {
     constexpr double c = 0.5;
-    const double lthermalPercentile = math::percentilelog10( lmin, lmax, lthermal[i]);
+    const double
+        lthermalPercentile = math::percentilelog10( lmin, lmax, lthermal[i] );
 
     ///Determine biased noise
     const double cotbc = tan( M_PI_2 - ( b * c ) );
