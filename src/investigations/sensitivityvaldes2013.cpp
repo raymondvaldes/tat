@@ -68,7 +68,7 @@ void run(const class filesystem::directory dir)
 
   std::vector<double> emissionExperimental =
         thermal::emission::addNoise( emissionNominal,
-                                     poptea.coreSystem.expSetup.laser.l_thermal,
+                                     poptea.coreSystem.l_thermal,
                                      myEmissionNoise ) ;
 //poptea.coreSystem.LMA.LMA_workspace.emissionExperimental//
 

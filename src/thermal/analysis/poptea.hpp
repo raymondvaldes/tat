@@ -68,7 +68,7 @@ public:
   void loadExperimentalData( const std::vector<double> data );
   void setParameterstoFit( class math::estimation::unknownList parameters );
   void setParametertoHoldX(enum physicalModel::labels::Name currentParameterX_);
-  void saveListunknowns(  );
+  void saveListunknowns( void );
 
   double meanError( const std::vector<double> curveBF,
                     const std::vector<double> curveRef );

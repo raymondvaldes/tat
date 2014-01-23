@@ -41,7 +41,7 @@ namespace analysis{
 Poptea::Poptea( const class Kernal coreSystem_ )
   : coreSystem( coreSystem_ )
 {
-  const size_t N = coreSystem.expSetup.laser.l_thermal.size();
+  const size_t N = coreSystem.l_thermal.size();
   ref_PHASE_BF.resize(N);
   experimental_PHASE_BF.resize(N);
   current_PHASE_BF.resize(N);

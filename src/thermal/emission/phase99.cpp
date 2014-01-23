@@ -35,7 +35,7 @@ void phase99( const class thermal::analysis::Kernal &popteaCore,
   OpenMP framework.  This gives significant increases in the speed of the code
   for all ranges of L_end.  This also allows the code to be parallelized at
   a very high level. No further modifications of the code is necessary.*/
-  const size_t L_end = popteaCore.expSetup.laser.L_end;
+  const size_t L_end = popteaCore.L_end;
   size_t n = 0;
 
   if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::OneDimNumLin )
@@ -64,7 +64,7 @@ void phase99( const class thermal::analysis::Kernal &popteaCore,
 std::vector<double>
 phase99( const class thermal::analysis::Kernal &popteaCore)
 {
-  const size_t n = popteaCore.expSetup.laser.l_thermal.size();
+  const size_t n = popteaCore.l_thermal.size();
   std::vector<double> results(n);
 
   phase99( popteaCore, results );

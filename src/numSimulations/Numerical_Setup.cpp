@@ -246,22 +246,7 @@ void solveMatrix(const int n, const std::vector<double>& b,
   return;
 }
 
-double omega(const double L_coat, const double l_thermal, const double k_c,
-             const double psi_c)
-{
-    return ( k_c / psi_c ) / ( pow(L_coat * l_thermal,2) );
-}
 
-double lthermal(const double L_coat, const double k_c, const double psi_c,
-                const double omega)
-{
-    double lthermal = k_c;
-    lthermal /= psi_c*omega;
-    lthermal = sqrt(lthermal);
-    lthermal /= L_coat;
-
-    return lthermal;
-}
 
 
 

@@ -28,6 +28,7 @@ License
 #include "numSimulations/Numerical_Temperature.h"
 #include "algorithms/statistical_tools.hpp"
 #include "math/utility.hpp"
+#include "thermal/thermal.hpp"
 
 void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     const class thermal::model thermalsys,
@@ -63,7 +64,7 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
   b_steady(mesh.Nend-1, std::vector<double>(mesh.M2));
 
 /// Setup initial conditions for the transient temperature field:
-  const double l_thermal = lthermal(L_coat, k1_thermal->offset,
+  const double l_thermal = thermal::lthermal(L_coat, k1_thermal->offset,
                                     psi1_thermal->offset, omega1);
   const std::complex<double>
   Tinfo = Tac1D_ana(mesh.z_real[0] / L_coat, R0, R1, epsilon,

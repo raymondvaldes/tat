@@ -59,9 +59,24 @@ public:
   ~Kernal( void );
 
 
-void thermalSetup( const double lmin_, const double lmax_, //MUST BE REMOVED
+
+
+
+  double l_min, l_max; ///MUST REMOVE
+  size_t L_end;     ///MUST REMOVE
+  std::vector<double> omegas; ///MUST REMOVE
+  std::vector<double> l_thermal;  ///MUST REMOVE
+  double thermalSetupTEMP(const double lmin_, const double lmax_,
+                          const double L_coat, const double kc, const double psic,
+                          const size_t L_end_);
+  void updateNMeasurements();
+  void thermalSetup( const double lmin_, const double lmax_, //MUST BE REMOVED
                    const size_t LendMin);                  //MUST BE REMOVED
-double bEval(void) const;                                 //MUST BE REMOVED
+  double bEval(void) const;                                 //MUST BE REMOVED
+
+
+
+
 };
 
 

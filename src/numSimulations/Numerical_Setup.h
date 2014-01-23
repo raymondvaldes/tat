@@ -74,12 +74,6 @@ double Iheat_int(const double Isteady,const double Itransient,
 double tau_0(const double omega);
 double x_bias(const double Xmean, const double Xstddev);
 
-double omega(const double L_coat, const double l_thermal, const double k_c,
-             const double psi_c);
-
-double lthermal(const double L_coat, const double k_c, const double psi_c,
-                const double omega);
-
 class perturbStruct
 {
   public:

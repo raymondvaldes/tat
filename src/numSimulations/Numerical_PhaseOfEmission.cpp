@@ -30,6 +30,7 @@ License
 #include "thermal/emission.hpp"
 #include "thermal/model.hpp"
 #include "thermal/heat/heat2DAna.hpp"
+#include "thermal/thermal.hpp"
 
 double PhaseOfEmission1DNum( const int flag,
                              const class thermal::analysis::Kernal &popteaCore)
@@ -38,7 +39,7 @@ double PhaseOfEmission1DNum( const int flag,
                               popteaCore.thermalsys.mesh.M2);
 
   //// Acquire Numerical Temperature
-  const double omega = popteaCore.expSetup.laser.omegas[flag];
+  const double omega = popteaCore.omegas[flag];
   temperature_1D( popteaCore.TBCsystem,
                   popteaCore.thermalsys,
                   popteaCore.expSetup, omega, Tprofile);
@@ -86,7 +87,7 @@ double PhaseOfEmission2DAna( const int flag,
 
     ///Populate Temperature Vector
     heatmodel2DAna.TemperatureDistro(T2DProfile,
-                                     popteaCore.expSetup.laser.omegas[flag]);
+                                     popteaCore.omegas[flag]);
 
     ///Initiate emission model
     const class thermal::Emission emission(popteaCore.expSetup.detector.wavelength,
@@ -105,7 +106,7 @@ double PhaseOfEmission1DAna(const int flag,
                             const thermal::analysis::Kernal &popteaCore)
 {
   /*See 2004 emission paper equation 19*/
-  const double omega1 = popteaCore.expSetup.laser.omegas[flag];
+  const double omega1 = popteaCore.omegas[flag];
   const double lambda = popteaCore.TBCsystem.coating.lambda;
   const double Esigma = popteaCore.TBCsystem.optical.Emit1;
   const double gamma  = popteaCore.TBCsystem.gammaEval();
@@ -113,7 +114,7 @@ double PhaseOfEmission1DAna(const int flag,
   const double L_coat = popteaCore.TBCsystem.coating.depth;
   const double k_c    = popteaCore.TBCsystem.coating.kthermal.offset;
   const double psi_c  = popteaCore.TBCsystem.coating.psithermal.offset;
-  const double l = lthermal(L_coat,k_c,psi_c,omega1);
+  const double l = thermal::lthermal(L_coat,k_c,psi_c,omega1);
 
   constexpr std::complex<double> _i_ (0.0, 1.0);
 

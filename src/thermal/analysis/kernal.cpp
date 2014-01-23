@@ -27,8 +27,10 @@ License
 #include "models/expEquipment.hpp"
 #include "models/numericalmodel.hpp"
 #include "math/estimation/parameterestimation.hpp"
+#include "math/utility.hpp"
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
+#include "thermal/thermal.hpp"
 
 namespace thermal {
 namespace analysis{
@@ -53,7 +55,7 @@ Kernal::Kernal( class equipment::setup expSetup_,
   const size_t LendMinDecade = 50;
 
   // Populate the experimental phase values in parameters99
-  expSetup.laser.L_end = LendMinDecade;
+  L_end = LendMinDecade;
   expSetup.q_surface = 0;
   thermalSetup(l_min, l_max, LendMinDecade);
 }
@@ -122,19 +124,109 @@ Kernal::~Kernal(void){}
 void Kernal::thermalSetup(const double lmin_, const double lmax_,
                                 const size_t LendMin)
 {
-  expSetup.laser.L_end = expSetup.laser.thermalSetup(lmin_, lmax_,
-                                      TBCsystem.coating.depth,
-                                      TBCsystem.coating.kthermal.offset,
-                                      TBCsystem.coating.psithermal.offset ,
-                                      LendMin);
+  L_end = thermalSetupTEMP( lmin_, lmax_,
+                            TBCsystem.coating.depth,
+                            TBCsystem.coating.kthermal.offset,
+                            TBCsystem.coating.psithermal.offset , LendMin);
 
-  LMA.LMA_workspace.updateArraySize(expSetup.laser.L_end,
-                                    LMA.unknownParameters.Nsize());
+  LMA.LMA_workspace.updateArraySize( L_end, LMA.unknownParameters.Nsize()  );
 }
 
 double Kernal::bEval(void) const
 {
   return expSetup.laser.radius / TBCsystem.coating.depth;
+}
+
+
+double  Kernal::thermalSetupTEMP(const double lmin_, const double lmax_,
+                           const double L_coat, const double kc,
+                           const double psic, const size_t L_end_)
+{
+  BOOST_ASSERT_MSG( ( lmin_ < lmax_ ) , "check min-max logic\n\n" );
+  BOOST_ASSERT_MSG( ( L_coat > 0 ) && ( L_end_ > 0 ) , "check L inputs\n\n" );
+  BOOST_ASSERT_MSG( ( kc > 0 ) && ( psic > 0 ) , "check kc inputs\n\n" );
+
+  constexpr size_t box = 7;
+  constexpr double rangeLim[box] = {1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3};
+
+  BOOST_ASSERT_MSG( ( lmin_ >= rangeLim[0] ) &&
+                    ( lmax_ <= rangeLim[box-1] )  , "check min-max range\n\n" );
+  l_min = lmin_;
+  l_max = lmax_;
+  /* I need to create a function that determines the number of measurements
+  necessary to satisfy L_end_ which is the minimum  number of measurements per
+  decade. Once I determine the number of measurements I need then I can use
+  the ::rangelog10 function to populate the range.*/
+
+  double rangeFills[box-1] = {0};
+  for(size_t i = 0; i < box-1 ; ++i)
+  {
+    if( l_min >= rangeLim[i+1]  || l_max <= rangeLim[i])
+    {
+      rangeFills[i] = 0;
+    }
+    else if( l_min <= rangeLim[i] && l_max >= rangeLim[i+1])
+    {
+      rangeFills[i] = 1;
+    }
+    else
+    {
+      double start = 0;
+      if(l_min <= rangeLim[i])
+      {
+        start = 0;
+      }
+      else if( l_min < rangeLim[i+1] )
+      {
+        start = math::percentilelog10(rangeLim[i], rangeLim[i+1], l_min);
+      }
+
+      double end1 = 1;
+      if(l_max >= rangeLim[i+1])
+      {
+        end1 = 1;
+      }
+      else if( l_max < rangeLim[i+1] )
+      {
+        end1 = math::percentilelog10(rangeLim[i], rangeLim[i+1], l_max);
+      }
+
+      rangeFills[i] = end1 - start;
+    }
+  }
+
+  double sum = 0;
+  for(size_t i = 0; i < box-1 ; ++i)
+  {
+    sum += rangeFills[i];
+  }
+
+  if( sum > 1)
+  {
+    L_end = L_end_;
+    L_end *=sum;
+  }
+  else if(sum <= 1)
+  {
+    L_end = L_end_;
+  }
+
+  updateNMeasurements();
+  math::range1og10(l_min, l_max, L_end, l_thermal);
+
+  for (size_t i=0; i < L_end; ++i )
+  {
+    omegas[i] = thermal::omega(L_coat, l_thermal[i], kc, psic);
+  }
+
+  return L_end;
+}
+
+
+void  Kernal::updateNMeasurements()
+{
+  omegas.resize(L_end);
+  l_thermal.resize(L_end);
 }
 
 

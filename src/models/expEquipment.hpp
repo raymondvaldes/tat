@@ -50,31 +50,18 @@ private:
   double offset, amplitude;
   void update(void);
 
-  double l_min, l_max; ///MUST REMOVE
-
 public:
   double Qlaser;
   double radius;
   double Is;
   double It;
 
-  size_t L_end;     ///MUST REMOVE
-
-  std::vector<double> omegas; ///MUST REMOVE
-  std::vector<double> l_thermal;  ///MUST REMOVE
-
   explicit Laser(const double a, const double b, const double c,
                  const double d);
-
   ~Laser();
 
   void updateRadius(const double r);
   void updatePower(const double Qpower);
-
-  double thermalSetup(const double lmin_, const double lmax_,
-                      const double L_coat, const double kc, const double psic,
-                      const size_t L_end_);
-  void updateNMeasurements();
 };
 
 class setup
