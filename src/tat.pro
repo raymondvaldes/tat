@@ -117,7 +117,6 @@ SOURCES += \
     algorithms/ThermalProp_Analysis.cpp \
     algorithms/statistical_tools.cpp \
     algorithms/sensitivity_analysis.cpp \
-    investigations/sensitivity_paper.cpp \
     numSimulations/Numerical_Temperature.cpp \
     numSimulations/Numerical_Setup.cpp \
     numSimulations/Numerical_PhaseOfEmission.cpp \
@@ -156,7 +155,6 @@ SOURCES += \
 HEADERS += \
     algorithms/ThermalProp_Analysis.h \
     algorithms/statistical_tools.hpp \
-    investigations/sensitivity_paper.h \
     numSimulations/Numerical_Temperature.h \
     numSimulations/Numerical_Setup.h \
     numSimulations/Numerical_PhaseOfEmission.h \

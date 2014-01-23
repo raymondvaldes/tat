@@ -62,9 +62,9 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
       int info = 0;
       myfile << i << "\t";
 
-      paramter_estimation(P, N, ParaEstSetting, &info, &nfev,
-                          xInitial, poptea.coreSystem, factorMax, factorScale,
-                          xpredicted);
+      poptea.coreSystem.LMA.xpredicted =
+          paramter_estimation( poptea.coreSystem, &info, &nfev );
+
       poptea.coreSystem.LMA.LMA_workspace.MSE =
           MSE(poptea.coreSystem.expSetup.laser.L_end,
               poptea.coreSystem.LMA.LMA_workspace.emissionExperimental,

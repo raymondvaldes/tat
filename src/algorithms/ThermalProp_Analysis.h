@@ -33,15 +33,8 @@ License
 #include "algorithms/ThermalProp_Analysis.h"
 #include "models/physicalmodel.hpp"
 
-int paramter_estimation( const size_t m, const size_t  n,
-                         class math::estimation::settings ParaEstSetting,
-                         int *info, int *nfev,
-                         double *x, class thermal::analysis::Kernal popteaCore,
-                         const double factorMax, const double factorScale,
-                         double *xpredicted);
-
 std::vector<double>
-paramter_estimation(class thermal::analysis::Kernal popteaCore, int *info,
+paramter_estimation(thermal::analysis::Kernal &popteaCore, int *info,
                     int *nfev);
 
 void ThermalProp_Analysis(int, int N, double*x, double*fvec, int*,

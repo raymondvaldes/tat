@@ -61,5 +61,17 @@ void phase99( const class thermal::analysis::Kernal &popteaCore,
   return;
 }
 
+std::vector<double>
+phase99( const class thermal::analysis::Kernal &popteaCore)
+{
+  const size_t n = popteaCore.expSetup.laser.l_thermal.size();
+  std::vector<double> results(n);
+
+  phase99( popteaCore, results );
+
+  return results;
+}
+
+
   }
 }

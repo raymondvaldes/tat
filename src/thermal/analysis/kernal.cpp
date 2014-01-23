@@ -46,7 +46,6 @@ Kernal::Kernal( class equipment::setup expSetup_,
     DataDirectory(DataDirectory_)
 {
   thermalsys.mesh.iter = 1000;
-  LMA.LMA_workspace.MSETol = 1e-8;
 
   /// Heat Transfer and Emission models
   const double l_min = .04;

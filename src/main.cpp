@@ -52,8 +52,9 @@ int main( int argc, char *argv[ ] )
 //    investigations::sensitivityvaldes2013::run( dir );
     investigations::manyfit::run( dir );
 
-    std::cout << "\nStopwatch: " << std::setprecision(3)
-                <<  globalStopWatch.returnTime() <<" sec.\n\n";
+    std::cout << "\nStopwatch: "
+              << std::setprecision(3)
+              <<  globalStopWatch.returnTime() <<" sec.\n\n";
   }
   return 0;
 }

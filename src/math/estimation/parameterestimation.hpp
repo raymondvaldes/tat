@@ -44,11 +44,13 @@ private:
   double initialGuess;
   double bestfitval;
 
+
+
 public:
-  explicit unknown(enum physicalModel::labels::Name name_,
+  unknown(enum physicalModel::labels::Name name_,
           const double lower_,
           const double upper_);
-  explicit unknown(enum physicalModel::labels::Name name_,
+  unknown(enum physicalModel::labels::Name name_,
           const double lower_,
           const double upper_,
           const double initialGuess_);
@@ -78,10 +80,12 @@ public:
                   const double lower,
                   const double upper);
   size_t Nsize(void);       //BUGS TODO REMOVE
-  void NAssign(size_t xInput); //BUGS TODO REMOVE
 
   static class unknownList
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
+
+  class unknown getParameter( physicalModel::labels::Name label );
+
   ~unknownList() ;
 };
 
@@ -97,11 +101,10 @@ public:
   std::vector<double> emissionNominal;
   std::vector<double> emissionCurrent;
 
-  double MSE, MSEinitial, MSETol, fvecTotal;
+  double MSE, MSEinitial, fvecTotal;
 
   ~LMA_workingArrays(void);
   void updateArraySize(const size_t Lend_, const size_t N);
-  void deleteArray(void);
 };
 
 
@@ -145,12 +148,7 @@ public:
   void resetInitialGuess(const std::vector<double> input);
 };
 
-//class tools
-//{
-//  class LMA myLMA;
-//  class
 
-//}
 
 
   }
