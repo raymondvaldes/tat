@@ -25,22 +25,15 @@ License
 #ifndef CONSTRAINED_HPP
 #define CONSTRAINED_HPP
 
-#include <cmath>
-#include <iostream>
-#include "math/estimation/constrained.hpp"
 
 namespace math{
   namespace estimation{
-
 
 double x_limiter1( const double xi );
 double x_limiter2( const double xi, const double x_min, const double x_max );
 
 double kx_limiter1( const double ki );
 double kx_limiter2( const double ki, const double k_min, const double k_max );
-
-
-
 
   }
 }
