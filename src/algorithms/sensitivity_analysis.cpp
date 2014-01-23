@@ -32,8 +32,7 @@ License
 #include "math/numIntegration/gslfunc.hpp"
 
 void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
-             const size_t interants, const double factorMax,
-             const double factorScale)
+             const size_t interants)
 {
   const size_t P = poptea.coreSystem.expSetup.laser.L_end;
   const size_t N = poptea.coreSystem.LMA.unknownParameters.Nsize();

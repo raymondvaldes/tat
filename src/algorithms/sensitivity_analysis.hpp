@@ -37,8 +37,7 @@ License
 #include "thermal/analysis/poptea.hpp"
 
 void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
-             const size_t interants, const double factorMax,
-             const double factorScale);
+             const size_t interants);
 
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,
                            const std::vector<double>& calibrationTable,
