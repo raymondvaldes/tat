@@ -80,13 +80,6 @@ double omega(const double L_coat, const double l_thermal, const double k_c,
 double lthermal(const double L_coat, const double k_c, const double psi_c,
                 const double omega);
 
-size_t xINTrandom(const size_t xmin, const size_t xmax);
-
-
-
-
-double percentile(const double xmin, const double xmax, const double x);
-
 class perturbStruct
 {
   public:

@@ -29,9 +29,7 @@ License
 #include <iostream>
 
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
-
-
-
+#include "math/numIntegration/gslfunc.hpp"
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
                    const size_t x, const size_t y, const size_t z)
@@ -386,27 +384,7 @@ void Amatrix(const size_t P, const size_t N, const double*fjac, double* Amatrix)
     return;
 }
 
-double fintegrate(double x, void *p)
-{
-  struct funcClass &params = *reinterpret_cast<struct funcClass *>(p);
-  return params.eval(x);
-}
 
-double integrate(struct funcClass *Func, double xlow, double xhigh)
-{
-    //http://www.bnikolic.co.uk/nqm/1dinteg/gslgk.html
-
-    struct funcClass &params = *Func;
-
-    gsl_function F;
-    F.function = &fintegrate;
-    F.params = reinterpret_cast<void *>(&params);
-
-    Func->code = gsl_integration_qng(&F, xlow, xhigh, params.epsabs,
-                                     params.epsrel, &params.result,
-                                     &params.error, &params.neval);
-    return Func->result;
-}
 
 double MSEarea(const size_t N, std::vector<double> &func1,
                std::vector<double> &func2)
@@ -432,6 +410,7 @@ double MSEarea1(size_t N, double* func1, double* func2, double* xvar)
 
 */
   ///Startup and initialization
+  using namespace math::numIntegration;
   struct funcClass *Func1;
   Func1 = new struct funcClass (xvar, func1, N);
   struct funcClass *Func2;

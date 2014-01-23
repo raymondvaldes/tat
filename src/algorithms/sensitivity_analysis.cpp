@@ -29,6 +29,7 @@ License
 #include "thermal/analysis/poptea.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "math/utility.hpp"
+#include "math/numIntegration/gslfunc.hpp"
 
 void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              const size_t interants, const double factorMax,
@@ -106,8 +107,8 @@ double evaluateUncertainty(const double MSEarea, double* perturbationTable,
         calibration[i] = calibrationTable[i];
     }
 
-    struct funcClass *Func1;
-    Func1 = new struct funcClass(perturbationTable, calibration, xnum);
+    struct math::numIntegration::funcClass *Func1;
+    Func1 = new struct math::numIntegration::funcClass(perturbationTable, calibration, xnum);
 
     const double stepsize = fabs(perturbationTable[1] -perturbationTable[0])/1000;
     double perturbation = 0;
