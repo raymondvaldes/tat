@@ -25,6 +25,7 @@ License
 #ifndef NUMERICAL_PHASEOFEMISSION_H_INCLUDED
 #define NUMERICAL_PHASEOFEMISSION_H_INCLUDED
 
+#include <cstddef>
 #include "thermal/analysis/kernal.hpp"
 
 class Temperature

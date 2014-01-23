@@ -25,6 +25,7 @@ License
 #ifndef estimation_HPP
 #define estimation_HPP
 
+#include <vector>
 #include "models/physicalmodel.hpp"
 
 namespace math{
