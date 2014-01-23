@@ -34,10 +34,7 @@ License
 void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              const size_t interants)
 {
-  const size_t P = poptea.coreSystem.expSetup.laser.L_end;
   const size_t N = poptea.coreSystem.LMA.unknownParameters.Nsize();
-  class math::estimation::settings ParaEstSetting(poptea.coreSystem.LMA.Settings);
-
 
 /// Scale jacobian if enabled
   double *xpredicted = new double[N];
@@ -65,7 +62,7 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
           paramter_estimation( poptea.coreSystem, &info, &nfev );
 
       poptea.coreSystem.LMA.LMA_workspace.MSE =
-          MSE(poptea.coreSystem.expSetup.laser.L_end,
+          MSE(poptea.coreSystem.L_end,
               poptea.coreSystem.LMA.LMA_workspace.emissionExperimental,
               poptea.coreSystem.LMA.LMA_workspace.predicted);
 

@@ -49,7 +49,7 @@ void run(const class filesystem::directory dir)
                               poptea.coreSystem.LMA.LMA_workspace.emissionNominal );
 
   /// execute
-  for(size_t nn = 0; nn < poptea.coreSystem.expSetup.laser.L_end; ++nn )
+  for(size_t nn = 0; nn < poptea.coreSystem.L_end ; ++nn )
   {
     poptea.coreSystem.LMA.LMA_workspace.emissionExperimental[nn]
           = poptea.coreSystem.LMA.LMA_workspace.emissionNominal[nn];

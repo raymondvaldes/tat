@@ -50,15 +50,11 @@ paramter_estimation(class thermal::analysis::Kernal &popteaCore, int *info,
   parameters are updated.
 */
   using namespace math::estimation;
-  const size_t m = popteaCore.expSetup.laser.l_thermal.size();
+  const size_t m = popteaCore.l_thermal.size();
   const size_t n = popteaCore.LMA.unknownParameters.vectorUnknowns.size();
   class settings ParaEstSetting = popteaCore.LMA.Settings;
 
-  const double factorMax = popteaCore.LMA.Settings.factorMax;
-  const double factorScale = popteaCore.LMA.Settings.factorScale;
-
   double *x = new double[n];
-
   double *fvec = new double[m];
   double *qtf = new double[n];
   double *wa1 = new double[n];
@@ -117,7 +113,7 @@ paramter_estimation(class thermal::analysis::Kernal &popteaCore, int *info,
   initial guesses. This is let to run a fixed number of iterations. */
 
   popteaCore.LMA.LMA_workspace.fvecTotal =
-      SobjectiveLS( popteaCore.expSetup.laser.L_end,
+      SobjectiveLS( popteaCore.L_end,
                     popteaCore.LMA.LMA_workspace.emissionExperimental,
                     popteaCore.LMA.LMA_workspace.predicted);
 
@@ -253,7 +249,7 @@ void printPEstimates( class thermal::analysis::Kernal popteaCore ,
   }
 
   popteaCore.LMA.LMA_workspace.MSE = MSE(
-        popteaCore.expSetup.laser.L_end,
+        popteaCore.L_end,
         popteaCore.LMA.LMA_workspace.emissionExperimental,
         popteaCore.LMA.LMA_workspace.predicted);
 
@@ -284,7 +280,7 @@ void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
   thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
 
 /// Evaluate Objective function
-  for(size_t n = 0 ; n < popteaCore.expSetup.laser.L_end ; ++n )
+  for(size_t n = 0 ; n < popteaCore.L_end ; ++n )
   {
      fvec[n] =
      popteaCore.LMA.LMA_workspace.emissionExperimental[n] -
@@ -294,7 +290,7 @@ void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
 
 /// Print stuff to terminal
   popteaCore.LMA.LMA_workspace.MSE =
-      MSE( popteaCore.expSetup.laser.L_end,
+      MSE( popteaCore.L_end,
            popteaCore.LMA.LMA_workspace.emissionExperimental,
            popteaCore.LMA.LMA_workspace.predicted );
 //  printPEstimates( popteaCore ) ;
