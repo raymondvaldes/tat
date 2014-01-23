@@ -54,7 +54,7 @@ void run(const class filesystem::directory dir)
     poptea.coreSystem.LMA.LMA_workspace.emissionExperimental[nn]
           = poptea.coreSystem.LMA.LMA_workspace.emissionNominal[nn];
   }
-  fitting( poptea, xInitial, interants, 10, 5 );
+  fitting( poptea, xInitial, interants );
   delete[] xInitial;
 
 }
