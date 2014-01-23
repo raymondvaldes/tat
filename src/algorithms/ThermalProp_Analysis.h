@@ -31,6 +31,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "numSimulations/Numerical_Setup.h"
 #include "algorithms/ThermalProp_Analysis.h"
+#include "models/physicalmodel.hpp"
 
 int paramter_estimation( const size_t m, const size_t  n,
                          class math::estimation::settings ParaEstSetting,
@@ -46,7 +47,9 @@ paramter_estimation(class thermal::analysis::Kernal popteaCore, int *info,
 void ThermalProp_Analysis(int, int N, double*x, double*fvec, int*,
                           class thermal::analysis::Kernal popteaCore );
 
-void printPEstimates( class thermal::analysis::Kernal popteaCore ) ;
+void printPEstimates( class thermal::analysis::Kernal popteaCore ,
+                      const class physicalModel::TBCsystem TBCSystem);
+
 void printfJac(const size_t N, const size_t P, const double*fjac);
 void InformationIndexAll(const size_t P, const size_t N,
                          const class thermal::analysis::Kernal popteaCore);

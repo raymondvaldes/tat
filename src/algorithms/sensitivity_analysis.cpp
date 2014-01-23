@@ -32,10 +32,9 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale)
 {
-  class thermal::analysis::Kernal popteaCore = poptea.coreSystem;
-  const size_t P = popteaCore.expSetup.laser.L_end;
-  const size_t N = popteaCore.LMA.unknownParameters.Nsize();
-  class math::estimation::settings ParaEstSetting(popteaCore.LMA.Settings);
+  const size_t P = poptea.coreSystem.expSetup.laser.L_end;
+  const size_t N = poptea.coreSystem.LMA.unknownParameters.Nsize();
+  class math::estimation::settings ParaEstSetting(poptea.coreSystem.LMA.Settings);
 
 
 /// Scale jacobian if enabled
@@ -61,21 +60,21 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
       myfile << i << "\t";
 
       paramter_estimation(P, N, ParaEstSetting, &info, &nfev,
-                          xInitial, popteaCore, factorMax, factorScale,
+                          xInitial, poptea.coreSystem, factorMax, factorScale,
                           xpredicted);
-      popteaCore.LMA.LMA_workspace.MSE =
-          MSE(popteaCore.expSetup.laser.L_end,
-              popteaCore.LMA.LMA_workspace.emissionExperimental,
-              popteaCore.LMA.LMA_workspace.predicted);
+      poptea.coreSystem.LMA.LMA_workspace.MSE =
+          MSE(poptea.coreSystem.expSetup.laser.L_end,
+              poptea.coreSystem.LMA.LMA_workspace.emissionExperimental,
+              poptea.coreSystem.LMA.LMA_workspace.predicted);
 
-      myfile << popteaCore.TBCsystem.gammaEval() << "\t"
-             << popteaCore.TBCsystem.a_subEval() << "\t"
-             << popteaCore.TBCsystem.optical.Emit1 << "\t"
-             << popteaCore.TBCsystem.optical.R1<< "\t"
-             << popteaCore.TBCsystem.coating.lambda << "\t"
-             << popteaCore.LMA.LMA_workspace.MSE << "\n";
+      myfile << poptea.coreSystem.TBCsystem.gammaEval() << "\t"
+             << poptea.coreSystem.TBCsystem.a_subEval() << "\t"
+             << poptea.coreSystem.TBCsystem.optical.Emit1 << "\t"
+             << poptea.coreSystem.TBCsystem.optical.R1<< "\t"
+             << poptea.coreSystem.TBCsystem.coating.lambda << "\t"
+             << poptea.coreSystem.LMA.LMA_workspace.MSE << "\n";
 
-      printPEstimates( popteaCore ) ;
+      printPEstimates( poptea.coreSystem , poptea.coreSystem.TBCsystem ) ;
       xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
               x_ini10(.8), x_ini10(0.57)};
   }
