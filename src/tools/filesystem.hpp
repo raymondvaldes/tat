@@ -25,6 +25,9 @@ License
 #ifndef FILESYSTEM_HPP_INCLUDED
 #define FILESYSTEM_HPP_INCLUDED
 
+#include <string>
+#include "tools/filesystem.hpp"
+
 namespace filesystem
 {
 

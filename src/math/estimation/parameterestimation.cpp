@@ -22,6 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <boost/foreach.hpp>
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "numSimulations/Numerical_Setup.h"
 #include "math/utility.hpp"
