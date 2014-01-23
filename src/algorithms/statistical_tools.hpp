@@ -28,10 +28,6 @@ License
 #include <vector>
 #include <cstddef>
 
-#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
-
-
-
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
                    const size_t x, const size_t y, const size_t z);
 

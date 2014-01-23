@@ -123,7 +123,6 @@ SOURCES += \
     numSimulations/Numerical_PhaseOfEmission.cpp \
     tools/filesystem.cpp \
     tools/timing.cpp \
-    models/Thermal_models.cpp \
     models/expEquipment.cpp \
     models/physicalmodel.cpp \
     models/numericalmodel.cpp \
@@ -150,7 +149,8 @@ SOURCES += \
     math/numIntegration/simpsons_3_8.cpp \
     math/estimation/cosfit.cpp \
     math/numIntegration/gslfunc.cpp \
-    tools/export.cpp
+    tools/export.cpp \
+    thermal/heat/heat2DAna.cpp
 
 #header files
 HEADERS += \
@@ -163,7 +163,6 @@ HEADERS += \
     tools/filesystem.hpp \
     tools/timing.h \
     algorithms/sensitivity_analysis.hpp \
-    models/Thermal_models.h \
     models/expEquipment.hpp \
     models/physicalmodel.hpp \
     models/numericalmodel.hpp \
@@ -192,4 +191,5 @@ HEADERS += \
     math/numIntegration/simpsons_3_8.hpp \
     math/estimation/cosfit.hpp \
     math/numIntegration/gslfunc.hpp \
-    tools/export.hpp
+    tools/export.hpp \
+    thermal/heat/heat2DAna.hpp

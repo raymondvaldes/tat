@@ -29,6 +29,7 @@ License
 #include "numSimulations/Numerical_Setup.h"
 #include "thermal/emission.hpp"
 #include "thermal/model.hpp"
+#include "thermal/heat/heat2DAna.hpp"
 
 double PhaseOfEmission1DNum( const int flag,
                              const class thermal::analysis::Kernal &popteaCore)

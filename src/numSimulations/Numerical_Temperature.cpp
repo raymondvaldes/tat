@@ -23,7 +23,6 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "models/physicalmodel.hpp"
-#include "models/Thermal_models.h"
 #include "numSimulations/Numerical_Setup.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Temperature.h"
