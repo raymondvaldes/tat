@@ -22,17 +22,16 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef THERMAL_MODELS_H_INCLUDED
-#define THERMAL_MODELS_H_INCLUDED
+#ifndef HEAT2DANA_HPP
+#define HEAT2DANA_HPP
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/bimap.hpp>
-#include <boost/bimap/unordered_set_of.hpp>
-#include <boost/bimap/list_of.hpp>
-#include <boost/assign/list_of.hpp>
-#include <boost/assign/list_inserter.hpp>
-#include <gsl/gsl_sf.h>
-#include "models/numericalmodel.hpp"
+#include <complex>
+
+#include "numSimulations/Numerical_Setup.h"
+#include "algorithms/statistical_tools.hpp"
+#include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "math/utility.hpp"
+#include "math/numIntegration/simpsons_3_8.hpp"
 
 class HeatModel2DAna
 {
@@ -110,4 +109,4 @@ private:
 };
 
 
-#endif // THERMAL_MODELS_H_INCLUDED
+#endif // HEAT2DANA_HPP

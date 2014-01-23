@@ -29,7 +29,6 @@ License
 #include <complex>
 
 #include "models/physicalmodel.hpp"
-#include "models/Thermal_models.h"
 #include "models/expEquipment.hpp"
 #include "thermal/thermal.hpp"
 #include "thermal/construct.hpp"
