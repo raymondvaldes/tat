@@ -66,17 +66,16 @@ double PhaseOfEmission2DAna( const int flag,
     const double csub = popteaCore.TBCsystem.substrate.c;
     const double ccoat = popteaCore.TBCsystem.coating.c;
 
-    const class HeatModel2DAna heatmodel2DAna(popteaCore.TBCsystem.optical.R0,
-                                              popteaCore.TBCsystem.optical.R1,
-                                              popteaCore.TBCsystem.coating.lambda,
-                                              popteaCore.expSetup.laser.It,
-                                              csub, popteaCore.TBCsystem.a_subEval(),
-                                              popteaCore.TBCsystem.gammaEval(),
-                                              popteaCore.bEval(),
-                                              k_coat, Lcoat, psi_coat,
-                                              ccoat,
-                                              popteaCore.TBCsystem.substrate.lambda,
-                                              popteaCore.thermalsys.mesh);
+    const class HeatModel2DAna
+        heatmodel2DAna( popteaCore.TBCsystem.optical.R0,
+                        popteaCore.TBCsystem.optical.R1,
+                        popteaCore.TBCsystem.coating.lambda,
+                        popteaCore.expSetup.laser.It,
+                        csub, popteaCore.TBCsystem.a_subEval(),
+                        popteaCore.TBCsystem.gammaEval(),
+                        popteaCore.bEval(), k_coat, Lcoat, psi_coat, ccoat,
+                        popteaCore.TBCsystem.substrate.lambda,
+                        popteaCore.thermalsys.mesh) ;
 
     /// Setup Temperature[n][r][z] Vector
     std::vector< std::vector< std::vector< double > > > T2DProfile;
