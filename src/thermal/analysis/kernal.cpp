@@ -25,7 +25,6 @@ License
 #include <exception>
 #include "thermal/analysis/kernal.hpp"
 #include "models/expEquipment.hpp"
-#include "models/Thermal_models.h"
 #include "models/numericalmodel.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "tools/filesystem.hpp"

@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <chrono>
 #include <iostream>
+#include <iomanip>
 
 #include "tools/timing.h"
 
@@ -55,7 +56,4 @@ double stopwatch::returnTime(void)
     return clockSpan.count();
 }
 
-void stopwatch::displayTime(void)
-{
-    std::cout << "\nStopwatch: " << returnTime() <<" sec.\n\n";
-}
+

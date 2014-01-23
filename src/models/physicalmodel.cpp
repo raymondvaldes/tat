@@ -26,7 +26,6 @@ License
 #include <cmath>
 
 #include "models/physicalmodel.hpp"
-#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "math/utility.hpp"
 
