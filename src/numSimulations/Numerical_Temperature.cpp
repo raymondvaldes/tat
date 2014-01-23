@@ -28,6 +28,7 @@ License
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 #include "numSimulations/Numerical_Temperature.h"
 #include "algorithms/statistical_tools.hpp"
+#include "math/utility.hpp"
 
 void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     const class thermal::model thermalsys,
@@ -713,11 +714,11 @@ double r_xi(const double xi, const double beta)
     //z_norm accounts for z_real after it has been normalized by
     //L_coat and L_substrat
 //    double B;
-    if (equalto(xi,0))
+    if ( math::equalto( xi , 0 ) )
     {
         return xi;
     }
-    else if (equalto(xi,1))
+    else if ( math::equalto(xi,1) )
     {
         return xi;
     }

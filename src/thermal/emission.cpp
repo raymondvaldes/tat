@@ -25,6 +25,9 @@ License
 #include "emission.hpp"
 #include "numSimulations/Numerical_Setup.h"
 #include "algorithms/statistical_tools.hpp"
+#include "math/utility.hpp"
+#include "math/estimation/cosfit.hpp"
+#include "math/numIntegration/simpsons_3_8.hpp"
 
 namespace thermal{
 Emission::Emission( const double detector_lam_, const double T_ref_,
@@ -104,7 +107,7 @@ double Emission::emissionAxial(std::vector<double> &Temperature) const
     constexpr   size_t z0 = 0;
     const       size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh.z_norm, z0, z1);
+    return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
 double Emission::emissionAxial(const class Temperature Tprofile,
@@ -123,7 +126,7 @@ double Emission::emissionAxial(const class Temperature Tprofile,
     constexpr   size_t z0 = 0;
     const       size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh.z_norm, z0, z1);
+    return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
 double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
@@ -140,7 +143,7 @@ double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
     const size_t z0 = 0;
     const size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * ::simpson_3_8(Ib, mesh.z_norm, z0, z1);
+    return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
 
@@ -190,7 +193,7 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
         EmissionTime[n] = emissionVolumetric2D( Temperature[n] );
     }
 
-    ::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
+    math::estimation::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
 
     return OAPemission[2];
 }
@@ -207,22 +210,21 @@ double Emission::phase1D(const class Temperature Tprofile) const
     }
 
     const double
-    offsetInitial = ::average(::arrayMax(EmissionTime, mesh.Nend),
-                              ::arrayMin(EmissionTime, mesh.Nend));
+    offsetInitial = math::average( math::arrayMax(EmissionTime, mesh.Nend),
+                                   math::arrayMin(EmissionTime, mesh.Nend));
     const double
-    amplitudeInitial = (::arrayMax(EmissionTime, mesh.Nend)
-                        -::arrayMin(EmissionTime, mesh.Nend)) / 2;
+    amplitudeInitial = (math::arrayMax(EmissionTime, mesh.Nend)
+                        -math::arrayMin(EmissionTime, mesh.Nend)) / 2;
 
     constexpr double
     phaseInitial = -M_PI_2;
 
     double OAPemission[3] = {offsetInitial, amplitudeInitial, phaseInitial};
 
-    ::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
+    math::estimation::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
 
     return OAPemission[2];
 }
-
 
 
 

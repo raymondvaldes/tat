@@ -23,10 +23,12 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "algorithms/sensitivity_analysis.hpp"
+#include "algorithms/statistical_tools.hpp"
 #include "thermal/emission/noise.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/poptea.hpp"
 #include "thermal/analysis/kernal.hpp"
+#include "math/utility.hpp"
 
 void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              const size_t interants, const double factorMax,
@@ -75,8 +77,9 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              << poptea.coreSystem.LMA.LMA_workspace.MSE << "\n";
 
       printPEstimates( poptea.coreSystem , poptea.coreSystem.TBCsystem ) ;
-      xInitial = new double[5]{x_ini10(2.3), x_ini10(3.8), x_ini10(42),
-              x_ini10(.8), x_ini10(0.57)};
+
+      xInitial = new double[5]{ math::x_ini10(2.3), math::x_ini10(3.8),
+          math::x_ini10(42), math::x_ini10(.8), math::x_ini10(0.57) };
   }
 
   myfile.close();

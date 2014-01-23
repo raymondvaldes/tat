@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef estimationINTERVAL_HPP_INCLUDED
 #define estimationINTERVAL_HPP_INCLUDED
+
 #include <functional>
 #include "math/bisection.hpp"
 

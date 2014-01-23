@@ -22,29 +22,57 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
 
-#include "thermal/analysis/kernal.hpp"
-#include "math/estimation/parameterestimation.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
+#include <cmath>
+#include <iostream>
 
-namespace thermal {
-namespace analysis{
+namespace math{
+  namespace estimation{
 
-class Poptea
+double x_limiter1( const double xi )
 {
-public:
-  class Kernal coreSystem;
-//  class math::estimation::LMA BFsolve;
-//  class math::sensitivityAnalysis::estIntervals BFintervals;
+    return exp(xi);
+}
 
-  explicit Poptea( const class Kernal coreSystem_) ;
-  ~Poptea( void );
+double x_limiter2( const double xi, const double x_min, const double x_max )
+{
+  // converts value from k-space to x_space. In k-space the parameter is free
+  // to be any value.  In x-space the parameter is constrained between x_min
+  // and x_max.
 
-  std::vector<double> paramter_estimation( int *info, int *nfev );
-};
+  double
+  x = x_max;
+  x -= x_min;
+  x /= 1 + exp(xi);
+  x += x_min;
 
+  if( x > x_max || x < x_min )
+  {
+    std::cout << "\nerror!! in x_limiter2" << x << "\t" << x_min;
+    std::cout << "\t" << x_max << "\n";
+  }
 
-}}
-#endif // poptea_HPP
+  return x;
+}
+
+double kx_limiter1( const double ki )
+{
+    //converts value to k-space
+//    assert(ki > 0);
+
+    return log(ki);
+}
+
+double kx_limiter2( const double ki, const double k_min, const double k_max )
+{
+//    std::cout << "\n\n"<< x_min <<"\t" <<  xi<< "\t" << x_max << "\n\n";
+//    std::cout << (xi > x_min) << "\n";
+//    std::cout << (xi < x_max) << "\n\n";
+//    assert(ki > k_min  && ki < k_max);
+
+    return log( ( (k_max - k_min) / (ki - k_min) ) - 1.);
+}
+
+  }
+}
+

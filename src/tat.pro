@@ -143,7 +143,13 @@ SOURCES += \
     math/sensitivityAnalysis/estimationInterval.cpp \
     tools/programoptions.cpp \
     thermal/analysis/kernal.cpp \
-    thermal/analysis/poptea.cpp
+    thermal/analysis/poptea.cpp \
+    math/estimation/lmdiff_helper.cpp \
+    math/estimation/utils.cpp \
+    math/estimation/constrained.cpp \
+    math/utility.cpp \
+    math/numIntegration/simpsons_3_8.cpp \
+    math/estimation/cosfit.cpp
 
 #header files
 HEADERS += \
@@ -178,4 +184,10 @@ HEADERS += \
     math/sensitivityAnalysis/estimationInterval.hpp \
     tools/programoptions.hpp \
     thermal/analysis/kernal.hpp \
-    thermal/analysis/poptea.hpp
+    thermal/analysis/poptea.hpp \
+    math/estimation/lmdiff_helper.hpp \
+    math/estimation/utils.hpp \
+    math/estimation/constrained.hpp \
+    math/utility.hpp \
+    math/numIntegration/simpsons_3_8.hpp \
+    math/estimation/cosfit.hpp
