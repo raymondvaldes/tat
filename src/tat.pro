@@ -120,7 +120,6 @@ SOURCES += \
     investigations/sensitivity_paper.cpp \
     numSimulations/Numerical_Temperature.cpp \
     numSimulations/Numerical_Setup.cpp \
-    numSimulations/Numerical_PhaseOfEmission_Results.cpp \
     numSimulations/Numerical_PhaseOfEmission.cpp \
     tools/filesystem.cpp \
     tools/timing.cpp \
@@ -150,7 +149,8 @@ SOURCES += \
     math/utility.cpp \
     math/numIntegration/simpsons_3_8.cpp \
     math/estimation/cosfit.cpp \
-    math/numIntegration/gslfunc.cpp
+    math/numIntegration/gslfunc.cpp \
+    tools/export.cpp
 
 #header files
 HEADERS += \
@@ -159,7 +159,6 @@ HEADERS += \
     investigations/sensitivity_paper.h \
     numSimulations/Numerical_Temperature.h \
     numSimulations/Numerical_Setup.h \
-    numSimulations/Numerical_PhaseOfEmission_Results.h \
     numSimulations/Numerical_PhaseOfEmission.h \
     tools/filesystem.hpp \
     tools/timing.h \
@@ -192,4 +191,5 @@ HEADERS += \
     math/utility.hpp \
     math/numIntegration/simpsons_3_8.hpp \
     math/estimation/cosfit.hpp \
-    math/numIntegration/gslfunc.hpp
+    math/numIntegration/gslfunc.hpp \
+    tools/export.hpp
