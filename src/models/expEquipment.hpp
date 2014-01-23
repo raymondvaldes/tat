@@ -88,9 +88,5 @@ public:
   static class setup loadConfigfromXML( const boost::property_tree::ptree pt );
 };
 
-
 }
-
-
 #endif // EXPEQUIPMENT_HPP_INCLUDED
-

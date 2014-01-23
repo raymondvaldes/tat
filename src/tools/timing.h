@@ -42,7 +42,6 @@ public:
     void start(void);
     void stop(void);
     double returnTime(void);
-    void displayTime(void);
 };
 
 #endif // TIMING_H

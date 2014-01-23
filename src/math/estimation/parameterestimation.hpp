@@ -54,9 +54,11 @@ public:
           const double initialGuess_);
 
   void bestfitset(const double input);
+
   double bestfit(void);
   double upperBound(void);
   double lowerBound(void);
+
   void Initialauto(void);
   void Initialset(const double input);
   double initialVal(void);
@@ -75,13 +77,12 @@ public:
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
                   const double upper);
-  size_t Nsize(void);
-  void NAssign(size_t xInput);
-
+  size_t Nsize(void);       //BUGS TODO REMOVE
+  void NAssign(size_t xInput); //BUGS TODO REMOVE
 
   static class unknownList
-      loadConfigfromXML(const boost::property_tree::ptree pt);
-  ~unknownList();
+      loadConfigfromXML( const boost::property_tree::ptree pt ) ;
+  ~unknownList() ;
 };
 
 
