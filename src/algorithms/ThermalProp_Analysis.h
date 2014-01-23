@@ -25,12 +25,7 @@ License
 #ifndef THERMALPROP_ANALYSIS_H_INCLUDED
 #define THERMALPROP_ANALYSIS_H_INCLUDED
 
-#include <boost/foreach.hpp>
-
-#include "math/estimation/parameterestimation.hpp"
 #include "thermal/analysis/kernal.hpp"
-#include "numSimulations/Numerical_Setup.h"
-#include "algorithms/ThermalProp_Analysis.h"
 #include "models/physicalmodel.hpp"
 
 std::vector<double>

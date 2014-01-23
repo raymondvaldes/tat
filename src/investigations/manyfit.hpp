@@ -25,7 +25,6 @@ License
 #ifndef MANYFIT_HPP
 #define MANYFIT_HPP
 
-#include "thermal/analysis/kernal.hpp"
 #include "tools/filesystem.hpp"
 
 namespace investigations{
