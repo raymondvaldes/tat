@@ -22,29 +22,28 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
+#ifndef CONSTRAINED_HPP
+#define CONSTRAINED_HPP
 
-#include "thermal/analysis/kernal.hpp"
-#include "math/estimation/parameterestimation.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
+#include <cmath>
+#include <iostream>
+#include "math/estimation/constrained.hpp"
 
-namespace thermal {
-namespace analysis{
-
-class Poptea
-{
-public:
-  class Kernal coreSystem;
-//  class math::estimation::LMA BFsolve;
-//  class math::sensitivityAnalysis::estIntervals BFintervals;
-
-  explicit Poptea( const class Kernal coreSystem_) ;
-  ~Poptea( void );
-
-  std::vector<double> paramter_estimation( int *info, int *nfev );
-};
+namespace math{
+  namespace estimation{
 
 
-}}
-#endif // poptea_HPP
+double x_limiter1( const double xi );
+double x_limiter2( const double xi, const double x_min, const double x_max );
+
+double kx_limiter1( const double ki );
+double kx_limiter2( const double ki, const double k_min, const double k_max );
+
+
+
+
+  }
+}
+
+
+#endif // CONSTRAINED_HPP

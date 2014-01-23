@@ -30,45 +30,7 @@ License
 
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 
-bool equalto(const double a, const double b)
-{
-    const double multi = a > b ? a : b;
-    const double multi2 = multi >= 1 ? multi  : 1;
 
-    return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
-}
-
-bool equalto(const double a, const int b)
-{
-    const double multi = a > b ? a : b;
-    const double multi2 = multi > 1 ? multi  : 1;
-
-    return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
-}
-
-
-double arrayMax(const double* x, const size_t I)
-{
-    double maxi = x[0];
-    for(size_t i = 1; i < I ; ++i)
-    {
-        if(x[i] > maxi ) maxi = x[i];
-    }
-
-
-    return maxi;
-}
-
-double arrayMin(const double* x, const size_t I)
-{
-    double maxi = x[0];
-    for(size_t i = 1; i < I ; ++i)
-    {
-        if(x[i] < maxi ) maxi = x[i];
-    }
-
-    return maxi;
-}
 
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,

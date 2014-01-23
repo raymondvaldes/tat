@@ -28,6 +28,8 @@ License
 #include "thermal/emission/phase99.hpp"
 #include "math/bisection.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
+#include "thermal/emission/noise.hpp"
+#include "algorithms/statistical_tools.hpp"
 
 namespace investigations
 {

@@ -22,29 +22,59 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
-#include "thermal/analysis/kernal.hpp"
-#include "math/estimation/parameterestimation.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
+#include <vector>
+#include <cmath>
 
-namespace thermal {
-namespace analysis{
+namespace math{
+  namespace estimation{
 
-class Poptea
+
+double SobjectiveLS(const size_t N, const std::vector<double>& emissionExp,
+                    const std::vector<double>& emissionEst)
 {
-public:
-  class Kernal coreSystem;
-//  class math::estimation::LMA BFsolve;
-//  class math::sensitivityAnalysis::estIntervals BFintervals;
+    /*
+        The objective function is evaluated for all the measurements.
+        emissionEst[n]  ...     is calculated through the model
+        emissionExp[n]  ...     is determined through the experiment
 
-  explicit Poptea( const class Kernal coreSystem_) ;
-  ~Poptea( void );
+    */
+    double fvec_objective = 0;
 
-  std::vector<double> paramter_estimation( int *info, int *nfev );
-};
+    for(size_t n=0 ; n < N; n++)
+    {
+        fvec_objective += pow( emissionExp[n] - emissionEst[n]  , 2);
+    }
+
+    return fvec_objective;
+}
+
+double SobjectiveLS(const size_t N, const double*emissionExp,
+                    const double* emissionEst)
+{
+    /*
+        The objective function is evaluated for all the measurements.
+        emissionEst[n]  ...     is calculated through the model
+        emissionExp[n]  ...     is determined through the experiment
+
+    */
+    double fvec_objective = 0;
+
+    for(size_t n=0 ; n < N; n++)
+    {
+        fvec_objective += pow( emissionExp[n] - emissionEst[n]  , 2);
+    }
+
+    return fvec_objective;
+}
 
 
-}}
-#endif // poptea_HPP
+
+  }
+}
+
+
+
+#endif // UTILS_HPP

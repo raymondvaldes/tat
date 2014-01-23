@@ -25,21 +25,20 @@ License
 #ifndef SENSITIVITY_ANALYSIS_HPP
 #define SENSITIVITY_ANALYSIS_HPP
 
-#include "numSimulations/Numerical_Temperature.h"
-#include "numSimulations/Numerical_Setup.h"
-#include "numSimulations/Numerical_PhaseOfEmission.h"
-#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
-#include "algorithms/statistical_tools.hpp"
-#include "algorithms/ThermalProp_Analysis.h"
-#include "thermal/emission/noise.hpp"
-#include "thermal/analysis/kernal.hpp"
+//#include "numSimulations/Numerical_Temperature.h"
+//#include "numSimulations/Numerical_Setup.h"
+//#include "numSimulations/Numerical_PhaseOfEmission.h"
+//#include "numSimulations/Numerical_PhaseOfEmission_Results.h"
+//#include "algorithms/statistical_tools.hpp"
+//#include "algorithms/ThermalProp_Analysis.h"
+
+#include <vector>
+#include <cstring>
 #include "thermal/analysis/poptea.hpp"
 
 void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              const size_t interants, const double factorMax,
              const double factorScale);
-
-
 
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,
                            const std::vector<double>& calibrationTable,

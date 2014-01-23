@@ -28,6 +28,8 @@ License
 #include "numSimulations/Numerical_Setup.h"
 #include "algorithms/statistical_tools.hpp"
 #include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "math/utility.hpp"
+#include "math/numIntegration/simpsons_3_8.hpp"
 
 HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
                                 const double lambda_, const double It_,
@@ -56,7 +58,7 @@ HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
   funcReal = new double[nuSize];
   funcImag = new double[nuSize];
 
-  ::range(nuSpace, nuStart, nuEnd, nuSize);
+  math::range(nuSpace, nuStart, nuEnd, nuSize);
 }
 
 HeatModel2DAna::~HeatModel2DAna(void)
@@ -377,10 +379,10 @@ HeatModel2DAna::iHankel(std::complex<double>(HeatModel2DAna::*hfunc)
   const size_t xhigh = nuSize-1;
 
   const double
-  sumReal = ::simpson_3_8(funcReal, nuSpace, xlow, xhigh);
+  sumReal = math::numIntegration::simpson_3_8(funcReal, nuSpace, xlow, xhigh);
 
   const double
-  sumImag = ::simpson_3_8(funcImag, nuSpace, xlow, xhigh);
+  sumImag = math::numIntegration::simpson_3_8(funcImag, nuSpace, xlow, xhigh);
 
   ///Cleanup
   const std::complex<double> sum (sumReal, sumImag);
@@ -446,7 +448,7 @@ HeatModel2DAna::iHankel(const size_t r, const size_t z) const
   const size_t xhigh = nuSize - 1;
 
 
-  return simpson_3_8Complex(funcReal, funcImag ,nuSpace,xlow,xhigh);
+  return math::numIntegration::simpson_3_8Complex(funcReal, funcImag ,nuSpace,xlow,xhigh);
 }
 
 void

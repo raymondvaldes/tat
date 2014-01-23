@@ -22,29 +22,28 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
 
-#include "thermal/analysis/kernal.hpp"
-#include "math/estimation/parameterestimation.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
+#ifndef COSFIT_HPP
+#define COSFIT_HPP
 
-namespace thermal {
-namespace analysis{
+#include <vector>
 
-class Poptea
-{
-public:
-  class Kernal coreSystem;
-//  class math::estimation::LMA BFsolve;
-//  class math::sensitivityAnalysis::estIntervals BFintervals;
-
-  explicit Poptea( const class Kernal coreSystem_) ;
-  ~Poptea( void );
-
-  std::vector<double> paramter_estimation( int *info, int *nfev );
-};
+namespace math{
+  namespace estimation{
 
 
-}}
-#endif // poptea_HPP
+void cosfit(double **dependent, const double *independent, double *x, int j,
+            double omega1, int Nend);
+
+void cosfit(double *dependent,const std::vector<double> &independentVec,
+            double *x, int Nend);
+
+void cosfcn(int P,int /*N*/,double *x,double *fvec,int */*iflag*/,
+            double **variables);
+
+void cosfcn1( int P, int /*N*/, double *x, double *fvec, int */*iflag*/,
+              double **variables);
+
+  }
+}
+#endif // COSFIT_HPP

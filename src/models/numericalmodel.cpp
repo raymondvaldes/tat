@@ -27,6 +27,7 @@ License
 #include "models/numericalmodel.hpp"
 #include "algorithms/statistical_tools.hpp"
 #include "numSimulations/Numerical_Setup.h"
+#include "math/utility.hpp"
 
 namespace numericalModel
 {
@@ -234,12 +235,12 @@ double Mesh::z_eta(const double eta_, const double beta1_, const double beta2_)
 {
   /* z_norm accounts for z_real after it has been normalized by L_coat
       and L_substrat double B;*/
-  if (equalto(eta_,0))
+  if ( math::equalto(eta_,0))
   {
     return eta_;
   }
 
-  else if (equalto(eta_,1))
+  else if ( math::equalto(eta_,1))
   {
     return eta_;
   }
@@ -264,7 +265,7 @@ double Mesh::D_eta(const double z_norm_)
   //z_norm accounts for z_real after it has been normalized by
   //L_coat and L_substrate
 
-  if (z_norm_ < 1 || equalto(z_norm_, 1))
+  if ( z_norm_ < 1 || math::equalto(z_norm_, 1) )
   {
     const double B = ( beta1 + 1) / ( beta1 - 1) ;
     return ( -2 * beta1 ) /
@@ -288,18 +289,18 @@ void Mesh::zUpdate()
   conditional statements in the z_eta function. Splitting the loop into
   three loops did not help.
   */
-  z_jplus[0] = z_eta( ::average(eta[1], eta[0]));
+  z_jplus[0] = z_eta( math::average(eta[1], eta[0]));
       z_j[0] = z_eta( eta[0]);
 
   const size_t endM2 = M2-1;
   for (size_t j = 1; j < endM2; j++)
   {
-    z_jplus[j] = z_eta( ::average(eta[j+1], eta[j]) );
-    z_jminus[j] = z_eta( ::average(eta[j-1], eta[j]) );
+    z_jplus[j] = z_eta( math::average(eta[j+1], eta[j]) );
+    z_jminus[j] = z_eta( math::average(eta[j-1], eta[j]) );
     z_j[j] =  z_eta( eta[j]);
   }
 
-  z_jminus[M2-1] = z_eta( ::average(eta[M2-2], eta[M2-1]) );
+  z_jminus[M2-1] = z_eta( math::average(eta[M2-2], eta[M2-1]) );
        z_j[M2-1] = z_eta( eta[M2-1]);
 
 

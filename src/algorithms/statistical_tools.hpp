@@ -30,33 +30,13 @@ License
 
 #include "numSimulations/Numerical_PhaseOfEmission_Results.h"
 
-bool equalto(const double a, const double b);
-bool equalto(const double a, const int b);
+
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
                    const size_t x, const size_t y, const size_t z);
 
 void vector2DSetup(std::vector< std::vector< double > > &Vnew,
                    const size_t x, const size_t y);
-
-double rss(const double N, const double* exp, const double* x_hat);
-
-double sVarianceEst(const double N, const double k, const double* SS);
-
-double variance(const size_t P, const size_t N, const double S);
-
-double Sobjective(const size_t L_end, const double*emissionExp,
-                  const double* emissionNum);
-
-double SobjectiveLS(const size_t N, const double*emissionExp,
-                    const double* emissionEst);
-double SobjectiveLS(const size_t N, const std::vector<double> &emissionExp,
-                    const std::vector<double>& emissionEst);
-double MSE(const size_t N, std::vector<double> &emissionExp,
-           std::vector<double> &emissionEst);
-double MSE(const size_t N, const double*emissionExp,
-                    const double* emissionEst);
-double MSEarea1(size_t N, double* func1, double* func2, double* xvar);
 
 void matrixTranspose(const size_t P, const size_t N, double*matrix);
 
@@ -87,14 +67,29 @@ void Amatrix(const size_t P, const size_t N, const double*fjac, double* Amatrix)
 double chisquare(const size_t N, const double*emissionExp,
                     const double* emissionEst);
 
+double rss(const double N, const double* exp, const double* x_hat);
 
+double sVarianceEst(const double N, const double k, const double* SS);
 
-double arrayMax(const double* x, const size_t I);
-double arrayMin(const double* x, const size_t I);
+double variance(const size_t P, const size_t N, const double S);
+
+double Sobjective(const size_t L_end, const double*emissionExp,
+                  const double* emissionNum);
+
+double SobjectiveLS(const size_t N, const double*emissionExp,
+                    const double* emissionEst);
+double SobjectiveLS(const size_t N, const std::vector<double> &emissionExp,
+                    const std::vector<double>& emissionEst);
+double MSE(const size_t N, std::vector<double> &emissionExp,
+           std::vector<double> &emissionEst);
+double MSE(const size_t N, const double*emissionExp,
+                    const double* emissionEst);
+double MSEarea1(size_t N, double* func1, double* func2, double* xvar);
 
 
 double fintegrate(double x, void *p);
 double integrate(struct funcClass *Func, double xlow, double xhigh);
+
 double MSEarea(const size_t N, std::vector<double> &func1,
                std::vector<double> &func2);
 

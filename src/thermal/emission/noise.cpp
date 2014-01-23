@@ -23,6 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "thermal/emission/noise.hpp"
+#include "math/utility.hpp"
 
 namespace thermal{
   namespace emission{
@@ -58,7 +59,7 @@ addNoise( const class thermal::emission::ExpNoiseSetting para,
   for( size_t i=0 ; i < lthermal.size(); ++i)
   {
     constexpr double c = 0.5;
-    const double lthermalPercentile = percentilelog10( lmin, lmax, lthermal[i]);
+    const double lthermalPercentile = math::percentilelog10( lmin, lmax, lthermal[i]);
 
     ///Determine biased noise
     const double cotbc = tan( M_PI_2 - ( b * c ) );
@@ -82,7 +83,7 @@ addNoise( const class thermal::emission::ExpNoiseSetting para,
     }
 
     ///Determine random noise
-    const double noiseRandomGen = x_normal(0, noiseRandom);
+    const double noiseRandomGen = math::x_normal(0, noiseRandom);
 
     output[i] += M_PI_2 * noiseBias;
     output[i] += M_PI_2 * noiseRandomGen;
@@ -92,4 +93,3 @@ addNoise( const class thermal::emission::ExpNoiseSetting para,
 
   }
 }
-

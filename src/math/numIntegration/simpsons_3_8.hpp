@@ -6,7 +6,7 @@
      ||   	  		|
 -------------------------------------------------------------------------------
 License
-    This file is part of Thermal Analysis Toolbox.
+          This file is part of Thermal Analysis Toolbox.
 
     Thermal Analysis Toolbox is free software: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published by
@@ -22,29 +22,37 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
 
-#include "thermal/analysis/kernal.hpp"
-#include "math/estimation/parameterestimation.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
+#ifndef simpsons_3_8_HPP_INCLUDED
+#define simpsons_3_8_HPP_INCLUDED
 
-namespace thermal {
-namespace analysis{
+#include <cstring>
+#include <complex>
+#include <vector>
 
-class Poptea
-{
-public:
-  class Kernal coreSystem;
-//  class math::estimation::LMA BFsolve;
-//  class math::sensitivityAnalysis::estIntervals BFintervals;
+namespace math{
+  namespace numIntegration{
 
-  explicit Poptea( const class Kernal coreSystem_) ;
-  ~Poptea( void );
+double simpson_3_8( const double *Y, const double *X, const size_t A,
+                    const size_t B);
 
-  std::vector<double> paramter_estimation( int *info, int *nfev );
-};
+double simpson_3_8(const std::vector<double>& Y, const double *X,
+                   const size_t A,const size_t B);
+
+double simpson_3_8( const double *Y, const std::vector<double>& X,
+                    const size_t A, const size_t B );
+
+std::complex<double> simpson_3_8Complex(const double* YReal,
+                                        const double* YCPLX,
+                                        const double* X,
+                                        const size_t A,const size_t B);
 
 
-}}
-#endif // poptea_HPP
+
+
+
+
+  }
+}
+
+#endif // simpsons_3_8_HPP_INCLUDED

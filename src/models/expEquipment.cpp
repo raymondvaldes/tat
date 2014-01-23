@@ -26,7 +26,7 @@ License
 
 #include "models/expEquipment.hpp"
 #include "numSimulations/Numerical_Setup.h"
-
+#include "math/utility.hpp"
 
 namespace equipment{
 
@@ -133,7 +133,7 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
       }
       else if( l_min < rangeLim[i+1] )
       {
-        start = ::percentilelog10(rangeLim[i], rangeLim[i+1], l_min);
+        start = math::percentilelog10(rangeLim[i], rangeLim[i+1], l_min);
       }
 
       double end1 = 1;
@@ -143,7 +143,7 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
       }
       else if( l_max < rangeLim[i+1] )
       {
-        end1 = ::percentilelog10(rangeLim[i], rangeLim[i+1], l_max);
+        end1 = math::percentilelog10(rangeLim[i], rangeLim[i+1], l_max);
       }
 
       rangeFills[i] = end1 - start;
@@ -167,7 +167,7 @@ double Laser::thermalSetup(const double lmin_, const double lmax_,
   }
 
   updateNMeasurements();
-  ::range1og10(l_min, l_max, L_end, l_thermal);
+  math::range1og10(l_min, l_max, L_end, l_thermal);
 
   for (size_t i=0; i < L_end; ++i )
   {

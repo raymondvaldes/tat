@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "numSimulations/Numerical_Setup.h"
+#include "math/utility.hpp"
 
 namespace math{
   namespace estimation{
@@ -45,7 +46,7 @@ unknown::unknown(enum physicalModel::labels::Name name_,
 
 void unknown::Initialauto(void)
 {
-  initialGuess = average(constraint.lower, constraint.upper);
+  initialGuess = math::average(constraint.lower, constraint.upper);
 }
 
 void unknown::Initialset(const double initial)

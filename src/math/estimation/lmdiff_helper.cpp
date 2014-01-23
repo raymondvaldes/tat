@@ -22,29 +22,27 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
-
+#include <boost/foreach.hpp>
 #include "thermal/analysis/kernal.hpp"
-#include "math/estimation/parameterestimation.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
 
-namespace thermal {
-namespace analysis{
 
-class Poptea
+namespace math{
+  namespace estimation{
+
+void scaleDiag(const int mode, const size_t N, double * diag,
+               const class thermal::analysis::Kernal popteaCore )
 {
-public:
-  class Kernal coreSystem;
-//  class math::estimation::LMA BFsolve;
-//  class math::sensitivityAnalysis::estIntervals BFintervals;
+  if(mode == 2)
+  {
+    int i = 0;
+    BOOST_FOREACH( const class math::estimation::unknown &unknown,
+                   popteaCore.LMA.unknownParameters.vectorUnknowns )
+    {
+      diag[i++] = popteaCore.TBCsystem.returnVal( unknown.label() );
+    }
+  }
+  return;
+}
 
-  explicit Poptea( const class Kernal coreSystem_) ;
-  ~Poptea( void );
-
-  std::vector<double> paramter_estimation( int *info, int *nfev );
-};
-
-
-}}
-#endif // poptea_HPP
+  }
+}
