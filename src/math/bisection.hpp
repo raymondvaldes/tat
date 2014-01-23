@@ -22,11 +22,11 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <boost/math/tools/roots.hpp>
-#include <functional>
-
 #ifndef BISECTION_HPP_INCLUDED
 #define BISECTION_HPP_INCLUDED
+
+#include <boost/math/tools/roots.hpp>
+#include <functional>
 
 /*  This class solves the function:
  *  f(x) = phi

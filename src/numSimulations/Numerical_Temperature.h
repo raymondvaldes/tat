@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef NUMERICAL_TEMPERATURE_H_INCLUDED
 #define NUMERICAL_TEMPERATURE_H_INCLUDED
+
 #include <vector>
 #include <cstddef>
 #include <complex>

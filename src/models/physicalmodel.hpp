@@ -32,8 +32,6 @@ License
 #include <boost/assign/list_inserter.hpp>
 #include <boost/property_tree/ptree.hpp>
 
-//#include "numSimulations/Numerical_PhaseOfEmission.h"
-
 class property
 {
 private:

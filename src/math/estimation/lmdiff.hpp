@@ -26,6 +26,7 @@ License
 #define LMDIFF_HPP
 
 #include "thermal/analysis/kernal.hpp"
+
 namespace math{
   namespace estimation{
 
