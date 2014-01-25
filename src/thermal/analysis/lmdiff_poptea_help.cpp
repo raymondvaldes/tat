@@ -781,6 +781,12 @@ void scaleDiag( double *diag, const class math::estimation::unknownList List,
 }
 
 
+
+LMA_workingArrays::LMA_workingArrays(const size_t Lend_, const size_t N_)
+{
+  updateArraySize( Lend_, N );
+}
+
 void LMA_workingArrays::updateArraySize(const size_t Lend_, const size_t N)
 {
   /*Lend_ is the total number of unique measurements in a dataset,

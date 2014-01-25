@@ -65,7 +65,8 @@ public:
   std::vector<double> xguessAuto;  //FIX THIS TODO BUG
 
   explicit LMA( const struct math::estimation::settings Settings_,
-                const class math::estimation::unknownList unknownParameters) ;
+                const class math::estimation::unknownList unknownParameters,
+                const size_t Lend_) ;
   ~LMA(void);
   void resetInitialGuess(const std::vector<double> input);
 
