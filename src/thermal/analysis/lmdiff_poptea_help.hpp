@@ -56,8 +56,10 @@ public:
   std::vector<double> emissionCurrent;
 
 
-
   double MSE, MSEinitial, fvecTotal;
+
+  LMA_workingArrays(void);
+
 
   ~LMA_workingArrays(void);
   void updateArraySize(const size_t Lend_, const size_t N);

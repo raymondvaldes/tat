@@ -43,14 +43,13 @@ private:
 };
 
 
-
 double PhaseOfEmission2DAna( const double omega,
                              const thermal::analysis::Kernal &popteaCore);
 
-double PhaseOfEmission1DNum(const double omega,
+double PhaseOfEmission1DNum( const double omega,
                              const thermal::analysis::Kernal &popteaCore);
 
-double PhaseOfEmission1DAna(const double omega,
+double PhaseOfEmission1DAna( const double omega,
                              const thermal::analysis::Kernal &popteaCore);
 
 

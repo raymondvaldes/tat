@@ -39,8 +39,10 @@ namespace analysis{
 
 
 LMA::LMA( const struct math::estimation::settings Settings_,
-          const class math::estimation::unknownList unknownParameters_)
-  : Settings(Settings_), unknownParameters(unknownParameters_)
+          const class math::estimation::unknownList unknownParameters_,
+          const size_t Lend_)
+  : Settings(Settings_), unknownParameters(unknownParameters_),
+    LMA_workspace( Lend_, unknownParameters_.Nsize() )
 {
 //  const size_t n = unknownParameters.vectorUnknowns.size();
 //  xpredicted.resize(n);

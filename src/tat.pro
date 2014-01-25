@@ -152,7 +152,8 @@ SOURCES += \
     thermal/heat/heat2DAna.cpp \
     thermal/analysis/lmdiff_poptea.cpp \
     thermal/analysis/lmdiff_poptea_help.cpp \
-    thermal/analysis/sa_sensitivity.cpp
+    thermal/analysis/sa_sensitivity.cpp \
+    thermal/analysis/solution.cpp
 
 #header files
 HEADERS += \
@@ -196,4 +197,5 @@ HEADERS += \
     thermal/heat/heat2DAna.hpp \
     thermal/analysis/lmdiff_poptea.hpp \
     thermal/analysis/lmdiff_poptea_help.hpp \
-    thermal/analysis/sa_sensitivity.hpp
+    thermal/analysis/sa_sensitivity.hpp \
+    thermal/analysis/solution.hpp
