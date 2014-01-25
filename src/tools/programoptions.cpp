@@ -35,7 +35,7 @@ bool loadProgramOptions( int argc, char** argv, std::string& path )
   po::options_description desc("Allowed options");
   desc.add_options()
       ("help", "produce help message")
-      ("config,c", po::value<std::string>(&path),"set path to config.xml")
+      ("config,c", po::value<std::string>(&path),"set path to config folder")
       ("version,v", "display version information")
       ;
 

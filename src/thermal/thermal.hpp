@@ -35,6 +35,7 @@ double effusivity(const double k, const double rhoCp);
 double diffusivity(const double k, const double rhoCp);
 double omega(const double L_coat, const double l_thermal, const double k_c,
              const double psi_c);
+
 double lthermal(const double L_coat, const double k_c, const double psi_c,
                 const double omega);
 

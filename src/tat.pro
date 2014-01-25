@@ -149,7 +149,10 @@ SOURCES += \
     math/estimation/cosfit.cpp \
     math/numIntegration/gslfunc.cpp \
     tools/export.cpp \
-    thermal/heat/heat2DAna.cpp
+    thermal/heat/heat2DAna.cpp \
+    thermal/analysis/lmdiff_poptea.cpp \
+    thermal/analysis/lmdiff_poptea_help.cpp \
+    thermal/analysis/sa_sensitivity.cpp
 
 #header files
 HEADERS += \
@@ -190,4 +193,7 @@ HEADERS += \
     math/estimation/cosfit.hpp \
     math/numIntegration/gslfunc.hpp \
     tools/export.hpp \
-    thermal/heat/heat2DAna.hpp
+    thermal/heat/heat2DAna.hpp \
+    thermal/analysis/lmdiff_poptea.hpp \
+    thermal/analysis/lmdiff_poptea_help.hpp \
+    thermal/analysis/sa_sensitivity.hpp

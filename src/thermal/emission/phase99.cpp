@@ -26,52 +26,42 @@ License
 #include "numSimulations/Numerical_PhaseOfEmission.h"
 
 namespace thermal{
-  namespace emission{
+namespace emission{
 
-void phase99( const class thermal::analysis::Kernal &popteaCore,
-              std::vector<double> &arrayVal )
+std::vector<double>
+phase99( const class thermal::analysis::Kernal &popteaCore,
+         const std::vector<double> &omegas)
 {
   /*The phase for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
   for all ranges of L_end.  This also allows the code to be parallelized at
   a very high level. No further modifications of the code is necessary.*/
-  const size_t L_end = popteaCore.L_end;
+
+  const size_t L_end = omegas.size();
+  std::vector<double> results(L_end);
   size_t n = 0;
 
   if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::OneDimNumLin )
   {
     #pragma omp parallel for schedule(dynamic) private(n)
     for(n = 0 ; n < L_end ; n++ )
-        { arrayVal[n] = PhaseOfEmission1DNum(n , popteaCore); }
+        { results[n] = PhaseOfEmission1DNum( omegas[n] , popteaCore); }
   }
 
   if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::TwoDimAnalytical )
   {
     #pragma omp parallel for schedule(dynamic) private(n)
     for(n = 0 ; n < L_end ; n++ )
-      { arrayVal[n] = PhaseOfEmission2DAna(n, popteaCore);}
+      { results[n] = PhaseOfEmission2DAna( omegas[n], popteaCore);}
   }
 
   if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::OneDimAnalytical )
   {
       for(n = 0 ; n < L_end ; n++ )
-        { arrayVal[n] = PhaseOfEmission1DAna(n , popteaCore); }
+        { results[n] = PhaseOfEmission1DAna( omegas[n] , popteaCore); }
   }
-
-  return;
-}
-
-std::vector<double>
-phase99( const class thermal::analysis::Kernal &popteaCore)
-{
-  const size_t n = popteaCore.l_thermal.size();
-  std::vector<double> results(n);
-
-  phase99( popteaCore, results );
 
   return results;
 }
 
-
-  }
-}
+}}
