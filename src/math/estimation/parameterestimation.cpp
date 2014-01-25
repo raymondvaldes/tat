@@ -32,14 +32,6 @@ namespace math{
 
 unknown::unknown(enum physicalModel::labels::Name name_,
                  const double lower_,
-                 const double upper_)
-    :name(name_), constraint(lower_, upper_)
-{
-    Initialauto();
-}
-
-unknown::unknown(enum physicalModel::labels::Name name_,
-                 const double lower_,
                  const double upper_,
                  const double initialGuess_)
     :name(name_), constraint(lower_, upper_), initialGuess(initialGuess_)
@@ -87,12 +79,11 @@ enum physicalModel::labels::Name unknown::label(void) const
 unknown::bounds::bounds(const double lower_, const double upper_)
 :lower(lower_), upper(upper_){}
 
-
 void unknownList::addUnknown(enum physicalModel::labels::Name name,
                              const double lower,
-                             const double upper)
+                             const double upper, const double initialGuess)
 {
-  vectorUnknowns.push_back ( unknown( name, lower, upper ) );
+  vectorUnknowns.push_back ( unknown( name, lower, upper, initialGuess ) );
   return;
 }
 
@@ -128,8 +119,6 @@ class unknown
 }
 
 
-
-
 class unknownList unknownList::
         loadConfigfromXML(const boost::property_tree::ptree pt)
 {
@@ -151,47 +140,14 @@ class unknownList unknownList::
 
     const double myMin = child.get<double>( "min" );
     const double myMax = child.get<double>( "max" );
-    unknownListObj.addUnknown(mylabel, myMin, myMax);
+    const double initialGuess = child.get<double> ("initialGuess");
+    unknownListObj.addUnknown(mylabel, myMin, myMax, initialGuess);
   }
   return unknownListObj;
 }
 
-void LMA_workingArrays::updateArraySize(const size_t Lend_, const size_t N)
-{
-  /*Lend_ is the total number of unique measurements in a dataset,
-  this value is based on the range and the set minimum*/
-
-  fjac.resize(Lend_*N);
-  emissionExperimental.resize(Lend_);
-  emissionNominal.resize(Lend_);
-  emissionCurrent.resize(Lend_);
-  predicted.resize(Lend_);
-  fvec.resize(Lend_);
-
-}
-
-LMA_workingArrays::~LMA_workingArrays(void)
-{}
-
-LMA::LMA(const struct settings Settings_,
-         const class unknownList unknownParameters_)
-  : Settings(Settings_), unknownParameters(unknownParameters_)
-{
-  const size_t n = unknownParameters.vectorUnknowns.size();
-  xpredicted.resize(n);
-  xguessAuto.resize(n);
-}
-
-void LMA::resetInitialGuess(const std::vector<double> input)
-{
-  if( input.size() == xInitial.size() )
-    { xInitial = input; }
-  else
-    { std::cout << "check xInitial"; exit(-3); }
-}
 
 
-LMA::~LMA(void){}
 
 unknownList::~unknownList(){}
 

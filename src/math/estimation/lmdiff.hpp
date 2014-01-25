@@ -37,14 +37,27 @@ void lmdif(void (*fcn)(int, int, double*, double*, int*, double**), int m,
            double *fjac, int ldfjac, int *ipvt, double *qtf, double *wa1,
            double *wa2, double *wa3, double *wa4, double *);
 
-void lmdif(void (*fcn)(int, int, double*, double*, int*,
-                       class thermal::analysis::Kernal),
-           int m, int n, double *x, double *fvec,double ftol, double xtol,
-           double gtol, int maxfev, double epsfcn, double *diag, int mode,
-           double factor, int nprint, int *info, int *nfev, double *fjac,
-           int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
-           double *wa3, double *wa4, double *wa5,
-           class thermal::analysis::Kernal popteaCore);
+
+void fdjac2(void (*fcn)(int, int, double*, double*, int*,double **),
+            int m,int n,double x[],double fvec[],double **variables,
+            double fjac[],int ldfjac, int *iflag,double epsfcn,double wa[]);
+
+
+double enorm(int n,double x[]);
+
+int mod(int k,int m);
+double dmin1(double a,double b);
+int min0(int a,int b);
+void pmat(int m,int n,double y[]);
+
+void qrfac(int m, int n, double a[], int, bool pivot, int ipvt[], int,
+           double rdiag[], double acnorm[], double wa[]);
+double dmax1(double a,double b);
+void lmpar(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
+           double delta,double *par,double x[],double sdiag[],double wa1[],
+           double wa2[]);
+void qrsolv(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
+            double x[],double sdiag[],double wa[]);
 
   }
 }

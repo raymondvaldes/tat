@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||                         |
+     ||                   |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -30,11 +30,13 @@ License
 namespace thermal{
   namespace emission{
 
-void phase99( const thermal::analysis::Kernal &popteaCore,
+void phase99( const class thermal::analysis::Kernal &popteaCore,
+              const std::vector<double> &omegas,
               std::vector<double> &arrayVal );
 
 std::vector<double>
-phase99( const class thermal::analysis::Kernal &popteaCore);
+phase99( const class thermal::analysis::Kernal &popteaCore,
+         const std::vector<double> &omegas);
 
   }
 }

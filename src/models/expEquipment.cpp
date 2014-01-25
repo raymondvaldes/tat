@@ -96,7 +96,10 @@ double Laser::IntensityTransient(void) const
 Laser::~Laser(){}
 
 setup::setup(struct Laser laser_, struct Detector detector_)
-    : laser(laser_), detector(detector_) {}
+    : laser(laser_), detector(detector_)
+{
+  q_surface = 0;
+}
 
 class setup setup::loadConfigfromXML( const boost::property_tree::ptree pt )
 {

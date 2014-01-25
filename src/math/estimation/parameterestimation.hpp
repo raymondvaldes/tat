@@ -50,9 +50,6 @@ private:
 public:
   unknown(enum physicalModel::labels::Name name_,
           const double lower_,
-          const double upper_);
-  unknown(enum physicalModel::labels::Name name_,
-          const double lower_,
           const double upper_,
           const double initialGuess_);
 
@@ -79,7 +76,7 @@ public:
   std::vector<class estimation::unknown> vectorUnknowns;
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
-                  const double upper);
+                  const double upper, const double initialGuess);
   size_t Nsize(void);       //BUGS TODO REMOVE
 
   static class unknownList
@@ -92,24 +89,10 @@ public:
 
 
 
-class LMA_workingArrays
-{
-public:
-  std::vector<double> fjac;
-  std::vector<double> predicted;
-  std::vector<double> fvec;
-  std::vector<double> emissionExperimental;
-  std::vector<double> emissionNominal;
-  std::vector<double> emissionCurrent;
-
-  double MSE, MSEinitial, fvecTotal;
-
-  ~LMA_workingArrays(void);
-  void updateArraySize(const size_t Lend_, const size_t N);
-};
 
 
-class settings loadConfig(const std::string &filename);
+
+//class settings loadConfig(const std::string &filename);
 
 class settings
 {
@@ -133,21 +116,7 @@ public:
                      const size_t nprint_ );
 };
 
-class LMA
-{
-public:
-  class LMA_workingArrays LMA_workspace;
-  struct settings Settings;
-  class unknownList unknownParameters;
-  std::vector<double> xInitial{ 2.1, 3.7, 40, 0.75, 0.5 } ; //FIX THIS TODO BUG
-  std::vector<double> xpredicted;  //FIX THIS TODO BUG
-  std::vector<double> xguessAuto;  //FIX THIS TODO BUG
 
-  explicit LMA(const struct settings Settings_,
-      const class unknownList unknownParameters);
-  ~LMA(void);
-  void resetInitialGuess(const std::vector<double> input);
-};
 
 
 

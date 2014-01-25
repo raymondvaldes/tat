@@ -40,15 +40,47 @@ namespace investigations
 class thermal::analysis::Kernal
     loadWorkingDirectory(const class filesystem::directory dir)
 {
-  const std::string filename = "config.xml";
-  return thermal::analysis::Kernal::loadConfig( dir.abs( filename ), dir);
+  const std::string filename = "kernal.xml";
+  boost::property_tree::ptree pt;
+  try
+  {
+    boost::property_tree::read_xml( dir.abs( filename ), pt);
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
+    exit(-2);
+  }
+
+  return thermal::analysis::Kernal::loadConfig( pt , dir);
 }
+
+class thermal::analysis::Poptea
+    loadWorkingDirectoryPoptea( const class filesystem::directory dir,
+                                const class thermal::analysis::Kernal popteaCore)
+{
+  const std::string filename = "poptea.xml";
+  boost::property_tree::ptree pt;
+  try
+  {
+    boost::property_tree::read_xml( dir.abs( filename ), pt);
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
+    exit(-2);
+  }
+
+  return thermal::analysis::Poptea::loadConfig( popteaCore, pt );
+}
+
 
 void run(const class filesystem::directory dir)
 {
   ///Initialize kernals
   class thermal::analysis::Kernal popteaCore = loadWorkingDirectory(dir);
-  class thermal::analysis::Poptea poptea( popteaCore );
+  class thermal::analysis::Poptea
+      poptea = loadWorkingDirectoryPoptea ( dir, popteaCore );
 
   /// STEP 0
   //Noise in Simulated Emission
@@ -64,11 +96,12 @@ void run(const class filesystem::directory dir)
 
   ///Output noise to test
   std::vector<double>
-      emissionNominal =  thermal::emission::phase99( poptea.coreSystem );
+      emissionNominal =  thermal::emission::phase99( poptea.coreSystem ,
+                                                     poptea.l_thermal);
 
   std::vector<double> emissionExperimental =
         thermal::emission::addNoise( emissionNominal,
-                                     poptea.coreSystem.l_thermal,
+                                     poptea.l_thermal,
                                      myEmissionNoise ) ;
 //poptea.coreSystem.LMA.LMA_workspace.emissionExperimental//
 
@@ -141,9 +174,6 @@ void run(const class filesystem::directory dir)
 
 //  void saveBestFitParameters( void );
 //  void setG1(void);
-
-
-
 
 
 

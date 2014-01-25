@@ -22,65 +22,57 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
+#ifndef SA_SENSITIVITY_HPP
+#define SA_SENSITIVITY_HPP
 
 #include <vector>
-#include <utility>
-
-#include "thermal/analysis/kernal.hpp"
-#include "thermal/analysis/lmdiff_poptea.hpp"
-#include "thermal/analysis/sa_sensitivity.hpp"
-
+#include <cstddef>
 #include "math/estimation/parameterestimation.hpp"
 #include "models/physicalmodel.hpp"
 
 namespace thermal {
 namespace analysis{
 
-class Poptea
+class SA_Sensitivity
 {
-private:
-  void updateNMeasurements( const double L_end );
-
 public:
-  class Kernal coreSystem;
-  class LMA LMA;
-  class SA_Sensitivity SA;
+  class math::estimation::unknownList unknownParameterswithBFdata;
+  class math::estimation::unknownList unknownParameters;
 
-  explicit Poptea(const class Kernal coreSystem_,
-                  const class math::estimation::settings Settings_,
-                  const class math::estimation::unknownList unknownParameters_);
+  enum physicalModel::labels::Name currentParameterX;
+//  class math::estimation::unknown currentParameter;
 
-  static Poptea loadConfig(const Kernal &coreSystem_,
-                            boost::property_tree::ptree pt);
+  std::vector<double> ref_PHASE_BF;          //phase
+  std::vector<double> experimental_PHASE_BF; //phase
+  std::vector<double> current_PHASE_BF;      //phase
 
-  ~Poptea( void );
+  double S1_BF;
+  double S1_X;
+  double S1_current;
 
-  double bestFit( class Kernal core );  //REMOVE
-
-  std::pair< double, double >
-  parameterInterval( const enum physicalModel::labels::Name currentPx,
-                     std::vector<double> emissionExperimentalOriginal );  //HIGHER LEVEL BUT YES
-
-  void setThermalRange( const double lmin, const double lmax );
+  void setThermalRange(const double lmin, const double lmax);
   void loadExperimentalData( const std::vector<double> data );
   void setParameterstoFit( class math::estimation::unknownList parameters );
-  void setParametertoHoldX( enum physicalModel::labels::Name currentParameterX_);
+  void setParametertoHoldX(enum physicalModel::labels::Name currentParameterX_);
+  void saveListunknowns( void );
 
-  std::vector<double> omegas; ///MUST REMOVE
-  std::vector<double> l_thermal;  ///MUST REMOVE
-  double thermalSetupTEMP(const double lmin_, const double lmax_,
-                          const double L_coat, const double kc, const double psic,
-                          const size_t L_end_);
+  double meanError( const std::vector<double> curveBF,
+                    const std::vector<double> curveRef );
 
 
-  //MUST BE REMOVED
- void thermalSetup(const double lmin_, const double lmax_,
-                   const size_t LendMin);
+  double Gfunc( const double x );
+   ///Gfunc must work by updating kernal with unknown parameters
+   ///updating experimental with predicted values;
 
+  std::pair< double, double >
+  Gsolve( enum physicalModel::labels::Name currentParameterX_ );
+
+  void saveBestFitParameters( void );
+  void setG1(void);
+
+  SA_Sensitivity( const size_t N );
 };
 
-
 }}
-#endif // poptea_HPP
+
+#endif // SA_SENSITIVITY_HPP

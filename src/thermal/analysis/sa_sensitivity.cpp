@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||                   |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -22,16 +22,18 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef LMDIFF_HELPER_HPP
-#define LMDIFF_HELPER_HPP
+#include <cstddef>
+#include <vector>
+#include "thermal/analysis/sa_sensitivity.hpp"
 
-#include "thermal/analysis/kernal.hpp"
+namespace thermal {
+namespace analysis{
 
-namespace math{
-namespace estimation{
-
-
+SA_Sensitivity::SA_Sensitivity(const size_t N)
+{
+  ref_PHASE_BF.resize(N);
+  experimental_PHASE_BF.resize(N);
+  current_PHASE_BF.resize(N);
 }
-}
 
-#endif // LMDIFF_HELPER_HPP
+}}

@@ -32,14 +32,14 @@ License
 #include "thermal/heat/heat2DAna.hpp"
 #include "thermal/thermal.hpp"
 
-double PhaseOfEmission1DNum( const int flag,
+double PhaseOfEmission1DNum( const double omega,
                              const class thermal::analysis::Kernal &popteaCore)
 {
   class Temperature Tprofile( popteaCore.thermalsys.mesh.Nend,
                               popteaCore.thermalsys.mesh.M2);
 
   //// Acquire Numerical Temperature
-  const double omega = popteaCore.omegas[flag];
+//  const double omega = omegas[flag];
   temperature_1D( popteaCore.TBCsystem,
                   popteaCore.thermalsys,
                   popteaCore.expSetup, omega, Tprofile);
@@ -58,8 +58,8 @@ double PhaseOfEmission1DNum( const int flag,
   return phase2;
 }
 
-double PhaseOfEmission2DAna( const int flag,
-                             const class thermal::analysis::Kernal &popteaCore )
+double PhaseOfEmission2DAna( const double omega,
+                             const class thermal::analysis::Kernal &popteaCore)
 {
     /// Initiate 2d analytical model
     const double k_coat  = popteaCore.TBCsystem.coating.kthermal.offset;
@@ -86,8 +86,7 @@ double PhaseOfEmission2DAna( const int flag,
                   popteaCore.thermalsys.mesh.M2);
 
     ///Populate Temperature Vector
-    heatmodel2DAna.TemperatureDistro(T2DProfile,
-                                     popteaCore.omegas[flag]);
+    heatmodel2DAna.TemperatureDistro(T2DProfile, omega );
 
     ///Initiate emission model
     const class thermal::Emission emission(popteaCore.expSetup.detector.wavelength,
@@ -102,11 +101,11 @@ double PhaseOfEmission2DAna( const int flag,
 }
 
 
-double PhaseOfEmission1DAna(const int flag,
+double PhaseOfEmission1DAna(const double omega1,
                             const thermal::analysis::Kernal &popteaCore)
 {
   /*See 2004 emission paper equation 19*/
-  const double omega1 = popteaCore.omegas[flag];
+//  const double omega1 = omegas[flag];
   const double lambda = popteaCore.TBCsystem.coating.lambda;
   const double Esigma = popteaCore.TBCsystem.optical.Emit1;
   const double gamma  = popteaCore.TBCsystem.gammaEval();

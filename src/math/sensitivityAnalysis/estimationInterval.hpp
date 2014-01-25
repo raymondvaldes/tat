@@ -42,6 +42,7 @@ public:
     using std::placeholders::_1;
     const std::function<double(double)>
         myFuncReduced = std::bind( &step4::gfunc, this , _1 );
+
     math::solve ojb( myFuncReduced, 0, 0, 1 );
 
     return ojb.returnSoln();

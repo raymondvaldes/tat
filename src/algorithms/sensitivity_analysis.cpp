@@ -34,7 +34,7 @@ License
 void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
              const size_t interants)
 {
-  const size_t N = poptea.coreSystem.LMA.unknownParameters.Nsize();
+  const size_t N = poptea.LMA.unknownParameters.Nsize();
 
 /// Scale jacobian if enabled
   double *xpredicted = new double[N];
@@ -58,22 +58,23 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
       int info = 0;
       myfile << i << "\t";
 
-      poptea.coreSystem.LMA.xpredicted =
-          paramter_estimation( poptea.coreSystem, &info, &nfev );
+      poptea.LMA.xpredicted =
+          poptea.LMA.paramter_estimation( &info, &nfev, poptea.coreSystem );
 
-      poptea.coreSystem.LMA.LMA_workspace.MSE =
-          MSE(poptea.coreSystem.L_end,
-              poptea.coreSystem.LMA.LMA_workspace.emissionExperimental,
-              poptea.coreSystem.LMA.LMA_workspace.predicted);
+      poptea.LMA.LMA_workspace.MSE =
+          MSE( poptea.l_thermal.size(),
+               poptea.LMA.LMA_workspace.emissionExperimental,
+               poptea.LMA.LMA_workspace.predicted);
 
       myfile << poptea.coreSystem.TBCsystem.gammaEval() << "\t"
              << poptea.coreSystem.TBCsystem.a_subEval() << "\t"
              << poptea.coreSystem.TBCsystem.optical.Emit1 << "\t"
              << poptea.coreSystem.TBCsystem.optical.R1<< "\t"
              << poptea.coreSystem.TBCsystem.coating.lambda << "\t"
-             << poptea.coreSystem.LMA.LMA_workspace.MSE << "\n";
+             << poptea.LMA.LMA_workspace.MSE << "\n";
 
-      printPEstimates( poptea.coreSystem , poptea.coreSystem.TBCsystem ) ;
+      printPEstimates( poptea.coreSystem.TBCsystem, poptea.LMA.unknownParameters ) ;
+
 
       xInitial = new double[5]{ math::x_ini10(2.3), math::x_ini10(3.8),
           math::x_ini10(42), math::x_ini10(.8), math::x_ini10(0.57) };

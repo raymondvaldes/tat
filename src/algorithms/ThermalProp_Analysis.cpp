@@ -31,113 +31,6 @@ License
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
 
-std::vector<double>
-paramter_estimation(class thermal::analysis::Kernal &popteaCore, int *info,
-                    int *nfev)
-{
-
-/*
-  The parameter estimation function takes in the function, fitting parameters,
-  initial guess.  If no initial guess is given then it will populate an
-  initial guess based on a random distribution of the parameter range. The
-  initial guess is then transformed based on the parameter estimation ranges.
-  The parameter estimation employed is the levenberg-marquardt algorithm(LMA).
-  The the objective function is evaluated and compared against a tolerance.
-  If it is larger than the tolerance than a new initial guess will be
-  initialized.  This process is repeated until the objective function
-  satisfies the tolerance or the number of iterations maxes out. The final
-  values are populated back into the parameter structure and the dependent
-  parameters are updated.
-*/
-  using namespace math::estimation;
-  const size_t m = popteaCore.l_thermal.size();
-  const size_t n = popteaCore.LMA.unknownParameters.vectorUnknowns.size();
-  class settings ParaEstSetting = popteaCore.LMA.Settings;
-
-  double *x = new double[n];
-  double *fvec = new double[m];
-  double *qtf = new double[n];
-  double *wa1 = new double[n];
-  double *wa2 = new double[n];
-  double *wa3 = new double[n];
-  double *wa4 = new double[m];
-  double *fjac = new double[m*n];
-  double *wa5 = new double[m*n];
-  int *ipvt = new int[n];
-  double *diag = new double[n];
-
-  scaleDiag(ParaEstSetting.mode, n, diag, popteaCore );
-
-  for(size_t i=0 ; i< n ; i++)
-  {
-    x[i] = popteaCore.LMA.xInitial[i];
-  }
-
-  ///set initial guesses
-  /// TODO put in function !
-  if ( fabs(x[0] - 0) < 1e-10 )
-  {
-    int i = 0;
-    BOOST_FOREACH( class unknown &unknown,
-                   popteaCore.LMA.unknownParameters.vectorUnknowns )
-    {
-      x[i++] = math::x_ini( unknown.lowerBound(), unknown.upperBound() );
-    }
-  }
-
-  for(size_t i=0; i< n; i++)
-  {
-    popteaCore.LMA.xguessAuto[i] = x[i];
-  }
-
-  ///Transform inputs
-  int i = 0;
-  BOOST_FOREACH( class unknown &unknown,
-                 popteaCore.LMA.unknownParameters.vectorUnknowns )
-  {
-    x[i] = kx_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
-    i++;
-  }
-
-  ///levenberg-marquardt algorithm
-  lmdif( &ThermalProp_Analysis, m, n, x, fvec, ParaEstSetting.ftol,
-         ParaEstSetting.xtol, ParaEstSetting.gtol, ParaEstSetting.maxfev,
-         ParaEstSetting.epsfcn, diag, ParaEstSetting.mode,
-         ParaEstSetting.factor, ParaEstSetting.nprint, info, nfev, fjac, m,
-         ipvt, qtf, wa1, wa2, wa3, wa4, wa5, popteaCore ) ;
-
-  ///Exit Routine
-  /* Sets up a condition where the total error in the phase is compared
-  against a fvec Tolerance.  If the error is greater than this constant,
-  then the parameter estimation algorithm is reset with a new set of
-  initial guesses. This is let to run a fixed number of iterations. */
-
-  popteaCore.LMA.LMA_workspace.fvecTotal =
-      SobjectiveLS( popteaCore.L_end,
-                    popteaCore.LMA.LMA_workspace.emissionExperimental,
-                    popteaCore.LMA.LMA_workspace.predicted);
-
-  for(size_t i=0 ; i< n ; i++)
-  {
-    x[i] = popteaCore.LMA.xInitial[i];
-  }
-
-
-  delete [] qtf;
-  delete [] wa1;
-  delete [] wa2;
-  delete [] wa3;
-  delete [] wa4;
-  delete [] wa5;
-  delete [] ipvt;
-  delete [] fvec;
-  delete [] fjac;
-  delete [] diag;
-  delete [] x;
-
-  return popteaCore.LMA.xpredicted;
-}
-
 
 void InformationIndex(const size_t P, double *Index,
                       const size_t I, const double ki, const double *const fjac)
@@ -238,61 +131,32 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
     return;
 }
 
-
-void printPEstimates( class thermal::analysis::Kernal popteaCore ,
-                      const class physicalModel::TBCsystem TBCSystem)
+void printPEstimates( const class physicalModel::TBCsystem TBCSystem,
+                      math::estimation::unknownList list )
 {
-  BOOST_FOREACH(class math::estimation::unknown &unknown,
-                popteaCore.LMA.unknownParameters.vectorUnknowns)
+  BOOST_FOREACH( class math::estimation::unknown &unknown, list.vectorUnknowns)
   {
     std::cout << TBCSystem.returnVal( unknown.label() ) << "  ";
   }
-
-  popteaCore.LMA.LMA_workspace.MSE = MSE(
-        popteaCore.L_end,
-        popteaCore.LMA.LMA_workspace.emissionExperimental,
-        popteaCore.LMA.LMA_workspace.predicted);
-
-  std::cout << std::setprecision(10) << popteaCore.LMA.LMA_workspace.MSE;
-  std::cout << std::setprecision(6)  << "\n";
-
   return;
 }
 
-void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
-                           int * /*iflag*/,
-                           class thermal::analysis::Kernal popteaCore)
-{
-  using namespace math::estimation;
-  //Update parameters
-  int i = 0;
-  BOOST_FOREACH( class math::estimation::unknown &unknown,
-                 popteaCore.LMA.unknownParameters.vectorUnknowns)
-  {
-    const double val =
-        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
+//void printPEstimates( class thermal::analysis::Kernal popteaCore ,
+//                      const class physicalModel::TBCsystem TBCSystem)
+//{
+//  BOOST_FOREACH(class math::estimation::unknown &unknown,
+//                LMA.unknownParameters.vectorUnknowns)
+//  {
+//    std::cout << TBCSystem.returnVal( unknown.label() ) << "  ";
+//  }
 
-    popteaCore.TBCsystem.updateVal( unknown.label() , val );
-  }
-  popteaCore.TBCsystem.updateCoat();
+////  LMA.LMA_workspace.MSE = MSE(
+////        popteaCore.L_end,
+////        LMA.LMA_workspace.emissionExperimental,
+////        LMA.LMA_workspace.predicted);
 
-  // Estimates the phase of emission at each heating frequency
-  thermal::emission::phase99(popteaCore, popteaCore.LMA.LMA_workspace.predicted);
+////  std::cout << std::setprecision(10) << popteaCore.LMA.LMA_workspace.MSE;
+////  std::cout << std::setprecision(6)  << "\n";
 
-/// Evaluate Objective function
-  for(size_t n = 0 ; n < popteaCore.L_end ; ++n )
-  {
-     fvec[n] =
-     popteaCore.LMA.LMA_workspace.emissionExperimental[n] -
-         popteaCore.LMA.LMA_workspace.predicted[n] ;
-     popteaCore.LMA.LMA_workspace.fvec[n] = fvec[n];
-  }
-
-/// Print stuff to terminal
-  popteaCore.LMA.LMA_workspace.MSE =
-      MSE( popteaCore.L_end,
-           popteaCore.LMA.LMA_workspace.emissionExperimental,
-           popteaCore.LMA.LMA_workspace.predicted );
-//  printPEstimates( popteaCore ) ;
-  return;
-}
+//  return;
+//}

@@ -1,2 +1,2 @@
 #!/bin/bash
-~/code/tat/bin/tat --config ~/code/tat/bin
+~/code/tat/bin/tat --config ~/code/tat/bin/config

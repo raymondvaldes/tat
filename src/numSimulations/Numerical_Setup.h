@@ -28,11 +28,11 @@ License
 #include "algorithms/ThermalProp_Analysis.h"
 #include "thermal/analysis/kernal.hpp"
 
-void fdjac2(void (*fcn)(int, int, double *, double *, int *,
-                        class thermal::analysis::Kernal popteaCore),
-            int m, int n, double x[], double fvec[], double fjac[], int,
-            int *iflag, double epsfcn, double wa[],
-            class thermal::analysis::Kernal popteaCore);
+//void fdjac2(void (*fcn)(int, int, double *, double *, int *,
+//                        class thermal::analysis::Kernal popteaCore),
+//            int m, int n, double x[], double fvec[], double fjac[], int,
+//            int *iflag, double epsfcn, double wa[],
+//            class thermal::analysis::Kernal popteaCore);
 
 double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);

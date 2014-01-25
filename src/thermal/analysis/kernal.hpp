@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||                   |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -43,40 +43,20 @@ public:
   class equipment::setup expSetup;
   class physicalModel::TBCsystem TBCsystem;
   class thermal::model thermalsys;
-  class math::estimation::LMA LMA;
   class filesystem::directory DataDirectory;
 
   Kernal( class equipment::setup expSetup_,
           class physicalModel::TBCsystem TBCsystem_,
           class thermal::model thermalsys_,
-          class math::estimation::settings Settings_,
-          class math::estimation::unknownList unknownParameters_,
           class filesystem::directory DataDirectory_ ) ;
 
-  static Kernal loadConfig( const std::string &filename,
+  static Kernal loadConfig( boost::property_tree::ptree pt,
                 const class filesystem::directory DataDirectory_);
+
 
   ~Kernal( void );
 
-
-
-
-
-  double l_min, l_max; ///MUST REMOVE
-  size_t L_end;     ///MUST REMOVE
-  std::vector<double> omegas; ///MUST REMOVE
-  std::vector<double> l_thermal;  ///MUST REMOVE
-  double thermalSetupTEMP(const double lmin_, const double lmax_,
-                          const double L_coat, const double kc, const double psic,
-                          const size_t L_end_);
-  void updateNMeasurements();
-  void thermalSetup( const double lmin_, const double lmax_, //MUST BE REMOVED
-                   const size_t LendMin);                  //MUST BE REMOVED
   double bEval(void) const;                                 //MUST BE REMOVED
-
-
-
-
 };
 
 

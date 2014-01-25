@@ -22,6 +22,9 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+
 #include "manyfit.hpp"
 #include "tools/filesystem.hpp"
 #include "thermal/analysis/kernal.hpp"
@@ -34,28 +37,51 @@ namespace manyfit{
 
 void run(const class filesystem::directory dir)
 {
-  /// initiate popteaCore by importing configuration info
   using namespace thermal::analysis;
+  /// initiate popteaCore by importing configuration info
 
-  const std::string filename = "config.xml";
-  const class Kernal popteaCore = Kernal::loadConfig( dir.abs( filename ), dir);
-  class Poptea poptea( popteaCore );
+  const std::string filename1 = "kernal.xml";
+  boost::property_tree::ptree pt;
+  try
+  {
+    boost::property_tree::read_xml( dir.abs( filename1 ), pt);
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << dir.abs( filename1 ) << " not found! See --help\n";
+    exit(-2);
+  }
+  const class Kernal popteaCore = Kernal::loadConfig( pt , dir);
 
-  /// Create initial guess
-  double *xInitial = new double[5]{2.1, 3.7, 40, 0.75, 0.5};
-  constexpr size_t interants = 1;
 
-  thermal::emission::phase99( poptea.coreSystem,
-                              poptea.coreSystem.LMA.LMA_workspace.emissionNominal );
+  const std::string filename = "poptea.xml";
+  boost::property_tree::ptree pt1;
+  try
+  {
+    boost::property_tree::read_xml( dir.abs( filename ), pt1);
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
+    exit(-2);
+  }
+
+  class Poptea poptea = Poptea::loadConfig( popteaCore, pt1 );
+
+//  /// Create initial guess
+//  std::vector< poptea.LMA.LMA_workspace.emissionNominal > =
+//  thermal::emission::phase99( poptea.coreSystem, poptea.omegas);
 
   /// execute
-  for(size_t nn = 0; nn < poptea.coreSystem.L_end ; ++nn )
-  {
-    poptea.coreSystem.LMA.LMA_workspace.emissionExperimental[nn]
-          = poptea.coreSystem.LMA.LMA_workspace.emissionNominal[nn];
-  }
-  fitting( poptea, xInitial, interants );
-  delete[] xInitial;
+//  for(size_t nn = 0; nn < poptea.coreSystem.L_end ; ++nn )
+//  {
+//    poptea.coreSystem.LMA.LMA_workspace.emissionExperimental[nn]
+//          = poptea.coreSystem.LMA.LMA_workspace.emissionNominal[nn];
+//  }
+
+//  constexpr size_t interants = 1;
+//  fitting( poptea, xInitial, interants );
+//  delete[] xInitial;
 
 }
 

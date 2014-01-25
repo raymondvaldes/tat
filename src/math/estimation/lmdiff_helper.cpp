@@ -22,27 +22,19 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <vector>
 #include <boost/foreach.hpp>
-#include "thermal/analysis/kernal.hpp"
 
+#include "math/estimation/parameterestimation.hpp"
+#include "thermal/analysis/kernal.hpp"
 
 namespace math{
   namespace estimation{
 
-void scaleDiag(const int mode, const size_t N, double * diag,
-               const class thermal::analysis::Kernal popteaCore )
-{
-  if(mode == 2)
-  {
-    int i = 0;
-    BOOST_FOREACH( const class math::estimation::unknown &unknown,
-                   popteaCore.LMA.unknownParameters.vectorUnknowns )
-    {
-      diag[i++] = popteaCore.TBCsystem.returnVal( unknown.label() );
-    }
-  }
-  return;
-}
+
+
+
+
 
   }
 }

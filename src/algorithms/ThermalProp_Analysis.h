@@ -27,16 +27,14 @@ License
 
 #include "thermal/analysis/kernal.hpp"
 #include "models/physicalmodel.hpp"
+#include "math/estimation/parameterestimation.hpp"
 
-std::vector<double>
-paramter_estimation(thermal::analysis::Kernal &popteaCore, int *info,
-                    int *nfev);
 
-void ThermalProp_Analysis(int, int N, double*x, double*fvec, int*,
-                          class thermal::analysis::Kernal popteaCore );
+void printPEstimates(const class physicalModel::TBCsystem TBCSystem,
+                math::estimation::unknownList list);
 
-void printPEstimates( class thermal::analysis::Kernal popteaCore ,
-                      const class physicalModel::TBCsystem TBCSystem);
+//void printPEstimates( class thermal::analysis::Kernal popteaCore ,
+//                      const class physicalModel::TBCsystem TBCSystem);
 
 void printfJac(const size_t N, const size_t P, const double*fjac);
 void InformationIndexAll(const size_t P, const size_t N,

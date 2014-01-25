@@ -44,11 +44,13 @@ private:
 
 
 
-double PhaseOfEmission2DAna( const int flag,
+double PhaseOfEmission2DAna( const double omega,
                              const thermal::analysis::Kernal &popteaCore);
-double PhaseOfEmission1DNum( const int flag,
+
+double PhaseOfEmission1DNum(const double omega,
                              const thermal::analysis::Kernal &popteaCore);
-double PhaseOfEmission1DAna( const int flag,
+
+double PhaseOfEmission1DAna(const double omega,
                              const thermal::analysis::Kernal &popteaCore);
 
 
