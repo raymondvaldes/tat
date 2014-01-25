@@ -31,6 +31,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/sa_sensitivity.hpp"
+#include "thermal/analysis/solution.hpp"
 
 #include "math/estimation/parameterestimation.hpp"
 #include "models/physicalmodel.hpp"
@@ -45,6 +46,7 @@ private:
 
 public:
   class Kernal coreSystem;
+  class ThermalData thermalData;
   class LMA LMA;
   class SA_Sensitivity SA;
 
@@ -70,14 +72,7 @@ public:
 
   std::vector<double> omegas; ///MUST REMOVE
   std::vector<double> l_thermal;  ///MUST REMOVE
-  double thermalSetupTEMP(const double lmin_, const double lmax_,
-                          const double L_coat, const double kc, const double psic,
-                          const size_t L_end_);
 
-
-  //MUST BE REMOVED
- void thermalSetup(const double lmin_, const double lmax_,
-                   const size_t LendMin);
 
 };
 

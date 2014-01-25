@@ -45,20 +45,12 @@ namespace analysis{
 Poptea::Poptea( const class Kernal coreSystem_ ,
                 const class math::estimation::settings Settings_,
                 const class math::estimation::unknownList unknownParameters_)
-  : coreSystem( coreSystem_ ),  LMA(Settings_, unknownParameters_),
+  : coreSystem( coreSystem_ ),  LMA(Settings_, unknownParameters_, ),
     SA(1) //TEMP BUG TODO
 {
 
 
-  /// Heat Transfer and Emission models
-  const double l_min = .04;
-  const double l_max = 4;
-  const size_t LendMinDecade = 50;
 
-  // Populate the experimental phase values in parameters99
-
-
-  thermalSetup( l_min, l_max, LendMinDecade );
 }
 
 class Poptea
@@ -198,103 +190,6 @@ void Poptea::loadExperimentalData( const std::vector<double> data )
 //  return limits;
 //}
 
-
-void Poptea::thermalSetup( const double lmin_, const double lmax_,
-                           const size_t LendMin )
-{
-  const double L_end = thermalSetupTEMP( lmin_, lmax_,
-                            coreSystem.TBCsystem.coating.depth,
-                            coreSystem.TBCsystem.coating.kthermal.offset,
-                            coreSystem.TBCsystem.coating.psithermal.offset ,
-                                         LendMin);
-
-  LMA.LMA_workspace.updateArraySize( L_end, LMA.unknownParameters.Nsize()  );
-}
-
-double  Poptea::thermalSetupTEMP( const double l_min, const double l_max,
-                                  const double L_coat, const double kc,
-                                  const double psic, const size_t L_end )
-{
-  BOOST_ASSERT_MSG( ( l_min < l_max ) , "check min-max logic\n\n" );
-  BOOST_ASSERT_MSG( ( L_coat > 0 ) && ( L_end > 0 ) , "check L inputs\n\n" );
-  BOOST_ASSERT_MSG( ( kc > 0 ) && ( psic > 0 ) , "check kc inputs\n\n" );
-
-  constexpr size_t box = 7;
-  constexpr double rangeLim[box] = {1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3};
-
-  BOOST_ASSERT_MSG( ( l_min >= rangeLim[0] ) &&
-                    ( l_max <= rangeLim[box-1] )  , "check min-max range\n\n" );
-
-  /* I need to create a function that determines the number of measurements
-  necessary to satisfy L_end_ which is the minimum  number of measurements per
-  decade. Once I determine the number of measurements I need then I can use
-  the ::rangelog10 function to populate the range.*/
-
-  double rangeFills[box-1] = {0};
-  for(size_t i = 0; i < box-1 ; ++i)
-  {
-    if( l_min >= rangeLim[i+1]  || l_max <= rangeLim[i])
-    {
-      rangeFills[i] = 0;
-    }
-    else if( l_min <= rangeLim[i] && l_max >= rangeLim[i+1])
-    {
-      rangeFills[i] = 1;
-    }
-    else
-    {
-      double start = 0;
-      if(l_min <= rangeLim[i])
-      {
-        start = 0;
-      }
-      else if( l_min < rangeLim[i+1] )
-      {
-        start = math::percentilelog10(rangeLim[i], rangeLim[i+1], l_min);
-      }
-
-      double end1 = 1;
-      if(l_max >= rangeLim[i+1])
-      {
-        end1 = 1;
-      }
-      else if( l_max < rangeLim[i+1] )
-      {
-        end1 = math::percentilelog10(rangeLim[i], rangeLim[i+1], l_max);
-      }
-
-      rangeFills[i] = end1 - start;
-    }
-  }
-
-  double sum = 0;
-  for(size_t i = 0; i < box-1 ; ++i)
-  {
-    sum += rangeFills[i];
-  }
-
-  size_t Lnew = L_end;
-
-  if( sum > 1)
-  {
-    Lnew = L_end;
-    Lnew *=sum;
-  }
-  else if(sum <= 1)  //TODO REMOVE?
-  {
-    Lnew = L_end;
-  }
-
-  updateNMeasurements( Lnew );
-  math::range1og10(l_min, l_max, Lnew, l_thermal);
-
-  for (size_t i=0; i < Lnew; ++i )
-  {
-    omegas[i] = thermal::omega(L_coat, l_thermal[i], kc, psic);
-  }
-
-  return Lnew;
-}
 
 
 void  Poptea::updateNMeasurements( const double L_end )
