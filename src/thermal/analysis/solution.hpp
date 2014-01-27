@@ -39,8 +39,6 @@ private:
                            const size_t lminPerDecarde,
                            const double L_coat, const double kc,
                            const double psic);
-  /// Heat Transfer and Emission models
-
 public:
   std::vector<double> omegas;
   std::vector<double> l_thermal;
@@ -48,7 +46,7 @@ public:
   explicit ThermalData( const double l_min, const double l_max,
                         const size_t lminPerDecarde,
                         const physicalModel::layer &coating );
-  ThermalData& operator=(const ThermalData& that);
+  ThermalData& operator = (const ThermalData& that);
   ~ThermalData();
 
   static class ThermalData

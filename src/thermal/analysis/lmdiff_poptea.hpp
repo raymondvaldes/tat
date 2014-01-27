@@ -68,10 +68,6 @@ public:
   class math::estimation::unknownList unknownParameters;
   class LMA_workingArrays LMA_workspace;
 
-  std::vector<double> xInitial{ 2.1, 3.7, 40, 0.75, 0.5 } ; //FIX THIS TODO BUG
-  std::vector<double> xpredicted;  //FIX THIS TODO BUG
-  std::vector<double> xguessAuto;  //FIX THIS TODO BUG
-
   explicit LMA( const struct math::estimation::settings &Settings_,
                 const class math::estimation::unknownList &unknownParameters,
                 const size_t Lend_, const class ThermalData &thermalData_) ;
@@ -83,8 +79,8 @@ public:
   void updateWorkSpace(const size_t Lend , const size_t N);
 
   std::vector<double>
-  paramter_estimation( int *info, int *nfev, class Kernal coreSystem,
-                       class ThermalData thermalData_ );
+  paramter_estimation(int *info, int *nfev, Kernal &coreSystem,
+                       const ThermalData &thermalData_ );
 };
 
 

@@ -41,23 +41,20 @@ void run( const class filesystem::directory dir )
   using namespace thermal::analysis;
   class Poptea poptea = Poptea::loadConfigfromFile( dir );
 
-//  /// Create initial guess
-//  poptea.LMA.LMA_workspace.emissionNominal =
-//  thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
-
+  /// Create initial guess
+  poptea.LMA.LMA_workspace.emissionNominal =
+  thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
 
 
   /// execute
-//  for(size_t nn = 0; nn < poptea.coreSystem.L_end ; ++nn )
-//  {
-//    poptea.coreSystem.LMA.LMA_workspace.emissionExperimental[nn]
-//          = poptea.coreSystem.LMA.LMA_workspace.emissionNominal[nn];
-//  }
+  for(size_t nn = 0; nn < poptea.thermalData.omegas.size() ; ++nn )
+  {
+    poptea.LMA.LMA_workspace.emissionExperimental[nn]
+          = poptea.LMA.LMA_workspace.emissionNominal[nn];
+  }
 
-//  constexpr size_t interants = 1;
-//  fitting( poptea, xInitial, interants );
-//  delete[] xInitial;
-
+  constexpr size_t interants = 1;
+  fitting( poptea, interants );
 }
 
 }

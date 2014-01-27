@@ -55,13 +55,13 @@ public:
 
   void bestfitset(const double input);
 
-  double bestfit(void);
-  double upperBound(void);
-  double lowerBound(void);
+  double bestfit(void) const;
+  double upperBound(void) const;
+  double lowerBound(void) const;
+  double initialVal(void) const;
 
   void Initialauto(void);
   void Initialset(const double input);
-  double initialVal(void);
 
   enum physicalModel::labels::Name label(void) const;
 
