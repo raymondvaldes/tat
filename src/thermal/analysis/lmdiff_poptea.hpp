@@ -72,12 +72,15 @@ public:
   std::vector<double> xpredicted;  //FIX THIS TODO BUG
   std::vector<double> xguessAuto;  //FIX THIS TODO BUG
 
-  explicit LMA( const struct math::estimation::settings Settings_,
-                const class math::estimation::unknownList unknownParameters,
-                const size_t Lend_, class ThermalData thermalData_) ;
+  explicit LMA( const struct math::estimation::settings &Settings_,
+                const class math::estimation::unknownList &unknownParameters,
+                const size_t Lend_, const class ThermalData &thermalData_) ;
   ~LMA(void);
 
-  void resetInitialGuess(const std::vector<double> input);
+
+  void updateUnknownParameters(
+      const std::vector<math::estimation::unknown> &unknownList_);
+  void updateWorkSpace(const size_t Lend , const size_t N);
 
   std::vector<double>
   paramter_estimation( int *info, int *nfev, class Kernal coreSystem,

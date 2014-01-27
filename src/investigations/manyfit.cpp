@@ -35,42 +35,16 @@ License
 namespace investigations{
 namespace manyfit{
 
-void run(const class filesystem::directory dir)
+void run( const class filesystem::directory dir )
 {
+  /// initiate poptea by importing configuration info
   using namespace thermal::analysis;
-  /// initiate popteaCore by importing configuration info
+  class Poptea poptea = Poptea::loadConfigfromFile( dir );
 
-  const std::string filename1 = "kernal.xml";
-  boost::property_tree::ptree pt;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename1 ), pt);
-  }
-  catch (std::exception& e)
-  {
-    std::cout << "file " << dir.abs( filename1 ) << " not found! See --help\n";
-    exit(-2);
-  }
-  const class Kernal popteaCore = Kernal::loadConfig( pt , dir);
+//  /// Create initial guess
+//  poptea.LMA.LMA_workspace.emissionNominal =
+//  thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
 
-
-  const std::string filename = "poptea.xml";
-  boost::property_tree::ptree pt1;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename ), pt1);
-  }
-  catch (std::exception& e)
-  {
-    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
-    exit(-2);
-  }
-
-  class Poptea poptea = Poptea::loadConfig( popteaCore, pt1 );
-
-  /// Create initial guess
-  poptea.LMA.LMA_workspace.emissionNominal =
-  thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
 
 
   /// execute

@@ -50,15 +50,19 @@ public:
   class LMA LMA;
   class SA_Sensitivity SA;
 
-  explicit Poptea( const class Kernal coreSystem_,
-                   const class math::estimation::settings Settings_,
-                   const class math::estimation::unknownList unknownParameters_);
+  explicit Poptea( const class Kernal &coreSystem_ ,
+                   const class ThermalData &thermaldata_,
+                   const class math::estimation::settings &Settings_,
+                   const math::estimation::unknownList &unknownParameters_) ;
 
-  static Poptea loadConfig(const Kernal &coreSystem_,
-                            boost::property_tree::ptree pt);
+  static Poptea loadConfig( const Kernal &coreSystem_,
+                            const boost::property_tree::ptree &pt ) ;
 
+  static Poptea loadConfigfromFile( const class filesystem::directory &dir ) ;
   ~Poptea( void );
 
+  void updatelthermal( const double lmin, const double lmax,
+                       const double lminperDecade);
 
 
   /// These should be pushed down another level

@@ -45,15 +45,12 @@ public:
   class thermal::model thermalsys;
   class filesystem::directory DataDirectory;
 
-  Kernal( class equipment::setup expSetup_,
-          class physicalModel::TBCsystem TBCsystem_,
-          class thermal::model thermalsys_,
-          class filesystem::directory DataDirectory_ ) ;
-
-  static Kernal loadConfig( boost::property_tree::ptree pt,
-                const class filesystem::directory DataDirectory_);
-
-
+  Kernal( const class equipment::setup &expSetup_,
+          const class physicalModel::TBCsystem &TBCsystem_,
+          const class thermal::model &thermalsys_,
+          const class filesystem::directory &DataDirectory_ ) ;
+  static Kernal loadConfig( const boost::property_tree::ptree &pt,
+                            const class filesystem::directory &DataDirectory_);
   ~Kernal( void );
 
   double bEval(void) const;                                 //MUST BE REMOVED

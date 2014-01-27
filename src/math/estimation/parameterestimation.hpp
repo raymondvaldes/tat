@@ -70,19 +70,21 @@ public:
 class unknownList
 {
 private:
-  size_t N;
+//  size_t N;
 
 public:
   std::vector<class estimation::unknown> vectorUnknowns;
-  void addUnknown(physicalModel::labels::Name name,
-                  const double lower,
-                  const double upper, const double initialGuess);
-  size_t Nsize(void) const;       //BUGS TODO REMOVE
+
+  void addUnknown( physicalModel::labels::Name name,
+                   const double lower, const double upper,
+                   const double initialGuess);
+  size_t Nsize(void) const;
 
   static class unknownList
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
-
   class unknown getParameter( physicalModel::labels::Name label );
+
+
 
   ~unknownList() ;
 };
@@ -108,7 +110,7 @@ public:
   const size_t factorMax = 10;
   const size_t factorScale = 5;
 
-  static struct settings loadConfigfromXML(const boost::property_tree::ptree pt);
+  static struct settings loadConfigfromXML( const boost::property_tree::ptree pt );
   ~settings(void);
   explicit settings( const double ftol_, const double xtol_, const double gtol_,
                      const size_t maxfev_, const double epsfcn_,

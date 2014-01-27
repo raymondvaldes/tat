@@ -38,43 +38,42 @@ namespace thermal {
 namespace analysis{
 
 
-LMA::LMA( const struct math::estimation::settings Settings_,
-          const class math::estimation::unknownList unknownParameters_,
-          const size_t Lend_, class ThermalData thermalData_)
+LMA::LMA(const math::estimation::settings &Settings_,
+          const math::estimation::unknownList &unknownParameters_,
+          const size_t Lend_, const ThermalData &thermalData_)
   : thermalData(thermalData_), Settings(Settings_),
     unknownParameters(unknownParameters_),
     LMA_workspace( Lend_, unknownParameters_.Nsize() )
 {
-//  const size_t n = unknownParameters.vectorUnknowns.size();
-//  xpredicted.resize(n);
-//  xguessAuto.resize(n);
-
-
 
 }
-
-void LMA::resetInitialGuess(const std::vector<double> input)
-{
-  if( input.size() == xInitial.size() )
-    { xInitial = input; }
-  else
-    { std::cout << "check xInitial"; exit(-3); }
-}
-
 
 LMA::~LMA(void){}
 
+void LMA::updateUnknownParameters(
+    const std::vector< class math::estimation::unknown > &unknownList_ )
+{
+  std::vector<class math::estimation::unknown> updated(unknownList_);
+  unknownParameters.vectorUnknowns.swap( updated );
+
+  const size_t Default = LMA_workspace.emissionNominal.size();
+  updateWorkSpace( Default, updated.size() ) ;
+}
+
+void LMA::updateWorkSpace( const size_t Lend, const size_t N )
+{
+  LMA_workspace.updateArraySize( Lend , N );
+}
 
 
-
-void LMA::updateThermalData( class ThermalData thermalData_  )
+void LMA::updateThermalData( class ThermalData thermalData_ )
 {
   thermalData = thermalData_;
 }
 
 std::vector<double>
-LMA::paramter_estimation( int *info, int *nfev,  class Kernal coreSystem,
-                          class ThermalData thermalData_ )
+LMA::paramter_estimation(int *info, int *nfev,  Kernal coreSystem,
+                          ThermalData thermalData_ )
 {
   updateThermalData( thermalData_ );
 

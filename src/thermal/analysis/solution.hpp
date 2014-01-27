@@ -31,29 +31,34 @@ License
 namespace thermal {
 namespace analysis{
 
-
 class ThermalData
 {
 private:
-  const size_t LendMinDecade = 50;
   void  updateNMeasurements( const double L_end );
-  double thermalSetupTEMP(const double lmin_, const double lmax_,
+  double thermalSetupTEMP( const double lmin_, const double lmax_,
+                           const size_t lminPerDecarde,
                            const double L_coat, const double kc,
                            const double psic);
   /// Heat Transfer and Emission models
-  const double l_min = .04;
-  const double l_max = 4;
 
 public:
   std::vector<double> omegas;
   std::vector<double> l_thermal;
 
-  explicit ThermalData( const physicalModel::layer coating );
+  explicit ThermalData( const double l_min, const double l_max,
+                        const size_t lminPerDecarde,
+                        const physicalModel::layer &coating );
   ThermalData& operator=(const ThermalData& that);
   ~ThermalData();
 
-  size_t thermalSetup( const double lmin_, const double lmax_,
-                       const physicalModel::layer coating );
+  static class ThermalData
+  loadConfigfromXML( const boost::property_tree::ptree pt,
+                     const physicalModel::layer &coating );
+
+  size_t thermalSetup( const double lmin, const double lmax,
+                       const size_t lminPerDecarde ,
+                       const physicalModel::layer &coating  );
+
 };
 
 

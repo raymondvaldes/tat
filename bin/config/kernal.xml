@@ -91,6 +91,7 @@
 			<Nend>80</Nend>
 			<beta1>100</beta1>
 			<split>0.5</split>
+			<num_iter>1000</num_iter>
 		</mesh>
 	</thermalModel>
 	

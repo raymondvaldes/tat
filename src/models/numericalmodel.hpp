@@ -33,7 +33,6 @@ namespace numericalModel
 class Mesh
 {
 public:
-  size_t iter;
   std::vector<double> z_jplus;
   std::vector<double> z_jminus;
   std::vector<double> z_j;
@@ -59,10 +58,10 @@ public:
   const size_t Rend;
   const size_t Nend;
 
-  explicit Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
-       const double beta1_, const double split_, const double L_coat_,
-       const double L_substrate_, const double CO2Radius_,
-       const double Rdomain_);
+  explicit Mesh( const size_t M2_, const size_t Rend_, const size_t Nend_,
+                 const double beta1_, const double split_, const double L_coat_,
+                 const double L_substrate_, const double CO2Radius_,
+                 const double Rdomain_, const size_t numIter_);
   ~Mesh();
 
   void meshUpdate(const double L_coat, const double L_substrate,
@@ -82,6 +81,9 @@ private:
   double z_eta(const double eta_);
   double D_eta(const double z_norm_);
   void zUpdate();
+
+public:
+  size_t iter;
 };
 
 class simulations
