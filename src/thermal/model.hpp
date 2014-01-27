@@ -37,8 +37,8 @@ public:
   class construct Construct;
   class numericalModel::Mesh mesh;
 
-  explicit model ( const class construct Construct_,
-                   const class numericalModel::Mesh mesh_);
+  explicit model ( const class construct &Construct_,
+                   const class numericalModel::Mesh &mesh_);
   ~model(void);
 };
 

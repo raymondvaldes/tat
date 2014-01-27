@@ -31,28 +31,35 @@ License
 namespace thermal {
 namespace analysis{
 
-ThermalData::ThermalData( const physicalModel::layer coating )
+ThermalData::ThermalData( const double l_min, const double l_max,
+                          const size_t lminPerDecarde,
+                          const physicalModel::layer &coating )
 {
-
-
   // Populate the experimental phase values in parameters99
-  thermalSetup( l_min, l_max, coating );
+  thermalSetup( l_min, l_max, lminPerDecarde ,coating );
 }
 
 ThermalData::~ThermalData(){}
 
-size_t ThermalData::thermalSetup(const double lmin_, const double lmax_,
-                                  const physicalModel::layer coating  )
+size_t ThermalData::thermalSetup( const double lmin, const double lmax,
+                                  const size_t lminPerDecarde ,
+                                  const physicalModel::layer &coating  )
 {
-  size_t L_end = thermalSetupTEMP( lmin_, lmax_, coating.depth,
-                                         coating.kthermal.offset,
-                                         coating.psithermal.offset);
-//  LMA.LMA_workspace.updateArraySize( L_end, LMA.unknownParameters.Nsize()  );
-
+  size_t L_end = thermalSetupTEMP( lmin, lmax, lminPerDecarde,
+                                   coating.depth, coating.kthermal.offset,
+                                   coating.psithermal.offset );
   updateNMeasurements( L_end );
+  math::range1og10(lmin, lmax, L_end, l_thermal);
+
+  for (size_t i=0; i < L_end; ++i )
+  {
+    omegas[i] = thermal::omega( coating.depth, l_thermal[i],
+                                coating.kthermal.offset,
+                                coating.psithermal.offset ) ;
+  }
 
   return L_end;
-
+  //  LMA.LMA_workspace.updateArraySize( L_end, LMA.unknownParameters.Nsize()  );
 }
 
 ThermalData& ThermalData::operator=(const ThermalData& that)
@@ -65,11 +72,12 @@ ThermalData& ThermalData::operator=(const ThermalData& that)
   return *this;
 }
 
-double  ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
-                                  const double L_coat, const double kc,
-                                  const double psic )
+double ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
+                                      const size_t lminPerDecarde,
+                                      const double L_coat, const double kc,
+                                      const double psic )
 {
-  const size_t L_end = LendMinDecade;
+  const size_t L_end = lminPerDecarde;
   BOOST_ASSERT_MSG( ( l_min < l_max ) , "check min-max logic\n\n" );
   BOOST_ASSERT_MSG( ( L_coat > 0 ) && ( L_end > 0 ) , "check L inputs\n\n" );
   BOOST_ASSERT_MSG( ( kc > 0 ) && ( psic > 0 ) , "check kc inputs\n\n" );
@@ -140,14 +148,6 @@ double  ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
     Lnew = L_end;
   }
 
-  updateNMeasurements( Lnew );
-  math::range1og10(l_min, l_max, Lnew, l_thermal);
-
-  for (size_t i=0; i < Lnew; ++i )
-  {
-    omegas[i] = thermal::omega(L_coat, l_thermal[i], kc, psic);
-  }
-
   return Lnew;
 }
 
@@ -157,6 +157,24 @@ void  ThermalData::updateNMeasurements( const double L_end )
   omegas.resize(L_end);
   l_thermal.resize(L_end);
 }
+
+
+class ThermalData ThermalData::
+        loadConfigfromXML( const boost::property_tree::ptree pt,
+                           const physicalModel::layer &coating )
+{
+  using boost::property_tree::ptree;
+
+  // Iterate over 'unknown' branches
+  const double start  = pt.get<double>( "thermal_penetration.start" );
+  const double end    = pt.get<double>( "thermal_penetration.end" );
+  const size_t minperDecade = pt.get<size_t> ("minperDecade");
+
+  class ThermalData thermalData( start, end, minperDecade, coating );
+
+  return thermalData;
+}
+
 
 
 

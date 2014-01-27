@@ -34,8 +34,9 @@ namespace numericalModel
 Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
            const double beta1_, const double split_, const double L_coat_,
            const double L_substrate_, const double CO2Radius_,
-           const double Rdomain_)
-           :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_)
+           const double Rdomain_, const size_t numIter_)
+           :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_),
+             iter(numIter_)
 {
   assert( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
 

@@ -29,9 +29,11 @@ License
 namespace thermal
 {
 
-model::model ( const class construct Construct_,
-               const class numericalModel::Mesh mesh_ )
-  : Construct(Construct_), mesh(mesh_){}
+model::model (const construct &Construct_,
+               const numericalModel::Mesh &mesh_ )
+  : Construct(Construct_), mesh(mesh_)
+{
+}
 
 model::~model(void){}
 

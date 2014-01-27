@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <boost/foreach.hpp>
 #include <vector>
+#include "thermal/analysis/solution.hpp"
 #include "thermal/analysis/poptea.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/emission/phase99.hpp"
@@ -42,42 +43,86 @@ License
 namespace thermal {
 namespace analysis{  
 
-Poptea::Poptea( const class Kernal coreSystem_ ,
-                const class math::estimation::settings Settings_,
-                const class math::estimation::unknownList unknownParameters_)
-  : coreSystem( coreSystem_ ), thermalData( coreSystem_.TBCsystem.coating ),
-    LMA(Settings_, unknownParameters_, thermalData.omegas.size(), thermalData ),
-    SA(thermalData.omegas.size() )
-{
-
-}
+Poptea::Poptea( const class Kernal &coreSystem_ ,
+                const class ThermalData &thermaldata_,
+                const class math::estimation::settings &Settings_,
+                const class math::estimation::unknownList &unknownParameters_)
+  : coreSystem( coreSystem_ ), thermalData( thermaldata_ ),
+    LMA( Settings_, unknownParameters_, thermalData.omegas.size(), thermalData ),
+    SA( thermalData.omegas.size() )
+{}
 
 class Poptea
 Poptea::loadConfig( const class Kernal &coreSystem_,
-                    boost::property_tree::ptree pt )
+                    const boost::property_tree::ptree &pt )
 {
   using boost::property_tree::ptree;
-
   const std::string conjunto = "poptea.";
-  const ptree ptchild4 = pt.get_child( conjunto + "ParaEstSettings" );
+
+  const ptree ptchild1 = pt.get_child( conjunto + "sweep");
+  const class ThermalData Obj1(
+        ThermalData::loadConfigfromXML( ptchild1 ,
+                                        coreSystem_.TBCsystem.coating) );
+
+  const ptree ptchild2 = pt.get_child( conjunto + "ParaEstSettings" );
   const class math::estimation::settings
-    Obj4( math::estimation::settings::loadConfigfromXML( ptchild4 ) );
+    Obj2( math::estimation::settings::loadConfigfromXML( ptchild2 ) );
 
-  const ptree ptchild5 = pt.get_child( conjunto );
+  const ptree ptchild3 = pt.get_child( conjunto );
   const class math::estimation::unknownList
-    Obj5( math::estimation::unknownList::loadConfigfromXML( ptchild5 ) );
-
+    Obj3( math::estimation::unknownList::loadConfigfromXML( ptchild3 ) );
 
 
   //Load class object from previous objects
-  class Poptea poptea( coreSystem_, Obj4, Obj5);
+  class Poptea poptea( coreSystem_, Obj1, Obj2, Obj3 ) ;
 
   return poptea;
 }
 
+void Poptea::updatelthermal( const double lmin, const double lmax,
+                             const double lminperDecade)
+{
+  const size_t Lend =
+  thermalData.thermalSetup( lmin, lmax, lminperDecade,
+                            coreSystem.TBCsystem.coating ) ;
+
+  LMA.updateWorkSpace( Lend, LMA.unknownParameters.Nsize() );
+}
+
+class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir )
+{
+  ///Initiate poptea kernal
+  const std::string filename1 = "kernal.xml";
+  boost::property_tree::ptree pt;
+  try
+  {
+    boost::property_tree::read_xml( dir.abs( filename1 ), pt );
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << dir.abs( filename1 ) << " not found! See --help\n";
+    exit(-2);
+  }
+  const class Kernal popteaCore = Kernal::loadConfig( pt , dir );
+
+  ///bring full poptea object online
+  const std::string filename = "poptea.xml";
+  boost::property_tree::ptree pt1;
+  try
+  {
+    boost::property_tree::read_xml( dir.abs( filename ), pt1 );
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
+    exit(-2);
+  }
+
+  ///return this object
+  return Poptea::loadConfig( popteaCore, pt1 );
+}
+
 Poptea::~Poptea(void){}
-
-
 
 void Poptea::loadExperimentalData( const std::vector<double> data )
 {}

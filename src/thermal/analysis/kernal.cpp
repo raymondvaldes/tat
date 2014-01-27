@@ -35,34 +35,23 @@ License
 namespace thermal {
 namespace analysis{
 
-Kernal::Kernal(class equipment::setup expSetup_,
-                class physicalModel::TBCsystem TBCsystem_,
-                class thermal::model thermalsys_,
-                class filesystem::directory DataDirectory_ )
+Kernal::Kernal( const equipment::setup &expSetup_,
+                const physicalModel::TBCsystem &TBCsystem_,
+                const model &thermalsys_,
+                const filesystem::directory &DataDirectory_ )
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
     thermalsys(thermalsys_),
     DataDirectory(DataDirectory_)
 {
-  thermalsys.mesh.iter = 1000;
 
 }
 
 class thermal::analysis::Kernal
-        Kernal::loadConfig( boost::property_tree::ptree pt,
-                            const filesystem::directory DataDirectory_)
+        Kernal::loadConfig( const boost::property_tree::ptree &pt,
+                            const filesystem::directory &DataDirectory_)
 {
   using boost::property_tree::ptree;
-//  ptree pt;
-//  try
-//  {
-//    read_xml(filename, pt);
-//  }
-//  catch (std::exception& e)
-//  {
-//    std::cout << "file " << filename << " not found! See --help\n";
-//    exit(-2);
-//  }
 
   const std::string conjunto = "kernal.";
   const ptree ptchild1 = pt.get_child( conjunto + "experimentalSetup" );
@@ -83,25 +72,17 @@ class thermal::analysis::Kernal
   const size_t Nend   = ptchild3.get<size_t>( "mesh.Nend" );
   const double beta1  = ptchild3.get<double>( "mesh.beta1" );
   const double split  = ptchild3.get<double>( "mesh.split" );
-  class numericalModel::Mesh mesh(M2, Rend, Nend, beta1, split,
+  const size_t iter   = ptchild3.get<size_t>( "mesh.num_iter" );
+  const class numericalModel::Mesh mesh(M2, Rend, Nend, beta1, split,
                                   Obj2.coating.depth,
                                   Obj2.substrate.depth,
                                   Obj1.laser.radius,
-                                  Obj2.radius);
+                                  Obj2.radius, iter);
 
   const class thermal::model Ojb3NEW( Construct , mesh);
 
-//  const ptree ptchild4 = pt.get_child( conjunto + "ParaEstSettings" );
-//  const class math::estimation::settings
-//    Obj4( math::estimation::settings::loadConfigfromXML( ptchild4 ) );
-
-//  const ptree ptchild5 = pt.get_child( conjunto );
-//  const class math::estimation::unknownList
-//    Obj5( math::estimation::unknownList::loadConfigfromXML( ptchild5 ) );
-
   //Load class object from previous objects
-  class Kernal kernal( Obj1, Obj2, Ojb3NEW, DataDirectory_);
-
+  const class Kernal kernal( Obj1, Obj2, Ojb3NEW, DataDirectory_);
   return kernal;
 }
 
