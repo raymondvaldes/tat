@@ -47,22 +47,22 @@ void unknown::Initialset(const double initial)
   initialGuess = initial;
 }
 
-double unknown::initialVal(void)
+double unknown::initialVal(void) const
 {
   return initialGuess;
 }
 
-double unknown::bestfit(void)
+double unknown::bestfit(void) const
 {
   return bestfitval;
 }
 
-double unknown::upperBound(void)
+double unknown::upperBound(void) const
 {
   return constraint.upper;
 }
-double unknown::lowerBound(void)
-{  name.getName();
+double unknown::lowerBound(void) const
+{
   return constraint.lower;
 }
 
@@ -102,7 +102,7 @@ class unknown
 {
   class unknown *myReturnPtr = nullptr;
 
-  BOOST_FOREACH( class unknown &myunKnown, vectorUnknowns )
+  for( auto& myunKnown : vectorUnknowns)
   {
     if ( myunKnown.label() == label )
     {

@@ -22,6 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+
 #include "algorithms/sensitivity_analysis.hpp"
 #include "algorithms/statistical_tools.hpp"
 #include "thermal/emission/noise.hpp"
@@ -31,13 +32,16 @@ License
 #include "math/utility.hpp"
 #include "math/numIntegration/gslfunc.hpp"
 
-void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
+void fitting(class thermal::analysis::Poptea poptea,
              const size_t interants)
 {
-  const size_t N = poptea.LMA.unknownParameters.Nsize();
+  std::vector<double>xInitial;
+  for( const auto &unknown : poptea.LMA.unknownParameters.vectorUnknowns )
+  {
+    xInitial.push_back( unknown.initialVal() );
+  }
 
 /// Scale jacobian if enabled
-  double *xpredicted = new double[N];
   std::ofstream myfile;
   std::stringstream filename;
   filename <<  "../data/fittingData.dat";
@@ -46,22 +50,18 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
   myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
   myfile << "\tasub\tgamma\tEsigma\tR1\tlambda\n";
 
-  double*xSave = new double[N];
-  for(size_t i =0 ; i < N ; ++i)
-  {
-      xSave[i] = xInitial[i];
-  }
+  std::vector<double>xSave(xInitial);
 
-  for(size_t i=0; i<interants; ++i)
+  for( size_t i=0; i<interants; ++i )
   {
       int nfev;
       int info = 0;
       myfile << i << "\t";
 
-      poptea.LMA.xpredicted =
-          poptea.LMA.paramter_estimation( &info, &nfev, poptea.coreSystem,
+//      poptea.LMA.xpredicted =
+      poptea.LMA.paramter_estimation( &info, &nfev, poptea.coreSystem,
                                           poptea.thermalData );
-
+      std::cout << "hello, raymond..\n\n"; exit(-2);
       poptea.LMA.LMA_workspace.MSE =
           MSE( poptea.thermalData.l_thermal.size(),
                poptea.LMA.LMA_workspace.emissionExperimental,
@@ -77,14 +77,17 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
       printPEstimates( poptea.coreSystem.TBCsystem, poptea.LMA.unknownParameters ) ;
 
 
-      xInitial = new double[5]{ math::x_ini10(2.3), math::x_ini10(3.8),
-          math::x_ini10(42), math::x_ini10(.8), math::x_ini10(0.57) };
+      xInitial.clear();
+      for( const auto& val : xSave)
+      {
+        xInitial.push_back( math::x_ini10(val) );
+      }
+//      xInitial = new double[5]{ math::x_ini10(2.3), math::x_ini10(3.8),
+//          math::x_ini10(42), math::x_ini10(.8), math::x_ini10(0.57) };
   }
 
   myfile.close();
 
-  delete []xSave;
-  delete []xpredicted;
 
   return;
 }

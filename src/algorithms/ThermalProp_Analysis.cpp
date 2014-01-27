@@ -134,29 +134,11 @@ void printfJac(const size_t N, const size_t P, const double*fjac)
 void printPEstimates( const class physicalModel::TBCsystem TBCSystem,
                       math::estimation::unknownList list )
 {
-  BOOST_FOREACH( class math::estimation::unknown &unknown, list.vectorUnknowns)
+  for( const auto& unknown : list.vectorUnknowns)
   {
     std::cout << TBCSystem.returnVal( unknown.label() ) << "  ";
   }
+
+  std::cout << "\n";
   return;
 }
-
-//void printPEstimates( class thermal::analysis::Kernal popteaCore ,
-//                      const class physicalModel::TBCsystem TBCSystem)
-//{
-//  BOOST_FOREACH(class math::estimation::unknown &unknown,
-//                LMA.unknownParameters.vectorUnknowns)
-//  {
-//    std::cout << TBCSystem.returnVal( unknown.label() ) << "  ";
-//  }
-
-////  LMA.LMA_workspace.MSE = MSE(
-////        popteaCore.L_end,
-////        LMA.LMA_workspace.emissionExperimental,
-////        LMA.LMA_workspace.predicted);
-
-////  std::cout << std::setprecision(10) << popteaCore.LMA.LMA_workspace.MSE;
-////  std::cout << std::setprecision(6)  << "\n";
-
-//  return;
-//}

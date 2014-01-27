@@ -29,7 +29,7 @@ License
 #include <cstring>
 #include "thermal/analysis/poptea.hpp"
 
-void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
+void fitting(class thermal::analysis::Poptea poptea,
              const size_t interants);
 
 double evaluateUncertainty(const double MSEarea, double* perturbationTable,

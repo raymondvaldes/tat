@@ -23,11 +23,10 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <functional>
-
-
 #include <cstddef>
 #include <vector>
 #include <boost/foreach.hpp>
+
 #include "algorithms/statistical_tools.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
@@ -72,14 +71,21 @@ void LMA::updateThermalData( class ThermalData thermalData_ )
 }
 
 std::vector<double>
-LMA::paramter_estimation(int *info, int *nfev,  Kernal coreSystem,
-                          ThermalData thermalData_ )
+LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
+                          const ThermalData &thermalData_ )
 {
   updateThermalData( thermalData_ );
+  std::vector<double>xInitial;
+  for( const auto &unknown : unknownParameters.vectorUnknowns )
+  {
+    xInitial.push_back( unknown.initialVal() );
+  }
 
   using namespace math::estimation;
   const size_t m = thermalData.omegas.size();
-  const size_t n = unknownParameters.vectorUnknowns.size();
+  const size_t n = unknownParameters.Nsize();
+  std::vector<double> xpredicted(n);  //FIX THIS TODO BUG
+  std::vector<double> xguessAuto(n);  //FIX THIS TODO BUG
 
   double *x = new double[n];
   double *fvec = new double[m];
@@ -93,8 +99,8 @@ LMA::paramter_estimation(int *info, int *nfev,  Kernal coreSystem,
   int *ipvt = new int[n];
   double *diag = new double[n];
 
- scaleDiag( diag, unknownParameters , coreSystem.TBCsystem,
-            Settings.mode ) ;
+  scaleDiag( diag, unknownParameters , coreSystem.TBCsystem,
+             Settings.mode ) ;
 
   for(size_t i=0 ; i< n ; i++)
   {
@@ -102,12 +108,10 @@ LMA::paramter_estimation(int *info, int *nfev,  Kernal coreSystem,
   }
 
   ///set initial guesses
-  /// TODO put in function !
   if ( fabs(x[0] - 0) < 1e-10 )
   {
-    int i = 0;
-    BOOST_FOREACH( class unknown &unknown,
-                   unknownParameters.vectorUnknowns )
+    int i = 0; 
+    for( const auto& unknown : unknownParameters.vectorUnknowns )
     {
       x[i++] = math::x_ini( unknown.lowerBound(), unknown.upperBound() );
     }
@@ -120,10 +124,9 @@ LMA::paramter_estimation(int *info, int *nfev,  Kernal coreSystem,
 
   ///Transform inputs
   int i = 0;
-  BOOST_FOREACH( class unknown &unknown,
-                 unknownParameters.vectorUnknowns )
+  for( const auto& unknown : unknownParameters.vectorUnknowns )
   {
-    x[i] = kx_limiter2(x[i], unknown.lowerBound(), unknown.upperBound());
+    x[i] = kx_limiter2( x[i], unknown.lowerBound(), unknown.upperBound() ) ;
     i++;
   }
 
