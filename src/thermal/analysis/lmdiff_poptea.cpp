@@ -40,13 +40,16 @@ namespace analysis{
 
 LMA::LMA( const struct math::estimation::settings Settings_,
           const class math::estimation::unknownList unknownParameters_,
-          const size_t Lend_)
-  : Settings(Settings_), unknownParameters(unknownParameters_),
+          const size_t Lend_, class ThermalData thermalData_)
+  : thermalData(thermalData_), Settings(Settings_),
+    unknownParameters(unknownParameters_),
     LMA_workspace( Lend_, unknownParameters_.Nsize() )
 {
 //  const size_t n = unknownParameters.vectorUnknowns.size();
 //  xpredicted.resize(n);
 //  xguessAuto.resize(n);
+
+
 
 }
 
@@ -63,50 +66,20 @@ LMA::~LMA(void){}
 
 
 
-void LMA::ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
-                                int * /*iflag*/,
-                                class thermal::analysis::Kernal popteaCore)
+
+void LMA::updateThermalData( class ThermalData thermalData_  )
 {
-  using namespace math::estimation;
-  //Update parameters
-  int i = 0;
-
-  BOOST_FOREACH( class math::estimation::unknown &unknown,
-                 unknownParameters.vectorUnknowns )
-  {
-    const double val =
-        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
-
-    popteaCore.TBCsystem.updateVal( unknown.label() , val );
-  }
-  popteaCore.TBCsystem.updateCoat();
-
-  // Estimates the phase of emission at each heating frequency
-  LMA_workspace.predicted = thermal::emission::phase99( popteaCore, omegas );
-
-  /// Evaluate Objective function
-  for( size_t n = 0 ; n < omegas.size() ; ++n )
-  {
-     fvec[n] = LMA_workspace.emissionExperimental[n] - LMA_workspace.predicted[n] ;
-     LMA_workspace.fvec[n] = fvec[n];
-  }
-
-/// Print stuff to terminal
-  LMA_workspace.MSE =
-      MSE( omegas.size() ,
-           LMA_workspace.emissionExperimental,
-           LMA_workspace.predicted );
-
-  printPEstimates( popteaCore.TBCsystem, unknownParameters ) ;
-  return;
+  thermalData = thermalData_;
 }
 
-
 std::vector<double>
-LMA::paramter_estimation( int *info, int *nfev,  class Kernal coreSystem )
+LMA::paramter_estimation( int *info, int *nfev,  class Kernal coreSystem,
+                          class ThermalData thermalData_ )
 {
+  updateThermalData( thermalData_ );
+
   using namespace math::estimation;
-  const size_t m = omegas.size();
+  const size_t m = thermalData.omegas.size();
   const size_t n = unknownParameters.vectorUnknowns.size();
 
   double *x = new double[n];
@@ -169,7 +142,7 @@ LMA::paramter_estimation( int *info, int *nfev,  class Kernal coreSystem )
   initial guesses. This is let to run a fixed number of iterations. */
 
   LMA_workspace.fvecTotal =
-      SobjectiveLS( omegas.size(),
+      SobjectiveLS( thermalData.omegas.size(),
                     LMA_workspace.emissionExperimental,
                     LMA_workspace.predicted);
 
@@ -195,8 +168,44 @@ LMA::paramter_estimation( int *info, int *nfev,  class Kernal coreSystem )
 }
 
 
+void LMA::ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
+                                int * /*iflag*/,
+                                class thermal::analysis::Kernal popteaCore)
+{
+  using namespace math::estimation;
+  //Update parameters
+  int i = 0;
 
+  BOOST_FOREACH( class math::estimation::unknown &unknown,
+                 unknownParameters.vectorUnknowns )
+  {
+    const double val =
+        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
 
+    popteaCore.TBCsystem.updateVal( unknown.label() , val );
+  }
+  popteaCore.TBCsystem.updateCoat();
+
+  // Estimates the phase of emission at each heating frequency
+  LMA_workspace.predicted = thermal::emission::phase99( popteaCore,
+                                                        thermalData.omegas );
+
+  /// Evaluate Objective function
+  for( size_t n = 0 ; n < thermalData.omegas.size() ; ++n )
+  {
+     fvec[n] = LMA_workspace.emissionExperimental[n] - LMA_workspace.predicted[n] ;
+     LMA_workspace.fvec[n] = fvec[n];
+  }
+
+/// Print stuff to terminal
+  LMA_workspace.MSE =
+      MSE( thermalData.omegas.size() ,
+           LMA_workspace.emissionExperimental,
+           LMA_workspace.predicted );
+
+  printPEstimates( popteaCore.TBCsystem, unknownParameters ) ;
+  return;
+}
 
 }
 }

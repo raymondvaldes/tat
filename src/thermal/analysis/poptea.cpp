@@ -45,11 +45,10 @@ namespace analysis{
 Poptea::Poptea( const class Kernal coreSystem_ ,
                 const class math::estimation::settings Settings_,
                 const class math::estimation::unknownList unknownParameters_)
-  : coreSystem( coreSystem_ ),  LMA(Settings_, unknownParameters_, ),
-    SA(1) //TEMP BUG TODO
+  : coreSystem( coreSystem_ ), thermalData( coreSystem_.TBCsystem.coating ),
+    LMA(Settings_, unknownParameters_, thermalData.omegas.size(), thermalData ),
+    SA(thermalData.omegas.size() )
 {
-
-
 
 }
 
@@ -78,12 +77,11 @@ Poptea::loadConfig( const class Kernal &coreSystem_,
 
 Poptea::~Poptea(void){}
 
-void Poptea::setThermalRange( const double lmin, const double lmax )
-{
 
-}
+
 void Poptea::loadExperimentalData( const std::vector<double> data )
 {}
+
 //void Poptea::setParameterstoFit( class math::estimation::unknownList parameters )
 //{
 ////  unknownParameters = parameters;
@@ -189,15 +187,6 @@ void Poptea::loadExperimentalData( const std::vector<double> data )
 //  std::pair <double,double> limits (lowerLimit, upperLimit);
 //  return limits;
 //}
-
-
-
-void  Poptea::updateNMeasurements( const double L_end )
-{
-  omegas.resize(L_end);
-  l_thermal.resize(L_end);
-}
-
 
 
 

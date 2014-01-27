@@ -22,42 +22,54 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "thermal/analysis/solution.hpp"
 #include <cstddef>
+#include "thermal/analysis/solution.hpp"
+#include "thermal/thermal.hpp"
 #include "models/physicalmodel.hpp"
-
+#include "math/utility.hpp"
 
 namespace thermal {
 namespace analysis{
 
-ThermalData::ThermalData()
+ThermalData::ThermalData( const physicalModel::layer coating )
 {
-  /// Heat Transfer and Emission models
-  const double l_min = .04;
-  const double l_max = 4;
-  const size_t LendMinDecade = 50;
+
 
   // Populate the experimental phase values in parameters99
-
-  thermalSetup( l_min, l_max, LendMinDecade );
+  thermalSetup( l_min, l_max, coating );
 }
 
+ThermalData::~ThermalData(){}
 
-size_t ThermalData::thermalSetup( const double lmin_, const double lmax_,
-                                  const size_t LendMin,
-                                  const physicalModel::layey coating  )
+size_t ThermalData::thermalSetup(const double lmin_, const double lmax_,
+                                  const physicalModel::layer coating  )
 {
-  return L_end = thermalSetupTEMP( lmin_, lmax_, coating.depth,
+  size_t L_end = thermalSetupTEMP( lmin_, lmax_, coating.depth,
                                          coating.kthermal.offset,
-                                         coating.psithermal.offset, LendMin);
-
+                                         coating.psithermal.offset);
 //  LMA.LMA_workspace.updateArraySize( L_end, LMA.unknownParameters.Nsize()  );
+
+  updateNMeasurements( L_end );
+
+  return L_end;
+
+}
+
+ThermalData& ThermalData::operator=(const ThermalData& that)
+{
+  if(this != &that)
+  {
+    omegas = that.omegas;
+    l_thermal = that.l_thermal;
+  }
+  return *this;
 }
 
 double  ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
                                   const double L_coat, const double kc,
-                                  const double psic, const size_t L_end )
+                                  const double psic )
 {
+  const size_t L_end = LendMinDecade;
   BOOST_ASSERT_MSG( ( l_min < l_max ) , "check min-max logic\n\n" );
   BOOST_ASSERT_MSG( ( L_coat > 0 ) && ( L_end > 0 ) , "check L inputs\n\n" );
   BOOST_ASSERT_MSG( ( kc > 0 ) && ( psic > 0 ) , "check kc inputs\n\n" );
@@ -137,6 +149,13 @@ double  ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
   }
 
   return Lnew;
+}
+
+
+void  ThermalData::updateNMeasurements( const double L_end )
+{
+  omegas.resize(L_end);
+  l_thermal.resize(L_end);
 }
 
 

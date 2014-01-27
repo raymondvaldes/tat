@@ -97,11 +97,11 @@ void run(const class filesystem::directory dir)
   ///Output noise to test
   std::vector<double>
       emissionNominal =  thermal::emission::phase99( poptea.coreSystem ,
-                                                     poptea.l_thermal);
+                                                     poptea.thermalData.l_thermal);
 
   std::vector<double> emissionExperimental =
         thermal::emission::addNoise( emissionNominal,
-                                     poptea.l_thermal,
+                                     poptea.thermalData.l_thermal,
                                      myEmissionNoise ) ;
 //poptea.coreSystem.LMA.LMA_workspace.emissionExperimental//
 

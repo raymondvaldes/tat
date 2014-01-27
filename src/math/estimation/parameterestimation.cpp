@@ -87,10 +87,9 @@ void unknownList::addUnknown(enum physicalModel::labels::Name name,
   return;
 }
 
-size_t unknownList::Nsize(void)
+size_t unknownList::Nsize(void) const
 {
-  N = vectorUnknowns.size();
-  return N;
+  return vectorUnknowns.size();
 }
 
 

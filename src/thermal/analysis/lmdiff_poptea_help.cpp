@@ -784,7 +784,7 @@ void scaleDiag( double *diag, const class math::estimation::unknownList List,
 
 LMA_workingArrays::LMA_workingArrays(const size_t Lend_, const size_t N_)
 {
-  updateArraySize( Lend_, N );
+  updateArraySize( Lend_, N_ );
 }
 
 void LMA_workingArrays::updateArraySize(const size_t Lend_, const size_t N)

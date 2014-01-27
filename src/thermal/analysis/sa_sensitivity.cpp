@@ -29,11 +29,11 @@ License
 namespace thermal {
 namespace analysis{
 
-SA_Sensitivity::SA_Sensitivity(const size_t N)
+SA_Sensitivity::SA_Sensitivity(const size_t Lend)
 {
-  ref_PHASE_BF.resize(N);
-  experimental_PHASE_BF.resize(N);
-  current_PHASE_BF.resize(N);
+  ref_PHASE_BF.resize(Lend);
+  experimental_PHASE_BF.resize(Lend);
+  current_PHASE_BF.resize(Lend);
 }
 
 }}

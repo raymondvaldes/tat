@@ -77,7 +77,7 @@ public:
   void addUnknown(physicalModel::labels::Name name,
                   const double lower,
                   const double upper, const double initialGuess);
-  size_t Nsize(void);       //BUGS TODO REMOVE
+  size_t Nsize(void) const;       //BUGS TODO REMOVE
 
   static class unknownList
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;

@@ -50,7 +50,7 @@ int main( int argc, char *argv[ ] )
 
     /// Run investigations
 //    investigations::sensitivityvaldes2013::run( dir );
-    investigations::manyfit::run( dir );
+//    investigations::manyfit::run( dir );
 
     std::cout << "\nStopwatch: "
               << std::setprecision(3)
