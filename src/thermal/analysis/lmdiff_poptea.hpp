@@ -31,6 +31,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/lmdiff_poptea_help.hpp"
+#include "thermal/analysis/solution.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "math/bisection.hpp"
@@ -47,36 +48,40 @@ namespace analysis{
 class LMA
 {
 private:
-  std::function<void(int, int, double*, double*, int*,
-                           class thermal::analysis::Kernal)> myReduced =
-  std::bind(&LMA::ThermalProp_Analysis, this , std::placeholders::_1,
-            std::placeholders::_2, std::placeholders::_3, std::placeholders::_4,
-            std::placeholders::_5, std::placeholders::_6);
+  std::function< void( int, int, double*, double*, int*,
+                       class thermal::analysis::Kernal ) >
+  myReduced =
+  std::bind( &LMA::ThermalProp_Analysis, this , std::placeholders::_1,
+             std::placeholders::_2, std::placeholders::_3,
+             std::placeholders::_4, std::placeholders::_5,
+             std::placeholders::_6 ) ;
+
+  class ThermalData thermalData;
+  void updateThermalData( class ThermalData thermalData_  );
+
+  void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
+                             int * /*iflag*/,
+                             class thermal::analysis::Kernal popteaCore);
 
 public:
-  class LMA_workingArrays LMA_workspace;
   class math::estimation::settings Settings;
   class math::estimation::unknownList unknownParameters;
+  class LMA_workingArrays LMA_workspace;
 
-  std::vector<double> omegas;
-  std::vector<double> experimental;
   std::vector<double> xInitial{ 2.1, 3.7, 40, 0.75, 0.5 } ; //FIX THIS TODO BUG
   std::vector<double> xpredicted;  //FIX THIS TODO BUG
   std::vector<double> xguessAuto;  //FIX THIS TODO BUG
 
   explicit LMA( const struct math::estimation::settings Settings_,
                 const class math::estimation::unknownList unknownParameters,
-                const size_t Lend_) ;
+                const size_t Lend_, class ThermalData thermalData_) ;
   ~LMA(void);
+
   void resetInitialGuess(const std::vector<double> input);
 
-  void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
-                             int * /*iflag*/,
-                             class thermal::analysis::Kernal popteaCore);
-
   std::vector<double>
-  paramter_estimation( int *info, int *nfev,
-                            class Kernal coreSystem );
+  paramter_estimation( int *info, int *nfev, class Kernal coreSystem,
+                       class ThermalData thermalData_ );
 };
 
 

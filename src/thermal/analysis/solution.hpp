@@ -25,6 +25,8 @@ License
 #ifndef SOLUTION_HPP
 #define SOLUTION_HPP
 
+#include "models/physicalmodel.hpp"
+
 
 namespace thermal {
 namespace analysis{
@@ -32,21 +34,26 @@ namespace analysis{
 
 class ThermalData
 {
-  public:
-  std::vector<double> omegas; ///MUST REMOVE
-  std::vector<double> l_thermal;  ///MUST REMOVE
-
-  explicit ThermalData();
-
+private:
+  const size_t LendMinDecade = 50;
+  void  updateNMeasurements( const double L_end );
   double thermalSetupTEMP(const double lmin_, const double lmax_,
-                          const double L_coat, const double kc, const double psic,
-                          const size_t L_end_);
+                           const double L_coat, const double kc,
+                           const double psic);
+  /// Heat Transfer and Emission models
+  const double l_min = .04;
+  const double l_max = 4;
 
+public:
+  std::vector<double> omegas;
+  std::vector<double> l_thermal;
 
-  //MUST BE REMOVED
- void thermalSetup(const double lmin_, const double lmax_,
-                   const size_t LendMin);
+  explicit ThermalData( const physicalModel::layer coating );
+  ThermalData& operator=(const ThermalData& that);
+  ~ThermalData();
 
+  size_t thermalSetup( const double lmin_, const double lmax_,
+                       const physicalModel::layer coating );
 };
 
 

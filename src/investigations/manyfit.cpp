@@ -69,8 +69,9 @@ void run(const class filesystem::directory dir)
   class Poptea poptea = Poptea::loadConfig( popteaCore, pt1 );
 
   /// Create initial guess
-  std::vector< poptea.LMA.LMA_workspace.emissionNominal > =
-  thermal::emission::phase99( poptea.coreSystem, poptea.omegas);
+  poptea.LMA.LMA_workspace.emissionNominal =
+  thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
+
 
   /// execute
 //  for(size_t nn = 0; nn < poptea.coreSystem.L_end ; ++nn )

@@ -59,10 +59,11 @@ void fitting(class thermal::analysis::Poptea poptea, double *xInitial,
       myfile << i << "\t";
 
       poptea.LMA.xpredicted =
-          poptea.LMA.paramter_estimation( &info, &nfev, poptea.coreSystem );
+          poptea.LMA.paramter_estimation( &info, &nfev, poptea.coreSystem,
+                                          poptea.thermalData );
 
       poptea.LMA.LMA_workspace.MSE =
-          MSE( poptea.l_thermal.size(),
+          MSE( poptea.thermalData.l_thermal.size(),
                poptea.LMA.LMA_workspace.emissionExperimental,
                poptea.LMA.LMA_workspace.predicted);
 

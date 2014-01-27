@@ -50,30 +50,25 @@ public:
   class LMA LMA;
   class SA_Sensitivity SA;
 
-  explicit Poptea(const class Kernal coreSystem_,
-                  const class math::estimation::settings Settings_,
-                  const class math::estimation::unknownList unknownParameters_);
+  explicit Poptea( const class Kernal coreSystem_,
+                   const class math::estimation::settings Settings_,
+                   const class math::estimation::unknownList unknownParameters_);
 
   static Poptea loadConfig(const Kernal &coreSystem_,
                             boost::property_tree::ptree pt);
 
   ~Poptea( void );
 
-  double bestFit( class Kernal core );  //REMOVE
 
+
+  /// These should be pushed down another level
+  double bestFit( class Kernal core );  //REMOVE
   std::pair< double, double >
   parameterInterval( const enum physicalModel::labels::Name currentPx,
                      std::vector<double> emissionExperimentalOriginal );  //HIGHER LEVEL BUT YES
-
-  void setThermalRange( const double lmin, const double lmax );
   void loadExperimentalData( const std::vector<double> data );
   void setParameterstoFit( class math::estimation::unknownList parameters );
   void setParametertoHoldX( enum physicalModel::labels::Name currentParameterX_);
-
-  std::vector<double> omegas; ///MUST REMOVE
-  std::vector<double> l_thermal;  ///MUST REMOVE
-
-
 };
 
 
