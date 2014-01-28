@@ -22,8 +22,10 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "algorithms/ThermalProp_Analysis.h"
-#include "numSimulations/Numerical_PhaseOfEmission.h"
+#include <vector>
+#include <cstddef>
+#include "thermal/analysis/kernal.hpp"
+#include "thermal/simulations/Numerical_PhaseOfEmission.h"
 
 namespace thermal{
 namespace emission{

@@ -26,7 +26,7 @@ License
 #include <cmath>
 
 #include "models/physicalmodel.hpp"
-#include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "math/utility.hpp"
 
 double property::Current(const double temperature) const

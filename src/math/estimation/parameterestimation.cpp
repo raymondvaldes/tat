@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <boost/foreach.hpp>
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
-#include "numSimulations/Numerical_Setup.h"
+#include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
 
 namespace math{

@@ -25,7 +25,7 @@ License
 #include <boost/assert.hpp>
 
 #include "models/expEquipment.hpp"
-#include "numSimulations/Numerical_Setup.h"
+#include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
 
 namespace equipment{
