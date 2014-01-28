@@ -26,6 +26,7 @@ License
 #include <cstddef>
 #include <vector>
 #include <boost/foreach.hpp>
+#include <iostream>
 
 #include "math/statistical_tools.hpp"
 #include "math/estimation/constrained.hpp"
@@ -71,22 +72,14 @@ void LMA::updateThermalData( class ThermalData thermalData_ )
   thermalData = thermalData_;
 }
 
-std::vector<double>
+double
 LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
                           const ThermalData &thermalData_ )
 {
   updateThermalData( thermalData_ );
-  std::vector<double>xInitial;
-  for( const auto &unknown : unknownParameters.vectorUnknowns )
-  {
-    xInitial.push_back( unknown.initialVal() );
-  }
-
   using namespace math::estimation;
   const size_t m = thermalData.omegas.size();
   const size_t n = unknownParameters.Nsize();
-  std::vector<double> xpredicted(n);  //FIX THIS TODO BUG
-  std::vector<double> xguessAuto(n);  //FIX THIS TODO BUG
 
   double *x = new double[n];
   double *fvec = new double[m];
@@ -100,35 +93,22 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
   int *ipvt = new int[n];
   double *diag = new double[n];
 
+  std::vector<double>xInitial;
+  for( const auto &unknown : unknownParameters.vectorUnknowns )
+    { xInitial.push_back( unknown.initialVal() ); }
+  for( size_t i=0 ; i< n ; i++ )
+    { x[i] = xInitial[i]; }
+
+
   scaleDiag( diag, unknownParameters , coreSystem.TBCsystem,
              Settings.mode ) ;
 
-  for(size_t i=0 ; i< n ; i++)
-  {
-    x[i] = xInitial[i];
-  }
-
-  ///set initial guesses
-  if ( fabs(x[0] - 0) < 1e-10 )
-  {
-    int i = 0; 
-    for( const auto& unknown : unknownParameters.vectorUnknowns )
-    {
-      x[i++] = math::x_ini( unknown.lowerBound(), unknown.upperBound() );
-    }
-  }
-
-  for(size_t i=0; i< n; i++)
-  {
-    xguessAuto[i] = x[i];
-  }
-
   ///Transform inputs
-  int i = 0;
+  int j = 0;
   for( const auto& unknown : unknownParameters.vectorUnknowns )
   {
-    x[i] = kx_limiter2( x[i], unknown.lowerBound(), unknown.upperBound() ) ;
-    i++;
+    x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
+    j++;
   }
 
   ///levenberg-marquardt algorithm
@@ -138,30 +118,24 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
          Settings.factor, Settings.nprint, info, nfev, fjac, m,
          ipvt, qtf, wa1, wa2, wa3, wa4, wa5, coreSystem ) ;
 
-  ///Exit Routine
-  /* Sets up a condition where the total error in the phase is compared
-  against a fvec Tolerance.  If the error is greater than this constant,
-  then the parameter estimation algorithm is reset with a new set of
-  initial guesses. This is let to run a fixed number of iterations. */
-
-  LMA_workspace.fvecTotal =
-      math::estimation::SobjectiveLS( thermalData.omegas.size(),
-                                      LMA_workspace.emissionExperimental,
-                                      LMA_workspace.predicted);
-
-  i = 0;
+  //Transform outputs
+  j=0;
   for( auto& unknown : unknownParameters.vectorUnknowns )
   {
-    unknown.bestfitset( x[i] ) ;
-    xpredicted.push_back( x[i] ) ;
-    x[i++] = math::x_ini( unknown.lowerBound(), unknown.upperBound() );
+    x[j] = x_limiter2(x[j], unknown.lowerBound(), unknown.upperBound());
+    unknown.bestfitset(x[j]);
+    j++;
   }
 
-  for(size_t i=0 ; i< n ; i++)
-  {
-    x[i] = xInitial[i];
-  }
+   ///Final fit
+  coreSystem.updatefromBestFit( unknownParameters.vectorUnknowns );
+  LMA_workspace.predicted = thermal::emission::phase99( coreSystem ,
+                                                        thermalData.omegas );
 
+  /// Quality-of-fit
+  LMA_workspace.MSE =
+      math::estimation::SobjectiveLS( LMA_workspace.emissionExperimental,
+                                      LMA_workspace.predicted);
 
   delete [] qtf;
   delete [] wa1;
@@ -175,7 +149,7 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
   delete [] diag;
   delete [] x;
 
-  return xpredicted;
+  return LMA_workspace.MSE;
 }
 
 
@@ -183,18 +157,16 @@ void LMA::ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
                                 int * /*iflag*/,
                                 class thermal::analysis::Kernal popteaCore)
 {
-  using namespace math::estimation;
-
   //Update parameters
   int i = 0;
-  for( const auto& unknown :  unknownParameters.vectorUnknowns)
+  for( auto& unknown :  unknownParameters.vectorUnknowns)
   {
-    const double val =
+    const double val = math::estimation::
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
-
-    popteaCore.TBCsystem.updateVal( unknown.label() , val );
+    unknown.bestfitset( val );
   }
-  popteaCore.TBCsystem.updateCoat();
+  popteaCore.updatefromBestFit( unknownParameters.vectorUnknowns );
+
 
   // Estimates the phase of emission at each heating frequency
   LMA_workspace.predicted = thermal::emission::phase99( popteaCore,
@@ -203,23 +175,18 @@ void LMA::ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
   /// Evaluate Objective function
   for( size_t n = 0 ; n < thermalData.omegas.size() ; ++n )
   {
-     fvec[n] = abs( LMA_workspace.emissionExperimental[n] -
-                    LMA_workspace.predicted[n] );
-//     LMA_workspace.fvec[n] = fvec[n];
+     fvec[n] =  LMA_workspace.emissionExperimental[n] -
+                    LMA_workspace.predicted[n] ;
   }
 
-/// Print stuff to terminal
-//  LMA_workspace.MSE =
-//      MSE( thermalData.omegas.size() ,
-//           LMA_workspace.emissionExperimental,
-//           LMA_workspace.predicted );
-
+  LMA_workspace.MSE =
+      math::estimation::SobjectiveLS( LMA_workspace.emissionExperimental,
+                                      LMA_workspace.predicted);
   printPEstimates( popteaCore.TBCsystem, unknownParameters ) ;
   return;
 }
 
-}
-}
+}}
 
 void printPEstimates( const class physicalModel::TBCsystem TBCSystem,
                       math::estimation::unknownList list )

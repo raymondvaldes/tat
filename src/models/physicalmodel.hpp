@@ -25,12 +25,15 @@ License
 #ifndef PHYSICALMODEL_HPP
 #define PHYSICALMODEL_HPP
 
+#include <vector>
+#include <cstddef>
 #include <boost/bimap.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
 #include <boost/bimap/list_of.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/assign/list_inserter.hpp>
 #include <boost/property_tree/ptree.hpp>
+
 
 class property
 {
@@ -81,8 +84,6 @@ public:
                                 const;
     static class property
         loadConfigfromXMLTree(const boost::property_tree::ptree pt);
-
-
 };
 
 namespace physicalModel
@@ -125,8 +126,8 @@ public:
   double base;
   double rear;
 
-  explicit temperatureScale(const double tolerance_,const double referance_,
-                            const double base_, const double rear_);
+  explicit temperatureScale( const double tolerance_,const double referance_,
+                             const double base_, const double rear_);
   static struct temperatureScale
       loadConfigfromXML( const boost::property_tree::ptree pt );
   ~temperatureScale( void );
@@ -140,8 +141,8 @@ public:
   double R0;
   double R1;
   double Emit1;
-  explicit radiativeSysProp(const double R0_, const double R1_,
-                            const double Emit1_);
+  explicit radiativeSysProp( const double R0_, const double R1_,
+                             const double Emit1_);
   static class radiativeSysProp
       loadConfig( const boost::property_tree::ptree pt );
   void load(const std::string &filename);
@@ -194,7 +195,6 @@ public:
   /// Member operations that update on multiple members
   void updateVal(const enum labels::Name mylabel , const double val);
   double returnVal( const enum labels::Name mylabel ) const;
-
 
   double gammaEval(void) const ;
   double a_subEval(void) const;

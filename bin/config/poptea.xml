@@ -5,11 +5,10 @@
 			<start>0.04</start>
 			<end>4</end>
 		</thermal_penetration>
-
-		<!---<frequency>			-->
-		<!---	<start>0.02</start>	-->
-		<!---	<end>2000</end>		-->
-		<!---</frequency>			-->
+		<frequency>			
+			<start>0.02</start>
+			<end>2000</end>		
+		</frequency>			
 	</sweep>
 	
 	<ParaEstSettings>
@@ -64,5 +63,7 @@
 			<initialGuess>0.5</initialGuess>
 		</unknown>
 	</unknownParameters>
+	
+
 	
 </poptea>

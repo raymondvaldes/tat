@@ -53,7 +53,6 @@ public:
           const double initialGuess_);
 
   void bestfitset(const double input);
-
   double bestfit(void) const;
   double upperBound(void) const;
   double lowerBound(void) const;
@@ -86,13 +85,6 @@ public:
   ~unknownList() ;
 };
 
-
-
-
-
-
-//class settings loadConfig(const std::string &filename);
-
 class settings
 {
 public:
@@ -114,10 +106,6 @@ public:
                      const double factor_, const size_t mode_,
                      const size_t nprint_ );
 };
-
-
-
-
 
 
   }

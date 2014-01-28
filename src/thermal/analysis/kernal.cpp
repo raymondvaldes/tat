@@ -23,10 +23,12 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <exception>
+
 #include "thermal/analysis/kernal.hpp"
 #include "models/expEquipment.hpp"
 #include "thermal/simulations/numericalmodel.hpp"
 #include "math/estimation/parameterestimation.hpp"
+#include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
@@ -96,6 +98,16 @@ Kernal::~Kernal(void){}
 double Kernal::bEval(void) const
 {
   return expSetup.laser.radius / TBCsystem.coating.depth;
+}
+
+void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
+{
+  for( const auto& unknown :  list )
+  {
+    const double val = unknown.bestfit();
+    TBCsystem.updateVal( unknown.label() , val );
+  }
+  TBCsystem.updateCoat();
 }
 
 class Kernal
