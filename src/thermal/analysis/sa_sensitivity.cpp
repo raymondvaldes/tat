@@ -37,3 +37,102 @@ SA_Sensitivity::SA_Sensitivity(const size_t Lend)
 }
 
 }}
+
+
+
+
+//double Poptea::Gfunc( const double x )
+//{
+//  ///Gfunc must work by updating kernal with unknown parameters
+//  ///updating experimental with predicted values;
+
+////  unknownParameterswithBFdata.
+
+//  double val = x * 1;
+
+
+////  TBCsystem::updateVal( currentParameterX , val );
+
+
+////  current_PHASE_BF
+
+
+//  return meanError( current_PHASE_BF , ref_PHASE_BF );
+
+//}
+//std::pair< double, double >
+//Poptea::Gsolve( enum physicalModel::labels::Name currentParameterX_ )
+//{
+//  double lowerLimit(1);
+//  double upperLimit(2);
+
+//  std::pair <double,double> limits (lowerLimit, upperLimit);
+//  return limits;
+//}
+//void Poptea::saveBestFitParameters( void )
+//{
+
+//}
+//void Poptea::setG1(void)
+//{
+
+//}
+//double Poptea::meanError( const std::vector<double> curveBF,
+//                          const std::vector<double> curveRef )
+//{
+//  const size_t N = curveBF.size();
+//  double error = 0;
+
+
+//  for(size_t n=0 ; n < N ;  ++n)
+//  {
+//      error += pow( ( curveBF[n] / curveRef[n] - 1 ), 2);
+//  }
+
+//  return sqrt(error / N );
+//}
+//double Poptea::bestFit( class Kernal core )
+//{
+//  int nfev;
+//  int info = 0;
+
+//  core.LMA.xpredicted = paramter_estimation( core, &info, &nfev );
+//  current_PHASE_BF = core.LMA.LMA_workspace.emissionCurrent;
+//  S1_current = meanError( current_PHASE_BF , ref_PHASE_BF );
+
+//  return S1_current;
+//}
+//std::pair< double, double >
+//Poptea::parameterInterval(const enum physicalModel::labels::Name currentPx ,
+//                          std::vector<double> emissionExperimental)
+//{
+//  //Step 1
+//  loadExperimentalData( emissionExperimental );
+
+//  //Step 2
+//  bestFit( coreSystem );
+
+//  //Step 3 Rebuild Core
+//  //rebuild unknown list;
+
+////  class kernal coreRebuild( coreSystem.expSetup ,
+////                            coreSystem.TBCsystem,
+////                            coreSystem.thermalsys,
+////                            coreSystem.LMA.Settings,
+////                            rebuiltSubSystem,
+////                            coreSystem.DataDirectory
+////                            )
+
+////      Kernal( class equipment::setup expSetup_,
+////              class physicalModel::TBCsystem TBCsystem_,
+////              class thermal::model thermalsys_,
+////              class math::estimation::settings Settings_,
+////              class math::estimation::unknownList unknownParameters_,
+////              class filesystem::directory DataDirectory_ ) ;
+
+
+//  double lowerLimit(1);
+//  double upperLimit(2);
+//  std::pair <double,double> limits (lowerLimit, upperLimit);
+//  return limits;
+//}

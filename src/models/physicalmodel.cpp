@@ -255,9 +255,10 @@ class layer layer::loadConfigfromXMLTree(const boost::property_tree::ptree pt)
   return layerObj;
 }
 
-TBCsystem::TBCsystem( const class layer coating_, const class layer substrate_,
-                      const struct temperatureScale Temp_,
-                      const struct radiativeSysProp optical_,
+TBCsystem::TBCsystem( const class layer &coating_,
+                      const class layer &substrate_,
+                      const class temperatureScale &Temp_,
+                      const class radiativeSysProp &optical_,
                       const double radius_)
     : coating(coating_), substrate(substrate_), Temp(Temp_), optical(optical_),
       radius(radius_)
@@ -267,7 +268,7 @@ TBCsystem::TBCsystem( const class layer coating_, const class layer substrate_,
 }
 TBCsystem::~TBCsystem(void){}
 
-class TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree pt)
+class TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree &pt)
 {  
   using boost::property_tree::ptree;
 

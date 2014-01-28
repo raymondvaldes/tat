@@ -28,9 +28,9 @@ License
 #include "manyfit.hpp"
 #include "tools/filesystem.hpp"
 #include "thermal/analysis/kernal.hpp"
-#include "algorithms/sensitivity_analysis.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/poptea.hpp"
+#include "math/utility.hpp"
 
 namespace investigations{
 namespace manyfit{
@@ -57,6 +57,65 @@ void run( const class filesystem::directory dir )
   fitting( poptea, interants );
 }
 
+}}
+
+
+void fitting(class thermal::analysis::Poptea poptea,
+             const size_t interants)
+{
+  std::vector<double>xInitial;
+  for( const auto &unknown : poptea.LMA.unknownParameters.vectorUnknowns )
+  {
+    xInitial.push_back( unknown.initialVal() );
+  }
+
+/// Scale jacobian if enabled
+  std::ofstream myfile;
+  std::stringstream filename;
+  filename <<  "../data/fittingData.dat";
+  myfile.open(filename.str().c_str());
+  myfile << std::setprecision(8);
+  myfile << "#run\tasub_0\tgamma_0\tEsigma_0\tR1_0\tlambda_0";
+  myfile << "\tasub\tgamma\tEsigma\tR1\tlambda\n";
+
+  std::vector<double>xSave(xInitial);
+
+  for( size_t i=0; i<interants; ++i )
+  {
+
+      int nfev;
+      int info = 0;
+      myfile << i << "\t";
+
+      poptea.LMA.paramter_estimation( &info, &nfev, poptea.coreSystem,
+                                          poptea.thermalData );
+      poptea.LMA.LMA_workspace.MSE =
+          MSE( poptea.thermalData.l_thermal.size(),
+               poptea.LMA.LMA_workspace.emissionExperimental,
+               poptea.LMA.LMA_workspace.predicted);
+
+      myfile << poptea.coreSystem.TBCsystem.gammaEval() << "\t"
+             << poptea.coreSystem.TBCsystem.a_subEval() << "\t"
+             << poptea.coreSystem.TBCsystem.optical.Emit1 << "\t"
+             << poptea.coreSystem.TBCsystem.optical.R1<< "\t"
+             << poptea.coreSystem.TBCsystem.coating.lambda << "\t"
+             << poptea.LMA.LMA_workspace.MSE << "\n";
+
+      printPEstimates( poptea.coreSystem.TBCsystem,
+                       poptea.LMA.unknownParameters ) ;
+
+      xInitial.clear();
+      for( const auto& val : xSave)
+      {
+        xInitial.push_back( math::x_ini10(val) );
+      }
+  }
+
+  myfile.close();
+
+
+  return;
 }
-}
+
+
 

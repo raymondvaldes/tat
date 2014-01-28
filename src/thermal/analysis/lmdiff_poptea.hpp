@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                |
+  ========                      |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||                   |
+     ||                         |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -31,7 +31,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/lmdiff_poptea_help.hpp"
-#include "thermal/analysis/solution.hpp"
+#include "thermal/analysis/thermalData.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "math/bisection.hpp"
@@ -90,5 +90,8 @@ public:
 
 }
 }
+
+void printPEstimates( const class physicalModel::TBCsystem TBCSystem,
+                      math::estimation::unknownList list );
 
 #endif // LMDIFF_POPTEA_HPP

@@ -31,13 +31,13 @@ License
 
 namespace thermal{
 
-double effusivity(const double k, const double rhoCp);
-double diffusivity(const double k, const double rhoCp);
-double omega(const double L_coat, const double l_thermal, const double k_c,
-             const double psi_c);
+double effusivity( const double k, const double rhoCp );
+double diffusivity( const double k, const double rhoCp );
+double omega( const double L_coat, const double l_thermal, const double k_c,
+              const double psi_c );
 
-double lthermal(const double L_coat, const double k_c, const double psi_c,
-                const double omega);
+double lthermal( const double L_coat, const double k_c, const double psi_c,
+                 const double omega );
 
 enum class HeatX: uint8_t
 {

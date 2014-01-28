@@ -31,56 +31,20 @@ License
 #include "math/bisection.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/emission/noise.hpp"
-#include "algorithms/statistical_tools.hpp"
+#include "math/statistical_tools.hpp"
 
 namespace investigations
 {
-  namespace sensitivityvaldes2013{
-
-class thermal::analysis::Kernal
-    loadWorkingDirectory(const class filesystem::directory dir)
+namespace sensitivityvaldes2013
 {
-  const std::string filename = "kernal.xml";
-  boost::property_tree::ptree pt;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename ), pt);
-  }
-  catch (std::exception& e)
-  {
-    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
-    exit(-2);
-  }
-
-  return thermal::analysis::Kernal::loadConfig( pt , dir);
-}
-
-class thermal::analysis::Poptea
-    loadWorkingDirectoryPoptea( const class filesystem::directory dir,
-                                const class thermal::analysis::Kernal popteaCore)
-{
-  const std::string filename = "poptea.xml";
-  boost::property_tree::ptree pt;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename ), pt);
-  }
-  catch (std::exception& e)
-  {
-    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
-    exit(-2);
-  }
-
-  return thermal::analysis::Poptea::loadConfig( popteaCore, pt );
-}
-
 
 void run(const class filesystem::directory dir)
 {
   ///Initialize kernals
-  class thermal::analysis::Kernal popteaCore = loadWorkingDirectory(dir);
+  class thermal::analysis::Kernal
+      popteaCore = thermal::analysis::loadWorkingDirectoryKernal(dir);
   class thermal::analysis::Poptea
-      poptea = loadWorkingDirectoryPoptea ( dir, popteaCore );
+      poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
 
   /// STEP 0
   //Noise in Simulated Emission
@@ -95,17 +59,16 @@ void run(const class filesystem::directory dir)
       myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
   ///Output noise to test
-  std::vector<double>
-      emissionNominal =  thermal::emission::phase99( poptea.coreSystem ,
-                                                     poptea.thermalData.l_thermal);
+  std::vector<double> emissionNominal =
+      thermal::emission::phase99( poptea.coreSystem ,
+                                  poptea.thermalData.l_thermal);
 
   std::vector<double> emissionExperimental =
         thermal::emission::addNoise( emissionNominal,
                                      poptea.thermalData.l_thermal,
                                      myEmissionNoise ) ;
-//poptea.coreSystem.LMA.LMA_workspace.emissionExperimental//
 
-  poptea.loadExperimentalData( emissionExperimental );
+//  poptea.loadExperimentalData( emissionExperimental );
 
 //  ///Output noise to test
 //  for( size_t i = 0 ; i < popteaCore.expSetup.laser.l_thermal.size() ; ++i)

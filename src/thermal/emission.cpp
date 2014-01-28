@@ -23,8 +23,8 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "emission.hpp"
-#include "numSimulations/Numerical_Setup.h"
-#include "algorithms/statistical_tools.hpp"
+#include "thermal/simulations/Numerical_Setup.h"
+#include "math/statistical_tools.hpp"
 #include "math/utility.hpp"
 #include "math/estimation/cosfit.hpp"
 #include "math/numIntegration/simpsons_3_8.hpp"

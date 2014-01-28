@@ -44,8 +44,7 @@ private:
   struct bounds constraint;
   double initialGuess;
   double bestfitval;
-
-
+  void Initialset(const double input);
 
 public:
   unknown(enum physicalModel::labels::Name name_,
@@ -59,11 +58,9 @@ public:
   double upperBound(void) const;
   double lowerBound(void) const;
   double initialVal(void) const;
+  enum physicalModel::labels::Name label(void) const;
 
   void Initialauto(void);
-  void Initialset(const double input);
-
-  enum physicalModel::labels::Name label(void) const;
 
 };
 

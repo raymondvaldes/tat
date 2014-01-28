@@ -25,7 +25,8 @@ License
 #ifndef PHASE99_HPP
 #define PHASE99_HPP
 
-#include "algorithms/ThermalProp_Analysis.h"
+#include <vector>
+#include "thermal/analysis/kernal.hpp"
 
 namespace thermal{
   namespace emission{

@@ -182,17 +182,19 @@ public:
     double gamma;
     double a_sub;
 
-    explicit TBCsystem( const class layer coating_,
-                        const class layer substrate_,
-                        const struct temperatureScale Temp_,
-                        const struct radiativeSysProp optical_,
+    /// constructors and object creators
+    explicit TBCsystem( const class layer &coating_,
+                        const class layer &substrate_,
+                        const struct temperatureScale &Temp_,
+                        const struct radiativeSysProp &optical_,
                         const double radius_);
+    static class TBCsystem loadConfig(const boost::property_tree::ptree &pt);
     ~TBCsystem(void);
 
+    /// Member operations that update on multiple members
     void updateVal(const enum labels::Name mylabel , const double val);
     double returnVal( const enum labels::Name mylabel ) const;
 
-    static class TBCsystem loadConfig(const boost::property_tree::ptree pt);
 
     double gammaEval(void) const ;
     double a_subEval(void) const;

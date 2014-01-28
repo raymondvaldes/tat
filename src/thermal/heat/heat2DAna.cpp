@@ -26,9 +26,9 @@ License
 #include <gsl/gsl_sf_bessel.h>
 
 #include "thermal/heat/heat2DAna.hpp"
-#include "numSimulations/Numerical_Setup.h"
-#include "algorithms/statistical_tools.hpp"
-#include "numSimulations/Numerical_PhaseOfEmission.h"
+#include "thermal/simulations/Numerical_Setup.h"
+#include "math/statistical_tools.hpp"
+#include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "math/utility.hpp"
 #include "math/numIntegration/simpsons_3_8.hpp"
 #include "thermal/thermal.hpp"

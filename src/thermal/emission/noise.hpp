@@ -25,7 +25,7 @@ License
 #ifndef NOISE_HPP
 #define NOISE_HPP
 #include <vector>
-#include "numSimulations/Numerical_Setup.h"
+#include "thermal/simulations/Numerical_Setup.h"
 
 namespace thermal{
   namespace emission{

@@ -71,7 +71,15 @@ public:
   void setG1(void);
 
   SA_Sensitivity( const size_t N );
+
+  std::pair< double, double >
+  parameterInterval( const enum physicalModel::labels::Name currentPx,
+                     std::vector<double> emissionExperimentalOriginal );  //HIGHER LEVEL BUT YES
+
 };
+
+
+
 
 }}
 

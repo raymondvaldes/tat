@@ -26,7 +26,7 @@ License
 #define MODEL_HPP
 
 #include "thermal/construct.hpp"
-#include "models/numericalmodel.hpp"
+#include "thermal/simulations/numericalmodel.hpp"
 
 namespace thermal
 {
