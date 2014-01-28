@@ -120,85 +120,85 @@ private:
 class temperatureScale
 {
 public:
-    double tolerance;
-    double referance;
-    double base;
-    double rear;
+  double tolerance;
+  double referance;
+  double base;
+  double rear;
 
-    explicit temperatureScale(const double tolerance_,const double referance_,
-                              const double base_, const double rear_);
-    static struct temperatureScale
-        loadConfigfromXML( const boost::property_tree::ptree pt );
-    ~temperatureScale( void );
-    void load(const std::string &filename);
-    void save(const std::string &filename);
+  explicit temperatureScale(const double tolerance_,const double referance_,
+                            const double base_, const double rear_);
+  static struct temperatureScale
+      loadConfigfromXML( const boost::property_tree::ptree pt );
+  ~temperatureScale( void );
+  void load(const std::string &filename);
+  void save(const std::string &filename);
 };
 
 class radiativeSysProp
 {
 public:
-    double R0;
-    double R1;
-    double Emit1;
-    explicit radiativeSysProp(const double R0_, const double R1_,
-                              const double Emit1_);
-    static class radiativeSysProp
-        loadConfig( const boost::property_tree::ptree pt );
-    void load(const std::string &filename);
-    void save(const std::string &filename);
-    ~radiativeSysProp(void);
+  double R0;
+  double R1;
+  double Emit1;
+  explicit radiativeSysProp(const double R0_, const double R1_,
+                            const double Emit1_);
+  static class radiativeSysProp
+      loadConfig( const boost::property_tree::ptree pt );
+  void load(const std::string &filename);
+  void save(const std::string &filename);
+  ~radiativeSysProp(void);
 };
 
 class layer
 {
 public:
-    class property kthermal;
-    class property psithermal;
-    double depth;
-    double lambda;
-    double c = 1;
+  class property kthermal;
+  class property psithermal;
+  double depth;
+  double lambda;
+  double c = 1;
 
-    double opticalPenetration(void) const;
-    double thermalDiffusivity(void) const;
-    double thermalEffusivity(void) const;
+  double opticalPenetration(void) const;
+  double thermalDiffusivity(void) const;
+  double thermalEffusivity(void) const;
 
-    explicit layer( const class property kthermal_,
-                    const class property psithermal_,
-                    const double depth_, const double lambda_);
-    ~layer(void);
-    static class layer
-      loadConfigfromXMLTree( const boost::property_tree::ptree pt );
+  explicit layer( const class property kthermal_,
+                  const class property psithermal_,
+                  const double depth_, const double lambda_);
+  ~layer(void);
+  static class layer
+    loadConfigfromXMLTree( const boost::property_tree::ptree pt );
 };
 
 class TBCsystem
 {
 public:
-    class layer coating;
-    class layer substrate;
-    class temperatureScale Temp;
-    class radiativeSysProp optical;
-    double radius;
-    double Rtc;
-    double gamma;
-    double a_sub;
+  class layer coating;
+  class layer substrate;
+  class temperatureScale Temp;
+  class radiativeSysProp optical;
+  double radius;
+  double Rtc;
+  double gamma;
+  double a_sub;
 
-    /// constructors and object creators
-    explicit TBCsystem( const class layer &coating_,
-                        const class layer &substrate_,
-                        const struct temperatureScale &Temp_,
-                        const struct radiativeSysProp &optical_,
-                        const double radius_);
-    static class TBCsystem loadConfig(const boost::property_tree::ptree &pt);
-    ~TBCsystem(void);
+  /// constructors and object creators
+  explicit TBCsystem( const class layer &coating_,
+                      const class layer &substrate_,
+                      const struct temperatureScale &Temp_,
+                      const struct radiativeSysProp &optical_,
+                      const double radius_);
+  static class TBCsystem loadConfig(const boost::property_tree::ptree &pt);
+  ~TBCsystem(void);
 
-    /// Member operations that update on multiple members
-    void updateVal(const enum labels::Name mylabel , const double val);
-    double returnVal( const enum labels::Name mylabel ) const;
+  /// Member operations that update on multiple members
+  void updateVal(const enum labels::Name mylabel , const double val);
+  double returnVal( const enum labels::Name mylabel ) const;
 
 
-    double gammaEval(void) const ;
-    double a_subEval(void) const;
-    void updateCoat(void);
+  double gammaEval(void) const ;
+  double a_subEval(void) const;
+  void updateCoat(void);
 };
 
 }
