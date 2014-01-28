@@ -65,7 +65,7 @@ public:
   /// Member operations that update on multiple members
   void updatelthermal( const double lmin, const double lmax,
                        const double lminperDecade);
-  void updateParameters( const class math::estimation::unknownList input);
+  void unknownParameters( const class math::estimation::unknownList input);
   void updateExperimentalData( const std::vector<double> input);
 
   /// Operations that give results

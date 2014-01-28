@@ -122,6 +122,21 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir 
 
 Poptea::~Poptea(void){}
 
+
+double Poptea::bestFit( void )
+{
+  int nfev;
+  int info;
+
+  double Serror =
+      LMA.paramter_estimation( &info, &nfev, coreSystem, thermalData );
+
+  coreSystem.updatefromBestFit( LMA.unknownParameters.vectorUnknowns );
+
+  return Serror;
+}
+
+
 class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
                                          const class Kernal popteaCore)
 {
@@ -139,6 +154,8 @@ class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
 
   return Poptea::loadConfig( popteaCore, pt );
 }
+
+
 
 
 }}

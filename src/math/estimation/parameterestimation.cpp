@@ -93,10 +93,6 @@ size_t unknownList::Nsize(void) const
 }
 
 
-//unknown::~unknown(void)
-//{
-//}
-
 class unknown
     unknownList::getParameter( physicalModel::labels::Name label )
 {

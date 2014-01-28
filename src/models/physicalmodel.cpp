@@ -28,6 +28,7 @@ License
 #include "models/physicalmodel.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "math/utility.hpp"
+#include "math/estimation/constrained.hpp"
 
 double property::Current(const double temperature) const
 {
@@ -368,6 +369,8 @@ void TBCsystem::updateCoat(void)
   coating.kthermal.offset = coating.psithermal.offset * diffusivty_coat;
   return;
 }
+
+
 
 labels::labels(void) {}
 

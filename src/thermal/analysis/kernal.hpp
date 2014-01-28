@@ -57,7 +57,10 @@ public:
   ~Kernal( void );
 
   /// Operations that give results
-  double bEval(void) const;                                 //MUST BE REMOVED
+  double bEval(void) const;
+  void updatefromBestFit( std::vector< math::estimation::unknown > list );
+
+
 
 };
 

@@ -57,7 +57,6 @@ public:
 
   double MSE;
   double MSEinitial;
-  double fvecTotal;
 
   LMA_workingArrays(const size_t Lend_, const size_t N_);
   ~LMA_workingArrays(void);

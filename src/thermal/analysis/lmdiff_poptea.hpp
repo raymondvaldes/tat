@@ -59,9 +59,9 @@ private:
   class ThermalData thermalData;
   void updateThermalData( class ThermalData thermalData_  );
 
-  void ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
+  void ThermalProp_Analysis(int /*P*/, int /*N*/, double *x, double *fvec,
                              int * /*iflag*/,
-                             class thermal::analysis::Kernal popteaCore);
+                             Kernal popteaCore);
 
 public:
   class math::estimation::settings Settings;
@@ -78,7 +78,7 @@ public:
       const std::vector<math::estimation::unknown> &unknownList_);
   void updateWorkSpace(const size_t Lend , const size_t N);
 
-  std::vector<double>
+  double
   paramter_estimation(int *info, int *nfev, Kernal &coreSystem,
                        const ThermalData &thermalData_ );
 };
