@@ -59,7 +59,41 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
   }
 
   return L_end;
-  //  LMA.LMA_workspace.updateArraySize( L_end, LMA.unknownParameters.Nsize()  );
+}
+
+
+void ThermalData::updateOmegas( const std::vector<double>  input,
+                                const physicalModel::layer &coating)
+{
+  l_thermal.clear();
+  omegas.clear();
+
+  omegas = input;
+
+  const size_t  L_end = input.size();
+  for (size_t i=0; i < L_end; ++i )
+  {
+    l_thermal[i] = thermal::lthermal( coating.depth,
+                                      coating.kthermal.offset,
+                                      coating.psithermal.offset,
+                                      omegas[i] ) ;
+  }
+}
+
+void ThermalData::updateLthermal( const std::vector<double> &input,
+                                  const physicalModel::layer &coating )
+{
+  l_thermal.clear();
+  l_thermal = input;
+
+  const size_t  L_end = input.size();
+  omegas.clear();
+  for (size_t i=0; i < L_end; ++i )
+  {
+    omegas[i] = thermal::omega( coating.depth, l_thermal[i],
+                                coating.kthermal.offset,
+                                coating.psithermal.offset ) ;
+  }
 }
 
 ThermalData& ThermalData::operator=(const ThermalData& that)

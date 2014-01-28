@@ -48,20 +48,16 @@ namespace analysis{
 class LMA
 {
 private:
-  std::function< void( int, int, double*, double*, int*,
-                       class thermal::analysis::Kernal ) >
+  std::function< void( double*, double*, class thermal::analysis::Kernal &) >
   myReduced =
   std::bind( &LMA::ThermalProp_Analysis, this , std::placeholders::_1,
-             std::placeholders::_2, std::placeholders::_3,
-             std::placeholders::_4, std::placeholders::_5,
-             std::placeholders::_6 ) ;
+             std::placeholders::_2, std::placeholders::_3) ;
 
   class ThermalData thermalData;
   void updateThermalData( class ThermalData thermalData_  );
 
-  void ThermalProp_Analysis(int /*P*/, int /*N*/, double *x, double *fvec,
-                             int * /*iflag*/,
-                             Kernal popteaCore);
+  void ThermalProp_Analysis(double *x, double *fvec,
+                             class thermal::analysis::Kernal &popteaCore);
 
 public:
   class math::estimation::settings Settings;
@@ -73,6 +69,7 @@ public:
                 const size_t Lend_, const class ThermalData &thermalData_) ;
   ~LMA(void);
 
+  void updateExperimental( const std::vector<double> input);
 
   void updateUnknownParameters(
       const std::vector<math::estimation::unknown> &unknownList_);

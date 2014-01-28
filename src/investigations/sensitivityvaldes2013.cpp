@@ -54,21 +54,31 @@ void run(const class filesystem::directory dir)
   constexpr bool d2 = true;    //monotonic (try true)
   constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
   constexpr double noiseRandom = 0.005*0; // normal noise % of pi/2
-
   const class thermal::emission::ExpNoiseSetting
       myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
   ///Output noise to test
-  std::vector<double> emissionNominal =
-      thermal::emission::phase99( poptea.coreSystem ,
-                                  poptea.thermalData.l_thermal);
+  const size_t Lend = poptea.thermalData.omegas.size();
+  std::vector<double> emissionNominal( Lend ) ;
+  emissionNominal = thermal::emission::phase99( poptea.coreSystem ,
+                                                poptea.thermalData.omegas );
 
-  std::vector<double> emissionExperimental =
-        thermal::emission::addNoise( emissionNominal,
-                                     poptea.thermalData.l_thermal,
-                                     myEmissionNoise ) ;
+  std::vector<double> emissionExperimental( Lend );
+  emissionExperimental = thermal::emission::
+      addNoise( emissionNominal, poptea.thermalData.l_thermal, myEmissionNoise);
 
-//  poptea.loadExperimentalData( emissionExperimental );
+  poptea.updateExperimentalData( poptea.thermalData.omegas ,
+                                 emissionExperimental );
+  poptea.bestFit();
+
+
+//  for( const auto& val : poptea.LMA.LMA_workspace.emissionExperimental )
+//    {std::cout << val <<"\n";}
+
+//  for( const auto& val : poptea.thermalData.omegas )
+//    {std::cout << val <<"\n";}
+//  std::cout << "\n\nleaving the world here...";exit(-1);
+
 
 //  ///Output noise to test
 //  for( size_t i = 0 ; i < popteaCore.expSetup.laser.l_thermal.size() ; ++i)

@@ -43,6 +43,7 @@ public:
   std::vector<double> omegas;
   std::vector<double> l_thermal;
 
+  //Constructors, destructors and assignment operators
   explicit ThermalData( const double l_min, const double l_max,
                         const size_t lminPerDecarde,
                         const physicalModel::layer &coating );
@@ -53,6 +54,11 @@ public:
   loadConfigfromXML( const boost::property_tree::ptree pt,
                      const physicalModel::layer &coating );
 
+  //modify data
+  void updateLthermal( const std::vector<double> &input,
+                       const physicalModel::layer &coating );
+  void updateOmegas(const std::vector<double> input ,
+                    const physicalModel::layer &coating);
   size_t thermalSetup( const double lmin, const double lmax,
                        const size_t lminPerDecarde ,
                        const physicalModel::layer &coating  );

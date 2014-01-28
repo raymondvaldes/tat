@@ -43,6 +43,11 @@ namespace analysis{
 
 class Poptea
 {
+private:
+  void updatelthermal( const double lmin, const double lmax,
+                       const double lminperDecade);
+  void unknownParameters( const class math::estimation::unknownList input);
+
 public:
   /// core members
   class Kernal coreSystem;
@@ -63,10 +68,8 @@ public:
 
 
   /// Member operations that update on multiple members
-  void updatelthermal( const double lmin, const double lmax,
-                       const double lminperDecade);
-  void unknownParameters( const class math::estimation::unknownList input);
-  void updateExperimentalData( const std::vector<double> input);
+  void updateExperimentalData( const std::vector<double> &omegas,
+                               const std::vector<double> &input);
 
   /// Operations that give results
   double bestFit( void );
