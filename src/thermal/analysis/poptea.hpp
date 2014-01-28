@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                |
+  ========                      |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||                   |
+     ||                         |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -27,29 +27,30 @@ License
 
 #include <vector>
 #include <utility>
+#include <boost/property_tree/ptree.hpp>
 
 #include "thermal/analysis/kernal.hpp"
+#include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/sa_sensitivity.hpp"
-#include "thermal/analysis/solution.hpp"
 
 #include "math/estimation/parameterestimation.hpp"
 #include "models/physicalmodel.hpp"
+#include "tools/filesystem.hpp"
 
 namespace thermal {
 namespace analysis{
 
 class Poptea
 {
-private:
-  void updateNMeasurements( const double L_end );
-
 public:
+  /// core members
   class Kernal coreSystem;
   class ThermalData thermalData;
   class LMA LMA;
   class SA_Sensitivity SA;
 
+  /// constructors and object creators
   explicit Poptea( const class Kernal &coreSystem_ ,
                    const class ThermalData &thermaldata_,
                    const class math::estimation::settings &Settings_,
@@ -57,24 +58,25 @@ public:
 
   static Poptea loadConfig( const Kernal &coreSystem_,
                             const boost::property_tree::ptree &pt ) ;
-
   static Poptea loadConfigfromFile( const class filesystem::directory &dir ) ;
   ~Poptea( void );
 
+
+  /// Member operations that update on multiple members
   void updatelthermal( const double lmin, const double lmax,
                        const double lminperDecade);
+  void updateParameters( const class math::estimation::unknownList input);
+  void updateExperimentalData( const std::vector<double> input);
 
-
-  /// These should be pushed down another level
-  double bestFit( class Kernal core );  //REMOVE
-  std::pair< double, double >
-  parameterInterval( const enum physicalModel::labels::Name currentPx,
-                     std::vector<double> emissionExperimentalOriginal );  //HIGHER LEVEL BUT YES
-  void loadExperimentalData( const std::vector<double> data );
-  void setParameterstoFit( class math::estimation::unknownList parameters );
-  void setParametertoHoldX( enum physicalModel::labels::Name currentParameterX_);
+  /// Operations that give results
+  double bestFit( void );
+  void parameterIntervalEstimates( void );
 };
 
+
+class Poptea
+loadWorkingDirectoryPoptea( const class filesystem::directory dir,
+                            const class Kernal popteaCore);
 
 }}
 #endif // poptea_HPP

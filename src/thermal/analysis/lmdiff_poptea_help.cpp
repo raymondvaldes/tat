@@ -30,7 +30,7 @@ License
 #include "math/estimation/lmdiff.hpp"
 #include "math/estimation/lmdiff_helper.hpp"
 #include "math/estimation/constrained.hpp"
-#include "algorithms/statistical_tools.hpp"
+#include "math/statistical_tools.hpp"
 
 
 namespace thermal {

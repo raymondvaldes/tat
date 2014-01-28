@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                |
+  ========                      |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox     	| Copyright (C) 2013 Raymond Valdes
-     ||                   |
+     ||                         |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -26,7 +26,7 @@ License
 #define LMDIFF_POPTEA_HELP_HPP
 
 #include "thermal/analysis/kernal.hpp"
-#include "algorithms/statistical_tools.hpp"
+#include "math/statistical_tools.hpp"
 
 
 namespace thermal {

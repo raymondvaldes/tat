@@ -114,17 +114,10 @@ QMAKE_CXXFLAGS += -fwhole-program
 #source files
 SOURCES += \
     main.cpp \
-    algorithms/ThermalProp_Analysis.cpp \
-    algorithms/statistical_tools.cpp \
-    algorithms/sensitivity_analysis.cpp \
-    numSimulations/Numerical_Temperature.cpp \
-    numSimulations/Numerical_Setup.cpp \
-    numSimulations/Numerical_PhaseOfEmission.cpp \
     tools/filesystem.cpp \
     tools/timing.cpp \
     models/expEquipment.cpp \
     models/physicalmodel.cpp \
-    models/numericalmodel.cpp \
     tools/configuration.cpp \
     math/bisection.cpp \
     investigations/sensitivityvaldes2013.cpp \
@@ -153,21 +146,19 @@ SOURCES += \
     thermal/analysis/lmdiff_poptea.cpp \
     thermal/analysis/lmdiff_poptea_help.cpp \
     thermal/analysis/sa_sensitivity.cpp \
-    thermal/analysis/solution.cpp
+    thermal/analysis/thermalData.cpp \
+    math/statistical_tools.cpp \
+    thermal/simulations/Numerical_PhaseOfEmission.cpp \
+    thermal/simulations/Numerical_Setup.cpp \
+    thermal/simulations/Numerical_Temperature.cpp \
+    thermal/simulations/numericalmodel.cpp
 
 #header files
 HEADERS += \
-    algorithms/ThermalProp_Analysis.h \
-    algorithms/statistical_tools.hpp \
-    numSimulations/Numerical_Temperature.h \
-    numSimulations/Numerical_Setup.h \
-    numSimulations/Numerical_PhaseOfEmission.h \
     tools/filesystem.hpp \
     tools/timing.h \
-    algorithms/sensitivity_analysis.hpp \
     models/expEquipment.hpp \
     models/physicalmodel.hpp \
-    models/numericalmodel.hpp \
     tools/configuration.hpp \
     math/bisection.hpp \
     investigations/sensitivityvaldes2013.hpp \
@@ -198,4 +189,9 @@ HEADERS += \
     thermal/analysis/lmdiff_poptea.hpp \
     thermal/analysis/lmdiff_poptea_help.hpp \
     thermal/analysis/sa_sensitivity.hpp \
-    thermal/analysis/solution.hpp
+    thermal/analysis/thermalData.hpp \
+    math/statistical_tools.hpp \
+    thermal/simulations/Numerical_PhaseOfEmission.h \
+    thermal/simulations/Numerical_Setup.h \
+    thermal/simulations/Numerical_Temperature.h \
+    thermal/simulations/numericalmodel.hpp

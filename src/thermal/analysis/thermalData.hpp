@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                |
+  ========                      |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||                   |
+     ||                         |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -22,8 +22,8 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef SOLUTION_HPP
-#define SOLUTION_HPP
+#ifndef THERMALDATA_HPP
+#define THERMALDATA_HPP
 
 #include "models/physicalmodel.hpp"
 
@@ -62,4 +62,4 @@ public:
 
 }}
 
-#endif // SOLUTION_HPP
+#endif // THERMALDATA_HPP

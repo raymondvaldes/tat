@@ -32,8 +32,8 @@ namespace math{
   namespace estimation{
 
 
-double SobjectiveLS(const size_t N, const std::vector<double>& emissionExp,
-                    const std::vector<double>& emissionEst)
+double SobjectiveLS( const size_t N, const std::vector<double>& emissionExp,
+                     const std::vector<double>& emissionEst )
 {
     /*
         The objective function is evaluated for all the measurements.
@@ -50,28 +50,6 @@ double SobjectiveLS(const size_t N, const std::vector<double>& emissionExp,
 
     return fvec_objective;
 }
-
-double SobjectiveLS(const size_t N, const double*emissionExp,
-                    const double* emissionEst)
-{
-    /*
-        The objective function is evaluated for all the measurements.
-        emissionEst[n]  ...     is calculated through the model
-        emissionExp[n]  ...     is determined through the experiment
-
-    */
-    double fvec_objective = 0;
-
-    for(size_t n=0 ; n < N; n++)
-    {
-        fvec_objective += pow( emissionExp[n] - emissionEst[n]  , 2);
-    }
-
-    return fvec_objective;
-}
-
-
-
   }
 }
 

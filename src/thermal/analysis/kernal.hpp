@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                |
+  ========                      |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||                   |
+     ||                         |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -37,14 +37,17 @@ License
 namespace thermal {
 namespace analysis{
 
+
 class Kernal
 {
 public:
+  /// core members
   class equipment::setup expSetup;
   class physicalModel::TBCsystem TBCsystem;
   class thermal::model thermalsys;
   class filesystem::directory DataDirectory;
 
+  /// constructors and object creators
   Kernal( const class equipment::setup &expSetup_,
           const class physicalModel::TBCsystem &TBCsystem_,
           const class thermal::model &thermalsys_,
@@ -53,8 +56,12 @@ public:
                             const class filesystem::directory &DataDirectory_);
   ~Kernal( void );
 
+  /// Operations that give results
   double bEval(void) const;                                 //MUST BE REMOVED
+
 };
+
+class Kernal loadWorkingDirectoryKernal(const class filesystem::directory dir);
 
 
 }}

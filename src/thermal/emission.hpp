@@ -26,8 +26,8 @@ License
 #define EMISSION_HPP
 
 #include <vector>
-#include "numSimulations/Numerical_PhaseOfEmission.h"
-#include "numSimulations/Numerical_Setup.h"
+#include "thermal/simulations/Numerical_PhaseOfEmission.h"
+#include "thermal/simulations/Numerical_Setup.h"
 
 
 namespace thermal{

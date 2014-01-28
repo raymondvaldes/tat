@@ -28,13 +28,8 @@ License
 namespace math{
   namespace estimation{
 
-
-double SobjectiveLS(const size_t N, const std::vector<double>& emissionExp,
-                    const std::vector<double>& emissionEst);
-
-double SobjectiveLS(const size_t N, const double*emissionExp,
-                    const double* emissionEst);
-
+double SobjectiveLS( const size_t N, const std::vector<double>& emissionExp,
+                     const std::vector<double>& emissionEst);
 
   }
 }

@@ -23,13 +23,12 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "thermal/construct.hpp"
-#include "models/numericalmodel.hpp"
 #include "thermal/model.hpp"
 
 namespace thermal
 {
 
-model::model (const construct &Construct_,
+model::model ( const construct &Construct_,
                const numericalModel::Mesh &mesh_ )
   : Construct(Construct_), mesh(mesh_)
 {

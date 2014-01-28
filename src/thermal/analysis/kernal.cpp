@@ -25,7 +25,7 @@ License
 #include <exception>
 #include "thermal/analysis/kernal.hpp"
 #include "models/expEquipment.hpp"
-#include "models/numericalmodel.hpp"
+#include "thermal/simulations/numericalmodel.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "math/utility.hpp"
 #include "tools/filesystem.hpp"
@@ -34,6 +34,8 @@ License
 
 namespace thermal {
 namespace analysis{
+
+
 
 Kernal::Kernal( const equipment::setup &expSetup_,
                 const physicalModel::TBCsystem &TBCsystem_,
@@ -96,7 +98,23 @@ double Kernal::bEval(void) const
   return expSetup.laser.radius / TBCsystem.coating.depth;
 }
 
+class Kernal
+    loadWorkingDirectoryKernal(const class filesystem::directory dir)
+{
+  const std::string filename = "kernal.xml";
+  boost::property_tree::ptree pt;
+  try
+  {
+    boost::property_tree::read_xml( dir.abs( filename ), pt);
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
+    exit(-2);
+  }
 
+  return Kernal::loadConfig( pt , dir);
+}
 
 
 }}

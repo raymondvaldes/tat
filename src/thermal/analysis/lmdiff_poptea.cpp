@@ -27,8 +27,9 @@ License
 #include <vector>
 #include <boost/foreach.hpp>
 
-#include "algorithms/statistical_tools.hpp"
+#include "math/statistical_tools.hpp"
 #include "math/estimation/constrained.hpp"
+#include "math/estimation/utils.hpp"
 #include "math/utility.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/emission/phase99.hpp"
@@ -144,9 +145,17 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
   initial guesses. This is let to run a fixed number of iterations. */
 
   LMA_workspace.fvecTotal =
-      SobjectiveLS( thermalData.omegas.size(),
-                    LMA_workspace.emissionExperimental,
-                    LMA_workspace.predicted);
+      math::estimation::SobjectiveLS( thermalData.omegas.size(),
+                                      LMA_workspace.emissionExperimental,
+                                      LMA_workspace.predicted);
+
+  i = 0;
+  for( auto& unknown : unknownParameters.vectorUnknowns )
+  {
+    unknown.bestfitset( x[i] ) ;
+    xpredicted.push_back( x[i] ) ;
+    x[i++] = math::x_ini( unknown.lowerBound(), unknown.upperBound() );
+  }
 
   for(size_t i=0 ; i< n ; i++)
   {
@@ -175,11 +184,10 @@ void LMA::ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
                                 class thermal::analysis::Kernal popteaCore)
 {
   using namespace math::estimation;
+
   //Update parameters
   int i = 0;
-
-  BOOST_FOREACH( class math::estimation::unknown &unknown,
-                 unknownParameters.vectorUnknowns )
+  for( const auto& unknown :  unknownParameters.vectorUnknowns)
   {
     const double val =
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
@@ -195,19 +203,32 @@ void LMA::ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
   /// Evaluate Objective function
   for( size_t n = 0 ; n < thermalData.omegas.size() ; ++n )
   {
-     fvec[n] = LMA_workspace.emissionExperimental[n] - LMA_workspace.predicted[n] ;
-     LMA_workspace.fvec[n] = fvec[n];
+     fvec[n] = abs( LMA_workspace.emissionExperimental[n] -
+                    LMA_workspace.predicted[n] );
+//     LMA_workspace.fvec[n] = fvec[n];
   }
 
 /// Print stuff to terminal
-  LMA_workspace.MSE =
-      MSE( thermalData.omegas.size() ,
-           LMA_workspace.emissionExperimental,
-           LMA_workspace.predicted );
+//  LMA_workspace.MSE =
+//      MSE( thermalData.omegas.size() ,
+//           LMA_workspace.emissionExperimental,
+//           LMA_workspace.predicted );
 
   printPEstimates( popteaCore.TBCsystem, unknownParameters ) ;
   return;
 }
 
 }
+}
+
+void printPEstimates( const class physicalModel::TBCsystem TBCSystem,
+                      math::estimation::unknownList list )
+{
+  for( const auto& unknown : list.vectorUnknowns)
+  {
+    std::cout << TBCSystem.returnVal( unknown.label() ) << "  ";
+  }
+
+  std::cout << "\n";
+  return;
 }
