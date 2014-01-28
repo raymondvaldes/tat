@@ -66,6 +66,11 @@ void LMA::updateWorkSpace( const size_t Lend, const size_t N )
   LMA_workspace.updateArraySize( Lend , N );
 }
 
+void LMA::updateExperimental( const std::vector<double> input)
+{
+  updateWorkSpace( input.size() , unknownParameters.Nsize()  );
+  LMA_workspace.emissionExperimental = input;
+}
 
 void LMA::updateThermalData( class ThermalData thermalData_ )
 {
@@ -153,9 +158,8 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
 }
 
 
-void LMA::ThermalProp_Analysis( int /*P*/, int /*N*/, double *x, double *fvec,
-                                int * /*iflag*/,
-                                class thermal::analysis::Kernal popteaCore)
+void LMA::ThermalProp_Analysis( double *x, double *fvec,
+                                class thermal::analysis::Kernal &popteaCore)
 {
   //Update parameters
   int i = 0;

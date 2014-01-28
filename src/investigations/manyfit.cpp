@@ -51,6 +51,9 @@ void run( const class filesystem::directory dir )
   {
     poptea.LMA.LMA_workspace.emissionExperimental[nn]
           = poptea.LMA.LMA_workspace.emissionNominal[nn];
+
+    std::cout << poptea.LMA.LMA_workspace.emissionExperimental[nn] << "\t"
+              << poptea.LMA.LMA_workspace.emissionNominal[nn] << "\n";
   }
 
   constexpr size_t interants = 1;

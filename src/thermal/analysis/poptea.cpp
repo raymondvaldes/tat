@@ -87,6 +87,17 @@ void Poptea::updatelthermal( const double lmin, const double lmax,
   LMA.updateWorkSpace( Lend, LMA.unknownParameters.Nsize() );
 }
 
+void Poptea::updateExperimentalData( const std::vector<double> &omegas,
+                                     const std::vector<double> &input)
+{
+  assert( input.size() == omegas.size());
+
+  thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
+  LMA.updateExperimental( input );
+}
+
+
+
 class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir )
 {
   ///Initiate poptea kernal
@@ -130,7 +141,6 @@ double Poptea::bestFit( void )
 
   double Serror =
       LMA.paramter_estimation( &info, &nfev, coreSystem, thermalData );
-
   coreSystem.updatefromBestFit( LMA.unknownParameters.vectorUnknowns );
 
   return Serror;
