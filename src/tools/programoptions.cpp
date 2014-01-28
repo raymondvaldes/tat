@@ -24,7 +24,9 @@ License
 \*----------------------------------------------------------------------------*/
 #include <iostream>
 #include <sstream>
-#include "boost/program_options.hpp"
+#include <boost/program_options.hpp>
+#include <boost/version.hpp>
+#include <gsl/gsl_version.h>
 
 namespace tools{
 
@@ -63,7 +65,18 @@ bool loadProgramOptions( int argc, char** argv, std::string& path )
     std::cout << "This is free software; see the source for copying " ;
     std::cout << "conditions.  There is NO\n" ;
     std::cout << "warranty; not even for MERCHANTABILITY or FITNESS FOR A" ;
-    std::cout << " PARTICULAR PURPOSE.\n" ;
+    std::cout << " PARTICULAR PURPOSE.\n\n" ;
+    std::cout << "Built with:\n";
+    std::cout << "Boost "
+              << BOOST_VERSION / 100000     << "."  // major version
+              << BOOST_VERSION / 100 % 1000 << "."  // minior version
+              << BOOST_VERSION % 100                // patch level
+              << std::endl;
+    std::cout << "Gnu Scientific Library "
+              << GSL_MAJOR_VERSION  << "."          // minior version
+              << GSL_MINOR_VERSION                  // patch level
+              << std::endl;
+
     return false;
   }
   return true;
