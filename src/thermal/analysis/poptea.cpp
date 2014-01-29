@@ -151,8 +151,9 @@ double Poptea::bestFit( void )
 
 void Poptea::parameterIntervalEstimates( void )
 {
-  if(!loadedExperimental) {  }
+  if(!loadedExperimental) { return; }
   if(!runbestfit) { bestFit(); }
+
 
 
 

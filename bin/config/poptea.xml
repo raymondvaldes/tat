@@ -34,20 +34,22 @@
 			<max>5</max>
 			<initialGuess>2.1</initialGuess>
 		</unknown>
-
-		<unknown>
-			<label>gammaEff</label>
-			<min>2e-0</min>
-			<max>10</max>
-			<initialGuess>3.7</initialGuess>
-		</unknown>
-
+		
 		<unknown>
 			<label>E1</label>
 			<min>1</min>
 			<max>200</max>
 			<initialGuess>40</initialGuess>
+		</unknown>		
+		
+		<unknown>
+			<label>lambda</label>
+			<min>0.1</min>
+			<max>1.0</max>
+			<initialGuess>0.5</initialGuess>
 		</unknown>
+		
+
 
 		<unknown>
 			<label>R1</label>
@@ -56,12 +58,15 @@
 			<initialGuess>0.75</initialGuess>
 		</unknown>
 
+
+		
 		<unknown>
-			<label>lambda</label>
-			<min>0.1</min>
-			<max>1.0</max>
-			<initialGuess>0.5</initialGuess>
+			<label>gammaEff</label>
+			<min>2e-0</min>
+			<max>10</max>
+			<initialGuess>3.7</initialGuess>
 		</unknown>
+		
 	</unknownParameters>
 	
 
