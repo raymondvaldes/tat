@@ -153,7 +153,8 @@ SOURCES += \
     thermal/simulations/Numerical_Temperature.cpp \
     thermal/simulations/numericalmodel.cpp \
     tools/log.cpp \
-    tools/version.cpp
+    tools/version.cpp \
+    math/algorithms/combinations.cpp
 
 #header files
 HEADERS += \
@@ -199,4 +200,5 @@ HEADERS += \
     thermal/simulations/numericalmodel.hpp \
     tools/log.hpp \
     tools/tools.hpp \
-    tools/version.hpp
+    tools/version.hpp \
+    math/algorithms/combinations.hpp

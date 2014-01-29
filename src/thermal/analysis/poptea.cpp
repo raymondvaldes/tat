@@ -151,6 +151,8 @@ double Poptea::bestFit( void )
 
 void Poptea::parameterIntervalEstimates( void )
 {
+/// Precheck to verify that the experimental data is loaded and there is a
+/// bestfit.
   if(!loadedExperimental) { return; }
   if(!runbestfit) { bestFit(); }
 
