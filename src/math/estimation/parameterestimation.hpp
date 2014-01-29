@@ -66,22 +66,22 @@ public:
 class unknownList
 {
 private:
-//  size_t N;
+  std::vector<class estimation::unknown> vectorUnknowns;
 
 public:
-  std::vector<class estimation::unknown> vectorUnknowns;
+  std::vector<class estimation::unknown> operator() (void) const;
+  void operator() (std::vector<class estimation::unknown> input) ;
 
   void addUnknown( physicalModel::labels::Name name,
                    const double lower, const double upper,
                    const double initialGuess);
-  size_t Nsize(void) const;
+  void addUnknown( class estimation::unknown input );
+
+  size_t size(void) const;
 
   static class unknownList
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
   class unknown getParameter( physicalModel::labels::Name label );
-
-
-
   ~unknownList() ;
 };
 

@@ -37,6 +37,7 @@ License
 #include "math/estimation/lmdiff_helper.hpp"
 #include "math/utility.hpp"
 #include "math/estimation/constrained.hpp"
+#include "math/algorithms/combinations.hpp"
 
 namespace thermal {
 namespace analysis{  
@@ -84,7 +85,7 @@ void Poptea::updatelthermal( const double lmin, const double lmax,
   thermalData.thermalSetup( lmin, lmax, lminperDecade,
                             coreSystem.TBCsystem.coating ) ;
 
-  LMA.updateWorkSpace( Lend, LMA.unknownParameters.Nsize() );
+  LMA.updateWorkSpace( Lend, LMA.unknownParameters.size() );
 }
 
 void Poptea::updateExperimentalData( const std::vector<double> &omegas,
@@ -95,7 +96,7 @@ void Poptea::updateExperimentalData( const std::vector<double> &omegas,
 
   thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
   thermalData.updateExperimental( input );
-  LMA.updateWorkSpace( input.size() , LMA.unknownParameters.Nsize()  );
+  LMA.updateWorkSpace( input.size() , LMA.unknownParameters.size()  );
 }
 
 
@@ -144,19 +145,25 @@ double Poptea::bestFit( void )
   int info;
 
   thermalData = LMA.paramter_estimation( &info, &nfev, coreSystem, thermalData);
-  coreSystem.updatefromBestFit( LMA.unknownParameters.vectorUnknowns );
+  coreSystem.updatefromBestFit( LMA.unknownParameters() );
 
   return thermalData.MSE;
 }
 
 void Poptea::parameterIntervalEstimates( void )
 {
-/// Precheck to verify that the experimental data is loaded and there is a
-/// bestfit.
+  /// Precheck to verify that the experimental data is loaded and there is a
+  /// bestfit.
   if(!loadedExperimental) { return; }
   if(!runbestfit) { bestFit(); }
 
+  math::algorithms::combos_minusOne( LMA.unknownParameters() );
 
+//  std::vector<std::vector <>>
+
+
+//  template<typename OBJ>
+//  std::vector< std::vector<OBJ> > combos_minusOne( const std::vector<OBJ> input )
 
 
 

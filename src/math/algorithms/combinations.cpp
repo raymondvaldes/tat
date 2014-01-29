@@ -22,10 +22,31 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "math/algorithms/combinations.hpp"
+
+#include <vector>
+#include <cstddef>
 
 namespace math{
 namespace algorithms{
+
+
+
+
+size_t factorial( const size_t n )
+{
+    if (n == 0)
+       return 1;
+    return n * factorial(n - 1);
+}
+
+size_t permutations( const size_t n, const size_t r)
+{
+  size_t
+  val = factorial(n);
+  val /= factorial( n -r) * factorial(r);
+
+  return val;
+}
 
 
 
