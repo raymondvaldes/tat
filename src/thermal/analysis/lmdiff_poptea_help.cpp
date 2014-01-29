@@ -253,6 +253,7 @@ void lmdif(std::function<void( double*, double*,
 using namespace math::estimation;
 
 
+
 int iter = 0;
 int i,iflag,ij,jj,j,l;
 double actred,delta,dirder,fnorm,fnorm1,gnorm;
@@ -791,10 +792,8 @@ void LMA_workingArrays::updateArraySize( const size_t Lend_, const size_t N )
   this value is based on the range and the set minimum*/
 
   fjac.resize(Lend_* N );
-  emissionExperimental.resize(Lend_);
-  emissionNominal.resize(Lend_);
-  emissionCurrent.resize(Lend_);
-  predicted.resize(Lend_);
+//  emissionExperimental.resize(Lend_);
+
   fvec.resize(Lend_);
 
 }

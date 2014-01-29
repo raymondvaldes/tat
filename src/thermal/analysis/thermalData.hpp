@@ -34,14 +34,19 @@ namespace analysis{
 class ThermalData
 {
 private:
-  void  updateNMeasurements( const double L_end );
   double thermalSetupTEMP( const double lmin_, const double lmax_,
                            const size_t lminPerDecarde,
                            const double L_coat, const double kc,
                            const double psic);
+  void clear(void);
+  void resize( const size_t Lend);
+
 public:
   std::vector<double> omegas;
   std::vector<double> l_thermal;
+  std::vector<double> experimentalEmission;
+  std::vector<double> predictedEmission;
+  double MSE;
 
   //Constructors, destructors and assignment operators
   explicit ThermalData( const double l_min, const double l_max,
@@ -59,6 +64,8 @@ public:
                        const physicalModel::layer &coating );
   void updateOmegas(const std::vector<double> input ,
                     const physicalModel::layer &coating);
+  void updateExperimental(const std::vector<double> &input);
+
   size_t thermalSetup( const double lmin, const double lmax,
                        const size_t lminPerDecarde ,
                        const physicalModel::layer &coating  );

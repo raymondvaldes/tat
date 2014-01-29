@@ -47,6 +47,8 @@ private:
   void updatelthermal( const double lmin, const double lmax,
                        const double lminperDecade);
   void unknownParameters( const class math::estimation::unknownList input);
+  bool loadedExperimental = false;
+  bool runbestfit = false;
 
 public:
   /// core members
@@ -69,7 +71,7 @@ public:
 
   /// Member operations that update on multiple members
   void updateExperimentalData( const std::vector<double> &omegas,
-                               const std::vector<double> &input);
+                               const std::vector<double> &input );
 
   /// Operations that give results
   double bestFit( void );

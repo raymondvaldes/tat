@@ -48,7 +48,10 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
   size_t L_end = thermalSetupTEMP( lmin, lmax, lminPerDecarde,
                                    coating.depth, coating.kthermal.offset,
                                    coating.psithermal.offset );
-  updateNMeasurements( L_end );
+  clear();
+  resize( L_end );
+
+
   math::range1og10(lmin, lmax, L_end, l_thermal);
 
   for (size_t i=0; i < L_end; ++i )
@@ -62,15 +65,31 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
 }
 
 
-void ThermalData::updateOmegas( const std::vector<double>  input,
-                                const physicalModel::layer &coating)
+void ThermalData::clear(void)
 {
   l_thermal.clear();
   omegas.clear();
+  experimentalEmission.clear();
+  predictedEmission.clear();
+}
+
+void ThermalData::resize( const size_t Lend)
+{
+  l_thermal.resize( Lend );
+  omegas.resize( Lend );
+  experimentalEmission.resize( Lend );
+  predictedEmission.resize( Lend );
+}
+
+void ThermalData::updateOmegas( const std::vector<double>  input,
+                                const physicalModel::layer &coating)
+{
+  const size_t L_end = input.size();
+  clear();
+  resize( L_end );
 
   omegas = input;
 
-  const size_t  L_end = input.size();
   for (size_t i=0; i < L_end; ++i )
   {
     l_thermal[i] = thermal::lthermal( coating.depth,
@@ -80,14 +99,21 @@ void ThermalData::updateOmegas( const std::vector<double>  input,
   }
 }
 
+void ThermalData::updateExperimental( const std::vector<double> &input)
+{
+  assert( input.size() == experimentalEmission.size() );
+  experimentalEmission = input;
+}
+
 void ThermalData::updateLthermal( const std::vector<double> &input,
                                   const physicalModel::layer &coating )
 {
-  l_thermal.clear();
+  const size_t L_end = input.size();
+  clear();
+  resize( L_end );
+
   l_thermal = input;
 
-  const size_t  L_end = input.size();
-  omegas.clear();
   for (size_t i=0; i < L_end; ++i )
   {
     omegas[i] = thermal::omega( coating.depth, l_thermal[i],
@@ -102,9 +128,14 @@ ThermalData& ThermalData::operator=(const ThermalData& that)
   {
     omegas = that.omegas;
     l_thermal = that.l_thermal;
+    experimentalEmission = that.experimentalEmission;
+    predictedEmission = that.predictedEmission;
+    MSE = that.MSE;
   }
   return *this;
 }
+
+
 
 double ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
                                       const size_t lminPerDecarde,
@@ -183,13 +214,6 @@ double ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
   }
 
   return Lnew;
-}
-
-
-void  ThermalData::updateNMeasurements( const double L_end )
-{
-  omegas.resize(L_end);
-  l_thermal.resize(L_end);
 }
 
 

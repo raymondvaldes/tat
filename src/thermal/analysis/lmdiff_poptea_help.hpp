@@ -44,18 +44,12 @@ namespace analysis{
 void scaleDiag( double *diag, const class math::estimation::unknownList List,
                 const physicalModel::TBCsystem TBCsystem, const int mode );
 
-
 class LMA_workingArrays
 {
 public:
   std::vector<double> fjac;
-  std::vector<double> predicted;
   std::vector<double> fvec;
-  std::vector<double> emissionExperimental;
-  std::vector<double> emissionNominal;
-  std::vector<double> emissionCurrent;
 
-  double MSE;
   double MSEinitial;
 
   LMA_workingArrays(const size_t Lend_, const size_t N_);

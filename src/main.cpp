@@ -30,9 +30,7 @@ License
 #include <iostream>
 
 //Internal dependencies
-#include "tools/timing.h"
-#include "tools/filesystem.hpp"
-#include "tools/programoptions.hpp"
+#include "tools/tools.hpp"
 #include "investigations/all.hpp"
 
 int main( int argc, char *argv[ ] )
@@ -49,12 +47,11 @@ int main( int argc, char *argv[ ] )
     const class filesystem::directory dir(path);
 
     /// Run investigations
-    investigations::sensitivityvaldes2013::run( dir );
-//    investigations::manyfit::run( dir );
+//    investigations::sensitivityvaldes2013::run( dir );
+    investigations::manyfit::run( dir );
 
-    std::cout << "\nStopwatch: "
-              << std::setprecision(3)
-              <<  globalStopWatch.returnTime() <<" sec.\n\n";
+    std::cout << "\nStopwatch: "                << std::setprecision(3)
+              <<  globalStopWatch.returnTime()  <<" sec.\n\n";
   }
   return 0;
 }

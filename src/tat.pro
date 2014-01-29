@@ -151,7 +151,9 @@ SOURCES += \
     thermal/simulations/Numerical_PhaseOfEmission.cpp \
     thermal/simulations/Numerical_Setup.cpp \
     thermal/simulations/Numerical_Temperature.cpp \
-    thermal/simulations/numericalmodel.cpp
+    thermal/simulations/numericalmodel.cpp \
+    tools/log.cpp \
+    tools/version.cpp
 
 #header files
 HEADERS += \
@@ -194,4 +196,7 @@ HEADERS += \
     thermal/simulations/Numerical_PhaseOfEmission.h \
     thermal/simulations/Numerical_Setup.h \
     thermal/simulations/Numerical_Temperature.h \
-    thermal/simulations/numericalmodel.hpp
+    thermal/simulations/numericalmodel.hpp \
+    tools/log.hpp \
+    tools/tools.hpp \
+    tools/version.hpp
