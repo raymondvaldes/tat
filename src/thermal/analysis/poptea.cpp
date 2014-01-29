@@ -39,6 +39,9 @@ License
 #include "math/estimation/constrained.hpp"
 #include "math/algorithms/combinations.hpp"
 
+#include <functional>
+#include "math/bisection.hpp"
+
 namespace thermal {
 namespace analysis{  
 
@@ -152,22 +155,101 @@ double Poptea::bestFit( void )
 
 void Poptea::parameterIntervalEstimates( void )
 {
-  /// Precheck to verify that the experimental data is loaded and there is a
-  /// bestfit.
+  /// Precheck experimental data is loaded and there is a bestfit.
   if(!loadedExperimental) { return; }
   if(!runbestfit) { bestFit(); }
 
-  math::algorithms::combos_minusOne( LMA.unknownParameters() );
+  /// Save experimental data
+  std::vector<double> SAVEemitExperimental = thermalData.experimentalEmission;
 
-//  std::vector<std::vector <>>
+  /// Save quality-of-fit parameters
+  const double S1 = thermalData.MSE;
 
+  ///Save unknown List
+  std::vector< math::estimation::unknown >
+      originalListUnknownParams = LMA.unknownParameters();
 
-//  template<typename OBJ>
-//  std::vector< std::vector<OBJ> > combos_minusOne( const std::vector<OBJ> input )
+  /// Update initial guess using bestfits
+  for( auto& param : originalListUnknownParams)
+  {
+    const double val = param.bestfit();
+    param.Initialset( val );
+  }
 
+  /// Predicted emission as the new experimental
+  std::vector<double> TEMPemissionExperimental = thermalData.predictedEmission;
 
+  /// update experimental data using new emission
+  updateExperimentalData( thermalData.omegas , TEMPemissionExperimental );
 
+  /// Create list of parameters that must be refitted
+  std::vector< std::vector<  math::estimation::unknown > >
+      unknownParaLists = math::algorithms::combos_minusOne( originalListUnknownParams );
+
+  std::vector< enum physicalModel::labels::Name  > parametersToBeManipulated;
+  for ( const auto& unknown : originalListUnknownParams )
+  {
+    parametersToBeManipulated.push_back( unknown.label() );
+  }
+
+  /// update list of parameters using unknownIterations
+  std::cout << thermalData.MSE << "\n\n";
+  std::cout << "iterate through parameters now:---\n\n";
+  std::cout << "parameter estimates intervals:\n";
+  std::cout << "------------------------------\n\n";
+
+  size_t i = 0;
+  for( const auto& list : unknownParaLists)
+  {
+    /// update parameters to be fitted
+    LMA.unknownParameters( list );
+
+    ///identifiy fixed parameter and update search bounds;
+    const class math::estimation::unknown
+        myfixedParameter =  originalListUnknownParams[i];
+    myfixedParameterName = myfixedParameter.label();
+    const double bestfit = myfixedParameter.bestfit();
+    const double lowerbound = myfixedParameter.lowerBound();
+    const double upperbound = myfixedParameter.upperBound();
+
+    ///search space
+    const double min = solve( S1, lowerbound, bestfit );
+    const double max = solve( S1, bestfit, upperbound );
+
+    std::cout << "min\t\tbestfit\t\tmax\n" << min << "\t\t"  <<  bestfit
+              <<"\t\t"<< max << "\n";
+    std::cout << "search bounds(" << lowerbound << ", " << upperbound <<")\n\n";
+    originalListUnknownParams[i].bestfitIntervalset( min, max);
+    i++;
+  }
+
+  ///Update list of parameters with updated list
+  LMA.unknownParameters( originalListUnknownParams ) ;
+  updateExperimentalData( thermalData.omegas , SAVEemitExperimental );
+  thermalData.MSE = S1;
 }
+
+double Poptea::Gfunc( const double val )
+{
+  coreSystem.TBCsystem.updateVal( myfixedParameterName , val );
+  coreSystem.TBCsystem.updateCoat();
+  bestFit();
+
+  return thermalData.MSE;
+}
+
+double Poptea::solve( const double target , const double min, const double max)
+{
+  using std::placeholders::_1;
+  const std::function<double(double)>
+      myFuncReduced = std::bind( &Poptea::Gfunc, this , _1 );
+
+  math::solve ojb( myFuncReduced, target, min, max );
+
+  return ojb.returnSoln();
+}
+
+
 
 
 class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,

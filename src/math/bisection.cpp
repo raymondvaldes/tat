@@ -58,8 +58,8 @@ solve::  solve( std::function<double(double)> myF_ , const double phi_,
   }
   catch (std::exception const&  ex)
   {
-    std::cout << "\noutside range or no roots \n\n" << "\n";
-    bestGuess = max;
+//    std::cout << "\noutside range or no roots \n\n" << "\n";
+    bestGuess = min;
   }
 }
 

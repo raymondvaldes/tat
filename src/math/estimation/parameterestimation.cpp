@@ -94,8 +94,18 @@ enum physicalModel::labels::Name unknown::label(void) const
   return name.getName();
 }
 
+unknown::bounds::bounds( void ){}
+
 unknown::bounds::bounds(const double lower_, const double upper_)
 :lower(lower_), upper(upper_){}
+
+void unknown::bestfitIntervalset ( const double min, const double max)
+{
+  bestfitInterval.lower = min;
+  bestfitInterval.upper = max;
+}
+
+
 
 void unknownList::addUnknown( class estimation::unknown input )
 {
