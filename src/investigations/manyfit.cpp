@@ -42,21 +42,20 @@ void run( const class filesystem::directory dir )
   class Poptea poptea = Poptea::loadConfigfromFile( dir );
 
   /// Create initial guess
-  poptea.LMA.LMA_workspace.emissionNominal =
+  std::vector<double>emissionNominal=
   thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
-
 
   /// execute
   for(size_t nn = 0; nn < poptea.thermalData.omegas.size() ; ++nn )
   {
-    poptea.LMA.LMA_workspace.emissionExperimental[nn]
-          = poptea.LMA.LMA_workspace.emissionNominal[nn];
+    poptea.thermalData.experimentalEmission[nn]
+          = emissionNominal[nn];
 
-    std::cout << poptea.LMA.LMA_workspace.emissionExperimental[nn] << "\t"
-              << poptea.LMA.LMA_workspace.emissionNominal[nn] << "\n";
+    std::cout << poptea.thermalData.experimentalEmission[nn] << "\t"
+              << emissionNominal[nn] << "\n";
   }
 
-  constexpr size_t interants = 1;
+  constexpr size_t interants = 10;
   fitting( poptea, interants );
 }
 
@@ -68,9 +67,7 @@ void fitting(class thermal::analysis::Poptea poptea,
 {
   std::vector<double>xInitial;
   for( const auto &unknown : poptea.LMA.unknownParameters.vectorUnknowns )
-  {
-    xInitial.push_back( unknown.initialVal() );
-  }
+    { xInitial.push_back( unknown.initialVal() ); }
 
 /// Scale jacobian if enabled
   std::ofstream myfile;
@@ -85,24 +82,23 @@ void fitting(class thermal::analysis::Poptea poptea,
 
   for( size_t i=0; i<interants; ++i )
   {
-
       int nfev;
       int info = 0;
       myfile << i << "\t";
 
-      poptea.LMA.paramter_estimation( &info, &nfev, poptea.coreSystem,
-                                          poptea.thermalData );
-      poptea.LMA.LMA_workspace.MSE =
+      poptea.bestFit();
+
+      poptea.thermalData.MSE =
           MSE( poptea.thermalData.l_thermal.size(),
-               poptea.LMA.LMA_workspace.emissionExperimental,
-               poptea.LMA.LMA_workspace.predicted);
+               poptea.thermalData.experimentalEmission,
+               poptea.thermalData.predictedEmission);
 
       myfile << poptea.coreSystem.TBCsystem.gammaEval() << "\t"
              << poptea.coreSystem.TBCsystem.a_subEval() << "\t"
              << poptea.coreSystem.TBCsystem.optical.Emit1 << "\t"
              << poptea.coreSystem.TBCsystem.optical.R1<< "\t"
              << poptea.coreSystem.TBCsystem.coating.lambda << "\t"
-             << poptea.LMA.LMA_workspace.MSE << "\n";
+             << poptea.thermalData.MSE << "\n";
 
       printPEstimates( poptea.coreSystem.TBCsystem,
                        poptea.LMA.unknownParameters ) ;

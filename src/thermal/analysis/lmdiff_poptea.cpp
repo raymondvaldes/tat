@@ -46,7 +46,7 @@ LMA::LMA(const math::estimation::settings &Settings_,
     unknownParameters(unknownParameters_),
     LMA_workspace( Lend_, unknownParameters_.Nsize() )
 {
-
+  myReducedUpdate();
 }
 
 LMA::~LMA(void){}
@@ -57,19 +57,22 @@ void LMA::updateUnknownParameters(
   std::vector<class math::estimation::unknown> updated(unknownList_);
   unknownParameters.vectorUnknowns.swap( updated );
 
-  const size_t Default = LMA_workspace.emissionNominal.size();
+//  const size_t Default = LMA_workspace.emissionExperimental.size();
+  const size_t Default = LMA_workspace.fvec.size();
   updateWorkSpace( Default, updated.size() ) ;
 }
+
+void LMA::myReducedUpdate( void )
+{
+  myReduced =
+  std::bind( &LMA::ThermalProp_Analysis, this , std::placeholders::_1,
+             std::placeholders::_2, std::placeholders::_3) ;
+}
+
 
 void LMA::updateWorkSpace( const size_t Lend, const size_t N )
 {
   LMA_workspace.updateArraySize( Lend , N );
-}
-
-void LMA::updateExperimental( const std::vector<double> input)
-{
-  updateWorkSpace( input.size() , unknownParameters.Nsize()  );
-  LMA_workspace.emissionExperimental = input;
 }
 
 void LMA::updateThermalData( class ThermalData thermalData_ )
@@ -77,15 +80,17 @@ void LMA::updateThermalData( class ThermalData thermalData_ )
   thermalData = thermalData_;
 }
 
-double
+class ThermalData
 LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
-                          const ThermalData &thermalData_ )
+                          ThermalData input )
 {
-  updateThermalData( thermalData_ );
+  updateThermalData( input );
+
   using namespace math::estimation;
   const size_t m = thermalData.omegas.size();
   const size_t n = unknownParameters.Nsize();
 
+  ///Create workspaces
   double *x = new double[n];
   double *fvec = new double[m];
   double *qtf = new double[n];
@@ -98,12 +103,12 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
   int *ipvt = new int[n];
   double *diag = new double[n];
 
+  ///populate initial values
   std::vector<double>xInitial;
   for( const auto &unknown : unknownParameters.vectorUnknowns )
     { xInitial.push_back( unknown.initialVal() ); }
   for( size_t i=0 ; i< n ; i++ )
     { x[i] = xInitial[i]; }
-
 
   scaleDiag( diag, unknownParameters , coreSystem.TBCsystem,
              Settings.mode ) ;
@@ -117,6 +122,7 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
   }
 
   ///levenberg-marquardt algorithm
+  myReducedUpdate();
   lmdif( myReduced , m, n, x, fvec, Settings.ftol,
          Settings.xtol, Settings.gtol, Settings.maxfev,
          Settings.epsfcn, diag, Settings.mode,
@@ -134,13 +140,13 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
 
    ///Final fit
   coreSystem.updatefromBestFit( unknownParameters.vectorUnknowns );
-  LMA_workspace.predicted = thermal::emission::phase99( coreSystem ,
+  thermalData.predictedEmission = thermal::emission::phase99( coreSystem ,
                                                         thermalData.omegas );
 
   /// Quality-of-fit
-  LMA_workspace.MSE =
-      math::estimation::SobjectiveLS( LMA_workspace.emissionExperimental,
-                                      LMA_workspace.predicted);
+  thermalData.MSE =
+      math::estimation::SobjectiveLS( thermalData.experimentalEmission,
+                                      thermalData.predictedEmission );
 
   delete [] qtf;
   delete [] wa1;
@@ -154,7 +160,7 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
   delete [] diag;
   delete [] x;
 
-  return LMA_workspace.MSE;
+  return thermalData;
 }
 
 
@@ -171,21 +177,20 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   }
   popteaCore.updatefromBestFit( unknownParameters.vectorUnknowns );
 
-
   // Estimates the phase of emission at each heating frequency
-  LMA_workspace.predicted = thermal::emission::phase99( popteaCore,
-                                                        thermalData.omegas );
+  thermalData.predictedEmission =
+      thermal::emission::phase99( popteaCore, thermalData.omegas );
 
   /// Evaluate Objective function
   for( size_t n = 0 ; n < thermalData.omegas.size() ; ++n )
   {
-     fvec[n] =  LMA_workspace.emissionExperimental[n] -
-                    LMA_workspace.predicted[n] ;
+     fvec[n] =  thermalData.experimentalEmission[n] -
+                    thermalData.predictedEmission[n] ;
   }
 
-  LMA_workspace.MSE =
-      math::estimation::SobjectiveLS( LMA_workspace.emissionExperimental,
-                                      LMA_workspace.predicted);
+  thermalData.MSE =
+      math::estimation::SobjectiveLS( thermalData.experimentalEmission,
+                                      thermalData.predictedEmission );
   printPEstimates( popteaCore.TBCsystem, unknownParameters ) ;
   return;
 }

@@ -91,9 +91,11 @@ void Poptea::updateExperimentalData( const std::vector<double> &omegas,
                                      const std::vector<double> &input)
 {
   assert( input.size() == omegas.size());
+  loadedExperimental = true;
 
   thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
-  LMA.updateExperimental( input );
+  thermalData.updateExperimental( input );
+  LMA.updateWorkSpace( input.size() , LMA.unknownParameters.Nsize()  );
 }
 
 
@@ -136,14 +138,25 @@ Poptea::~Poptea(void){}
 
 double Poptea::bestFit( void )
 {
+  runbestfit = true;
+
   int nfev;
   int info;
 
-  double Serror =
-      LMA.paramter_estimation( &info, &nfev, coreSystem, thermalData );
+  thermalData = LMA.paramter_estimation( &info, &nfev, coreSystem, thermalData);
   coreSystem.updatefromBestFit( LMA.unknownParameters.vectorUnknowns );
 
-  return Serror;
+  return thermalData.MSE;
+}
+
+void Poptea::parameterIntervalEstimates( void )
+{
+  if(!loadedExperimental) {  }
+  if(!runbestfit) { bestFit(); }
+
+
+
+
 }
 
 

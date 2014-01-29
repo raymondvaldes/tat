@@ -83,6 +83,8 @@ void unknownList::addUnknown(enum physicalModel::labels::Name name,
                              const double lower,
                              const double upper, const double initialGuess)
 {
+  assert( initialGuess > lower && initialGuess  < upper);
+
   vectorUnknowns.push_back ( unknown( name, lower, upper, initialGuess ) );
   return;
 }
