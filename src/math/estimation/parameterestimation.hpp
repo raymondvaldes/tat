@@ -34,23 +34,26 @@ namespace math{
 class unknown
 {
 private:
+  struct physicalModel::labels name;
   struct bounds
   {
     const double lower;
     const double upper;
     bounds(const double lower_, const double  upper_);
   };
-  struct physicalModel::labels name;
   struct bounds constraint;
   double initialGuess;
   double bestfitval;
+
   void Initialset(const double input);
+  void Initialauto(void);
 
 public:
   unknown(enum physicalModel::labels::Name name_,
           const double lower_,
           const double upper_,
           const double initialGuess_);
+  ~unknown();
 
   void bestfitset(const double input);
   double bestfit(void) const;
@@ -59,7 +62,9 @@ public:
   double initialVal(void) const;
   enum physicalModel::labels::Name label(void) const;
 
-  void Initialauto(void);
+  bool compareName( const unknown& input ) const;
+  bool operator == ( const unknown& input ) const;
+  bool operator != ( const unknown& input ) const;
 
 };
 

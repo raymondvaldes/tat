@@ -37,6 +37,24 @@ unknown::unknown(enum physicalModel::labels::Name name_,
     :name(name_), constraint(lower_, upper_), initialGuess(initialGuess_)
 {}
 
+unknown::~unknown(){}
+
+bool unknown::compareName( const unknown& input ) const
+{
+  return input.label() == label();
+}
+
+bool unknown::operator == ( const unknown& input ) const
+{
+  return compareName(input);
+}
+
+bool unknown::operator != ( const unknown& input ) const
+{
+  return !compareName(input);
+}
+
+
 void unknown::Initialauto(void)
 {
   initialGuess = math::average(constraint.lower, constraint.upper);

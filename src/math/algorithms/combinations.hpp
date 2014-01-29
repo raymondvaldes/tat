@@ -42,7 +42,7 @@ std::vector< std::vector<OBJ> > combos_minusOne( const std::vector<OBJ> input )
   {
     for( auto& val_i : input)
     {
-      if( val_i != val_o )
+      if( val_i != val_o )   
         { output[iter].push_back( val_i ) ; }
     }
     iter++;
