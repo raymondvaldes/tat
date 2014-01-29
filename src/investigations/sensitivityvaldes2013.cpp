@@ -53,7 +53,7 @@ void run(const class filesystem::directory dir)
   constexpr bool d1 = true;    //positive  (try false)
   constexpr bool d2 = true;    //monotonic (try true)
   constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
-  constexpr double noiseRandom = 0.01*0; // normal noise % of pi/2
+  constexpr double noiseRandom = 0.01; // normal noise % of pi/2
   const class thermal::emission::ExpNoiseSetting
       myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 

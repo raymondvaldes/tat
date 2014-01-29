@@ -331,10 +331,10 @@ double TBCsystem::returnVal( const enum labels::Name mylabel ) const
       val = a_sub ;
       break;
     case labels::Name::E1 :
-      val = gamma;
+      val = optical.Emit1 ;
       break;
     case labels::Name::gammaEff :
-      val = optical.Emit1 ;
+      val = gamma;
       break;
     case labels::Name::R1 :
       val = optical.R1;

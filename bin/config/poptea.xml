@@ -49,16 +49,12 @@
 			<initialGuess>0.5</initialGuess>
 		</unknown>
 		
-
-
 		<unknown>
 			<label>R1</label>
 			<min>0.6</min>
 			<max>1.0</max>
 			<initialGuess>0.75</initialGuess>
 		</unknown>
-
-
 		
 		<unknown>
 			<label>gammaEff</label>
@@ -70,5 +66,4 @@
 	</unknownParameters>
 	
 
-	
-</poptea>
+	</poptea>
