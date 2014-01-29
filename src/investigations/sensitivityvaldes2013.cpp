@@ -48,12 +48,12 @@ void run(const class filesystem::directory dir)
 
   /// STEP 0
   //Noise in Simulated Emission
-  constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
+  constexpr double a =  .01*0;   // max % error (%*pi/2) (try .025)
   constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
   constexpr bool d1 = true;    //positive  (try false)
   constexpr bool d2 = true;    //monotonic (try true)
   constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
-  constexpr double noiseRandom = 0.01; // normal noise % of pi/2
+  constexpr double noiseRandom = 0.01*0; // normal noise % of pi/2
   const class thermal::emission::ExpNoiseSetting
       myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
@@ -119,7 +119,6 @@ void run(const class filesystem::directory dir)
 
 //  /// STEP 4
 //  class math::estimation::unknown
-//      first(poptea.coreSystem.LMA.unknownParameters.vectorUnknowns[0]);
 
 //  class math::sensitivityAnalysis::step4 Step4;
 //  std::cout << "this is the output\n\n" << Step4.solve() << "\n";

@@ -41,7 +41,7 @@ namespace analysis{
              double *wa3, double *wa4, double */*wa5*/,
              class thermal::analysis::Kernal &popteaCore);
 
-void scaleDiag( double *diag, const class math::estimation::unknownList List,
+void scaleDiag(double *diag, math::estimation::unknownList List,
                 const physicalModel::TBCsystem TBCsystem, const int mode );
 
 class LMA_workingArrays

@@ -765,14 +765,14 @@ pmat( m, n, fjac );
 }
 
 
-void scaleDiag( double *diag, const class math::estimation::unknownList List,
+void scaleDiag( double *diag, class math::estimation::unknownList List,
                 const physicalModel::TBCsystem TBCsystem, const int mode )
 {
   if( mode == 2 )
   {
     int i = 0;
-    BOOST_FOREACH( const class math::estimation::unknown &unknown,
-                   List.vectorUnknowns )
+
+    for( const class math::estimation::unknown &unknown : List() )
     {
       diag[i++] = TBCsystem.returnVal( unknown.label() );
     }

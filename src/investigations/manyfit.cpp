@@ -66,7 +66,7 @@ void fitting(class thermal::analysis::Poptea poptea,
              const size_t interants)
 {
   std::vector<double>xInitial;
-  for( const auto &unknown : poptea.LMA.unknownParameters.vectorUnknowns )
+  for( const auto &unknown : poptea.LMA.unknownParameters() )
     { xInitial.push_back( unknown.initialVal() ); }
 
 /// Scale jacobian if enabled

@@ -79,6 +79,12 @@ enum physicalModel::labels::Name unknown::label(void) const
 unknown::bounds::bounds(const double lower_, const double upper_)
 :lower(lower_), upper(upper_){}
 
+void unknownList::addUnknown( class estimation::unknown input )
+{
+  vectorUnknowns.push_back(input);
+}
+
+
 void unknownList::addUnknown(enum physicalModel::labels::Name name,
                              const double lower,
                              const double upper, const double initialGuess)
@@ -89,10 +95,28 @@ void unknownList::addUnknown(enum physicalModel::labels::Name name,
   return;
 }
 
-size_t unknownList::Nsize(void) const
+size_t unknownList::size(void) const
 {
   return vectorUnknowns.size();
 }
+
+
+std::vector<class unknown> unknownList::operator() (void) const
+{
+  return vectorUnknowns;
+}
+
+void unknownList::operator() (std::vector<class unknown> input)
+{
+  vectorUnknowns.clear();
+
+  for( auto& val : input )
+  {
+    vectorUnknowns.push_back(val);
+  }
+
+}
+
 
 
 class unknown
