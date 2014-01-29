@@ -381,5 +381,12 @@ enum labels::Name labels::getName(void) const
   return name;
 }
 
+std::string labels::getNameString(void)
+{
+  return nameMap.left.at( name ) ;
+}
+
+
+
 
 }

@@ -195,7 +195,7 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   thermalData.MSE =
       math::estimation::SobjectiveLS( thermalData.experimentalEmission,
                                       thermalData.predictedEmission );
-  printPEstimates( popteaCore.TBCsystem, unknownParameters ) ;
+//  printPEstimates( popteaCore.TBCsystem, unknownParameters ) ;
 
   return;
 }

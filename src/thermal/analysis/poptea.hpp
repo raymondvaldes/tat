@@ -76,6 +76,14 @@ public:
   /// Operations that give results
   double bestFit( void );
   void parameterIntervalEstimates( void );
+
+
+  ///TEMP
+  enum physicalModel::labels::Name myfixedParameterName;
+  double solve( const double target , const double min, const double max);
+  double Gfunc(const double x );
+
+
 };
 
 

@@ -48,7 +48,7 @@ void run(const class filesystem::directory dir)
 
   /// STEP 0
   //Noise in Simulated Emission
-  constexpr double a =  .01*0;   // max % error (%*pi/2) (try .025)
+  constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
   constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
   constexpr bool d1 = true;    //positive  (try false)
   constexpr bool d2 = true;    //monotonic (try true)
@@ -123,30 +123,8 @@ void run(const class filesystem::directory dir)
 //  class math::sensitivityAnalysis::step4 Step4;
 //  std::cout << "this is the output\n\n" << Step4.solve() << "\n";
 
-//  std::cout << "**********************************************\n" ;
-//  std::cout << "**********************************************\n" ;
-//  std::cout << "**********************************************\n" ;
-//  std::cout << "**********************************************\n" ;
-//  std::cout << "**********************************************\n" ;
 
 
-
-
-
-//  void setThermalRange(const double lmin, const double lmax);
-//  void setParametertoFit( class math::estimation::unknownList parameters );
-//  void setParametertoHoldX(enum physicalModel::labels::Name currentParameterX_);
-
-
-//  double Gfunc( const double x );
-// ///Gfunc must work by updating kernal with unknown parameters
-// ///updating experimental with predicted values;
-
-//  std::pair< double, double >
-//  Gsolve( enum physicalModel::labels::Name currentParameterX_ );
-
-//  void saveBestFitParameters( void );
-//  void setG1(void);
 
 
 

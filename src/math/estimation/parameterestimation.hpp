@@ -34,38 +34,42 @@ namespace math{
 class unknown
 {
 private:
-  struct physicalModel::labels name;
   struct bounds
   {
-    const double lower;
-    const double upper;
-    bounds(const double lower_, const double  upper_);
+    double lower;
+    double upper;
+    bounds( void ) ;
+    bounds( const double lower_, const double  upper_ ) ;
   };
-  struct bounds constraint;
+  struct physicalModel::labels name;
+  const struct bounds constraint;
+  struct bounds bestfitInterval;
   double initialGuess;
   double bestfitval;
 
-  void Initialset(const double input);
-  void Initialauto(void);
+  void Initialauto( void ) ;
 
 public:
-  unknown(enum physicalModel::labels::Name name_,
-          const double lower_,
-          const double upper_,
-          const double initialGuess_);
+  unknown( enum physicalModel::labels::Name name_,
+           const double lower_,
+           const double upper_,
+           const double initialGuess_) ;
   ~unknown();
 
-  void bestfitset(const double input);
-  double bestfit(void) const;
-  double upperBound(void) const;
-  double lowerBound(void) const;
-  double initialVal(void) const;
-  enum physicalModel::labels::Name label(void) const;
+  double bestfit( void ) const ;
+  double upperBound( void ) const ;
+  double lowerBound( void ) const ;
+  double initialVal( void ) const ;
 
-  bool compareName( const unknown& input ) const;
-  bool operator == ( const unknown& input ) const;
-  bool operator != ( const unknown& input ) const;
+  void bestfitset( const double input ) ;
+  void Initialset( const double input ) ;
+  void bestfitIntervalset ( const double min, const double max);
 
+  enum physicalModel::labels::Name label( void ) const ;
+
+  bool compareName( const unknown& input ) const ;
+  bool operator == ( const unknown& input ) const ;
+  bool operator != ( const unknown& input ) const ;
 };
 
 class unknownList

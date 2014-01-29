@@ -27,6 +27,7 @@ License
 
 #include <vector>
 #include <cstddef>
+#include <string>
 #include <boost/bimap.hpp>
 #include <boost/bimap/unordered_set_of.hpp>
 #include <boost/bimap/list_of.hpp>
@@ -113,6 +114,8 @@ public:
   explicit labels(void);
   explicit labels(const enum Name name_);
   Name getName(void) const;
+  std::string getNameString(void);
+
 
 private:
   enum Name name;
