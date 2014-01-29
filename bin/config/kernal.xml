@@ -65,22 +65,6 @@
 		
 		<radialDomain>0.25e-3</radialDomain>
 	</TBCsystem>
-
-	<ParaEstSettings>
-		<!--- N number of thermal parameters to be fitted-->
-		<!-- ftol difference in error-->
-		<!-- xtol difference in parameters-->
-		<!-- beta_iter is the number of iterations to find beta2-->
-		<!-- beta_tol is how close dz_sub is to dz_coat */-->
-		<ftol>1e-08</ftol>
-		<xtol>1e-08</xtol>
-		<gtol>1e-08</gtol>
-		<maxfev>100000</maxfev>
-		<epsfcn>0.0001</epsfcn>
-		<factor>10</factor>
-		<mode>0</mode>
-		<nprint>0</nprint>
-	</ParaEstSettings>
 	
 	<thermalModel>
 		<heatModel>OneDimAnalytical</heatModel>
