@@ -190,14 +190,14 @@ void Poptea::parameterIntervalEstimates( void )
     ///identifiy fixed parameter and update search bound
     const class unknown myfixedParameter =  originalListParams[i];
     const enum physicalModel::labels::Name
-        myfixedParameterName = myfixedParameter.label();
+        mylabel = myfixedParameter.label();
     const double bestfit = myfixedParameter.bestfit();
     const double lowerbound = myfixedParameter.lowerBound();
     const double upperbound = myfixedParameter.upperBound();
 
     ///search space
-    const double min = solve( S1, lowerbound, bestfit , myfixedParameterName );
-    const double max = solve( S1, bestfit, upperbound , myfixedParameterName );
+    const double min = solve( S1, lowerbound, bestfit , mylabel, "min" );
+    const double max = solve( S1, bestfit, upperbound , mylabel, "max" );
 
     originalListParams[i++].bestfitIntervalset( min, max);
   }
@@ -209,7 +209,7 @@ void Poptea::parameterIntervalEstimates( void )
 }
 
 double Poptea::Gfunc( const double val ,
-                      const enum physicalModel::labels::Name mylabel )
+                      const enum physicalModel::labels::Name &mylabel )
 {
   coreSystem.TBCsystem.updateVal( mylabel , val );
   coreSystem.TBCsystem.updateCoat();
@@ -219,22 +219,30 @@ double Poptea::Gfunc( const double val ,
 }
 
 double Poptea::solve( const double target , const double min, const double max,
-                      const enum physicalModel::labels::Name mylabel )
+                      const enum physicalModel::labels::Name &mylabel,
+                      const std::string &bound )
 {
   using std::placeholders::_1;
   const std::function<double(double)>
       myFuncReduced = std::bind( &Poptea::Gfunc, this , _1 , mylabel);
 
-  math::solve ojb( myFuncReduced, target, min, max );
+  const math::solve ojb( myFuncReduced, target, min, max ) ;
+  double soln = ojb.returnSoln();
 
-  return ojb.returnSoln();
+  if(!ojb.pass)
+  {
+    if(bound == "min") soln = min;
+    if(bound == "max") soln = max;
+  }
+
+  return soln;
 }
 
 
 
 
 class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
-                                         const class Kernal popteaCore)
+                                         const class Kernal &popteaCore)
 {
   const std::string filename = "poptea.xml";
   boost::property_tree::ptree pt;

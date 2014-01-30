@@ -52,8 +52,9 @@ private:
 
   ///TEMP will probably rename LMA to support statistical methods
   double solve( const double target , const double min, const double max,
-                const physicalModel::labels::Name mylabel );
-  double Gfunc( const double x , const physicalModel::labels::Name mylabel );
+                const physicalModel::labels::Name &mylabel ,
+                const std::string &bound ) ;
+  double Gfunc( const double x , const physicalModel::labels::Name &mylabel );
 
 public:
   /// core members
@@ -84,8 +85,8 @@ public:
 
 
 class Poptea
-loadWorkingDirectoryPoptea( const class filesystem::directory dir,
-                            const class Kernal popteaCore);
+loadWorkingDirectoryPoptea(const class filesystem::directory dir,
+                            const Kernal &popteaCore);
 
 }}
 #endif // poptea_HPP
