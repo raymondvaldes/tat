@@ -27,13 +27,16 @@ License
 #define PROGRAMOPTIONS_HPP
 
 #include <sstream>
+#include <boost/program_options.hpp>
 
 namespace tools{
 namespace programoptions{
 
+  bool help( boost::program_options::options_description desc);
   bool version(void);
   bool loadOptions( int argc, char** argv, std::string& path );
-
+  bool build(void);
+  bool config( std::string& path);
 
 
 }}
