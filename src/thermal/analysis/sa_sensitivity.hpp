@@ -35,46 +35,7 @@ namespace analysis{
 
 class SA_Sensitivity
 {
-public:
-  class math::estimation::unknownList unknownParameterswithBFdata;
-  class math::estimation::unknownList unknownParameters;
 
-  enum physicalModel::labels::Name currentParameterX;
-//  class math::estimation::unknown currentParameter;
-
-  std::vector<double> ref_PHASE_BF;          //phase
-  std::vector<double> experimental_PHASE_BF; //phase
-  std::vector<double> current_PHASE_BF;      //phase
-
-  double S1_BF;
-  double S1_X;
-  double S1_current;
-
-  void setThermalRange(const double lmin, const double lmax);
-  void loadExperimentalData( const std::vector<double> data );
-  void setParameterstoFit( class math::estimation::unknownList parameters );
-  void setParametertoHoldX(enum physicalModel::labels::Name currentParameterX_);
-  void saveListunknowns( void );
-
-  double meanError( const std::vector<double> curveBF,
-                    const std::vector<double> curveRef );
-
-
-  double Gfunc( const double x );
-   ///Gfunc must work by updating kernal with unknown parameters
-   ///updating experimental with predicted values;
-
-  std::pair< double, double >
-  Gsolve( enum physicalModel::labels::Name currentParameterX_ );
-
-  void saveBestFitParameters( void );
-  void setG1(void);
-
-  SA_Sensitivity( const size_t N );
-
-  std::pair< double, double >
-  parameterInterval( const enum physicalModel::labels::Name currentPx,
-                     std::vector<double> emissionExperimentalOriginal );  //HIGHER LEVEL BUT YES
 
 };
 

@@ -69,62 +69,20 @@ void run(const class filesystem::directory dir)
 
   poptea.updateExperimentalData( poptea.thermalData.omegas ,
                                  emissionExperimental );
-  poptea.bestFit();
   poptea.parameterIntervalEstimates();
 
 
-//  for( const auto& val : poptea.LMA.LMA_workspace.emissionExperimental )
-//    {std::cout << val <<"\n";}
+  std::cout << "iterate through parameters now:---\n\n";
+  std::cout << "parameter estimates intervals:\n";
+  std::cout << "------------------------------\n\n";
+  std::cout << "min\t\tbestfit\t\tmax\n";
 
-//  for( const auto& val : poptea.thermalData.omegas )
-//    {std::cout << val <<"\n";}
-//  std::cout << "\n\nleaving the world here...";exit(-1);
-
-
-//  ///Output noise to test
-//  for( size_t i = 0 ; i < popteaCore.expSetup.laser.l_thermal.size() ; ++i)
-//  {
-//    std::cout <<  popteaCore.expSetup.laser.l_thermal[i] << "\t"
-//              <<  popteaCore.LMA.LMA_workspace.emissionNominal[i] << "\t"
-//              <<  popteaCore.LMA.LMA_workspace.emissionExperimental[i] << "\n" ;
-//  }
-
-  /// STEP 1
-//  poptea.setParametertoFit( poptea.coreSystem.LMA.unknownParameters );
-//  poptea.saveListunknowns();
-//  poptea.bestFit( poptea.coreSystem );
-
-
-
-
-//  for( size_t i = 0 ; i < popteaCore.LMA.xpredicted.size() ;  i++)
-//  {
-//    std::cout << popteaCore.LMA.xpredicted[i] << "\n";
-//  }
-
-//  /// STEP 2
-////  thermal::emission::phase99( popteaCore, popteaCore.LMA.LMA_workspace.predicted );
-
-//  poptea.coreSystem.LMA.LMA_workspace.predicted =
-//  thermal::emission::phase99( poptea.coreSystem );
-
-//  poptea.coreSystem.LMA.LMA_workspace.MSE =
-//      MSE( poptea.coreSystem.expSetup.laser.L_end,
-//           poptea.coreSystem.LMA.LMA_workspace.emissionExperimental,
-//           poptea.coreSystem.LMA.LMA_workspace.predicted ) ;
-
-//  std::cout << poptea.coreSystem.LMA.LMA_workspace.MSE << "\n";
-
-//  /// STEP 3
-
-//  /// STEP 4
-//  class math::estimation::unknown
-
-//  class math::sensitivityAnalysis::step4 Step4;
-//  std::cout << "this is the output\n\n" << Step4.solve() << "\n";
-
-
-
+  for(auto& val : poptea.LMA.unknownParameters() )
+  {
+    std::cout << val.bestfitInterval.lower << "\t\t"   <<  val.bestfit()
+              << "\t\t"   << val.bestfitInterval.upper << "\n";
+//    std::cout << "search bounds(" << lowerbound << ", " << upperbound <<")\n\n";
+  }
 
 
 

@@ -43,7 +43,6 @@ private:
   };
   struct physicalModel::labels name;
   const struct bounds constraint;
-  struct bounds bestfitInterval;
   double initialGuess;
   double bestfitval;
 
@@ -56,6 +55,7 @@ public:
            const double initialGuess_) ;
   ~unknown();
 
+  struct bounds bestfitInterval;
   double bestfit( void ) const ;
   double upperBound( void ) const ;
   double lowerBound( void ) const ;
