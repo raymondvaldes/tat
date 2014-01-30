@@ -50,12 +50,16 @@ private:
   bool loadedExperimental = false;
   bool runbestfit = false;
 
+  ///TEMP will probably rename LMA to support statistical methods
+  double solve( const double target , const double min, const double max,
+                const physicalModel::labels::Name mylabel );
+  double Gfunc( const double x , const physicalModel::labels::Name mylabel );
+
 public:
   /// core members
   class Kernal coreSystem;
   class ThermalData thermalData;
   class LMA LMA;
-  class SA_Sensitivity SA;
 
   /// constructors and object creators
   explicit Poptea( const class Kernal &coreSystem_ ,
@@ -76,14 +80,6 @@ public:
   /// Operations that give results
   double bestFit( void );
   void parameterIntervalEstimates( void );
-
-
-  ///TEMP
-  enum physicalModel::labels::Name myfixedParameterName;
-  double solve( const double target , const double min, const double max);
-  double Gfunc(const double x );
-
-
 };
 
 

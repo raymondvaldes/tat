@@ -50,8 +50,7 @@ Poptea::Poptea( const class Kernal &coreSystem_ ,
                 const class math::estimation::settings &Settings_,
                 const class math::estimation::unknownList &unknownParameters_)
   : coreSystem( coreSystem_ ), thermalData( thermaldata_ ),
-    LMA( Settings_, unknownParameters_, thermalData.omegas.size(), thermalData ),
-    SA( thermalData.omegas.size() )
+    LMA( Settings_, unknownParameters_, thermalData.omegas.size(), thermalData )
 {}
 
 class Poptea
@@ -159,90 +158,72 @@ void Poptea::parameterIntervalEstimates( void )
   if(!loadedExperimental) { return; }
   if(!runbestfit) { bestFit(); }
 
-  /// Save experimental data
-  std::vector<double> SAVEemitExperimental = thermalData.experimentalEmission;
-
-  /// Save quality-of-fit parameters
+  /// Save experimental data, quality-of-fit, unknownParameter List
+  using math::estimation::unknown;
+  std::vector< unknown > originalListParams = LMA.unknownParameters();
+  const std::vector<double> SAVEExperimental = thermalData.experimentalEmission;
   const double S1 = thermalData.MSE;
 
-  ///Save unknown List
-  std::vector< math::estimation::unknown >
-      originalListUnknownParams = LMA.unknownParameters();
-
   /// Update initial guess using bestfits
-  for( auto& param : originalListUnknownParams)
-  {
-    const double val = param.bestfit();
-    param.Initialset( val );
-  }
+  for( auto& param : originalListParams)
+    { param.Initialset( param.bestfit() ); }
 
   /// Predicted emission as the new experimental
-  std::vector<double> TEMPemissionExperimental = thermalData.predictedEmission;
-
-  /// update experimental data using new emission
+  const std::vector<double> TEMPemissionExperimental = thermalData.predictedEmission;
   updateExperimentalData( thermalData.omegas , TEMPemissionExperimental );
 
   /// Create list of parameters that must be refitted
-  std::vector< std::vector<  math::estimation::unknown > >
-      unknownParaLists = math::algorithms::combos_minusOne( originalListUnknownParams );
+  using math::algorithms::combos_minusOne;
+  const std::vector< std::vector<  unknown > >
+      unknownParaLists = combos_minusOne( originalListParams );
 
   std::vector< enum physicalModel::labels::Name  > parametersToBeManipulated;
-  for ( const auto& unknown : originalListUnknownParams )
-  {
-    parametersToBeManipulated.push_back( unknown.label() );
-  }
+  for ( const auto& unknown : originalListParams )
+    { parametersToBeManipulated.push_back( unknown.label() ); }
 
   /// update list of parameters using unknownIterations
-  std::cout << thermalData.MSE << "\n\n";
-  std::cout << "iterate through parameters now:---\n\n";
-  std::cout << "parameter estimates intervals:\n";
-  std::cout << "------------------------------\n\n";
-
   size_t i = 0;
-  for( const auto& list : unknownParaLists)
+  for( const auto& updatedListParameters : unknownParaLists )
   {
-    /// update parameters to be fitted
-    LMA.unknownParameters( list );
+    LMA.unknownParameters( updatedListParameters );
 
-    ///identifiy fixed parameter and update search bounds;
-    const class math::estimation::unknown
-        myfixedParameter =  originalListUnknownParams[i];
-    myfixedParameterName = myfixedParameter.label();
+    ///identifiy fixed parameter and update search bound
+    const class unknown myfixedParameter =  originalListParams[i];
+    const enum physicalModel::labels::Name
+        myfixedParameterName = myfixedParameter.label();
     const double bestfit = myfixedParameter.bestfit();
     const double lowerbound = myfixedParameter.lowerBound();
     const double upperbound = myfixedParameter.upperBound();
 
     ///search space
-    const double min = solve( S1, lowerbound, bestfit );
-    const double max = solve( S1, bestfit, upperbound );
+    const double min = solve( S1, lowerbound, bestfit , myfixedParameterName );
+    const double max = solve( S1, bestfit, upperbound , myfixedParameterName );
 
-    std::cout << "min\t\tbestfit\t\tmax\n" << min << "\t\t"  <<  bestfit
-              <<"\t\t"<< max << "\n";
-    std::cout << "search bounds(" << lowerbound << ", " << upperbound <<")\n\n";
-    originalListUnknownParams[i].bestfitIntervalset( min, max);
-    i++;
+    originalListParams[i++].bestfitIntervalset( min, max);
   }
 
   ///Update list of parameters with updated list
-  LMA.unknownParameters( originalListUnknownParams ) ;
-  updateExperimentalData( thermalData.omegas , SAVEemitExperimental );
+  LMA.unknownParameters( originalListParams ) ;
+  updateExperimentalData( thermalData.omegas , SAVEExperimental );
   thermalData.MSE = S1;
 }
 
-double Poptea::Gfunc( const double val )
+double Poptea::Gfunc( const double val ,
+                      const enum physicalModel::labels::Name mylabel )
 {
-  coreSystem.TBCsystem.updateVal( myfixedParameterName , val );
+  coreSystem.TBCsystem.updateVal( mylabel , val );
   coreSystem.TBCsystem.updateCoat();
   bestFit();
 
   return thermalData.MSE;
 }
 
-double Poptea::solve( const double target , const double min, const double max)
+double Poptea::solve( const double target , const double min, const double max,
+                      const enum physicalModel::labels::Name mylabel )
 {
   using std::placeholders::_1;
   const std::function<double(double)>
-      myFuncReduced = std::bind( &Poptea::Gfunc, this , _1 );
+      myFuncReduced = std::bind( &Poptea::Gfunc, this , _1 , mylabel);
 
   math::solve ojb( myFuncReduced, target, min, max );
 
