@@ -44,13 +44,12 @@ class solve
 {
 private:
   std::function<double(double)> myF;
-
+  boost::uintmax_t maxInt = 300;
   const double phi;
   const double min;
   const double max;
   double bestGuess;
   double solnTolerance;
-  boost::uintmax_t maxInt = 100;
   double myRootFunc(const double x) const;
   void BisectMethod(void);
 
@@ -59,6 +58,7 @@ public:
          const double min_, const double max_);
   ~solve(void);
 
+  bool pass;
   double returnSoln(void) const ;
   size_t returnIterations(void) const ;
   double returnSolnTolerance(void) const;

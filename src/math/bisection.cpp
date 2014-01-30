@@ -27,7 +27,7 @@ License
 #include <math.h>
 #include <boost/math/tools/roots.hpp>
 #include "math/bisection.hpp"
-
+#include "math/utility.hpp"
 
 namespace math{
 
@@ -46,7 +46,7 @@ size_t PrecisionToBits(const size_t precision)
   return myF(x) - phi;
 }
 
-solve::  solve( std::function<double(double)> myF_ , const double phi_,
+solve::solve( std::function<double(double)> myF_ , const double phi_,
                 const double min_, const double max_)
   : myF(myF_), phi(phi_), min(min_), max(max_)
 {
@@ -55,11 +55,13 @@ solve::  solve( std::function<double(double)> myF_ , const double phi_,
   try
   {
     BisectMethod();
+    pass = true;
   }
   catch (std::exception const&  ex)
   {
-//    std::cout << "\noutside range or no roots \n\n" << "\n";
+    std::cerr << "\noutside range or no roots \n\n" << "\n";
     bestGuess = min;
+    pass = false;
   }
 }
 
@@ -74,10 +76,10 @@ void solve::BisectMethod(void)
   const BMT::eps_tolerance<double> tol = digitsBitsofPrecision;
 
   const std::pair<double, double> result =
-      BMT::bisect( myFuncReduced, min, max, tol, maxInt);
+      BMT::bisect( myFuncReduced, min, max, tol, maxInt ) ;
 
-  solnTolerance = abs( result.first - result.second );
-  bestGuess = (result.first + result.second) / 2;
+  solnTolerance = abs( result.first - result.second ) ;
+  bestGuess = math::average( result.first , result.second ) ;
 }
 
 double solve::returnSoln(void) const
