@@ -81,7 +81,6 @@ void run(const class filesystem::directory dir)
   {
     std::cout << val.bestfitInterval.lower << "\t\t"   <<  val.bestfit()
               << "\t\t"   << val.bestfitInterval.upper << "\n";
-//    std::cout << "search bounds(" << lowerbound << ", " << upperbound <<")\n\n";
   }
 
 
