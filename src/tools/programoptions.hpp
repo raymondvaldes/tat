@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||                   |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -26,11 +26,15 @@ License
 #ifndef PROGRAMOPTIONS_HPP
 #define PROGRAMOPTIONS_HPP
 
+#include <sstream>
+
 namespace tools{
+namespace programoptions{
 
-  bool loadProgramOptions( int argc, char** argv, std::string& path );
+  bool version(void);
+  bool loadOptions( int argc, char** argv, std::string& path );
 
 
 
-}
+}}
 #endif // PROGRAMOPTIONS_HPP

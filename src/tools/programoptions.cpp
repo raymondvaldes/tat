@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||                   |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -27,10 +27,13 @@ License
 #include <boost/program_options.hpp>
 #include <boost/version.hpp>
 #include <gsl/gsl_version.h>
+#include "tools/programoptions.hpp"
 
 namespace tools{
 
-bool loadProgramOptions( int argc, char** argv, std::string& path )
+namespace programoptions{
+
+bool loadOptions( int argc, char** argv, std::string& path )
 {
   namespace po = boost::program_options;
 
@@ -58,29 +61,33 @@ bool loadProgramOptions( int argc, char** argv, std::string& path )
   }
 
   if (vm.count("version"))
-  {
-    std::cout << "tat (Ubuntu) 0.54\n" ;
-    std::cout << "Thermal Analysis Toolbox\n";
-    std::cout << "Copyright (C) 2013 Raymond Valdes\n\n" ;
-    std::cout << "This is free software; see the source for copying " ;
-    std::cout << "conditions.  There is NO\n" ;
-    std::cout << "warranty; not even for MERCHANTABILITY or FITNESS FOR A" ;
-    std::cout << " PARTICULAR PURPOSE.\n\n" ;
-    std::cout << "Built with:\n";
-    std::cout << "Boost "
-              << BOOST_VERSION / 100000     << "."  // major version
-              << BOOST_VERSION / 100 % 1000 << "."  // minior version
-              << BOOST_VERSION % 100                // patch level
-              << std::endl;
-    std::cout << "Gnu Scientific Library "
-              << GSL_MAJOR_VERSION  << "."          // minior version
-              << GSL_MINOR_VERSION                  // patch level
-              << std::endl;
+    { return version(); }
 
-    return false;
-  }
   return true;
 }
 
-
+bool version(void)
+{
+  std::cout << "tat (Ubuntu) \n" ;
+  std::cout << "Thermal Analysis Toolbox\n";
+  std::cout << "Copyright (C) 2013 Raymond Valdes\n\n" ;
+  std::cout << "This is free software; see the source for copying " ;
+  std::cout << "conditions.  There is NO\n" ;
+  std::cout << "warranty; not even for MERCHANTABILITY or FITNESS FOR A" ;
+  std::cout << " PARTICULAR PURPOSE.\n\n" ;
+  std::cout << "Built with:\n";
+  std::cout << "Boost "
+            << BOOST_VERSION / 100000     << "."  // major version
+            << BOOST_VERSION / 100 % 1000 << "."  // minior version
+            << BOOST_VERSION % 100                // patch level
+            << std::endl;
+  std::cout << "Gnu Scientific Library "
+            << GSL_MAJOR_VERSION  << "."          // minior version
+            << GSL_MINOR_VERSION                  // patch level
+            << std::endl;
+  std::cout << "Written by Raymond Valdes.\n";
+return false;
 }
+
+
+}}
