@@ -189,7 +189,10 @@ double x_bias(const double Xmean, const double Xstddev)
 
 double average(const double a, const double b)
 {
-    return (a+b)*.5;
+    double val = a;
+    val += b;
+    val *= .5;
+    return val;
 }
 
 double percentile(const double xmin, const double xmax, const double x)
