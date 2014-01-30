@@ -36,7 +36,7 @@ License
 int main( int argc, char *argv[ ] )
 {
   std::string path;
-  bool run = tools::loadProgramOptions( argc, argv, path );
+  const bool run = tools::programoptions::loadOptions( argc, argv, path );
 
   if(run)
   {
