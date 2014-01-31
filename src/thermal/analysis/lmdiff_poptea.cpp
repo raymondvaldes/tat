@@ -43,8 +43,8 @@ namespace analysis{
 LMA::LMA(const math::estimation::settings &Settings_,
           const math::estimation::unknownList &unknownParameters_,
           const size_t Lend_, const ThermalData &thermalData_)
-  : thermalData(thermalData_), Settings(Settings_),
-    unknownParameters(unknownParameters_),
+  : unknownParameters(unknownParameters_),
+    thermalData(thermalData_), Settings(Settings_),
     LMA_workspace( Lend_, unknownParameters_.size() )
 {
   myReducedUpdate();

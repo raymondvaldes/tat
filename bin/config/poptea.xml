@@ -2,7 +2,7 @@
 	<sweep>
 		<minperDecade>50</minperDecare>
 		<thermal_penetration>
-			<start>0.04</start>
+			<start>.04</start>
 			<end>4</end>
 		</thermal_penetration>
 		<frequency>			

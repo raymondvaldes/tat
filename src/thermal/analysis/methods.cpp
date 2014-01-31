@@ -159,4 +159,24 @@ void methods::parameterIntervalEstimates( Kernal &coreSystem,
   thermalData.MSE = S1;
 }
 
+void methods::optimization(void)
+{
+  /// I need to create ways to optimize thermal penetration. The ones I am
+  /// thinking
+  ///   a) given X data what is the optimal range to best estimate properties
+  ///      - original data limited in range
+  ///      - cannot introduce new measurements
+  ///   b) given LMIN and LMAX what is the optimal range to take data to
+  ///     ensure the most accurate measurements
+  ///  The function I am minimizing is
+  ///  S1
+  ///
+  /// So this means one should be from the perspective of someone doing
+  /// post-analysis on their data.  They have a given range of values ( a
+  /// thermograph) and they're looking to see how much data to keep.
+  ///
+}
+
+
+
 }}

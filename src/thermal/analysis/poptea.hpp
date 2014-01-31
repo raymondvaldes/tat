@@ -78,6 +78,5 @@ public:
 class Poptea
 loadWorkingDirectoryPoptea( const filesystem::directory dir,
                             const Kernal &popteaCore);
-
 }}
 #endif // poptea_HPP
