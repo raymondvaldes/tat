@@ -44,9 +44,7 @@ void scaleDiag( double *diag, class math::estimation::unknownList List,
     int i = 0;
 
     for( const class math::estimation::unknown &unknown : List() )
-    {
-      diag[i++] = TBCsystem.returnVal( unknown.label() );
-    }
+      { diag[i++] = TBCsystem.returnVal( unknown.label() ); }
   }
 }
 
@@ -61,10 +59,7 @@ void LMA_workingArrays::updateArraySize( const size_t Lend_, const size_t N )
   this value is based on the range and the set minimum*/
 
   fjac.resize(Lend_* N );
-//  emissionExperimental.resize(Lend_);
-
   fvec.resize(Lend_);
-
 }
 
 LMA_workingArrays::~LMA_workingArrays(void)

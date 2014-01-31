@@ -36,9 +36,9 @@ ExpNoiseSetting::ExpNoiseSetting( const double a1_, const double b1_,
 {}
 
 std::vector<double>
-addNoise( const std::vector<double> emissionNominal_,
-          const std::vector<double> lthermal,
-          const class thermal::emission::ExpNoiseSetting para )
+addNoise( const std::vector<double> &emissionNominal_,
+          const std::vector<double> &lthermal,
+          const class thermal::emission::ExpNoiseSetting &para )
 
 {
   const double lmin = lthermal.front();
@@ -52,7 +52,7 @@ addNoise( const std::vector<double> emissionNominal_,
 
   if( (a < 0) || (b < 1) || (b > M_PI) )
   {
-     std::cout << "parameters (a,b) out of range"; exit(-99);
+     std::cerr << "parameters (a,b) out of range"; exit(-99);
   }
 
   std::vector<double> output(emissionNominal_);

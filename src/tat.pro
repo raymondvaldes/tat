@@ -145,7 +145,6 @@ SOURCES += \
     thermal/heat/heat2DAna.cpp \
     thermal/analysis/lmdiff_poptea.cpp \
     thermal/analysis/lmdiff_poptea_help.cpp \
-    thermal/analysis/sa_sensitivity.cpp \
     thermal/analysis/thermalData.cpp \
     math/statistical_tools.cpp \
     thermal/simulations/Numerical_PhaseOfEmission.cpp \
@@ -154,7 +153,8 @@ SOURCES += \
     thermal/simulations/numericalmodel.cpp \
     tools/log.cpp \
     tools/version.cpp \
-    math/algorithms/combinations.cpp
+    math/algorithms/combinations.cpp \
+    thermal/analysis/methods.cpp
 
 #header files
 HEADERS += \
@@ -191,7 +191,6 @@ HEADERS += \
     thermal/heat/heat2DAna.hpp \
     thermal/analysis/lmdiff_poptea.hpp \
     thermal/analysis/lmdiff_poptea_help.hpp \
-    thermal/analysis/sa_sensitivity.hpp \
     thermal/analysis/thermalData.hpp \
     math/statistical_tools.hpp \
     thermal/simulations/Numerical_PhaseOfEmission.h \
@@ -201,4 +200,5 @@ HEADERS += \
     tools/log.hpp \
     tools/tools.hpp \
     tools/version.hpp \
-    math/algorithms/combinations.hpp
+    math/algorithms/combinations.hpp \
+    thermal/analysis/methods.hpp

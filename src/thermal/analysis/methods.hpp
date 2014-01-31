@@ -22,51 +22,45 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef popteaCore_HPP
-#define popteaCore_HPP
+#ifndef METHODS_HPP
+#define METHODS_HPP
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
+#include <string>
+#include <vector>
 
-#include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"
+#include "thermal/analysis/kernal.hpp"
+#include "thermal/analysis/lmdiff_poptea.hpp"
 #include "math/estimation/parameterestimation.hpp"
-#include "tools/filesystem.hpp"
-#include "thermal/model.hpp"
 
-namespace thermal {
+namespace thermal{
 namespace analysis{
 
+class methods{
 
-class Kernal
-{
+private:
+  double solve( const double target , const double min, const double max,
+                const physicalModel::labels::Name &mylabel ,
+                const std::string &bound, Kernal &coreSystem,
+                ThermalData &thermalData ) ;
+  double Gfunc( const double x , const physicalModel::labels::Name &mylabel,
+                Kernal &coreSystem, ThermalData &thermalData ) ;
+
 public:
-  /// core members
-  class equipment::setup expSetup;
-  class physicalModel::TBCsystem TBCsystem;
-  class thermal::model thermalsys;
-  class filesystem::directory DataDirectory;
-
-  /// constructors and object creators
-  Kernal( const class equipment::setup &expSetup_,
-          const class physicalModel::TBCsystem &TBCsystem_,
-          const class thermal::model &thermalsys_,
-          const class filesystem::directory &DataDirectory_ ) ;
-  static Kernal loadConfig( const boost::property_tree::ptree &pt,
-                            const class filesystem::directory &DataDirectory_);
-  ~Kernal( void );
-
-  /// Operations that give results
-  double bEval(void) const;
-  void updatefromBestFit( std::vector< math::estimation::unknown > list );
-
-
+  methods( const math::estimation::settings &Settings_,
+           const math::estimation::unknownList &unknownParameters_,
+           const ThermalData& thermalData ) ;
+  class LMA bestfitMethod;
+  double bestFit( Kernal &coreSystem , ThermalData &thermalData ) ;
+  void parameterIntervalEstimates( Kernal &coreSystem,
+                                   ThermalData &thermalData) ;
+  void updateExperimentalData( const std::vector<double> &omegas,
+                               const std::vector<double> &input,
+                               const Kernal &coreSystem,
+                               ThermalData &thermalData );
 
 };
 
-class Kernal loadWorkingDirectoryKernal(const class filesystem::directory dir);
-
-
 }}
 
-#endif // popteaCore_HPP
+#endif // METHODS_HPP

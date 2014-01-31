@@ -44,18 +44,17 @@ License
 namespace thermal {
 namespace analysis{
 
-
 class LMA
 {
 private:
-  std::function< void( double*, double*, class thermal::analysis::Kernal &) >
+  std::function< void( double*, double*, thermal::analysis::Kernal &) >
   myReduced;
 
   class ThermalData thermalData;
-  void updateThermalData( class ThermalData thermalData_  );
+  void updateThermalData( ThermalData thermalData_  );
 
   void ThermalProp_Analysis( double *x, double *fvec,
-                             class thermal::analysis::Kernal &popteaCore);
+                             thermal::analysis::Kernal &popteaCore);
   void myReducedUpdate( void );
 
 public:
@@ -64,8 +63,8 @@ public:
   class LMA_workingArrays LMA_workspace;
 
   explicit LMA( const struct math::estimation::settings &Settings_,
-                const class math::estimation::unknownList &unknownParameters,
-                const size_t Lend_, const class ThermalData &thermalData_) ;
+                const math::estimation::unknownList &unknownParameters,
+                const size_t Lend_, const ThermalData &thermalData_) ;
   ~LMA(void);
 
   void updateUnknownParameters(
