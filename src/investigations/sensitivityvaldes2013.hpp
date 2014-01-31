@@ -32,7 +32,7 @@ namespace investigations
 {
 namespace sensitivityvaldes2013{
 
-void run(const class filesystem::directory dir);
+void run( const class filesystem::directory dir ) ;
 
 }}
 
@@ -41,17 +41,3 @@ void run(const class filesystem::directory dir);
 
 
 
-
-
-
-
-
-//#include "math/bisection.hpp"
-//double Funct2( double x)
-//{
-//  return x*x ;
-//}
-//  math::solve funcSoln( &Funct2, 4 , -5 , 0);
-//  std::cout << "this is my result\t" << funcSoln.returnSoln() << "\n"
-//            << "number of iterations\t" << funcSoln.returnIterations() << "\n"
-//            << "tolerance\t" << funcSoln.returnSolnTolerance() << "\n";

@@ -38,33 +38,29 @@ namespace investigations
 namespace sensitivityvaldes2013
 {
 
-void run(const class filesystem::directory dir)
+void run( const filesystem::directory dir )
 {
   ///Initialize kernals
-  class thermal::analysis::Kernal
+  const class thermal::analysis::Kernal
       popteaCore = thermal::analysis::loadWorkingDirectoryKernal(dir);
   class thermal::analysis::Poptea
       poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
 
-  /// STEP 0
   //Noise in Simulated Emission
-  constexpr double a =  .01;   // max % error (%*pi/2) (try .025)
-  constexpr double b = 2.95;   // stretching parameter  (try 2.95) (1->pi)
-  constexpr bool d1 = true;    //positive  (try false)
-  constexpr bool d2 = true;    //monotonic (try true)
-  constexpr int s1 = 0;        //-1(left bias) 0(symmetric) +1(right bias)
-  constexpr double noiseRandom = 0.01*0; // normal noise % of pi/2
-  const class thermal::emission::ExpNoiseSetting
+  constexpr double a =  .01;        // max % error (%*pi/2) (try .025)
+  constexpr double b = 2.95;        // stretching parameter  (try 2.95) (1->pi)
+  constexpr bool d1 = true;         //positive  (try false)
+  constexpr bool d2 = true;         //monotonic (try true)
+  constexpr int s1 = 0;             //-1(left bias) 0(symmetric) +1(right bias)
+  constexpr double noiseRandom = 0.01*0;              // normal noise % of pi/2
+  const thermal::emission::ExpNoiseSetting
       myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
 
   ///Output noise to test
-  const size_t Lend = poptea.thermalData.omegas.size();
-  std::vector<double> emissionNominal( Lend ) ;
-  emissionNominal = thermal::emission::phase99( poptea.coreSystem ,
-                                                poptea.thermalData.omegas );
+  std::vector<double> emissionNominal =
+      thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
 
-  std::vector<double> emissionExperimental( Lend );
-  emissionExperimental = thermal::emission::
+  std::vector<double> emissionExperimental = thermal::emission::
       addNoise( emissionNominal, poptea.thermalData.l_thermal, myEmissionNoise);
 
   poptea.updateExperimentalData( poptea.thermalData.omegas ,
@@ -77,14 +73,11 @@ void run(const class filesystem::directory dir)
   std::cout << "------------------------------\n\n";
   std::cout << "min\tbestfit\tmax\n";
 
-  for(auto& val : poptea.LMA.unknownParameters() )
+  for(auto& val : poptea.analysis.bestfitMethod.unknownParameters() )
   {
     std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
               << "\t"   << val.bestfitInterval.upper << "\n";
   }
-
-
-
 
   return;
 }

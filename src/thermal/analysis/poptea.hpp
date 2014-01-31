@@ -32,8 +32,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
-#include "thermal/analysis/sa_sensitivity.hpp"
-
+#include "thermal/analysis/methods.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "models/physicalmodel.hpp"
 #include "tools/filesystem.hpp"
@@ -46,46 +45,38 @@ class Poptea
 private:
   void updatelthermal( const double lmin, const double lmax,
                        const double lminperDecade);
-  void unknownParameters( const class math::estimation::unknownList input);
   bool loadedExperimental = false;
   bool runbestfit = false;
-
-  ///TEMP will probably rename LMA to support statistical methods
-  double solve( const double target , const double min, const double max,
-                const physicalModel::labels::Name &mylabel ,
-                const std::string &bound ) ;
-  double Gfunc( const double x , const physicalModel::labels::Name &mylabel );
 
 public:
   /// core members
   class Kernal coreSystem;
   class ThermalData thermalData;
-  class LMA LMA;
+  class methods analysis;
 
   /// constructors and object creators
-  explicit Poptea( const class Kernal &coreSystem_ ,
-                   const class ThermalData &thermaldata_,
-                   const class math::estimation::settings &Settings_,
-                   const math::estimation::unknownList &unknownParameters_) ;
+  explicit Poptea( const Kernal &coreSystem_ ,
+                   const ThermalData &thermaldata_,
+                   const math::estimation::settings &Settings_,
+                   const math::estimation::unknownList &unknownParameters_ ) ;
 
   static Poptea loadConfig( const Kernal &coreSystem_,
                             const boost::property_tree::ptree &pt ) ;
-  static Poptea loadConfigfromFile( const class filesystem::directory &dir ) ;
+  static Poptea loadConfigfromFile( const filesystem::directory &dir ) ;
   ~Poptea( void );
-
 
   /// Member operations that update on multiple members
   void updateExperimentalData( const std::vector<double> &omegas,
-                               const std::vector<double> &input );
+                               const std::vector<double> &input ) ;
 
   /// Operations that give results
-  double bestFit( void );
-  void parameterIntervalEstimates( void );
-};
+  double bestFit( void ) ;
+  void parameterIntervalEstimates( void ) ;
+} ;
 
 
 class Poptea
-loadWorkingDirectoryPoptea(const class filesystem::directory dir,
+loadWorkingDirectoryPoptea( const filesystem::directory dir,
                             const Kernal &popteaCore);
 
 }}

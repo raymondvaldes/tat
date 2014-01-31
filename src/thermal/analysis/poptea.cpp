@@ -23,6 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <vector>
+#include <functional>
 #include <boost/foreach.hpp>
 
 #include "thermal/analysis/poptea.hpp"
@@ -39,7 +40,6 @@ License
 #include "math/estimation/constrained.hpp"
 #include "math/algorithms/combinations.hpp"
 
-#include <functional>
 #include "math/bisection.hpp"
 
 namespace thermal {
@@ -50,7 +50,8 @@ Poptea::Poptea( const class Kernal &coreSystem_ ,
                 const class math::estimation::settings &Settings_,
                 const class math::estimation::unknownList &unknownParameters_)
   : coreSystem( coreSystem_ ), thermalData( thermaldata_ ),
-    LMA( Settings_, unknownParameters_, thermalData.omegas.size(), thermalData )
+//    LMA( Settings_, unknownParameters_, thermalData.omegas.size(), thermalData ),
+    analysis( Settings_, unknownParameters_, thermalData )
 {}
 
 class Poptea
@@ -79,29 +80,6 @@ Poptea::loadConfig( const class Kernal &coreSystem_,
 
   return poptea;
 }
-
-void Poptea::updatelthermal( const double lmin, const double lmax,
-                             const double lminperDecade)
-{
-  const size_t Lend =
-  thermalData.thermalSetup( lmin, lmax, lminperDecade,
-                            coreSystem.TBCsystem.coating ) ;
-
-  LMA.updateWorkSpace( Lend, LMA.unknownParameters.size() );
-}
-
-void Poptea::updateExperimentalData( const std::vector<double> &omegas,
-                                     const std::vector<double> &input)
-{
-  assert( input.size() == omegas.size());
-  loadedExperimental = true;
-
-  thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
-  thermalData.updateExperimental( input );
-  LMA.updateWorkSpace( input.size() , LMA.unknownParameters.size()  );
-}
-
-
 
 class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir )
 {
@@ -136,20 +114,38 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir 
   return Poptea::loadConfig( popteaCore, pt1 );
 }
 
-Poptea::~Poptea(void){}
 
+void Poptea::updatelthermal( const double lmin, const double lmax,
+                             const double lminperDecade)
+{
+  const size_t Lend =
+  thermalData.thermalSetup( lmin, lmax, lminperDecade,
+                            coreSystem.TBCsystem.coating ) ;
+  analysis.bestfitMethod.updateWorkSpace(
+        Lend, analysis.bestfitMethod.unknownParameters.size() );
+}
+
+void Poptea::updateExperimentalData( const std::vector<double> &omegas,
+                                     const std::vector<double> &input)
+{
+  assert( input.size() == omegas.size());
+  loadedExperimental = true;
+
+  thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
+  thermalData.updateExperimental( input );
+
+  analysis.bestfitMethod.updateWorkSpace(
+        input.size() , analysis.bestfitMethod.unknownParameters.size()  );
+
+  analysis.updateExperimentalData( omegas, input, coreSystem, thermalData  );
+}
+
+Poptea::~Poptea(void){}
 
 double Poptea::bestFit( void )
 {
   runbestfit = true;
-
-  int nfev;
-  int info;
-
-  thermalData = LMA.paramter_estimation( &info, &nfev, coreSystem, thermalData);
-  coreSystem.updatefromBestFit( LMA.unknownParameters() );
-
-  return thermalData.MSE;
+  return analysis.bestFit( coreSystem, thermalData ) ;
 }
 
 void Poptea::parameterIntervalEstimates( void )
@@ -158,88 +154,8 @@ void Poptea::parameterIntervalEstimates( void )
   if(!loadedExperimental) { return; }
   if(!runbestfit) { bestFit(); }
 
-  /// Save experimental data, quality-of-fit, unknownParameter List
-  using math::estimation::unknown;
-  std::vector< unknown > originalListParams = LMA.unknownParameters();
-  const std::vector<double> SAVEExperimental = thermalData.experimentalEmission;
-  const double S1 = thermalData.MSE;
-
-  /// Update initial guess using bestfits
-  for( auto& param : originalListParams)
-    { param.Initialset( param.bestfit() ); }
-
-  /// Predicted emission as the new experimental
-  const std::vector<double> TEMPemissionExperimental = thermalData.predictedEmission;
-  updateExperimentalData( thermalData.omegas , TEMPemissionExperimental );
-
-  /// Create list of parameters that must be refitted
-  using math::algorithms::combos_minusOne;
-  const std::vector< std::vector<  unknown > >
-      unknownParaLists = combos_minusOne( originalListParams );
-
-  std::vector< enum physicalModel::labels::Name  > parametersToBeManipulated;
-  for ( const auto& unknown : originalListParams )
-    { parametersToBeManipulated.push_back( unknown.label() ); }
-
-  /// update list of parameters using unknownIterations
-  size_t i = 0;
-  for( const auto& updatedListParameters : unknownParaLists )
-  {
-    LMA.unknownParameters( updatedListParameters );
-
-    ///identifiy fixed parameter and update search bound
-    const class unknown myfixedParameter =  originalListParams[i];
-    const enum physicalModel::labels::Name
-        mylabel = myfixedParameter.label();
-    const double bestfit = myfixedParameter.bestfit();
-    const double lowerbound = myfixedParameter.lowerBound();
-    const double upperbound = myfixedParameter.upperBound();
-
-    ///search space
-    const double min = solve( S1, lowerbound, bestfit , mylabel, "min" );
-    const double max = solve( S1, bestfit, upperbound , mylabel, "max" );
-
-    originalListParams[i++].bestfitIntervalset( min, max);
-  }
-
-  ///Update list of parameters with updated list
-  LMA.unknownParameters( originalListParams ) ;
-  updateExperimentalData( thermalData.omegas , SAVEExperimental );
-  thermalData.MSE = S1;
+  analysis.parameterIntervalEstimates( coreSystem, thermalData ) ;
 }
-
-double Poptea::Gfunc( const double val ,
-                      const enum physicalModel::labels::Name &mylabel )
-{
-  coreSystem.TBCsystem.updateVal( mylabel , val );
-  coreSystem.TBCsystem.updateCoat();
-  bestFit();
-
-  return thermalData.MSE;
-}
-
-double Poptea::solve( const double target , const double min, const double max,
-                      const enum physicalModel::labels::Name &mylabel,
-                      const std::string &bound )
-{
-  using std::placeholders::_1;
-  const std::function<double(double)>
-      myFuncReduced = std::bind( &Poptea::Gfunc, this , _1 , mylabel);
-
-  const math::solve ojb( myFuncReduced, target, min, max ) ;
-  double soln = ojb.returnSoln();
-
-  if(!ojb.pass)
-  {
-    if(bound == "min") soln = min;
-    if(bound == "max") soln = max;
-  }
-
-  return soln;
-}
-
-
-
 
 class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
                                          const class Kernal &popteaCore)

@@ -106,7 +106,7 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
   double *diag = new double[n];
 
   ///populate initial values
-  std::vector<double>xInitial;
+  std::vector<double> xInitial(0);
   for( const auto &unknown : unknownParameters() )
     { xInitial.push_back( unknown.initialVal() ); }
   for( size_t i=0 ; i< n ; i++ )

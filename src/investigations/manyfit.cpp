@@ -22,6 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <array>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 
@@ -62,11 +63,11 @@ void run( const class filesystem::directory dir )
 }}
 
 
-void fitting(class thermal::analysis::Poptea poptea,
-             const size_t interants)
+void fitting( class thermal::analysis::Poptea poptea,
+              const size_t interants )
 {
   std::vector<double>xInitial;
-  for( const auto &unknown : poptea.LMA.unknownParameters() )
+  for( const auto &unknown : poptea.analysis.bestfitMethod.unknownParameters() )
     { xInitial.push_back( unknown.initialVal() ); }
 
 /// Scale jacobian if enabled
@@ -82,8 +83,8 @@ void fitting(class thermal::analysis::Poptea poptea,
 
   for( size_t i=0; i<interants; ++i )
   {
-      int nfev;
-      int info = 0;
+      //int nfev;
+      //int info = 0;
       myfile << i << "\t";
 
       poptea.bestFit();
@@ -101,7 +102,7 @@ void fitting(class thermal::analysis::Poptea poptea,
              << poptea.thermalData.MSE << "\n";
 
       printPEstimates( poptea.coreSystem.TBCsystem,
-                       poptea.LMA.unknownParameters ) ;
+                       poptea.analysis.bestfitMethod.unknownParameters ) ;
 
       xInitial.clear();
       for( const auto& val : xSave)
