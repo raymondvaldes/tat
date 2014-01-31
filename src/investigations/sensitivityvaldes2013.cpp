@@ -67,7 +67,6 @@ void run( const filesystem::directory dir )
                                  emissionExperimental );
   poptea.parameterIntervalEstimates();
 
-
   std::cout << "iterate through parameters now:---\n\n";
   std::cout << "parameter estimates intervals:\n";
   std::cout << "------------------------------\n\n";
@@ -78,6 +77,21 @@ void run( const filesystem::directory dir )
     std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
               << "\t"   << val.bestfitInterval.upper << "\n";
   }
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return;
 }

@@ -46,22 +46,8 @@ namespace analysis{
 
 class LMA
 {
-private:
-  std::function< void( double*, double*, thermal::analysis::Kernal &) >
-  myReduced;
-
-  class ThermalData thermalData;
-  void updateThermalData( ThermalData thermalData_  );
-
-  void ThermalProp_Analysis( double *x, double *fvec,
-                             thermal::analysis::Kernal &popteaCore);
-  void myReducedUpdate( void );
-
 public:
-  class math::estimation::settings Settings;
   class math::estimation::unknownList unknownParameters;
-  class LMA_workingArrays LMA_workspace;
-
   explicit LMA( const struct math::estimation::settings &Settings_,
                 const math::estimation::unknownList &unknownParameters,
                 const size_t Lend_, const ThermalData &thermalData_) ;
@@ -70,9 +56,22 @@ public:
   void updateUnknownParameters(
       const std::vector<math::estimation::unknown> &unknownList_);
   void updateWorkSpace(const size_t Lend , const size_t N);
+  ThermalData paramter_estimation( int *info, int *nfev, Kernal &coreSystem,
+                                   ThermalData input );
 
-  ThermalData paramter_estimation(int *info, int *nfev, Kernal &coreSystem,
-                                  ThermalData input );
+private:
+  std::function< void( double*, double*, thermal::analysis::Kernal &) >
+  myReduced;
+
+  void updateThermalData( ThermalData thermalData_  );
+
+  void ThermalProp_Analysis( double *x, double *fvec,
+                             thermal::analysis::Kernal &popteaCore);
+  void myReducedUpdate( void );
+  class ThermalData thermalData;
+  class math::estimation::settings Settings;
+  class LMA_workingArrays LMA_workspace;
+
 };
 
 

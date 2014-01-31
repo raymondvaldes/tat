@@ -50,10 +50,15 @@ public:
   methods( const math::estimation::settings &Settings_,
            const math::estimation::unknownList &unknownParameters_,
            const ThermalData& thermalData ) ;
+
+  //output methods
   class LMA bestfitMethod;
   double bestFit( Kernal &coreSystem , ThermalData &thermalData ) ;
   void parameterIntervalEstimates( Kernal &coreSystem,
-                                   ThermalData &thermalData) ;
+                                   ThermalData &thermalData ) ;
+  void optimization(void);
+
+  //updaters
   void updateExperimentalData( const std::vector<double> &omegas,
                                const std::vector<double> &input,
                                const Kernal &coreSystem,

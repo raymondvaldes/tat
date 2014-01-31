@@ -26,8 +26,46 @@ License
 #include <cstring>
 #include "math/numIntegration/gslfunc.hpp"
 namespace math{
-  namespace numIntegration{
+namespace numIntegration{
 
+funcClass::funcClass(const double *a, const double *b, const size_t c )
+  : xvar(a), func(b), N(c)
+{
+  /*The arguments include two arrays where
+      a ...independent array
+      b ...dependent array
+      c ...size of array */
+  ///alloc space for the spline anbd assign to pointer
+  spline = gsl_spline_alloc(gsl_interp_cspline, N);
+  gsl_spline_init(spline, xvar, func, N);
+  workspace = gsl_integration_workspace_alloc (limit);
+}
+
+funcClass::~funcClass(void)
+{
+  gsl_spline_free(spline);
+  gsl_interp_accel_free(acc);
+  gsl_integration_workspace_free(workspace);
+}
+
+
+double funcClass::eval( const double xpos ) const
+{
+  if( xpos < xvar[0] || xpos > xvar[N-1] )
+  {
+    std::cout << "outside range!!\n\n"
+    <<xpos<<" is outside of range "<<xvar[0]<<"\t"<<xvar[N-1]<<"\n";
+    exit(-71);
+    return 0;
+  }
+
+  return gsl_spline_eval( spline, xpos, acc );
+}
+
+double funcClass::CCallback( double d, void*params )
+{
+  return static_cast<funcClass*>(params)->eval(d);
+}
 
 double fintegrate(double x, void *p)
 {
@@ -35,21 +73,19 @@ double fintegrate(double x, void *p)
   return params.eval(x);
 }
 
-double integrate(struct funcClass *Func, double xlow, double xhigh)
+double integrate( struct funcClass *Func, const double xlow, const double xhigh)
 {
     //http://www.bnikolic.co.uk/nqm/1dinteg/gslgk.html
 
     struct funcClass &params = *Func;
-
     gsl_function F;
     F.function = &fintegrate;
     F.params = reinterpret_cast<void *>(&params);
 
-    Func->code = gsl_integration_qng(&F, xlow, xhigh, params.epsabs,
-                                     params.epsrel, &params.result,
-                                     &params.error, &params.neval);
+    Func->code = gsl_integration_qng( &F, xlow, xhigh, params.epsabs,
+                                      params.epsrel, &params.result,
+                                      &params.error, &params.neval) ;
     return Func->result;
 }
 
-  }
-}
+}}

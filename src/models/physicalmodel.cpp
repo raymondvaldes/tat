@@ -40,7 +40,6 @@ double property::Current(const double temperature) const
     currT += offset;
 
     return currT;
-//        return offset + slope * temperature;
 }
 
 double property::Projected(const double temperature1, const double temperature2)
@@ -55,7 +54,6 @@ const
     projT += Current(temperature1) ;
 
     return projT;
-//        return Current(temperature1) + slope * (temperature1 - temperature2);
 }
 
 double property::Current(const std::vector<std::vector<double>>& T, const size_t n,
