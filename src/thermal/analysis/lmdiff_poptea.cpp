@@ -28,6 +28,7 @@ License
 #include <boost/foreach.hpp>
 #include <iostream>
 
+#include "math/estimation/lmdiff.hpp"
 #include "math/statistical_tools.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/utils.hpp"
@@ -124,7 +125,7 @@ LMA::paramter_estimation( int *info, int *nfev,  Kernal &coreSystem,
 
   ///levenberg-marquardt algorithm
   myReducedUpdate();
-  lmdif( myReduced , m, n, x, fvec, Settings.ftol,
+  math::estimation::lmdif( myReduced , m, n, x, fvec, Settings.ftol,
          Settings.xtol, Settings.gtol, Settings.maxfev,
          Settings.epsfcn, diag, Settings.mode,
          Settings.factor, Settings.nprint, info, nfev, fjac, m,

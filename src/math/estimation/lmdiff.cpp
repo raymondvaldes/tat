@@ -254,20 +254,20 @@ xnorm = 0.0;
 *     check the input parameters for errors.
 */
 if( (n <= 0) || (m < n) || (ldfjac < m) || (ftol < zero)
-	|| (xtol < zero) || (gtol < zero) || (maxfev <= 0)
-	|| (factor <= zero) )
-	goto L300;
+  || (xtol < zero) || (gtol < zero) || (maxfev <= 0)
+  || (factor <= zero) )
+  goto L300;
 
 
 
 if( mode == 2 )
-	{ /* scaling by diag[] */
-	for( j=0; j<n; j++ )
-		{
-		if( diag[j] <= 0.0 )
-			goto L300;
-		}
-	}
+  { /* scaling by diag[] */
+  for( j=0; j<n; j++ )
+    {
+    if( diag[j] <= 0.0 )
+      goto L300;
+    }
+  }
 
 #if BUG
 PRINT( "lmdif\n" );
@@ -283,7 +283,7 @@ fcn(m,n,x,fvec,&iflag,variables);
 
 *nfev = 1;
 if(iflag < 0)
-	goto L300;
+  goto L300;
 fnorm = enorm(m,fvec);
 /*
 *     initialize levenberg-marquardt parameter and iteration counter.
@@ -307,21 +307,21 @@ fdjac2(fcn, m, n, x, fvec, variables, fjac, ldfjac, &iflag, epsfcn, wa4);
 
 *nfev += n;
 if(iflag < 0)
-	goto L300;
+  goto L300;
 /*
 *	 if requested, call fcn to enable printing of iterates.
 */
 if( nprint > 0 )
-	{
-	iflag = 0;
-	if(mod(iter-1,nprint) == 0)
-		{
-		fcn(m,n,x,fvec,&iflag,variables);
-		if(iflag < 0)
-			goto L300;
+  {
+  iflag = 0;
+  if(mod(iter-1,nprint) == 0)
+    {
+    fcn(m,n,x,fvec,&iflag,variables);
+    if(iflag < 0)
+      goto L300;
 //z		PRINT("\n   fnorm %.15e\n", enorm(m,fvec) );
-		}
-	}
+    }
+  }
 /*
 *	 compute the qr factorization of the jacobian.
 */
@@ -331,60 +331,60 @@ qrfac(m,n,fjac,ldfjac,true,ipvt,n,wa1,wa2,wa3);
 *	 to the norms of the columns of the initial jacobian.
 */
 if(iter == 1)
-	{
-	if(mode != 2)
-		{
-		for( j=0; j<n; j++ )
-			{
-			diag[j] = wa2[j];
-			if( wa2[j] == zero )
-				diag[j] = one;
-			}
-		}
+  {
+  if(mode != 2)
+    {
+    for( j=0; j<n; j++ )
+      {
+      diag[j] = wa2[j];
+      if( wa2[j] == zero )
+        diag[j] = one;
+      }
+    }
 
 /*
 *	 on the first iteration, calculate the norm of the scaled x
 *	 and initialize the step bound delta.
 */
-	for( j=0; j<n; j++ )
-		wa3[j] = diag[j] * x[j];
+  for( j=0; j<n; j++ )
+    wa3[j] = diag[j] * x[j];
 
-	xnorm = enorm(n,wa3);
-	delta = factor*xnorm;
-	if(delta == zero)
-		delta = factor;
-	}
+  xnorm = enorm(n,wa3);
+  delta = factor*xnorm;
+  if(delta == zero)
+    delta = factor;
+  }
 /*
 *	 form (q transpose)*fvec and store the first n components in
 *	 qtf.
 */
 for( i=0; i<m; i++ )
-	wa4[i] = fvec[i];
+  wa4[i] = fvec[i];
 jj = 0;
 for( j=0; j<n; j++ )
-	{
-	temp3 = fjac[jj];
-	if(temp3 != zero)
-		{
-		sum = zero;
-		ij = jj;
-		for( i=j; i<m; i++ )
-			{
-			sum += fjac[ij] * wa4[i];
-			ij += 1;	/* fjac[i+m*j] */
-			}
-		temp = -sum / temp3;
-		ij = jj;
-		for( i=j; i<m; i++ )
-			{
-			wa4[i] += fjac[ij] * temp;
-			ij += 1;	/* fjac[i+m*j] */
-			}
-		}
-	fjac[jj] = wa1[j];
-	jj += m+1;	/* fjac[j+m*j] */
-	qtf[j] = wa4[j];
-	}
+  {
+  temp3 = fjac[jj];
+  if(temp3 != zero)
+    {
+    sum = zero;
+    ij = jj;
+    for( i=j; i<m; i++ )
+      {
+      sum += fjac[ij] * wa4[i];
+      ij += 1;	/* fjac[i+m*j] */
+      }
+    temp = -sum / temp3;
+    ij = jj;
+    for( i=j; i<m; i++ )
+      {
+      wa4[i] += fjac[ij] * temp;
+      ij += 1;	/* fjac[i+m*j] */
+      }
+    }
+  fjac[jj] = wa1[j];
+  jj += m+1;	/* fjac[j+m*j] */
+  qtf[j] = wa4[j];
+  }
 
 /*
 *	 compute the norm of the scaled gradient.
@@ -469,28 +469,28 @@ PRINT( "pnorm %.10e  fnorm1 %.10e\n", pnorm, fnorm1 );
 */
 actred = -one;
 if( (p1*fnorm1) < fnorm)
-	{
-	temp = fnorm1/fnorm;
-	actred = one - temp * temp;
-	}
+  {
+  temp = fnorm1/fnorm;
+  actred = one - temp * temp;
+  }
 /*
 *	    compute the scaled predicted reduction and
 *	    the scaled directional derivative.
 */
 jj = 0;
 for( j=0; j<n; j++ )
-	{
-	wa3[j] = zero;
-	l = ipvt[j];
-	temp = wa1[l];
-	ij = jj;
-	for( i=0; i<=j; i++ )
-		{
-		wa3[i] += fjac[ij]*temp;
-		ij += 1; /* fjac[i+m*j] */
-		}
-	jj += m;
-	}
+  {
+  wa3[j] = zero;
+  l = ipvt[j];
+  temp = wa1[l];
+  ij = jj;
+  for( i=0; i<=j; i++ )
+    {
+    wa3[i] += fjac[ij]*temp;
+    ij += 1; /* fjac[i+m*j] */
+    }
+  jj += m;
+  }
 temp1 = enorm(n,wa3)/fnorm;
 temp2 = (sqrt(par)*pnorm)/fnorm;
 prered = temp1*temp1 + (temp2*temp2)/p5;
@@ -501,49 +501,49 @@ dirder = -(temp1*temp1 + temp2*temp2);
 */
 ratio = zero;
 if(prered != zero)
-	ratio = actred/prered;
+  ratio = actred/prered;
 /*
 *	    update the step bound.
 */
 if(ratio <= p25)
-	{
-	if(actred >= zero)
-		temp = p5;
-	else
-		temp = p5*dirder/(dirder + p5*actred);
-	if( ((p1*fnorm1) >= fnorm)
-	|| (temp < p1) )
-		temp = p1;
+  {
+  if(actred >= zero)
+    temp = p5;
+  else
+    temp = p5*dirder/(dirder + p5*actred);
+  if( ((p1*fnorm1) >= fnorm)
+  || (temp < p1) )
+    temp = p1;
        delta = temp*dmin1(delta,pnorm/p1);
        par = par/temp;
         }
 else
-	{
-	if( (par == zero) || (ratio >= p75) )
-		{
-		delta = pnorm/p5;
-		par = p5*par;
-		}
-	}
+  {
+  if( (par == zero) || (ratio >= p75) )
+    {
+    delta = pnorm/p5;
+    par = p5*par;
+    }
+  }
 /*
 *	    test for successful iteration.
 */
 if(ratio >= p0001)
-	{
+  {
 /*
 *	    successful iteration. update x, fvec, and their norms.
 */
-	for( j=0; j<n; j++ )
-		{
-		x[j] = wa2[j];
-		wa2[j] = diag[j]*x[j];
-		}
-	for( i=0; i<m; i++ )
-		fvec[i] = wa4[i];
-	xnorm = enorm(n,wa2);
-	fnorm = fnorm1;
-	iter += 1;
-	}
+  for( j=0; j<n; j++ )
+    {
+    x[j] = wa2[j];
+    wa2[j] = diag[j]*x[j];
+    }
+  for( i=0; i<m; i++ )
+    fvec[i] = wa4[i];
+  xnorm = enorm(n,wa2);
+  fnorm = fnorm1;
+  iter += 1;
+  }
 /*
 *	    tests for convergence.
 */
@@ -718,42 +718,42 @@ PRINT( "lmpar\n" );
 nsing = n;
 jj = 0;
 for( j=0; j<n; j++ )
-	{
-	wa1[j] = qtb[j];
-	if( (r[jj] == zero) && (nsing == n) )
-		nsing = j;
-	if(nsing < n)
-		wa1[j] = zero;
-	jj += ldr+1; /* [j+ldr*j] */
-	}
+  {
+  wa1[j] = qtb[j];
+  if( (r[jj] == zero) && (nsing == n) )
+    nsing = j;
+  if(nsing < n)
+    wa1[j] = zero;
+  jj += ldr+1; /* [j+ldr*j] */
+  }
 #if BUG
 PRINT( "nsing %d ", nsing );
 #endif
 if(nsing >= 1)
-	{
-	for( k=0; k<nsing; k++ )
-		{
-		j = nsing - k - 1;
-		wa1[j] = wa1[j]/r[j+ldr*j];
-		temp = wa1[j];
-		jm1 = j - 1;
-		if(jm1 >= 0)
-			{
-			ij = ldr * j;
-			for( i=0; i<=jm1; i++ )
-				{
-				wa1[i] -= r[ij]*temp;
-				ij += 1;
-				}
-			}
-		}
-	}
+  {
+  for( k=0; k<nsing; k++ )
+    {
+    j = nsing - k - 1;
+    wa1[j] = wa1[j]/r[j+ldr*j];
+    temp = wa1[j];
+    jm1 = j - 1;
+    if(jm1 >= 0)
+      {
+      ij = ldr * j;
+      for( i=0; i<=jm1; i++ )
+        {
+        wa1[i] -= r[ij]*temp;
+        ij += 1;
+        }
+      }
+    }
+  }
 
 for( j=0; j<n; j++ )
-	{
-	l = ipvt[j];
-	x[l] = wa1[j];
-	}
+  {
+  l = ipvt[j];
+  x[l] = wa1[j];
+  }
 /*
 *     initialize the iteration counter.
 *     evaluate the function at the origin, and test
@@ -761,16 +761,16 @@ for( j=0; j<n; j++ )
 */
 iter = 0;
 for( j=0; j<n; j++ )
-	wa2[j] = diag[j]*x[j];
+  wa2[j] = diag[j]*x[j];
 dxnorm = enorm(n,wa2);
 fp = dxnorm - delta;
 if(fp <= p1*delta)
-	{
+  {
 #if BUG
-	PRINT( "going to L220\n" );
+  PRINT( "going to L220\n" );
 #endif
-	goto L220;
-	}
+  goto L220;
+  }
 /*
 *     if the jacobian is not rank deficient, the newton
 *     step provides a lower bound, parl, for the zero of
@@ -778,53 +778,53 @@ if(fp <= p1*delta)
 */
 parl = zero;
 if(nsing >= n)
-	{
-	for( j=0; j<n; j++ )
-		{
-		l = ipvt[j];
-		wa1[j] = diag[l]*(wa2[l]/dxnorm);
-		}
-	jj = 0;
-	for( j=0; j<n; j++ )
-		{
-		sum = zero;
-		jm1 = j - 1;
-		if(jm1 >= 0)
-			{
-			ij = jj;
-			for( i=0; i<=jm1; i++ )
-				{
-				sum += r[ij]*wa1[i];
-				ij += 1;
-				}
-			}
-		wa1[j] = (wa1[j] - sum)/r[j+ldr*j];
-		jj += ldr; /* [i+ldr*j] */
-		}
-	temp = enorm(n,wa1);
-	parl = ((fp/delta)/temp)/temp;
-	}
+  {
+  for( j=0; j<n; j++ )
+    {
+    l = ipvt[j];
+    wa1[j] = diag[l]*(wa2[l]/dxnorm);
+    }
+  jj = 0;
+  for( j=0; j<n; j++ )
+    {
+    sum = zero;
+    jm1 = j - 1;
+    if(jm1 >= 0)
+      {
+      ij = jj;
+      for( i=0; i<=jm1; i++ )
+        {
+        sum += r[ij]*wa1[i];
+        ij += 1;
+        }
+      }
+    wa1[j] = (wa1[j] - sum)/r[j+ldr*j];
+    jj += ldr; /* [i+ldr*j] */
+    }
+  temp = enorm(n,wa1);
+  parl = ((fp/delta)/temp)/temp;
+  }
 /*
 *     calculate an upper bound, paru, for the zero of the function.
 */
 jj = 0;
 for( j=0; j<n; j++ )
-	{
-	sum = zero;
-	ij = jj;
-	for( i=0; i<=j; i++ )
-		{
-		sum += r[ij]*qtb[i];
-		ij += 1;
-		}
-	l = ipvt[j];
-	wa1[j] = sum/diag[l];
-	jj += ldr; /* [i+ldr*j] */
-	}
+  {
+  sum = zero;
+  ij = jj;
+  for( i=0; i<=j; i++ )
+    {
+    sum += r[ij]*qtb[i];
+    ij += 1;
+    }
+  l = ipvt[j];
+  wa1[j] = sum/diag[l];
+  jj += ldr; /* [i+ldr*j] */
+  }
 gnorm = enorm(n,wa1);
 paru = gnorm/delta;
 if(paru == zero)
-	paru = DWARF/dmin1(delta,p1);
+  paru = DWARF/dmin1(delta,p1);
 /*
 *     if the input par lies outside of the interval (parl,paru),
 *     set par to the closer endpoint.
@@ -832,7 +832,7 @@ if(paru == zero)
 *par = dmax1( *par,parl);
 *par = dmin1( *par,paru);
 if( *par == zero)
-	*par = gnorm/dxnorm;
+  *par = gnorm/dxnorm;
 #if BUG
 PRINT( "parl %.4e  par %.4e  paru %.4e\n", parl, *par, paru );
 #endif
@@ -845,13 +845,13 @@ iter += 1;
 *	 evaluate the function at the current value of par.
 */
 if( *par == zero)
-	*par = dmax1(DWARF,p001*paru);
+  *par = dmax1(DWARF,p001*paru);
 temp = sqrt( *par );
 for( j=0; j<n; j++ )
-	wa1[j] = temp*diag[j];
+  wa1[j] = temp*diag[j];
 qrsolv(n,r,ldr,ipvt,wa1,qtb,x,sdiag,wa2);
 for( j=0; j<n; j++ )
-	wa2[j] = diag[j]*x[j];
+  wa2[j] = diag[j]*x[j];
 dxnorm = enorm(n,wa2);
 temp = fp;
 fp = dxnorm - delta;
@@ -868,36 +868,36 @@ if( (fabs(fp) <= p1*delta)
 *	 compute the newton correction.
 */
 for( j=0; j<n; j++ )
-	{
-	l = ipvt[j];
-	wa1[j] = diag[l]*(wa2[l]/dxnorm);
-	}
+  {
+  l = ipvt[j];
+  wa1[j] = diag[l]*(wa2[l]/dxnorm);
+  }
 jj = 0;
 for( j=0; j<n; j++ )
-	{
-	wa1[j] = wa1[j]/sdiag[j];
-	temp = wa1[j];
-	jp1 = j + 1;
-	if(jp1 < n)
-		{
-		ij = jp1 + jj;
-		for( i=jp1; i<n; i++ )
-			{
-			wa1[i] -= r[ij]*temp;
-			ij += 1; /* [i+ldr*j] */
-			}
-		}
-	jj += ldr; /* ldr*j */
-	}
+  {
+  wa1[j] = wa1[j]/sdiag[j];
+  temp = wa1[j];
+  jp1 = j + 1;
+  if(jp1 < n)
+    {
+    ij = jp1 + jj;
+    for( i=jp1; i<n; i++ )
+      {
+      wa1[i] -= r[ij]*temp;
+      ij += 1; /* [i+ldr*j] */
+      }
+    }
+  jj += ldr; /* ldr*j */
+  }
 temp = enorm(n,wa1);
 parc = ((fp/delta)/temp)/temp;
 /*
 *	 depending on the sign of the function, update parl or paru.
 */
 if(fp > zero)
-	parl = dmax1(parl, *par);
+  parl = dmax1(parl, *par);
 if(fp < zero)
-	paru = dmin1(paru, *par);
+  paru = dmin1(paru, *par);
 /*
 *	 compute an improved estimate for par.
 */
@@ -912,14 +912,14 @@ L220:
 *     termination.
 */
 if(iter == 0)
-	*par = zero;
+  *par = zero;
 /*
 *     last card of subroutine lmpar.
 */
 }
 
 void qrfac(int m,int n,double a[],int /*lda*/,bool pivot,int ipvt[],
-	   int /*lipvt*/, double rdiag[],double acnorm[],double wa[])
+     int /*lipvt*/, double rdiag[],double acnorm[],double wa[])
 {
 /*
 *     **********
@@ -1009,14 +1009,14 @@ extern double MACHEP;
 */
 ij = 0;
 for( j=0; j<n; j++ )
-	{
-	acnorm[j] = enorm(m,&a[ij]);
-	rdiag[j] = acnorm[j];
-	wa[j] = rdiag[j];
-	if(pivot != 0)
-		ipvt[j] = j;
-	ij += m; /* m*j */
-	}
+  {
+  acnorm[j] = enorm(m,&a[ij]);
+  rdiag[j] = acnorm[j];
+  wa[j] = rdiag[j];
+  if(pivot != 0)
+    ipvt[j] = j;
+  ij += m; /* m*j */
+  }
 #if BUG
 PRINT( "qrfac\n" );
 #endif
@@ -1027,29 +1027,29 @@ minmn = min0(m,n);
 for( j=0; j<minmn; j++ )
 {
 if(pivot == 0)
-	goto L40;
+  goto L40;
 /*
 *	 bring the column of largest norm into the pivot position.
 */
 kmax = j;
 for( k=j; k<n; k++ )
-	{
-	if(rdiag[k] > rdiag[kmax])
-		kmax = k;
-	}
+  {
+  if(rdiag[k] > rdiag[kmax])
+    kmax = k;
+  }
 if(kmax == j)
-	goto L40;
+  goto L40;
 
 ij = m * j;
 jj = m * kmax;
 for( i=0; i<m; i++ )
-	{
-	temp = a[ij]; /* [i+m*j] */
-	a[ij] = a[jj]; /* [i+m*kmax] */
-	a[jj] = temp;
-	ij += 1;
-	jj += 1;
-	}
+  {
+  temp = a[ij]; /* [i+m*j] */
+  a[ij] = a[jj]; /* [i+m*kmax] */
+  a[jj] = temp;
+  ij += 1;
+  jj += 1;
+  }
 rdiag[kmax] = rdiag[j];
 wa[kmax] = wa[j];
 k = ipvt[j];
@@ -1064,15 +1064,15 @@ L40:
 jj = j + m*j;
 ajnorm = enorm(m-j,&a[jj]);
 if(ajnorm == zero)
-	goto L100;
+  goto L100;
 if(a[jj] < zero)
-	ajnorm = -ajnorm;
+  ajnorm = -ajnorm;
 ij = jj;
 for( i=j; i<m; i++ )
-	{
-	a[ij] /= ajnorm;
-	ij += 1; /* [i+m*j] */
-	}
+  {
+  a[ij] /= ajnorm;
+  ij += 1; /* [i+m*j] */
+  }
 a[jj] += one;
 /*
 *	 apply the transformation to the remaining columns
@@ -1082,42 +1082,42 @@ jp1 = j + 1;
 if(jp1 < n )
 {
 for( k=jp1; k<n; k++ )
-	{
-	sum = zero;
-	ij = j + m*k;
-	jj = j + m*j;
-	for( i=j; i<m; i++ )
-		{
-		sum += a[jj]*a[ij];
-		ij += 1; /* [i+m*k] */
-		jj += 1; /* [i+m*j] */
-		}
-	temp = sum/a[j+m*j];
-	ij = j + m*k;
-	jj = j + m*j;
-	for( i=j; i<m; i++ )
-		{
-		a[ij] -= temp*a[jj];
-		ij += 1; /* [i+m*k] */
-		jj += 1; /* [i+m*j] */
-		}
-	if( (pivot != 0) && (rdiag[k] != 0.0) )
-		{
-		temp = a[j+m*k]/rdiag[k];
-		temp = dmax1( zero, one-temp*temp );
-		rdiag[k] *= sqrt(temp);
-		temp = rdiag[k]/wa[k];
-		if( (p05*temp*temp) <= MACHEP)
-			{
-			rdiag[k] = enorm(m-j-1,&a[jp1+m*k]);
-			wa[k] = rdiag[k];
-			}
-		}
-	}
+  {
+  sum = zero;
+  ij = j + m*k;
+  jj = j + m*j;
+  for( i=j; i<m; i++ )
+    {
+    sum += a[jj]*a[ij];
+    ij += 1; /* [i+m*k] */
+    jj += 1; /* [i+m*j] */
+    }
+  temp = sum/a[j+m*j];
+  ij = j + m*k;
+  jj = j + m*j;
+  for( i=j; i<m; i++ )
+    {
+    a[ij] -= temp*a[jj];
+    ij += 1; /* [i+m*k] */
+    jj += 1; /* [i+m*j] */
+    }
+  if( (pivot != 0) && (rdiag[k] != 0.0) )
+    {
+    temp = a[j+m*k]/rdiag[k];
+    temp = dmax1( zero, one-temp*temp );
+    rdiag[k] *= sqrt(temp);
+    temp = rdiag[k]/wa[k];
+    if( (p05*temp*temp) <= MACHEP)
+      {
+      rdiag[k] = enorm(m-j-1,&a[jp1+m*k]);
+      wa[k] = rdiag[k];
+      }
+    }
+  }
 }
 
 L100:
-	rdiag[j] = -ajnorm;
+  rdiag[j] = -ajnorm;
 }
 /*
 *     last card of subroutine qrfac.
@@ -1134,7 +1134,7 @@ double r[],diag[],qtb[],x[],sdiag[],wa[];
 */
 
 void qrsolv(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
-	    double x[],double sdiag[],double wa[])
+      double x[],double sdiag[],double wa[])
 {
 /*
 *     **********
@@ -1227,19 +1227,19 @@ static double p5 = 0.5;
 */
 kk = 0;
 for( j=0; j<n; j++ )
-	{
-	ij = kk;
-	ik = kk;
-	for( i=j; i<n; i++ )
-		{
-		r[ij] = r[ik];
-		ij += 1;   /* [i+ldr*j] */
-		ik += ldr; /* [j+ldr*i] */
-		}
-	x[j] = r[kk];
-	wa[j] = qtb[j];
-	kk += ldr+1; /* j+ldr*j */
-	}
+  {
+  ij = kk;
+  ik = kk;
+  for( i=j; i<n; i++ )
+    {
+    r[ij] = r[ik];
+    ij += 1;   /* [i+ldr*j] */
+    ik += ldr; /* [j+ldr*i] */
+    }
+  x[j] = r[kk];
+  wa[j] = qtb[j];
+  kk += ldr+1; /* j+ldr*j */
+  }
 #if BUG
 PRINT( "qrsolv\n" );
 #endif
@@ -1254,9 +1254,9 @@ for( j=0; j<n; j++ )
 */
 l = ipvt[j];
 if(diag[l] == zero)
-	goto L90;
+  goto L90;
 for( k=j; k<n; k++ )
-	sdiag[k] = zero;
+  sdiag[k] = zero;
 sdiag[j] = diag[l];
 /*
 *	 the transformations to eliminate the row of d
@@ -1265,58 +1265,58 @@ sdiag[j] = diag[l];
 */
 qtbpj = zero;
 for( k=j; k<n; k++ )
-	{
+  {
 /*
 *	    determine a givens rotation which eliminates the
 *	    appropriate element in the current row of d.
 */
-	if(sdiag[k] == zero)
-		continue;
-	kk = k + ldr * k;
-	if(fabs(r[kk]) < fabs(sdiag[k]))
-		{
-		cotan = r[kk]/sdiag[k];
-		sin = p5/sqrt(p25+p25*cotan*cotan);
-		cos = sin*cotan;
-		}
-	else
-		{
-		tan = sdiag[k]/r[kk];
-		cos = p5/sqrt(p25+p25*tan*tan);
-		sin = cos*tan;
-		}
+  if(sdiag[k] == zero)
+    continue;
+  kk = k + ldr * k;
+  if(fabs(r[kk]) < fabs(sdiag[k]))
+    {
+    cotan = r[kk]/sdiag[k];
+    sin = p5/sqrt(p25+p25*cotan*cotan);
+    cos = sin*cotan;
+    }
+  else
+    {
+    tan = sdiag[k]/r[kk];
+    cos = p5/sqrt(p25+p25*tan*tan);
+    sin = cos*tan;
+    }
 /*
 *	    compute the modified diagonal element of r and
 *	    the modified element of ((q transpose)*b,0).
 */
-	r[kk] = cos*r[kk] + sin*sdiag[k];
-	temp = cos*wa[k] + sin*qtbpj;
-	qtbpj = -sin*wa[k] + cos*qtbpj;
-	wa[k] = temp;
+  r[kk] = cos*r[kk] + sin*sdiag[k];
+  temp = cos*wa[k] + sin*qtbpj;
+  qtbpj = -sin*wa[k] + cos*qtbpj;
+  wa[k] = temp;
 /*
 *	    accumulate the tranformation in the row of s.
 */
-	kp1 = k + 1;
-	if( n > kp1 )
-		{
-		ik = kk + 1;
-		for( i=kp1; i<n; i++ )
-			{
-			temp = cos*r[ik] + sin*sdiag[i];
-			sdiag[i] = -sin*r[ik] + cos*sdiag[i];
-			r[ik] = temp;
-			ik += 1; /* [i+ldr*k] */
-			}
-		}
-	}
+  kp1 = k + 1;
+  if( n > kp1 )
+    {
+    ik = kk + 1;
+    for( i=kp1; i<n; i++ )
+      {
+      temp = cos*r[ik] + sin*sdiag[i];
+      sdiag[i] = -sin*r[ik] + cos*sdiag[i];
+      r[ik] = temp;
+      ik += 1; /* [i+ldr*k] */
+      }
+    }
+  }
 L90:
 /*
 *	 store the diagonal element of s and restore
 *	 the corresponding diagonal element of r.
 */
-	kk = j + ldr*j;
-	sdiag[j] = r[kk];
-	r[kk] = x[j];
+  kk = j + ldr*j;
+  sdiag[j] = r[kk];
+  r[kk] = x[j];
 }
 /*
 *     solve the triangular system for z. if the system is
@@ -1324,40 +1324,40 @@ L90:
 */
 nsing = n;
 for( j=0; j<n; j++ )
-	{
-	if( (sdiag[j] == zero) && (nsing == n) )
-		nsing = j;
-	if(nsing < n)
-		wa[j] = zero;
-	}
+  {
+  if( (sdiag[j] == zero) && (nsing == n) )
+    nsing = j;
+  if(nsing < n)
+    wa[j] = zero;
+  }
 if(nsing < 1)
-	goto L150;
+  goto L150;
 
 for( k=0; k<nsing; k++ )
-	{
-	j = nsing - k - 1;
-	sum = zero;
-	jp1 = j + 1;
-	if(nsing > jp1)
-		{
-		ij = jp1 + ldr * j;
-		for( i=jp1; i<nsing; i++ )
-			{
-			sum += r[ij]*wa[i];
-			ij += 1; /* [i+ldr*j] */
-			}
-		}
-	wa[j] = (wa[j] - sum)/sdiag[j];
-	}
+  {
+  j = nsing - k - 1;
+  sum = zero;
+  jp1 = j + 1;
+  if(nsing > jp1)
+    {
+    ij = jp1 + ldr * j;
+    for( i=jp1; i<nsing; i++ )
+      {
+      sum += r[ij]*wa[i];
+      ij += 1; /* [i+ldr*j] */
+      }
+    }
+  wa[j] = (wa[j] - sum)/sdiag[j];
+  }
 L150:
 /*
 *     permute the components of z back to components of x.
 */
 for( j=0; j<n; j++ )
-	{
-	l = ipvt[j];
-	x[l] = wa[j];
-	}
+  {
+  l = ipvt[j];
+  x[l] = wa[j];
+  }
 /*
 *     last card of subroutine qrsolv.
 */
@@ -1425,71 +1425,71 @@ for( i=0; i<n; i++ )
 {
 xabs = fabs(x[i]);
 if( (xabs > rdwarf) && (xabs < agiant) )
-	{
+  {
 /*
 *	    sum for intermediate components.
 */
-	s2 += xabs*xabs;
-	continue;
-	}
+  s2 += xabs*xabs;
+  continue;
+  }
 
 if(xabs > rdwarf)
-	{
+  {
 /*
 *	       sum for large components.
 */
-	if(xabs > x1max)
-		{
-		temp = x1max/xabs;
-		s1 = one + s1*temp*temp;
-		x1max = xabs;
-		}
-	else
-		{
-		temp = xabs/x1max;
-		s1 += temp*temp;
-		}
-	continue;
-	}
+  if(xabs > x1max)
+    {
+    temp = x1max/xabs;
+    s1 = one + s1*temp*temp;
+    x1max = xabs;
+    }
+  else
+    {
+    temp = xabs/x1max;
+    s1 += temp*temp;
+    }
+  continue;
+  }
 /*
 *	       sum for small components.
 */
 if(xabs > x3max)
-	{
-	temp = x3max/xabs;
-	s3 = one + s3*temp*temp;
-	x3max = xabs;
-	}
+  {
+  temp = x3max/xabs;
+  s3 = one + s3*temp*temp;
+  x3max = xabs;
+  }
 else
-	{
-	if(xabs != zero)
-		{
-		temp = xabs/x3max;
-		s3 += temp*temp;
-		}
-	}
+  {
+  if(xabs != zero)
+    {
+    temp = xabs/x3max;
+    s3 += temp*temp;
+    }
+  }
 }
 /*
 *     calculation of norm.
 */
 if(s1 != zero)
-	{
-	temp = s1 + (s2/x1max)/x1max;
-	ans = x1max*sqrt(temp);
-	return(ans);
-	}
+  {
+  temp = s1 + (s2/x1max)/x1max;
+  ans = x1max*sqrt(temp);
+  return(ans);
+  }
 if(s2 != zero)
-	{
-	if(s2 >= x3max)
-		temp = s2*(one+(x3max/s2)*(x3max*s3));
-	else
-		temp = x3max*((s2/x3max)+(x3max*s3));
-	ans = sqrt(temp);
-	}
+  {
+  if(s2 >= x3max)
+    temp = s2*(one+(x3max/s2)*(x3max*s3));
+  else
+    temp = x3max*((s2/x3max)+(x3max*s3));
+  ans = sqrt(temp);
+  }
 else
-	{
-	ans = x3max*sqrt(s3);
-	}
+  {
+  ans = x3max*sqrt(s3);
+  }
 return(ans);
 /*
 *     last card of function enorm.
@@ -1627,25 +1627,25 @@ void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
 double dmax1(double a,double b)
 {
 if( a >= b )
-	return(a);
+  return(a);
 else
-	return(b);
+  return(b);
 }
 
 double dmin1(double a,double b)
 {
 if( a <= b )
-	return(a);
+  return(a);
 else
-	return(b);
+  return(b);
 }
 
 int min0(int a,int b)
 {
 if( a <= b )
-	return(a);
+  return(a);
 else
-	return(b);
+  return(b);
 }
 
 int mod(int k,int m )
@@ -1659,14 +1659,14 @@ int i, j, k;
 
 k = 0;
 for( i=0; i<m; i++ )
-	{
-	for( j=0; j<n; j++ )
-		{
-		PRINT( "%.5e ", y[k] );
-		k += 1;
-		}
-	PRINT( "\n" );
-	}
+  {
+  for( j=0; j<n; j++ )
+    {
+    PRINT( "%.5e ", y[k] );
+    k += 1;
+    }
+  PRINT( "\n" );
+  }
 }
 
 }

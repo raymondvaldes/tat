@@ -75,13 +75,14 @@ void run(const class filesystem::directory dir)
   std::cout << "iterate through parameters now:---\n\n";
   std::cout << "parameter estimates intervals:\n";
   std::cout << "------------------------------\n\n";
-  std::cout << "min\t\tbestfit\t\tmax\n";
+  std::cout << "min\tbestfit\tmax\n";
 
   for(auto& val : poptea.LMA.unknownParameters() )
   {
-    std::cout << val.bestfitInterval.lower << "\t\t"   <<  val.bestfit()
-              << "\t\t"   << val.bestfitInterval.upper << "\n";
+    std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
+              << "\t"   << val.bestfitInterval.upper << "\n";
   }
+
 
 
 

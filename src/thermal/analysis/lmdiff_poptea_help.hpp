@@ -32,16 +32,7 @@ License
 namespace thermal {
 namespace analysis{
 
-  void lmdif(std::function<void( double*, double*,
-                                class thermal::analysis::Kernal&)> fcn,
-             int m, int n, double *x, double *fvec,double ftol, double xtol,
-             double gtol, int maxfev, double epsfcn, double *diag, int mode,
-             double factor, int nprint, int *info, int *nfev, double *fjac,
-             int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
-             double *wa3, double *wa4, double */*wa5*/,
-             class thermal::analysis::Kernal &popteaCore);
-
-void scaleDiag(double *diag, math::estimation::unknownList List,
+void scaleDiag( double *diag, math::estimation::unknownList List,
                 const physicalModel::TBCsystem TBCsystem, const int mode );
 
 class LMA_workingArrays
