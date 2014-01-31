@@ -23,7 +23,7 @@
 		<maxfev>100000</maxfev>
 		<epsfcn>0.0001</epsfcn>
 		<factor>10</factor>
-		<mode>0</mode>
+		<mode>2</mode>
 		<nprint>0</nprint>
 	</ParaEstSettings>
 
