@@ -71,6 +71,7 @@ inline double mean(const double a, const double b)
     mean1 *=0.5;
     return mean1;
 }
+double xspread( const double xmin, const double xnominal, const double xmax);
 
 }
 
