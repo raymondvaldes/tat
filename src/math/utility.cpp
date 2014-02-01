@@ -232,9 +232,16 @@ double percentilelog10(const double xmin, const double xmax, const double x)
     return (log10(x) - log10(xmin)) / (log10(xmax) - log10(xmin));
 }
 
+double valFROMpercentileLog10( const double input,  const double xmin, const double xmax )
+{
+  assert( input <= 1 && input >=0) ;
 
-void range(double* l_thermal, const double l_min, const double l_max,
-           const size_t L_end)
+  return input * ( log10( xmax ) - log10( xmin ) ) + log10( xmin );
+}
+
+
+void range( double* l_thermal, const double l_min, const double l_max,
+            const size_t L_end )
 {
     for(size_t i = 0 ; i <  L_end; ++i)
     {
@@ -242,17 +249,32 @@ void range(double* l_thermal, const double l_min, const double l_max,
     }
 }
 
-void range(std::vector<double>& l_thermal, const double l_min,
-           const double l_max, const size_t L_end)
+void range( std::vector<double>& l_thermal, const double l_min,
+            const double l_max, const size_t L_end )
 {
+  //Creates equally spaced range from lmin to lmax
   for(size_t i = 0 ; i <  L_end; ++i)
   {
-    l_thermal[i] = (l_max-l_min)*(double(i)/(L_end-1));
+    l_thermal[i] = ( l_max - l_min ) * ( double(i) / (L_end - 1 ) ) ;
   }
 }
 
-void range1og10(const double l_min, const double l_max, const size_t L_end,
-                std::vector<double> &l_thermal)
+std::vector<double>
+rangelog10( const double xstart, const double xend, const size_t size )
+{
+  std::vector<double> result( size );
+  size_t i = 0;
+  for( auto& val : result )
+  { 
+    val = ( xend - xstart ) * ( double(i) / ( size - 1 ) ) ;
+    i++;
+  }
+
+  return result;
+}
+
+void range1og10( const double l_min, const double l_max, const size_t L_end,
+                 std::vector<double> &l_thermal )
 {
   BOOST_ASSERT_MSG( L_end >= 1 , "check inputs \n\n" );
   BOOST_ASSERT_MSG( l_min < l_max , "check inputs \n\n" );
@@ -321,6 +343,12 @@ void range1og10(const double l_min, const double l_max, const size_t L_end,
         l_thermal[L_end-1] = l_max;
     }
 }
+
+double xspread( const double xmin, const double xnominal, const double xmax)
+{
+  return (xmax - xmin) / xnominal;
+}
+
 
 
 }

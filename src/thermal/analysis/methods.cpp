@@ -31,7 +31,7 @@ License
 #include "math/estimation/parameterestimation.hpp"
 #include "models/physicalmodel.hpp"
 #include "math/algorithms/combinations.hpp"
-
+#include "math/utility.hpp"
 namespace thermal{
 namespace analysis{
 
@@ -63,6 +63,26 @@ double methods::Gfunc( const double val ,
   bestFit( coreSystem, thermalData );
 
   return thermalData.MSE;
+}
+
+double methods::optiGfun( const double xCenter, const double xRange,
+                          const enum physicalModel::labels::Name &mylabel,
+                          Kernal &coreSystem, ThermalData &thermalData)
+{
+  bestFit( coreSystem, thermalData );
+  parameterIntervalEstimates( coreSystem, thermalData ) ;
+
+  double xreturn;
+  for( math::estimation::unknown& val : bestfitMethod.unknownParameters() )
+  {
+    if( val.label() == mylabel )
+    {
+      xreturn = math::xspread( val.bestfitInterval.lower, val.bestfit(),
+                               val.bestfitInterval.upper );
+    }
+  }
+
+  return xreturn;
 }
 
 double methods::solve( const double target , const double min,
@@ -98,6 +118,8 @@ void methods::updateExperimentalData( const std::vector<double> &omegas,
   bestfitMethod.updateWorkSpace( input.size() ,
                                  bestfitMethod.unknownParameters.size()  );
 }
+
+
 
 void methods::parameterIntervalEstimates( Kernal &coreSystem,
                                           ThermalData &thermalData )
@@ -158,6 +180,9 @@ void methods::parameterIntervalEstimates( Kernal &coreSystem,
                           coreSystem, thermalData );
   thermalData.MSE = S1;
 }
+
+
+
 
 void methods::optimization(void)
 {

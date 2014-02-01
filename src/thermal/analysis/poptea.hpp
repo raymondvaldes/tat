@@ -72,6 +72,8 @@ public:
   /// Operations that give results
   double bestFit( void ) ;
   void parameterIntervalEstimates( void ) ;
+  void optimization(void);
+
 } ;
 
 

@@ -152,10 +152,44 @@ void Poptea::parameterIntervalEstimates( void )
 {
   /// Precheck experimental data is loaded and there is a bestfit.
   if(!loadedExperimental) { return; }
-  if(!runbestfit) { bestFit(); }
+  bestFit();
 
   analysis.parameterIntervalEstimates( coreSystem, thermalData ) ;
+
+  std::cout << "iterate through parameters now:---\n\n";
+  std::cout << "parameter estimates intervals:\n";
+  std::cout << "------------------------------\n\n";
+  std::cout << "min\tbestfit\tmax\n";
+
+  for(auto& val : analysis.bestfitMethod.unknownParameters() )
+  {
+    std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
+              << "\t"   << val.bestfitInterval.upper << "\n";
+  }
+
+  return;
 }
+
+void Poptea::optimization(void)
+{
+  if(!loadedExperimental) { return; }
+  bestFit();
+
+  analysis.parameterIntervalEstimates( coreSystem, thermalData ) ;
+
+  double xreturn;
+  for( math::estimation::unknown& val : analysis.bestfitMethod.unknownParameters() )
+  {
+    if( val.label() == physicalModel::labels::Name::asub)
+    {
+      xreturn = math::xspread( val.bestfitInterval.lower, val.bestfit(),
+                               val.bestfitInterval.upper );
+    }
+  }
+
+  std::cout << xreturn;
+}
+
 
 class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
                                          const class Kernal &popteaCore)

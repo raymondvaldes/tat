@@ -46,6 +46,10 @@ private:
   double Gfunc( const double x , const physicalModel::labels::Name &mylabel,
                 Kernal &coreSystem, ThermalData &thermalData ) ;
 
+  double optiGfun( const double xCenter, const double xRange,
+                   const enum physicalModel::labels::Name &mylabel,
+                   Kernal &coreSystem, ThermalData &thermalData ) ;
+
 public:
   methods( const math::estimation::settings &Settings_,
            const math::estimation::unknownList &unknownParameters_,
