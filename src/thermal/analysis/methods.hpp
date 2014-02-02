@@ -33,6 +33,10 @@ License
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "math/estimation/parameterestimation.hpp"
 
+template<typename OBJ>
+void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
+  { var.reset( new OBJ( input )  ); }
+
 namespace thermal{
 namespace analysis{
 

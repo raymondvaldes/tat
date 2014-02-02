@@ -57,8 +57,10 @@ public:
                 const math::estimation::unknownList &unknownParameters,
                 const size_t Lend_) ;
   ~LMA(void);
-  ThermalData solve( Kernal *coreSystem, ThermalData *thermalInput,
-                     math::estimation::unknownList *list) ;
+  ThermalData solve(
+      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+      std::shared_ptr<ThermalData> &thermalData_in,
+      std::shared_ptr<Kernal> &coreSystem_in );
 private:
   std::function< void( double*, double*, thermal::analysis::Kernal &) >
   myReduced;
@@ -82,9 +84,7 @@ private:
 }}
 
 
-template<typename OBJ>
-void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
-  { var.reset( new OBJ( input )  ); }
+
 
 
 
