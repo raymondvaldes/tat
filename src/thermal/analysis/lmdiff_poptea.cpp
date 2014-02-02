@@ -66,10 +66,6 @@ class ThermalData LMA::solve(
     std::shared_ptr< ThermalData > &thermalData_in,
     std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-  ///Take inputs and create objects to work with
-//  reassign( thermalData,  *thermalInput );
-//  reassign( coreSystem_p, *coreSystem );
-//  reassign( unknownParameters_p, *list );
   unknownParameters_p = unknownParameters_in;
   thermalData = thermalData_in;
   coreSystem_p = coreSystem_in;
@@ -83,15 +79,6 @@ class ThermalData LMA::solve(
 
   /// Use working objects and send those address to the references pass in
   // take the object that thermalData points to and reassign the pointer of
-//  thermalInput = &*thermalData;
-//  coreSystem = &*coreSystem_p;
-//  list = &*unknownParameters_p;
-
-  std::cout << "\ninside the solver\n";
-  for( auto& val : (*unknownParameters_p)() )
-  {
-    std::cout <<  val.bestfit() << "\n";
-  }
 
 
   ///Return object
@@ -212,7 +199,7 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   thermalData->MSE =
       math::estimation::SobjectiveLS( thermalData->experimentalEmission,
                                       thermalData->predictedEmission );
-  printPEstimates( popteaCore.TBCsystem, *unknownParameters_p ) ;
+//  printPEstimates( popteaCore.TBCsystem, *unknownParameters_p ) ;
 
   return;
 }

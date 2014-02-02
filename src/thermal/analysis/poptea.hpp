@@ -48,16 +48,16 @@ private:
 
 public:
   /// core members
-  class Kernal coreSystem;
-  class ThermalData thermalData;
-  class math::estimation::unknownList unknownParameters;
+  std::shared_ptr< thermal::analysis::Kernal > coreSystem;
+  std::shared_ptr< ThermalData > thermalData;
+  std::shared_ptr< math::estimation::unknownList > unknownParameters;
   class methods analysis;
 
   /// constructors and object creators
   explicit Poptea( const Kernal &coreSystem_ ,
                    const ThermalData &thermaldata_,
                    const math::estimation::settings &Settings_,
-                   const math::estimation::unknownList &unknownParameters_ ) ;
+                   const math::estimation::unknownList &unknownParameters_) ;
 
   static Poptea loadConfig( const Kernal &coreSystem_,
                             const boost::property_tree::ptree &pt ) ;
@@ -65,17 +65,14 @@ public:
   ~Poptea( void );
 
   /// Member operations that update on multiple members
-  void updatelthermal( const double lmin, const double lmax ) ;
   void updateExperimentalData( const std::vector<double> &omegas,
                                const std::vector<double> &input ) ;
   void PIE ( void );
-
 
   /// Operations that give results
   double bestFit( void ) ;
   void parameterIntervalEstimates( void ) ;
   void optimization(void);
-
 } ;
 
 

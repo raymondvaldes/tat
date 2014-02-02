@@ -44,15 +44,15 @@ void run( const class filesystem::directory dir )
 
   /// Create initial guess
   std::vector<double>emissionNominal=
-  thermal::emission::phase99( poptea.coreSystem, poptea.thermalData.omegas);
+  thermal::emission::phase99( *(poptea.coreSystem), poptea.thermalData->omegas );
 
   /// execute
-  for(size_t nn = 0; nn < poptea.thermalData.omegas.size() ; ++nn )
+  for(size_t nn = 0; nn < poptea.thermalData->omegas.size() ; ++nn )
   {
-    poptea.thermalData.experimentalEmission[nn]
+    poptea.thermalData->experimentalEmission[nn]
           = emissionNominal[nn];
 
-    std::cout << poptea.thermalData.experimentalEmission[nn] << "\t"
+    std::cout << poptea.thermalData->experimentalEmission[nn] << "\t"
               << emissionNominal[nn] << "\n";
   }
 
@@ -67,7 +67,7 @@ void fitting( class thermal::analysis::Poptea poptea,
               const size_t interants )
 {
   std::vector<double>xInitial;
-  for( const auto &unknown : poptea.unknownParameters() )
+  for( const auto &unknown : (*poptea.unknownParameters)() )
     { xInitial.push_back( unknown.initialVal() ); }
 
 /// Scale jacobian if enabled
@@ -89,20 +89,15 @@ void fitting( class thermal::analysis::Poptea poptea,
 
       poptea.bestFit();
 
-      poptea.thermalData.MSE =
-          MSE( poptea.thermalData.l_thermal.size(),
-               poptea.thermalData.experimentalEmission,
-               poptea.thermalData.predictedEmission);
+//      myfile << *(poptea.coreSystem).TBCsystem.gammaEval() << "\t"
+//             << *(poptea.coreSystem).TBCsystem.a_subEval() << "\t"
+//             << *(poptea.coreSystem).TBCsystem.optical.Emit1 << "\t"
+//             << *(poptea.coreSystem).TBCsystem.optical.R1<< "\t"
+//             << *(poptea.coreSystem).TBCsystem.coating.lambda << "\t"
+//             << *(poptea.thermalData).MSE << "\n";
 
-      myfile << poptea.coreSystem.TBCsystem.gammaEval() << "\t"
-             << poptea.coreSystem.TBCsystem.a_subEval() << "\t"
-             << poptea.coreSystem.TBCsystem.optical.Emit1 << "\t"
-             << poptea.coreSystem.TBCsystem.optical.R1<< "\t"
-             << poptea.coreSystem.TBCsystem.coating.lambda << "\t"
-             << poptea.thermalData.MSE << "\n";
-
-      printPEstimates( poptea.coreSystem.TBCsystem,
-                       poptea.unknownParameters ) ;
+//      printPEstimates( *(poptea.coreSystem).TBCsystem,
+//                       *(poptea.unknownParameters) ) ;
 
       xInitial.clear();
       for( const auto& val : xSave)

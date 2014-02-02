@@ -45,14 +45,18 @@ License
 namespace thermal {
 namespace analysis{  
 
-Poptea::Poptea( const class Kernal &coreSystem_ ,
-                const class ThermalData &thermaldata_,
-                const class math::estimation::settings &Settings_,
-                const class math::estimation::unknownList &unknownParameters_)
-  : coreSystem( coreSystem_ ), thermalData( thermaldata_ ),
-    unknownParameters(unknownParameters_),
-    analysis( Settings_, unknownParameters_, thermalData )
-{}
+Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
+                const math::estimation::settings &Settings_,
+                const math::estimation::unknownList &unknownParameters_)
+    : coreSystem( new Kernal(coreSystem_) ),
+      thermalData( new ThermalData(thermaldata_)),
+      unknownParameters( new math::estimation::unknownList(unknownParameters_)),
+      analysis( Settings_, unknownParameters_, thermaldata_ )
+{
+//  reassign( coreSystem, coreSystem_) ;
+//  reassign( thermalData, thermaldata_) ;
+//  reassign( unknownParameters, unknownParameters_) ;
+}
 
 class Poptea
 Poptea::loadConfig( const class Kernal &coreSystem_,
@@ -115,19 +119,19 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir 
 }
 
 
-void Poptea::updatelthermal( const double lmin, const double lmax )
-{
-  thermalData.thermalSetup( lmin, lmax, coreSystem.TBCsystem.coating ) ;
-}
+//void Poptea::updatelthermal( const double lmin, const double lmax )
+//{
+//  thermalData.thermalSetup( lmin, lmax, coreSystem.TBCsystem.coating ) ;
+//}
 
 void Poptea::updateExperimentalData( const std::vector<double> &omegas,
-                                     const std::vector<double> &input)
+                                     const std::vector<double> &input )
 {
   assert( input.size() == omegas.size());
   loadedExperimental = true;
 
-  thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
-  thermalData.updateExperimental( input );
+  thermalData->updateOmegas( omegas , coreSystem->TBCsystem.coating );
+  thermalData->updateExperimental( input );
 }
 
 Poptea::~Poptea(void){}
@@ -135,9 +139,11 @@ Poptea::~Poptea(void){}
 double Poptea::bestFit( void )
 {
   runbestfit = true;
-  double output = analysis.bestFit( coreSystem, thermalData, unknownParameters ) ;
+  double output = 0;
+  output =  analysis.bestFit( unknownParameters, thermalData, coreSystem);
 
-  for(auto& val : unknownParameters() )
+  std::cout << "\ninside poptea\n";
+  for(auto& val : (*unknownParameters)() )
   {
     std::cout << val.bestfit()
               << "\n";
@@ -148,8 +154,8 @@ double Poptea::bestFit( void )
 
 void Poptea::PIE ( void )
 {
-  analysis.parameterIntervalEstimates( coreSystem, thermalData,
-                                       unknownParameters  ) ;
+  analysis.parameterIntervalEstimates( unknownParameters , thermalData,
+                                       coreSystem ) ;
 }
 
 void Poptea::parameterIntervalEstimates( void )
@@ -171,7 +177,7 @@ void Poptea::parameterIntervalEstimates( void )
   std::cout << "------------------------------\n\n";
   std::cout << "min\tbestfit\tmax\n";
 
-  for(auto& val : unknownParameters() )
+  for(auto& val : (*unknownParameters)() )
   {
     std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
               << "\t"   << val.bestfitInterval.upper << "\n";
