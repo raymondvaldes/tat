@@ -61,13 +61,19 @@ void LMA::updateWorkSpace( const size_t Lend, const size_t N )
   LMA_workspace.updateArraySize( Lend , N );
 }
 
-class ThermalData LMA::solve( Kernal *coreSystem, ThermalData *thermalInput,
-                              math::estimation::unknownList *list )
+class ThermalData LMA::solve(
+    std::shared_ptr< math::estimation::unknownList > &unknownParameters_in,
+    std::shared_ptr< ThermalData > &thermalData_in,
+    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
   ///Take inputs and create objects to work with
-  reassign( thermalData,  *thermalInput );
-  reassign( coreSystem_p, *coreSystem );
-  reassign( unknownParameters_p, *list );
+//  reassign( thermalData,  *thermalInput );
+//  reassign( coreSystem_p, *coreSystem );
+//  reassign( unknownParameters_p, *list );
+  unknownParameters_p = unknownParameters_in;
+  thermalData = thermalData_in;
+  coreSystem_p = coreSystem_in;
+
 
   ///update workspaces
   updateWorkSpace( thermalData->size() , unknownParameters_p->size()  );
@@ -77,12 +83,12 @@ class ThermalData LMA::solve( Kernal *coreSystem, ThermalData *thermalInput,
 
   /// Use working objects and send those address to the references pass in
   // take the object that thermalData points to and reassign the pointer of
-  thermalInput = &*thermalData;
-  coreSystem = &*coreSystem_p;
-  list = &*unknownParameters_p;
+//  thermalInput = &*thermalData;
+//  coreSystem = &*coreSystem_p;
+//  list = &*unknownParameters_p;
 
   std::cout << "\ninside the solver\n";
-  for( auto& val : (*list)() )
+  for( auto& val : (*unknownParameters_p)() )
   {
     std::cout <<  val.bestfit() << "\n";
   }

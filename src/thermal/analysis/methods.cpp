@@ -44,17 +44,18 @@ methods::methods( const math::estimation::settings &Settings_,
 double methods::bestFit( Kernal &coreSystem, ThermalData &thermalData,
                          math::estimation::unknownList& list )
 {
-
-  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
-  std::shared_ptr< ThermalData > thermalData_p;
   std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
+  std::shared_ptr< ThermalData > thermalData_p;
+  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
 
+  reassign( coreSystem_p, coreSystem );
+  reassign( unknownParameters_p, list );
+  reassign( thermalData_p,  thermalData );
 
-
-  bestfitMethod.solve( &coreSystem, &thermalData, &list );
+  bestfitMethod.solve( unknownParameters_p, thermalData_p, coreSystem_p );
 
   std::cout << "\ninside methods\n";
-  for( auto& val : list() )
+  for( auto& val : (*unknownParameters_p)() )
   {
     std::cout <<  val.bestfit() << "\n";
   }
