@@ -167,6 +167,10 @@ class unknown
   return myReturn;
 }
 
+unknownList::unknownList(){}
+unknownList::unknownList( std::vector<class estimation::unknown> input )
+  :vectorUnknowns(input)
+{}
 
 class unknownList unknownList::
         loadConfigfromXML(const boost::property_tree::ptree pt)

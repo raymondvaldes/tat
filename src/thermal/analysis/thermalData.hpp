@@ -35,7 +35,6 @@ class ThermalData
 {
 private:
   double thermalSetupTEMP( const double lmin_, const double lmax_,
-                           const size_t lminPerDecarde,
                            const double L_coat, const double kc,
                            const double psic);
   void clear(void);
@@ -46,6 +45,7 @@ public:
   std::vector<double> l_thermal;
   std::vector<double> experimentalEmission;
   std::vector<double> predictedEmission;
+  const size_t measurementsPerDecade;
   double MSE;
 
   //Constructors, destructors and assignment operators
@@ -60,15 +60,15 @@ public:
                      const physicalModel::layer &coating );
 
   //modify data
+  size_t size(void) const;
   void updateLthermal( const std::vector<double> &input,
                        const physicalModel::layer &coating );
-  void updateOmegas(const std::vector<double> input ,
-                    const physicalModel::layer &coating);
-  void updateExperimental(const std::vector<double> &input);
+  void updateOmegas( const std::vector<double> input ,
+                     const physicalModel::layer &coating );
+  void updateExperimental( const std::vector<double> &input );
 
   size_t thermalSetup( const double lmin, const double lmax,
-                       const size_t lminPerDecarde ,
-                       const physicalModel::layer &coating  );
+                       const physicalModel::layer &coating );
 
 };
 

@@ -39,35 +39,60 @@ namespace analysis{
 class methods{
 
 private:
-  double solve( const double target , const double min, const double max,
-                const physicalModel::labels::Name &mylabel ,
-                const std::string &bound, Kernal &coreSystem,
-                ThermalData &thermalData ) ;
+
+
   double Gfunc( const double x , const physicalModel::labels::Name &mylabel,
-                Kernal &coreSystem, ThermalData &thermalData ) ;
+                Kernal &coreSystem, ThermalData &thermalData,
+                math::estimation::unknownList &list) ;
 
   double optiGfun( const double xCenter, const double xRange,
                    const enum physicalModel::labels::Name &mylabel,
-                   Kernal &coreSystem, ThermalData &thermalData ) ;
+                   Kernal &coreSystem, ThermalData &thermalData ,
+                   math::estimation::unknownList &list) ;
+  void updatelthermal(const double, const double);
+  void updateExperimentalData( const std::vector<double> &omegas,
+                               const std::vector<double> &input,
+                               Kernal &coreSystem,
+                               ThermalData &thermalData );
+
+  std::vector<double>SAVEExperimental;
+  std::vector<double>SAVEomega;
+
+  std::vector<double>TEMPExperimental;
+  std::vector<double>TEMPomega;
+  std::vector<double> resizeExperimental( const double center,
+                                          const double range,
+                                          const size_t numPos ) ;
+
+  void saveExperimental( const ThermalData& thermalData );
+
+  Kernal *coreSystem;
+  ThermalData *thermalData;
+
 
 public:
+  // Working objects
+  class LMA bestfitMethod;
+
+  //constructors
   methods( const math::estimation::settings &Settings_,
            const math::estimation::unknownList &unknownParameters_,
            const ThermalData& thermalData ) ;
 
   //output methods
-  class LMA bestfitMethod;
-  double bestFit( Kernal &coreSystem , ThermalData &thermalData ) ;
+  double bestFit( Kernal &coreSystem , ThermalData &thermalData ,
+                  math::estimation::unknownList &list) ;
   void parameterIntervalEstimates( Kernal &coreSystem,
-                                   ThermalData &thermalData ) ;
-  void optimization(void);
+                                   ThermalData &thermalData ,
+                                   math::estimation::unknownList &list) ;
+  void optimization( Kernal &coreSystem,
+                     ThermalData &thermalData,
+                     math::estimation::unknownList &list);
 
-  //updaters
-  void updateExperimentalData( const std::vector<double> &omegas,
-                               const std::vector<double> &input,
-                               const Kernal &coreSystem,
-                               ThermalData &thermalData );
-
+  double solve(const double target , const double min, const double max,
+                const physicalModel::labels::Name mylabel,
+                const std::string &bound, Kernal &coreSystem,
+                ThermalData &thermalData, math::estimation::unknownList &list) ;
 };
 
 }}

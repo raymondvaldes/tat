@@ -50,7 +50,7 @@ Poptea::Poptea( const class Kernal &coreSystem_ ,
                 const class math::estimation::settings &Settings_,
                 const class math::estimation::unknownList &unknownParameters_)
   : coreSystem( coreSystem_ ), thermalData( thermaldata_ ),
-//    LMA( Settings_, unknownParameters_, thermalData.omegas.size(), thermalData ),
+    unknownParameters(unknownParameters_),
     analysis( Settings_, unknownParameters_, thermalData )
 {}
 
@@ -115,14 +115,9 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir 
 }
 
 
-void Poptea::updatelthermal( const double lmin, const double lmax,
-                             const double lminperDecade)
+void Poptea::updatelthermal( const double lmin, const double lmax )
 {
-  const size_t Lend =
-  thermalData.thermalSetup( lmin, lmax, lminperDecade,
-                            coreSystem.TBCsystem.coating ) ;
-  analysis.bestfitMethod.updateWorkSpace(
-        Lend, analysis.bestfitMethod.unknownParameters.size() );
+  thermalData.thermalSetup( lmin, lmax, coreSystem.TBCsystem.coating ) ;
 }
 
 void Poptea::updateExperimentalData( const std::vector<double> &omegas,
@@ -133,11 +128,6 @@ void Poptea::updateExperimentalData( const std::vector<double> &omegas,
 
   thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
   thermalData.updateExperimental( input );
-
-  analysis.bestfitMethod.updateWorkSpace(
-        input.size() , analysis.bestfitMethod.unknownParameters.size()  );
-
-  analysis.updateExperimentalData( omegas, input, coreSystem, thermalData  );
 }
 
 Poptea::~Poptea(void){}
@@ -145,7 +135,21 @@ Poptea::~Poptea(void){}
 double Poptea::bestFit( void )
 {
   runbestfit = true;
-  return analysis.bestFit( coreSystem, thermalData ) ;
+  double output = analysis.bestFit( coreSystem, thermalData, unknownParameters ) ;
+
+  for(auto& val : unknownParameters() )
+  {
+    std::cout << val.bestfit()
+              << "\n";
+  }
+
+  return output;
+}
+
+void Poptea::PIE ( void )
+{
+  analysis.parameterIntervalEstimates( coreSystem, thermalData,
+                                       unknownParameters  ) ;
 }
 
 void Poptea::parameterIntervalEstimates( void )
@@ -154,20 +158,24 @@ void Poptea::parameterIntervalEstimates( void )
   if(!loadedExperimental) { return; }
   bestFit();
 
-  analysis.parameterIntervalEstimates( coreSystem, thermalData ) ;
+  std::cout << "iterate through parameters now:---\n\n";
+  std::cout << "parameter estimates intervals:\n";
+  std::cout << "------------------------------\n\n";
+  std::cout << "min\tbestfit\tmax\n";
+
+
+  PIE();
 
   std::cout << "iterate through parameters now:---\n\n";
   std::cout << "parameter estimates intervals:\n";
   std::cout << "------------------------------\n\n";
   std::cout << "min\tbestfit\tmax\n";
 
-  for(auto& val : analysis.bestfitMethod.unknownParameters() )
+  for(auto& val : unknownParameters() )
   {
     std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
               << "\t"   << val.bestfitInterval.upper << "\n";
   }
-
-  return;
 }
 
 void Poptea::optimization(void)
@@ -175,19 +183,18 @@ void Poptea::optimization(void)
   if(!loadedExperimental) { return; }
   bestFit();
 
-  analysis.parameterIntervalEstimates( coreSystem, thermalData ) ;
+//  double xreturn;
+//  analysis.parameterIntervalEstimates( coreSystem, thermalData ) ;
+//  for( math::estimation::unknown& val : analysis.bestfitMethod.unknownParameters() )
+//  {
+//    if( val.label() == physicalModel::labels::Name::asub)
+//    {
+//      xreturn = math::xspread( val.bestfitInterval.lower, val.bestfit(),
+//                               val.bestfitInterval.upper );
+//    }
+//  }
 
-  double xreturn;
-  for( math::estimation::unknown& val : analysis.bestfitMethod.unknownParameters() )
-  {
-    if( val.label() == physicalModel::labels::Name::asub)
-    {
-      xreturn = math::xspread( val.bestfitInterval.lower, val.bestfit(),
-                               val.bestfitInterval.upper );
-    }
-  }
-
-  std::cout << xreturn;
+//  std::cout << xreturn;
 }
 
 
@@ -209,7 +216,14 @@ class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
   return Poptea::loadConfig( popteaCore, pt );
 }
 
+//void Poptea::updateUnknownParameters(
+//    const std::vector< class math::estimation::unknown > &unknownList_ )
+//{
+//  std::vector<class math::estimation::unknown> updated(unknownList_);
+//  unknownParameters( updated );
 
+//  const size_t Default = thermalData.experimentalEmission.size();
+//}
 
 
 }}
