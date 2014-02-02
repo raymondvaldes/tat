@@ -63,7 +63,7 @@ void qrsolv(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
 template< typename OBJ >
 void fdjac2(std::function<void( double*, double*,
                                 OBJ&)> fcn,
-            int m, int n, double x[], double fvec[], double fjac[], int ldfjac,
+            int m, int n, double x[], double fvec[], double fjac[], int /*ldfjac*/,
             int *iflag, double epsfcn, double wa[],
             OBJ &popteaCore)
 {

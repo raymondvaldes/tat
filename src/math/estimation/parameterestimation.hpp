@@ -88,6 +88,9 @@ public:
 
   size_t size(void) const;
 
+  unknownList();
+  unknownList( std::vector<class estimation::unknown> input )  ;
+
   static class unknownList
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
   class unknown getParameter( physicalModel::labels::Name label );

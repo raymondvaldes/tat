@@ -34,19 +34,20 @@ namespace analysis{
 ThermalData::ThermalData( const double l_min, const double l_max,
                           const size_t lminPerDecarde,
                           const physicalModel::layer &coating )
+  : measurementsPerDecade(lminPerDecarde)
 {
   // Populate the experimental phase values in parameters99
-  thermalSetup( l_min, l_max, lminPerDecarde ,coating );
+  thermalSetup( l_min, l_max, coating );
 }
 
 ThermalData::~ThermalData(){}
 
 size_t ThermalData::thermalSetup( const double lmin, const double lmax,
-                                  const size_t lminPerDecarde ,
                                   const physicalModel::layer &coating  )
+
 {
-  size_t L_end = thermalSetupTEMP( lmin, lmax, lminPerDecarde,
-                                   coating.depth, coating.kthermal.offset,
+  size_t L_end = thermalSetupTEMP( lmin, lmax, coating.depth,
+                                   coating.kthermal.offset,
                                    coating.psithermal.offset );
   clear();
   resize( L_end );
@@ -64,6 +65,10 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
   return L_end;
 }
 
+size_t ThermalData::size(void) const
+{
+  return experimentalEmission.size();
+}
 
 void ThermalData::clear(void)
 {
@@ -138,11 +143,10 @@ ThermalData& ThermalData::operator=(const ThermalData& that)
 
 
 double ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
-                                      const size_t lminPerDecarde,
                                       const double L_coat, const double kc,
                                       const double psic )
 {
-  const size_t L_end = lminPerDecarde;
+  const size_t L_end = measurementsPerDecade;
   BOOST_ASSERT_MSG( ( l_min < l_max ) , "check min-max logic\n\n" );
   BOOST_ASSERT_MSG( ( L_coat > 0 ) && ( L_end > 0 ) , "check L inputs\n\n" );
   BOOST_ASSERT_MSG( ( kc > 0 ) && ( psic > 0 ) , "check kc inputs\n\n" );

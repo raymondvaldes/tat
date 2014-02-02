@@ -232,7 +232,8 @@ double percentilelog10(const double xmin, const double xmax, const double x)
     return (log10(x) - log10(xmin)) / (log10(xmax) - log10(xmin));
 }
 
-double valFROMpercentileLog10( const double input,  const double xmin, const double xmax )
+double valFROMpercentileLog10( const double input,  const double xmin,
+                               const double xmax )
 {
   assert( input <= 1 && input >=0) ;
 
@@ -245,7 +246,7 @@ void range( double* l_thermal, const double l_min, const double l_max,
 {
     for(size_t i = 0 ; i <  L_end; ++i)
     {
-        l_thermal[i] = ( l_max - l_min ) * ( double(i) / ( L_end - 1 ) );
+      l_thermal[i] = ( l_max - l_min ) * ( double(i) / ( L_end - 1 ) );
     }
 }
 
@@ -298,12 +299,49 @@ void range1og10( const double l_min, const double l_max, const size_t L_end,
 
     for(size_t n = 0 ; n < L_end-1 ; ++n )
     {
-        l_thermal[n] = pow(10, rangeI - 1);
-        rangeI += increments;
+      l_thermal[n] = pow(10, rangeI - 1);
+      rangeI += increments;
     }
     l_thermal[L_end-1] = l_max;
   }
 }
+
+std::vector<double>
+range1og10( const double l_min, const double l_max, const size_t L_end )
+{
+  BOOST_ASSERT_MSG( L_end >= 1 , "check inputs \n\n" );
+  BOOST_ASSERT_MSG( l_min < l_max , "check inputs \n\n" );
+  BOOST_ASSERT_MSG( l_min > 0 , "check inputs \n\n" );
+
+  std::vector<double> output( L_end );
+
+  if (L_end == 1)
+  {
+    output[0] = l_min;
+  }
+  else if(L_end == 2)
+  {
+    output[0] = l_min;
+    output[L_end-1] = l_max;
+  }
+  else if(L_end > 2)
+  {
+    const double start1 = log10(l_min * 10);
+    const double end1   = log10(l_max * 10);
+    const double increments = (end1 - start1) / (L_end -1);
+    double rangeI = start1;
+
+    for(size_t n = 0 ; n < L_end-1 ; ++n )
+    {
+      output[n] = pow(10, rangeI - 1);
+      rangeI += increments;
+    }
+    output[L_end-1] = l_max;
+  }
+
+  return output;
+}
+
 
 void range1og10(const double l_min, const double l_max, const size_t L_end,
                 double* l_thermal)

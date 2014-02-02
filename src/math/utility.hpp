@@ -25,6 +25,7 @@ License
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
+#include <vector>
 #include <cstring>
 #include <iostream>
 
@@ -63,6 +64,8 @@ void range1og10( const double l_min, const double l_max, const size_t L_end,
                  std::vector<double> &l_thermal ) ;
 void range1og10( const double l_min, const double l_max, const size_t L_end,
                  double* l_thermal ) ;
+std::vector<double>
+range1og10( const double l_min, const double l_max, const size_t L_end );
 
 inline double mean(const double a, const double b)
 {
@@ -72,6 +75,9 @@ inline double mean(const double a, const double b)
     return mean1;
 }
 double xspread( const double xmin, const double xnominal, const double xmax);
+
+double valFROMpercentileLog10( const double input,  const double xmin,
+                               const double xmax );
 
 }
 

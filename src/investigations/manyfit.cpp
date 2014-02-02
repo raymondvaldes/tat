@@ -67,7 +67,7 @@ void fitting( class thermal::analysis::Poptea poptea,
               const size_t interants )
 {
   std::vector<double>xInitial;
-  for( const auto &unknown : poptea.analysis.bestfitMethod.unknownParameters() )
+  for( const auto &unknown : poptea.unknownParameters() )
     { xInitial.push_back( unknown.initialVal() ); }
 
 /// Scale jacobian if enabled
@@ -102,7 +102,7 @@ void fitting( class thermal::analysis::Poptea poptea,
              << poptea.thermalData.MSE << "\n";
 
       printPEstimates( poptea.coreSystem.TBCsystem,
-                       poptea.analysis.bestfitMethod.unknownParameters ) ;
+                       poptea.unknownParameters ) ;
 
       xInitial.clear();
       for( const auto& val : xSave)

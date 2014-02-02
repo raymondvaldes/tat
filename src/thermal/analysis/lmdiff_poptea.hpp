@@ -27,6 +27,7 @@ License
 
 #include <vector>
 #include <utility>
+#include <memory>
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
@@ -40,47 +41,52 @@ License
 #include "thermal/model.hpp"
 #include "thermal/thermal.hpp"
 
-
 namespace thermal {
 namespace analysis{
 
 class LMA
 {
+
+private:
+
+  int nfev;
+  int info;
+
 public:
-  class math::estimation::unknownList unknownParameters;
   explicit LMA( const struct math::estimation::settings &Settings_,
                 const math::estimation::unknownList &unknownParameters,
-                const size_t Lend_, const ThermalData &thermalData_) ;
+                const size_t Lend_) ;
   ~LMA(void);
-
-  void updateUnknownParameters(
-      const std::vector<math::estimation::unknown> &unknownList_);
-  void updateWorkSpace(const size_t Lend , const size_t N);
-  ThermalData paramter_estimation( int *info, int *nfev, Kernal &coreSystem,
-                                   ThermalData input );
-
+  ThermalData solve( Kernal *coreSystem, ThermalData *thermalInput,
+                     math::estimation::unknownList *list) ;
 private:
   std::function< void( double*, double*, thermal::analysis::Kernal &) >
   myReduced;
-
-  void updateThermalData( ThermalData thermalData_  );
-
   void ThermalProp_Analysis( double *x, double *fvec,
-                             thermal::analysis::Kernal &popteaCore);
-  void myReducedUpdate( void );
-  class ThermalData thermalData;
-  class math::estimation::settings Settings;
-  class LMA_workingArrays LMA_workspace;
+                             thermal::analysis::Kernal &popteaCore ) ;
+  void updateBindFunc( void );
+  void updateWorkSpace(const size_t Lend , const size_t N);
+  ThermalData paramter_estimation(int *info, int *nfev);
+
+  /// working objects
+  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
+  std::shared_ptr< ThermalData > thermalData;
+  std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
+
+//  ThermalData thermalData;
+  math::estimation::settings Settings;
+  LMA_workingArrays LMA_workspace;
 
 };
 
+}}
 
 
+template<typename OBJ>
+void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
+  { var.reset( new OBJ( input )  ); }
 
 
-
-}
-}
 
 void printPEstimates( const class physicalModel::TBCsystem TBCSystem,
                       math::estimation::unknownList list );

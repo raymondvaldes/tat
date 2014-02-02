@@ -38,42 +38,68 @@ namespace analysis{
 methods::methods( const math::estimation::settings &Settings_,
                   const math::estimation::unknownList &unknownParameters_,
                   const ThermalData& thermalData_ )
-  : bestfitMethod( Settings_, unknownParameters_, thermalData_.omegas.size(),
-                   thermalData_ )
+  : bestfitMethod( Settings_, unknownParameters_, thermalData_.size() )
 {}
 
-double methods::bestFit( Kernal &coreSystem, ThermalData &thermalData )
+double methods::bestFit( Kernal &coreSystem, ThermalData &thermalData,
+                         math::estimation::unknownList& list )
 {
-  int nfev;
-  int info;
 
-  thermalData = bestfitMethod.paramter_estimation( &info, &nfev, coreSystem,
-                                                   thermalData);
-  coreSystem.updatefromBestFit( bestfitMethod.unknownParameters() );
+  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
+  std::shared_ptr< ThermalData > thermalData_p;
+  std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
+
+
+
+  bestfitMethod.solve( &coreSystem, &thermalData, &list );
+
+  std::cout << "\ninside methods\n";
+  for( auto& val : list() )
+  {
+    std::cout <<  val.bestfit() << "\n";
+  }
+
+
+  coreSystem.updatefromBestFit( list() );
 
   return thermalData.MSE;
 }
 
 double methods::Gfunc( const double val ,
                        const enum physicalModel::labels::Name &mylabel,
-                       Kernal &coreSystem, ThermalData &thermalData)
+                       Kernal &coreSystem, ThermalData &thermalData,
+                       math::estimation::unknownList &list )
 {
-  coreSystem.TBCsystem.updateVal( mylabel , val );
-  coreSystem.TBCsystem.updateCoat();
-  bestFit( coreSystem, thermalData );
+  coreSystem.TBCsystem.updateVal( mylabel , val ) ;
+  coreSystem.TBCsystem.updateCoat() ;
+
+  bestFit( coreSystem, thermalData, list ) ;
 
   return thermalData.MSE;
 }
 
+void methods::updatelthermal( const double /*lmin*/, const double /*lmax*/ )
+{
+//  const size_t Lend =
+//  thermalData.thermalSetup( lmin, lmax, coreSystem.TBCsystem.coating ) ;
+//  analysis.bestfitMethod.updateWorkSpace(
+//        Lend, analysis.bestfitMethod.unknownParameters.size() );
+}
+
+
 double methods::optiGfun( const double xCenter, const double xRange,
                           const enum physicalModel::labels::Name &mylabel,
-                          Kernal &coreSystem, ThermalData &thermalData)
+                          Kernal &coreSystem, ThermalData &thermalData,
+                          math::estimation::unknownList &list)
 {
-  bestFit( coreSystem, thermalData );
-  parameterIntervalEstimates( coreSystem, thermalData ) ;
+  const size_t numPos = 10;
+  resizeExperimental( xCenter, xRange, numPos );
 
-  double xreturn;
-  for( math::estimation::unknown& val : bestfitMethod.unknownParameters() )
+  bestFit( coreSystem, thermalData, list );
+  parameterIntervalEstimates( coreSystem, thermalData, list) ;
+
+  double xreturn = 1;
+  for( math::estimation::unknown& val : list() )
   {
     if( val.label() == mylabel )
     {
@@ -85,16 +111,81 @@ double methods::optiGfun( const double xCenter, const double xRange,
   return xreturn;
 }
 
-double methods::solve( const double target , const double min,
-                       const double max,
-                       const enum physicalModel::labels::Name &mylabel,
+void methods::updateExperimentalData( const std::vector<double> &omegas,
+                                      const std::vector<double> &input,
+                                      Kernal &coreSystem,
+                                      ThermalData &thermalData )
+{
+  thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
+  thermalData.updateExperimental( input );
+}
+
+void methods::parameterIntervalEstimates( Kernal &coreSystem,
+                                          ThermalData &thermalData,
+                                          math::estimation::unknownList &list )
+{
+  /// Save experimental data, quality-of-fit, unknownParameter List
+  using math::estimation::unknown;
+  std::vector< unknown > originalListParams( list() );
+  saveExperimental( thermalData );
+  const double S1 = thermalData.MSE;
+
+  /// Update initial guess using bestfits
+  for( auto& param : originalListParams)
+    { param.Initialset( param.bestfit() ); }
+
+  /// Predicted emission as the new experimental
+  const std::vector<double> TEMPExperimental = thermalData.predictedEmission;
+  updateExperimentalData( SAVEomega, TEMPExperimental, coreSystem, thermalData);
+
+  /// Create list of parameters that must be refitted
+  using math::algorithms::combos_minusOne;
+  const std::vector< std::vector<  unknown > >
+      unknownParaLists = combos_minusOne( originalListParams );
+
+  std::vector< enum physicalModel::labels::Name  > parametersToBeManipulated;
+  for ( const auto& unknown : originalListParams )
+    { parametersToBeManipulated.push_back( unknown.label() ); }
+
+  /// update list of parameters using unknownIterations
+  size_t i = 0;
+  for( auto& newListVect : unknownParaLists )
+  {
+    ///identifiy fixed parameter and update search bound
+    const unknown myfixedParameter =  originalListParams[i];
+    const enum physicalModel::labels::Name mylabel = myfixedParameter.label();
+    const double bestfit = myfixedParameter.bestfit();
+    const double lowerbound = myfixedParameter.lowerBound();
+    const double upperbound = myfixedParameter.upperBound();
+
+//    std::cout << "solve this\t" << lowerbound << "\t" << bestfit << "\t" << upperbound << "\n";
+
+    ///search space
+    math::estimation::unknownList myUpdateList(newListVect);
+    const double min = solve( S1, lowerbound, bestfit , mylabel, "min",
+                              coreSystem, thermalData, myUpdateList ) ;
+    const double max = solve( S1, bestfit, upperbound , mylabel, "max",
+                              coreSystem, thermalData, myUpdateList ) ;
+
+    originalListParams[i++].bestfitIntervalset( min, max);
+  }
+
+  ///Update list of parameters with updated list  
+  list( originalListParams );
+  updateExperimentalData( SAVEomega , SAVEExperimental, coreSystem,thermalData);
+  thermalData.MSE = S1;
+}
+
+double methods::solve( const double target , const double min, const double max,
+                       const enum physicalModel::labels::Name mylabel,
                        const std::string &bound, Kernal &coreSystem,
-                       ThermalData &thermalData )
+                       ThermalData &thermalData,
+                       math::estimation::unknownList &list )
 {
   using std::placeholders::_1;
   const std::function<double(double)>
       myFuncReduced = std::bind( &methods::Gfunc, this , _1 , mylabel,
-                                 coreSystem, thermalData ) ;
+                                 coreSystem, thermalData, list ) ;
 
   const math::solve ojb( myFuncReduced, target, min, max ) ;
   double soln = ojb.returnSoln();
@@ -108,84 +199,35 @@ double methods::solve( const double target , const double min,
   return soln;
 }
 
-void methods::updateExperimentalData( const std::vector<double> &omegas,
-                                      const std::vector<double> &input,
-                                      const Kernal &coreSystem,
-                                      ThermalData &thermalData )
+
+std::vector<double>
+methods::resizeExperimental( const double center, const double range,
+                             const size_t numPos )
 {
-  thermalData.updateOmegas( omegas , coreSystem.TBCsystem.coating );
-  thermalData.updateExperimental( input );
-  bestfitMethod.updateWorkSpace( input.size() ,
-                                 bestfitMethod.unknownParameters.size()  );
+  const double lmin = SAVEExperimental.front();
+  const double lmax = SAVEExperimental.back();
+
+  const double strPos = center - range/2;
+  const double endPos = center + range/2;
+
+  const double lminNEW = math::valFROMpercentileLog10( strPos, lmin, lmax ) ;
+  const double lmaxNEW = math::valFROMpercentileLog10( endPos, lmin, lmax ) ;
+
+  std::vector<double>output = math::range1og10( lminNEW, lmaxNEW, numPos );
+
+  return output;
 }
 
-
-
-void methods::parameterIntervalEstimates( Kernal &coreSystem,
-                                          ThermalData &thermalData )
+void methods::optimization( Kernal &coreSystem, ThermalData &thermalData ,
+                            math::estimation::unknownList &list)
 {
-  /// Save experimental data, quality-of-fit, unknownParameter List
+  ///The optimization algorithm will have the experimental data in vector for.
+  /// I need to take that data and be able to resize it.
   using math::estimation::unknown;
-  std::vector< unknown > originalListParams = bestfitMethod.unknownParameters();
-  const std::vector<double> SAVEExperimental = thermalData.experimentalEmission;
-  const double S1 = thermalData.MSE;
-
-  /// Update initial guess using bestfits
-  for( auto& param : originalListParams)
-    { param.Initialset( param.bestfit() ); }
-
-  /// Predicted emission as the new experimental
-  const std::vector<double> TEMPemissionExperimental = thermalData.predictedEmission;
-  updateExperimentalData( thermalData.omegas , TEMPemissionExperimental,
-                          coreSystem, thermalData ) ;
+  saveExperimental( thermalData );
+  std::vector< unknown > originalListParams = list();
 
 
-
-  /// Create list of parameters that must be refitted
-  using math::algorithms::combos_minusOne;
-  const std::vector< std::vector<  unknown > >
-      unknownParaLists = combos_minusOne( originalListParams );
-
-  std::vector< enum physicalModel::labels::Name  > parametersToBeManipulated;
-  for ( const auto& unknown : originalListParams )
-    { parametersToBeManipulated.push_back( unknown.label() ); }
-
-  /// update list of parameters using unknownIterations
-  size_t i = 0;
-  for( const auto& updatedListParameters : unknownParaLists )
-  {
-    bestfitMethod.unknownParameters( updatedListParameters );
-
-    ///identifiy fixed parameter and update search bound
-    const class unknown myfixedParameter =  originalListParams[i];
-    const enum physicalModel::labels::Name
-        mylabel = myfixedParameter.label();
-    const double bestfit = myfixedParameter.bestfit();
-    const double lowerbound = myfixedParameter.lowerBound();
-    const double upperbound = myfixedParameter.upperBound();
-
-    ///search space
-    const double min = solve( S1, lowerbound, bestfit , mylabel, "min",
-                              coreSystem, thermalData );
-
-    const double max = solve( S1, bestfit, upperbound , mylabel, "max",
-                              coreSystem, thermalData );
-
-    originalListParams[i++].bestfitIntervalset( min, max);
-  }
-
-  ///Update list of parameters with updated list
-  bestfitMethod.unknownParameters( originalListParams ) ;
-  updateExperimentalData( thermalData.omegas , SAVEExperimental,
-                          coreSystem, thermalData );
-  thermalData.MSE = S1;
-}
-
-
-
-
-void methods::optimization(void)
-{
   /// I need to create ways to optimize thermal penetration. The ones I am
   /// thinking
   ///   a) given X data what is the optimal range to best estimate properties
@@ -200,7 +242,23 @@ void methods::optimization(void)
   /// post-analysis on their data.  They have a given range of values ( a
   /// thermograph) and they're looking to see how much data to keep.
   ///
+  ///
+
+
+  ///Update list of parameters with updated list
+  list( originalListParams ) ;
+  updateExperimentalData( SAVEomega , SAVEExperimental, coreSystem,
+                          thermalData );
 }
+
+void methods::saveExperimental( const ThermalData& thermalData)
+{
+  SAVEExperimental = thermalData.experimentalEmission;
+  SAVEomega = thermalData.omegas;
+}
+
+
+
 
 
 
