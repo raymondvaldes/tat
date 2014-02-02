@@ -43,60 +43,56 @@ namespace analysis{
 class methods{
 
 private:
-
-
-  double Gfunc( const double x , const physicalModel::labels::Name &mylabel,
-                Kernal &coreSystem, ThermalData &thermalData,
-                math::estimation::unknownList &list) ;
-
-  double optiGfun( const double xCenter, const double xRange,
-                   const enum physicalModel::labels::Name &mylabel,
-                   Kernal &coreSystem, ThermalData &thermalData ,
-                   math::estimation::unknownList &list) ;
-  void updatelthermal(const double, const double);
-  void updateExperimentalData( const std::vector<double> &omegas,
-                               const std::vector<double> &input,
-                               Kernal &coreSystem,
-                               ThermalData &thermalData );
-
+  /// working objects
   std::vector<double>SAVEExperimental;
   std::vector<double>SAVEomega;
-
   std::vector<double>TEMPExperimental;
   std::vector<double>TEMPomega;
+  std::shared_ptr< math::estimation::unknownList > unknownParameters;
+  std::shared_ptr< ThermalData > thermalData;
+  std::shared_ptr< thermal::analysis::Kernal > coreSystem;
+
+  double Gfunc( const double x , const physicalModel::labels::Name &mylabel ) ;
+  double optiGfun( const double xCenter, const double xRange,
+                   const enum physicalModel::labels::Name &mylabel ) ;
+
   std::vector<double> resizeExperimental( const double center,
                                           const double range,
                                           const size_t numPos ) ;
 
-  void saveExperimental( const ThermalData& thermalData );
+  void updateExperimentalData( const std::vector<double> &omegas,
+                               const std::vector<double> &input,
+                               Kernal &coreSystem_in,
+                               ThermalData &thermalData_in ) ;
 
-  Kernal *coreSystem;
-  ThermalData *thermalData;
+  void saveExperimental( const ThermalData& thermalData_in );
 
-
+  double solve( const double target , const double min, const double max,
+                const physicalModel::labels::Name mylabel,
+                const std::string &bound) ;
 public:
-  // Working objects
   class LMA bestfitMethod;
 
   //constructors
-  methods( const math::estimation::settings &Settings_,
-           const math::estimation::unknownList &unknownParameters_,
-           const ThermalData& thermalData ) ;
+  methods( const math::estimation::settings &Settings_in,
+           const math::estimation::unknownList &unknownParameters_in,
+           const ThermalData& thermalData_in ) ;
 
   //output methods
-  double bestFit( Kernal &coreSystem , ThermalData &thermalData ,
-                  math::estimation::unknownList &list) ;
-  void parameterIntervalEstimates( Kernal &coreSystem,
-                                   ThermalData &thermalData ,
-                                   math::estimation::unknownList &list) ;
-  void optimization( Kernal &coreSystem,
-                     ThermalData &thermalData,
-                     math::estimation::unknownList &list);
+  double bestFit(
+      std::shared_ptr< math::estimation::unknownList > &list_in,
+      std::shared_ptr< ThermalData > &thermalData_in,
+      std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
 
-  double solve(const double target , const double min, const double max,
-                const physicalModel::labels::Name mylabel,
-                const std::string &bound, Kernal &coreSystem,
-                ThermalData &thermalData, math::estimation::unknownList &list) ;
+  void parameterIntervalEstimates(
+      std::shared_ptr< math::estimation::unknownList > &list_in,
+      std::shared_ptr< ThermalData > &thermalData_in,
+      std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
+
+  void optimization(
+      std::shared_ptr< math::estimation::unknownList > &list_in,
+      std::shared_ptr< ThermalData > &thermalData_in,
+      std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in );
 };
 
 }}
