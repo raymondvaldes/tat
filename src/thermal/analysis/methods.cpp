@@ -143,12 +143,6 @@ void methods::optimization(
 }
 
 
-//void methods::updateExperimentalData( const std::vector<double> &input,
-//                                      ThermalData &thermalData_in )
-//{
-//  thermalData_in.updateExperimental( input );
-//}
-
 
 
 

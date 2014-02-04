@@ -22,61 +22,23 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef poptea_HPP
-#define poptea_HPP
-
-#include <vector>
-#include <utility>
-#include <boost/property_tree/ptree.hpp>
+#ifndef BASEDATA_HPP
+#define BASEDATA_HPP
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/thermalData.hpp"
-#include "thermal/analysis/methods.hpp"
-#include "thermal/analysis/basedata.hpp"
 
-namespace thermal {
+namespace thermal{
 namespace analysis{
 
-class Poptea
+class baseData
 {
-private:
-  bool loadedExperimental = false;
-  bool runbestfit = false;
-
-public:
-  /// core members
+protected:
   std::shared_ptr< Kernal > coreSystem;
   std::shared_ptr< ThermalData > thermalData;
   std::shared_ptr< math::estimation::unknownList > unknownParameters;
-  methods analysis;
+};
 
-  /// constructors and object creators
-  explicit Poptea( const Kernal &coreSystem_ ,
-                   const ThermalData &thermaldata_,
-                   const math::estimation::settings &Settings_,
-                   const math::estimation::unknownList &unknownParameters_) ;
-
-  static Poptea loadConfig( const Kernal &coreSystem_,
-                            const boost::property_tree::ptree &pt ) ;
-  static Poptea loadConfigfromFile( const filesystem::directory &dir ) ;
-  ~Poptea( void );
-
-  /// Member operations that update on multiple members
-  void updateExperimentalData( const std::vector<double> &omegas,
-                               const std::vector<double> &input ) ;
-  void PIE ( void );
-
-  /// Operations that give results
-  double bestFit( void ) ;
-  void parameterIntervalEstimates( void ) ;
-  void optimization(void);
-  std::vector<double> thermalSweep(void) const;
-
-} ;
-
-
-class Poptea
-loadWorkingDirectoryPoptea( const filesystem::directory dir,
-                            const Kernal &popteaCore);
 }}
-#endif // poptea_HPP
+
+#endif // BASEDATA_HPP

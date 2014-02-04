@@ -77,12 +77,12 @@ void LMA::solve(
     std::shared_ptr< ThermalData > &thermalData_in,
     std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-  unknownParameters_p = unknownParameters_in;
+  unknownParameters = unknownParameters_in;
   thermalData = thermalData_in;
-  coreSystem_p = coreSystem_in;
+  coreSystem = coreSystem_in;
 
   ///update workspaces
-  updateWorkSpace( thermalData->size() , unknownParameters_p->size()  );
+  updateWorkSpace( thermalData->size() , unknownParameters->size()  );
 
   ///Solve
   paramter_estimation( &info, &nfev );
@@ -94,7 +94,7 @@ LMA::paramter_estimation( int *info, int *nfev )
 {
   using namespace math::estimation;
   const size_t m = thermalData->omegas.size();
-  const size_t n = unknownParameters_p->size();
+  const size_t n = unknownParameters->size();
 
   ///Create workspaces
   double *x = new double[n];
@@ -112,17 +112,17 @@ LMA::paramter_estimation( int *info, int *nfev )
   ///populate initial values
   std::vector<double> xInitial(0);
 
-  for( const auto &unknown : (*unknownParameters_p)() )
+  for( const auto &unknown : (*unknownParameters)() )
     { xInitial.push_back( unknown.initialVal() ); }
   for( size_t i=0 ; i< n ; i++ )
     { x[i] = xInitial[i]; }
 
-  scaleDiag( diag, *unknownParameters_p , coreSystem_p->TBCsystem,
+  scaleDiag( diag, *unknownParameters , coreSystem->TBCsystem,
              Settings.mode ) ;
 
   ///Transform inputs
   int j = 0;
-  for( const auto& unknown : (*unknownParameters_p)() )
+  for( const auto& unknown : (*unknownParameters)() )
   {
     x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
     j++;
@@ -135,11 +135,11 @@ LMA::paramter_estimation( int *info, int *nfev )
                            Settings.epsfcn, diag, Settings.mode,
                            Settings.factor, Settings.nprint, info, nfev, fjac,
                            m, ipvt, qtf, wa1, wa2, wa3, wa4, wa5,
-                           *coreSystem_p ) ;
+                           *coreSystem ) ;
 
   //Transform outputs
   j=0;
-  for( auto& unknown : (*unknownParameters_p)() )
+  for( auto& unknown : (*unknownParameters)() )
   {
     x[j] = x_limiter2(x[j], unknown.lowerBound(), unknown.upperBound());
     unknown.bestfitset(x[j]);
@@ -147,9 +147,9 @@ LMA::paramter_estimation( int *info, int *nfev )
   }
 
    ///Final fit
-  coreSystem_p->updatefromBestFit( (*unknownParameters_p)() );
+  coreSystem->updatefromBestFit( (*unknownParameters)() );
   thermalData->predictedEmission =
-      thermal::emission::phase99( *coreSystem_p , thermalData->omegas );
+      thermal::emission::phase99( *coreSystem , thermalData->omegas );
 
   /// Quality-of-fit
   thermalData->MSE = math::estimation::SobjectiveLS(
@@ -177,7 +177,7 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   //Update parameters
   math::estimation::unknownList updatedInput;
   int i = 0;
-  for( auto& unknown :  (*unknownParameters_p)() )
+  for( auto& unknown :  (*unknownParameters)() )
   {
     const double val = math::estimation::
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
@@ -185,8 +185,8 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
     updatedInput.addUnknown(unknown);
   }
 
-  (*unknownParameters_p)( updatedInput() );
-  popteaCore.updatefromBestFit( (*unknownParameters_p)()  );
+  (*unknownParameters)( updatedInput() );
+  popteaCore.updatefromBestFit( (*unknownParameters)()  );
 
   // Estimates the phase of emission at each heating frequency
   thermalData->predictedEmission =
@@ -202,7 +202,7 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   thermalData->MSE =
       math::estimation::SobjectiveLS( thermalData->experimentalEmission,
                                       thermalData->predictedEmission );
-  printPEstimates( popteaCore.TBCsystem, *unknownParameters_p ) ;
+  printPEstimates( popteaCore.TBCsystem, *unknownParameters ) ;
 
   return;
 }
@@ -216,17 +216,17 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
 //  //Update parameters with current bestfits by transforming x
 //  math::estimation::unknownList updatedInput;
 //  int i = 0;
-//  for( auto& unknown :  (*unknownParameters_p)() )
+//  for( auto& unknown :  (*unknownParameters)() )
 //  {
 //    const double val = math::estimation::
 //        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
 //    unknown.bestfitset( val );
 //    updatedInput.addUnknown(unknown);
 //  }
-//  (*unknownParameters_p)( updatedInput() );
+//  (*unknownParameters)( updatedInput() );
 
 //  ///Load these unknownParameters into the popteaCore and thermalData kernals
-//  thermalData->updatefromBestFit( (*unknownParameters_p)() ,
+//  thermalData->updatefromBestFit( (*unknownParameters)() ,
 //                                  popteaCore.TBCsystem.coating ) ;
 
 //  // Estimates the phase of emission at each heating frequency
