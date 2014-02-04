@@ -53,9 +53,7 @@ Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
       unknownParameters( new math::estimation::unknownList(unknownParameters_)),
       analysis( Settings_, unknownParameters_, thermaldata_ )
 {
-//  reassign( coreSystem, coreSystem_) ;
-//  reassign( thermalData, thermaldata_) ;
-//  reassign( unknownParameters, unknownParameters_) ;
+
 }
 
 class Poptea

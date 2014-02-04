@@ -22,52 +22,49 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#ifndef PIE_HPP
+#define PIE_HPP
 
-#ifndef LMA_BASE_HPP
-#define LMA_BASE_HPP
-
-#include <functional>
-#include <cstddef>
 #include <memory>
-
 #include "math/estimation/parameterestimation.hpp"
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/kernal.hpp"
-#include "thermal/analysis/poptea.hpp"
-#include "thermal/analysis/lmdiff_poptea_help.hpp"
+#include "thermal/analysis/lmdiff_poptea.hpp"
 
-namespace thermal {
+namespace thermal{
 namespace analysis{
 
-//class LMA_BASE
-//{
-//protected:
-//  /// working objects
-//  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
-//  std::shared_ptr< ThermalData > thermalData;
-//  std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
+class PIE
+{
+private:
+  std::shared_ptr< math::estimation::unknownList > unknownParameters;
+  std::shared_ptr< ThermalData > thermalData;
+  std::shared_ptr< Kernal > coreSystem;
+  std::shared_ptr< LMA > bestfitMethod;
+  double bestFit();
 
-//  // ThermalData thermalData;
-//  math::estimation::settings Settings;
-//  LMA_workingArrays LMA_workspace;
+  std::vector<double>SAVEExperimental;
+  std::vector<double>SAVEomega;
+  void parameterIntervalEstimates( void ) ;
 
-//  int nfev;
-//  int info;
-//  std::function< void( double*, double*, thermal::analysis::Kernal &) >
-//  myReduced;
+  double Gfunc( const double x , const physicalModel::labels::Name &mylabel ) ;
+  void updateExperimentalData( const std::vector<double> &input,
+                               ThermalData &thermalData_in ) ;
+  void saveExperimental( const ThermalData& thermalData_in ) ;
 
-//  virtual void ThermalProp_Analysis( double *x, double *fvec,
-//                             thermal::analysis::Kernal &popteaCore ) ;
-//  virtual void updateBindFunc( void );
-//  virtual void updateWorkSpace(const size_t Lend , const size_t N);
+  double solveFORx( const double target , const double min, const double max,
+                    const physicalModel::labels::Name mylabel,
+                    const std::string &bound ) ;
 
-//public:
-//  virtual void solve(
-//      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-//      std::shared_ptr<ThermalData> &thermalData_in,
-//      std::shared_ptr<Kernal> &coreSystem_in );
-//};
+public:
+  explicit PIE(void ) ;
+  void solve( std::shared_ptr< math::estimation::unknownList > &list_in,
+               std::shared_ptr< ThermalData > &thermalData_in,
+               std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in,
+               std::shared_ptr< LMA > bestfitMethod_in ) ;
+  ~PIE();
+};
 
 }}
 
-#endif // LMA_BASE_HPP
+#endif // PIE_HPP
