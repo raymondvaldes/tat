@@ -47,7 +47,7 @@ void run( const filesystem::directory dir )
       poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
 
   //Noise in Simulated Emission
-  constexpr double a =  .01*0;        // max % error (%*pi/2) (try .025)
+  constexpr double a =  .01;        // max % error (%*pi/2) (try .025)
   constexpr double b = 2.95;        // stretching parameter  (try 2.95) (1->pi)
   constexpr bool d1 = true;         //positive  (try false)
   constexpr bool d2 = true;         //monotonic (try true)
@@ -67,8 +67,8 @@ void run( const filesystem::directory dir )
                                  emissionExperimental );
 
 //  poptea.bestFit();
-//  poptea.parameterIntervalEstimates();
-  poptea.optimization();
+  poptea.parameterIntervalEstimates();
+//  poptea.optimization();
 
 ////////////////////////////////////////////////////////////////////////////////
 

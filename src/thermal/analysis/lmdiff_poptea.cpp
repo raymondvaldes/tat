@@ -42,7 +42,7 @@ namespace analysis{
 LMA_BASE::LMA_BASE( const math::estimation::settings &Settings_,
                     const math::estimation::unknownList &unknownParameters_,
                     const size_t Lend_ )
-  :Settings(Settings_), LMA_workspace( Lend_, unknownParameters_.size() )
+  : Settings(Settings_), LMA_workspace( Lend_, unknownParameters_.size() )
 {}
 
 
@@ -210,7 +210,7 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
 
 }}
 
-void printPEstimates( const class physicalModel::TBCsystem TBCSystem,
+void printPEstimates( const physicalModel::TBCsystem TBCSystem,
                       math::estimation::unknownList list )
 {
   for( const auto& unknown : list() )
