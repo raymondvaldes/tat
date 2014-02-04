@@ -36,42 +36,39 @@ License
 namespace thermal{
 namespace analysis{
 
-class ThermalSweepOptimizer: private LMA_BASE
+
+class ThermalSweepOptimizer: public LMA_BASE
 {
 private:
-    void updateWorkSpace(const size_t Lend , const size_t N) override;
+    void updateWorkSpace( const size_t Lend , const size_t N ) override;
     void ThermalProp_Analysis( double *x, double *fvec,
                                thermal::analysis::Kernal &popteaCore ) override;
-    std::vector<double> resizeExperimental( const double center,
-                                            const double range,
-                                            const size_t numPos ) ;
-
-
+    void solve(
+      const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
+      const std::shared_ptr<ThermalData> &thermalData_in,
+      const std::shared_ptr<Kernal> &coreSystem_in ) override;
     std::shared_ptr< LMA > bestfitMethod;
-    double bestFit(void);
-
     std::shared_ptr< PIE > intervalEstimates;
-    void pieAnalysis(void);
 
-    void optimizer(void);
+    double bestFit( void ) ;
+    void pieAnalysis( void ) ;
 
 public:
   explicit ThermalSweepOptimizer(
       const math::estimation::settings &Settings_,
       const math::estimation::unknownList &unknownParameters,
-      const size_t Lend_) ;
-  ~ThermalSweepOptimizer(void);
+      const size_t Lend_ ) ;
+  ~ThermalSweepOptimizer( void ) ;
 
   void start(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in,
-      std::shared_ptr< LMA > &bestfitMethod_in,
-      std::shared_ptr< PIE > &intervalEstimates_in
-      );
+     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+     const std::shared_ptr<ThermalData> &thermalData_in,
+     const std::shared_ptr<Kernal> &coreSystem_in,
+     const std::shared_ptr< LMA > &bestfitMethod_in,
+     const std::shared_ptr< PIE > &intervalEstimates_in
+     );
 
 };
-
 
 }}
 

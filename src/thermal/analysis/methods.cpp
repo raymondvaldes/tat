@@ -42,34 +42,38 @@ methods::methods( const math::estimation::settings &Settings_in,
                   const ThermalData& thermalData_in )
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
-    intervalEstimates( new PIE() )
+    intervalEstimates( new PIE() ),
+    lthermalSweepOptimizer(
+      new ThermalSweepOptimizer( Settings_in, unknownParameters_in,
+                                 unknownParameters_in.size() ) )
 {}
 
 double methods::bestFit(
-    std::shared_ptr< math::estimation::unknownList > &list_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
   bestfitMethod->solve( list_in, thermalData_in, coreSystem_in );
   return thermalData_in->MSE;
 }
 
 void methods::parameterIntervalEstimates(
-    std::shared_ptr< math::estimation::unknownList > &list_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
   intervalEstimates->solve( list_in, thermalData_in, coreSystem_in,
                             bestfitMethod );
 }
 
 void methods::optimization(
-    std::shared_ptr< math::estimation::unknownList > &list_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-  lthermalSweepOptimizer->start( list_in, thermalData_in, coreSystem_in,
-                                 bestfitMethod, intervalEstimates ) ;
+
+//  lthermalSweepOptimizer->start( list_in, thermalData_in, coreSystem_in,
+//                                 bestfitMethod, intervalEstimates ) ;
 
 }
 

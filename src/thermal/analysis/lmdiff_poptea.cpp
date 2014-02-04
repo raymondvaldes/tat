@@ -73,9 +73,9 @@ LMA::~LMA(void){}
 
 
 void LMA::solve(
-    std::shared_ptr< math::estimation::unknownList > &unknownParameters_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+    const std::shared_ptr<ThermalData> &thermalData_in,
+    const std::shared_ptr<Kernal> &coreSystem_in )
 {
   unknownParameters = unknownParameters_in;
   thermalData = thermalData_in;

@@ -55,10 +55,10 @@ private:
 
 public:
   explicit PIE(void ) ;
-  void solve( std::shared_ptr< math::estimation::unknownList > &list_in,
-               std::shared_ptr< ThermalData > &thermalData_in,
-               std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in,
-               std::shared_ptr< LMA > bestfitMethod_in ) ;
+  void solve( const std::shared_ptr< math::estimation::unknownList > &list_in,
+              const std::shared_ptr< ThermalData > &thermalData_in,
+              const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in,
+              const std::shared_ptr< LMA > bestfitMethod_in ) ;
   ~PIE();
 };
 

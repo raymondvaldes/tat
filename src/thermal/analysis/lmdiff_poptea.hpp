@@ -69,9 +69,9 @@ public:
                      const size_t Lend_ );
 
   virtual void solve(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in ) = 0;
+      const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
+      const std::shared_ptr<ThermalData> &thermalData_in,
+      const std::shared_ptr<Kernal> &coreSystem_in ) = 0;
 };
 
 
@@ -90,9 +90,9 @@ public:
                 const size_t Lend_) ;
   ~LMA(void);
   void solve(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in ) override;
+      const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+      const std::shared_ptr<ThermalData> &thermalData_in,
+      const std::shared_ptr<Kernal> &coreSystem_in ) override;
 };
 
 

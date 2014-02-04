@@ -68,14 +68,14 @@
 	<optimizationSweep>
 		<unknownParameters>
 			<unknown>
-				<label>center</label>
+				<label>thermalCenter</label>
 				<min>0</min>
 				<max>1</max>
 				<initialGuess>.5</initialGuess>
 			</unknown>
 
 			<unknown>
-				<label>range</label>
+				<label>thermalRange</label>
 				<min>0</min>
 				<max>1</max>
 				<initialGuess>.5</initialGuess>
