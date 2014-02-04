@@ -42,18 +42,21 @@ License
 
 #include "math/bisection.hpp"
 
+template<typename OBJ>
+void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
+  { var.reset( new OBJ( input )  ); }
+
 namespace thermal {
 namespace analysis{  
 
 Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
                 const math::estimation::settings &Settings_,
                 const math::estimation::unknownList &unknownParameters_)
-    : coreSystem( new Kernal(coreSystem_) ),
-      thermalData( new ThermalData(thermaldata_)),
-      unknownParameters( new math::estimation::unknownList(unknownParameters_)),
-      analysis( Settings_, unknownParameters_, thermaldata_ )
+    : analysis( Settings_, unknownParameters_, thermaldata_ )
 {
-
+  reassign( coreSystem, coreSystem_);
+  reassign( thermalData, thermaldata_);
+  reassign( unknownParameters, unknownParameters_);
 }
 
 class Poptea
@@ -116,11 +119,6 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir 
   return Poptea::loadConfig( popteaCore, pt1 );
 }
 
-
-//void Poptea::updatelthermal( const double lmin, const double lmax )
-//{
-//  thermalData.thermalSetup( lmin, lmax, coreSystem.TBCsystem.coating ) ;
-//}
 
 void Poptea::updateExperimentalData( const std::vector<double> &omegas,
                                      const std::vector<double> &input )

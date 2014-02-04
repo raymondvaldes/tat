@@ -74,72 +74,7 @@ void methods::optimization(
   thermalData = thermalData_in;
   unknownParameters = list_in;
 
-  ///Define experimental "operability domain"
-  ///This is the section of my code where I have figured out what lmin and lmax
-  /// is. At this point I am assuming that the experimental data has been loaded
-  /// and a best fit has been done on the parameters.  The new lthermals are
-  const std::pair<double, double> thermalOperabilityLimits =
-      thermalData->get_lthermalLimits(coreSystem->TBCsystem.coating );
-  std::cout << "thermalOperabilityLimits\t"
-            << thermalOperabilityLimits.first << "\t"
-            << thermalOperabilityLimits.second << "\n";
-
-  ///Define acceptable tolerance.  This is where I give it a threshold in which
-  /// it will seach for the optimal range and stop once the threshold is
-  /// satisfied.
-  const double minError = 0;
-
-  /// Given a center and a range can I create data from this. [TEST]
-  const double xCenter = .2;
-  const double xRange = 1;
-  const std::pair<double, double> updatedRange =
-  math::newThermalSweepLimits( xCenter, xRange, thermalOperabilityLimits );
-  std::cout << "updated range\t" << updatedRange.first << "\t"
-            << updatedRange.second << "\n";
-
-  const std::pair<double, double> CRfromSwweep =
-  math::CRfromSweepLimits( updatedRange.first, updatedRange.second,
-                     thermalOperabilityLimits );
-  std::cout << "updated center range\t" << CRfromSwweep.first << "\t"
-            << CRfromSwweep.second << "\n";
-
-
-  ///Create list of unknowns
-//  class math::estimation::unknownList unknownSweep;
-
-//  unknownSweep.addUnknown( , 0, 1, 0.5);
-
-//  physicalModel::labels::Name
-
-
-  ///The optimization algorithm will have the experimental data in vector for.
-  /// I need to take that data and be able to resize it.
-//  using math::estimation::unknown;
-//  saveExperimental( *thermalData );
-//  std::vector< unknown > originalListParams = (*unknownParameters)();
-
-
-
-  /// I need to create ways to optimize thermal penetration. The ones I am
-  /// thinking
-  ///   a) given X data what is the optimal range to best estimate properties
-  ///      - original data limited in range
-  ///      - cannot introduce new measurements
-  ///   b) given LMIN and LMAX what is the optimal range to take data to
-  ///     ensure the most accurate measurements
-  ///  The function I am minimizing is
-  ///  S1
-  ///
-  /// So this means one should be from the perspective of someone doing
-  /// post-analysis on their data.  They have a given range of values ( a
-  /// thermograph) and they're looking to see how much data to keep.
-  ///
-  ///
-
-
-  ///Update list of parameters with updated list
-//  (*unknownParameters)( originalListParams ) ;
-//  updateExperimentalData(  SAVEExperimental, *thermalData );
+  lthermalSweepOptimizer->solve( list_in, thermalData_in, coreSystem_in );
 }
 
 

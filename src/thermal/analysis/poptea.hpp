@@ -32,24 +32,18 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/methods.hpp"
-#include "thermal/analysis/basedata.hpp"
 
 namespace thermal {
 namespace analysis{
 
-class Poptea
+class Poptea: public baseData
 {
 private:
   bool loadedExperimental = false;
   bool runbestfit = false;
-
-public:
-  /// core members
-  std::shared_ptr< Kernal > coreSystem;
-  std::shared_ptr< ThermalData > thermalData;
-  std::shared_ptr< math::estimation::unknownList > unknownParameters;
   methods analysis;
 
+public:
   /// constructors and object creators
   explicit Poptea( const Kernal &coreSystem_ ,
                    const ThermalData &thermaldata_,
@@ -64,16 +58,15 @@ public:
   /// Member operations that update on multiple members
   void updateExperimentalData( const std::vector<double> &omegas,
                                const std::vector<double> &input ) ;
-  void PIE ( void );
 
   /// Operations that give results
   double bestFit( void ) ;
-  void parameterIntervalEstimates( void ) ;
+  void PIE ( void );
   void optimization(void);
   std::vector<double> thermalSweep(void) const;
 
+  void parameterIntervalEstimates( void ) ;
 } ;
-
 
 class Poptea
 loadWorkingDirectoryPoptea( const filesystem::directory dir,

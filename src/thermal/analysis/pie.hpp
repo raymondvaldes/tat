@@ -34,7 +34,7 @@ License
 namespace thermal{
 namespace analysis{
 
-class PIE: public baseData
+class PIE: private baseData
 {
 private:
   std::shared_ptr< LMA > bestfitMethod;
