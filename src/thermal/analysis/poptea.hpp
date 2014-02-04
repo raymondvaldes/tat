@@ -51,7 +51,7 @@ public:
   std::shared_ptr< thermal::analysis::Kernal > coreSystem;
   std::shared_ptr< ThermalData > thermalData;
   std::shared_ptr< math::estimation::unknownList > unknownParameters;
-  class methods analysis;
+  methods analysis;
 
   /// constructors and object creators
   explicit Poptea( const Kernal &coreSystem_ ,
@@ -73,6 +73,8 @@ public:
   double bestFit( void ) ;
   void parameterIntervalEstimates( void ) ;
   void optimization(void);
+  std::vector<double> thermalSweep(void) const;
+
 } ;
 
 

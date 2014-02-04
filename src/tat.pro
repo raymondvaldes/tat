@@ -154,7 +154,8 @@ SOURCES += \
     tools/log.cpp \
     tools/version.cpp \
     math/algorithms/combinations.cpp \
-    thermal/analysis/methods.cpp
+    thermal/analysis/methods.cpp \
+    thermal/analysis/lma_base.cpp
 
 #header files
 HEADERS += \
@@ -201,4 +202,5 @@ HEADERS += \
     tools/tools.hpp \
     tools/version.hpp \
     math/algorithms/combinations.hpp \
-    thermal/analysis/methods.hpp
+    thermal/analysis/methods.hpp \
+    thermal/analysis/lma_base.hpp

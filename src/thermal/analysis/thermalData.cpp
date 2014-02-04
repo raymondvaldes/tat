@@ -23,10 +23,12 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <cstddef>
+#include <utility>
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/thermal.hpp"
 #include "models/physicalmodel.hpp"
 #include "math/utility.hpp"
+#include "math/estimation/parameterestimation.hpp"
 
 namespace thermal {
 namespace analysis{
@@ -34,9 +36,8 @@ namespace analysis{
 ThermalData::ThermalData( const double l_min, const double l_max,
                           const size_t lminPerDecarde,
                           const physicalModel::layer &coating )
-  : measurementsPerDecade(lminPerDecarde)
+  : lthermalLimits(l_min, l_max), measurementsPerDecade(lminPerDecarde)
 {
-  // Populate the experimental phase values in parameters99
   thermalSetup( l_min, l_max, coating );
 }
 
@@ -46,18 +47,16 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
                                   const physicalModel::layer &coating  )
 
 {
-  size_t L_end = thermalSetupTEMP( lmin, lmax, coating.depth,
-                                   coating.kthermal.offset,
-                                   coating.psithermal.offset );
-  clear();
-  resize( L_end );
+  size_t L_end = numMeasurements( lmin, lmax );
 
+  clearVectors();
+  resizeVectors( L_end );
 
-  math::range1og10(lmin, lmax, L_end, l_thermal);
+  std::vector<double> lthermalTEMP = math::range1og10(lmin, lmax, L_end ) ;
 
   for (size_t i=0; i < L_end; ++i )
   {
-    omegas[i] = thermal::omega( coating.depth, l_thermal[i],
+    omegas[i] = thermal::omega( coating.depth, lthermalTEMP[i],
                                 coating.kthermal.offset,
                                 coating.psithermal.offset ) ;
   }
@@ -70,39 +69,53 @@ size_t ThermalData::size(void) const
   return experimentalEmission.size();
 }
 
-void ThermalData::clear(void)
+void ThermalData::clearVectors(void)
 {
-  l_thermal.clear();
   omegas.clear();
   experimentalEmission.clear();
   predictedEmission.clear();
 }
 
-void ThermalData::resize( const size_t Lend)
+void ThermalData::resizeVectors( const size_t Lend)
 {
-  l_thermal.resize( Lend );
   omegas.resize( Lend );
   experimentalEmission.resize( Lend );
   predictedEmission.resize( Lend );
 }
 
-void ThermalData::updateOmegas( const std::vector<double>  input,
-                                const physicalModel::layer &coating)
+
+std::pair<double, double>
+ThermalData::get_lthermalLimits( const physicalModel::layer &coating) const
 {
-  const size_t L_end = input.size();
-  clear();
-  resize( L_end );
+  const double first = thermal::lthermal( coating.depth,
+                                          coating.kthermal.offset,
+                                          coating.psithermal.offset,
+                                          omegas.front() ) ;
 
-  omegas = input;
+  const double second = thermal::lthermal( coating.depth,
+                                           coating.kthermal.offset,
+                                           coating.psithermal.offset,
+                                           omegas.back() ) ;
 
-  for (size_t i=0; i < L_end; ++i )
-  {
-    l_thermal[i] = thermal::lthermal( coating.depth,
-                                      coating.kthermal.offset,
-                                      coating.psithermal.offset,
-                                      omegas[i] ) ;
-  }
+  const std::pair< double, double > output(first, second);
+  return output;
 }
+
+std::vector<double>
+ThermalData::get_lthermalSweep( const physicalModel::layer &coating ) const
+{
+  const size_t LEND = omegas.size();
+
+  std::vector<double> output(LEND);
+  for (size_t i=0; i < LEND ; ++i )
+  {
+    output[i] = thermal::lthermal( coating.depth, coating.kthermal.offset,
+                                   coating.psithermal.offset, omegas[i] ) ;
+  }
+
+  return output;
+}
+
 
 void ThermalData::updateExperimental( const std::vector<double> &input)
 {
@@ -110,29 +123,13 @@ void ThermalData::updateExperimental( const std::vector<double> &input)
   experimentalEmission = input;
 }
 
-void ThermalData::updateLthermal( const std::vector<double> &input,
-                                  const physicalModel::layer &coating )
-{
-  const size_t L_end = input.size();
-  clear();
-  resize( L_end );
 
-  l_thermal = input;
-
-  for (size_t i=0; i < L_end; ++i )
-  {
-    omegas[i] = thermal::omega( coating.depth, l_thermal[i],
-                                coating.kthermal.offset,
-                                coating.psithermal.offset ) ;
-  }
-}
 
 ThermalData& ThermalData::operator=(const ThermalData& that)
 {
   if(this != &that)
   {
     omegas = that.omegas;
-    l_thermal = that.l_thermal;
     experimentalEmission = that.experimentalEmission;
     predictedEmission = that.predictedEmission;
     MSE = that.MSE;
@@ -141,15 +138,40 @@ ThermalData& ThermalData::operator=(const ThermalData& that)
 }
 
 
+void ThermalData::
+updatefromBestFit( std::vector< math::estimation::unknown > list,
+                   const physicalModel::layer &coating ,
+                   const ThermalData fullExpData )
+{
+  double xCenter;
+  double xRange;
+  for( const auto& unknown :  list )
+  {
+    if( unknown.label() == physicalModel::labels::Name::thermalCenter )
+      { xCenter = unknown.bestfit(); }
+    else if( unknown.label() == physicalModel::labels::Name::thermalRange )
+      { xRange = unknown.bestfit(); }
+  }
 
-double ThermalData::thermalSetupTEMP( const double l_min, const double l_max,
-                                      const double L_coat, const double kc,
-                                      const double psic )
+  std::pair<double, double> newThermalSweep =
+  math::newThermalSweepLimits( xCenter, xRange, lthermalLimits);
+  thermalSetup( newThermalSweep.first, newThermalSweep.second, coating);
+
+
+  ///Experimental Data must be saved and used to be interpolated accross the
+  /// restricted domain.  The experimental Data and sweep cannot be erased.
+
+
+
+
+
+}
+
+size_t ThermalData::numMeasurements( const double l_min, const double l_max )
 {
   const size_t L_end = measurementsPerDecade;
   BOOST_ASSERT_MSG( ( l_min < l_max ) , "check min-max logic\n\n" );
-  BOOST_ASSERT_MSG( ( L_coat > 0 ) && ( L_end > 0 ) , "check L inputs\n\n" );
-  BOOST_ASSERT_MSG( ( kc > 0 ) && ( psic > 0 ) , "check kc inputs\n\n" );
+
 
   constexpr size_t box = 7;
   constexpr double rangeLim[box] = {1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3};

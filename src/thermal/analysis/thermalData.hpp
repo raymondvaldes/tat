@@ -26,7 +26,7 @@ License
 #define THERMALDATA_HPP
 
 #include "models/physicalmodel.hpp"
-
+#include "math/estimation/parameterestimation.hpp"
 
 namespace thermal {
 namespace analysis{
@@ -34,15 +34,13 @@ namespace analysis{
 class ThermalData
 {
 private:
-  double thermalSetupTEMP( const double lmin_, const double lmax_,
-                           const double L_coat, const double kc,
-                           const double psic);
-  void clear(void);
-  void resize( const size_t Lend);
+  size_t numMeasurements(const double lmin_, const double lmax_);
+  void clearVectors(void);
+  void resizeVectors( const size_t Lend);
+  const std::pair<double, double> lthermalLimits;
 
 public:
   std::vector<double> omegas;
-  std::vector<double> l_thermal;
   std::vector<double> experimentalEmission;
   std::vector<double> predictedEmission;
   const size_t measurementsPerDecade;
@@ -59,16 +57,20 @@ public:
   loadConfigfromXML( const boost::property_tree::ptree pt,
                      const physicalModel::layer &coating );
 
-  //modify data
+  //get information
   size_t size(void) const;
-  void updateLthermal( const std::vector<double> &input,
-                       const physicalModel::layer &coating );
-  void updateOmegas( const std::vector<double> input ,
-                     const physicalModel::layer &coating );
-  void updateExperimental( const std::vector<double> &input );
+  std::vector<double>
+  get_lthermalSweep( const physicalModel::layer &coating ) const;
+  std::pair<double, double>
+  get_lthermalLimits( const physicalModel::layer &coating) const;
 
+  //modify data
+  void updateExperimental( const std::vector<double> &input );
   size_t thermalSetup( const double lmin, const double lmax,
                        const physicalModel::layer &coating );
+  void updatefromBestFit( std::vector< math::estimation::unknown > list,
+                          const physicalModel::layer &coating,
+                          const ThermalData fullData);
 
 };
 

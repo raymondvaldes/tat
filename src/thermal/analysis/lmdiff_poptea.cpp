@@ -61,7 +61,7 @@ void LMA::updateWorkSpace( const size_t Lend, const size_t N )
   LMA_workspace.updateArraySize( Lend , N );
 }
 
-class ThermalData LMA::solve(
+void LMA::solve(
     std::shared_ptr< math::estimation::unknownList > &unknownParameters_in,
     std::shared_ptr< ThermalData > &thermalData_in,
     std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
@@ -70,19 +70,11 @@ class ThermalData LMA::solve(
   thermalData = thermalData_in;
   coreSystem_p = coreSystem_in;
 
-
   ///update workspaces
   updateWorkSpace( thermalData->size() , unknownParameters_p->size()  );
 
   ///Solve
-  class ThermalData output = paramter_estimation( &info, &nfev );
-
-  /// Use working objects and send those address to the references pass in
-  // take the object that thermalData points to and reassign the pointer of
-
-
-  ///Return object
-  return output;
+  paramter_estimation( &info, &nfev );
 }
 
 
@@ -199,10 +191,11 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   thermalData->MSE =
       math::estimation::SobjectiveLS( thermalData->experimentalEmission,
                                       thermalData->predictedEmission );
-//  printPEstimates( popteaCore.TBCsystem, *unknownParameters_p ) ;
+  printPEstimates( popteaCore.TBCsystem, *unknownParameters_p ) ;
 
   return;
 }
+
 
 }}
 

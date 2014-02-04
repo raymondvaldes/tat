@@ -22,23 +22,10 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef PHASE99_HPP
-#define PHASE99_HPP
+#include "thermal/analysis/lma_base.hpp"
 
-#include <vector>
-#include "thermal/analysis/kernal.hpp"
-
-namespace thermal{
-  namespace emission{
-
-std::vector<double>
-phase99( const thermal::analysis::Kernal &popteaCore,
-         const std::vector<double> &omegas);
-  }
-}
+namespace thermal {
+namespace analysis{
 
 
-
-
-
-#endif // PHASE99_HPP
+}}

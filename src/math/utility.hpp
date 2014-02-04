@@ -79,6 +79,18 @@ double xspread( const double xmin, const double xnominal, const double xmax);
 double valFROMpercentileLog10( const double input,  const double xmin,
                                const double xmax );
 
+
+std::pair<double, double>
+newThermalSweepLimits( const double center, const double range,
+                                const std::pair<double, double> limits );
+std::pair<double, double>
+CRfromSweepLimits( const double lstart, const double lend,
+                   const std::pair<double, double> limits);
+
+
+
+
+
 }
 
 

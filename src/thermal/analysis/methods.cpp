@@ -67,34 +67,31 @@ double methods::Gfunc( const double val ,
 }
 
 
-double methods::optiGfun( const double xCenter, const double xRange,
-                          const enum physicalModel::labels::Name &mylabel)
-{
-  const size_t numPos = 10;
-  resizeExperimental( xCenter, xRange, numPos );
+//double methods::optiGfun( const double xCenter, const double xRange,
+//                          const enum physicalModel::labels::Name &mylabel)
+//{
+//  const size_t numPos = 10;
+//  resizeExperimental( xCenter, xRange, numPos );
 
-  bestFit( unknownParameters, thermalData, coreSystem ) ;
-  parameterIntervalEstimates( unknownParameters, thermalData, coreSystem ) ;
+//  bestFit( unknownParameters, thermalData, coreSystem ) ;
+//  parameterIntervalEstimates( unknownParameters, thermalData, coreSystem ) ;
 
-  double xreturn = 1;
-  for( math::estimation::unknown& val : (*unknownParameters)() )
-  {
-    if( val.label() == mylabel )
-    {
-      xreturn = math::xspread( val.bestfitInterval.lower, val.bestfit(),
-                               val.bestfitInterval.upper );
-    }
-  }
+//  double xreturn = 1;
+//  for( math::estimation::unknown& val : (*unknownParameters)() )
+//  {
+//    if( val.label() == mylabel )
+//    {
+//      xreturn = math::xspread( val.bestfitInterval.lower, val.bestfit(),
+//                               val.bestfitInterval.upper );
+//    }
+//  }
 
-  return xreturn;
-}
+//  return xreturn;
+//}
 
-void methods::updateExperimentalData( const std::vector<double> &omegas,
-                                      const std::vector<double> &input,
-                                      Kernal &coreSystem_in,
+void methods::updateExperimentalData( const std::vector<double> &input,
                                       ThermalData &thermalData_in )
 {
-  thermalData_in.updateOmegas( omegas , coreSystem_in.TBCsystem.coating );
   thermalData_in.updateExperimental( input );
 }
 
@@ -119,7 +116,7 @@ void methods::parameterIntervalEstimates(
 
   /// Predicted emission as the new experimental
   const std::vector<double> TEMPExperimental = thermalData->predictedEmission;
-  updateExperimentalData( SAVEomega, TEMPExperimental, *coreSystem, *thermalData);
+  updateExperimentalData( TEMPExperimental, *thermalData) ;
 
   /// Create list of parameters that must be refitted
   using math::algorithms::combos_minusOne;
@@ -151,7 +148,7 @@ void methods::parameterIntervalEstimates(
 
   ///Update list of parameters with updated list  
   (*unknownParameters)( originalListParams );
-  updateExperimentalData( SAVEomega , SAVEExperimental, *coreSystem, *thermalData);
+  updateExperimentalData(  SAVEExperimental, *thermalData ) ;
   thermalData_in->MSE = S1;
 }
 
@@ -175,25 +172,6 @@ double methods::solve(const double target , const double min, const double max,
   return soln;
 }
 
-
-std::vector<double>
-methods::resizeExperimental( const double center, const double range,
-                             const size_t numPos )
-{
-  const double lmin = SAVEExperimental.front();
-  const double lmax = SAVEExperimental.back();
-
-  const double strPos = center - range/2;
-  const double endPos = center + range/2;
-
-  const double lminNEW = math::valFROMpercentileLog10( strPos, lmin, lmax ) ;
-  const double lmaxNEW = math::valFROMpercentileLog10( endPos, lmin, lmax ) ;
-
-  std::vector<double>output = math::range1og10( lminNEW, lmaxNEW, numPos );
-
-  return output;
-}
-
 void methods::optimization(
     std::shared_ptr< math::estimation::unknownList > &list_in,
     std::shared_ptr< ThermalData > &thermalData_in,
@@ -203,11 +181,50 @@ void methods::optimization(
   thermalData = thermalData_in;
   unknownParameters = list_in;
 
+  ///Define experimental "operability domain"
+  ///This is the section of my code where I have figured out what lmin and lmax
+  /// is. At this point I am assuming that the experimental data has been loaded
+  /// and a best fit has been done on the parameters.  The new lthermals are
+  const std::pair<double, double> thermalOperabilityLimits =
+      thermalData->get_lthermalLimits(coreSystem->TBCsystem.coating );
+  std::cout << "thermalOperabilityLimits\t"
+            << thermalOperabilityLimits.first << "\t"
+            << thermalOperabilityLimits.second << "\n";
+
+  ///Define acceptable tolerance.  This is where I give it a threshold in which
+  /// it will seach for the optimal range and stop once the threshold is
+  /// satisfied.
+  const double minError = 0;
+
+  /// Given a center and a range can I create data from this. [TEST]
+  const double xCenter = .2;
+  const double xRange = 1;
+  const std::pair<double, double> updatedRange =
+  math::newThermalSweepLimits( xCenter, xRange, thermalOperabilityLimits );
+  std::cout << "updated range\t" << updatedRange.first << "\t"
+            << updatedRange.second << "\n";
+
+  const std::pair<double, double> CRfromSwweep =
+  math::CRfromSweepLimits( updatedRange.first, updatedRange.second,
+                     thermalOperabilityLimits );
+  std::cout << "updated center range\t" << CRfromSwweep.first << "\t"
+            << CRfromSwweep.second << "\n";
+
+
+  ///Create list of unknowns
+//  class math::estimation::unknownList unknownSweep;
+
+//  unknownSweep.addUnknown( , 0, 1, 0.5);
+
+//  physicalModel::labels::Name
+
+
   ///The optimization algorithm will have the experimental data in vector for.
   /// I need to take that data and be able to resize it.
-  using math::estimation::unknown;
-  saveExperimental( *thermalData );
-  std::vector< unknown > originalListParams = (*unknownParameters)();
+//  using math::estimation::unknown;
+//  saveExperimental( *thermalData );
+//  std::vector< unknown > originalListParams = (*unknownParameters)();
+
 
 
   /// I need to create ways to optimize thermal penetration. The ones I am
@@ -228,9 +245,8 @@ void methods::optimization(
 
 
   ///Update list of parameters with updated list
-  (*unknownParameters)( originalListParams ) ;
-  updateExperimentalData( SAVEomega , SAVEExperimental, *coreSystem,
-                          *thermalData );
+//  (*unknownParameters)( originalListParams ) ;
+//  updateExperimentalData(  SAVEExperimental, *thermalData );
 }
 
 void methods::saveExperimental(const ThermalData& thermalData_in)
@@ -238,6 +254,41 @@ void methods::saveExperimental(const ThermalData& thermalData_in)
   SAVEExperimental = thermalData_in.experimentalEmission;
   SAVEomega = thermalData_in.omegas;
 }
+
+
+//void methods::Optimization_Analysis( double *x, double *fvec,
+//                                     class thermal::analysis::Kernal &popteaCore )
+//{
+//  //Update parameters with current bestfits by transforming x
+//  math::estimation::unknownList updatedInput;
+//  int i = 0;
+//  for( auto& unknown :  (*unknownParameters_p)() )
+//  {
+//    const double val = math::estimation::
+//        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
+//    unknown.bestfitset( val );
+//    updatedInput.addUnknown(unknown);
+//  }
+//  (*unknownParameters_p)( updatedInput() );
+
+//  ///Load these unknownParameters into the popteaCore and thermalData kernals
+//  thermalData->updatefromBestFit( (*unknownParameters_p)() ,
+//                                  popteaCore.TBCsystem.coating ) ;
+
+//  // Estimates the phase of emission at each heating frequency
+//  thermalData->predictedEmission =
+//      thermal::emission::phase99( popteaCore, thermalData->omegas );
+
+//  /// Evaluate Objective function
+//  for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
+//  {
+//     fvec[n] =  thermalData->experimentalEmission[n] -
+//                    thermalData->predictedEmission[n] ;
+//  }
+
+//  return;
+//}
+
 
 
 

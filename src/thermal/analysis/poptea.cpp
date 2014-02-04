@@ -130,24 +130,22 @@ void Poptea::updateExperimentalData( const std::vector<double> &omegas,
   assert( input.size() == omegas.size());
   loadedExperimental = true;
 
-  thermalData->updateOmegas( omegas , coreSystem->TBCsystem.coating );
   thermalData->updateExperimental( input );
 }
 
 Poptea::~Poptea(void){}
+
+std::vector<double> Poptea::thermalSweep(void) const
+{
+  return thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating );
+}
+
 
 double Poptea::bestFit( void )
 {
   runbestfit = true;
   double output = 0;
   output =  analysis.bestFit( unknownParameters, thermalData, coreSystem);
-
-  std::cout << "\ninside poptea\n";
-  for(auto& val : (*unknownParameters)() )
-  {
-    std::cout << val.bestfit()
-              << "\n";
-  }
 
   return output;
 }
@@ -189,18 +187,9 @@ void Poptea::optimization(void)
   if(!loadedExperimental) { return; }
   bestFit();
 
-//  double xreturn;
-//  analysis.parameterIntervalEstimates( coreSystem, thermalData ) ;
-//  for( math::estimation::unknown& val : analysis.bestfitMethod.unknownParameters() )
-//  {
-//    if( val.label() == physicalModel::labels::Name::asub)
-//    {
-//      xreturn = math::xspread( val.bestfitInterval.lower, val.bestfit(),
-//                               val.bestfitInterval.upper );
-//    }
-//  }
+  analysis.optimization( unknownParameters , thermalData, coreSystem);
 
-//  std::cout << xreturn;
+
 }
 
 
