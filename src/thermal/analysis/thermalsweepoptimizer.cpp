@@ -29,6 +29,14 @@ License
 namespace thermal{
 namespace analysis{
 
+ThermalSweepOptimizer::ThermalSweepOptimizer(
+    const math::estimation::settings &Settings_,
+    const math::estimation::unknownList &unknownParameters_,
+    const size_t Lend_ )
+  : LMA_BASE( Settings_, unknownParameters_, Lend_ )
+{}
+ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {}
+
 void ThermalSweepOptimizer::
   ThermalProp_Analysis( double *x, double *fvec, class Kernal &popteaCore )
 {
@@ -59,7 +67,12 @@ void ThermalSweepOptimizer::
 //                    thermalData->predictedEmission[n] ;
 //  }
 
-  return;
+//  return;
+}
+
+void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
+{
+//  LMA_workspace.updateArraySize( Lend , N );
 }
 
 double ThermalSweepOptimizer::bestFit( void )
@@ -75,22 +88,26 @@ void ThermalSweepOptimizer::pieAnalysis( void )
 }
 
 void ThermalSweepOptimizer::start(
-    std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-    std::shared_ptr<ThermalData> &thermalData_in,
-    std::shared_ptr<Kernal> &coreSystem_in,
-    std::shared_ptr<LMA> &bestfitMethod_in,
-    std::shared_ptr< PIE > &intervalEstimates_in )
+    const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+    const std::shared_ptr<ThermalData> &thermalData_in,
+    const std::shared_ptr<Kernal> &coreSystem_in,
+    const std::shared_ptr<LMA> &bestfitMethod_in,
+    const std::shared_ptr<PIE> &intervalEstimates_in )
 {
+
   unknownParameters = unknownParameters_in;
   thermalData = thermalData_in;
   coreSystem = coreSystem_in;
   bestfitMethod = bestfitMethod_in;
   intervalEstimates = intervalEstimates_in;
 
-  optimizer();
+  solve( unknownParameters_in, thermalData_in, coreSystem_in  ) ;
 }
 
-void ThermalSweepOptimizer::optimizer(void)
+void ThermalSweepOptimizer::solve(
+    const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+    const std::shared_ptr<ThermalData> &thermalData_in,
+    const std::shared_ptr<Kernal> &coreSystem_in )
 {
 
   ///Define experimental "operability domain"

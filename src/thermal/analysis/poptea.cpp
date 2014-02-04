@@ -64,7 +64,7 @@ Poptea::loadConfig( const class Kernal &coreSystem_,
                     const boost::property_tree::ptree &pt )
 {
   using boost::property_tree::ptree;
-  const std::string conjunto = "poptea.";
+  const std::string conjunto = "poptea." ;
 
   const ptree ptchild1 = pt.get_child( conjunto + "sweep");
   const class ThermalData Obj1(
@@ -75,10 +75,14 @@ Poptea::loadConfig( const class Kernal &coreSystem_,
   const class math::estimation::settings
     Obj2( math::estimation::settings::loadConfigfromXML( ptchild2 ) );
 
-  const ptree ptchild3 = pt.get_child( conjunto );
+  const ptree ptchild3 = pt.get_child( conjunto ) ;
   const class math::estimation::unknownList
     Obj3( math::estimation::unknownList::loadConfigfromXML( ptchild3 ) );
 
+
+  const ptree ptchild4 = pt.get_child( conjunto + "optimizationSweep") ;
+  const class math::estimation::unknownList
+    Obj4( math::estimation::unknownList::loadConfigfromXML( ptchild4 ) );
 
   //Load class object from previous objects
   class Poptea poptea( coreSystem_, Obj1, Obj2, Obj3 ) ;
@@ -86,7 +90,7 @@ Poptea::loadConfig( const class Kernal &coreSystem_,
   return poptea;
 }
 
-class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir )
+class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
 {
   ///Initiate poptea kernal
   const std::string filename1 = "kernal.xml";

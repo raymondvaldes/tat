@@ -23,6 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <boost/foreach.hpp>
+#include <exception>
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
@@ -188,8 +189,16 @@ class unknownList unknownList::
 
     //access members of subtree
     const std::string nameLabel = child.get< std::string >( "label" );
-    const enum physicalModel::labels::Name
-        mylabel = labels.nameMap.right.at(nameLabel);
+    enum physicalModel::labels::Name mylabel;
+    try
+    {
+      mylabel = labels.nameMap.right.at(nameLabel);
+    }
+    catch( std::exception& e )
+    {
+      std::cerr << "Error with unknownParameters label in poptea.xml config\n";
+      exit(1);
+    }
 
     const double myMin = child.get<double>( "min" );
     const double myMax = child.get<double>( "max" );
