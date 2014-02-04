@@ -41,18 +41,15 @@ License
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
 #include "thermal/thermal.hpp"
-
+#include "thermal/analysis/basedata.hpp"
 
 namespace thermal {
 namespace analysis{
 
-class LMA_BASE
+class LMA_BASE: public baseData
 {
 protected:
   /// working objects
-  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
-  std::shared_ptr< ThermalData > thermalData;
-  std::shared_ptr< Kernal > coreSystem_p;
   math::estimation::settings Settings;
   LMA_workingArrays LMA_workspace;
 

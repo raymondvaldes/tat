@@ -41,13 +41,11 @@ void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
 namespace thermal{
 namespace analysis{
 
-class methods{
+class methods: public baseData
+{
 
 private:
   /// working objects
-  std::shared_ptr< math::estimation::unknownList > unknownParameters;
-  std::shared_ptr< ThermalData > thermalData;
-  std::shared_ptr< Kernal > coreSystem;
   std::shared_ptr< LMA > bestfitMethod;
   std::shared_ptr< PIE > intervalEstimates;
   std::shared_ptr< ThermalSweepOptimizer > lthermalSweepOptimizer;

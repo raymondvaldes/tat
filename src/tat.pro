@@ -155,7 +155,8 @@ SOURCES += \
     tools/version.cpp \
     math/algorithms/combinations.cpp \
     thermal/analysis/methods.cpp \
-    thermal/analysis/pie.cpp
+    thermal/analysis/pie.cpp \
+    thermal/analysis/basedata.cpp
 
 #header files
 HEADERS += \
@@ -203,4 +204,5 @@ HEADERS += \
     tools/version.hpp \
     math/algorithms/combinations.hpp \
     thermal/analysis/methods.hpp \
-    thermal/analysis/pie.hpp
+    thermal/analysis/pie.hpp \
+    thermal/analysis/basedata.hpp
