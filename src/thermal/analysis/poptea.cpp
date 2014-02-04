@@ -207,14 +207,4 @@ class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
   return Poptea::loadConfig( popteaCore, pt );
 }
 
-//void Poptea::updateUnknownParameters(
-//    const std::vector< class math::estimation::unknown > &unknownList_ )
-//{
-//  std::vector<class math::estimation::unknown> updated(unknownList_);
-//  unknownParameters( updated );
-
-//  const size_t Default = thermalData.experimentalEmission.size();
-//}
-
-
 }}

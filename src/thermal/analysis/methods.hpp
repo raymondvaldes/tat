@@ -33,7 +33,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/pie.hpp"
-
+#include "thermal/analysis/thermalsweepoptimizer.hpp"
 
 
 namespace thermal{

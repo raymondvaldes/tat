@@ -70,11 +70,9 @@ void methods::optimization(
     std::shared_ptr< ThermalData > &thermalData_in,
     std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-  coreSystem = coreSystem_in;
-  thermalData = thermalData_in;
-  unknownParameters = list_in;
+  lthermalSweepOptimizer->start( list_in, thermalData_in, coreSystem_in,
+                                 bestfitMethod, intervalEstimates ) ;
 
-  lthermalSweepOptimizer->solve( list_in, thermalData_in, coreSystem_in );
 }
 
 
