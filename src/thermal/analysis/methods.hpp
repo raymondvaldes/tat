@@ -34,14 +34,12 @@ License
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/pie.hpp"
 
-template<typename OBJ>
-void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
-  { var.reset( new OBJ( input )  ); }
+
 
 namespace thermal{
 namespace analysis{
 
-class methods: public baseData
+class methods: private baseData
 {
 
 private:
