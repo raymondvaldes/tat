@@ -45,33 +45,14 @@ class methods{
 
 private:
   /// working objects
-  std::vector<double>SAVEExperimental;
-  std::vector<double>SAVEomega;
-
   std::shared_ptr< math::estimation::unknownList > unknownParameters;
   std::shared_ptr< ThermalData > thermalData;
   std::shared_ptr< Kernal > coreSystem;
   std::shared_ptr< LMA > bestfitMethod;
   std::shared_ptr< PIE > intervalEstimates;
+  std::shared_ptr< ThermalSweepOptimizer > lthermalSweepOptimizer;
 
-  double Gfunc( const double x , const physicalModel::labels::Name &mylabel ) ;
-  void updateExperimentalData(const std::vector<double> &input,
-                               ThermalData &thermalData_in ) ;
-  void saveExperimental( const ThermalData& thermalData_in );
-
-  double solve( const double target , const double min, const double max,
-                const physicalModel::labels::Name mylabel,
-                const std::string &bound) ;
-
-//  double optiGfun( const double xCenter, const double xRange,
-//                   const enum physicalModel::labels::Name &mylabel ) ;
-//  void Optimization_Analysis( double *x, double *fvec,
-//                              thermal::analysis::Kernal &popteaCore ) ;
-  std::vector<double> resizeExperimental( const double center,
-                                          const double range,
-                                          const size_t numPos ) ;
 public:
-
   //constructors
   methods( const math::estimation::settings &Settings_in,
            const math::estimation::unknownList &unknownParameters_in,

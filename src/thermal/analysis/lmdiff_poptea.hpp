@@ -105,7 +105,13 @@ private:
 //  void updateWorkSpace(const size_t Lend , const size_t N) override;
 
 //  ThermalData paramter_estimation(int *info, int *nfev);
-
+  //  double optiGfun( const double xCenter, const double xRange,
+  //                   const enum physicalModel::labels::Name &mylabel ) ;
+  //  void Optimization_Analysis( double *x, double *fvec,
+  //                              thermal::analysis::Kernal &popteaCore ) ;
+    std::vector<double> resizeExperimental( const double center,
+                                            const double range,
+                                            const size_t numPos ) ;
 public:
   explicit ThermalSweepOptimizer(
       const math::estimation::settings &Settings_,

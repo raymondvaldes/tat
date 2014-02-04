@@ -208,6 +208,50 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
 }
 
 
+
+
+//void methods::Optimization_Analysis( double *x, double *fvec,
+//                                     class thermal::analysis::Kernal &popteaCore )
+//{
+//  //Update parameters with current bestfits by transforming x
+//  math::estimation::unknownList updatedInput;
+//  int i = 0;
+//  for( auto& unknown :  (*unknownParameters_p)() )
+//  {
+//    const double val = math::estimation::
+//        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
+//    unknown.bestfitset( val );
+//    updatedInput.addUnknown(unknown);
+//  }
+//  (*unknownParameters_p)( updatedInput() );
+
+//  ///Load these unknownParameters into the popteaCore and thermalData kernals
+//  thermalData->updatefromBestFit( (*unknownParameters_p)() ,
+//                                  popteaCore.TBCsystem.coating ) ;
+
+//  // Estimates the phase of emission at each heating frequency
+//  thermalData->predictedEmission =
+//      thermal::emission::phase99( popteaCore, thermalData->omegas );
+
+//  /// Evaluate Objective function
+//  for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
+//  {
+//     fvec[n] =  thermalData->experimentalEmission[n] -
+//                    thermalData->predictedEmission[n] ;
+//  }
+
+//  return;
+//}
+
+
+
+
+
+
+
+
+
+
 }}
 
 void printPEstimates( const physicalModel::TBCsystem TBCSystem,
