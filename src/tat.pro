@@ -156,7 +156,8 @@ SOURCES += \
     math/algorithms/combinations.cpp \
     thermal/analysis/methods.cpp \
     thermal/analysis/pie.cpp \
-    thermal/analysis/basedata.cpp
+    thermal/analysis/basedata.cpp \
+    thermal/analysis/thermalsweepoptimizer.cpp
 
 #header files
 HEADERS += \
@@ -205,4 +206,5 @@ HEADERS += \
     math/algorithms/combinations.hpp \
     thermal/analysis/methods.hpp \
     thermal/analysis/pie.hpp \
-    thermal/analysis/basedata.hpp
+    thermal/analysis/basedata.hpp \
+    thermal/analysis/thermalsweepoptimizer.hpp

@@ -68,7 +68,7 @@ void run( const filesystem::directory dir )
 
 //  poptea.bestFit();
 //  poptea.parameterIntervalEstimates();
-//  poptea.optimization();
+  poptea.optimization();
 
 ////////////////////////////////////////////////////////////////////////////////
 

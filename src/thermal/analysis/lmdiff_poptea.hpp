@@ -42,6 +42,7 @@ License
 #include "thermal/model.hpp"
 #include "thermal/thermal.hpp"
 #include "thermal/analysis/basedata.hpp"
+//#include "thermal/analysis/pie.hpp"
 
 namespace thermal {
 namespace analysis{
@@ -94,33 +95,7 @@ public:
       std::shared_ptr<Kernal> &coreSystem_in ) override;
 };
 
-class ThermalSweepOptimizer: public LMA_BASE
-{
-private:
-//  void ThermalProp_Analysis( double *x, double *fvec,
-//                             thermal::analysis::Kernal &popteaCore ) override;
-//  void updateWorkSpace(const size_t Lend , const size_t N) override;
 
-//  ThermalData paramter_estimation(int *info, int *nfev);
-  //  double optiGfun( const double xCenter, const double xRange,
-  //                   const enum physicalModel::labels::Name &mylabel ) ;
-  //  void Optimization_Analysis( double *x, double *fvec,
-  //                              thermal::analysis::Kernal &popteaCore ) ;
-    std::vector<double> resizeExperimental( const double center,
-                                            const double range,
-                                            const size_t numPos ) ;
-public:
-  explicit ThermalSweepOptimizer(
-      const math::estimation::settings &Settings_,
-      const math::estimation::unknownList &unknownParameters,
-      const size_t Lend_) ;
-  ~ThermalSweepOptimizer(void);
-
-  void solve(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in ) override;
-};
 
 
 }}
