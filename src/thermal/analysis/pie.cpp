@@ -38,7 +38,6 @@ PIE::~PIE(){}
 double PIE::bestFit()
 {
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
-  coreSystem->updatefromBestFit( (*unknownParameters)() );
   return thermalData->MSE;
 }
 
