@@ -86,6 +86,9 @@ void LMA::solve(
 
   ///Solve
   paramter_estimation( &info, &nfev );
+
+  ///update core
+  coreSystem->updatefromBestFit( (*unknownParameters)() );
 }
 
 

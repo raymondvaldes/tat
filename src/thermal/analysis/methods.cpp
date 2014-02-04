@@ -51,8 +51,6 @@ double methods::bestFit(
     std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
   bestfitMethod->solve( list_in, thermalData_in, coreSystem_in );
-  coreSystem_in->updatefromBestFit( (*list_in)() );
-
   return thermalData_in->MSE;
 }
 

@@ -39,21 +39,21 @@ namespace analysis{
 class ThermalSweepOptimizer: private LMA_BASE
 {
 private:
-//  void ThermalProp_Analysis( double *x, double *fvec,
-//                             thermal::analysis::Kernal &popteaCore ) override;
-//  void updateWorkSpace(const size_t Lend , const size_t N) override;
-
-//  ThermalData paramter_estimation(int *info, int *nfev);
-  //  double optiGfun( const double xCenter, const double xRange,
-  //                   const enum physicalModel::labels::Name &mylabel ) ;
-  //  void Optimization_Analysis( double *x, double *fvec,
-  //                              thermal::analysis::Kernal &popteaCore ) ;
+    void updateWorkSpace(const size_t Lend , const size_t N) override;
+    void ThermalProp_Analysis( double *x, double *fvec,
+                               thermal::analysis::Kernal &popteaCore ) override;
     std::vector<double> resizeExperimental( const double center,
                                             const double range,
                                             const size_t numPos ) ;
-    std::shared_ptr< LMA > bestfitMethod;
-    std::shared_ptr< PIE > intervalEstimates;
 
+
+    std::shared_ptr< LMA > bestfitMethod;
+    double bestFit(void);
+
+    std::shared_ptr< PIE > intervalEstimates;
+    void pieAnalysis(void);
+
+    void optimizer(void);
 
 public:
   explicit ThermalSweepOptimizer(
@@ -69,6 +69,7 @@ public:
       std::shared_ptr< LMA > &bestfitMethod_in,
       std::shared_ptr< PIE > &intervalEstimates_in
       );
+
 };
 
 
