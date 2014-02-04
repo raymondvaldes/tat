@@ -27,11 +27,11 @@ License
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "models/physicalmodel.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
-#include "math/estimation/parameterestimation.hpp"
 
 template<typename OBJ>
 void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )

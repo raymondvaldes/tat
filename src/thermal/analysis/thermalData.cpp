@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <cstddef>
 #include <utility>
+
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/thermal.hpp"
 #include "models/physicalmodel.hpp"

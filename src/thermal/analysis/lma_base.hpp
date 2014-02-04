@@ -39,34 +39,34 @@ License
 namespace thermal {
 namespace analysis{
 
-class LMA_BASE
-{
-protected:
-  /// working objects
-  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
-  std::shared_ptr< ThermalData > thermalData;
-  std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
+//class LMA_BASE
+//{
+//protected:
+//  /// working objects
+//  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
+//  std::shared_ptr< ThermalData > thermalData;
+//  std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
 
-  // ThermalData thermalData;
-  math::estimation::settings Settings;
-  LMA_workingArrays LMA_workspace;
+//  // ThermalData thermalData;
+//  math::estimation::settings Settings;
+//  LMA_workingArrays LMA_workspace;
 
-  int nfev;
-  int info;
-  std::function< void( double*, double*, thermal::analysis::Kernal &) >
-  myReduced;
+//  int nfev;
+//  int info;
+//  std::function< void( double*, double*, thermal::analysis::Kernal &) >
+//  myReduced;
 
-  virtual void ThermalProp_Analysis( double *x, double *fvec,
-                             thermal::analysis::Kernal &popteaCore ) ;
-  virtual void updateBindFunc( void );
-  virtual void updateWorkSpace(const size_t Lend , const size_t N);
+//  virtual void ThermalProp_Analysis( double *x, double *fvec,
+//                             thermal::analysis::Kernal &popteaCore ) ;
+//  virtual void updateBindFunc( void );
+//  virtual void updateWorkSpace(const size_t Lend , const size_t N);
 
-public:
-  virtual void solve(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in );
-};
+//public:
+//  virtual void solve(
+//      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+//      std::shared_ptr<ThermalData> &thermalData_in,
+//      std::shared_ptr<Kernal> &coreSystem_in );
+//};
 
 }}
 
