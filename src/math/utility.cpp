@@ -236,8 +236,7 @@ double valFROMpercentileLog10( const double input,  const double xmin,
                                const double xmax )
 {
   assert( input <= 1 && input >=0) ;
-
-  return input * ( log10( xmax ) - log10( xmin ) ) + log10( xmin );
+  return xmin * pow( xmax / xmin , input );
 }
 
 
@@ -385,6 +384,56 @@ void range1og10(const double l_min, const double l_max, const size_t L_end,
 double xspread( const double xmin, const double xnominal, const double xmax)
 {
   return (xmax - xmin) / xnominal;
+}
+
+
+std::pair<double, double>
+CRfromSweepLimits( const double lstart, const double lend,
+                            const std::pair<double, double> limits)
+{
+  const double xmin = limits.first;
+  const double xmax = limits.second;
+
+  const double posStart = math::percentilelog10( xmin,  xmax,  lstart ) ;
+  const double posEnd = math::percentilelog10( xmin,  xmax,  lend ) ;
+
+  const double range = posEnd - posStart;
+  const double center = range / 2;
+
+  const std::pair<double, double> output( center, range );
+  return output;
+}
+
+std::pair<double, double>
+newThermalSweepLimits( const double center, const double range,
+                       const std::pair<double, double> limits )
+{
+  assert( center > 0 && center < 1);
+  assert( range > 0 && range <= 1 );
+
+  const double min = limits.first;
+  const double max = limits.second;
+
+  double strPos = center - range/2;
+  double endPos = center + range/2;
+
+  if( strPos < 0 )
+  {
+    strPos = 0;
+    endPos = 2 * center;
+  }
+  else if( endPos > 1 )
+  {
+    strPos = 2 * center  - 1;
+    endPos = 1;
+  }
+
+  const double start = math::valFROMpercentileLog10( strPos, min, max ) ;
+  const double end   = math::valFROMpercentileLog10( endPos, min, max ) ;
+
+  const std::pair<double, double> output(start, end);
+
+  return output;
 }
 
 

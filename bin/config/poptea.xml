@@ -1,6 +1,6 @@
 ﻿<poptea>
 	<sweep>
-		<minperDecade>50</minperDecare>
+		<minperDecade>50</minperDecade>
 		<thermal_penetration>
 			<start>.04</start>
 			<end>4</end>
@@ -65,5 +65,22 @@
 		
 	</unknownParameters>
 	
+	<optimizationSweep>
+		<unknownParameters>
+			<unknown>
+				<label>center</label>
+				<min>0</min>
+				<max>1</max>
+				<initialGuess>.5</initialGuess>
+			</unknown>
 
-	</poptea>
+			<unknown>
+				<label>range</label>
+				<min>0</min>
+				<max>1</max>
+				<initialGuess>.5</initialGuess>
+			</unknown>		
+		</unknownParameters>
+	</optimizationSweep>
+	
+</poptea>

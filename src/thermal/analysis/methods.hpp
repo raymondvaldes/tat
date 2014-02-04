@@ -48,21 +48,17 @@ private:
   std::vector<double>SAVEomega;
   std::vector<double>TEMPExperimental;
   std::vector<double>TEMPomega;
+
   std::shared_ptr< math::estimation::unknownList > unknownParameters;
   std::shared_ptr< ThermalData > thermalData;
-  std::shared_ptr< thermal::analysis::Kernal > coreSystem;
+  std::shared_ptr< Kernal > coreSystem;
 
   double Gfunc( const double x , const physicalModel::labels::Name &mylabel ) ;
-  double optiGfun( const double xCenter, const double xRange,
-                   const enum physicalModel::labels::Name &mylabel ) ;
-
   std::vector<double> resizeExperimental( const double center,
                                           const double range,
                                           const size_t numPos ) ;
 
-  void updateExperimentalData( const std::vector<double> &omegas,
-                               const std::vector<double> &input,
-                               Kernal &coreSystem_in,
+  void updateExperimentalData(const std::vector<double> &input,
                                ThermalData &thermalData_in ) ;
 
   void saveExperimental( const ThermalData& thermalData_in );
@@ -70,8 +66,15 @@ private:
   double solve( const double target , const double min, const double max,
                 const physicalModel::labels::Name mylabel,
                 const std::string &bound) ;
+
+
+//  double optiGfun( const double xCenter, const double xRange,
+//                   const enum physicalModel::labels::Name &mylabel ) ;
+//  void Optimization_Analysis( double *x, double *fvec,
+//                              thermal::analysis::Kernal &popteaCore ) ;
+
 public:
-  class LMA bestfitMethod;
+  LMA bestfitMethod;
 
   //constructors
   methods( const math::estimation::settings &Settings_in,

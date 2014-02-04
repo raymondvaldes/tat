@@ -32,7 +32,7 @@ namespace emission{
 
 std::vector<double>
 phase99( const thermal::analysis::Kernal &popteaCore,
-         std::vector<double> &omegas)
+         const std::vector<double> &omegas)
 {
   /*The phase for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
