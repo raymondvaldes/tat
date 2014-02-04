@@ -28,6 +28,7 @@ License
 #include <vector>
 #include <utility>
 #include <memory>
+#include <functional>
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
@@ -41,15 +42,49 @@ License
 #include "thermal/model.hpp"
 #include "thermal/thermal.hpp"
 
+
 namespace thermal {
 namespace analysis{
 
-class LMA
+class LMA_BASE
 {
-
 protected:
+  /// working objects
+  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
+  std::shared_ptr< ThermalData > thermalData;
+  std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
+  math::estimation::settings Settings;
+  LMA_workingArrays LMA_workspace;
+
   int nfev;
   int info;
+  std::function< void( double*, double*, thermal::analysis::Kernal &) >
+  myReduced;
+  virtual void ThermalProp_Analysis( double *x, double *fvec,
+                                     thermal::analysis::Kernal &popteaCore ) =0;
+  void updateBindFunc( void );
+//  virtual void updateWorkSpace(const size_t Lend , const size_t N);
+
+public:
+  explicit LMA_BASE( const math::estimation::settings &Settings_,
+                     const math::estimation::unknownList &unknownParameters_,
+                     const size_t Lend_ );
+
+  virtual void solve(
+      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+      std::shared_ptr<ThermalData> &thermalData_in,
+      std::shared_ptr<Kernal> &coreSystem_in ) = 0;
+};
+
+
+
+class LMA: public LMA_BASE
+{
+protected:
+  void ThermalProp_Analysis( double *x, double *fvec,
+                             thermal::analysis::Kernal &popteaCore ) override;
+  ThermalData paramter_estimation(int *info, int *nfev);
+  void updateWorkSpace(const size_t Lend , const size_t N);
 
 public:
   explicit LMA( const struct math::estimation::settings &Settings_,
@@ -59,40 +94,10 @@ public:
   void solve(
       std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
       std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in );
-
-protected:
-  std::function< void( double*, double*, thermal::analysis::Kernal &) >
-  myReduced;
-
-  void ThermalProp_Analysis( double *x, double *fvec,
-                             thermal::analysis::Kernal &popteaCore ) ;
-
-  void updateBindFunc( void );
-  ThermalData paramter_estimation(int *info, int *nfev);
-  void updateWorkSpace(const size_t Lend , const size_t N);
-
-
-  /// working objects
-  std::shared_ptr< math::estimation::unknownList > unknownParameters_p;
-  std::shared_ptr< ThermalData > thermalData;
-  std::shared_ptr< thermal::analysis::Kernal > coreSystem_p;
-
-  // ThermalData thermalData;
-  math::estimation::settings Settings;
-  LMA_workingArrays LMA_workspace;
-
+      std::shared_ptr<Kernal> &coreSystem_in ) override;
 };
 
-
-
-
-
 }}
-
-
-
-
 
 
 void printPEstimates( const class physicalModel::TBCsystem TBCSystem,

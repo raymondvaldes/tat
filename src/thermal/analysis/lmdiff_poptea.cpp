@@ -39,20 +39,18 @@ License
 namespace thermal {
 namespace analysis{
 
-
-LMA::LMA( const math::estimation::settings &Settings_,
-          const math::estimation::unknownList &unknownParameters_,
-          const size_t Lend_ )
-  : Settings(Settings_),
-    LMA_workspace( Lend_, unknownParameters_.size() )
+LMA_BASE::LMA_BASE( const math::estimation::settings &Settings_,
+                    const math::estimation::unknownList &unknownParameters_,
+                    const size_t Lend_ )
+  :Settings(Settings_), LMA_workspace( Lend_, unknownParameters_.size() )
 {}
 
-LMA::~LMA(void){}
 
-void LMA::updateBindFunc( void )
+
+void LMA_BASE::updateBindFunc( void )
 {
   myReduced =
-  std::bind( &LMA::ThermalProp_Analysis, this , std::placeholders::_1,
+  std::bind( &LMA_BASE::ThermalProp_Analysis, this , std::placeholders::_1,
              std::placeholders::_2, std::placeholders::_3) ;
 }
 
@@ -60,6 +58,19 @@ void LMA::updateWorkSpace( const size_t Lend, const size_t N )
 {
   LMA_workspace.updateArraySize( Lend , N );
 }
+
+
+LMA::LMA( const math::estimation::settings &Settings_,
+          const math::estimation::unknownList &unknownParameters_,
+          const size_t Lend_ )
+  : LMA_BASE( Settings_, unknownParameters_, Lend_ )
+{}
+
+LMA::~LMA(void){}
+
+
+
+
 
 void LMA::solve(
     std::shared_ptr< math::estimation::unknownList > &unknownParameters_in,

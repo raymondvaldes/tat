@@ -25,7 +25,6 @@ License
 #ifndef THERMALDATA_HPP
 #define THERMALDATA_HPP
 
-#include "models/physicalmodel.hpp"
 #include "math/estimation/parameterestimation.hpp"
 
 namespace thermal {

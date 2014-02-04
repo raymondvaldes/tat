@@ -31,11 +31,7 @@ License
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/thermalData.hpp"
-#include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/methods.hpp"
-#include "math/estimation/parameterestimation.hpp"
-#include "models/physicalmodel.hpp"
-#include "tools/filesystem.hpp"
 
 namespace thermal {
 namespace analysis{
@@ -48,7 +44,7 @@ private:
 
 public:
   /// core members
-  std::shared_ptr< thermal::analysis::Kernal > coreSystem;
+  std::shared_ptr< Kernal > coreSystem;
   std::shared_ptr< ThermalData > thermalData;
   std::shared_ptr< math::estimation::unknownList > unknownParameters;
   methods analysis;
