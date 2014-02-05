@@ -113,13 +113,28 @@ void ThermalSweepOptimizer::
   intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
                             bestfitMethod );
 
+  for(size_t i = 0; i < sweepOptimizationGoal.size() ; i++)
+  {
+    double error = 0 ;
 
-  /// Evaluate Objective function
-//  for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
-//  {
-//     fvec[n] =  thermalData->experimentalEmission[n] -
-//                    thermalData->predictedEmission[n] ;
-//  }
+    for (auto& unknown: (*unknownParameters)() )
+    {
+      switch( unknown.label() )
+      {
+        case physicalModel::labels::Name::gammaEff :
+            error = unknown.bestfitIntervalSpread();
+            break;
+        case physicalModel::labels::Name::asub :
+            error = unknown.bestfitIntervalSpread();
+            break;
+        default:
+            std::cout << "\nSwitch Error!!\n";
+            exit(-10) ;
+            break;
+      }
+    }
+    fvec[i] = error;
+  }
 
   return;
 }
@@ -137,19 +152,6 @@ void ThermalSweepOptimizer::updateWorkSpace(
   const size_t N = thermalSweepSearch_in.size();
   updateWorkSpace( Lend, N ) ;
 }
-
-
-//double ThermalSweepOptimizer::bestFit( void )
-//{
-//  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
-//  return thermalData->MSE;
-//}
-
-//void ThermalSweepOptimizer::pieAnalysis( void )
-//{
-//  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
-//                            bestfitMethod );
-//}
 
 void ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,

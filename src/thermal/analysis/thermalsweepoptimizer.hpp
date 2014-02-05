@@ -71,9 +71,8 @@ private:
                                 const physicalModel::layer updatedCoating ) ;
   std::pair< double, double >
   updateVal(const std::pair<double, double> xSweep) ;
+
   // solvers
-//  double bestFit( void ) ;
-//  void pieAnalysis( void ) ;
   void optimizer(void);
 
 public:
