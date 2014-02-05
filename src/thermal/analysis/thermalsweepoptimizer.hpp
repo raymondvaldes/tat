@@ -37,7 +37,7 @@ namespace thermal{
 namespace analysis{
 
 
-class ThermalSweepOptimizer: public LMA_BASE
+class ThermalSweepOptimizer: private LMA_BASE
 {
 private:
     void updateWorkSpace( const size_t Lend , const size_t N ) override;
@@ -53,14 +53,22 @@ private:
 
     double bestFit( void ) ;
     void pieAnalysis( void ) ;
-    std::vector< physicalModel::labels > sweepOptimizationGoal;
+
+    math::estimation::unknownList thermalSweepSearch;
+    std::vector<physicalModel::labels> sweepOptimizationGoal ;
 
 public:
   explicit ThermalSweepOptimizer(
-      const math::estimation::settings &Settings_,
-      const math::estimation::unknownList &unknownParameters,
-      const std::vector< physicalModel::labels > sweepOptimizationGoal ) ;
+        const math::estimation::settings &Settings_in,
+        const ThermalData &thermalData,
+        const math::estimation::unknownList &unknownParameters_,
+        const std::shared_ptr< LMA > &bestfitMethod_in,
+        const std::shared_ptr< PIE > &intervalEstimates_in,
+        const math::estimation::unknownList thermalSweepSearch_in,
+        const std::vector< physicalModel::labels > sweepOptimizationGoal_in ) ;
   ~ThermalSweepOptimizer( void ) ;
+
+
 
   void start(
      const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,

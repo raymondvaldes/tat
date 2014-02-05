@@ -47,7 +47,7 @@ License
 namespace thermal {
 namespace analysis{
 
-class LMA_BASE: protected baseData
+class LMA_BASE: public baseData
 {
 protected:
   /// working objects
