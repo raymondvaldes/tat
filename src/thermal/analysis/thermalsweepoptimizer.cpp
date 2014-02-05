@@ -236,28 +236,28 @@ void ThermalSweepOptimizer::optimizer(void)
 
   ///The optimization algorithm will have the experimental data in vector for.
   /// I need to take that data and be able to resize it.
-  ThermalData( sliceThermalData( xCenter, xRange,
-                                 coreSystem->TBCsystem.coating ) ) ;
+  ThermalData updatedThermal(
+        sliceThermalData( xCenter, xRange, coreSystem->TBCsystem.coating ) ) ;
+  reassign( thermalData , updatedThermal ) ;
 
 std::cout <<"hello";
-//  sliceThermalData( xCenter, xRange, coreSystem->TBCsystem.coating );
 
 
-    /// I need to create ways to optimize thermal penetration. The ones I am
-    /// thinking
-    ///   a) given X data what is the optimal range to best estimate properties
-    ///      - original data limited in range
-    ///      - cannot introduce new measurements
-    ///   b) given LMIN and LMAX what is the optimal range to take data to
-    ///     ensure the most accurate measurements
-    ///  The function I am minimizing is
-    ///  S1
-    ///
-    /// So this means one should be from the perspective of someone doing
-    /// post-analysis on their data.  They have a given range of values ( a
-    /// thermograph) and they're looking to see how much data to keep.
-    ///
-    ///
+/// I need to create ways to optimize thermal penetration. The ones I am
+/// thinking
+///   a) given X data what is the optimal range to best estimate properties
+///      - original data limited in range
+///      - cannot introduce new measurements
+///   b) given LMIN and LMAX what is the optimal range to take data to
+///     ensure the most accurate measurements
+///  The function I am minimizing is
+///  S1
+///
+/// So this means one should be from the perspective of someone doing
+/// post-analysis on their data.  They have a given range of values ( a
+/// thermograph) and they're looking to see how much data to keep.
+///
+///
 
 
     ///Update list of parameters with updated list
