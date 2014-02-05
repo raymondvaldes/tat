@@ -43,12 +43,7 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     intervalEstimates( intervalEstimates_in ),
     thermalSweepSearch( thermalSweepSearch_in ),
     sweepOptimizationGoal( sweepOptimizationGoal_in )
-{
-
-
-
-
-}
+{}
 ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {}
 
 void ThermalSweepOptimizer::
@@ -86,8 +81,18 @@ void ThermalSweepOptimizer::
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
 {
-//  LMA_workspace.updateArraySize( Lend , N );
+  LMA_workspace.updateArraySize( Lend , N );
 }
+
+void ThermalSweepOptimizer::updateWorkSpace(
+    const math::estimation::unknownList &thermalSweepSearch_in,
+    const std::vector<physicalModel::labels> &sweepOptimizationGoal_in)
+{
+  const size_t Lend = sweepOptimizationGoal_in.size();
+  const size_t N = thermalSweepSearch_in.size();
+  updateWorkSpace( Lend, N ) ;
+}
+
 
 double ThermalSweepOptimizer::bestFit( void )
 {
@@ -101,17 +106,13 @@ void ThermalSweepOptimizer::pieAnalysis( void )
                             bestfitMethod );
 }
 
-void ThermalSweepOptimizer::start(
+void ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in,
     const std::shared_ptr<LMA> &bestfitMethod_in,
     const std::shared_ptr<PIE> &intervalEstimates_in )
 {
-
-  unknownParameters = unknownParameters_in;
-  thermalData = thermalData_in;
-  coreSystem = coreSystem_in;
   bestfitMethod = bestfitMethod_in;
   intervalEstimates = intervalEstimates_in;
 
@@ -123,6 +124,10 @@ void ThermalSweepOptimizer::solve(
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in )
 {
+  unknownParameters = unknownParameters_in;
+  thermalData = thermalData_in;
+  coreSystem = coreSystem_in;
+
 
   ///Define experimental "operability domain"
   ///This is the section of my code where I have figured out what lmin and lmax
@@ -158,9 +163,7 @@ void ThermalSweepOptimizer::solve(
 
     ///The optimization algorithm will have the experimental data in vector for.
     /// I need to take that data and be able to resize it.
-//    using math::estimation::unknown;
-//    saveExperimental( *thermalData );
-//    std::vector< unknown > originalListParams = (*unknownParameters)();
+    ThermalData fullRangeThermalData( *thermalData ) ;
 
 
 
