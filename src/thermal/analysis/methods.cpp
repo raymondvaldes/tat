@@ -37,15 +37,18 @@ License
 namespace thermal{
 namespace analysis{
 
-methods::methods( const math::estimation::settings &Settings_in,
-                  const math::estimation::unknownList &unknownParameters_in,
-                  const ThermalData& thermalData_in )
+methods::methods(
+    const math::estimation::settings &Settings_in,
+    const math::estimation::unknownList &unknownParameters_in,
+    const ThermalData& thermalData_in ,
+    const math::estimation::unknownList &thermalSweepSearch ,
+    const std::vector<physicalModel::labels> sweepOptimizationGoal)
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
     intervalEstimates( new PIE() ),
     lthermalSweepOptimizer(
-      new ThermalSweepOptimizer( Settings_in, unknownParameters_in,
-                                 unknownParameters_in.size() ) )
+      new ThermalSweepOptimizer( Settings_in, thermalSweepSearch,
+                                 sweepOptimizationGoal ) )
 {}
 
 double methods::bestFit(

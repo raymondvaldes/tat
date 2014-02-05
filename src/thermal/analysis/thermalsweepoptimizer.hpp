@@ -47,17 +47,19 @@ private:
       const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
       const std::shared_ptr<ThermalData> &thermalData_in,
       const std::shared_ptr<Kernal> &coreSystem_in ) override;
+
     std::shared_ptr< LMA > bestfitMethod;
     std::shared_ptr< PIE > intervalEstimates;
 
     double bestFit( void ) ;
     void pieAnalysis( void ) ;
+    std::vector< physicalModel::labels > sweepOptimizationGoal;
 
 public:
   explicit ThermalSweepOptimizer(
       const math::estimation::settings &Settings_,
       const math::estimation::unknownList &unknownParameters,
-      const size_t Lend_ ) ;
+      const std::vector< physicalModel::labels > sweepOptimizationGoal ) ;
   ~ThermalSweepOptimizer( void ) ;
 
   void start(
@@ -67,7 +69,6 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      );
-
 };
 
 }}
