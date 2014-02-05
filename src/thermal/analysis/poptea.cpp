@@ -42,10 +42,6 @@ License
 
 #include "math/bisection.hpp"
 
-template<typename OBJ>
-void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
-  { var.reset( new OBJ( input )  ); }
-
 namespace thermal {
 namespace analysis{  
 
@@ -55,7 +51,7 @@ Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
                 const math::estimation::unknownList &thermalSweepSearch ,
                 const std::vector<physicalModel::labels> sweepOptimizationGoal)
     : analysis( Settings_, unknownParameters_, thermaldata_, thermalSweepSearch,
-                sweepOptimizationGoal)
+                sweepOptimizationGoal, coreSystem_.TBCsystem.coating )
 {
   reassign( coreSystem, coreSystem_);
   reassign( thermalData, thermaldata_);

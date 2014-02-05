@@ -41,7 +41,8 @@ methods::methods(const math::estimation::settings &Settings_in,
     const math::estimation::unknownList &unknownParameters_in,
     const ThermalData& thermalData_in ,
     const math::estimation::unknownList &thermalSweepSearch ,
-    const std::vector<physicalModel::labels> &sweepOptimizationGoal)
+    const std::vector<physicalModel::labels> &sweepOptimizationGoal,
+                 const physicalModel::layer coating )
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
     intervalEstimates( new PIE() ),
@@ -52,7 +53,8 @@ methods::methods(const math::estimation::settings &Settings_in,
                                  bestfitMethod,
                                  intervalEstimates ,
                                  thermalSweepSearch,
-                                 sweepOptimizationGoal ) )
+                                 sweepOptimizationGoal,
+                                 coating) )
 {
 }
 
