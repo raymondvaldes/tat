@@ -178,6 +178,7 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
                                 class thermal::analysis::Kernal &popteaCore )
 {
   //Update parameters
+  //The reason I create a new list of unknownParameter is because the operator()
   math::estimation::unknownList updatedInput;
   int i = 0;
   for( auto& unknown :  (*unknownParameters)() )
@@ -187,8 +188,8 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
     unknown.bestfitset( val );
     updatedInput.addUnknown(unknown);
   }
-
   (*unknownParameters)( updatedInput() );
+
   popteaCore.updatefromBestFit( (*unknownParameters)()  );
 
   // Estimates the phase of emission at each heating frequency
