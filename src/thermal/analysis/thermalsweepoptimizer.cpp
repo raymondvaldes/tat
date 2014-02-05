@@ -240,46 +240,79 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 
 void ThermalSweepOptimizer::optimizer(void)
 {
+  ///Create workspaces
+  using namespace math::estimation;
+  const size_t m = sweepOptimizationGoal.size();
+  const size_t n = thermalSweepSearch.size();
 
-  ///Define experimental "operability domain"
-  ///This is the section of my code where I have figured out what lmin and lmax
-  /// is. At this point I am assuming that the experimental data has been loaded
-  /// and a best fit has been done on the parameters.  The new lthermals are
-  const std::pair<double, double> thermalOperabilityLimits =
-      thermalData->get_lthermalLimits(coreSystem->TBCsystem.coating );
-  std::cout << "thermalOperabilityLimits\t"
-            << thermalOperabilityLimits.first << "\t"
-            << thermalOperabilityLimits.second << "\n";
+  double *x = new double[n];
+  double *fvec = new double[m];
+  double *qtf = new double[n];
+  double *wa1 = new double[n];
+  double *wa2 = new double[n];
+  double *wa3 = new double[n];
+  double *wa4 = new double[m];
+  double *fjac = new double[m*n];
+  double *wa5 = new double[m*n];
+  int *ipvt = new int[n];
+  double *diag = new double[n];
 
-  ///Define acceptable tolerance.  This is where I give it a threshold in which
-  /// it will seach for the optimal range and stop once the threshold is
-  /// satisfied.
-  const double minError = 0;
+  ///populate initial values
+  std::vector<double> xInitial(0);
 
-  /// Given a center and a range can I create data from this. [TEST]
-  const double xCenter = .5;
-  const double xRange = .1;
-  const std::pair<double, double> updatedRange =
-  math::newThermalSweepLimits( xCenter, xRange, thermalOperabilityLimits );
-  std::cout << "updated range\t" << updatedRange.first << "\t"
-            << updatedRange.second << "\n";
+  for( const auto &unknown : thermalSweepSearch() )
+    { xInitial.push_back( unknown.initialVal() ); }
+  for( size_t i=0 ; i< n ; i++ )
+    { x[i] = xInitial[i]; }
 
-  const std::pair<double, double> CRfromSwweep =
-  math::CRfromSweepLimits( updatedRange.first, updatedRange.second,
-                     thermalOperabilityLimits );
-  std::cout << "updated center range\t" << CRfromSwweep.first << "\t"
-            << CRfromSwweep.second << "\n";
+//scaleDiag( diag, thermalSweepSearch , coreSystem->TBCsystem, Settings.mode ) ;
 
-  ///Create list of unknowns
-  //see global object
+  ///Transform inputs
+  int j = 0;
+  for( const auto& unknown : thermalSweepSearch() )
+  {
+    x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
+    j++;
+  }
 
-  ///The optimization algorithm will have the experimental data in vector for.
-  /// I need to take that data and be able to resize it.
-  ThermalData updatedThermal(
-        sliceThermalData( xCenter, xRange, coreSystem->TBCsystem.coating ) ) ;
-  reassign( thermalData , updatedThermal ) ;
+//  ///levenberg-marquardt algorithm
+//  updateBindFunc();
+//  math::estimation::lmdif( myReduced , m, n, x, fvec, Settings.ftol,
+//                           Settings.xtol, Settings.gtol, Settings.maxfev,
+//                           Settings.epsfcn, diag, Settings.mode,
+//                           Settings.factor, Settings.nprint, info, nfev, fjac,
+//                           m, ipvt, qtf, wa1, wa2, wa3, wa4, wa5,
+//                           *coreSystem ) ;
 
-std::cout <<"hello";
+//  //Transform outputs
+//  j=0;
+//  for( auto& unknown : (*unknownParameters)() )
+//  {
+//    x[j] = x_limiter2(x[j], unknown.lowerBound(), unknown.upperBound());
+//    unknown.bestfitset(x[j]);
+//    j++;
+//  }
+
+//   ///Final fit
+//  coreSystem->updatefromBestFit( (*unknownParameters)() );
+//  thermalData->predictedEmission =
+//      thermal::emission::phase99( *coreSystem , thermalData->omegas );
+
+//  /// Quality-of-fit
+//  thermalData->MSE = math::estimation::SobjectiveLS(
+//        thermalData->experimentalEmission, thermalData->predictedEmission );
+
+  delete [] qtf;
+  delete [] wa1;
+  delete [] wa2;
+  delete [] wa3;
+  delete [] wa4;
+  delete [] wa5;
+  delete [] ipvt;
+  delete [] fvec;
+  delete [] fjac;
+  delete [] diag;
+  delete [] x;
 
 
 /// I need to create ways to optimize thermal penetration. The ones I am
