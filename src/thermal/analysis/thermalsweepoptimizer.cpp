@@ -28,6 +28,7 @@ License
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
 #include "math/numIntegration/gslfunc.hpp"
+#include "math/estimation/lmdiff.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -87,7 +88,7 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
 
 
 void ThermalSweepOptimizer::
-  ThermalProp_Analysis( double *x, double *fvec, class Kernal &popteaCore )
+  ThermalProp_Analysis( double *x, double *fvec )
 {
   //Update parameters with current bestfits by transforming x
   math::estimation::unknownList updatedInput;
@@ -105,7 +106,7 @@ void ThermalSweepOptimizer::
   xSweep = updateVal( xSweep ) ;
   const double lmin = xSweep.first;
   const double lmax = xSweep.second;
-  const physicalModel::layer coatingUpdate( popteaCore.TBCsystem.coating );
+  const physicalModel::layer coatingUpdate( coreSystem->TBCsystem.coating );
   ThermalData updatedThermal( sliceThermalData( lmin, lmax, coatingUpdate ) ) ;
   reassign( thermalData , updatedThermal ) ;
 
@@ -259,7 +260,6 @@ void ThermalSweepOptimizer::optimizer(void)
 
   ///populate initial values
   std::vector<double> xInitial(0);
-
   for( const auto &unknown : thermalSweepSearch() )
     { xInitial.push_back( unknown.initialVal() ); }
   for( size_t i=0 ; i< n ; i++ )
@@ -268,30 +268,27 @@ void ThermalSweepOptimizer::optimizer(void)
 //scaleDiag( diag, thermalSweepSearch , coreSystem->TBCsystem, Settings.mode ) ;
 
   ///Transform inputs
-  int j = 0;
+  size_t j = 0;
   for( const auto& unknown : thermalSweepSearch() )
   {
     x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
     j++;
   }
 
-//  ///levenberg-marquardt algorithm
-//  updateBindFunc();
-//  math::estimation::lmdif( myReduced , m, n, x, fvec, Settings.ftol,
-//                           Settings.xtol, Settings.gtol, Settings.maxfev,
-//                           Settings.epsfcn, diag, Settings.mode,
-//                           Settings.factor, Settings.nprint, info, nfev, fjac,
-//                           m, ipvt, qtf, wa1, wa2, wa3, wa4, wa5,
-//                           *coreSystem ) ;
+  /// Constrained nonlinear parameter estimation
+  updateBindFunc() ;
+  lmdif( myReduced , m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
+         Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
+         Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
 
-//  //Transform outputs
-//  j=0;
-//  for( auto& unknown : (*unknownParameters)() )
-//  {
-//    x[j] = x_limiter2(x[j], unknown.lowerBound(), unknown.upperBound());
-//    unknown.bestfitset(x[j]);
-//    j++;
-//  }
+  //Transform outputs
+  j=0;
+  for( auto& unknown : thermalSweepSearch() )
+  {
+    x[j] = x_limiter2(x[j], unknown.lowerBound(), unknown.upperBound());
+    unknown.bestfitset(x[j]);
+    j++;
+  }
 
 //   ///Final fit
 //  coreSystem->updatefromBestFit( (*unknownParameters)() );
