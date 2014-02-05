@@ -56,6 +56,12 @@ bool unknown::operator != ( const unknown& input ) const
 }
 
 
+double unknown::bestfitIntervalSpread( void )
+{
+  return  (bestfitInterval.upper - bestfitInterval.lower) / bestfitval;
+}
+
+
 void unknown::Initialauto(void)
 {
   initialGuess = math::average(constraint.lower, constraint.upper);
