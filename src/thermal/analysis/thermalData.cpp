@@ -67,7 +67,7 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
 
 size_t ThermalData::size(void) const
 {
-  return experimentalEmission.size();
+  return omegas.size();
 }
 
 void ThermalData::clearVectors(void)
@@ -84,6 +84,12 @@ void ThermalData::resizeVectors( const size_t Lend)
   predictedEmission.resize( Lend );
 }
 
+std::pair<double, double>
+ThermalData::get_omegaLimits( const physicalModel::layer &coating) const
+{
+  std::pair<double, double> output(omegas.front(), omegas.back());
+  return output;
+}
 
 std::pair<double, double>
 ThermalData::get_lthermalLimits( const physicalModel::layer &coating) const
