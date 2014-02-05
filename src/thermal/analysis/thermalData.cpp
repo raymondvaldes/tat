@@ -267,6 +267,4 @@ class ThermalData ThermalData::
 }
 
 
-
-
 }}

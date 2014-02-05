@@ -64,11 +64,13 @@ private:
   std::shared_ptr< ThermalData > fullRangeThermalData;
   std::shared_ptr< LMA > bestfitMethod;
   std::shared_ptr< PIE > intervalEstimates;
+  std::pair<double, double> xSweep;
 
   // worker methods
   ThermalData sliceThermalData( const double xCenter, const double xRange,
                                 const physicalModel::layer updatedCoating ) ;
-
+  std::pair< double, double >
+  updateVal(const std::pair<double, double> xSweep) ;
   // solvers
   double bestFit( void ) ;
   void pieAnalysis( void ) ;
