@@ -34,14 +34,14 @@ namespace analysis{
 
 ThermalSweepOptimizer::ThermalSweepOptimizer(
     const math::estimation::settings &Settings_in,
-    const ThermalData &thermalData,
+    const ThermalData &thermalData_in,
     const math::estimation::unknownList &unknownParameters_,
     const std::shared_ptr< LMA > &bestfitMethod_in,
     const std::shared_ptr< PIE > &intervalEstimates_in,
     const math::estimation::unknownList thermalSweepSearch_in,
     const std::vector<physicalModel::labels> sweepOptimizationGoal_in,
     const physicalModel::layer coating)
-  : LMA_BASE( Settings_in, unknownParameters_, thermalData.size() ) ,
+  : LMA_BASE( Settings_in, unknownParameters_, thermalData_in.size() ) ,
     bestfitMethod( bestfitMethod_in ),
     intervalEstimates( intervalEstimates_in ),
     thermalSweepSearch( thermalSweepSearch_in ),
@@ -103,16 +103,16 @@ void ThermalSweepOptimizer::
 
   ///Load these unknownParameters into the popteaCore and thermalData kernals
   xSweep = updateVal( xSweep ) ;
-
-  ThermalData updatedThermal(
-        sliceThermalData( xSweep.first, xSweep.second,
-                          popteaCore.TBCsystem.coating ) ) ;
+  const double lmin = xSweep.first;
+  const double lmax = xSweep.second;
+  const physicalModel::layer coatingUpdate( popteaCore.TBCsystem.coating );
+  ThermalData updatedThermal( sliceThermalData( lmin, lmax, coatingUpdate ) ) ;
   reassign( thermalData , updatedThermal ) ;
 
+  // Parameter Estimation with PIE analysis
+  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
+                            bestfitMethod );
 
-  // Estimates the phase of emission at each heating frequency
-//  thermalData->predictedEmission =
-//      thermal::emission::phase99( popteaCore, thermalData->omegas );
 
   /// Evaluate Objective function
 //  for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
@@ -139,17 +139,17 @@ void ThermalSweepOptimizer::updateWorkSpace(
 }
 
 
-double ThermalSweepOptimizer::bestFit( void )
-{
-  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
-  return thermalData->MSE;
-}
+//double ThermalSweepOptimizer::bestFit( void )
+//{
+//  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
+//  return thermalData->MSE;
+//}
 
-void ThermalSweepOptimizer::pieAnalysis( void )
-{
-  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
-                            bestfitMethod );
-}
+//void ThermalSweepOptimizer::pieAnalysis( void )
+//{
+//  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
+//                            bestfitMethod );
+//}
 
 void ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
