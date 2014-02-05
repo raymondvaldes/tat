@@ -67,7 +67,6 @@ public:
   void PIE ( void );
   void optimization(void);
   std::vector<double> thermalSweep(void) const;
-
   void parameterIntervalEstimates( void ) ;
 } ;
 

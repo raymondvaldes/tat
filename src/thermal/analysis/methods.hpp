@@ -54,7 +54,8 @@ public:
       const math::estimation::unknownList &unknownParameters_in,
       const ThermalData& thermalData_in,
       const math::estimation::unknownList &thermalSweepSearch_in,
-      const std::vector<physicalModel::labels> &sweepOptimizationGoal_in ) ;
+      const std::vector<physicalModel::labels> &sweepOptimizationGoal_in,
+      const physicalModel::layer coating ) ;
 
   //output methods
   double bestFit(
