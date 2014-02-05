@@ -22,7 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-
+#include <vector>
 #include <cstring>
 #include "math/numIntegration/gslfunc.hpp"
 namespace math{
