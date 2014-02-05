@@ -32,8 +32,9 @@ namespace analysis{
 ThermalSweepOptimizer::ThermalSweepOptimizer(
     const math::estimation::settings &Settings_,
     const math::estimation::unknownList &unknownParameters_,
-    const size_t Lend_ )
-  : LMA_BASE( Settings_, unknownParameters_, Lend_ )
+    const std::vector<physicalModel::labels> sweepOptimizationGoal_in )
+  : LMA_BASE( Settings_, unknownParameters_, sweepOptimizationGoal_in.size() ),
+    sweepOptimizationGoal(sweepOptimizationGoal_in)
 {}
 ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {}
 

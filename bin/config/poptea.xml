@@ -66,6 +66,16 @@
 	</unknownParameters>
 	
 	<optimizationSweep>
+		<parameters>
+			<optimizeFor>
+				<label>asub</label>
+			</optimizeFor>
+
+			<optimizeFor>
+				<label>gammaEff</label>
+			</optimizeFor>
+		</parameters>
+
 		<unknownParameters>
 			<unknown>
 				<label>thermalCenter</label>

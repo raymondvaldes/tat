@@ -169,7 +169,7 @@ class unknown
 }
 
 unknownList::unknownList(){}
-unknownList::unknownList( std::vector<class estimation::unknown> input )
+unknownList::unknownList( std::vector< estimation::unknown> input )
   :vectorUnknowns(input)
 {}
 
@@ -177,10 +177,10 @@ class unknownList unknownList::
         loadConfigfromXML(const boost::property_tree::ptree pt)
 {
   using boost::property_tree::ptree;
-  class unknownList unknownListObj;
+  unknownList unknownListObj;
 
   // Iterate over 'unknown' branches
-  class physicalModel::labels labels;
+  physicalModel::labels labels;
   BOOST_FOREACH( const ptree::value_type &v,
                  pt.get_child( "unknownParameters" ) )
   {

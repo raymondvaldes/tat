@@ -45,10 +45,13 @@ private:
 
 public:
   /// constructors and object creators
-  explicit Poptea( const Kernal &coreSystem_ ,
-                   const ThermalData &thermaldata_,
-                   const math::estimation::settings &Settings_,
-                   const math::estimation::unknownList &unknownParameters_) ;
+  explicit Poptea(
+      const Kernal &coreSystem_ ,
+      const ThermalData &thermaldata_,
+      const math::estimation::settings &Settings_,
+      const math::estimation::unknownList &unknownParameters_,
+      const math::estimation::unknownList &thermalSweepSearch,
+      const std::vector< physicalModel::labels > sweepOptimizationGoal) ;
 
   static Poptea loadConfig( const Kernal &coreSystem_,
                             const boost::property_tree::ptree &pt ) ;

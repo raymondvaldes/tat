@@ -52,7 +52,9 @@ public:
   explicit methods(
       const math::estimation::settings &Settings_in,
       const math::estimation::unknownList &unknownParameters_in,
-      const ThermalData& thermalData_in ) ;
+      const ThermalData& thermalData_in,
+      const math::estimation::unknownList &thermalSweepSearch,
+      const std::vector<physicalModel::labels> sweepOptimizationGoal) ;
 
   //output methods
   double bestFit(
