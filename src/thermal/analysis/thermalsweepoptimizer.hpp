@@ -72,21 +72,21 @@ private:
   std::pair< double, double >
   updateVal(const std::pair<double, double> xSweep) ;
   // solvers
-  double bestFit( void ) ;
-  void pieAnalysis( void ) ;
+//  double bestFit( void ) ;
+//  void pieAnalysis( void ) ;
   void optimizer(void);
 
 public:
   // constructors and destructors
   explicit ThermalSweepOptimizer(
-        const math::estimation::settings &Settings_in,
-        const ThermalData &thermalData,
-        const math::estimation::unknownList &unknownParameters_,
-        const std::shared_ptr< LMA > &bestfitMethod_in,
-        const std::shared_ptr< PIE > &intervalEstimates_in,
-        const math::estimation::unknownList thermalSweepSearch_in,
-        const std::vector< physicalModel::labels > sweepOptimizationGoal_in,
-        const physicalModel::layer coating ) ;
+      const math::estimation::settings &Settings_in,
+      const ThermalData &thermalData_in,
+      const math::estimation::unknownList &unknownParameters_,
+      const std::shared_ptr< LMA > &bestfitMethod_in,
+      const std::shared_ptr< PIE > &intervalEstimates_in,
+      const math::estimation::unknownList thermalSweepSearch_in,
+      const std::vector< physicalModel::labels > sweepOptimizationGoal_in,
+      const physicalModel::layer coating ) ;
   ~ThermalSweepOptimizer( void ) ;
 
   // public solver (yes just give it all this shit and it'll do the work for u)
