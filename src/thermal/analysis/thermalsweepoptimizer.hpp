@@ -44,7 +44,7 @@ class ThermalSweepOptimizer: private LMA_BASE
 private:
   // overide methods inherited
   void updateWorkSpace( const size_t Lend , const size_t N ) override;
-  void g(
+  void updateWorkSpace(
       const math::estimation::unknownList &thermalSweepSearch_in,
       const std::vector<physicalModel::labels> &sweepOptimizationGoal_in);
 
