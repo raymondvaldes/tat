@@ -40,24 +40,35 @@ namespace analysis{
 class ThermalSweepOptimizer: private LMA_BASE
 {
 private:
-    void updateWorkSpace( const size_t Lend , const size_t N ) override;
-    void ThermalProp_Analysis( double *x, double *fvec,
-                               thermal::analysis::Kernal &popteaCore ) override;
-    void solve(
-      const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
-      const std::shared_ptr<ThermalData> &thermalData_in,
-      const std::shared_ptr<Kernal> &coreSystem_in ) override;
+  // overide methods inherited
+  void updateWorkSpace( const size_t Lend , const size_t N ) override;
+  void updateWorkSpace(
+      const math::estimation::unknownList &thermalSweepSearch_in,
+      const std::vector<physicalModel::labels> &sweepOptimizationGoal_in);
 
-    std::shared_ptr< LMA > bestfitMethod;
-    std::shared_ptr< PIE > intervalEstimates;
+  void ThermalProp_Analysis( double *x, double *fvec,
+                             thermal::analysis::Kernal &popteaCore ) override;
+  void solve(
+    const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
+    const std::shared_ptr<ThermalData> &thermalData_in,
+    const std::shared_ptr<Kernal> &coreSystem_in ) override;
 
-    double bestFit( void ) ;
-    void pieAnalysis( void ) ;
+  // settings Objects
+  math::estimation::unknownList thermalSweepSearch;
+  std::vector<physicalModel::labels> sweepOptimizationGoal ;
 
-    math::estimation::unknownList thermalSweepSearch;
-    std::vector<physicalModel::labels> sweepOptimizationGoal ;
+  // worker Objects
+  ThermalData fullRangeThermalData;
+  std::shared_ptr< LMA > bestfitMethod;
+  std::shared_ptr< PIE > intervalEstimates;
+
+  // solvers
+  double bestFit( void ) ;
+  void pieAnalysis( void ) ;
+  void optimizer(void);
 
 public:
+  // constructors and destructors
   explicit ThermalSweepOptimizer(
         const math::estimation::settings &Settings_in,
         const ThermalData &thermalData,
@@ -68,9 +79,8 @@ public:
         const std::vector< physicalModel::labels > sweepOptimizationGoal_in ) ;
   ~ThermalSweepOptimizer( void ) ;
 
-
-
-  void start(
+  // public solver (yes just give it all this shit and it'll do the work for u)
+  void solve(
      const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
      const std::shared_ptr<ThermalData> &thermalData_in,
      const std::shared_ptr<Kernal> &coreSystem_in,
