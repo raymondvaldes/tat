@@ -27,11 +27,13 @@ License
 #define THERMALSWEEPOPTIMIZER_HPP
 
 #include <cstddef>
+#include <memory>
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/pie.hpp"
+#include "models/physicalmodel.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -58,9 +60,14 @@ private:
   std::vector<physicalModel::labels> sweepOptimizationGoal ;
 
   // worker Objects
-  ThermalData fullRangeThermalData;
+  std::shared_ptr< physicalModel::layer > coatingTOinterpretFullRange;
+  std::shared_ptr< ThermalData > fullRangeThermalData;
   std::shared_ptr< LMA > bestfitMethod;
   std::shared_ptr< PIE > intervalEstimates;
+
+  // worker methods
+  ThermalData sliceThermalData( const double xCenter, const double xRange,
+                                const physicalModel::layer updatedCoating ) ;
 
   // solvers
   double bestFit( void ) ;
@@ -76,7 +83,8 @@ public:
         const std::shared_ptr< LMA > &bestfitMethod_in,
         const std::shared_ptr< PIE > &intervalEstimates_in,
         const math::estimation::unknownList thermalSweepSearch_in,
-        const std::vector< physicalModel::labels > sweepOptimizationGoal_in ) ;
+        const std::vector< physicalModel::labels > sweepOptimizationGoal_in,
+        const physicalModel::layer coating ) ;
   ~ThermalSweepOptimizer( void ) ;
 
   // public solver (yes just give it all this shit and it'll do the work for u)
