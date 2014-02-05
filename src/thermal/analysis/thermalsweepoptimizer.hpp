@@ -48,22 +48,21 @@ private:
       const math::estimation::unknownList &thermalSweepSearch_in,
       const std::vector<physicalModel::labels> &sweepOptimizationGoal_in);
 
-  void ThermalProp_Analysis( double *x, double *fvec,
-                             thermal::analysis::Kernal &popteaCore ) override;
+  void ThermalProp_Analysis( double *x, double *fvec ) override;
   void solve(
     const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in ) override;
 
   // settings Objects
+  std::shared_ptr< LMA > bestfitMethod;
+  std::shared_ptr< PIE > intervalEstimates;
   math::estimation::unknownList thermalSweepSearch;
   std::vector<physicalModel::labels> sweepOptimizationGoal ;
 
   // worker Objects
   std::shared_ptr< physicalModel::layer > coatingTOinterpretFullRange;
   std::shared_ptr< ThermalData > fullRangeThermalData;
-  std::shared_ptr< LMA > bestfitMethod;
-  std::shared_ptr< PIE > intervalEstimates;
   std::pair<double, double> xSweep;
 
   // worker methods

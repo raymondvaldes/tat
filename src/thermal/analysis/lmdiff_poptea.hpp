@@ -30,6 +30,7 @@ License
 #include <memory>
 #include <functional>
 
+#include "math/estimation/lmdiff.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/lmdiff_poptea_help.hpp"
@@ -56,10 +57,9 @@ protected:
 
   int nfev;
   int info;
-  std::function< void( double*, double*, Kernal &) >
-  myReduced;
-  virtual void ThermalProp_Analysis( double *x, double *fvec,
-                                     Kernal &popteaCore ) = 0 ;
+  std::function< void( double*, double* ) > myReduced;
+
+  virtual void ThermalProp_Analysis( double *x, double *fvec ) = 0 ;
   void updateBindFunc( void );
   virtual void updateWorkSpace(const size_t Lend , const size_t N) = 0;
 
@@ -79,8 +79,7 @@ public:
 class LMA: public LMA_BASE
 {
 private:
-  void ThermalProp_Analysis( double *x, double *fvec,
-                             Kernal &popteaCore ) override;
+  void ThermalProp_Analysis( double *x, double *fvec ) override;
   ThermalData paramter_estimation(int *info, int *nfev);
   void updateWorkSpace(const size_t Lend , const size_t N) override;
 

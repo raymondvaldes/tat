@@ -51,7 +51,7 @@ void LMA_BASE::updateBindFunc( void )
 {
   myReduced =
   std::bind( &LMA_BASE::ThermalProp_Analysis, this , std::placeholders::_1,
-             std::placeholders::_2, std::placeholders::_3) ;
+             std::placeholders::_2 ) ;
 }
 
 void LMA::updateWorkSpace( const size_t Lend, const size_t N )
@@ -133,12 +133,10 @@ LMA::paramter_estimation( int *info, int *nfev )
 
   ///levenberg-marquardt algorithm
   updateBindFunc();
-  math::estimation::lmdif( myReduced , m, n, x, fvec, Settings.ftol,
-                           Settings.xtol, Settings.gtol, Settings.maxfev,
-                           Settings.epsfcn, diag, Settings.mode,
-                           Settings.factor, Settings.nprint, info, nfev, fjac,
-                           m, ipvt, qtf, wa1, wa2, wa3, wa4, wa5,
-                           *coreSystem ) ;
+  lmdif( myReduced , m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
+         Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
+         Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4,
+         wa5 ) ;
 
   //Transform outputs
   j=0;
@@ -174,8 +172,7 @@ LMA::paramter_estimation( int *info, int *nfev )
 }
 
 
-void LMA::ThermalProp_Analysis( double *x, double *fvec,
-                                class thermal::analysis::Kernal &popteaCore )
+void LMA::ThermalProp_Analysis(double *x, double *fvec)
 {
   //Update parameters
   //The reason I create a new list of unknownParameter is because the operator()
@@ -190,11 +187,11 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   }
   (*unknownParameters)( updatedInput() );
 
-  popteaCore.updatefromBestFit( (*unknownParameters)()  );
+  coreSystem->updatefromBestFit( (*unknownParameters)()  );
 
   // Estimates the phase of emission at each heating frequency
   thermalData->predictedEmission =
-      thermal::emission::phase99( popteaCore, thermalData->omegas );
+      thermal::emission::phase99( *coreSystem, thermalData->omegas );
 
   /// Evaluate Objective function
   for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
@@ -206,7 +203,7 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   thermalData->MSE =
       math::estimation::SobjectiveLS( thermalData->experimentalEmission,
                                       thermalData->predictedEmission );
-  printPEstimates( popteaCore.TBCsystem, *unknownParameters ) ;
+  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
 
   return;
 }
