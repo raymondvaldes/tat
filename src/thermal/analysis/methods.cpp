@@ -37,19 +37,24 @@ License
 namespace thermal{
 namespace analysis{
 
-methods::methods(
-    const math::estimation::settings &Settings_in,
+methods::methods(const math::estimation::settings &Settings_in,
     const math::estimation::unknownList &unknownParameters_in,
     const ThermalData& thermalData_in ,
     const math::estimation::unknownList &thermalSweepSearch ,
-    const std::vector<physicalModel::labels> sweepOptimizationGoal)
+    const std::vector<physicalModel::labels> &sweepOptimizationGoal)
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
     intervalEstimates( new PIE() ),
     lthermalSweepOptimizer(
-      new ThermalSweepOptimizer( Settings_in, thermalSweepSearch,
+      new ThermalSweepOptimizer( Settings_in,
+                                 thermalData_in,
+                                 unknownParameters_in,
+                                 bestfitMethod,
+                                 intervalEstimates ,
+                                 thermalSweepSearch,
                                  sweepOptimizationGoal ) )
-{}
+{
+}
 
 double methods::bestFit(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
@@ -74,9 +79,8 @@ void methods::optimization(
     const std::shared_ptr< ThermalData > &thermalData_in,
     const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-
-//  lthermalSweepOptimizer->start( list_in, thermalData_in, coreSystem_in,
-//                                 bestfitMethod, intervalEstimates ) ;
+  lthermalSweepOptimizer->start( list_in, thermalData_in, coreSystem_in,
+                                 bestfitMethod, intervalEstimates ) ;
 
 }
 

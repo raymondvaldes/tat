@@ -53,8 +53,8 @@ public:
       const math::estimation::settings &Settings_in,
       const math::estimation::unknownList &unknownParameters_in,
       const ThermalData& thermalData_in,
-      const math::estimation::unknownList &thermalSweepSearch,
-      const std::vector<physicalModel::labels> sweepOptimizationGoal) ;
+      const math::estimation::unknownList &thermalSweepSearch_in,
+      const std::vector<physicalModel::labels> &sweepOptimizationGoal_in ) ;
 
   //output methods
   double bestFit(
@@ -70,7 +70,8 @@ public:
   void optimization(
       const std::shared_ptr< math::estimation::unknownList > &list_in,
       const std::shared_ptr< ThermalData > &thermalData_in,
-      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in );
+      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in
+      );
 };
 
 }}

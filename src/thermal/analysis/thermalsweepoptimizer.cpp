@@ -25,17 +25,30 @@ License
 
 #include "thermal/analysis/thermalsweepoptimizer.hpp"
 #include "math/estimation/constrained.hpp"
+#include "math/utility.hpp"
 
 namespace thermal{
 namespace analysis{
 
 ThermalSweepOptimizer::ThermalSweepOptimizer(
-    const math::estimation::settings &Settings_,
+    const math::estimation::settings &Settings_in,
+    const ThermalData &thermalData,
     const math::estimation::unknownList &unknownParameters_,
+    const std::shared_ptr< LMA > &bestfitMethod_in,
+    const std::shared_ptr< PIE > &intervalEstimates_in,
+    const math::estimation::unknownList thermalSweepSearch_in,
     const std::vector<physicalModel::labels> sweepOptimizationGoal_in )
-  : LMA_BASE( Settings_, unknownParameters_, sweepOptimizationGoal_in.size() ),
-    sweepOptimizationGoal(sweepOptimizationGoal_in)
-{}
+  : LMA_BASE( Settings_in, unknownParameters_, thermalData.size() ) ,
+    bestfitMethod( bestfitMethod_in ),
+    intervalEstimates( intervalEstimates_in ),
+    thermalSweepSearch( thermalSweepSearch_in ),
+    sweepOptimizationGoal( sweepOptimizationGoal_in )
+{
+
+
+
+
+}
 ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {}
 
 void ThermalSweepOptimizer::
@@ -68,7 +81,7 @@ void ThermalSweepOptimizer::
 //                    thermalData->predictedEmission[n] ;
 //  }
 
-//  return;
+  return;
 }
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
@@ -121,39 +134,33 @@ void ThermalSweepOptimizer::solve(
             << thermalOperabilityLimits.first << "\t"
             << thermalOperabilityLimits.second << "\n";
 
-  //  ///Define acceptable tolerance.  This is where I give it a threshold in which
-  //  /// it will seach for the optimal range and stop once the threshold is
-  //  /// satisfied.
-  //  const double minError = 0;
+    ///Define acceptable tolerance.  This is where I give it a threshold in which
+    /// it will seach for the optimal range and stop once the threshold is
+    /// satisfied.
+    const double minError = 0;
 
-  //  /// Given a center and a range can I create data from this. [TEST]
-  //  const double xCenter = .2;
-  //  const double xRange = 1;
-  //  const std::pair<double, double> updatedRange =
-  //  math::newThermalSweepLimits( xCenter, xRange, thermalOperabilityLimits );
-  //  std::cout << "updated range\t" << updatedRange.first << "\t"
-  //            << updatedRange.second << "\n";
+    /// Given a center and a range can I create data from this. [TEST]
+    const double xCenter = .2;
+    const double xRange = 1;
+    const std::pair<double, double> updatedRange =
+    math::newThermalSweepLimits( xCenter, xRange, thermalOperabilityLimits );
+    std::cout << "updated range\t" << updatedRange.first << "\t"
+              << updatedRange.second << "\n";
 
-  //  const std::pair<double, double> CRfromSwweep =
-  //  math::CRfromSweepLimits( updatedRange.first, updatedRange.second,
-  //                     thermalOperabilityLimits );
-  //  std::cout << "updated center range\t" << CRfromSwweep.first << "\t"
-  //            << CRfromSwweep.second << "\n";
-
+    const std::pair<double, double> CRfromSwweep =
+    math::CRfromSweepLimits( updatedRange.first, updatedRange.second,
+                       thermalOperabilityLimits );
+    std::cout << "updated center range\t" << CRfromSwweep.first << "\t"
+              << CRfromSwweep.second << "\n";
 
     ///Create list of unknowns
-  //  class math::estimation::unknownList unknownSweep;
-
-  //  unknownSweep.addUnknown( , 0, 1, 0.5);
-
-  //  physicalModel::labels::Name
-
+    //see global object
 
     ///The optimization algorithm will have the experimental data in vector for.
     /// I need to take that data and be able to resize it.
-  //  using math::estimation::unknown;
-  //  saveExperimental( *thermalData );
-  //  std::vector< unknown > originalListParams = (*unknownParameters)();
+//    using math::estimation::unknown;
+//    saveExperimental( *thermalData );
+//    std::vector< unknown > originalListParams = (*unknownParameters)();
 
 
 
