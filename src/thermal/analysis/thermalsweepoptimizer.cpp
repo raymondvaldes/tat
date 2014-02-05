@@ -46,38 +46,75 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     intervalEstimates( intervalEstimates_in ),
     thermalSweepSearch( thermalSweepSearch_in ),
     sweepOptimizationGoal( sweepOptimizationGoal_in ),
-    coatingTOinterpretFullRange( new physicalModel::layer( coating ))
+    coatingTOinterpretFullRange( new physicalModel::layer( coating )),
+    xSweep(0.5,0.5)
 {
+  updateWorkSpace( thermalSweepSearch_in, sweepOptimizationGoal_in );
 }
 
 ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {
 
 }
 
+std::pair< double, double >
+ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
+{
+  double thermalCenter = xSweep.first;
+  double thermalRange = xSweep.second;
+
+  for( const auto& unknown : thermalSweepSearch() )
+  {
+    const double bestfit  = unknown.bestfit();
+    switch( unknown.label() )
+    {
+      case physicalModel::labels::Name::thermalCenter :
+          thermalCenter = bestfit ;
+          break;
+      case physicalModel::labels::Name::thermalRange :
+          thermalRange = bestfit ;
+          break;
+      default:
+          std::cout << "\nSwitch Error!!\n";
+          exit(-10) ;
+          break;
+    }
+  }
+
+
+  std::pair< double, double > output( thermalCenter, thermalRange ) ;
+  return output;
+}
+
+
 void ThermalSweepOptimizer::
   ThermalProp_Analysis( double *x, double *fvec, class Kernal &popteaCore )
 {
-//  //Update parameters with current bestfits by transforming x
-//  math::estimation::unknownList updatedInput;
-//  int i = 0;
-//  for( auto& unknown :  (*unknownParameters)() )
-//  {
-//    const double val = math::estimation::
-//        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
-//    unknown.bestfitset( val );
-//    updatedInput.addUnknown(unknown);
-//  }
-//  (*unknownParameters)( updatedInput() );
+  //Update parameters with current bestfits by transforming x
+  math::estimation::unknownList updatedInput;
+  int i = 0;
+  for( auto& unknown :  thermalSweepSearch() )
+  {
+    const double val = math::estimation::
+        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
+    unknown.bestfitset( val );
+    updatedInput.addUnknown(unknown);
+  }
+  thermalSweepSearch( updatedInput() );
 
-//  ///Load these unknownParameters into the popteaCore and thermalData kernals
-//  thermalData->updatefromBestFit( (*unknownParameters)() ,
-//                                  popteaCore.TBCsystem.coating ) ;
+  ///Load these unknownParameters into the popteaCore and thermalData kernals
+  xSweep = updateVal( xSweep ) ;
 
-//  // Estimates the phase of emission at each heating frequency
+  ThermalData updatedThermal(
+        sliceThermalData( xSweep.first, xSweep.second,
+                          popteaCore.TBCsystem.coating ) ) ;
+  reassign( thermalData , updatedThermal ) ;
+
+
+  // Estimates the phase of emission at each heating frequency
 //  thermalData->predictedEmission =
 //      thermal::emission::phase99( popteaCore, thermalData->omegas );
 
-//  /// Evaluate Objective function
+  /// Evaluate Objective function
 //  for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
 //  {
 //     fvec[n] =  thermalData->experimentalEmission[n] -
