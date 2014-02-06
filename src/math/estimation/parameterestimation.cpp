@@ -56,7 +56,7 @@ bool unknown::operator != ( const unknown& input ) const
 }
 
 
-double unknown::bestfitIntervalSpread( void )
+double unknown::bestfitIntervalSpread( void ) const
 {
   return  (bestfitInterval.upper - bestfitInterval.lower) / bestfitval;
 }
@@ -215,7 +215,23 @@ class unknownList unknownList::
 }
 
 
-
+void unknownList::prettyPrint(void) const
+{
+  std::cout << "*------------------------------------------*\n";
+  std::cout << "| parameter estimate intervals:            |\n";
+  std::cout << "|------------------------------------------|\n";
+  std::cout << "| min       bestfit    max      error(%)   |\n";
+  for( const math::estimation::unknown & val : vectorUnknowns )
+  {
+    std::cout << "| "
+              << std::setw(10) << std::left << val.bestfitInterval.lower
+              << std::setw(10) << std::left << val.bestfit()
+              << std::setw(10) << std::left << val.bestfitInterval.upper
+              << std::setw(10) << std::left << val.bestfitIntervalSpread()
+              << " |\n";
+  }
+  std::cout << "*------------------------------------------*\n";
+}
 
 unknownList::~unknownList(){}
 
