@@ -185,6 +185,17 @@ void Poptea::parameterIntervalEstimates( void )
   if(!loadedExperimental) { return; }
 
   bestFit();
+
+  std::vector<double> lthermalsVector(
+        thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ) ;
+
+  for(size_t i=0; i < thermalData->size() ; i++ )
+  {
+    std::cout << lthermalsVector[i] << "\t"
+              << thermalData->experimentalEmission[i] << "\t"
+              << thermalData->predictedEmission[i] << "\n" ;
+  }
+
   PIE();
 
   std::cout << "iterate through parameters now:---\n\n";
