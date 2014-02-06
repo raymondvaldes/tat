@@ -211,7 +211,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 {
   // Establish omegas limits of full range (FR) experimental data
   std::pair<double, double> omegaLimits =
-      fullRangeThermalData->get_omegaLimits( *coatingTOinterpretFullRange ) ;
+      fullRangeThermalData->get_omegaLimits(  ) ;
 
   std::vector<double> omegasMonoIncreasing( fullRangeThermalData->size() ) ;
   std::reverse_copy(
