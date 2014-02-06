@@ -33,15 +33,14 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/pie.hpp"
-
+#include "thermal/analysis/thermalsweepoptimizer.hpp"
 
 
 namespace thermal{
 namespace analysis{
 
-class methods: private baseData
+class methods
 {
-
 private:
   /// working objects
   std::shared_ptr< LMA > bestfitMethod;
@@ -50,27 +49,31 @@ private:
 
 public:
   //constructors
-  methods( const math::estimation::settings &Settings_in,
-           const math::estimation::unknownList &unknownParameters_in,
-           const ThermalData& thermalData_in ) ;
+  explicit methods(
+      const math::estimation::settings &Settings_in,
+      const math::estimation::unknownList &unknownParameters_in,
+      const ThermalData& thermalData_in,
+      const math::estimation::unknownList &thermalSweepSearch_in,
+      const std::vector<physicalModel::labels> &sweepOptimizationGoal_in,
+      const physicalModel::layer coating ) ;
 
   //output methods
   double bestFit(
-      std::shared_ptr< math::estimation::unknownList > &list_in,
-      std::shared_ptr< ThermalData > &thermalData_in,
-      std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
+      const std::shared_ptr< math::estimation::unknownList > &list_in,
+      const std::shared_ptr< ThermalData > &thermalData_in,
+      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
 
   void parameterIntervalEstimates(
-      std::shared_ptr< math::estimation::unknownList > &list_in,
-      std::shared_ptr< ThermalData > &thermalData_in,
-      std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
+      const std::shared_ptr< math::estimation::unknownList > &list_in,
+      const std::shared_ptr< ThermalData > &thermalData_in,
+      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
 
   void optimization(
-      std::shared_ptr< math::estimation::unknownList > &list_in,
-      std::shared_ptr< ThermalData > &thermalData_in,
-      std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in );
+      const std::shared_ptr< math::estimation::unknownList > &list_in,
+      const std::shared_ptr< ThermalData > &thermalData_in,
+      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in
+      );
 };
 
 }}
-
 #endif // METHODS_HPP

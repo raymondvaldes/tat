@@ -30,6 +30,7 @@ License
 #include <memory>
 #include <functional>
 
+#include "math/estimation/lmdiff.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/lmdiff_poptea_help.hpp"
@@ -42,11 +43,12 @@ License
 #include "thermal/model.hpp"
 #include "thermal/thermal.hpp"
 #include "thermal/analysis/basedata.hpp"
+//#include "thermal/analysis/pie.hpp"
 
 namespace thermal {
 namespace analysis{
 
-class LMA_BASE: protected baseData
+class LMA_BASE: public baseData
 {
 protected:
   /// working objects
@@ -55,10 +57,9 @@ protected:
 
   int nfev;
   int info;
-  std::function< void( double*, double*, Kernal &) >
-  myReduced;
-  virtual void ThermalProp_Analysis( double *x, double *fvec,
-                                     Kernal &popteaCore ) = 0 ;
+  std::function< void( double*, double* ) > myReduced;
+
+  virtual void ThermalProp_Analysis( double *x, double *fvec ) = 0 ;
   void updateBindFunc( void );
   virtual void updateWorkSpace(const size_t Lend , const size_t N) = 0;
 
@@ -68,9 +69,9 @@ public:
                      const size_t Lend_ );
 
   virtual void solve(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in ) = 0;
+      const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
+      const std::shared_ptr<ThermalData> &thermalData_in,
+      const std::shared_ptr<Kernal> &coreSystem_in ) = 0;
 };
 
 
@@ -78,8 +79,7 @@ public:
 class LMA: public LMA_BASE
 {
 private:
-  void ThermalProp_Analysis( double *x, double *fvec,
-                             Kernal &popteaCore ) override;
+  void ThermalProp_Analysis( double *x, double *fvec ) override;
   ThermalData paramter_estimation(int *info, int *nfev);
   void updateWorkSpace(const size_t Lend , const size_t N) override;
 
@@ -89,38 +89,12 @@ public:
                 const size_t Lend_) ;
   ~LMA(void);
   void solve(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in ) override;
+      const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+      const std::shared_ptr<ThermalData> &thermalData_in,
+      const std::shared_ptr<Kernal> &coreSystem_in ) override;
 };
 
-class ThermalSweepOptimizer: public LMA_BASE
-{
-private:
-//  void ThermalProp_Analysis( double *x, double *fvec,
-//                             thermal::analysis::Kernal &popteaCore ) override;
-//  void updateWorkSpace(const size_t Lend , const size_t N) override;
 
-//  ThermalData paramter_estimation(int *info, int *nfev);
-  //  double optiGfun( const double xCenter, const double xRange,
-  //                   const enum physicalModel::labels::Name &mylabel ) ;
-  //  void Optimization_Analysis( double *x, double *fvec,
-  //                              thermal::analysis::Kernal &popteaCore ) ;
-    std::vector<double> resizeExperimental( const double center,
-                                            const double range,
-                                            const size_t numPos ) ;
-public:
-  explicit ThermalSweepOptimizer(
-      const math::estimation::settings &Settings_,
-      const math::estimation::unknownList &unknownParameters,
-      const size_t Lend_) ;
-  ~ThermalSweepOptimizer(void);
-
-  void solve(
-      std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-      std::shared_ptr<ThermalData> &thermalData_in,
-      std::shared_ptr<Kernal> &coreSystem_in ) override;
-};
 
 
 }}

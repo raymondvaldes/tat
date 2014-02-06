@@ -46,9 +46,10 @@ public:
   double MSE;
 
   //Constructors, destructors and assignment operators
-  explicit ThermalData( const double l_min, const double l_max,
+  explicit ThermalData( const double l_min,
+                        const double l_max,
                         const size_t lminPerDecarde,
-                        const physicalModel::layer &coating );
+                        const physicalModel::layer &coating );  
   ThermalData& operator = (const ThermalData& that);
   ~ThermalData();
 
@@ -62,6 +63,8 @@ public:
   get_lthermalSweep( const physicalModel::layer &coating ) const;
   std::pair<double, double>
   get_lthermalLimits( const physicalModel::layer &coating) const;
+  std::pair<double, double>
+  get_omegaLimits( const physicalModel::layer &coating) const;
 
   //modify data
   void updateExperimental( const std::vector<double> &input );
