@@ -1799,7 +1799,7 @@ void lmdif( std::function < void ( double*, double* ) > fcn,
             double gtol, int maxfev, double epsfcn, double *diag, int mode,
             double factor, int nprint, int *info, int *nfev, double *fjac,
             int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
-            double *wa3, double *wa4, double */*wa5*/)
+            double *wa3, double *wa4)
 {
 /*
 *     **********

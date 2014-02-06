@@ -23,7 +23,7 @@
 		<maxfev>100000</maxfev>
 		<epsfcn>0.0001</epsfcn>
 		<factor>10</factor>
-		<mode>2</mode>
+		<mode>1</mode>
 		<nprint>0</nprint>
 	</ParaEstSettings>
 
@@ -88,7 +88,7 @@
 				<label>thermalRange</label>
 				<min>0</min>
 				<max>1</max>
-				<initialGuess>.5</initialGuess>
+				<initialGuess>.9</initialGuess>
 			</unknown>		
 		</unknownParameters>
 	</optimizationSweep>

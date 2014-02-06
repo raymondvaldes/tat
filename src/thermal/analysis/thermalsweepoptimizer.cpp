@@ -51,6 +51,7 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     xSweep(0.5,0.5)
 {
   updateWorkSpace( thermalSweepSearch_in, sweepOptimizationGoal_in );
+
 }
 
 ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {
@@ -75,7 +76,7 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
           thermalRange = bestfit ;
           break;
       default:
-          std::cout << "\nSwitch Error!!\n";
+          std::cout << "\nSwitch Error in thermalCenter and Range!!\n";
           exit(-10) ;
           break;
     }
@@ -90,6 +91,16 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
 void ThermalSweepOptimizer::
   ThermalProp_Analysis( double *x, double *fvec )
 {
+
+
+//pieAnalysis();
+//pieAnalysis();
+
+//  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
+//                            bestfitMethod );
+
+//exit(-2);
+
   //Update parameters with current bestfits by transforming x
   math::estimation::unknownList updatedInput;
   int i = 0;
@@ -111,33 +122,68 @@ void ThermalSweepOptimizer::
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
-  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
-                            bestfitMethod );
+  pieAnalysis();
 
+  ///Use results from anaylsis
   for(size_t i = 0; i < sweepOptimizationGoal.size() ; i++)
   {
     double error = 0 ;
 
-    for (auto& unknown: (*unknownParameters)() )
+    for ( math::estimation::unknown& unknown: (*unknownParameters)() )
     {
       switch( unknown.label() )
       {
         case physicalModel::labels::Name::gammaEff :
             error = unknown.bestfitIntervalSpread();
+            std::cout << unknown.bestfitInterval.lower << "\t" <<
+                         unknown.bestfitInterval.upper << "\t" <<
+                         unknown.bestfit() << "\n";
             break;
         case physicalModel::labels::Name::asub :
             error = unknown.bestfitIntervalSpread();
+            std::cout << unknown.bestfitInterval.lower << "\t" <<
+                         unknown.bestfitInterval.upper << "\t" <<
+                         unknown.bestfit() << "\n";
             break;
         default:
-            std::cout << "\nSwitch Error!!\n";
-            exit(-10) ;
+//            std::cout << "\nSwitch Error!!123\n" << unknown.bestfit() ;
+//            exit(-10) ;
             break;
       }
     }
     fvec[i] = error;
   }
 
+  std::cout << lmin << "\t" << lmax <<"\t"<<fvec[0] << "\t" << fvec[1] << "\n";
+
   return;
+}
+void ThermalSweepOptimizer::pieAnalysis(void)
+{
+//  std::cout << "iterate through parameters now:---\n\n";
+//  std::cout << "parameter estimates intervals:\n";
+//  std::cout << "------------------------------\n\n";
+//  std::cout << "min\tbestfit\tmax\n";
+
+//  for( math::estimation::unknown& val : (*unknownParameters)() )
+//  {
+//    std::cout << val.initialVal() << "\n";
+//  }
+  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
+  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
+                            bestfitMethod );
+  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
+
+//  std::cout << "iterate through parameters now:---\n\n";
+//  std::cout << "parameter estimates intervals:\n";
+//  std::cout << "------------------------------\n\n";
+//  std::cout << "min\tbestfit\tmax\n";
+
+//  for(auto& val : (*unknownParameters)() )
+//  {
+//    std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
+//              << "\t"   << val.bestfitInterval.upper << "\n";
+//  }
 }
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
@@ -180,7 +226,7 @@ void ThermalSweepOptimizer::solve(
   fullRangeThermalData = thermalData;
 
   ///at this point all the input objects have been set and are now available
-  optimizer();
+  optimizer( &info, &nfev );
 }
 
 ThermalData ThermalSweepOptimizer::sliceThermalData(
@@ -231,7 +277,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   size_t i = 0;
   for( auto& omega : output.omegas )
   {
-    sliceEmission[i] =   experimentalEmissionInterpolater.eval(omega);
+    sliceEmission[i] =   experimentalEmissionInterpolater.eval( omega );
     i++;
   }
   output.updateExperimental( sliceEmission );
@@ -239,12 +285,12 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   return output;
 }
 
-void ThermalSweepOptimizer::optimizer(void)
+void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 {
   ///Create workspaces
   using namespace math::estimation;
-  const size_t m = sweepOptimizationGoal.size();
-  const size_t n = thermalSweepSearch.size();
+  int m = sweepOptimizationGoal.size();
+  int n = thermalSweepSearch.size();
 
   double *x = new double[n];
   double *fvec = new double[m];
@@ -259,13 +305,12 @@ void ThermalSweepOptimizer::optimizer(void)
   double *diag = new double[n];
 
   ///populate initial values
-  std::vector<double> xInitial(0);
+  std::vector<double> xInitial(0) ;
   for( const auto &unknown : thermalSweepSearch() )
     { xInitial.push_back( unknown.initialVal() ); }
   for( size_t i=0 ; i< n ; i++ )
     { x[i] = xInitial[i]; }
 
-//scaleDiag( diag, thermalSweepSearch , coreSystem->TBCsystem, Settings.mode ) ;
 
   ///Transform inputs
   size_t j = 0;
@@ -277,7 +322,7 @@ void ThermalSweepOptimizer::optimizer(void)
 
   /// Constrained nonlinear parameter estimation
   updateBindFunc() ;
-  lmdif( myReduced , m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
+  lmdif( myReduced, m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
          Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
          Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
 

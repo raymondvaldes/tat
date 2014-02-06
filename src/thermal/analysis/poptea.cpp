@@ -170,10 +170,7 @@ std::vector<double> Poptea::thermalSweep(void) const
 double Poptea::bestFit( void )
 {
   runbestfit = true;
-  double output = 0;
-  output =  analysis.bestFit( unknownParameters, thermalData, coreSystem);
-
-  return output;
+  return analysis.bestFit( unknownParameters, thermalData, coreSystem ) ;
 }
 
 void Poptea::PIE ( void )
@@ -186,13 +183,12 @@ void Poptea::parameterIntervalEstimates( void )
 {
   /// Precheck experimental data is loaded and there is a bestfit.
   if(!loadedExperimental) { return; }
-  bestFit();
 
+  bestFit();
   std::cout << "iterate through parameters now:---\n\n";
   std::cout << "parameter estimates intervals:\n";
   std::cout << "------------------------------\n\n";
   std::cout << "min\tbestfit\tmax\n";
-
 
   PIE();
 
