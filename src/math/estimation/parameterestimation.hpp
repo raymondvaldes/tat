@@ -64,6 +64,7 @@ public:
   void bestfitset( const double input ) ;
   void Initialset( const double input ) ;
   void bestfitIntervalset ( const double min, const double max);
+  double bestfitIntervalSpread( void );
 
   enum physicalModel::labels::Name label( void ) const ;
 

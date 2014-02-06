@@ -23,6 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <boost/foreach.hpp>
+#include <exception>
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
@@ -52,6 +53,12 @@ bool unknown::operator == ( const unknown& input ) const
 bool unknown::operator != ( const unknown& input ) const
 {
   return !compareName(input);
+}
+
+
+double unknown::bestfitIntervalSpread( void )
+{
+  return  (bestfitInterval.upper - bestfitInterval.lower) / bestfitval;
 }
 
 
@@ -168,7 +175,7 @@ class unknown
 }
 
 unknownList::unknownList(){}
-unknownList::unknownList( std::vector<class estimation::unknown> input )
+unknownList::unknownList( std::vector< estimation::unknown> input )
   :vectorUnknowns(input)
 {}
 
@@ -176,10 +183,10 @@ class unknownList unknownList::
         loadConfigfromXML(const boost::property_tree::ptree pt)
 {
   using boost::property_tree::ptree;
-  class unknownList unknownListObj;
+  unknownList unknownListObj;
 
   // Iterate over 'unknown' branches
-  class physicalModel::labels labels;
+  physicalModel::labels labels;
   BOOST_FOREACH( const ptree::value_type &v,
                  pt.get_child( "unknownParameters" ) )
   {
@@ -188,8 +195,16 @@ class unknownList unknownList::
 
     //access members of subtree
     const std::string nameLabel = child.get< std::string >( "label" );
-    const enum physicalModel::labels::Name
-        mylabel = labels.nameMap.right.at(nameLabel);
+    enum physicalModel::labels::Name mylabel;
+    try
+    {
+      mylabel = labels.nameMap.right.at(nameLabel);
+    }
+    catch( std::exception& e )
+    {
+      std::cerr << "Error with unknownParameters label in poptea.xml config\n";
+      exit(1);
+    }
 
     const double myMin = child.get<double>( "min" );
     const double myMax = child.get<double>( "max" );

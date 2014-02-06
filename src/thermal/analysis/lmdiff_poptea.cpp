@@ -51,7 +51,7 @@ void LMA_BASE::updateBindFunc( void )
 {
   myReduced =
   std::bind( &LMA_BASE::ThermalProp_Analysis, this , std::placeholders::_1,
-             std::placeholders::_2, std::placeholders::_3) ;
+             std::placeholders::_2 ) ;
 }
 
 void LMA::updateWorkSpace( const size_t Lend, const size_t N )
@@ -73,9 +73,9 @@ LMA::~LMA(void){}
 
 
 void LMA::solve(
-    std::shared_ptr< math::estimation::unknownList > &unknownParameters_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+    const std::shared_ptr<ThermalData> &thermalData_in,
+    const std::shared_ptr<Kernal> &coreSystem_in )
 {
   unknownParameters = unknownParameters_in;
   thermalData = thermalData_in;
@@ -86,6 +86,9 @@ void LMA::solve(
 
   ///Solve
   paramter_estimation( &info, &nfev );
+
+  ///update core
+  coreSystem->updatefromBestFit( (*unknownParameters)() );
 }
 
 
@@ -130,12 +133,9 @@ LMA::paramter_estimation( int *info, int *nfev )
 
   ///levenberg-marquardt algorithm
   updateBindFunc();
-  math::estimation::lmdif( myReduced , m, n, x, fvec, Settings.ftol,
-                           Settings.xtol, Settings.gtol, Settings.maxfev,
-                           Settings.epsfcn, diag, Settings.mode,
-                           Settings.factor, Settings.nprint, info, nfev, fjac,
-                           m, ipvt, qtf, wa1, wa2, wa3, wa4, wa5,
-                           *coreSystem ) ;
+  lmdif( myReduced , m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
+         Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
+         Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4) ;
 
   //Transform outputs
   j=0;
@@ -171,10 +171,10 @@ LMA::paramter_estimation( int *info, int *nfev )
 }
 
 
-void LMA::ThermalProp_Analysis( double *x, double *fvec,
-                                class thermal::analysis::Kernal &popteaCore )
+void LMA::ThermalProp_Analysis(double *x, double *fvec)
 {
   //Update parameters
+  //The reason I create a new list of unknownParameter is because the operator()
   math::estimation::unknownList updatedInput;
   int i = 0;
   for( auto& unknown :  (*unknownParameters)() )
@@ -184,13 +184,13 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
     unknown.bestfitset( val );
     updatedInput.addUnknown(unknown);
   }
-
   (*unknownParameters)( updatedInput() );
-  popteaCore.updatefromBestFit( (*unknownParameters)()  );
+
+  coreSystem->updatefromBestFit( (*unknownParameters)()  );
 
   // Estimates the phase of emission at each heating frequency
   thermalData->predictedEmission =
-      thermal::emission::phase99( popteaCore, thermalData->omegas );
+      thermal::emission::phase99( *coreSystem, thermalData->omegas );
 
   /// Evaluate Objective function
   for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
@@ -202,127 +202,10 @@ void LMA::ThermalProp_Analysis( double *x, double *fvec,
   thermalData->MSE =
       math::estimation::SobjectiveLS( thermalData->experimentalEmission,
                                       thermalData->predictedEmission );
-  printPEstimates( popteaCore.TBCsystem, *unknownParameters ) ;
+//  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
 
   return;
 }
-
-
-
-
-//void methods::Optimization_Analysis( double *x, double *fvec,
-//                                     class thermal::analysis::Kernal &popteaCore )
-//{
-//  //Update parameters with current bestfits by transforming x
-//  math::estimation::unknownList updatedInput;
-//  int i = 0;
-//  for( auto& unknown :  (*unknownParameters)() )
-//  {
-//    const double val = math::estimation::
-//        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
-//    unknown.bestfitset( val );
-//    updatedInput.addUnknown(unknown);
-//  }
-//  (*unknownParameters)( updatedInput() );
-
-//  ///Load these unknownParameters into the popteaCore and thermalData kernals
-//  thermalData->updatefromBestFit( (*unknownParameters)() ,
-//                                  popteaCore.TBCsystem.coating ) ;
-
-//  // Estimates the phase of emission at each heating frequency
-//  thermalData->predictedEmission =
-//      thermal::emission::phase99( popteaCore, thermalData->omegas );
-
-//  /// Evaluate Objective function
-//  for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
-//  {
-//     fvec[n] =  thermalData->experimentalEmission[n] -
-//                    thermalData->predictedEmission[n] ;
-//  }
-
-//  return;
-//}
-
-
-
-
-void ThermalSweepOptimizer::solve(
-    std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-    std::shared_ptr<ThermalData> &thermalData_in,
-    std::shared_ptr<Kernal> &coreSystem_in)
-{
-
-
-//  ///Define experimental "operability domain"
-//  ///This is the section of my code where I have figured out what lmin and lmax
-//  /// is. At this point I am assuming that the experimental data has been loaded
-//  /// and a best fit has been done on the parameters.  The new lthermals are
-//  const std::pair<double, double> thermalOperabilityLimits =
-//      thermalData->get_lthermalLimits(coreSystem->TBCsystem.coating );
-//  std::cout << "thermalOperabilityLimits\t"
-//            << thermalOperabilityLimits.first << "\t"
-//            << thermalOperabilityLimits.second << "\n";
-
-//  ///Define acceptable tolerance.  This is where I give it a threshold in which
-//  /// it will seach for the optimal range and stop once the threshold is
-//  /// satisfied.
-//  const double minError = 0;
-
-//  /// Given a center and a range can I create data from this. [TEST]
-//  const double xCenter = .2;
-//  const double xRange = 1;
-//  const std::pair<double, double> updatedRange =
-//  math::newThermalSweepLimits( xCenter, xRange, thermalOperabilityLimits );
-//  std::cout << "updated range\t" << updatedRange.first << "\t"
-//            << updatedRange.second << "\n";
-
-//  const std::pair<double, double> CRfromSwweep =
-//  math::CRfromSweepLimits( updatedRange.first, updatedRange.second,
-//                     thermalOperabilityLimits );
-//  std::cout << "updated center range\t" << CRfromSwweep.first << "\t"
-//            << CRfromSwweep.second << "\n";
-
-
-  ///Create list of unknowns
-//  class math::estimation::unknownList unknownSweep;
-
-//  unknownSweep.addUnknown( , 0, 1, 0.5);
-
-//  physicalModel::labels::Name
-
-
-  ///The optimization algorithm will have the experimental data in vector for.
-  /// I need to take that data and be able to resize it.
-//  using math::estimation::unknown;
-//  saveExperimental( *thermalData );
-//  std::vector< unknown > originalListParams = (*unknownParameters)();
-
-
-
-  /// I need to create ways to optimize thermal penetration. The ones I am
-  /// thinking
-  ///   a) given X data what is the optimal range to best estimate properties
-  ///      - original data limited in range
-  ///      - cannot introduce new measurements
-  ///   b) given LMIN and LMAX what is the optimal range to take data to
-  ///     ensure the most accurate measurements
-  ///  The function I am minimizing is
-  ///  S1
-  ///
-  /// So this means one should be from the perspective of someone doing
-  /// post-analysis on their data.  They have a given range of values ( a
-  /// thermograph) and they're looking to see how much data to keep.
-  ///
-  ///
-
-
-  ///Update list of parameters with updated list
-//  (*unknownParameters)( originalListParams ) ;
-//  updateExperimentalData(  SAVEExperimental, *thermalData );
-}
-
-
-
 
 }}
 

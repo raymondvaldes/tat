@@ -63,6 +63,9 @@ public:
   size_t neval;
 
   explicit funcClass( const double* a, const double* b, const size_t c ) ;
+  explicit funcClass( const std::vector<double> &a,
+                      const std::vector<double> &b) ;
+
   ~funcClass( void ) ;
   double eval( const double xpos ) const;
 };

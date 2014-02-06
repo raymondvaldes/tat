@@ -37,44 +37,54 @@ License
 namespace thermal{
 namespace analysis{
 
-methods::methods( const math::estimation::settings &Settings_in,
-                  const math::estimation::unknownList &unknownParameters_in,
-                  const ThermalData& thermalData_in )
+methods::methods(const math::estimation::settings &Settings_in,
+    const math::estimation::unknownList &unknownParameters_in,
+    const ThermalData& thermalData_in ,
+    const math::estimation::unknownList &thermalSweepSearch ,
+    const std::vector<physicalModel::labels> &sweepOptimizationGoal,
+                 const physicalModel::layer coating )
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
-    intervalEstimates( new PIE() )
-{}
+    intervalEstimates( new PIE() ),
+    lthermalSweepOptimizer(
+      new ThermalSweepOptimizer( Settings_in,
+                                 thermalData_in,
+                                 unknownParameters_in,
+                                 bestfitMethod,
+                                 intervalEstimates ,
+                                 thermalSweepSearch,
+                                 sweepOptimizationGoal,
+                                 coating) )
+{
+}
 
 double methods::bestFit(
-    std::shared_ptr< math::estimation::unknownList > &list_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
   bestfitMethod->solve( list_in, thermalData_in, coreSystem_in );
-  coreSystem_in->updatefromBestFit( (*list_in)() );
-
   return thermalData_in->MSE;
 }
 
 void methods::parameterIntervalEstimates(
-    std::shared_ptr< math::estimation::unknownList > &list_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
   intervalEstimates->solve( list_in, thermalData_in, coreSystem_in,
                             bestfitMethod );
+
 }
 
 void methods::optimization(
-    std::shared_ptr< math::estimation::unknownList > &list_in,
-    std::shared_ptr< ThermalData > &thermalData_in,
-    std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-  coreSystem = coreSystem_in;
-  thermalData = thermalData_in;
-  unknownParameters = list_in;
+  lthermalSweepOptimizer->solve( list_in, thermalData_in, coreSystem_in,
+                                 bestfitMethod, intervalEstimates ) ;
 
-  lthermalSweepOptimizer->solve( list_in, thermalData_in, coreSystem_in );
 }
 
 

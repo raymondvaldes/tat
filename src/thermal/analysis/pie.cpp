@@ -38,15 +38,14 @@ PIE::~PIE(){}
 double PIE::bestFit()
 {
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
-  coreSystem->updatefromBestFit( (*unknownParameters)() );
   return thermalData->MSE;
 }
 
 
-void PIE::solve( std::shared_ptr< math::estimation::unknownList > &list_in,
-                  std::shared_ptr< ThermalData > &thermalData_in,
-                  std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in,
-                  std::shared_ptr< LMA > bestfitMethod_in )
+void PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
+                 const std::shared_ptr<ThermalData> &thermalData_in,
+                 const std::shared_ptr<Kernal> &coreSystem_in,
+                 const std::shared_ptr<LMA> bestfitMethod_in )
 {
   unknownParameters = list_in ;
   thermalData = thermalData_in ;
@@ -54,6 +53,9 @@ void PIE::solve( std::shared_ptr< math::estimation::unknownList > &list_in,
   bestfitMethod =  bestfitMethod_in ;
 
   parameterIntervalEstimates();
+
+  ///update core
+  bestFit();
 }
 
 void PIE::parameterIntervalEstimates( void )

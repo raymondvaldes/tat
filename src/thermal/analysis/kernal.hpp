@@ -34,6 +34,10 @@ License
 #include "tools/filesystem.hpp"
 #include "thermal/model.hpp"
 
+template<typename OBJ>
+void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
+  { var.reset( new OBJ( input )  ); }
+
 namespace thermal {
 namespace analysis{
 
