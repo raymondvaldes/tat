@@ -181,20 +181,20 @@ public:
 class TBCsystem
 {
 public:
-  class layer coating;
-  class layer substrate;
-  class temperatureScale Temp;
-  class radiativeSysProp optical;
+  layer coating;
+  layer substrate;
+  temperatureScale Temp;
+  radiativeSysProp optical;
   double radius;
   double Rtc;
   double gamma;
   double a_sub;
 
   /// constructors and object creators
-  explicit TBCsystem( const class layer &coating_,
-                      const class layer &substrate_,
-                      const struct temperatureScale &Temp_,
-                      const struct radiativeSysProp &optical_,
+  explicit TBCsystem( const layer &coating_,
+                      const layer &substrate_,
+                      const temperatureScale &Temp_,
+                      const radiativeSysProp &optical_,
                       const double radius_);
   static class TBCsystem loadConfig(const boost::property_tree::ptree &pt);
   ~TBCsystem(void);
