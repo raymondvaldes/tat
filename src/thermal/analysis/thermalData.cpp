@@ -85,7 +85,7 @@ void ThermalData::resizeVectors( const size_t Lend)
 }
 
 std::pair<double, double>
-ThermalData::get_omegaLimits( const physicalModel::layer &coating) const
+ThermalData::get_omegaLimits( void ) const
 {
   std::pair<double, double> output(omegas.front(), omegas.back());
   return output;
