@@ -1,22 +1,18 @@
 ﻿<poptea>
+	
 	<sweep>
 		<minperDecade>50</minperDecade>
 		<thermal_penetration>
 			<start>.04</start>
 			<end>4</end>
 		</thermal_penetration>
-		<frequency>			
+		<frequencyLimits>			
 			<start>0.02</start>
 			<end>2000</end>		
-		</frequency>			
+		</frequencyLimits>			
 	</sweep>
 	
 	<ParaEstSettings>
-		<!--- N number of thermal parameters to be fitted-->
-		<!-- ftol difference in error-->
-		<!-- xtol difference in parameters-->
-		<!-- beta_iter is the number of iterations to find beta2-->
-		<!-- beta_tol is how close dz_sub is to dz_coat */-->
 		<ftol>1e-08</ftol>
 		<xtol>1e-08</xtol>
 		<gtol>1e-08</gtol>
