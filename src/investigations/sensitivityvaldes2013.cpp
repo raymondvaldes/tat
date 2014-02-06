@@ -67,32 +67,8 @@ void run( const filesystem::directory dir )
                                  emissionExperimental );
 
 //  poptea.bestFit();
-//  poptea.parameterIntervalEstimates();
-
+  poptea.parameterIntervalEstimates();
   poptea.optimization();
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-///what am i minimizing exactly? it's not best fit, it's the tolerance on the
-/// parameters.  So I need to pick one
-/// optimizer( "asub" , 5 );  //finds best data but stops when asub is 5%
-/// optimizer( "asum" ) ///finds best data
-/// now it should populate my unknown parameters list with a final best fit
-/// it should iterate through the process and return all my estimations
-/// it should return the C/R necessary and the lmin, lmax
-/// it should be constrained to my original experimental data
-/// it should
-
-
-
-
-
-
-
-
-
 
   return;
 }
