@@ -68,19 +68,10 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
   {
     const double bestfit  = unknown.bestfit();
 
-    switch( unknown.label() )
-    {
-      case physicalModel::labels::Name::thermalCenter :
-          thermalCenter = bestfit ;
-          break;
-      case physicalModel::labels::Name::thermalRange :
-          thermalRange = bestfit ;
-          break;
-      default:
-          std::cout << "\nSwitch Error in thermalCenter and Range!!\n";
-          exit(-10) ;
-          break;
-    }
+    if ( unknown.label() == physicalModel::labels::Name::thermalCenter  )
+      { thermalCenter = bestfit ; }
+    else if ( unknown.label() == physicalModel::labels::Name::thermalRange  )
+      { thermalRange = bestfit ; }
   }
 
   std::pair< double, double > output( thermalCenter, thermalRange ) ;
