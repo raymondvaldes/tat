@@ -64,7 +64,7 @@ public:
   void bestfitset( const double input ) ;
   void Initialset( const double input ) ;
   void bestfitIntervalset ( const double min, const double max);
-  double bestfitIntervalSpread( void );
+  double bestfitIntervalSpread( void ) const;
 
   enum physicalModel::labels::Name label( void ) const ;
 
@@ -96,6 +96,9 @@ public:
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
   class unknown getParameter( physicalModel::labels::Name label );
   ~unknownList() ;
+
+  void prettyPrint(void) const;
+
 };
 
 class settings
