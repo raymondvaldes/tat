@@ -185,13 +185,12 @@ void Poptea::parameterIntervalEstimates( void )
   if(!loadedExperimental) { return; }
 
   bestFit();
+  PIE();
+
   std::cout << "iterate through parameters now:---\n\n";
   std::cout << "parameter estimates intervals:\n";
   std::cout << "------------------------------\n\n";
   std::cout << "min\tbestfit\tmax\n";
-
-  PIE();
-
   std::cout << "iterate through parameters now:---\n\n";
   std::cout << "parameter estimates intervals:\n";
   std::cout << "------------------------------\n\n";

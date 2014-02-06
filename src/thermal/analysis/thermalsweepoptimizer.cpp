@@ -67,6 +67,7 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
   for( const auto& unknown : thermalSweepSearch() )
   {
     const double bestfit  = unknown.bestfit();
+
     switch( unknown.label() )
     {
       case physicalModel::labels::Name::thermalCenter :
@@ -82,7 +83,6 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
     }
   }
 
-
   std::pair< double, double > output( thermalCenter, thermalRange ) ;
   return output;
 }
@@ -91,19 +91,9 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
 void ThermalSweepOptimizer::
   ThermalProp_Analysis( double *x, double *fvec )
 {
-
-
-//pieAnalysis();
-//pieAnalysis();
-
-//  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
-//                            bestfitMethod );
-
-//exit(-2);
-
   //Update parameters with current bestfits by transforming x
   math::estimation::unknownList updatedInput;
-  int i = 0;
+  size_t i = 0;
   for( auto& unknown :  thermalSweepSearch() )
   {
     const double val = math::estimation::
@@ -125,65 +115,50 @@ void ThermalSweepOptimizer::
   pieAnalysis();
 
   ///Use results from anaylsis
-  for(size_t i = 0; i < sweepOptimizationGoal.size() ; i++)
+  std::cout << lmin << "\t" << lmax << "\t";
+  i =0 ;
+  for( physicalModel::labels& myParam : sweepOptimizationGoal )
   {
     double error = 0 ;
 
     for ( math::estimation::unknown& unknown: (*unknownParameters)() )
     {
-      switch( unknown.label() )
+      if ( myParam.getName() == unknown.label() )
       {
-        case physicalModel::labels::Name::gammaEff :
-            error = unknown.bestfitIntervalSpread();
-            std::cout << unknown.bestfitInterval.lower << "\t" <<
-                         unknown.bestfitInterval.upper << "\t" <<
-                         unknown.bestfit() << "\n";
-            break;
-        case physicalModel::labels::Name::asub :
-            error = unknown.bestfitIntervalSpread();
-            std::cout << unknown.bestfitInterval.lower << "\t" <<
-                         unknown.bestfitInterval.upper << "\t" <<
-                         unknown.bestfit() << "\n";
-            break;
-        default:
-//            std::cout << "\nSwitch Error!!123\n" << unknown.bestfit() ;
-//            exit(-10) ;
-            break;
+        error = unknown.bestfitIntervalSpread();
       }
     }
-    fvec[i] = error;
+    fvec[i] = error ;
+    std::cout << fvec[i] << "\t";
+    i++;
   }
-
-  std::cout << lmin << "\t" << lmax <<"\t"<<fvec[0] << "\t" << fvec[1] << "\n";
+  std::cout << "\n\n\n";
 
   return;
 }
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
-//  std::cout << "iterate through parameters now:---\n\n";
-//  std::cout << "parameter estimates intervals:\n";
-//  std::cout << "------------------------------\n\n";
-//  std::cout << "min\tbestfit\tmax\n";
 
-//  for( math::estimation::unknown& val : (*unknownParameters)() )
-//  {
-//    std::cout << val.initialVal() << "\n";
-//  }
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
   intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
                             bestfitMethod );
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
 
-//  std::cout << "iterate through parameters now:---\n\n";
-//  std::cout << "parameter estimates intervals:\n";
-//  std::cout << "------------------------------\n\n";
-//  std::cout << "min\tbestfit\tmax\n";
+  std::cout << "iterate through parameters now:---\n\n";
+  std::cout << "parameter estimates intervals:\n";
+  std::cout << "------------------------------\n\n";
+  std::cout << "min\tbestfit\tmax\n";
+  std::cout << "iterate through parameters now:---\n\n";
+  std::cout << "parameter estimates intervals:\n";
+  std::cout << "------------------------------\n\n";
+  std::cout << "min\tbestfit\tmax\n";
 
-//  for(auto& val : (*unknownParameters)() )
-//  {
-//    std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
-//              << "\t"   << val.bestfitInterval.upper << "\n";
-//  }
+  for(auto& val : (*unknownParameters)() )
+  {
+    std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
+              << "\t"   << val.bestfitInterval.upper << "\n";
+  }
+  std::cout <<"\n\n";
 }
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
@@ -228,6 +203,8 @@ void ThermalSweepOptimizer::solve(
   ///at this point all the input objects have been set and are now available
   optimizer( &info, &nfev );
 }
+
+
 
 ThermalData ThermalSweepOptimizer::sliceThermalData(
     const double xCenter, const double xRange,
@@ -289,8 +266,8 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 {
   ///Create workspaces
   using namespace math::estimation;
-  int m = sweepOptimizationGoal.size();
-  int n = thermalSweepSearch.size();
+  size_t m = sweepOptimizationGoal.size();
+  size_t n = thermalSweepSearch.size();
 
   double *x = new double[n];
   double *fvec = new double[m];
@@ -312,6 +289,14 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
     { x[i] = xInitial[i]; }
 
 
+//  if( Settings.mode == 2 )
+//  {
+//    int i = 0;
+//  for( const class math::estimation::unknown &unknown : thermalSweepSearch())
+//    { diag[i++] = TBCsystem.returnVal( unknown.label() ); }
+//  }
+
+
   ///Transform inputs
   size_t j = 0;
   for( const auto& unknown : thermalSweepSearch() )
@@ -326,23 +311,22 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
          Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
          Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
 
+  std::cout << *info << "\n\n";
+
   //Transform outputs
   j=0;
   for( auto& unknown : thermalSweepSearch() )
   {
-    x[j] = x_limiter2(x[j], unknown.lowerBound(), unknown.upperBound());
-    unknown.bestfitset(x[j]);
-    j++;
+    x[j] = x_limiter2( x[j] , unknown.lowerBound() , unknown.upperBound() ) ;
+    unknown.bestfitset( x[j] ) ;
+    j++ ;
   }
 
-//   ///Final fit
-//  coreSystem->updatefromBestFit( (*unknownParameters)() );
-//  thermalData->predictedEmission =
-//      thermal::emission::phase99( *coreSystem , thermalData->omegas );
-
-//  /// Quality-of-fit
-//  thermalData->MSE = math::estimation::SobjectiveLS(
-//        thermalData->experimentalEmission, thermalData->predictedEmission );
+  ///Final fit
+  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
+  coreSystem->updatefromBestFit( (*unknownParameters)() );
+  //  (*unknownParameters)( originalListParams ) ;
+  //  updateExperimentalData(  SAVEExperimental, *thermalData );
 
   delete [] qtf;
   delete [] wa1;
@@ -355,28 +339,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   delete [] fjac;
   delete [] diag;
   delete [] x;
-
-
-/// I need to create ways to optimize thermal penetration. The ones I am
-/// thinking
-///   a) given X data what is the optimal range to best estimate properties
-///      - original data limited in range
-///      - cannot introduce new measurements
-///   b) given LMIN and LMAX what is the optimal range to take data to
-///     ensure the most accurate measurements
-///  The function I am minimizing is
-///  S1
-///
-/// So this means one should be from the perspective of someone doing
-/// post-analysis on their data.  They have a given range of values ( a
-/// thermograph) and they're looking to see how much data to keep.
-///
-///
-
-
-    ///Update list of parameters with updated list
-  //  (*unknownParameters)( originalListParams ) ;
-  //  updateExperimentalData(  SAVEExperimental, *thermalData );
 }
 
 }}

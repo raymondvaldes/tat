@@ -95,7 +95,7 @@ public:
      const std::shared_ptr<Kernal> &coreSystem_in,
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
-     );
+     ) ;
 };
 
 }}
