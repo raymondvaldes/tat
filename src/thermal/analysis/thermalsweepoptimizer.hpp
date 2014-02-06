@@ -70,9 +70,10 @@ private:
                                 const physicalModel::layer updatedCoating ) ;
   std::pair< double, double >
   updateVal(const std::pair<double, double> xSweep) ;
+  void pieAnalysis(void);
 
   // solvers
-  void optimizer(void);
+  void optimizer( int *info, int *nfev );
 
 public:
   // constructors and destructors

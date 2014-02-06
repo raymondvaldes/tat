@@ -135,8 +135,7 @@ LMA::paramter_estimation( int *info, int *nfev )
   updateBindFunc();
   lmdif( myReduced , m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
          Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
-         Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4,
-         wa5 ) ;
+         Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4) ;
 
   //Transform outputs
   j=0;
@@ -203,7 +202,7 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
   thermalData->MSE =
       math::estimation::SobjectiveLS( thermalData->experimentalEmission,
                                       thermalData->predictedEmission );
-  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
+//  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
 
   return;
 }

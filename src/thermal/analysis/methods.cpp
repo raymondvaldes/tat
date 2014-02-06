@@ -74,6 +74,7 @@ void methods::parameterIntervalEstimates(
 {
   intervalEstimates->solve( list_in, thermalData_in, coreSystem_in,
                             bestfitMethod );
+
 }
 
 void methods::optimization(

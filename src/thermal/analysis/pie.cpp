@@ -53,6 +53,9 @@ void PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
   bestfitMethod =  bestfitMethod_in ;
 
   parameterIntervalEstimates();
+
+  ///update core
+  bestFit();
 }
 
 void PIE::parameterIntervalEstimates( void )

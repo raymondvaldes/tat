@@ -41,13 +41,13 @@ namespace sensitivityvaldes2013
 void run( const filesystem::directory dir )
 {
   ///Initialize kernals
-  const class thermal::analysis::Kernal
+  const thermal::analysis::Kernal
       popteaCore = thermal::analysis::loadWorkingDirectoryKernal(dir);
   class thermal::analysis::Poptea
       poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
 
   //Noise in Simulated Emission
-  constexpr double a =  .01*0;        // max % error (%*pi/2) (try .025)
+  constexpr double a =  .01;        // max % error (%*pi/2) (try .025)
   constexpr double b = 2.95;        // stretching parameter  (try 2.95) (1->pi)
   constexpr bool d1 = true;         //positive  (try false)
   constexpr bool d2 = true;         //monotonic (try true)
@@ -68,6 +68,7 @@ void run( const filesystem::directory dir )
 
 //  poptea.bestFit();
 //  poptea.parameterIntervalEstimates();
+
   poptea.optimization();
 
 ////////////////////////////////////////////////////////////////////////////////

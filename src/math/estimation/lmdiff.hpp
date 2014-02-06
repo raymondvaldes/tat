@@ -64,12 +64,12 @@ void fdjac2(std::function<void( double*, double* )> fcn,
             int m, int n, double x[], double fvec[], double fjac[], int /*ldfjac*/,
             int *iflag, double epsfcn, double wa[]);
 
-void lmdif( std::function < void ( double*, double* ) > fcn,
-            int m, int n, double *x, double *fvec,double ftol, double xtol,
+void lmdif(std::function < void ( double*, double* ) > fcn,
+            int m, int n, double *x, double *fvec, double ftol, double xtol,
             double gtol, int maxfev, double epsfcn, double *diag, int mode,
             double factor, int nprint, int *info, int *nfev, double *fjac,
             int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
-            double *wa3, double *wa4, double */*wa5*/);
+            double *wa3, double *wa4);
   }
 }
 
