@@ -150,8 +150,8 @@ updatefromBestFit( std::vector< math::estimation::unknown > list,
                    const physicalModel::layer &coating ,
                    const ThermalData fullExpData )
 {
-  double xCenter;
-  double xRange;
+  double xCenter = 0;
+  double xRange = 0;
   for( const auto& unknown :  list )
   {
     if( unknown.label() == physicalModel::labels::Name::thermalCenter )
@@ -167,10 +167,6 @@ updatefromBestFit( std::vector< math::estimation::unknown > list,
 
   ///Experimental Data must be saved and used to be interpolated accross the
   /// restricted domain.  The experimental Data and sweep cannot be erased.
-
-
-
-
 
 }
 
