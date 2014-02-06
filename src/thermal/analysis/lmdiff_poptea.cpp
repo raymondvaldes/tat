@@ -202,6 +202,9 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
   thermalData->MSE =
       math::estimation::SobjectiveLS( thermalData->experimentalEmission,
                                       thermalData->predictedEmission );
+
+  lthermalPredicted =
+      thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating );
 //  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
 
   return;
