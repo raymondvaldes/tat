@@ -65,6 +65,8 @@ private:
   std::shared_ptr< ThermalData > fullRangeThermalData;
   std::pair<double, double> xSweep;
 
+  std::pair<double, double> updatedLimits;
+
   // worker methods
   ThermalData sliceThermalData( const double xCenter, const double xRange,
                                 const physicalModel::layer updatedCoating ) ;

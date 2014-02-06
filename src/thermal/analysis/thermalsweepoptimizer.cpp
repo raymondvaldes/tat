@@ -132,6 +132,12 @@ void ThermalSweepOptimizer::
     std::cout << fvec[i] << "\t";
     i++;
   }
+
+  updatedLimits =
+  updatedThermal.get_lthermalLimits(coatingUpdate);
+  std::cout << "\nlmin = " << updatedLimits.first <<"\tlmax ="
+            << updatedLimits.second ;
+
   std::cout << "\n\n\n";
 
   return;
@@ -144,21 +150,14 @@ void ThermalSweepOptimizer::pieAnalysis(void)
                             bestfitMethod );
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
 
-  std::cout << "iterate through parameters now:---\n\n";
   std::cout << "parameter estimates intervals:\n";
-  std::cout << "------------------------------\n\n";
+  std::cout << "------------------------------\n";
   std::cout << "min\tbestfit\tmax\n";
-  std::cout << "iterate through parameters now:---\n\n";
-  std::cout << "parameter estimates intervals:\n";
-  std::cout << "------------------------------\n\n";
-  std::cout << "min\tbestfit\tmax\n";
-
   for(auto& val : (*unknownParameters)() )
   {
     std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
               << "\t"   << val.bestfitInterval.upper << "\n";
   }
-  std::cout <<"\n\n";
 }
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
@@ -324,9 +323,28 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 
   ///Final fit
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
-  coreSystem->updatefromBestFit( (*unknownParameters)() );
-  //  (*unknownParameters)( originalListParams ) ;
-  //  updateExperimentalData(  SAVEExperimental, *thermalData );
+  coreSystem->updatefromBestFit( (*unknownParameters)() );  
+
+
+
+  std::vector<double> lthermalsVector(
+        thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ) ;
+
+  for(size_t i=0; i < thermalData->size() ; i++ )
+  {
+    std::cout << lthermalsVector[i] << "\t"
+              << thermalData->experimentalEmission[i] << "\t"
+              << thermalData->predictedEmission[i] << "\n" ;
+  }
+
+
+
+
+
+
+
+
+  reassign(  thermalData, *fullRangeThermalData );
 
   delete [] qtf;
   delete [] wa1;
