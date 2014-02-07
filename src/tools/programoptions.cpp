@@ -83,7 +83,7 @@ bool help( boost::program_options::options_description desc)
 
 bool config( std::string& path)
 {
-  std::cout << "path configured... " << path << "\n";
+//  std::cout << "path configured... " << path << "\n";
   return true;
 }
 
