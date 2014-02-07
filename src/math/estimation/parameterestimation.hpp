@@ -96,6 +96,7 @@ public:
   ~unknownList() ;
 
   void prettyPrint( void ) const;
+  std::string prettyPrint(void) ;
 };
 
 class settings
