@@ -67,8 +67,18 @@ void run( const filesystem::directory dir )
   poptea.updateExperimentalData( poptea.thermalData->omegas ,
                                  emissionExperimental ) ;
 
+  poptea.bestFit();
+  std::cout << poptea.unknownParameters->prettyPrint();
+  std::cout << "Press <ENTER> to continue.\n";
+  std::cin.get();
+  std::cout << "Please wait...\n";
+//  poptea.parameterIntervalEstimates();
+
+//  std::cout << poptea.unknownParameters->prettyPrint();
+//  std::cout << "Press <ENTER> to continue.\n";
+//  std::cin.get();
+//  std::cout << "Please wait...\n";
 //  poptea.bestFit();
-//    poptea.parameterIntervalEstimates();
   poptea.optimization();
 
   return;
