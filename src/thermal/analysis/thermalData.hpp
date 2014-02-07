@@ -42,6 +42,7 @@ public:
   std::vector<double> omegas;
   std::vector<double> experimentalEmission;
   std::vector<double> predictedEmission;
+  std::pair<double, double> lthermalPredicted;
   const size_t measurementsPerDecade;
   double MSE;
 
@@ -64,7 +65,7 @@ public:
   std::pair<double, double>
   get_lthermalLimits( const physicalModel::layer &coating) const;
   std::pair<double, double>
-  get_omegaLimits( const physicalModel::layer &coating) const;
+  get_omegaLimits(void) const;
 
   //modify data
   void updateExperimental( const std::vector<double> &input );

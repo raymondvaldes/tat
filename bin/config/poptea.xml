@@ -1,22 +1,18 @@
 ﻿<poptea>
+	
 	<sweep>
 		<minperDecade>50</minperDecade>
 		<thermal_penetration>
 			<start>.04</start>
 			<end>4</end>
 		</thermal_penetration>
-		<frequency>			
+		<frequencyLimits>			
 			<start>0.02</start>
 			<end>2000</end>		
-		</frequency>			
+		</frequencyLimits>			
 	</sweep>
 	
 	<ParaEstSettings>
-		<!--- N number of thermal parameters to be fitted-->
-		<!-- ftol difference in error-->
-		<!-- xtol difference in parameters-->
-		<!-- beta_iter is the number of iterations to find beta2-->
-		<!-- beta_tol is how close dz_sub is to dz_coat */-->
 		<ftol>1e-08</ftol>
 		<xtol>1e-08</xtol>
 		<gtol>1e-08</gtol>
@@ -32,35 +28,35 @@
 			<label>asub</label>
 			<min>1e-0</min>
 			<max>5</max>
-			<initialGuess>2.1</initialGuess>
+			<initialGuess>2.328</initialGuess>
 		</unknown>
 		
 		<unknown>
 			<label>E1</label>
 			<min>1</min>
 			<max>200</max>
-			<initialGuess>40</initialGuess>
+			<initialGuess>40.120</initialGuess>
 		</unknown>		
 		
 		<unknown>
 			<label>lambda</label>
 			<min>0.1</min>
 			<max>1.0</max>
-			<initialGuess>0.5</initialGuess>
+			<initialGuess>0.562</initialGuess>
 		</unknown>
 		
 		<unknown>
 			<label>R1</label>
 			<min>0.6</min>
 			<max>1.0</max>
-			<initialGuess>0.75</initialGuess>
+			<initialGuess>0.794</initialGuess>
 		</unknown>
 		
 		<unknown>
 			<label>gammaEff</label>
 			<min>2e-0</min>
 			<max>10</max>
-			<initialGuess>3.7</initialGuess>
+			<initialGuess>3.768</initialGuess>
 		</unknown>
 		
 	</unknownParameters>

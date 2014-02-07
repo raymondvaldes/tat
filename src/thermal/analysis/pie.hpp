@@ -41,14 +41,16 @@ private:
   double bestFit();
 
   std::vector<double>SAVEExperimental;
+  std::vector<double>SAVEpredictions;
   std::vector<double>SAVEomega;
+
   void parameterIntervalEstimates( void ) ;
 
   double Gfunc( const double x , const physicalModel::labels::Name &mylabel ) ;
   void updateExperimentalData( const std::vector<double> &input,
                                ThermalData &thermalData_in ) ;
   void saveExperimental( const ThermalData& thermalData_in ) ;
-
+  void reloadExperimental( void );
   double solveFORx( const double target , const double min, const double max,
                     const physicalModel::labels::Name mylabel,
                     const std::string &bound ) ;
