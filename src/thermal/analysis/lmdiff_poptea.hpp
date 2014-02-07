@@ -55,7 +55,7 @@ protected:
   math::estimation::settings Settings;
   LMA_workingArrays LMA_workspace;
 
-  int nfev;
+  int nfev = 0;
   int info;
   std::function< void( double*, double* ) > myReduced;
 

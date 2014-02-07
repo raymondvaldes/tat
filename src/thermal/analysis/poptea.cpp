@@ -205,8 +205,16 @@ void Poptea::parameterIntervalEstimates( void )
 //  std::cout << thermalData->MSE << "\n";
 
   PIE();
-  unknownParameters->prettyPrint()  ;
+//  unknownParameters->prettyPrint()  ;
 
+  const std::string prettyResults = unknownParameters->prettyPrint()  ;
+  std::cout << prettyResults ;
+//  std::cout << prettyResults << "\r";
+//  std::cout << prettyResults << "\r";
+
+
+
+  exit(-2);
 }
 
 void Poptea::optimization(void)

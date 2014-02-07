@@ -123,21 +123,29 @@ void ThermalSweepOptimizer::
   }
 
 
+
+
   updatedLimits =
   updatedThermal.get_lthermalLimits(coatingUpdate);
   std::cout.setf( std::ios::fixed, std::ios::floatfield );
   std::cout << std::setprecision(3);
   std::cout << "*-----------------------------------------*\n";
-  std::cout << "| xCenter:  "<< std::setw(8) << std::left
+  std::cout << "| Data ctr: "<< std::setw(8) << std::right
             << lmin << "                      |\n";
-  std::cout << "| xRange:   "<< std::setw(8) << std::left
-            << lmax << "                      |\n";
-  std::cout << "| lmin:     "<< std::setw(8) << std::left
+  std::cout << "| Data used:"<< std::setw(8) << std::right
+            << lmax*100 << "%                     |\n";
+  std::cout << "| lmin:     "<< std::setw(8) << std::right
             << updatedLimits.first << "                      |\n";
-  std::cout << "| lmax:     "<< std::setw(8) << std::left
+  std::cout << "| lmax:     "<< std::setw(8) << std::right
             << updatedLimits.second << "                      |\n";
   std::cout << "*-----------------------------------------*\n";
-  std::cout << "\n\n";
+
+  if(nfev == 0)
+  {
+    std::cout << "Press <ENTER> to continue.\n";
+    std::cin.get();
+//    std::cout << "Please wait...\n";
+  }
 
   return;
 }
@@ -148,7 +156,11 @@ void ThermalSweepOptimizer::pieAnalysis(void)
 {
   intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
                             bestfitMethod );
-  unknownParameters->prettyPrint();
+
+  const std::string prettyResults = unknownParameters->prettyPrint()  ;
+  for(size_t i = 0; i < 60 ; i ++)
+    std::cout << "\n";
+  std::cout <<prettyResults ;
 }
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
