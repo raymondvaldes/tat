@@ -1,4 +1,5 @@
-﻿<poptea>
+﻿<?xml version="1.0" encoding="utf-16"?>
+<poptea>
 	
 	<sweep>
 		<minperDecade>50</minperDecade>
@@ -84,7 +85,7 @@
 				<label>thermalRange</label>
 				<min>0</min>
 				<max>1</max>
-				<initialGuess>.9</initialGuess>
+				<initialGuess>.90</initialGuess>
 			</unknown>		
 		</unknownParameters>
 	</optimizationSweep>
