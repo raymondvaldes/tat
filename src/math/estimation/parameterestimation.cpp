@@ -26,6 +26,7 @@ License
 #include <exception>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <ios>
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
@@ -216,6 +217,34 @@ void unknownList::prettyPrint(void) const
               << "|\n";
   }
   std::cout << "*-----------------------------------------*\n";
+}
+
+
+std::string
+unknownList::prettyPrint(void)
+{
+  std::ostringstream output;
+
+
+  output << "*-----------------------------------------*\n";
+  output << "| parameter estimate intervals:           |\n";
+  output << "|-----------------------------------------|\n";
+  output << "| min       bestfit    max      error(%)  |\n";
+
+  output.setf( std::ios::fixed, std::ios::floatfield );
+  output << std::setprecision(3);
+  for( const math::estimation::unknown & val : vectorUnknowns )
+  {
+    output << "| "
+              << std::setw(10) << std::left << val.bestfitInterval.lower
+              << std::setw(10) << std::left << val.bestfit()
+              << std::setw(10) << std::left << val.bestfitInterval.upper
+              << std::setw(10) << std::left << 100*val.bestfitIntervalSpread()
+              << "|\n";
+  }
+  output << "*-----------------------------------------*\n";
+
+  return output.str() ;
 }
 
 unknownList::~unknownList(){}
