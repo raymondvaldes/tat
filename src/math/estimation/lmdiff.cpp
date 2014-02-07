@@ -589,6 +589,9 @@ L300:
 /*
 *     termination, either normal or user imposed.
 */
+
+
+
 if(iflag < 0)
         *info = iflag;
 iflag = 0;
@@ -1987,6 +1990,11 @@ using namespace math::estimation;
 constexpr double MACHEP = 1.2e-16;
 //constexpr double DWARF = 1.0e-38;
 
+std::vector<double>xSave(n);
+for( int i = 0; i < n ;  i++)
+{
+  xSave[i] = x[i];
+}
 
 int iter = 0;
 int i,iflag,ij,jj,j,l;
@@ -2360,6 +2368,16 @@ L300:
 /*
 *     termination, either normal or user imposed.
 */
+
+if( *nfev == (n+1) )
+{
+  for( int i = 0; i < n ;  i++)
+  {
+//    std::cout << x[i] << "\t";
+//    x[i] = xSave[i];
+  }
+}
+
 if(iflag < 0)
         *info = iflag;
 iflag = 0;
