@@ -50,14 +50,14 @@ enum class HeatX: uint8_t
 };
 
 typedef boost::bimap< enum HeatX , std::string > HeatXBiTYPE;
-const HeatXBiTYPE HeatXMap =
+static const HeatXBiTYPE HeatXMap =
     boost::assign::list_of < HeatXBiTYPE::relation >
  ( HeatX::OneDimAnalytical , "OneDimAnalytical")
  ( HeatX::OneDimNumLin     , "OneDimNumLin")
  ( HeatX::OneDimNumNonLin  , "OneDimNumNonLin")
  ( HeatX::TwoDimAnalytical , "TwoDimAnalytical")
  ( HeatX::TwoDimNumLin     , "TwoDimNumLin")
- ( HeatX::TwoDimNumNonLin  , "TwoDimNumNonLin");
+ ( HeatX::TwoDimNumNonLin  , "TwoDimNumNonLin") ;
 
 
 enum class EmissionX: uint8_t

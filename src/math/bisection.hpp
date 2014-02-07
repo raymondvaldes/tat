@@ -44,7 +44,7 @@ class solve
 {
 private:
   std::function<double(double)> myF;
-  boost::uintmax_t maxInt = 300;
+  boost::uintmax_t maxInt = 500;
   const double phi;
   const double min;
   const double max;

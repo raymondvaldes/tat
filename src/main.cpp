@@ -53,5 +53,6 @@ int main( int argc, char *argv[ ] )
     std::cout << "\nStopwatch: "                << std::setprecision(3)
               <<  globalStopWatch.returnTime()  <<" sec.\n\n";
   }
+
   return 0;
 }

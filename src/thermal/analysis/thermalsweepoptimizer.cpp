@@ -68,19 +68,10 @@ ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
   {
     const double bestfit  = unknown.bestfit();
 
-    switch( unknown.label() )
-    {
-      case physicalModel::labels::Name::thermalCenter :
-          thermalCenter = bestfit ;
-          break;
-      case physicalModel::labels::Name::thermalRange :
-          thermalRange = bestfit ;
-          break;
-      default:
-          std::cout << "\nSwitch Error in thermalCenter and Range!!\n";
-          exit(-10) ;
-          break;
-    }
+    if ( unknown.label() == physicalModel::labels::Name::thermalCenter  )
+      { thermalCenter = bestfit ; }
+    else if ( unknown.label() == physicalModel::labels::Name::thermalRange  )
+      { thermalRange = bestfit ; }
   }
 
   std::pair< double, double > output( thermalCenter, thermalRange ) ;
@@ -115,7 +106,6 @@ void ThermalSweepOptimizer::
   pieAnalysis();
 
   ///Use results from anaylsis
-  std::cout << lmin << "\t" << lmax << "\t";
   i =0 ;
   for( physicalModel::labels& myParam : sweepOptimizationGoal )
   {
@@ -129,35 +119,36 @@ void ThermalSweepOptimizer::
       }
     }
     fvec[i] = error ;
-    std::cout << fvec[i] << "\t";
     i++;
   }
 
+
   updatedLimits =
   updatedThermal.get_lthermalLimits(coatingUpdate);
-  std::cout << "\nlmin = " << updatedLimits.first <<"\tlmax ="
-            << updatedLimits.second ;
-
-  std::cout << "\n\n\n";
+  std::cout.setf( std::ios::fixed, std::ios::floatfield );
+  std::cout << std::setprecision(3);
+  std::cout << "*-----------------------------------------*\n";
+  std::cout << "| xCenter:  "<< std::setw(8) << std::left
+            << lmin << "                      |\n";
+  std::cout << "| xRange:   "<< std::setw(8) << std::left
+            << lmax << "                      |\n";
+  std::cout << "| lmin:     "<< std::setw(8) << std::left
+            << updatedLimits.first << "                      |\n";
+  std::cout << "| lmax:     "<< std::setw(8) << std::left
+            << updatedLimits.second << "                      |\n";
+  std::cout << "*-----------------------------------------*\n";
+  std::cout << "\n\n";
 
   return;
 }
+
+
+
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
-
-  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
   intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
                             bestfitMethod );
-  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
-
-  std::cout << "parameter estimates intervals:\n";
-  std::cout << "------------------------------\n";
-  std::cout << "min\tbestfit\tmax\n";
-  for(auto& val : (*unknownParameters)() )
-  {
-    std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
-              << "\t"   << val.bestfitInterval.upper << "\n";
-  }
+  unknownParameters->prettyPrint();
 }
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
@@ -211,7 +202,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 {
   // Establish omegas limits of full range (FR) experimental data
   std::pair<double, double> omegaLimits =
-      fullRangeThermalData->get_omegaLimits( *coatingTOinterpretFullRange ) ;
+      fullRangeThermalData->get_omegaLimits(  ) ;
 
   std::vector<double> omegasMonoIncreasing( fullRangeThermalData->size() ) ;
   std::reverse_copy(
@@ -310,8 +301,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
          Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
          Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
 
-  std::cout << *info << "\n\n";
-
   //Transform outputs
   j=0;
   for( auto& unknown : thermalSweepSearch() )
@@ -325,24 +314,15 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
   coreSystem->updatefromBestFit( (*unknownParameters)() );  
 
+//  std::vector<double> lthermalsVector(
+//        thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ) ;
 
-
-  std::vector<double> lthermalsVector(
-        thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ) ;
-
-  for(size_t i=0; i < thermalData->size() ; i++ )
-  {
-    std::cout << lthermalsVector[i] << "\t"
-              << thermalData->experimentalEmission[i] << "\t"
-              << thermalData->predictedEmission[i] << "\n" ;
-  }
-
-
-
-
-
-
-
+//  for(size_t i=0; i < thermalData->size() ; i++ )
+//  {
+//    std::cout << lthermalsVector[i] << "\t"
+//              << thermalData->experimentalEmission[i] << "\t"
+//              << thermalData->predictedEmission[i] << "\n" ;
+//  }
 
   reassign(  thermalData, *fullRangeThermalData );
 

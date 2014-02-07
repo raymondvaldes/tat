@@ -58,16 +58,17 @@ void run( const filesystem::directory dir )
 
   ///Output noise to test
   std::vector<double> emissionNominal =
-      thermal::emission::phase99(*(poptea.coreSystem), poptea.thermalData->omegas);
+      thermal::emission::phase99( *(poptea.coreSystem) ,
+                                  poptea.thermalData->omegas ) ;
 
   std::vector<double> emissionExperimental = thermal::emission::
       addNoise( emissionNominal, poptea.thermalSweep(), myEmissionNoise ) ;
 
   poptea.updateExperimentalData( poptea.thermalData->omegas ,
-                                 emissionExperimental );
+                                 emissionExperimental ) ;
 
 //  poptea.bestFit();
-  poptea.parameterIntervalEstimates();
+//    poptea.parameterIntervalEstimates();
   poptea.optimization();
 
   return;
