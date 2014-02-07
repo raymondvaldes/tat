@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include "thermal/analysis/pie.hpp"
 #include "math/algorithms/combinations.hpp"
-
+//#include "math/estimation/utils.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -54,7 +54,6 @@ void PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
 
   bestFit();
   parameterIntervalEstimates();
-  bestFit();
 }
 
 void PIE::parameterIntervalEstimates( void )
@@ -92,19 +91,25 @@ void PIE::parameterIntervalEstimates( void )
     const double bestfit = myfixedParameter.bestfit();
     const double lowerbound = myfixedParameter.lowerBound();
     const double upperbound = myfixedParameter.upperBound();
+//    std::cerr << lowerbound << "\t" <<bestfit << "\t" <<upperbound << "\n";
 
     ///search space
-    (*unknownParameters)( newListVect );
+    (*unknownParameters)( newListVect ) ;
+
+//   std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<< "\n";
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     const double max = solveFORx( S1, bestfit, upperbound , mylabel, "max" ) ;
 
     originalListParams[i++].bestfitIntervalset( min, max);
   }
+//  std::cerr << "\n";
 
   ///Update list of parameters with updated list
   (*unknownParameters)( originalListParams );
-  updateExperimentalData(  SAVEExperimental, *thermalData ) ;
+
+  reloadExperimental();
   thermalData->MSE = S1;
+//  std::cerr << S1 << "\n";
 }
 
 double PIE::solveFORx( const double target , const double min, const double max,
@@ -114,15 +119,20 @@ double PIE::solveFORx( const double target , const double min, const double max,
   const std::function<double(double)>
       myFuncReduced = std::bind( &PIE::Gfunc, this , std::placeholders::_1,
                                  mylabel ) ;
+//  std::cerr << "gogogoogogogogog  \n";
 
   const math::solve ojb( myFuncReduced, target, min, max ) ;
   double soln = ojb.returnSoln();
+
+//  std::cerr << "warning\t"<< min << "\t" << max << "\t" << target  <<"\n";
 
   if(!ojb.pass)
   {
     if( bound == "min" ) soln = min;
     if( bound == "max" ) soln = max;
+//    std::cerr << "warning  ";
   }
+//  std::cerr << "end with " << soln << "\n";
 
   return soln;
 }
@@ -130,13 +140,24 @@ double PIE::solveFORx( const double target , const double min, const double max,
 void PIE::saveExperimental( const ThermalData& thermalData_in )
 {
   SAVEExperimental = thermalData_in.experimentalEmission;
+  SAVEpredictions = thermalData_in.predictedEmission;
   SAVEomega = thermalData_in.omegas;
 }
+
+void PIE::reloadExperimental( void )
+{
+  thermalData->experimentalEmission = SAVEExperimental;
+  thermalData->predictedEmission = SAVEpredictions;
+  thermalData->omegas = SAVEomega;
+}
+
 void PIE::updateExperimentalData( const std::vector<double> &input,
                                   ThermalData &thermalData_in )
 {
   thermalData_in.updateExperimental( input );
 }
+
+
 double PIE::Gfunc( const double val ,
                    const enum physicalModel::labels::Name &mylabel)
 {
@@ -144,7 +165,6 @@ double PIE::Gfunc( const double val ,
   coreSystem->TBCsystem.updateCoat() ;
 
   bestFit() ;
-
   return thermalData->MSE;
 }
 
