@@ -170,7 +170,16 @@ std::vector<double> Poptea::thermalSweep(void) const
 double Poptea::bestFit( void )
 {
   runbestfit = true;
-  return analysis.bestFit( unknownParameters, thermalData, coreSystem ) ;
+
+  double output=analysis.bestFit( unknownParameters, thermalData, coreSystem );
+  unknownParameters->prettyPrint();
+
+//  std::cerr << thermalData->predictedEmission[0]
+//            << "\t"<< thermalData->experimentalEmission[0] << "\t";
+//  std::cerr << thermalData->MSE << "\n";
+//  std::cerr << "reset\n";
+
+  return  output;
 }
 
 void Poptea::PIE ( void )
@@ -184,33 +193,26 @@ void Poptea::parameterIntervalEstimates( void )
   /// Precheck experimental data is loaded and there is a bestfit.
   if(!loadedExperimental) { return; }
 
-//  bestFit();
-
 //  std::vector<double> lthermalsVector(
 //        thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ) ;
-//  for(size_t i=0; i < thermalData->size() ; i++ )
+//  for(size_t i=0; i < 5 ; i++ )
 //  {
-//    std::cout << lthermalsVector[i] << "\t"
+//    std::cout << std::setprecision(6)
+//              << lthermalsVector[i] << "\t"
 //              << thermalData->experimentalEmission[i] << "\t"
 //              << thermalData->predictedEmission[i] << "\n" ;
 //  }
+//  std::cout << thermalData->MSE << "\n";
 
   PIE();
+  unknownParameters->prettyPrint()  ;
 
-  std::cout << "parameter estimates intervals:\n";
-  std::cout << "------------------------------\n";
-  std::cout << "min\tbestfit\tmax\n";
-  for(auto& val : (*unknownParameters)() )
-  {
-    std::cout << val.bestfitInterval.lower << "\t"   <<  val.bestfit()
-              << "\t"   << val.bestfitInterval.upper << "\n";
-  }
 }
 
 void Poptea::optimization(void)
 {
   if(!loadedExperimental) { return; }
-  bestFit();
+//  bestFit();
 
   analysis.optimization( unknownParameters , thermalData, coreSystem);
 

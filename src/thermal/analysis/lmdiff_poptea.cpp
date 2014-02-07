@@ -77,18 +77,18 @@ void LMA::solve(
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in )
 {
-  unknownParameters = unknownParameters_in;
-  thermalData = thermalData_in;
-  coreSystem = coreSystem_in;
+  unknownParameters = unknownParameters_in ;
+  thermalData = thermalData_in ;
+  coreSystem = coreSystem_in ;
 
   ///update workspaces
-  updateWorkSpace( thermalData->size() , unknownParameters->size()  );
+  updateWorkSpace( thermalData->size() , unknownParameters->size() ) ;
 
   ///Solve
-  paramter_estimation( &info, &nfev );
+  paramter_estimation( &info, &nfev ) ;
 
   ///update core
-  coreSystem->updatefromBestFit( (*unknownParameters)() );
+  coreSystem->updatefromBestFit( (*unknownParameters)() ) ;
 }
 
 
@@ -139,12 +139,13 @@ LMA::paramter_estimation( int *info, int *nfev )
 
   //Transform outputs
   j=0;
-  for( auto& unknown : (*unknownParameters)() )
+  for( math::estimation::unknown& unknown : unknownParameters->vectorUnknowns )
   {
-    x[j] = x_limiter2(x[j], unknown.lowerBound(), unknown.upperBound());
+    x[j] = x_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
     unknown.bestfitset(x[j]);
     j++;
   }
+
 
    ///Final fit
   coreSystem->updatefromBestFit( (*unknownParameters)() );
@@ -154,6 +155,8 @@ LMA::paramter_estimation( int *info, int *nfev )
   /// Quality-of-fit
   thermalData->MSE = math::estimation::SobjectiveLS(
         thermalData->experimentalEmission, thermalData->predictedEmission );
+
+//  std::cerr << "from inside bestfit " << thermalData->MSE << "\n";
 
   delete [] qtf;
   delete [] wa1;
@@ -166,6 +169,9 @@ LMA::paramter_estimation( int *info, int *nfev )
   delete [] fjac;
   delete [] diag;
   delete [] x;
+
+//  std::cout << *nfev <<"\n";
+//  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
 
   return *thermalData;
 }
@@ -199,9 +205,9 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
                     thermalData->predictedEmission[n] ;
   }
 
-  thermalData->MSE =
-      math::estimation::SobjectiveLS( thermalData->experimentalEmission,
-                                      thermalData->predictedEmission );
+//  thermalData->MSE =
+//      math::estimation::SobjectiveLS( thermalData->experimentalEmission,
+//                                      thermalData->predictedEmission );
 
   thermalData->lthermalPredicted =
       thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating );
