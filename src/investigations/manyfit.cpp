@@ -83,8 +83,6 @@ void fitting( class thermal::analysis::Poptea poptea,
 
   for( size_t i=0; i<interants; ++i )
   {
-      //int nfev;
-      //int info = 0;
       myfile << i << "\t";
 
       poptea.bestFit();
@@ -93,17 +91,10 @@ void fitting( class thermal::analysis::Poptea poptea,
 //             << *(poptea.coreSystem).TBCsystem.a_subEval() << "\t"
 //             << *(poptea.coreSystem).TBCsystem.optical.Emit1 << "\t"
 //             << *(poptea.coreSystem).TBCsystem.optical.R1<< "\t"
-//             << *(poptea.coreSystem).TBCsystem.coating.lambda << "\t"
-//             << *(poptea.thermalData).MSE << "\n";
+//             << *(poptea.coreSystem).TBCsystem.coating.lambda << "\n"
 
 //      printPEstimates( *(poptea.coreSystem).TBCsystem,
 //                       *(poptea.unknownParameters) ) ;
-
-      xInitial.clear();
-      for( const auto& val : xSave)
-      {
-        xInitial.push_back( math::x_ini10(val) );
-      }
   }
 
   myfile.close();
