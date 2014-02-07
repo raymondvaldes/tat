@@ -75,11 +75,10 @@ public:
 
 class unknownList
 {
-private:
-  std::vector<class estimation::unknown> vectorUnknowns;
-
 public:
-  std::vector<class estimation::unknown> operator() (void) const;
+  std::vector< estimation::unknown> vectorUnknowns;
+
+  std::vector< estimation::unknown> operator() (void) const;
   void operator() (std::vector<class estimation::unknown> input) ;
 
   void addUnknown( physicalModel::labels::Name name,
@@ -92,13 +91,11 @@ public:
   unknownList();
   unknownList( std::vector<class estimation::unknown> input )  ;
 
-  static class unknownList
+  static unknownList
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
-  class unknown getParameter( physicalModel::labels::Name label );
   ~unknownList() ;
 
-  void prettyPrint(void) const;
-
+  void prettyPrint( void ) const;
 };
 
 class settings
