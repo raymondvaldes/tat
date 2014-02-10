@@ -28,11 +28,17 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "tools/filesystem.hpp"
 
+#include "thermal/analysis/poptea.hpp"
+
 namespace investigations
 {
 namespace sensitivityvaldes2013{
 
-void run( const class filesystem::directory dir ) ;
+void run( const filesystem::directory dir ) ;
+void demo(const filesystem::directory dir) ;
+
+thermal::analysis::Poptea
+initializePopTeaAndLoadSimuEmission( const filesystem::directory dir );
 
 }}
 
