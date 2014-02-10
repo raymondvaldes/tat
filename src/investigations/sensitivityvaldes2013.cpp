@@ -40,6 +40,22 @@ namespace sensitivityvaldes2013
 
 void run( const filesystem::directory dir )
 {
+void demo( const filesystem::directory dir )
+{
+  thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
+
+  for(size_t i =0 ; i < 100; i++)
+    std::cout << "\n";
+
+  poptea.bestFit();
+
+  std::cout << poptea.unknownParameters->prettyPrint();
+  std::cout << "Press <ENTER> to continue.\n";
+  std::cin.get();
+  std::cout << "Please wait...\n";
+
+  poptea.optimization();
+}
   ///Initialize kernals
   const thermal::analysis::Kernal
       popteaCore = thermal::analysis::loadWorkingDirectoryKernal(dir);
