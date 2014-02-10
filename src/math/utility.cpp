@@ -419,13 +419,13 @@ newThermalSweepLimits( const double center, const double range,
 
   if( strPos < 0 )
   {
-    strPos = 0;
+    strPos = 0.001;
     endPos = 2 * center;
   }
   else if( endPos > 1 )
   {
     strPos = 2 * center  - 1;
-    endPos = 1;
+    endPos = .999;
   }
 
   const double start = math::valFROMpercentileLog10( strPos, min, max ) ;
