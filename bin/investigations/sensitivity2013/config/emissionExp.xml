@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<simulated-emission>
+	
+	<settings>		
+		<bias-noise>							.01			</bias-noise>
+		<stretching-parameter>		2.95		</stretching-parameter>
+		<positive> 								true 		</positive>
+		<monotonic> 							true 		</monotonic>
+		<random-noise>						0				</random-noise>
+	</settings>
+
+</simulated-emission>
