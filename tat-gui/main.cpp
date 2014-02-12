@@ -25,13 +25,15 @@ License
 
 #include "mainwindow.hpp"
 #include <QApplication>
+#include <QtDebug>
 
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
 
-  MainWindow w;
-  w.show();
+  MainWindow window;
+  window.show();
 
-  return a.exec();
+
+  return app.exec();
 }

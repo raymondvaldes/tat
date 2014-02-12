@@ -22,7 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-
+#include <iostream>
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 
@@ -36,4 +36,29 @@ MainWindow::MainWindow( QWidget *parent ) :
 MainWindow::~MainWindow()
 {
   delete ui;
+}
+
+
+
+void MainWindow::on_optimizer_clicked()
+{
+  on_progressBar_valueChanged( 60 );
+
+}
+
+void MainWindow::on_progressBar_valueChanged(int value)
+{
+
+}
+
+void MainWindow::on_label_windowIconTextChanged(const QString &iconText)
+{
+
+
+
+}
+
+void MainWindow::on_label_destroyed()
+{
+
 }

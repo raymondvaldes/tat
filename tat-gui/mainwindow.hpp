@@ -42,6 +42,16 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
+private slots:
+
+  void on_optimizer_clicked();
+
+  void on_progressBar_valueChanged(int value);
+
+  void on_label_windowIconTextChanged(const QString &iconText);
+
+  void on_label_destroyed();
+
 private:
   Ui::MainWindow *ui;
 };
