@@ -96,7 +96,8 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
   poptea.updateExperimentalData( poptea.thermalData->omegas ,
                                  emissionExperimental ) ;
 
-  const std::string path = dir.abs("export.dat") ;
+  dir.mkdir( "data" ) ;
+  const std::string path = dir.abs( "data/export.dat" ) ;
   const std::string
       output = poptea.thermalData->prettyPrint(
         poptea.coreSystem->TBCsystem.coating ) ;
