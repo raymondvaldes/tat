@@ -83,7 +83,7 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
   constexpr int s1 = 0;             //-1(left bias) 0(symmetric) +1(right bias)
   constexpr double noiseRandom = 0.0005;              // normal noise % of pi/2
   const thermal::emission::ExpNoiseSetting
-      myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
+      myEmissionNoise( a, b, d1, d2, s1, noiseRandom ) ;
 
   ///Output noise to test
   std::vector<double> emissionNominal =
