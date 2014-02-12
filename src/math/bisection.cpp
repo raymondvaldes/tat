@@ -52,17 +52,25 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
 {
   assert(min < max);
 
-  try
+  if( fabs( ( min - max ) / max ) < tol )
   {
-    BisectMethod();
-    pass = true;
+    bestGuess = math::average( min, max ) ;
+    solnTolerance = tol;
+    pass = true ;
   }
-  catch (std::exception const&  ex)
+  else
   {
-//    std::cerr << "\t" <<phi_ << "\t" << min_ << "\t" << max_ << "\n";
-//    std::cerr << "\noutside range or no roots \n\n" << "\n";
-    bestGuess = min;
-    pass = false;
+    assert(min < max) ;
+    try
+    {
+      BisectMethod();
+      pass = true ;
+    }
+    catch ( std::exception const&  ex )
+    {
+      bestGuess = min;
+      pass = false ;
+    }
   }
 }
 
