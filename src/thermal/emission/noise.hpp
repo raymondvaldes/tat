@@ -53,6 +53,7 @@ c is the location of the center and set it to 0.5.
 d is the orientation options
 d1 true (positive)
 d2 true (monotonically)
+s1 is //-1(left bias) 0(symmetric) +1(right bias)
 
 This function needs an emissionProfile already established. This is the
 nominal emission profile used for the simulation. The EXPERIMENTAL EMISSION
