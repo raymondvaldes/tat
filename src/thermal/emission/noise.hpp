@@ -40,7 +40,14 @@ public:
   explicit ExpNoiseSetting( const double a1_, const double b1_,
                             const bool d1_, const bool d2_,
                             const int s1_, const double noiseRandom_);
+
+  static ExpNoiseSetting initializeObj( const boost::property_tree::ptree pt ) ;
+  static ExpNoiseSetting loadExpNoiseFile( const filesystem::directory dir ) ;
 };
+
+
+
+
 
 std::vector<double>
 addNoise( const std::vector<double> &emissionNominal_,
