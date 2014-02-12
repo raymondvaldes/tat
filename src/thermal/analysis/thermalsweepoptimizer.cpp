@@ -96,10 +96,12 @@ void ThermalSweepOptimizer::
 
   ///Load these unknownParameters into the popteaCore and thermalData kernals
   xSweep = updateVal( xSweep ) ;
-  const double lmin = xSweep.first;
-  const double lmax = xSweep.second;
-  const physicalModel::layer coatingUpdate( coreSystem->TBCsystem.coating );
-  ThermalData updatedThermal( sliceThermalData( lmin, lmax, coatingUpdate ) ) ;
+
+  const double xCenter = xSweep.first ;
+  const double xRange = xSweep.second ;
+  const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating );
+
+  ThermalData updatedThermal = sliceThermalData( xCenter, xRange, coatUpdate ) ;
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
@@ -208,7 +210,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 {
   // Establish omegas limits of full range (FR) experimental data
   std::pair<double, double> omegaLimits =
-      fullRangeThermalData->get_omegaLimits(  ) ;
+      fullRangeThermalData->get_omegaLimits( ) ;
 
   std::vector<double> omegasMonoIncreasing( fullRangeThermalData->size() ) ;
   std::reverse_copy(
@@ -226,7 +228,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
     &omegasMonoIncreasing[0] , &emissionReversed[0],
       omegasMonoIncreasing.size() ) ;
 
-  // Use omega to derive current lthermalsLimits that correspond to FR
+  // Use omega to derive current lthermalsLimits that correspond to FullRange
   const double coatingLength = updatedCoating.depth;
   const double coatingK = updatedCoating.kthermal.offset;
   const double coatingPsi = updatedCoating.psithermal.offset;

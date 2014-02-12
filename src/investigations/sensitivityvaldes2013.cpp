@@ -42,10 +42,15 @@ namespace sensitivityvaldes2013
 void run( const filesystem::directory dir )
 {
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
-
-  poptea.bestFit();
-//  poptea.parameterIntervalEstimates();
   poptea.optimization();
+
+
+  ///output results
+  dir.mkdir( "data" ) ;
+  const std::string path = dir.abs( "data/export.dat" ) ;
+  const std::string output = poptea.thermalData->prettyPrint(
+        poptea.coreSystem->TBCsystem.coating ) ;
+  tools::interface::exportfile( path , output ) ;
 
   return;
 }
@@ -64,7 +69,7 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
   thermal::emission::ExpNoiseSetting::loadExpNoiseFile( dir );
 
   ///Output noise to test
-  std::vector<double> emissionNominal =
+  const std::vector<double> emissionNominal =
       thermal::emission::phase99( *(poptea.coreSystem) ,
                                   poptea.thermalData->omegas ) ;
 
@@ -73,13 +78,6 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
 
   poptea.updateExperimentalData( poptea.thermalData->omegas ,
                                  emissionExperimental ) ;
-
-  dir.mkdir( "data" ) ;
-  const std::string path = dir.abs( "data/export.dat" ) ;
-  const std::string
-      output = poptea.thermalData->prettyPrint(
-        poptea.coreSystem->TBCsystem.coating ) ;
-  tools::interface::exportfile( path , output ) ;
 
   return poptea;
 }
@@ -100,5 +98,5 @@ void demo( const filesystem::directory dir )
 
   poptea.optimization();
 }
-}}
 
+}}
