@@ -96,10 +96,12 @@ void ThermalSweepOptimizer::
 
   ///Load these unknownParameters into the popteaCore and thermalData kernals
   xSweep = updateVal( xSweep ) ;
-  const double lmin = xSweep.first;
-  const double lmax = xSweep.second;
-  const physicalModel::layer coatingUpdate( coreSystem->TBCsystem.coating );
-  ThermalData updatedThermal( sliceThermalData( lmin, lmax, coatingUpdate ) ) ;
+
+  const double xCenter = xSweep.first ;
+  const double xRange = xSweep.second ;
+  const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating );
+
+  ThermalData updatedThermal = sliceThermalData( xCenter, xRange, coatUpdate ) ;
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
@@ -119,43 +121,87 @@ void ThermalSweepOptimizer::
       }
     }
 
+    error += penalty( xSweep );
+
     fvec[i] = error ;
     i++;
   }
 
-
-
-
-  updatedLimits =
-  updatedThermal.get_lthermalLimits(coatingUpdate);
-  std::cout.setf( std::ios::fixed, std::ios::floatfield );
-  std::cout << std::setprecision(3);
-  std::cout << "*-----------------------------------------*\n";
-  std::cout << "| Data ctr: "<< std::setw(8) << std::right
-            << lmin << "                      |\n";
-  std::cout << "| Data used:"<< std::setw(8) << std::right
-            << lmax*100 << "%                     |\n";
-  std::cout << "| lmin:     "<< std::setw(8) << std::right
-            << updatedLimits.first << "                      |\n";
-  std::cout << "| lmax:     "<< std::setw(8) << std::right
-            << updatedLimits.second << "                      |\n";
-  std::cout << "*-----------------------------------------*\n";
-
   return;
 }
-
-
 
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
   intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
                             bestfitMethod );
 
-  const std::string prettyResults = unknownParameters->prettyPrint()  ;
   for(size_t i = 0; i < 60 ; i ++)
     std::cout << "\n";
-  std::cout <<prettyResults ;
+  std::cout <<unknownParameters->prettyPrint() ;
+  std::cout << prettyPrintThermalRange( coreSystem->TBCsystem.coating ) ;
+
 }
+
+std::string ThermalSweepOptimizer::prettyPrintThermalRange(
+    const physicalModel::layer coatUpdate )
+{
+  const double xCenter = xSweep.first ;
+  const double xRange = xSweep.second ;
+
+  std::ostringstream output ;
+
+  updatedLimits =
+  thermalData->get_lthermalLimits( coatUpdate ) ;
+
+  output.setf( std::ios::fixed, std::ios::floatfield );
+  output << std::setprecision(3);
+  output << "*-----------------------------------------*\n";
+  output << "| Data ctr: "<< std::setw(8) << std::right
+         << xCenter << "                      |\n";
+  output << "| Data used:"<< std::setw(8) << std::right
+         << xRange*100 << "%                     |\n";
+  output << "| lmin:     "<< std::setw(8) << std::right
+         << updatedLimits.first << "                      |\n";
+  output << "| lmax:     "<< std::setw(8) << std::right
+         << updatedLimits.second << "                      |\n";
+  output << "*-----------------------------------------*\n";
+
+  return output.str() ;
+}
+
+
+
+double ThermalSweepOptimizer::penalty(
+    const std::pair<double, double>  thermalCenterRange )
+{
+  const double center = thermalCenterRange.first;
+  const double range = thermalCenterRange.second;
+
+  const double strPos = center - range/2;
+  const double endPos = center + range/2;
+
+  double error = 0;
+
+  if( strPos < 0 || endPos > 1  )
+  {
+    double errorModifier = 0;
+    if ( strPos < 0 )
+    {
+      errorModifier = strPos ;
+    }
+    else if ( endPos > 1 )
+    {
+      errorModifier = endPos - 1 ;
+    }
+
+    error += pow( std::abs( floor( errorModifier*100 ) ) , 2 ) ;
+  }
+
+  return error;
+}
+
+
+
 
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
 {
@@ -208,7 +254,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 {
   // Establish omegas limits of full range (FR) experimental data
   std::pair<double, double> omegaLimits =
-      fullRangeThermalData->get_omegaLimits(  ) ;
+      fullRangeThermalData->get_omegaLimits( ) ;
 
   std::vector<double> omegasMonoIncreasing( fullRangeThermalData->size() ) ;
   std::reverse_copy(
@@ -226,7 +272,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
     &omegasMonoIncreasing[0] , &emissionReversed[0],
       omegasMonoIncreasing.size() ) ;
 
-  // Use omega to derive current lthermalsLimits that correspond to FR
+  // Use omega to derive current lthermalsLimits that correspond to FullRange
   const double coatingLength = updatedCoating.depth;
   const double coatingK = updatedCoating.kthermal.offset;
   const double coatingPsi = updatedCoating.psithermal.offset;

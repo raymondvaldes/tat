@@ -19,7 +19,7 @@
 		<gtol>1e-08</gtol>
 		<maxfev>100000</maxfev>
 		<epsfcn>0.0001</epsfcn>
-		<factor>10</factor>
+		<factor>1</factor>
 		<mode>1</mode>
 		<nprint>0</nprint>
 	</ParaEstSettings>
@@ -76,11 +76,12 @@
 		</parameters>
 
 		<unknownParameters>
+			
 			<unknown>
 				<label>thermalCenter</label>
-				<min>.1</min>
-				<max>.9</max>
-				<initialGuess>.5</initialGuess>
+				<min>.2</min>
+				<max>.8</max>
+				<initialGuess>.55</initialGuess>
 			</unknown>
 
 			<unknown>
@@ -89,6 +90,8 @@
 				<max>1</max>
 				<initialGuess>.8</initialGuess>
 			</unknown>		
+			
+			
 		</unknownParameters>
 	</optimizationSweep>
 	
