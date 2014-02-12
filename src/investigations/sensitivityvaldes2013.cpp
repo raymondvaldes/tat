@@ -32,6 +32,7 @@ License
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/emission/noise.hpp"
 #include "math/statistical_tools.hpp"
+#include "tools/interface/exportfile.hpp"
 
 namespace investigations
 {
@@ -42,9 +43,45 @@ void run( const filesystem::directory dir )
 {
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 
+  poptea.bestFit();
+//  poptea.parameterIntervalEstimates();
   poptea.optimization();
 
   return;
+}
+
+thermal::analysis::Poptea
+initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
+{
+  ///Initialize kernals
+  const thermal::analysis::Kernal
+      popteaCore = thermal::analysis::loadWorkingDirectoryKernal(dir);
+  thermal::analysis::Poptea
+      poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
+
+  //Noise in Simulated Emission
+  const thermal::emission::ExpNoiseSetting myEmissionNoise =
+  thermal::emission::ExpNoiseSetting::loadExpNoiseFile( dir );
+
+  ///Output noise to test
+  std::vector<double> emissionNominal =
+      thermal::emission::phase99( *(poptea.coreSystem) ,
+                                  poptea.thermalData->omegas ) ;
+
+  const std::vector<double> emissionExperimental = thermal::emission::
+      addNoise( emissionNominal, poptea.thermalSweep(), myEmissionNoise ) ;
+
+  poptea.updateExperimentalData( poptea.thermalData->omegas ,
+                                 emissionExperimental ) ;
+
+  dir.mkdir( "data" ) ;
+  const std::string path = dir.abs( "data/export.dat" ) ;
+  const std::string
+      output = poptea.thermalData->prettyPrint(
+        poptea.coreSystem->TBCsystem.coating ) ;
+  tools::interface::exportfile( path , output ) ;
+
+  return poptea;
 }
 
 void demo( const filesystem::directory dir )
@@ -63,39 +100,5 @@ void demo( const filesystem::directory dir )
 
   poptea.optimization();
 }
-
-thermal::analysis::Poptea
-initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
-{
-  ///Initialize kernals
-  const thermal::analysis::Kernal
-      popteaCore = thermal::analysis::loadWorkingDirectoryKernal(dir);
-  thermal::analysis::Poptea
-      poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
-
-  //Noise in Simulated Emission
-  constexpr double a =  .01;        // max % error (%*pi/2) (try .025)
-  constexpr double b = 2.95;        // stretching parameter  (try 2.95) (1->pi)
-  constexpr bool d1 = true;         //positive  (try false)
-  constexpr bool d2 = true;         //monotonic (try true)
-  constexpr int s1 = 0;             //-1(left bias) 0(symmetric) +1(right bias)
-  constexpr double noiseRandom = 0.0005;              // normal noise % of pi/2
-  const thermal::emission::ExpNoiseSetting
-      myEmissionNoise( a, b, d1, d2, s1, noiseRandom );
-
-  ///Output noise to test
-  std::vector<double> emissionNominal =
-      thermal::emission::phase99( *(poptea.coreSystem) ,
-                                  poptea.thermalData->omegas ) ;
-
-  const std::vector<double> emissionExperimental = thermal::emission::
-      addNoise( emissionNominal, poptea.thermalSweep(), myEmissionNoise ) ;
-
-  poptea.updateExperimentalData( poptea.thermalData->omegas ,
-                                 emissionExperimental ) ;
-  return poptea;
-}
-
-
 }}
 

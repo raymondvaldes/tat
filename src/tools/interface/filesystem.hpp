@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||                   |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -22,39 +22,31 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <boost/filesystem.hpp>
+#ifndef FILESYSTEM_HPP_INCLUDED
+#define FILESYSTEM_HPP_INCLUDED
 
-#include "tools/filesystem.hpp"
+#include <string>
+#include "tools/interface/filesystem.hpp"
 
 namespace filesystem
 {
 
-void makeDir(const std::string rootPath, const std::string newDirectory)
+void makeDir(const std::string rootPath, const std::string newDirectory);
+
+class directory
 {
-    boost::filesystem::path directory(rootPath + "/" +newDirectory);
-    boost::filesystem::create_directory(directory);
-    return;
-}
+private:
+  const std::string workingDirectory;
 
+public:
+  explicit directory(const std::string workingDirectory_);
+  ~directory(void);
 
-directory::directory(const std::string workingDirectory_):
-  workingDirectory(workingDirectory_){}
-
-directory::~directory(void){}
-void directory::mkdir(const std::string newDirectory) const
-{
-  makeDir(workingDirectory,newDirectory);
-}
-
-std::string directory::pwd(void) const
-{
-  return workingDirectory;
-}
-
-std::string directory::abs(const std::string relativePath) const
-{
-  return workingDirectory + "/" + relativePath;
-}
-
+  std::string abs(const std::string relativePath) const;
+  void mkdir(const std::string newDirectory) const;
+  std::string pwd(void) const;
+};
 
 }
+
+#endif // FILESYSTEM_HPP_INCLUDED

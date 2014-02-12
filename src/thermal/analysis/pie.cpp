@@ -91,12 +91,13 @@ void PIE::parameterIntervalEstimates( void )
     const double bestfit = myfixedParameter.bestfit();
     const double lowerbound = myfixedParameter.lowerBound();
     const double upperbound = myfixedParameter.upperBound();
-//    std::cerr << lowerbound << "\t" <<bestfit << "\t" <<upperbound << "\n";
 
     ///search space
     (*unknownParameters)( newListVect ) ;
 
-//   std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<< "\n";
+//    std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<< "\n";
+    constexpr double tol  = 1e-12;
+    assert( fabs( Gfunc( bestfit , mylabel ) )  < tol );
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     const double max = solveFORx( S1, bestfit, upperbound , mylabel, "max" ) ;
 
@@ -123,8 +124,8 @@ double PIE::solveFORx( const double target , const double min, const double max,
 
   const math::solve ojb( myFuncReduced, target, min, max ) ;
   double soln = ojb.returnSoln();
+  //  std::cerr << "warning\t"<< min << "\t" << max << "\t" << target  <<"\n";
 
-//  std::cerr << "warning\t"<< min << "\t" << max << "\t" << target  <<"\n";
 
   if(!ojb.pass)
   {

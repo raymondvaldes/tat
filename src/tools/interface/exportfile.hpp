@@ -1,10 +1,10 @@
 /*----------------------------------------------------------------------------*\
-  ========                |
-     || 	 T Thermal      | TAT: Thermal Analysis Toolbox
-     ||  	 A Analysis     |
-     || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||                   |
--------------------------------------------------------------------------------
+  ========                  |
+     ||     T Thermal       | TAT: Thermal Analysis Toolbox
+     ||     A Analysis      |
+     ||     T Toolbox       | Copyright (C) 2013 Raymond Valdes
+     ||                     |
+--------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
 
@@ -15,24 +15,27 @@ License
 
     Thermal Analysis Toolbox is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+    Public License for more details.
 
     You should have received a copy of the GNU General Public License along with
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef LOG_HPP
-#define LOG_HPP
+
+#ifndef EXPORTFILE_HPP
+#define EXPORTFILE_HPP
+
+#include <string>
 
 namespace tools{
+namespace interface{
+
+
+void exportfile( const std::string fullpath, const std::string input ) ;
 
 
 
+}}
 
-
-
-}
-
-
-#endif // LOG_HPP
+#endif // EXPORTFILE_HPP

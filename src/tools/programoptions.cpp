@@ -97,6 +97,10 @@ bool version(void)
   std::cout << "conditions.  There is NO\n" ;
   std::cout << "warranty; not even for MERCHANTABILITY or FITNESS FOR A" ;
   std::cout << " PARTICULAR PURPOSE.\n\n" ;
+
+  std::cout << "Writted by : \nRaymondValdes\n\n";
+  std::cout << "Constributors:\n";
+  std::cout << "Michael Simeone\n";
   return false;
 }
 

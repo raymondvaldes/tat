@@ -26,7 +26,7 @@ License
 #define SENSITIVITYVALDES2013_HPP
 
 #include "thermal/analysis/kernal.hpp"
-#include "tools/filesystem.hpp"
+#include "tools/interface/filesystem.hpp"
 
 #include "thermal/analysis/poptea.hpp"
 
@@ -35,7 +35,7 @@ namespace investigations
 namespace sensitivityvaldes2013{
 
 void run( const filesystem::directory dir ) ;
-void demo(const filesystem::directory dir) ;
+void demo( const filesystem::directory dir ) ;
 
 thermal::analysis::Poptea
 initializePopTeaAndLoadSimuEmission( const filesystem::directory dir );
