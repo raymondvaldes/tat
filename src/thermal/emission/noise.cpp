@@ -92,5 +92,56 @@ addNoise( const std::vector<double> &emissionNominal_,
   return output;
 }
 
-  }
+
+
+ExpNoiseSetting
+ExpNoiseSetting::initializeObj( const boost::property_tree::ptree pt )
+{
+  //initialize parameter estimation settings
+  const double a1_     = pt.get<double>( "bias-noise" );
+  const double b1_     = pt.get<double>( "stretching-parameter" );
+  const bool d1_     = pt.get<int>( "positive" );
+  const bool d2_   = pt.get<int>( "monotonic" );
+  const int s1_   = pt.get<int>( "bias-side" );
+  const double noiseRandom_   = pt.get<double>( "random-noise" );
+
+  const ExpNoiseSetting output( a1_, b1_, d1_, d2_, s1_, noiseRandom_ ) ;
+
+  return output;
 }
+
+
+ExpNoiseSetting
+ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory dir )
+{
+  const std::string filename = "config/EmissionNoise.xml";
+  const std::string absPath = dir.abs( filename );
+  boost::property_tree::ptree pt;
+  try
+  {
+    boost::property_tree::read_xml( absPath , pt);
+  }
+  catch (std::exception& e)
+  {
+    std::cout << "file " << absPath << " not found! See --help\n";
+    exit(-2);
+  }
+
+  //pass child to settings object
+  using boost::property_tree::ptree;
+  const std::string conjunto = "simulated-emission." ;
+  const ptree ptchild1 = pt.get_child( conjunto + "settings");
+
+
+  return initializeObj( ptchild1 ) ;
+}
+
+
+
+
+
+
+
+
+
+}}
