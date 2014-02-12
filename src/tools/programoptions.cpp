@@ -90,7 +90,7 @@ bool config( std::string& path)
 
 bool version(void)
 {
-  std::cout << "TAT: " ;
+  std::cout << "\nT A T : " ;
   std::cout << "Thermal Analysis Toolbox\n";
   std::cout << "Copyright (C) 2013 Raymond Valdes\n\n" ;
   std::cout << "This is free software; see the source for copying " ;

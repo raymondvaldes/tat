@@ -408,8 +408,8 @@ std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                        const std::pair<double, double> limits )
 {
-  assert( center > 0 && center < 1);
-  assert( range > 0 && range <= 1 );
+  assert( center > 0 && center < 1) ;
+  assert( range > 0 && range <= 1 ) ;
 
   const double min = limits.first;
   const double max = limits.second;
