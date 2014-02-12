@@ -22,3 +22,6 @@ MakeFile
 *.sh#
 # OSX Director information
 *.DS_Store
+
+# Data files
+*.dat
