@@ -26,7 +26,7 @@ License
 #define MANYFIT_HPP
 
 #include <cstddef>
-#include "tools/filesystem.hpp"
+#include "tools/interface/filesystem.hpp"
 #include "thermal/analysis/poptea.hpp"
 
 namespace investigations{
