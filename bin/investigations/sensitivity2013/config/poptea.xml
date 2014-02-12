@@ -31,6 +31,13 @@
 			<max>5</max>
 			<initialGuess>2.328</initialGuess>
 		</unknown>
+
+		<unknown>
+			<label>gammaEff</label>
+			<min>2e-0</min>
+			<max>10</max>
+			<initialGuess>3.768</initialGuess>
+		</unknown>
 		
 		<unknown>
 			<label>E1</label>
@@ -51,19 +58,13 @@
 			<min>0.6</min>
 			<max>1.0</max>
 			<initialGuess>0.794</initialGuess>
-		</unknown>
-		
-		<unknown>
-			<label>gammaEff</label>
-			<min>2e-0</min>
-			<max>10</max>
-			<initialGuess>3.768</initialGuess>
-		</unknown>
-		
+		</unknown>		
 	</unknownParameters>
 	
 	<optimizationSweep>
+		
 		<parameters>
+			
 			<optimizeFor>
 				<label>asub</label>
 			</optimizeFor>
@@ -71,21 +72,22 @@
 			<optimizeFor>
 				<label>gammaEff</label>
 			</optimizeFor>
+						
 		</parameters>
 
 		<unknownParameters>
 			<unknown>
 				<label>thermalCenter</label>
-				<min>0</min>
-				<max>1</max>
+				<min>.1</min>
+				<max>.9</max>
 				<initialGuess>.5</initialGuess>
 			</unknown>
 
 			<unknown>
 				<label>thermalRange</label>
-				<min>0</min>
+				<min>.2</min>
 				<max>1</max>
-				<initialGuess>.90</initialGuess>
+				<initialGuess>.8</initialGuess>
 			</unknown>		
 		</unknownParameters>
 	</optimizationSweep>
