@@ -95,7 +95,6 @@ public:
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
   ~unknownList() ;
 
-  void prettyPrint( void ) const;
   std::string prettyPrint(void) ;
 };
 

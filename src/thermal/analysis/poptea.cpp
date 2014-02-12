@@ -174,11 +174,6 @@ double Poptea::bestFit( void )
   double output=analysis.bestFit( unknownParameters, thermalData, coreSystem );
   unknownParameters->prettyPrint();
 
-//  std::cerr << thermalData->predictedEmission[0]
-//            << "\t"<< thermalData->experimentalEmission[0] << "\t";
-//  std::cerr << thermalData->MSE << "\n";
-//  std::cerr << "reset\n";
-
   return  output;
 }
 
@@ -193,38 +188,17 @@ void Poptea::parameterIntervalEstimates( void )
   /// Precheck experimental data is loaded and there is a bestfit.
   if(!loadedExperimental) { return; }
 
-//  std::vector<double> lthermalsVector(
-//        thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ) ;
-//  for(size_t i=0; i < 5 ; i++ )
-//  {
-//    std::cout << std::setprecision(6)
-//              << lthermalsVector[i] << "\t"
-//              << thermalData->experimentalEmission[i] << "\t"
-//              << thermalData->predictedEmission[i] << "\n" ;
-//  }
-//  std::cout << thermalData->MSE << "\n";
-
   PIE();
-//  unknownParameters->prettyPrint()  ;
 
   const std::string prettyResults = unknownParameters->prettyPrint()  ;
   std::cout << prettyResults ;
-//  std::cout << prettyResults << "\r";
-//  std::cout << prettyResults << "\r";
-
-
-
-  exit(-2);
 }
 
 void Poptea::optimization(void)
 {
   if(!loadedExperimental) { return; }
-//  bestFit();
 
   analysis.optimization( unknownParameters , thermalData, coreSystem);
-
-
 }
 
 
