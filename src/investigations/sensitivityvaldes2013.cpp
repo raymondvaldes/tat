@@ -43,7 +43,8 @@ void run( const filesystem::directory dir )
 {
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 
-  poptea.optimization();
+  poptea.parameterIntervalEstimates();
+//  poptea.optimization();
 
   return;
 }
