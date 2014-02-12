@@ -67,44 +67,6 @@ double Iheat_int(const double Isteady,const double Itransient,
 double tau_0(const double omega);
 double x_bias(const double Xmean, const double Xstddev);
 
-class perturbStruct
-{
-  public:
-    size_t pNum;
-
-    size_t xnumber;  //keep this odd
-    double spread;
-    double lmin1;
-
-    double lmax2;
-    double PtolBand;
-    const double lminRef = 0.2;
-    const double lmaxRef = 0.8;
-    const double lmin2 = .6;
-    const double lmax1 = lmin1;
-
-    size_t iterates;
-    double* xArea;
-    double* lmin;
-    double* lmax;
-    double* temp;
-    double* bands;
-
-    explicit perturbStruct(const size_t a, const size_t b, const double c );
-    explicit perturbStruct(const size_t a, const size_t b, const double c,
-                  const double e, const double h, const size_t i);
-    void lThermalMC();
-    void lthermalDeterministic();
-    void lthermalBands(const double PtolBand1);
-    void cleanup();
-    void cleanup2();
-};
-
-class parameterStr
-{
-public:
-  class thermal::analysis::Kernal *popteaCore;
-};
 
 
 #endif // NUMERICAL_SETUP_H_INCLUDED

@@ -27,7 +27,7 @@ License
 #include <boost/property_tree/xml_parser.hpp>
 
 #include "manyfit.hpp"
-#include "tools/filesystem.hpp"
+#include "tools/interface/filesystem.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/poptea.hpp"

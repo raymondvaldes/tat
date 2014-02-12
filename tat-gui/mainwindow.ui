@@ -14,81 +14,83 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Hi Melissa!</string>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>20</y>
-      <width>281</width>
-      <height>81</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="commandLinkButton">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>430</y>
-      <width>101</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Plot</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>310</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>best fit</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>340</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>pie analysis</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>370</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>optimizer</string>
-    </property>
-   </widget>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;TextLabel&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QCommandLinkButton" name="plot">
+      <property name="text">
+       <string>Plot</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="best_fit">
+      <property name="text">
+       <string>best fit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="pie_analysis">
+      <property name="text">
+       <string>pie analysis</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="optimizer">
+      <property name="text">
+       <string>optimizer</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="whatsThis">
+       <string>temperature scale
+
+</string>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QDial" name="dial">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(94, 207, 255);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QRadioButton" name="radioButton">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QRadioButton" name="radioButton_2">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QRadioButton" name="radioButton_3">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -114,22 +116,19 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="separator"/>
+    <addaction name="actionTAT_Help"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout_TaT"/>
    </widget>
    <addaction name="menuStuff"/>
    <addaction name="menuMore_stuff"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAbout_TaT">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>About TaT</string>
    </property>
@@ -139,8 +138,19 @@
     <string>Run</string>
    </property>
   </action>
+  <action name="actionTAT_Help">
+   <property name="text">
+    <string>TAT Help</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>best_fit</tabstop>
+  <tabstop>pie_analysis</tabstop>
+  <tabstop>optimizer</tabstop>
+  <tabstop>plot</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

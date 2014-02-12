@@ -30,7 +30,7 @@ License
 #include "math/estimation/parameterestimation.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
-#include "tools/filesystem.hpp"
+#include "tools/interface/filesystem.hpp"
 #include "thermal/model.hpp"
 #include "thermal/thermal.hpp"
 
@@ -113,7 +113,7 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 class Kernal
     loadWorkingDirectoryKernal(const class filesystem::directory dir)
 {
-  const std::string filename = "kernal.xml";
+  const std::string filename = "config/kernal.xml";
   boost::property_tree::ptree pt;
   try
   {

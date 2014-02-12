@@ -28,6 +28,7 @@ License
 #include <iostream>
 #include <sstream>
 #include <ios>
+
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
@@ -197,42 +198,18 @@ class unknownList unknownList::
   return unknownListObj;
 }
 
-
-void unknownList::prettyPrint(void) const
-{
-  std::cout << "*-----------------------------------------*\n";
-  std::cout << "| parameter estimate intervals:           |\n";
-  std::cout << "|-----------------------------------------|\n";
-  std::cout << "| min       bestfit    max      error(%)  |\n";
-
-  std::cout.setf( std::ios::fixed, std::ios::floatfield );
-  std::cout << std::setprecision(3);
-  for( const math::estimation::unknown & val : vectorUnknowns )
-  {
-    std::cout << "| "
-              << std::setw(10) << std::left << val.bestfitInterval.lower
-              << std::setw(10) << std::left << val.bestfit()
-              << std::setw(10) << std::left << val.bestfitInterval.upper
-              << std::setw(10) << std::left << 100*val.bestfitIntervalSpread()
-              << "|\n";
-  }
-  std::cout << "*-----------------------------------------*\n";
-}
-
-
 std::string
-unknownList::prettyPrint(void)
+unknownList::prettyPrint( void )
 {
-  std::ostringstream output;
-
+  std::ostringstream output ;
 
   output << "*-----------------------------------------*\n";
   output << "| parameter estimate intervals:           |\n";
   output << "|-----------------------------------------|\n";
   output << "| min       bestfit    max      error(%)  |\n";
 
-  output.setf( std::ios::fixed, std::ios::floatfield );
-  output << std::setprecision(3);
+  output.setf( std::ios::fixed, std::ios::floatfield ) ;
+  output << std::setprecision(3) ;
   for( const math::estimation::unknown & val : vectorUnknowns )
   {
     output << "| "
@@ -242,7 +219,7 @@ unknownList::prettyPrint(void)
               << std::setw(10) << std::left << 100*val.bestfitIntervalSpread()
               << "|\n";
   }
-  output << "*-----------------------------------------*\n";
+  output << "*-----------------------------------------*\n" ;
 
   return output.str() ;
 }

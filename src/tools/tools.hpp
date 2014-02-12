@@ -26,7 +26,7 @@ License
 #define TOOLS_HPP
 
 #include "tools/timing.h"
-#include "tools/filesystem.hpp"
+#include "tools/interface/filesystem.hpp"
 #include "tools/programoptions.hpp"
 
 #endif // TOOLS_HPP

@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <functional>
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <boost/math/tools/roots.hpp>
 #include "math/bisection.hpp"
 #include "math/utility.hpp"
@@ -50,19 +50,27 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
                 const double min_, const double max_)
   : myF(myF_), phi(phi_), min(min_), max(max_)
 {
-  assert(min < max);
+  constexpr double tol  = 0.0001;
 
-  try
+  if( fabs( ( min - max ) / max ) < tol )
   {
-    BisectMethod();
-    pass = true;
+    bestGuess = math::average( min, max ) ;
+    solnTolerance = tol;
+    pass = true ;
   }
-  catch (std::exception const&  ex)
+  else
   {
-//    std::cerr << "\t" <<phi_ << "\t" << min_ << "\t" << max_ << "\n";
-//    std::cerr << "\noutside range or no roots \n\n" << "\n";
-    bestGuess = min;
-    pass = false;
+    assert(min < max) ;
+    try
+    {
+      BisectMethod();
+      pass = true ;
+    }
+    catch ( std::exception const&  ex )
+    {
+      bestGuess = min;
+      pass = false ;
+    }
   }
 }
 
@@ -79,6 +87,7 @@ void solve::BisectMethod(void)
   const std::pair<double, double> result =
       BMT::bisect( myFuncReduced, min, max, tol, maxInt ) ;
 
+  //output
   solnTolerance = abs( result.first - result.second ) ;
   bestGuess = math::average( result.first , result.second ) ;
 }

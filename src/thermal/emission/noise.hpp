@@ -40,12 +40,19 @@ public:
   explicit ExpNoiseSetting( const double a1_, const double b1_,
                             const bool d1_, const bool d2_,
                             const int s1_, const double noiseRandom_);
+
+  static ExpNoiseSetting initializeObj( const boost::property_tree::ptree pt ) ;
+  static ExpNoiseSetting loadExpNoiseFile( const filesystem::directory dir ) ;
 };
+
+
+
+
 
 std::vector<double>
 addNoise( const std::vector<double> &emissionNominal_,
           const std::vector<double> &lthermal,
-          const class thermal::emission::ExpNoiseSetting &para );
+          const thermal::emission::ExpNoiseSetting &para );
 /*
 a is the magnitude of the error at the edges of the range
 b is the stretching parameter that ranges from 1 < b < pi (use around 3)
@@ -53,6 +60,7 @@ c is the location of the center and set it to 0.5.
 d is the orientation options
 d1 true (positive)
 d2 true (monotonically)
+s1 is //-1(left bias) 0(symmetric) +1(right bias)
 
 This function needs an emissionProfile already established. This is the
 nominal emission profile used for the simulation. The EXPERIMENTAL EMISSION

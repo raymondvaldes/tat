@@ -118,6 +118,7 @@ void ThermalSweepOptimizer::
         error = unknown.bestfitIntervalSpread();
       }
     }
+
     fvec[i] = error ;
     i++;
   }
@@ -139,13 +140,6 @@ void ThermalSweepOptimizer::
   std::cout << "| lmax:     "<< std::setw(8) << std::right
             << updatedLimits.second << "                      |\n";
   std::cout << "*-----------------------------------------*\n";
-
-  if(nfev == 0)
-  {
-    std::cout << "Press <ENTER> to continue.\n";
-    std::cin.get();
-//    std::cout << "Please wait...\n";
-  }
 
   return;
 }
