@@ -25,6 +25,8 @@ License
 #ifndef THERMALDATA_HPP
 #define THERMALDATA_HPP
 
+#include <sstream>
+
 #include "math/estimation/parameterestimation.hpp"
 
 namespace thermal {
@@ -64,8 +66,8 @@ public:
   get_lthermalSweep( const physicalModel::layer &coating ) const;
   std::pair<double, double>
   get_lthermalLimits( const physicalModel::layer &coating) const;
-  std::pair<double, double>
-  get_omegaLimits(void) const;
+  std::pair<double, double> get_omegaLimits( void ) const ;
+  std::string prettyPrint( const physicalModel::layer &coating ) ;
 
   //modify data
   void updateExperimental( const std::vector<double> &input );

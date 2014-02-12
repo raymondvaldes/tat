@@ -140,12 +140,12 @@ void ThermalSweepOptimizer::
             << updatedLimits.second << "                      |\n";
   std::cout << "*-----------------------------------------*\n";
 
-  if(nfev == 0)
-  {
-    std::cout << "Press <ENTER> to continue.\n";
-    std::cin.get();
-//    std::cout << "Please wait...\n";
-  }
+//  if(nfev == 0)
+//  {
+//    std::cout << "Press <ENTER> to continue.\n";
+//    std::cin.get();
+////    std::cout << "Please wait...\n";
+//  }
 
   return;
 }
