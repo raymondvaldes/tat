@@ -73,6 +73,7 @@ private:
   std::pair< double, double >
   updateVal(const std::pair<double, double> xSweep) ;
   void pieAnalysis(void);
+  double penalty( const std::pair<double, double>  thermalCenterRange );
 
   // solvers
   void optimizer( int *info, int *nfev );
@@ -98,6 +99,7 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      ) ;
+  std::string prettyPrintThermalRange( const physicalModel::layer coatUpdate ) ;
 };
 
 }}
