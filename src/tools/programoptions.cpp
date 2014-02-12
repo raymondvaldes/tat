@@ -99,8 +99,8 @@ bool version(void)
   std::cout << " PARTICULAR PURPOSE.\n\n" ;
 
   std::cout << "Writted by : \nRaymondValdes\n\n";
-  std::cout << "Constributors:\n";
-  std::cout << "Michael Simeone\n";
+  std::cout << "Contributors:\n";
+  std::cout << "Michael Simeone\n\n";
   return false;
 }
 
