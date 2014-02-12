@@ -130,7 +130,6 @@ SOURCES += \
     tools/timing.cpp \
     models/expEquipment.cpp \
     models/physicalmodel.cpp \
-    tools/configuration.cpp \
     math/bisection.cpp \
     investigations/sensitivityvaldes2013.cpp \
     investigations/manyfit.cpp \
@@ -177,7 +176,6 @@ HEADERS += \
     tools/timing.h \
     models/expEquipment.hpp \
     models/physicalmodel.hpp \
-    tools/configuration.hpp \
     math/bisection.hpp \
     investigations/sensitivityvaldes2013.hpp \
     investigations/manyfit.hpp \
