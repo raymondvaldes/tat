@@ -45,7 +45,7 @@ public:
 std::vector<double>
 addNoise( const std::vector<double> &emissionNominal_,
           const std::vector<double> &lthermal,
-          const class thermal::emission::ExpNoiseSetting &para );
+          const thermal::emission::ExpNoiseSetting &para );
 /*
 a is the magnitude of the error at the edges of the range
 b is the stretching parameter that ranges from 1 < b < pi (use around 3)
