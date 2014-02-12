@@ -43,27 +43,11 @@ void run( const filesystem::directory dir )
 {
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 
-  poptea.parameterIntervalEstimates();
-//  poptea.optimization();
+  poptea.bestFit();
+//  poptea.parameterIntervalEstimates();
+  poptea.optimization();
 
   return;
-}
-
-void demo( const filesystem::directory dir )
-{
-  thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
-
-  for(size_t i =0 ; i < 100; i++)
-    std::cout << "\n";
-
-  poptea.bestFit();
-
-  std::cout << poptea.unknownParameters->prettyPrint();
-  std::cout << "Press <ENTER> to continue.\n";
-  std::cin.get();
-  std::cout << "Please wait...\n";
-
-  poptea.optimization();
 }
 
 thermal::analysis::Poptea
@@ -76,14 +60,8 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
       poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
 
   //Noise in Simulated Emission
-  constexpr double a =  .01;        // max % error (%*pi/2) (try .025)
-  constexpr double b = 2.95;        // stretching parameter  (try 2.95) (1->pi)
-  constexpr bool d1 = true;         //positive  (try false)
-  constexpr bool d2 = true;         //monotonic (try true)
-  constexpr int s1 = 0;             //-1(left bias) 0(symmetric) +1(right bias)
-  constexpr double noiseRandom = 0.0005;              // normal noise % of pi/2
-  const thermal::emission::ExpNoiseSetting
-      myEmissionNoise( a, b, d1, d2, s1, noiseRandom ) ;
+  const thermal::emission::ExpNoiseSetting myEmissionNoise =
+  thermal::emission::ExpNoiseSetting::loadExpNoiseFile( dir );
 
   ///Output noise to test
   std::vector<double> emissionNominal =
@@ -106,6 +84,21 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
   return poptea;
 }
 
+void demo( const filesystem::directory dir )
+{
+  thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 
+  for(size_t i =0 ; i < 100; i++)
+    std::cout << "\n";
+
+  poptea.bestFit();
+
+  std::cout << poptea.unknownParameters->prettyPrint();
+  std::cout << "Press <ENTER> to continue.\n";
+  std::cin.get();
+  std::cout << "Please wait...\n";
+
+  poptea.optimization();
+}
 }}
 
