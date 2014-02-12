@@ -32,6 +32,7 @@ License
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/emission/noise.hpp"
 #include "math/statistical_tools.hpp"
+#include "tools/interface/exportfile.hpp"
 
 namespace investigations
 {
