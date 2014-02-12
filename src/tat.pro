@@ -29,27 +29,38 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
+#CONFIG += static
 CONFIG += c++11
 DEFINES -= UNICODE QT_LARGEFILE_SUPPORT
 QMAKE_CXXFLAGS += -std=c++11
 
 #paths
 unix:!macx{
-INCLUDEPATH += /usr/lib/
-INCLUDEPATH += /usr/include/
+
 LIBS += -L/usr/lib -lgomp
-LIBS += -L/usr/lib -lgsl -lgslcblas -lm
-LIBS += -L/usr/lib -lboost_system -lboost_filesystem -lboost_program_options
+LIBS += -L/usr/lib -lm
+
+INCLUDEPATH += /usr/include/usr/
+DEPENDPATH += /usr/include
+unix:!macx: LIBS += -L/usr/lib/ -lgsl
+unix:!macx: LIBS += -L/usr/lib/ -lgslcblas
+
+
+INCLUDEPATH += /usr/lib/
+DEPENDPATH += /usr/lib/
+unix:!macx: LIBS += -L/usr/lib/ -lboost_filesystem
+unix:!macx: LIBS += -L/usr/lib/ -lboost_program_options
+unix:!macx: LIBS += -L/usr/lib/ -lboost_system
+
+
+
+
 }
 
 macx {
 #CONFIG += MAC_CONFIG
-#QMAKE_CXX = /opt/local/bin/g++
 INCLUDEPATH += /opt/local/lib
 INCLUDEPATH += /opt/local/include
-
-#LIBS += /opt/local/lib -lgsl -lgslcblas -lm
-#LIBS += /opt/local/lib -lboost_system -lboost_filesystem
 
 INCLUDEPATH += opt/local/include
 DEPENDPATH  += opt/local/include
@@ -72,14 +83,17 @@ unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/libboost_system-mt.a
 }
 
 #compiler flags
-#QMAKE_CXXFLAGS += -std=gnu++11 (automatically applied with c++11 flag)
-#QMAKE_CXXFLAGS += -m64 (automatically applied with release)
-#QMAKE_CXXFLAGS += -O3 (automatically applied with release)
+QMAKE_CXXFLAGS += -std=gnu++11 #(automatically applied with c++11 flag)
+QMAKE_CXXFLAGS += -m64 #(automatically applied with release)
+QMAKE_CXXFLAGS += -O3 #(automatically applied with release)
 QMAKE_CXXFLAGS += -fopenmp
 QMAKE_CXXFLAGS += -march=native
 
 #linker flags
 QMAKE_LFLAGS += -fopenmp
+#QMAKE_LFLAGS += -static-libgcc -static-libstdc++
+#QMAKE_LFLAGS += -static
+
 
 ##Optional#########################
 #compiler warnings
@@ -108,13 +122,11 @@ QMAKE_CXXFLAGS += -Wformat=2
 QMAKE_CXXFLAGS += -Wuninitialized
 QMAKE_CXXFLAGS += -flto
 QMAKE_CXXFLAGS += -fwhole-program
-
 ##Optional#########################
 
 #source files
 SOURCES += \
     main.cpp \
-    tools/filesystem.cpp \
     tools/timing.cpp \
     models/expEquipment.cpp \
     models/physicalmodel.cpp \
@@ -141,7 +153,6 @@ SOURCES += \
     math/numIntegration/simpsons_3_8.cpp \
     math/estimation/cosfit.cpp \
     math/numIntegration/gslfunc.cpp \
-    tools/export.cpp \
     thermal/heat/heat2DAna.cpp \
     thermal/analysis/lmdiff_poptea.cpp \
     thermal/analysis/lmdiff_poptea_help.cpp \
@@ -151,17 +162,18 @@ SOURCES += \
     thermal/simulations/Numerical_Setup.cpp \
     thermal/simulations/Numerical_Temperature.cpp \
     thermal/simulations/numericalmodel.cpp \
-    tools/log.cpp \
     tools/version.cpp \
     math/algorithms/combinations.cpp \
     thermal/analysis/methods.cpp \
     thermal/analysis/pie.cpp \
     thermal/analysis/basedata.cpp \
-    thermal/analysis/thermalsweepoptimizer.cpp
+    thermal/analysis/thermalsweepoptimizer.cpp \
+    tools/interface/exportfile.cpp \
+    tools/interface/filesystem.cpp
 
 #header files
 HEADERS += \
-    tools/filesystem.hpp \
+    tools/interface/filesystem.hpp \
     tools/timing.h \
     models/expEquipment.hpp \
     models/physicalmodel.hpp \
@@ -190,7 +202,6 @@ HEADERS += \
     math/numIntegration/simpsons_3_8.hpp \
     math/estimation/cosfit.hpp \
     math/numIntegration/gslfunc.hpp \
-    tools/export.hpp \
     thermal/heat/heat2DAna.hpp \
     thermal/analysis/lmdiff_poptea.hpp \
     thermal/analysis/lmdiff_poptea_help.hpp \
@@ -200,11 +211,17 @@ HEADERS += \
     thermal/simulations/Numerical_Setup.h \
     thermal/simulations/Numerical_Temperature.h \
     thermal/simulations/numericalmodel.hpp \
-    tools/log.hpp \
     tools/tools.hpp \
     tools/version.hpp \
     math/algorithms/combinations.hpp \
     thermal/analysis/methods.hpp \
     thermal/analysis/pie.hpp \
     thermal/analysis/basedata.hpp \
-    thermal/analysis/thermalsweepoptimizer.hpp
+    thermal/analysis/thermalsweepoptimizer.hpp \
+    tools/interface/exportfile.hpp \
+    tools/interface/filesystem.hpp
+
+
+
+
+
