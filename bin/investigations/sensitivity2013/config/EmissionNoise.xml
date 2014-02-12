@@ -7,7 +7,7 @@
 		<positive> 								1 		</positive>
 		<monotonic> 							1 		</monotonic>
 		<bias-side>								0				</bias-side>
-		<random-noise>						.0005				</random-noise>
+		<random-noise>						.0001				</random-noise>
 	</settings>
 
 </simulated-emission>
