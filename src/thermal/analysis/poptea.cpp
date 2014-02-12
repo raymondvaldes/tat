@@ -213,7 +213,7 @@ class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
   }
   catch (std::exception& e)
   {
-    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
+    std::cerr << "file " << dir.abs( filename ) << " not found! See --help\n";
     exit(-2);
   }
 

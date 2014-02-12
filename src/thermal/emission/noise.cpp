@@ -38,7 +38,7 @@ ExpNoiseSetting::ExpNoiseSetting( const double a1_, const double b1_,
 std::vector<double>
 addNoise( const std::vector<double> &emissionNominal_,
           const std::vector<double> &lthermal,
-          const class thermal::emission::ExpNoiseSetting &para )
+          const thermal::emission::ExpNoiseSetting &para )
 
 {
   const double lmin = lthermal.front();
