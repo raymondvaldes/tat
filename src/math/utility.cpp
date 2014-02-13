@@ -260,7 +260,7 @@ void range( std::vector<double>& l_thermal, const double l_min,
 }
 
 std::vector<double>
-rangelog10( const double xstart, const double xend, const size_t size )
+range( const double xstart, const double xend, const size_t size )
 {
   std::vector<double> result( size );
   size_t i = 0;
