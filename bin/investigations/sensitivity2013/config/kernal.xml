@@ -69,6 +69,10 @@
 	<thermalModel>
 		<heatModel>OneDimAnalytical</heatModel>
 		<emissionModel>OneDimNonLin</emissionModel>
+		
+		<simulation>analytical</simulation>
+		<temperatureDep> true </temperatureDep>
+		
 		<mesh>
 			<M2>221</M2>
 			<Rend>20</Rend>
