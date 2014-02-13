@@ -260,7 +260,7 @@ void range( std::vector<double>& l_thermal, const double l_min,
 }
 
 std::vector<double>
-rangelog10( const double xstart, const double xend, const size_t size )
+range( const double xstart, const double xend, const size_t size )
 {
   std::vector<double> result( size );
   size_t i = 0;
@@ -273,36 +273,15 @@ rangelog10( const double xstart, const double xend, const size_t size )
   return result;
 }
 
-void range1og10( const double l_min, const double l_max, const size_t L_end,
-                 std::vector<double> &l_thermal )
+
+std::pair<double, double> xCenterlog10( const double lmin, const double lmax )
 {
-  BOOST_ASSERT_MSG( L_end >= 1 , "check inputs \n\n" );
-  BOOST_ASSERT_MSG( l_min < l_max , "check inputs \n\n" );
-  BOOST_ASSERT_MSG( l_min > 0 , "check inputs \n\n" );
+  const double xlimits = std::log10( lmax / lmin ) ;
+  const double center = lmin * std::pow( 10, xlimits / 2 ) ;
 
-  if (L_end == 1)
-  {
-    l_thermal[0] = l_min;
-  }
-  else if(L_end == 2)
-  {
-    l_thermal[0] = l_min;
-    l_thermal[L_end-1] = l_max;
-  }
-  else if(L_end > 2)
-  {
-    const double start1 = log10(l_min * 10);
-    const double end1   = log10(l_max * 10);
-    const double increments = (end1 - start1) / (L_end -1);
-    double rangeI = start1;
+  const std::pair<double, double> output ( center, xlimits ) ;
 
-    for(size_t n = 0 ; n < L_end-1 ; ++n )
-    {
-      l_thermal[n] = pow(10, rangeI - 1);
-      rangeI += increments;
-    }
-    l_thermal[L_end-1] = l_max;
-  }
+  return output;
 }
 
 std::vector<double>
@@ -316,69 +295,29 @@ range1og10( const double l_min, const double l_max, const size_t L_end )
 
   if (L_end == 1)
   {
-    output[0] = l_min;
+    output[0] = l_min ;
   }
   else if(L_end == 2)
   {
-    output[0] = l_min;
-    output[L_end-1] = l_max;
+    output[0] = l_min ;
+    output[L_end-1] = l_max ;
   }
   else if(L_end > 2)
   {
-    const double start1 = log10(l_min * 10);
-    const double end1   = log10(l_max * 10);
-    const double increments = (end1 - start1) / (L_end -1);
-    double rangeI = start1;
+    const double start1 = std::log10( l_min ) + 1 ;
+    const double end1   = std::log10( l_max ) + 1 ;
+    const double increments = ( end1 - start1 ) / ( L_end - 1 ) ;
+    double rangeI = start1 ;
 
-    for(size_t n = 0 ; n < L_end-1 ; ++n )
+    for(size_t n = 0 ; n < L_end - 1 ; ++n )
     {
-      output[n] = pow(10, rangeI - 1);
-      rangeI += increments;
+      output[n] = pow( 10, rangeI - 1 ) ;
+      rangeI += increments ;
     }
-    output[L_end-1] = l_max;
+    output[L_end-1] = l_max ;
   }
 
   return output;
-}
-
-
-void range1og10(const double l_min, const double l_max, const size_t L_end,
-                double* l_thermal)
-{
-    /*
-    Creates a closed logarithmic distribution from l_min to l_max.
-    log base 10
-    */
-    if( (L_end < 1) || (l_min > l_max) || (equalto(l_min,l_max))
-        || (l_min <= 0))
-    {
-        std::cout << "\nerror in range1og10()";
-        exit(-69);
-    }
-
-    if (L_end == 1)
-    {
-        l_thermal[0] = l_min;
-    }
-    else if(L_end == 2)
-    {
-        l_thermal[0] = l_min;
-        l_thermal[L_end-1] = l_max;
-    }
-    else if(L_end > 2)
-    {
-        const double start1 = log10(l_min * 10);
-        const double end1   = log10(l_max * 10);
-        const double increments = (end1 - start1) / (L_end -1);
-        double rangeI = start1;
-
-        for(size_t n = 0 ; n < L_end-1 ; ++n )
-        {
-            l_thermal[n] = pow(10, rangeI - 1);
-            rangeI += increments;
-        }
-        l_thermal[L_end-1] = l_max;
-    }
 }
 
 double xspread( const double xmin, const double xnominal, const double xmax)
