@@ -60,19 +60,16 @@ void range( double* l_thermal, const double l_min, const double l_max,
             const size_t L_end ) ;
 void range( std::vector<double>& l_thermal, const double l_min,
             const double l_max, const size_t L_end ) ;
-void range1og10( const double l_min, const double l_max, const size_t L_end,
-                 std::vector<double> &l_thermal ) ;
-void range1og10( const double l_min, const double l_max, const size_t L_end,
-                 double* l_thermal ) ;
+
 std::vector<double>
 range1og10( const double l_min, const double l_max, const size_t L_end );
 
 inline double mean(const double a, const double b)
 {
-    double mean1 = a;
-    mean1 +=b;
-    mean1 *=0.5;
-    return mean1;
+    double mean1 = a ;
+    mean1 += b ;
+    mean1 *= 0.5 ;
+    return mean1 ;
 }
 double xspread( const double xmin, const double xnominal, const double xmax);
 
@@ -85,7 +82,8 @@ newThermalSweepLimits( const double center, const double range,
                                 const std::pair<double, double> limits );
 std::pair<double, double>
 CRfromSweepLimits( const double lstart, const double lend,
-                   const std::pair<double, double> limits);
+                   const std::pair<double, double> limits ) ;
+std::pair<double, double> xCenterlog10( const double lmin, const double lmax ) ;
 
 
 
