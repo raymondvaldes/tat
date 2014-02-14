@@ -26,7 +26,6 @@ License
 #define THERMALDATA_HPP
 
 #include <sstream>
-
 #include "math/estimation/parameterestimation.hpp"
 
 namespace thermal {
@@ -38,7 +37,7 @@ private:
   size_t numMeasurements(const double lmin_, const double lmax_);
   void clearVectors(void);
   void resizeVectors( const size_t Lend);
-  const std::pair<double, double> lthermalLimits;
+  std::pair<double, double> lthermalLimits;
 
 public:
   std::vector<double> omegas;
@@ -51,6 +50,9 @@ public:
   //Constructors, destructors and assignment operators
   explicit ThermalData( const double l_min, const double l_max,
                         const size_t lminPerDecarde,
+                        const physicalModel::layer &coating ) ;
+  explicit ThermalData( void ) ;
+  ThermalData& operator = ( const ThermalData& that ) ;
   ~ThermalData();
 
   static class ThermalData
