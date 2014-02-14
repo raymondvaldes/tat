@@ -56,7 +56,7 @@ public:
   static Poptea loadConfig( const Kernal &coreSystem_,
                             const boost::property_tree::ptree &pt ) ;
   static Poptea loadConfigfromFile( const filesystem::directory &dir ) ;
-  ~Poptea( void );
+  ~Poptea( void ) ;
 
   /// Member operations that update on multiple members
   void updateExperimentalData( const std::vector<double> &omegas,
