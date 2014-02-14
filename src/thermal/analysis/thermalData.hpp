@@ -45,7 +45,7 @@ public:
   std::vector<double> experimentalEmission;
   std::vector<double> predictedEmission;
   std::pair<double, double> lthermalPredicted;
-  const size_t measurementsPerDecade;
+  size_t measurementsPerDecade;
   double MSE;
 
   //Constructors, destructors and assignment operators
