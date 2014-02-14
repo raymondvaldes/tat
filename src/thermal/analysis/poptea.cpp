@@ -22,25 +22,8 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <vector>
-#include <functional>
 #include <boost/foreach.hpp>
-
 #include "thermal/analysis/poptea.hpp"
-#include "thermal/analysis/kernal.hpp"
-#include "thermal/analysis/thermalData.hpp"
-#include "thermal/emission/phase99.hpp"
-#include "thermal/analysis/lmdiff_poptea.hpp"
-#include "thermal/analysis/lmdiff_poptea_help.hpp"
-
-#include "math/estimation/parameterestimation.hpp"
-#include "math/estimation/lmdiff.hpp"
-#include "math/estimation/lmdiff_helper.hpp"
-#include "math/utility.hpp"
-#include "math/estimation/constrained.hpp"
-#include "math/algorithms/combinations.hpp"
-
-#include "math/bisection.hpp"
 
 namespace thermal {
 namespace analysis{  
@@ -177,21 +160,15 @@ double Poptea::bestFit( void )
   return  output;
 }
 
-void Poptea::PIE ( void )
+thermal::analysis::PIE::PIEAnalysisOutput Poptea::PIE( void )
 {
-  analysis.parameterIntervalEstimates( unknownParameters , thermalData,
-                                       coreSystem ) ;
-}
+  PIE::PIEAnalysisOutput returnObject =
+      analysis.parameterIntervalEstimates( unknownParameters , thermalData,
+                                           coreSystem ) ;
+  std::cout << returnObject.prettyPrintSearchPath(
+                 physicalModel::labels::Name::asub ) ;
 
-void Poptea::parameterIntervalEstimates( void )
-{
-  /// Precheck experimental data is loaded and there is a bestfit.
-  if(!loadedExperimental) { return; }
-
-  PIE();
-
-  const std::string prettyResults = unknownParameters->prettyPrint()  ;
-  std::cout << prettyResults ;
+  return returnObject;
 }
 
 void Poptea::optimization(void)
@@ -201,8 +178,18 @@ void Poptea::optimization(void)
   analysis.optimization( unknownParameters , thermalData, coreSystem);
 }
 
+std::string Poptea::ppUnknownParameters ( void )
+{
+  return unknownParameters->prettyPrint();
+}
 
-class Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
+std::string Poptea::ppThermalData( void )
+{
+  return thermalData->prettyPrint( coreSystem->TBCsystem.coating ) ;
+}
+
+
+Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
                                          const class Kernal &popteaCore)
 {
   const std::string filename = "config/poptea.xml";

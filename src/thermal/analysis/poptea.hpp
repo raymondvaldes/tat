@@ -26,11 +26,9 @@ License
 #define poptea_HPP
 
 #include <vector>
-#include <utility>
 #include <boost/property_tree/ptree.hpp>
 
-#include "thermal/analysis/kernal.hpp"
-#include "thermal/analysis/thermalData.hpp"
+#include "thermal/analysis/pie.hpp"
 #include "thermal/analysis/methods.hpp"
 
 namespace thermal {
@@ -64,10 +62,13 @@ public:
 
   /// Operations that give results
   double bestFit( void ) ;
-  void PIE ( void );
-  void optimization(void);
-  std::vector<double> thermalSweep(void) const;
-  void parameterIntervalEstimates( void ) ;
+  thermal::analysis::PIE::PIEAnalysisOutput PIE( void ) ;
+  void optimization( void ) ;
+  std::vector<double> thermalSweep( void ) const ;
+
+  /// Printers
+  std::string ppThermalData( void ) ;
+  std::string ppUnknownParameters( void ) ;
 } ;
 
 class Poptea
