@@ -67,14 +67,14 @@ double methods::bestFit(
   return thermalData_in->MSE;
 }
 
-void methods::parameterIntervalEstimates(
+PIE::PIEAnalysisOutput
+methods::parameterIntervalEstimates(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
     const std::shared_ptr< ThermalData > &thermalData_in,
     const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-  intervalEstimates->solve( list_in, thermalData_in, coreSystem_in,
+  return intervalEstimates->solve( list_in, thermalData_in, coreSystem_in,
                             bestfitMethod );
-
 }
 
 void methods::optimization(
