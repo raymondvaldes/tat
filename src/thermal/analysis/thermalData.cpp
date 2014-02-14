@@ -162,7 +162,7 @@ void ThermalData::updateExperimental( const std::vector<double> &input)
 
 
 
-ThermalData& ThermalData::operator=(const ThermalData& that)
+ThermalData& ThermalData::operator=( const ThermalData& that )
 {
   if(this != &that)
   {

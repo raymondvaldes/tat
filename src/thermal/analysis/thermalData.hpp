@@ -49,33 +49,30 @@ public:
   double MSE;
 
   //Constructors, destructors and assignment operators
-  explicit ThermalData( const double l_min,
-                        const double l_max,
+  explicit ThermalData( const double l_min, const double l_max,
                         const size_t lminPerDecarde,
-                        const physicalModel::layer &coating );  
-  ThermalData& operator = (const ThermalData& that);
   ~ThermalData();
 
   static class ThermalData
   loadConfigfromXML( const boost::property_tree::ptree pt,
-                     const physicalModel::layer &coating );
+                     const physicalModel::layer &coating ) ;
 
   //get information
-  size_t size(void) const;
+  size_t size( void ) const;
   std::vector<double>
-  get_lthermalSweep( const physicalModel::layer &coating ) const;
+  get_lthermalSweep( const physicalModel::layer &coating ) const ;
   std::pair<double, double>
-  get_lthermalLimits( const physicalModel::layer &coating) const;
+  get_lthermalLimits( const physicalModel::layer &coating ) const ;
   std::pair<double, double> get_omegaLimits( void ) const ;
   std::string prettyPrint( const physicalModel::layer &coating ) ;
 
   //modify data
-  void updateExperimental( const std::vector<double> &input );
+  void updateExperimental( const std::vector<double> &input ) ;
   size_t thermalSetup( const double lmin, const double lmax,
-                       const physicalModel::layer &coating );
+                       const physicalModel::layer &coating ) ;
   void updatefromBestFit( std::vector< math::estimation::unknown > list,
                           const physicalModel::layer &coating,
-                          const ThermalData fullData);
+                          const ThermalData fullData ) ;
 
 };
 

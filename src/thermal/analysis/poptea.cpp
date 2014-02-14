@@ -127,7 +127,7 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
   }
   catch (std::exception& e)
   {
-    std::cout << "file " << dir.abs( filename1 ) << " not found! See --help\n";
+    std::cerr << "file " << dir.abs( filename1 ) << " not found! See --help\n";
     exit(-2);
   }
   const class Kernal popteaCore = Kernal::loadConfig( pt , dir );
@@ -141,7 +141,7 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
   }
   catch (std::exception& e)
   {
-    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
+    std::cerr << "file " << dir.abs( filename ) << " not found! See --help\n";
     exit(-2);
   }
 
@@ -171,7 +171,7 @@ double Poptea::bestFit( void )
 {
   runbestfit = true;
 
-  double output=analysis.bestFit( unknownParameters, thermalData, coreSystem );
+  double output = analysis.bestFit( unknownParameters, thermalData, coreSystem );
   unknownParameters->prettyPrint();
 
   return  output;

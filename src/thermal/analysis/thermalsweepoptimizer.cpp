@@ -145,8 +145,8 @@ void ThermalSweepOptimizer::pieAnalysis(void)
 std::string ThermalSweepOptimizer::prettyPrintThermalRange(
     const physicalModel::layer coatUpdate )
 {
-  const double xCenter = xSweep.first ;
-  const double xRange = xSweep.second ;
+//  const double xCenter = xSweep.first ;
+//  const double xRange = xSweep.second ;
 
   std::ostringstream output ;
 
