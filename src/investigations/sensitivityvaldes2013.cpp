@@ -39,18 +39,39 @@ namespace investigations
 namespace sensitivityvaldes2013
 {
 
+using namespace thermal::analysis;
+
 void run( const filesystem::directory dir )
 {
-  thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
-  poptea.optimization();
+  /// setup output directory
+  dir.mkdir( "data" ) ;
 
+  ///pie analysis
+  Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
+
+  poptea.PIE();
+
+
+
+//  for( PIE::SearchData& searchData : PIEoutput)
+//  {
+//    if ( searchData.param == physicalModel::labels::Name::asub ||
+//         searchData.param == physicalModel::labels::Name::gammaEff )
+//    {
+//      std::cout << searchData.pprint();
+//    }
+//  }
+
+  std::cout << poptea.ppUnknownParameters();
 
   ///output results
-  dir.mkdir( "data" ) ;
-  const std::string path = dir.abs( "data/export.dat" ) ;
-  const std::string output = poptea.thermalData->prettyPrint(
-        poptea.coreSystem->TBCsystem.coating ) ;
-  tools::interface::exportfile( path , output ) ;
+  const std::string pathThermalData = dir.abs( "data/pieAnalysis_data.dat" ) ;
+  const std::string thermalOutput = poptea.ppThermalData();
+  tools::interface::exportfile( pathThermalData , thermalOutput ) ;
+
+  const std::string pathThermalTbl = dir.abs( "data/pieAnalysis_table.dat" ) ;
+  const std::string tableParameters = poptea.ppUnknownParameters();
+  tools::interface::exportfile( pathThermalTbl , tableParameters ) ;
 
   return;
 }

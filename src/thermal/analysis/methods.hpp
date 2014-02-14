@@ -63,7 +63,8 @@ public:
       const std::shared_ptr< ThermalData > &thermalData_in,
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
 
-  void parameterIntervalEstimates(
+  PIE::PIEAnalysisOutput
+  parameterIntervalEstimates(
       const std::shared_ptr< math::estimation::unknownList > &list_in,
       const std::shared_ptr< ThermalData > &thermalData_in,
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
