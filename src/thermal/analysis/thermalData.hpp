@@ -64,7 +64,6 @@ public:
   std::pair<double, double>
   get_lthermalLimits( const physicalModel::layer &coating ) const ;
   std::pair<double, double> get_omegaLimits( void ) const ;
-  std::string prettyPrint( const physicalModel::layer &coating ) ;
 
   //modify data
   void updateExperimental( const std::vector<double> &input ) ;
@@ -74,6 +73,8 @@ public:
                           const physicalModel::layer &coating,
                           const ThermalData fullData ) ;
 
+  //printer
+  std::string prettyPrint( const physicalModel::layer &coating ) ;
 };
 
 
