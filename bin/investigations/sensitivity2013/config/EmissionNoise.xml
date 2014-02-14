@@ -2,12 +2,12 @@
 <simulated-emission>
 	
 	<settings>		
-		<bias-noise>							0			</bias-noise>
+		<bias-noise>							.02			</bias-noise>
 		<stretching-parameter>		2.95		</stretching-parameter>
 		<positive> 								1 		</positive>
 		<monotonic> 							1 		</monotonic>
 		<bias-side>								0				</bias-side>
-		<random-noise>						.00001				</random-noise>
+		<random-noise>						.005				</random-noise>
 	</settings>
 
 </simulated-emission>

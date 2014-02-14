@@ -81,14 +81,14 @@
 				<label>thermalCenter</label>
 				<min>.2</min>
 				<max>.8</max>
-				<initialGuess>.55</initialGuess>
+				<initialGuess>.5</initialGuess>
 			</unknown>
 
 			<unknown>
 				<label>thermalRange</label>
 				<min>.2</min>
 				<max>1</max>
-				<initialGuess>.8</initialGuess>
+				<initialGuess>.9</initialGuess>
 			</unknown>		
 			
 			
