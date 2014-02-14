@@ -35,6 +35,9 @@ License
 namespace thermal {
 namespace analysis{
 
+ThermalData::ThermalData(void)
+{}
+
 ThermalData::ThermalData( const double l_min, const double l_max,
                           const size_t lminPerDecarde,
                           const physicalModel::layer &coating )
@@ -169,7 +172,10 @@ ThermalData& ThermalData::operator=( const ThermalData& that )
     omegas = that.omegas;
     experimentalEmission = that.experimentalEmission;
     predictedEmission = that.predictedEmission;
+    lthermalPredicted = that.lthermalPredicted;
+    measurementsPerDecade = that.measurementsPerDecade;
     MSE = that.MSE;
+    lthermalLimits = that.lthermalLimits;
   }
   return *this;
 }
