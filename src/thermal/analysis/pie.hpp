@@ -36,16 +36,44 @@ namespace analysis{
 
 class PIE: private baseData
 {
+public:
+  class PIEAnalysisOutput
+  {
+    public:
+    class SearchData
+    {
+      public:
+      physicalModel::labels::Name param;
+      std::vector< std::pair< double, ThermalData > > allThermalData;
+      std::string pprint( void );
+    };
+
+    /// struct SearchData dataTempStorage;
+    std::vector< SearchData > searchPath;
+
+    /// Post-PIE analysis methods
+    SearchData retrieveSearchData(const physicalModel::labels::Name input ) ;
+    std::string prettyPrintSearchPath( const physicalModel::labels::Name input);
+    void clear( void ) ;
+  };
+
+
+  explicit PIE( void ) ;
+  ~PIE( ) ;
+
+  PIEAnalysisOutput
+  solve( const std::shared_ptr< math::estimation::unknownList > &list_in,
+         const std::shared_ptr< ThermalData > &thermalData_in,
+         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in,
+         const std::shared_ptr< LMA > bestfitMethod_in ) ;
+
 private:
+  /// Heavy duty workers
   std::shared_ptr< LMA > bestfitMethod;
   double bestFit();
-
-  std::vector<double>SAVEExperimental;
-  std::vector<double>SAVEpredictions;
-  std::vector<double>SAVEomega;
-
   void parameterIntervalEstimates( void ) ;
 
+  /// worker methods
   double Gfunc( const double x , const physicalModel::labels::Name &mylabel ) ;
   void updateExperimentalData( const std::vector<double> &input,
                                ThermalData &thermalData_in ) ;
@@ -54,16 +82,13 @@ private:
   double solveFORx( const double target , const double min, const double max,
                     const physicalModel::labels::Name mylabel,
                     const std::string &bound ) ;
-
-public:
-  explicit PIE(void ) ;
-  void solve( const std::shared_ptr< math::estimation::unknownList > &list_in,
-              const std::shared_ptr< ThermalData > &thermalData_in,
-              const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in,
-              const std::shared_ptr< LMA > bestfitMethod_in ) ;
-  ~PIE();
+  PIEAnalysisOutput ouputResults;
+  PIEAnalysisOutput::SearchData dataTempStorage;
+  /// TO BO REMOVED
+  std::vector<double>SAVEExperimental;
+  std::vector<double>SAVEpredictions;
+  std::vector<double>SAVEomega;
 };
 
 }}
-
 #endif // PIE_HPP

@@ -22,6 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <utility>
 #include "thermal/analysis/pie.hpp"
 #include "math/algorithms/combinations.hpp"
 //#include "math/estimation/utils.hpp"
@@ -34,6 +35,26 @@ PIE::PIE( void )
 
 PIE::~PIE(){}
 
+std::string PIE::PIEAnalysisOutput::SearchData::pprint( void )
+{
+  std::ostringstream output ;
+
+  output << "%*-----------------------------------------*\n" ;
+  output << "%| Search Path for PIE Analysis:           |\n" ;
+  output << "%|-----------------------------------------|\n" ;
+  output << "%| xSet    Quality-of-fit                  |\n" ;
+
+  output.setf( std::ios::fixed, std::ios::floatfield ) ;
+  output << std::setprecision(3) ;
+  for( const std::pair< double, ThermalData > & pair : allThermalData )
+  {
+    output << pair.first << "\t"
+           << pair.second.MSE << "\n";
+  }
+  output << "%*-----------------------------------------*\n" ;
+
+  return output.str() ;
+}
 
 double PIE::bestFit()
 {
@@ -42,11 +63,46 @@ double PIE::bestFit()
 }
 
 
-void PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
-                 const std::shared_ptr<ThermalData> &thermalData_in,
-                 const std::shared_ptr<Kernal> &coreSystem_in,
-                 const std::shared_ptr<LMA> bestfitMethod_in )
+PIE::PIEAnalysisOutput::SearchData PIE::PIEAnalysisOutput::
+retrieveSearchData( const physicalModel::labels::Name input )
 {
+  SearchData myOutput;
+
+  for( const SearchData&val : searchPath )
+  {
+    if( input == val.param )
+    {
+      myOutput = val;
+      break;
+    }
+  }
+
+  return myOutput;
+}
+
+std::string PIE::PIEAnalysisOutput::
+prettyPrintSearchPath( const physicalModel::labels::Name input )
+{
+  SearchData myData = retrieveSearchData( input );
+  const std::string output = myData.pprint() ;
+
+  return output;
+}
+
+
+void PIE::PIEAnalysisOutput::clear( void )
+{
+  searchPath.clear();
+}
+
+PIE::PIEAnalysisOutput 
+PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
+            const std::shared_ptr<ThermalData> &thermalData_in,
+            const std::shared_ptr<Kernal> &coreSystem_in, 
+            const std::shared_ptr<LMA> bestfitMethod_in )
+{
+  ouputResults.clear();
+
   unknownParameters = list_in ;
   thermalData = thermalData_in ;
   coreSystem = coreSystem_in ;
@@ -54,6 +110,8 @@ void PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
 
   bestFit();
   parameterIntervalEstimates();
+
+  return ouputResults;
 }
 
 void PIE::parameterIntervalEstimates( void )
@@ -101,16 +159,23 @@ void PIE::parameterIntervalEstimates( void )
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     const double max = solveFORx( S1, bestfit, upperbound , mylabel, "max" ) ;
 
-    originalListParams[i++].bestfitIntervalset( min, max);
+    originalListParams[i].bestfitIntervalset( min, max) ;
+
+
+    ///save search data for later analysis
+    dataTempStorage.param = mylabel ;        
+    ouputResults.searchPath.push_back( dataTempStorage ) ;
+    dataTempStorage.allThermalData.clear();
+
+    ///iterate
+    i++;
   }
-//  std::cerr << "\n";
 
   ///Update list of parameters with updated list
   (*unknownParameters)( originalListParams );
 
   reloadExperimental();
   thermalData->MSE = S1;
-//  std::cerr << S1 << "\n";
 }
 
 double PIE::solveFORx( const double target , const double min, const double max,
@@ -120,20 +185,14 @@ double PIE::solveFORx( const double target , const double min, const double max,
   const std::function<double(double)>
       myFuncReduced = std::bind( &PIE::Gfunc, this , std::placeholders::_1,
                                  mylabel ) ;
-//  std::cerr << "gogogoogogogogog  \n";
-
   const math::solve ojb( myFuncReduced, target, min, max ) ;
   double soln = ojb.returnSoln();
-  //  std::cerr << "warning\t"<< min << "\t" << max << "\t" << target  <<"\n";
-
 
   if(!ojb.pass)
   {
     if( bound == "min" ) soln = min;
     if( bound == "max" ) soln = max;
-//    std::cerr << "warning  ";
   }
-//  std::cerr << "end with " << soln << "\n";
 
   return soln;
 }
@@ -166,6 +225,10 @@ double PIE::Gfunc( const double val ,
   coreSystem->TBCsystem.updateCoat() ;
 
   bestFit() ;
+
+  std::pair<double, ThermalData> saveThis( val, *thermalData ) ;
+  dataTempStorage.allThermalData.push_back( saveThis ) ;
+
   return thermalData->MSE;
 }
 
