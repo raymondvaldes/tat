@@ -32,8 +32,8 @@ namespace math{
 void cosfit(double **dependent, const double *independent, double *x, int j,
             double omega1, int Nend)
 {
-    constexpr size_t N = 3; // number  of constants to be fitted
-    const size_t P = Nend-1; //number of datapoints to be used in the fitting process
+    const int N = 3; // number  of constants to be fitted
+    const int P = Nend-1; //number of datapoints to be used in the fitting process
     constexpr double ftol = 1.e-13;
     constexpr double xtol = 1.e-13;
     constexpr double gtol = 1.e-13;
@@ -143,7 +143,7 @@ void cosfit(double *dependent,const std::vector<double> &independentVec,
 
 
     constexpr size_t N = 3; // number  of constants to be fitted
-    const size_t P = Nend-1;
+    const int P = Nend-1;
     //number of datapoints to be used in the fitting process
     constexpr double ftol = 1.e-10;
     constexpr double xtol = 1.e-10;

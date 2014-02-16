@@ -193,7 +193,8 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
         EmissionTime[n] = emissionVolumetric2D( Temperature[n] );
     }
 
-    math::estimation::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
+    math::estimation::cosfit( EmissionTime, mesh.tau, OAPemission,
+                              static_cast<int>(mesh.Nend) ) ;
 
     return OAPemission[2];
 }
@@ -221,7 +222,8 @@ double Emission::phase1D(const class Temperature Tprofile) const
 
     double OAPemission[3] = {offsetInitial, amplitudeInitial, phaseInitial};
 
-    math::estimation::cosfit(EmissionTime, mesh.tau, OAPemission, mesh.Nend);
+    math::estimation::cosfit(EmissionTime, mesh.tau, OAPemission,
+                             static_cast<int>(mesh.Nend) );
 
     return OAPemission[2];
 }
