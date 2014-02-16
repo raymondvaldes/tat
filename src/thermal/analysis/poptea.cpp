@@ -165,8 +165,8 @@ thermal::analysis::PIE::PIEAnalysisOutput Poptea::PIE( void )
   PIE::PIEAnalysisOutput returnObject =
       analysis.parameterIntervalEstimates( unknownParameters , thermalData,
                                            coreSystem ) ;
-  std::cout << returnObject.prettyPrintSearchPath(
-                 physicalModel::labels::Name::asub ) ;
+//  std::cout << returnObject.prettyPrintSearchPath(
+//                 physicalModel::labels::Name::asub ) ;
 
   return returnObject;
 }

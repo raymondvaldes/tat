@@ -140,7 +140,7 @@ void Mesh::minimizer(double *variable, double *constants,
     variable[0] = temp_variable_min+fraction;
     temp_to_minimize[0] = beta2_func(variable,constants);
 
-    for(size_t for_j=1 ; for_j <= max_iterations ; for_j++ )
+    for( int for_j=1 ; for_j <= max_iterations ; for_j++ )
     {
       variable[0]+=fraction;
       temp_to_minimize[for_j]= beta2_func(variable,constants);

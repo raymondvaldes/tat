@@ -60,16 +60,16 @@ bool loadOptions( int argc, char** argv, std::string& path )
 
   po::notify( vm ) ;
 
-  if (vm.count("help"))
+  if( vm.count( "help" ) )
     { run = help(desc) ; }
 
-  if (vm.count("config"))
+  if( vm.count( "config" ) )
     { run = config(path) ; }
 
-  if (vm.count("version"))
+  if( vm.count( "version" ) )
     { run = version() ; }
 
-  if (vm.count("build"))
+  if( vm.count( "build" ) )
     { run = build() ; }
 
   return run;
