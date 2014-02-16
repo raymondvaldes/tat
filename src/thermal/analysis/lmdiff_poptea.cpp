@@ -96,8 +96,8 @@ class ThermalData
 LMA::paramter_estimation( int *info, int *nfev )
 {
   using namespace math::estimation;
-  const size_t m = thermalData->omegas.size();
-  const size_t n = unknownParameters->size();
+  const int m = static_cast<int>(thermalData->omegas.size());
+  const int n = static_cast<int>(unknownParameters->size());
 
   ///Create workspaces
   double *x = new double[n];
@@ -121,7 +121,7 @@ LMA::paramter_estimation( int *info, int *nfev )
     { x[i] = xInitial[i]; }
 
   scaleDiag( diag, *unknownParameters , coreSystem->TBCsystem,
-             Settings.mode ) ;
+             static_cast<int>(Settings.mode ) ) ;
 
   ///Transform inputs
   int j = 0;
@@ -134,8 +134,10 @@ LMA::paramter_estimation( int *info, int *nfev )
   ///levenberg-marquardt algorithm
   updateBindFunc();
   lmdif( myReduced , m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
-         Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
-         Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4) ;
+         static_cast<int>(Settings.maxfev), Settings.epsfcn, diag,
+         static_cast<int>(Settings.mode), Settings.factor,
+         static_cast<int>(Settings.nprint), info, nfev, fjac, m, ipvt, qtf, wa1,
+         wa2, wa3, wa4 ) ;
 
   //Transform outputs
   j=0;
