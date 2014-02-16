@@ -175,8 +175,8 @@ void matrixTranspose(const size_t P, const size_t N, double*matrix)
     return;
 }
 
-void matrixTranspose(const size_t P, const size_t N, const double*matrix,
-                     double*matrixT)
+void matrixTranspose( const size_t P, const size_t N, const double*matrix,
+                      double*matrixT )
 {
     /*
        N is parameters being estimated

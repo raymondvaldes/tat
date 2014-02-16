@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  		        |
 -------------------------------------------------------------------------------
 License
           This file is part of Thermal Analysis Toolbox.
@@ -34,7 +34,7 @@ namespace math{
 size_t PrecisionToBits(const size_t precision)
 {
   /*Enter the number of decimal precision required*/
-  constexpr double log10of2 = log10(2);
+  const double log10of2 = log10(2);
   const double bits = precision / log10of2;
 
   return ceil(bits);

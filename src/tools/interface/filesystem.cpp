@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  		        |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -31,9 +31,19 @@ namespace filesystem
 
 void makeDir(const std::string rootPath, const std::string newDirectory)
 {
-    boost::filesystem::path directory(rootPath + "/" +newDirectory);
-    boost::filesystem::create_directory(directory);
-    return;
+  
+  const std::string fullpath = rootPath + "/" + newDirectory ;
+  
+  boost::filesystem::path directory( fullpath ) ;
+  
+  try {
+    boost::filesystem::create_directory( directory ) ;
+  } catch (std::exception const& ex) {
+    std::cerr << ex.what() << "\n";
+    std::cerr << fullpath;
+  }
+  
+  return;
 }
 
 
@@ -44,7 +54,7 @@ directory::directory(const std::string workingDirectory_):
 directory::~directory(void){}
 void directory::mkdir(const std::string newDirectory) const
 {
-  if ( ! boost::filesystem::is_directory( abs(newDirectory) ) )
+  if ( ! boost::filesystem::is_directory( abs( newDirectory ) ) )
     makeDir( workingDirectory , newDirectory ) ;
 }
 

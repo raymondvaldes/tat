@@ -41,7 +41,7 @@ double x_ini(const double x_min, const double x_max)
     while (equalto(xini,x_min) || equalto(xini,x_max))
     {
         std::mt19937 gen;
-        gen.seed(std::time(NULL)+rand());
+        gen.seed( std::time(NULL) + rand() ) ;
         std::uniform_real_distribution<> dis(x_min, x_max);
         xini = dis(gen);
     }
@@ -79,7 +79,7 @@ double x_ini(const double x_min, const double x_max, const size_t position,
     while ( math::equalto(xini, xminNew) || math::equalto(xini, xmaxNew) )
     {
         std::mt19937 gen;
-        gen.seed(std::time(NULL)+rand());
+        gen.seed( std::time(NULL) + rand() ) ;
         std::uniform_real_distribution<> dis(xminNew, xmaxNew);
         xini = dis(gen);
     }
@@ -169,7 +169,7 @@ double x_normal(const double Xmean, const double Xstddev)
 {
 //    std::default_random_engine gen;
     std::mt19937 gen;
-    gen.seed(std::time(NULL)+rand());
+    gen.seed(std::time(NULL) + rand()) ;
 
     std::normal_distribution<double> distribution(Xmean,Xstddev);
     return distribution(gen);
