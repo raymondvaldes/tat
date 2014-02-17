@@ -31,6 +31,15 @@ License
 
 namespace math{
 
+double genWseed( const double x_min, const double x_max, const unsigned seed )
+{
+  std::mt19937 gen ;
+  gen.seed( seed ) ;
+  std::uniform_real_distribution<> dis( x_min, x_max ) ;
+  
+  return dis(gen) ;
+}
+  
 double x_ini(const double x_min, const double x_max)
 {
 /*
@@ -38,73 +47,59 @@ double x_ini(const double x_min, const double x_max)
     x_min = minimum value
     x_max = maximum value
 */
-    double xini = x_min ;
-    while (equalto(xini,x_min) || equalto(xini,x_max))
-    {
-        std::mt19937 gen;
-        gen.seed( std::time(NULL) + rand() ) ;
-        std::uniform_real_distribution<> dis(x_min, x_max);
-        xini = dis(gen);
-    }
+  typedef std::chrono::high_resolution_clock myclock;
+  myclock::time_point beginning = myclock::now();
 
-    return xini;
+  double xini = x_min ;
+  while ( equalto( xini,x_min ) || equalto( xini, x_max ) )
+  {
+    myclock::duration d = myclock::now() - beginning;
+    unsigned seed2 = static_cast<unsigned> (d.count() ) ;
+  
+    xini = genWseed( x_min, x_max, seed2 ) ;
+  }
+
+  return xini;
 }
 
-double x_ini(const double x_min, const double x_max, const size_t position,
-             const size_t gN)
+int xINTrandom(const int xmin, const int xmax)
 {
-/*
-    Creates a random parameter between two open bounds
-    x_min = minimum value
-    x_max = maximum value
-
-    In addition, the number will be in a "low", "high" group depending on the gN
-    value.  Example:
-        gN = 2 would create two groups of "low" and "high".
-        gN = 3 would create three groups of "low", "medium", "high" etc.
-    The position will depend on the 'position' argument.
-*/
-
-    if(position  <= 0 || position  > gN)
-    {
-        exit(-99);
-    }
-
-    double xini = x_min;
-    xini += (x_max - x_min) * ( ( position-1 ) / gN ) ;
-
-    double xminNew = xini;
-    double xmaxNew = x_max;
-    xmaxNew -= (x_max - x_min) * ( ( position-1 ) / gN );
-
-    while ( math::equalto(xini, xminNew) || math::equalto(xini, xmaxNew) )
-    {
-        std::mt19937 gen;
-        gen.seed( std::time(NULL) + rand() ) ;
-        std::uniform_real_distribution<> dis(xminNew, xmaxNew);
-        xini = dis(gen);
-    }
-
-    return xini;
+  std::mt19937 gen;
+  typedef std::chrono::high_resolution_clock myclock;
+  myclock::time_point beginning = myclock::now();
+  myclock::duration d = myclock::now() - beginning;
+  unsigned seed = static_cast<unsigned> (d.count() ) ;
+  
+  gen.seed( seed );
+  std::uniform_int_distribution<int> dist( xmin , xmax );
+  
+  return dist(gen);
+  
 }
-
-bool equalto(const double a, const double b)
+  
+double x_normal(const double Xmean, const double Xstddev, const unsigned seed1)
 {
-    const double multi = a > b ? a : b;
-    const double multi2 = multi >= 1 ? multi  : 1;
+  std::mt19937 gen;
+  gen.seed(seed1);
 
-    return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
+  std::normal_distribution<double> distribution(Xmean,Xstddev);
+  return distribution(gen);
 }
 
-bool equalto(const double a, const int b)
+double x_normal(const double Xmean, const double Xstddev)
 {
-    const double multi = a > b ? a : b;
-    const double multi2 = multi > 1 ? multi  : 1;
+  std::mt19937 gen;
+  typedef std::chrono::high_resolution_clock myclock;
+  myclock::time_point beginning = myclock::now();
+  myclock::duration d = myclock::now() - beginning;
+  unsigned seed = static_cast<unsigned> (d.count() ) ;
+  
+  gen.seed( seed ) ;
 
-    return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
+  std::normal_distribution<double> distribution(Xmean,Xstddev);
+  return distribution(gen);
 }
-
-
+  
 double arrayMax(const double* x, const size_t I)
 {
     double maxi = x[0];
@@ -144,38 +139,6 @@ double x_ini10(const double x_ref)
 
 
 
-
-
-size_t xINTrandom(const size_t xmin, const size_t xmax)
-{
-    std::mt19937 gen;
-    gen.seed( std::time( NULL ) + rand() );
-
-    std::uniform_int_distribution<> distribution( xmin , xmax );
-    return distribution(gen);
-}
-
-
-double x_normal(const double Xmean, const double Xstddev, const double seed1)
-{
-//    std::default_random_engine gen;
-    std::mt19937 gen;
-    gen.seed(seed1);
-
-    std::normal_distribution<double> distribution(Xmean,Xstddev);
-    return distribution(gen);
-}
-
-double x_normal(const double Xmean, const double Xstddev)
-{
-//    std::default_random_engine gen;
-    std::mt19937 gen;
-    gen.seed(std::time(NULL) + rand()) ;
-
-    std::normal_distribution<double> distribution(Xmean,Xstddev);
-    return distribution(gen);
-}
-
 double x_bias(const double Xmean, const double Xstddev)
 {
     double xguess = x_normal(Xmean,Xstddev);
@@ -205,7 +168,7 @@ double percentile(const double xmin, const double xmax, const double x)
 
     if( x > xmax || x < xmin)
     {
-        std::cout << "\noutside range linear\n";
+        std::cerr << "\noutside range linear\n";
         exit(-99);
     }
 
@@ -222,22 +185,23 @@ double percentilelog10(const double xmin, const double xmax, const double x)
     constexpr double epsilon = 1e-12;
     if( ( (x-epsilon) > xmax) || ( (x+epsilon) < xmin ) )
     {
-        std::cout << "\n" << xmin << "\t" << xmax << "\t" << x << "\t"
+        std::cerr << "\n" << xmin << "\t" << xmax << "\t" << x << "\t"
         << (x > xmax) << "\t" << (x < xmin) << "\n";
 
-        std::cout << "\noutside range logspace\n";
+        std::cerr << "\noutside range logspace\n";
         exit(-99);
     }
 
 
-    return (log10(x) - log10(xmin)) / (log10(xmax) - log10(xmin));
+  return (std::log10(x) - std::log10(xmin)) /
+         (std::log10(xmax) - std::log10(xmin));
 }
 
 double valFROMpercentileLog10( const double input,  const double xmin,
                                const double xmax )
 {
   assert( input <= 1 && input >=0) ;
-  return xmin * pow( xmax / xmin , input );
+  return xmin * std::pow( xmax / xmin , input );
 }
 
 
@@ -248,16 +212,6 @@ void range( double* l_thermal, const double l_min, const double l_max,
     {
       l_thermal[i] = ( l_max - l_min ) * ( double(i) / ( L_end - 1 ) );
     }
-}
-
-void range( std::vector<double>& l_thermal, const double l_min,
-            const double l_max, const size_t L_end )
-{
-  //Creates equally spaced range from lmin to lmax
-  for(size_t i = 0 ; i <  L_end; ++i)
-  {
-    l_thermal[i] = ( l_max - l_min ) * ( double(i) / (L_end - 1 ) ) ;
-  }
 }
 
 std::vector<double>
