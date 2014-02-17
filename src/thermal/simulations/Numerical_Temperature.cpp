@@ -150,8 +150,8 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
                     MatrixArrays->B2, MatrixArrays->B3, MatrixArrays->B4,
                     k1_thermal, k2_thermal, psi1_thermal, psi2_thermal );
 
-      solveMatrix( static_cast<int>( MatrixArrays->M2 ) , MatrixArrays->A1 ,
-                   MatrixArrays->A2 , MatrixArrays->A3 , MatrixArrays->b ,
+      solveMatrix( MatrixArrays->M2 , MatrixArrays->A1 , MatrixArrays->A2 ,
+                   MatrixArrays->A3 , MatrixArrays->b ,
                    MatrixArrays->Temperature ) ;
 
 

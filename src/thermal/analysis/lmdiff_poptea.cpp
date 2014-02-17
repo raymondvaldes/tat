@@ -45,6 +45,7 @@ LMA_BASE::LMA_BASE( const math::estimation::settings &Settings_,
   : Settings(Settings_), LMA_workspace( Lend_, unknownParameters_.size() )
 {}
 
+LMA_BASE::~LMA_BASE() {}
 
 
 void LMA_BASE::updateBindFunc( void )
@@ -117,7 +118,7 @@ LMA::paramter_estimation( int *info, int *nfev )
 
   for( const auto &unknown : (*unknownParameters)() )
     { xInitial.push_back( unknown.initialVal() ); }
-  for( size_t i=0 ; i< n ; i++ )
+  for( size_t i=0 ; i< static_cast<size_t>(n) ; i++ )
     { x[i] = xInitial[i]; }
 
   scaleDiag( diag, *unknownParameters , coreSystem->TBCsystem,

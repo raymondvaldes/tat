@@ -59,10 +59,10 @@ ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {
 }
 
 std::pair< double, double >
-ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep )
+ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep_in )
 {
-  double thermalCenter = xSweep.first;
-  double thermalRange = xSweep.second;
+  double thermalCenter = xSweep_in.first;
+  double thermalRange = xSweep_in.second;
 
   for( const auto& unknown : thermalSweepSearch() )
   {
@@ -298,7 +298,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 
   const double lmin = slicedThermalLimits.first ;
   const double lmax = slicedThermalLimits.second ;
-  const double lminPerDecarde = fullRangeThermalData->measurementsPerDecade;
+  const size_t lminPerDecarde = fullRangeThermalData->measurementsPerDecade;
 
   // Create vector of lthermals for my slice of data
   ThermalData output( lmin , lmax , lminPerDecarde, updatedCoating ) ;
@@ -360,9 +360,12 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 
   /// Constrained nonlinear parameter estimation
   updateBindFunc() ;
-  lmdif( myReduced, m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
-         Settings.maxfev, Settings.epsfcn, diag, Settings.mode, Settings.factor,
-         Settings.nprint, info, nfev, fjac, m, ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
+  lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
+         Settings.ftol, Settings.xtol, Settings.gtol,
+         static_cast<int>(Settings.maxfev), Settings.epsfcn, diag,
+         static_cast<int>(Settings.mode), Settings.factor,
+         static_cast<int>(Settings.nprint), info, nfev, fjac,
+         static_cast<int>(m), ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
 
   //Transform outputs
   j=0;

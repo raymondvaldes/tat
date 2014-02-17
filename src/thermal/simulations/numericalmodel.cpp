@@ -79,13 +79,13 @@ Mesh::~Mesh()
 
 double Mesh::beta2_func(const double *variable, const double *constants)
 {
-  std::vector<double> eta_(int(constants[1]), 0);
+  std::vector<double> eta_( static_cast<size_t>( constants[1] ) , 0 ) ;
 
   constexpr double L1 = 1; //coating nondimensional thickness
                            //z transformed to eta from 0-L_coat  to 0-1.
   constexpr double L2 = 1; //substrate ....Do not change these parameters.
 
-  const size_t M1_ = constants[4] * ( constants[1] - 1 );
+  const size_t M1_ = static_cast<size_t> (constants[4] * ( constants[1] -1 ) ) ;
 
   for(size_t j = 0; j <= M1_ ; j++)
   {
@@ -124,7 +124,7 @@ void Mesh::minimizer(double *variable, double *constants,
   //    double *temp_to_minimize = new double [max_iterations];
 
   size_t while_j=0;
-  int best_minimum_element = 0;
+  size_t best_minimum_element = 0;
   variable[0] = temp_variable_min;
   //    temp_to_minimize[best_minimum_element] = min_goal*10;
 
@@ -140,7 +140,7 @@ void Mesh::minimizer(double *variable, double *constants,
     variable[0] = temp_variable_min+fraction;
     temp_to_minimize[0] = beta2_func(variable,constants);
 
-    for( int for_j=1 ; for_j <= max_iterations ; for_j++ )
+    for( size_t for_j=1 ; for_j <= max_iterations ; for_j++ )
     {
       variable[0]+=fraction;
       temp_to_minimize[for_j]= beta2_func(variable,constants);
@@ -186,7 +186,7 @@ size_t Mesh::discretizeSpace(const double L_coat, const double L_substrate)
                            //z transformed to eta from 0-L_coat  to 0-1.
   constexpr double L2 = 1; //substrate ....Do not change these parameters.
 
-  const size_t M1_ = split * (M2-1);
+  const size_t M1_ = static_cast<size_t> ( split * ( M2 - 1 ) ) ;
 
 // define eta (computational grid)
   for(size_t j = 0; j <= M1_ ; j++)
