@@ -28,7 +28,7 @@ namespace thermal{
 
 double effusivity( const double k, const double rhoCp )
 {
-  return sqrt(k * rhoCp);
+  return std::sqrt( k * rhoCp ) ;
 }
 
 double diffusivity( const double k, const double rhoCp )
@@ -47,8 +47,8 @@ double lthermal( const double L_coat, const double k_c, const double psi_c,
 {
   double lthermal = k_c;
   lthermal /= psi_c*omega;
-  lthermal = sqrt(lthermal);
   lthermal /= L_coat;
+  lthermal = std::sqrt(lthermal) ;
 
   return lthermal;
 }

@@ -25,7 +25,9 @@ License
 #include <functional>
 #include <iostream>
 #include <cmath>
+
 #include <boost/math/tools/roots.hpp>
+
 #include "math/bisection.hpp"
 #include "math/utility.hpp"
 
@@ -34,8 +36,8 @@ namespace math{
 size_t PrecisionToBits(const size_t precision)
 {
   /*Enter the number of decimal precision required*/
-  const double log10of2 = log10(2);
   const double bits = precision / log10of2;
+  const double log10of2 = std::log10(2) ;
 
   return ceil(bits);
 }
@@ -88,7 +90,7 @@ void solve::BisectMethod(void)
       BMT::bisect( myFuncReduced, min, max, tol, maxInt ) ;
 
   //output
-  solnTolerance = abs( result.first - result.second ) ;
+  solnTolerance = std::abs( result.first - result.second ) ;
   bestGuess = math::average( result.first , result.second ) ;
 }
 
