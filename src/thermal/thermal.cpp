@@ -23,7 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <cmath>
-
+#include "thermal/thermal.hpp"
 namespace thermal{
 
 double effusivity( const double k, const double rhoCp )

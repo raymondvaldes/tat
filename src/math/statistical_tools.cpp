@@ -28,6 +28,7 @@ License
 #include <cstddef>
 #include <iostream>
 
+#include "math/statistical_tools.hpp"
 #include "math/numIntegration/gslfunc.hpp"
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
