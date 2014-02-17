@@ -146,8 +146,8 @@ void Mesh::minimizer(double *variable, double *constants,
       temp_to_minimize[for_j]= beta2_func(variable,constants);
 
       if(
-         fabs(temp_to_minimize[for_j]) >=
-         fabs(temp_to_minimize[for_j-1])
+         std::fabs(temp_to_minimize[for_j]) >=
+         std::fabs(temp_to_minimize[for_j-1])
          ||
          variable[0] >   temp_variable_max)
       {
