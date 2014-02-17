@@ -39,7 +39,7 @@ size_t PrecisionToBits(const size_t precision)
   const double log10of2 = std::log10(2) ;
   const double bits = precision / log10of2 ;
 
-  return ceil(bits);
+  return static_cast<size_t> (std::ceil( bits ) ) ;
 }
 
 

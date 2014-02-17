@@ -185,7 +185,7 @@ double gspatial(double z, double opt, double lambda, double R1, double Iplus0,
 
 
 
-void solveMatrix(const int n, const std::vector<double>& b,
+void solveMatrix(const size_t n, const std::vector<double>& b,
                  const std::vector<double>& d,
                  const std::vector<double>& a,
                  const std::vector<double>& C,
@@ -217,7 +217,7 @@ void solveMatrix(const int n, const std::vector<double>& b,
     }
 
 
-    for (int i = 1 ; i < n  ; i++)
+    for (size_t i = 1 ; i < static_cast<size_t>(n)  ; ++i)
     {
         m1 = -b[i];
         m1 /= dw[i-1];
@@ -232,12 +232,13 @@ void solveMatrix(const int n, const std::vector<double>& b,
     u[n-1] = Cw[n-1];
     u[n-1] /= dw[n-1];
 
-    for (int i = n - 2; i >= 0; i--)
+    for (int si = static_cast<int>(n) - 2 ; si >= 0 ; --si )
     {
-        u[i]  = u[i+1];
-        u[i] *= -a[i];
-        u[i] += Cw[i];
-        u[i] /= dw[i];
+      const size_t i = static_cast<size_t>(si);
+      u[i]  = u[i+1];
+      u[i] *= -a[i];
+      u[i] += Cw[i];
+      u[i] /= dw[i];
     }
 
   delete[] dw;

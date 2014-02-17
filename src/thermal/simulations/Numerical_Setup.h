@@ -30,7 +30,7 @@ License
 double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);
 
-void solveMatrix(const int n, const std::vector<double>& b,
+void solveMatrix(const size_t n, const std::vector<double>& b,
                  const std::vector<double>& d, const std::vector<double>& a,
                  const std::vector<double>& C, std::vector<double>& u);
 

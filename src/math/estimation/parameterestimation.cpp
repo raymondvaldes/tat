@@ -240,8 +240,8 @@ struct settings settings::
     const size_t maxfev   = pt.get<size_t>( "maxfev" );
     const double epsfcn   = pt.get<double>( "epsfcn" );
     const double factor   = pt.get<double>( "factor" );
-    const int mode        = pt.get<int>( "mode" );
-    const int nprint      = pt.get<int>( "nprint" );
+    const size_t mode        = pt.get<size_t>( "mode" );
+    const size_t nprint      = pt.get<size_t>( "nprint" );
 
     class estimation::settings
     ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);

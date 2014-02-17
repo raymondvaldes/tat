@@ -36,7 +36,7 @@ void cosfit(double **dependent, const double *independent, double *x, int j,
             double omega1, int Nend);
 
 void cosfit(double *dependent,const std::vector<double> &independentVec,
-            double *x, int Nend);
+            double *x, size_t Nend);
 
 void cosfcn(int P,int /*N*/,double *x,double *fvec,int */*iflag*/,
             double **variables);

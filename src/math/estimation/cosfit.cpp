@@ -85,17 +85,17 @@ void cosfit(double **dependent, const double *independent, double *x, int j,
         int nfev;
         int info=0;
 
-        for (size_t g = 0; g <P; g++)
+        for (size_t g = 0 ; g < static_cast<size_t>(P) ; ++g )
         {
             newdependent[g]   = dependent[g][j];
             newindependent[g] = g*(independent[1]-independent[0]);
         }
 
-        double *variables[3];
+        double *variables[3] ;
         for(size_t a=0; a<=2 ; ++a)
-            variables[a]=new double [P];
+            variables[a]=new double [P] ;
 
-        for(size_t g = 0; g <P; g++)
+        for(size_t g = 0 ; g <static_cast<size_t>(P) ; g++ )
         {
             variables[0][g] =   newdependent[g];
             variables[1][g] =   newindependent[g];
@@ -130,20 +130,20 @@ void cosfit(double **dependent, const double *independent, double *x, int j,
 }
 
 void cosfit(double *dependent,const std::vector<double> &independentVec,
-            double *x, int Nend)
+            double *x, size_t Nend)
 {
 ///Must replace const double *independent by vector.  However, will create a
 ///new object replace back in.
 
   double*independent = new double[Nend];
-  for(int i=0 ; i< Nend; ++i)
+  for(size_t i=0 ; i< static_cast<size_t>(Nend) ; ++i )
   {
-      independent[i] = independentVec[i];
+      independent[i] = independentVec[i] ;
   }
 
 
     constexpr size_t N = 3; // number  of constants to be fitted
-    const int P = Nend-1;
+    const size_t P = Nend-1;
     //number of datapoints to be used in the fitting process
     constexpr double ftol = 1.e-10;
     constexpr double xtol = 1.e-10;
@@ -215,9 +215,9 @@ void cosfit(double *dependent,const std::vector<double> &independentVec,
         }
         variables[2][0]=0;
 
-        lmdif( &cosfcn1, P, N, x, fvec, variables, ftol, xtol, gtol, maxfev,
-               epsfcn, diag, mode, factor, nprint, &info, &nfev, fjac, P, ipvt,
-               qtf, wa1, wa2, wa3, wa4, wa5);
+        lmdif( &cosfcn1, static_cast<int>(P), N, x, fvec, variables, ftol, xtol,
+               gtol, maxfev, epsfcn, diag, mode, factor, nprint, &info, &nfev,
+               fjac, static_cast<int>(P), ipvt, qtf, wa1, wa2, wa3, wa4, wa5 ) ;
 
         ///Clean Up
         for(size_t a=0; a<=2 ; ++a)
