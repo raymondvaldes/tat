@@ -49,19 +49,9 @@ void run( const filesystem::directory dir )
   ///pie analysis
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 
-  
-  poptea.PIE();
+  poptea.bestFit();
+//  poptea.PIE();
 
-
-
-//  for( PIE::SearchData& searchData : PIEoutput)
-//  {
-//    if ( searchData.param == physicalModel::labels::Name::asub ||
-//         searchData.param == physicalModel::labels::Name::gammaEff )
-//    {
-//      std::cout << searchData.pprint();
-//    }
-//  }
 
   std::cout << poptea.ppUnknownParameters();
 
