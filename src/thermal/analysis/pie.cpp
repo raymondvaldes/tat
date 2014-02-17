@@ -155,7 +155,7 @@ void PIE::parameterIntervalEstimates( void )
 
     //std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
     constexpr double tol  = 1e-12;
-    assert( fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
+  assert( std::fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     const double max = solveFORx( S1, bestfit, upperbound , mylabel, "max" ) ;
 

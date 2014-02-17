@@ -54,7 +54,7 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
 {
   constexpr double tol  = 0.0001;
 
-  if( fabs( ( min - max ) / max ) < tol )
+  if( std::fabs( ( min - max ) / max ) < tol )
   {
     bestGuess = math::average( min, max ) ;
     solnTolerance = tol;

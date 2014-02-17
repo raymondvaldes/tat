@@ -136,7 +136,7 @@ double SOR(double **A, double *b,const size_t n,double *phi, double omega,
 		}
 
         for (size_t i=0;i<n;i++)
-            errorphi[i] = fabs( phi[i] - phi_n[i] )/phi[i] ; // convergence check
+          errorphi[i] = std::fabs( phi[i] - phi_n[i] )/phi[i] ; // convergence check
         errorphimax = errorphi[0];       // start with max = first element
         for(size_t i = 1; i<n; i++)
         {
