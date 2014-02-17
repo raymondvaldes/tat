@@ -49,6 +49,7 @@ double SobjectiveLS( const std::vector<double>& emissionExp,
 }
   }
 }
+                     const std::vector<double>& emissionEst ) ;
 
 
 
