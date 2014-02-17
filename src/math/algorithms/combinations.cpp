@@ -25,12 +25,10 @@ License
 
 #include <vector>
 #include <cstddef>
+#include "math/algorithms/combinations.hpp"
 
 namespace math{
 namespace algorithms{
-
-
-
 
 size_t factorial( const size_t n )
 {
@@ -47,7 +45,5 @@ size_t permutations( const size_t n, const size_t r)
 
   return val;
 }
-
-
 
 }}

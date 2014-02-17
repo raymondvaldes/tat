@@ -26,8 +26,6 @@ License
 #define UTILS_HPP
 
 #include <vector>
-#include <cmath>
-#include <cstddef>
 
 namespace math{
   namespace estimation{

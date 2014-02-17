@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <random>
 #include <ctime>
+#include <chrono>
 #include <boost/assert.hpp>
 
 #include "math/utility.hpp"

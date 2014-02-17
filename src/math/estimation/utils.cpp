@@ -23,7 +23,8 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <vector>
-#include <cstring>
+#include <cmath>
+#include "math/estimation/utils.hpp"
 
 namespace math{
   namespace estimation{

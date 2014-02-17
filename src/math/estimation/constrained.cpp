@@ -23,6 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 
+#include "math/estimation/constrained.hpp"
 #include <cmath>
 #include <iostream>
 
