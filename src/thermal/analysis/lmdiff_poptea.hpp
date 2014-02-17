@@ -67,6 +67,7 @@ public:
   explicit LMA_BASE( const math::estimation::settings &Settings_,
                      const math::estimation::unknownList &unknownParameters_,
                      const size_t Lend_ );
+  virtual ~LMA_BASE();
 
   virtual void solve(
       const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
