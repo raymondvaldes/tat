@@ -174,7 +174,7 @@ double Mesh::find_beta2(const double L_coat, const double L_substrate)
   double variable;
   double constants[5] = {beta1, double(M2), L_substrate, L_coat, split};
 
-  minimizer(&variable, constants, 1.001, 15., beta_tol, beta_iter);
+  minimizer( &variable, constants, 1.001, 15., beta_tol, beta_iter ) ;
 
 
   return variable;

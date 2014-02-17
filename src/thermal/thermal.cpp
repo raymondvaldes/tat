@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  		        |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -33,11 +33,11 @@ double effusivity( const double k, const double rhoCp )
 
 double diffusivity( const double k, const double rhoCp )
 {
-  return k / rhoCp;
+  return k / rhoCp ;
 }
 
 double omega( const double L_coat, const double l_thermal, const double k_c,
-              const double psi_c)
+              const double psi_c )
 {
   return ( k_c / psi_c ) / ( pow( L_coat * l_thermal , 2 ) );
 }
@@ -50,7 +50,7 @@ double lthermal( const double L_coat, const double k_c, const double psi_c,
   lthermal /= L_coat;
   lthermal = std::sqrt(lthermal) ;
 
-  return lthermal;
+  return lthermal ;
 }
 
 

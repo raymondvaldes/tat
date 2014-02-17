@@ -36,8 +36,8 @@ namespace math{
 size_t PrecisionToBits(const size_t precision)
 {
   /*Enter the number of decimal precision required*/
-  const double bits = precision / log10of2;
   const double log10of2 = std::log10(2) ;
+  const double bits = precision / log10of2 ;
 
   return ceil(bits);
 }

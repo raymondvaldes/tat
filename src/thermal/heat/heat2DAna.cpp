@@ -52,15 +52,15 @@ HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
     exit(-99);
   }
 
-  funcComplex = new std::complex<double>[nuSize];
-  funcComplexR = new std::complex<double>[nuSize * mesh.Rend];
-  funcComplexZ = new std::complex<double>[nuSize * mesh.M2];
-  nuSpace = new double[nuSize];
+  funcComplex = new std::complex<double>[nuSize] ;
+  funcComplexR = new std::complex<double>[nuSize * mesh.Rend] ;
+  funcComplexZ = new std::complex<double>[nuSize * mesh.M2] ;
+  nuSpace = new double[nuSize] ;
 
-  funcReal = new double[nuSize];
-  funcImag = new double[nuSize];
+  funcReal = new double[nuSize] ;
+  funcImag = new double[nuSize] ;
 
-  math::range(nuSpace, nuStart, nuEnd, nuSize);
+  math::range( nuSpace, nuStart, nuEnd, nuSize ) ;
 }
 
 HeatModel2DAna::~HeatModel2DAna(void)

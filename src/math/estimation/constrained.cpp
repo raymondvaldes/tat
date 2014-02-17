@@ -32,7 +32,7 @@ namespace estimation{
 
 double x_limiter1( const double xi )
 {
-    return exp(xi);
+    return exp(xi) ;
 }
 
 double x_limiter2( const double xi, const double x_min, const double x_max )
@@ -42,18 +42,18 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   // and x_max.
 
   double
-  x = x_max;
-  x -= x_min;
-  x /= 1 + exp(xi);
-  x += x_min;
+  x = x_max ;
+  x -= x_min ;
+  x /= 1 + exp(xi) ;
+  x += x_min ;
 
   if( x > x_max || x < x_min )
   {
-    std::cout << "\nerror!! in x_limiter2" << x << "\t" << x_min;
-    std::cout << "\t" << x_max << "\n";
+    std::cerr << "\nerror!! in x_limiter2" << x << "\t" << x_min ;
+    std::cerr << "\t" << x_max << "\n" ;
   }
 
-  return x;
+  return x ;
 }
 
 double kx_limiter1( const double ki )
