@@ -31,12 +31,19 @@ License
 
 namespace math{
 
-double x_ini(const double x_min, const double x_max);
-double x_ini(const double x_min, const double x_max, const size_t position,
-             const size_t gN);
+double genWseed( const double x_min, const double x_max, const unsigned seed );
 
-bool equalto(const double a, const double b);
-bool equalto(const double a, const int b);
+double x_ini(const double x_min, const double x_max);
+
+template< typename T1, typename T2>
+bool equalto ( const T1 a, const T2 b)
+{
+const double multi = a > b ? a : b;
+const double multi2 = multi >= 1 ? multi  : 1;
+
+return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
+}
+
 double arrayMax(const double* x, const size_t I);
 double arrayMin(const double* x, const size_t I);
 
@@ -44,8 +51,8 @@ double x_ini10(const int x_ref);
 double x_ini10(const double x_ref);
 
 
-size_t xINTrandom(const size_t xmin, const size_t xmax);
-double x_normal(const double Xmean, const double Xstddev, const double seed1);
+int xINTrandom(const int xmin, const int xmax);
+double x_normal(const double Xmean, const double Xstddev, const unsigned seed1);
 double x_normal(const double Xmean, const double Xstddev);
 
 double x_bias(const double Xmean, const double Xstddev);
@@ -58,8 +65,8 @@ double percentilelog10(const double xmin, const double xmax, const double x);
 
 void range( double* l_thermal, const double l_min, const double l_max,
             const size_t L_end ) ;
-void range( std::vector<double>& l_thermal, const double l_min,
-            const double l_max, const size_t L_end ) ;
+std::vector<double>
+  range( const double xstart, const double xend, const size_t size ) ;
 
 std::vector<double>
 range1og10( const double l_min, const double l_max, const size_t L_end );
