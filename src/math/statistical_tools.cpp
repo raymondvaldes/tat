@@ -354,7 +354,7 @@ double MSEarea(const size_t N, std::vector<double> &func1,
     double sum = 0;
     for(size_t i=0 ; i < N ; i++)
     {
-        sum += fabs(func1[i] - func2[i]);
+      sum += std::fabs(func1[i] - func2[i]);
     }
 
     return sum / N;
@@ -406,7 +406,7 @@ double MSEarea1(size_t N, double* func1, double* func2, double* xvar)
       xi -= xStep;
     }
 
-    else if( fabs(Func2->eval(xi) - Func1->eval(xi)) <  etol)
+    else if( std::fabs(Func2->eval(xi) - Func1->eval(xi)) <  etol)
     {
       area +=0;
     }

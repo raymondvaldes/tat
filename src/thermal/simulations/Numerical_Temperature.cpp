@@ -175,20 +175,20 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
       if (p == 0) ss_error1 = 1;
 
       double
-      ss_error = fabs(Tprofile.eval(mesh.Nend-1, 0) -
+    ss_error = std::fabs(Tprofile.eval(mesh.Nend-1, 0) -
                       Tprofile.eval(0, 0));
       double ss_errorD = 1;
 
       if( p >1 )
       {
-        ss_errorD = fabs(ss_error - ss_error1);
+      ss_errorD = std::fabs(ss_error - ss_error1);
         ss_errorD /= amplitude_T_analytical ;
       }
 
       ss_error1 = ss_error;
 
       static const size_t iter_min = 3  ;
-      const double TtolPercentage = Ttol *fabs(amplitude_T_analytical);
+    const double TtolPercentage = Ttol * std::fabs(amplitude_T_analytical);
 
       if( p >= iter_min )
       {

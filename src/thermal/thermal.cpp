@@ -39,7 +39,7 @@ double diffusivity( const double k, const double rhoCp )
 double omega( const double L_coat, const double l_thermal, const double k_c,
               const double psi_c )
 {
-  return ( k_c / psi_c ) / ( pow( L_coat * l_thermal , 2 ) );
+  return ( k_c / psi_c ) / ( std::pow( L_coat * l_thermal , 2 ) );
 }
 
 double lthermal( const double L_coat, const double k_c, const double psi_c,

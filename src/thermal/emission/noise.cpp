@@ -66,7 +66,7 @@ addNoise( const std::vector<double> &emissionNominal_,
     const double cotbc = tan( M_PI_2 - ( b * c ) );
     double noiseBias = -a * cotbc * tan( b * ( c - lthermalPercentile ) );
 
-    if(!d2) { noiseBias = fabs(noiseBias); }
+  if(!d2) { noiseBias = std::fabs(noiseBias); }
     if(!d1) { noiseBias *= -1; }
 
     switch(s1)

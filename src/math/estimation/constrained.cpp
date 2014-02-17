@@ -32,7 +32,7 @@ namespace estimation{
 
 double x_limiter1( const double xi )
 {
-    return exp(xi) ;
+  return std::exp(xi) ;
 }
 
 double x_limiter2( const double xi, const double x_min, const double x_max )
@@ -44,7 +44,7 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   double
   x = x_max ;
   x -= x_min ;
-  x /= 1 + exp(xi) ;
+  x /= 1 + std::exp(xi) ;
   x += x_min ;
 
   if( x > x_max || x < x_min )
@@ -60,13 +60,13 @@ double kx_limiter1( const double ki )
 {
     //converts value to k-space
 //    assert(ki > 0);
-    return log(ki);
+  return std::log(ki);
 }
 
 double kx_limiter2( const double ki, const double k_min, const double k_max )
 {
 //    assert(ki > k_min  && ki < k_max);
-    return log( ( (k_max - k_min) / (ki - k_min) ) - 1.);
+  return std::log( ( (k_max - k_min) / (ki - k_min) ) - 1.);
 }
 
 }}
