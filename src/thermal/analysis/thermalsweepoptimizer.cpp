@@ -235,6 +235,7 @@ void ThermalSweepOptimizer::solve(
     const std::shared_ptr<LMA> &bestfitMethod_in,
     const std::shared_ptr<PIE> &intervalEstimates_in )
 {
+  ouputResults.clear();
   bestfitMethod = bestfitMethod_in;
   intervalEstimates = intervalEstimates_in;
 
