@@ -25,13 +25,17 @@ License
 #ifndef FILESYSTEM_HPP_INCLUDED
 #define FILESYSTEM_HPP_INCLUDED
 
+#include <vector>
 #include <string>
+#include <boost/filesystem/path.hpp>
 #include "tools/interface/filesystem.hpp"
 
 namespace filesystem
 {
 
 void makeDir(const std::string rootPath, const std::string newDirectory);
+
+std::vector<boost::filesystem::path> ls( const std::string &path );
 
 class directory
 {

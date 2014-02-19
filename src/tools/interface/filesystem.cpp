@@ -72,5 +72,61 @@ std::string directory::abs(const std::string relativePath) const
   return workingDirectory + "/" + relativePath;
 }
 
+std::vector< boost::filesystem::path > ls( const std::string &path_in )
+{
+  using namespace boost::filesystem;
+  path p ( path_in );
+  std::vector< path > output;
+
+  size_t dir_count = 0;
+  size_t file_count = 0;
+  size_t other_count = 0;
+
+  if (!exists(p))
+  {
+    std::cout << "\nNot found: " << path_in << std::endl;
+    return output;
+  }
+
+  if( is_directory( p ) )
+  {
+    directory_iterator end_iter;
+
+    for ( directory_iterator dir_itr(p) ;  dir_itr != end_iter; ++dir_itr )
+    {
+      try
+      {
+        if( is_directory( dir_itr->status() ) )
+        {
+          ++dir_count;
+          //std::cout << dir_itr->path().filename() << " [directory]\n";
+          output.push_back( dir_itr->path() ) ;
+        }
+        else if ( is_regular_file( dir_itr->status() ) )
+        {
+          ++file_count;
+          //std::cout << dir_itr->path().filename() << "\n";
+        }
+        else
+        {
+          ++other_count;
+          //std::cout << dir_itr->path().filename() << " [other]\n";
+        }
+      }
+      catch (const boost::filesystem::filesystem_error& ex)
+      {
+        std::cerr << ex.what() << "\n";
+      }
+    }
+  }
+  else // must be a file
+  {
+    std::cout << "\nFound: " << p << "\n";
+  }
+
+  return output;
+}
+
+
 
 }
