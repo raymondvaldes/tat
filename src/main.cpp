@@ -43,8 +43,8 @@ int main( int argc, char *argv[ ] )
   std::string path;
   if( tools::programoptions::loadOptions( argc, argv, path ) )
   {
-    const filesystem::directory dir1( path + "/" + "APS-77um" ) ;
-    investigations::sensitivityvaldes2013::run( dir1 ) ;
+//    const filesystem::directory dir1( path + "/" + "APS-77um" ) ;
+//    investigations::sensitivityvaldes2013::run( dir1 ) ;
 
     const filesystem::directory dir2( path + "/" + "APS-300um" ) ;
     investigations::sensitivityvaldes2013::run( dir2 ) ;
