@@ -113,7 +113,7 @@ public:
   ~ThermalSweepOptimizer( void ) ;
 
   // public solver (yes just give it all this shit and it'll do the work for u)
-  void solve(
+  OptimizerOutput solve(
      const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
      const std::shared_ptr<ThermalData> &thermalData_in,
      const std::shared_ptr<Kernal> &coreSystem_in,
