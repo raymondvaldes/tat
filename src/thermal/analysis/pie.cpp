@@ -223,9 +223,12 @@ void PIE::parameterIntervalEstimates( void )
     ///search space
     (*unknownParameters)( newListVect ) ;
 
-    //std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
+    Gfunc( bestfit , mylabel );
+//    std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
+//    std::cerr << "these are the bounds" << lowerbound <<"\t"<< upperbound<< "\n";
     constexpr double tol  = 1e-12;
     assert( std::fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
+
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     ThermalSweepTEMP.lowerbound = *thermalData;
 
@@ -241,8 +244,6 @@ void PIE::parameterIntervalEstimates( void )
 
     ouputResults.searchPath.push_back( dataTempStorage ) ;
     dataTempStorage.allThermalData.clear();
-
-
 
     ///iterate
     i++;
