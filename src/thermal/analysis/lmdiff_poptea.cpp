@@ -191,8 +191,8 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
     const double val = math::estimation::
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
     unknown.bestfitset( val );
-//    std::cerr << " : " << x[i - 1] << "\t" << unknown.lowerBound() << "\t"
-//              << unknown.upperBound()  << "\t";
+//    std::cerr << " : " << x[i - 1] << "\t" << unknown.lowerBound() << "\t"<<
+//                val << "\t" << unknown.upperBound()  << "\t";
     updatedInput.addUnknown(unknown);
   }
 //  std::cerr << "\n";
