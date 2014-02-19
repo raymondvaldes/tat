@@ -39,8 +39,8 @@ bool loadOptions( int argc, char** argv, std::string& path )
   po::options_description desc("Allowed options");
   desc.add_options()
       ("help", "produce help message")
-      ("config,c", po::value<std::string>(&path),
-        "set path to config files dir")
+      ("run,r", po::value<std::string>(&path),
+        "set path to settings folder")
       ("version,v", "display version information")
       ("build,b","build libraries")
       ;
@@ -63,7 +63,7 @@ bool loadOptions( int argc, char** argv, std::string& path )
   if( vm.count( "help" ) )
     { run = help(desc) ; }
 
-  if( vm.count( "config" ) )
+  if( vm.count( "run" ) )
     { run = config(path) ; }
 
   if( vm.count( "version" ) )
@@ -100,6 +100,7 @@ bool version(void)
 
   std::cout << "Writted by : \nRaymondValdes\n\n";
   std::cout << "Contributors:\n";
+  std::cout << "Ted Bennett\n";
   std::cout << "Michael Simeone\n\n";
   return false;
 }

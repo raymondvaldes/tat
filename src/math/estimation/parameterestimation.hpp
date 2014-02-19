@@ -67,6 +67,7 @@ public:
   double bestfitIntervalSpread( void ) const;
 
   enum physicalModel::labels::Name label( void ) const ;
+  physicalModel::labels getLabel ( void ) const;
 
   bool compareName( const unknown& input ) const ;
   bool operator == ( const unknown& input ) const ;

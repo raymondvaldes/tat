@@ -118,7 +118,7 @@ public:
   explicit labels(void);
   explicit labels(const enum Name name_);
   Name getName(void) const;
-  std::string getNameString(void);
+  std::string getNameString(void) const;
 
 
 private:

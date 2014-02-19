@@ -44,25 +44,23 @@ using namespace thermal::analysis;
 void run( const filesystem::directory dir )
 {
   /// setup output directory
-  dir.mkdir( "data" ) ;
+  Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
 
-  ///pie analysis
-  Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
+  /// PartA ( pie_analysis )
+  const std::string partA = "/partA_pieAnalysis";
+  dir.mkdir( partA ) ;
+  const std::string path = dir.abs( partA ) ;
 
-  poptea.bestFit();
-//  poptea.PIE();
+  thermal::analysis::PIE::PIEAnalysisOutput pieOutput = poptea.PIE();
+  pieOutput.pp2Folder( path ) ;
+  std::cout << poptea.ppUnknownParameters() << "\n";
 
-
-  std::cout << poptea.ppUnknownParameters();
-
-  ///output results
-  const std::string pathThermalData = dir.abs( "data/pieAnalysis_data.dat" ) ;
-  const std::string thermalOutput = poptea.ppThermalData();
-  tools::interface::exportfile( pathThermalData , thermalOutput ) ;
-
-  const std::string pathThermalTbl = dir.abs( "data/pieAnalysis_table.dat" ) ;
-  const std::string tableParameters = poptea.ppUnknownParameters();
-  tools::interface::exportfile( pathThermalTbl , tableParameters ) ;
+  /// PartB (experimental Optimizer)
+  const std::string partB = "/partB_expOptimize";
+  dir.mkdir( partB ) ;
+//  poptea.optimization();
+//thermal::analysis::ThermalSweepOptimizer::outputData = poptea.optimization();
+//  outputData.pp2Folder( path ) ;
 
   return;
 }

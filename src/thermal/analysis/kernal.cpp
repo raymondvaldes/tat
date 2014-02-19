@@ -113,7 +113,7 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 class Kernal
     loadWorkingDirectoryKernal(const class filesystem::directory dir)
 {
-  const std::string filename = "config/kernal.xml";
+  const std::string filename = "kernal.xml";
   boost::property_tree::ptree pt;
   try
   {

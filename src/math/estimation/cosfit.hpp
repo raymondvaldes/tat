@@ -27,6 +27,7 @@ License
 #define COSFIT_HPP
 
 #include <vector>
+#include <cstddef>
 
 namespace math{
   namespace estimation{

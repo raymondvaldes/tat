@@ -379,7 +379,7 @@ enum labels::Name labels::getName(void) const
   return name;
 }
 
-std::string labels::getNameString(void)
+std::string labels::getNameString(void) const
 {
   return nameMap.left.at( name ) ;
 }

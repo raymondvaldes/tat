@@ -77,6 +77,8 @@ public:
 
   //printer
   std::string prettyPrint( const physicalModel::layer &coating ) ;
+  std::string prettyPrint( void ) ;
+
 };
 
 

@@ -106,6 +106,13 @@ enum physicalModel::labels::Name unknown::label(void) const
   return name.getName();
 }
 
+physicalModel::labels unknown::getLabel ( void ) const
+{
+  return name;
+}
+
+
+
 unknown::bounds::bounds( void ){}
 
 unknown::bounds::bounds(const double lower_, const double upper_)
