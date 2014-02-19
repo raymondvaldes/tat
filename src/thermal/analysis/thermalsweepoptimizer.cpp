@@ -228,7 +228,8 @@ void ThermalSweepOptimizer::updateWorkSpace(
   updateWorkSpace( Lend, N ) ;
 }
 
-void ThermalSweepOptimizer::solve(
+ThermalSweepOptimizer::OptimizerOutput
+ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in,
@@ -236,10 +237,12 @@ void ThermalSweepOptimizer::solve(
     const std::shared_ptr<PIE> &intervalEstimates_in )
 {
   ouputResults.clear();
+
   bestfitMethod = bestfitMethod_in;
   intervalEstimates = intervalEstimates_in;
 
   solve( unknownParameters_in, thermalData_in, coreSystem_in  ) ;
+  return ouputResults;
 }
 
 void ThermalSweepOptimizer::solve(
