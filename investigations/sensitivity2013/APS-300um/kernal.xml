@@ -71,12 +71,12 @@
 		<emissionModel>OneDimNonLin</emissionModel>
 		
 		<simulation>analytical</simulation>
-		<temperatureDep> true </temperatureDep>
+		<temperatureDep> false </temperatureDep>
 		
 		<mesh>
-			<M2>221</M2>
+			<M2>101</M2>
 			<Rend>20</Rend>
-			<Nend>80</Nend>
+			<Nend>40</Nend>
 			<beta1>100</beta1>
 			<split>0.5</split>
 			<num_iter>1000</num_iter>
