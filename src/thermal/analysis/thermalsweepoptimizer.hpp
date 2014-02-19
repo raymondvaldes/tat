@@ -79,6 +79,27 @@ private:
   void optimizer( int *info, int *nfev );
 
 public:
+  ///output object
+  class OptimizerOutput
+  {
+  public:
+    class ExperimentAnalysisState
+    {
+      std::shared_ptr< ThermalData > thermalData ;
+      std::shared_ptr<math::estimation::unknownList> unknownParameters ;
+      std::shared_ptr<math::estimation::unknownList> thermalSweepSearch ;
+      std::shared_ptr< physicalModel::layer > coating ;
+      double error;
+    };
+    std::vector< ExperimentAnalysisState > searchPath ;
+
+    /// Post-PIE analysis methods
+    void pp2Folder(const std::string path ) ;
+    void clear( void ) ;
+    std::shared_ptr< math::estimation::unknownList > myUnknowns;
+  private:
+  } ouputResults;
+
   // constructors and destructors
   explicit ThermalSweepOptimizer(
       const math::estimation::settings &Settings_in,
