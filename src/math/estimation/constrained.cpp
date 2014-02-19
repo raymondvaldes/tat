@@ -54,6 +54,7 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   /// Must build in some type of tolerance to ensure that xi is never >= the
   /// constraints. This causes errors when I'm transforming back and forth.
 
+//  std::cerr << x << "\t" << xi << "\t" << x_min << "\t" << x_max << "\n";
   BOOST_ASSERT_MSG( x < x_max , "\nerror!! in x_limiter2");
   BOOST_ASSERT_MSG( x > x_min , "\nerror!! in x_limiter2");
 
