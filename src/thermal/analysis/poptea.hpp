@@ -63,7 +63,7 @@ public:
   /// Operations that give results
   double bestFit( void ) ;
   thermal::analysis::PIE::PIEAnalysisOutput PIE( void ) ;
-  void optimization( void ) ;
+  ThermalSweepOptimizer::OptimizerOutput optimization( void ) ;
   std::vector<double> thermalSweep( void ) const ;
 
   /// Printers
