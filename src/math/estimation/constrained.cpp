@@ -49,11 +49,15 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   x /= 1 + std::exp(xi) ;
   x += x_min ;
 
-  if( x > x_max || x < x_min )
-  {
-    std::cerr << "\nerror!! in x_limiter2" << x << "\t" << x_min ;
-    std::cerr << "\t" << x_max << "\n" ;
-  }
+  constexpr double tol = 1e-14;
+
+  if( std::abs( x - x_min ) < tol ) x = x_min + tol ;
+  if( std::abs( x - x_max ) < tol ) x = x_max - tol ;
+  /// Must build in some type of tolerance to ensure that xi is never >= the
+  /// constraints. This causes errors when I'm transforming back and forth.
+
+  BOOST_ASSERT_MSG( x < x_max , "\nerror!! in x_limiter2");
+  BOOST_ASSERT_MSG( x > x_min , "\nerror!! in x_limiter2");
 
   return x ;
 }
