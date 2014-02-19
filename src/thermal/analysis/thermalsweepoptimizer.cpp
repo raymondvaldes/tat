@@ -228,6 +228,16 @@ void ThermalSweepOptimizer::updateWorkSpace(
   updateWorkSpace( Lend, N ) ;
 }
 
+void ThermalSweepOptimizer::OptimizerOutput::clear( void )
+{
+}
+
+void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path )
+{
+
+}
+
+
 ThermalSweepOptimizer::OptimizerOutput
 ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
