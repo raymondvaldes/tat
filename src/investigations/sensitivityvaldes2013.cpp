@@ -53,18 +53,20 @@ void run( const filesystem::directory dir )
   /// PartA ( pie_analysis )
   const std::string partA = "/partA_pieAnalysis";
   dir.mkdir( partA ) ;
-  const std::string path = dir.abs( partA ) ;
 
-  thermal::analysis::PIE::PIEAnalysisOutput pieOutput = poptea.PIE();
+  PIE::PIEAnalysisOutput pieOutput = poptea.PIE();
+  const std::string path = dir.abs( partA ) ;
   pieOutput.pp2Folder( path ) ;
-  std::cout << poptea.ppUnknownParameters() << "\n";
+  std::cout << poptea.ppUnknownParameters() << "\n" ;
+
 
   /// PartB (experimental Optimizer)
-  const std::string partB = "/partB_expOptimize";
+  const std::string partB = "/partB_expOptimize" ;
   dir.mkdir( partB ) ;
-//  poptea.optimization();
-//thermal::analysis::ThermalSweepOptimizer::outputData = poptea.optimization();
-//  outputData.pp2Folder( path ) ;
+
+  ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization();
+  const std::string pathB = dir.abs( partA ) ;
+  outputData.pp2Folder( pathB ) ;
 
   return;
 }
