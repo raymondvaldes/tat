@@ -166,11 +166,11 @@ thermal::analysis::PIE::PIEAnalysisOutput Poptea::PIE( void )
                                               coreSystem ) ;
 }
 
-void Poptea::optimization(void)
+ThermalSweepOptimizer::OptimizerOutput Poptea::optimization(void)
 {
-  if(!loadedExperimental) { return; }
+  BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" );
 
-  analysis.optimization( unknownParameters , thermalData, coreSystem);
+  return analysis.optimization( unknownParameters , thermalData, coreSystem);
 }
 
 std::string Poptea::ppUnknownParameters ( void )
