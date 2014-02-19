@@ -42,6 +42,7 @@ public:
     void start(void);
     void stop(void);
     double returnTime(void);
+    std::string readoutLoud(void);
 };
 
 #endif // TIMING_H
