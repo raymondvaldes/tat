@@ -62,7 +62,7 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
   }
   else
   {
-    assert(min < max) ;
+    BOOST_ASSERT(min < max) ;
     try
     {
       BisectMethod();

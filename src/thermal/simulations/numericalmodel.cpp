@@ -38,7 +38,7 @@ Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
            :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_),
              iter(numIter_)
 {
-  assert( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
+  BOOST_ASSERT( (M2-1) %5 == 0);     // (M2-1 / 5) must be integer!! (assert)
 
   time.resize(Nend);
   tau.resize(Nend);

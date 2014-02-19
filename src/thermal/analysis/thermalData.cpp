@@ -183,7 +183,7 @@ ThermalData::get_lthermalSweep( const physicalModel::layer &coating ) const
 
 void ThermalData::updateExperimental( const std::vector<double> &input)
 {
-  assert( input.size() == experimentalEmission.size() );
+  BOOST_ASSERT( input.size() == experimentalEmission.size() );
   experimentalEmission = input;
 }
 
