@@ -77,13 +77,13 @@ methods::parameterIntervalEstimates(
                             bestfitMethod );
 }
 
-void methods::optimization(
+ThermalSweepOptimizer::OptimizerOutput methods::optimization(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
     const std::shared_ptr< ThermalData > &thermalData_in,
     const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
 {
-  lthermalSweepOptimizer->solve( list_in, thermalData_in, coreSystem_in,
-                                 bestfitMethod, intervalEstimates ) ;
+  return lthermalSweepOptimizer->solve( list_in, thermalData_in, coreSystem_in,
+                                        bestfitMethod, intervalEstimates ) ;
 
 }
 
