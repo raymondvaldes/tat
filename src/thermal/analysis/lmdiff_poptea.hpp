@@ -85,6 +85,12 @@ private:
   void updateWorkSpace(const size_t Lend , const size_t N) override;
 
 public:
+  class BestFitAnalysisOutput
+  {
+    public:
+    void clear( void ) ;
+  };
+
   explicit LMA( const math::estimation::settings &Settings_,
                 const math::estimation::unknownList &unknownParameters,
                 const size_t Lend_) ;

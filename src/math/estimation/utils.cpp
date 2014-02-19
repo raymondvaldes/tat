@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <vector>
 #include <cmath>
+#include <cstddef>
 #include "math/estimation/utils.hpp"
 
 namespace math{
@@ -40,7 +41,7 @@ double SobjectiveLS( const std::vector<double>& emissionExp,
   double fvec_objective = 0 ;
   for(size_t  n =0 ; n < emissionEst.size() ; n++)
   {
-  fvec_objective += std::fabs( emissionExp[n] - emissionEst[n] ) ;
+    fvec_objective += std::fabs( emissionExp[n] - emissionEst[n] ) ;
   }
 
   return fvec_objective / emissionEst.size() ;

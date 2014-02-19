@@ -80,14 +80,14 @@ ThermalData::prettyPrint( const physicalModel::layer &coating )
   std::ostringstream output;
 
   output << "#|-------------------------------------------------------------\n";
-  output << "#| Phase of Emission                       \n";
-  output << "#|                                         \n";
-  output << "#| columns...                              \n";
-  output << "#| omega      : heating wavelength         \n";
-  output << "#| Lambda     : thermal penetration        \n";
-  output << "#| expEmission: experimental phase of emit \n";
-  output << "#| modEmission: model output phase of emit \n";
-  output << "#|                                         \n";
+  output << "#| Phase of Emission                                           \n";
+  output << "#|                                                             \n";
+  output << "#| columns...                                                  \n";
+  output << "#| omega      : heating wavelength                             \n";
+  output << "#| Lambda     : thermal penetration                            \n";
+  output << "#| expEmission: experimental phase of emit                     \n";
+  output << "#| modEmission: model output phase of emit                     \n";
+  output << "#|                                                             \n";
   output << "#|-------------------------------------------------------------\n";
   const std::vector<double> lthermals = get_lthermalSweep( coating ) ;
   for( size_t i = 0 ; i < omegas.size() ; ++i )
@@ -98,10 +98,34 @@ ThermalData::prettyPrint( const physicalModel::layer &coating )
            << std::setw(10) << std::left << predictedEmission[i]
            << "\n";
   }
-  output << "#|-------------------------------------------------------------\n";
 
   return output.str() ;
 }
+
+std::string ThermalData::prettyPrint( void )
+{
+  std::ostringstream output;
+
+  output << "#|-------------------------------------------------------------\n";
+  output << "#| Phase of Emission                                           \n";
+  output << "#|                                                             \n";
+  output << "#| columns...                                                  \n";
+  output << "#| omega      : heating wavelength                             \n";
+  output << "#| expEmission: experimental phase of emit                     \n";
+  output << "#| modEmission: model output phase of emit                     \n";
+  output << "#|                                                             \n";
+  output << "#|-------------------------------------------------------------\n";
+  for( size_t i = 0 ; i < omegas.size() ; ++i )
+  {
+    output << std::setw(10) << std::left << omegas[i]
+           << std::setw(10) << std::left << experimentalEmission[i]
+           << std::setw(10) << std::left << predictedEmission[i]
+           << "\n";
+  }
+
+  return output.str() ;
+}
+
 
 void ThermalData::clearVectors(void)
 {

@@ -114,7 +114,7 @@ ExpNoiseSetting::initializeObj( const boost::property_tree::ptree pt )
 ExpNoiseSetting
 ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory dir )
 {
-  const std::string filename = "config/EmissionNoise.xml";
+  const std::string filename = "EmissionNoise.xml";
   const std::string absPath = dir.abs( filename );
   boost::property_tree::ptree pt;
   try

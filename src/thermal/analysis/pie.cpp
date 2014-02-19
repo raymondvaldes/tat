@@ -25,6 +25,9 @@ License
 #include <utility>
 #include "thermal/analysis/pie.hpp"
 #include "math/algorithms/combinations.hpp"
+#include "tools/interface/exportfile.hpp"
+#include "tools/interface/filesystem.hpp"
+
 //#include "math/estimation/utils.hpp"
 
 namespace thermal{
@@ -51,10 +54,36 @@ std::string PIE::PIEAnalysisOutput::SearchData::pprint( void )
     output << pair.first << "\t"
            << pair.second.MSE << "\n";
   }
-  output << "%*-----------------------------------------*\n" ;
 
   return output.str() ;
 }
+
+void PIE::PIEAnalysisOutput::ThermalSweep::prettyPrint(const std::string folder)
+{
+  const std::string newFolder = "thermalSweep" ;
+  filesystem::makeDir( folder , newFolder ) ;
+  const std::string updatedPath = folder + "/" +newFolder ;
+
+  const std::string output1 = bestfit.prettyPrint();
+  const std::string output2 = upperbound.prettyPrint();
+  const std::string output3 = lowerbound.prettyPrint();
+
+  const std::string path1 =  updatedPath + "/" + "bestfit.dat" ;
+  const std::string path2 =  updatedPath + "/" + "upperbound.dat" ;
+  const std::string path3 =  updatedPath + "/" + "lowerbound.dat" ;
+
+  tools::interface::exportfile( path1 , output1 ) ;
+  tools::interface::exportfile( path2 , output2 ) ;
+  tools::interface::exportfile( path3 , output3 ) ;
+}
+
+
+void PIE::PIEAnalysisOutput::SearchData::
+  ppThermalSweep ( const std::string folder)
+{
+  thermalSweep.prettyPrint( folder );
+}
+
 
 double PIE::bestFit()
 {
@@ -68,11 +97,11 @@ retrieveSearchData( const physicalModel::labels::Name input )
 {
   SearchData myOutput;
 
-  for( const SearchData&val : searchPath )
+  for( const SearchData&data : searchPath )
   {
-    if( input == val.param )
+    if( input == data.param )
     {
-      myOutput = val;
+      myOutput = data ;
       break;
     }
   }
@@ -80,14 +109,50 @@ retrieveSearchData( const physicalModel::labels::Name input )
   return myOutput;
 }
 
-std::string PIE::PIEAnalysisOutput::
-prettyPrintSearchPath( const physicalModel::labels::Name input )
+void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 {
-  SearchData myData = retrieveSearchData( input );
+  using namespace physicalModel;
+
+  for( math::estimation::unknown&parameter : (*myUnknowns)() )
+  {
+    const physicalModel::labels myLabel = parameter.getLabel();
+    const std::string myLabelName = myLabel.getNameString() ;
+    filesystem::makeDir( path , myLabelName );
+
+    const std::string updatePath = path + "/" + myLabelName;
+
+    const labels::Name myenumName = myLabel.getName();
+
+    const std::string output = ppSearchPath( myenumName );
+    const std::string pathSP =  updatePath + "/" + "searchPath.dat" ;
+    tools::interface::exportfile( pathSP , output ) ;
+
+    SearchData mySearchData = retrieveSearchData( myenumName ) ;
+    mySearchData.ppThermalSweep( updatePath ) ;
+
+  }
+
+}
+
+
+std::string PIE::PIEAnalysisOutput::
+ppSearchPath( const physicalModel::labels::Name input )
+{
+  SearchData myData = retrieveSearchData( input ) ;
   const std::string output = myData.pprint() ;
 
   return output;
 }
+
+std::string PIE::PIEAnalysisOutput::
+ppEmissionLimits( const physicalModel::labels::Name input )
+{
+  SearchData myData = retrieveSearchData( input ) ;
+
+  const std::string output = myData.pprint() ;
+  return output;
+}
+
 
 
 void PIE::PIEAnalysisOutput::clear( void )
@@ -103,13 +168,18 @@ PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
 {
   ouputResults.clear();
 
+  ///use the inputs
   unknownParameters = list_in ;
   thermalData = thermalData_in ;
   coreSystem = coreSystem_in ;
   bestfitMethod =  bestfitMethod_in ;
 
-  bestFit();
-  parameterIntervalEstimates();
+  ///repeat best fit and save the info for output analysis
+  bestFit() ;
+  ThermalSweepTEMP.bestfit = *thermalData ;
+
+  parameterIntervalEstimates() ;
+  reassign( ouputResults.myUnknowns, *unknownParameters ) ;
 
   return ouputResults;
 }
@@ -155,17 +225,24 @@ void PIE::parameterIntervalEstimates( void )
 
     //std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
     constexpr double tol  = 1e-12;
-  assert( std::fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
+    assert( std::fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
+    ThermalSweepTEMP.lowerbound = *thermalData;
+
     const double max = solveFORx( S1, bestfit, upperbound , mylabel, "max" ) ;
+    ThermalSweepTEMP.upperbound = *thermalData;
 
     originalListParams[i].bestfitIntervalset( min, max) ;
 
 
     ///save search data for later analysis
     dataTempStorage.param = mylabel ;        
+    dataTempStorage.thermalSweep = ThermalSweepTEMP;
+
     ouputResults.searchPath.push_back( dataTempStorage ) ;
     dataTempStorage.allThermalData.clear();
+
+
 
     ///iterate
     i++;
@@ -226,7 +303,7 @@ double PIE::Gfunc( const double val ,
 
   bestFit() ;
 
-  std::pair<double, ThermalData> saveThis( val, *thermalData ) ;
+  const std::pair< double, ThermalData > saveThis( val, *thermalData ) ;
   dataTempStorage.allThermalData.push_back( saveThis ) ;
 
   return thermalData->MSE;

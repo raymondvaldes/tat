@@ -132,7 +132,6 @@ SOURCES += \
     models/physicalmodel.cpp \
     math/bisection.cpp \
     investigations/sensitivityvaldes2013.cpp \
-    investigations/manyfit.cpp \
     thermal/thermal.cpp \
     thermal/construct.cpp \
     thermal/emission.cpp \
@@ -161,7 +160,6 @@ SOURCES += \
     thermal/simulations/Numerical_Setup.cpp \
     thermal/simulations/Numerical_Temperature.cpp \
     thermal/simulations/numericalmodel.cpp \
-    tools/version.cpp \
     math/algorithms/combinations.cpp \
     thermal/analysis/methods.cpp \
     thermal/analysis/pie.cpp \
@@ -178,8 +176,6 @@ HEADERS += \
     models/physicalmodel.hpp \
     math/bisection.hpp \
     investigations/sensitivityvaldes2013.hpp \
-    investigations/manyfit.hpp \
-    investigations/all.hpp \
     thermal/thermal.hpp \
     thermal/construct.hpp \
     thermal/emission.hpp \
@@ -210,7 +206,6 @@ HEADERS += \
     thermal/simulations/Numerical_Temperature.h \
     thermal/simulations/numericalmodel.hpp \
     tools/tools.hpp \
-    tools/version.hpp \
     math/algorithms/combinations.hpp \
     thermal/analysis/methods.hpp \
     thermal/analysis/pie.hpp \

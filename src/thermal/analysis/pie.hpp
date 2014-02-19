@@ -34,28 +34,46 @@ License
 namespace thermal{
 namespace analysis{
 
+using namespace physicalModel;
+
 class PIE: private baseData
 {
 public:
   class PIEAnalysisOutput
-  {
-    public:
+  { 
+  public:
+    /// struct SearchData dataTempStorage;
+    class ThermalSweep
+    {
+      public:
+      ThermalData lowerbound;
+      ThermalData bestfit;
+      ThermalData upperbound;
+      void prettyPrint( const std::string folder );
+    };
+
     class SearchData
     {
       public:
-      physicalModel::labels::Name param;
-      std::vector< std::pair< double, ThermalData > > allThermalData;
-      std::string pprint( void );
-    };
+      labels::Name param ;
+      std::vector< std::pair< double, ThermalData > > allThermalData ;
+      ThermalSweep thermalSweep;
 
-    /// struct SearchData dataTempStorage;
+      std::string pprint( void ) ;
+      void ppThermalSweep ( const std::string folder) ;
+    };
     std::vector< SearchData > searchPath;
 
     /// Post-PIE analysis methods
-    SearchData retrieveSearchData(const physicalModel::labels::Name input ) ;
-    std::string prettyPrintSearchPath( const physicalModel::labels::Name input);
+    std::string ppSearchPath( const labels::Name input ) ;
+    std::string ppEmissionLimits( const labels::Name input ) ;
+    void pp2Folder(const std::string path );
     void clear( void ) ;
-  };
+    std::shared_ptr< math::estimation::unknownList > myUnknowns;
+
+  private:
+    SearchData retrieveSearchData(const labels::Name input ) ;
+  } ouputResults;
 
 
   explicit PIE( void ) ;
@@ -74,16 +92,17 @@ private:
   void parameterIntervalEstimates( void ) ;
 
   /// worker methods
-  double Gfunc( const double x , const physicalModel::labels::Name &mylabel ) ;
+  double Gfunc( const double x , const labels::Name &mylabel ) ;
   void updateExperimentalData( const std::vector<double> &input,
                                ThermalData &thermalData_in ) ;
   void saveExperimental( const ThermalData& thermalData_in ) ;
   void reloadExperimental( void );
   double solveFORx( const double target , const double min, const double max,
-                    const physicalModel::labels::Name mylabel,
+                    const labels::Name mylabel,
                     const std::string &bound ) ;
-  PIEAnalysisOutput ouputResults;
+
   PIEAnalysisOutput::SearchData dataTempStorage;
+  PIEAnalysisOutput::ThermalSweep ThermalSweepTEMP;
   /// TO BO REMOVED
   std::vector<double>SAVEExperimental;
   std::vector<double>SAVEpredictions;

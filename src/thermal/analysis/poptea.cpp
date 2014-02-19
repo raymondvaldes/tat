@@ -187,7 +187,7 @@ std::string Poptea::ppThermalData( void )
 Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
                                          const class Kernal &popteaCore)
 {
-  const std::string filename = "config/poptea.xml";
+  const std::string filename = "poptea.xml";
   boost::property_tree::ptree pt;
   try
   {

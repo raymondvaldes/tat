@@ -33,8 +33,7 @@ void makeDir(const std::string rootPath, const std::string newDirectory)
 {
   
   const std::string fullpath = rootPath + "/" + newDirectory ;
-  
-  boost::filesystem::path directory( fullpath ) ;
+  const boost::filesystem::path directory( fullpath ) ;
   
   try {
     boost::filesystem::create_directory( directory ) ;
@@ -55,7 +54,12 @@ directory::~directory(void){}
 void directory::mkdir(const std::string newDirectory) const
 {
   if ( ! boost::filesystem::is_directory( abs( newDirectory ) ) )
+  {
+
     makeDir( workingDirectory , newDirectory ) ;
+  }
+
+
 }
 
 std::string directory::pwd(void) const

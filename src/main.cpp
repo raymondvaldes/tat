@@ -33,29 +33,25 @@ License
 
 //Internal dependencies
 #include "tools/tools.hpp"
-#include "investigations/all.hpp"
+#include "investigations/sensitivityvaldes2013.hpp"
 
 int main( int argc, char *argv[ ] )
 {
+  std::cout << "Welcome back, Raymond!\n\n" ;
+  stopwatch globalStopWatch ;
+
   std::string path;
-  const bool run = tools::programoptions::loadOptions( argc, argv, path );
-
-  if(run)
+  if( tools::programoptions::loadOptions( argc, argv, path ) )
   {
-    std::cout << "Welcome back, Raymond!\n\n";
-    stopwatch globalStopWatch;
+    const filesystem::directory dir1( path + "/" + "APS-77um" ) ;
+    investigations::sensitivityvaldes2013::run( dir1 ) ;
 
-    /// Retrieve working directory
-    const filesystem::directory dir(path);
-  
-    /// Run investigations
-    //investigations::sensitivityvaldes2013::demo( dir );
-    investigations::sensitivityvaldes2013::run( dir );
-    //investigations::manyfit::run( dir );
-
-    std::cout << "\nStopwatch: "                << std::setprecision(3)
-              <<  globalStopWatch.returnTime()  <<" sec.\n\n";
+    const filesystem::directory dir2( path + "/" + "APS-300um" ) ;
+    investigations::sensitivityvaldes2013::run( dir2 ) ;
   }
+
+  std::cout << "\nStopwatch: " << std::setprecision(3)
+            <<  globalStopWatch.returnTime() << " sec.\n\n";
 
   return 0;
 }
