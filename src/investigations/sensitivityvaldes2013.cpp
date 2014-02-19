@@ -46,6 +46,10 @@ void run( const filesystem::directory dir )
   /// setup output directory
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
 
+  /// Part test
+  poptea.bestFit();
+  std::cout << poptea.ppUnknownParameters();
+
   /// PartA ( pie_analysis )
   const std::string partA = "/partA_pieAnalysis";
   dir.mkdir( partA ) ;
