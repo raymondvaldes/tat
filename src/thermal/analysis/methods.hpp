@@ -69,7 +69,8 @@ public:
       const std::shared_ptr< ThermalData > &thermalData_in,
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
 
-  void optimization(
+  ThermalSweepOptimizer::OptimizerOutput
+  optimization(
       const std::shared_ptr< math::estimation::unknownList > &list_in,
       const std::shared_ptr< ThermalData > &thermalData_in,
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in
