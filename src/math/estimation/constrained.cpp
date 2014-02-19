@@ -47,7 +47,7 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   x /= 1 + std::exp(xi) ;
   x += x_min ;
 
-  constexpr double tol = 1e-14;
+  constexpr double tol = 1e-10;
 
   if( std::abs( x - x_min ) < tol ) x = x_min + tol ;
   if( std::abs( x - x_max ) < tol ) x = x_max - tol ;
