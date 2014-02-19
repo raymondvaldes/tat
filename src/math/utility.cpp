@@ -200,7 +200,7 @@ double percentilelog10(const double xmin, const double xmax, const double x)
 double valFROMpercentileLog10( const double input,  const double xmin,
                                const double xmax )
 {
-  assert( input <= 1 && input >=0) ;
+  BOOST_ASSERT( input <= 1 && input >=0) ;
   return xmin * std::pow( xmax / xmin , input );
 }
 
@@ -302,8 +302,8 @@ std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                        const std::pair<double, double> limits )
 {
-  assert( center > 0 && center < 1) ;
-  assert( range > 0 && range <= 1 ) ;
+  BOOST_ASSERT( center > 0 && center < 1) ;
+  BOOST_ASSERT( range > 0 && range <= 1 ) ;
 
   const double min = limits.first;
   const double max = limits.second;

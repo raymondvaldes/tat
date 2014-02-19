@@ -136,7 +136,7 @@ class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
 void Poptea::updateExperimentalData( const std::vector<double> &omegas,
                                      const std::vector<double> &input )
 {
-  assert( input.size() == omegas.size());
+  BOOST_ASSERT( input.size() == omegas.size());
   loadedExperimental = true;
 
   thermalData->updateExperimental( input );
