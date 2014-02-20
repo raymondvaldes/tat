@@ -67,16 +67,16 @@ public:
 
     struct Comparison
     {
-      std::shared_ptr<ExperimentAnalysisState > before;
-      std::shared_ptr<ExperimentAnalysisState > after;
+      std::shared_ptr< ExperimentAnalysisState > before ;
+      std::shared_ptr< ExperimentAnalysisState > after ;
     } results ;
 
     /// Post-PIE analysis methods
     void push_back( const ExperimentAnalysisState &data_in ) ;
     void pp2Folder( const std::string path ) ;
     void clear( void ) ;
-    void addBefore( ExperimentAnalysisState input );
-    void addAfter( ExperimentAnalysisState input );
+    void addBefore( const ExperimentAnalysisState input ) ;
+    void addAfter( const ExperimentAnalysisState input ) ;
 
   } ouputResults;
 

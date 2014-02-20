@@ -139,7 +139,7 @@ void ThermalSweepOptimizer::pieAnalysis(void)
   PIE::PIEAnalysisOutput output =
   intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
                             bestfitMethod ) ;
-  captureState( coreSystem->TBCsystem.coating );
+  captureState( coreSystem->TBCsystem.coating ) ;
 
 
   for(size_t i = 0; i < 60 ; i ++)
@@ -247,12 +247,12 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 clear( void )
 {
-  thermalData.reset();
-  coating.reset();
-  unknownParameters.reset();
-  thermalSweepSearch.reset();
+  thermalData.reset() ;
+  coating.reset() ;
+  unknownParameters.reset() ;
+  thermalSweepSearch.reset() ;
 
-  fitquality = 0;
+  fitquality = 0 ;
 }
 
 
