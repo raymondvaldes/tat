@@ -91,8 +91,8 @@ void ThermalSweepOptimizer::
   }
   thermalSweepSearch( updatedInput() );
 
-  ///Load these unknownParameters into the popteaCore and thermalData kernals
-  xSweep = updateVal( xSweep ) ;
+  ///Load these to slice the thermal Data
+  xSweep = updateSweep() ;
 
   const double xCenter = xSweep.first ;
   const double xRange = xSweep.second ;
