@@ -76,8 +76,7 @@ std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
 }
 
 
-void ThermalSweepOptimizer::
-  ThermalProp_Analysis( double *x, double *fvec )
+ThermalData ThermalSweepOptimizer::updatedFromXsearch( const double *x )
 {
   //Update parameters with current bestfits by transforming x
   math::estimation::unknownList updatedInput;
@@ -98,14 +97,22 @@ void ThermalSweepOptimizer::
   const double xRange = xSweep.second ;
   const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating );
 
-  ThermalData updatedThermal = sliceThermalData( xCenter, xRange, coatUpdate ) ;
+  return sliceThermalData( xCenter, xRange, coatUpdate ) ;
+}
+
+
+void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
+{
+  // update experimental data used based on search
+  ThermalData updatedThermal = updatedFromXsearch( x ) ;
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
   pieAnalysis();
+  ouputResults.push_back( currentState ) ;
 
   ///Use results from anaylsis
-  i =0 ;
+  size_t i =0 ;
   for( physicalModel::labels& myParam : sweepOptimizationGoal )
   {
     double error = 0 ;
@@ -171,8 +178,6 @@ double ThermalSweepOptimizer::penalty(
 }
 
 
-
-
 void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
 {
   LMA_workspace.updateArraySize( Lend , N );
@@ -187,8 +192,21 @@ void ThermalSweepOptimizer::updateWorkSpace(
   updateWorkSpace( Lend, N ) ;
 }
 
+void ThermalSweepOptimizer::OptimizerOutput::
+addBefore( ExperimentAnalysisState input )
+{
+  reassign( results.before , input ) ;
+}
+
+void ThermalSweepOptimizer::OptimizerOutput::
+addAfter( ExperimentAnalysisState input )
+{
+  reassign( results.after , input ) ;
+}
+
 void ThermalSweepOptimizer::OptimizerOutput::clear( void )
 {
+  searchPath.clear() ;
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path )
@@ -225,6 +243,24 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
   return output.str() ;
 }
 
+
+void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
+clear( void )
+{
+  thermalData.reset();
+  coating.reset();
+  unknownParameters.reset();
+  thermalSweepSearch.reset();
+
+  fitquality = 0;
+}
+
+
+void ThermalSweepOptimizer::OptimizerOutput::
+  push_back( const ExperimentAnalysisState &data_in )
+{
+  searchPath.push_back( data_in ) ;
+}
 
 ThermalSweepOptimizer::OptimizerOutput
 ThermalSweepOptimizer::solve(
