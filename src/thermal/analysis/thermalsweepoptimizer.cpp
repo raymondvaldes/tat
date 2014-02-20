@@ -66,15 +66,13 @@ std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
   for( const auto& unknown : thermalSweepSearch() )
   {
     const double bestfit  = unknown.bestfit();
-
     if ( unknown.label() == physicalModel::labels::Name::thermalCenter  )
       { thermalCenter = bestfit ; }
     else if ( unknown.label() == physicalModel::labels::Name::thermalRange  )
       { thermalRange = bestfit ; }
   }
 
-  std::pair< double, double > output( thermalCenter, thermalRange ) ;
-  return output;
+  return std::make_pair( thermalCenter, thermalRange ) ;
 }
 
 
