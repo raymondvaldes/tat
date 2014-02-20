@@ -29,6 +29,7 @@ License
 #include "math/utility.hpp"
 #include "math/numIntegration/gslfunc.hpp"
 #include "math/estimation/lmdiff.hpp"
+#include "tools/interface/exportfile.hpp"
 
 namespace thermal{
 namespace analysis{
