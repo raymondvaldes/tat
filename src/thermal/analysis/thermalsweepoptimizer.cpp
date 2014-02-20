@@ -86,10 +86,10 @@ void ThermalSweepOptimizer::
   {
     const double val = math::estimation::
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
-    unknown.bestfitset( val );
-    updatedInput.addUnknown(unknown);
+    unknown.bestfitset( val ) ;
+    updatedInput.addUnknown(unknown) ;
   }
-  thermalSweepSearch( updatedInput() );
+  thermalSweepSearch( updatedInput() ) ;
 
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
@@ -129,8 +129,8 @@ void ThermalSweepOptimizer::
 
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
-  intervalEstimates->solve( unknownParameters, thermalData, coreSystem,
-                            bestfitMethod );
+  intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
+                            bestfitMethod ) ;
 
   for(size_t i = 0; i < 60 ; i ++)
     std::cout << "\n";
