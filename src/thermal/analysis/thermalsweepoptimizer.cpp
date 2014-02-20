@@ -342,15 +342,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
          static_cast<int>(Settings.nprint), info, nfev, fjac,
          static_cast<int>(m), ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
 
-  //Transform outputs
-  j=0;
-  for( auto& unknown : thermalSweepSearch() )
-  {
-    x[j] = x_limiter2( x[j] , unknown.lowerBound() , unknown.upperBound() ) ;
-    unknown.bestfitset( x[j] ) ;
-    j++ ;
-  }
-
   ///Final fit
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
   coreSystem->updatefromBestFit( (*unknownParameters)() );  
