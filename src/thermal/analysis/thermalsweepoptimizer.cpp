@@ -110,7 +110,6 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   // Parameter Estimation with PIE analysis
   pieAnalysis();
-  ouputResults.push_back( currentState ) ;
 
   ///Use results from anaylsis
   size_t i =0 ;
@@ -126,11 +125,15 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
       }
     }
 
+    currentState.meanParameterError = error;
     error += penalty( xSweep );
 
     fvec[i] = error ;
     i++;
   }
+
+  ouputResults.push_back( currentState ) ;
+
 
   return;
 }
