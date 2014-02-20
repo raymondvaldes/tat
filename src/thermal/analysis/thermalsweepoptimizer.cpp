@@ -216,6 +216,9 @@ void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path )
 {
   results.prettyPrint( path );
 
+  const std::string searchOutput = searchPath.prettyPrint() ;
+  const std::string fullPath = path + "/" + "optimizerPath.dat";
+  tools::interface::exportfile( fullPath , searchOutput ) ;
 }
 
 
