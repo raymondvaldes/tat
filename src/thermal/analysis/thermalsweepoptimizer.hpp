@@ -52,14 +52,14 @@ public:
       std::shared_ptr< physicalModel::layer > coating ;
       std::shared_ptr<math::estimation::unknownList> unknownParameters ;
       std::shared_ptr<math::estimation::unknownList> thermalSweepSearch ;
+
       double fitquality ;
-
-      std::pair<double, double> lthermalLimits;
-      std::pair<double, double> lthermalCenterDecades;
-
-      void clear( void ) ;
+      double meanParameterError;
+      std::pair<double, double> lthermalLimits ;
+      std::pair<double, double> lthermalCenterDecades ;
 
       std::string ppFinalResults( void ) ;
+      void clear( void ) ;
     };
 
     std::vector< ExperimentAnalysisState > searchPath ;
