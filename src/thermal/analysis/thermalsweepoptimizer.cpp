@@ -243,6 +243,20 @@ ThermalSweepOptimizer::solve(
   return ouputResults;
 }
 
+void ThermalSweepOptimizer::captureState( const physicalModel::layer coat )
+{
+  currentState.lthermalLimits = thermalData->get_lthermalLimits( coat ) ;
+  currentState.lthermalCenterDecades =
+      math::xCenterlog10( currentState.lthermalLimits.first,
+                          currentState.lthermalLimits.second );
+
+  reassign( currentState.thermalData, *thermalData ) ;
+  reassign( currentState.thermalSweepSearch, thermalSweepSearch ) ;
+  reassign( currentState.unknownParameters, *unknownParameters ) ;
+  reassign( currentState.coating, (*coreSystem).TBCsystem.coating ) ;
+  currentState.fitquality = thermalData->MSE ;
+}
+
 void ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
