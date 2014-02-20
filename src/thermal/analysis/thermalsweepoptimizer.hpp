@@ -64,6 +64,9 @@ public:
     };
 
     std::vector< ExperimentAnalysisState > searchPath ;
+    struct SearchPath
+    {
+    } searchPath ;
 
     struct Comparison
     {
