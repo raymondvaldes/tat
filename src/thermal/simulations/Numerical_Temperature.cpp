@@ -185,7 +185,7 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
         ss_errorD /= amplitude_T_analytical ;
       }
 
-      ss_error1 = ss_error;
+//      ss_error1 = ss_error;
 
       static const size_t iter_min = 3  ;
     const double TtolPercentage = Ttol * std::fabs(amplitude_T_analytical);

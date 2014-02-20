@@ -360,64 +360,6 @@ double MSEarea(const size_t N, std::vector<double> &func1,
     return sum / N;
 }
 
-double MSEarea1(size_t N, double* func1, double* func2, double* xvar)
-{
-/*
-  This function calculates the area between two curves.  This is done by
-  feeding in two lists of points (func1 and func2) along with the independent
-  variable (xvar).  The lists of points are fitted to an interpolating
-  cubic spline.  This spline is then used to evaluate the integral and area
-  between the lists.
-
-*/
-  ///Startup and initialization
-  using namespace math::numIntegration;
-  struct funcClass *Func1;
-  Func1 = new struct funcClass (xvar, func1, N);
-  struct funcClass *Func2;
-  Func2 = new struct funcClass (xvar, func2, N);
-
-  ///Evaluate Integration
-  double etol = 1e-5;
-  double xStep = etol;
-  double xo;
-  double area = 0;
-
-  for (double xi = xvar[0]; xi <= xvar[N-1]; xi += xStep)
-  {
-    xo = xi;
-    if(Func1->eval(xi) > Func2->eval(xi))
-    {
-      while(Func1->eval(xi) > Func2->eval(xi))
-      {
-          xi += xStep;
-      }
-      area += integrate(Func1, xo, xi) - integrate(Func2, xo, xi);
-      xi -= xStep;
-    }
-
-    else if(Func2->eval(xi) > Func1->eval(xi))
-    {
-      while(Func2->eval(xi) > Func1->eval(xi))
-      {
-          xi += xStep;
-      }
-      area += integrate(Func2, xo, xi) - integrate(Func1, xo, xi);
-      xi -= xStep;
-    }
-
-    else if( std::fabs(Func2->eval(xi) - Func1->eval(xi)) <  etol)
-    {
-      area +=0;
-    }
-  }
-
-  ///Cleanup
-  delete Func1;
-  delete Func2;
-
-  return area;
-}
 
 template< typename Type >
 constexpr Type maximum( Type a, Type b )
