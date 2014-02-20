@@ -250,6 +250,35 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
   return output.str() ;
 }
 
+std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
+  ppEmissionSweep( void )
+{
+  std::ostringstream output ;
+  output << thermalData->prettyPrint( *coating ) ;
+
+  return output.str() ;
+}
+
+void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
+ppExportEmissionSweep( const std::string path )
+{
+  const std::string fullpath =  path + "/" +  "emission.dat" ;
+  const std::string output = ppEmissionSweep() ;
+
+  tools::interface::exportfile( fullpath , output ) ;
+}
+
+void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
+ppExportAll( const std::string path )
+{
+  ppExportEmissionSweep( path ) ;
+  const std::string output = ppFinalResults();
+  tools::interface::exportfile( path + "/" + "pie.dat", output ) ;
+
+  const std::string fullpath =  path + "/" +  "emission.dat" ;
+  const std::string outEmission = ppEmissionSweep() ;
+  tools::interface::exportfile( fullpath , outEmission ) ;
+}
 
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 clear( void )
@@ -262,6 +291,68 @@ clear( void )
   fitquality = 0 ;
 }
 
+std::string ThermalSweepOptimizer::OptimizerOutput::SearchPath::
+prettyPrint( void )
+{
+  std::ostringstream output;
+
+  output << "#|-------------------------------------------------------------\n";
+  output << "#| Search Path                                                 \n";
+  output << "#|                                                             \n";
+  output << "#| columns...                                                  \n";
+  output << "#| lthermal center  :                                          \n";
+  output << "#| lthermal decade  :                                          \n";
+  output << "#| lthermal min     :                                          \n";
+  output << "#| lthermal max     :                                          \n";
+  output << "#| fit-quality      :                                          \n";
+  output << "#| mean parameter error  :                                     \n";
+  output << "#|                                                             \n";
+  output << "#|-------------------------------------------------------------\n";
+
+  for ( ExperimentAnalysisState state : path )
+  {
+    output << state.lthermalCenterDecades.first << "\t"
+           << state.lthermalCenterDecades.second << "\t"
+           << state.lthermalLimits.first << "\t"
+           << state.lthermalLimits.second << "\t"
+           << state.fitquality << "\t"
+           << state.meanParameterError << "\t"
+           << "\n";
+  }
+
+
+  return output.str() ;
+
+
+}
+
+void ThermalSweepOptimizer::OptimizerOutput::SearchPath::
+push_back( const ExperimentAnalysisState &data_in )
+{
+  path.push_back( data_in ) ;
+}
+
+
+void ThermalSweepOptimizer::OptimizerOutput::Comparison::
+prettyPrint( const std::string path )
+{
+  const std::string pre = "before" ;
+  const std::string fullPathpre = path + "/" + pre;
+  filesystem::makeDir( path , pre ) ;
+  before->ppExportAll( fullPathpre ) ;
+
+
+  const std::string post = "after" ;
+  const std::string fullpathPost = path + "/" + post;
+  filesystem::makeDir( path , post ) ;
+  after->ppExportAll( fullpathPost ) ;
+}
+
+void ThermalSweepOptimizer::OptimizerOutput::SearchPath::
+clear( void )
+{
+  path.clear();
+}
 
 void ThermalSweepOptimizer::OptimizerOutput::
   push_back( const ExperimentAnalysisState &data_in )
