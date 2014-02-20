@@ -351,7 +351,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 //    { diag[i++] = TBCsystem.returnVal( unknown.label() ); }
 //  }
 
-
   ///Transform inputs
   size_t j = 0;
   for( const auto& unknown : thermalSweepSearch() )
@@ -370,6 +369,9 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
          static_cast<int>(m), ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
 
   ///Final fit
+  ThermalData updatedThermal = updatedFromXsearch( x ) ;
+  reassign( thermalData , updatedThermal ) ;
+
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
   coreSystem->updatefromBestFit( (*unknownParameters)() );  
 
