@@ -62,14 +62,19 @@ public:
       std::string pprint( void ) ;
       void ppThermalSweep ( const std::string folder) ;
     };
-    std::vector< SearchData > searchPath;
+    std::shared_ptr< ThermalData > bestFitThermal ;
+    std::shared_ptr< physicalModel::layer > bestFitCoat ;
+
+    std::vector< SearchData > searchPath ;
+    std::shared_ptr< math::estimation::unknownList > myUnknowns ;
+
 
     /// Post-PIE analysis methods
+    std::string ppThermalSweep ( void );
     std::string ppSearchPath( const labels::Name input ) ;
     std::string ppEmissionLimits( const labels::Name input ) ;
     void pp2Folder(const std::string path );
     void clear( void ) ;
-    std::shared_ptr< math::estimation::unknownList > myUnknowns;
 
   private:
     SearchData retrieveSearchData(const labels::Name input ) ;
