@@ -199,6 +199,35 @@ void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path )
 }
 
 
+std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
+  ppFinalResults( void )
+{
+  std::ostringstream output ;
+
+  output << unknownParameters->prettyPrint() ;
+
+  const double lthermCenter = lthermalCenterDecades.first;
+  const double lthermDecade = lthermalCenterDecades.second;
+
+  const double lthermMin = lthermalLimits.first;
+  const double lthermMax = lthermalLimits.second;
+
+  output.setf( std::ios::fixed, std::ios::floatfield );
+  output << std::setprecision(3);
+  output << "| lthermal center: "<< std::setw(8) << std::right
+         << lthermCenter << "               |\n";
+  output << "| lthermal decades:"<< std::setw(8) << std::right
+         << lthermDecade << "               |\n";
+  output << "| lmin:     "<< std::setw(8) << std::right
+         << lthermMin << "                      |\n";
+  output << "| lmax:     "<< std::setw(8) << std::right
+         << lthermMax << "                      |\n";
+  output << "*-----------------------------------------*\n";
+
+  return output.str() ;
+}
+
+
 ThermalSweepOptimizer::OptimizerOutput
 ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
