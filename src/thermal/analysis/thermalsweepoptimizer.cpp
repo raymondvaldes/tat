@@ -82,7 +82,7 @@ void ThermalSweepOptimizer::
   //Update parameters with current bestfits by transforming x
   math::estimation::unknownList updatedInput;
   size_t i = 0;
-  for( auto& unknown :  thermalSweepSearch() )
+  for( auto& unknown : thermalSweepSearch() )
   {
     const double val = math::estimation::
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
