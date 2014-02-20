@@ -214,6 +214,7 @@ void ThermalSweepOptimizer::OptimizerOutput::clear( void )
 
 void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path )
 {
+  results.prettyPrint( path );
 
 }
 
