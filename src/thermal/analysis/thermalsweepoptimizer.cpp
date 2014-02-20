@@ -139,44 +139,8 @@ void ThermalSweepOptimizer::pieAnalysis(void)
 
 }
 
-std::string ThermalSweepOptimizer::prettyPrintThermalRange(
-    const physicalModel::layer coatUpdate )
-{
-//  const double xCenter = xSweep.first ;
-//  const double xRange = xSweep.second ;
-
-  std::ostringstream output ;
-
-  updatedLimits =
-  thermalData->get_lthermalLimits( coatUpdate ) ;
-
-  std::pair<double, double> CenterX =
-      math::xCenterlog10( updatedLimits.first, updatedLimits.second );
-
-
-  output.setf( std::ios::fixed, std::ios::floatfield );
-  output << std::setprecision(3);
-  output << "*-----------------------------------------*\n";
-
-  output << "| lthermal center: "<< std::setw(8) << std::right
-         << CenterX.first << "               |\n";
-  output << "| lthermal decades:"<< std::setw(8) << std::right
-         << CenterX.second << "               |\n";
-  output << "| lmin:     "<< std::setw(8) << std::right
-         << updatedLimits.first << "                      |\n";
-  output << "| lmax:     "<< std::setw(8) << std::right
-         << updatedLimits.second << "                      |\n";
-
-//  output << "| Data ctr: "<< std::setw(8) << std::right
-//         << xCenter << "                      |\n";
-//  output << "| Data used:"<< std::setw(8) << std::right
-//         << xRange*100 << "%                     |\n";
-
-  output << "*-----------------------------------------*\n";
-
-  return output.str() ;
-}
-
+  std::cout << currentState.ppFinalResults() << "\n" ;
+ }
 
 
 double ThermalSweepOptimizer::penalty(
