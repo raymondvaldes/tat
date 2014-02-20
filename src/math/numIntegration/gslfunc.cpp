@@ -51,7 +51,12 @@ funcClass::~funcClass(void)
 
 double funcClass::eval( const double xpos ) const
 {
-  if( xpos < xvar[0] || xpos > xvar[N-1] )
+  const double tol = 10e-10;
+  double xposNew = xpos;
+  if( std::fabs( xpos - xvar[0]   ) < tol ) xposNew = xvar[0] + tol;
+  if( std::fabs( xpos - xvar[N-1] ) < tol ) xposNew = xvar[N-1] - tol;
+
+  if( xposNew < xvar[0] || xposNew > xvar[N-1] )
   {
     std::cout << "outside range!!\n\n"
     <<xpos<<" is outside of range "<<xvar[0]<<"\t"<<xvar[N-1]<<"\n";
@@ -59,7 +64,7 @@ double funcClass::eval( const double xpos ) const
     return 0;
   }
 
-  return gsl_spline_eval( spline, xpos, acc );
+  return gsl_spline_eval( spline, xposNew, acc );
 }
 
 double funcClass::CCallback( double d, void*params )
