@@ -24,7 +24,9 @@ License
 \*----------------------------------------------------------------------------*/
 #include <vector>
 #include <cstring>
+#include <cmath>
 #include "math/numIntegration/gslfunc.hpp"
+
 namespace math{
 namespace numIntegration{
 
