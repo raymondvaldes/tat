@@ -48,7 +48,6 @@ public:
   public:
     struct ExperimentAnalysisState
     {
-    public:
       std::shared_ptr< ThermalData > thermalData ;
       std::shared_ptr< physicalModel::layer > coating ;
       std::shared_ptr<math::estimation::unknownList> unknownParameters ;
