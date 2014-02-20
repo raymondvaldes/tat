@@ -213,15 +213,15 @@ void PIE::parameterIntervalEstimates( void )
   size_t i = 0;
   for( auto& newListVect : unknownParaLists )
   {
+    ///search space
+    (*unknownParameters)( newListVect ) ;
+
     ///identifiy fixed parameter and update search bound
     const unknown myfixedParameter =  originalListParams[i];
     const enum physicalModel::labels::Name mylabel = myfixedParameter.label();
     const double bestfit = myfixedParameter.bestfit();
     const double lowerbound = myfixedParameter.lowerBound();
     const double upperbound = myfixedParameter.upperBound();
-
-    ///search space
-    (*unknownParameters)( newListVect ) ;
 
     Gfunc( bestfit , mylabel );
 //    std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";

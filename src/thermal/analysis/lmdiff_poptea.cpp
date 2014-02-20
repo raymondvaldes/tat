@@ -71,8 +71,6 @@ LMA::~LMA(void){}
 
 
 
-
-
 void LMA::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
