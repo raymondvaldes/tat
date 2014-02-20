@@ -373,18 +373,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
   coreSystem->updatefromBestFit( (*unknownParameters)() );  
 
-//  std::vector<double> lthermalsVector(
-//        thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ) ;
-
-//  for(size_t i=0; i < thermalData->size() ; i++ )
-//  {
-//    std::cout << lthermalsVector[i] << "\t"
-//              << thermalData->experimentalEmission[i] << "\t"
-//              << thermalData->predictedEmission[i] << "\n" ;
-//  }
-
-  reassign(  thermalData, *fullRangeThermalData );
-
   delete [] qtf;
   delete [] wa1;
   delete [] wa2;
