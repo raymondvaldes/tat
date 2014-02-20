@@ -75,7 +75,6 @@ double MSE(const size_t N, std::vector<double> &emissionExp,
            std::vector<double> &emissionEst);
 double MSE(const size_t N, const double*emissionExp,
                     const double* emissionEst);
-double MSEarea1(size_t N, double* func1, double* func2, double* xvar);
 
 double MSEarea(const size_t N, std::vector<double> &func1,
                std::vector<double> &func2);
