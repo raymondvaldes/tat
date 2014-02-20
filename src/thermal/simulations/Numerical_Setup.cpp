@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  		        |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -179,17 +179,11 @@ double gspatial(double z, double opt, double lambda, double R1, double Iplus0,
   return 0;
   }
 
-
-
-
-
-
-
-void solveMatrix(const size_t n, const std::vector<double>& b,
-                 const std::vector<double>& d,
-                 const std::vector<double>& a,
-                 const std::vector<double>& C,
-                 std::vector<double>& u)
+void solveMatrix( const size_t n, const std::vector<double>& b,
+                  const std::vector<double>& d,
+                  const std::vector<double>& a,
+                  const std::vector<double>& C,
+                  std::vector<double>& u )
 {
      /**
      * Impliment Thomas Algorithm to solve matrix.
