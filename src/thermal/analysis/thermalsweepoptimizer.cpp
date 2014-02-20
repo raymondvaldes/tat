@@ -58,8 +58,7 @@ ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {
 
 }
 
-std::pair< double, double >
-ThermalSweepOptimizer::updateVal( const std::pair<double, double> xSweep_in )
+std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
 {
   double thermalCenter = xSweep_in.first;
   double thermalRange = xSweep_in.second;
