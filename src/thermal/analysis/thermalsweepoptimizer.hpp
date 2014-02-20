@@ -59,18 +59,26 @@ public:
       std::pair<double, double> lthermalCenterDecades ;
 
       std::string ppFinalResults( void ) ;
+      std::string ppEmissionSweep( void ) ;
+      void ppExportEmissionSweep( const std::string path ) ;
+      void ppExportAll( const std::string path );
+
       void clear( void ) ;
     };
 
-    std::vector< ExperimentAnalysisState > searchPath ;
     struct SearchPath
     {
+      std::vector< ExperimentAnalysisState > path ;
+      void clear( void ) ;
+      void push_back( const ExperimentAnalysisState &data_in ) ;
+      std::string prettyPrint( void ) ;
     } searchPath ;
 
     struct Comparison
     {
       std::shared_ptr< ExperimentAnalysisState > before ;
       std::shared_ptr< ExperimentAnalysisState > after ;
+      void prettyPrint( const std::string path );
     } results ;
 
     /// Post-PIE analysis methods
