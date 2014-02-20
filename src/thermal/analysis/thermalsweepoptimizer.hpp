@@ -40,7 +40,67 @@ namespace analysis{
 
 
 class ThermalSweepOptimizer: private LMA_BASE
-{
+{  
+public:
+  ///output object
+  class OptimizerOutput
+  {
+  public:
+    class ExperimentAnalysisState
+    {
+    public:
+      std::shared_ptr< ThermalData > thermalData ;
+      std::shared_ptr< physicalModel::layer > coating ;
+      std::shared_ptr<math::estimation::unknownList> unknownParameters ;
+      std::shared_ptr<math::estimation::unknownList> thermalSweepSearch ;
+      double fitquality ;
+
+      std::pair<double, double> lthermalLimits;
+      std::pair<double, double> lthermalCenterDecades;
+
+      void clear( void ) ;
+
+      std::string ppFinalResults( void ) ;
+    };
+
+    std::vector< ExperimentAnalysisState > searchPath ;
+
+    struct Comparison
+    {
+      std::shared_ptr<ExperimentAnalysisState > before;
+      std::shared_ptr<ExperimentAnalysisState > after;
+    } results ;
+
+    /// Post-PIE analysis methods
+    void push_back( const ExperimentAnalysisState &data_in ) ;
+    void pp2Folder( const std::string path ) ;
+    void clear( void ) ;
+    void addBefore( ExperimentAnalysisState input );
+    void addAfter( ExperimentAnalysisState input );
+
+  } ouputResults;
+
+  // constructors and destructors
+  explicit ThermalSweepOptimizer(
+      const math::estimation::settings &Settings_in,
+      const ThermalData &thermalData_in,
+      const math::estimation::unknownList &unknownParameters_,
+      const std::shared_ptr< LMA > &bestfitMethod_in,
+      const std::shared_ptr< PIE > &intervalEstimates_in,
+      const math::estimation::unknownList thermalSweepSearch_in,
+      const std::vector< physicalModel::labels > sweepOptimizationGoal_in,
+      const physicalModel::layer coating ) ;
+  ~ThermalSweepOptimizer( void ) ;
+
+  // public solver (yes just give it all this shit and it'll do the work for u)
+  OptimizerOutput solve(
+     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+     const std::shared_ptr<ThermalData> &thermalData_in,
+     const std::shared_ptr<Kernal> &coreSystem_in,
+     const std::shared_ptr< LMA > &bestfitMethod_in,
+     const std::shared_ptr< PIE > &intervalEstimates_in
+     ) ;
+
 private:
   // overide methods inherited
   void updateWorkSpace( const size_t Lend , const size_t N ) override;
@@ -64,62 +124,22 @@ private:
   std::shared_ptr< physicalModel::layer > coatingTOinterpretFullRange;
   std::shared_ptr< ThermalData > fullRangeThermalData;
   std::pair<double, double> xSweep;
-
   std::pair<double, double> updatedLimits;
 
   // worker methods
   ThermalData sliceThermalData( const double xCenter, const double xRange,
                                 const physicalModel::layer updatedCoating ) ;
-  std::pair< double, double >
+  std::pair< double, double > updateSweep( void ) ;
   void pieAnalysis(void);
   double penalty( const std::pair<double, double>  thermalCenterRange );
+  ThermalData updatedFromXsearch( const double *x );
+
+  // current state
+  OptimizerOutput::ExperimentAnalysisState currentState;
+  void captureState(const layer coat );
 
   // solvers
   void optimizer( int *info, int *nfev );
-
-public:
-  ///output object
-  class OptimizerOutput
-  {
-  public:
-    class ExperimentAnalysisState
-    {
-      std::shared_ptr< ThermalData > thermalData ;
-      std::shared_ptr<math::estimation::unknownList> unknownParameters ;
-      std::shared_ptr<math::estimation::unknownList> thermalSweepSearch ;
-      std::shared_ptr< physicalModel::layer > coating ;
-      double error;
-    };
-    std::vector< ExperimentAnalysisState > searchPath ;
-
-    /// Post-PIE analysis methods
-    void pp2Folder(const std::string path ) ;
-    void clear( void ) ;
-    std::shared_ptr< math::estimation::unknownList > myUnknowns;
-  private:
-  } ouputResults;
-
-  // constructors and destructors
-  explicit ThermalSweepOptimizer(
-      const math::estimation::settings &Settings_in,
-      const ThermalData &thermalData_in,
-      const math::estimation::unknownList &unknownParameters_,
-      const std::shared_ptr< LMA > &bestfitMethod_in,
-      const std::shared_ptr< PIE > &intervalEstimates_in,
-      const math::estimation::unknownList thermalSweepSearch_in,
-      const std::vector< physicalModel::labels > sweepOptimizationGoal_in,
-      const physicalModel::layer coating ) ;
-  ~ThermalSweepOptimizer( void ) ;
-
-  // public solver (yes just give it all this shit and it'll do the work for u)
-  OptimizerOutput solve(
-     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
-     const std::shared_ptr<ThermalData> &thermalData_in,
-     const std::shared_ptr<Kernal> &coreSystem_in,
-     const std::shared_ptr< LMA > &bestfitMethod_in,
-     const std::shared_ptr< PIE > &intervalEstimates_in
-     ) ;
-  std::string prettyPrintThermalRange( const physicalModel::layer coatUpdate ) ;
 };
 
 }}
