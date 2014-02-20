@@ -129,8 +129,11 @@ void ThermalSweepOptimizer::
 
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
+  PIE::PIEAnalysisOutput output =
   intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
                             bestfitMethod ) ;
+  captureState( coreSystem->TBCsystem.coating );
+
 
   for(size_t i = 0; i < 60 ; i ++)
     std::cout << "\n";
