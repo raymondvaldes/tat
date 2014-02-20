@@ -113,6 +113,13 @@ void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 {
   using namespace physicalModel;
 
+  std::string pieResults = myUnknowns->prettyPrint();
+  tools::interface::exportfile( path + "/" + "pie.dat" , pieResults ) ;
+
+  std::string bestfit = ppThermalSweep();
+  tools::interface::exportfile( path + "/" + "thermalSweep.dat" , bestfit ) ;
+
+
   for( math::estimation::unknown&parameter : (*myUnknowns)() )
   {
     const physicalModel::labels myLabel = parameter.getLabel();
@@ -134,6 +141,11 @@ void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 
 }
 
+std::string PIE::PIEAnalysisOutput::ppThermalSweep( void )
+{
+  const std::string output = bestFitThermal->prettyPrint( *bestFitCoat ) ;
+  return output;
+}
 
 std::string PIE::PIEAnalysisOutput::
 ppSearchPath( const physicalModel::labels::Name input )
@@ -177,6 +189,8 @@ PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
   ///repeat best fit and save the info for output analysis
   bestFit() ;
   ThermalSweepTEMP.bestfit = *thermalData ;
+  reassign ( ouputResults.bestFitThermal , *thermalData ) ;
+  reassign ( ouputResults.bestFitCoat , coreSystem->TBCsystem.coating ) ;
 
   parameterIntervalEstimates() ;
   reassign( ouputResults.myUnknowns, *unknownParameters ) ;
