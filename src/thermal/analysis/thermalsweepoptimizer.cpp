@@ -134,11 +134,6 @@ void ThermalSweepOptimizer::pieAnalysis(void)
 
   for(size_t i = 0; i < 60 ; i ++)
     std::cout << "\n";
-  std::cout <<unknownParameters->prettyPrint() ;
-  std::cout << prettyPrintThermalRange( coreSystem->TBCsystem.coating ) ;
-
-}
-
   std::cout << currentState.ppFinalResults() << "\n" ;
  }
 
