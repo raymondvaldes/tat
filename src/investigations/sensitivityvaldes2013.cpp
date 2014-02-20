@@ -59,13 +59,12 @@ void run( const filesystem::directory dir )
   pieOutput.pp2Folder( path ) ;
   std::cout << poptea.ppUnknownParameters() << "\n" ;
 
-
   /// PartB (experimental Optimizer)
   const std::string partB = "/partB_expOptimize" ;
   dir.mkdir( partB ) ;
 
   ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization();
-  const std::string pathB = dir.abs( partA ) ;
+  const std::string pathB = dir.abs( partB ) ;
   outputData.pp2Folder( pathB ) ;
 
   return;
