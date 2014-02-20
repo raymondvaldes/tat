@@ -71,7 +71,6 @@ private:
   ThermalData sliceThermalData( const double xCenter, const double xRange,
                                 const physicalModel::layer updatedCoating ) ;
   std::pair< double, double >
-  updateVal(const std::pair<double, double> xSweep) ;
   void pieAnalysis(void);
   double penalty( const std::pair<double, double>  thermalCenterRange );
 
