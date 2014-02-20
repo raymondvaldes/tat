@@ -46,7 +46,7 @@ public:
   class OptimizerOutput
   {
   public:
-    class ExperimentAnalysisState
+    struct ExperimentAnalysisState
     {
     public:
       std::shared_ptr< ThermalData > thermalData ;
