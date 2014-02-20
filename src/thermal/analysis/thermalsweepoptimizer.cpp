@@ -140,7 +140,6 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
-  PIE::PIEAnalysisOutput output =
   intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
                             bestfitMethod ) ;
   captureState( coreSystem->TBCsystem.coating ) ;
@@ -149,7 +148,7 @@ void ThermalSweepOptimizer::pieAnalysis(void)
   for(size_t i = 0; i < 60 ; i ++)
     std::cout << "\n";
   std::cout << currentState.ppFinalResults() << "\n" ;
- }
+}
 
 
 double ThermalSweepOptimizer::penalty(
