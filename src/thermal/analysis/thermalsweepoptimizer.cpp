@@ -248,6 +248,7 @@ void ThermalSweepOptimizer::solve(
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in )
 {
+  ///at this point all the input objects have been set
   unknownParameters = unknownParameters_in;
   thermalData = thermalData_in;
   coreSystem = coreSystem_in;
@@ -255,8 +256,25 @@ void ThermalSweepOptimizer::solve(
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  );
   fullRangeThermalData = thermalData;
 
-  ///at this point all the input objects have been set and are now available
-  optimizer( &info, &nfev );
+  /// pre analysis on full-range
+  double xC = 0.5 ;
+  double xR = 1 ;
+  const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating ) ;
+  const ThermalData updatedThermal = sliceThermalData( xC, xR, coatUpdate ) ;
+  reassign( thermalData , updatedThermal ) ;
+
+  pieAnalysis() ;
+  ouputResults.addBefore( currentState ) ;
+
+  /// optimization run
+  optimizer( &info, &nfev ) ;
+
+  /// post analysis
+  pieAnalysis() ;
+  ouputResults.addAfter( currentState ) ;
+
+  /// now that all data is saved - reset thermalData to fullRange
+  reassign(  thermalData, *fullRangeThermalData ) ;
 }
 
 
