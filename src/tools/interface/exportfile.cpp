@@ -37,7 +37,7 @@ void exportfile( const std::string fullpath, const std::string input )
 {
   std::ofstream myfile ;
   myfile.open( fullpath ) ;
-  myfile  << input ;
+  myfile << input ;
   myfile.close() ;
 }
 
