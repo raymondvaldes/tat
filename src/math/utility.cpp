@@ -40,7 +40,7 @@ double genWseed( const double x_min, const double x_max, const unsigned seed )
   return dis(gen) ;
 }
   
-double x_ini(const double x_min, const double x_max)
+double x_ini( const double x_min, const double x_max )
 {
 /*
     Creates a random parameter between two open bounds
