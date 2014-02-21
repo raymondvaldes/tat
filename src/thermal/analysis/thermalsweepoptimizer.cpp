@@ -174,7 +174,7 @@ double ThermalSweepOptimizer::penalty(
       errorModifier = endPos - 1 ;
     }
 
-    error += pow( std::abs( floor( errorModifier*100 ) ) , 2 ) ;
+    error += std::pow( std::fabs( std::floor( errorModifier*100 ) ) , 2 ) ;
   }
 
   return error;
@@ -319,11 +319,7 @@ prettyPrint( void )
            << state.meanParameterError << "\t"
            << "\n";
   }
-
-
   return output.str() ;
-
-
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::SearchPath::
