@@ -173,6 +173,14 @@ ThermalSweepOptimizer::OptimizerOutput Poptea::optimization(void)
   return analysis.optimization( unknownParameters , thermalData, coreSystem);
 }
 
+std::string Poptea::thermalSweepMap(const size_t iter)
+{
+  BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" ) ;
+  return analysis.montecarloMap( unknownParameters , thermalData, coreSystem,
+                                 iter) ;
+}
+
+
 std::string Poptea::ppUnknownParameters ( void )
 {
   return unknownParameters->prettyPrint();
