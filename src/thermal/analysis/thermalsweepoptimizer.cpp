@@ -410,7 +410,19 @@ std::string ThermalSweepOptimizer::montecarloMap(
     coreSystem->updatefromBestFit( (*unknownBestFit)() );
   }
 
+
   std::ostringstream output;
+
+  output << "#|-------------------------------------------------------------\n";
+  output << "#| Contour Map of Experimental Optimization                    \n";
+  output << "#|                                                             \n";
+  output << "#| columns...                                                  \n";
+  output << "#| lthermal center  :                                          \n";
+  output << "#| lthermal decade  :                                          \n";
+  output << "#| mean parameter error  :                                     \n";
+  output << "#|                                                             \n";
+  output << "#|-------------------------------------------------------------\n";
+
   for( OptimizerOutput::ExperimentAnalysisState&state :
        ouputResults.searchPath.path )
   {
