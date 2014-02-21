@@ -388,6 +388,38 @@ std::string ThermalSweepOptimizer::montecarloMap(
   coreSystem->updatefromBestFit( (*unknownParameters)() );
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
+  //This function will output a table of values from maping out
+  constexpr double min = 0 ;
+  constexpr double max = 1 ;
+
+  ouputResults.clear();
+  for( size_t i = 0; i < iIter ; ++i )
+  {
+    ///create random start points and transform them
+    double xinitial[2] = { math::x_ini( min,max ) , math::x_ini( min,max ) } ;
+    double x[2] = {0};
+
+    for(size_t j =0 ; j < 2 ; ++j)
+      { x[j] = math::estimation::kx_limiter2( xinitial[j], min, max ) ; }
+
+    double fvec[2] = {0} ;
+    ThermalProp_Analysis( x , fvec ) ;
+
+    ///reset unknown parameters
+    reassign( unknownParameters , *unknownBestFit ) ;
+    coreSystem->updatefromBestFit( (*unknownBestFit)() );
+  }
+
+  std::ostringstream output;
+  for( OptimizerOutput::ExperimentAnalysisState&state :
+       ouputResults.searchPath.path )
+  {
+    output <<
+    state.lthermalCenterDecades.first   << "\t" <<
+    state.lthermalCenterDecades.second  << "\t" <<
+    state.meanParameterError << "\n";
+  }
+  return output.str();
 
 }
 
