@@ -386,6 +386,8 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromBestFit( (*unknownParameters)() );
+  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
+
 
 }
 
