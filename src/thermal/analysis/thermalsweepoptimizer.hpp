@@ -50,8 +50,8 @@ public:
     {
       std::shared_ptr< ThermalData > thermalData ;
       std::shared_ptr< physicalModel::layer > coating ;
-      std::shared_ptr<math::estimation::unknownList> unknownParameters ;
-      std::shared_ptr<math::estimation::unknownList> thermalSweepSearch ;
+      std::shared_ptr< math::estimation::unknownList > unknownParameters ;
+      std::shared_ptr< math::estimation::unknownList > thermalSweepSearch ;
 
       double fitquality ;
       double meanParameterError;
