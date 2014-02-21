@@ -136,9 +136,17 @@ void unknownList::addUnknown(enum physicalModel::labels::Name name,
                              const double lower,
                              const double upper, const double initialGuess)
 {
-  BOOST_ASSERT( initialGuess > lower && initialGuess  < upper);
+  const double tol = 1e-12;
+  double myInitialGuess = initialGuess;
+  if ( std::fabs( initialGuess - upper) < tol )
+    {myInitialGuess = upper - tol;}
 
-  vectorUnknowns.push_back ( unknown( name, lower, upper, initialGuess ) );
+  if ( std::fabs( initialGuess - lower) < tol )
+    {myInitialGuess = lower + tol;}
+
+  BOOST_ASSERT( myInitialGuess > lower && myInitialGuess  < upper);
+
+  vectorUnknowns.push_back ( unknown( name, lower, upper, myInitialGuess ) );
   return;
 }
 
