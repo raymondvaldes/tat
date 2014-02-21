@@ -393,12 +393,12 @@ void ThermalSweepOptimizer::solve(
     const std::shared_ptr<Kernal> &coreSystem_in )
 {
   ///at this point all the input objects have been set
-  unknownParameters = unknownParameters_in;
-  thermalData = thermalData_in;
-  coreSystem = coreSystem_in;
+  unknownParameters = unknownParameters_in ;
+  thermalData = thermalData_in ;
+  coreSystem = coreSystem_in ;
 
-  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  );
-  fullRangeThermalData = thermalData;
+  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating ) ;
+  fullRangeThermalData = thermalData ;
 
   /// pre analysis on full-range
   double xC = 0.5 ;
