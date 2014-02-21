@@ -19,7 +19,7 @@
 		<gtol>1e-08</gtol>
 		<maxfev>100000</maxfev>
 		<epsfcn>0.0001</epsfcn>
-		<factor>1</factor>
+		<factor>10</factor>
 		<mode>1</mode>
 		<nprint>0</nprint>
 	</ParaEstSettings>
@@ -79,16 +79,16 @@
 			
 			<unknown>
 				<label>thermalCenter</label>
-				<min>.2</min>
-				<max>.8</max>
-				<initialGuess>.5</initialGuess>
+				<min>.05</min>
+				<max>.95</max>
+				<initialGuess>.6</initialGuess>
 			</unknown>
 
 			<unknown>
 				<label>thermalRange</label>
-				<min>.2</min>
+				<min>.05</min>
 				<max>1</max>
-				<initialGuess>.9</initialGuess>
+				<initialGuess>.90</initialGuess>
 			</unknown>		
 			
 			
