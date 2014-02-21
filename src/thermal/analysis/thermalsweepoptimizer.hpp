@@ -135,6 +135,8 @@ private:
   std::shared_ptr< ThermalData > fullRangeThermalData;
   std::pair<double, double> xSweep;
   std::pair<double, double> updatedLimits;
+  std::shared_ptr< math::estimation::unknownList > unknownBestFit;
+
 
   // worker methods
   ThermalData sliceThermalData( const double xCenter, const double xRange,

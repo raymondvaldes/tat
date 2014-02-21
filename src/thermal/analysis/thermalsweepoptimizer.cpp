@@ -373,6 +373,8 @@ ThermalSweepOptimizer::solve(
   return ouputResults;
 }
 
+  reassign ( unknownBestFit , *unknownParameters  ) ;
+  coreSystem->updatefromBestFit( (*unknownParameters)() );
 void ThermalSweepOptimizer::captureState( const physicalModel::layer coat )
 {
   currentState.lthermalLimits = thermalData->get_lthermalLimits( coat ) ;
