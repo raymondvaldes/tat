@@ -373,8 +373,18 @@ ThermalSweepOptimizer::solve(
   return ouputResults;
 }
 
+std::string ThermalSweepOptimizer::montecarloMap(
+    const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+    const std::shared_ptr<ThermalData> &thermalData_in,
+    const std::shared_ptr<Kernal> &coreSystem_in,
+    const std::shared_ptr< LMA > &bestfitMethod_in,
+    const std::shared_ptr< PIE > &intervalEstimates_in, const size_t iIter )
+{
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromBestFit( (*unknownParameters)() );
+
+}
+
 void ThermalSweepOptimizer::captureState( const physicalModel::layer coat )
 {
   currentState.lthermalLimits = thermalData->get_lthermalLimits( coat ) ;
