@@ -380,6 +380,10 @@ std::string ThermalSweepOptimizer::montecarloMap(
     const std::shared_ptr< LMA > &bestfitMethod_in,
     const std::shared_ptr< PIE > &intervalEstimates_in, const size_t iIter )
 {
+  //The purpose here is to get the "best possible fit" and use that as my ref.
+  solve( unknownParameters_in, thermalData_in, coreSystem_in, bestfitMethod_in,
+         intervalEstimates_in ) ;
+
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromBestFit( (*unknownParameters)() );
 
