@@ -305,9 +305,6 @@ newThermalSweepLimits( const double center, const double range,
   BOOST_ASSERT( center > 0 && center < 1) ;
   BOOST_ASSERT( range > 0 && range <= 1 ) ;
 
-  const double min = limits.first;
-  const double max = limits.second;
-
   double strPos = center - range/2;
   double endPos = center + range/2;
 
@@ -321,6 +318,9 @@ newThermalSweepLimits( const double center, const double range,
     strPos = 2 * center  - 1;
     endPos = .999;
   }
+
+  const double min = limits.first;
+  const double max = limits.second;
 
   const double start = math::valFROMpercentileLog10( strPos, min, max ) ;
   const double end   = math::valFROMpercentileLog10( endPos, min, max ) ;
