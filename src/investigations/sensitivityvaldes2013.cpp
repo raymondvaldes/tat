@@ -67,7 +67,7 @@ void run( const filesystem::directory dir )
   const std::string pathB = dir.abs( partB ) ;
   outputData.pp2Folder( pathB ) ;
 
-  std::string thermalSweepMap = poptea.thermalSweepMap( 1000 ) ;
+  std::string thermalSweepMap = poptea.thermalSweepMap( 2000 ) ;
   std::string path2thermalMap = pathB + "/" + "thermalSweepMap.dat";
   tools::interface::exportfile( path2thermalMap , thermalSweepMap ) ;
 

@@ -298,6 +298,19 @@ CRfromSweepLimits( const double lstart, const double lend,
   return output;
 }
 
+bool checkLimits( const double center, const double range )
+{
+  bool run = true;
+  double strPos = center - range / 2 ;
+  double endPos = center + range / 2 ;
+
+  if( strPos < 0 ||  endPos > 1 )
+    { run = false; }
+
+  return run;
+}
+
+
 std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                        const std::pair<double, double> limits )

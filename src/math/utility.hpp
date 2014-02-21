@@ -93,7 +93,7 @@ CRfromSweepLimits( const double lstart, const double lend,
 std::pair<double, double> xCenterlog10( const double lmin, const double lmax ) ;
 
 
-
+bool checkLimits( const double center, const double range );
 
 
 }
