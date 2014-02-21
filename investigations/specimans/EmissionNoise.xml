@@ -5,7 +5,7 @@
 		<stretching-parameter>		2.95		</stretching-parameter>
 		<positive> 			1 		</positive>
 		<monotonic> 			1 		</monotonic>
-		<bias-side>			-1		</bias-side>
-		<random-noise>			.001		</random-noise>
+		<bias-side>			0		</bias-side>
+		<random-noise>			.0005		</random-noise>
 	</settings>
 </simulated-emission>
