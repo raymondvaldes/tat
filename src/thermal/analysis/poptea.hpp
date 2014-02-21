@@ -64,6 +64,7 @@ public:
   double bestFit( void ) ;
   thermal::analysis::PIE::PIEAnalysisOutput PIE( void ) ;
   ThermalSweepOptimizer::OptimizerOutput optimization( void ) ;
+  std::string thermalSweepMap( const size_t iter ) ;
   std::vector<double> thermalSweep( void ) const ;
 
   /// Printers
