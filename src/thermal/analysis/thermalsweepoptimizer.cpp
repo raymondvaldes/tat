@@ -396,9 +396,18 @@ std::string ThermalSweepOptimizer::montecarloMap(
   for( size_t i = 0; i < iIter ; ++i )
   {
     ///create random start points and transform them
-    double xinitial[2] = { math::x_ini( min,max ) , math::x_ini( min,max ) } ;
-    double x[2] = {0} ;
+    bool initialGuessPass = false;
+    double xinitial[2];
 
+    while ( !initialGuessPass )
+    {
+      xinitial[0] = math::x_ini( min,max ) ;
+      xinitial[1] = math::x_ini( min,max ) ;
+      initialGuessPass = math::checkLimits( xinitial[0] , xinitial[1] ) ;
+    }
+
+    /// transform it into something thermal_prop can understand
+    double x[2] = {0} ;
     for(size_t j =0 ; j < 2 ; ++j)
       { x[j] = math::estimation::kx_limiter2( xinitial[j], min, max ) ; }
 
