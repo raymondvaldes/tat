@@ -514,7 +514,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 //  {
 //    int i = 0;
 //  for( const class math::estimation::unknown &unknown : thermalSweepSearch())
-//    { diag[i++] = TBCsystem.returnVal( unknown.label() ); }
+//    { diag[i++] = TBCsystem.returnVal( unknown.label() ) ; }
 //  }
 
   ///Transform inputs
