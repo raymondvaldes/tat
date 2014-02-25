@@ -40,23 +40,23 @@ License
 
 int main( int argc, char *argv[ ] )
 {
-  std::cout << "Welcome back, Raymond!\n\n" ;
-  stopwatch globalStopWatch ;
-
   std::string path;
 
   if( tools::programoptions::loadOptions( argc, argv, path ) )
   {
-    std::vector< boost::filesystem::path > samples = filesystem::ls( path );
+    std::cout << "Welcome back, Raymond!\n\n" ;
+    stopwatch globalStopWatch ;
 
-    for( boost::filesystem::path& testSpeciman : samples )
+    std::vector< boost::filesystem::path > samples = filesystem::ls( path );
+    for( const boost::filesystem::path& testSpeciman : samples )
     {
       const std::string specimanPath = testSpeciman.string();
       const filesystem::directory dir(specimanPath ) ;
       investigations::sensitivityvaldes2013::run( dir ) ;
     }
+
+    std::cout << globalStopWatch.readoutLoud() << "\n";
   }
 
-  std::cout << globalStopWatch.readoutLoud() << "\n";
   return 0;
 }
