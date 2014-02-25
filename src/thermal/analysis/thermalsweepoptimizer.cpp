@@ -397,7 +397,7 @@ std::string ThermalSweepOptimizer::montecarloMap(
   {
     ///create random start points and transform them
     bool initialGuessPass = false;
-    double xinitial[2];
+    double xinitial[2] = {0};
 
     while ( !initialGuessPass )
     {
