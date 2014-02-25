@@ -31,36 +31,37 @@ License
 
 namespace math{
 
-double genWseed( const double x_min, const double x_max, const unsigned seed );
+double genWseed( const double x_min, const double x_max, const unsigned seed ) ;
 
-double x_ini(const double x_min, const double x_max);
+double x_ini( const double x_min, const double x_max ) ;
 
-template< typename T1, typename T2>
-bool equalto ( const T1 a, const T2 b)
+template< typename T1, typename T2 >
+bool equalto ( const T1 a, const T2 b )
 {
-const double multi = a > b ? a : b;
-const double multi2 = multi >= 1 ? multi  : 1;
+  const double multi = ( a > b ? a : b ) ;
+  const double multi2 = ( multi >= 1 ? multi  : 1 ) ;
 
-return std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2;
+  return (std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2 );
 }
 
-double arrayMax(const double* x, const size_t I);
-double arrayMin(const double* x, const size_t I);
+double arrayMax( const double* x, const size_t I ) ;
+double arrayMin( const double* x, const size_t I ) ;
 
-double x_ini10(const int x_ref);
-double x_ini10(const double x_ref);
-
-
-int xINTrandom(const int xmin, const int xmax);
-double x_normal(const double Xmean, const double Xstddev, const unsigned seed1);
-double x_normal(const double Xmean, const double Xstddev);
-
-double x_bias(const double Xmean, const double Xstddev);
+double x_ini10( const int x_ref ) ;
+double x_ini10( const double x_ref ) ;
 
 
-double average(const double a, const double b);
-double percentile(const double xmin, const double xmax, const double x);
-double percentilelog10(const double xmin, const double xmax, const double x);
+int xINTrandom( const int xmin, const int xmax ) ;
+double x_normal( const double Xmean, const double Xstddev,
+                 const unsigned seed1 ) ;
+double x_normal( const double Xmean, const double Xstddev ) ;
+
+double x_bias( const double Xmean, const double Xstddev ) ;
+
+
+double average( const double a, const double b ) ;
+double percentile( const double xmin, const double xmax, const double x ) ;
+double percentilelog10( const double xmin, const double xmax, const double x ) ;
 
 
 void range( double* l_thermal, const double l_min, const double l_max,
