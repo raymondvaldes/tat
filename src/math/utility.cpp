@@ -33,11 +33,12 @@ namespace math{
 
 double genWseed( const double x_min, const double x_max, const unsigned seed )
 {
-  std::mt19937 gen ;
-  gen.seed( seed ) ;
+  std::random_device rd;
+  std::mt19937 gen( rd() ) ;
+//  gen.seed( seed ) ;
   std::uniform_real_distribution<> dis( x_min, x_max ) ;
   
-  return dis(gen) ;
+  return dis( gen ) ;
 }
   
 double x_ini( const double x_min, const double x_max )
