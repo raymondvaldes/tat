@@ -214,7 +214,7 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
 //                                      thermalData->predictedEmission );
 
   thermalData->lthermalPredicted =
-      thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating );
+      thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
 //  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
 
   return;

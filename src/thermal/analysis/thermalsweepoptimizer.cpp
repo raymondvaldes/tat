@@ -96,7 +96,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch( const double *x )
 
   const double xCenter = xSweep.first ;
   const double xRange = xSweep.second ;
-  const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating );
+  const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating ) ;
 
   return sliceThermalData( xCenter, xRange, coatUpdate ) ;
 }
@@ -145,9 +145,9 @@ void ThermalSweepOptimizer::pieAnalysis(void)
   captureState( coreSystem->TBCsystem.coating ) ;
 
 
-  for(size_t i = 0; i < 60 ; i ++)
-    std::cout << "\n";
-  std::cout << currentState.ppFinalResults() << "\n" ;
+//  for(size_t i = 0; i < 60 ; i ++)
+//    std::cout << "\n";
+//  std::cout << currentState.ppFinalResults() << "\n" ;
 }
 
 
@@ -401,10 +401,13 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
     while ( !initialGuessPass )
     {
-      xinitial[0] = math::x_ini( min,max ) ;
-      xinitial[1] = math::x_ini( min,max ) ;
+      xinitial[0] = math::x_ini( min, max ) ;
+      xinitial[1] = math::x_ini( min, max ) ;
+//      std::cout << "  checking..." << "\t" << xinitial[0] << "\t" << xinitial[1];
       initialGuessPass = math::checkLimits( xinitial[0] , xinitial[1] ) ;
+//      std::cout << "\t" << initialGuessPass << "\n";
     }
+//    std::cout << xinitial[0] << "\t" << xinitial[1] << "\n";
 
     /// transform it into something thermal_prop can understand
     double x[2] = {0} ;

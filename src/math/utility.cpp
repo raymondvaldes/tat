@@ -236,7 +236,6 @@ std::pair<double, double> xCenterlog10( const double lmin, const double lmax )
   const double center = lmin * std::pow( 10, xlimits / 2 ) ;
 
   const std::pair<double, double> output ( center, xlimits ) ;
-
   return output;
 }
 
@@ -301,14 +300,30 @@ CRfromSweepLimits( const double lstart, const double lend,
 
 bool checkLimits( const double center, const double range )
 {
+  // The center and range are used to charactize the data set.  The following
+  /// are defined:
+  ///
+  /// center: This the center of the data set, where 0 is the beginning of the
+  /// data and 1 is the end of the data.
+  ///
+  /// range: This the the span of the data. It is defined to represent a
+  /// percentage of the data where 0 is 0% of the data and 1 is 100% of the
+  /// data.
+  ///
+  /// For example: given the values of center = 0.3 and range = .25
+  /// The dataset is bounded to ( 0.175 , 0.425 )
+
+  BOOST_ASSERT( center > 0 && center < 1 ) ;
+  BOOST_ASSERT( range > 0 && range <= 1 ) ;
+
   bool run = true;
-  double strPos = center - range / 2 ;
-  double endPos = center + range / 2 ;
+  const double strPos = center - range / 2 ;
+  const double endPos = center + range / 2 ;
 
   if( strPos < 0 ||  endPos > 1 )
-    { run = false; }
+    { run = false ; }
 
-  return run;
+  return run ;
 }
 
 

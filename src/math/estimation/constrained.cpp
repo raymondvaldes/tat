@@ -71,8 +71,7 @@ double kx_limiter1( const double ki )
 double kx_limiter2( const double ki, const double k_min, const double k_max )
 {
   BOOST_ASSERT(ki > k_min  && ki < k_max);
-
-  return std::log( ( (k_max - k_min) / (ki - k_min) ) - 1.);
+  return std::log( ( ( k_max - k_min ) / ( ki - k_min ) ) - 1.) ;
 }
 
 }}
