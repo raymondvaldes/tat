@@ -40,9 +40,8 @@ phase99( const thermal::analysis::Kernal &popteaCore,
   for all ranges of L_end.  This also allows the code to be parallelized at
   a very high level. No further modifications of the code is necessary.*/
 
-  const size_t L_end = omegas.size();
-  std::vector<double> results(L_end);
-  size_t n = 0;
+  const size_t L_end = omegas.size() ;
+  std::vector<double> results(L_end) ;
 
   if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::OneDimNumLin )
   {

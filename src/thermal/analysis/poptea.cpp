@@ -154,7 +154,7 @@ double Poptea::bestFit( void )
 {
   runbestfit = true;
 
-  double output = analysis.bestFit( unknownParameters, thermalData, coreSystem );
+  const double output = analysis.bestFit( unknownParameters, thermalData, coreSystem );
   unknownParameters->prettyPrint();
 
   return  output;

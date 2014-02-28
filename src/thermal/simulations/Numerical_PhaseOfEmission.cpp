@@ -101,8 +101,8 @@ double PhaseOfEmission2DAna( const double omega,
 }
 
 
-double PhaseOfEmission1DAna(const double omega1,
-                            const thermal::analysis::Kernal &popteaCore)
+double PhaseOfEmission1DAna( const double omega1,
+                             const thermal::analysis::Kernal &popteaCore )
 {
   /*See 2004 emission paper equation 19*/
 //  const double omega1 = omegas[flag];

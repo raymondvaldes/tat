@@ -80,12 +80,12 @@ public:
   std::vector< estimation::unknown> vectorUnknowns;
 
   std::vector< estimation::unknown> operator() (void) const;
-  void operator() (std::vector<class estimation::unknown> input) ;
+  void operator() ( const std::vector<class unknown> &input );
 
   void addUnknown( physicalModel::labels::Name name,
                    const double lower, const double upper,
                    const double initialGuess);
-  void addUnknown( class estimation::unknown input );
+  void addUnknown(const unknown &input );
 
   size_t size(void) const;
 

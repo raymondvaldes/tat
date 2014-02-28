@@ -40,7 +40,8 @@ unknown::unknown(enum physicalModel::labels::Name name_,
                  const double lower_,
                  const double upper_,
                  const double initialGuess_)
-    :name(name_), constraint(lower_, upper_), initialGuess(initialGuess_)
+    :name(name_), constraint(lower_, upper_), initialGuess(initialGuess_),
+      bestfitInterval(0,0), bestfitval(initialGuess_)
 {}
 
 unknown::~unknown(){}
@@ -126,7 +127,7 @@ void unknown::bestfitIntervalset ( const double min, const double max)
 
 
 
-void unknownList::addUnknown( class estimation::unknown input )
+void unknownList::addUnknown( const class estimation::unknown &input )
 {
   vectorUnknowns.push_back(input);
 }
@@ -161,15 +162,14 @@ std::vector<class unknown> unknownList::operator() (void) const
   return vectorUnknowns;
 }
 
-void unknownList::operator() (std::vector<class unknown> input)
+void unknownList::operator() ( const std::vector< class unknown > &input )
 {
   vectorUnknowns.clear();
 
-  for( auto& val : input )
+  for( const auto& val : input )
   {
-    vectorUnknowns.push_back(val);
+    addUnknown( val ) ;
   }
-
 }
 
 
@@ -234,7 +234,7 @@ unknownList::prettyPrint( void )
               << std::setw(10) << std::left << 100*val.bestfitIntervalSpread()
               << "|\n";
   }
-  output << "*-----------------------------------------*\n" ;
+  output << "*-----------------------------------------*\n" << std::ends;
 
   return output.str() ;
 }

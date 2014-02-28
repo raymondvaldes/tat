@@ -65,7 +65,7 @@ public:
   void updatefromBestFit( std::vector< math::estimation::unknown > list );
 };
 
-class Kernal loadWorkingDirectoryKernal(const class filesystem::directory dir);
+class Kernal loadWorkingDirectoryKernal(const filesystem::directory &dir);
 
 
 }}

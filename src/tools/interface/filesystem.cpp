@@ -67,7 +67,7 @@ std::string directory::pwd(void) const
   return workingDirectory;
 }
 
-std::string directory::abs(const std::string relativePath) const
+std::string directory::abs( const std::string &relativePath) const
 {
   return workingDirectory + "/" + relativePath;
 }

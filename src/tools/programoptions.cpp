@@ -44,27 +44,27 @@ bool loadOptions( int argc, char** argv, std::string& path )
       ("version,v", "display version information")
       ("build,b","build libraries")
       ;
-  bool run = false;
-  po::variables_map vm;
+  bool run = false ;
+  po::variables_map vm ;
 
   try
   {
     po::store( po::command_line_parser( argc,argv ).options(desc).run(), vm ) ;
   }
-  catch (std::exception const&  ex)
+  catch ( std::exception const&  ex )
   {
-    std::cout << "See help below...\n";
-    version();
-    run = help(desc);
+    std::cout << "See help below...\n" ;
+    version() ;
+    run = help( desc ) ;
   }
 
   po::notify( vm ) ;
 
   if( vm.count( "help" ) )
-    { run = help(desc) ; }
+    { run = help( desc ) ; }
 
   if( vm.count( "run" ) )
-    { run = config(path) ; }
+    { run = config( path ) ; }
 
   if( vm.count( "version" ) )
     { run = version() ; }

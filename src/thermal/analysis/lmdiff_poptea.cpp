@@ -189,34 +189,26 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
     const double val = math::estimation::
         x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
     unknown.bestfitset( val );
-//    std::cerr << " : " << x[i - 1] << "\t" << unknown.lowerBound() << "\t"<<
-//                val << "\t" << unknown.upperBound()  << "\t";
-    updatedInput.addUnknown(unknown);
+    updatedInput.addUnknown( unknown ) ;
   }
-//  std::cerr << "\n";
   (*unknownParameters)( updatedInput() );
 
   coreSystem->updatefromBestFit( (*unknownParameters)()  );
 
   // Estimates the phase of emission at each heating frequency
   thermalData->predictedEmission =
-      thermal::emission::phase99( *coreSystem, thermalData->omegas );
+      thermal::emission::phase99( *coreSystem, thermalData->omegas ) ;
 
   /// Evaluate Objective function
   for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
   {
-     fvec[n] =  thermalData->experimentalEmission[n] -
-                    thermalData->predictedEmission[n] ;
+     fvec[n] =  thermalData->experimentalEmission[n] ;
+     fvec[n] -= thermalData->predictedEmission[n] ;
   }
-
-//  thermalData->MSE =
-//      math::estimation::SobjectiveLS( thermalData->experimentalEmission,
-//                                      thermalData->predictedEmission );
 
   thermalData->lthermalPredicted =
       thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
 //  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
-
   return;
 }
 
