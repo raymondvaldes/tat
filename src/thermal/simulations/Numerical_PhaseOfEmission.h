@@ -42,6 +42,9 @@ private:
   double *temperature = nullptr;
 };
 
+double PhaseOfEmission1DAna( const double omega1, const double L_coat, const double k_c,
+                             const double psi_c, const double lambda, const double R1 ,
+                             const double gamma, const double Esigma);
 
 double PhaseOfEmission2DAna( const double omega,
                              const thermal::analysis::Kernal &popteaCore);

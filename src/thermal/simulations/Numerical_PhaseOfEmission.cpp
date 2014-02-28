@@ -106,54 +106,100 @@ double PhaseOfEmission1DAna( const double omega1,
 {
   /*See 2004 emission paper equation 19*/
 //  const double omega1 = omegas[flag];
+  const double L_coat = popteaCore.TBCsystem.coating.depth ;
+  const double k_c    = popteaCore.TBCsystem.coating.kthermal.offset ;
+  const double psi_c  = popteaCore.TBCsystem.coating.psithermal.offset ;
+
+  const double l = thermal::lthermal( L_coat , k_c , psi_c , omega1 ) ;
   const double lambda = popteaCore.TBCsystem.coating.lambda;
-  const double Esigma = popteaCore.TBCsystem.optical.Emit1;
-  const double gamma  = popteaCore.TBCsystem.gammaEval();
-  const double R1     = popteaCore.TBCsystem.optical.R1;
-  const double L_coat = popteaCore.TBCsystem.coating.depth;
-  const double k_c    = popteaCore.TBCsystem.coating.kthermal.offset;
-  const double psi_c  = popteaCore.TBCsystem.coating.psithermal.offset;
-  const double l = thermal::lthermal(L_coat,k_c,psi_c,omega1);
-
-  constexpr std::complex<double> _i_ (0.0, 1.0);
-
-  std::complex<double>
-  M = 1;
-  M -= sqrt(_i_) * lambda / l * sinh( sqrt(_i_)/l ) / sinh( 1/lambda ) ;
-  M /=  gamma * cosh( sqrt(_i_)/l ) + sinh( sqrt(_i_)/l ) ;
-
-  std::complex<double>
-  N = 1 ;
-  N -= _i_ * lambda * lambda / l / l * cosh( sqrt(_i_)/l ) / cosh( 1/lambda ) ;
-  N /= gamma * cosh( sqrt(_i_)/l ) + sinh( sqrt(_i_)/l ) ;
-
-  std::complex<double>
-  A =  1 + R1 ;
-  A *= 1 - exp(-2/lambda);
-  A *= M;
-
-  std::complex<double>
-  B =  1 - R1 ;
-  B *= 1 + exp(-2/lambda) ;
-  B *= N;
-
-  const std::complex<double>
-  v = Esigma * sqrt(_i_) / l - 4 * gamma ;
+  constexpr std::complex<double> _i_ ( 0.0 , 1.0 ) ;
 
   std::complex<double>
   u  = 2;
   u *=  1. - lambda * lambda / l / l * _i_  ;
 
-  const std::complex<double>
-  t = A + B;
+  const double gamma  = popteaCore.TBCsystem.gammaEval();
+
+  const double Esigma = popteaCore.TBCsystem.optical.Emit1;
+  const std::complex<double> v = Esigma * std::sqrt(_i_) / l - 4 * gamma ;
+
+  const std::complex<double> sinhSQRTi = std::sinh( std::sqrt(_i_)/l ) ;
+  const std::complex<double> coshSQRTi = std::cosh( std::sqrt(_i_)/l ) ;
+
+  std::complex<double>
+  M = 1;
+  M -= std::sqrt(_i_) * lambda / l * sinhSQRTi / std::sinh( 1 / lambda ) ;
+  M /=  gamma * coshSQRTi + sinhSQRTi ;
+
+  std::complex<double>
+  N = 1 ;
+  N -= _i_ * lambda * lambda / l / l * coshSQRTi / std::cosh( 1 / lambda ) ;
+  N /= gamma * coshSQRTi + sinhSQRTi ;
+
+  const double exp2lambda = std::exp(-2/lambda);
+  const double R1     = popteaCore.TBCsystem.optical.R1;
+  std::complex<double>
+  A =  1 + R1 ;
+  A *= 1 - exp2lambda;
+  A *= M;
+
+  std::complex<double>
+  B =  1 - R1 ;
+  B *= 1 + exp2lambda ;
+  B *= N;
+
+  const std::complex<double> t = A + B;
+  const double R1xExp2lambdaPLUS1 = std::fma( -R1, exp2lambda, 1 );
 
   double
-  phase_emit_ana_C = std::arg( v/u*t + 4 * ( 1. - R1 * exp(-2/lambda) ) ) ;
+  phase_emit_ana_C = std::arg( v/u*t + 4 * R1xExp2lambdaPLUS1 ) ;
   phase_emit_ana_C -= M_PI_2;
 
   return phase_emit_ana_C;
 }
 
+double PhaseOfEmission1DAna( const double omega1, const double L_coat, const double k_c,
+                             const double psi_c, const double lambda, const double R1,
+                             const double gamma, const double Esigma )
+{
+  const double l = thermal::lthermal( L_coat , k_c , psi_c , omega1 ) ;
+
+  /*See 2004 emission paper equation 19*/
+  //  const double omega1 = omegas[flag];
+  constexpr std::complex<double> _i_ ( 0.0 , 1.0 ) ;
+  const std::complex<double> SQRTi = std::sqrt(_i_);
+  std::complex<double> M = 1;
+  std::complex<double> N = 1;
+  {
+    const std::complex<double> sinhSQRTi = std::sinh( SQRTi / l ) ;
+    const std::complex<double> coshSQRTi = std::cosh( SQRTi / l ) ;
+    const std::complex<double> gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+
+    M -= SQRTi * lambda / l * sinhSQRTi / std::sinh( 1 / lambda ) ;
+    M /= gammaXcoshSQRTplusSinhSQRT ;
+
+    N -= _i_ * lambda * lambda / l / l * coshSQRTi / std::cosh( 1 / lambda ) ;
+    N /= gammaXcoshSQRTplusSinhSQRT ;
+  }
+
+  const double exp2lambda = std::exp( -2 / lambda ) ;
+  std::complex<double>
+  A =  1 + R1 ;
+  A *= 1 - exp2lambda;
+  A *= M;
+
+  std::complex<double>
+  B =  1 - R1 ;
+  B *= 1 + exp2lambda ;
+  B *= N;
+
+  const std::complex<double> t = A + B;
+  const std::complex<double> u  = 2. * ( 1. - lambda * lambda / l / l * _i_ ) ;
+  const std::complex<double> v = Esigma * SQRTi / l - 4 * gamma ;
+  const double R1xExp2lambdaPLUS1 = std::fma( -R1, exp2lambda, 1 );
+
+  return std::arg( v/u*t + 4 * R1xExp2lambdaPLUS1 ) - M_PI_2 ;
+}
 
 
 Temperature::Temperature(const size_t Nend_, const size_t M2_)
