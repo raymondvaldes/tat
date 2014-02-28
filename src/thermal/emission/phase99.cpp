@@ -43,25 +43,50 @@ phase99( const thermal::analysis::Kernal &popteaCore,
   const size_t L_end = omegas.size() ;
   std::vector<double> results(L_end) ;
 
-  if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::OneDimNumLin )
+  switch( popteaCore.thermalsys.Construct.heat )
   {
-    #pragma omp parallel for schedule(dynamic) private(n)
-    for(n = 0 ; n < L_end ; n++ )
-        { results[n] = PhaseOfEmission1DNum( omegas[n] , popteaCore); }
-  }
+    case thermal::HeatX::OneDimAnalytical:
+    {
+      const double L_coat = popteaCore.TBCsystem.coating.depth ;
+      const double k_c    = popteaCore.TBCsystem.coating.kthermal.offset ;
+      const double psi_c  = popteaCore.TBCsystem.coating.psithermal.offset ;
+      const double lambda = popteaCore.TBCsystem.coating.lambda;
+      const double R1     = popteaCore.TBCsystem.optical.R1;
+      const double gamma  = popteaCore.TBCsystem.gammaEval();
+      const double Esigma = popteaCore.TBCsystem.optical.Emit1;
 
-  if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::TwoDimAnalytical )
-  {
-    #pragma omp parallel for schedule(dynamic) private(n)
-    for(n = 0 ; n < L_end ; n++ )
-      { results[n] = PhaseOfEmission2DAna( omegas[n], popteaCore);}
-  }
+      for( size_t n = 0 ; n < L_end ; ++n )
+        { results[ n ] = PhaseOfEmission1DAna( omegas[n] , L_coat, k_c, psi_c,
+                                               lambda, R1, gamma, Esigma ) ; }
+      break;
+    }
 
-  if( popteaCore.thermalsys.Construct.heat ==  thermal::HeatX::OneDimAnalytical )
-  {
+    case thermal::HeatX::OneDimNumLin:
+    {
+      size_t n = 0;
+      #pragma omp parallel for schedule(dynamic) private(n)
       for(n = 0 ; n < L_end ; n++ )
-        { results[n] = PhaseOfEmission1DAna( omegas[n] , popteaCore); }
+          { results[n] = PhaseOfEmission1DNum( omegas[n] , popteaCore ) ; }
+      break;
+    }
+
+    case thermal::HeatX::TwoDimAnalytical:
+    {
+      size_t n = 0;
+      #pragma omp parallel for schedule(dynamic) private(n)
+      for(n = 0 ; n < L_end ; n++ )
+        { results[n] = PhaseOfEmission2DAna( omegas[n], popteaCore ) ; }
+      break;
+    }
   }
+
+
+
+
+
+
+
+
 
   return results;
 }
