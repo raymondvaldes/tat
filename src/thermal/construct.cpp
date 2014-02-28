@@ -36,6 +36,27 @@ construct::~construct(void){}
 class construct
     construct::loadConfigfromXML( const boost::property_tree::ptree pt)
   {
+
+  typedef boost::bimap < enum EmissionX , std::string > emission_bimap;
+  static const emission_bimap EmissionXMap =
+      boost::assign::list_of < emission_bimap::relation >
+   ( EmissionX::OneDimNonLin , "OneDimNonLin")
+   ( EmissionX::TwoDimNonLin , "TwoDimNonLin");
+
+
+  typedef boost::bimap< enum HeatX , std::string > HeatXBiTYPE;
+  static const HeatXBiTYPE HeatXMap =
+      boost::assign::list_of < HeatXBiTYPE::relation >
+   ( HeatX::OneDimAnalytical , "OneDimAnalytical")
+   ( HeatX::OneDimNumLin     , "OneDimNumLin")
+   ( HeatX::OneDimNumNonLin  , "OneDimNumNonLin")
+   ( HeatX::TwoDimAnalytical , "TwoDimAnalytical")
+   ( HeatX::TwoDimNumLin     , "TwoDimNumLin")
+   ( HeatX::TwoDimNumNonLin  , "TwoDimNumNonLin") ;
+
+
+
+
   // retrieve string and map it to enum
     const std::string heatLabel = pt.get<std::string>( "heatModel" );
     const enum HeatX heatModel = HeatXMap.right.at(heatLabel);
