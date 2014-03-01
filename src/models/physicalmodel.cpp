@@ -368,6 +368,14 @@ void TBCsystem::updateCoat(void)
   return;
 }
 
+labels& labels::operator=( const labels& that )
+{
+  if(this != &that)
+  {
+     name = that.name;
+  }
+  return *this;
+}
 
 
 labels::labels(void) {}

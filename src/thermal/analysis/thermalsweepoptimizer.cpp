@@ -122,8 +122,10 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
       if ( myParam.getName() == unknown.label() )
       {
         error = unknown.bestfitIntervalSpread();
+        //std::cout << error << "\t";
       }
     }
+    //std::cout <<"\n";
 
     currentState.meanParameterError = error;
     error += penalty( xSweep );
@@ -373,6 +375,28 @@ ThermalSweepOptimizer::solve(
   return ouputResults;
 }
 
+void ThermalSweepOptimizer::upSweepStartReset( void )
+{
+  bool pass = false;
+
+  while( !pass )
+  {
+    thermalSweepSearch.resetBestfits() ;
+    pass = math::checkLimits( thermalSweepSearch.vectorUnknowns[0].bestfit() ,
+                              thermalSweepSearch.vectorUnknowns[0].bestfit() ) ;
+  }
+}
+
+math::estimation::unknownList thermalSweepSearch;
+
+void ThermalSweepOptimizer::
+upSweepOptiGoals ( const std::vector<physicalModel::labels> &goal )
+{
+  sweepOptimizationGoal = goal;
+}
+
+
+
 std::string ThermalSweepOptimizer::montecarloMap(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
@@ -403,15 +427,12 @@ std::string ThermalSweepOptimizer::montecarloMap(
     {
       xinitial[0] = math::x_ini( min, max ) ;
       xinitial[1] = math::x_ini( min, max ) ;
-//      std::cout << "  checking..." << "\t" << xinitial[0] << "\t" << xinitial[1];
       initialGuessPass = math::checkLimits( xinitial[0] , xinitial[1] ) ;
-//      std::cout << "\t" << initialGuessPass << "\n";
     }
-//    std::cout << xinitial[0] << "\t" << xinitial[1] << "\n";
 
     /// transform it into something thermal_prop can understand
-    double x[2] = {0} ;
-    for(size_t j =0 ; j < 2 ; ++j)
+    double x[2] = { 0 } ;
+    for( size_t j =0 ; j < 2 ; ++j )
       { x[j] = math::estimation::kx_limiter2( xinitial[j], min, max ) ; }
 
     double fvec[2] = {0} ;
@@ -486,6 +507,7 @@ void ThermalSweepOptimizer::solve(
 
   /// optimization run
   optimizer( &info, &nfev ) ;
+  //std::cout << "ended optimizer with:--- " << info  << "  " << nfev<< "\n\n";
 
   /// post analysis
   pieAnalysis() ;
@@ -494,8 +516,6 @@ void ThermalSweepOptimizer::solve(
   /// now that all data is saved - reset thermalData to fullRange
   reassign(  thermalData, *fullRangeThermalData ) ;
 }
-
-
 
 ThermalData ThermalSweepOptimizer::sliceThermalData(
     const double xCenter, const double xRange,
@@ -595,6 +615,12 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
     j++;
   }
 
+  //  std::cout << static_cast<int>(m) << "\n" <<  static_cast<int>(n) << "\n" ;
+  //  for( int i = 0; i < n ; ++i)
+  //  {
+  //    std::cout << "this is x: "<< i << "\t" <<x[i] << "\n";
+  //  }
+
   /// Constrained nonlinear parameter estimation
   updateBindFunc() ;
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
@@ -603,6 +629,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
          static_cast<int>(Settings.mode), Settings.factor,
          static_cast<int>(Settings.nprint), info, nfev, fjac,
          static_cast<int>(m), ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
+  //std::cout << "error code:  "<< *info <<"\n\n";
 
   ///Final fit
   ThermalData updatedThermal = updatedFromXsearch( x ) ;

@@ -45,58 +45,59 @@ class Poptea
 Poptea::loadConfig( const Kernal &coreSystem_,
                     const boost::property_tree::ptree &pt )
 {
+  using math::estimation::unknownList;
   using boost::property_tree::ptree;
   const std::string conjunto = "poptea." ;
 
   /// Initiate poptea constructor objects
-  const ptree ptchild1 = pt.get_child( conjunto + "sweep");
+  const ptree ptchild1 = pt.get_child( conjunto + "sweep") ;
   const ThermalData thermData(
         ThermalData::loadConfigfromXML( ptchild1 ,
-                                        coreSystem_.TBCsystem.coating) );
+                                        coreSystem_.TBCsystem.coating) ) ;
 
-  const ptree ptchild2 = pt.get_child( conjunto + "ParaEstSettings" );
+  const ptree ptchild2 = pt.get_child( conjunto + "ParaEstSettings" ) ;
   const math::estimation::settings
-    estSettings( math::estimation::settings::loadConfigfromXML( ptchild2 ) );
+    estSettings( math::estimation::settings::loadConfigfromXML( ptchild2 ) ) ;
 
   const ptree ptchild3 = pt.get_child( conjunto ) ;
-  const math::estimation::unknownList
-    parameterEstimation(
-        math::estimation::unknownList::loadConfigfromXML( ptchild3 ) );
+  const unknownList
+    parameterEstimation( unknownList::loadConfigfromXML( ptchild3 ) ) ;
 
 
-  const ptree ptchild4 = pt.get_child( conjunto + "optimizationSweep") ;
-  const math::estimation::unknownList
-    thermalSweep( math::estimation::unknownList::loadConfigfromXML( ptchild4 ));
+  const ptree ptchild4 = pt.get_child( conjunto + "optimizationSweep" ) ;
+  const unknownList thermalSweep( unknownList::loadConfigfromXML( ptchild4 ) ) ;
 
-  std::vector< physicalModel::labels > sweepOptimizationGoal;
+  std::vector< physicalModel::labels > sweepOptimizationGoal ;
   BOOST_FOREACH( const ptree::value_type &v,
                  ptchild4.get_child( "parameters" ) )
   {
     //retrieve subtree
-    const ptree& child = v.second;
+    const ptree& child = v.second ;
 
     //access members of subtree
-    physicalModel::labels labelmaker;
-    const std::string nameLabel = child.get< std::string >( "label" );
-    enum physicalModel::labels::Name mylabel;
+    physicalModel::labels labelmaker ;
+    const std::string nameLabel = child.get< std::string >( "label" ) ;
+    enum physicalModel::labels::Name mylabel ;
     try
     {
-      mylabel = labelmaker.nameMap.right.at(nameLabel);
+      mylabel = labelmaker.nameMap.right.at( nameLabel ) ;
     }
     catch( std::exception& e )
     {
       std::cerr << "Error with label in config.xml config\n";
-      exit(1);
+      exit( 1 ) ;
     }
-    const physicalModel::labels output(mylabel);
-    sweepOptimizationGoal.push_back( output );
+    const physicalModel::labels output( mylabel ) ;
+    sweepOptimizationGoal.push_back( output ) ;
   }
+
+  std::cout << sweepOptimizationGoal.size() << "\n\n";
 
   //Load class object from previous objects
   const Poptea poptea( coreSystem_, thermData, estSettings, parameterEstimation,
                        thermalSweep, sweepOptimizationGoal ) ;
 
-  return poptea;
+  return poptea ;
 }
 
 class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
@@ -170,14 +171,14 @@ ThermalSweepOptimizer::OptimizerOutput Poptea::optimization(void)
 {
   BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" );
 
-  return analysis.optimization( unknownParameters , thermalData, coreSystem);
+  return analysis.optimization( unknownParameters , thermalData, coreSystem ) ;
 }
 
 std::string Poptea::thermalSweepMap(const size_t iter)
 {
   BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" ) ;
   return analysis.montecarloMap( unknownParameters , thermalData, coreSystem,
-                                 iter) ;
+                                 iter ) ;
 }
 
 

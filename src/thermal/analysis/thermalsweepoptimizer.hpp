@@ -118,6 +118,8 @@ public:
       const std::shared_ptr< PIE > &intervalEstimates_in,
       const size_t iIter ) ;
 
+  void upSweepStartReset( void ) ;
+  void upSweepOptiGoals ( const std::vector<physicalModel::labels> &goal ) ;
 
 private:
   // overide methods inherited

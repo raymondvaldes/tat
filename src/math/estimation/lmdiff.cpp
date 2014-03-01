@@ -2018,21 +2018,30 @@ xnorm = 0.0;
 /*
 *     check the input parameters for errors.
 */
-if( (n <= 0) || (m < n) || (ldfjac < m) || (ftol < zero)
+
+if( (n <= 0) || ( m < (n-1) ) || (ldfjac < m) || (ftol < zero)
   || (xtol < zero) || (gtol < zero) || (maxfev <= 0)
   || (factor <= zero) )
+{
+  std::cerr << (n <= 0)<< "\t" << (m < n) <<"\t" << (ldfjac < m)  <<"\t"
+            << (ftol < zero) << "\t" <<(xtol < zero) << "\t"
+            << (gtol < zero) << "\t" << (maxfev <= 0) <<"\t" <<(factor <= zero)
+            << "\n";
   goto L300;
+}
+
+
 
 
 
 if( mode == 2 )
-  { /* scaling by diag[] */
+{ /* scaling by diag[] */
   for( j=0; j<n; j++ )
-    {
+  {
     if( diag[j] <= 0.0 )
       goto L300;
-    }
   }
+}
 
 #if BUG
 PRINT( "lmdif\n" );

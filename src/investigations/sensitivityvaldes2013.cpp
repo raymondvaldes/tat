@@ -47,14 +47,14 @@ void run( const filesystem::directory dir )
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
 
   /// Part test
-  poptea.bestFit();
-  std::cout << poptea.ppUnknownParameters();
+  poptea.bestFit() ;
+  std::cout << poptea.ppUnknownParameters() ;
 
   /// PartA ( pie_analysis )
-  const std::string partA = "/partA_pieAnalysis";
+  const std::string partA = "/partA_pieAnalysis" ;
   dir.mkdir( partA ) ;
 
-  PIE::PIEAnalysisOutput pieOutput = poptea.PIE();
+  PIE::PIEAnalysisOutput pieOutput = poptea.PIE() ;
   const std::string path = dir.abs( partA ) ;
   pieOutput.pp2Folder( path ) ;
   std::cout << poptea.ppUnknownParameters() << "\n" ;
@@ -62,12 +62,16 @@ void run( const filesystem::directory dir )
   /// PartB (experimental Optimizer)
   const std::string partB = "/partB_expOptimize" ;
   dir.mkdir( partB ) ;
-
-  ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization();
+  ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
   const std::string pathB = dir.abs( partB ) ;
   outputData.pp2Folder( pathB ) ;
 
-//  std::string thermalSweepMap = poptea.thermalSweepMap( 10000 ) ;
+  /// PartC (thermal Maps)
+  const std::string partC = "/partC_thermalMaps" ;
+  dir.mkdir( partC ) ;
+
+
+  std::string thermalSweepMap = poptea.thermalSweepMap( 10 ) ;
 //  std::string path2thermalMap = pathB + "/" + "thermalSweepMap.dat" ;
 //  tools::interface::exportfile( path2thermalMap , thermalSweepMap ) ;
 

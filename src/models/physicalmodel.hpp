@@ -120,6 +120,8 @@ public:
   Name getName(void) const;
   std::string getNameString(void) const;
 
+  labels& operator=( const labels& that );
+
 
 private:
   enum Name name;

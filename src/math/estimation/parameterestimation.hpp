@@ -56,16 +56,23 @@ public:
   ~unknown();
 
   struct bounds bestfitInterval;
+
+  /// return values
   double bestfit( void ) const ;
   double upperBound( void ) const ;
   double lowerBound( void ) const ;
   double initialVal( void ) const ;
 
+  /// set values with inputs
   void bestfitset( const double input ) ;
   void Initialset( const double input ) ;
   void bestfitIntervalset ( const double min, const double max);
   double bestfitIntervalSpread( void ) const;
 
+  // reset randomly
+  void reset(void);
+
+  /// labels
   enum physicalModel::labels::Name label( void ) const ;
   physicalModel::labels getLabel ( void ) const;
 
@@ -96,6 +103,7 @@ public:
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
   ~unknownList() ;
 
+  void resetBestfits( void ) ;
   std::string prettyPrint(void) ;
 };
 

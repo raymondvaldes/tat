@@ -78,6 +78,11 @@ void unknown::Initialset(const double initial)
   initialGuess = initial;
 }
 
+void unknown::reset( void )
+{
+  bestfitval = math::x_ini( constraint.lower, constraint.upper ) ;
+}
+
 double unknown::initialVal(void) const
 {
   return initialGuess;
@@ -177,6 +182,15 @@ unknownList::unknownList(){}
 unknownList::unknownList( std::vector< estimation::unknown> input )
   :vectorUnknowns(input)
 {}
+
+void unknownList::resetBestfits( void )
+{
+  for( estimation::unknown& val : vectorUnknowns)
+  {
+    val.reset();
+  }
+}
+
 
 class unknownList unknownList::
         loadConfigfromXML(const boost::property_tree::ptree pt)
