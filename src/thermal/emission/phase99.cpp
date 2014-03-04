@@ -78,6 +78,15 @@ phase99( const thermal::analysis::Kernal &popteaCore,
         { results[n] = PhaseOfEmission2DAna( omegas[n], popteaCore ) ; }
       break;
     }
+
+    case thermal::HeatX::OneDimNumNonLin:
+      std::cout << "no model available"; exit(-2);
+    case thermal::HeatX::TwoDimNumLin:
+      std::cout << "no model available"; exit(-2);
+    case thermal::HeatX::TwoDimNumNonLin:
+      std::cout << "no model available"; exit(-2);
+    default:
+      std::cout << "no model available"; exit(-2);
   }
 
 

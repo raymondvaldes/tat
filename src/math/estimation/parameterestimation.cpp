@@ -80,7 +80,7 @@ void unknown::Initialset(const double initial)
 
 void unknown::reset( void )
 {
-  bestfitval = math::x_ini( constraint.lower, constraint.upper ) ;
+  initialGuess = math::x_ini( constraint.lower, constraint.upper ) ;
 }
 
 double unknown::initialVal(void) const

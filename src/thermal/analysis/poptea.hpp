@@ -68,6 +68,9 @@ public:
   /// Reload kernels
   void reloadAnalysis( const methods &analysis_in );
 
+  /// Reset
+  void resetThermalSweepIni( void );
+
   /// Printers
   std::string ppThermalData( void ) ;
   std::string ppUnknownParameters( void ) ;

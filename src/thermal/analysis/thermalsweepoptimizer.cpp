@@ -23,7 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <algorithm>
-
+#include <string>
 #include "thermal/analysis/thermalsweepoptimizer.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
@@ -122,7 +122,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
     {
       if ( myParam.getName() == unknown.label() )
       {
-        error = unknown.bestfitIntervalSpread();
+        error += unknown.bestfitIntervalSpread();
         //std::cout << error << "\t";
       }
     }
@@ -215,12 +215,13 @@ void ThermalSweepOptimizer::OptimizerOutput::clear( void )
   searchPath.clear() ;
 }
 
-void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path )
+void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path ,
+                                                       const std::string i)
 {
   results.prettyPrint( path );
 
   const std::string searchOutput = searchPath.prettyPrint() ;
-  const std::string fullPath = path + "/" + "optimizerPath.dat";
+  const std::string fullPath = path + "/" + "optimizerPath"+ i +".dat";
   tools::interface::exportfile( fullPath , searchOutput ) ;
 }
 
@@ -383,20 +384,12 @@ void ThermalSweepOptimizer::upSweepStartReset( void )
   while( !pass )
   {
     thermalSweepSearch.resetBestfits() ;
-    pass = math::checkLimits( thermalSweepSearch.vectorUnknowns[0].bestfit() ,
-                              thermalSweepSearch.vectorUnknowns[0].bestfit() ) ;
+    pass = math::checkLimits( thermalSweepSearch.vectorUnknowns[0].initialVal() ,
+                              thermalSweepSearch.vectorUnknowns[1].initialVal() ) ;
   }
+
+
 }
-
-math::estimation::unknownList thermalSweepSearch;
-
-void ThermalSweepOptimizer::
-upSweepOptiGoals ( const std::vector<physicalModel::labels> &goal )
-{
-  sweepOptimizationGoal = goal;
-}
-
-
 
 std::string ThermalSweepOptimizer::montecarloMap(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
@@ -408,6 +401,9 @@ std::string ThermalSweepOptimizer::montecarloMap(
   //The purpose here is to get the "best possible fit" and use that as my ref.
   solve( unknownParameters_in, thermalData_in, coreSystem_in, bestfitMethod_in,
          intervalEstimates_in ) ;
+
+  bestfitMethod_in->solve( unknownParameters, thermalData_in, coreSystem_in ) ;
+
 
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromBestFit( (*unknownParameters)() );
@@ -595,6 +591,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 
   ///populate initial values
   std::vector<double> xInitial(0) ;
+  upSweepStartReset();
   for( const auto &unknown : thermalSweepSearch() )
     { xInitial.push_back( unknown.initialVal() ); }
   for( size_t i=0 ; i< n ; i++ )

@@ -254,10 +254,10 @@ class layer layer::loadConfigfromXMLTree(const boost::property_tree::ptree pt)
   return layerObj;
 }
 
-TBCsystem::TBCsystem( const class layer &coating_,
-                      const class layer &substrate_,
-                      const class temperatureScale &Temp_,
-                      const class radiativeSysProp &optical_,
+TBCsystem::TBCsystem( const layer &coating_,
+                      const layer &substrate_,
+                      const temperatureScale &Temp_,
+                      const radiativeSysProp &optical_,
                       const double radius_)
     : coating(coating_), substrate(substrate_), Temp(Temp_), optical(optical_),
       radius(radius_)
@@ -321,7 +321,7 @@ void TBCsystem::updateVal( const enum labels::Name mylabel , const double val )
 
 double TBCsystem::returnVal( const enum labels::Name mylabel ) const
 {
-  double val(0);
+  double val( 0 ) ;
 
   switch ( mylabel )
   {

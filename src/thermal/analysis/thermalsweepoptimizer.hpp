@@ -83,7 +83,7 @@ public:
 
     /// Post-PIE analysis methods
     void push_back( const ExperimentAnalysisState &data_in ) ;
-    void pp2Folder( const std::string path ) ;
+    void pp2Folder( const std::string path , const std::string i) ;
     void clear( void ) ;
     void addBefore( const ExperimentAnalysisState input ) ;
     void addAfter( const ExperimentAnalysisState input ) ;

@@ -85,6 +85,9 @@ public:
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in
       );
 
+  /// reset values
+  void resetThermalSweepIni(void);
+
 
 };
 
