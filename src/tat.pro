@@ -166,7 +166,8 @@ SOURCES += \
     thermal/analysis/basedata.cpp \
     thermal/analysis/thermalsweepoptimizer.cpp \
     tools/interface/exportfile.cpp \
-    tools/interface/filesystem.cpp
+    tools/interface/filesystem.cpp \
+    tools/interface/xml.cpp
 
 #header files
 HEADERS += \
@@ -212,7 +213,8 @@ HEADERS += \
     thermal/analysis/basedata.hpp \
     thermal/analysis/thermalsweepoptimizer.hpp \
     tools/interface/exportfile.hpp \
-    tools/interface/filesystem.hpp
+    tools/interface/filesystem.hpp \
+    tools/interface/xml.h
 
 
 
