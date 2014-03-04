@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include "thermal/emission/noise.hpp"
 #include "math/utility.hpp"
+#include "tools/interface/xml.h"
 
 namespace thermal{
   namespace emission{

@@ -24,8 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef EXPEQUIPMENT_HPP_INCLUDED
 #define EXPEQUIPMENT_HPP_INCLUDED
-
-#include <boost/property_tree/xml_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 
 
 namespace equipment{

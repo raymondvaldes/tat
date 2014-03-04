@@ -28,6 +28,7 @@ License
 #include <string>
 #include <vector>
 #include <memory>
+#include <boost/property_tree/ptree.hpp>
 
 #include "models/physicalmodel.hpp"
 #include "thermal/analysis/kernal.hpp"

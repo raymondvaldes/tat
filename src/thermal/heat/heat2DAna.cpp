@@ -24,7 +24,8 @@ License
 \*----------------------------------------------------------------------------*/
 #include <complex>
 #include <gsl/gsl_sf_bessel.h>
-
+#include <fstream>
+#include <iomanip>
 #include "thermal/heat/heat2DAna.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/statistical_tools.hpp"

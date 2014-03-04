@@ -27,6 +27,7 @@ License
 #include "models/expEquipment.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
+#include "tools/interface/xml.h"
 
 namespace equipment{
 

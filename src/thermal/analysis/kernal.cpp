@@ -33,6 +33,7 @@ License
 #include "tools/interface/filesystem.hpp"
 #include "thermal/model.hpp"
 #include "thermal/thermal.hpp"
+#include "tools/interface/xml.h"
 
 namespace thermal {
 namespace analysis{

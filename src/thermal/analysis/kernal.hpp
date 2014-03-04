@@ -26,7 +26,6 @@ License
 #define popteaCore_HPP
 
 #include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 
 #include "models/expEquipment.hpp"
 #include "models/physicalmodel.hpp"

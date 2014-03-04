@@ -25,6 +25,8 @@ License
 #include <vector>
 #include <string>
 #include <functional>
+#include <boost/foreach.hpp>
+#include <boost/property_tree/ptree.hpp>
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/methods.hpp"

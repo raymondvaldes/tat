@@ -24,17 +24,15 @@ License
 \*----------------------------------------------------------------------------*/
 #include <boost/foreach.hpp>
 #include "thermal/analysis/poptea.hpp"
+#include "tools/interface/xml.h"
 
 namespace thermal {
 namespace analysis{  
 
 Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
-                const math::estimation::settings &Settings_,
                 const math::estimation::unknownList &unknownParameters_,
-                const math::estimation::unknownList &thermalSweepSearch ,
-                const std::vector<physicalModel::labels> sweepOptimizationGoal)
-    : analysis( Settings_, unknownParameters_, thermaldata_, thermalSweepSearch,
-                sweepOptimizationGoal, coreSystem_.TBCsystem.coating )
+                const methods analysis_in )
+    : analysis( analysis_in )
 {
   reassign( coreSystem, coreSystem_);
   reassign( thermalData, thermaldata_);
