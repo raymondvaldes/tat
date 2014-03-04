@@ -117,19 +117,11 @@ ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory dir )
 {
   const std::string filename = "EmissionNoise.xml";
   const std::string absPath = dir.abs( filename );
-  boost::property_tree::ptree pt;
-  try
-  {
-    boost::property_tree::read_xml( absPath , pt);
-  }
-  catch (std::exception& e)
-  {
-    std::cout << "file " << absPath << " not found! See --help\n";
-    exit(-2);
-  }
+
+  using boost::property_tree::ptree;
+  ptree pt = tools::interface::getTreefromFile( absPath ) ;
 
   //pass child to settings object
-  using boost::property_tree::ptree;
   const std::string conjunto = "simulated-emission." ;
   const ptree ptchild1 = pt.get_child( conjunto + "settings");
 

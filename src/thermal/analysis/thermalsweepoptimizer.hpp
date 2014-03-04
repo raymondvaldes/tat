@@ -99,7 +99,8 @@ public:
       const std::shared_ptr< PIE > &intervalEstimates_in,
       const math::estimation::unknownList thermalSweepSearch_in,
       const std::vector< physicalModel::labels > sweepOptimizationGoal_in,
-      const physicalModel::layer coating ) ;
+      const physicalModel::layer coating,
+      const size_t iter_in ) ;
   ~ThermalSweepOptimizer( void ) ;
 
   // public solver (yes just give it all this shit and it'll do the work for u)
@@ -110,18 +111,18 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      ) ;
-  std::string montecarloMap(
-      const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+  std::string montecarloMap(const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
       const std::shared_ptr<ThermalData> &thermalData_in,
       const std::shared_ptr<Kernal> &coreSystem_in,
       const std::shared_ptr< LMA > &bestfitMethod_in,
-      const std::shared_ptr< PIE > &intervalEstimates_in,
-      const size_t iIter ) ;
+      const std::shared_ptr< PIE > &intervalEstimates_in) ;
 
   void upSweepStartReset( void ) ;
-  void upSweepOptiGoals ( const std::vector<physicalModel::labels> &goal ) ;
 
 private:
+  // thermal mapping
+  const size_t iter;
+
   // overide methods inherited
   void updateWorkSpace( const size_t Lend , const size_t N ) override;
   void updateWorkSpace(

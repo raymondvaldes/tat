@@ -44,6 +44,7 @@ using namespace thermal::analysis;
 
 void run( const filesystem::directory dir )
 {
+  using namespace physicalModel;
   /// setup output directory
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
 
@@ -69,12 +70,49 @@ void run( const filesystem::directory dir )
 
   /// PartC (thermal Maps)
   const std::string partC = "/partC_thermalMaps" ;
+  using tools::interface::exportfile;
   dir.mkdir( partC ) ;
 
+  const std::string path2thermalMap = partC + "/" + "thermalSweepALL.dat" ;
+  const std::string thermalSweepMap = poptea.thermalSweepMap() ;
+  exportfile( path2thermalMap , thermalSweepMap ) ;
 
-  std::string thermalSweepMap = poptea.thermalSweepMap( 10 ) ;
-//  std::string path2thermalMap = pathB + "/" + "thermalSweepMap.dat" ;
-//  tools::interface::exportfile( path2thermalMap , thermalSweepMap ) ;
+  ///subMaps
+  using tools::interface::getTreefromFile;
+  using tools::interface::getBranch;
+  using boost::property_tree::ptree;
+
+  const std::string path2asub = dir.abs( "/poptea-gamma.xml" ) ;
+  const ptree asubTrunk = getTreefromFile( path2asub );
+  ptree aBranch = getBranch( "poptea", "optimizationSweep", asubTrunk );
+  const methods
+      analysisAsub = loadMethodsfromFile( aBranch,
+                                          *(poptea.unknownParameters),
+                                          *(poptea.thermalData),
+                                          poptea.coreSystem->TBCsystem.coating);
+  poptea.reloadAnalysis( analysisAsub ) ;
+  const std::string path2asubMap = partC + "/" + "thermalSweep-asub.dat" ;
+  const std::string thermalSweepMapasub = poptea.thermalSweepMap() ;
+  exportfile( path2asubMap , thermalSweepMapasub ) ;
+
+
+  const std::string path2gamma = dir.abs( "/poptea-gamma.xml" ) ;
+  const ptree gammaTrunk = getTreefromFile( path2gamma );
+  const ptree gBranch = getBranch("poptea", "optimizationSweep", gammaTrunk );
+  const methods
+      gammaEmphasis = loadMethodsfromFile( gBranch,
+                                           *(poptea.unknownParameters),
+                                           *(poptea.thermalData),
+                                          poptea.coreSystem->TBCsystem.coating);
+  poptea.reloadAnalysis( gammaEmphasis );
+  const std::string path2gammalMap = partC + "/" + "thermalSweep-gamma.dat" ;
+  const std::string thermalSweepMapgam = poptea.thermalSweepMap() ;
+  exportfile( path2gammalMap , thermalSweepMapgam ) ;
+
+
+
+
+
 
   return;
 }

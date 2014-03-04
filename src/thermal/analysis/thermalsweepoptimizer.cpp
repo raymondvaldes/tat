@@ -42,14 +42,15 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     const std::shared_ptr< PIE > &intervalEstimates_in,
     const math::estimation::unknownList thermalSweepSearch_in,
     const std::vector<physicalModel::labels> sweepOptimizationGoal_in,
-    const physicalModel::layer coating)
+    const physicalModel::layer coating, const size_t iter_in)
   : LMA_BASE( Settings_in, unknownParameters_, thermalData_in.size() ) ,
     bestfitMethod( bestfitMethod_in ),
     intervalEstimates( intervalEstimates_in ),
     thermalSweepSearch( thermalSweepSearch_in ),
     sweepOptimizationGoal( sweepOptimizationGoal_in ),
     coatingTOinterpretFullRange( new physicalModel::layer( coating )),
-    xSweep(0.5,0.5)
+    xSweep(0.5,0.5),
+    iter(iter_in)
 {
   updateWorkSpace( thermalSweepSearch_in, sweepOptimizationGoal_in );
 
@@ -147,9 +148,9 @@ void ThermalSweepOptimizer::pieAnalysis(void)
   captureState( coreSystem->TBCsystem.coating ) ;
 
 
-//  for(size_t i = 0; i < 60 ; i ++)
-//    std::cout << "\n";
-//  std::cout << currentState.ppFinalResults() << "\n" ;
+  for(size_t i = 0; i < 60 ; i ++)
+    std::cout << "\n";
+  std::cout << currentState.ppFinalResults() << "\n" ;
 }
 
 
@@ -402,7 +403,7 @@ std::string ThermalSweepOptimizer::montecarloMap(
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in,
     const std::shared_ptr< LMA > &bestfitMethod_in,
-    const std::shared_ptr< PIE > &intervalEstimates_in, const size_t iIter )
+    const std::shared_ptr< PIE > &intervalEstimates_in )
 {
   //The purpose here is to get the "best possible fit" and use that as my ref.
   solve( unknownParameters_in, thermalData_in, coreSystem_in, bestfitMethod_in,
@@ -417,7 +418,7 @@ std::string ThermalSweepOptimizer::montecarloMap(
   constexpr double max = 1 ;
 
   ouputResults.clear();
-  for( size_t i = 0; i < iIter ; ++i )
+  for( size_t i = 0; i < iter ; ++i )
   {
     ///create random start points and transform them
     bool initialGuessPass = false;

@@ -53,79 +53,35 @@ Poptea::loadConfig( const Kernal &coreSystem_,
         ThermalData::loadConfigfromXML( ptchild1 ,
                                         coreSystem_.TBCsystem.coating) ) ;
 
-  const ptree ptchild2 = pt.get_child( conjunto + "ParaEstSettings" ) ;
-  const math::estimation::settings
-    estSettings( math::estimation::settings::loadConfigfromXML( ptchild2 ) ) ;
-
   const ptree ptchild3 = pt.get_child( conjunto ) ;
   const unknownList
     parameterEstimation( unknownList::loadConfigfromXML( ptchild3 ) ) ;
 
 
   const ptree ptchild4 = pt.get_child( conjunto + "optimizationSweep" ) ;
-  const unknownList thermalSweep( unknownList::loadConfigfromXML( ptchild4 ) ) ;
 
-  std::vector< physicalModel::labels > sweepOptimizationGoal ;
-  BOOST_FOREACH( const ptree::value_type &v,
-                 ptchild4.get_child( "parameters" ) )
-  {
-    //retrieve subtree
-    const ptree& child = v.second ;
-
-    //access members of subtree
-    physicalModel::labels labelmaker ;
-    const std::string nameLabel = child.get< std::string >( "label" ) ;
-    enum physicalModel::labels::Name mylabel ;
-    try
-    {
-      mylabel = labelmaker.nameMap.right.at( nameLabel ) ;
-    }
-    catch( std::exception& e )
-    {
-      std::cerr << "Error with label in config.xml config\n";
-      exit( 1 ) ;
-    }
-    const physicalModel::labels output( mylabel ) ;
-    sweepOptimizationGoal.push_back( output ) ;
-  }
-
-  std::cout << sweepOptimizationGoal.size() << "\n\n";
+  const methods analysis_obj =
+  loadMethodsfromFile( ptchild4, parameterEstimation, thermData,
+                       coreSystem_.TBCsystem.coating ) ;
 
   //Load class object from previous objects
-  const Poptea poptea( coreSystem_, thermData, estSettings, parameterEstimation,
-                       thermalSweep, sweepOptimizationGoal ) ;
-
+  const Poptea poptea( coreSystem_, thermData, parameterEstimation,
+                       analysis_obj ) ;
   return poptea ;
 }
 
 class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
 {
+  using boost::property_tree::ptree;
+
   ///Initiate poptea kernal
   const std::string filename1 = "kernal.xml";
-  boost::property_tree::ptree pt;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename1 ), pt );
-  }
-  catch (std::exception& e)
-  {
-    std::cerr << "file " << dir.abs( filename1 ) << " not found! See --help\n";
-    exit(-2);
-  }
+  ptree pt = tools::interface::getTreefromFile( dir.abs( filename1 ) ) ;
   const class Kernal popteaCore = Kernal::loadConfig( pt , dir );
 
   ///bring full poptea object online
   const std::string filename = "poptea.xml";
-  boost::property_tree::ptree pt1;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename ), pt1 );
-  }
-  catch (std::exception& e)
-  {
-    std::cerr << "file " << dir.abs( filename ) << " not found! See --help\n";
-    exit(-2);
-  }
+  ptree pt1 = tools::interface::getTreefromFile( dir.abs( filename ) ) ;
 
   ///return this object
   return Poptea::loadConfig( popteaCore, pt1 );
@@ -145,7 +101,7 @@ Poptea::~Poptea(void){}
 
 std::vector<double> Poptea::thermalSweep(void) const
 {
-  return thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating );
+  return thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ;
 }
 
 
@@ -153,7 +109,8 @@ double Poptea::bestFit( void )
 {
   runbestfit = true;
 
-  const double output = analysis.bestFit( unknownParameters, thermalData, coreSystem );
+  const double output = analysis.bestFit( unknownParameters, thermalData,
+                                          coreSystem ) ;
   unknownParameters->prettyPrint();
 
   return  output;
@@ -172,11 +129,10 @@ ThermalSweepOptimizer::OptimizerOutput Poptea::optimization(void)
   return analysis.optimization( unknownParameters , thermalData, coreSystem ) ;
 }
 
-std::string Poptea::thermalSweepMap(const size_t iter)
+std::string Poptea::thermalSweepMap( void )
 {
   BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" ) ;
-  return analysis.montecarloMap( unknownParameters , thermalData, coreSystem,
-                                 iter ) ;
+  return analysis.montecarloMap( unknownParameters , thermalData, coreSystem ) ;
 }
 
 
@@ -190,21 +146,19 @@ std::string Poptea::ppThermalData( void )
   return thermalData->prettyPrint( coreSystem->TBCsystem.coating ) ;
 }
 
+void Poptea::reloadAnalysis( const methods &analysis_in )
+{
+  analysis = analysis_in;
+}
+
 
 Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
-                                         const class Kernal &popteaCore)
+                                   const class Kernal &popteaCore )
 {
   const std::string filename = "poptea.xml";
-  boost::property_tree::ptree pt;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename ), pt);
-  }
-  catch (std::exception& e)
-  {
-    std::cerr << "file " << dir.abs( filename ) << " not found! See --help\n";
-    exit(-2);
-  }
+  boost::property_tree::ptree
+      pt = tools::interface::getTreefromFile( dir.abs( filename ) ) ;
+
 
   return Poptea::loadConfig( popteaCore, pt );
 }

@@ -46,10 +46,8 @@ public:
   explicit Poptea(
       const Kernal &coreSystem_ ,
       const ThermalData &thermaldata_,
-      const math::estimation::settings &Settings_,
       const math::estimation::unknownList &unknownParameters_,
-      const math::estimation::unknownList &thermalSweepSearch,
-      const std::vector< physicalModel::labels > sweepOptimizationGoal) ;
+      const methods analysis_in ) ;
 
   static Poptea loadConfig( const Kernal &coreSystem_,
                             const boost::property_tree::ptree &pt ) ;
@@ -64,8 +62,11 @@ public:
   double bestFit( void ) ;
   thermal::analysis::PIE::PIEAnalysisOutput PIE( void ) ;
   ThermalSweepOptimizer::OptimizerOutput optimization( void ) ;
-  std::string thermalSweepMap( const size_t iter ) ;
+  std::string thermalSweepMap(void ) ;
   std::vector<double> thermalSweep( void ) const ;
+
+  /// Reload kernels
+  void reloadAnalysis( const methods &analysis_in );
 
   /// Printers
   std::string ppThermalData( void ) ;

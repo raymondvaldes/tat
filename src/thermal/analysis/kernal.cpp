@@ -114,20 +114,13 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 class Kernal
     loadWorkingDirectoryKernal( const class filesystem::directory &dir )
 {
+  using boost::property_tree::ptree;
+
   const std::string filename = "kernal.xml";
-  boost::property_tree::ptree pt;
-  try
-  {
-    boost::property_tree::read_xml( dir.abs( filename ), pt);
-  }
-  catch (std::exception& e)
-  {
-    std::cout << "file " << dir.abs( filename ) << " not found! See --help\n";
-    exit(-2);
-  }
+  const std::string fullpath = dir.abs( filename );
+  ptree pt = tools::interface::getTreefromFile( fullpath ) ;
 
   return Kernal::loadConfig( pt , dir);
 }
-
 
 }}
