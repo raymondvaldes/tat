@@ -111,6 +111,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   // Parameter Estimation with PIE analysis
   pieAnalysis();
+//  std::cout << xSweep.first << "\t" << xSweep.second << "\n";
 
   ///Use results from anaylsis
   size_t i =0 ;
@@ -123,10 +124,8 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
       if ( myParam.getName() == unknown.label() )
       {
         error += unknown.bestfitIntervalSpread();
-        //std::cout << error << "\t";
       }
     }
-    //std::cout <<"\n";
 
     currentState.meanParameterError = error;
     error += penalty( xSweep );
@@ -148,9 +147,9 @@ void ThermalSweepOptimizer::pieAnalysis(void)
   captureState( coreSystem->TBCsystem.coating ) ;
 
 
-  for(size_t i = 0; i < 60 ; i ++)
-    std::cout << "\n";
-  std::cout << currentState.ppFinalResults() << "\n" ;
+//  for(size_t i = 0; i < 60 ; i ++)
+//    std::cout << "\n";
+//  std::cout << currentState.ppFinalResults() << "\n" ;
 }
 
 
@@ -591,7 +590,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 
   ///populate initial values
   std::vector<double> xInitial(0) ;
-  upSweepStartReset();
   for( const auto &unknown : thermalSweepSearch() )
     { xInitial.push_back( unknown.initialVal() ); }
   for( size_t i=0 ; i< n ; i++ )

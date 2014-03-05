@@ -65,11 +65,14 @@ void run( const filesystem::directory dir )
   std::string partB = "/partB_expOptimize" ;
   dir.mkdir( partB ) ;
 
-  for( size_t i =0 ; i < 20 ; ++i )
+
+  for( size_t i =0 ; i < 10 ; ++i )
   {
     poptea.bestFit() ;
     ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
     outputData.pp2Folder( dir.abs( partB ) , std::to_string(i)  ) ;
+    std::cout << poptea.ppUnknownParameters() << "\n" ;
+
     poptea.resetThermalSweepIni();
   }
 
