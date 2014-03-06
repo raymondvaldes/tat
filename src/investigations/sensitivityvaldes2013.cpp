@@ -53,81 +53,82 @@ void run( const filesystem::directory &dir )
   poptea.bestFit() ;
   std::cout << poptea.ppUnknownParameters() ;
 
-  /// PartA ( pie_analysis )
-  const std::string partA = "/partA_pieAnalysis" ;
-  dir.mkdir( partA ) ;
 
-  PIE::PIEAnalysisOutput pieOutput = poptea.PIE() ;
-  const std::string path = dir.abs( partA ) ;
-  pieOutput.pp2Folder( path ) ;
-  std::cout << poptea.ppUnknownParameters() << "\n" ;
-
-  /// PartB (experimental Optimizer)
-  std::string partB = "/partB_expOptimize" ;
-  dir.mkdir( partB ) ;
-
-
-  for( size_t i =0 ; i < 10 ; ++i )
   {
-    poptea.bestFit() ;
-    ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
-    outputData.pp2Folder( dir.abs( partB ) , std::to_string(i)  ) ;
-    std::cout << poptea.ppUnknownParameters() << "\n" ;
+    /// PartA ( pie_analysis )
+    const string partA = "/partA_pieAnalysis" ;
+    dir.mkdir( partA ) ;
+    PIE::PIEAnalysisOutput pieOutput = poptea.PIE() ;
 
-    poptea.resetThermalSweepIni();
+    const string path = dir.abs( partA ) ;
+    pieOutput.pp2Folder( path ) ;
+    std::cout << poptea.ppUnknownParameters() << "\n" ;
   }
 
-  /// PartC (thermal Maps)
-  const std::string partC = "/partC_thermalMaps" ;
+  {
+    /// PartB (experimental Optimizer)
+    string partB = "/partB_expOptimize" ;
+    dir.mkdir( partB ) ;
+
+    for( size_t i =0 ; i < 1 ; ++i )
+    {
+      poptea.bestFit() ;
+      ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
+      outputData.pp2Folder( dir.abs( partB ) , std::to_string(i)  ) ;
+      std::cout << poptea.ppUnknownParameters() << "\n" ;
+
+      //poptea.resetThermalSweepIni();
+    }
+  }
+
   using tools::interface::exportfile;
-  dir.mkdir( partC ) ;
+  const string partC = "/partC_thermalMaps" ;
+  {
+    /// PartC (thermal Maps)
+    dir.mkdir( partC ) ;
 
-  const std::string path2thermalMap
-      = dir.abs( partC + "/" + "thermalSweepALL.dat" );
-  std::cout <<  path2thermalMap << "\n\n";
-  const std::string thermalSweepMap = poptea.thermalSweepMap() ;
-  exportfile( path2thermalMap , thermalSweepMap ) ;
-
+    const string path2thermalMap = dir.abs( partC + "/thermalSweepALL.dat" );
+    const string thermalSweepMap = poptea.thermalSweepMap() ;
+    exportfile( path2thermalMap , thermalSweepMap ) ;
+  }
 
   ///subMaps
-  //// asub
   using tools::interface::getTreefromFile;
   using tools::interface::getBranch;
   using boost::property_tree::ptree;
+  {
+    //// asub
+    const string path2asub = dir.abs( "/poptea-asub.xml" ) ;
+    const ptree asubTrunk = getTreefromFile( path2asub ) ;
+    ptree aBranch = getBranch( "poptea", "optimizationSweep", asubTrunk ) ;
+    const methods analysisAsub
+        = loadMethodsfromFile( aBranch, *(poptea.unknownParameters),
+                               *(poptea.thermalData),
+                               poptea.coreSystem->TBCsystem.coating);
 
-  const std::string path2asub = dir.abs( "/poptea-asub.xml" ) ;
-  const ptree asubTrunk = getTreefromFile( path2asub ) ;
-  ptree aBranch = getBranch( "poptea", "optimizationSweep", asubTrunk ) ;
-  const methods
-      analysisAsub = loadMethodsfromFile( aBranch,
-                                          *(poptea.unknownParameters),
-                                          *(poptea.thermalData),
-                                          poptea.coreSystem->TBCsystem.coating);
-  poptea.reloadAnalysis( analysisAsub ) ;
-  const std::string
-      path2asubMap = dir.abs( partC + "/" + "thermalSweep-asub.dat" ) ;
-  poptea.bestFit() ;
-  poptea.PIE();
-  const std::string thermalSweepMapasub = poptea.thermalSweepMap() ;
-  exportfile( path2asubMap , thermalSweepMapasub ) ;
+    poptea.reloadAnalysis( analysisAsub ) ;
+    const string path2asubMap = dir.abs( partC+"/thermalSweep-asub.dat" ) ;
+    poptea.bestFit() ;
+    const string thermalSweepMapasub = poptea.thermalSweepMap() ;
+    exportfile( path2asubMap , thermalSweepMapasub ) ;
+  }
 
+  {
+    //// gamma
+    const string path2gamma = dir.abs( "/poptea-gamma.xml" ) ;
+    const ptree gammaTrunk = getTreefromFile( path2gamma );
+    const ptree gBranch = getBranch("poptea", "optimizationSweep", gammaTrunk ) ;
+    const methods gammaEmphasis = loadMethodsfromFile(
+          gBranch, *(poptea.unknownParameters), *(poptea.thermalData),
+          poptea.coreSystem->TBCsystem.coating);
 
-  //// gamma
-  const std::string path2gamma = dir.abs( "/poptea-gamma.xml" ) ;
-  const ptree gammaTrunk = getTreefromFile( path2gamma );
-  const ptree gBranch = getBranch("poptea", "optimizationSweep", gammaTrunk ) ;
-  const methods
-      gammaEmphasis = loadMethodsfromFile( gBranch,
-                                           *(poptea.unknownParameters),
-                                           *(poptea.thermalData),
-                                          poptea.coreSystem->TBCsystem.coating);
-  poptea.reloadAnalysis( gammaEmphasis ) ;
-  const std::string
-      path2gammalMap = dir.abs( partC + "/" + "thermalSweep-gamma.dat" ) ;
-  poptea.bestFit() ;
-  poptea.PIE();
-  const std::string thermalSweepMapgam = poptea.thermalSweepMap() ;
-  exportfile( path2gammalMap , thermalSweepMapgam ) ;
+    poptea.reloadAnalysis( gammaEmphasis ) ;
+    const string path2gammalMap = dir.abs( partC + "/thermalSweep-gamma.dat" ) ;
+    poptea.bestFit() ;
+    const string thermalSweepMapgam = poptea.thermalSweepMap() ;
+    exportfile( path2gammalMap , thermalSweepMapgam ) ;
+  }
+
 
   return;
 }
