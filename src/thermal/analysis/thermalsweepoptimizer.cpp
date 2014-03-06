@@ -111,10 +111,10 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   // Parameter Estimation with PIE analysis
   pieAnalysis();
-//  std::cout << xSweep.first << "\t" << xSweep.second << "\n";
 
   ///Use results from anaylsis
   size_t i =0 ;
+  currentState.meanParameterError = 0;
   for( physicalModel::labels& myParam : sweepOptimizationGoal )
   {
     double error = 0 ;
@@ -127,11 +127,11 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
       }
     }
 
-    currentState.meanParameterError = error;
     error += penalty( xSweep );
-
     fvec[i] = error ;
     i++;
+
+    currentState.meanParameterError += error;
   }
 
   ouputResults.push_back( currentState ) ;
@@ -142,6 +142,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
+
   intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
                             bestfitMethod ) ;
   captureState( coreSystem->TBCsystem.coating ) ;
@@ -400,7 +401,9 @@ std::string ThermalSweepOptimizer::montecarloMap(
     const std::shared_ptr< LMA > &bestfitMethod_in,
     const std::shared_ptr< PIE > &intervalEstimates_in )
 {
-  //The purpose here is to get the "best possible fit" and use that as my ref.
+  // Optimization process and then best-fit Info!!!
+  // The purpose here is to get the "best possible fit" and use that as my ref.
+  std::cout << "starting monte carlo method....  \n";
   solve( unknownParameters_in, thermalData_in, coreSystem_in, bestfitMethod_in,
          intervalEstimates_in ) ;
 
@@ -450,19 +453,41 @@ std::string ThermalSweepOptimizer::montecarloMap(
   output << "#| Contour Map of Experimental Optimization                    \n";
   output << "#|                                                             \n";
   output << "#| columns...                                                  \n";
+  output << "#| omega lowerbound :                                          \n";
+  output << "#| omega upperbound :                                          \n";
   output << "#| lthermal center  :                                          \n";
   output << "#| lthermal decade  :                                          \n";
+  output << "#| lthermal min     :                                          \n";
+  output << "#| lthermal max     :                                          \n";
   output << "#| mean parameter error  :                                     \n";
   output << "#|                                                             \n";
   output << "#|-------------------------------------------------------------\n";
 
+  const double kcond = coatingTOinterpretFullRange->kthermal.offset;
+  const double psi = coatingTOinterpretFullRange->psithermal.offset;
+  const double length = coatingTOinterpretFullRange->depth;
+
+
   for( OptimizerOutput::ExperimentAnalysisState&state :
        ouputResults.searchPath.path )
   {
+    const double omegafirst = state.omegaLimits.first;
+    const double omegasecond = state.omegaLimits.second;
+
+    const double lmin = thermal::lthermal( length, kcond, psi, omegafirst ) ;
+    const double lmax = thermal::lthermal( length, kcond, psi, omegasecond );
+
+    using std::pair;
+    const pair<double, double > lthermCenDec =math::xCenterlog10( lmin, lmax );
+
     output <<
-    state.lthermalCenterDecades.first   << "\t" <<
-    state.lthermalCenterDecades.second  << "\t" <<
-    state.meanParameterError << "\n";
+    lthermCenDec.first                  << "\t" <<
+    lthermCenDec.second                 << "\t" <<
+    lmin                                << "\t" <<
+    lmax                                << "\t" <<
+    omegafirst                          << "\t" <<
+    omegasecond                         << "\t" <<
+    state.meanParameterError            << "\n";
   }
   return output.str();
 
@@ -474,6 +499,8 @@ void ThermalSweepOptimizer::captureState( const physicalModel::layer &coat )
   currentState.lthermalCenterDecades =
       math::xCenterlog10( currentState.lthermalLimits.first,
                           currentState.lthermalLimits.second );
+
+  currentState.omegaLimits = thermalData->get_omegaLimits();
 
   reassign( currentState.thermalData, *thermalData ) ;
   reassign( currentState.thermalSweepSearch, thermalSweepSearch ) ;

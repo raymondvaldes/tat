@@ -57,6 +57,7 @@ public:
       double meanParameterError;
       std::pair<double, double> lthermalLimits ;
       std::pair<double, double> lthermalCenterDecades ;
+      std::pair<double, double> omegaLimits;
 
       std::string ppFinalResults( void ) ;
       std::string ppEmissionSweep( void ) ;
@@ -68,6 +69,7 @@ public:
 
     struct SearchPath
     {
+      std::shared_ptr< physicalModel::layer > coating_final ;
       std::vector< ExperimentAnalysisState > path ;
       void clear( void ) ;
       void push_back( const ExperimentAnalysisState &data_in ) ;
