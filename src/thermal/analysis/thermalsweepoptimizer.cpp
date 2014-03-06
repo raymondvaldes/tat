@@ -123,7 +123,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
     {
       if ( myParam.getName() == unknown.label() )
       {
-        error += unknown.bestfitIntervalSpread();
+        error = unknown.bestfitIntervalSpread();
       }
     }
 
