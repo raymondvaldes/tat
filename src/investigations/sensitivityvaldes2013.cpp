@@ -44,6 +44,7 @@ using namespace thermal::analysis;
 
 void run( const filesystem::directory &dir )
 {
+  using std::string;
   using namespace physicalModel;
   /// setup output directory
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
@@ -132,25 +133,24 @@ void run( const filesystem::directory &dir )
 }
 
 thermal::analysis::Poptea
-initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
+initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir )
 {
   ///Initialize kernals
-  const thermal::analysis::Kernal
-      popteaCore = thermal::analysis::loadWorkingDirectoryKernal(dir);
-  thermal::analysis::Poptea
-      poptea = thermal::analysis::loadWorkingDirectoryPoptea ( dir, popteaCore);
+  const Kernal popteaCore = loadWorkingDirectoryKernal( dir ) ;
+  Poptea poptea = loadWorkingDirectoryPoptea ( dir, popteaCore);
 
   //Noise in Simulated Emission
-  const thermal::emission::ExpNoiseSetting myEmissionNoise =
-  thermal::emission::ExpNoiseSetting::loadExpNoiseFile( dir );
+  using thermal::emission::ExpNoiseSetting;
+  const ExpNoiseSetting myEmissionNoise =ExpNoiseSetting::loadExpNoiseFile(dir);
 
   ///Output noise to test
   const std::vector<double> emissionNominal =
       thermal::emission::phase99( *(poptea.coreSystem) ,
                                   poptea.thermalData->omegas ) ;
 
-  const std::vector<double> emissionExperimental = thermal::emission::
-      addNoise( emissionNominal, poptea.thermalSweep(), myEmissionNoise ) ;
+  const std::vector<double> emissionExperimental =
+      thermal::emission::addNoise( emissionNominal, poptea.thermalSweep(),
+                                   myEmissionNoise ) ;
 
   poptea.updateExperimentalData( poptea.thermalData->omegas ,
                                  emissionExperimental ) ;
@@ -158,7 +158,7 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory dir )
   return poptea;
 }
 
-void demo( const filesystem::directory dir )
+void demo( const filesystem::directory &dir )
 {
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 

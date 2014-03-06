@@ -48,11 +48,10 @@ int main( int argc, char *argv[ ] )
     stopwatch globalStopWatch ;
 
     std::vector< boost::filesystem::path > samples = filesystem::ls( path );
-
     for( const boost::filesystem::path& testSpeciman : samples )
     {
       const std::string specimanPath = testSpeciman.string();
-      const filesystem::directory dir(specimanPath ) ;
+      const filesystem::directory dir( specimanPath ) ;
       investigations::sensitivityvaldes2013::run( dir ) ;
     }
 

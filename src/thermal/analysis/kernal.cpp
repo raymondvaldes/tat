@@ -60,15 +60,14 @@ class thermal::analysis::Kernal
 
   const std::string conjunto = "kernal.";
   const ptree ptchild1 = pt.get_child( conjunto + "experimentalSetup" );
-  const class equipment::setup
-    Obj1( equipment::setup::loadConfigfromXML( ptchild1 ) );
+  const equipment::setup Obj1( equipment::setup::loadConfigfromXML( ptchild1 ));
 
   const ptree ptchild2 = pt.get_child( conjunto + "TBCsystem" );
-  const class physicalModel::TBCsystem
+  const physicalModel::TBCsystem
     Obj2( physicalModel::TBCsystem::loadConfig( ptchild2 ) );
 
   const ptree ptchild3 = pt.get_child( conjunto + "thermalModel" );
-  const class thermal::construct
+  const thermal::construct
     Construct( thermal::construct::loadConfigfromXML( ptchild3 ) );
 
   /// Mesh is intrinsically linked the TBCsystem and experimental setup
@@ -78,16 +77,16 @@ class thermal::analysis::Kernal
   const double beta1  = ptchild3.get<double>( "mesh.beta1" );
   const double split  = ptchild3.get<double>( "mesh.split" );
   const size_t iter   = ptchild3.get<size_t>( "mesh.num_iter" );
-  const class numericalModel::Mesh mesh(M2, Rend, Nend, beta1, split,
-                                  Obj2.coating.depth,
-                                  Obj2.substrate.depth,
-                                  Obj1.laser.radius,
-                                  Obj2.radius, iter);
+  const numericalModel::Mesh mesh( M2, Rend, Nend, beta1, split,
+                                   Obj2.coating.depth,
+                                   Obj2.substrate.depth,
+                                   Obj1.laser.radius,
+                                   Obj2.radius, iter);
 
-  const class thermal::model Ojb3NEW( Construct , mesh);
+  const thermal::model Ojb3NEW( Construct , mesh);
 
   //Load class object from previous objects
-  const class Kernal kernal( Obj1, Obj2, Ojb3NEW, DataDirectory_);
+  const Kernal kernal( Obj1, Obj2, Ojb3NEW, DataDirectory_);
   return kernal;
 }
 

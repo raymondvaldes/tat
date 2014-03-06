@@ -45,9 +45,11 @@ double omega( const double L_coat, const double l_thermal, const double k_c,
 double lthermal( const double L_coat, const double k_c, const double psi_c,
                  const double omega )
 {
+  using std::sqrt;
+
   double lthermal = k_c ;
-  lthermal /= psi_c*omega ;
-  lthermal = std::sqrt(lthermal) ;
+  lthermal /= psi_c * omega ;
+  lthermal = sqrt( lthermal ) ;
   lthermal /= L_coat ;
 
   return lthermal ;

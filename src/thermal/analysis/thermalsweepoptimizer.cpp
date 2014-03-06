@@ -149,7 +149,7 @@ void ThermalSweepOptimizer::pieAnalysis(void)
 
 //  for(size_t i = 0; i < 60 ; i ++)
 //    std::cout << "\n";
-//  std::cout << currentState.ppFinalResults() << "\n" ;
+  std::cout << currentState.ppFinalResults() << "\n" ;
 }
 
 
@@ -335,15 +335,18 @@ push_back( const ExperimentAnalysisState &data_in )
 void ThermalSweepOptimizer::OptimizerOutput::Comparison::
 prettyPrint( const std::string path )
 {
-  const std::string pre = "before" ;
-  const std::string fullPathpre = path + "/" + pre;
-  filesystem::makeDir( path , pre ) ;
+  using std::string;
+  using filesystem::makeDir;
+
+  const string pre = "before" ;
+  const string fullPathpre = path + "/" + pre;
+  makeDir( path , pre ) ;
   before->ppExportAll( fullPathpre ) ;
 
 
-  const std::string post = "after" ;
-  const std::string fullpathPost = path + "/" + post;
-  filesystem::makeDir( path , post ) ;
+  const string post = "after" ;
+  const string fullpathPost = path + "/" + post;
+  makeDir( path , post ) ;
   after->ppExportAll( fullpathPost ) ;
 }
 
@@ -406,13 +409,14 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromBestFit( (*unknownParameters)() );
+
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
   //This function will output a table of values from maping out
   constexpr double min = 0 ;
   constexpr double max = 1 ;
 
-  ouputResults.clear();
+  ouputResults.clear() ;
   for( size_t i = 0; i < iter ; ++i )
   {
     ///create random start points and transform them
@@ -464,7 +468,7 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
 }
 
-void ThermalSweepOptimizer::captureState( const physicalModel::layer coat )
+void ThermalSweepOptimizer::captureState( const physicalModel::layer &coat )
 {
   currentState.lthermalLimits = thermalData->get_lthermalLimits( coat ) ;
   currentState.lthermalCenterDecades =
@@ -517,37 +521,39 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
     const double xCenter, const double xRange,
     const physicalModel::layer updatedCoating )
 {
-  // Establish omegas limits of full range (FR) experimental data
-  std::pair<double, double> omegaLimits =
-      fullRangeThermalData->get_omegaLimits( ) ;
+  using std::pair;
+  using std::vector;
 
-  std::vector<double> omegasMonoIncreasing( fullRangeThermalData->size() ) ;
+  // Establish omegas limits of full range (FR) experimental data
+  pair<double, double> omegaLimits = fullRangeThermalData->get_omegaLimits( ) ;
+
+  vector<double> omegasMonoIncreasing( fullRangeThermalData->size() ) ;
   std::reverse_copy(
         std::begin( fullRangeThermalData->omegas ),
         std::end( fullRangeThermalData->omegas ),
         std::begin( omegasMonoIncreasing ) ) ;
 
-  std::vector<double> emissionReversed( fullRangeThermalData->size() ) ;
+  vector<double> emissionReversed( fullRangeThermalData->size() ) ;
   std::reverse_copy(
         std::begin( fullRangeThermalData->experimentalEmission ),
         std::end( fullRangeThermalData->experimentalEmission ),
         std::begin( emissionReversed ) ) ;
 
-  math::numIntegration::funcClass experimentalEmissionInterpolater(
-    &omegasMonoIncreasing[0] , &emissionReversed[0],
-      omegasMonoIncreasing.size() ) ;
+  using math::numIntegration::funcClass;
+  funcClass experimentalEmissionInterpolater( &omegasMonoIncreasing[0] ,
+      &emissionReversed[0], omegasMonoIncreasing.size() ) ;
 
   // Use omega to derive current lthermalsLimits that correspond to FullRange
   const double coatingLength = updatedCoating.depth;
   const double coatingK = updatedCoating.kthermal.offset;
   const double coatingPsi = updatedCoating.psithermal.offset;
 
-  const std::pair<double, double> thermalLimits(
+  const pair<double, double> thermalLimits(
   lthermal( coatingLength, coatingK,  coatingPsi, omegaLimits.first  ) ,
   lthermal( coatingLength, coatingK,  coatingPsi, omegaLimits.second ) ) ;
 
   // Take a slice of thermalData range based on updated limits and xC,xR
-  const std::pair<double, double> slicedThermalLimits =
+  const pair<double, double> slicedThermalLimits =
   math::newThermalSweepLimits( xCenter, xRange, thermalLimits ) ;
 
   const double lmin = slicedThermalLimits.first ;
@@ -556,7 +562,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 
   // Create vector of lthermals for my slice of data
   ThermalData output( lmin , lmax , lminPerDecarde, updatedCoating ) ;
-  std::vector<double> sliceEmission( output.size() ); /*output.size() */
+  vector<double> sliceEmission( output.size() ); /*output.size() */
 
   size_t i = 0;
   for( auto& omega : output.omegas )

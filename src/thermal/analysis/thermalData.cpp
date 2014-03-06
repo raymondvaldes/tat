@@ -144,7 +144,7 @@ void ThermalData::resizeVectors( const size_t Lend)
 std::pair<double, double>
 ThermalData::get_omegaLimits( void ) const
 {
-  std::pair<double, double> output(omegas.front(), omegas.back());
+  std::pair<double, double> output( omegas.front(), omegas.back() );
   return output;
 }
 

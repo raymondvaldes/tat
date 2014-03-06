@@ -89,14 +89,6 @@ phase99( const thermal::analysis::Kernal &popteaCore,
       std::cout << "no model available"; exit(-2);
   }
 
-
-
-
-
-
-
-
-
   return results;
 }
 
