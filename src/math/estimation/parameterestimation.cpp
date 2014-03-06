@@ -248,7 +248,7 @@ unknownList::prettyPrint( void )
               << std::setw(10) << std::left << 100*val.bestfitIntervalSpread()
               << "|\n";
   }
-  output << "*-----------------------------------------*\n" << std::ends;
+  output << "*-----------------------------------------*\n";
 
   return output.str() ;
 }
