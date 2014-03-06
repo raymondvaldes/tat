@@ -96,7 +96,7 @@ addNoise( const std::vector<double> &emissionNominal_,
 
 
 ExpNoiseSetting
-ExpNoiseSetting::initializeObj( const boost::property_tree::ptree pt )
+ExpNoiseSetting::initializeObj(const boost::property_tree::ptree &pt )
 {
   //initialize parameter estimation settings
   const double a1_     = pt.get<double>( "bias-noise" );
@@ -113,7 +113,7 @@ ExpNoiseSetting::initializeObj( const boost::property_tree::ptree pt )
 
 
 ExpNoiseSetting
-ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory dir )
+ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory &dir )
 {
   const std::string filename = "EmissionNoise.xml";
   const std::string absPath = dir.abs( filename );

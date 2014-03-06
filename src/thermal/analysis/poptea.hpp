@@ -76,8 +76,7 @@ public:
   std::string ppUnknownParameters( void ) ;
 } ;
 
-class Poptea
-loadWorkingDirectoryPoptea( const filesystem::directory dir,
-                            const Kernal &popteaCore);
+Poptea loadWorkingDirectoryPoptea( const filesystem::directory &dir,
+                                   const Kernal &popteaCore );
 }}
 #endif // poptea_HPP

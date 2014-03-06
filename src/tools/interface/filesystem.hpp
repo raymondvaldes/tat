@@ -33,7 +33,7 @@ License
 namespace filesystem
 {
 
-void makeDir(const std::string rootPath, const std::string newDirectory);
+void makeDir(const std::string rootPath, const std::string &newDirectory);
 
 std::vector<boost::filesystem::path> ls( const std::string &path );
 
@@ -43,11 +43,11 @@ private:
   const std::string workingDirectory;
 
 public:
-  explicit directory(const std::string workingDirectory_);
+  explicit directory(const std::string &workingDirectory_);
   ~directory(void);
 
   std::string abs(const std::string &relativePath) const;
-  void mkdir(const std::string newDirectory) const;
+  void mkdir(const std::string &newDirectory) const;
   std::string pwd(void) const;
 };
 

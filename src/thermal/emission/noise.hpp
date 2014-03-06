@@ -41,8 +41,8 @@ public:
                             const bool d1_, const bool d2_,
                             const int s1_, const double noiseRandom_);
 
-  static ExpNoiseSetting initializeObj( const boost::property_tree::ptree pt ) ;
-  static ExpNoiseSetting loadExpNoiseFile( const filesystem::directory dir ) ;
+  static ExpNoiseSetting initializeObj( const boost::property_tree::ptree &pt ) ;
+  static ExpNoiseSetting loadExpNoiseFile(const filesystem::directory &dir ) ;
 };
 
 

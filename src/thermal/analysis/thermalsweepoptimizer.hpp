@@ -159,7 +159,7 @@ private:
 
   // current state
   OptimizerOutput::ExperimentAnalysisState currentState;
-  void captureState(const layer coat );
+  void captureState(const layer &coat );
 
   // solvers
   void optimizer( int *info, int *nfev );

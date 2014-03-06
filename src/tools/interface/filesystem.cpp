@@ -29,7 +29,7 @@ License
 namespace filesystem
 {
 
-void makeDir(const std::string rootPath, const std::string newDirectory)
+void makeDir(const std::string rootPath, const std::string &newDirectory)
 {
   
   const std::string fullpath = rootPath + "/" + newDirectory ;
@@ -46,12 +46,12 @@ void makeDir(const std::string rootPath, const std::string newDirectory)
 }
 
 
-directory::directory(const std::string workingDirectory_):
+directory::directory(const std::string &workingDirectory_):
   workingDirectory( workingDirectory_ )
 {}
 
 directory::~directory(void){}
-void directory::mkdir(const std::string newDirectory) const
+void directory::mkdir(const std::string &newDirectory) const
 {
   if ( ! boost::filesystem::is_directory( abs( newDirectory ) ) )
   {

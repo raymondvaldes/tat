@@ -42,7 +42,7 @@ namespace sensitivityvaldes2013
 
 using namespace thermal::analysis;
 
-void run( const filesystem::directory dir )
+void run( const filesystem::directory &dir )
 {
   using namespace physicalModel;
   /// setup output directory

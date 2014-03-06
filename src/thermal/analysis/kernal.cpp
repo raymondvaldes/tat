@@ -112,7 +112,7 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 }
 
 class Kernal
-    loadWorkingDirectoryKernal( const class filesystem::directory &dir )
+    loadWorkingDirectoryKernal( const filesystem::directory &dir )
 {
   using boost::property_tree::ptree;
 

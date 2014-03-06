@@ -158,7 +158,7 @@ void Poptea::reloadAnalysis( const methods &analysis_in )
 }
 
 
-Poptea loadWorkingDirectoryPoptea( const class filesystem::directory dir,
+Poptea loadWorkingDirectoryPoptea( const class filesystem::directory &dir,
                                    const class Kernal &popteaCore )
 {
   const std::string filename = "poptea.xml";

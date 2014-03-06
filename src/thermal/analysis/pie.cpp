@@ -187,6 +187,7 @@ PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
   bestfitMethod =  bestfitMethod_in ;
 
   ///repeat best fit and save the info for output analysis
+
   bestFit() ;
   ThermalSweepTEMP.bestfit = *thermalData ;
   reassign ( ouputResults.bestFitThermal , *thermalData ) ;
