@@ -43,6 +43,7 @@ public:
   std::vector<double> omegas;
   std::vector<double> experimentalEmission;
   std::vector<double> predictedEmission;
+  std::vector<double> nominalEmission;
   std::pair<double, double> lthermalPredicted;
   size_t measurementsPerDecade;
   double MSE;
