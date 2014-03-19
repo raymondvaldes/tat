@@ -87,17 +87,21 @@ ThermalData::prettyPrint( const physicalModel::layer &coating )
   output << "#| Lambda     : thermal penetration                            \n";
   output << "#| expEmission: experimental phase of emit                     \n";
   output << "#| modEmission: model output phase of emit                     \n";
-  output << "#| nomEmission: nominal phase of emit                          \n";
   output << "#|                                                             \n";
   output << "#|-------------------------------------------------------------\n";
   const std::vector<double> lthermals = get_lthermalSweep( coating ) ;
+
+  assert( omegas.size() == lthermals.size() );
+  assert( omegas.size() == experimentalEmission.size() );
+  assert( omegas.size() == predictedEmission.size() );
+
+
   for( size_t i = 0 ; i < omegas.size() ; ++i )
   {
     output << omegas[i]
            << "\t" << lthermals[i]
            << "\t" << experimentalEmission[i]
            << "\t" << predictedEmission[i]
-           << "\t" << nominalEmission[i]
            << "\n";
   }
 
