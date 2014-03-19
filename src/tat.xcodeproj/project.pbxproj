@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB38313E18AEF3A9009965F1 /* manyfit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830DB18AEF3A8009965F1 /* manyfit.cpp */; };
 		AB38313F18AEF3A9009965F1 /* sensitivityvaldes2013.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830DD18AEF3A8009965F1 /* sensitivityvaldes2013.cpp */; };
 		AB38314018AEF3A9009965F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830DF18AEF3A8009965F1 /* main.cpp */; };
 		AB38314118AEF3A9009965F1 /* combinations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830E218AEF3A8009965F1 /* combinations.cpp */; };
@@ -49,7 +48,6 @@
 		AB38316518AEF3A9009965F1 /* filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313518AEF3A9009965F1 /* filesystem.cpp */; };
 		AB38316618AEF3A9009965F1 /* programoptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313718AEF3A9009965F1 /* programoptions.cpp */; };
 		AB38316718AEF3A9009965F1 /* timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313918AEF3A9009965F1 /* timing.cpp */; };
-		AB38316818AEF3A9009965F1 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313C18AEF3A9009965F1 /* version.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,9 +64,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AB3830DA18AEF3A8009965F1 /* all.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = all.hpp; sourceTree = "<group>"; };
-		AB3830DB18AEF3A8009965F1 /* manyfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = manyfit.cpp; sourceTree = "<group>"; };
-		AB3830DC18AEF3A8009965F1 /* manyfit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = manyfit.hpp; sourceTree = "<group>"; };
 		AB3830DD18AEF3A8009965F1 /* sensitivityvaldes2013.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sensitivityvaldes2013.cpp; sourceTree = "<group>"; };
 		AB3830DE18AEF3A8009965F1 /* sensitivityvaldes2013.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sensitivityvaldes2013.hpp; sourceTree = "<group>"; };
 		AB3830DF18AEF3A8009965F1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -151,8 +146,6 @@
 		AB38313918AEF3A9009965F1 /* timing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timing.cpp; sourceTree = "<group>"; };
 		AB38313A18AEF3A9009965F1 /* timing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timing.h; sourceTree = "<group>"; };
 		AB38313B18AEF3A9009965F1 /* tools.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tools.hpp; sourceTree = "<group>"; };
-		AB38313C18AEF3A9009965F1 /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = version.cpp; sourceTree = "<group>"; };
-		AB38313D18AEF3A9009965F1 /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
 		AB38316918AEF3AE009965F1 /* tat */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tat; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -183,9 +176,6 @@
 		AB3830D918AEF3A8009965F1 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
-				AB3830DA18AEF3A8009965F1 /* all.hpp */,
-				AB3830DB18AEF3A8009965F1 /* manyfit.cpp */,
-				AB3830DC18AEF3A8009965F1 /* manyfit.hpp */,
 				AB3830DD18AEF3A8009965F1 /* sensitivityvaldes2013.cpp */,
 				AB3830DE18AEF3A8009965F1 /* sensitivityvaldes2013.hpp */,
 			);
@@ -356,8 +346,6 @@
 				AB38313918AEF3A9009965F1 /* timing.cpp */,
 				AB38313A18AEF3A9009965F1 /* timing.h */,
 				AB38313B18AEF3A9009965F1 /* tools.hpp */,
-				AB38313C18AEF3A9009965F1 /* version.cpp */,
-				AB38313D18AEF3A9009965F1 /* version.hpp */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -399,7 +387,7 @@
 		AB37106918653C7D000092C5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Raymond Valdes";
 			};
 			buildConfigurationList = AB37106C18653C7D000092C5 /* Build configuration list for PBXProject "tat" */;
@@ -437,7 +425,6 @@
 				AB38315518AEF3A9009965F1 /* pie.cpp in Sources */,
 				AB38315918AEF3A9009965F1 /* construct.cpp in Sources */,
 				AB38315818AEF3A9009965F1 /* thermalsweepoptimizer.cpp in Sources */,
-				AB38313E18AEF3A9009965F1 /* manyfit.cpp in Sources */,
 				AB38315418AEF3A9009965F1 /* methods.cpp in Sources */,
 				AB38315318AEF3A9009965F1 /* lmdiff_poptea_help.cpp in Sources */,
 				AB38314B18AEF3A9009965F1 /* estimationInterval.cpp in Sources */,
@@ -460,7 +447,6 @@
 				AB38315118AEF3A9009965F1 /* kernal.cpp in Sources */,
 				AB38315618AEF3A9009965F1 /* poptea.cpp in Sources */,
 				AB38315018AEF3A9009965F1 /* basedata.cpp in Sources */,
-				AB38316818AEF3A9009965F1 /* version.cpp in Sources */,
 				AB38316218AEF3A9009965F1 /* numericalmodel.cpp in Sources */,
 				AB38316418AEF3A9009965F1 /* exportfile.cpp in Sources */,
 				AB38314918AEF3A9009965F1 /* gslfunc.cpp in Sources */,
@@ -507,9 +493,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PROFILING_CODE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -543,7 +529,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
@@ -610,7 +596,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "~/code/tat/src";
 				VALID_ARCHS = x86_64;
 			};
@@ -678,7 +664,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "~/code/tat/src";
 				VALID_ARCHS = x86_64;
 			};

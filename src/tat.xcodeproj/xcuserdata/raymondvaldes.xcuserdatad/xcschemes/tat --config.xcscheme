@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--config /Users/raymondvaldes/code/tat/investigations/sensitivity2013"
+            argument = "--run /Users/raymondvaldes/Dropbox/investigations/develop"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
