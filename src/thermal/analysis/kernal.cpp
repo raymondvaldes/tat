@@ -110,6 +110,17 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
   TBCsystem.updateCoat();
 }
 
+void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list )
+{
+  for( const math::estimation::unknown& unknown :  list )
+  {
+    const double val = unknown.initialVal();
+    TBCsystem.updateVal( unknown.label() , val );
+  }
+  TBCsystem.updateCoat();
+}
+
+
 class Kernal
     loadWorkingDirectoryKernal( const filesystem::directory &dir )
 {
