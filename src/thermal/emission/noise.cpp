@@ -51,6 +51,10 @@ addNoise( const std::vector<double> &emissionNominal_,
   const int s1 = para.s1;
   const double noiseRandom = para.noiseRandom;
 
+  using std::tan;
+  using std::abs;
+
+//  assert( (a > 0) || (b > 1) || (b < M_PI) );
   if( (a < 0) || (b < 1) || (b > M_PI) )
   {
      std::cerr << "parameters (a,b) out of range"; exit(-99);
@@ -67,7 +71,7 @@ addNoise( const std::vector<double> &emissionNominal_,
     const double cotbc = tan( M_PI_2 - ( b * c ) );
     double noiseBias = -a * cotbc * tan( b * ( c - lthermalPercentile ) );
 
-  if(!d2) { noiseBias = std::fabs(noiseBias); }
+    if(!d2) { noiseBias = abs(noiseBias); }
     if(!d1) { noiseBias *= -1; }
 
     switch(s1)
@@ -85,7 +89,7 @@ addNoise( const std::vector<double> &emissionNominal_,
     }
 
     ///Determine random noise
-    const double noiseRandomGen = math::x_normal(0, noiseRandom);
+    const double noiseRandomGen = math::x_normal( 0, noiseRandom );
 
     output[i] += M_PI_2 * noiseBias;
     output[i] += M_PI_2 * noiseRandomGen;
