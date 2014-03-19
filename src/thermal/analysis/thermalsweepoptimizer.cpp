@@ -30,6 +30,7 @@ License
 #include "math/numIntegration/gslfunc.hpp"
 #include "math/estimation/lmdiff.hpp"
 #include "tools/interface/exportfile.hpp"
+#include "thermal/emission/phase99.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -115,6 +116,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   ///Use results from anaylsis
   size_t i =0 ;
   currentState.meanParameterError = 0;
+  using std::pow;
   for( physicalModel::labels& myParam : sweepOptimizationGoal )
   {
     double error = 0 ;
@@ -131,9 +133,12 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
     fvec[i] = error ;
     i++;
 
-    currentState.meanParameterError += error;
+    currentState.meanParameterError += pow(error,2);
   }
 
+  using std::sqrt;
+  currentState.meanParameterError = sqrt(currentState.meanParameterError );
+  currentState.meanParameterError /= sweepOptimizationGoal.size();
   ouputResults.push_back( currentState ) ;
 
 
@@ -199,15 +204,26 @@ void ThermalSweepOptimizer::updateWorkSpace(
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::
-addBefore( ExperimentAnalysisState input )
+addBefore( const ExperimentAnalysisState &input,
+           const std::shared_ptr<ThermalData> &thermalData  )
 {
   reassign( results.before , input ) ;
+  results.preFitted = thermalData ;
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::
-addAfter( ExperimentAnalysisState input )
+addAfter( const ExperimentAnalysisState &input,
+          const std::shared_ptr<Kernal> &coreSystem  )
 {
+  ///This saves the 'after' state.
   reassign( results.after , input ) ;
+
+  ///This creates a full-range sweep of the model
+  results.postFitted = results.preFitted;
+
+  using thermal::emission::phase99;
+  results.postFitted->predictedEmission =
+      phase99( *(coreSystem) , results.postFitted->omegas ) ;
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::clear( void )
@@ -218,11 +234,21 @@ void ThermalSweepOptimizer::OptimizerOutput::clear( void )
 void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path ,
                                                        const std::string i)
 {
+  using tools::interface::exportfile;
+  using std::string;
+
   results.prettyPrint( path );
 
-  const std::string searchOutput = searchPath.prettyPrint() ;
-  const std::string fullPath = path + "/" + "optimizerPath"+ i +".dat";
-  tools::interface::exportfile( fullPath , searchOutput ) ;
+  const string searchOutput = searchPath.prettyPrint() ;
+  const string fullPath = path + "/" + "optimizerPath"+ i +".dat";
+
+  exportfile( fullPath , searchOutput ) ;
+
+
+  const string fullSweep =
+      results.postFitted->prettyPrint( *(searchPath.coating_final) );
+  const string fullSweepfile = path + "/" + "optiSweep.dat" ;
+  exportfile( fullSweepfile, fullSweep );
 }
 
 
@@ -334,21 +360,21 @@ push_back( const ExperimentAnalysisState &data_in )
 
 
 void ThermalSweepOptimizer::OptimizerOutput::Comparison::
-prettyPrint( const std::string path )
+prettyPrint( const std::string folder )
 {
   using std::string;
   using filesystem::makeDir;
 
   const string pre = "before" ;
-  const string fullPathpre = path + "/" + pre;
-  makeDir( path , pre ) ;
+  const string fullPathpre = folder + "/" + pre;
+  makeDir( folder , pre ) ;
   before->ppExportAll( fullPathpre ) ;
 
 
   const string post = "after" ;
-  const string fullpathPost = path + "/" + post;
-  makeDir( path , post ) ;
-  after->ppExportAll( fullpathPost ) ;
+  const string fullpathPost = folder + "/" + post;
+  makeDir( folder , post ) ;
+  after->ppExportAll( fullpathPost ) ;  
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::SearchPath::
@@ -389,6 +415,7 @@ void ThermalSweepOptimizer::upSweepStartReset( void )
     thermalSweepSearch.resetBestfits() ;
     pass = math::checkLimits( thermalSweepSearch.vectorUnknowns[0].initialVal() ,
                               thermalSweepSearch.vectorUnknowns[1].initialVal() ) ;
+
   }
 
 
@@ -404,22 +431,27 @@ std::string ThermalSweepOptimizer::montecarloMap(
   // Optimization process and then best-fit Info!!!
   // The purpose here is to get the "best possible fit" and use that as my ref.
   std::cout << "starting monte carlo method....  \n";
-  solve( unknownParameters_in, thermalData_in, coreSystem_in, bestfitMethod_in,
-         intervalEstimates_in ) ;
 
-  bestfitMethod_in->solve( unknownParameters, thermalData_in, coreSystem_in ) ;
-
-
+//  solve( unknownParameters_in, thermalData_in, coreSystem_in, bestfitMethod_in,
+//         intervalEstimates_in ) ;
+//  bestfitMethod_in->solve( unknownParameters, thermalData_in, coreSystem_in ) ;
   reassign ( unknownBestFit , *unknownParameters  ) ;
-  coreSystem->updatefromBestFit( (*unknownParameters)() );
+  coreSystem->updatefromInitial( (*unknownParameters)() );
 
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
+
+  //sweep constraints
+  using std::pair;
+  const pair<double, double>thermalLimits(0.01,10);
+  const double lcen_min = .1;
+  const double lcen_max = 1;
 
   //This function will output a table of values from maping out
   constexpr double min = 0 ;
   constexpr double max = 1 ;
 
   ouputResults.clear() ;
+
   for( size_t i = 0; i < iter ; ++i )
   {
     ///create random start points and transform them
@@ -431,6 +463,23 @@ std::string ThermalSweepOptimizer::montecarloMap(
       xinitial[0] = math::x_ini( min, max ) ;
       xinitial[1] = math::x_ini( min, max ) ;
       initialGuessPass = math::checkLimits( xinitial[0] , xinitial[1] ) ;
+
+      //get omegas from
+      //get lthermals (real values)
+      //check if lthermals are within limits
+
+      const pair<double, double> slicedThermalLimits =
+      math::newThermalSweepLimits( xinitial[0], xinitial[1], thermalLimits ) ;
+
+      const pair<double, double> thermalCenDec =
+      math::xCenterlog10( slicedThermalLimits.first, slicedThermalLimits.second);
+
+      if( thermalCenDec.first  < lcen_min ) initialGuessPass = false;
+      if( thermalCenDec.first  > lcen_max ) initialGuessPass = false;
+
+//      std::cout << xinitial[0] << "\t" << xinitial[1] << "\t"
+//                << thermalCenDec.first <<"\t"
+//                << thermalCenDec.second <<"\t"<<  initialGuessPass<< "\n";
     }
 
     /// transform it into something thermal_prop can understand
@@ -443,7 +492,7 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
     ///reset unknown parameters
     reassign( unknownParameters , *unknownBestFit ) ;
-    coreSystem->updatefromBestFit( (*unknownBestFit)() );
+    coreSystem->updatefromInitial( (*unknownBestFit)() );
   }
 
 
@@ -453,12 +502,12 @@ std::string ThermalSweepOptimizer::montecarloMap(
   output << "#| Contour Map of Experimental Optimization                    \n";
   output << "#|                                                             \n";
   output << "#| columns...                                                  \n";
-  output << "#| omega lowerbound :                                          \n";
-  output << "#| omega upperbound :                                          \n";
   output << "#| lthermal center  :                                          \n";
   output << "#| lthermal decade  :                                          \n";
   output << "#| lthermal min     :                                          \n";
   output << "#| lthermal max     :                                          \n";
+  output << "#| omega lowerbound :                                          \n";
+  output << "#| omega upperbound :                                          \n";
   output << "#| mean parameter error  :                                     \n";
   output << "#|                                                             \n";
   output << "#|-------------------------------------------------------------\n";
@@ -523,14 +572,16 @@ void ThermalSweepOptimizer::solve(
   fullRangeThermalData = thermalData ;
 
   /// pre analysis on full-range
-  double xC = 0.5 ;
+  double xC = .5 ;
   double xR = 1 ;
-  const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating ) ;
+
+  using physicalModel::layer;
+  const layer coatUpdate( coreSystem->TBCsystem.coating ) ;
   const ThermalData updatedThermal = sliceThermalData( xC, xR, coatUpdate ) ;
   reassign( thermalData , updatedThermal ) ;
 
   pieAnalysis() ;
-  ouputResults.addBefore( currentState ) ;
+  ouputResults.addBefore( currentState , thermalData ) ;
 
   /// optimization run
   optimizer( &info, &nfev ) ;
@@ -538,7 +589,8 @@ void ThermalSweepOptimizer::solve(
 
   /// post analysis
   pieAnalysis() ;
-  ouputResults.addAfter( currentState ) ;
+  ouputResults.addAfter( currentState, coreSystem ) ;
+  reassign(ouputResults.searchPath.coating_final,coreSystem->TBCsystem.coating);
 
   /// now that all data is saved - reset thermalData to fullRange
   reassign(  thermalData, *fullRangeThermalData ) ;
@@ -652,6 +704,9 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 
   /// Constrained nonlinear parameter estimation
   updateBindFunc() ;
+
+  Settings.epsfcn = 0.1;
+
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
          Settings.ftol, Settings.xtol, Settings.gtol,
          static_cast<int>(Settings.maxfev), Settings.epsfcn, diag,
