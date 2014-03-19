@@ -53,10 +53,12 @@ funcClass::~funcClass(void)
 
 double funcClass::eval( const double xpos ) const
 {
-  const double tol = 10e-10;
+  using std::abs;
+
+  const double tol = 10e-8;
   double xposNew = xpos;
-  if( std::fabs( xpos - xvar[0]   ) < tol ) xposNew = xvar[0] + tol;
-  if( std::fabs( xpos - xvar[N-1] ) < tol ) xposNew = xvar[N-1] - tol;
+  if( abs( xpos - xvar[0]   ) < tol ) xposNew = xvar[0] + tol;
+  if( abs( xpos - xvar[N-1] ) < tol ) xposNew = xvar[N-1] - tol;
 
   if( xposNew < xvar[0] || xposNew > xvar[N-1] )
   {
