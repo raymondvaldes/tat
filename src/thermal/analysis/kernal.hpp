@@ -62,6 +62,8 @@ public:
   /// Operations that give results
   double bEval(void) const;
   void updatefromBestFit( std::vector< math::estimation::unknown > list );
+  void updatefromInitial( std::vector< math::estimation::unknown > list );
+
 };
 
 class Kernal loadWorkingDirectoryKernal(const filesystem::directory &dir);
