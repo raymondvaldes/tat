@@ -79,16 +79,16 @@ void run( const filesystem::directory &dir )
     }
   }
 
-//	using tools::interface::exportfile;
-//	const string partC = "/partC_thermalMaps" ;
-//	{
-//	/// PartC (thermal Maps)
-//	dir.mkdir( partC ) ;
+	using tools::interface::exportfile;
+	const string partC = "/partC_thermalMaps" ;
+	{
+    /// PartC (thermal Maps)
+    dir.mkdir( partC ) ;
 
-//	const string path2thermalMap = dir.abs( partC + "/thermalSweepALL.dat" );
-//	const string thermalSweepMap = poptea.thermalSweepMap() ;
-//	exportfile( path2thermalMap , thermalSweepMap ) ;
-//	}
+    const string path2thermalMap = dir.abs( partC + "/thermalSweepALL.dat" );
+    const string thermalSweepMap = poptea.thermalSweepMap() ;
+    exportfile( path2thermalMap , thermalSweepMap ) ;
+	}
 
 //	///subMaps
 //	using tools::interface::getTreefromFile;
