@@ -80,6 +80,8 @@ public:
     {
       std::shared_ptr< ExperimentAnalysisState > before ;
       std::shared_ptr< ExperimentAnalysisState > after ;
+      std::shared_ptr< ThermalData > preFitted ;
+      std::shared_ptr< ThermalData > postFitted ;
       void prettyPrint( const std::string path );
     } results ;
 
@@ -87,8 +89,10 @@ public:
     void push_back( const ExperimentAnalysisState &data_in ) ;
     void pp2Folder( const std::string path , const std::string i) ;
     void clear( void ) ;
-    void addBefore( const ExperimentAnalysisState input ) ;
-    void addAfter( const ExperimentAnalysisState input ) ;
+    void addBefore( const ExperimentAnalysisState &input,
+                    const std::shared_ptr<ThermalData> &thermalData);
+    void addAfter( const ExperimentAnalysisState &input,
+                   const std::shared_ptr<Kernal> &coreSystem  );
 
   } ouputResults;
 
@@ -122,9 +126,6 @@ public:
   void upSweepStartReset( void ) ;
 
 private:
-  // thermal mapping
-  const size_t iter;
-
   // overide methods inherited
   void updateWorkSpace( const size_t Lend , const size_t N ) override;
   void updateWorkSpace(
@@ -165,6 +166,9 @@ private:
 
   // solvers
   void optimizer( int *info, int *nfev );
+
+  // thermal mapping
+  const size_t iter;
 };
 
 }}
