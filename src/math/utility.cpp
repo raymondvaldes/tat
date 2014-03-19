@@ -89,13 +89,8 @@ double x_normal(const double Xmean, const double Xstddev, const unsigned seed1)
 
 double x_normal(const double Xmean, const double Xstddev)
 {
-  std::mt19937 gen;
-  typedef std::chrono::high_resolution_clock myclock;
-  myclock::time_point beginning = myclock::now();
-  myclock::duration d = myclock::now() - beginning;
-  unsigned seed = static_cast<unsigned> (d.count() ) ;
-  
-  gen.seed( seed ) ;
+  std::random_device rd;
+  std::mt19937 gen( rd() ) ;
 
   std::normal_distribution<double> distribution(Xmean,Xstddev);
   return distribution(gen);
@@ -334,8 +329,8 @@ newThermalSweepLimits( const double center, const double range,
   BOOST_ASSERT( center > 0 && center < 1) ;
   BOOST_ASSERT( range > 0 && range <= 1 ) ;
 
-  double strPos = center - range/2;
-  double endPos = center + range/2;
+  double strPos = center - range/2 ;
+  double endPos = center + range/2 ;
 
   if( strPos < 0 )
   {
