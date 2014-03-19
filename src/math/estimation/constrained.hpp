@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
