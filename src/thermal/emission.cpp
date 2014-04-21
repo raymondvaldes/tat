@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  		        |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -74,14 +74,16 @@ double Emission::Ib_plank(const double Temperature) const
     Bennett and Yu, 2005
     Equation (6)
     */
-
+    using std::pow;
+    using std::exp;
+  
     constexpr double C1     = .59552197e-16;
     constexpr double C2     = .01438769;
     constexpr double sigma  = 5.67051e-8;
 
     const double
     T = Temperature + T_ref;
-
+  
     double
     Ibp = C1;
 //    Ibp *= 2;
@@ -101,7 +103,7 @@ double Emission::emissionAxial(std::vector<double> &Temperature) const
     */
     for(size_t j = 0 ; j <= mesh.M1 ; ++j)
     {
-        Ib[j] = Ib_plank(Temperature[j]);
+        Ib[j] = Ib_plank( Temperature[j] );
     }
 
     constexpr   size_t z0 = 0;
@@ -110,23 +112,25 @@ double Emission::emissionAxial(std::vector<double> &Temperature) const
     return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
-double Emission::emissionAxial(const class Temperature Tprofile,
-                               const size_t nVal) const
+double Emission::emissionAxial( const class Temperature Tprofile,
+                                const size_t nVal) const
 {
     /*
     Calculates the volumetric emission flux with respect to the axial
     direction. The Temperature variable is a pointer to the axial
     temperature.
     */
+  
     for(size_t j = 0 ; j <= mesh.M1 ; ++j)
     {
-        Ib[j] = Ib_plank(Tprofile.eval(nVal,j));
+        Ib[j] = Ib_plank( Tprofile.eval(nVal,j) );
     }
 
     constexpr   size_t z0 = 0;
     const       size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
+    using math::numIntegration::simpson_3_8;
+    return E_sigma * Ib[z1] + 4 * simpson_3_8( Ib, mesh.z_norm, z0, z1 );
 }
 
 double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
