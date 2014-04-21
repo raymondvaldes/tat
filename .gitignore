@@ -25,3 +25,6 @@ MakeFile
 
 # Data files
 *.dat
+
+# project folder files
+*.xccheckout
