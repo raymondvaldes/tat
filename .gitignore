@@ -28,3 +28,5 @@ MakeFile
 
 # project folder files
 *.xcodeproj/
+
+*.xccheckout
