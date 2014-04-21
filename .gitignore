@@ -30,3 +30,9 @@ MakeFile
 *.xcodeproj/
 
 *.xccheckout
+
+*.xcuserstate
+
+*.xcuserstate
+
+*.xccheckout
