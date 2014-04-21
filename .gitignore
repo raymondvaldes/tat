@@ -27,4 +27,4 @@ MakeFile
 *.dat
 
 # project folder files
-*.xccheckout
+*.xcodeproj/
