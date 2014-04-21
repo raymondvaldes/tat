@@ -42,3 +42,9 @@ MakeFile
 *.xcuserstate
 
 *.pbxproj
+
+src/tat.xcodeproj/project.pbxproj
+
+src/tat.xcodeproj/project.pbxproj
+
+src/tat.xcodeproj/project.xcworkspace/xcshareddata/tat.xccheckout
