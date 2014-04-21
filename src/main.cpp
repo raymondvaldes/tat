@@ -37,6 +37,7 @@ License
 //Internal dependencies
 #include "tools/tools.hpp"
 #include "investigations/sensitivityvaldes2013.hpp"
+#include "investigations/num_method2014.h"
 
 int main( int argc, char *argv[ ] )
 {
@@ -52,7 +53,8 @@ int main( int argc, char *argv[ ] )
     {
       const std::string specimanPath = testSpeciman.string();
       const filesystem::directory dir( specimanPath ) ;
-      investigations::sensitivityvaldes2013::run( dir ) ;
+      //investigations::sensitivityvaldes2013::run( dir ) ;
+      investigations::num_method::run( dir ) ;
     }
 
     std::cout << globalStopWatch.readoutLoud() << "\n";
