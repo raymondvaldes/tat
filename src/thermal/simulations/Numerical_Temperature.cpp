@@ -22,27 +22,35 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "models/physicalmodel.hpp"
+
 #include "thermal/simulations/Numerical_Setup.h"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "thermal/simulations/Numerical_Temperature.h"
 #include "thermal/simulations/numericalmodel.hpp"
 #include "math/statistical_tools.hpp"
 #include "math/utility.hpp"
-#include "thermal/thermal.hpp"
+#include "thermal/define/lthermal.h"
+#include "thermal/define/temperature.h"
+#include "thermal/equipment/setup.h"
+#include "sensible/property.h"
 
-void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
-                    const class thermal::model thermalsys,
-                    const class equipment::setup expSetup,
-                    const double omega1,
-                    class Temperature Tprofile)
+using sensible::property;
+using thermal::define::Temperature;
+
+void temperature_1D( const sensible::TBCsystem  TBCsystem,
+                     const thermal::define::model thermalsys,
+                     const thermal::equipment::setup expSetup,
+                     const double omega1,
+                     thermal::define::Temperature Tprofile)
 {
+
+  
   const double lambda     = TBCsystem.coating.lambda;
   const double R1         = TBCsystem.optical.R1;
   const double epsilon    = TBCsystem.gammaEval();
 
   const size_t iter       = thermalsys.mesh.iter;
-  class numericalModel::Mesh mesh        = thermalsys.mesh;
+  numericalModel::Mesh mesh        = thermalsys.mesh;
 
   const double q_surface = expSetup.q_surface;
 
@@ -53,19 +61,20 @@ void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
   const double L_substrate  = TBCsystem.substrate.depth;
   const double Ttol         = TBCsystem.Temp.tolerance;
   const double T_rear       = TBCsystem.Temp.rear;
-  const class property *k1_thermal      = &TBCsystem.coating.kthermal;
-  const class property *k2_thermal      = &TBCsystem.substrate.kthermal;
-  const class property *psi1_thermal    = &TBCsystem.coating.psithermal;
-  const class property *psi2_thermal    = &TBCsystem.substrate.psithermal;
+  const property *k1_thermal      = &TBCsystem.coating.kthermal;
+  const property *k2_thermal      = &TBCsystem.substrate.kthermal;
+  const property *psi1_thermal    = &TBCsystem.coating.psithermal;
+  const property *psi2_thermal    = &TBCsystem.substrate.psithermal;
 
   class matrixArrays *MatrixArrays = NULL;
   MatrixArrays = new class matrixArrays( mesh.M2 );
 
   std::vector< std::vector<double> >
   b_steady(mesh.Nend-1, std::vector<double>(mesh.M2));
-
-/// Setup initial conditions for the transient temperature field:
-  const double l_thermal = thermal::lthermal(L_coat, k1_thermal->offset,
+ 
+  /// Setup initial conditions for the transient temperature field:
+  using thermal::define::lthermal;
+  const double l_thermal = lthermal(L_coat, k1_thermal->offset,
                                     psi1_thermal->offset, omega1);
   const std::complex<double>
   Tinfo = Tac1D_ana(mesh.z_real[0] / L_coat, R0, R1, epsilon,

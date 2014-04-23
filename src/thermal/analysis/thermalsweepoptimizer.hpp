@@ -33,7 +33,7 @@ License
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/pie.hpp"
-#include "models/physicalmodel.hpp"
+#include "sensible/layer.h"
 
 namespace thermal{
 namespace analysis{
@@ -49,7 +49,7 @@ public:
     struct ExperimentAnalysisState
     {
       std::shared_ptr< ThermalData > thermalData ;
-      std::shared_ptr< physicalModel::layer > coating ;
+      std::shared_ptr< sensible::layer > coating ;
       std::shared_ptr< math::estimation::unknownList > unknownParameters ;
       std::shared_ptr< math::estimation::unknownList > thermalSweepSearch ;
 
@@ -69,7 +69,7 @@ public:
 
     struct SearchPath
     {
-      std::shared_ptr< physicalModel::layer > coating_final ;
+      std::shared_ptr< sensible::layer > coating_final ;
       std::vector< ExperimentAnalysisState > path ;
       void clear( void ) ;
       void push_back( const ExperimentAnalysisState &data_in ) ;
@@ -104,8 +104,8 @@ public:
       const std::shared_ptr< LMA > &bestfitMethod_in,
       const std::shared_ptr< PIE > &intervalEstimates_in,
       const math::estimation::unknownList thermalSweepSearch_in,
-      const std::vector< physicalModel::labels > sweepOptimizationGoal_in,
-      const physicalModel::layer coating,
+      const std::vector< thermal::model::labels > sweepOptimizationGoal_in,
+      const sensible::layer coating,
       const size_t iter_in ) ;
   ~ThermalSweepOptimizer( void ) ;
 
@@ -117,7 +117,8 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      ) ;
-  std::string montecarloMap(const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
+  std::string montecarloMap(const std::shared_ptr<math::estimation::unknownList>
+                             &unknownParameters_in,
       const std::shared_ptr<ThermalData> &thermalData_in,
       const std::shared_ptr<Kernal> &coreSystem_in,
       const std::shared_ptr< LMA > &bestfitMethod_in,
@@ -130,7 +131,7 @@ private:
   void updateWorkSpace( const size_t Lend , const size_t N ) override;
   void updateWorkSpace(
       const math::estimation::unknownList &thermalSweepSearch_in,
-      const std::vector<physicalModel::labels> &sweepOptimizationGoal_in);
+      const std::vector<thermal::model::labels> &sweepOptimizationGoal_in);
 
   void ThermalProp_Analysis( double *x, double *fvec ) override;
   void solve(
@@ -142,10 +143,10 @@ private:
   std::shared_ptr< LMA > bestfitMethod;
   std::shared_ptr< PIE > intervalEstimates;
   math::estimation::unknownList thermalSweepSearch;
-  std::vector<physicalModel::labels> sweepOptimizationGoal ;
+  std::vector<thermal::model::labels> sweepOptimizationGoal ;
 
   // worker Objects
-  std::shared_ptr< physicalModel::layer > coatingTOinterpretFullRange;
+  std::shared_ptr< sensible::layer > coatingTOinterpretFullRange;
   std::shared_ptr< ThermalData > fullRangeThermalData;
   std::pair<double, double> xSweep;
   std::pair<double, double> updatedLimits;
@@ -154,7 +155,7 @@ private:
 
   // worker methods
   ThermalData sliceThermalData( const double xCenter, const double xRange,
-                                const physicalModel::layer updatedCoating ) ;
+                                const sensible::layer updatedCoating ) ;
   std::pair< double, double > updateSweep( void ) ;
   void pieAnalysis(void);
   double penalty( const std::pair<double, double>  thermalCenterRange );
@@ -162,7 +163,7 @@ private:
 
   // current state
   OptimizerOutput::ExperimentAnalysisState currentState;
-  void captureState(const layer &coat );
+  void captureState(const sensible::layer &coat );
 
   // solvers
   void optimizer( int *info, int *nfev );

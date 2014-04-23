@@ -26,11 +26,14 @@ License
 #define estimation_HPP
 
 #include <vector>
-#include "models/physicalmodel.hpp"
+#include <boost/property_tree/ptree.hpp>
+#include "thermal/model/labels.h"
 
 namespace math{
   namespace estimation{
 
+    using thermal::model::labels;
+    
 class unknown
 {
 private:
@@ -41,7 +44,7 @@ private:
     bounds( void ) ;
     bounds( const double lower_, const double  upper_ ) ;
   };
-  struct physicalModel::labels name;
+  struct labels name;
   const struct bounds constraint;
   double initialGuess;
   double bestfitval;
@@ -49,7 +52,7 @@ private:
   void Initialauto( void ) ;
 
 public:
-  unknown( enum physicalModel::labels::Name name_,
+  unknown( enum labels::Name name_,
            const double lower_,
            const double upper_,
            const double initialGuess_) ;
@@ -73,8 +76,8 @@ public:
   void reset(void);
 
   /// labels
-  enum physicalModel::labels::Name label( void ) const ;
-  physicalModel::labels getLabel ( void ) const;
+  enum labels::Name label( void ) const ;
+  labels getLabel ( void ) const;
 
   bool compareName( const unknown& input ) const ;
   bool operator == ( const unknown& input ) const ;
@@ -89,7 +92,7 @@ public:
   std::vector< estimation::unknown> operator() (void) const;
   void operator() ( const std::vector<class unknown> &input );
 
-  void addUnknown( physicalModel::labels::Name name,
+  void addUnknown( labels::Name name,
                    const double lower, const double upper,
                    const double initialGuess);
   void addUnknown(const unknown &input );
@@ -97,7 +100,7 @@ public:
   size_t size(void) const;
 
   unknownList();
-  unknownList( std::vector<class estimation::unknown> input )  ;
+  unknownList( std::vector< estimation::unknown> input )  ;
 
   static unknownList
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;

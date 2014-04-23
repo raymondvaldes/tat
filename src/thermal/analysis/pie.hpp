@@ -30,12 +30,14 @@ License
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
+#include "thermal/model/labels.h"
+#include "sensible/layer.h"
 
 namespace thermal{
 namespace analysis{
 
-using namespace physicalModel;
-
+  using thermal::model::labels;
+  
 class PIE: private baseData
 {
 public:
@@ -63,7 +65,7 @@ public:
       void ppThermalSweep ( const std::string folder) ;
     };
     std::shared_ptr< ThermalData > bestFitThermal ;
-    std::shared_ptr< physicalModel::layer > bestFitCoat ;
+    std::shared_ptr< sensible::layer > bestFitCoat ;
 
     std::vector< SearchData > searchPath ;
     std::shared_ptr< math::estimation::unknownList > myUnknowns ;

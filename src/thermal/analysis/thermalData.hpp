@@ -27,10 +27,13 @@ License
 
 #include <sstream>
 #include "math/estimation/parameterestimation.hpp"
+#include "sensible/layer.h"
 
 namespace thermal {
 namespace analysis{
 
+  using std::vector;
+  
 class ThermalData
 {
 private:
@@ -40,9 +43,9 @@ private:
   std::pair<double, double> lthermalLimits;
 
 public:
-  std::vector<double> omegas;
-  std::vector<double> experimentalEmission;
-  std::vector<double> predictedEmission;
+  vector<double> omegas;
+  vector<double> experimentalEmission;
+  vector<double> predictedEmission;
   std::pair<double, double> lthermalPredicted;
   size_t measurementsPerDecade;
   double MSE;
@@ -50,33 +53,34 @@ public:
   //Constructors, destructors and assignment operators
   explicit ThermalData( const double l_min, const double l_max,
                         const size_t lminPerDecarde,
-                        const physicalModel::layer &coating ) ;
+                        const sensible::layer &coating ) ;
   explicit ThermalData( void ) ;
   ThermalData& operator = ( const ThermalData& that ) ;
   ~ThermalData();
 
   static class ThermalData
   loadConfigfromXML( const boost::property_tree::ptree pt,
-                     const physicalModel::layer &coating ) ;
+                     const sensible::layer &coating ) ;
 
   //get information
   size_t size( void ) const;
-  std::vector<double>
-  get_lthermalSweep( const physicalModel::layer &coating ) const ;
+  vector<double> get_lthermalSweep( const sensible::layer &coating ) const ;
   std::pair<double, double>
-  get_lthermalLimits( const physicalModel::layer &coating ) const ;
+  get_lthermalLimits( const sensible::layer &coating ) const ;
   std::pair<double, double> get_omegaLimits( void ) const ;
 
   //modify data
   void updateExperimental( const std::vector<double> &input ) ;
+  
   size_t thermalSetup( const double lmin, const double lmax,
-                       const physicalModel::layer &coating ) ;
+                       const sensible::layer &coating ) ;
+  
   void updatefromBestFit( std::vector< math::estimation::unknown > list,
-                          const physicalModel::layer &coating,
+                          const sensible::layer &coating,
                           const ThermalData fullData ) ;
 
   //printer
-  std::string prettyPrint( const physicalModel::layer &coating ) ;
+  std::string prettyPrint( const sensible::layer &coating ) ;
   std::string prettyPrint( void ) ;
 
 };

@@ -214,7 +214,7 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
 
 }}
 
-void printPEstimates( const physicalModel::TBCsystem TBCSystem,
+void printPEstimates( const sensible::TBCsystem  TBCSystem,
                       math::estimation::unknownList list )
 {
   for( const auto& unknown : list() )

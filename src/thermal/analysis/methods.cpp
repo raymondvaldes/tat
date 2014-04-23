@@ -32,7 +32,6 @@ License
 #include "thermal/analysis/methods.hpp"
 #include "thermal/analysis/pie.hpp"
 #include "math/estimation/parameterestimation.hpp"
-#include "models/physicalmodel.hpp"
 #include "math/algorithms/combinations.hpp"
 #include "math/utility.hpp"
 
@@ -44,8 +43,8 @@ methods::methods(
     const math::estimation::unknownList &unknownParameters_in,
     const ThermalData& thermalData_in ,
     const math::estimation::unknownList &thermalSweepSearch ,
-    const std::vector<physicalModel::labels> &sweepOptimizationGoal,
-                 const physicalModel::layer coating, const size_t iter )
+    const std::vector<thermal::model::labels> &sweepOptimizationGoal,
+                 const sensible::layer coating, const size_t iter )
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
     intervalEstimates( new PIE() ),
@@ -124,7 +123,7 @@ methods
 loadMethodsfromFile( const boost::property_tree::ptree &mybranch,
                      const math::estimation::unknownList &parameterEstimation,
                      const ThermalData &thermData,
-                     const physicalModel::layer &coating )
+                     const sensible::layer &coating )
 {
   using math::estimation::unknownList;
   using math::estimation::settings;
@@ -136,7 +135,7 @@ loadMethodsfromFile( const boost::property_tree::ptree &mybranch,
 
   const unknownList thermalSweep( unknownList::loadConfigfromXML( mybranch ) ) ;
 
-  std::vector< physicalModel::labels > sweepOptimizationGoal ;
+  std::vector< thermal::model::labels > sweepOptimizationGoal ;
   BOOST_FOREACH( const ptree::value_type &v,
                  mybranch.get_child( "parameters" ) )
   {
@@ -144,9 +143,9 @@ loadMethodsfromFile( const boost::property_tree::ptree &mybranch,
     const ptree& child = v.second ;
 
     //access members of subtree
-    physicalModel::labels labelmaker ;
+    thermal::model::labels labelmaker ;
     const std::string nameLabel = child.get< std::string >( "label" ) ;
-    enum physicalModel::labels::Name mylabel ;
+    enum thermal::model::labels::Name mylabel ;
     try
     {
       mylabel = labelmaker.nameMap.right.at( nameLabel ) ;
@@ -156,7 +155,7 @@ loadMethodsfromFile( const boost::property_tree::ptree &mybranch,
       std::cerr << "Error with mylabel in poptea.xml labelmaker\n";
       exit( 1 ) ;
     }
-    const physicalModel::labels output( mylabel ) ;
+    const thermal::model::labels output( mylabel ) ;
     sweepOptimizationGoal.push_back( output ) ;
   }
 

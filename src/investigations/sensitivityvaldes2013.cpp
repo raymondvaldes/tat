@@ -46,7 +46,6 @@ using namespace thermal::analysis;
 void run( const filesystem::directory &dir )
 {
   using std::string;
-  using namespace physicalModel;
   /// setup output directory
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
 

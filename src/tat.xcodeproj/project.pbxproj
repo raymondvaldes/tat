@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB19F8931905DF430013D14D /* effusivity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F8911905DF430013D14D /* effusivity.cpp */; };
+		AB19F8961905DF830013D14D /* diffusivity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F8941905DF830013D14D /* diffusivity.cpp */; };
+		AB19F8991905DFD40013D14D /* omega.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F8971905DFD40013D14D /* omega.cpp */; };
+		AB19F89C1905DFE50013D14D /* lthermal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F89A1905DFE50013D14D /* lthermal.cpp */; };
+		AB19F8A21905FD700013D14D /* Numerical_PhaseOfEmission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F8A11905FD700013D14D /* Numerical_PhaseOfEmission.cpp */; };
+		AB19F8AC190606C10013D14D /* heat2DAna.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F8AA190606C10013D14D /* heat2DAna.cpp */; };
+		AB19F8B9190606DF0013D14D /* heat1dAna.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F8B5190606DF0013D14D /* heat1dAna.cpp */; };
+		AB19F8C019060B750013D14D /* analytical_2005.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB19F8BE19060B750013D14D /* analytical_2005.cpp */; };
 		AB38313F18AEF3A9009965F1 /* sensitivityvaldes2013.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830DD18AEF3A8009965F1 /* sensitivityvaldes2013.cpp */; };
 		AB38314018AEF3A9009965F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830DF18AEF3A8009965F1 /* main.cpp */; };
 		AB38314118AEF3A9009965F1 /* combinations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830E218AEF3A8009965F1 /* combinations.cpp */; };
@@ -22,8 +30,6 @@
 		AB38314B18AEF3A9009965F1 /* estimationInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830F918AEF3A8009965F1 /* estimationInterval.cpp */; };
 		AB38314C18AEF3A9009965F1 /* statistical_tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830FB18AEF3A8009965F1 /* statistical_tools.cpp */; };
 		AB38314D18AEF3A9009965F1 /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830FD18AEF3A8009965F1 /* utility.cpp */; };
-		AB38314E18AEF3A9009965F1 /* expEquipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310018AEF3A8009965F1 /* expEquipment.cpp */; };
-		AB38314F18AEF3A9009965F1 /* physicalmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310218AEF3A8009965F1 /* physicalmodel.cpp */; };
 		AB38315018AEF3A9009965F1 /* basedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310618AEF3A8009965F1 /* basedata.cpp */; };
 		AB38315118AEF3A9009965F1 /* kernal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310818AEF3A8009965F1 /* kernal.cpp */; };
 		AB38315218AEF3A9009965F1 /* lmdiff_poptea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310A18AEF3A8009965F1 /* lmdiff_poptea.cpp */; };
@@ -37,17 +43,27 @@
 		AB38315A18AEF3A9009965F1 /* noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38311B18AEF3A8009965F1 /* noise.cpp */; };
 		AB38315B18AEF3A9009965F1 /* phase99.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38311D18AEF3A8009965F1 /* phase99.cpp */; };
 		AB38315C18AEF3A9009965F1 /* emission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38311F18AEF3A8009965F1 /* emission.cpp */; };
-		AB38315D18AEF3A9009965F1 /* heat2DAna.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312218AEF3A9009965F1 /* heat2DAna.cpp */; };
 		AB38315E18AEF3A9009965F1 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312418AEF3A9009965F1 /* model.cpp */; };
-		AB38315F18AEF3A9009965F1 /* Numerical_PhaseOfEmission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312718AEF3A9009965F1 /* Numerical_PhaseOfEmission.cpp */; };
 		AB38316018AEF3A9009965F1 /* Numerical_Setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312918AEF3A9009965F1 /* Numerical_Setup.cpp */; };
 		AB38316118AEF3A9009965F1 /* Numerical_Temperature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312B18AEF3A9009965F1 /* Numerical_Temperature.cpp */; };
 		AB38316218AEF3A9009965F1 /* numericalmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312D18AEF3A9009965F1 /* numericalmodel.cpp */; };
-		AB38316318AEF3A9009965F1 /* thermal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312F18AEF3A9009965F1 /* thermal.cpp */; };
 		AB38316418AEF3A9009965F1 /* exportfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313318AEF3A9009965F1 /* exportfile.cpp */; };
 		AB38316518AEF3A9009965F1 /* filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313518AEF3A9009965F1 /* filesystem.cpp */; };
 		AB38316618AEF3A9009965F1 /* programoptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313718AEF3A9009965F1 /* programoptions.cpp */; };
 		AB38316718AEF3A9009965F1 /* timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313918AEF3A9009965F1 /* timing.cpp */; };
+		AB9D915319071414006F0FCC /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D915119071414006F0FCC /* detector.cpp */; };
+		AB9D91561907141D006F0FCC /* laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D91541907141D006F0FCC /* laser.cpp */; };
+		AB9D9159190714DC006F0FCC /* setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D9157190714DC006F0FCC /* setup.cpp */; };
+		AB9D915D190718B9006F0FCC /* property.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D915B190718B9006F0FCC /* property.cpp */; };
+		AB9D9160190718DD006F0FCC /* temperature_scale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D915E190718DD006F0FCC /* temperature_scale.cpp */; };
+		AB9D916319071920006F0FCC /* radiativeSysProp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D916119071920006F0FCC /* radiativeSysProp.cpp */; };
+		AB9D91661907192B006F0FCC /* layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D91641907192B006F0FCC /* layer.cpp */; };
+		AB9D91691907193B006F0FCC /* TBCsystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D91671907193B006F0FCC /* TBCsystem.cpp */; };
+		ABC277911907351E003A4D06 /* labels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC2778F1907351E003A4D06 /* labels.cpp */; };
+		ABC277941907393F003A4D06 /* temperature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC277921907393F003A4D06 /* temperature.cpp */; };
+		ABC716CC1905A4CF00C14977 /* num_method2014.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC716CA1905A4CF00C14977 /* num_method2014.cpp */; };
+		ABC716CF1905A83F00C14977 /* poptea_initialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC716CD1905A83F00C14977 /* poptea_initialize.cpp */; };
+		ABC716D21905C07C00C14977 /* xml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC716D01905C07C00C14977 /* xml.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +80,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB19F8911905DF430013D14D /* effusivity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = effusivity.cpp; path = /Users/raymondvaldes/code/tat/src/thermal/define/effusivity.cpp; sourceTree = "<absolute>"; };
+		AB19F8921905DF430013D14D /* effusivity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = effusivity.hpp; path = define/effusivity.hpp; sourceTree = "<group>"; };
+		AB19F8941905DF830013D14D /* diffusivity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = diffusivity.cpp; path = define/diffusivity.cpp; sourceTree = "<group>"; };
+		AB19F8951905DF830013D14D /* diffusivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffusivity.h; path = define/diffusivity.h; sourceTree = "<group>"; };
+		AB19F8971905DFD40013D14D /* omega.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = omega.cpp; path = define/omega.cpp; sourceTree = "<group>"; };
+		AB19F8981905DFD40013D14D /* omega.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = omega.h; path = define/omega.h; sourceTree = "<group>"; };
+		AB19F89A1905DFE50013D14D /* lthermal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lthermal.cpp; path = define/lthermal.cpp; sourceTree = "<group>"; };
+		AB19F89B1905DFE50013D14D /* lthermal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lthermal.h; path = define/lthermal.h; sourceTree = "<group>"; };
+		AB19F89E1905E3C20013D14D /* model_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model_type.h; path = define/model_type.h; sourceTree = "<group>"; };
+		AB19F8A01905F4FC0013D14D /* emission.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = emission.hpp; sourceTree = "<group>"; };
+		AB19F8A11905FD700013D14D /* Numerical_PhaseOfEmission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Numerical_PhaseOfEmission.cpp; sourceTree = "<group>"; };
+		AB19F8AA190606C10013D14D /* heat2DAna.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = heat2DAna.cpp; sourceTree = "<group>"; };
+		AB19F8AB190606C10013D14D /* heat2DAna.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = heat2DAna.hpp; sourceTree = "<group>"; };
+		AB19F8B5190606DF0013D14D /* heat1dAna.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = heat1dAna.cpp; sourceTree = "<group>"; };
+		AB19F8B6190606DF0013D14D /* heat1dAna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heat1dAna.h; sourceTree = "<group>"; };
+		AB19F8BE19060B750013D14D /* analytical_2005.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = analytical_2005.cpp; sourceTree = "<group>"; };
+		AB19F8BF19060B750013D14D /* analytical_2005.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analytical_2005.h; sourceTree = "<group>"; };
 		AB3830DD18AEF3A8009965F1 /* sensitivityvaldes2013.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sensitivityvaldes2013.cpp; sourceTree = "<group>"; };
 		AB3830DE18AEF3A8009965F1 /* sensitivityvaldes2013.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sensitivityvaldes2013.hpp; sourceTree = "<group>"; };
 		AB3830DF18AEF3A8009965F1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -93,10 +126,6 @@
 		AB3830FC18AEF3A8009965F1 /* statistical_tools.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = statistical_tools.hpp; sourceTree = "<group>"; };
 		AB3830FD18AEF3A8009965F1 /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
 		AB3830FE18AEF3A8009965F1 /* utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utility.hpp; sourceTree = "<group>"; };
-		AB38310018AEF3A8009965F1 /* expEquipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = expEquipment.cpp; sourceTree = "<group>"; };
-		AB38310118AEF3A8009965F1 /* expEquipment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = expEquipment.hpp; sourceTree = "<group>"; };
-		AB38310218AEF3A8009965F1 /* physicalmodel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = physicalmodel.cpp; sourceTree = "<group>"; };
-		AB38310318AEF3A8009965F1 /* physicalmodel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = physicalmodel.hpp; sourceTree = "<group>"; };
 		AB38310618AEF3A8009965F1 /* basedata.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basedata.cpp; sourceTree = "<group>"; };
 		AB38310718AEF3A8009965F1 /* basedata.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basedata.hpp; sourceTree = "<group>"; };
 		AB38310818AEF3A8009965F1 /* kernal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kernal.cpp; sourceTree = "<group>"; };
@@ -115,19 +144,15 @@
 		AB38311518AEF3A8009965F1 /* thermalData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thermalData.hpp; sourceTree = "<group>"; };
 		AB38311618AEF3A8009965F1 /* thermalsweepoptimizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thermalsweepoptimizer.cpp; sourceTree = "<group>"; };
 		AB38311718AEF3A8009965F1 /* thermalsweepoptimizer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thermalsweepoptimizer.hpp; sourceTree = "<group>"; };
-		AB38311818AEF3A8009965F1 /* construct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = construct.cpp; sourceTree = "<group>"; };
-		AB38311918AEF3A8009965F1 /* construct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = construct.hpp; sourceTree = "<group>"; };
+		AB38311818AEF3A8009965F1 /* construct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = construct.cpp; path = define/construct.cpp; sourceTree = "<group>"; };
+		AB38311918AEF3A8009965F1 /* construct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = construct.hpp; path = define/construct.hpp; sourceTree = "<group>"; };
 		AB38311B18AEF3A8009965F1 /* noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = noise.cpp; sourceTree = "<group>"; };
 		AB38311C18AEF3A8009965F1 /* noise.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = noise.hpp; sourceTree = "<group>"; };
 		AB38311D18AEF3A8009965F1 /* phase99.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = phase99.cpp; sourceTree = "<group>"; };
 		AB38311E18AEF3A8009965F1 /* phase99.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = phase99.hpp; sourceTree = "<group>"; };
-		AB38311F18AEF3A8009965F1 /* emission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = emission.cpp; sourceTree = "<group>"; };
-		AB38312018AEF3A8009965F1 /* emission.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = emission.hpp; sourceTree = "<group>"; };
-		AB38312218AEF3A9009965F1 /* heat2DAna.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = heat2DAna.cpp; sourceTree = "<group>"; };
-		AB38312318AEF3A9009965F1 /* heat2DAna.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = heat2DAna.hpp; sourceTree = "<group>"; };
-		AB38312418AEF3A9009965F1 /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
-		AB38312518AEF3A9009965F1 /* model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = model.hpp; sourceTree = "<group>"; };
-		AB38312718AEF3A9009965F1 /* Numerical_PhaseOfEmission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Numerical_PhaseOfEmission.cpp; sourceTree = "<group>"; };
+		AB38311F18AEF3A8009965F1 /* emission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = emission.cpp; path = thermal/emission/emission.cpp; sourceTree = SOURCE_ROOT; };
+		AB38312418AEF3A9009965F1 /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = model.cpp; path = /Users/raymondvaldes/code/tat/src/thermal/define/model.cpp; sourceTree = "<absolute>"; };
+		AB38312518AEF3A9009965F1 /* model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = model.hpp; path = define/model.hpp; sourceTree = "<group>"; };
 		AB38312818AEF3A9009965F1 /* Numerical_PhaseOfEmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Numerical_PhaseOfEmission.h; sourceTree = "<group>"; };
 		AB38312918AEF3A9009965F1 /* Numerical_Setup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Numerical_Setup.cpp; sourceTree = "<group>"; };
 		AB38312A18AEF3A9009965F1 /* Numerical_Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Numerical_Setup.h; sourceTree = "<group>"; };
@@ -135,8 +160,6 @@
 		AB38312C18AEF3A9009965F1 /* Numerical_Temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Numerical_Temperature.h; sourceTree = "<group>"; };
 		AB38312D18AEF3A9009965F1 /* numericalmodel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = numericalmodel.cpp; sourceTree = "<group>"; };
 		AB38312E18AEF3A9009965F1 /* numericalmodel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = numericalmodel.hpp; sourceTree = "<group>"; };
-		AB38312F18AEF3A9009965F1 /* thermal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thermal.cpp; sourceTree = "<group>"; };
-		AB38313018AEF3A9009965F1 /* thermal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thermal.hpp; sourceTree = "<group>"; };
 		AB38313318AEF3A9009965F1 /* exportfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exportfile.cpp; sourceTree = "<group>"; };
 		AB38313418AEF3A9009965F1 /* exportfile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = exportfile.hpp; sourceTree = "<group>"; };
 		AB38313518AEF3A9009965F1 /* filesystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filesystem.cpp; sourceTree = "<group>"; };
@@ -147,6 +170,32 @@
 		AB38313A18AEF3A9009965F1 /* timing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timing.h; sourceTree = "<group>"; };
 		AB38313B18AEF3A9009965F1 /* tools.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tools.hpp; sourceTree = "<group>"; };
 		AB38316918AEF3AE009965F1 /* tat */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tat; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB9D915119071414006F0FCC /* detector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = detector.cpp; sourceTree = "<group>"; };
+		AB9D915219071414006F0FCC /* detector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detector.h; sourceTree = "<group>"; };
+		AB9D91541907141D006F0FCC /* laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laser.cpp; sourceTree = "<group>"; };
+		AB9D91551907141D006F0FCC /* laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = laser.h; sourceTree = "<group>"; };
+		AB9D9157190714DC006F0FCC /* setup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setup.cpp; sourceTree = "<group>"; };
+		AB9D9158190714DC006F0FCC /* setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup.h; sourceTree = "<group>"; };
+		AB9D915B190718B9006F0FCC /* property.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = property.cpp; sourceTree = "<group>"; };
+		AB9D915C190718B9006F0FCC /* property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = property.h; sourceTree = "<group>"; };
+		AB9D915E190718DD006F0FCC /* temperature_scale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = temperature_scale.cpp; sourceTree = "<group>"; };
+		AB9D915F190718DD006F0FCC /* temperature_scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = temperature_scale.h; sourceTree = "<group>"; };
+		AB9D916119071920006F0FCC /* radiativeSysProp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radiativeSysProp.cpp; sourceTree = "<group>"; };
+		AB9D916219071920006F0FCC /* radiativeSysProp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radiativeSysProp.h; sourceTree = "<group>"; };
+		AB9D91641907192B006F0FCC /* layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = layer.cpp; sourceTree = "<group>"; };
+		AB9D91651907192B006F0FCC /* layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = layer.h; sourceTree = "<group>"; };
+		AB9D91671907193B006F0FCC /* TBCsystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TBCsystem.cpp; sourceTree = "<group>"; };
+		AB9D91681907193B006F0FCC /* TBCsystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCsystem.h; sourceTree = "<group>"; };
+		ABC2778F1907351E003A4D06 /* labels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = labels.cpp; path = model/labels.cpp; sourceTree = "<group>"; };
+		ABC277901907351E003A4D06 /* labels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = labels.h; path = model/labels.h; sourceTree = "<group>"; };
+		ABC277921907393F003A4D06 /* temperature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature.cpp; path = define/temperature.cpp; sourceTree = "<group>"; };
+		ABC277931907393F003A4D06 /* temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature.h; path = define/temperature.h; sourceTree = "<group>"; };
+		ABC716CA1905A4CF00C14977 /* num_method2014.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = num_method2014.cpp; sourceTree = "<group>"; };
+		ABC716CB1905A4CF00C14977 /* num_method2014.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = num_method2014.h; sourceTree = "<group>"; };
+		ABC716CD1905A83F00C14977 /* poptea_initialize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = poptea_initialize.cpp; sourceTree = "<group>"; };
+		ABC716CE1905A83F00C14977 /* poptea_initialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poptea_initialize.h; sourceTree = "<group>"; };
+		ABC716D01905C07C00C14977 /* xml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml.cpp; sourceTree = "<group>"; };
+		ABC716D11905C07C00C14977 /* xml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xml.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,13 +209,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB19F8A3190605520013D14D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AB19F8A61906058E0013D14D /* two_dim */,
+				AB19F8A4190605630013D14D /* one_dim */,
+				ABC2778F1907351E003A4D06 /* labels.cpp */,
+				ABC277901907351E003A4D06 /* labels.h */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		AB19F8A4190605630013D14D /* one_dim */ = {
+			isa = PBXGroup;
+			children = (
+				AB19F8B4190606DF0013D14D /* analytical_2005 */,
+			);
+			name = one_dim;
+			sourceTree = "<group>";
+		};
+		AB19F8A61906058E0013D14D /* two_dim */ = {
+			isa = PBXGroup;
+			children = (
+				AB19F8A9190606C10013D14D /* analytical_2009 */,
+			);
+			name = two_dim;
+			sourceTree = "<group>";
+		};
+		AB19F8A9190606C10013D14D /* analytical_2009 */ = {
+			isa = PBXGroup;
+			children = (
+				AB19F8AA190606C10013D14D /* heat2DAna.cpp */,
+				AB19F8AB190606C10013D14D /* heat2DAna.hpp */,
+			);
+			name = analytical_2009;
+			path = model/2dim/analytical_2009;
+			sourceTree = "<group>";
+		};
+		AB19F8B4190606DF0013D14D /* analytical_2005 */ = {
+			isa = PBXGroup;
+			children = (
+				AB19F8B5190606DF0013D14D /* heat1dAna.cpp */,
+				AB19F8B6190606DF0013D14D /* heat1dAna.h */,
+				AB19F8BE19060B750013D14D /* analytical_2005.cpp */,
+				AB19F8BF19060B750013D14D /* analytical_2005.h */,
+			);
+			name = analytical_2005;
+			path = model/1dim/analytical_2005;
+			sourceTree = "<group>";
+		};
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
+				AB9D915A19071892006F0FCC /* sensible */,
 				AB3830D918AEF3A8009965F1 /* investigations */,
 				AB3830DF18AEF3A8009965F1 /* main.cpp */,
 				AB3830E018AEF3A8009965F1 /* math */,
-				AB3830FF18AEF3A8009965F1 /* models */,
 				AB38310418AEF3A8009965F1 /* thermal */,
 				AB38313118AEF3A9009965F1 /* tools */,
 				AB38316918AEF3AE009965F1 /* tat */,
@@ -178,6 +276,8 @@
 			children = (
 				AB3830DD18AEF3A8009965F1 /* sensitivityvaldes2013.cpp */,
 				AB3830DE18AEF3A8009965F1 /* sensitivityvaldes2013.hpp */,
+				ABC716CA1905A4CF00C14977 /* num_method2014.cpp */,
+				ABC716CB1905A4CF00C14977 /* num_method2014.h */,
 			);
 			path = investigations;
 			sourceTree = "<group>";
@@ -247,32 +347,16 @@
 			path = sensitivityAnalysis;
 			sourceTree = "<group>";
 		};
-		AB3830FF18AEF3A8009965F1 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				AB38310018AEF3A8009965F1 /* expEquipment.cpp */,
-				AB38310118AEF3A8009965F1 /* expEquipment.hpp */,
-				AB38310218AEF3A8009965F1 /* physicalmodel.cpp */,
-				AB38310318AEF3A8009965F1 /* physicalmodel.hpp */,
-			);
-			path = models;
-			sourceTree = "<group>";
-		};
 		AB38310418AEF3A8009965F1 /* thermal */ = {
 			isa = PBXGroup;
 			children = (
+				AB9D914D19071332006F0FCC /* equipment */,
+				AB19F8A3190605520013D14D /* model */,
+				ABC716DF1905D9FC00C14977 /* define */,
+				ABC716DE1905D91300C14977 /* sweep */,
 				AB38310518AEF3A8009965F1 /* analysis */,
-				AB38311818AEF3A8009965F1 /* construct.cpp */,
-				AB38311918AEF3A8009965F1 /* construct.hpp */,
 				AB38311A18AEF3A8009965F1 /* emission */,
-				AB38311F18AEF3A8009965F1 /* emission.cpp */,
-				AB38312018AEF3A8009965F1 /* emission.hpp */,
-				AB38312118AEF3A9009965F1 /* heat */,
-				AB38312418AEF3A9009965F1 /* model.cpp */,
-				AB38312518AEF3A9009965F1 /* model.hpp */,
 				AB38312618AEF3A9009965F1 /* simulations */,
-				AB38312F18AEF3A9009965F1 /* thermal.cpp */,
-				AB38313018AEF3A9009965F1 /* thermal.hpp */,
 			);
 			path = thermal;
 			sourceTree = "<group>";
@@ -298,6 +382,8 @@
 				AB38311518AEF3A8009965F1 /* thermalData.hpp */,
 				AB38311618AEF3A8009965F1 /* thermalsweepoptimizer.cpp */,
 				AB38311718AEF3A8009965F1 /* thermalsweepoptimizer.hpp */,
+				ABC716CD1905A83F00C14977 /* poptea_initialize.cpp */,
+				ABC716CE1905A83F00C14977 /* poptea_initialize.h */,
 			);
 			path = analysis;
 			sourceTree = "<group>";
@@ -305,6 +391,8 @@
 		AB38311A18AEF3A8009965F1 /* emission */ = {
 			isa = PBXGroup;
 			children = (
+				AB19F8A01905F4FC0013D14D /* emission.hpp */,
+				AB38311F18AEF3A8009965F1 /* emission.cpp */,
 				AB38311B18AEF3A8009965F1 /* noise.cpp */,
 				AB38311C18AEF3A8009965F1 /* noise.hpp */,
 				AB38311D18AEF3A8009965F1 /* phase99.cpp */,
@@ -313,19 +401,10 @@
 			path = emission;
 			sourceTree = "<group>";
 		};
-		AB38312118AEF3A9009965F1 /* heat */ = {
-			isa = PBXGroup;
-			children = (
-				AB38312218AEF3A9009965F1 /* heat2DAna.cpp */,
-				AB38312318AEF3A9009965F1 /* heat2DAna.hpp */,
-			);
-			path = heat;
-			sourceTree = "<group>";
-		};
 		AB38312618AEF3A9009965F1 /* simulations */ = {
 			isa = PBXGroup;
 			children = (
-				AB38312718AEF3A9009965F1 /* Numerical_PhaseOfEmission.cpp */,
+				AB19F8A11905FD700013D14D /* Numerical_PhaseOfEmission.cpp */,
 				AB38312818AEF3A9009965F1 /* Numerical_PhaseOfEmission.h */,
 				AB38312918AEF3A9009965F1 /* Numerical_Setup.cpp */,
 				AB38312A18AEF3A9009965F1 /* Numerical_Setup.h */,
@@ -353,12 +432,73 @@
 		AB38313218AEF3A9009965F1 /* interface */ = {
 			isa = PBXGroup;
 			children = (
+				ABC716D01905C07C00C14977 /* xml.cpp */,
+				ABC716D11905C07C00C14977 /* xml.h */,
 				AB38313318AEF3A9009965F1 /* exportfile.cpp */,
 				AB38313418AEF3A9009965F1 /* exportfile.hpp */,
 				AB38313518AEF3A9009965F1 /* filesystem.cpp */,
 				AB38313618AEF3A9009965F1 /* filesystem.hpp */,
 			);
 			path = interface;
+			sourceTree = "<group>";
+		};
+		AB9D914D19071332006F0FCC /* equipment */ = {
+			isa = PBXGroup;
+			children = (
+				AB9D915119071414006F0FCC /* detector.cpp */,
+				AB9D915219071414006F0FCC /* detector.h */,
+				AB9D91541907141D006F0FCC /* laser.cpp */,
+				AB9D91551907141D006F0FCC /* laser.h */,
+				AB9D9157190714DC006F0FCC /* setup.cpp */,
+				AB9D9158190714DC006F0FCC /* setup.h */,
+			);
+			path = equipment;
+			sourceTree = "<group>";
+		};
+		AB9D915A19071892006F0FCC /* sensible */ = {
+			isa = PBXGroup;
+			children = (
+				AB9D915B190718B9006F0FCC /* property.cpp */,
+				AB9D915C190718B9006F0FCC /* property.h */,
+				AB9D915E190718DD006F0FCC /* temperature_scale.cpp */,
+				AB9D915F190718DD006F0FCC /* temperature_scale.h */,
+				AB9D916119071920006F0FCC /* radiativeSysProp.cpp */,
+				AB9D916219071920006F0FCC /* radiativeSysProp.h */,
+				AB9D91641907192B006F0FCC /* layer.cpp */,
+				AB9D91651907192B006F0FCC /* layer.h */,
+				AB9D91671907193B006F0FCC /* TBCsystem.cpp */,
+				AB9D91681907193B006F0FCC /* TBCsystem.h */,
+			);
+			path = sensible;
+			sourceTree = "<group>";
+		};
+		ABC716DE1905D91300C14977 /* sweep */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = sweep;
+			sourceTree = "<group>";
+		};
+		ABC716DF1905D9FC00C14977 /* define */ = {
+			isa = PBXGroup;
+			children = (
+				AB38312418AEF3A9009965F1 /* model.cpp */,
+				AB38312518AEF3A9009965F1 /* model.hpp */,
+				AB38311818AEF3A8009965F1 /* construct.cpp */,
+				AB38311918AEF3A8009965F1 /* construct.hpp */,
+				AB19F8911905DF430013D14D /* effusivity.cpp */,
+				AB19F8921905DF430013D14D /* effusivity.hpp */,
+				AB19F8941905DF830013D14D /* diffusivity.cpp */,
+				AB19F8951905DF830013D14D /* diffusivity.h */,
+				AB19F8971905DFD40013D14D /* omega.cpp */,
+				AB19F8981905DFD40013D14D /* omega.h */,
+				AB19F89A1905DFE50013D14D /* lthermal.cpp */,
+				AB19F89B1905DFE50013D14D /* lthermal.h */,
+				AB19F89E1905E3C20013D14D /* model_type.h */,
+				ABC277921907393F003A4D06 /* temperature.cpp */,
+				ABC277931907393F003A4D06 /* temperature.h */,
+			);
+			name = define;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,47 +552,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABC716CC1905A4CF00C14977 /* num_method2014.cpp in Sources */,
 				AB38314D18AEF3A9009965F1 /* utility.cpp in Sources */,
+				AB9D91661907192B006F0FCC /* layer.cpp in Sources */,
 				AB38316618AEF3A9009965F1 /* programoptions.cpp in Sources */,
 				AB38313F18AEF3A9009965F1 /* sensitivityvaldes2013.cpp in Sources */,
 				AB38314218AEF3A9009965F1 /* bisection.cpp in Sources */,
 				AB38314318AEF3A9009965F1 /* constrained.cpp in Sources */,
 				AB38316518AEF3A9009965F1 /* filesystem.cpp in Sources */,
-				AB38315F18AEF3A9009965F1 /* Numerical_PhaseOfEmission.cpp in Sources */,
+				ABC716CF1905A83F00C14977 /* poptea_initialize.cpp in Sources */,
 				AB38314618AEF3A9009965F1 /* lmdiff_helper.cpp in Sources */,
 				AB38314C18AEF3A9009965F1 /* statistical_tools.cpp in Sources */,
-				AB38315D18AEF3A9009965F1 /* heat2DAna.cpp in Sources */,
 				AB38315518AEF3A9009965F1 /* pie.cpp in Sources */,
 				AB38315918AEF3A9009965F1 /* construct.cpp in Sources */,
 				AB38315818AEF3A9009965F1 /* thermalsweepoptimizer.cpp in Sources */,
 				AB38315418AEF3A9009965F1 /* methods.cpp in Sources */,
+				AB9D915D190718B9006F0FCC /* property.cpp in Sources */,
 				AB38315318AEF3A9009965F1 /* lmdiff_poptea_help.cpp in Sources */,
+				ABC277911907351E003A4D06 /* labels.cpp in Sources */,
+				ABC716D21905C07C00C14977 /* xml.cpp in Sources */,
+				AB19F8B9190606DF0013D14D /* heat1dAna.cpp in Sources */,
 				AB38314B18AEF3A9009965F1 /* estimationInterval.cpp in Sources */,
+				AB19F8AC190606C10013D14D /* heat2DAna.cpp in Sources */,
 				AB38316118AEF3A9009965F1 /* Numerical_Temperature.cpp in Sources */,
-				AB38314F18AEF3A9009965F1 /* physicalmodel.cpp in Sources */,
+				AB19F8991905DFD40013D14D /* omega.cpp in Sources */,
 				AB38316718AEF3A9009965F1 /* timing.cpp in Sources */,
+				AB9D9160190718DD006F0FCC /* temperature_scale.cpp in Sources */,
+				AB19F8A21905FD700013D14D /* Numerical_PhaseOfEmission.cpp in Sources */,
+				AB19F8961905DF830013D14D /* diffusivity.cpp in Sources */,
+				AB9D915319071414006F0FCC /* detector.cpp in Sources */,
 				AB38314018AEF3A9009965F1 /* main.cpp in Sources */,
+				AB19F8931905DF430013D14D /* effusivity.cpp in Sources */,
 				AB38315C18AEF3A9009965F1 /* emission.cpp in Sources */,
 				AB38315B18AEF3A9009965F1 /* phase99.cpp in Sources */,
+				AB19F89C1905DFE50013D14D /* lthermal.cpp in Sources */,
+				AB9D91561907141D006F0FCC /* laser.cpp in Sources */,
 				AB38314818AEF3A9009965F1 /* utils.cpp in Sources */,
 				AB38315A18AEF3A9009965F1 /* noise.cpp in Sources */,
-				AB38314E18AEF3A9009965F1 /* expEquipment.cpp in Sources */,
+				AB19F8C019060B750013D14D /* analytical_2005.cpp in Sources */,
 				AB38315218AEF3A9009965F1 /* lmdiff_poptea.cpp in Sources */,
 				AB38314518AEF3A9009965F1 /* lmdiff.cpp in Sources */,
 				AB38314A18AEF3A9009965F1 /* simpsons_3_8.cpp in Sources */,
 				AB38314418AEF3A9009965F1 /* cosfit.cpp in Sources */,
 				AB38316018AEF3A9009965F1 /* Numerical_Setup.cpp in Sources */,
+				ABC277941907393F003A4D06 /* temperature.cpp in Sources */,
 				AB38314718AEF3A9009965F1 /* parameterestimation.cpp in Sources */,
 				AB38315E18AEF3A9009965F1 /* model.cpp in Sources */,
+				AB9D916319071920006F0FCC /* radiativeSysProp.cpp in Sources */,
 				AB38315118AEF3A9009965F1 /* kernal.cpp in Sources */,
 				AB38315618AEF3A9009965F1 /* poptea.cpp in Sources */,
 				AB38315018AEF3A9009965F1 /* basedata.cpp in Sources */,
 				AB38316218AEF3A9009965F1 /* numericalmodel.cpp in Sources */,
+				AB9D9159190714DC006F0FCC /* setup.cpp in Sources */,
 				AB38316418AEF3A9009965F1 /* exportfile.cpp in Sources */,
+				AB9D91691907193B006F0FCC /* TBCsystem.cpp in Sources */,
 				AB38314918AEF3A9009965F1 /* gslfunc.cpp in Sources */,
 				AB38314118AEF3A9009965F1 /* combinations.cpp in Sources */,
 				AB38315718AEF3A9009965F1 /* thermalData.cpp in Sources */,
-				AB38316318AEF3A9009965F1 /* thermal.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +643,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -497,6 +654,10 @@
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
+				WARNING_CFLAGS = (
+					"-Wno-gnu",
+					"-Wno-conversion",
+				);
 			};
 			name = Debug;
 		};
@@ -520,8 +681,10 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -531,6 +694,10 @@
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
+				WARNING_CFLAGS = (
+					"-Wno-gnu",
+					"-Wno-conversion",
+				);
 			};
 			name = Release;
 		};

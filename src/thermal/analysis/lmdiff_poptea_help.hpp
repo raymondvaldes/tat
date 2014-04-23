@@ -25,15 +25,14 @@ License
 #ifndef LMDIFF_POPTEA_HELP_HPP
 #define LMDIFF_POPTEA_HELP_HPP
 
-#include "thermal/analysis/kernal.hpp"
-#include "math/statistical_tools.hpp"
-
+#include "math/estimation/parameterestimation.hpp"
+#include "sensible/TBCsystem.h"
 
 namespace thermal {
 namespace analysis{
 
-void scaleDiag( double *diag, math::estimation::unknownList List,
-                const physicalModel::TBCsystem TBCsystem, const int mode );
+  void scaleDiag( double *diag, math::estimation::unknownList List,
+                  const sensible::TBCsystem TBCsystem, const int mode );
 
 class LMA_workingArrays
 {

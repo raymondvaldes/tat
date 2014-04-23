@@ -30,6 +30,7 @@ License
 #include <memory>
 #include <functional>
 
+#include "sensible/TBCsystem.h"
 #include "math/estimation/lmdiff.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
@@ -38,12 +39,9 @@ License
 #include "math/estimation/parameterestimation.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "math/bisection.hpp"
-#include "models/expEquipment.hpp"
 #include "tools/interface/filesystem.hpp"
-#include "thermal/model.hpp"
-#include "thermal/thermal.hpp"
+#include "thermal/define/model.hpp"
 #include "thermal/analysis/basedata.hpp"
-//#include "thermal/analysis/pie.hpp"
 
 namespace thermal {
 namespace analysis{
@@ -102,12 +100,10 @@ public:
 };
 
 
-
-
 }}
 
 
-void printPEstimates( const physicalModel::TBCsystem TBCSystem,
+void printPEstimates( const sensible::TBCsystem TBCSystem,
                       math::estimation::unknownList list );
 
 #endif // LMDIFF_POPTEA_HPP

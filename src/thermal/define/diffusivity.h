@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
- ========               |
-    || 	 T Thermal      | TAT: Thermal Analysis Toolbox
-    ||   A Analysis     |
-    || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-    ||   	  	        	|
+ ========                 |
+    || 	   T Thermal      | TAT: Thermal Analysis Toolbox
+    ||  	 A Analysis     |
+    || 	   T Toolbox    	| Copyright (C) 2013 Raymond Valdes
+    ||   	  	          	|
  -------------------------------------------------------------------------------
  License
  This file is part of Thermal Analysis Toolbox.
@@ -23,31 +23,16 @@
  
 \*----------------------------------------------------------------------------*/
 
-#include "num_method2014.h"
-#include "thermal/analysis/poptea.hpp"
-#include "thermal/analysis/poptea_initialize.h"
+#ifndef __tat__diffusivity__
+#define __tat__diffusivity__
 
-namespace investigations{
-  namespace num_method{
-    
-using namespace thermal::analysis;
+#include <iostream>
 
-void run( const filesystem::directory &dir )
-{
-  using std::string;
-  /// setup output directory
-  Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
+namespace thermal{
+  namespace define{
 
-  /// Part test
-  poptea.bestFit() ;
-  std::cout << poptea.ppUnknownParameters() ;
-  
-  
-  return;
-}
-    
-    
-    
-  
-    
-}}
+double diffusivity( const double k, const double rhoCp ) ;
+
+  }}
+
+#endif /* defined(__tat__diffusivity__) */

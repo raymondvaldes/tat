@@ -98,7 +98,6 @@ addNoise( const std::vector<double> &emissionNominal_,
 }
 
 
-
 ExpNoiseSetting
 ExpNoiseSetting::initializeObj(const boost::property_tree::ptree &pt )
 {
@@ -114,7 +113,6 @@ ExpNoiseSetting::initializeObj(const boost::property_tree::ptree &pt )
 
   return output;
 }
-
 
 ExpNoiseSetting
 ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory &dir )
@@ -132,13 +130,4 @@ ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory &dir )
 
   return initializeObj( ptchild1 ) ;
 }
-
-
-
-
-
-
-
-
-
 }}

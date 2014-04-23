@@ -55,8 +55,6 @@ double Kappa(const std::vector<std::vector<double>>& T, const double eta,
              const double k_ref, const int prop_linearity, const double k_c);
 
 
-
-
 double Iheat(double Isteady, double Itransient, double omega, double t) ;//verified
 
 size_t sumVector(const size_t *const vector1,const size_t sizeV);
@@ -66,7 +64,5 @@ double Iheat_int(const double Isteady,const double Itransient,
 
 double tau_0(const double omega);
 double x_bias(const double Xmean, const double Xstddev);
-
-
 
 #endif // NUMERICAL_SETUP_H_INCLUDED
