@@ -30,7 +30,6 @@ License
 #include <memory>
 #include <boost/property_tree/ptree.hpp>
 
-#include "models/physicalmodel.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/pie.hpp"
@@ -54,8 +53,8 @@ public:
       const math::estimation::unknownList &unknownParameters_in,
       const ThermalData& thermalData_in,
       const math::estimation::unknownList &thermalSweepSearch_in,
-      const std::vector<physicalModel::labels> &sweepOptimizationGoal_in,
-      const physicalModel::layer coating , const size_t iter ) ;
+      const std::vector<thermal::model::labels> &sweepOptimizationGoal_in,
+      const sensible::layer coating , const size_t iter ) ;
 
   methods& operator=( const methods& that );
 
@@ -95,7 +94,7 @@ methods
 loadMethodsfromFile(const boost::property_tree::ptree &ptchild4,
                      const math::estimation::unknownList &parameterEstimation,
                      const ThermalData &thermData,
-                     const physicalModel::layer &coating ) ;
+                     const sensible::layer &coating ) ;
 
 
 }}

@@ -86,9 +86,5 @@ public:
   size_t iter;
 };
 
-
-
-
 }
-
 #endif // NUMERICALMODEL_HPP

@@ -31,6 +31,7 @@ License
 #include "math/estimation/lmdiff.hpp"
 #include "tools/interface/exportfile.hpp"
 #include "thermal/emission/phase99.hpp"
+#include "thermal/define/lthermal.h"
 
 namespace thermal{
 namespace analysis{
@@ -42,14 +43,14 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     const std::shared_ptr< LMA > &bestfitMethod_in,
     const std::shared_ptr< PIE > &intervalEstimates_in,
     const math::estimation::unknownList thermalSweepSearch_in,
-    const std::vector<physicalModel::labels> sweepOptimizationGoal_in,
-    const physicalModel::layer coating, const size_t iter_in)
+    const std::vector<thermal::model::labels> sweepOptimizationGoal_in,
+    const sensible::layer coating, const size_t iter_in)
   : LMA_BASE( Settings_in, unknownParameters_, thermalData_in.size() ) ,
     bestfitMethod( bestfitMethod_in ),
     intervalEstimates( intervalEstimates_in ),
     thermalSweepSearch( thermalSweepSearch_in ),
     sweepOptimizationGoal( sweepOptimizationGoal_in ),
-    coatingTOinterpretFullRange( new physicalModel::layer( coating )),
+    coatingTOinterpretFullRange( new sensible::layer( coating )),
     xSweep(0.5,0.5),
     iter(iter_in)
 {
@@ -69,9 +70,9 @@ std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
   for( const auto& unknown : thermalSweepSearch() )
   {
     const double bestfit  = unknown.bestfit();
-    if ( unknown.label() == physicalModel::labels::Name::thermalCenter  )
+    if ( unknown.label() == thermal::model::labels::Name::thermalCenter  )
       { thermalCenter = bestfit ; }
-    else if ( unknown.label() == physicalModel::labels::Name::thermalRange  )
+    else if ( unknown.label() == thermal::model::labels::Name::thermalRange  )
       { thermalRange = bestfit ; }
   }
 
@@ -98,7 +99,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch( const double *x )
 
   const double xCenter = xSweep.first ;
   const double xRange = xSweep.second ;
-  const physicalModel::layer coatUpdate( coreSystem->TBCsystem.coating ) ;
+  const sensible::layer coatUpdate( coreSystem->TBCsystem.coating ) ;
 
   return sliceThermalData( xCenter, xRange, coatUpdate ) ;
 }
@@ -117,7 +118,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   size_t i =0 ;
   currentState.meanParameterError = 0;
   using std::pow;
-  for( physicalModel::labels& myParam : sweepOptimizationGoal )
+  for( thermal::model::labels& myParam : sweepOptimizationGoal )
   {
     double error = 0 ;
 
@@ -196,7 +197,7 @@ void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
 
 void ThermalSweepOptimizer::updateWorkSpace(
     const math::estimation::unknownList &thermalSweepSearch_in,
-    const std::vector<physicalModel::labels> &sweepOptimizationGoal_in)
+    const std::vector<thermal::model::labels> &sweepOptimizationGoal_in)
 {
   const size_t Lend = sweepOptimizationGoal_in.size();
   const size_t N = thermalSweepSearch_in.size();
@@ -523,8 +524,9 @@ std::string ThermalSweepOptimizer::montecarloMap(
     const double omegafirst = state.omegaLimits.first;
     const double omegasecond = state.omegaLimits.second;
 
-    const double lmin = thermal::lthermal( length, kcond, psi, omegafirst ) ;
-    const double lmax = thermal::lthermal( length, kcond, psi, omegasecond );
+    using define::lthermal;
+    const double lmin = lthermal( length, kcond, psi, omegafirst ) ;
+    const double lmax = lthermal( length, kcond, psi, omegasecond );
 
     using std::pair;
     const pair<double, double > lthermCenDec =math::xCenterlog10( lmin, lmax );
@@ -542,7 +544,7 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
 }
 
-void ThermalSweepOptimizer::captureState( const physicalModel::layer &coat )
+void ThermalSweepOptimizer::captureState( const sensible::layer &coat )
 {
   currentState.lthermalLimits = thermalData->get_lthermalLimits( coat ) ;
   currentState.lthermalCenterDecades =
@@ -575,7 +577,7 @@ void ThermalSweepOptimizer::solve(
   double xC = .5 ;
   double xR = 1 ;
 
-  using physicalModel::layer;
+  using sensible::layer;
   const layer coatUpdate( coreSystem->TBCsystem.coating ) ;
   const ThermalData updatedThermal = sliceThermalData( xC, xR, coatUpdate ) ;
   reassign( thermalData , updatedThermal ) ;
@@ -598,7 +600,7 @@ void ThermalSweepOptimizer::solve(
 
 ThermalData ThermalSweepOptimizer::sliceThermalData(
     const double xCenter, const double xRange,
-    const physicalModel::layer updatedCoating )
+    const sensible::layer updatedCoating )
 {
   using std::pair;
   using std::vector;
@@ -627,6 +629,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   const double coatingK = updatedCoating.kthermal.offset;
   const double coatingPsi = updatedCoating.psithermal.offset;
 
+  using define::lthermal;
   const pair<double, double> thermalLimits(
   lthermal( coatingLength, coatingK,  coatingPsi, omegaLimits.first  ) ,
   lthermal( coatingLength, coatingK,  coatingPsi, omegaLimits.second ) ) ;

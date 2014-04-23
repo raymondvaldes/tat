@@ -27,36 +27,31 @@ License
 
 #include <boost/property_tree/ptree.hpp>
 
-#include "models/expEquipment.hpp"
-#include "models/physicalmodel.hpp"
+#include "thermal/equipment/setup.h"
 #include "math/estimation/parameterestimation.hpp"
 #include "tools/interface/filesystem.hpp"
-#include "thermal/model.hpp"
-
-template<typename OBJ>
-void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
-  { var.reset( new OBJ( input )  ); }
+#include "thermal/define/model.hpp"
+#include "sensible/TBCsystem.h"
 
 namespace thermal {
 namespace analysis{
-
 
 class Kernal
 {
 public:
   /// core members
-  class equipment::setup expSetup;
-  class physicalModel::TBCsystem TBCsystem;
-  class thermal::model thermalsys;
-  class filesystem::directory DataDirectory;
+  equipment::setup expSetup;
+  sensible::TBCsystem TBCsystem;
+  define::model thermalsys;
+  filesystem::directory DataDirectory;
 
   /// constructors and object creators
-  Kernal( const class equipment::setup &expSetup_,
-          const class physicalModel::TBCsystem &TBCsystem_,
-          const class thermal::model &thermalsys_,
-          const class filesystem::directory &DataDirectory_ ) ;
+  Kernal( const equipment::setup &expSetup_,
+          const sensible::TBCsystem &TBCsystem_,
+          const define::model &thermalsys_,
+          const filesystem::directory &DataDirectory_ ) ;
   static Kernal loadConfig( const boost::property_tree::ptree &pt,
-                            const class filesystem::directory &DataDirectory_);
+                            const filesystem::directory &DataDirectory_);
   ~Kernal( void );
 
   /// Operations that give results
@@ -66,9 +61,12 @@ public:
 
 };
 
-class Kernal loadWorkingDirectoryKernal(const filesystem::directory &dir);
-
-
+Kernal loadWorkingDirectoryKernal(const filesystem::directory &dir);
 }}
+
+template<typename OBJ>
+void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
+{ var.reset( new OBJ( input )  ); }
+
 
 #endif // popteaCore_HPP

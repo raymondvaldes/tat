@@ -26,13 +26,13 @@ License
 #include <gsl/gsl_sf_bessel.h>
 #include <fstream>
 #include <iomanip>
-#include "thermal/heat/heat2DAna.hpp"
+#include "thermal/model/2dim/analytical_2009/heat2DAna.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/statistical_tools.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "math/utility.hpp"
 #include "math/numIntegration/simpsons_3_8.hpp"
-#include "thermal/thermal.hpp"
+#include "thermal/define/lthermal.h"
 
 HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
                                 const double lambda_, const double It_,
@@ -424,7 +424,7 @@ HeatModel2DAna::TempT(const double r, const double z, const double tau_,
   The transient temperature (real). The parameters are normalized
   including time.
   */
-  const double ltherm = thermal::lthermal(L, k_coat, psi_coat, omega);
+  const double ltherm = thermal::define::lthermal(L, k_coat, psi_coat, omega);
   constexpr std::complex<double> _i_ (0.0, 1.0);
 
   std::complex<double>
@@ -459,7 +459,8 @@ HeatModel2DAna::TemperatureDistro(std::vector<std::vector<std::vector<double>>>
                                   &Temperature, const double omega) const
 {
   ///Determine the thermal penetration based on the omega
-  const double ltherm = thermal::lthermal(L, k_coat, psi_coat, omega);
+  using thermal::define::lthermal;
+  const double ltherm = lthermal(L, k_coat, psi_coat, omega);
   constexpr   std::complex<double> _i_ (0.0, 1.0);
 
   ///Populate working arrays

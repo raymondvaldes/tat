@@ -28,3 +28,23 @@ MakeFile
 
 # project folder files
 *.xcodeproj/
+
+*.xccheckout
+
+*.xcuserstate
+
+*.xcuserstate
+
+*.xccheckout
+
+*.xccheckout
+
+*.xcuserstate
+
+*.pbxproj
+
+src/tat.xcodeproj/project.pbxproj
+
+src/tat.xcodeproj/project.pbxproj
+
+src/tat.xcodeproj/project.xcworkspace/xcshareddata/tat.xccheckout

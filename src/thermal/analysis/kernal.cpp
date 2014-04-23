@@ -25,14 +25,13 @@ License
 #include <exception>
 
 #include "thermal/analysis/kernal.hpp"
-#include "models/expEquipment.hpp"
+#include "thermal/equipment/setup.h"
 #include "thermal/simulations/numericalmodel.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
 #include "tools/interface/filesystem.hpp"
-#include "thermal/model.hpp"
-#include "thermal/thermal.hpp"
+#include "thermal/define/model.hpp"
 #include "tools/interface/xml.h"
 
 namespace thermal {
@@ -41,8 +40,8 @@ namespace analysis{
 
 
 Kernal::Kernal( const equipment::setup &expSetup_,
-                const physicalModel::TBCsystem &TBCsystem_,
-                const model &thermalsys_,
+                const sensible::TBCsystem  &TBCsystem_,
+                const define::model &thermalsys_,
                 const filesystem::directory &DataDirectory_ )
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
@@ -63,12 +62,12 @@ class thermal::analysis::Kernal
   const equipment::setup Obj1( equipment::setup::loadConfigfromXML( ptchild1 ));
 
   const ptree ptchild2 = pt.get_child( conjunto + "TBCsystem" );
-  const physicalModel::TBCsystem
-    Obj2( physicalModel::TBCsystem::loadConfig( ptchild2 ) );
+  const sensible::TBCsystem 
+    Obj2( sensible::TBCsystem ::loadConfig( ptchild2 ) );
 
   const ptree ptchild3 = pt.get_child( conjunto + "thermalModel" );
-  const thermal::construct
-    Construct( thermal::construct::loadConfigfromXML( ptchild3 ) );
+  const define::construct
+    Construct( define::construct::loadConfigfromXML( ptchild3 ) );
 
   /// Mesh is intrinsically linked the TBCsystem and experimental setup
   const size_t M2     = ptchild3.get<size_t>( "mesh.M2" );
@@ -83,7 +82,7 @@ class thermal::analysis::Kernal
                                    Obj1.laser.radius,
                                    Obj2.radius, iter);
 
-  const thermal::model Ojb3NEW( Construct , mesh);
+  const define::model Ojb3NEW( Construct , mesh);
 
   //Load class object from previous objects
   const Kernal kernal( Obj1, Obj2, Ojb3NEW, DataDirectory_);

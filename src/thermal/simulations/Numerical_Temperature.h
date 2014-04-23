@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  		        |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -29,11 +29,13 @@ License
 #include <cstddef>
 #include <complex>
 
-#include "models/physicalmodel.hpp"
-#include "models/expEquipment.hpp"
-#include "thermal/thermal.hpp"
-#include "thermal/construct.hpp"
-#include "thermal/model.hpp"
+#include "thermal/define/construct.hpp"
+#include "thermal/define/model.hpp"
+#include "thermal/equipment/setup.h"
+#include "thermal/define/temperature.h"
+
+using sensible::property;
+using thermal::define::Temperature;
 
 class matrixArrays
 {
@@ -60,11 +62,11 @@ std::complex<double> Tac1D_ana( const double z, const double R0,
                                 const double R1, const double epsilon,
                                 const double Lam, const double Lthrm);
 
-void temperature_1D(const class physicalModel::TBCsystem TBCsystem,
-                    const class thermal::model thermalsys,
-                    const class equipment::setup expSetup,
-                    const double omega1,
-                    class Temperature Tprofile);
+void temperature_1D( const sensible::TBCsystem  TBCsystem,
+                     const thermal::define::model thermalsys,
+                     const thermal::equipment::setup expSetup,
+                     const double omega1,
+                     thermal::define::Temperature Tprofile);
 
 double abMatrixPrepopulate( std::vector<double>& B1,
                             std::vector<double>& B2,

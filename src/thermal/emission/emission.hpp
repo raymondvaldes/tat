@@ -28,19 +28,20 @@ License
 #include <vector>
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "thermal/simulations/Numerical_Setup.h"
-
+#include "thermal/define/temperature.h"
 
 namespace thermal{
+  
 class Emission
 {
 public:
   explicit Emission( const double detector_lam_, const double T_ref_,
-                     const class numericalModel::Mesh mesh, const double beamR_,
+                     const numericalModel::Mesh mesh, const double beamR_,
                      const double E_sigma_);
   ~Emission();
   double phase2D( std::vector< std::vector< std::vector< double > > >
                          &Temperature) const;
-  double phase1D(const class Temperature Tprofile) const;
+  double phase1D(const define::Temperature Tprofile) const;
 
 private:
   mutable double *Ib;
@@ -54,18 +55,13 @@ private:
   double drArea(const double r0_, const double r1_) const;
   double Ib_plank(const double Temperature) const;
   double emissionAxial(std::vector<double> &Temperature) const;
-  double emissionAxial(const class Temperature Tprofile, const size_t nVal)
+  double emissionAxial(const define::Temperature Tprofile, const size_t nVal)
   const;
 
   double emissionAxialLinear(std::vector<double> &Temperature) const;
   double emissionVolumetric2D(std::vector<std::vector<double>>&Temperature)
   const;
 };
-
-
-
-
-
 
 
 }

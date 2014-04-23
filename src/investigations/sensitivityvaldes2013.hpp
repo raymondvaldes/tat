@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  	        	|
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -36,8 +36,6 @@ namespace sensitivityvaldes2013{
 void run(const filesystem::directory &dir ) ;
 void demo( const filesystem::directory &dir ) ;
 
-thermal::analysis::Poptea
-initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir ) ;
 
 }}
 

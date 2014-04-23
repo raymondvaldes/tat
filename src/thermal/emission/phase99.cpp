@@ -27,6 +27,7 @@ License
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
+#include "thermal/model/1dim/analytical_2005/heat1dAna.h"
 
 namespace thermal{
 namespace emission{
@@ -45,7 +46,7 @@ phase99( const thermal::analysis::Kernal &popteaCore,
 
   switch( popteaCore.thermalsys.Construct.heat )
   {
-    case thermal::HeatX::OneDimAnalytical:
+    case define::HeatX::OneDimAnalytical:
     {
       const double L_coat = popteaCore.TBCsystem.coating.depth ;
       const double k_c    = popteaCore.TBCsystem.coating.kthermal.offset ;
@@ -55,13 +56,15 @@ phase99( const thermal::analysis::Kernal &popteaCore,
       const double gamma  = popteaCore.TBCsystem.gammaEval();
       const double Esigma = popteaCore.TBCsystem.optical.Emit1;
 
+      using thermal::heat::PhaseOfEmission1DAna;
+    
       for( size_t n = 0 ; n < L_end ; ++n )
         { results[ n ] = PhaseOfEmission1DAna( omegas[n] , L_coat, k_c, psi_c,
                                                lambda, R1, gamma, Esigma ) ; }
       break;
     }
 
-    case thermal::HeatX::OneDimNumLin:
+    case define::HeatX::OneDimNumLin:
     {
       size_t n = 0;
       #pragma omp parallel for schedule(dynamic) private(n)
@@ -70,7 +73,7 @@ phase99( const thermal::analysis::Kernal &popteaCore,
       break;
     }
 
-    case thermal::HeatX::TwoDimAnalytical:
+    case define::HeatX::TwoDimAnalytical:
     {
       size_t n = 0;
       #pragma omp parallel for schedule(dynamic) private(n)
@@ -79,11 +82,11 @@ phase99( const thermal::analysis::Kernal &popteaCore,
       break;
     }
 
-    case thermal::HeatX::OneDimNumNonLin:
+    case define::HeatX::OneDimNumNonLin:
       std::cout << "no model available"; exit(-2);
-    case thermal::HeatX::TwoDimNumLin:
+    case define::HeatX::TwoDimNumLin:
       std::cout << "no model available"; exit(-2);
-    case thermal::HeatX::TwoDimNumNonLin:
+    case define::HeatX::TwoDimNumNonLin:
       std::cout << "no model available"; exit(-2);
     default:
       std::cout << "no model available"; exit(-2);

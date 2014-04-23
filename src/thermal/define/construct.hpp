@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                |
+  ========                      |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		        |
+     ||                         |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -22,38 +22,30 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <cmath>
-#include "thermal/thermal.hpp"
+
+#ifndef __TAT__CONSTRUCT_HPP
+#define __TAT__CONSTRUCT_HPP
+
+#include "thermal/define/model_type.h"
+#include <boost/property_tree/ptree.hpp>
+
 namespace thermal{
-
-double effusivity( const double k, const double rhoCp )
+  namespace define{
+  
+class construct
 {
-  return std::sqrt( k * rhoCp ) ;
-}
 
-double diffusivity( const double k, const double rhoCp )
-{
-  return k / rhoCp ;
-}
+public:
+  const enum HeatX heat;
+  const enum EmissionX emission;
 
-double omega( const double L_coat, const double l_thermal, const double k_c,
-              const double psi_c )
-{
-  return ( k_c / psi_c ) / ( std::pow( L_coat * l_thermal , 2 ) );
-}
+  explicit construct( const enum HeatX myHeat,
+                      const enum EmissionX myEmission );
 
-double lthermal( const double L_coat, const double k_c, const double psi_c,
-                 const double omega )
-{
-  using std::sqrt;
+  static construct loadConfigfromXML( const boost::property_tree::ptree pt );
+  ~construct(void);
+};
 
-  double lthermal = k_c ;
-  lthermal /= psi_c * omega ;
-  lthermal = sqrt( lthermal ) ;
-  lthermal /= L_coat ;
+}}
 
-  return lthermal ;
-}
-
-
-}
+#endif // __TAT__CONSTRUCT_HPP

@@ -93,7 +93,7 @@ double PIE::bestFit()
 
 
 PIE::PIEAnalysisOutput::SearchData PIE::PIEAnalysisOutput::
-retrieveSearchData( const physicalModel::labels::Name input )
+retrieveSearchData( const thermal::model::labels::Name input )
 {
   SearchData myOutput;
 
@@ -111,8 +111,6 @@ retrieveSearchData( const physicalModel::labels::Name input )
 
 void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 {
-  using namespace physicalModel;
-
   std::string pieResults = myUnknowns->prettyPrint();
   tools::interface::exportfile( path + "/" + "pie.dat" , pieResults ) ;
 
@@ -122,7 +120,7 @@ void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 
   for( math::estimation::unknown&parameter : (*myUnknowns)() )
   {
-    const physicalModel::labels myLabel = parameter.getLabel();
+    const thermal::model::labels myLabel = parameter.getLabel();
     const std::string myLabelName = myLabel.getNameString() ;
     filesystem::makeDir( path , myLabelName );
 
@@ -148,7 +146,7 @@ std::string PIE::PIEAnalysisOutput::ppThermalSweep( void )
 }
 
 std::string PIE::PIEAnalysisOutput::
-ppSearchPath( const physicalModel::labels::Name input )
+ppSearchPath( const thermal::model::labels::Name input )
 {
   SearchData myData = retrieveSearchData( input ) ;
   const std::string output = myData.pprint() ;
@@ -157,7 +155,7 @@ ppSearchPath( const physicalModel::labels::Name input )
 }
 
 std::string PIE::PIEAnalysisOutput::
-ppEmissionLimits( const physicalModel::labels::Name input )
+ppEmissionLimits( const thermal::model::labels::Name input )
 {
   SearchData myData = retrieveSearchData( input ) ;
 
@@ -220,7 +218,7 @@ void PIE::parameterIntervalEstimates( void )
   const std::vector< std::vector<  unknown > >
       unknownParaLists = combos_minusOne( originalListParams );
 
-  std::vector< enum physicalModel::labels::Name  > parametersToBeManipulated;
+  std::vector< enum thermal::model::labels::Name  > parametersToBeManipulated;
   for ( const auto& unknown : originalListParams )
     { parametersToBeManipulated.push_back( unknown.label() ); }
 
@@ -233,7 +231,7 @@ void PIE::parameterIntervalEstimates( void )
 
     ///identifiy fixed parameter and update search bound
     const unknown myfixedParameter =  originalListParams[i];
-    const enum physicalModel::labels::Name mylabel = myfixedParameter.label();
+    const enum thermal::model::labels::Name mylabel = myfixedParameter.label();
     const double bestfit = myfixedParameter.bestfit();
     const double lowerbound = myfixedParameter.lowerBound();
     const double upperbound = myfixedParameter.upperBound();
@@ -272,7 +270,7 @@ void PIE::parameterIntervalEstimates( void )
 }
 
 double PIE::solveFORx( const double target , const double min, const double max,
-                       const enum physicalModel::labels::Name mylabel,
+                       const enum thermal::model::labels::Name mylabel,
                        const std::string &bound )
 {
   const std::function<double(double)>
@@ -312,7 +310,7 @@ void PIE::updateExperimentalData( const std::vector<double> &input,
 
 
 double PIE::Gfunc( const double val ,
-                   const enum physicalModel::labels::Name &mylabel)
+                   const enum thermal::model::labels::Name &mylabel)
 {
   coreSystem->TBCsystem.updateVal( mylabel , val ) ;
   coreSystem->TBCsystem.updateCoat() ;

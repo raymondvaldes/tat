@@ -37,22 +37,27 @@ License
 //Internal dependencies
 #include "tools/tools.hpp"
 #include "investigations/sensitivityvaldes2013.hpp"
+#include "investigations/num_method2014.h"
 
 int main( int argc, char *argv[ ] )
 {
-  std::string path;
+  using std::string;
+  using std::vector;
+  
+  string path;
 
   if( tools::programoptions::loadOptions( argc, argv, path ) )
   {
     std::cout << "Welcome back, Raymond!\n\n" ;
     stopwatch globalStopWatch ;
 
-    std::vector< boost::filesystem::path > samples = filesystem::ls( path );
+    vector< boost::filesystem::path > samples = filesystem::ls( path );
     for( const boost::filesystem::path& testSpeciman : samples )
     {
-      const std::string specimanPath = testSpeciman.string();
+      const string specimanPath = testSpeciman.string();
       const filesystem::directory dir( specimanPath ) ;
-      investigations::sensitivityvaldes2013::run( dir ) ;
+      //investigations::sensitivityvaldes2013::run( dir ) ;
+      investigations::num_method::run( dir ) ;
     }
 
     std::cout << globalStopWatch.readoutLoud() << "\n";

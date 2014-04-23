@@ -22,18 +22,26 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "thermal/construct.hpp"
-#include "thermal/model.hpp"
+#ifndef __TAT__MODEL_HPP
+#define __TAT__MODEL_HPP
 
-namespace thermal
+#include "thermal/define/construct.hpp"
+#include "thermal/simulations/numericalmodel.hpp"
+
+namespace thermal{
+namespace define{
+
+class model
 {
+public:
+  construct Construct;
+  numericalModel::Mesh mesh;
 
-model::model ( const construct &Construct_,
-               const numericalModel::Mesh &mesh_ )
-  : Construct(Construct_), mesh(mesh_)
-{
-}
+  explicit model ( const construct &Construct_,
+                   const numericalModel::Mesh &mesh_);
+  ~model(void);
+};
 
-model::~model(void){}
+}}
 
-}
+#endif // __TAT__MODEL_HPP

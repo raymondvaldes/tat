@@ -45,10 +45,6 @@ public:
   static ExpNoiseSetting loadExpNoiseFile(const filesystem::directory &dir ) ;
 };
 
-
-
-
-
 std::vector<double>
 addNoise( const std::vector<double> &emissionNominal_,
           const std::vector<double> &lthermal,

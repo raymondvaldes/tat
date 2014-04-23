@@ -22,14 +22,18 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "emission.hpp"
+#include "thermal/emission/emission.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/statistical_tools.hpp"
 #include "math/utility.hpp"
 #include "math/estimation/cosfit.hpp"
 #include "math/numIntegration/simpsons_3_8.hpp"
 
+
+
 namespace thermal{
+
+  
 Emission::Emission( const double detector_lam_, const double T_ref_,
                     const numericalModel::Mesh mesh_, const double beamR_,
                     const double E_sigma_):
@@ -112,8 +116,8 @@ double Emission::emissionAxial(std::vector<double> &Temperature) const
     return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
 }
 
-double Emission::emissionAxial( const class Temperature Tprofile,
-                                const size_t nVal) const
+  double Emission::emissionAxial( const define::Temperature Tprofile,
+                                  const size_t nVal) const
 {
     /*
     Calculates the volumetric emission flux with respect to the axial
@@ -203,7 +207,7 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
     return OAPemission[2];
 }
 
-double Emission::phase1D(const class Temperature Tprofile) const
+  double Emission::phase1D(const define::Temperature Tprofile) const
 {
     /*
     The volumetric emission is determined for one unique period of heating

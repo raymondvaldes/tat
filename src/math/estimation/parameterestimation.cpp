@@ -36,7 +36,7 @@ License
 namespace math{
   namespace estimation{
 
-unknown::unknown(enum physicalModel::labels::Name name_,
+unknown::unknown(enum thermal::model::labels::Name name_,
                  const double lower_,
                  const double upper_,
                  const double initialGuess_)
@@ -107,12 +107,12 @@ void unknown::bestfitset(const double input)
   bestfitval = input;
 }
 
-enum physicalModel::labels::Name unknown::label(void) const
+enum thermal::model::labels::Name unknown::label(void) const
 {
   return name.getName();
 }
 
-physicalModel::labels unknown::getLabel ( void ) const
+thermal::model::labels unknown::getLabel ( void ) const
 {
   return name;
 }
@@ -138,7 +138,7 @@ void unknownList::addUnknown( const class estimation::unknown &input )
 }
 
 
-void unknownList::addUnknown(enum physicalModel::labels::Name name,
+void unknownList::addUnknown(enum thermal::model::labels::Name name,
                              const double lower,
                              const double upper, const double initialGuess)
 {
@@ -199,7 +199,7 @@ class unknownList unknownList::
   unknownList unknownListObj;
 
   // Iterate over 'unknown' branches
-  physicalModel::labels labels;
+  thermal::model::labels labels;
   BOOST_FOREACH( const ptree::value_type &v,
                  pt.get_child( "unknownParameters" ) )
   {
@@ -208,7 +208,7 @@ class unknownList unknownList::
 
     //access members of subtree
     const std::string nameLabel = child.get< std::string >( "label" );
-    enum physicalModel::labels::Name mylabel;
+    enum thermal::model::labels::Name mylabel;
     try
     {
       mylabel = labels.nameMap.right.at(nameLabel);

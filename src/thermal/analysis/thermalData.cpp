@@ -27,10 +27,10 @@ License
 #include <iomanip>
 
 #include "thermal/analysis/thermalData.hpp"
-#include "thermal/thermal.hpp"
-#include "models/physicalmodel.hpp"
 #include "math/utility.hpp"
 #include "math/estimation/parameterestimation.hpp"
+#include "thermal/define/omega.h"
+#include "thermal/define/lthermal.h"
 
 namespace thermal {
 namespace analysis{
@@ -40,7 +40,7 @@ ThermalData::ThermalData(void)
 
 ThermalData::ThermalData( const double l_min, const double l_max,
                           const size_t lminPerDecarde,
-                          const physicalModel::layer &coating )
+                          const sensible::layer &coating )
   : lthermalLimits(l_min, l_max), measurementsPerDecade(lminPerDecarde)
 {
   thermalSetup( l_min, l_max, coating );
@@ -49,7 +49,7 @@ ThermalData::ThermalData( const double l_min, const double l_max,
 ThermalData::~ThermalData(){}
 
 size_t ThermalData::thermalSetup( const double lmin, const double lmax,
-                                  const physicalModel::layer &coating  )
+                                  const sensible::layer &coating  )
 
 {
   size_t L_end = numMeasurements( lmin, lmax );
@@ -59,9 +59,10 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
 
   std::vector<double> lthermalTEMP = math::range1og10(lmin, lmax, L_end ) ;
 
+  using thermal::define::omega;
   for (size_t i=0; i < L_end; ++i )
   {
-    omegas[i] = thermal::omega( coating.depth, lthermalTEMP[i],
+    omegas[i] = omega( coating.depth, lthermalTEMP[i],
                                 coating.kthermal.offset,
                                 coating.psithermal.offset ) ;
   }
@@ -75,7 +76,7 @@ size_t ThermalData::size(void) const
 }
 
 std::string
-ThermalData::prettyPrint( const physicalModel::layer &coating )
+ThermalData::prettyPrint( const sensible::layer &coating )
 {
   std::ostringstream output;
 
@@ -155,14 +156,15 @@ ThermalData::get_omegaLimits( void ) const
 }
 
 std::pair<double, double>
-ThermalData::get_lthermalLimits( const physicalModel::layer &coating) const
+ThermalData::get_lthermalLimits( const sensible::layer &coating) const
 {
-  const double first = thermal::lthermal( coating.depth,
+  using thermal::define::lthermal;
+  const double first = lthermal( coating.depth,
                                           coating.kthermal.offset,
                                           coating.psithermal.offset,
                                           omegas.front() ) ;
 
-  const double second = thermal::lthermal( coating.depth,
+  const double second = lthermal( coating.depth,
                                            coating.kthermal.offset,
                                            coating.psithermal.offset,
                                            omegas.back() ) ;
@@ -172,14 +174,15 @@ ThermalData::get_lthermalLimits( const physicalModel::layer &coating) const
 }
 
 std::vector<double>
-ThermalData::get_lthermalSweep( const physicalModel::layer &coating ) const
+ThermalData::get_lthermalSweep( const sensible::layer &coating ) const
 {
   const size_t LEND = omegas.size();
-
+  using thermal::define::lthermal;
+  
   std::vector<double> output(LEND);
   for (size_t i=0; i < LEND ; ++i )
   {
-    output[i] = thermal::lthermal( coating.depth, coating.kthermal.offset,
+    output[i] = lthermal( coating.depth, coating.kthermal.offset,
                                    coating.psithermal.offset, omegas[i] ) ;
   }
 
@@ -213,16 +216,16 @@ ThermalData& ThermalData::operator=( const ThermalData& that )
 
 void ThermalData::
 updatefromBestFit( std::vector< math::estimation::unknown > list,
-                   const physicalModel::layer &coating ,
+                   const sensible::layer &coating ,
                    const ThermalData fullExpData )
 {
   double xCenter = 0;
   double xRange = 0;
   for( const auto& unknown :  list )
   {
-    if( unknown.label() == physicalModel::labels::Name::thermalCenter )
+    if( unknown.label() == thermal::model::labels::Name::thermalCenter )
       { xCenter = unknown.bestfit(); }
-    else if( unknown.label() == physicalModel::labels::Name::thermalRange )
+    else if( unknown.label() == thermal::model::labels::Name::thermalRange )
       { xRange = unknown.bestfit(); }
   }
 
@@ -314,7 +317,7 @@ size_t ThermalData::numMeasurements( const double l_min, const double l_max )
 
 class ThermalData ThermalData::
         loadConfigfromXML( const boost::property_tree::ptree pt,
-                           const physicalModel::layer &coating )
+                           const sensible::layer &coating )
 {
   using boost::property_tree::ptree;
 
@@ -323,7 +326,7 @@ class ThermalData ThermalData::
   const double end    = pt.get<double>( "thermal_penetration.end" );
   const size_t minperDecade = pt.get<size_t> ("minperDecade");
 
-  class ThermalData thermalData( start, end, minperDecade, coating );
+  ThermalData thermalData( start, end, minperDecade, coating );
 
   return thermalData;
 }

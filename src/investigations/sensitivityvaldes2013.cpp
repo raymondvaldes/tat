@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  	        	|
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -34,6 +34,7 @@ License
 #include "math/statistical_tools.hpp"
 #include "tools/interface/exportfile.hpp"
 #include "tools/interface/xml.h"
+#include "thermal/analysis/poptea_initialize.h"
 
 namespace investigations
 {
@@ -45,7 +46,6 @@ using namespace thermal::analysis;
 void run( const filesystem::directory &dir )
 {
   using std::string;
-  using namespace physicalModel;
   /// setup output directory
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
 
@@ -131,34 +131,11 @@ void run( const filesystem::directory &dir )
   return;
 }
 
-thermal::analysis::Poptea
-initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir )
-{
-  ///Initialize kernals
-  const Kernal popteaCore = loadWorkingDirectoryKernal( dir ) ;
-  Poptea poptea = loadWorkingDirectoryPoptea ( dir, popteaCore);
 
-  //Noise in Simulated Emission
-  using thermal::emission::ExpNoiseSetting;
-  const ExpNoiseSetting myEmissionNoise =ExpNoiseSetting::loadExpNoiseFile(dir);
-
-  ///Output noise to test
-  using thermal::emission::phase99;
-  const std::vector<double> emissionNominal =
-      phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
-
-  using thermal::emission::addNoise;
-  const std::vector<double> emissionExperimental =
-      addNoise( emissionNominal, poptea.thermalSweep(), myEmissionNoise ) ;
-
-  poptea.updateExperimentalData( poptea.thermalData->omegas ,
-                                 emissionExperimental ) ;
-
-  return poptea;
-}
 
 void demo( const filesystem::directory &dir )
 {
+  using thermal::analysis::initializePopTeaAndLoadSimuEmission;
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 
   for(size_t i =0 ; i < 100; i++)

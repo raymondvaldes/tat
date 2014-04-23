@@ -23,21 +23,14 @@ License
 
 \*----------------------------------------------------------------------------*/
 
-#include <boost/foreach.hpp>
 #include "thermal/analysis/lmdiff_poptea_help.hpp"
-#include "thermal/analysis/kernal.hpp"
-#include "thermal/emission/phase99.hpp"
-#include "math/estimation/lmdiff.hpp"
-#include "math/estimation/lmdiff_helper.hpp"
-#include "math/estimation/constrained.hpp"
-#include "math/statistical_tools.hpp"
 
 
 namespace thermal {
 namespace analysis{
 
-void scaleDiag( double *diag, class math::estimation::unknownList List,
-                const physicalModel::TBCsystem TBCsystem, const int mode )
+void scaleDiag( double *diag, math::estimation::unknownList List,
+                const sensible::TBCsystem TBCsystem, const int mode )
 {
   if( mode == 2 )
   {
