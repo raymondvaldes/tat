@@ -28,32 +28,24 @@
 
 namespace thermal{ namespace model {namespace one_dim{
   
-
-analytical_2005::analytical_2005( const double k_coat_in,
-                                  const double psi_c_in,
-                                  const double L_coat_in,
-                                  const double I_intensity_ss_in,
-                                  const double I_intensity_tt_in,
-                                  const double Lambda_in,
-                                  const double Temperature_interface_in,
-                                  const double gamma_in ,
-                                  const double R1_in ,
-                                  const double Emit1_in,
-                                  const double effusivity_sub_in )
-:k_coat( k_coat_in ),
- psi_c( psi_c_in),
- L_coat( L_coat_in ),
- I_intensity_ss( I_intensity_ss_in ),
- I_intensity_tt( I_intensity_tt_in ),
- Lambda( Lambda_in ),
- Temperature_interface( Temperature_interface_in ),
- gamma( gamma_in ),
- R1( R1_in ),
- Emit1( Emit1_in ),
- eye( 0.0,1.0 ),
- effusivity_sub( effusivity_sub_in )
+analytical_2005::analytical_2005(
+  const sensible::layer &coating_in,
+  const sensible::radiativeSysProp &radiative_prop_in,
+  const thermal::equipment::Laser &laser_in,
+  const double temp_in,
+  const double gamma_in )
+  :
+  coat( coating_in.kthermal.offset, coating_in.psithermal.offset,
+        coating_in.depth, coating_in.opticalPenetration() ),
+  I_intensity_ss(             laser_in.Is ),
+  I_intensity_tt(             laser_in.It ),
+  Temperature_interface(      temp_in ),
+  gamma(                      gamma_in ),
+  R1(                         radiative_prop_in.R1 ),
+  Emit1(                      radiative_prop_in.Emit1 ),
+  eye( 0.0,1.0 )
 {}
-
+  
 analytical_2005::~analytical_2005( void ) {}
 
 
@@ -72,7 +64,7 @@ complex<double> analytical_2005::F_tilde( const double lthermal ) const
 
 double analytical_2005::Lambda_hat ( const double lthermal ) const
 {
-  return Lambda / lthermal ;
+  return coat.Lambda / lthermal ;
 }
 
 complex<double> analytical_2005::eta ( const double Lambda_hat ) const
@@ -102,15 +94,15 @@ double analytical_2005::T_ss_R1eq1_eval( const double omega,
   using std::sinh;
   using std::cosh;
   
-  const double coeff = 2 * L_coat * I_intensity_ss / k_coat ;
+  const double coeff = 2 * coat.L * I_intensity_ss / coat.k ;
   
   double
-  bracket = 1 - cosh( ( 1 - z ) / Lambda ) ;
-  bracket *= Lambda;
-  bracket += ( 1 - z ) * sinh( 1 / Lambda ) ;
+  bracket = 1 - cosh( ( 1 - z ) / coat.Lambda ) ;
+  bracket *= coat.Lambda;
+  bracket += ( 1 - z ) * sinh( 1 / coat.Lambda ) ;
   
   const double
-  output = coeff * exp( 1 / Lambda ) * bracket + Temperature_interface;
+  output = coeff * exp( 1 / coat.Lambda ) * bracket + Temperature_interface;
   
   return output;
 }
@@ -119,7 +111,7 @@ complex<double> analytical_2005::
   T_ts_R1eq1_eval( const double omega, const double z ) const
 {
   using thermal::define::lthermal;
-  const double lthermal_val = lthermal( L_coat, k_coat, psi_c, omega ) ;
+  const double lthermal_val = lthermal( coat.L, coat.k, coat.psi, omega ) ;
   const double Lambdahat_val = Lambda_hat ( lthermal_val ) ;
  
   const complex<double> F_til = F_tilde( lthermal_val ) ;
@@ -130,12 +122,12 @@ complex<double> analytical_2005::
   
   
   complex<double> 
-  coeff = L_coat * I_intensity_tt * lthermal_val ;
-  coeff /= k_coat * eta_val ;
+  coeff = coat.L * I_intensity_tt * lthermal_val ;
+  coeff /= coat.k * eta_val ;
   
   using std::exp;
   const complex<double>
-    coeff1 = ( 1 - exp( -2 / Lambda ) ) / sqrt( eye ) ;
+    coeff1 = ( 1 - exp( -2 / coat.Lambda ) ) / sqrt( eye ) ;
   
   const complex<double>
     coeff2 = F_til * cosh( sqrtEyedivL * z ) - sinh( sqrtEyedivL * z );
@@ -146,7 +138,7 @@ complex<double> analytical_2005::
   complex<double>
   coeff4 =  gamma * cosh( sqrtEyedivL * z ) ;
   coeff4 /= gamma * cosh( sqrtEyedivL ) + sinh( sqrtEyedivL ) ;
-  coeff4 -= cosh( ( 1 - z )  / Lambda ) ;
+  coeff4 -= cosh( ( 1 - z )  / coat.Lambda ) ;
   
   
   const complex<double> bracket = coeff1 * coeff2 - coeff3 * coeff4;
@@ -164,20 +156,21 @@ complex<double> analytical_2005::
   using std::sinh;
   using thermal::define::lthermal;
   
-  const double ltherm = lthermal(L_coat, k_coat, psi_c, omega ) ;
+  const double ltherm = lthermal( coat.L, coat.k, coat.psi, omega ) ;
   const double Lambda_hat_val = Lambda_hat( ltherm ) ;
   const complex<double> eta_val = eta( Lambda_hat_val ) ;
   
   complex<double>
-  coeff = ( 1 - R1 ) * exp( -1 / Lambda ) * ( L_coat * I_intensity_tt * ltherm);
-  coeff/= k_coat * eta_val ;
+  coeff = ( 1 - R1 ) * exp( -1 / coat.Lambda ) ;
+  coeff*= ( coat.L * I_intensity_tt * ltherm);
+  coeff/= coat.k * eta_val ;
   
 
   const complex<double> sqrtIdivL = sqrt( eye ) / ltherm ;
-  const complex<double> coeff1 = exp( -1 / Lambda )  / sqrt( eye ) ;
+  const complex<double> coeff1 = exp( -1 / coat.Lambda )  / sqrt( eye ) ;
   const complex<double> coeff2 = F_tilde( ltherm ) * cosh( sqrtIdivL * z )
                                                    - sinh( sqrtIdivL * z ) ;
-  const complex<double> coeff3 = exp( ( z - 1 ) / Lambda ) ;
+  const complex<double> coeff3 = exp( ( z - 1 ) / coat.Lambda ) ;
   
   complex<double>
     coeff4  = ( gamma + sqrt( eye ) * Lambda_hat_val ) * cosh( sqrtIdivL * z ) ;
@@ -193,11 +186,11 @@ complex<double> analytical_2005::
   return output;
 }
   
-double analytical_2005::phase_linear( const double omega1 )
+double analytical_2005::phase_linear( const double omega )
 {
   using thermal::define::lthermal;
-  const double l = lthermal( L_coat , k_coat , psi_c , omega1 ) ;
-  
+  const double l = lthermal( coat.L, coat.k, coat.psi, omega ) ;
+  const double Lambda = coat.Lambda;
   /*See 2004 emission paper equation 19*/
 
   constexpr complex<double> _i_ ( 0.0 , 1.0 ) ;

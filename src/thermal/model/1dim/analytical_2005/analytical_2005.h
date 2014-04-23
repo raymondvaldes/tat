@@ -28,6 +28,8 @@
 
 #include <iostream>
 #include <complex>
+#include "sensible/TBCsystem.h"
+#include "thermal/equipment/laser.h"
 
 namespace thermal{ namespace model { namespace one_dim{
   
@@ -36,18 +38,27 @@ namespace thermal{ namespace model { namespace one_dim{
 class analytical_2005
 {
 private:
-  const double k_coat;
-  const double psi_c;
-  const double L_coat;
+  struct layer
+  {
+    const double k;
+    const double psi;
+    const double L;
+    const double Lambda;
+    
+    layer( const double k_in, const double psi_in, const double L_in,
+            const double Lambda_in)
+    : k( k_in ), psi( psi_in ), L( L_in ), Lambda( Lambda_in )
+    {}
+  };
+  
+  const layer coat;
   const double I_intensity_ss;
   const double I_intensity_tt;
 
-  const double Lambda;
   const double Temperature_interface;
   const double gamma;
   const double R1;
   const double Emit1;
-  const double effusivity_sub;
   const std::complex<double> eye;
 
 
@@ -61,17 +72,11 @@ private:
   complex<double> T_ts_R1eq1_eval( const double omega, const double z ) const ;
 
 public:
-  explicit analytical_2005( const double k_coat_in,
-                            const double psi_c_in,
-                            const double L_coat_in,
-                            const double I_intensity_ss_in,
-                            const double I_intensity_tt_in,
-                            const double Lambda_in,
-                            const double Temperature_interface_in,
-                            const double gamma_in ,
-                            const double R1_in ,
-                            const double Emit1_in,
-                            const double effusivity_sub_in ) ;
+  explicit analytical_2005( const sensible::layer &coating_in,
+                            const sensible::radiativeSysProp &radiative_prop_in,
+                            const thermal::equipment::Laser &laser_in,
+                            const double temp_in,
+                            const double gamma_in ) ;
   ~analytical_2005( void ) ;
   
   complex<double> T_tt_eval_cplx( const double omega, const double z ) const;
