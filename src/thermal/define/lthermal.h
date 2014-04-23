@@ -23,9 +23,17 @@
  
 \*----------------------------------------------------------------------------*/
 
-#ifndef __tat__omega__
-#define __tat__omega__
+#ifndef __tat__thermalpenetration__
+#define __tat__thermalpenetration__
 
 #include <iostream>
 
-#endif /* defined(__tat__omega__) */
+namespace thermal{
+  namespace define{
+
+double lthermal( const double L_coat, const double k_c, const double psi_c,
+                const double omega ) ;
+
+    
+  }}
+#endif /* defined(__tat__thermalpenetration__) */

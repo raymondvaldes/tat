@@ -3,7 +3,7 @@
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||                         |
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -22,18 +22,30 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "thermal/construct.hpp"
-#include "thermal/model.hpp"
 
-namespace thermal
+#ifndef __TAT__CONSTRUCT_HPP
+#define __TAT__CONSTRUCT_HPP
+
+#include "thermal/define/model_type.h"
+#include <boost/property_tree/ptree.hpp>
+
+namespace thermal{
+  namespace define{
+  
+class construct
 {
 
-model::model ( const construct &Construct_,
-               const numericalModel::Mesh &mesh_ )
-  : Construct(Construct_), mesh(mesh_)
-{
-}
+public:
+  const enum HeatX heat;
+  const enum EmissionX emission;
 
-model::~model(void){}
+  explicit construct( const enum HeatX myHeat,
+                      const enum EmissionX myEmission );
 
-}
+  static construct loadConfigfromXML( const boost::property_tree::ptree pt );
+  ~construct(void);
+};
+
+}}
+
+#endif // __TAT__CONSTRUCT_HPP

@@ -22,5 +22,20 @@
  Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
  
 \*----------------------------------------------------------------------------*/
+#include <boost/assert.hpp>
+#include "thermal/equipment/detector.h"
 
-#include "property.h"
+namespace thermal{
+namespace equipment{
+
+Detector::Detector(const double wavelength_, const double radius_)
+:wavelength(wavelength_), radius(radius_)
+{
+  BOOST_ASSERT_MSG( ( wavelength > 0 )     &&
+                    ( radius > 0 ),
+                   "check detector inputs\n\n" );
+}
+
+Detector::~Detector(void){}
+  
+}}

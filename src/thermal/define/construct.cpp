@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  	        	|
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -22,29 +22,31 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "thermal/thermal.hpp"
-#include "thermal/construct.hpp"
+#include <boost/bimap.hpp>
+#include <boost/assign.hpp>
+
+#include "thermal/define/construct.hpp"
 
 namespace thermal{
-
-construct::construct( const enum HeatX myHeat, const enum EmissionX myEmission)
+namespace define{
+  
+construct::construct( const enum HeatX myHeat,
+                      const enum EmissionX myEmission )
   :heat(myHeat), emission(myEmission){}
 
 construct::~construct(void){}
 
+construct construct::loadConfigfromXML( const boost::property_tree::ptree pt)
+{
+  using std::string;
 
-class construct
-    construct::loadConfigfromXML( const boost::property_tree::ptree pt)
-  {
-
-  typedef boost::bimap < enum EmissionX , std::string > emission_bimap;
+  typedef boost::bimap < enum EmissionX , string > emission_bimap;
   static const emission_bimap EmissionXMap =
       boost::assign::list_of < emission_bimap::relation >
-   ( EmissionX::OneDimNonLin , "OneDimNonLin")
-   ( EmissionX::TwoDimNonLin , "TwoDimNonLin");
+  ( EmissionX::OneDimNonLin , "OneDimNonLin")
+  ( EmissionX::TwoDimNonLin , "TwoDimNonLin");
 
-
-  typedef boost::bimap< enum HeatX , std::string > HeatXBiTYPE;
+  typedef boost::bimap< enum HeatX , string > HeatXBiTYPE;
   static const HeatXBiTYPE HeatXMap =
       boost::assign::list_of < HeatXBiTYPE::relation >
    ( HeatX::OneDimAnalytical , "OneDimAnalytical")
@@ -54,19 +56,14 @@ class construct
    ( HeatX::TwoDimNumLin     , "TwoDimNumLin")
    ( HeatX::TwoDimNumNonLin  , "TwoDimNumNonLin") ;
 
-
-
-
   // retrieve string and map it to enum
-    const std::string heatLabel = pt.get<std::string>( "heatModel" );
-    const enum HeatX heatModel = HeatXMap.right.at(heatLabel);
+  const string heatLabel = pt.get<string>( "heatModel" );
+  const enum HeatX heatModel = HeatXMap.right.at(heatLabel);
 
-    const std::string emissionLabel = pt.get<std::string>( "emissionModel" );
-    const enum EmissionX emissionModel = EmissionXMap.right.at(emissionLabel);
+  const string emissionLabel = pt.get<string>( "emissionModel" );
+  const enum EmissionX emissionModel = EmissionXMap.right.at(emissionLabel);
+  const construct thermalModel( heatModel, emissionModel);
 
-    const class construct thermalModel( heatModel, emissionModel);
-
-    return thermalModel;
-  }
-
+  return thermalModel;
 }
+}}

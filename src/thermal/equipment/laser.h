@@ -23,9 +23,40 @@
  
 \*----------------------------------------------------------------------------*/
 
-#ifndef __tat__thermalpenetration__
-#define __tat__thermalpenetration__
+#ifndef __tat__laser__
+#define __tat__laser__
 
 #include <iostream>
 
-#endif /* defined(__tat__thermalpenetration__) */
+namespace thermal{
+namespace equipment{
+
+    
+class Laser
+{
+private:
+  double area(void) const;
+  double IntensityTotal(void) const;
+  double IntensitySteady(void) const;
+  double IntensityTransient(void) const;
+  double offset, amplitude;
+  void update(void);
+  
+public:
+  double Qlaser;
+  double radius;
+  double Is;
+  double It;
+  
+  explicit Laser(const double a, const double b, const double c,
+                 const double d);
+  ~Laser();
+  
+  void updateRadius(const double r);
+  void updatePower(const double Qpower);
+};
+  
+  
+}}
+
+#endif /* defined(__tat__laser__) */

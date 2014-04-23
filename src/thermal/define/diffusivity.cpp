@@ -23,4 +23,15 @@
  
 \*----------------------------------------------------------------------------*/
 
-#include "labels.h"
+#include "thermal/define/diffusivity.h"
+
+namespace thermal{
+  namespace define{
+
+double diffusivity( const double k, const double rhoCp )
+{
+  return k / rhoCp ;
+}
+
+    
+}}

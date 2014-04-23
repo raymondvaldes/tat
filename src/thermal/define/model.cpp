@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*\
-  ========                      |
+  ========                |
      || 	 T Thermal      | TAT: Thermal Analysis Toolbox
      ||  	 A Analysis     |
      || 	 T Toolbox    	| Copyright (C) 2013 Raymond Valdes
-     ||   	  		|
+     ||   	  	        	|
 -------------------------------------------------------------------------------
 License
     This file is part of Thermal Analysis Toolbox.
@@ -22,26 +22,16 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef MODEL_HPP
-#define MODEL_HPP
+#include "thermal/define/model.hpp"
 
-#include "thermal/construct.hpp"
-#include "thermal/simulations/numericalmodel.hpp"
+namespace thermal{
+namespace define{
 
-namespace thermal
-{
+model::model ( const construct &Construct_,
+               const numericalModel::Mesh &mesh_ )
+  : Construct(Construct_), mesh(mesh_)
+{}
 
-class model
-{
-public:
-  class construct Construct;
-  class numericalModel::Mesh mesh;
+model::~model(void){}
 
-  explicit model ( const class construct &Construct_,
-                   const class numericalModel::Mesh &mesh_);
-  ~model(void);
-};
-
-}
-
-#endif // MODEL_HPP
+}}

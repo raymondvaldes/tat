@@ -23,4 +23,15 @@
  
 \*----------------------------------------------------------------------------*/
 
-#include "effusivity.h"
+#ifndef __tat__effusivity__
+#define __tat__effusivity__
+
+#include <iostream>
+
+namespace thermal{
+  namespace define{
+
+double effusivity( const double k, const double rhoCp ) ;
+
+  }}
+#endif /* defined(__tat__effusivity__) */

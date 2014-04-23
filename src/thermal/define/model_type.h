@@ -23,9 +23,35 @@
  
 \*----------------------------------------------------------------------------*/
 
-#ifndef __tat__effusivity__
-#define __tat__effusivity__
+#ifndef __tat__model__
+#define __tat__model__
 
 #include <iostream>
 
-#endif /* defined(__tat__effusivity__) */
+namespace thermal{
+  namespace define{
+    
+  
+enum class HeatX: uint8_t
+{
+  OneDimAnalytical,
+  OneDimNumLin,
+  OneDimNumNonLin,
+  TwoDimAnalytical,
+  TwoDimNumLin,
+  TwoDimNumNonLin
+} ;
+
+
+enum class EmissionX: uint8_t
+{
+  OneDimNonLin,
+  TwoDimNonLin
+} ;
+    
+    
+  }
+}
+
+
+#endif /* defined(__tat__model__) */

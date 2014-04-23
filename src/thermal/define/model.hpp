@@ -22,42 +22,26 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#ifndef THERMAL_HPP
-#define THERMAL_HPP
+#ifndef __TAT__MODEL_HPP
+#define __TAT__MODEL_HPP
 
-#include <boost/bimap.hpp>
-#include <boost/assign.hpp>
-#include <boost/property_tree/ptree.hpp>
+#include "thermal/define/construct.hpp"
+#include "thermal/simulations/numericalmodel.hpp"
 
 namespace thermal{
+namespace define{
 
-double effusivity( const double k, const double rhoCp ) ;
-double diffusivity( const double k, const double rhoCp ) ;
-double omega( const double L_coat, const double l_thermal, const double k_c,
-              const double psi_c ) ;
-
-double lthermal( const double L_coat, const double k_c, const double psi_c,
-                 const double omega ) ;
-
-enum class HeatX: uint8_t
+class model
 {
-  OneDimAnalytical,
-  OneDimNumLin,
-  OneDimNumNonLin,
-  TwoDimAnalytical,
-  TwoDimNumLin,
-  TwoDimNumNonLin
+public:
+  construct Construct;
+  numericalModel::Mesh mesh;
+
+  explicit model ( const construct &Construct_,
+                   const numericalModel::Mesh &mesh_);
+  ~model(void);
 };
 
+}}
 
-
-
-enum class EmissionX: uint8_t
-{
-  OneDimNonLin,
-  TwoDimNonLin
-};
-
-
-}
-#endif // THERMAL_HPP
+#endif // __TAT__MODEL_HPP
