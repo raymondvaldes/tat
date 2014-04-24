@@ -31,27 +31,43 @@ namespace thermal{
 namespace analysis{
 
 Poptea
-initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir )
+initializePopTeawithNominalEmission( const filesystem::directory &dir )
 {
   ///Initialize kernals
   const Kernal popteaCore = loadWorkingDirectoryKernal( dir ) ;
   Poptea poptea = loadWorkingDirectoryPoptea ( dir, popteaCore);
-  
-  //Noise in Simulated Emission
-  using thermal::emission::ExpNoiseSetting;
-  const ExpNoiseSetting myEmissionNoise =ExpNoiseSetting::loadExpNoiseFile(dir);
   
   ///Output noise to test
   using thermal::emission::phase99;
   const std::vector<double> emissionNominal =
   phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
   
+  poptea.updateExperimentalData( poptea.thermalData->omegas , emissionNominal );
+  
+  return poptea;
+}
+ 
+  
+Poptea
+initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir )
+{
+  using std::vector;
+  
+  // Retrieve nominal emission from the poptea initial
+  Poptea poptea = initializePopTeawithNominalEmission( dir );
+  const vector<double>
+  emissionNominal = poptea.thermalData->experimentalEmission;
+  
+  //Noise in Simulated Emission
+  using thermal::emission::ExpNoiseSetting;
+  const ExpNoiseSetting myEmissionNoise =ExpNoiseSetting::loadExpNoiseFile(dir);
+  
   using thermal::emission::addNoise;
-  const std::vector<double> emissionExperimental =
+  const vector<double> emissionExperimental =
   addNoise( emissionNominal, poptea.thermalSweep(), myEmissionNoise ) ;
   
   poptea.updateExperimentalData( poptea.thermalData->omegas ,
-                                emissionExperimental ) ;
+                                 emissionExperimental ) ;
   
   return poptea;
 }

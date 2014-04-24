@@ -33,6 +33,7 @@
 namespace thermal{
 namespace analysis{
 
+Poptea initializePopTeawithNominalEmission( const filesystem::directory &dir ) ;
 Poptea initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir ) ;
   
   
