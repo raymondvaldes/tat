@@ -100,20 +100,22 @@ double Emission::Ib_plank(const double Temperature) const
 
 double Emission::emissionAxial(std::vector<double> &Temperature) const
 {
-    /*
-    Calculates the volumetric emission flux with respect to the axial
-    direction. The Temperature variable is a pointer to the axial
-    temperature.
-    */
-    for(size_t j = 0 ; j <= mesh.M1 ; ++j)
-    {
-        Ib[j] = Ib_plank( Temperature[j] );
-    }
+  /*
+  Calculates the volumetric emission flux with respect to the axial
+  direction. The Temperature variable is a pointer to the axial
+  temperature.
+  */
+  using math::numIntegration::simpson_3_8;
+  
+  for(size_t j = 0 ; j <= mesh.M1 ; ++j)
+  {
+      Ib[j] = Ib_plank( Temperature[j] );
+  }
 
-    constexpr   size_t z0 = 0;
-    const       size_t z1 = mesh.M1;
+  constexpr   size_t z0 = 0;
+  const       size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
+  return E_sigma * Ib[z1] + 4 * simpson_3_8( Ib, mesh.z_norm, z0, z1);
 }
 
   double Emission::emissionAxial( const define::Temperature Tprofile,
