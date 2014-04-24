@@ -41,7 +41,7 @@ unknown::unknown(enum thermal::model::labels::Name name_,
                  const double upper_,
                  const double initialGuess_)
     :name(name_), constraint(lower_, upper_), initialGuess(initialGuess_),
-      bestfitInterval(0,0), bestfitval(initialGuess_)
+    bestfitval(initialGuess_), bestfitInterval(0,0)
 {}
 
 unknown::~unknown(){}
