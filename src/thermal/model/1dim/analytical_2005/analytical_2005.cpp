@@ -36,7 +36,7 @@ analytical_2005::analytical_2005(
   const double gamma_in )
   :
   coat( coating_in.kthermal.offset, coating_in.psithermal.offset,
-        coating_in.depth, coating_in.opticalPenetration() ),
+        coating_in.depth, coating_in.lambda ),
   I_intensity_ss(             laser_in.Is ),
   I_intensity_tt(             laser_in.It ),
   Temperature_interface(      temp_in ),
