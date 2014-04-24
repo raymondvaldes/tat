@@ -151,7 +151,8 @@ double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
     const size_t z0 = 0;
     const size_t z1 = mesh.M1;
 
-    return E_sigma * Ib[z1] + 4 * math::numIntegration::simpson_3_8(Ib, mesh.z_norm, z0, z1);
+    using math::numIntegration::simpson_3_8;
+    return E_sigma * Ib[z1] + 4 * simpson_3_8( Ib, mesh.z_norm, z0, z1 );
 }
 
 
@@ -207,7 +208,7 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
     return OAPemission[2];
 }
 
-  double Emission::phase1D(const define::Temperature Tprofile) const
+  double Emission::phase1D( const define::Temperature Tprofile ) const
 {
     /*
     The volumetric emission is determined for one unique period of heating
@@ -215,14 +216,14 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
     */
     for (size_t n = 0 ; n < mesh.Nend ; ++n )
     {
-        EmissionTime[n] = emissionAxial(Tprofile, n);
+        EmissionTime[n] = emissionAxial( Tprofile, n ) ;
     }
 
     const double
     offsetInitial = math::average( math::arrayMax(EmissionTime, mesh.Nend),
                                    math::arrayMin(EmissionTime, mesh.Nend));
     const double
-    amplitudeInitial = (math::arrayMax(EmissionTime, mesh.Nend)
+    amplitudeInitial = ( math::arrayMax(EmissionTime, mesh.Nend)
                         -math::arrayMin(EmissionTime, mesh.Nend)) / 2;
 
     constexpr double

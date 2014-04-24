@@ -44,7 +44,6 @@ double PhaseOfEmission1DNum( const double omega,
                         popteaCore.thermalsys.mesh.M2);
 
   //// Acquire Numerical Temperature
-//  const double omega = omegas[flag];
   temperature_1D( popteaCore.TBCsystem,
                   popteaCore.thermalsys,
                   popteaCore.expSetup, omega, Tprofile);
@@ -54,7 +53,7 @@ double PhaseOfEmission1DNum( const double omega,
   const class thermal::Emission emission( popteaCore.expSetup.detector.wavelength,
                                           popteaCore.TBCsystem.Temp.base,
                                           popteaCore.thermalsys.mesh,
-                                          popteaCore.bEval() *Lcoat,
+                                          popteaCore.bEval() * Lcoat,
                                           popteaCore.TBCsystem.optical.Emit1 );
 
   const double phase2 = emission.phase1D( Tprofile );

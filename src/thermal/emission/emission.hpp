@@ -37,7 +37,7 @@ class Emission
 public:
   explicit Emission( const double detector_lam_, const double T_ref_,
                      const numericalModel::Mesh mesh, const double beamR_,
-                     const double E_sigma_);
+                     const double E_sigma_ );
   ~Emission();
   double phase2D( std::vector< std::vector< std::vector< double > > >
                          &Temperature) const;

@@ -43,8 +43,6 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
                      const double omega1,
                      thermal::define::Temperature Tprofile)
 {
-
-  
   const double lambda     = TBCsystem.coating.lambda;
   const double R1         = TBCsystem.optical.R1;
   const double epsilon    = TBCsystem.gammaEval();
@@ -66,7 +64,7 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
   const property *psi1_thermal    = &TBCsystem.coating.psithermal;
   const property *psi2_thermal    = &TBCsystem.substrate.psithermal;
 
-  class matrixArrays *MatrixArrays = NULL;
+  matrixArrays *MatrixArrays = NULL;
   MatrixArrays = new class matrixArrays( mesh.M2 );
 
   std::vector< std::vector<double> >
@@ -649,8 +647,9 @@ double Tss1D_ana( const double z, const double R1, const double lambda,
     /* This is the steady state 1d analytical solution to volumetric heat
     absorption in a two-layer system.  The front surface is maintained with
     an adiabatic boundary and the rear surface is held at a constant reference
-    temperature of zero.*/
+    temperature of zero. */
     double Tss = 0;
+    using std::exp;
 
     const double
     C0 = Is * L  / ( lambda * k_c ) ;
