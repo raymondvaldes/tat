@@ -26,6 +26,7 @@ License
 #define STATISTICAL_TOOLS_HPP_INCLUDED
 
 #include <vector>
+#include <cstddef>
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
                    const size_t x, const size_t y, const size_t z);
