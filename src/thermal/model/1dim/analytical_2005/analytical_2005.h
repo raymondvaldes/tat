@@ -45,10 +45,9 @@ private:
     const double L;
     const double Lambda;
     
-    layer( const double k_in, const double psi_in, const double L_in,
-            const double Lambda_in)
-    : k( k_in ), psi( psi_in ), L( L_in ), Lambda( Lambda_in )
-    {}
+    explicit layer( const double k_in, const double psi_in, const double L_in,
+                    const double Lambda_in)
+    : k( k_in ), psi( psi_in ), L( L_in ), Lambda( Lambda_in ) {}
   };
   
   const layer coat;
@@ -65,11 +64,11 @@ private:
   double Lambda_hat ( const double lthermal ) const;
   complex<double> F_tilde( const double lthermal ) const;
   complex<double> eta ( const double Lambda_hat ) const;
-  complex<double> M_tilde( const complex<double> x_in ) const;
-  complex<double> N_tilde( const complex<double> x_in ) const;
+  complex<double> M_tilde( const complex<double> x_in, const double l ) const;
+  complex<double> N_tilde( const complex<double> x_in, const double l ) const;
   
           double  T_ss_R1eq1_eval( const double omega, const double z ) const ;
-  complex<double> T_ts_R1eq1_eval( const double omega, const double z ) const ;
+  complex<double> T_tt_R1eq1_eval( const double omega, const double z ) const ;
 
 public:
   explicit analytical_2005( const sensible::layer &coating_in,
@@ -81,9 +80,8 @@ public:
   
   complex<double> T_tt_eval_cplx( const double omega, const double z ) const;
   
-  double phase_linear( const double omega1 ) ;
-  double phase_nonlinear( const double omega ) ;
-
+  double phase_linear( const double omega ) const ;
+  double phase_nonlinear( const double omega ) const;
 };
   
 }}}

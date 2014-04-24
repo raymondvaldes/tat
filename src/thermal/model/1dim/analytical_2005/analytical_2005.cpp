@@ -25,6 +25,7 @@
 #include <cmath>
 #include "analytical_2005.h"
 #include "thermal/define/lthermal.h"
+#include "math/utility.hpp"
 
 namespace thermal{ namespace model {namespace one_dim{
   
@@ -51,13 +52,14 @@ analytical_2005::~analytical_2005( void ) {}
 
 complex<double> analytical_2005::F_tilde( const double lthermal ) const
 {
-  const complex<double> rootIdivLthermal = std::sqrt( eye ) / lthermal;
+  using std::sqrt;
+  const complex<double> sqrtIdivLthermal = sqrt( eye ) / lthermal;
 
   using std::sinh;
   using std::cosh;
   complex<double>
-  out =          cosh( rootIdivLthermal ) + gamma * sinh( rootIdivLthermal);
-  out /= gamma * cosh( rootIdivLthermal ) +         sinh( rootIdivLthermal);
+  out =          cosh( sqrtIdivLthermal ) + gamma * sinh( sqrtIdivLthermal);
+  out /= gamma * cosh( sqrtIdivLthermal ) +         sinh( sqrtIdivLthermal);
 
   return out;
 }
@@ -69,22 +71,54 @@ double analytical_2005::Lambda_hat ( const double lthermal ) const
 
 complex<double> analytical_2005::eta ( const double Lambda_hat ) const
 {
-  const complex<double> eta_out = 1. - std::pow( Lambda_hat, 2 ) * eye ;
+  using std::pow;
+  
+  const complex<double> eta_out = 1. - pow( Lambda_hat, 2 ) * eye ;
   return eta_out;
 }
 
 complex<double>
-analytical_2005::M_tilde( const std::complex<double> x_in ) const
+analytical_2005::M_tilde( const complex<double> x_in, const double l ) const
 {
-  complex<double> output;
-  return output;
+  using std::sinh;
+  using std::cosh;
+  
+  constexpr complex<double> _i_ ( 0.0 , 1.0 ) ;
+  const complex<double> SQRTi = std::sqrt(_i_);
+  
+  
+  const complex<double> sinhSQRTi = sinh( SQRTi / l ) ;
+  const complex<double> coshSQRTi = cosh( SQRTi / l ) ;
+  const complex<double>
+  gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+
+  complex<double>
+  M_x = 1;
+  M_x -= x_in * sinhSQRTi / sinh( 1 / coat.Lambda ) ;
+  M_x /= gammaXcoshSQRTplusSinhSQRT ;
+
+  return M_x;
 }
 
 complex<double>
-analytical_2005::N_tilde( const std::complex<double> x_in ) const
+analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
 {
-  complex<double> output;
-  return output;
+  using std::sinh;
+  using std::cosh;
+  
+  constexpr complex<double> _i_ ( 0.0 , 1.0 ) ;
+  const complex<double> SQRTi = std::sqrt(_i_);
+  
+  const complex<double> sinhSQRTi = sinh( SQRTi / l ) ;
+  const complex<double> coshSQRTi = cosh( SQRTi / l ) ;
+  const complex<double>
+  gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+  
+  complex<double> N_x = 1;
+  N_x -= x_in * coshSQRTi / cosh( 1 / coat.Lambda ) ;
+  N_x /= gammaXcoshSQRTplusSinhSQRT ;
+  
+  return N_x;
 }
   
 double analytical_2005::T_ss_R1eq1_eval( const double omega,
@@ -97,27 +131,30 @@ double analytical_2005::T_ss_R1eq1_eval( const double omega,
   const double coeff = 2 * coat.L * I_intensity_ss / coat.k ;
   
   double
-  bracket = 1 - cosh( ( 1 - z ) / coat.Lambda ) ;
-  bracket *= coat.Lambda;
+  bracket = coat.Lambda ;
+  bracket *= 1 - cosh( ( 1 - z ) / coat.Lambda ) ;
   bracket += ( 1 - z ) * sinh( 1 / coat.Lambda ) ;
   
   const double
-  output = coeff * exp( 1 / coat.Lambda ) * bracket + Temperature_interface;
+  output = coeff * exp( -1 / coat.Lambda ) * bracket + Temperature_interface;
   
   return output;
 }
 
 complex<double> analytical_2005::
-  T_ts_R1eq1_eval( const double omega, const double z ) const
+  T_tt_R1eq1_eval( const double omega, const double z ) const
 {
+  using std::sqrt;
+  using std::exp;
+  using std::sinh;
+  using std::cosh;
+  
   using thermal::define::lthermal;
   const double lthermal_val = lthermal( coat.L, coat.k, coat.psi, omega ) ;
   const double Lambdahat_val = Lambda_hat ( lthermal_val ) ;
  
   const complex<double> F_til = F_tilde( lthermal_val ) ;
   const complex<double> eta_val = eta( Lambdahat_val ) ;
-  
-  using std::sqrt;
   const complex<double> sqrtEyedivL = sqrt( eye ) / lthermal_val;
   
   
@@ -125,7 +162,6 @@ complex<double> analytical_2005::
   coeff = coat.L * I_intensity_tt * lthermal_val ;
   coeff /= coat.k * eta_val ;
   
-  using std::exp;
   const complex<double>
     coeff1 = ( 1 - exp( -2 / coat.Lambda ) ) / sqrt( eye ) ;
   
@@ -138,10 +174,10 @@ complex<double> analytical_2005::
   complex<double>
   coeff4 =  gamma * cosh( sqrtEyedivL * z ) ;
   coeff4 /= gamma * cosh( sqrtEyedivL ) + sinh( sqrtEyedivL ) ;
-  coeff4 -= cosh( ( 1 - z )  / coat.Lambda ) ;
+  coeff4 -= cosh( ( 1 - z ) / coat.Lambda ) ;
   
   
-  const complex<double> bracket = coeff1 * coeff2 - coeff3 * coeff4;
+  const complex<double> bracket = coeff1 * coeff2 + coeff3 * coeff4;
   const complex<double> output = coeff * bracket;
   return output;
 }
@@ -159,14 +195,14 @@ complex<double> analytical_2005::
   const double ltherm = lthermal( coat.L, coat.k, coat.psi, omega ) ;
   const double Lambda_hat_val = Lambda_hat( ltherm ) ;
   const complex<double> eta_val = eta( Lambda_hat_val ) ;
-  
+  const complex<double> sqrtIdivL = sqrt( eye ) / ltherm ;
+
   complex<double>
   coeff = ( 1 - R1 ) * exp( -1 / coat.Lambda ) ;
-  coeff*= ( coat.L * I_intensity_tt * ltherm);
+  coeff*= coat.L * I_intensity_tt * ltherm ;
   coeff/= coat.k * eta_val ;
   
 
-  const complex<double> sqrtIdivL = sqrt( eye ) / ltherm ;
   const complex<double> coeff1 = exp( -1 / coat.Lambda )  / sqrt( eye ) ;
   const complex<double> coeff2 = F_tilde( ltherm ) * cosh( sqrtIdivL * z )
                                                    - sinh( sqrtIdivL * z ) ;
@@ -181,38 +217,24 @@ complex<double> analytical_2005::
     bracket = coeff1 * coeff2 + Lambda_hat_val * ( coeff3 - coeff4 ) ;
 
   const complex<double>
-    output = T_ts_R1eq1_eval( omega, z ) + coeff * bracket ;
+    output = T_tt_R1eq1_eval( omega, z ) + coeff * bracket ;
   
   return output;
 }
   
-double analytical_2005::phase_linear( const double omega )
+double analytical_2005::phase_linear( const double omega ) const
 {
   using thermal::define::lthermal;
   const double l = lthermal( coat.L, coat.k, coat.psi, omega ) ;
   const double Lambda = coat.Lambda;
+  
   /*See 2004 emission paper equation 19*/
 
   constexpr complex<double> _i_ ( 0.0 , 1.0 ) ;
   const complex<double> SQRTi = std::sqrt(_i_);
-  complex<double> M = 1;
-  complex<double> N = 1;
   
-  {
-    using std::sinh;
-    using std::cosh;
-    
-    const complex<double> sinhSQRTi = sinh( SQRTi / l ) ;
-    const complex<double> coshSQRTi = cosh( SQRTi / l ) ;
-    const complex<double>
-      gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
-    
-    M -= SQRTi * Lambda / l * sinhSQRTi / sinh( 1 / Lambda ) ;
-    M /= gammaXcoshSQRTplusSinhSQRT ;
-    
-    N -= _i_ * Lambda * Lambda / l / l * coshSQRTi / cosh( 1 / Lambda ) ;
-    N /= gammaXcoshSQRTplusSinhSQRT ;
-  }
+  const complex<double> M = M_tilde( SQRTi * Lambda / l , l ) ;
+  const complex<double> N = N_tilde( _i_ * Lambda * Lambda / l / l, l ) ;
   
   using std::exp;
   const double exp2lambda = exp( -2 / Lambda ) ;
@@ -231,7 +253,51 @@ double analytical_2005::phase_linear( const double omega )
   const complex<double> v = Emit1 * SQRTi / l - 4 * gamma ;
   const double R1xExp2lambdaPLUS1 = std::fma( -R1, exp2lambda, 1 );
   
-  return std::arg( v/u*t + 4 * R1xExp2lambdaPLUS1 ) - M_PI_2 ;
+  using std::arg;
+  const double phase = arg( v/u*t + 4 * R1xExp2lambdaPLUS1 ) - M_PI_2;
+  
+  return phase ;
+}
+  
+double analytical_2005::phase_nonlinear( const double omega ) const
+{
+  /*Nonlinear emission field will be calculated based on the analytical 
+   temperature field.  This should be very similar to the linear model for
+   low temperatures fluctuations. */
+  /* Step 1 create complex tempearture distribution */
+  using math::range;
+  
+  const size_t resolution = 500;
+  using std::vector;
+  using std::complex;
+  
+  vector< complex<double> > temp_cplx( resolution ) ;
+  const vector< double > z_pos = range( 0, 1, resolution ) ;
+  
+  for( size_t i = 0 ; i < resolution ; ++i )
+  {
+    temp_cplx[i] = T_tt_eval_cplx( omega, z_pos[i] ) ;
+  }
+  
+  /* Step 2 evaluate complex temperature distribution for emission */
+  
+  
+  
+  
+  
+  
+  /* Step 3 fit emission field over temperature distribution */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  double phase = 0;
+  return phase;
 }
   
   
