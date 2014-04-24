@@ -238,15 +238,8 @@ double analytical_2005::phase_linear( const double omega ) const
   
   using std::exp;
   const double exp2lambda = exp( -2 / Lambda ) ;
-  complex<double>
-  A =  1 + R1 ;
-  A *= 1 - exp2lambda;
-  A *= M;
-  
-  complex<double>
-  B =  1 - R1 ;
-  B *= 1 + exp2lambda ;
-  B *= N;
+  const complex<double> A =  ( 1 + R1 ) * ( 1 - exp2lambda ) * M ;
+  const complex<double> B =  ( 1 - R1 ) * ( 1 + exp2lambda ) * N ;
   
   const complex<double> t = A + B;
   const complex<double> u  = 2. * ( 1. - Lambda * Lambda / l / l * _i_ ) ;
