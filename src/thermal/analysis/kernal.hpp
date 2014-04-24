@@ -58,6 +58,9 @@ public:
   double bEval(void) const;
   void updatefromBestFit( std::vector< math::estimation::unknown > list );
   void updatefromInitial( std::vector< math::estimation::unknown > list );
+  
+  // reload members
+  void reloadthermalsys( const define::construct &other );
 
 };
 

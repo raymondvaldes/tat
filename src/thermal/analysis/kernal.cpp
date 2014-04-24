@@ -132,4 +132,14 @@ class Kernal
   return Kernal::loadConfig( pt , dir);
 }
 
+
+  void Kernal::reloadthermalsys( const define::construct &other )
+{
+  
+  thermalsys.reloadThermalConstruct( other );
+  
+  return;
+}
+  
+  
 }}

@@ -108,7 +108,6 @@ std::vector<double> Poptea::thermalSweep(void) const
 double Poptea::bestFit( void )
 {
   runbestfit = true;
-
   const double output = analysis.bestFit( unknownParameters, thermalData,
                                           coreSystem ) ;
   unknownParameters->prettyPrint();
@@ -156,7 +155,11 @@ void Poptea::reloadAnalysis( const methods &analysis_in )
 {
   analysis = analysis_in;
 }
-
+  
+void Poptea::reloadThermalModel( const thermal::define::construct &in_ )
+{
+  coreSystem->thermalsys.reloadThermalConstruct( in_ );
+}
 
 Poptea loadWorkingDirectoryPoptea( const class filesystem::directory &dir,
                                    const class Kernal &popteaCore )
