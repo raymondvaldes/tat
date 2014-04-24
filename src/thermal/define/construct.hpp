@@ -36,13 +36,16 @@ class construct
 {
 
 public:
-  const enum HeatX heat;
-  const enum EmissionX emission;
+  enum HeatX heat;
+  enum EmissionX emission;
 
+  construct & operator = (const construct & other);
   explicit construct( const enum HeatX myHeat,
                       const enum EmissionX myEmission );
 
+  void update( const enum HeatX heat_in, const enum EmissionX emission_in );
   static construct loadConfigfromXML( const boost::property_tree::ptree pt );
+
   ~construct(void);
 };
 

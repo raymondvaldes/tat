@@ -34,7 +34,6 @@ construct::construct( const enum HeatX myHeat,
                       const enum EmissionX myEmission )
   :heat(myHeat), emission(myEmission){}
 
-construct::~construct(void){}
 
 construct construct::loadConfigfromXML( const boost::property_tree::ptree pt)
 {
@@ -66,4 +65,28 @@ construct construct::loadConfigfromXML( const boost::property_tree::ptree pt)
 
   return thermalModel;
 }
+
+void construct::update( const enum HeatX heat_in,
+                        const enum EmissionX emission_in )
+{
+  heat = heat_in;
+  emission = emission_in;
+}
+
+construct& construct::operator = (const construct & other)
+{
+  if (this != &other) // protect against invalid self-assignment
+  {
+      // 3: assign the new memory to the object
+    emission = other.emission;
+    heat = other.heat;
+  }
+    // by convention, always return *this
+  return *this;
+}
+  
+construct::~construct(void){}
+
+  
+  
 }}
