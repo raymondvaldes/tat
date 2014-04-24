@@ -39,6 +39,10 @@ public:
 
   explicit model ( const construct &Construct_,
                    const numericalModel::Mesh &mesh_);
+  
+  //reload members
+  void reloadThermalConstruct( const construct &other_ );
+  
   ~model(void);
 };
 

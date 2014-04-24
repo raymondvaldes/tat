@@ -26,6 +26,7 @@
 #include "num_method2014.h"
 #include "thermal/analysis/poptea.hpp"
 #include "thermal/analysis/poptea_initialize.h"
+#include "thermal/emission/phase99.hpp"
 
 namespace investigations{
   namespace num_method{
@@ -35,19 +36,38 @@ using namespace thermal::analysis;
 void run( const filesystem::directory &dir )
 {
   using std::string;
-  /// setup output directory
-  Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
+  using thermal::define::construct;
+  using thermal::define::HeatX;
+  using thermal::define::EmissionX;
+  using thermal::emission::phase99;
 
+  /// setup output
+  Poptea poptea = initializePopTeawithNominalEmission( dir ) ;
+  construct theoreticalModel = poptea.coreSystem->thermalsys.Construct ;
+  
+  
+  // prepare models
+  theoreticalModel.update( HeatX::OneDimAnalytical, EmissionX::OneDimNonLin ) ;
+  poptea.reloadThermalModel( theoreticalModel) ;
+  std::vector<double> heat1 =
+  phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
+
+  
+  theoreticalModel.update( HeatX::OneDimNumLin, EmissionX::OneDimNonLin ) ;
+  poptea.reloadThermalModel( theoreticalModel) ;
+  std::vector<double> heat2 =
+  phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
+  
+  for(size_t i = 0 ; i < poptea.thermalData->size() ; ++i )
+    std::cout << heat1[i] << "\t" <<  heat2[i] << "\n";
+  
+  
   /// Part test
-  poptea.bestFit() ;
+  // poptea.bestFit() ;
   std::cout << poptea.ppUnknownParameters() ;
   
   
   return;
 }
-    
-    
-    
-  
     
 }}

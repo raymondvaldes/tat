@@ -33,12 +33,7 @@
 namespace investigations{
   namespace num_method{
     
-
-    void run(const filesystem::directory &dir ) ;
-
-    
-    
-    
+void run(const filesystem::directory &dir ) ;    
     
 }}
 
