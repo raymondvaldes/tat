@@ -116,14 +116,8 @@ QMAKE_CXXFLAGS += -flto
 SOURCES += \
     main.cpp \
     tools/timing.cpp \
-    models/expEquipment.cpp \
-    models/physicalmodel.cpp \
     math/bisection.cpp \
     investigations/sensitivityvaldes2013.cpp \
-    thermal/thermal.cpp \
-    thermal/construct.cpp \
-    thermal/emission.cpp \
-    thermal/model.cpp \
     thermal/emission/noise.cpp \
     thermal/emission/phase99.cpp \
     math/estimation/lmdiff.cpp \
@@ -139,7 +133,6 @@ SOURCES += \
     math/numIntegration/simpsons_3_8.cpp \
     math/estimation/cosfit.cpp \
     math/numIntegration/gslfunc.cpp \
-    thermal/heat/heat2DAna.cpp \
     thermal/analysis/lmdiff_poptea.cpp \
     thermal/analysis/lmdiff_poptea_help.cpp \
     thermal/analysis/thermalData.cpp \
@@ -182,14 +175,8 @@ SOURCES += \
 HEADERS += \
     tools/interface/filesystem.hpp \
     tools/timing.h \
-    models/expEquipment.hpp \
-    models/physicalmodel.hpp \
     math/bisection.hpp \
     investigations/sensitivityvaldes2013.hpp \
-    thermal/thermal.hpp \
-    thermal/construct.hpp \
-    thermal/emission.hpp \
-    thermal/model.hpp \
     thermal/emission/noise.hpp \
     thermal/emission/phase99.hpp \
     math/estimation/parameterestimation.hpp \
@@ -206,7 +193,6 @@ HEADERS += \
     math/numIntegration/simpsons_3_8.hpp \
     math/estimation/cosfit.hpp \
     math/numIntegration/gslfunc.hpp \
-    thermal/heat/heat2DAna.hpp \
     thermal/analysis/lmdiff_poptea.hpp \
     thermal/analysis/lmdiff_poptea_help.hpp \
     thermal/analysis/thermalData.hpp \
