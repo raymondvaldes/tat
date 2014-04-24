@@ -27,7 +27,7 @@ License
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
-#include "thermal/model/1dim/analytical_2005/heat1dAna.h"
+#include "thermal/model/1dim/analytical_2005/analytical_2005.h"
 
 namespace thermal{
 namespace emission{
@@ -48,19 +48,15 @@ phase99( const thermal::analysis::Kernal &popteaCore,
   {
     case define::HeatX::OneDimAnalytical:
     {
-      const double L_coat = popteaCore.TBCsystem.coating.depth ;
-      const double k_c    = popteaCore.TBCsystem.coating.kthermal.offset ;
-      const double psi_c  = popteaCore.TBCsystem.coating.psithermal.offset ;
-      const double lambda = popteaCore.TBCsystem.coating.lambda;
-      const double R1     = popteaCore.TBCsystem.optical.R1;
-      const double gamma  = popteaCore.TBCsystem.gammaEval();
-      const double Esigma = popteaCore.TBCsystem.optical.Emit1;
-
-      using thermal::heat::PhaseOfEmission1DAna;
-    
+      using thermal::model::one_dim::analytical_2005;
+      const analytical_2005 thermalEngine( popteaCore.TBCsystem.coating,
+                                           popteaCore.TBCsystem.optical,
+                                           popteaCore.expSetup.laser,
+                                           popteaCore.TBCsystem.Temp.rear,
+                                           popteaCore.TBCsystem.gammaEval());
       for( size_t n = 0 ; n < L_end ; ++n )
-        { results[ n ] = PhaseOfEmission1DAna( omegas[n] , L_coat, k_c, psi_c,
-                                               lambda, R1, gamma, Esigma ) ; }
+        { results[ n ] = thermalEngine.phase_linear( omegas[n] ) ; }
+      
       break;
     }
 
