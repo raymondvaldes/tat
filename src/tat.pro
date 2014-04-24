@@ -37,49 +37,32 @@ QMAKE_CXXFLAGS += -std=c++11
 #paths
 unix:!macx{
 
-LIBS += -L/usr/lib -lgomp
-LIBS += -L/usr/lib -lm
+  LIBS += -L/usr/lib -lgomp
+  LIBS += -L/usr/lib -lm
 
-INCLUDEPATH += /usr/include/usr/
-DEPENDPATH += /usr/include
-unix:!macx: LIBS += -L/usr/lib/ -lgsl
-unix:!macx: LIBS += -L/usr/lib/ -lgslcblas
+  INCLUDEPATH += /usr/include/usr/
+  DEPENDPATH += /usr/include
+  LIBS += -L/usr/lib/ -lgsl
+  LIBS += -L/usr/lib/ -lgslcblas
 
-
-INCLUDEPATH += /usr/lib/
-DEPENDPATH += /usr/lib/
-unix:!macx: LIBS += -L/usr/lib/ -lboost_filesystem
-unix:!macx: LIBS += -L/usr/lib/ -lboost_program_options
-unix:!macx: LIBS += -L/usr/lib/ -lboost_system
-
-
-
-
+  INCLUDEPATH += /usr/lib/
+  DEPENDPATH += /usr/lib/
+  LIBS += -L/usr/lib/ -lboost_filesystem
+  LIBS += -L/usr/lib/ -lboost_program_options
+  LIBS += -L/usr/lib/ -lboost_system
 }
 
 macx {
-#CONFIG += MAC_CONFIG
-INCLUDEPATH += /opt/local/lib
-INCLUDEPATH += /opt/local/include
+  CONFIG += MAC_CONFIG
 
-INCLUDEPATH += opt/local/include
-DEPENDPATH  += opt/local/include
+  INCLUDEPATH += /usr/include/
+  DEPENDPATH  += /usr/include/
 
-unix: LIBS += -L$$PWD/../../../../../opt/local/lib/gcc48/ -lgomp
-unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/gcc48/libgomp.a
-
-unix: LIBS += -L$$PWD/../../../../../opt/local/lib/ -lgsl
-unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/libgsl.a
-
-unix: LIBS += -L$$PWD/../../../../../opt/local/lib/ -lgslcblas
-unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/libgslcblas.a
-
-unix: LIBS += -L$$PWD/../../../../../opt/local/lib/ -lboost_filesystem-mt
-unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/libboost_filesystem-mt.a
-
-unix: LIBS += -L$$PWD/../../../../../opt/local/lib/ -lboost_system-mt
-unix: PRE_TARGETDEPS += $$PWD/../../../../../opt/local/lib/libboost_system-mt.a
-
+  LIBS += -L/usr/lib/gcc/x86_64-linux-gnu/4.8/ -lgomp
+  LIBS += -L/usr/lib/ -lgsl
+  LIBS += -L/usr/lib/ -lgslcblas
+  LIBS += -L/usr/lib/x86_64-linux-gnu/ -lboost_filesystem
+  LIBS += -L/usr/lib/x86_64-linux-gnu/ -lboost_system
 }
 
 #compiler flags
@@ -89,10 +72,15 @@ QMAKE_CXXFLAGS += -O3 #(automatically applied with release)
 QMAKE_CXXFLAGS += -fopenmp
 QMAKE_CXXFLAGS += -march=native
 
+
 #linker flags
 QMAKE_LFLAGS += -fopenmp
 #QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 #QMAKE_LFLAGS += -static
+
+#header flags
+QMAKE_CXXFLAGS += -I /usr/include/
+QMAKE_LFLAGS += -I /usr/include/
 
 
 ##Optional#########################
@@ -121,7 +109,7 @@ QMAKE_CXXFLAGS += -Wstrict-aliasing
 QMAKE_CXXFLAGS += -Wformat=2
 QMAKE_CXXFLAGS += -Wuninitialized
 QMAKE_CXXFLAGS += -flto
-QMAKE_CXXFLAGS += -fwhole-program
+#QMAKE_CXXFLAGS += -fwhole-program
 ##Optional#########################
 
 #source files
@@ -167,7 +155,28 @@ SOURCES += \
     thermal/analysis/thermalsweepoptimizer.cpp \
     tools/interface/exportfile.cpp \
     tools/interface/filesystem.cpp \
-    tools/interface/xml.cpp
+    tools/interface/xml.cpp \
+    investigations/num_method2014.cpp \
+    sensible/layer.cpp \
+    sensible/property.cpp \
+    sensible/radiativeSysProp.cpp \
+    sensible/TBCsystem.cpp \
+    sensible/temperature_scale.cpp \
+    thermal/analysis/poptea_initialize.cpp \
+    thermal/define/construct.cpp \
+    thermal/define/diffusivity.cpp \
+    thermal/define/effusivity.cpp \
+    thermal/define/lthermal.cpp \
+    thermal/define/model.cpp \
+    thermal/define/omega.cpp \
+    thermal/define/temperature.cpp \
+    thermal/emission/emission.cpp \
+    thermal/equipment/detector.cpp \
+    thermal/equipment/laser.cpp \
+    thermal/equipment/setup.cpp \
+    thermal/model/1dim/analytical_2005/analytical_2005.cpp \
+    thermal/model/2dim/analytical_2009/heat2DAna.cpp \
+    thermal/model/labels.cpp
 
 #header files
 HEADERS += \
@@ -214,9 +223,26 @@ HEADERS += \
     thermal/analysis/thermalsweepoptimizer.hpp \
     tools/interface/exportfile.hpp \
     tools/interface/filesystem.hpp \
-    tools/interface/xml.h
-
-
-
-
-
+    tools/interface/xml.h \
+    investigations/num_method2014.h \
+    sensible/layer.h \
+    sensible/property.h \
+    sensible/radiativeSysProp.h \
+    sensible/TBCsystem.h \
+    sensible/temperature_scale.h \
+    thermal/analysis/poptea_initialize.h \
+    thermal/define/construct.hpp \
+    thermal/define/diffusivity.h \
+    thermal/define/effusivity.hpp \
+    thermal/define/lthermal.h \
+    thermal/define/model_type.h \
+    thermal/define/model.hpp \
+    thermal/define/omega.h \
+    thermal/define/temperature.h \
+    thermal/emission/emission.hpp \
+    thermal/equipment/detector.h \
+    thermal/equipment/laser.h \
+    thermal/equipment/setup.h \
+    thermal/model/1dim/analytical_2005/analytical_2005.h \
+    thermal/model/2dim/analytical_2009/heat2DAna.hpp \
+    thermal/model/labels.h
