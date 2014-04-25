@@ -252,17 +252,24 @@ double analytical_2005::phase_linear( const double omega ) const
   return phase ;
 }
 
-math::algorithms::spline_cplx analytical_2005::T_tt_cplx_sweep( const double omega)
+math::algorithms::spline_cplx
+analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega)
 {
   using std::vector;
   /* This methods returns a spline to the complex temperature field for the
      coating based on the laser harmonic modulation. */
   
+  constexpr size_t pts= 500;
+  constexpr double z_surf = 0;
+  constexpr double z_interface = 1;
+  const vector<double> z_values = math::range( z_surf, z_interface, pts ) ;
+  
   vector<complex<double>> temp_discrete(0);
-  vector<double> z_values(0);
+  for(size_t i = 0 ; i < pts ; ++i)
+    temp_discrete[i] = T_tt_R1eq1_eval( omega, z_values[i] ) ;
   
   using math::algorithms::spline_cplx;
-  spline_cplx temperature_field( temp_discrete, z_values.data(), 2 );
+  spline_cplx temperature_field( temp_discrete, z_values.data(), pts );
   
   return temperature_field;
 }

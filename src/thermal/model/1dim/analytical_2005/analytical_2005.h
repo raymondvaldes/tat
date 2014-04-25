@@ -85,9 +85,7 @@ public:
   double phase_nonlinear( const double omega ) const;
   
   //sweeps
-  math::algorithms::spline_cplx T_tt_cplx_sweep( const double omega ) ;
-
-  
+  math::algorithms::spline_cplx T_tt_R1eq1_cplx_sweep( const double omega ) ;
 };
   
 }}}
