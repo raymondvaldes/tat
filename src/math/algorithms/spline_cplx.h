@@ -42,7 +42,7 @@ private:
 public:
   explicit spline_cplx( const std::vector< std::complex<double> > &ind,
                         const double* dep, const size_t c ) ;
-  ~spline_cplx( void ) ;
+ // ~spline_cplx( void ) ;
   std::complex<double> eval( const double xpos ) const;
 };
 

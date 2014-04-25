@@ -46,6 +46,8 @@ void run( const filesystem::directory &dir )
   using thermal::emission::phase99;
   using thermal::analysis::sweep::temp_cplx_99;
 
+  size_t temp_resolution = 100;
+
   /// setup output
   Poptea poptea = initializePopTeawithNominalEmission( dir ) ;
   construct theoreticalModel = poptea.coreSystem->thermalsys.Construct ;
@@ -56,9 +58,10 @@ void run( const filesystem::directory &dir )
   poptea.reloadThermalModel( theoreticalModel) ;
   vector<double> emission1 =
   phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
-  vector<complex<double >> heat1_cplx =
-  sweep::temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ) ;
   
+  vector<complex<double >> heat1_cplx =
+  sweep::temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ,
+                       temp_resolution) ;
   
   theoreticalModel.update( HeatX::OneDimNumLin, EmissionX::OneDimNonLin ) ;
   poptea.reloadThermalModel( theoreticalModel) ;
@@ -71,11 +74,12 @@ void run( const filesystem::directory &dir )
   cout << "\n\n";
   cout << "complex temperature fields" << "\n";
   
-  cout << heat1_cplx[0] << "\n";
+  for(size_t i = 0 ; i < temp_resolution ; ++i )
+    cout << heat1_cplx[i] << "\n";
   
   /// Part test
   // poptea.bestFit() ;
-  cout << poptea.ppUnknownParameters() ;
+  cout << poptea.ppUnknownParameters() << "\n" << temp_resolution;
   
   
   return;

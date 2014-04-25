@@ -36,7 +36,7 @@ namespace sweep{
 
 std::vector< std::complex<double> >
 temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
-              const double omega );
+              const double omega , const size_t M1 ) ;
 
 }}}
 

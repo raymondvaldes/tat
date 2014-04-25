@@ -46,6 +46,8 @@ spline_cplx::eval( const double xpos ) const
   return output;
 }
 
+//spline_cplx::~spline_cplx(void){}
+
 
 
 }}

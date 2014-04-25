@@ -55,7 +55,7 @@ int main( int argc, char *argv[ ] )
     vector< path > samples = filesystem::ls( myDirectory );
     for( const path& testSpeciman : samples )
     {
-      const string specimanPath = testSpeciman.string();
+      const string specimanPath = testSpeciman.string() ;
       const filesystem::directory dir( specimanPath ) ;
       //investigations::sensitivityvaldes2013::run( dir ) ;
       investigations::num_method::run( dir ) ;

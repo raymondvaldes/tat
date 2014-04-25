@@ -25,6 +25,8 @@
 
 #include "thermal/analysis/sweep/temp_cmplx.h"
 #include "thermal/model/one_dim/analytical_2005/analytical_2005.h"
+#include "math/algorithms/spline_cplx.h"
+#include "math/utility.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -32,7 +34,7 @@ namespace sweep{
 
 std::vector< std::complex<double> >
 temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
-              const double omega )
+              const double omega , const size_t M1)
 {
   /*The result for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
@@ -44,8 +46,11 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
   
   /* A fine mesh will be used to report back the complex temperature.  This 
   will differ from the mesh used in the numerical solution for now.*/
-  constexpr size_t M1 = 200;
   vector< complex<double> > results( M1 ) ;
+  const double z_surf = 0;
+  const double z_interface = 1;
+  vector< double > z_val = math::range( z_surf, z_interface, M1 );
+  
 
   switch( popteaCore.thermalsys.Construct.heat )
   {
@@ -57,11 +62,12 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
                                            popteaCore.expSetup.laser,
                                            popteaCore.TBCsystem.Temp.rear,
                                            popteaCore.TBCsystem.gammaEval());
-//      results = thermalEngine.phase_linear( omega ) ; }
-      complex<double> temp = thermalEngine.T_tt_eval_cplx( omega, 0 );
-      results[0] = temp;
-      
-      
+      using math::algorithms::spline_cplx;
+      spline_cplx temp_cplx = thermalEngine.T_tt_R1eq1_cplx_sweep( omega ) ;
+
+
+      for( size_t i = 0 ; i < M1 ; ++i )
+        results[i] = temp_cplx.eval( z_val[i] ) ;
       
       break;
     }
