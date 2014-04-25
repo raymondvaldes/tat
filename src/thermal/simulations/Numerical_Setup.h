@@ -31,7 +31,7 @@ License
 double Iheat(double Isteady, double Itransient, double omega, double t) ;
 
 double Iheat_int(const double Isteady,const double Itransient,
-                        const double omega, const double t); 
+                        const double omega, const double t);
 double tau_0(const double omega);
 
 size_t sumVector(const size_t *const vector1,const size_t sizeV);

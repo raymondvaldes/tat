@@ -620,8 +620,8 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
         std::end( fullRangeThermalData->experimentalEmission ),
         std::begin( emissionReversed ) ) ;
 
-  using math::numIntegration::funcClass;
-  funcClass experimentalEmissionInterpolater( &omegasMonoIncreasing[0] ,
+  using math::numIntegration::mySpline;
+  mySpline experimentalEmissionInterpolater( &omegasMonoIncreasing[0] ,
       &emissionReversed[0], omegasMonoIncreasing.size() ) ;
 
   // Use omega to derive current lthermalsLimits that correspond to FullRange

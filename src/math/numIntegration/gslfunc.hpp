@@ -26,54 +26,18 @@ License
 #ifndef GSLFUNC_HPP
 #define GSLFUNC_HPP
 
-#include <gsl/gsl_spline.h>
-#include <gsl/gsl_integration.h>
+#include "math/algorithms/spline.h"
 #include <iostream>
 #include <iomanip>
 
 namespace math{
   namespace numIntegration{
 
-class funcClass
-{
-private:
-  const size_t limit = 1001;    //defines size of workspace
-  gsl_interp_accel *acc   = gsl_interp_accel_alloc();  ///Ptr interpolation iter
-  gsl_spline *spline      = nullptr; ///Declare pointer to interpolations
-  gsl_integration_workspace *workspace  = nullptr;
-  const double* xvar;
-  const double* func;
-  const size_t  N;
-  static double CCallback(double d, void*params);
-
-public:
-  /*  F:          the gsl_function which is the integrand
-      xlow:       lower integration limit
-      xhigh:      higher integration limit
-      abstol:     absolute tolerance
-      reltol:     relative tolerance
-      result:     a pointer to a gdouble in which stores the result
-      error:      a pointer to a gdobuel in which the function stores the
-                  estimed error                                           */
-  static constexpr double epsabs = 1e-8;
-  static constexpr double epsrel = 1e-8;
-  int code;
-  double result;
-  double error;
-  size_t neval;
-
-  explicit funcClass( const double* a, const double* b, const size_t c ) ;
-  explicit funcClass( const std::vector<double> &a,
-                      const std::vector<double> &b) ;
-
-  ~funcClass( void ) ;
-  double eval( const double xpos ) const;
-};
-
+using math::algorithms::mySpline;
 
 double fintegrate( double x, void *p ) ;
-double integrate( funcClass *Func, const double xlow, const double xhigh ) ;
-
+double integrate( mySpline *Func, const double xlow,
+                  const double xhigh ) ;
 
   }
 }
