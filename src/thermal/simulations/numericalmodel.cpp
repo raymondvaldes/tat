@@ -29,6 +29,8 @@ License
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
 
+#include <boost/assert.hpp>
+
 namespace numericalModel
 {
 Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,

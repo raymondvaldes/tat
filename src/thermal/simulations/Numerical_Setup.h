@@ -25,7 +25,19 @@ License
 #ifndef NUMERICAL_SETUP_H_INCLUDED
 #define NUMERICAL_SETUP_H_INCLUDED
 
-#include "thermal/analysis/kernal.hpp"
+#include <cstddef>
+#include <vector>
+
+double Iheat(double Isteady, double Itransient, double omega, double t) ;
+
+double Iheat_int(const double Isteady,const double Itransient,
+                        const double omega, const double t); 
+double tau_0(const double omega);
+
+size_t sumVector(const size_t *const vector1,const size_t sizeV);
+
+double SOR(double**A, double*b, const size_t M2, double*phi, double omega,
+           double error);
 
 double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);
@@ -34,35 +46,8 @@ void solveMatrix(const size_t n, const std::vector<double>& b,
                  const std::vector<double>& d, const std::vector<double>& a,
                  const std::vector<double>& C, std::vector<double>& u);
 
-double SOR(double**A, double*b, const size_t M2, double*phi, double omega,
-           double error);
-
 double gs_int(const double eta, const double opt, const double lambda,
               const double R1, const double Iplus0, const double Iplus1);
 
-double psi(const double eta, const double psi_layer1, const double psi_layer2);
-double psi(const std::vector<std::vector<double>>& T, const double eta,
-           const size_t j, const size_t n, const double psi_c,
-           const double psi_ref);
-
-double k(const std::vector<std::vector<double>>& T, const double zpos,
-         const double k_c, const double k_ref);
-
-double kthermal(const double eta, const double k_layer1, const double k_layer2);
-
-double Kappa(const std::vector<std::vector<double>>& T, const double eta,
-             const double eta_j, const size_t j, const size_t n,
-             const double k_ref, const int prop_linearity, const double k_c);
-
-
-double Iheat(double Isteady, double Itransient, double omega, double t) ;//verified
-
-size_t sumVector(const size_t *const vector1,const size_t sizeV);
-
-double Iheat_int(const double Isteady,const double Itransient,
-                        const double omega, const double t); //verified
-
-double tau_0(const double omega);
-double x_bias(const double Xmean, const double Xstddev);
 
 #endif // NUMERICAL_SETUP_H_INCLUDED

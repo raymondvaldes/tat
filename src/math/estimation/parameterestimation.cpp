@@ -29,9 +29,12 @@ License
 #include <sstream>
 #include <ios>
 
+#include "math/estimation/parameterestimation.hpp"
+
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/simulations/Numerical_Setup.h"
 #include "math/utility.hpp"
+
 
 namespace math{
   namespace estimation{

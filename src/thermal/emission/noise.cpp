@@ -22,6 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <cmath>
 #include "thermal/emission/noise.hpp"
 #include "math/utility.hpp"
 #include "tools/interface/xml.h"

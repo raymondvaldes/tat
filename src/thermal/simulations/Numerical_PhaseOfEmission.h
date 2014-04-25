@@ -29,8 +29,6 @@ License
 #include "thermal/analysis/kernal.hpp"
 
 
-
-
 double PhaseOfEmission2DAna( const double omega,
                              const thermal::analysis::Kernal &popteaCore);
 
