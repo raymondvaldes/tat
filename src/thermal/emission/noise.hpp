@@ -26,7 +26,7 @@ License
 #define NOISE_HPP
 #include <vector>
 #include <boost/property_tree/ptree.hpp>
-#include "thermal/simulations/Numerical_Setup.h"
+#include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
 #include "tools/interface/filesystem.hpp"
 
 namespace thermal{

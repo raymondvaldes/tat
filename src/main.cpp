@@ -44,15 +44,16 @@ int main( int argc, char *argv[ ] )
   using std::string;
   using std::vector;
   
-  string path;
+  string myDirectory;
 
-  if( tools::programoptions::loadOptions( argc, argv, path ) )
+  if( tools::programoptions::loadOptions( argc, argv, myDirectory ) )
   {
     std::cout << "Welcome back, Raymond!\n\n" ;
     stopwatch globalStopWatch ;
 
-    vector< boost::filesystem::path > samples = filesystem::ls( path );
-    for( const boost::filesystem::path& testSpeciman : samples )
+    using boost::filesystem::path;
+    vector< path > samples = filesystem::ls( myDirectory );
+    for( const path& testSpeciman : samples )
     {
       const string specimanPath = testSpeciman.string();
       const filesystem::directory dir( specimanPath ) ;

@@ -24,7 +24,7 @@
 \*----------------------------------------------------------------------------*/
 
 #include "thermal/analysis/sweep/temp_cmplx.h"
-#include "thermal/model/1dim/analytical_2005/analytical_2005.h"
+#include "thermal/model/one_dim/analytical_2005/analytical_2005.h"
 
 namespace thermal{
 namespace analysis{

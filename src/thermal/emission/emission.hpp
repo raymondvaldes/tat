@@ -27,7 +27,7 @@ License
 
 #include <vector>
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
-#include "thermal/simulations/Numerical_Setup.h"
+#include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
 #include "thermal/define/temperature.h"
 
 namespace thermal{

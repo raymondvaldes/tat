@@ -26,7 +26,7 @@ License
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/equipment/setup.h"
-#include "thermal/simulations/numericalmodel.hpp"
+#include "thermal/model/one_dim/numerical_2011/mesh.hpp"
 #include "math/estimation/parameterestimation.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
@@ -36,7 +36,6 @@ License
 
 namespace thermal {
 namespace analysis{
-
 
 
 Kernal::Kernal( const equipment::setup &expSetup_,

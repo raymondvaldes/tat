@@ -27,7 +27,7 @@ License
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
-#include "thermal/model/1dim/analytical_2005/analytical_2005.h"
+#include "thermal/model/one_dim/analytical_2005/analytical_2005.h"
 
 namespace thermal{
 namespace emission{

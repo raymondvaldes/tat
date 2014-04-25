@@ -26,7 +26,7 @@ License
 #define __TAT__MODEL_HPP
 
 #include "thermal/define/construct.hpp"
-#include "thermal/simulations/numericalmodel.hpp"
+#include "thermal/model/one_dim/numerical_2011/mesh.hpp"
 
 namespace thermal{
 namespace define{

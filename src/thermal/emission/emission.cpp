@@ -23,7 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include "thermal/emission/emission.hpp"
-#include "thermal/simulations/Numerical_Setup.h"
+#include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
 #include "math/statistical_tools.hpp"
 #include "math/utility.hpp"
 #include "math/estimation/cosfit.hpp"

@@ -24,14 +24,13 @@ License
 \*----------------------------------------------------------------------------*/
 #include "math/statistical_tools.hpp"
 
-#include "thermal/model/2dim/analytical_2009/heat2DAna.hpp"
+#include "thermal/model/two_dim/analytical_2009/heat2DAna.hpp"
 #include "thermal/emission/emission.hpp"
 #include "thermal/analysis/kernal.hpp"
 
-#include "thermal/simulations/Numerical_Temperature.h"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
-#include "thermal/simulations/Numerical_Setup.h"
-
+#include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
+#include "thermal/model/one_dim/numerical_2011/Numerical_Temperature.h"
 #include "thermal/define/model.hpp"
 #include "thermal/define/temperature.h"
 
