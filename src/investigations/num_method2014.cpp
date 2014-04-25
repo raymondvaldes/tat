@@ -27,6 +27,7 @@
 #include "thermal/analysis/poptea.hpp"
 #include "thermal/analysis/poptea_initialize.h"
 #include "thermal/emission/phase99.hpp"
+#include "thermal/analysis/sweep/temp_cmplx.h"
 
 namespace investigations{
   namespace num_method{
@@ -36,35 +37,45 @@ using namespace thermal::analysis;
 void run( const filesystem::directory &dir )
 {
   using std::string;
+  using std::vector;
+  using std::complex;
+  using std::cout;
   using thermal::define::construct;
   using thermal::define::HeatX;
   using thermal::define::EmissionX;
   using thermal::emission::phase99;
+  using thermal::analysis::sweep::temp_cplx_99;
 
   /// setup output
   Poptea poptea = initializePopTeawithNominalEmission( dir ) ;
   construct theoreticalModel = poptea.coreSystem->thermalsys.Construct ;
   
   
-  // prepare models
+  // prepare models see emission
   theoreticalModel.update( HeatX::OneDimAnalytical, EmissionX::OneDimNonLin ) ;
   poptea.reloadThermalModel( theoreticalModel) ;
-  std::vector<double> heat1 =
+  vector<double> emission1 =
   phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
-
+  vector<complex<double >> heat1_cplx =
+  sweep::temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ) ;
+  
   
   theoreticalModel.update( HeatX::OneDimNumLin, EmissionX::OneDimNonLin ) ;
   poptea.reloadThermalModel( theoreticalModel) ;
-  std::vector<double> heat2 =
+  vector<double> emission2 =
   phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
   
   for(size_t i = 0 ; i < poptea.thermalData->size() ; ++i )
-    std::cout << heat1[i] << "\t" <<  heat2[i] << "\n";
+    cout << emission1[i] << "\t" <<  emission2[i] << "\n";
   
+  cout << "\n\n";
+  cout << "complex temperature fields" << "\n";
+  
+  cout << heat1_cplx[0] << "\n";
   
   /// Part test
   // poptea.bestFit() ;
-  std::cout << poptea.ppUnknownParameters() ;
+  cout << poptea.ppUnknownParameters() ;
   
   
   return;

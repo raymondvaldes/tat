@@ -30,6 +30,7 @@
 #include <complex>
 #include "sensible/TBCsystem.h"
 #include "thermal/equipment/laser.h"
+#include "math/algorithms/spline_cplx.h"
 
 namespace thermal{ namespace model { namespace one_dim{
   
@@ -82,6 +83,11 @@ public:
   
   double phase_linear( const double omega ) const ;
   double phase_nonlinear( const double omega ) const;
+  
+  //sweeps
+  math::algorithms::spline_cplx T_tt_cplx_sweep( const double omega ) ;
+
+  
 };
   
 }}}
