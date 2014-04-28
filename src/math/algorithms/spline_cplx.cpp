@@ -24,7 +24,7 @@
 \*----------------------------------------------------------------------------*/
 
 #include "math/algorithms/spline_cplx.h"
-#include "math/algorithms/cmplx_split.h"
+#include "math/algorithms/complex.h"
 
 namespace math{ namespace algorithms {
 
