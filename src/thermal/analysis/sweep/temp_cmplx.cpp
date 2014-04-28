@@ -74,6 +74,13 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
 
     case define::HeatX::OneDimNumLin:
     {
+    
+    
+      // 1) temperature field
+      // 2) feed temperature field to ttransient to cmplx
+      // 3) return the vector
+    
+    
 //      size_t n = 0;
 //      #pragma omp parallel for schedule(dynamic) private(n)
 //      for(n = 0 ; n < L_end ; n++ )

@@ -60,8 +60,11 @@ void run( const filesystem::directory &dir )
   phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
   
   vector<complex<double >> heat1_cplx =
-  sweep::temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ,
+  temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ,
                        temp_resolution) ;
+  
+  
+  
   
   theoreticalModel.update( HeatX::OneDimNumLin, EmissionX::OneDimNonLin ) ;
   poptea.reloadThermalModel( theoreticalModel) ;
