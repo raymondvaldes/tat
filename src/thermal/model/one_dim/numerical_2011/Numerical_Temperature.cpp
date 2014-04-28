@@ -33,7 +33,9 @@ License
 #include "thermal/define/temperature.h"
 #include "thermal/equipment/setup.h"
 #include "sensible/property.h"
-
+#include "math/solvers/tma.h"
+#include "thermal/model/utilities/heat generation/Iheat.h"
+#include "thermal/model/utilities/nondimensional/tau_0.h"
 using sensible::property;
 using thermal::define::Temperature;
 
@@ -109,7 +111,7 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
    very small and need a much tighter amplitude control.
   */
   {
-    const double tau_ref = tau_0(omega1);
+    const double tau_ref = thermal::model::tau_0( omega1 ) ;
     MatrixArrays->B4 = abMatrixPrepopulate(MatrixArrays->B1,
                                            MatrixArrays->B2,
                                            MatrixArrays->B3, mesh.M1,
@@ -157,6 +159,7 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
                     MatrixArrays->B2, MatrixArrays->B3, MatrixArrays->B4,
                     k1_thermal, k2_thermal, psi1_thermal, psi2_thermal );
 
+      using math::solvers::solveMatrix;
       solveMatrix( MatrixArrays->M2 , MatrixArrays->A1 , MatrixArrays->A2 ,
                    MatrixArrays->A3 , MatrixArrays->b ,
                    MatrixArrays->Temperature ) ;
@@ -701,9 +704,12 @@ double Iaverage(const double Is, const double It, const double omega,
                 const size_t n)
 {
     double I_avg;
-    I_avg  = Iheat_int( Is,It,omega, t_tau(tau[n+1], tau_ref) ) ;
-    I_avg -= Iheat_int( Is,It,omega, t_tau(tau[n]  , tau_ref) ) ;
-    I_avg /= t_tau(tau[n+1], tau_ref) - t_tau(tau[n], tau_ref)  ;
+  
+    using thermal::model::Iheat_int;
+  
+    I_avg  = Iheat_int( Is, It, omega, t_tau( tau[n+1], tau_ref ) ) ;
+    I_avg -= Iheat_int( Is, It, omega, t_tau( tau[n]  , tau_ref ) ) ;
+    I_avg /= t_tau( tau[n+1], tau_ref ) - t_tau( tau[n], tau_ref )  ;
 
     return I_avg;
 }

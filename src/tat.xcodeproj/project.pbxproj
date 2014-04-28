@@ -29,7 +29,6 @@
 		AB38314B18AEF3A9009965F1 /* estimationInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830F918AEF3A8009965F1 /* estimationInterval.cpp */; };
 		AB38314C18AEF3A9009965F1 /* statistical_tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830FB18AEF3A8009965F1 /* statistical_tools.cpp */; };
 		AB38314D18AEF3A9009965F1 /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3830FD18AEF3A8009965F1 /* utility.cpp */; };
-		AB38315018AEF3A9009965F1 /* basedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310618AEF3A8009965F1 /* basedata.cpp */; };
 		AB38315118AEF3A9009965F1 /* kernal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310818AEF3A8009965F1 /* kernal.cpp */; };
 		AB38315218AEF3A9009965F1 /* lmdiff_poptea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310A18AEF3A8009965F1 /* lmdiff_poptea.cpp */; };
 		AB38315318AEF3A9009965F1 /* lmdiff_poptea_help.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38310C18AEF3A8009965F1 /* lmdiff_poptea_help.cpp */; };
@@ -54,6 +53,10 @@
 		AB5029C21909E7A100150E07 /* temp_ss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5029C01909E7A100150E07 /* temp_ss.cpp */; };
 		AB8B64B6190F062600B2C008 /* one_dim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64B4190F062600B2C008 /* one_dim.cpp */; };
 		AB8B64B9190F15CD00B2C008 /* numerical_2011.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64B7190F15CD00B2C008 /* numerical_2011.cpp */; };
+		AB8B64BF190F1D0000B2C008 /* sor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64BD190F1D0000B2C008 /* sor.cpp */; };
+		AB8B64C2190F1D7700B2C008 /* tma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64C0190F1D7700B2C008 /* tma.cpp */; };
+		AB8B64CD190F204200B2C008 /* Iheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64CB190F204200B2C008 /* Iheat.cpp */; };
+		AB8B64D1190F20CA00B2C008 /* tau_0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64CF190F20CA00B2C008 /* tau_0.cpp */; };
 		AB9D915319071414006F0FCC /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D915119071414006F0FCC /* detector.cpp */; };
 		AB9D91561907141D006F0FCC /* laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D91541907141D006F0FCC /* laser.cpp */; };
 		AB9D9159190714DC006F0FCC /* setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D9157190714DC006F0FCC /* setup.cpp */; };
@@ -108,8 +111,8 @@
 		AB3830DF18AEF3A8009965F1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AB3830E218AEF3A8009965F1 /* combinations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = combinations.cpp; sourceTree = "<group>"; };
 		AB3830E318AEF3A8009965F1 /* combinations.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = combinations.hpp; sourceTree = "<group>"; };
-		AB3830E418AEF3A8009965F1 /* bisection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bisection.cpp; sourceTree = "<group>"; };
-		AB3830E518AEF3A8009965F1 /* bisection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bisection.hpp; sourceTree = "<group>"; };
+		AB3830E418AEF3A8009965F1 /* bisection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bisection.cpp; path = ../bisection.cpp; sourceTree = "<group>"; };
+		AB3830E518AEF3A8009965F1 /* bisection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bisection.hpp; path = ../bisection.hpp; sourceTree = "<group>"; };
 		AB3830E718AEF3A8009965F1 /* constrained.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = constrained.cpp; sourceTree = "<group>"; };
 		AB3830E818AEF3A8009965F1 /* constrained.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = constrained.hpp; sourceTree = "<group>"; };
 		AB3830E918AEF3A8009965F1 /* cosfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cosfit.cpp; sourceTree = "<group>"; };
@@ -132,7 +135,6 @@
 		AB3830FC18AEF3A8009965F1 /* statistical_tools.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = statistical_tools.hpp; sourceTree = "<group>"; };
 		AB3830FD18AEF3A8009965F1 /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
 		AB3830FE18AEF3A8009965F1 /* utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utility.hpp; sourceTree = "<group>"; };
-		AB38310618AEF3A8009965F1 /* basedata.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basedata.cpp; sourceTree = "<group>"; };
 		AB38310718AEF3A8009965F1 /* basedata.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basedata.hpp; sourceTree = "<group>"; };
 		AB38310818AEF3A8009965F1 /* kernal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kernal.cpp; sourceTree = "<group>"; };
 		AB38310918AEF3A8009965F1 /* kernal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kernal.hpp; sourceTree = "<group>"; };
@@ -184,6 +186,14 @@
 		AB8B64B5190F062600B2C008 /* one_dim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = one_dim.h; path = model/one_dim/one_dim.h; sourceTree = "<group>"; };
 		AB8B64B7190F15CD00B2C008 /* numerical_2011.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = numerical_2011.cpp; path = model/one_dim/numerical_2011/numerical_2011.cpp; sourceTree = "<group>"; };
 		AB8B64B8190F15CD00B2C008 /* numerical_2011.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = numerical_2011.h; path = model/one_dim/numerical_2011/numerical_2011.h; sourceTree = "<group>"; };
+		AB8B64BD190F1D0000B2C008 /* sor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sor.cpp; path = solvers/sor.cpp; sourceTree = "<group>"; };
+		AB8B64BE190F1D0000B2C008 /* sor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sor.h; path = solvers/sor.h; sourceTree = "<group>"; };
+		AB8B64C0190F1D7700B2C008 /* tma.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tma.cpp; path = solvers/tma.cpp; sourceTree = "<group>"; };
+		AB8B64C1190F1D7700B2C008 /* tma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tma.h; path = solvers/tma.h; sourceTree = "<group>"; };
+		AB8B64CB190F204200B2C008 /* Iheat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Iheat.cpp; path = "model/utilities/heat generation/Iheat.cpp"; sourceTree = "<group>"; };
+		AB8B64CC190F204200B2C008 /* Iheat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Iheat.h; path = "model/utilities/heat generation/Iheat.h"; sourceTree = "<group>"; };
+		AB8B64CF190F20CA00B2C008 /* tau_0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tau_0.cpp; path = model/utilities/nondimensional/tau_0.cpp; sourceTree = "<group>"; };
+		AB8B64D0190F20CA00B2C008 /* tau_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tau_0.h; path = model/utilities/nondimensional/tau_0.h; sourceTree = "<group>"; };
 		AB9D915119071414006F0FCC /* detector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = detector.cpp; sourceTree = "<group>"; };
 		AB9D915219071414006F0FCC /* detector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detector.h; sourceTree = "<group>"; };
 		AB9D91541907141D006F0FCC /* laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laser.cpp; sourceTree = "<group>"; };
@@ -236,6 +246,7 @@
 		AB19F8A3190605520013D14D /* model */ = {
 			isa = PBXGroup;
 			children = (
+				AB8B64C3190F1E3600B2C008 /* utilities */,
 				AB19F8A61906058E0013D14D /* two_dim */,
 				AB19F8A4190605630013D14D /* one_dim */,
 				ABC2778F1907351E003A4D06 /* labels.cpp */,
@@ -247,6 +258,7 @@
 		AB19F8A4190605630013D14D /* one_dim */ = {
 			isa = PBXGroup;
 			children = (
+				AB8B64BB190F1CB700B2C008 /* define */,
 				ABD1EA29190B178A004579AA /* numerical_2011 */,
 				AB19F8B4190606DF0013D14D /* analytical_2005 */,
 				AB8B64B4190F062600B2C008 /* one_dim.cpp */,
@@ -311,9 +323,8 @@
 		AB3830E018AEF3A8009965F1 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				AB8B64BC190F1CEC00B2C008 /* solvers */,
 				AB3830E118AEF3A8009965F1 /* algorithms */,
-				AB3830E418AEF3A8009965F1 /* bisection.cpp */,
-				AB3830E518AEF3A8009965F1 /* bisection.hpp */,
 				AB3830E618AEF3A8009965F1 /* estimation */,
 				AB3830F318AEF3A8009965F1 /* numIntegration */,
 				AB3830F818AEF3A8009965F1 /* sensitivityAnalysis */,
@@ -328,6 +339,8 @@
 		AB3830E118AEF3A8009965F1 /* algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				AB3830E418AEF3A8009965F1 /* bisection.cpp */,
+				AB3830E518AEF3A8009965F1 /* bisection.hpp */,
 				AB3830E218AEF3A8009965F1 /* combinations.cpp */,
 				AB3830E318AEF3A8009965F1 /* combinations.hpp */,
 				ABD1EA20190AE8E5004579AA /* spline.cpp */,
@@ -394,28 +407,12 @@
 		AB38310518AEF3A8009965F1 /* analysis */ = {
 			isa = PBXGroup;
 			children = (
+				AB8B64BA190F1B6000B2C008 /* poptea */,
 				ABD1EA3C190DFC82004579AA /* cplx_combination */,
 				AB5029BC1909E4AA00150E07 /* sweep */,
-				AB38310618AEF3A8009965F1 /* basedata.cpp */,
 				AB38310718AEF3A8009965F1 /* basedata.hpp */,
 				AB38310818AEF3A8009965F1 /* kernal.cpp */,
 				AB38310918AEF3A8009965F1 /* kernal.hpp */,
-				AB38310A18AEF3A8009965F1 /* lmdiff_poptea.cpp */,
-				AB38310B18AEF3A8009965F1 /* lmdiff_poptea.hpp */,
-				AB38310C18AEF3A8009965F1 /* lmdiff_poptea_help.cpp */,
-				AB38310D18AEF3A8009965F1 /* lmdiff_poptea_help.hpp */,
-				AB38310E18AEF3A8009965F1 /* methods.cpp */,
-				AB38310F18AEF3A8009965F1 /* methods.hpp */,
-				AB38311018AEF3A8009965F1 /* pie.cpp */,
-				AB38311118AEF3A8009965F1 /* pie.hpp */,
-				AB38311218AEF3A8009965F1 /* poptea.cpp */,
-				AB38311318AEF3A8009965F1 /* poptea.hpp */,
-				AB38311418AEF3A8009965F1 /* thermalData.cpp */,
-				AB38311518AEF3A8009965F1 /* thermalData.hpp */,
-				AB38311618AEF3A8009965F1 /* thermalsweepoptimizer.cpp */,
-				AB38311718AEF3A8009965F1 /* thermalsweepoptimizer.hpp */,
-				ABC716CD1905A83F00C14977 /* poptea_initialize.cpp */,
-				ABC716CE1905A83F00C14977 /* poptea_initialize.h */,
 			);
 			path = analysis;
 			sourceTree = "<group>";
@@ -470,6 +467,74 @@
 				AB5029C11909E7A100150E07 /* temp_ss.h */,
 			);
 			name = sweep;
+			sourceTree = "<group>";
+		};
+		AB8B64BA190F1B6000B2C008 /* poptea */ = {
+			isa = PBXGroup;
+			children = (
+				AB38311418AEF3A8009965F1 /* thermalData.cpp */,
+				AB38311518AEF3A8009965F1 /* thermalData.hpp */,
+				AB38311618AEF3A8009965F1 /* thermalsweepoptimizer.cpp */,
+				AB38311718AEF3A8009965F1 /* thermalsweepoptimizer.hpp */,
+				ABC716CD1905A83F00C14977 /* poptea_initialize.cpp */,
+				ABC716CE1905A83F00C14977 /* poptea_initialize.h */,
+				AB38310E18AEF3A8009965F1 /* methods.cpp */,
+				AB38310F18AEF3A8009965F1 /* methods.hpp */,
+				AB38311018AEF3A8009965F1 /* pie.cpp */,
+				AB38311118AEF3A8009965F1 /* pie.hpp */,
+				AB38311218AEF3A8009965F1 /* poptea.cpp */,
+				AB38311318AEF3A8009965F1 /* poptea.hpp */,
+				AB38310A18AEF3A8009965F1 /* lmdiff_poptea.cpp */,
+				AB38310B18AEF3A8009965F1 /* lmdiff_poptea.hpp */,
+				AB38310C18AEF3A8009965F1 /* lmdiff_poptea_help.cpp */,
+				AB38310D18AEF3A8009965F1 /* lmdiff_poptea_help.hpp */,
+			);
+			name = poptea;
+			sourceTree = "<group>";
+		};
+		AB8B64BB190F1CB700B2C008 /* define */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = define;
+			sourceTree = "<group>";
+		};
+		AB8B64BC190F1CEC00B2C008 /* solvers */ = {
+			isa = PBXGroup;
+			children = (
+				AB8B64BD190F1D0000B2C008 /* sor.cpp */,
+				AB8B64BE190F1D0000B2C008 /* sor.h */,
+				AB8B64C0190F1D7700B2C008 /* tma.cpp */,
+				AB8B64C1190F1D7700B2C008 /* tma.h */,
+			);
+			name = solvers;
+			sourceTree = "<group>";
+		};
+		AB8B64C3190F1E3600B2C008 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AB8B64CE190F20AC00B2C008 /* nondimensional */,
+				AB8B64C4190F1FF800B2C008 /* heat_generation */,
+			);
+			name = utilities;
+			sourceTree = "<group>";
+		};
+		AB8B64C4190F1FF800B2C008 /* heat_generation */ = {
+			isa = PBXGroup;
+			children = (
+				AB8B64CB190F204200B2C008 /* Iheat.cpp */,
+				AB8B64CC190F204200B2C008 /* Iheat.h */,
+			);
+			name = heat_generation;
+			sourceTree = "<group>";
+		};
+		AB8B64CE190F20AC00B2C008 /* nondimensional */ = {
+			isa = PBXGroup;
+			children = (
+				AB8B64CF190F20CA00B2C008 /* tau_0.cpp */,
+				AB8B64D0190F20CA00B2C008 /* tau_0.h */,
+			);
+			name = nondimensional;
 			sourceTree = "<group>";
 		};
 		AB9D914D19071332006F0FCC /* equipment */ = {
@@ -625,6 +690,7 @@
 				AB38314218AEF3A9009965F1 /* bisection.cpp in Sources */,
 				AB38314318AEF3A9009965F1 /* constrained.cpp in Sources */,
 				AB38316518AEF3A9009965F1 /* filesystem.cpp in Sources */,
+				AB8B64BF190F1D0000B2C008 /* sor.cpp in Sources */,
 				ABC716CF1905A83F00C14977 /* poptea_initialize.cpp in Sources */,
 				AB38314618AEF3A9009965F1 /* lmdiff_helper.cpp in Sources */,
 				AB38314C18AEF3A9009965F1 /* statistical_tools.cpp in Sources */,
@@ -650,6 +716,7 @@
 				AB9D915319071414006F0FCC /* detector.cpp in Sources */,
 				AB8B64B6190F062600B2C008 /* one_dim.cpp in Sources */,
 				AB38314018AEF3A9009965F1 /* main.cpp in Sources */,
+				AB8B64D1190F20CA00B2C008 /* tau_0.cpp in Sources */,
 				AB19F8931905DF430013D14D /* effusivity.cpp in Sources */,
 				AB38315C18AEF3A9009965F1 /* emission.cpp in Sources */,
 				AB38315B18AEF3A9009965F1 /* phase99.cpp in Sources */,
@@ -666,14 +733,15 @@
 				AB38314518AEF3A9009965F1 /* lmdiff.cpp in Sources */,
 				AB38314A18AEF3A9009965F1 /* simpsons_3_8.cpp in Sources */,
 				AB38314418AEF3A9009965F1 /* cosfit.cpp in Sources */,
+				AB8B64CD190F204200B2C008 /* Iheat.cpp in Sources */,
 				AB38316018AEF3A9009965F1 /* Numerical_Setup.cpp in Sources */,
 				ABC277941907393F003A4D06 /* temperature.cpp in Sources */,
 				AB38314718AEF3A9009965F1 /* parameterestimation.cpp in Sources */,
+				AB8B64C2190F1D7700B2C008 /* tma.cpp in Sources */,
 				AB38315E18AEF3A9009965F1 /* model.cpp in Sources */,
 				AB9D916319071920006F0FCC /* radiativeSysProp.cpp in Sources */,
 				AB38315118AEF3A9009965F1 /* kernal.cpp in Sources */,
 				AB38315618AEF3A9009965F1 /* poptea.cpp in Sources */,
-				AB38315018AEF3A9009965F1 /* basedata.cpp in Sources */,
 				AB38316218AEF3A9009965F1 /* mesh.cpp in Sources */,
 				AB9D9159190714DC006F0FCC /* setup.cpp in Sources */,
 				AB38316418AEF3A9009965F1 /* exportfile.cpp in Sources */,

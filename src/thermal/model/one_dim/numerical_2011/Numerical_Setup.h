@@ -25,26 +25,9 @@ License
 #ifndef NUMERICAL_SETUP_H_INCLUDED
 #define NUMERICAL_SETUP_H_INCLUDED
 
-#include <cstddef>
-#include <vector>
-
-double Iheat(double Isteady, double Itransient, double omega, double t) ;
-
-double Iheat_int(const double Isteady,const double Itransient,
-                        const double omega, const double t);
-double tau_0(const double omega);
-
-size_t sumVector(const size_t *const vector1,const size_t sizeV);
-
-double SOR(double**A, double*b, const size_t M2, double*phi, double omega,
-           double error);
-
 double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);
 
-void solveMatrix(const size_t n, const std::vector<double>& b,
-                 const std::vector<double>& d, const std::vector<double>& a,
-                 const std::vector<double>& C, std::vector<double>& u);
 
 double gs_int(const double eta, const double opt, const double lambda,
               const double R1, const double Iplus0, const double Iplus1);

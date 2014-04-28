@@ -23,20 +23,15 @@
  
 \*----------------------------------------------------------------------------*/
 
-#include "thermal/model/one_dim/numerical_2011/numerical_2011.h"
+#ifndef __tat__sor__
+#define __tat__sor__
 
-namespace thermal{ namespace model {namespace one_dim{
+#include <iostream>
 
-  numerical_2011::numerical_2011(
-  const sensible::layer &coating_in,
-  const sensible::radiativeSysProp &radiative_prop_in,
-  const thermal::equipment::Laser &laser_in,
-  const double temp_in,
-  const double gamma_in )
-  :
-  one_dim( coating_in, radiative_prop_in, laser_in, temp_in, gamma_in )
-  {}
-  
-  numerical_2011::~numerical_2011( void ) {}
+namespace math{namespace solvers{
 
-}}}
+double SOR( double**A, double*b, const size_t M2, double*phi, double omega,
+            double error);
+            
+}}
+#endif /* defined(__tat__sor__) */

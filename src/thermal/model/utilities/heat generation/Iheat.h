@@ -23,20 +23,19 @@
  
 \*----------------------------------------------------------------------------*/
 
-#include "thermal/model/one_dim/numerical_2011/numerical_2011.h"
+#ifndef __tat__Iheat__
+#define __tat__Iheat__
 
-namespace thermal{ namespace model {namespace one_dim{
+#include <iostream>
 
-  numerical_2011::numerical_2011(
-  const sensible::layer &coating_in,
-  const sensible::radiativeSysProp &radiative_prop_in,
-  const thermal::equipment::Laser &laser_in,
-  const double temp_in,
-  const double gamma_in )
-  :
-  one_dim( coating_in, radiative_prop_in, laser_in, temp_in, gamma_in )
-  {}
-  
-  numerical_2011::~numerical_2011( void ) {}
+namespace thermal{
+namespace model{
 
-}}}
+double Iheat(double Isteady, double Itransient, double omega, double t) ;
+
+double Iheat_int(const double Isteady,const double Itransient,
+                        const double omega, const double t);
+
+
+}}
+#endif /* defined(__tat__Iheat__) */

@@ -28,8 +28,6 @@ License
 #include <vector>
 #include <cstddef>
 
-
-
 namespace numericalModel
 {
 class Mesh

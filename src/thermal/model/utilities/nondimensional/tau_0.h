@@ -23,20 +23,15 @@
  
 \*----------------------------------------------------------------------------*/
 
-#include "thermal/model/one_dim/numerical_2011/numerical_2011.h"
+#ifndef __tat__tau0__
+#define __tat__tau0__
 
-namespace thermal{ namespace model {namespace one_dim{
+#include <iostream>
 
-  numerical_2011::numerical_2011(
-  const sensible::layer &coating_in,
-  const sensible::radiativeSysProp &radiative_prop_in,
-  const thermal::equipment::Laser &laser_in,
-  const double temp_in,
-  const double gamma_in )
-  :
-  one_dim( coating_in, radiative_prop_in, laser_in, temp_in, gamma_in )
-  {}
-  
-  numerical_2011::~numerical_2011( void ) {}
 
-}}}
+namespace thermal{namespace model{
+
+double tau_0(const double omega);
+
+}}
+#endif /* defined(__tat__tau0__) */
