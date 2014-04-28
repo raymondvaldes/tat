@@ -36,16 +36,8 @@ analytical_2005::analytical_2005(
   const double temp_in,
   const double gamma_in )
   :
-  coat( coating_in.kthermal.offset, coating_in.psithermal.offset,
-        coating_in.depth, coating_in.lambda ),
-  I_intensity_ss(             laser_in.Is ),
-  I_intensity_tt(             laser_in.It ),
-  Temperature_interface(      temp_in ),
-  gamma(                      gamma_in ),
-  R1(                         radiative_prop_in.R1 ),
-  Emit1(                      radiative_prop_in.Emit1 ),
-  eye( 0.0,1.0 )
-{}
+  one_dim( coating_in, radiative_prop_in, laser_in, temp_in, gamma_in )
+  {}
   
 analytical_2005::~analytical_2005( void ) {}
 
