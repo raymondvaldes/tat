@@ -118,6 +118,31 @@ double arrayMin(const double* x, const size_t I)
     return maxi;
 }
 
+std::pair<double, double> OA_init( const double *x, const size_t span )
+{
+  /* Givin a harmonic response over the length of one period this function
+     returns initial guesses of the amplitude and offset in the form of
+     
+        x(t) = offset + amplitude * cos( omega * time - phase )
+  */
+
+  using std::pair;
+  
+  const double arrayMax_val = arrayMax( x, span ) ;
+  const double arrayMin_val = arrayMin( x, span ) ;
+
+  const double
+  offsetInitial = average( arrayMax_val , arrayMin_val ) ;
+  
+  const double
+  amplitudeInitial = ( arrayMax_val - arrayMin_val ) / 2 ;
+  
+  
+  const pair<double, double> output( offsetInitial , amplitudeInitial );
+  return output;
+}
+
+
 double x_ini10(const int x_ref)
 {
     return x_ini10(double(x_ref));

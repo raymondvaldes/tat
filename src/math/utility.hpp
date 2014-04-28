@@ -46,6 +46,7 @@ bool equalto ( const T1 a, const T2 b )
 
 double arrayMax( const double* x, const size_t I ) ;
 double arrayMin( const double* x, const size_t I ) ;
+std::pair<double, double> OA_init( const double *x, const size_t span ) ;
 
 double x_ini10( const int x_ref ) ;
 double x_ini10( const double x_ref ) ;
