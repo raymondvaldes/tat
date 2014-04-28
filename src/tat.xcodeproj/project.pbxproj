@@ -67,7 +67,9 @@
 		ABC716D21905C07C00C14977 /* xml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC716D01905C07C00C14977 /* xml.cpp */; };
 		ABD1EA22190AE8E5004579AA /* spline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD1EA20190AE8E5004579AA /* spline.cpp */; };
 		ABD1EA25190AFF25004579AA /* spline_cplx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD1EA23190AFF25004579AA /* spline_cplx.cpp */; };
-		ABD1EA28190B0536004579AA /* cmplx_split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD1EA26190B0536004579AA /* cmplx_split.cpp */; };
+		ABD1EA28190B0536004579AA /* complex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD1EA26190B0536004579AA /* complex.cpp */; };
+		ABD1EA3B190DFA62004579AA /* kinematics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD1EA39190DFA62004579AA /* kinematics.cpp */; };
+		ABD1EA3F190DFCEE004579AA /* cmplx_combination.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD1EA3D190DFCEE004579AA /* cmplx_combination.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -206,8 +208,12 @@
 		ABD1EA21190AE8E5004579AA /* spline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spline.h; sourceTree = "<group>"; };
 		ABD1EA23190AFF25004579AA /* spline_cplx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spline_cplx.cpp; sourceTree = "<group>"; };
 		ABD1EA24190AFF25004579AA /* spline_cplx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spline_cplx.h; sourceTree = "<group>"; };
-		ABD1EA26190B0536004579AA /* cmplx_split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cmplx_split.cpp; sourceTree = "<group>"; };
-		ABD1EA27190B0536004579AA /* cmplx_split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmplx_split.h; sourceTree = "<group>"; };
+		ABD1EA26190B0536004579AA /* complex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = complex.cpp; sourceTree = "<group>"; };
+		ABD1EA27190B0536004579AA /* complex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = complex.h; sourceTree = "<group>"; };
+		ABD1EA39190DFA62004579AA /* kinematics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kinematics.cpp; path = physics/classical_mechanics/kinematics.cpp; sourceTree = "<group>"; };
+		ABD1EA3A190DFA62004579AA /* kinematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kinematics.h; path = physics/classical_mechanics/kinematics.h; sourceTree = "<group>"; };
+		ABD1EA3D190DFCEE004579AA /* cmplx_combination.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cmplx_combination.cpp; path = cmplx_combination/cmplx_combination.cpp; sourceTree = "<group>"; };
+		ABD1EA3E190DFCEE004579AA /* cmplx_combination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmplx_combination.h; path = cmplx_combination/cmplx_combination.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +278,7 @@
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
+				ABD1EA2E190DF881004579AA /* physics */,
 				AB9D915A19071892006F0FCC /* sensible */,
 				AB3830D918AEF3A8009965F1 /* investigations */,
 				AB3830DF18AEF3A8009965F1 /* main.cpp */,
@@ -319,8 +326,8 @@
 				ABD1EA21190AE8E5004579AA /* spline.h */,
 				ABD1EA23190AFF25004579AA /* spline_cplx.cpp */,
 				ABD1EA24190AFF25004579AA /* spline_cplx.h */,
-				ABD1EA26190B0536004579AA /* cmplx_split.cpp */,
-				ABD1EA27190B0536004579AA /* cmplx_split.h */,
+				ABD1EA26190B0536004579AA /* complex.cpp */,
+				ABD1EA27190B0536004579AA /* complex.h */,
 			);
 			path = algorithms;
 			sourceTree = "<group>";
@@ -379,6 +386,7 @@
 		AB38310518AEF3A8009965F1 /* analysis */ = {
 			isa = PBXGroup;
 			children = (
+				ABD1EA3C190DFC82004579AA /* cplx_combination */,
 				AB5029BC1909E4AA00150E07 /* sweep */,
 				AB38310618AEF3A8009965F1 /* basedata.cpp */,
 				AB38310718AEF3A8009965F1 /* basedata.hpp */,
@@ -521,6 +529,32 @@
 			name = numerical_2011;
 			sourceTree = "<group>";
 		};
+		ABD1EA2E190DF881004579AA /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				ABD1EA2F190DF8BD004579AA /* classical_mechanics */,
+			);
+			name = physics;
+			sourceTree = "<group>";
+		};
+		ABD1EA2F190DF8BD004579AA /* classical_mechanics */ = {
+			isa = PBXGroup;
+			children = (
+				ABD1EA39190DFA62004579AA /* kinematics.cpp */,
+				ABD1EA3A190DFA62004579AA /* kinematics.h */,
+			);
+			name = classical_mechanics;
+			sourceTree = "<group>";
+		};
+		ABD1EA3C190DFC82004579AA /* cplx_combination */ = {
+			isa = PBXGroup;
+			children = (
+				ABD1EA3D190DFCEE004579AA /* cmplx_combination.cpp */,
+				ABD1EA3E190DFCEE004579AA /* cmplx_combination.h */,
+			);
+			name = cplx_combination;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -574,7 +608,7 @@
 			files = (
 				ABC716CC1905A4CF00C14977 /* num_method2014.cpp in Sources */,
 				AB38314D18AEF3A9009965F1 /* utility.cpp in Sources */,
-				ABD1EA28190B0536004579AA /* cmplx_split.cpp in Sources */,
+				ABD1EA28190B0536004579AA /* complex.cpp in Sources */,
 				AB9D91661907192B006F0FCC /* layer.cpp in Sources */,
 				AB38316618AEF3A9009965F1 /* programoptions.cpp in Sources */,
 				AB38313F18AEF3A9009965F1 /* sensitivityvaldes2013.cpp in Sources */,
@@ -600,6 +634,7 @@
 				AB9D9160190718DD006F0FCC /* temperature_scale.cpp in Sources */,
 				ABD1EA25190AFF25004579AA /* spline_cplx.cpp in Sources */,
 				AB5029BF1909E78C00150E07 /* temp_cmplx.cpp in Sources */,
+				ABD1EA3F190DFCEE004579AA /* cmplx_combination.cpp in Sources */,
 				AB19F8A21905FD700013D14D /* Numerical_PhaseOfEmission.cpp in Sources */,
 				AB19F8961905DF830013D14D /* diffusivity.cpp in Sources */,
 				AB9D915319071414006F0FCC /* detector.cpp in Sources */,
@@ -614,6 +649,7 @@
 				AB38314818AEF3A9009965F1 /* utils.cpp in Sources */,
 				AB38315A18AEF3A9009965F1 /* noise.cpp in Sources */,
 				AB19F8C019060B750013D14D /* analytical_2005.cpp in Sources */,
+				ABD1EA3B190DFA62004579AA /* kinematics.cpp in Sources */,
 				AB38315218AEF3A9009965F1 /* lmdiff_poptea.cpp in Sources */,
 				AB38314518AEF3A9009965F1 /* lmdiff.cpp in Sources */,
 				AB38314A18AEF3A9009965F1 /* simpsons_3_8.cpp in Sources */,

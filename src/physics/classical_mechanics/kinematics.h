@@ -23,23 +23,18 @@
  
 \*----------------------------------------------------------------------------*/
 
-#ifndef __tat__cmplx_split__
-#define __tat__cmplx_split__
+#ifndef __tat__kinematics__
+#define __tat__kinematics__
 
 #include <iostream>
-#include <vector>
-#include <complex>
 
-namespace math { namespace algorithms{
-using std::vector;
-using std::complex;
+namespace physics{
+namespace classical_mechanics{
 
-vector<double> cmplx_split_real( const vector< complex<double> > &input) ;
-vector<double> cmplx_split_imag( const vector< complex<double> > &input) ;
-
-
+double period_to_angularFrequency( const double period );
+double angularFrequency_to_period( const double angularFrequency );
 
 }}
 
 
-#endif /* defined(__tat__cmplx_split__) */
+#endif /* defined(__tat__kinematics__) */

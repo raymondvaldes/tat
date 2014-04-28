@@ -22,32 +22,22 @@
  Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
  
 \*----------------------------------------------------------------------------*/
+#include <cmath>
+#include "kinematics.h"
 
-#include "math/algorithms/cmplx_split.h"
+namespace physics{
+namespace classical_mechanics{
 
-namespace math{ namespace algorithms{
-
-vector<double> cmplx_split_real( const vector< complex<double> > &input)
+double period_to_angularFrequency( const double period )
 {
-  const size_t size = input.size();
-  vector<double> output( size );
-  
-  for( size_t i = 0; i < size ; ++i  )
-    output[i] = input[i].real() ;
-
-  return output;
+  const double angularFrequency = 2 * M_PI / period;
+  return angularFrequency ;
 }
 
-vector<double> cmplx_split_imag( const vector< complex<double> > &input)
+double  angularFrequency_to_period( const double angularFrequency )
 {
-  const size_t size = input.size();
-  vector<double> output( size );
-  
-  for( size_t i = 0; i < size ; ++i  )
-    output[i] = input[i].imag() ;
-
-  return output;
+  const double period = 2 * M_PI / angularFrequency;
+  return period;
 }
-
 
 }}
