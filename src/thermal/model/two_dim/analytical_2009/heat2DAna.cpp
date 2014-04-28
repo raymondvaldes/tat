@@ -41,7 +41,7 @@ HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
                                 const double k_coat_, const double L_,
                                 const double psi_coat_, const double ccoat_,
                                 const double lambda_Sub_,
-                                const class numericalModel::Mesh mesh_)
+                                const class numericalModel::Mesh mesh_ )
   : R0(R0_), R1(R1_), lambda(lambda_), It(It_), csub(csub_), asub(asub_),
     gamma(gamma_), beam(beam_), k_coat(k_coat_), L(L_), psi_coat(psi_coat_),
     ccoat(ccoat_), lambda_Sub(lambda_Sub_), mesh(mesh_)

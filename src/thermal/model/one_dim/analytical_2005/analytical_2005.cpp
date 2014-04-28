@@ -314,9 +314,6 @@ double analytical_2005::phase_nonlinear( const double omega ) const
   
   
   
-  
-  
-  
   double phase = 0;
   return phase;
 }
