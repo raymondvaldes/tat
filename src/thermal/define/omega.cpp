@@ -36,4 +36,4 @@ double omega( const double L_coat, const double l_thermal, const double k_c,
   return ( k_c / psi_c ) / ( pow( L_coat * l_thermal , 2 ) );
 }
     
-  }}
+}}

@@ -233,8 +233,8 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
 
     double OAPemission[3] = {offsetInitial, amplitudeInitial, phaseInitial};
 
-    math::estimation::cosfit( EmissionTime, mesh.tau, OAPemission,
-                              mesh.Nend ) ;
+    using math::estimation::cosfit;
+    cosfit( EmissionTime, mesh.tau, OAPemission, mesh.Nend ) ;
 
     return OAPemission[2];
 }

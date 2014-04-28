@@ -23,18 +23,24 @@
  
 \*----------------------------------------------------------------------------*/
 
-
-#ifndef __tat__omega__
-#define __tat__omega__
+#ifndef __tat__cmplx_split__
+#define __tat__cmplx_split__
 
 #include <iostream>
+#include <vector>
+#include <complex>
 
-namespace thermal{
-  namespace define{
+namespace math { namespace algorithms{
+using std::vector;
+using std::complex;
 
-double omega( const double L_coat, const double l_thermal, const double k_c,
-              const double psi_c );
+vector<double> cmplx_split_real( const vector< complex<double> > &input) ;
+vector<double> cmplx_split_imag( const vector< complex<double> > &input) ;
+double cmplx_modulus( const std::complex<double> &input ) ;
 
-    
+std::complex<double>
+mod_phase_to_cmplx( const double mod, const double phase ) ;
+
 }}
-#endif /* defined(__tat__omega__) */
+
+#endif /* defined(__tat__cmplx_split__) */
