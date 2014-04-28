@@ -27,8 +27,45 @@
 #define __tat__one_dim__
 
 #include <iostream>
+#include <complex>
+#include "sensible/TBCsystem.h"
+#include "thermal/equipment/laser.h"
 
 namespace thermal{ namespace model {namespace one_dim{
+
+class one_dim
+{
+  protected:
+  
+  struct layer
+  {
+    const double k;
+    const double psi;
+    const double L;
+    const double Lambda;
+    
+    explicit layer( const double k_in, const double psi_in, const double L_in,
+                    const double Lambda_in)
+    : k( k_in ), psi( psi_in ), L( L_in ), Lambda( Lambda_in ) {}
+  };
+  
+  const layer coat;
+  const double I_intensity_ss;
+  const double I_intensity_tt;
+
+  const double Temperature_interface;
+  const double gamma;
+  const double R1;
+  const double Emit1;
+  const std::complex<double> eye;
+
+  explicit one_dim( const sensible::layer &coating_in,
+                            const sensible::radiativeSysProp &radiative_prop_in,
+                            const thermal::equipment::Laser &laser_in,
+                            const double temp_in,
+                            const double gamma_in ) ;
+  ~one_dim( void ) ;
+};
 
 }}}
 
