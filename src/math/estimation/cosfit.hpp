@@ -32,15 +32,8 @@ License
 namespace math{
   namespace estimation{
 
-
-void cosfit(double **dependent, const double *independent, double *x, int j,
-            double omega1, int Nend);
-
-void cosfit(double *dependent,const std::vector<double> &independentVec,
-            double *x, size_t Nend);
-
-void cosfcn(int P,int /*N*/,double *x,double *fvec,int */*iflag*/,
-            double **variables);
+void cosfit( const double *dependent,const std::vector<double> &independentVec,
+             double *x, size_t Nend) ;
 
 void cosfcn1( int P, int /*N*/, double *x, double *fvec, int */*iflag*/,
               double **variables);
