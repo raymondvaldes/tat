@@ -45,11 +45,13 @@ class one_dim
     const double Lambda;
     
     explicit layer( const double k_in, const double psi_in, const double L_in,
-                    const double Lambda_in)
+                    const double Lambda_in )
     : k( k_in ), psi( psi_in ), L( L_in ), Lambda( Lambda_in ) {}
   };
   
   const layer coat;
+  const sensible::layer coat_full ;
+  const sensible::layer sub_full ;
   const double I_intensity_ss;
   const double I_intensity_tt;
 
@@ -60,10 +62,10 @@ class one_dim
   const std::complex<double> eye;
 
   explicit one_dim( const sensible::layer &coating_in,
-                            const sensible::radiativeSysProp &radiative_prop_in,
-                            const thermal::equipment::Laser &laser_in,
-                            const double temp_in,
-                            const double gamma_in ) ;
+                    const sensible::layer &substrate_in,
+                    const sensible::radiativeSysProp &radiative_prop_in,
+                    const thermal::equipment::Laser &laser_in,
+                    const double temp_in, const double gamma_in ) ;
   ~one_dim( void ) ;
 };
 

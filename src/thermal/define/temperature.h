@@ -27,9 +27,11 @@
 #define __tat__temperature__thermal_define__
 
 #include <iostream>
+#include <vector>
 
 namespace thermal{
   namespace define{
+  using std::vector;
 
 class Temperature
 {
@@ -38,6 +40,9 @@ public:
   double eval( const size_t Nvalue, const size_t M2Value ) const ;
   void assgn( const size_t i, const size_t j, const double value ) ;
   void cleanup( void ) ;
+  
+  vector<double> eval_at_z( const size_t val ) const;
+  vector<double> eval_at_t( const size_t val ) const;
   
 private:
   const size_t Nend;

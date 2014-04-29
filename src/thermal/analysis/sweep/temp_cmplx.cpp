@@ -25,8 +25,11 @@
 
 #include "thermal/analysis/sweep/temp_cmplx.h"
 #include "thermal/model/one_dim/analytical_2005/analytical_2005.h"
+#include "thermal/model/one_dim/numerical_2011/numerical_2011.h"
 #include "math/algorithms/spline_cplx.h"
 #include "math/utility.hpp"
+#include "thermal/define/temperature.h"
+#include "thermal/analysis/cmplx_combination/cmplx_combination.h"
 
 namespace thermal{
 namespace analysis{
@@ -58,6 +61,7 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
     {
       using thermal::model::one_dim::analytical_2005;
       const analytical_2005 thermalEngine( popteaCore.TBCsystem.coating,
+                                           popteaCore.TBCsystem.substrate,
                                            popteaCore.TBCsystem.optical,
                                            popteaCore.expSetup.laser,
                                            popteaCore.TBCsystem.Temp.rear,
@@ -74,9 +78,33 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
 
     case define::HeatX::OneDimNumLin:
     {
-    
-    
-      // 1) temperature field
+      using thermal::model::one_dim::numerical_2011;
+      const numerical_2011 thermalEngine( popteaCore.TBCsystem.coating,
+                                          popteaCore.TBCsystem.substrate,
+                                          popteaCore.TBCsystem.optical,
+                                          popteaCore.expSetup.laser,
+                                          popteaCore.TBCsystem.Temp.rear,
+                                          popteaCore.TBCsystem.gammaEval());
+      const size_t iter = 1000;
+      const double Ttol = .0001;
+      using std::cout;
+
+      using thermal::define::Temperature;
+      Temperature Tprofile( popteaCore.thermalsys.mesh.Nend,
+                            popteaCore.thermalsys.mesh.M2 ) ;
+      
+      thermalEngine.temperature_1D( omega, iter, Ttol,
+                                    popteaCore.thermalsys.mesh, Tprofile );
+      
+      const vector<double> Tsurface = Tprofile.eval_at_z(0);
+      
+      
+      complex<double> Tsurface_cmplx =
+      Ttransient_to_Tcplx( Tsurface , popteaCore.thermalsys.mesh.time ) ;
+      
+      cout << Tsurface_cmplx << "\nhello,world!\n";
+      
+                                 // 1) temperature field
       // 2) feed temperature field to ttransient to cmplx
       // 3) return the vector
     

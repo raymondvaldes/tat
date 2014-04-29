@@ -23,31 +23,18 @@
  
 \*----------------------------------------------------------------------------*/
 
-#include "thermal/model/one_dim/one_dim.h"
+#ifndef __tat__Tss_ana__
+#define __tat__Tss_ana__
 
-namespace thermal{ namespace model {namespace one_dim{
+#include <iostream>
 
-one_dim::one_dim(
-  const sensible::layer &coating_in,
-  const sensible::layer &substrate_in,
-  const sensible::radiativeSysProp &radiative_prop_in,
-  const thermal::equipment::Laser &laser_in,
-  const double temp_in,
-  const double gamma_in )
-  :
-  coat( coating_in.kthermal.offset, coating_in.psithermal.offset,
-        coating_in.depth, coating_in.lambda ),
-  coat_full( coating_in ),
-  sub_full( substrate_in ), 
-  I_intensity_ss(             laser_in.Is ),
-  I_intensity_tt(             laser_in.It ),
-  Temperature_interface(      temp_in ),
-  gamma(                      gamma_in ),
-  R1(                         radiative_prop_in.R1 ),
-  Emit1(                      radiative_prop_in.Emit1 ),
-  eye( 0.0,1.0 )
-{}
-  
-one_dim::~one_dim( void ) {}
+namespace thermal{ namespace model{ namespace one_dim{
+
+double Tss1D_ana( const double z, const double R1, const double lambda,
+                  const double Is, const double L, const double d,
+                  const double k_ref, const double Iplus0, const double Iplus1,
+                  const double q_surface, const double k_c );
 
 }}}
+
+#endif /* defined(__tat__Tss_ana__) */

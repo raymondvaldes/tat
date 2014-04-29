@@ -35,6 +35,26 @@ Temperature::Temperature( const size_t Nend_, const size_t M2_ )
   temperature = new double[Nend_ * M2_];
 }
 
+vector<double> Temperature::eval_at_z( const size_t val ) const
+{
+  vector<double> output( Nend ) ;
+
+  for ( size_t i = 0 ; i < Nend ; ++i)
+    output[i] = eval( i, val );
+  
+  return output;
+}
+
+vector<double> Temperature::eval_at_t( const size_t val ) const
+{
+  vector<double> output( M2 ) ;
+  
+  for ( size_t i = 0 ; i < M2 ; ++i)
+    output[i] = eval( val, i );
+  
+  return output;
+}
+
 double Temperature::eval( const size_t i, const size_t j ) const
 {
   return temperature[j + M2 * i];

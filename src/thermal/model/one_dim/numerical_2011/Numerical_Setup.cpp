@@ -25,7 +25,7 @@ License
 #include <cmath>
 #include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
 
-
+//SLATE FOR DELETETION//
 double gspatial( double z, double opt, double lambda, double R1, double Iplus0,
                  double Iplus1)
 {
@@ -43,6 +43,7 @@ double gspatial( double z, double opt, double lambda, double R1, double Iplus0,
   return 0;
 }
 
+//SLATE FOR DELETETION//
 
 double gs_int(const double eta, const double opt, const double lambda,
               const double R1, const double Iplus0,

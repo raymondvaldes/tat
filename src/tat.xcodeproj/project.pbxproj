@@ -42,7 +42,6 @@
 		AB38315B18AEF3A9009965F1 /* phase99.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38311D18AEF3A8009965F1 /* phase99.cpp */; };
 		AB38315C18AEF3A9009965F1 /* emission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38311F18AEF3A8009965F1 /* emission.cpp */; };
 		AB38315E18AEF3A9009965F1 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312418AEF3A9009965F1 /* model.cpp */; };
-		AB38316018AEF3A9009965F1 /* Numerical_Setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312918AEF3A9009965F1 /* Numerical_Setup.cpp */; };
 		AB38316118AEF3A9009965F1 /* Numerical_Temperature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312B18AEF3A9009965F1 /* Numerical_Temperature.cpp */; };
 		AB38316218AEF3A9009965F1 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38312D18AEF3A9009965F1 /* mesh.cpp */; };
 		AB38316418AEF3A9009965F1 /* exportfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313318AEF3A9009965F1 /* exportfile.cpp */; };
@@ -57,6 +56,8 @@
 		AB8B64C2190F1D7700B2C008 /* tma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64C0190F1D7700B2C008 /* tma.cpp */; };
 		AB8B64CD190F204200B2C008 /* Iheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64CB190F204200B2C008 /* Iheat.cpp */; };
 		AB8B64D1190F20CA00B2C008 /* tau_0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64CF190F20CA00B2C008 /* tau_0.cpp */; };
+		AB8B64D4190F25BE00B2C008 /* Tss_ana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64D2190F25BE00B2C008 /* Tss_ana.cpp */; };
+		AB8B64E1190F301500B2C008 /* Numerical_Setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64DF190F301500B2C008 /* Numerical_Setup.cpp */; };
 		AB9D915319071414006F0FCC /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D915119071414006F0FCC /* detector.cpp */; };
 		AB9D91561907141D006F0FCC /* laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D91541907141D006F0FCC /* laser.cpp */; };
 		AB9D9159190714DC006F0FCC /* setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9D9157190714DC006F0FCC /* setup.cpp */; };
@@ -162,8 +163,6 @@
 		AB38312418AEF3A9009965F1 /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = model.cpp; path = /Users/raymondvaldes/code/tat/src/thermal/define/model.cpp; sourceTree = "<absolute>"; };
 		AB38312518AEF3A9009965F1 /* model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = model.hpp; path = define/model.hpp; sourceTree = "<group>"; };
 		AB38312818AEF3A9009965F1 /* Numerical_PhaseOfEmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Numerical_PhaseOfEmission.h; path = ../simulations/Numerical_PhaseOfEmission.h; sourceTree = "<group>"; };
-		AB38312918AEF3A9009965F1 /* Numerical_Setup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Numerical_Setup.cpp; path = model/one_dim/numerical_2011/Numerical_Setup.cpp; sourceTree = "<group>"; };
-		AB38312A18AEF3A9009965F1 /* Numerical_Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Numerical_Setup.h; path = model/one_dim/numerical_2011/Numerical_Setup.h; sourceTree = "<group>"; };
 		AB38312B18AEF3A9009965F1 /* Numerical_Temperature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Numerical_Temperature.cpp; path = model/one_dim/numerical_2011/Numerical_Temperature.cpp; sourceTree = "<group>"; };
 		AB38312C18AEF3A9009965F1 /* Numerical_Temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Numerical_Temperature.h; path = model/one_dim/numerical_2011/Numerical_Temperature.h; sourceTree = "<group>"; };
 		AB38312D18AEF3A9009965F1 /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mesh.cpp; path = model/one_dim/numerical_2011/mesh.cpp; sourceTree = "<group>"; };
@@ -194,6 +193,10 @@
 		AB8B64CC190F204200B2C008 /* Iheat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Iheat.h; path = "model/utilities/heat generation/Iheat.h"; sourceTree = "<group>"; };
 		AB8B64CF190F20CA00B2C008 /* tau_0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tau_0.cpp; path = model/utilities/nondimensional/tau_0.cpp; sourceTree = "<group>"; };
 		AB8B64D0190F20CA00B2C008 /* tau_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tau_0.h; path = model/utilities/nondimensional/tau_0.h; sourceTree = "<group>"; };
+		AB8B64D2190F25BE00B2C008 /* Tss_ana.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tss_ana.cpp; path = model/one_dim/Tss_ana.cpp; sourceTree = "<group>"; };
+		AB8B64D3190F25BE00B2C008 /* Tss_ana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tss_ana.h; path = model/one_dim/Tss_ana.h; sourceTree = "<group>"; };
+		AB8B64DF190F301500B2C008 /* Numerical_Setup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Numerical_Setup.cpp; path = model/one_dim/numerical_2011/Numerical_Setup.cpp; sourceTree = "<group>"; };
+		AB8B64E0190F301500B2C008 /* Numerical_Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Numerical_Setup.h; path = model/one_dim/numerical_2011/Numerical_Setup.h; sourceTree = "<group>"; };
 		AB9D915119071414006F0FCC /* detector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = detector.cpp; sourceTree = "<group>"; };
 		AB9D915219071414006F0FCC /* detector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detector.h; sourceTree = "<group>"; };
 		AB9D91541907141D006F0FCC /* laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laser.cpp; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 				AB19F8B4190606DF0013D14D /* analytical_2005 */,
 				AB8B64B4190F062600B2C008 /* one_dim.cpp */,
 				AB8B64B5190F062600B2C008 /* one_dim.h */,
+				AB8B64D2190F25BE00B2C008 /* Tss_ana.cpp */,
+				AB8B64D3190F25BE00B2C008 /* Tss_ana.h */,
 			);
 			name = one_dim;
 			sourceTree = "<group>";
@@ -592,10 +597,10 @@
 		ABD1EA29190B178A004579AA /* numerical_2011 */ = {
 			isa = PBXGroup;
 			children = (
+				AB8B64DF190F301500B2C008 /* Numerical_Setup.cpp */,
+				AB8B64E0190F301500B2C008 /* Numerical_Setup.h */,
 				AB38312D18AEF3A9009965F1 /* mesh.cpp */,
 				AB38312E18AEF3A9009965F1 /* mesh.hpp */,
-				AB38312918AEF3A9009965F1 /* Numerical_Setup.cpp */,
-				AB38312A18AEF3A9009965F1 /* Numerical_Setup.h */,
 				AB38312B18AEF3A9009965F1 /* Numerical_Temperature.cpp */,
 				AB38312C18AEF3A9009965F1 /* Numerical_Temperature.h */,
 				AB8B64B7190F15CD00B2C008 /* numerical_2011.cpp */,
@@ -683,6 +688,7 @@
 			files = (
 				ABC716CC1905A4CF00C14977 /* num_method2014.cpp in Sources */,
 				AB38314D18AEF3A9009965F1 /* utility.cpp in Sources */,
+				AB8B64E1190F301500B2C008 /* Numerical_Setup.cpp in Sources */,
 				ABD1EA28190B0536004579AA /* complex.cpp in Sources */,
 				AB9D91661907192B006F0FCC /* layer.cpp in Sources */,
 				AB38316618AEF3A9009965F1 /* programoptions.cpp in Sources */,
@@ -716,6 +722,7 @@
 				AB9D915319071414006F0FCC /* detector.cpp in Sources */,
 				AB8B64B6190F062600B2C008 /* one_dim.cpp in Sources */,
 				AB38314018AEF3A9009965F1 /* main.cpp in Sources */,
+				AB8B64D4190F25BE00B2C008 /* Tss_ana.cpp in Sources */,
 				AB8B64D1190F20CA00B2C008 /* tau_0.cpp in Sources */,
 				AB19F8931905DF430013D14D /* effusivity.cpp in Sources */,
 				AB38315C18AEF3A9009965F1 /* emission.cpp in Sources */,
@@ -734,7 +741,6 @@
 				AB38314A18AEF3A9009965F1 /* simpsons_3_8.cpp in Sources */,
 				AB38314418AEF3A9009965F1 /* cosfit.cpp in Sources */,
 				AB8B64CD190F204200B2C008 /* Iheat.cpp in Sources */,
-				AB38316018AEF3A9009965F1 /* Numerical_Setup.cpp in Sources */,
 				ABC277941907393F003A4D06 /* temperature.cpp in Sources */,
 				AB38314718AEF3A9009965F1 /* parameterestimation.cpp in Sources */,
 				AB8B64C2190F1D7700B2C008 /* tma.cpp in Sources */,

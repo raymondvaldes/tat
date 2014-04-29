@@ -50,6 +50,7 @@ private:
 
 public:
   explicit analytical_2005( const sensible::layer &coating_in,
+                            const sensible::layer &substrate_in,
                             const sensible::radiativeSysProp &radiative_prop_in,
                             const thermal::equipment::Laser &laser_in,
                             const double temp_in,

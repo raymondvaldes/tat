@@ -24,9 +24,11 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef NUMERICAL_SETUP_H_INCLUDED
 #define NUMERICAL_SETUP_H_INCLUDED
+//SLATE FOR DELETETION//
 
 double gspatial(double eta, double opt, double lambda, double R1,
                 double Iplus0, double Iplus1);
+//SLATE FOR DELETETION//
 
 
 double gs_int(const double eta, const double opt, const double lambda,

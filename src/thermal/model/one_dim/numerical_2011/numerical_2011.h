@@ -26,38 +26,127 @@
 #ifndef __tat__numerical_2011__
 #define __tat__numerical_2011__
 
-#include <iostream>
 #include <complex>
-#include "math/algorithms/spline_cplx.h"
-#include "thermal/model/one_dim/one_dim.h"
+#include <iostream>
+#include "one_dim.h"
+#include "thermal/define/temperature.h"
+#include "sensible/layer.h"
+#include "sensible/property.h"
+#include "thermal/model/one_dim/numerical_2011/mesh.hpp"
 
-namespace thermal{ namespace model {namespace one_dim{
-
+namespace thermal{ namespace model { namespace one_dim{
+  
   using std::complex;
-  using math::algorithms::spline_cplx;
-
+  using std::vector;
+  
 class numerical_2011: protected one_dim
 {
 private:
-          double  T_ss_R1eq1_eval( const double omega, const double z ) const ;
-  complex<double> T_tt_R1eq1_eval( const double omega, const double z ) const ;
+  class matrixArrays
+  {
+    public:
+    vector<double> A1, A2, A3;
+    vector<double> b;
+    vector<double> Temperature;
+    vector<double> B1, B2, B3;
+
+    const size_t M2;
+    double B4;
+
+    explicit matrixArrays( const size_t length )
+      : A1(length), A2(length), A3(length), b(length), Temperature(length),
+      B1(length), B2(length), B3(length), M2(length){}
+  };
+
+
+  double gspatial( double eta, double opt, double lambda, double R1,
+                   double Iplus0, double Iplus1 ) const;
+  double gs_int( const double eta, const double opt, const double lambda,
+                 const double R1, const double Iplus0, const double Iplus1 ) const;
+  double t_tau( const double tau, const double tau_ref ) const;
+  double Iaverage( const double Is, const double It, const double omega,
+                   const double tau_ref,
+                   const vector<double>&tau,
+                   const size_t n ) const;
+  double Gaverage( const double opt, const double lambda, const double R1,
+                   const double Iplus0, const double Iplus1, const double z1,
+                   const double z2 ) const;
+  double Iplus0Func( const double R0, const double R1, const double lambda ) const;
+  double Iplus1Func( const double R0, const double R1, const double lambda ) const;
+  double abMatrixPrepopulate( vector<double>& B1,
+                              vector<double>& B2,
+                              vector<double>& B3,
+                              const size_t M1, const size_t M2,
+                              const vector<double>&tau,
+                              const double L_coat, const double L_substrate,
+                              const double tau_ref,
+                              const vector<double>& eta,
+                              const double q_surface,
+                              const vector<double>& z_jplus,
+                              const vector<double>& z_jminus,
+                              const vector<double>& z_j,
+                              const vector<double>&d_eta_plus,
+                              const vector<double>&deltaZ,
+                              const vector<double>&d_eta_minus ) const;
+
+  void heatingProfile( const double opt, const double lambda,
+                       const double R1, const double Iplus0, const double Iplus1,
+                       const vector<double>& z_jplus,
+                       const vector<double>& z_jminus,
+                       const vector<double>& z_j, double*genProfile,
+                       const size_t M1 ) const ;
+
+  void bMatrixPrepopulate1( const size_t n, std::vector<double>& B2,
+                            vector<double>& b, const size_t M1,
+                            const size_t M2,
+                            const vector<double>& tau,
+                            const double Is, const double It, const double L_coat,
+                            const double tau_ref, const double R1,
+                            const double Iplus1, const double omega,
+                            const vector<double>& z_jminus,
+                            const vector<double>& z_j,
+                            const vector<double>&deltaZ,
+                            const double* genProfile,
+                            const double T_rear ) const;
+  
+  complex<double> Tac1D_ana( const double z, const double R0, const double R1,
+                             const double epsilon, const double Lam,
+                             const double Lthrm ) const;
+  
+  void Ab_transient( const size_t n,
+                     vector<double>& A1,
+                     vector<double>& A2,
+                     vector<double>& A3,
+                     vector<double>& b, const define::Temperature Tprofile,
+                     const size_t M1,
+                     const size_t M2,
+                     const vector<double>& B1,
+                     const vector<double>& B2,
+                     const vector<double>& B3,
+                     const double B4,
+                     const sensible::property *kLayer1,
+                     const sensible::property *kLayer2,
+                     const sensible::property *psiLayer1,
+                     const sensible::property *psiLayer2
+                   ) const;
+  
 
 public:
   explicit numerical_2011( const sensible::layer &coating_in,
+                           const sensible::layer &substrate_in, 
                            const sensible::radiativeSysProp &radiative_prop_in,
                            const thermal::equipment::Laser &laser_in,
                            const double temp_in,
                            const double gamma_in ) ;
   ~numerical_2011( void ) ;
   
-  complex<double> T_tt_eval_cplx( const double omega, const double z ) const;
-  double phase_linear( const double omega ) const ;
-  double phase_nonlinear( const double omega ) const;
+  void temperature_1D( const double omega1, const size_t iter,
+                       const double Ttol, numericalModel::Mesh mesh,
+                       thermal::define::Temperature Tprofile ) const ;
   
-  //sweeps
-  spline_cplx T_tt_R1eq1_cplx_sweep( const double omega ) const;
 };
 
+  
 }}}
 
 #endif /* defined(__tat__numerical_2011__) */

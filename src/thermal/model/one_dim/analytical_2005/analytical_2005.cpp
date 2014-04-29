@@ -31,12 +31,14 @@ namespace thermal{ namespace model {namespace one_dim{
   
 analytical_2005::analytical_2005(
   const sensible::layer &coating_in,
+  const sensible::layer &substrate_in,
   const sensible::radiativeSysProp &radiative_prop_in,
   const thermal::equipment::Laser &laser_in,
   const double temp_in,
   const double gamma_in )
   :
-  one_dim( coating_in, radiative_prop_in, laser_in, temp_in, gamma_in )
+  one_dim( coating_in, substrate_in, radiative_prop_in, laser_in, temp_in,
+           gamma_in )
   {}
   
 analytical_2005::~analytical_2005( void ) {}
@@ -210,6 +212,7 @@ complex<double> analytical_2005::
 
   const complex<double>
     output = T_tt_R1eq1_eval( omega, z ) + coeff * bracket ;
+
   
   return output;
 }

@@ -71,6 +71,11 @@ void run( const filesystem::directory &dir )
   vector<double> emission2 =
   phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
   
+  vector<complex<double >> heat2_cplx =
+  temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ,
+                       temp_resolution) ;
+  
+  
   for(size_t i = 0 ; i < poptea.thermalData->size() ; ++i )
     cout << emission1[i] << "\t" <<  emission2[i] << "\n";
   

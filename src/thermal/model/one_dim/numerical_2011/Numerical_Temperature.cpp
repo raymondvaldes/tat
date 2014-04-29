@@ -36,6 +36,8 @@ License
 #include "math/solvers/tma.h"
 #include "thermal/model/utilities/heat generation/Iheat.h"
 #include "thermal/model/utilities/nondimensional/tau_0.h"
+#include "thermal/model/one_dim/Tss_ana.h"
+
 using sensible::property;
 using thermal::define::Temperature;
 
@@ -81,27 +83,28 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
                     lambda, l_thermal);
 
   double
-    amplitude_T_analytical = std::abs( Tinfo );
+  amplitude_T_analytical = std::abs( Tinfo );
   amplitude_T_analytical *= L_coat * It * (1 - R0) ;
   amplitude_T_analytical /= k1_thermal->offset ;
 
   const double Iplus0 = Iplus0Func(R0, R1, lambda);
   const double Iplus1 = Iplus1Func(R0, R1, lambda);
 
+  using thermal::model::one_dim::Tss1D_ana;
   for(size_t j=0 ; j <= mesh.M1; ++j)
   {
-    Tprofile.assgn(0,j, Tss1D_ana(mesh.z_real[j] / L_coat, R1, lambda, Is,
-                                  L_coat, (L_coat+L_substrate)/L_coat,
-                                  k2_thermal->offset, Iplus0, Iplus1,
-                                  q_surface, k1_thermal->offset));
+    Tprofile.assgn(0,j, Tss1D_ana( mesh.z_real[j] / L_coat, R1, lambda, Is,
+                                   L_coat, (L_coat+L_substrate)/L_coat,
+                                   k2_thermal->offset, Iplus0, Iplus1,
+                                   q_surface, k1_thermal->offset) );
   }
 
   for (size_t j = mesh.M1+1; j < mesh.M2; j++)
   {
       Tprofile.assgn(0,j, Tss1D_ana( mesh.z_real[j] / L_coat, R1, lambda,
-                                    Is,  L_coat, (L_coat+L_substrate)/L_coat,
-                                    k2_thermal->offset, Iplus0, Iplus1,
-                                    q_surface, k1_thermal->offset));
+                                     Is,  L_coat, (L_coat+L_substrate)/L_coat,
+                                     k2_thermal->offset, Iplus0, Iplus1,
+                                     q_surface, k1_thermal->offset) );
   }
 ///Transient Solution
   /*
@@ -642,56 +645,7 @@ std::complex<double> Tac1D_ana(const double z,const double R0,const double R1,
     return theta;
 }
 
-double Tss1D_ana( const double z, const double R1, const double lambda,
-                  const double Is, const double L, const double d,
-                 const double k_ref, const double Iplus0, const double Iplus1,
-                 const double q_surface, const double k_c)
-{
-    /* This is the steady state 1d analytical solution to volumetric heat
-    absorption in a two-layer system.  The front surface is maintained with
-    an adiabatic boundary and the rear surface is held at a constant reference
-    temperature of zero. */
-    double Tss = 0;
-    using std::exp;
 
-    const double
-    C0 = Is * L  / ( lambda * k_c ) ;
-
-    const double
-    Clam = exp( -1 / lambda );
-
-    double
-    C1  = C0 ;
-    C1 *= -Iplus0 * lambda + R1 * Iplus1 * lambda * Clam;
-    C1 -= q_surface / (k_c / k_ref);
-
-    double
-    C3  = k_c / k_ref;
-    C3 *= -C0 * ( - Iplus0 * lambda * Clam + R1 * Iplus1 * lambda ) + C1 ;
-    C3 += ( ( -1 + R1 ) * Is * Iplus1 * L ) /   k_ref  ;
-
-    double
-    C4 = - C3 * d;
-
-    double
-    C2 =  C0 ;
-    C2 *= lambda * lambda * Iplus0 * Clam + R1 * Iplus1 * lambda * lambda ;
-    C2 += C4 + C3 - C1;
-
-    if ( z<=1 )
-    {
-        Tss = -C0;
-        Tss *= Iplus0 * lambda * lambda * exp( -z / lambda ) + R1 * Iplus1 *
-               lambda * lambda * exp( ( z - 1 ) / lambda ) ;
-        Tss += C1 * z;
-        Tss += C2;
-    }
-    else if (z > 1)
-    {
-        Tss = C3 * z + C4 ;
-    }
-    return Tss;
-}
 
 double t_tau(const double tau, const double tau_ref)
 {
@@ -724,27 +678,7 @@ double Gaverage(const double opt, const double lambda, const double R1,
     return generation;
 }
 
-double r_xi(const double xi, const double beta)
-{
-    //z_norm accounts for z_real after it has been normalized by
-    //L_coat and L_substrat
-//    double B;
-    if ( math::equalto( xi , 0 ) )
-    {
-        return xi;
-    }
-    else if ( math::equalto(xi,1) )
-    {
-        return xi;
-    }
-    else if (xi < 1)
-    {
-        const double B = ( beta + 1) / (beta - 1) ;
-        return 1 + beta - ( 2 * B * beta ) / ( B + pow( B , xi ) ) ;
-    }
 
-    return -1;
-}
 
 double Iplus0Func(const double R0, const double R1, const double lambda)
 {

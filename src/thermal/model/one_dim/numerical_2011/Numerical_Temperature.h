@@ -53,10 +53,6 @@ class matrixArrays
       B1(length), B2(length), B3(length), M2(length){}
 };
 
-double Tss1D_ana( const double z, const double R1, const double lambda,
-                  const double Is, const double L, const double d,
-                  const double k_ref, const double Iplus0, const double Iplus1,
-                  const double q_surface, const double k_c );
 
 std::complex<double> Tac1D_ana( const double z, const double R0,
                                 const double R1, const double epsilon,
@@ -86,7 +82,6 @@ double abMatrixPrepopulate( std::vector<double>& B1,
 
 void bMatrixPrepopulate1( const size_t n, std::vector<double>& B2,
                           std::vector<double>& b, const size_t M1,
-
                           const size_t M2, const std::vector<double> &tau,
                           const double Is, const double It, const double L_coat,
                           const double tau_ref, const double R1,
@@ -111,28 +106,24 @@ void Ab_transient( const size_t n,
                    std::vector<double>& A1,
                    std::vector<double>& A2,
                    std::vector<double>& A3,
-                   std::vector<double>& b, const class Temperature Tprofile,
+                   std::vector<double>& b, const Temperature Tprofile,
                    const size_t M1,
                    const size_t M2,
                    const std::vector<double>& B1,
                    const std::vector<double>& B2,
                    const std::vector<double>& B3,
                    const double B4,
-                   const class property *kLayer1,
-                   const class property *kLayer2,
-                   const class property *psiLayer1,
-                   const class property *psiLayer2);
+                   const property *kLayer1,
+                   const property *kLayer2,
+                   const property *psiLayer1,
+                   const property *psiLayer2) ;
 
-double t_tau( const double tau, const double tau_ref );
-
+double t_tau( const double tau, const double tau_ref ) ;
 double Iaverage( const double Is, const double It, const double omega,
                  const double tau_ref, const std::vector<double> &tau,
-                 const size_t n);
+                 const size_t n) ;
 
-double r_xi( const double xi, const double beta );
-
-double Iplus1Func( const double R0, const double R1, const double lambda );
-double Iplus0Func( const double R0, const double R1, const double lambda );
-
+double Iplus1Func( const double R0, const double R1, const double lambda ) ;
+double Iplus0Func( const double R0, const double R1, const double lambda ) ;
 
 #endif // NUMERICAL_TEMPERATURE_H_INCLUDED

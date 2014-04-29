@@ -64,8 +64,7 @@ Tcplx_to_Ttransient( const std::complex<double> &cplx , const double omega,
 
 std::complex<double>
 Ttransient_to_Tcplx( const std::vector<double> Ttransient ,
-                     const std::vector<double> time,
-                     const double period )
+                     const std::vector<double> time )
 {
   /* Only one period or wavelength of thermal transient temperature data can
      be sent as the arguement. This can be verified by using an assert */

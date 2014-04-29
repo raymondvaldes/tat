@@ -50,6 +50,7 @@ phase99( const thermal::analysis::Kernal &popteaCore,
     {
       using thermal::model::one_dim::analytical_2005;
       const analytical_2005 thermalEngine( popteaCore.TBCsystem.coating,
+                                           popteaCore.TBCsystem.substrate,
                                            popteaCore.TBCsystem.optical,
                                            popteaCore.expSetup.laser,
                                            popteaCore.TBCsystem.Temp.rear,
