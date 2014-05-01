@@ -53,7 +53,7 @@ void run( const filesystem::directory &dir )
   poptea.bestFit() ;
   std::cout << poptea.ppUnknownParameters() ;
 
-
+return;
   {
     /// PartA ( pie_analysis )
     const string partA = "/partA_pieAnalysis" ;
@@ -75,7 +75,7 @@ void run( const filesystem::directory &dir )
       poptea.bestFit() ;
       ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
       outputData.pp2Folder( dir.abs( partB ) , std::to_string(i)  ) ;
-//      std::cout << poptea.ppUnknownParameters() << "\n" ;
+      std::cout << poptea.ppUnknownParameters() << "\n" ;
     }
   }
 

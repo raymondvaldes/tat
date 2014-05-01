@@ -43,12 +43,13 @@ int main( int argc, char *argv[ ] )
 {
   using std::string;
   using std::vector;
+  using std::cout;
   
   string myDirectory;
-
-  if( tools::programoptions::loadOptions( argc, argv, myDirectory ) )
+  using tools::programoptions::loadOptions;
+  if( loadOptions( argc, argv, myDirectory ) )
   {
-    std::cout << "Welcome back, Raymond!\n\n" ;
+    cout << "Welcome back, Raymond!\n\n" ;
     stopwatch globalStopWatch ;
 
     using boost::filesystem::path;
@@ -57,11 +58,11 @@ int main( int argc, char *argv[ ] )
     {
       const string specimanPath = testSpeciman.string() ;
       const filesystem::directory dir( specimanPath ) ;
-      //investigations::sensitivityvaldes2013::run( dir ) ;
-      investigations::num_method::run( dir ) ;
+      investigations::sensitivityvaldes2013::run( dir ) ;
+      //investigations::num_method::run( dir ) ;
     }
 
-    std::cout << globalStopWatch.readoutLoud() << "\n";
+    cout << globalStopWatch.readoutLoud() << "\n";
   }
 
   return 0;
