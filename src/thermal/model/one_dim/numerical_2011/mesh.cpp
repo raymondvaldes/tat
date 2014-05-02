@@ -22,6 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <limits>
 #include <cassert>
 #include <cmath>
 #include "thermal/model/one_dim/numerical_2011/mesh.hpp"

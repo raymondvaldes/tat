@@ -28,7 +28,7 @@
 
 #include <complex>
 #include <iostream>
-#include "one_dim.h"
+#include "thermal/model/one_dim/one_dim.h"
 #include "thermal/define/temperature.h"
 #include "sensible/layer.h"
 #include "sensible/property.h"

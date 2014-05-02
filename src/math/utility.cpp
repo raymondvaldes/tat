@@ -22,6 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <limits>
 #include <random>
 #include <ctime>
 #include <chrono>
