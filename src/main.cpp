@@ -58,8 +58,8 @@ int main( int argc, char *argv[ ] )
     {
       const string specimanPath = testSpeciman.string() ;
       const filesystem::directory dir( specimanPath ) ;
-      investigations::sensitivityvaldes2013::run( dir ) ;
-      //investigations::num_method::run( dir ) ;
+      //investigations::sensitivityvaldes2013::run( dir ) ;
+      investigations::num_method::run( dir ) ;
     }
 
     cout << globalStopWatch.readoutLoud() << "\n";

@@ -54,10 +54,8 @@ phase99( const thermal::analysis::Kernal &popteaCore,
                                            popteaCore.TBCsystem.optical,
                                            popteaCore.expSetup.laser,
                                            popteaCore.TBCsystem.Temp.rear,
-                                           popteaCore.TBCsystem.gammaEval());
-      for( size_t n = 0 ; n < L_end ; ++n )
-        { results[ n ] = thermalEngine.phase_linear( omegas[n] ) ; }
-      
+                                           popteaCore.TBCsystem.gammaEval() ) ;
+      results = thermalEngine.sweep_phase_linear( omegas ) ;
       break;
     }
 
