@@ -28,6 +28,10 @@
 #include "thermal/analysis/poptea_initialize.h"
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/sweep/temp_cmplx.h"
+#include "thermal/analysis/cmplx_combination/cmplx_combination.h"
+
+#include "physics/classical_mechanics/kinematics.h"
+#include "math/utility.hpp"
 
 namespace investigations{
   namespace num_method{
@@ -52,38 +56,66 @@ void run( const filesystem::directory &dir )
   Poptea poptea = initializePopTeawithNominalEmission( dir ) ;
   construct theoreticalModel = poptea.coreSystem->thermalsys.Construct ;
   
-  
-  // prepare models see emission
+  /// prepare new thermal model
   theoreticalModel.update( HeatX::OneDimAnalytical, EmissionX::OneDimNonLin ) ;
   poptea.reloadThermalModel( theoreticalModel) ;
-  vector<double> emission1 =
-  phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
   
+  /// output emission
+  vector<double> emission1 = phase99( *( poptea.coreSystem ) , poptea.thermalData->omegas ) ;
+  
+  const size_t unit = poptea.thermalData->omegas.size() - 1;
+  const double omega = poptea.thermalData->omegas[unit] ;
+  std::cout << omega << "\n";
+
   vector<complex<double >> heat1_cplx =
-  temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ,
-                       temp_resolution) ;
+  temp_cplx_99( *( poptea.coreSystem ) , omega , temp_resolution ) ;
+  const size_t z_pos = 0;
+  const complex<double> Tcplx = heat1_cplx[z_pos] ;
+  cout << "the complex number is:\t" << Tcplx << "\n";
+
+
+  using thermal::analysis::Tcplx_to_Ttransient;
+  using thermal::analysis::Ttransient_to_Tcplx;
+  const size_t res = 102;
+  const vector<double> zval = math::range(0,1,res);
+
+
+  using std::abs ;
+  using std::arg ;
+  cout << "mod:  " << abs( Tcplx ) << "\targ:\t" << arg( Tcplx ) <<"\n\n";
+
+  vector<double> test = Tcplx_to_Ttransient( Tcplx , omega, res ) ;
+  vector<double> time = t_cmplx_to_t_time( omega, res );
   
+  using physics::classical_mechanics::angularFrequency_to_period;
+  cout << "period is\t " << angularFrequency_to_period( omega )  << "\n" ;
+  cout << "zpos is\t" << zval[z_pos ] << "\n";
+  cout << "the complex number is:\t" << heat1_cplx[z_pos] << "\n" ;
+//  for( size_t i = 0 ; i < res ; ++i)
+//    cout << test[i] << "\n";
+//  cout << "\n\n";
   
-  
-  
+  complex<double> time_transformed = Ttransient_to_Tcplx(test);
+  cout << "the complex number is:\t" << time_transformed << "\n\n";
+
   theoreticalModel.update( HeatX::OneDimNumLin, EmissionX::OneDimNonLin ) ;
-  poptea.reloadThermalModel( theoreticalModel) ;
-  vector<double> emission2 =
-  phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
+  poptea.reloadThermalModel( theoreticalModel ) ;
+  const vector<double> emission2 =
+  phase99( *( poptea.coreSystem ) , poptea.thermalData->omegas ) ;
   
-  vector<complex<double >> heat2_cplx =
-  temp_cplx_99( *(poptea.coreSystem) , poptea.thermalData->omegas[0] ,
-                       temp_resolution) ;
+  const vector<complex< double >> heat2_cplx =
+  temp_cplx_99( *( poptea.coreSystem ) , poptea.thermalData->omegas[unit] ,
+                temp_resolution ) ;
   
   
-  for(size_t i = 0 ; i < poptea.thermalData->size() ; ++i )
-    cout << emission1[i] << "\t" <<  emission2[i] << "\n";
+//  for(size_t i = 0 ; i < poptea.thermalData->size() ; ++i )
+//    cout << emission1[i] << "\t" <<  emission2[i] << "\n";
   
   cout << "\n\n";
   cout << "complex temperature fields" << "\n";
   
-  for(size_t i = 0 ; i < temp_resolution ; ++i )
-    cout << heat1_cplx[i] << "\n";
+//  for(size_t i = 0 ; i < temp_resolution ; ++i )
+//    cout << heat1_cplx[i] << "\n";
   
   /// Part test
   // poptea.bestFit() ;

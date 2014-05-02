@@ -31,151 +31,135 @@ namespace math{
 
 
 
-void cosfit( const double *dependent, const std::vector<double> &independentVec,
+void cosfit( const double *dependent, const std::vector<double> &independent,
              double *x, size_t Nend)
 {
-///Must replace const double *independent by vector.  However, will create a
-///new object replace back in.
 
-  double*independent = new double[Nend];
-  for(size_t i=0 ; i< static_cast<size_t>(Nend) ; ++i )
-  {
-      independent[i] = independentVec[i] ;
-  }
-
-
-    constexpr size_t N = 3; // number  of constants to be fitted
-    const size_t P = Nend-1;
-    //number of datapoints to be used in the fitting process
-    constexpr double ftol = 1.e-10;
-    constexpr double xtol = 1.e-10;
-    constexpr double gtol = 1.e-10;
-    constexpr int maxfev = 1e8;
-    constexpr double epsfcn = 1.e-12;
-    constexpr double factor = 1;
-    constexpr int mode = 1;
-    constexpr int nprint = 0;
+  constexpr size_t N = 3; // number  of constants to be fitted
+  const size_t P = Nend-1;
+  //number of datapoints to be used in the fitting process
+  constexpr double ftol = 1.e-10;
+  constexpr double xtol = 1.e-10;
+  constexpr double gtol = 1.e-10;
+  constexpr int maxfev = 1e8;
+  constexpr double epsfcn = 1.e-12;
+  constexpr double factor = 1;
+  constexpr int mode = 1;
+  constexpr int nprint = 0;
 
 ///Transform input into offset, amplitude, phase
-    /*
-    The offset is limited to positive values.
-    The amplitude if limited to positive values.  This is accomplished
-    by reparameterization (Bates and Watts, 1988). See pg 163 Englezos
-    (applied parameter estimation)
-    ex. k_i = exp(kappa_i)
+  /*
+  The offset is limited to positive values.
+  The amplitude if limited to positive values.  This is accomplished
+  by reparameterization (Bates and Watts, 1988). See pg 163 Englezos
+  (applied parameter estimation)
+  ex. k_i = exp(kappa_i)
 
-    By conducting our search over kappa regardless of its value, exp(kappa)
-    and hence k is always positive.
+  By conducting our search over kappa regardless of its value, exp(kappa)
+  and hence k is always positive.
 
-    The phase is bounded from -pi to +pi.
-    */
-    x[0] = kx_limiter1(x[0]);
-    x[1] = kx_limiter1(x[1]);
-    x[2] = kx_limiter2(x[2], -M_PI, M_PI );
+  The phase is bounded from -pi to +pi.
+  */
+  //x[0] = kx_limiter1(x[0]);
+  x[1] = kx_limiter1(x[1]);
+  x[2] = kx_limiter2(x[2], -M_PI, M_PI );
 
 ///Fitting in kappa space
-    /*
-    loop is run for each time
-    newdependent is the temperature data
-    newindependent sets B and B to corresponding values (time)
-    */
-    {
-        double *fjac = new double[P*N];
-        double *wa5 = new double[P*N];
+  /*
+  loop is run for each time
+  newdependent is the temperature data
+  newindependent sets B and B to corresponding values (time)
+  */
+  {
+      double *fjac = new double[P*N];
+      double *wa5 = new double[P*N];
 
-        double *fvec = new double[P];
-        double *wa4 = new double[P];
-        double *newdependent = new double[P];//dependent array for fits
-        double *newindependent = new double[P]; //independent array for fits
+      double *fvec = new double[P];
+      double *wa4 = new double[P];
+      double *newdependent = new double[P];//dependent array for fits
+      double *newindependent = new double[P]; //independent array for fits
 
-        double *qtf     = new double[N];
-        double *wa1     = new double[N];
-        double *wa2     = new double[N];
-        double *wa3     = new double[N];
-        double *diag    = new double[N];
-        int *ipvt       = new int[N];
+      double *qtf     = new double[N];
+      double *wa1     = new double[N];
+      double *wa2     = new double[N];
+      double *wa3     = new double[N];
+      double *diag    = new double[N];
+      int *ipvt       = new int[N];
 
-        int nfev;
-        int info=0;
+      int nfev;
+      int info=0;
 
-        for (size_t g = 0; g <P; g++)
-        {
-            newdependent[g]   = dependent[g];
-            newindependent[g] = g*(independent[1]-independent[0]);
-        }
-        delete[] independent;
+      for (size_t g = 0; g <P; g++)
+      {
+          newdependent[g]   = dependent[g];
+          newindependent[g] = g*(independent[1]-independent[0]);
+      }
 
 
-        double *variables[3];
-        for( size_t a=0; a<=2 ; ++a )
-            variables[a]=new double [P];
+      double *variables[3];
+      for( size_t a=0; a<=2 ; ++a )
+          variables[a]=new double [P];
 
-        for( size_t g = 0; g <P; g++ )
-        {
-            variables[0][g] =   newdependent[g];
-            variables[1][g] =   newindependent[g];
-        }
-        variables[2][0]=0;
+      for( size_t g = 0; g <P; g++ )
+      {
+          variables[0][g] =   newdependent[g];
+          variables[1][g] =   newindependent[g];
+      }
+      variables[2][0]=0;
 
-        lmdif( &cosfcn1, static_cast<int>(P), N, x, fvec, variables, ftol, xtol,
-               gtol, maxfev, epsfcn, diag, mode, factor, nprint, &info, &nfev,
-               fjac, static_cast<int>(P), ipvt, qtf, wa1, wa2, wa3, wa4, wa5 ) ;
+      lmdif( &cosfcn1, static_cast<int>(P), N, x, fvec, variables, ftol, xtol,
+             gtol, maxfev, epsfcn, diag, mode, factor, nprint, &info, &nfev,
+             fjac, static_cast<int>(P), ipvt, qtf, wa1, wa2, wa3, wa4, wa5 ) ;
 
-        ///Clean Up
-        for(size_t a=0; a<=2 ; ++a)
-        {
-            delete[] variables[a];
-        }
-        delete [] fvec;    delete [] qtf;
-        delete [] wa1;      delete [] wa2;
-        delete [] wa3;     delete [] wa4;
-        delete [] fjac;    delete [] wa5;
-        delete [] ipvt;     delete [] diag;
+      ///Clean Up
+      for(size_t a=0; a<=2 ; ++a)
+      {
+          delete[] variables[a];
+      }
+      delete [] fvec;    delete [] qtf;
+      delete [] wa1;      delete [] wa2;
+      delete [] wa3;     delete [] wa4;
+      delete [] fjac;    delete [] wa5;
+      delete [] ipvt;     delete [] diag;
 
-        delete [] newdependent;
-        delete [] newindependent;
-    }
+      delete [] newdependent;
+      delete [] newindependent;
+  }
 
 ///Transform output back to offset, amplitude, phase
-    x[0] = x_limiter1(x[0]);
-    x[1] = x_limiter1(x[1]);
-    x[2] = x_limiter2(x[2],-M_PI,M_PI);
+  //x[0] = x_limiter1(x[0]);
+  x[1] = x_limiter1(x[1]);
+  x[2] = x_limiter2(x[2],-M_PI,M_PI);
 
-    return;
+  return;
 }
 
 
 
 
 void cosfcn1( int P, int /*N*/, double *x, double *fvec, int */*iflag*/,
-              double **variables)
+              double **variables )
 {  // function to be fitted:
-   // dependent[i] = x[0]+x[1]*cos(independent[i]*2*PI+x[2])
+   // dependent[i] = x[0] + x[1] * cos( independent[i]*2*PI + x[2] )
    // constants to be found by the fit are: x[0],x[1],x[2] which respectively
    // are offset, amplitude, phase
+  
+  const double phase = x_limiter2( x[2], -M_PI, M_PI ) ;
+  const double ampli = x_limiter1( x[1] ) ;
+  const double offset = x[0] ;
 
-    double *dependent = new double[P];
-    double *independent = new double[P];
-    for(int i=0;i<P;i++)
-    {
-        dependent[i] = variables[0][i];
-        independent[i] = variables[1][i];
-    }
+  using std::cos;
+  for( int g=0 ; g<P ; ++g )
+  {
+      fvec[g] = cos( variables[1][g] * 2 * M_PI + phase );
+      fvec[g] *= ampli ;
+      fvec[g] += offset;  //x_limiter1(x[0]);
 
-    for( int g=0 ; g<P ; ++g )
-    {
-        fvec[g] = cos(independent[g] * 2 * M_PI + x_limiter2(x[2], -M_PI, M_PI) );
-        fvec[g] *= x_limiter1(x[1]);
-        fvec[g] += x_limiter1(x[0]);
-
-        fvec[g] *= -1;
-        fvec[g] += dependent[g];
-    }
-
-    delete [] dependent;
-    delete [] independent;
-
-    return;
+      fvec[g] *= -1;
+      fvec[g] += variables[0][g];
+  }
+  
+  return;
 }
 
 
