@@ -34,6 +34,8 @@ namespace math{
 
 double genWseed( const double x_min, const double x_max, const unsigned seed )
 {
+  ( void ) seed;
+      
   std::random_device rd;
   std::mt19937 gen( rd() ) ;
 //  gen.seed( seed ) ;
