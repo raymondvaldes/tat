@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
-
+#include <limits>
 #include <vector>
 #include <cstring>
 #include <iostream>
