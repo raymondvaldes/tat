@@ -44,8 +44,7 @@ one_dim::one_dim(
   Temperature_interface(      temp_in ),
   gamma(                      gamma_in ),
   R1(                         radiative_prop_in.R1 ),
-  Emit1(                      radiative_prop_in.Emit1 ),
-  eye( 0.0,1.0 )
+  Emit1(                      radiative_prop_in.Emit1 )
 {}
   
 one_dim::~one_dim( void ) {}

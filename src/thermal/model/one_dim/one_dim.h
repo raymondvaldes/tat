@@ -59,7 +59,6 @@ class one_dim
   const double gamma;
   const double R1;
   const double Emit1;
-  const std::complex<double> eye;
 
   explicit one_dim( const sensible::layer &coating_in,
                     const sensible::layer &substrate_in,
