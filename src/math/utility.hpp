@@ -67,6 +67,7 @@ double percentilelog10( const double xmin, const double xmax, const double x ) ;
 
 void range( double* l_thermal, const double l_min, const double l_max,
             const size_t L_end ) ;
+  
 std::vector<double>
   range( const double xstart, const double xend, const size_t size ) ;
 

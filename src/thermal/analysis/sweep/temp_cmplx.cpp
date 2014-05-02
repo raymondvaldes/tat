@@ -49,10 +49,11 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
   
   /* A fine mesh will be used to report back the complex temperature.  This 
   will differ from the mesh used in the numerical solution for now.*/
-  vector< complex<double> > results( M1 ) ;
-  const double z_surf = 0;
-  const double z_interface = 1;
-  vector< double > z_val = math::range( z_surf, z_interface, M1 );
+  const size_t cntr_size = M1 + 1 ;
+  vector< complex<double> > results( cntr_size ) ;
+  constexpr double z_surf = 0;
+  constexpr double z_interface = 1;
+  const vector< double > z_val = math::range( z_surf, z_interface, cntr_size );
   
 
   switch( popteaCore.thermalsys.Construct.heat )
@@ -65,14 +66,13 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
                                            popteaCore.TBCsystem.optical,
                                            popteaCore.expSetup.laser,
                                            popteaCore.TBCsystem.Temp.rear,
-                                           popteaCore.TBCsystem.gammaEval());
+                                           popteaCore.TBCsystem.gammaEval() ) ;
       using math::algorithms::spline_cplx;
       spline_cplx temp_cplx = thermalEngine.T_tt_R1eq1_cplx_sweep( omega ) ;
 
-
-      for( size_t i = 0 ; i < M1 ; ++i )
+      for( size_t i = 0 ; i <= M1 ; ++i )
         results[i] = temp_cplx.eval( z_val[i] ) ;
-      
+
       break;
     }
 
@@ -85,34 +85,25 @@ temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
                                           popteaCore.expSetup.laser,
                                           popteaCore.TBCsystem.Temp.rear,
                                           popteaCore.TBCsystem.gammaEval());
-      const size_t iter = 1000;
-      const double Ttol = .0001;
-      using std::cout;
+      constexpr size_t iter = 1000;
+      constexpr double Ttol = .0001;
 
       using thermal::define::Temperature;
-      Temperature Tprofile( popteaCore.thermalsys.mesh.Nend,
-                            popteaCore.thermalsys.mesh.M2 ) ;
+      const size_t Nend = popteaCore.thermalsys.mesh.Nend ;
+      const size_t M2 =popteaCore.thermalsys.mesh.M2 ;
+      Temperature Tprofile( Nend, M2 ) ;
       
       thermalEngine.temperature_1D( omega, iter, Ttol,
                                     popteaCore.thermalsys.mesh, Tprofile );
       
-      const vector<double> Tsurface = Tprofile.eval_at_z(0);
       
+      for( size_t i = 0 ; i <= M1 ; ++i )
+      {
+//        const vector<double> Tsurface = Tprofile.eval_at_z( i );
+//        const complex<double> Tsurface_cmplx = Ttransient_to_Tcplx( Tsurface ) ;
+//        results[i] = Tsurface_cmplx ;
+      }
       
-      complex<double> Tsurface_cmplx =
-      Ttransient_to_Tcplx( Tsurface , popteaCore.thermalsys.mesh.time ) ;
-      
-      cout << Tsurface_cmplx << "\nhello,world!\n";
-      
-                                 // 1) temperature field
-      // 2) feed temperature field to ttransient to cmplx
-      // 3) return the vector
-    
-    
-//      size_t n = 0;
-//      #pragma omp parallel for schedule(dynamic) private(n)
-//      for(n = 0 ; n < L_end ; n++ )
-//          { results[n] = PhaseOfEmission1DNum( omegas[n] , popteaCore ) ; }
       break;
     }
 

@@ -200,15 +200,21 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
       thermal::emission::phase99( *coreSystem, thermalData->omegas ) ;
 
   /// Evaluate Objective function
+  double MSE = 0;
   for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
   {
      fvec[n] =  thermalData->experimentalEmission[n] ;
      fvec[n] -= thermalData->predictedEmission[n] ;
+     MSE += std::pow( fvec[n], 2);
   }
+  MSE = std::sqrt( MSE );
 
   thermalData->lthermalPredicted =
       thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
-//  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
+  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
+  std::cout << "\t" << MSE;
+  std::cout << "\n";
+
   return;
 }
 
@@ -217,11 +223,12 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
 void printPEstimates( const sensible::TBCsystem  TBCSystem,
                       math::estimation::unknownList list )
 {
+  using std::cout;
+  
   for( const auto& unknown : list() )
   {
-    std::cout << TBCSystem.returnVal( unknown.label() ) << "  ";
+    cout << TBCSystem.returnVal( unknown.label() ) << "  ";
   }
 
-  std::cout << "\n";
   return;
 }
