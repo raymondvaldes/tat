@@ -74,7 +74,7 @@ Ttransient_to_Tcplx( const std::vector<double> Ttransient )
   //safety checks
   const double tol = abs(Ttransient.front()) * 0.0001 ;
   const double convergence = abs( Ttransient.front() - Ttransient.back() ) ;
-  const bool assertChkr = islessequal( convergence ,  tol ) ;  
+  const bool assertChkr = std::islessequal( convergence ,  tol ) ;  
   assert( assertChkr ) ;
   
   //retrieve initial guess
