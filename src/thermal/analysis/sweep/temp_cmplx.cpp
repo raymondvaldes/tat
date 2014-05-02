@@ -22,7 +22,7 @@
  Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
  
 \*----------------------------------------------------------------------------*/
-
+#include <limits>
 #include "thermal/analysis/sweep/temp_cmplx.h"
 #include "thermal/model/one_dim/analytical_2005/analytical_2005.h"
 #include "thermal/model/one_dim/numerical_2011/numerical_2011.h"
