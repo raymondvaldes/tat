@@ -38,7 +38,7 @@ analytical_2005::analytical_2005(
   const double gamma_in )
   :
   one_dim( coating_in, substrate_in, radiative_prop_in, laser_in, temp_in,
-           gamma_in )
+           gamma_in ), _i_ ( 0 , 1 ), SQRTi( std::sqrt( _i_ ) )
   {}
   
 analytical_2005::~analytical_2005( void ) {}
@@ -47,7 +47,7 @@ analytical_2005::~analytical_2005( void ) {}
 complex<double> analytical_2005::F_tilde( const double lthermal ) const
 {
   using std::sqrt;
-  const complex<double> sqrtIdivLthermal = sqrt( eye ) / lthermal;
+  const complex<double> sqrtIdivLthermal = SQRTi / lthermal;
 
   using std::sinh;
   using std::cosh;
@@ -67,7 +67,7 @@ complex<double> analytical_2005::eta ( const double Lambda_hat ) const
 {
   using std::pow;
   
-  const complex<double> eta_out = 1. - pow( Lambda_hat, 2 ) * eye ;
+  const complex<double> eta_out = 1. - pow( Lambda_hat, 2 ) * _i_ ;
   return eta_out;
 }
 
@@ -76,10 +76,6 @@ analytical_2005::M_tilde( const complex<double> x_in, const double l ) const
 {
   using std::sinh;
   using std::cosh;
-  
-  constexpr complex<double> _i_ ( 0.0 , 1.0 ) ;
-  const complex<double> SQRTi = std::sqrt(_i_);
-  
   
   const complex<double> sinhSQRTi = sinh( SQRTi / l ) ;
   const complex<double> coshSQRTi = cosh( SQRTi / l ) ;
@@ -99,9 +95,6 @@ analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
 {
   using std::sinh;
   using std::cosh;
-  
-  constexpr complex<double> _i_ ( 0.0 , 1.0 ) ;
-  const complex<double> SQRTi = std::sqrt(_i_);
   
   const complex<double> sinhSQRTi = sinh( SQRTi / l ) ;
   const complex<double> coshSQRTi = cosh( SQRTi / l ) ;
@@ -149,30 +142,30 @@ complex<double> analytical_2005::
  
   const complex<double> F_til = F_tilde( lthermal_val ) ;
   const complex<double> eta_val = eta( Lambdahat_val ) ;
-  const complex<double> sqrtEyedivL = sqrt( eye ) / lthermal_val;
-  
-  
+  const complex<double> sqrtEyedivL = sqrt( _i_ ) / lthermal_val;
+
   complex<double> 
   coeff = coat.L * I_intensity_tt * lthermal_val ;
   coeff /= coat.k * eta_val ;
   
   const complex<double>
-    coeff1 = ( 1 - exp( -2 / coat.Lambda ) ) / sqrt( eye ) ;
+    coeff1 = ( 1 - exp( -2 / coat.Lambda ) ) / sqrt( _i_ ) ;
   
   const complex<double>
     coeff2 = F_til * cosh( sqrtEyedivL * z ) - sinh( sqrtEyedivL * z );
   
   const complex<double>
-    coeff3 = 2 * Lambdahat_val * exp ( -1 / Lambdahat_val ) ;
+    coeff3 = 2 * Lambdahat_val * exp ( -1 / coat.Lambda ) ;
   
   complex<double>
   coeff4 =  gamma * cosh( sqrtEyedivL * z ) ;
   coeff4 /= gamma * cosh( sqrtEyedivL ) + sinh( sqrtEyedivL ) ;
-  coeff4 -= cosh( ( 1 - z ) / coat.Lambda ) ;
   
+  coeff4 -= cosh( ( 1 - z ) / coat.Lambda ) ;
   
   const complex<double> bracket = coeff1 * coeff2 + coeff3 * coeff4;
   const complex<double> output = coeff * bracket;
+  
   return output;
 }
 
@@ -189,7 +182,7 @@ complex<double> analytical_2005::
   const double ltherm = lthermal( coat.L, coat.k, coat.psi, omega ) ;
   const double Lambda_hat_val = Lambda_hat( ltherm ) ;
   const complex<double> eta_val = eta( Lambda_hat_val ) ;
-  const complex<double> sqrtIdivL = sqrt( eye ) / ltherm ;
+  const complex<double> sqrtIdivL = sqrt( _i_ ) / ltherm ;
 
   complex<double>
   coeff = ( 1 - R1 ) * exp( -1 / coat.Lambda ) ;
@@ -197,13 +190,13 @@ complex<double> analytical_2005::
   coeff/= coat.k * eta_val ;
   
 
-  const complex<double> coeff1 = exp( -1 / coat.Lambda )  / sqrt( eye ) ;
+  const complex<double> coeff1 = exp( -1 / coat.Lambda )  / sqrt( _i_ ) ;
   const complex<double> coeff2 = F_tilde( ltherm ) * cosh( sqrtIdivL * z )
                                                    - sinh( sqrtIdivL * z ) ;
   const complex<double> coeff3 = exp( ( z - 1 ) / coat.Lambda ) ;
   
   complex<double>
-    coeff4  = ( gamma + sqrt( eye ) * Lambda_hat_val ) * cosh( sqrtIdivL * z ) ;
+    coeff4  = ( gamma + sqrt( _i_ ) * Lambda_hat_val ) * cosh( sqrtIdivL * z ) ;
     coeff4 /= gamma * cosh( sqrtIdivL ) - sinh( sqrtIdivL ) ;
   
 
@@ -219,20 +212,17 @@ complex<double> analytical_2005::
   
 double analytical_2005::phase_linear( const double omega ) const
 {
+  /*See 2004 emission paper equation 19*/
+  using std::exp;
   using thermal::define::lthermal;
   const double l = lthermal( coat.L, coat.k, coat.psi, omega ) ;
   const double Lambda = coat.Lambda;
   
-  /*See 2004 emission paper equation 19*/
-
-  constexpr complex<double> _i_ ( 0.0 , 1.0 ) ;
-  const complex<double> SQRTi = std::sqrt(_i_);
-  
   const complex<double> M = M_tilde( SQRTi * Lambda / l , l ) ;
   const complex<double> N = N_tilde( _i_ * Lambda * Lambda / l / l, l ) ;
   
-  using std::exp;
-  const double exp2lambda = exp( -2 / Lambda ) ;
+  const double halflamb = -2 / Lambda ;
+  const double exp2lambda = exp( halflamb ) ;
   const complex<double> A =  ( 1 + R1 ) * ( 1 - exp2lambda ) * M ;
   const complex<double> B =  ( 1 - R1 ) * ( 1 + exp2lambda ) * N ;
   
@@ -247,8 +237,21 @@ double analytical_2005::phase_linear( const double omega ) const
   return phase ;
 }
 
+vector<double>
+analytical_2005::sweep_phase_linear( const vector<double> &omega ) const
+{
+  const size_t NUM = omega.size() ;
+  vector<double> results( NUM ) ;
+  
+  for( size_t n = 0 ; n < NUM ; ++n )
+    { results[ n ] = phase_linear( omega[n] ) ; }
+  
+  return results;
+}
+
+
 math::algorithms::spline_cplx
-analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega) const
+analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega ) const
 {
   using std::vector;
   using math::range;
@@ -260,9 +263,7 @@ analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega) const
   constexpr double z_interface = 1;
   const vector<double> z_values = range( z_surf, z_interface, pts ) ;
 
-  
-
-  vector<complex<double>> temp_discrete( pts );
+  vector<complex<double>> temp_discrete( pts ) ;
   for( size_t i = 0 ; i < pts ; ++i )
   {
     temp_discrete[i] = T_tt_R1eq1_eval( omega, z_values[i] ) ;
@@ -270,7 +271,7 @@ analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega) const
 
   using math::algorithms::spline_cplx ;
   spline_cplx temperature_field( temp_discrete, z_values.data(), pts ) ;
-  
+
   return temperature_field;
 }
 

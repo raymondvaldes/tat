@@ -28,17 +28,22 @@
 
 #include <iostream>
 #include <complex>
+#include <vector>
 #include "math/algorithms/spline_cplx.h"
 #include "thermal/model/one_dim/one_dim.h"
 
 namespace thermal{ namespace model { namespace one_dim{
   
   using std::complex;
+  using std::vector;
   using math::algorithms::spline_cplx;
   
 class analytical_2005: protected one_dim
 {
 private:
+  const complex<double> _i_ ;
+  const complex<double> SQRTi ;
+
   double Lambda_hat ( const double lthermal ) const;
   complex<double> F_tilde( const double lthermal ) const;
   complex<double> eta ( const double Lambda_hat ) const;
@@ -61,6 +66,10 @@ public:
   double phase_linear( const double omega ) const ;
   double phase_nonlinear( const double omega ) const;
   
+  vector<double>
+  sweep_phase_linear( const vector<double> &omega ) const;
+
+
   //sweeps
   spline_cplx T_tt_R1eq1_cplx_sweep( const double omega ) const;
 };
