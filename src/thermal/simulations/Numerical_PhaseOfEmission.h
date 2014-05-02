@@ -35,7 +35,12 @@ double PhaseOfEmission2DAna( const double omega,
 double PhaseOfEmission1DNum( const double omega,
                              const thermal::analysis::Kernal &popteaCore);
 
+double PhaseOfEmission1DAna( const double omega1, const double L_coat,
+                             const double k_c, const double psi_c,
+                             const double lambda, const double R1 ,
+                             const double gamma, const double Esigma);
 
-
+double PhaseOfEmission1DAna( const double omega1,
+                             const thermal::analysis::Kernal &popteaCore );
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED

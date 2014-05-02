@@ -33,6 +33,7 @@ License
 #include "thermal/model/one_dim/numerical_2011/Numerical_Temperature.h"
 #include "thermal/define/model.hpp"
 #include "thermal/define/temperature.h"
+#include "thermal/define/lthermal.h"
 
 
 double PhaseOfEmission1DNum( const double omega,
@@ -40,22 +41,22 @@ double PhaseOfEmission1DNum( const double omega,
 {
   using thermal::define::Temperature;
   Temperature Tprofile( popteaCore.thermalsys.mesh.Nend,
-                        popteaCore.thermalsys.mesh.M2);
+                        popteaCore.thermalsys.mesh.M2 ) ;
 
   //// Acquire Numerical Temperature
   temperature_1D( popteaCore.TBCsystem,
                   popteaCore.thermalsys,
-                  popteaCore.expSetup, omega, Tprofile);
+                  popteaCore.expSetup, omega, Tprofile ) ;
 
   ///Initiate emission model
-  const double Lcoat = popteaCore.TBCsystem.coating.depth;
+  const double Lcoat = popteaCore.TBCsystem.coating.depth ;
   const class thermal::Emission emission( popteaCore.expSetup.detector.wavelength,
                                           popteaCore.TBCsystem.Temp.base,
                                           popteaCore.thermalsys.mesh,
                                           popteaCore.bEval() * Lcoat,
-                                          popteaCore.TBCsystem.optical.Emit1 );
+                                          popteaCore.TBCsystem.optical.Emit1 ) ;
 
-  const double phase2 = emission.phase1D( Tprofile );
+  const double phase2 = emission.phase1D( Tprofile ) ;
   Tprofile.cleanup();
 
   return phase2;
@@ -103,4 +104,67 @@ double PhaseOfEmission2DAna( const double omega,
     return phase2d;
 }
 
+
+
+
+double PhaseOfEmission1DAna( const double omega1, const double L_coat,
+                             const double k_c, const double psi_c,
+                             const double lambda, const double R1,
+                             const double gamma, const double Esigma )
+{
+  using thermal::define::lthermal;
+  const double l = lthermal( L_coat , k_c , psi_c , omega1 ) ;
+
+  /*See 2004 emission paper equation 19*/
+  constexpr std::complex<double> _i_ ( 0.0 , 1.0 ) ;
+  const std::complex<double> SQRTi = std::sqrt(_i_);
+  std::complex<double> M = 1;
+  std::complex<double> N = 1;
+  {
+    const std::complex<double> sinhSQRTi = std::sinh( SQRTi / l ) ;
+    const std::complex<double> coshSQRTi = std::cosh( SQRTi / l ) ;
+    const std::complex<double> gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+
+    M -= SQRTi * lambda / l * sinhSQRTi / std::sinh( 1 / lambda ) ;
+    M /= gammaXcoshSQRTplusSinhSQRT ;
+
+    N -= _i_ * lambda * lambda / l / l * coshSQRTi / std::cosh( 1 / lambda ) ;
+    N /= gammaXcoshSQRTplusSinhSQRT ;
+  }
+
+  const double exp2lambda = std::exp( -2 / lambda ) ;
+  std::complex<double>
+  A =  1 + R1 ;
+  A *= 1 - exp2lambda;
+  A *= M;
+
+  std::complex<double>
+  B =  1 - R1 ;
+  B *= 1 + exp2lambda ;
+  B *= N;
+
+  const std::complex<double> t = A + B;
+  const std::complex<double> u  = 2. * ( 1. - lambda * lambda / l / l * _i_ ) ;
+  const std::complex<double> v = Esigma * SQRTi / l - 4 * gamma ;
+  const double R1xExp2lambdaPLUS1 = std::fma( -R1, exp2lambda, 1 );
+
+  return std::arg( v/u*t + 4 * R1xExp2lambdaPLUS1 ) - M_PI_2 ;
+}
+
+double PhaseOfEmission1DAna( const double omega1,
+                             const thermal::analysis::Kernal &popteaCore )
+{
+  const double L_coat   = popteaCore.TBCsystem.coating.depth ;
+  const double k_c      = popteaCore.TBCsystem.coating.kthermal.offset ;
+  const double psi    = popteaCore.TBCsystem.coating.psithermal.offset ;
+  const double lambda   = popteaCore.TBCsystem.coating.lambda ;
+  const double R1       = popteaCore.TBCsystem.optical.R1 ;
+  const double gamma    = popteaCore.TBCsystem.gammaEval() ;
+  const double E1   = popteaCore.TBCsystem.optical.Emit1;
+  
+  const double output = PhaseOfEmission1DAna( omega1, L_coat, k_c, psi, lambda,
+                                              R1, gamma, E1 ) ;
+  
+  return output ;
+}
 
