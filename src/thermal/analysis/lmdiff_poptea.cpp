@@ -180,40 +180,45 @@ LMA::paramter_estimation( int *info, int *nfev )
 
 void LMA::ThermalProp_Analysis(double *x, double *fvec)
 {
+  using math::estimation::unknownList;
+  using math::estimation::x_limiter2;
+  using thermal::emission::phase99;
+  using std::pow;
+  using std::sqrt;
+  
   //Update parameters
   //The reason I create a new list of unknownParameter is because the operator()
-  math::estimation::unknownList updatedInput;
+  unknownList updatedInput;
+  
   int i = 0;
   for( auto& unknown :  (*unknownParameters)() )
   {
-    const double val = math::estimation::
-        x_limiter2( x[i++] , unknown.lowerBound(), unknown.upperBound() );
+    const double val = x_limiter2( x[i++] , unknown.lowerBound(),
+                                   unknown.upperBound() ) ;
     unknown.bestfitset( val );
     updatedInput.addUnknown( unknown ) ;
   }
   (*unknownParameters)( updatedInput() );
-
   coreSystem->updatefromBestFit( (*unknownParameters)()  );
 
   // Estimates the phase of emission at each heating frequency
-  thermalData->predictedEmission =
-      thermal::emission::phase99( *coreSystem, thermalData->omegas ) ;
+  thermalData->predictedEmission = phase99( *coreSystem, thermalData->omegas ) ;
 
   /// Evaluate Objective function
-  double MSE = 0;
+//  double MSE = 0;
   for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
   {
      fvec[n] =  thermalData->experimentalEmission[n] ;
      fvec[n] -= thermalData->predictedEmission[n] ;
-     MSE += std::pow( fvec[n], 2);
+//     MSE += pow( fvec[n], 2);
   }
-  MSE = std::sqrt( MSE );
+//  MSE = sqrt( MSE );
 
   thermalData->lthermalPredicted =
       thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
-  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
-  std::cout << "\t" << MSE;
-  std::cout << "\n";
+//  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
+//  std::cout << "\t" << MSE;
+//  std::cout << "\n";
 
   return;
 }

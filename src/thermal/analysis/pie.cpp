@@ -201,26 +201,28 @@ void PIE::parameterIntervalEstimates( void )
 {
   /// Save experimental data, quality-of-fit, unknownParameter List
   using math::estimation::unknown;
-  std::vector< unknown > originalListParams( (*unknownParameters)() );
-  saveExperimental( *thermalData );
-  const double S1 = thermalData->MSE;
+  using std::vector;
+  
+  vector< unknown > originalListParams( ( *unknownParameters )() ) ;
+  saveExperimental( *thermalData ) ;
+  const double S1 = thermalData->MSE ;
 
   /// Update initial guess using bestfits
-  for( auto& param : originalListParams)
-    { param.Initialset( param.bestfit() ); }
+  for( auto& param : originalListParams )
+    param.Initialset( param.bestfit() );
 
   /// Predicted emission as the new experimental
-  const std::vector<double> TEMPExperimental = thermalData->predictedEmission;
-  updateExperimentalData( TEMPExperimental, *thermalData) ;
+  const vector<double> TEMPExperimental = thermalData->predictedEmission;
+  updateExperimentalData( TEMPExperimental, *thermalData ) ;
 
   /// Create list of parameters that must be refitted
   using math::algorithms::combos_minusOne;
-  const std::vector< std::vector<  unknown > >
+  const vector< vector<  unknown > >
       unknownParaLists = combos_minusOne( originalListParams );
 
-  std::vector< enum thermal::model::labels::Name  > parametersToBeManipulated;
+  vector< enum thermal::model::labels::Name  > parametersToBeManipulated;
   for ( const auto& unknown : originalListParams )
-    { parametersToBeManipulated.push_back( unknown.label() ); }
+    parametersToBeManipulated.push_back( unknown.label() );
 
   /// update list of parameters using unknownIterations
   size_t i = 0;
@@ -230,11 +232,11 @@ void PIE::parameterIntervalEstimates( void )
     (*unknownParameters)( newListVect ) ;
 
     ///identifiy fixed parameter and update search bound
-    const unknown myfixedParameter =  originalListParams[i];
-    const enum thermal::model::labels::Name mylabel = myfixedParameter.label();
-    const double bestfit = myfixedParameter.bestfit();
-    const double lowerbound = myfixedParameter.lowerBound();
-    const double upperbound = myfixedParameter.upperBound();
+    const unknown myfixedParameter =  originalListParams[i] ;
+    const enum thermal::model::labels::Name mylabel = myfixedParameter.label() ;
+    const double bestfit = myfixedParameter.bestfit() ;
+    const double lowerbound = myfixedParameter.lowerBound() ;
+    const double upperbound = myfixedParameter.upperBound() ;
 
     Gfunc( bestfit , mylabel );
 //    std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
@@ -273,19 +275,38 @@ double PIE::solveFORx( const double target , const double min, const double max,
                        const enum thermal::model::labels::Name mylabel,
                        const std::string &bound )
 {
-  const std::function<double(double)>
-      myFuncReduced = std::bind( &PIE::Gfunc, this , std::placeholders::_1,
-                                 mylabel ) ;
+  using std::function;
+  using std::bind;
+  using std::placeholders::_1;
+  
+  const function<double(double)>
+    myFuncReduced = bind( &PIE::Gfunc, this , _1, mylabel ) ;
   const math::solve ojb( myFuncReduced, target, min, max ) ;
   double soln = ojb.returnSoln();
 
-  if(!ojb.pass)
+  if( !ojb.pass )
   {
     if( bound == "min" ) soln = min;
     if( bound == "max" ) soln = max;
   }
 
   return soln;
+}
+
+double PIE::Gfunc( const double val ,
+                   const enum thermal::model::labels::Name &mylabel)
+{
+  using std::pair;
+
+  coreSystem->TBCsystem.updateVal( mylabel , val ) ;
+  coreSystem->TBCsystem.updateCoat() ;
+
+  bestFit() ;
+
+  const pair< double, ThermalData > saveThis( val, *thermalData ) ;
+  dataTempStorage.allThermalData.push_back( saveThis ) ;
+
+  return thermalData->MSE;
 }
 
 void PIE::saveExperimental( const ThermalData& thermalData_in )
@@ -309,19 +330,7 @@ void PIE::updateExperimentalData( const std::vector<double> &input,
 }
 
 
-double PIE::Gfunc( const double val ,
-                   const enum thermal::model::labels::Name &mylabel)
-{
-  coreSystem->TBCsystem.updateVal( mylabel , val ) ;
-  coreSystem->TBCsystem.updateCoat() ;
 
-  bestFit() ;
-
-  const std::pair< double, ThermalData > saveThis( val, *thermalData ) ;
-  dataTempStorage.allThermalData.push_back( saveThis ) ;
-
-  return thermalData->MSE;
-}
 
 
 }}

@@ -46,14 +46,15 @@ using namespace thermal::analysis;
 void run( const filesystem::directory &dir )
 {
   using std::string;
+  using std::cout;
+  
   /// setup output directory
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir ) ;
 
   /// Part test
   poptea.bestFit() ;
-  std::cout << poptea.ppUnknownParameters() ;
+  cout << poptea.ppUnknownParameters() ;
 
-return;
   {
     /// PartA ( pie_analysis )
     const string partA = "/partA_pieAnalysis" ;
@@ -62,7 +63,7 @@ return;
 
     const string path = dir.abs( partA ) ;
     pieOutput.pp2Folder( path ) ;
-    std::cout << poptea.ppUnknownParameters() << "\n" ;
+    cout << poptea.ppUnknownParameters() << "\n" ;
   }
 
   {
@@ -73,11 +74,13 @@ return;
     for( size_t i =0 ; i < 1 ; ++i )
     {
       poptea.bestFit() ;
+      
       ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
       outputData.pp2Folder( dir.abs( partB ) , std::to_string(i)  ) ;
-      std::cout << poptea.ppUnknownParameters() << "\n" ;
+      cout << poptea.ppUnknownParameters() << "\n" ;
     }
   }
+return;
 
 	using tools::interface::exportfile;
 	const string partC = "/partC_thermalMaps" ;
