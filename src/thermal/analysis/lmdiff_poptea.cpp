@@ -94,6 +94,11 @@ void LMA::solve(
 class ThermalData
 LMA::paramter_estimation( int *info, int *nfev )
 {
+  using std::vector;
+  using thermal::emission::phase99;
+  using math::estimation::SobjectiveLS ;
+  using math::estimation::unknown;
+
   using namespace math::estimation;
   const int m = static_cast<int>(thermalData->omegas.size());
   const int n = static_cast<int>(unknownParameters->size());
@@ -112,12 +117,12 @@ LMA::paramter_estimation( int *info, int *nfev )
   double *diag = new double[n];
 
   ///populate initial values
-  std::vector<double> xInitial(0);
+  vector<double> xInitial(0);
 
   for( const auto &unknown : (*unknownParameters)() )
-    { xInitial.push_back( unknown.initialVal() ); }
+    xInitial.push_back( unknown.initialVal() );
   for( size_t i=0 ; i< static_cast<size_t>(n) ; i++ )
-    { x[i] = xInitial[i]; }
+    x[i] = xInitial[i];
 
   scaleDiag( diag, *unknownParameters , coreSystem->TBCsystem,
              static_cast<int>(Settings.mode ) ) ;
@@ -140,22 +145,20 @@ LMA::paramter_estimation( int *info, int *nfev )
 
   //Transform outputs
   j=0;
-  for( math::estimation::unknown& unknown : unknownParameters->vectorUnknowns )
+  for( unknown& unknown : unknownParameters->vectorUnknowns )
   {
     x[j] = x_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
     unknown.bestfitset(x[j]);
     j++;
   }
 
-
    ///Final fit
   coreSystem->updatefromBestFit( (*unknownParameters)() );
-  thermalData->predictedEmission =
-      thermal::emission::phase99( *coreSystem , thermalData->omegas );
+  thermalData->predictedEmission = phase99( *coreSystem , thermalData->omegas );
 
   /// Quality-of-fit
-  thermalData->MSE = math::estimation::SobjectiveLS(
-        thermalData->experimentalEmission, thermalData->predictedEmission );
+  thermalData->MSE = SobjectiveLS(
+        thermalData->experimentalEmission, thermalData->predictedEmission ) ;
 
 //  std::cerr << "from inside bestfit " << thermalData->MSE << "\n";
 

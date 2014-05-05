@@ -80,7 +80,6 @@ void run( const filesystem::directory &dir )
       cout << poptea.ppUnknownParameters() << "\n" ;
     }
   }
-return;
 
 	using tools::interface::exportfile;
 	const string partC = "/partC_thermalMaps" ;

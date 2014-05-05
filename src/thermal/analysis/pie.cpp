@@ -202,7 +202,10 @@ void PIE::parameterIntervalEstimates( void )
   /// Save experimental data, quality-of-fit, unknownParameter List
   using math::estimation::unknown;
   using std::vector;
-  
+  using std::abs;
+  using math::algorithms::combos_minusOne;
+
+
   vector< unknown > originalListParams( ( *unknownParameters )() ) ;
   saveExperimental( *thermalData ) ;
   const double S1 = thermalData->MSE ;
@@ -216,7 +219,6 @@ void PIE::parameterIntervalEstimates( void )
   updateExperimentalData( TEMPExperimental, *thermalData ) ;
 
   /// Create list of parameters that must be refitted
-  using math::algorithms::combos_minusOne;
   const vector< vector<  unknown > >
       unknownParaLists = combos_minusOne( originalListParams );
 
@@ -242,7 +244,7 @@ void PIE::parameterIntervalEstimates( void )
 //    std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
 //    std::cerr << "these are the bounds" << lowerbound <<"\t"<< upperbound<< "\n";
     constexpr double tol  = 1e-12;
-    BOOST_ASSERT( std::fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
+    BOOST_ASSERT( fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
 
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     ThermalSweepTEMP.lowerbound = *thermalData;
