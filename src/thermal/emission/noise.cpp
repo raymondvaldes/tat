@@ -55,45 +55,48 @@ addNoise( const std::vector<double> &emissionNominal_,
   using std::tan;
   using std::abs;
 
-//  assert( (a > 0) || (b > 1) || (b < M_PI) );
   if( (a < 0) || (b < 1) || (b > M_PI) )
   {
      std::cerr << "parameters (a,b) out of range"; exit(-99);
   }
+  
+  using std::vector;
 
-  std::vector<double> output(emissionNominal_);
+  vector<double> output( emissionNominal_ ) ;
   for( size_t i=0 ; i < lthermal.size() ; ++i )
   {
     constexpr double c = 0.5;
+    using math::percentilelog10;
     const double
-        lthermalPercentile = math::percentilelog10( lmin, lmax, lthermal[i] );
+        lthermalPercentile = percentilelog10( lmin, lmax, lthermal[i] );
 
     ///Determine biased noise
     const double cotbc = tan( M_PI_2 - ( b * c ) );
     double noiseBias = -a * cotbc * tan( b * ( c - lthermalPercentile ) );
 
-    if(!d2) { noiseBias = abs(noiseBias); }
-    if(!d1) { noiseBias *= -1; }
+    if( !d2 ) { noiseBias = abs( noiseBias ) ; }
+    if( !d1 ) { noiseBias *= -1 ; }
 
     switch(s1)
     {
       case -1:
-          if( lthermalPercentile > 0.5 ) { noiseBias = 0; }
+          if( lthermalPercentile > 0.5 ) { noiseBias = 0 ; }
           break;
       case 0:
           break;
       case 1:
-          if( lthermalPercentile < 0.5 ) { noiseBias = 0; }
+          if( lthermalPercentile < 0.5 ) { noiseBias = 0 ; }
           break;
       default:
           std::cout << "\n\nerror in symmetry options\n\n"; exit(-1);
     }
 
     ///Determine random noise
-    const double noiseRandomGen = math::x_normal( 0, noiseRandom );
+    using math::x_normal;
+    const double noiseRandomGen = x_normal( 0, noiseRandom ) ;
 
-    output[i] += M_PI_2 * noiseBias;
-    output[i] += M_PI_2 * noiseRandomGen;
+    output[i] += M_PI_2 * noiseBias ;
+    output[i] += M_PI_2 * noiseRandomGen ;
   }
   return output;
 }
