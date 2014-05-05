@@ -54,11 +54,16 @@ mySpline::~mySpline(void)
 
 double mySpline::eval( const double xpos ) const
 {
+  constexpr double tol_spline = .000001;
   using std::abs;
 
   double xposNew = xpos;
-  if( abs( xpos - xvar[0]   ) < tol ) xposNew = xvar[0] + tol;
-  if( abs( xpos - xvar[N-1] ) < tol ) xposNew = xvar[N-1] - tol;
+  
+  if( abs( xpos - xvar[0]   ) < tol_spline * xvar[0]  )
+    xposNew = xvar[0] + tol;
+  
+  if( abs( xpos - xvar[N-1] ) < tol_spline * xvar[N-1] )
+    xposNew = xvar[N-1] - tol;
 
 
   if( xposNew < xvar[0] || xposNew > xvar[N-1] )
