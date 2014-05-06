@@ -504,7 +504,10 @@ std::string ThermalSweepOptimizer::montecarloMap(
     /// transform it into something thermal_prop can understand
     double x[2] = { 0 } ;
     for( size_t j =0 ; j < 2 ; ++j )
-      { x[j] = math::estimation::kx_limiter2( xinitial[j], min, max ) ; }
+    {
+//      x[j] = math::estimation::kx_limiter2( xinitial[j], min, max ) ;
+        x[j] = xinitial[j];
+    }
 
     double fvec[2] = {0} ;
     ThermalProp_Analysis( x , fvec ) ;
