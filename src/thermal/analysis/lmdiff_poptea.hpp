@@ -54,7 +54,7 @@ protected:
   LMA_workingArrays LMA_workspace;
 
   int nfev = 0;
-  int info;
+  int info = -1;
   std::function< void( double*, double* ) > myReduced;
 
   virtual void ThermalProp_Analysis( double *x, double *fvec ) = 0 ;

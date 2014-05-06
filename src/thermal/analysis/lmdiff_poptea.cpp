@@ -50,9 +50,11 @@ LMA_BASE::~LMA_BASE() {}
 
 void LMA_BASE::updateBindFunc( void )
 {
-  myReduced =
-  std::bind( &LMA_BASE::ThermalProp_Analysis, this , std::placeholders::_1,
-             std::placeholders::_2 ) ;
+  using std::bind;
+  using std::placeholders::_1;
+  using std::placeholders::_2;
+  
+  myReduced = bind( &LMA_BASE::ThermalProp_Analysis, this , _1, _2 ) ;
 }
 
 void LMA::updateWorkSpace( const size_t Lend, const size_t N )

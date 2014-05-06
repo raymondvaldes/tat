@@ -65,46 +65,95 @@ std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
 
   double thermalCenter = 0;
   double thermalRange = 0;
+  using thermal::model::labels;
+  
 
   for( const auto& unknown : thermalSweepSearch() )
   {
     const double bestfit  = unknown.bestfit();
-    if ( unknown.label() == thermal::model::labels::Name::thermalCenter  )
+    if ( unknown.label() == labels::Name::thermalCenter  )
       { thermalCenter = bestfit ; }
-    else if ( unknown.label() == thermal::model::labels::Name::thermalRange  )
+    else if ( unknown.label() == labels::Name::thermalRange  )
       { thermalRange = bestfit ; }
   }
+  
+  //std::cout << " check0 " << thermalCenter << "\t" << thermalRange << " here0 ";
+
 
   return make_pair( thermalCenter, thermalRange ) ;
 }
 
 
-ThermalData ThermalSweepOptimizer::updatedFromXsearch( const double *x )
+ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 {
   //Update parameters with current bestfits by transforming x
   using math::estimation::unknownList;
   using math::estimation::x_limiter2;
   using sensible::layer;
   
+
+  
+   // std::cout << "before  " <<x[0] << "\t" << x[1] << "\n";
+    resize_ThermalCenterRange( x ) ;
+   // std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
+
+  
+
   unknownList updatedInput;
   size_t i = 0;
   for( auto& unknown : thermalSweepSearch() )
   {
-    const double val = x_limiter2( x[i++] , unknown.lowerBound(),
-                                   unknown.upperBound() );
+    //    const double val = x_limiter2( x[i++] , unknown.lowerBound(),
+    //                                   unknown.upperBound() );
+    const double val = x[i++];
+    std::cout << val << "\t ";
     unknown.bestfitset( val ) ;
     updatedInput.addUnknown( unknown ) ;
   }
   thermalSweepSearch( updatedInput() ) ;
+  
+  //std::cout << thermalSweepSearch.prettyPrint();
 
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
+    //std::cout << " check1 " <<xSweep.first << "\t" << xSweep.second << " here1 ";
+
 
   const double xCenter = xSweep.first ;
   const double xRange = xSweep.second ;
   const layer coatUpdate( coreSystem->TBCsystem.coating ) ;
-
+  
+  //std::cout << " check2 " <<xCenter << "\t" << xRange << " here2 ";
   return sliceThermalData( xCenter, xRange, coatUpdate ) ;
+}
+
+void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
+{
+  const double center = x[0];
+  const double range = x[1];
+
+  const double strPos = center - range/2;
+  const double endPos = center + range/2;
+
+//  const double tol = 0.0001;
+
+  if( strPos < 0 || endPos > 1  )
+  {
+    double range_new;
+    
+    if ( strPos < 0 )
+    {
+      range_new = 2 * center - .2 ;
+    }
+    else
+    {
+      range_new = 1.8 - 2 * center;
+    }
+    
+    x[1] = range_new;
+
+  }
+  
 }
 
 
@@ -123,12 +172,13 @@ void ThermalSweepOptimizer::pieAnalysis(void)
 }
 
 
+
 double ThermalSweepOptimizer::
 penalty( const std::pair<double, double>  thermalCenterRange )
 {
   using std::pow;
   using std::fabs;
-  using std::floor;
+  using std::ceil;
 
   const double center = thermalCenterRange.first;
   const double range = thermalCenterRange.second;
@@ -150,7 +200,7 @@ penalty( const std::pair<double, double>  thermalCenterRange )
       errorModifier = endPos - 1 ;
     }
 
-    error += pow( fabs( floor( errorModifier * 100 ) ) , 2 ) ;
+    error += fabs( errorModifier * 100  ) ;
   }
 
   return error;
@@ -555,7 +605,7 @@ void ThermalSweepOptimizer::solve(
 
   /// optimization run
   optimizer( &info, &nfev ) ;
-  //std::cout << "ended optimizer with:--- " << info  << "  " << nfev<< "\n\n";
+  std::cout << "ended optimizer with:--- " << info  << "  " << nfev<< "\n\n";
 
   /// post analysis
   pieAnalysis() ;
@@ -608,6 +658,8 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   lthermal( coatingLength, coatingK,  coatingPsi, omegaLimits.second ) ) ;
 
   // Take a slice of thermalData range based on updated limits and xC,xR
+  //std::cout << "check3 " <<xCenter << "\t" << xRange << " here3";
+
   const pair<double, double> slicedThermalLimits =
   math::newThermalSweepLimits( xCenter, xRange, thermalLimits ) ;
 
@@ -653,8 +705,12 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   vector<double> xInitial(0) ;
   for( const auto &unknown : thermalSweepSearch() )
     xInitial.push_back( unknown.initialVal() );
+  
   for( size_t i=0 ; i< n ; i++ )
-    x[i] = xInitial[i];
+  {
+      x[i] = xInitial[i];
+    std::cout << x[i] << "\n" ;
+  }
 
 
 //  if( Settings.mode == 2 )
@@ -664,13 +720,17 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 //    { diag[i++] = TBCsystem.returnVal( unknown.label() ) ; }
 //  }
 
-  ///Transform inputs
-  size_t j = 0;
-  for( const auto& unknown : thermalSweepSearch() )
-  {
-    x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
-    j++;
-  }
+//  ///Transform inputs
+//  size_t j = 0;
+//  for( const auto& unknown : thermalSweepSearch() )
+//  {
+//    std::cout << x[j] << "\t";
+//    x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
+//    std::cout << unknown.lowerBound() << "\t" << unknown.upperBound() << "\t";
+//    std::cout << x[j] << "\n";
+//    j++;
+//  }
+  
 
   //  std::cout << static_cast<int>(m) << "\n" <<  static_cast<int>(n) << "\n" ;
   //  for( int i = 0; i < n ; ++i)
@@ -681,7 +741,22 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   /// Constrained nonlinear parameter estimation
   updateBindFunc() ;
 
-  Settings.epsfcn = 0.1;
+//  using std::function;
+//  function< void( double*, double* ) > myOptimizerEval;
+//
+//  using std::bind;
+//  using std::placeholders::_1;
+//  using std::placeholders::_2;
+//  
+//  myOptimizerEval = bind( &LMA_BASE::ThermalProp_Analysis, this , _1, _2 ) ;
+
+//  Settings.mode = 2;
+//  diag[0] = 10;
+//  diag[1] = 10;
+  Settings.epsfcn = .01;
+  Settings.factor = 1;
+  
+  std::cout << x[0] << "\t" << x[1] << "\n";
 
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
          Settings.ftol, Settings.xtol, Settings.gtol,
@@ -717,8 +792,17 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   using std::pow;
   using math::estimation::unknown;
 
+  if ( penalty( xSweep ) > 0 )
+  {
+    std::cout << "before  " <<x[0] << "\t" << x[1] << "\n";
+    resize_ThermalCenterRange( x ) ;
+    std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
+  }
+
   // update experimental data used based on search
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
+  
+  std::cout << x[0] << "\t" << x[1] << "\t";
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
@@ -746,7 +830,16 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   }
 
   currentState.meanParameterError /= sweepOptimizationGoal.size();
+  
+  std::cout << "opt: "
+            << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
+            << thermalSweepSearch.vectorUnknowns[1].bestfit() << "\t"
+            <<currentState.meanParameterError  << "\n";
+
+
   ouputResults.push_back( currentState ) ;
+  
+  
   return;
 }
 

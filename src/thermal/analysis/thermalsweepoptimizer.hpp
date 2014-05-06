@@ -159,7 +159,8 @@ private:
   std::pair< double, double > updateSweep( void ) ;
   void pieAnalysis(void);
   double penalty( const std::pair<double, double>  thermalCenterRange );
-  ThermalData updatedFromXsearch( const double *x );
+  ThermalData updatedFromXsearch( double *x );
+  void resize_ThermalCenterRange( double *x ) ;
 
   // current state
   OptimizerOutput::ExperimentAnalysisState currentState;

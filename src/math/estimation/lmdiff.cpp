@@ -253,11 +253,10 @@ xnorm = 0.0;
 /*
 *     check the input parameters for errors.
 */
-if( (n <= 0) || (m < n) || (ldfjac < m) || (ftol < zero)
-  || (xtol < zero) || (gtol < zero) || (maxfev <= 0)
-  || (factor <= zero) )
+if( ( n <= 0 ) || ( m < n ) || ( ldfjac < m ) || ( ftol < zero )
+    || ( xtol < zero ) || ( gtol < zero ) || ( maxfev <= 0 )
+    || ( factor <= zero ) )
   goto L300;
-
 
 
 if( mode == 2 )
