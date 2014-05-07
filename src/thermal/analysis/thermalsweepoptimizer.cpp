@@ -90,14 +90,10 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   using math::estimation::unknownList;
   using math::estimation::x_limiter2;
   using sensible::layer;
-  
 
-  
    // std::cout << "before  " <<x[0] << "\t" << x[1] << "\n";
     resize_ThermalCenterRange( x ) ;
    // std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
-
-  
 
   unknownList updatedInput;
   size_t i = 0;
@@ -106,7 +102,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
     //    const double val = x_limiter2( x[i++] , unknown.lowerBound(),
     //                                   unknown.upperBound() );
     const double val = x[i++];
-    std::cout << val << "\t ";
+//    std::cout << val << "\t ";
     unknown.bestfitset( val ) ;
     updatedInput.addUnknown( unknown ) ;
   }
@@ -463,51 +459,91 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
   //sweep constraints
   const pair<double, double>thermalLimits(0.01,10);
-  const double lcen_min = .1;
-  const double lcen_max = 1;
+  constexpr double lcen_min = .1;
+  constexpr double lcen_max = 1;
+  constexpr double ldec_min = 0.05;
+  constexpr double ldec_max = 2;
 
   //This function will output a table of values from maping out
-  constexpr double min = 0 ;
-  constexpr double max = 1 ;
+//  constexpr double min = 0 ;
+//  constexpr double max = 1 ;
   ouputResults.clear() ;
 
   for( size_t i = 0; i < iter ; ++i )
   {
     ///create random start points and transform them
-    bool initialGuessPass = false;
-    double xinitial[2] = {0};
+  //  bool initialGuessPass = false;
 
-    while ( !initialGuessPass )
-    {
-      xinitial[0] = math::x_ini( min, max ) ;
-      xinitial[1] = math::x_ini( min, max ) ;
-      initialGuessPass = math::checkLimits( xinitial[0] , xinitial[1] ) ;
+    pair<double, double> thermalCenDec;
+    pair<double, double> slicedThermalLimits;
+    
+//    while ( !initialGuessPass )
+//    {
+//      double error = 0;
+     using math::x_ini;
+     using math::x_limits_from_cenDec;
+     using math::CRfromSweepLimits;
+    
+    const double lcen = x_ini( lcen_min, lcen_max ) ;
+    const double ldec = x_ini( ldec_min, ldec_max ) ;
+    
+    using math::x_limits_from_cenDec ;
+    const pair<double, double> lminmax = x_limits_from_cenDec( lcen, ldec ) ;
+    const pair<double, double>
+    x_initial_CR = CRfromSweepLimits( lminmax.first, lminmax.second , thermalLimits ) ;
+  
 
-      //get omegas from
-      //get lthermals (real values)
-      //check if lthermals are within limits
-
-      const pair<double, double> slicedThermalLimits =
-      math::newThermalSweepLimits( xinitial[0], xinitial[1], thermalLimits ) ;
-
-      const pair<double, double> thermalCenDec =
-      math::xCenterlog10( slicedThermalLimits.first, slicedThermalLimits.second);
-
-      if( thermalCenDec.first  < lcen_min ) initialGuessPass = false;
-      if( thermalCenDec.first  > lcen_max ) initialGuessPass = false;
+    //transform this back into x
+    
+//      initialGuessPass = checkLimits( xinitial[0] , xinitial[1] ) ;
+//      if( initialGuessPass == false )
+//      {
+//        error = 1;
+//      }
+//      else
+//      {
+//        //get omegas from
+//        //get lthermals (real values)
+//        //check if lthermals are within limits
+//
+//        slicedThermalLimits =
+//        math::newThermalSweepLimits( xinitial[0], xinitial[1], thermalLimits ) ;
+//
+//        thermalCenDec =
+//        math::xCenterlog10( slicedThermalLimits.first, slicedThermalLimits.second);
+//
+//        if( thermalCenDec.first  < lcen_min )
+//        {
+//          initialGuessPass = false;
+//          error = 2 ;
+//        }
+//        else if( thermalCenDec.first  > lcen_max )
+//        {
+//          initialGuessPass = false;
+//          error = 3 ;
+//        }
+//        else if( thermalCenDec.second  > ldec_max )
+//        {
+//          initialGuessPass = false;
+//          error = 4 ;
+//        }
+//      }
 
 //      std::cout << xinitial[0] << "\t" << xinitial[1] << "\t"
-//                << thermalCenDec.first <<"\t"
-//                << thermalCenDec.second <<"\t"<<  initialGuessPass<< "\n";
-    }
+//                << thermalCenDec.first   << "\t"
+//                << thermalCenDec.second  << "\t"
+//                << slicedThermalLimits.first   << "\t"
+//                << slicedThermalLimits.second  << "\t" << "\n" ;
+  //  }
 
     /// transform it into something thermal_prop can understand
     double x[2] = { 0 } ;
-    for( size_t j =0 ; j < 2 ; ++j )
-    {
-//      x[j] = math::estimation::kx_limiter2( xinitial[j], min, max ) ;
-        x[j] = xinitial[j];
-    }
+    x[0] = x_initial_CR.first ;
+    x[1] = x_initial_CR.second ;
+
+
+//    std::cout << lcen << "\t" << ldec <<"\t"  << lminmax.first << "\t" << lminmax.second;
+ //   std::cout << "\t" <<x_initial_CR.first << "\t" << x_initial_CR.second<< "\n" ;
 
     double fvec[2] = {0} ;
     ThermalProp_Analysis( x , fvec ) ;
@@ -797,7 +833,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   if ( penalty( xSweep ) > 0 )
   {
-    std::cout << "before  " <<x[0] << "\t" << x[1] << "\n";
+    std::cout << "before  " << x[0] << "\t" << x[1] << "\n";
     resize_ThermalCenterRange( x ) ;
     std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
   }
@@ -834,7 +870,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   currentState.meanParameterError /= sweepOptimizationGoal.size();
   
-  std::cout << "opt: "
+  std::cout << "out: "
             << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
             << thermalSweepSearch.vectorUnknowns[1].bestfit() << "\t"
             <<currentState.meanParameterError  << "\n";

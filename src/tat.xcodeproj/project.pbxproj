@@ -823,6 +823,7 @@
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = (
 					"-Wno-gnu",
+					"-fslp-vectorize-aggressive",
 					"-Wno-conversion",
 					"-Wreorder",
 				);
@@ -885,6 +886,7 @@
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = (
 					"-Wno-gnu",
+					"-fslp-vectorize-aggressive",
 					"-Wno-conversion",
 					"-Wreorder",
 				);

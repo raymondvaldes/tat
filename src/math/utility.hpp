@@ -86,6 +86,8 @@ double xspread( const double xmin, const double xnominal, const double xmax);
 double valFROMpercentileLog10( const double input,  const double xmin,
                                const double xmax );
 
+std::pair<double, double>
+x_limits_from_cenDec( const double cen, const double dec );
 
 std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
@@ -96,7 +98,7 @@ CRfromSweepLimits( const double lstart, const double lend,
 std::pair<double, double> xCenterlog10( const double lmin, const double lmax ) ;
 
 
-bool checkLimits( const double center, const double range );
+bool checkLimits( const double center, const double range ) ;
 
 
 }

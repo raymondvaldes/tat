@@ -81,7 +81,7 @@ void run( const filesystem::directory &dir )
       cout << poptea.ppUnknownParameters() << "\n" ;
     }
   }
-
+  
 	using tools::interface::exportfile;
 	const string partC = "/partC_thermalMaps" ;
 	{
@@ -92,6 +92,8 @@ void run( const filesystem::directory &dir )
     const string thermalSweepMap = poptea.thermalSweepMap() ;
     exportfile( path2thermalMap , thermalSweepMap ) ;
 	}
+  
+return;
 
 //	///subMaps
 //	using tools::interface::getTreefromFile;

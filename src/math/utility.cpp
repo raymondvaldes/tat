@@ -205,6 +205,7 @@ double percentilelog10(const double xmin, const double xmax, const double x)
     This function returns the percentile of x in log10 space with respect to the
     x_min to x_max range.
     */
+    using std::log10;
 
     constexpr double epsilon = 1e-12;
     if( ( (x-epsilon) > xmax) || ( (x+epsilon) < xmin ) )
@@ -217,8 +218,8 @@ double percentilelog10(const double xmin, const double xmax, const double x)
     }
 
 
-  return (std::log10(x) - std::log10(xmin)) /
-         (std::log10(xmax) - std::log10(xmin));
+  return ( log10(x) - log10(xmin)) /
+         ( log10(xmax) - log10(xmin));
 }
 
 double valFROMpercentileLog10( const double input,  const double xmin,
@@ -252,13 +253,30 @@ range( const double xstart, const double xend, const size_t size )
   return result;
 }
 
+std::pair<double, double>
+x_limits_from_cenDec( const double cen, const double dec )
+{
+  using std::log10;
+  using std::pow;
+  using std::pair;
+
+  const double lmin = cen / pow( 10, dec / 2 ) ;
+  const double lmax = lmin * pow( 10, dec ) ;
+
+  const pair<double, double> output ( lmin, lmax ) ;
+  return output;
+}
 
 std::pair<double, double> xCenterlog10( const double lmin, const double lmax )
 {
-  const double xlimits = std::log10( lmax / lmin ) ;
-  const double center = lmin * std::pow( 10, xlimits / 2 ) ;
+  using std::log10;
+  using std::pow;
+  using std::pair;
 
-  const std::pair<double, double> output ( center, xlimits ) ;
+  const double dec = log10( lmax / lmin ) ;
+  const double center = lmin * pow( 10, dec / 2 ) ;
+
+  const pair<double, double> output ( center, dec ) ;
   return output;
 }
 
@@ -306,18 +324,21 @@ double xspread( const double xmin, const double xnominal, const double xmax)
 
 std::pair<double, double>
 CRfromSweepLimits( const double lstart, const double lend,
-                            const std::pair<double, double> limits)
+                   const std::pair<double, double> limits )
 {
+  using std::pair;
+  using math::percentilelog10;
+
   const double xmin = limits.first;
   const double xmax = limits.second;
 
-  const double posStart = math::percentilelog10( xmin,  xmax,  lstart ) ;
-  const double posEnd = math::percentilelog10( xmin,  xmax,  lend ) ;
+  const double posStart = percentilelog10( xmin,  xmax, lstart ) ;
+  const double posEnd   = percentilelog10( xmin,  xmax, lend   ) ;
 
   const double range = posEnd - posStart;
-  const double center = range / 2;
+  const double center = posStart + range / 2;
 
-  const std::pair<double, double> output( center, range );
+  const pair<double, double> output( center, range );
   return output;
 }
 
@@ -339,12 +360,12 @@ bool checkLimits( const double center, const double range )
   BOOST_ASSERT( center > 0 && center < 1 ) ;
   BOOST_ASSERT( range > 0 && range <= 1 ) ;
 
-  bool run = true;
+  bool run = false;
   const double strPos = center - range / 2 ;
   const double endPos = center + range / 2 ;
 
-  if( strPos < 0 ||  endPos > 1 )
-    { run = false ; }
+  if( strPos >= 0 && endPos <= 1 )
+    run = true ;
 
   return run ;
 }
