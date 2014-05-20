@@ -83,19 +83,26 @@ int xINTrandom(const int xmin, const int xmax)
   
 double x_normal(const double Xmean, const double Xstddev, const unsigned seed1)
 {
-  std::mt19937 gen;
+  using std::mt19937;
+  mt19937 gen;
   gen.seed(seed1);
 
-  std::normal_distribution<double> distribution(Xmean,Xstddev);
+  using std::normal_distribution;
+  
+  normal_distribution<double> distribution(Xmean,Xstddev);
   return distribution(gen);
 }
 
-double x_normal(const double Xmean, const double Xstddev)
+double x_normal( const double Xmean, const double Xstddev )
 {
-  std::random_device rd;
-  std::mt19937 gen( rd() ) ;
+  using std::random_device;
+  using std::mt19937;
+  using std::normal_distribution;
+  
+  random_device rd;
+  mt19937 gen( rd() ) ;
 
-  std::normal_distribution<double> distribution(Xmean,Xstddev);
+  normal_distribution<double> distribution(Xmean,Xstddev);
   return distribution(gen);
 }
   
@@ -375,17 +382,25 @@ std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                        const std::pair<double, double> limits )
 {
+  //This function inputs a center and range (0,1) and (0,1) and uses
+  // this info to determine the appropriate min and max based on the total
+  // limits.
+  
+  using math::valFROMpercentileLog10;
+  using std::cout;
+  using std::pair;
+
   BOOST_ASSERT( center > 0 && center < 1) ;
   if( !(range > 0 && range <= 1 ) )
   {
-    std::cout << "check " <<center << "\t" << range << " here";
+    cout << "check " <<center << "\t" << range << " here";
 
     exit(-2);
   }
   
 
-  double strPos = center - range/2 ;
-  double endPos = center + range/2 ;
+  double strPos = center - range / 2 ;
+  double endPos = center + range / 2 ;
 
   if( strPos < 0 )
   {
@@ -401,10 +416,10 @@ newThermalSweepLimits( const double center, const double range,
   const double min = limits.first;
   const double max = limits.second;
 
-  const double start = math::valFROMpercentileLog10( strPos, min, max ) ;
-  const double end   = math::valFROMpercentileLog10( endPos, min, max ) ;
+  const double start = valFROMpercentileLog10( strPos, min, max ) ;
+  const double end   = valFROMpercentileLog10( endPos, min, max ) ;
 
-  const std::pair<double, double> output(start, end);
+  const pair<double, double> output(start, end);
 
   return output;
 }

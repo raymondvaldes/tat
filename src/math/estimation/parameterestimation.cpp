@@ -233,22 +233,28 @@ class unknownList unknownList::
 std::string
 unknownList::prettyPrint( void )
 {
-  std::ostringstream output ;
+  using std::setw;
+  using std::left;
+  using std::ostringstream;
+  using std::ios;
+  using std::setprecision;
+  ostringstream output ;
 
   output << "*-----------------------------------------*\n";
   output << "| parameter estimate intervals:           |\n";
   output << "|-----------------------------------------|\n";
   output << "| min       bestfit    max      error(%)  |\n";
 
-  output.setf( std::ios::fixed, std::ios::floatfield ) ;
-  output << std::setprecision(3) ;
-  for( const math::estimation::unknown & val : vectorUnknowns )
+  output.setf( ios::fixed, ios::floatfield ) ;
+  output << setprecision(3) ;
+  using math::estimation::unknown;
+  for( const unknown & val : vectorUnknowns )
   {
     output << "| "
-              << std::setw(10) << std::left << val.bestfitInterval.lower
-              << std::setw(10) << std::left << val.bestfit()
-              << std::setw(10) << std::left << val.bestfitInterval.upper
-              << std::setw(10) << std::left << 100*val.bestfitIntervalSpread()
+              << setw(10) << left << val.bestfitInterval.lower
+              << setw(10) << left << val.bestfit()
+              << setw(10) << left << val.bestfitInterval.upper
+              << setw(10) << left <<  100 * val.bestfitIntervalSpread()
               << "|\n";
   }
   output << "*-----------------------------------------*\n";

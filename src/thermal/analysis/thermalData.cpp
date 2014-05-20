@@ -229,9 +229,11 @@ updatefromBestFit( std::vector< math::estimation::unknown > list,
       { xRange = unknown.bestfit(); }
   }
 
+  using std::pair;
+  using math::newThermalSweepLimits;
 
-  std::pair<double, double> newThermalSweep =
-  math::newThermalSweepLimits( xCenter, xRange, lthermalLimits);
+  pair<double, double> newThermalSweep =
+  newThermalSweepLimits( xCenter, xRange, lthermalLimits);
   thermalSetup( newThermalSweep.first, newThermalSweep.second, coating);
 
 
