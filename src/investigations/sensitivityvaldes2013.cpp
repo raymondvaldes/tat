@@ -72,16 +72,14 @@ void run( const filesystem::directory &dir )
     string partB = "partB_expOptimize" ;
     dir.mkdir( partB ) ;
 
-    for( size_t i =0 ; i < 1 ; ++i )
-    {
-      poptea.bestFit() ;
-      
-      ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
-      outputData.pp2Folder( dir.abs( partB ) , to_string(i)  ) ;
-      cout << poptea.ppUnknownParameters() << "\n" ;
-    }
+    poptea.bestFit() ;
+    ThermalSweepOptimizer::OptimizerOutput outputData = poptea.optimization() ;
+    outputData.pp2Folder( dir.abs( partB ) , to_string(1)  ) ;
+    cout << poptea.ppUnknownParameters() << "\n" ;
+    
   }
-  
+  return;
+
 	using tools::interface::exportfile;
 	const string partC = "/partC_thermalMaps" ;
 	{
