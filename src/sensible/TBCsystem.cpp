@@ -132,7 +132,7 @@ double TBCsystem::gammaEval(void) const
 double TBCsystem::a_subEval(void) const
 {
   using std::sqrt;
-  return sqrt(substrate.thermalDiffusivity() / coating.thermalDiffusivity());
+  return sqrt( substrate.thermalDiffusivity() / coating.thermalDiffusivity() ) ;
 }
 
 void TBCsystem::updateCoat(void)
