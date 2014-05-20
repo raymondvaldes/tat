@@ -274,16 +274,16 @@ void PIE::parameterIntervalEstimates( void )
 }
 
 double PIE::solveFORx( const double target , const double min, const double max,
-                       const enum thermal::model::labels::Name mylabel,
+                       const enum thermal::model::labels::Name param,
                        const std::string &bound )
 {
   using std::function;
   using std::bind;
   using std::placeholders::_1;
+  using math::solve;
   
-  const function<double(double)>
-    myFuncReduced = bind( &PIE::Gfunc, this , _1, mylabel ) ;
-  const math::solve ojb( myFuncReduced, target, min, max ) ;
+  const function<double(double)> myFuncReduced =bind(&PIE::Gfunc,this,_1,param);
+  const solve ojb( myFuncReduced, target, min, max ) ;
   double soln = ojb.returnSoln();
 
   if( !ojb.pass )
@@ -295,20 +295,20 @@ double PIE::solveFORx( const double target , const double min, const double max,
   return soln;
 }
 
-double PIE::Gfunc( const double val ,
-                   const enum thermal::model::labels::Name &mylabel)
+double PIE::Gfunc( const double eval ,
+                   const enum thermal::model::labels::Name &param)
 {
   using std::pair;
 
-  coreSystem->TBCsystem.updateVal( mylabel , val ) ;
+  coreSystem->TBCsystem.updateVal( param , eval ) ;
   coreSystem->TBCsystem.updateCoat() ;
 
-  bestFit() ;
+  const double MSE_value = bestFit() ;
 
-  const pair< double, ThermalData > saveThis( val, *thermalData ) ;
+  const pair< double, ThermalData > saveThis( eval, *thermalData ) ;
   dataTempStorage.allThermalData.push_back( saveThis ) ;
 
-  return thermalData->MSE;
+  return MSE_value;
 }
 
 void PIE::saveExperimental( const ThermalData& thermalData_in )
