@@ -55,6 +55,9 @@ void run( const filesystem::directory &dir )
   /// Part test
   poptea.bestFit() ;
   cout << poptea.ppUnknownParameters() ;
+  cout << "substrate properties:\n"
+       << poptea.coreSystem->TBCsystem.substrate.thermalEffusivity() << "\n"
+       << poptea.coreSystem->TBCsystem.substrate.thermalDiffusivity() << "\n";
 
   {
     /// PartA ( pie_analysis )
@@ -91,7 +94,6 @@ void run( const filesystem::directory &dir )
     exportfile( path2thermalMap , thermalSweepMap ) ;
 	}
   
-return;
 
 //	///subMaps
 //	using tools::interface::getTreefromFile;

@@ -156,15 +156,32 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
+  using std::cout;
 
+  //cout << "\nbefore:\n" ;
+  //cout << "a_sub\t" << coreSystem->TBCsystem.gammaEval() << "\n" ;
+  //cout << "gamma\t" << coreSystem->TBCsystem.a_subEval() << "\n" ;
+  
+  //using std::pair;
+  //pair<double, double > ltherm =
+  //thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
+  //cout << ltherm.first << "\t" << ltherm.second << "\n";
+  
   intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
                             bestfitMethod ) ;
   captureState( coreSystem->TBCsystem.coating ) ;
+  coreSystem->updatefromBestFit( (*unknownParameters)() ) ;
 
+//
+//  cout << "\n" <<currentState.ppFinalResults() ;
+//  
+//  cout << "after:\n" ;
+//  cout << "a_sub\t" << coreSystem->TBCsystem.gammaEval() << "\n" ;
+//  cout << "gamma\t" << coreSystem->TBCsystem.a_subEval() << "\n" ;
+  
 
 //  for(size_t i = 0; i < 60 ; i ++)
 //    std::cout << "\n";
-//  std::cout << currentState.ppFinalResults() << "\n" ;
 }
 
 
@@ -258,18 +275,29 @@ void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path ,
 
   exportfile( fullPath , searchOutput ) ;
 
+  
 
-  const string fullSweep =
-      results.postFitted->prettyPrint( *(searchPath.coating_final) );
+  using sensible::layer;
+  const layer coating_final = *(searchPath.coating_final) ;
+  std::cout << "coating info\t" << coating_final.thermalDiffusivity() << "\n" ;
+  std::cout << "coating info\t" << coating_final.thermalEffusivity() << "\n" ;
+  
+  const string fullSweep = results.postFitted->prettyPrint( coating_final );
   const string fullSweepfile = path + "/" + "optiSweep.dat" ;
-  exportfile( fullSweepfile, fullSweep );
+  exportfile( fullSweepfile, fullSweep ) ;
 }
 
 
 std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
   ppFinalResults( void )
 {
-  std::ostringstream output ;
+  using std::setw;
+  using std::right;
+  using std::ios;
+  using std::ostringstream;
+  using std::setprecision;
+  
+  ostringstream output ;
 
   output << unknownParameters->prettyPrint() ;
 
@@ -279,16 +307,12 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
   const double lthermMin = lthermalLimits.first;
   const double lthermMax = lthermalLimits.second;
 
-  output.setf( std::ios::fixed, std::ios::floatfield );
-  output << std::setprecision(3);
-  output << "| lthermal center: "<< std::setw(8) << std::right
-         << lthermCenter << "               |\n";
-  output << "| lthermal decades:"<< std::setw(8) << std::right
-         << lthermDecade << "               |\n";
-  output << "| lmin:     "<< std::setw(8) << std::right
-         << lthermMin << "                      |\n";
-  output << "| lmax:     "<< std::setw(8) << std::right
-         << lthermMax << "                      |\n";
+  output.setf( ios::fixed, ios::floatfield );
+  output << setprecision(3);
+  output << "| lthermal center: "<< setw(8) << right << lthermCenter << "               |\n";
+  output << "| lthermal decades:"<< setw(8) << right << lthermDecade << "               |\n";
+  output << "| lmin:     "<< setw(8) << right << lthermMin << "                      |\n";
+  output << "| lmax:     "<< setw(8) << right << lthermMax << "                      |\n";
   output << "*-----------------------------------------*\n";
 
   return output.str() ;
@@ -306,8 +330,10 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 ppExportEmissionSweep( const std::string path )
 {
-  const std::string fullpath =  path + "/" +  "emission.dat" ;
-  const std::string output = ppEmissionSweep() ;
+  using std::string;
+
+  const string fullpath =  path + "/" +  "emission.dat" ;
+  const string output = ppEmissionSweep() ;
 
   tools::interface::exportfile( fullpath , output ) ;
 }
@@ -315,13 +341,17 @@ ppExportEmissionSweep( const std::string path )
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 ppExportAll( const std::string path )
 {
-  ppExportEmissionSweep( path ) ;
-  const std::string output = ppFinalResults();
-  tools::interface::exportfile( path + "/" + "pie.dat", output ) ;
+  using tools::interface::exportfile;
+  using std::string;
+  
+  const string output = ppFinalResults();
+  exportfile( path + "/" + "pie.dat", output ) ;
 
-  const std::string fullpath =  path + "/" +  "emission.dat" ;
-  const std::string outEmission = ppEmissionSweep() ;
-  tools::interface::exportfile( fullpath , outEmission ) ;
+
+  ppExportEmissionSweep( path ) ;
+//  const string fullpath =  path + "/" +  "emission.dat" ;
+//  const string outEmission = ppEmissionSweep() ;
+//  exportfile( fullpath , outEmission ) ;
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
@@ -603,10 +633,13 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
 void ThermalSweepOptimizer::captureState( const sensible::layer &coat )
 {
+  using math::xCenterlog10;
+
   currentState.lthermalLimits = thermalData->get_lthermalLimits( coat ) ;
-  currentState.lthermalCenterDecades =
-      math::xCenterlog10( currentState.lthermalLimits.first,
-                          currentState.lthermalLimits.second );
+  const double lmin = currentState.lthermalLimits.first ;
+  const double lmax = currentState.lthermalLimits.second ;
+  
+  currentState.lthermalCenterDecades = xCenterlog10( lmin , lmax ) ;
 
   currentState.omegaLimits = thermalData->get_omegaLimits();
 
@@ -644,12 +677,27 @@ void ThermalSweepOptimizer::solve(
 
   /// optimization run
   optimizer( &info, &nfev ) ;
-  std::cout << "ended optimizer with:--- " << info  << "  " << nfev<< "\n\n";
+//  std::cout << "ended optimizer with:--- " << info  << "  " << nfev<< "\n\n";
+//  std::cout << "a_sub\t" << coreSystem->TBCsystem.gammaEval() << "\n" ;
+//  std::cout << "gamma\t" << coreSystem->TBCsystem.a_subEval() << "\n" ;
 
   /// post analysis
   pieAnalysis() ;
+  
+  
+  layer coating_final_pre = coreSystem->TBCsystem.coating;
+//  std::cout << "a_sub\t" << coreSystem->TBCsystem.gammaEval() << "\n" ;
+//  std::cout << "gamma\t" << coreSystem->TBCsystem.a_subEval() << "\n" ;
+//  
+  
   ouputResults.addAfter( currentState, coreSystem ) ;
-  reassign(ouputResults.searchPath.coating_final,coreSystem->TBCsystem.coating);
+  
+  using std::shared_ptr;
+  layer coating_final = coreSystem->TBCsystem.coating;
+//  std::cout << "coating info\t" << coating_final.thermalDiffusivity() << "\n" ;
+//  std::cout << "coating info\t" << coating_final.thermalEffusivity() << "\n" ;
+//  
+  reassign( ouputResults.searchPath.coating_final, coating_final ) ;
 
   /// now that all data is saved - reset thermalData to fullRange
   reassign(  thermalData, *fullRangeThermalData ) ;
@@ -666,6 +714,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   using std::end;
   
   using math::numIntegration::mySpline;
+  using math::newThermalSweepLimits;
   using define::lthermal;
 
 
@@ -700,7 +749,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   //std::cout << "check3 " <<xCenter << "\t" << xRange << " here3";
 
   const pair<double, double> slicedThermalLimits =
-  math::newThermalSweepLimits( xCenter, xRange, thermalLimits ) ;
+  newThermalSweepLimits( xCenter, xRange, thermalLimits ) ;
 
   const double lmin = slicedThermalLimits.first ;
   const double lmax = slicedThermalLimits.second ;
@@ -870,7 +919,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   currentState.meanParameterError /= sweepOptimizationGoal.size();
   
-  std::cout << "out: "
+  std::cout
             << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
             << thermalSweepSearch.vectorUnknowns[1].bestfit() << "\t"
             <<currentState.meanParameterError  << "\n";
