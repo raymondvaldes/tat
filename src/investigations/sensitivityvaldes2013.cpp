@@ -81,7 +81,7 @@ void run( const filesystem::directory &dir )
     cout << poptea.ppUnknownParameters() << "\n" ;
     
   }
-  return;
+  //return;
 
 	using tools::interface::exportfile;
 	const string partC = "/partC_thermalMaps" ;
@@ -143,7 +143,7 @@ void demo( const filesystem::directory &dir )
   using thermal::analysis::initializePopTeaAndLoadSimuEmission;
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
 
-  for(size_t i =0 ; i < 100; i++)
+  for(size_t i =0 ; i < 100; i++)ç
     std::cout << "\n";
 
   poptea.bestFit();

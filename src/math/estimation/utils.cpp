@@ -40,11 +40,12 @@ double SobjectiveLS( const std::vector<double>& emissionExp,
    */
 
   using std::abs;
-
+  using std::pow;
+  
   double fvec_objective = 0 ;
   
   for( size_t  n =0 ; n < emissionEst.size() ; ++n )
-    fvec_objective += abs( emissionExp[n] - emissionEst[n] ) ;
+    fvec_objective +=  pow(emissionExp[n] - emissionEst[n], 2) ;
   
   fvec_objective /= emissionEst.size() ;
   
