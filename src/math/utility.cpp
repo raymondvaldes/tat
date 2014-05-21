@@ -393,14 +393,14 @@ newThermalSweepLimits( const double center, const double range,
   //BOOST_ASSERT( center > 0 && center < 1) ;
   if( !(center > 0 && center < 1 ) )
   {
-    cout << "check " <<center << "\t" << range << " here";
+    cout << "check5 " <<center << "\t" << range << " here5\n\n";
 
     exit(-2);
   }
   
   if( !(range > 0 && range <= 1 ) )
   {
-    cout << "check " <<center << "\t" << range << " here";
+    cout << "check6 " <<center << "\t" << range << " here6\n\n";
 
     exit(-2);
   }
