@@ -232,10 +232,11 @@ updatefromBestFit( std::vector< math::estimation::unknown > list,
   using std::pair;
   using math::newThermalSweepLimits;
 
+  std::cout << "running here: ";
   pair<double, double> newThermalSweep =
   newThermalSweepLimits( xCenter, xRange, lthermalLimits);
   thermalSetup( newThermalSweep.first, newThermalSweep.second, coating);
-
+  std::cout << "ending here\n";
 
   ///Experimental Data must be saved and used to be interpolated accross the
   /// restricted domain.  The experimental Data and sweep cannot be erased.
