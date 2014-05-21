@@ -716,14 +716,14 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   
   if( !(xCenter > 0 && xCenter < 1 ) )
   {
-    cout << "check7 " <<xCenter << "\t" << xRange << " here7\n\n";
+    cout << "check7 " <<xCenter << "\t" << xRange << " here7\n\n\n\n";
 
     exit(-2);
   }
   
   if( !(xRange > 0 && xRange <= 1 ) )
   {
-    cout << "check8 " <<xCenter << "\t" << xRange << " here8\n\n";
+    cout << "check8 " <<xCenter << "\t" << xRange << " here8\n\n\n\n";
 
     exit(-2);
   }
