@@ -131,8 +131,10 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
   using math::checkLimits;
   std::cout << "before resizing: " << x[0] << "\t" << x[1] << "\n" ;
   
-  if ( x[0] > 1 )
+  if ( x[0] > 1  )
     x[0] = 0.99 ;
+  else if ( x[0] < 0 )
+    x[0] = 0.01 ;
   
   const double center = x[0];
   const double range = x[1];
@@ -140,7 +142,7 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
   const double strPos = center - range/2;
   const double endPos = center + range/2;
 
-  const double tol = 0.0001;
+  constexpr double tol = 0.0001;
 
   if( strPos < 0 || endPos > 1  )
   {
