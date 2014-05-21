@@ -115,7 +115,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
   
-  std::cout << " check9 " <<xSweep.first << "\t" << xSweep.second << " here9\n";
+  //std::cout << " check9 " <<xSweep.first << "\t" << xSweep.second << " here9\n";
 
 
   const double xCenter = xSweep.first ;
@@ -128,6 +128,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 
 void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 {
+  using math::checkLimits;
   std::cout << "before resizing: " << x[0] << "\t" << x[1] << "\n" ;
   const double center = x[0];
   const double range = x[1];
@@ -154,8 +155,8 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 
   }
   
-  std::cout << "after resizing: " << x[0] << "\t" << x[1] << "\n" ;
-
+  
+  BOOST_ASSERT( checkLimits( x[0], x[1] ) ) ;
   
 }
 
@@ -870,7 +871,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   Settings.epsfcn = .01;
   Settings.factor = 1;
   
-  std::cout << x[0] << "\t" << x[1] << "\n";
+  std::cout << "\ngoing to optimize: " <<x[0] << "\t" << x[1] << "\n";
 
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
          Settings.ftol, Settings.xtol, Settings.gtol,
@@ -916,8 +917,6 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   // update experimental data used based on search
   std::cout << "after11  " << x[0] << "\t" << x[1] << "\n";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
-  
-  std::cout << x[0] << "\t" << x[1] << "\t";
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
