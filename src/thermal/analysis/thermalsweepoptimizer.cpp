@@ -89,12 +89,14 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   //Update parameters with current bestfits by transforming x
   using math::estimation::unknownList;
   using math::estimation::x_limiter2;
+  using math::checkLimits;
   using sensible::layer;
 
-   // std::cout << "before  " <<x[0] << "\t" << x[1] << "\n";
+  if ( !checkLimits( x[0], x[1] ) )
+  {
     resize_ThermalCenterRange( x ) ;
-   // std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
-
+  }
+  
   unknownList updatedInput;
   size_t i = 0;
   for( auto& unknown : thermalSweepSearch() )
@@ -906,11 +908,9 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   using math::estimation::unknown;
   using math::checkLimits;
 
-  if ( checkLimits( x[0], x[1] ) )
+  if ( !checkLimits( x[0], x[1] ) )
   {
-    std::cout << "before  " << x[0] << "\t" << x[1] << "\n";
     resize_ThermalCenterRange( x ) ;
-    std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
   }
 
   // update experimental data used based on search
