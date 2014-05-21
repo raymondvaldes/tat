@@ -61,13 +61,13 @@ ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {}
 
 std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
 {
+  // This updates the sweep from the best-fit.
   using std::make_pair;
 
   double thermalCenter = 0;
   double thermalRange = 0;
   using thermal::model::labels;
   
-
   for( const auto& unknown : thermalSweepSearch() )
   {
     const double bestfit  = unknown.bestfit();
@@ -864,7 +864,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   Settings.epsfcn = .01;
   Settings.factor = 1;
   
-  std::cout << x[0] << "\t" << x[1] << "\n";
+  //std::cout << x[0] << "\t" << x[1] << "\n";
 
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
          Settings.ftol, Settings.xtol, Settings.gtol,
@@ -875,6 +875,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   //std::cout << "error code:  "<< *info <<"\n\n";
 
   ///Final fit
+  std::cout << "after12  " << x[0] << "\t" << x[1] << "\n";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
   reassign( thermalData , updatedThermal ) ;
 
@@ -908,6 +909,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   }
 
   // update experimental data used based on search
+  std::cout << "after11  " << x[0] << "\t" << x[1] << "\n";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
   
   std::cout << x[0] << "\t" << x[1] << "\t";
