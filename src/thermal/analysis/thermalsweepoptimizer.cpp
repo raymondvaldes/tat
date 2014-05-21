@@ -112,7 +112,8 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
-    //std::cout << " check1 " <<xSweep.first << "\t" << xSweep.second << " here1 ";
+  
+  std::cout << " check9 " <<xSweep.first << "\t" << xSweep.second << " here9\n";
 
 
   const double xCenter = xSweep.first ;
@@ -707,6 +708,23 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
     const double xCenter, const double xRange,
     const sensible::layer updatedCoating )
 {
+  using std::cout;
+  
+  if( !(xCenter > 0 && xCenter < 1 ) )
+  {
+    cout << "check7 " <<xCenter << "\t" << xRange << " here7\n\n";
+
+    exit(-2);
+  }
+  
+  if( !(xRange > 0 && xRange <= 1 ) )
+  {
+    cout << "check8 " <<xCenter << "\t" << xRange << " here8\n\n";
+
+    exit(-2);
+  }
+
+
   using std::pair;
   using std::vector;
   using std::reverse_copy;
