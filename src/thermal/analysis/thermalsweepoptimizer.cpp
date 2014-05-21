@@ -91,11 +91,6 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   using math::estimation::x_limiter2;
   using math::checkLimits;
   using sensible::layer;
-
-//  if ( !checkLimits( x[0], x[1] ) )
-//  {
-//    resize_ThermalCenterRange( x ) ;
-//  }
   
   unknownList updatedInput;
   size_t i = 0;
@@ -110,19 +105,19 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   }
   thermalSweepSearch( updatedInput() ) ;
   
-  //std::cout << thermalSweepSearch.prettyPrint();
+  std::cout << thermalSweepSearch.prettyPrint();
 
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
   
-  //std::cout << " check9 " <<xSweep.first << "\t" << xSweep.second << " here9\n";
+  std::cout << " check9 " <<xSweep.first << "\t" << xSweep.second << " here9\n";
 
 
   const double xCenter = xSweep.first ;
   const double xRange = xSweep.second ;
   const layer coatUpdate( coreSystem->TBCsystem.coating ) ;
   
-  std::cout << " check2 " <<xCenter << "\t" << xRange << " here2 ";
+  std::cout << " check2 " << xCenter << "\t" << xRange << " here2 ";
   return sliceThermalData( xCenter, xRange, coatUpdate ) ;
 }
 
