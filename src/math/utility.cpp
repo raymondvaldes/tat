@@ -371,8 +371,9 @@ bool checkLimits( const double center, const double range )
   const double strPos = center - range / 2 ;
   const double endPos = center + range / 2 ;
 
-  if( strPos >= 0 && endPos <= 1 )
-    run = true ;
+  if( strPos >= 0 && strPos < 1 )
+    if( endPos >0 && endPos <= 1 )
+      run = true ;
 
   return run ;
 }
