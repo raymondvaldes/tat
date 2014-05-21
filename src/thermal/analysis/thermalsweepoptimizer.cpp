@@ -122,7 +122,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   const double xRange = xSweep.second ;
   const layer coatUpdate( coreSystem->TBCsystem.coating ) ;
   
-  //std::cout << " check2 " <<xCenter << "\t" << xRange << " here2 ";
+  std::cout << " check2 " <<xCenter << "\t" << xRange << " here2 ";
   return sliceThermalData( xCenter, xRange, coatUpdate ) ;
 }
 
@@ -913,6 +913,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 {
   using std::sqrt;
   using std::pow;
+  using std::cout;
   using math::estimation::unknown;
   using math::checkLimits;
 
@@ -922,7 +923,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   }
 
   // update experimental data used based on search
-  std::cout << "after11  " << x[0] << "\t" << x[1] << "\n";
+  cout << "after11  " << x[0] << "\t" << x[1] << "\n";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
   reassign( thermalData , updatedThermal ) ;
 
@@ -952,7 +953,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   currentState.meanParameterError /= sweepOptimizationGoal.size();
   
-  std::cout
+  cout
             << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
             << thermalSweepSearch.vectorUnknowns[1].bestfit() << "\t"
             <<currentState.meanParameterError  << "\n";
