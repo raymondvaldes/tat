@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--run /Users/raymondvaldes/Dropbox/investigations/develop"
+            argument = "--run /Users/raymondvaldes/Dropbox/investigations/develop/"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
