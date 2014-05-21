@@ -748,8 +748,11 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   // Take a slice of thermalData range based on updated limits and xC,xR
   //std::cout << "check3 " <<xCenter << "\t" << xRange << " here3";
 
+  std::cout << "running here2: ";
   const pair<double, double> slicedThermalLimits =
   newThermalSweepLimits( xCenter, xRange, thermalLimits ) ;
+  std::cout << "ending here2: ";
+
 
   const double lmin = slicedThermalLimits.first ;
   const double lmax = slicedThermalLimits.second ;
