@@ -132,13 +132,13 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
   if ( x[0] > 1  )
   {
     x[0] = max ;
-    x[1] = 1 - x[0] / 2  - tol;
+    x[1] = ( 1 - x[0] ) / 2  - tol;
     return;
   }
   else if ( x[0] < 0 )
   {
     x[0] = min ;
-    x[1] = x[0] / 2  - tol;
+    x[1] = ( x[0] / 2 ) - tol;
     return;
   }
   
