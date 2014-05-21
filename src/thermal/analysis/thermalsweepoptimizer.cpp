@@ -161,7 +161,8 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 
   }
   
-  
+  std::cout << "after resizing: " << x[0] << "\t" << x[1] << "\n" ;
+
   BOOST_ASSERT( checkLimits( x[0], x[1] ) ) ;
   
 }
