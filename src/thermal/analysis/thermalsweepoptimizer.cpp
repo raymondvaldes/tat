@@ -92,10 +92,10 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   using math::checkLimits;
   using sensible::layer;
 
-  if ( !checkLimits( x[0], x[1] ) )
-  {
-    resize_ThermalCenterRange( x ) ;
-  }
+//  if ( !checkLimits( x[0], x[1] ) )
+//  {
+//    resize_ThermalCenterRange( x ) ;
+//  }
   
   unknownList updatedInput;
   size_t i = 0;
@@ -130,9 +130,13 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 {
   using math::checkLimits;
   std::cout << "before resizing: " << x[0] << "\t" << x[1] << "\n" ;
+  
+  if ( x[0] > 1 )
+    x[0] = 0.99 ;
+  
   const double center = x[0];
   const double range = x[1];
-
+  
   const double strPos = center - range/2;
   const double endPos = center + range/2;
 
