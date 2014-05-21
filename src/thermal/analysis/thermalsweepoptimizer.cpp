@@ -195,7 +195,7 @@ double ThermalSweepOptimizer::
 penalty( const std::pair<double, double>  thermalCenterRange )
 {
   using std::pow;
-  using std::fabs;
+  using std::abs;
   using std::ceil;
 
   const double center = thermalCenterRange.first;
@@ -218,7 +218,7 @@ penalty( const std::pair<double, double>  thermalCenterRange )
       errorModifier = endPos - 1 ;
     }
 
-    error += fabs( errorModifier * 100  ) ;
+    error += abs( errorModifier * 100  ) ;
   }
 
   return error;
@@ -904,8 +904,9 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   using std::sqrt;
   using std::pow;
   using math::estimation::unknown;
+  using math::checkLimits;
 
-  if ( penalty( xSweep ) > 0 )
+  if ( checkLimits( x[0], x[1] ) )
   {
     std::cout << "before  " << x[0] << "\t" << x[1] << "\n";
     resize_ThermalCenterRange( x ) ;
