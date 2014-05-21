@@ -126,13 +126,14 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 
 void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 {
+  std::cout << "before resizing: " << x[0] << "\t" << x[1] << "\n" ;
   const double center = x[0];
   const double range = x[1];
 
   const double strPos = center - range/2;
   const double endPos = center + range/2;
 
-//  const double tol = 0.0001;
+  const double tol = 0.0001;
 
   if( strPos < 0 || endPos > 1  )
   {
@@ -140,16 +141,19 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
     
     if ( strPos < 0 )
     {
-      range_new = 2 * center - .2 ;
+      range_new = 2 * center - tol ;
     }
     else
     {
-      range_new = 1.8 - 2 * center;
+      range_new = ( 2 - tol ) - 2 * center;
     }
     
     x[1] = range_new;
 
   }
+  
+  std::cout << "after resizing: " << x[0] << "\t" << x[1] << "\n" ;
+
   
 }
 
@@ -864,7 +868,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   Settings.epsfcn = .01;
   Settings.factor = 1;
   
-  //std::cout << x[0] << "\t" << x[1] << "\n";
+  std::cout << x[0] << "\t" << x[1] << "\n";
 
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
          Settings.ftol, Settings.xtol, Settings.gtol,
