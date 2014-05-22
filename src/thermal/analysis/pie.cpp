@@ -111,26 +111,29 @@ retrieveSearchData( const thermal::model::labels::Name input )
 
 void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 {
-  std::string pieResults = myUnknowns->prettyPrint();
-  tools::interface::exportfile( path + "/" + "pie.dat" , pieResults ) ;
+  using std::string;
+  using tools::interface::exportfile;
+  
+  string pieResults = myUnknowns->prettyPrint();
+  exportfile( path + "/" + "pie.dat" , pieResults ) ;
 
-  std::string bestfit = ppThermalSweep();
-  tools::interface::exportfile( path + "/" + "thermalSweep.dat" , bestfit ) ;
+  string bestfit = ppThermalSweep();
+  exportfile( path + "/" + "thermalSweep.dat" , bestfit ) ;
 
 
   for( math::estimation::unknown&parameter : (*myUnknowns)() )
   {
     const thermal::model::labels myLabel = parameter.getLabel();
-    const std::string myLabelName = myLabel.getNameString() ;
+    const string myLabelName = myLabel.getNameString() ;
     filesystem::makeDir( path , myLabelName );
 
-    const std::string updatePath = path + "/" + myLabelName;
+    const string updatePath = path + "/" + myLabelName;
 
     const labels::Name myenumName = myLabel.getName();
 
-    const std::string output = ppSearchPath( myenumName );
-    const std::string pathSP =  updatePath + "/" + "searchPath.dat" ;
-    tools::interface::exportfile( pathSP , output ) ;
+    const string output = ppSearchPath( myenumName );
+    const string pathSP =  updatePath + "/" + "searchPath.dat" ;
+    exportfile( pathSP , output ) ;
 
     SearchData mySearchData = retrieveSearchData( myenumName ) ;
     mySearchData.ppThermalSweep( updatePath ) ;

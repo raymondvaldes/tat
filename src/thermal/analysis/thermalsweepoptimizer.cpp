@@ -690,8 +690,8 @@ void ThermalSweepOptimizer::solve(
   fullRangeThermalData = thermalData ;
 
   /// pre analysis on full-range
-  double xC = .5 ;
-  double xR = 1 ;
+  const double xC = .5 ;
+  const double xR = 1 ;
 
   using sensible::layer;
   const layer coatUpdate( coreSystem->TBCsystem.coating ) ;
@@ -703,26 +703,14 @@ void ThermalSweepOptimizer::solve(
 
   /// optimization run
   optimizer( &info, &nfev ) ;
-//  std::cout << "ended optimizer with:--- " << info  << "  " << nfev<< "\n\n";
-//  std::cout << "a_sub\t" << coreSystem->TBCsystem.gammaEval() << "\n" ;
-//  std::cout << "gamma\t" << coreSystem->TBCsystem.a_subEval() << "\n" ;
 
   /// post analysis
   pieAnalysis() ;
-  
-  
   layer coating_final_pre = coreSystem->TBCsystem.coating;
-//  std::cout << "a_sub\t" << coreSystem->TBCsystem.gammaEval() << "\n" ;
-//  std::cout << "gamma\t" << coreSystem->TBCsystem.a_subEval() << "\n" ;
-//  
-  
   ouputResults.addAfter( currentState, coreSystem ) ;
   
   using std::shared_ptr;
   layer coating_final = coreSystem->TBCsystem.coating;
-//  std::cout << "coating info\t" << coating_final.thermalDiffusivity() << "\n" ;
-//  std::cout << "coating info\t" << coating_final.thermalEffusivity() << "\n" ;
-//  
   reassign( ouputResults.searchPath.coating_final, coating_final ) ;
 
   /// now that all data is saved - reset thermalData to fullRange
@@ -842,7 +830,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   for( size_t i=0 ; i< n ; i++ )
   {
       x[i] = xInitial[i];
-    std::cout << x[i] << "\n" ;
   }
 
 
@@ -886,10 +873,9 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 //  Settings.mode = 2;
 //  diag[0] = 10;
 //  diag[1] = 10;
-  Settings.epsfcn = .01;
-  Settings.factor = 1;
+  Settings.epsfcn = .001;
+  Settings.factor = .1;
   
-  std::cout << "\ngoing to optimize: " <<x[0] << "\t" << x[1] << "\n";
 
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
          Settings.ftol, Settings.xtol, Settings.gtol,
@@ -897,10 +883,9 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
          static_cast<int>(Settings.mode), Settings.factor,
          static_cast<int>(Settings.nprint), info, nfev, fjac,
          static_cast<int>(m), ipvt, qtf, wa1, wa2, wa3, wa4 ) ;
-  //std::cout << "error code:  "<< *info <<"\n\n";
+  std::cout << "error code:  "<< *info <<"\n\n";
 
   ///Final fit
-  std::cout << "after12  " << x[0] << "\t" << x[1] << "\n";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
   reassign( thermalData , updatedThermal ) ;
 
