@@ -109,7 +109,6 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
-  
   std::cout << " check9 " <<xSweep.first << "\t" << xSweep.second << " here9\n";
 
 
@@ -700,6 +699,7 @@ void ThermalSweepOptimizer::solve(
 
   pieAnalysis() ;
   ouputResults.addBefore( currentState , thermalData ) ;
+  reassign( unknownBestFit, *unknownParameters ) ;
 
   /// optimization run
   optimizer( &info, &nfev ) ;
@@ -873,8 +873,8 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 //  Settings.mode = 2;0
 //  diag[0] = 10;
 //  diag[1] = 10;
-  Settings.epsfcn = .1;
-  Settings.factor = .1;
+  Settings.epsfcn = .01;
+  Settings.factor = 1;
   
 
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
@@ -919,18 +919,19 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   }
 
   // update experimental data used based on search
-  cout << "after11  " << x[0] << "\t" << x[1] << "\n";
+  //cout << "after11  " << x[0] << "\t" << x[1] << "\n";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
-  pieAnalysis();
+  coreSystem->updatefromInitial( (*unknownBestFit)() ) ;
+  pieAnalysis() ;
 
   ///Use results from anaylsis
   size_t i = 0 ;
   currentState.meanParameterError = 0;
   for( thermal::model::labels& myParam : sweepOptimizationGoal )
-  {
+  {k
     double error = 0 ;
 
     for ( unknown& unknown: (*unknownParameters)() )
