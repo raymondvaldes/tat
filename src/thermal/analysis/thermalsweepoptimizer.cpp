@@ -870,10 +870,10 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 //  
 //  myOptimizerEval = bind( &LMA_BASE::ThermalProp_Analysis, this , _1, _2 ) ;
 
-//  Settings.mode = 2;
+//  Settings.mode = 2;0
 //  diag[0] = 10;
 //  diag[1] = 10;
-  Settings.epsfcn = .001;
+  Settings.epsfcn = .1;
   Settings.factor = .1;
   
 
