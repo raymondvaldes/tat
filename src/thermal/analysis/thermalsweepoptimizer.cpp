@@ -931,7 +931,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   size_t i = 0 ;
   currentState.meanParameterError = 0;
   for( thermal::model::labels& myParam : sweepOptimizationGoal )
-  {k
+  {
     double error = 0 ;
 
     for ( unknown& unknown: (*unknownParameters)() )
