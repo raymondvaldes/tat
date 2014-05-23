@@ -71,20 +71,20 @@ double unknown::bestfitIntervalSpread( void ) const
 }
 
 
-void unknown::Initialauto(void)
-{
-  initialGuess = math::average(constraint.lower, constraint.upper);
-}
+//void unknown::Initialauto(void)
+//{
+//  initialGuess = math::average(constraint.lower, constraint.upper);
+//}
 
-void unknown::Initialset(const double initial)
-{
-  initialGuess = initial;
-}
+//void unknown::Initialset(const double initial)
+//{
+//  initialGuess = initial;
+//}
 
-void unknown::reset( void )
-{
-  initialGuess = math::x_ini( constraint.lower, constraint.upper ) ;
-}
+//void unknown::reset( void )
+//{
+//  initialGuess = math::x_ini( constraint.lower, constraint.upper ) ;
+//}
 
 double unknown::initialVal(void) const
 {
@@ -145,12 +145,13 @@ void unknownList::addUnknown(enum thermal::model::labels::Name name,
                              const double lower,
                              const double upper, const double initialGuess)
 {
+  using std::abs;
   const double tol = 1e-12;
   double myInitialGuess = initialGuess;
-  if ( std::fabs( initialGuess - upper) < tol )
+  if ( abs( initialGuess - upper) < tol )
     {myInitialGuess = upper - tol;}
 
-  if ( std::fabs( initialGuess - lower) < tol )
+  if ( abs( initialGuess - lower) < tol )
     {myInitialGuess = lower + tol;}
 
   BOOST_ASSERT( myInitialGuess > lower && myInitialGuess  < upper);
@@ -186,13 +187,13 @@ unknownList::unknownList( std::vector< estimation::unknown> input )
   :vectorUnknowns(input)
 {}
 
-void unknownList::resetBestfits( void )
-{
-  for( estimation::unknown& val : vectorUnknowns)
-  {
-    val.reset();
-  }
-}
+//void unknownList::resetBestfits( void )
+//{
+//  for( estimation::unknown& val : vectorUnknowns)
+//  {
+//    val.reset();
+//  }
+//}
 
 
 class unknownList unknownList::

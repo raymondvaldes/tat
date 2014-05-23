@@ -70,7 +70,7 @@ public:
   void reloadThermalModel( const thermal::define::construct &in_ );
 
   /// Reset
-  void resetThermalSweepIni( void );
+//  void resetThermalSweepIni( void );
 
   /// Printers
   std::string ppThermalData( void ) ;

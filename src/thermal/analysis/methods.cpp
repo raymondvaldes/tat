@@ -110,10 +110,10 @@ std::string methods::montecarloMap(
                                                 intervalEstimates ) ;
 }
 
-void methods::resetThermalSweepIni(void)
-{
-  lthermalSweepOptimizer->upSweepStartReset();
-}
+//void methods::resetThermalSweepIni(void)
+//{
+//  lthermalSweepOptimizer->upSweepStartReset();
+//}
 
 
 

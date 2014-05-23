@@ -85,7 +85,7 @@ public:
       );
 
   /// reset values
-  void resetThermalSweepIni(void);
+//  void resetThermalSweepIni(void);
 
 
 };

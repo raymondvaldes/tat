@@ -46,10 +46,10 @@ private:
   };
   struct labels name;
   const struct bounds constraint;
-  double initialGuess;
+  const double initialGuess;
   double bestfitval;
 
-  void Initialauto( void ) ;
+//  void Initialauto( void ) ;
 
 public:
   unknown( enum labels::Name name_,
@@ -68,12 +68,12 @@ public:
 
   /// set values with inputs
   void bestfitset( const double input ) ;
-  void Initialset( const double input ) ;
+//  void Initialset( const double input ) ;
   void bestfitIntervalset ( const double min, const double max);
   double bestfitIntervalSpread( void ) const;
 
   // reset randomly
-  void reset(void);
+//  void reset(void);
 
   /// labels
   enum labels::Name label( void ) const ;
@@ -94,7 +94,7 @@ public:
 
   void addUnknown( labels::Name name,
                    const double lower, const double upper,
-                   const double initialGuess);
+                   const double initialGuess ) ;
   void addUnknown(const unknown &input );
 
   size_t size(void) const;
@@ -106,7 +106,7 @@ public:
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
   ~unknownList() ;
 
-  void resetBestfits( void ) ;
+//  void resetBestfits( void ) ;
   std::string prettyPrint(void) ;
 };
 

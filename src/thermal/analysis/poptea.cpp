@@ -134,10 +134,10 @@ std::string Poptea::thermalSweepMap( void )
   return analysis.montecarloMap( unknownParameters , thermalData, coreSystem ) ;
 }
 
-void Poptea::resetThermalSweepIni( void )
-{
-  analysis.resetThermalSweepIni();
-}
+//void Poptea::resetThermalSweepIni( void )
+//{
+//  analysis.resetThermalSweepIni();
+//}
 
 
 

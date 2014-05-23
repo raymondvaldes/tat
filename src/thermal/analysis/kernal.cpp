@@ -110,7 +110,8 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 
 void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list )
 {
-  for( const math::estimation::unknown& unknown :  list )
+  using math::estimation::unknown;
+  for( const unknown& unknown :  list )
   {
     const double val = unknown.initialVal();
     TBCsystem.updateVal( unknown.label() , val );

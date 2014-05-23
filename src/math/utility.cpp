@@ -387,10 +387,12 @@ std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                        const std::pair<double, double> limits )
 {
-  BOOST_ASSERT( center > 0 && center < 1) ;
-  if( !(range > 0 && range <= 1 ) )
+  //BOOST_ASSERT( center > 0 && center < 1) ;
+  const bool rangeChecker = range > 0 && range <= 1 ;
+  const bool centerChecker = center > 0 && center < 1 ;
+  if( !rangeChecker || !centerChecker )
   {
-    std::cout << "check " <<center << "\t" << range << " here";
+    std::cout << "check\t" <<center << "\t" << range << "\there";
 
     exit(-2);
   }

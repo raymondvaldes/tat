@@ -185,7 +185,6 @@ PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
   bestfitMethod =  bestfitMethod_in ;
 
   ///repeat best fit and save the info for output analysis
-
   bestFit() ;
   ThermalSweepTEMP.bestfit = *thermalData ;
   reassign ( ouputResults.bestFitThermal , *thermalData ) ;
@@ -211,8 +210,8 @@ void PIE::parameterIntervalEstimates( void )
   const double S1 = thermalData->MSE ;
 
   /// Update initial guess using bestfits
-  for( auto& param : originalListParams )
-    param.Initialset( param.bestfit() );
+//  for( auto& param : originalListParams )
+//    param.Initialset( param.bestfit() );
 
   /// Predicted emission as the new experimental
   const vector<double> TEMPExperimental = thermalData->predictedEmission;
@@ -240,11 +239,11 @@ void PIE::parameterIntervalEstimates( void )
     const double lowerbound = myfixedParameter.lowerBound() ;
     const double upperbound = myfixedParameter.upperBound() ;
 
-    Gfunc( bestfit , mylabel );
-//    std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
-//    std::cerr << "these are the bounds" << lowerbound <<"\t"<< upperbound<< "\n";
-    constexpr double tol  = 1e-12;
-    BOOST_ASSERT( abs( Gfunc( bestfit , mylabel ) )  < tol ) ;
+    const double gcheck = Gfunc( bestfit , mylabel );
+    //std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
+    //std::cerr << "these are the bounds" << lowerbound <<"\t"<< upperbound<< "\n";
+    constexpr double tol  = 1e-8;
+    BOOST_ASSERT( abs( gcheck )  < tol ) ;
 
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     ThermalSweepTEMP.lowerbound = *thermalData;

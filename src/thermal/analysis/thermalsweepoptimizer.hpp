@@ -124,7 +124,7 @@ public:
       const std::shared_ptr< LMA > &bestfitMethod_in,
       const std::shared_ptr< PIE > &intervalEstimates_in) ;
 
-  void upSweepStartReset( void ) ;
+//  void upSweepStartReset( void ) ;
 
 private:
   // overide methods inherited
