@@ -793,8 +793,8 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 //  Settings.mode = 2;
 //  diag[0] = 10;
 //  diag[1] = 10;
-  Settings.epsfcn = .01;
-  Settings.factor = 1;
+  Settings.epsfcn = .1;
+  Settings.factor = .1;
   
   std::cout << x[0] << "\t" << x[1] << "\n";
 
