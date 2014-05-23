@@ -30,8 +30,8 @@ License
 namespace math{
 namespace estimation{
   
-double SobjectiveLS( const std::vector<double>& emissionExp,
-                    const std::vector<double>& emissionEst )
+double SobjectiveLS( const std::vector<double>& emissionExp ,
+                     const std::vector<double>& emissionEst )
 {
   /*
    The objective function is evaluated for all the measurements.
@@ -44,8 +44,9 @@ double SobjectiveLS( const std::vector<double>& emissionExp,
   double fvec_objective = 0 ;
   
   for( size_t  n =0 ; n < emissionEst.size() ; ++n )
-    fvec_objective += abs( emissionExp[n] - emissionEst[n] ) ;
+    fvec_objective += ( emissionExp[n] - emissionEst[n] ) ;
   
+  fvec_objective = abs( fvec_objective ) ;
   fvec_objective /= emissionEst.size() ;
   
 
