@@ -156,11 +156,11 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
-
+  coreSystem->updatefromInitial( (*unknownParameters)() );
   intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
                             bestfitMethod ) ;
   captureState( coreSystem->TBCsystem.coating ) ;
-
+  coreSystem->updatefromBestFit( (*unknownParameters)() ) ;
 
 //  for(size_t i = 0; i < 60 ; i ++)
 //    std::cout << "\n";
@@ -481,10 +481,11 @@ std::string ThermalSweepOptimizer::montecarloMap(
 //    {
 //      double error = 0;
      using math::x_ini;
+     using math::x_iniLog;
      using math::x_limits_from_cenDec;
      using math::CRfromSweepLimits;
     
-    const double lcen = x_ini( lcen_min, lcen_max ) ;
+    const double lcen = x_iniLog( lcen_min, lcen_max ) ;
     const double ldec = x_ini( ldec_min, ldec_max ) ;
     
     using math::x_limits_from_cenDec ;

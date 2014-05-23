@@ -44,6 +44,18 @@ double genWseed( const double x_min, const double x_max, const unsigned seed )
   return dis( gen ) ;
 }
   
+double x_iniLog( const double start, const double end )
+{
+  using std::pow;
+  using std::log10;
+  
+  const double ran = x_ini( 0 , 1 );
+  const double argument = ran * ( log10( end ) - log10( start ) ) - 1 ;
+  const double xini = pow( 10, argument );
+
+  return xini;
+}
+  
 double x_ini( const double x_min, const double x_max )
 {
 /*

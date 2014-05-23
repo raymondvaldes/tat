@@ -244,7 +244,7 @@ void PIE::parameterIntervalEstimates( void )
 //    std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
 //    std::cerr << "these are the bounds" << lowerbound <<"\t"<< upperbound<< "\n";
     constexpr double tol  = 1e-12;
-    BOOST_ASSERT( fabs( Gfunc( bestfit , mylabel ) )  < tol ) ;
+    BOOST_ASSERT( abs( Gfunc( bestfit , mylabel ) )  < tol ) ;
 
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
     ThermalSweepTEMP.lowerbound = *thermalData;

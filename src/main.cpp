@@ -38,6 +38,7 @@ License
 #include "tools/tools.hpp"
 #include "investigations/sensitivityvaldes2013.hpp"
 #include "investigations/num_method2014.h"
+#include "math/utility.hpp"
 
 int main( int argc, char *argv[ ] )
 {
