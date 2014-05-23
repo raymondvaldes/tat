@@ -93,7 +93,7 @@ void LMA::solve(
 }
 
 
-class ThermalData
+ThermalData
 LMA::paramter_estimation( int *info, int *nfev )
 {
   using std::vector;
@@ -192,9 +192,7 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
   using std::sqrt;
   
   //Update parameters
-  //The reason I create a new list of unknownParameter is because the operator()
   unknownList updatedInput;
-  
   int i = 0;
   for( auto& unknown :  (*unknownParameters)() )
   {
@@ -203,6 +201,7 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
     unknown.bestfitset( val );
     updatedInput.addUnknown( unknown ) ;
   }
+  
   (*unknownParameters)( updatedInput() );
   coreSystem->updatefromBestFit( (*unknownParameters)()  );
 
@@ -215,14 +214,11 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
   {
      fvec[n] =  thermalData->experimentalEmission[n] ;
      fvec[n] -= thermalData->predictedEmission[n] ;
-//     MSE += pow( fvec[n], 2);
   }
-//  MSE = sqrt( MSE );
 
   thermalData->lthermalPredicted =
       thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
 //  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
-//  std::cout << "\t" << MSE;
 //  std::cout << "\n";
 
   return;
