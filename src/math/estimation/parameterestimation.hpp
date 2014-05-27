@@ -46,7 +46,7 @@ private:
   };
   struct labels name;
   const struct bounds constraint;
-  const double initialGuess;
+  double initialGuess;
   double bestfitval;
 
 //  void Initialauto( void ) ;
@@ -68,7 +68,7 @@ public:
 
   /// set values with inputs
   void bestfitset( const double input ) ;
-//  void Initialset( const double input ) ;
+  void Initialset( const double input ) ;
   void bestfitIntervalset ( const double min, const double max);
   double bestfitIntervalSpread( void ) const;
 

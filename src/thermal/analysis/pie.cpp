@@ -87,7 +87,7 @@ void PIE::PIEAnalysisOutput::SearchData::
 
 double PIE::bestFit()
 {
-  bestfitMethod->solve( unknownParameters, thermalData, coreSystem );
+  bestfitMethod->solve( unknownParameters, thermalData, coreSystem ) ;
   return thermalData->MSE;
 }
 
@@ -210,11 +210,11 @@ void PIE::parameterIntervalEstimates( void )
   const double S1 = thermalData->MSE ;
 
   /// Update initial guess using bestfits
-//  for( auto& param : originalListParams )
-//    param.Initialset( param.bestfit() );
+  for( auto& param : originalListParams )
+    param.Initialset( param.bestfit() );
 
   /// Predicted emission as the new experimental
-  const vector<double> TEMPExperimental = thermalData->predictedEmission;
+  const vector<double> TEMPExperimental = thermalData->predictedEmission ;
   updateExperimentalData( TEMPExperimental, *thermalData ) ;
 
   /// Create list of parameters that must be refitted
@@ -239,10 +239,10 @@ void PIE::parameterIntervalEstimates( void )
     const double lowerbound = myfixedParameter.lowerBound() ;
     const double upperbound = myfixedParameter.upperBound() ;
 
-    const double gcheck = Gfunc( bestfit , mylabel );
     //std::cerr << "this better be zero = " << Gfunc( bestfit , mylabel )<<"\n";
     //std::cerr << "these are the bounds" << lowerbound <<"\t"<< upperbound<< "\n";
     constexpr double tol  = 1e-8;
+    const double gcheck = Gfunc( bestfit , mylabel );
     BOOST_ASSERT( abs( gcheck )  < tol ) ;
 
     const double min = solveFORx( S1, lowerbound, bestfit , mylabel, "min" ) ;
@@ -263,6 +263,13 @@ void PIE::parameterIntervalEstimates( void )
 
     ///iterate
     i++;
+  }
+  
+  //Reset originalListParams with the preserved initials
+  for( size_t j = 0 ; i < originalListParams.size() ; ++i )
+  {
+    const double initial = (*unknownParameters).vectorUnknowns[j].initialVal();
+    originalListParams[j].Initialset( initial ) ;
   }
 
   ///Update list of parameters with updated list
@@ -295,19 +302,19 @@ double PIE::solveFORx( const double target , const double min, const double max,
 }
 
 double PIE::Gfunc( const double val ,
-                   const enum thermal::model::labels::Name &mylabel)
+                   const enum thermal::model::labels::Name &mylabel )
 {
   using std::pair;
 
   coreSystem->TBCsystem.updateVal( mylabel , val ) ;
   coreSystem->TBCsystem.updateCoat() ;
 
-  bestFit() ;
+  const double error = bestFit() ;
 
   const pair< double, ThermalData > saveThis( val, *thermalData ) ;
   dataTempStorage.allThermalData.push_back( saveThis ) ;
 
-  return thermalData->MSE;
+  return error;
 }
 
 void PIE::saveExperimental( const ThermalData& thermalData_in )

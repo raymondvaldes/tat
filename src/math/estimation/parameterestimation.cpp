@@ -76,10 +76,10 @@ double unknown::bestfitIntervalSpread( void ) const
 //  initialGuess = math::average(constraint.lower, constraint.upper);
 //}
 
-//void unknown::Initialset(const double initial)
-//{
-//  initialGuess = initial;
-//}
+void unknown::Initialset(const double initial)
+{
+  initialGuess = initial;
+}
 
 //void unknown::reset( void )
 //{

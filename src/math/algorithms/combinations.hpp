@@ -34,8 +34,10 @@ namespace algorithms{
 template<typename OBJ>
 std::vector< std::vector<OBJ> > combos_minusOne( const std::vector<OBJ> input )
 {
+  using std::vector;
+  
   const size_t N = input.size();
-  std::vector< std::vector<OBJ> > output(N);
+  vector< vector<OBJ> > output(N);
 
   size_t iter = 0;
   for( auto& val_o : input)
