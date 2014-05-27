@@ -338,6 +338,7 @@ std::pair<double, double>
 CRfromSweepLimits( const double lstart, const double lend,
                    const std::pair<double, double> limits )
 {
+  //This function returns the "center and range" of based on the limits//
   using std::pair;
   using math::percentilelog10;
 

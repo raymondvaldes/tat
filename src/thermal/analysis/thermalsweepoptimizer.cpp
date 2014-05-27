@@ -540,6 +540,9 @@ std::string ThermalSweepOptimizer::montecarloMap(
     x[0] = x_initial_CR.first ;
     x[1] = x_initial_CR.second ;
 
+    using math::estimation::kx_limiter2;
+    x[0] = kx_limiter2( x[ 0 ], 0, 1 ) ;
+    x[1] = kx_limiter2( x[ 1 ], 0, 1 ) ;
 
 //    std::cout << lcen << "\t" << ldec <<"\t"  << lminmax.first << "\t" << lminmax.second;
  //   std::cout << "\t" <<x_initial_CR.first << "\t" << x_initial_CR.second<< "\n" ;
@@ -843,7 +846,7 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 //  }
 
   // update experimental data used based on search
-  std::cout << x[0] << "\t" << x[1] << "\t";
+  //std::cout << x[0] << "\t" << x[1] << "\t";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
   
   //std::cout << x[0] << "\t" << x[1] << "\t";
