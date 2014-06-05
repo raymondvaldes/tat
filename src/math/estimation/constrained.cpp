@@ -40,17 +40,18 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   // converts value from k-space to x_space. In k-space the parameter is free
   // to be any value.  In x-space the parameter is constrained between x_min
   // and x_max.
-
+  using std::abs;
+  using std::exp;
   double
   x = x_max ;
   x -= x_min ;
-  x /= 1 + std::exp(xi) ;
+  x /= 1 + exp(xi) ;
   x += x_min ;
 
   constexpr double tol = 1e-10;
 
-  if( std::abs( x - x_min ) < tol ) x = x_min + tol ;
-  if( std::abs( x - x_max ) < tol ) x = x_max - tol ;
+  if( abs( x - x_min ) < tol ) x = x_min + tol ;
+  if( abs( x - x_max ) < tol ) x = x_max - tol ;
   /// Must build in some type of tolerance to ensure that xi is never >= the
   /// constraints. This causes errors when I'm transforming back and forth.
 

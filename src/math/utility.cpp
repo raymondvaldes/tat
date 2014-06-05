@@ -388,6 +388,8 @@ std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                        const std::pair<double, double> limits )
 {
+  using math::valFROMpercentileLog10;
+  
   //BOOST_ASSERT( center > 0 && center < 1) ;
   const bool rangeChecker = range > 0 && range <= 1 ;
   const bool centerChecker = center > 0 && center < 1 ;
@@ -398,7 +400,6 @@ newThermalSweepLimits( const double center, const double range,
     exit(-2);
   }
   
-
   double strPos = center - range/2 ;
   double endPos = center + range/2 ;
 
@@ -416,8 +417,8 @@ newThermalSweepLimits( const double center, const double range,
   const double min = limits.first;
   const double max = limits.second;
 
-  const double start = math::valFROMpercentileLog10( strPos, min, max ) ;
-  const double end   = math::valFROMpercentileLog10( endPos, min, max ) ;
+  const double start = valFROMpercentileLog10( strPos, min, max ) ;
+  const double end   = valFROMpercentileLog10( endPos, min, max ) ;
 
   const std::pair<double, double> output(start, end);
 

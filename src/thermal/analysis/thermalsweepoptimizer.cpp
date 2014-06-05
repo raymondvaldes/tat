@@ -72,13 +72,10 @@ std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
   {
     const double bestfit  = unknown.bestfit();
     if ( unknown.label() == labels::Name::thermalCenter  )
-      { thermalCenter = bestfit ; }
+      thermalCenter = bestfit ;
     else if ( unknown.label() == labels::Name::thermalRange  )
-      { thermalRange = bestfit ; }
+      thermalRange = bestfit ;
   }
-  
-  //std::cout << " check0 " << thermalCenter << "\t" << thermalRange << " here0 ";
-
 
   return make_pair( thermalCenter, thermalRange ) ;
 }
@@ -102,7 +99,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   for( auto& unknown : thermalSweepSearch() )
   {
     const double val = x_limiter2( x[i++] , unknown.lowerBound(),
-                                       unknown.upperBound() );
+                                            unknown.upperBound() );
 //    const double val = x[i++];
 //    std::cout << val << "\t ";
     unknown.bestfitset( val ) ;
@@ -194,8 +191,9 @@ penalty( const std::pair<double, double>  thermalCenterRange ,
     {
       errorModifier = endPos - 1 ;
     }
-    error += abs( errorModifier * scale ) ;
-      //  std::cout << strPos << "\t" << endPos << "\t" << error << "\n";
+    error += abs( errorModifier * scale * 10 ) ;
+    
+    std::cout << strPos << "\t" << endPos << "\t" << error << "\n";
 
   }
 
@@ -678,7 +676,8 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
 
 
   // Establish omegas limits of full range (FR) experimental data
-  pair<double, double> omegaLimits = fullRangeThermalData->get_omegaLimits( ) ;
+  const pair<double, double>
+    omegaLimits = fullRangeThermalData->get_omegaLimits( ) ;
 
   vector<double> omegasMonoIncreasing( fullRangeThermalData->size() ) ;
   reverse_copy(
@@ -692,8 +691,10 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
         end( fullRangeThermalData->experimentalEmission ),
         begin( emissionReversed ) ) ;
 
-  mySpline experimentalEmissionInterpolater( &omegasMonoIncreasing[0] ,
-      &emissionReversed[0], omegasMonoIncreasing.size() ) ;
+  const mySpline experimentalEmissionInterpolater(
+      omegasMonoIncreasing.data(),
+      emissionReversed.data(),
+      omegasMonoIncreasing.size() ) ;
 
   // Use omega to derive current lthermalsLimits that correspond to FullRange
   const double coatingLength = updatedCoating.depth;
@@ -705,7 +706,6 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   lthermal( coatingLength, coatingK,  coatingPsi, omegaLimits.second ) ) ;
 
   // Take a slice of thermalData range based on updated limits and xC,xR
-  
   const pair<double, double> slicedThermalLimits =
   newThermalSweepLimits( xCenter, xRange, thermalLimits ) ;
 
@@ -772,41 +772,14 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
     j++;
   }
   
-//  Settings.mode = 2;
-//  if( Settings.mode == 2 )
-//  {
-//    int i = 0;
-//    for( const auto& unknown : thermalSweepSearch() )
-//      diag[i++] = unknown.initialVal() ;
-//  }
-  
-
-  //  std::cout << static_cast<int>(m) << "\n" <<  static_cast<int>(n) << "\n" ;
-  //  for( int i = 0; i < n ; ++i)
-  //  {
-  //    std::cout << "this is x: "<< i << "\t" <<x[i] << "\n";
-  //  }
 
   /// Constrained nonlinear parameter estimation
   updateBindFunc() ;
 
-//  using std::function;
-//  function< void( double*, double* ) > myOptimizerEval;
-//
-//  using std::bind;
-//  using std::placeholders::_1;
-//  using std::placeholders::_2;
-//  
-//  myOptimizerEval = bind( &LMA_BASE::ThermalProp_Analysis, this , _1, _2 ) ;
-
   Settings.mode = 1;
-  //diag[0] = 1;
-  //diag[1] = 1;
-  
   Settings.epsfcn = .01;
   Settings.factor = 1;
   Settings.gtol = .00001;
-  //std::cout << x[0] << "\t" << x[1] << "\n";
 
   lmdif( myReduced, static_cast<int>(m), static_cast<int>(n), x, fvec,
          Settings.ftol, Settings.xtol, Settings.gtol,
