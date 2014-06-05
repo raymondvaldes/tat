@@ -158,7 +158,8 @@ private:
                                 const sensible::layer updatedCoating ) ;
   std::pair< double, double > updateSweep( void ) ;
   void pieAnalysis(void);
-  double penalty( const std::pair<double, double>  thermalCenterRange );
+  double penalty( const std::pair<double, double>  thermalCenterRange,
+                  const double error ) ;
   ThermalData updatedFromXsearch( double *x );
   void resize_ThermalCenterRange( double *x ) ;
 
