@@ -46,6 +46,7 @@ int main( int argc, char *argv[ ] )
   using std::vector;
   using std::cout;
   
+  
   string myDirectory;
   using tools::programoptions::loadOptions;
   if( loadOptions( argc, argv, myDirectory ) )

@@ -338,36 +338,40 @@ std::pair<double, double> xCenterlog10( const double lmin, const double lmax )
 }
 
 std::vector<double>
-range1og10( const double l_min, const double l_max, const size_t L_end )
+range1og10( const double start, const double end, const size_t points )
 {
-  BOOST_ASSERT_MSG( L_end >= 1 , "check inputs \n\n" );
-  BOOST_ASSERT_MSG( l_min < l_max , "check inputs \n\n" );
-  BOOST_ASSERT_MSG( l_min > 0 , "check inputs \n\n" );
+  //Creates a finite uniform distribution from lmin to lmax in log10space
 
-  std::vector<double> output( L_end );
+  BOOST_ASSERT_MSG( points >= 1 , "number of points must be > 0 \n\n" );
+  BOOST_ASSERT_MSG( start < end , "start must be smaller than end \n\n" );
+  BOOST_ASSERT_MSG( start > 0 , "start cannot be negative! \n\n" );
 
-  if (L_end == 1)
+  using std::log10;
+  using std::pow;
+  std::vector<double> output( points );
+
+  if(points == 1)
   {
-    output[0] = l_min ;
+    output[0] = start ;
   }
-  else if(L_end == 2)
+  else if(points == 2)
   {
-    output[0] = l_min ;
-    output[L_end-1] = l_max ;
+    output[0] = start ;
+    output[points-1] = end ;
   }
-  else if(L_end > 2)
+  else if(points > 2)
   {
-    const double start1 = std::log10( l_min ) + 1 ;
-    const double end1   = std::log10( l_max ) + 1 ;
-    const double increments = ( end1 - start1 ) / ( L_end - 1 ) ;
+    const double start1 = log10( start ) + 1 ;
+    const double end1   = log10( end ) + 1 ;
+    const double increments = ( end1 - start1 ) / ( points - 1 ) ;
     double rangeI = start1 ;
 
-    for(size_t n = 0 ; n < L_end - 1 ; ++n )
+    for(size_t n = 0 ; n < points - 1 ; ++n )
     {
       output[n] = pow( 10, rangeI - 1 ) ;
       rangeI += increments ;
     }
-    output[L_end-1] = l_max ;
+    output[points-1] = end ;
   }
 
   return output;
