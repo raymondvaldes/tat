@@ -434,11 +434,7 @@ ThermalSweepOptimizer::solve(
 //}
 
 
-std::string ThermalSweepOptimizer::montecarloMap(
-    const std::shared_ptr<ThermalData> &thermalData_in,
-    const std::shared_ptr<Kernal> &coreSystem_in,
-    const std::shared_ptr< LMA > &bestfitMethod_in,
-    const std::shared_ptr< PIE > &intervalEstimates_in )
+std::string ThermalSweepOptimizer::montecarloMap()
 {
   using std::cout;
   using std::pair;

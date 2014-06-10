@@ -100,14 +100,9 @@ ThermalSweepOptimizer::OptimizerOutput methods::optimization(
 
 }
 
-std::string methods::montecarloMap(
-    const std::shared_ptr< math::estimation::unknownList > &list_in,
-    const std::shared_ptr< ThermalData > &thermalData_in,
-    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in)
+std::string methods::montecarloMap()
 {
-  return lthermalSweepOptimizer->montecarloMap( thermalData_in,
-                                                coreSystem_in, bestfitMethod,
-                                                intervalEstimates ) ;
+  return lthermalSweepOptimizer->montecarloMap(  ) ;
 }
 
 

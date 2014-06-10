@@ -117,13 +117,7 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      ) ;
-  std::string montecarloMap(
-      const std::shared_ptr<ThermalData> &thermalData_in,
-      const std::shared_ptr<Kernal> &coreSystem_in,
-      const std::shared_ptr< LMA > &bestfitMethod_in,
-      const std::shared_ptr< PIE > &intervalEstimates_in) ;
-
-//  void upSweepStartReset( void ) ;
+  std::string montecarloMap() ;
 
 private:
   // overide methods inherited
