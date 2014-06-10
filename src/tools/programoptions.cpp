@@ -81,13 +81,6 @@ bool help( boost::program_options::options_description desc)
   return false;
 }
 
-bool config( std::string& path)
-{
-//  std::cout << "path configured... " << path << "\n";
-  return true;
-}
-
-
 bool version(void)
 {
   std::cout << "\nT A T : " ;

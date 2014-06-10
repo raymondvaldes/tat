@@ -36,7 +36,6 @@ namespace programoptions{
   bool version(void);
   bool loadOptions( int argc, char** argv, std::string& path );
   bool build(void);
-  bool config( std::string& path);
 
 
 }}
