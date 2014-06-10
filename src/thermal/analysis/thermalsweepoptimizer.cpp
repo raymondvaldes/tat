@@ -476,7 +476,9 @@ std::string ThermalSweepOptimizer::montecarloMap(
 
     using math::random_CR_from_limits;
     const pairDD x_initial_CR = random_CR_from_limits( thermalLimits ) ;
-
+    
+    std::cout << x_initial_CR.first << "\t" << x_initial_CR.second << "\n";
+//ERROR IN CODE - PRODUCING CR BUT I NEED IT PRESENTED IN TERMS OF DATA %
     /// transform it into something thermal_prop can understand
     double x[2] = { 0 } ;
     x[0] = x_initial_CR.first ;
