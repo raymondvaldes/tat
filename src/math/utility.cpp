@@ -433,24 +433,9 @@ bool checkLimits( const double center, const double range )
   return run ;
 }
 
-std::pair<double, double>
-random_limits_log( const double min, const double max )
-{
-  //given an absolute bound, return a random new set of limits
-  //randomly generated such that the distribution is uniform in log10 space
-  BOOST_ASSERT( min < max ) ;
-  
-  double new_min = 0 ;
-  double new_max = 0 ;
-  
-  do {
-    new_min = x_iniLog( min, max ) ;
-    new_max = x_iniLog( min, max ) ;
-  } while ( new_min >= new_max ) ;
-  
-  return std::make_pair( new_min , new_max ) ;
 
-}
+
+
 
 std::pair<double, double>
 random_CR_from_limits( const std::pair<double, double> limits )
