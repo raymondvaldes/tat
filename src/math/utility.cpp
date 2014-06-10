@@ -92,15 +92,22 @@ double genWseed( const double x_min, const double x_max, const unsigned seed )
   return dis( gen ) ;
 }
   
-double x_iniLog( const double start, const double end )
+double random_in_logspace( const double start, const double end )
 {
+  //failing because it assumes end is 1.0
+  BOOST_ASSERT_MSG( start < end, "Setup issue" ) ;
+  BOOST_ASSERT_MSG( start > 0, "must be positive for logspace transform" ) ;
+
   using std::pow;
   using std::log10;
+  using std::fma;
   
-  const double ran = x_ini( 0 , 1 );
-  const double argument = ran * ( log10( end ) - log10( start ) ) - 1 ;
-  const double xini = pow( 10, argument );
+  const double ran = random_0_to_1() ;
+  const double argument = fma( ran, log10(end/start), log10(start) ) ;
+  const double xini = pow( 10,  argument ) ;
 
+  BOOST_ASSERT_MSG( xini < end , "error in calculations"  ) ;
+  BOOST_ASSERT_MSG( xini > start, "error in calculations" ) ;
   return xini;
 }
   
