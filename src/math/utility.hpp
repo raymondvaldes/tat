@@ -85,13 +85,12 @@ double percentilelog10( const double xmin, const double xmax, const double x ) ;
 
 void range( double* l_thermal, const double l_min, const double l_max,
             const size_t L_end ) ;
-  double x_iniLog( const double start, const double end ) ;
+double random_in_logspace( const double start, const double end ) ;
 
 std::vector<double>
   range( const double xstart, const double xend, const size_t size ) ;
 
-std::pair<double, double>
-random_limits_log( const double min, const double max ) ;
+double random_0_to_1();
 
 std::pair<double, double>
 CRfromSweepLimits( const std::pair<double, double> inner_bounds,

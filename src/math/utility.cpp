@@ -111,6 +111,12 @@ double random_in_logspace( const double start, const double end )
   return xini;
 }
   
+double random_0_to_1() {
+  const double lowerbound = 0 ;
+  const double upperbound = 1 ;
+  return x_ini( lowerbound, upperbound ) ;
+}
+  
 double x_ini( const double x_min, const double x_max )
 {
 /*
