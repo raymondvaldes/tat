@@ -385,24 +385,18 @@ double xspread( const double xmin, const double xnominal, const double xmax)
 
 std::pair<double, double>
 CRfromSweepLimits( const std::pair<double, double> inner_bounds,
-                   const std::pair<double, double> limits )
+                   const std::pair<double, double> outer_bounds )
 {
-  return CRfromSweepLimits(inner_bounds.first, inner_bounds.second, limits) ;
-}
-
-std::pair<double, double>
-CRfromSweepLimits( const double lstart, const double lend,
-                   const std::pair<double, double> limits )
-{
+  
   //This function returns the "center and range" of based on the limits//
   using std::pair;
   using math::percentilelog10;
 
-  const double xmin = limits.first;
-  const double xmax = limits.second;
+  const double xmin = outer_bounds.first;
+  const double xmax = outer_bounds.second;
 
-  const double posStart = percentilelog10( xmin,  xmax, lstart ) ;
-  const double posEnd   = percentilelog10( xmin,  xmax, lend   ) ;
+  const double posStart = percentilelog10( xmin,  xmax, inner_bounds.first  ) ;
+  const double posEnd   = percentilelog10( xmin,  xmax, inner_bounds.second ) ;
 
   const double range = posEnd - posStart;
   const double center = posStart + range / 2;

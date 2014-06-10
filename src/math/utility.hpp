@@ -121,9 +121,7 @@ x_limits_from_cenDec( const double cen, const double dec );
 std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                                 const std::pair<double, double> limits );
-std::pair<double, double>
-CRfromSweepLimits( const double lstart, const double lend,
-                   const std::pair<double, double> limits ) ;
+
 std::pair<double, double> xCenterlog10( const double lmin, const double lmax ) ;
 
 
