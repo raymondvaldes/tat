@@ -32,6 +32,55 @@ License
 
 namespace math{
 
+
+Interval_Ends::Interval_Ends( const std::pair<double, double> endpoints_input )
+  : left_end( endpoints_input.first ), right_end( endpoints_input.second ) {
+}
+
+Interval_Ends::Interval_Ends(  ) {
+}
+
+
+double Interval_Ends::get_left_end() const {
+  return left_end ;
+}
+
+double Interval_Ends::get_right_end() const {
+  return right_end ;
+}
+
+bool Interval_Ends::is_valid() const {
+  return left_end < right_end ;
+}
+
+bool Interval_Ends::is_invalid() const {
+  return left_end >= right_end ;
+}
+
+void Interval_Ends::set_ends( const std::pair<double, double> endpoints_input) {
+  left_end = endpoints_input.first ;
+  right_end = endpoints_input.second ;
+}
+
+Interval_Ends Interval_Ends::get_log10_random_subInterval() const {
+  //given an absolute bound, return a random new set of inner limits
+  //randomly generated such that the distribution is uniform in log10 space
+
+  BOOST_ASSERT( this->is_valid() ) ;
+  using std::make_pair;
+  
+  Interval_Ends myInterval ;
+  
+  do {
+    const double myleft = random_in_logspace( left_end, right_end ) ;
+    const double myright = random_in_logspace( left_end, right_end ) ;
+    myInterval.set_ends( make_pair( myleft, myright ) );
+  } while ( myInterval.is_invalid() ) ;
+
+  return myInterval ;
+}
+
+
 double genWseed( const double x_min, const double x_max, const unsigned seed )
 {
   ( void ) seed;

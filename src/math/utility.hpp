@@ -31,6 +31,24 @@ License
 
 namespace math{
 
+
+struct Interval_Ends
+{
+private:
+  double left_end;
+  double right_end;
+
+public:
+  Interval_Ends( const std::pair<double, double> endpoints_input ) ;
+  Interval_Ends() ;
+  double get_left_end() const ;
+  double get_right_end() const ;
+  bool is_valid() const ;
+  bool is_invalid() const;
+  void set_ends( const std::pair<double, double> endpoints_input) ;
+  Interval_Ends get_log10_random_subInterval() const ;
+};
+
 double genWseed( const double x_min, const double x_max, const unsigned seed ) ;
 
 double x_ini( const double x_min, const double x_max ) ;
