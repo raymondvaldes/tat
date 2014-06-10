@@ -48,7 +48,8 @@ int main( int argc, char *argv[ ] )
   
   string myDirectory;
   using tools::programoptions::loadOptions;
-  if( loadOptions( argc, argv, myDirectory ) )
+  const bool run_analysis = loadOptions( argc, argv, myDirectory ) ;
+  if( run_analysis )
   {
     cout << "Welcome back, Raymond!\n\n" ;
     stopwatch globalStopWatch ;

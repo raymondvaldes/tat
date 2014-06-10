@@ -64,7 +64,7 @@ bool loadOptions( int argc, char** argv, std::string& path )
     { run = help( desc ) ; }
 
   if( vm.count( "run" ) )
-    { run = config( path ) ; }
+    { run = true ; }
 
   if( vm.count( "version" ) )
     { run = version() ; }
