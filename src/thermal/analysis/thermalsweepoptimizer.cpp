@@ -435,7 +435,6 @@ ThermalSweepOptimizer::solve(
 
 
 std::string ThermalSweepOptimizer::montecarloMap(
-    const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in,
     const std::shared_ptr< LMA > &bestfitMethod_in,

@@ -29,7 +29,6 @@ License
 #include <cstring>
 #include <iostream>
 #include <cassert>
-//#define NDEBUG
 //#define BOOST_DISABLE_ASSERTS
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 #define BOOST_SYSTEM_NO_DEPRECATED

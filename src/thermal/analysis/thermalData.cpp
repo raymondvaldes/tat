@@ -216,9 +216,9 @@ ThermalData& ThermalData::operator=( const ThermalData& that )
 
 void ThermalData::
 updatefromBestFit( std::vector< math::estimation::unknown > list,
-                   const sensible::layer &coating ,
-                   const ThermalData fullExpData )
+                   const sensible::layer &coating  )
 {
+
   double xCenter = 0;
   double xRange = 0;
   for( const auto& unknown :  list )

@@ -105,7 +105,7 @@ std::string methods::montecarloMap(
     const std::shared_ptr< ThermalData > &thermalData_in,
     const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in)
 {
-  return lthermalSweepOptimizer->montecarloMap( list_in, thermalData_in,
+  return lthermalSweepOptimizer->montecarloMap( thermalData_in,
                                                 coreSystem_in, bestfitMethod,
                                                 intervalEstimates ) ;
 }

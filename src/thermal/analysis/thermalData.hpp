@@ -76,8 +76,7 @@ public:
                        const sensible::layer &coating ) ;
   
   void updatefromBestFit( std::vector< math::estimation::unknown > list,
-                          const sensible::layer &coating,
-                          const ThermalData fullData ) ;
+                          const sensible::layer &coating) ;
 
   //printer
   std::string prettyPrint( const sensible::layer &coating ) ;
