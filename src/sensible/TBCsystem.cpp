@@ -85,6 +85,12 @@ void TBCsystem::updateVal( const enum labels::Name mylabel , const double val )
     case labels::Name::lambda :
       coating.lambda = val;
       break;
+    case labels::Name::thermalCenter:
+      std::cout << "not yet implemented, error!!"; exit(-68);
+      break;
+    case labels::Name::thermalRange:
+      std::cout << "not yet implemented, error!!"; exit(-68);
+      break;      
     default:
       std::cout << "\nSwitch Error!!\n";
       exit(-68);
@@ -115,6 +121,12 @@ double TBCsystem::returnVal( const enum labels::Name mylabel ) const
       break;
     case labels::Name::lambda :
       val = coating.lambda;
+      break;
+    case labels::Name::thermalCenter:
+      std::cout << "not yet implemented, error!!"; exit(-68);
+      break;
+    case labels::Name::thermalRange:
+      std::cout << "not yet implemented, error!!"; exit(-68);
       break;
     default:
       std::cout << "\nSwitch Error!!\n";

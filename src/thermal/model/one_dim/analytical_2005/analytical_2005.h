@@ -50,7 +50,7 @@ private:
   complex<double> M_tilde( const complex<double> x_in, const double l ) const;
   complex<double> N_tilde( const complex<double> x_in, const double l ) const;
   
-          double  T_ss_R1eq1_eval( const double omega, const double z ) const ;
+          double  T_ss_R1eq1_eval( const double z ) const ;
   complex<double> T_tt_R1eq1_eval( const double omega, const double z ) const ;
 
 public:

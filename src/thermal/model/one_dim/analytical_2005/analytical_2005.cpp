@@ -108,8 +108,7 @@ analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
   return N_x;
 }
   
-double analytical_2005::T_ss_R1eq1_eval( const double omega,
-                                         const double z ) const
+double analytical_2005::T_ss_R1eq1_eval( const double z ) const
 {
   using std::exp;
   using std::sinh;
