@@ -219,22 +219,6 @@ std::pair<double, double> OA_init( const double *x, const size_t span )
 }
 
 
-double x_ini10(const int x_ref)
-{
-    return x_ini10(double(x_ref));
-}
-double x_ini10(const double x_ref)
-{
-/*
-    Creates a random parameter between two open bounds
-    x_ref*.9 = minimum value
-    x_ref*1.1 = minimum value
-*/
-    const double percent = .1;
-    return x_ini(x_ref*(1-percent), x_ref*(1+percent));
-}
-
-
 
 double x_bias(const double Xmean, const double Xstddev)
 {

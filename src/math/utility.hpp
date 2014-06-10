@@ -66,9 +66,6 @@ double arrayMax( const double* x, const size_t I ) ;
 double arrayMin( const double* x, const size_t I ) ;
 std::pair<double, double> OA_init( const double *x, const size_t span ) ;
 
-double x_ini10( const int x_ref ) ;
-double x_ini10( const double x_ref ) ;
-
 
 int xINTrandom( const int xmin, const int xmax ) ;
 double x_normal( const double Xmean, const double Xstddev,
