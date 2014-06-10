@@ -72,6 +72,16 @@ void range( double* l_thermal, const double l_min, const double l_max,
 std::vector<double>
   range( const double xstart, const double xend, const size_t size ) ;
 
+std::pair<double, double>
+random_limits_log( const double min, const double max ) ;
+
+std::pair<double, double>
+CRfromSweepLimits( const std::pair<double, double> inner_bounds,
+                   const std::pair<double, double> limits ) ;
+
+std::pair<double, double>
+random_CR_from_limits( const std::pair<double, double> limits );
+
 std::vector<double>
 range1og10( const double l_min, const double l_max, const size_t L_end );
 

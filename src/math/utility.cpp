@@ -335,6 +335,13 @@ double xspread( const double xmin, const double xnominal, const double xmax)
 
 
 std::pair<double, double>
+CRfromSweepLimits( const std::pair<double, double> inner_bounds,
+                   const std::pair<double, double> limits )
+{
+  return CRfromSweepLimits(inner_bounds.first, inner_bounds.second, limits) ;
+}
+
+std::pair<double, double>
 CRfromSweepLimits( const double lstart, const double lend,
                    const std::pair<double, double> limits )
 {
@@ -381,6 +388,42 @@ bool checkLimits( const double center, const double range )
     run = true ;
 
   return run ;
+}
+
+std::pair<double, double>
+random_limits_log( const double min, const double max )
+{
+  //given an absolute bound, return a random new set of limits
+  //randomly generated such that the distribution is uniform in log10 space
+  BOOST_ASSERT( min < max ) ;
+  
+  double new_min = 0 ;
+  double new_max = 0 ;
+  
+  do {
+    new_min = x_iniLog( min, max ) ;
+    new_max = x_iniLog( min, max ) ;
+  } while ( new_min >= new_max ) ;
+  
+  return std::make_pair( new_min , new_max ) ;
+
+}
+
+std::pair<double, double>
+random_CR_from_limits( const std::pair<double, double> limits )
+{
+  //generates distribution a new distrubtion limits in terms of the logspace
+  //center and decades. It used some global limits (input).
+
+  using std::make_pair;
+  using std::pair;
+  typedef pair<double,double> pairDD;
+  
+  const double lower_bound = limits.first ;
+  const double upper_bound = limits.second ;
+  const pairDD inner_bounds = random_limits_log( lower_bound, upper_bound ) ;
+  
+  return CRfromSweepLimits( inner_bounds , limits ) ;
 }
 
 
