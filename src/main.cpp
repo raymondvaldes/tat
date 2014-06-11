@@ -23,21 +23,13 @@ License
 
 \*----------------------------------------------------------------------------*/
 //Standard Template Libraries
-#include <cstdlib>
-#include <cstddef>
 #include <cstdio>
-#include <cstring>
-#include <iostream>
-#include <cassert>
 //#define BOOST_DISABLE_ASSERTS
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 #define BOOST_SYSTEM_NO_DEPRECATED
-
-//Internal dependencies
 #include "tools/tools.hpp"
 #include "investigations/sensitivityvaldes2013.hpp"
 #include "investigations/num_method2014.h"
-#include "math/utility.hpp"
 
 int main( int argc, char *argv[ ] )
 {
