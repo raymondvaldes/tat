@@ -37,21 +37,19 @@ int main( const int argc, char *argv[ ] )
   using std::vector;
   using std::cout;
   
-  
-  string myDirectory;
   using tools::programoptions::loadOptions;
-  const bool run_analysis = loadOptions( argc, argv, myDirectory ) ;
-  if( run_analysis )
+  std::pair< bool, string > run_analysis = loadOptions( argc, argv ) ;
+  
+  if( run_analysis.first )
   {
     cout << "Welcome back, Raymond!\n\n" ;
     stopwatch globalStopWatch ;
 
     using boost::filesystem::path;
-    vector< path > samples = filesystem::ls( myDirectory );
-    for( const path& testSpeciman : samples )
+    vector< path > folders_of_samples = filesystem::ls( run_analysis.second );
+    for( const path& folder : folders_of_samples )
     {
-      const string specimanPath = testSpeciman.string() ;
-      const filesystem::directory dir( specimanPath ) ;
+      const filesystem::directory dir( folder.string() ) ;
       investigations::sensitivityvaldes2013::run( dir ) ;
       //investigations::num_method::run( dir ) ;
     }
