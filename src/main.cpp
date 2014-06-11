@@ -31,7 +31,7 @@ License
 #include "investigations/sensitivityvaldes2013.hpp"
 #include "investigations/num_method2014.h"
 
-int main( int argc, char *argv[ ] )
+int main( const int argc, char *argv[ ] )
 {
   using std::string;
   using std::vector;
