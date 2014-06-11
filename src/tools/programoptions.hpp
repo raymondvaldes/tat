@@ -26,6 +26,8 @@ License
 #ifndef PROGRAMOPTIONS_HPP
 #define PROGRAMOPTIONS_HPP
 
+#include <utility>
+#include <string>
 #include <sstream>
 #include <boost/program_options.hpp>
 
