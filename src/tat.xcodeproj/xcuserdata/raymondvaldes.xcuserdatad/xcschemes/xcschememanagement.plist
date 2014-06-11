@@ -4,23 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>tat --build.xcscheme</key>
+		<key>tat --library.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>tat --config.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>tat --version.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>tat.xcscheme</key>
-		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
@@ -28,6 +15,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>AB37107018653C7D000092C5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABEF4D961948D02600B44AD5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABEF4D9E1948D0D900B44AD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

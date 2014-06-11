@@ -22,30 +22,27 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <cstdio>
-//#define BOOST_DISABLE_ASSERTS
-#define BOOST_FILESYSTEM_NO_DEPRECATED
-#define BOOST_SYSTEM_NO_DEPRECATED
+#include <iostream>
+
 #include "tools/programoptions.hpp"
 #include "tools/timing.h"
 #include "investigations/execute.h"
 
 int main( const int argc, char *argv[ ] )
 {
-  using std::string;
-  using std::cout;
-  using std::pair;
+  using std::string ;
+  using std::cout ;
+  using std::pair ;
   
-  using tools::programoptions::loadOptions;
+  using tools::programoptions::loadOptions ;
   const pair< bool, string > run_analysis = loadOptions( argc, argv ) ;
   
-  if( run_analysis.first )
-  {
+  if( run_analysis.first ) {
     cout << "Welcome back, Raymond!\n\n" ;
     stopwatch globalStopWatch ;
     investigations::execute( run_analysis.second ) ;
     cout << globalStopWatch.readoutLoud() << "\n";
   }
-
-  return 0;
+ 
+  return 0 ;
 }

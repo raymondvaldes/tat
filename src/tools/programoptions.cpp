@@ -58,13 +58,13 @@ std::pair<bool, std::string> loadOptions( const int argc, char** argv )
   {
     std::cout << "See help below...\n" ;
     version() ;
-    run = help( desc ) ;
+    run = help( /*desc*/ ) ;
   }
 
   po::notify( vm ) ;
 
   if( vm.count( "help" ) )
-    { run = help( desc ) ; }
+    { run = help( /*desc*/ ) ; }
 
   if( vm.count( "run" ) )
     { run = true ; }
@@ -78,9 +78,9 @@ std::pair<bool, std::string> loadOptions( const int argc, char** argv )
   return make_pair( run, path ) ;
 }
 
-bool help( boost::program_options::options_description desc)
+bool help( /*boost::program_options::options_description desc*/)
 {
-  std::cout << desc << "\n";
+  //std::cout << desc << "\n";
   return false;
 }
 

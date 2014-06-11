@@ -29,12 +29,12 @@ License
 #include <utility>
 #include <string>
 #include <sstream>
-#include <boost/program_options.hpp>
+//#include <boost/program_options.hpp>
 
 namespace tools{
 namespace programoptions{
 
-  bool help( boost::program_options::options_description desc) ;
+  bool help( /* boost::program_options::options_description desc */) ;
   bool version() ;
   std::pair<bool,std::string> loadOptions( const int argc, char** argv ) ;
   bool build() ;
