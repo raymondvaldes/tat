@@ -33,8 +33,11 @@ namespace tools{
 
 namespace programoptions{
 
-bool loadOptions( int argc, char** argv, std::string& path )
+std::pair<bool, std::string> loadOptions( const int argc, char** argv )
 {
+  using std::make_pair;
+  std::string path;
+  
   namespace po = boost::program_options;
   po::options_description desc("Allowed options");
   desc.add_options()
@@ -72,7 +75,7 @@ bool loadOptions( int argc, char** argv, std::string& path )
   if( vm.count( "build" ) )
     { run = build() ; }
 
-  return run;
+  return make_pair( run, path ) ;
 }
 
 bool help( boost::program_options::options_description desc)

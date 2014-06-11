@@ -34,10 +34,10 @@ License
 namespace tools{
 namespace programoptions{
 
-  bool help( boost::program_options::options_description desc);
-  bool version(void);
-  bool loadOptions( int argc, char** argv, std::string& path );
-  bool build(void);
+  bool help( boost::program_options::options_description desc) ;
+  bool version() ;
+  std::pair<bool,std::string> loadOptions( const int argc, char** argv ) ;
+  bool build() ;
 
 
 }}
