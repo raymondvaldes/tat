@@ -35,7 +35,7 @@ namespace filesystem
 
 void makeDir(const std::string rootPath, const std::string &newDirectory);
 
-std::vector<boost::filesystem::path> ls( const std::string &path );
+
 
 class directory
 {
@@ -50,6 +50,9 @@ public:
   void mkdir(const std::string &newDirectory) const;
   std::string pwd(void) const;
 };
+
+std::vector< directory > ls( const std::string &path_in ) ;
+
 
 }
 

@@ -72,11 +72,12 @@ std::string directory::abs( const std::string &relativePath) const
   return workingDirectory + "/" + relativePath;
 }
 
-std::vector< boost::filesystem::path > ls( const std::string &path_in )
+
+std::vector< directory > ls( const std::string &path_in )
 {
   using namespace boost::filesystem;
   path p ( path_in );
-  std::vector< path > output;
+  std::vector< directory > output;
 
   size_t dir_count = 0;
   size_t file_count = 0;
@@ -100,7 +101,9 @@ std::vector< boost::filesystem::path > ls( const std::string &path_in )
         {
           ++dir_count;
           //std::cout << dir_itr->path().filename() << " [directory]\n";
-          output.push_back( dir_itr->path() ) ;
+          const boost::filesystem::path temp_dir( dir_itr->path() ) ;
+          const directory mytemp ( temp_dir.string() ) ;
+          output.push_back( mytemp ) ;
         }
         else if ( is_regular_file( dir_itr->status() ) )
         {
@@ -126,7 +129,5 @@ std::vector< boost::filesystem::path > ls( const std::string &path_in )
 
   return output;
 }
-
-
 
 }

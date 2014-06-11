@@ -22,38 +22,28 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-//Standard Template Libraries
 #include <cstdio>
 //#define BOOST_DISABLE_ASSERTS
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 #define BOOST_SYSTEM_NO_DEPRECATED
-#include "tools/tools.hpp"
-#include "investigations/sensitivityvaldes2013.hpp"
-#include "investigations/num_method2014.h"
+#include "tools/programoptions.hpp"
+#include "tools/timing.h"
+#include "investigations/execute.h"
 
 int main( const int argc, char *argv[ ] )
 {
   using std::string;
-  using std::vector;
   using std::cout;
+  using std::pair;
   
   using tools::programoptions::loadOptions;
-  std::pair< bool, string > run_analysis = loadOptions( argc, argv ) ;
+  const pair< bool, string > run_analysis = loadOptions( argc, argv ) ;
   
   if( run_analysis.first )
   {
     cout << "Welcome back, Raymond!\n\n" ;
     stopwatch globalStopWatch ;
-
-    using boost::filesystem::path;
-    vector< path > folders_of_samples = filesystem::ls( run_analysis.second );
-    for( const path& folder : folders_of_samples )
-    {
-      const filesystem::directory dir( folder.string() ) ;
-      investigations::sensitivityvaldes2013::run( dir ) ;
-      //investigations::num_method::run( dir ) ;
-    }
-
+    investigations::execute( run_analysis.second ) ;
     cout << globalStopWatch.readoutLoud() << "\n";
   }
 

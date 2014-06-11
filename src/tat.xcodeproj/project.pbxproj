@@ -50,6 +50,7 @@
 		AB38316718AEF3A9009965F1 /* timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB38313918AEF3A9009965F1 /* timing.cpp */; };
 		AB5029BF1909E78C00150E07 /* temp_cmplx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5029BD1909E78C00150E07 /* temp_cmplx.cpp */; };
 		AB5029C21909E7A100150E07 /* temp_ss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5029C01909E7A100150E07 /* temp_ss.cpp */; };
+		AB81A84F1948BD2D002BCA4B /* execute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB81A84D1948BD2D002BCA4B /* execute.cpp */; };
 		AB8B64B6190F062600B2C008 /* one_dim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64B4190F062600B2C008 /* one_dim.cpp */; };
 		AB8B64B9190F15CD00B2C008 /* numerical_2011.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64B7190F15CD00B2C008 /* numerical_2011.cpp */; };
 		AB8B64BF190F1D0000B2C008 /* sor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8B64BD190F1D0000B2C008 /* sor.cpp */; };
@@ -181,6 +182,8 @@
 		AB5029BE1909E78C00150E07 /* temp_cmplx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temp_cmplx.h; path = sweep/temp_cmplx.h; sourceTree = "<group>"; };
 		AB5029C01909E7A100150E07 /* temp_ss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temp_ss.cpp; path = sweep/temp_ss.cpp; sourceTree = "<group>"; };
 		AB5029C11909E7A100150E07 /* temp_ss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temp_ss.h; path = sweep/temp_ss.h; sourceTree = "<group>"; };
+		AB81A84D1948BD2D002BCA4B /* execute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = execute.cpp; sourceTree = "<group>"; };
+		AB81A84E1948BD2D002BCA4B /* execute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = execute.h; sourceTree = "<group>"; };
 		AB8B64B4190F062600B2C008 /* one_dim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = one_dim.cpp; path = model/one_dim/one_dim.cpp; sourceTree = "<group>"; };
 		AB8B64B5190F062600B2C008 /* one_dim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = one_dim.h; path = model/one_dim/one_dim.h; sourceTree = "<group>"; };
 		AB8B64B7190F15CD00B2C008 /* numerical_2011.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = numerical_2011.cpp; path = model/one_dim/numerical_2011/numerical_2011.cpp; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 				AB3830DE18AEF3A8009965F1 /* sensitivityvaldes2013.hpp */,
 				ABC716CA1905A4CF00C14977 /* num_method2014.cpp */,
 				ABC716CB1905A4CF00C14977 /* num_method2014.h */,
+				AB81A84D1948BD2D002BCA4B /* execute.cpp */,
+				AB81A84E1948BD2D002BCA4B /* execute.h */,
 			);
 			path = investigations;
 			sourceTree = "<group>";
@@ -755,6 +760,7 @@
 				AB38314918AEF3A9009965F1 /* gslfunc.cpp in Sources */,
 				AB38314118AEF3A9009965F1 /* combinations.cpp in Sources */,
 				AB38315718AEF3A9009965F1 /* thermalData.cpp in Sources */,
+				AB81A84F1948BD2D002BCA4B /* execute.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
