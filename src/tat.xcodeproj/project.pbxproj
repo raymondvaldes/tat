@@ -339,6 +339,13 @@
 			);
 			sourceTree = "<group>";
 		};
+		ABE1692F194A223C00C1E409 /* stl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = stl;
+			sourceTree = "<group>";
+		};
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +362,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				ABE1692F194A223C00C1E409 /* stl */,
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
 				ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */,
 				ABEF4DDD1948D4A500B44AD5 /* bisection.hpp */,

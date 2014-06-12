@@ -38,8 +38,11 @@ int main( const int argc, char *argv[ ] ) {
   
   if( run_analysis.first ) {
     cout << "Welcome back, Raymond!\n\n" ;
+    
     stopwatch globalStopWatch ;
+    
     investigations::execute( run_analysis.second ) ;
+    
     cout << globalStopWatch.readoutLoud() << "\n";
   }
  
