@@ -602,8 +602,14 @@ if(nprint > 0)
 
 }
 
-void lmpar(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],double delta,
-           double *par,double x[],double sdiag[],double wa1[],double wa2[])
+//void lmpar( int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],double delta,
+//            double *par,double x[],double sdiag[],double wa1[],double wa2[])
+  
+  
+  
+void lmpar( const int n, double *r, const int ldr, const int *ipvt,
+            const double *diag, double *qtb, const double delta, double *par,
+            double *x, double *sdiag, double *wa1, double *wa2 )
 {
 /*     **********
 *
@@ -920,8 +926,9 @@ if(iter == 0)
 */
 }
 
-void qrfac(int m,int n,double a[],int /*lda*/,bool pivot,int ipvt[],
-     int /*lipvt*/, double rdiag[],double acnorm[],double wa[])
+void qrfac( const int m, const int n, double *a, int /*lda*/, const bool pivot,
+            int *ipvt, int /*lipvt*/, double *rdiag, double *acnorm,
+            double *wa )
 {
 /*
 *     **********
@@ -1011,14 +1018,18 @@ extern double MACHEP;
 */
 ij = 0;
 for( j=0; j<n; j++ )
-  {
+{
   acnorm[j] = enorm(m,&a[ij]);
   rdiag[j] = acnorm[j];
   wa[j] = rdiag[j];
   if(pivot != 0)
     ipvt[j] = j;
   ij += m; /* m*j */
-  }
+}
+
+
+
+
 #if BUG
 PRINT( "qrfac\n" );
 #endif
@@ -1035,23 +1046,23 @@ if(pivot == 0)
 */
 kmax = j;
 for( k=j; k<n; k++ )
-  {
+{
   if(rdiag[k] > rdiag[kmax])
     kmax = k;
-  }
+}
 if(kmax == j)
   goto L40;
 
 ij = m * j;
 jj = m * kmax;
 for( i=0; i<m; i++ )
-  {
+{
   temp = a[ij]; /* [i+m*j] */
   a[ij] = a[jj]; /* [i+m*kmax] */
   a[jj] = temp;
   ij += 1;
   jj += 1;
-  }
+}
 rdiag[kmax] = rdiag[j];
 wa[kmax] = wa[j];
 k = ipvt[j];
@@ -1124,6 +1135,8 @@ L100:
 /*
 *     last card of subroutine qrfac.
 */
+
+
 }
 
 /************************qrsolv.c*************************
@@ -1135,8 +1148,9 @@ int ipvt[];
 double r[],diag[],qtb[],x[],sdiag[],wa[];
 */
 
-void qrsolv(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
-      double x[],double sdiag[],double wa[])
+void qrsolv( const int n,  double r[], const int ldr, const int ipvt[],
+             const double diag[], const double qtb[],  double x[],
+             double sdiag[], double wa[] )
 {
 /*
 *     **********
@@ -1223,6 +1237,7 @@ static double zero = 0.0;
 static double p25 = 0.25;
 static double p5 = 0.5;
 
+
 /*
 *     copy r and (q transpose)*b to preserve input and initialize s.
 *     in particular, save the diagonal elements of r in x.
@@ -1255,6 +1270,10 @@ for( j=0; j<n; j++ )
 *	 diagonal element using p from the qr factorization.
 */
 l = ipvt[j];
+
+assert( l >= 0 ) ;
+assert( l < n ) ;
+
 if(diag[l] == zero)
   goto L90;
 for( k=j; k<n; k++ )

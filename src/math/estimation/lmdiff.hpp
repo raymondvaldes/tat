@@ -50,15 +50,18 @@ double dmin1(double a,double b);
 int min0(int a,int b);
 void pmat(int m,int n,double y[]);
 
-void qrfac(int m, int n, double a[], int, bool pivot, int ipvt[], int,
-           double rdiag[], double acnorm[], double wa[]);
+void qrfac( const int m, const int n, double a[], int /*lda*/, const bool pivot,
+            int ipvt[], int /*lipvt*/, double rdiag[], double acnorm[],
+            double wa[] );
 double dmax1(double a,double b);
-void lmpar(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
-           double delta,double *par,double x[],double sdiag[],double wa1[],
-           double wa2[]);
-void qrsolv(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
-            double x[],double sdiag[],double wa[]);
-
+void lmpar( const int n, double *r, const int ldr, const int *ipvt,
+            const double *diag, double *qtb, const double delta, double *par,
+            double *x, double *sdiag, double *wa1, double *wa2 );
+//void qrsolv(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
+//            double x[],double sdiag[],double wa[]);
+void qrsolv( const int n,  double r[], const int ldr, const int ipvt[],
+              const double diag[], const double qtb[],  double x[], double sdiag[],
+               double wa[] );
 
 void fdjac2(std::function<void( double*, double* )> fcn,
             int m, int n, double x[], double fvec[], double fjac[], int /*ldfjac*/,

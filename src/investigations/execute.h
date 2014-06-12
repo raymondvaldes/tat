@@ -32,7 +32,6 @@
 namespace investigations {
 
 void execute( const std::string& directory_of_samples );
-
 }
 
 #endif /* defined(__tat__File__) */

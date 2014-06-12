@@ -684,7 +684,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   double *fjac = new double[m*n];
   double *wa5 = new double[m*n];
   int *ipvt = new int[n];
-  double *diag = new double[n];
+  double *diag = new double[n]();
 
   ///populate initial values
   vector<double> xInitial(0) ;
@@ -694,6 +694,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   for( size_t i=0 ; i< n ; i++ )
   {
       x[i] = xInitial[i];
+      ipvt[i] = 9;
    // std::cout << x[i] << "\n" ;
   }
 

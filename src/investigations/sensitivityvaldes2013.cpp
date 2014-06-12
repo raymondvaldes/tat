@@ -76,7 +76,7 @@ void run( const filesystem::directory &dir )
     outputData.pp2Folder( dir.abs( partB ) , to_string(0)  ) ;
     cout << poptea.ppUnknownParameters() << "\n" ;
   }
-//return;
+return;
 
 	using tools::interface::exportfile;
 	const string partC = "/partC_thermalMaps" ;

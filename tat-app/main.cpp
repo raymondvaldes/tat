@@ -28,8 +28,7 @@ License
 #include "tools/timing.h"
 #include "investigations/execute.h"
 
-int main( const int argc, char *argv[ ] )
-{
+int main( const int argc, char *argv[ ] ) {
   using std::string ;
   using std::cout ;
   using std::pair ;

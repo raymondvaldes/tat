@@ -118,8 +118,6 @@
 		ABEF4EDE1948D4A500B44AD5 /* laser.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4E431948D4A500B44AD5 /* laser.h */; };
 		ABEF4EDF1948D4A500B44AD5 /* setup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4E441948D4A500B44AD5 /* setup.cpp */; };
 		ABEF4EE01948D4A500B44AD5 /* setup.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4E451948D4A500B44AD5 /* setup.h */; };
-		ABEF4EE11948D4A500B44AD5 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4E461948D4A500B44AD5 /* File.cpp */; };
-		ABEF4EE21948D4A500B44AD5 /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4E471948D4A500B44AD5 /* File.h */; };
 		ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4E491948D4A500B44AD5 /* labels.cpp */; };
 		ABEF4EE41948D4A500B44AD5 /* labels.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4E4A1948D4A500B44AD5 /* labels.h */; };
 		ABEF4EE51948D4A500B44AD5 /* analytical_2005.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4E4D1948D4A500B44AD5 /* analytical_2005.cpp */; };
@@ -270,8 +268,6 @@
 		ABEF4E431948D4A500B44AD5 /* laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = laser.h; sourceTree = "<group>"; };
 		ABEF4E441948D4A500B44AD5 /* setup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setup.cpp; sourceTree = "<group>"; };
 		ABEF4E451948D4A500B44AD5 /* setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setup.h; sourceTree = "<group>"; };
-		ABEF4E461948D4A500B44AD5 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
-		ABEF4E471948D4A500B44AD5 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		ABEF4E491948D4A500B44AD5 /* labels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = labels.cpp; sourceTree = "<group>"; };
 		ABEF4E4A1948D4A500B44AD5 /* labels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = labels.h; sourceTree = "<group>"; };
 		ABEF4E4D1948D4A500B44AD5 /* analytical_2005.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = analytical_2005.cpp; sourceTree = "<group>"; };
@@ -480,8 +476,6 @@
 				ABEF4E281948D4A500B44AD5 /* define */,
 				ABEF4E381948D4A500B44AD5 /* emission */,
 				ABEF4E3F1948D4A500B44AD5 /* equipment */,
-				ABEF4E461948D4A500B44AD5 /* File.cpp */,
-				ABEF4E471948D4A500B44AD5 /* File.h */,
 				ABEF4E481948D4A500B44AD5 /* model */,
 				ABEF4E671948D4A500B44AD5 /* simulations */,
 			);
@@ -749,7 +743,6 @@
 				ABEF4EB51948D4A500B44AD5 /* lmdiff_poptea_help.hpp in Headers */,
 				ABEF4EBD1948D4A500B44AD5 /* poptea_initialize.h in Headers */,
 				ABEF4ECF1948D4A500B44AD5 /* model.hpp in Headers */,
-				ABEF4EE21948D4A500B44AD5 /* File.h in Headers */,
 				ABEF4EE81948D4A500B44AD5 /* mesh.hpp in Headers */,
 				ABEF4F051948D4A500B44AD5 /* tools.hpp in Headers */,
 				ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */,
@@ -858,7 +851,6 @@
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,
 				ABEF4EB41948D4A500B44AD5 /* lmdiff_poptea_help.cpp in Sources */,
 				ABEF4ECA1948D4A500B44AD5 /* effusivity.cpp in Sources */,
-				ABEF4EE11948D4A500B44AD5 /* File.cpp in Sources */,
 				ABEF4EEF1948D4A500B44AD5 /* one_dim.cpp in Sources */,
 				ABEF4EE71948D4A500B44AD5 /* mesh.cpp in Sources */,
 				ABEF4EC61948D4A500B44AD5 /* construct.cpp in Sources */,
@@ -931,6 +923,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -945,7 +938,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -957,7 +950,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -975,25 +968,25 @@
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PROFILING_CODE = YES;
-				LLVM_LTO = YES;
+				LLVM_LTO = NO;
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = debugging;
 				VALID_ARCHS = x86_64;
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = (
 					"-Wno-gnu",
 					"-fslp-vectorize-aggressive",
-					"-Wno-conversion",
-					"-Wreorder",
 				);
 			};
 			name = Debug;
@@ -1002,6 +995,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -1016,7 +1010,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1041,24 +1035,24 @@
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				LLVM_LTO = YES;
+				LLVM_LTO = NO;
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = debugging;
 				VALID_ARCHS = x86_64;
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = (
 					"-Wno-gnu",
 					"-fslp-vectorize-aggressive",
-					"-Wno-conversion",
-					"-Wreorder",
 				);
 			};
 			name = Release;
@@ -1072,6 +1066,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -1095,11 +1090,18 @@
 					/usr/local/lib/,
 					/usr/local/Cellar/gsl/1.16/lib,
 				);
+				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "~/code/tat/src";
+				WARNING_CFLAGS = (
+					"-Wno-gnu",
+					"-fslp-vectorize-aggressive",
+				);
 			};
 			name = Debug;
 		};
@@ -1112,7 +1114,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -1131,10 +1133,17 @@
 					/usr/local/lib/,
 					/usr/local/Cellar/gsl/1.16/lib,
 				);
+				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				STRIP_STYLE = debugging;
 				USER_HEADER_SEARCH_PATHS = "~/code/tat/src";
+				WARNING_CFLAGS = (
+					"-Wno-gnu",
+					"-fslp-vectorize-aggressive",
+				);
 			};
 			name = Release;
 		};

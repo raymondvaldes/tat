@@ -115,16 +115,20 @@ LMA::paramter_estimation( int *info, int *nfev )
   double *wa4 = new double[m];
   double *fjac = new double[m*n];
   double *wa5 = new double[m*n];
-  int *ipvt = new int[n];
-  double *diag = new double[n];
+  int *ipvt = new int[n]();
+  double *diag = new double[n]();
 
   ///populate initial values
   vector<double> xInitial(0);
 
-  for( const auto &unknown : (*unknownParameters)() )
+  for( const auto &unknown : (*unknownParameters)() ) {
     xInitial.push_back( unknown.initialVal() );
-  for( size_t i=0 ; i< static_cast<size_t>(n) ; i++ )
+  }
+  
+  for( size_t i=0 ; i< static_cast<size_t>(n) ; i++ ) {
     x[i] = xInitial[i];
+    ipvt[i] = 9;
+  }
 
   scaleDiag( diag, *unknownParameters , coreSystem->TBCsystem,
              static_cast<int>(Settings.mode ) ) ;

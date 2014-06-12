@@ -83,9 +83,12 @@ void cosfit( const double *dependent, const std::vector<double> &independent,
       double *wa1     = new double[N];
       double *wa2     = new double[N];
       double *wa3     = new double[N];
-      double *diag    = new double[N];
+      double *diag    = new double[N]();
       int *ipvt       = new int[N];
 
+      for(size_t i = 0 ; i < N ; ++i )
+        ipvt[i] = 9;
+        
       int nfev;
       int info=0;
 
