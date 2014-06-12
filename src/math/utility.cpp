@@ -26,6 +26,7 @@ License
 #include <random>
 #include <ctime>
 #include <chrono>
+
 #include <boost/assert.hpp>
 
 #include "math/utility.hpp"
@@ -503,6 +504,26 @@ newThermalSweepLimits( const double center, const double range,
   return output;
 }
 
+bool within_tolerance( const double x1, const double x2, const double tol ) {
+
+  assert( tol > 0 ) ;
+  
+  using std::abs;
+  
+  const bool close_enough = abs( x1 - x2 ) < tol  ;
+  return close_enough ;
+}
+
+double average_of_all( const double* myarray, const size_t size){
+  double sum  = 0 ;
+  for( size_t i = 0 ;  i < size ; ++i ) {
+    sum += myarray[i] ;
+  }
+
+  const double average = sum / size ;
+  return average;
+
+}
 
 
 }
