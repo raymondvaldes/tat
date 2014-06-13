@@ -92,18 +92,17 @@ double genWseed( const double x_min, const double x_max, const unsigned seed )
   
   return dis( gen ) ;
 }
-  
+
 double random_in_logspace( const double start, const double end )
 {
   BOOST_ASSERT_MSG( start < end, "Setup issue" ) ;
   BOOST_ASSERT_MSG( start > 0, "must be positive for logspace transform" ) ;
 
   using std::pow;
-
   const double x = random_0_to_1() ;
   const double xini = start * pow( end/start, x ) ;
  
-  return xini;
+  return xini ;
 }
   
 double random_0_to_1() {
@@ -430,10 +429,6 @@ bool checkLimits( const double center, const double range )
 
   return run ;
 }
-
-
-
-
 
 std::pair<double, double>
 random_CR_from_limits( const Interval_Ends myInterval )

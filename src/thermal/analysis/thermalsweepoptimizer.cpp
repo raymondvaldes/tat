@@ -90,28 +90,22 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   using math::estimation::x_limiter2;
   using sensible::layer;
 
-   // std::cout << "before  " <<x[0] << "\t" << x[1] << "\n";
-    //resize_ThermalCenterRange( x ) ;
-   // std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
-
   unknownList updatedInput;
   size_t i = 0;
-  for( auto& unknown : thermalSweepSearch() )
-  {
+  for( auto& unknown : thermalSweepSearch() ) {
     const double val = x_limiter2( x[i++] , unknown.lowerBound(),
                                             unknown.upperBound() );
-//    const double val = x[i++];
 //    std::cout << val << "\t ";
     unknown.bestfitset( val ) ;
     updatedInput.addUnknown( unknown ) ;
   }
   thermalSweepSearch( updatedInput() ) ;
   
-  //std::cout << thermalSweepSearch.prettyPrint();
 
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
-    //std::cout << " check1 " <<xSweep.first << "\t" << xSweep.second << " here1 ";
+  
+  //std::cout  <<xSweep.first << "\t" << xSweep.second  << "\n";
 
 
   const double xCenter = xSweep.first ;
@@ -434,6 +428,7 @@ ThermalSweepOptimizer::solve(
 //}
 
 
+
 std::string ThermalSweepOptimizer::montecarloMap()
 {
   using std::cout;
@@ -472,7 +467,7 @@ std::string ThermalSweepOptimizer::montecarloMap()
     using math::random_CR_from_limits;
     const pairDD x_initial_CR = random_CR_from_limits( thermalLimits ) ;
     
-    std::cout << x_initial_CR.first << "\t" << x_initial_CR.second << "\n";
+  //  std::cout << x_initial_CR.first << "\t" << x_initial_CR.second << "\t" << CRinTHERMALSPACE.first << "\t" << CRinTHERMALSPACE.second << "\n";
 //ERROR IN CODE - PRODUCING CR BUT I NEED IT PRESENTED IN TERMS OF DATA %
     /// transform it into something thermal_prop can understand
     double x[2] = { 0 } ;
@@ -483,8 +478,8 @@ std::string ThermalSweepOptimizer::montecarloMap()
     x[0] = kx_limiter2( x[ 0 ], 0, 1 ) ;
     x[1] = kx_limiter2( x[ 1 ], 0, 1 ) ;
 
-//    std::cout << lcen << "\t" << ldec <<"\t"  << lminmax.first << "\t" << lminmax.second;
- //   std::cout << "\t" <<x_initial_CR.first << "\t" << x_initial_CR.second<< "\n" ;
+    //std::cout << lminmax.first << "\t" << lminmax.second;
+    //std::cout << "\t" <<x_initial_CR.first << "\t" << x_initial_CR.second<< "\n" ;
 
     double fvec[2] = {0} ;
     ThermalProp_Analysis( x , fvec ) ;
