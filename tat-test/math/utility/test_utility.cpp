@@ -5,10 +5,12 @@
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
 
-#define BOOST_TEST_MODULE math_utility
+#define BOOST_TEST_MODULE tat_unit_test
 #include <boost/test/included/unit_test.hpp>
+
 #include "math/utility.hpp"
 
+#include <ratio>
 #include <array>
 #include <cstddef>
 #include <algorithm>
@@ -301,3 +303,5 @@ BOOST_AUTO_TEST_CASE( checkLimits ) {
   checker( 0.01 ) ;
 }
 
+
+BOOST_AUTO_TEST_SUITE_END()
