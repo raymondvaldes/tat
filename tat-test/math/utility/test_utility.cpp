@@ -195,6 +195,55 @@ BOOST_AUTO_TEST_CASE( random_in_logspace ) {
   
   BOOST_VERIFY( rand_checker( .01 ) ) ;
 }BOOST_AUTO_TEST_CASE( checkLimits ) {
+
+BOOST_AUTO_TEST_CASE( random_CR_from_limits ) {
+
+//doesn't matter what limits i give this function, i expect the random CR to
+// vary from 0->1
+  typedef const math::Interval_Ends Interval;
+  typedef const std::pair<double, double> constPairDD ;
+  using math::checkLimits;
+  using math::CRfromSweepLimits;
+  using math::average_of_all;
+  using std::make_pair;
+  using std::vector;
+  const int Iters = 500 ;
+  const double tol = .1;
+
+  const auto checker = [] ( Interval masterInterval ) {
+    Interval subInterval = masterInterval.get_log10_random_subInterval() ;
+  
+    constPairDD myCR =
+      CRfromSweepLimits( subInterval.get_pair() , masterInterval.get_pair() ) ;
+    
+    BOOST_VERIFY( checkLimits( myCR ) ) ;
+    
+    return myCR ;
+  } ;
+
+
+  const auto checkerIterator = [&] ( constPairDD myPair ) {
+    vector< double > Centers(Iters) ;
+    vector< double > Ranges(Iters) ;
+    for( int i = 0 ; i < Iters ; ++i ) {
+      constPairDD myCR = checker( Interval( myPair ) ) ;
+      Centers[i] = myCR.first ;
+      Ranges[i] = myCR.second ;
+    }
+    const double center_avg = average_of_all( Centers.data(), Iters ) ;
+    const double range_avg = average_of_all( Ranges.data(), Iters ) ;
+    const double expected_avg = 0.50 ;
+    const double expected_rag = 0.33 ;
+    
+    BOOST_CHECK_CLOSE_FRACTION( center_avg, expected_avg, tol ) ;
+    BOOST_CHECK_CLOSE_FRACTION( range_avg, expected_rag, tol ) ;
+  } ;
+  
+  checkerIterator( make_pair(.05, 20 ) ) ;
+  checkerIterator( make_pair( 10, 20 ) ) ;
+  checkerIterator( make_pair( 1, 1.5 ) ) ;
+}
+
   using math::checkLimits;
   
   const auto checker = [] ( const double center ) {
