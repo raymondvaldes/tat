@@ -16,6 +16,8 @@
 #include <cmath>
 #include <istream>
 
+BOOST_AUTO_TEST_SUITE( math_utility )
+
 BOOST_AUTO_TEST_CASE( random_0_to_1 ) {
   using std::array ;
   using std::sort ;
@@ -36,13 +38,13 @@ BOOST_AUTO_TEST_CASE( random_0_to_1 ) {
   }
   sort ( out.begin(), out.end() ) ;
   
-  const auto less_than_min = []( const double i ){ return i < min ; } ;
-  const bool none_less_than_min = none_of( out.begin(), out.end(), less_than_min ) ;
-  BOOST_CHECK( none_less_than_min ) ;
+  const auto less_min = []( const double i ){ return i < min ; } ;
+  const bool none_less_min = none_of( out.begin(), out.end(), less_min ) ;
+  BOOST_CHECK( none_less_min ) ;
 
-  const auto greater_than_max = []( const double i ){ return i > max ; } ;
-  const bool none_greater_than_max = none_of( out.begin(), out.end(), greater_than_max ) ;
-  BOOST_CHECK( none_greater_than_max) ;
+  const auto greater_max = []( const double i ){ return i > max ; } ;
+  const bool none_greater_max = none_of( out.begin(), out.end(), greater_max ) ;
+  BOOST_CHECK( none_greater_max) ;
 
   const bool smallest_is_min = within_tolerance ( out.front(), min, tol );
   BOOST_VERIFY( smallest_is_min ) ;
@@ -163,7 +165,6 @@ BOOST_AUTO_TEST_CASE( random_in_logspace ) {
   const auto rand_checker = [tol, units]( const double min ) {
     const double mid = min * 10 ;
     const double max = min * 100 ;
-    const double tol_abs = tol * mid ;
 
     vector<double> out(units);
     for( auto& output: out ) {
@@ -177,14 +178,16 @@ BOOST_AUTO_TEST_CASE( random_in_logspace ) {
     const bool none_greater_than_max = out.back() < max ;
     BOOST_CHECK( none_greater_than_max) ;
 
-    const bool smallest_is_min = within_tolerance ( out.front(), min, tol*min );
-    BOOST_VERIFY( smallest_is_min ) ;
     
-    const bool largest_is_max = within_tolerance ( out.back(), max, tol*max ) ;
-    BOOST_VERIFY( largest_is_max ) ;
+    BOOST_CHECK_CLOSE_FRACTION( out.front(), min, tol ) ;
+    BOOST_CHECK_CLOSE_FRACTION( out.back(), max, tol ) ;
 
     const double median = median_of_all( out.data(), out.size() ) ;
-    const bool med_is_midpoint = within_tolerance( median, mid, tol_abs ) ;
+    BOOST_CHECK_CLOSE_FRACTION( median, mid, tol ) ;
+  };
+  
+  rand_checker( .01 ) ;
+}
 
 BOOST_AUTO_TEST_CASE( percentilelog10 ) {
   using math::percentilelog10;
