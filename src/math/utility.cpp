@@ -437,27 +437,15 @@ bool checkLimits( const double center, const double range )
 
 
 std::pair<double, double>
-random_CR_from_limits( const std::pair<double, double> limits )
+random_CR_from_limits( const Interval_Ends myInterval )
 {
   //generates distribution a new distrubtion limits in terms of the logspace
   //center and decades. It used some global limits (input).
 
-  using std::make_pair;
-  using std::pair;
-  typedef pair<double,double> pairDD;
+  const Interval_Ends
+  mySubInterval = myInterval.get_log10_random_subInterval();
   
-  const double lower_bound = limits.first ;
-  const double upper_bound = limits.second ;
-  
-  const Interval_Ends myInterval( make_pair( lower_bound, upper_bound ) ) ;
-  const Interval_Ends mySubInterval = myInterval.get_log10_random_subInterval();
-  
-  
-  const pairDD inner_bounds( mySubInterval.get_left_end() ,
-                             mySubInterval.get_right_end() );
-
-  
-  return CRfromSweepLimits( inner_bounds , limits ) ;
+  return CRfromSweepLimits( mySubInterval.get_pair() , myInterval.get_pair() ) ;
 }
 
 
