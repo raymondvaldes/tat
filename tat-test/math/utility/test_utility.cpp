@@ -194,4 +194,23 @@ BOOST_AUTO_TEST_CASE( random_in_logspace ) {
   };
   
   BOOST_VERIFY( rand_checker( .01 ) ) ;
+}BOOST_AUTO_TEST_CASE( checkLimits ) {
+  using math::checkLimits;
+  
+  const auto checker = [] ( const double center ) {
+    const double rangemax = ( center > 0.5 ) ? 2 * ( 1 - center ) : center * 2 ;
+
+    BOOST_VERIFY( checkLimits( center, rangemax ) ) ;
+    BOOST_VERIFY( checkLimits( center, .00001 ) ) ;
+    BOOST_VERIFY( checkLimits( center, rangemax / 2 ) ) ;
+    BOOST_VERIFY( !checkLimits( center, rangemax * 2 ) ) ;
+    BOOST_VERIFY( !checkLimits( center, rangemax * 1.01 ) ) ;
+  } ;
+
+  checker( 0.7 ) ;
+  checker( 0.3 ) ;
+  checker( 0.5 ) ;
+  checker( 0.99 ) ;
+  checker( 0.01 ) ;
 }
+
