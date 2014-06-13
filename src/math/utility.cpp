@@ -38,9 +38,6 @@ Interval_Ends::Interval_Ends( const std::pair<double, double> endpoints_input )
   : left_end( endpoints_input.first ), right_end( endpoints_input.second ) {
 }
 
-Interval_Ends::Interval_Ends(  ) {
-}
-
 
 double Interval_Ends::get_left_end() const {
   return left_end ;
@@ -63,6 +60,12 @@ void Interval_Ends::set_ends( const std::pair<double, double> endpoints_input) {
   right_end = endpoints_input.second ;
 }
 
+std::pair<double, double> Interval_Ends::get_pair() const {
+  using std::make_pair;
+  return make_pair( left_end, right_end ) ;
+}
+
+
 Interval_Ends Interval_Ends::get_log10_random_subInterval() const {
   //given an absolute bound, return a random new set of inner limits
   //randomly generated such that the distribution is uniform in log10 space
@@ -70,7 +73,7 @@ Interval_Ends Interval_Ends::get_log10_random_subInterval() const {
   BOOST_ASSERT( this->is_valid() ) ;
   using std::make_pair;
   
-  Interval_Ends myInterval ;
+  Interval_Ends myInterval( make_pair(0 , 0) ) ;
   
   do {
     const double myleft = random_in_logspace( left_end, right_end ) ;
@@ -256,8 +259,11 @@ double percentilelog10(const double xmin, const double xmax, const double x)
     This function returns the percentile of x in log10 space with respect to the
     x_min to x_max range.
     */
-    using std::log10;
+    BOOST_ASSERT( xmin > 0 ) ;
+    BOOST_ASSERT( xmin < xmax ) ;
+    BOOST_ASSERT( x >= xmin && x <= xmax ) ;
 
+    using std::log10;
     constexpr double epsilon = 1e-12;
     if( ( (x-epsilon) > xmax) || ( (x+epsilon) < xmin ) )
     {
@@ -381,6 +387,13 @@ std::pair<double, double>
 CRfromSweepLimits( const std::pair<double, double> inner_bounds,
                    const std::pair<double, double> outer_bounds )
 {
+  BOOST_ASSERT( outer_bounds.first > 0 ) ;
+  BOOST_ASSERT( inner_bounds.first  <= inner_bounds.second ) ;
+  BOOST_ASSERT( outer_bounds.first  <= outer_bounds.second ) ;
+  
+  BOOST_ASSERT( outer_bounds.first <= inner_bounds.first) ;
+  BOOST_ASSERT( inner_bounds.second <= outer_bounds.second ) ;
+  
   
   //This function returns the "center and range" of based on the limits//
   using std::pair;
@@ -506,7 +519,6 @@ double average_of_all( const double* myarray, const size_t size){
 
 double median_of_all( const double* sortedvector ,
                       const size_t size )
-//double median( const std::vector<double> &sortedvector )
 {
   using math::mean;
   using std::is_sorted;
