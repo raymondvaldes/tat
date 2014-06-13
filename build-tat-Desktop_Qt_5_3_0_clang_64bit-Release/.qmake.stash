@@ -1,0 +1,2 @@
+QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
+QMAKE_XCODE_VERSION = 6.0
