@@ -95,7 +95,6 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   for( auto& unknown : thermalSweepSearch() ) {
     const double val = x_limiter2( x[i++] , unknown.lowerBound(),
                                             unknown.upperBound() );
-//    std::cout << val << "\t ";
     unknown.bestfitset( val ) ;
     updatedInput.addUnknown( unknown ) ;
   }
@@ -465,7 +464,13 @@ std::string ThermalSweepOptimizer::montecarloMap()
     pairDD slicedThermalLimits;
 
     using math::random_CR_from_limits;
-    const pairDD x_initial_CR = random_CR_from_limits( thermalLimits ) ;
+    using math::Interval_Ends;
+    
+    const Interval_Ends myThermalLimits( thermalLimits ) ;
+    const pairDD x_initial_CR = random_CR_from_limits( myThermalLimits ) ;
+
+//    const pair<double, double> CRinTHERMALSPACE =
+//    math::newThermalSweepLimits( x_initial_CR.first, x_initial_CR.second, myThermalLimits.get_pair() ) ;
     
   //  std::cout << x_initial_CR.first << "\t" << x_initial_CR.second << "\t" << CRinTHERMALSPACE.first << "\t" << CRinTHERMALSPACE.second << "\n";
 //ERROR IN CODE - PRODUCING CR BUT I NEED IT PRESENTED IN TERMS OF DATA %
