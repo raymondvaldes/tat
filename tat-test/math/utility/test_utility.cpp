@@ -192,9 +192,27 @@ BOOST_AUTO_TEST_CASE( random_in_logspace ) {
         && none_greater_than_max && none_less_than_min );
     return pass;
   };
+BOOST_AUTO_TEST_CASE( CRfromSweepLimits ) {
+  typedef const std::pair<double, double> constPairDD ;
+  using math::CRfromSweepLimits;
+  using std::make_pair;
   
-  BOOST_VERIFY( rand_checker( .01 ) ) ;
-}BOOST_AUTO_TEST_CASE( checkLimits ) {
+  const auto checker = [] ( constPairDD outer_bounds ) {
+    constPairDD fullset = outer_bounds ;
+    constPairDD full_calc = CRfromSweepLimits( fullset, outer_bounds ) ;
+    const double center = 0.5;
+    const double range = 1.0;
+    constPairDD full_true = make_pair( center, range ) ;
+    
+    BOOST_VERIFY( full_true == full_calc ) ;
+  } ;
+
+  checker( make_pair( .1, 1 ) ) ;
+  checker( make_pair( .01, .02 ) ) ;
+  checker( make_pair( 1, 2 ) ) ;
+  checker( make_pair( 3, 3.0152 ) ) ;
+  checker( make_pair( 5.726, 8.465 ) ) ;
+}
 
 BOOST_AUTO_TEST_CASE( random_CR_from_limits ) {
 
@@ -244,6 +262,7 @@ BOOST_AUTO_TEST_CASE( random_CR_from_limits ) {
   checkerIterator( make_pair( 1, 1.5 ) ) ;
 }
 
+BOOST_AUTO_TEST_CASE( checkLimits ) {
   using math::checkLimits;
   
   const auto checker = [] ( const double center ) {
