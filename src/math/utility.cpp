@@ -420,7 +420,6 @@ bool checkLimits( const double center, const double range )
   /// The dataset is bounded to ( 0.175 , 0.425 )
 
   BOOST_ASSERT( center > 0 && center < 1 ) ;
-  BOOST_ASSERT( range > 0 && range <= 1 ) ;
 
   bool run = false;
   const double strPos = center - range / 2 ;
