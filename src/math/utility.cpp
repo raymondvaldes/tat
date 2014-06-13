@@ -400,6 +400,10 @@ CRfromSweepLimits( const std::pair<double, double> inner_bounds,
   return output;
 }
 
+bool checkLimits( const std::pair<double, double> CRpair ) {
+  return checkLimits( CRpair.first, CRpair.second ) ;
+}
+
 bool checkLimits( const double center, const double range )
 {
   // The center and range are used to charactize the data set.  The following

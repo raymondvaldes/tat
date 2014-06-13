@@ -123,6 +123,7 @@ std::pair<double, double> xCenterlog10( const double lmin, const double lmax ) ;
 
 
 bool checkLimits( const double center, const double range ) ;
+bool checkLimits( const std::pair<double, double> CRpair ) ;
 
 
 double average_of_all( const double* myarray, const size_t size) ;
