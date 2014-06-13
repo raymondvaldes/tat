@@ -186,12 +186,28 @@ BOOST_AUTO_TEST_CASE( random_in_logspace ) {
     const double median = median_of_all( out.data(), out.size() ) ;
     const bool med_is_midpoint = within_tolerance( median, mid, tol_abs ) ;
 
-    BOOST_VERIFY( med_is_midpoint ) ;
+BOOST_AUTO_TEST_CASE( percentilelog10 ) {
+  using math::percentilelog10;
+  
+  const double tol = 1e-10 ;
+  
+  const auto checker = [tol]( const double min ) {
+    const double mid = 10 * min ;
+    const double max = 100 * min ;
     
-    const bool pass = ( med_is_midpoint && largest_is_max && smallest_is_min
-        && none_greater_than_max && none_less_than_min );
-    return pass;
-  };
+    const double percent_min = 0 ;
+    const double percent_max = 1 ;
+    const double percent_mid = 0.50 ;
+    BOOST_CHECK_CLOSE( percentilelog10( min, max, min ), percent_min, tol ) ;
+    BOOST_CHECK_CLOSE( percentilelog10( min, max, max ), percent_max, tol ) ;
+    BOOST_CHECK_CLOSE( percentilelog10( min, max, mid ), percent_mid, tol ) ;
+  } ;
+  
+  checker( .01 ) ;
+  checker( .001 ) ;
+  checker( 1 ) ;
+}
+
 BOOST_AUTO_TEST_CASE( CRfromSweepLimits ) {
   typedef const std::pair<double, double> constPairDD ;
   using math::CRfromSweepLimits;
