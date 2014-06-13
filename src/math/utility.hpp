@@ -29,7 +29,7 @@ License
 #include <array>
 #include <cstring>
 #include <iostream>
-
+#include <typeinfo>
 namespace math{
 
 
@@ -127,6 +127,26 @@ bool checkLimits( const double center, const double range ) ;
 
 double average_of_all( const double* myarray, const size_t size) ;
 bool within_tolerance( const double x1, const double x2, const double tol ) ;
+
+template< typename integer >
+bool even( const integer x )
+{
+  //cannot pass double because of modulus (template is for uint and int)
+  const bool pass = ( (x % 2) == 0 ) ;
+  return pass;
+}
+
+template< typename integer >
+bool odd( const integer x )
+{
+  const bool fail = even(x) ;
+  const bool pass = !fail ;
+  return pass;
+}
+
+double median_of_all( const double* sortedvector ,
+                      const size_t size ) ;
+
 
 }
 

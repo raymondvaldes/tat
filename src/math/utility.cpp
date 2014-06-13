@@ -26,7 +26,7 @@ License
 #include <random>
 #include <ctime>
 #include <chrono>
-
+#include <algorithm>
 #include <boost/assert.hpp>
 
 #include "math/utility.hpp"
@@ -95,20 +95,14 @@ double genWseed( const double x_min, const double x_max, const unsigned seed )
   
 double random_in_logspace( const double start, const double end )
 {
-  //failing because it assumes end is 1.0
   BOOST_ASSERT_MSG( start < end, "Setup issue" ) ;
   BOOST_ASSERT_MSG( start > 0, "must be positive for logspace transform" ) ;
 
   using std::pow;
-  using std::log10;
-  using std::fma;
-  
-  const double ran = random_0_to_1() ;
-  const double argument = fma( ran, log10(end/start), log10(start) ) ;
-  const double xini = pow( 10,  argument ) ;
 
-  BOOST_ASSERT_MSG( xini < end , "error in calculations"  ) ;
-  BOOST_ASSERT_MSG( xini > start, "error in calculations" ) ;
+  const double x = random_0_to_1() ;
+  const double xini = start * pow( end/start, x ) ;
+ 
   return xini;
 }
   
@@ -522,8 +516,32 @@ double average_of_all( const double* myarray, const size_t size){
 
   const double average = sum / size ;
   return average;
-
 }
+
+double median_of_all( const double* sortedvector ,
+                      const size_t size )
+//double median( const std::vector<double> &sortedvector )
+{
+  using math::mean;
+  using std::is_sorted;
+  BOOST_ASSERT( size >= 1 ) ;
+  BOOST_ASSERT( is_sorted( &sortedvector[0], &sortedvector[0]+size  ) ) ;
+  
+  
+  const size_t N = size / 2;
+  double medianout = 0;
+  
+  if( even(size)  ) {
+    medianout = mean( sortedvector[N], sortedvector[N-1] ) ;
+  }
+  else if( odd(size) ) {
+    medianout = sortedvector[N] ;
+    
+  }
+  
+  return medianout;
+}
+
 
 
 }

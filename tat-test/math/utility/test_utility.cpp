@@ -27,8 +27,8 @@ BOOST_AUTO_TEST_CASE( random_0_to_1 ) {
   constexpr double min = 0 ;
   constexpr double mid = 0.5;
   constexpr double max = 1 ;
-  constexpr size_t units = 1000 ;
-  constexpr double tol = 0.025 ;
+  constexpr size_t units = 500 ;
+  constexpr double tol = 0.05 ;
   
   array<double, units> out;
   for( auto& output: out ) {
@@ -52,8 +52,7 @@ BOOST_AUTO_TEST_CASE( random_0_to_1 ) {
 
   const double avg = average_of_all( out.data(), out.size() ) ;
   const bool avg_is_midpoint = within_tolerance( avg, mid, tol ) ;
-  //const double smallest =
-  //const double biggest = outputs
+
   BOOST_VERIFY( avg_is_midpoint );        // #1 continues on error
 }
 
@@ -110,3 +109,89 @@ BOOST_AUTO_TEST_CASE( average_of_all ) {
   BOOST_CHECK( avg_checker( .0001 ) ) ;
 }
 
+BOOST_AUTO_TEST_CASE( even ) {
+  using math::even;
+  BOOST_CHECK( even(2) ) ;
+  BOOST_CHECK( even(-4) ) ;
+  BOOST_CHECK( even(0) ) ;
+  BOOST_CHECK( !even(1) ) ;
+ 
+}
+
+BOOST_AUTO_TEST_CASE( odd ) {
+  using math::odd;
+  
+  BOOST_CHECK( odd(3) ) ;
+  BOOST_CHECK( odd(7) ) ;
+  BOOST_CHECK( odd(9) ) ;
+  BOOST_CHECK( !odd(2) ) ;
+
+}
+
+BOOST_AUTO_TEST_CASE( median_of_all ) {
+  using std::vector;
+  using math::within_tolerance;
+  using math::median_of_all;
+
+  const double tol = 0.05 ;
+  const auto checker = [tol]( const vector<double> sorted,const double answer){
+    const double calc_median = median_of_all( sorted.data(), sorted.size() ) ;
+    const bool pass = within_tolerance( calc_median, answer, tol ) ;
+    BOOST_CHECK_MESSAGE( pass ,
+      "output:" << calc_median << "\t" << answer << "\t" << sorted.size()  ) ;
+    return pass ;
+  } ;
+  
+  BOOST_CHECK( checker( {0,1} , 0.5 ) ) ;
+  BOOST_VERIFY( checker( {0,6,8} , 6 ) ) ;
+  BOOST_VERIFY( checker( {1,2,41,43,99,100 } , 42 ) ) ;
+  BOOST_VERIFY( checker( {0,0,0,0,0,0,0,0,0,0,1} , 0 ) ) ;
+  BOOST_VERIFY( checker( {-10, -2, -1, 3, 7} , -1 ) ) ;
+}
+
+
+BOOST_AUTO_TEST_CASE( random_in_logspace ) {
+  using std::vector ;
+  using std::sort ;
+  using math::within_tolerance;
+  using math::random_in_logspace ;
+  using math::median_of_all ;
+
+  constexpr size_t units = 5000 ;
+  constexpr double tol = 0.1 ;
+  
+  const auto rand_checker = [tol, units]( const double min ) {
+    const double mid = min * 10 ;
+    const double max = min * 100 ;
+    const double tol_abs = tol * mid ;
+
+    vector<double> out(units);
+    for( auto& output: out ) {
+      output = random_in_logspace( min, max ) ;
+    }
+    sort ( out.begin(), out.end() ) ;
+    
+    const bool none_less_than_min = out.front() > min  ;
+    BOOST_CHECK( none_less_than_min ) ;
+
+    const bool none_greater_than_max = out.back() < max ;
+    BOOST_CHECK( none_greater_than_max) ;
+
+    const bool smallest_is_min = within_tolerance ( out.front(), min, tol*min );
+    BOOST_VERIFY( smallest_is_min ) ;
+    
+    const bool largest_is_max = within_tolerance ( out.back(), max, tol*max ) ;
+    BOOST_VERIFY( largest_is_max ) ;
+
+    const double median = median_of_all( out.data(), out.size() ) ;
+    const bool med_is_midpoint = within_tolerance( median, mid, tol_abs ) ;
+
+    BOOST_VERIFY( med_is_midpoint ) ;
+    
+    const bool pass = ( med_is_midpoint && largest_is_max && smallest_is_min
+        && none_greater_than_max && none_less_than_min );
+    return pass;
+  };
+  
+  BOOST_VERIFY( rand_checker( .01 ) ) ;
+}
