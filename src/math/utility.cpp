@@ -65,6 +65,16 @@ std::pair<double, double> Interval_Ends::get_pair() const {
   return make_pair( left_end, right_end ) ;
 }
 
+std::pair<double, double>
+get_log10_random_pair( const double left_end, const double right_end)  {
+  using std::make_pair;
+  
+  const double myleft = random_in_logspace( left_end, right_end ) ;
+  const double myright = random_in_logspace( left_end, right_end ) ;
+  
+  return make_pair( myleft, myright ) ;
+}
+
 
 Interval_Ends Interval_Ends::get_log10_random_subInterval() const {
   //given an absolute bound, return a random new set of inner limits
@@ -72,13 +82,13 @@ Interval_Ends Interval_Ends::get_log10_random_subInterval() const {
 
   BOOST_ASSERT( this->is_valid() ) ;
   using std::make_pair;
+  typedef const std::pair<double, double> constPairDD;
   
   Interval_Ends myInterval( make_pair(0 , 0) ) ;
   
   do {
-    const double myleft = random_in_logspace( left_end, right_end ) ;
-    const double myright = random_in_logspace( left_end, right_end ) ;
-    myInterval.set_ends( make_pair( myleft, myright ) );
+    constPairDD myRandoms = get_log10_random_pair( left_end, right_end ) ;
+    myInterval.set_ends( myRandoms ) ;
   } while ( myInterval.is_invalid() ) ;
 
   return myInterval ;
