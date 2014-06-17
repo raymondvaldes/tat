@@ -755,13 +755,6 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   using std::pow;
   using math::estimation::unknown;
 
-//  if ( penalty( xSweep ) > 0 )
-//  {
-//    std::cout << "before  " << x[0] << "\t" << x[1] << "\n";
-//    resize_ThermalCenterRange( x ) ;
-//    std::cout << "after  " << x[0] << "\t" << x[1] << "\n";
-//  }
-
   // update experimental data used based on search
   //std::cout << x[0] << "\t" << x[1] << "\t";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
