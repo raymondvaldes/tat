@@ -246,7 +246,7 @@ BOOST_AUTO_TEST_CASE( random_CR_from_limits ) {
   using math::average_of_all;
   using std::make_pair;
   using std::vector;
-  const int Iters = 500 ;
+  const int Iters = 5000 ;
   const double tol = .1;
 
   const auto checker = [] ( Interval masterInterval ) {
