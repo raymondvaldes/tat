@@ -124,7 +124,6 @@ HEADERS += investigations/num_method2014.h \
            sensible/radiativeSysProp.h \
            sensible/TBCsystem.h \
            sensible/temperature_scale.h \
-           thermal/File.h \
            tools/programoptions.hpp \
            tools/timing.h \
            tools/tools.hpp \
@@ -185,7 +184,9 @@ HEADERS += investigations/num_method2014.h \
            thermal/model/one_dim/numerical_2011/Numerical_Temperature.h \
            thermal/model/two_dim/analytical_2009/heat2DAna.hpp \
            "thermal/model/utilities/heat generation/Iheat.h" \
-           thermal/model/utilities/nondimensional/tau_0.h
+           thermal/model/utilities/nondimensional/tau_0.h \
+	   investigations/execute.h
+
 SOURCES += main.cpp \
            investigations/num_method2014.cpp \
            investigations/sensitivityvaldes2013.cpp \
@@ -197,7 +198,6 @@ SOURCES += main.cpp \
            sensible/radiativeSysProp.cpp \
            sensible/TBCsystem.cpp \
            sensible/temperature_scale.cpp \
-           thermal/File.cpp \
            tools/programoptions.cpp \
            tools/timing.cpp \
            math/algorithms/combinations.cpp \
@@ -255,4 +255,5 @@ SOURCES += main.cpp \
            thermal/model/one_dim/numerical_2011/Numerical_Temperature.cpp \
            thermal/model/two_dim/analytical_2009/heat2DAna.cpp \
            "thermal/model/utilities/heat generation/Iheat.cpp" \
-           thermal/model/utilities/nondimensional/tau_0.cpp
+           thermal/model/utilities/nondimensional/tau_0.cpp \
+           investigations/execute.cpp

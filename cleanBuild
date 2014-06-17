@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo 'deleting build files ..........'
+
+rm /home/raymond/code/build/build-tat-Desktop_Qt_5_2_1_GCC_64bit-Release/*.o
+
+echo 'cleanup complete'
+
