@@ -31,17 +31,36 @@
 
 namespace investigations {
 
-void execute( const std::string& directory_of_samples ) {
+void execute( const std::string& mydirectory ) {
 
   using std::vector;
+  using std::string;
   using filesystem::directory;
-  using filesystem::ls;
+  const directory directory_of_samples( mydirectory ) ;
   
-  const vector< directory > folders_of_samples = ls( directory_of_samples ) ;
-  for( const directory& folder : folders_of_samples ) {
-    sensitivityvaldes2013::run( folder ) ;
-    //num_method::run( dir ) ;
+  const string sampleName = "APS" ;
+  
+  const auto investigations = []( const directory& active ) {
+    sensitivityvaldes2013::run( active ) ;
+  };
+  
+  const bool
+  runCurrentDirectory =
+  directory_of_samples.working_directory_starts_with( sampleName ) ;
+  
+  std::cout << runCurrentDirectory << "\n";
+  
+  if( runCurrentDirectory ) {
+    investigations( directory_of_samples ) ;
   }
-}
+  else {
+    const vector< directory > paths = directory_of_samples.ls() ;
+    for( const directory& active : paths ) {
+      if( active.working_directory_starts_with( sampleName ) ) {
+        investigations( active ) ;
+      }
+    }
+  }
+  
 
-}
+}}
