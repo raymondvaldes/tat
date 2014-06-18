@@ -186,7 +186,7 @@ HEADERS += investigations/num_method2014.h \
            "thermal/model/utilities/heat generation/Iheat.h" \
            thermal/model/utilities/nondimensional/tau_0.h \
             investigations/execute.h \
-            algorithms/string/starts_with.h \
+            algorithm/string/starts_with.h \
             algorithm/string/split.h
 
 SOURCES += main.cpp \
@@ -259,5 +259,5 @@ SOURCES += main.cpp \
            "thermal/model/utilities/heat generation/Iheat.cpp" \
            thermal/model/utilities/nondimensional/tau_0.cpp \
            investigations/execute.cpp \
-            algorithms/string/starts_with.cpp \
+            algorithm/string/starts_with.cpp \
             algorithm/string/split.cpp
