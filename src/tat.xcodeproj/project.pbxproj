@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0DFE01195242AA007DF69B /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFDFF195242AA007DF69B /* split.cpp */; };
+		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
+		AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFE0319524382007DF69B /* starts_with.cpp */; };
+		AB0DFE0619524382007DF69B /* starts_with.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE0419524382007DF69B /* starts_with.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
@@ -156,6 +160,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB0DFDFF195242AA007DF69B /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = split.cpp; path = algorithm/string/split.cpp; sourceTree = "<group>"; };
+		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
+		AB0DFE0319524382007DF69B /* starts_with.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = starts_with.cpp; path = algorithm/string/starts_with.cpp; sourceTree = "<group>"; };
+		AB0DFE0419524382007DF69B /* starts_with.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = starts_with.h; path = algorithm/string/starts_with.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -321,9 +329,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB0DFDFD19524268007DF69B /* algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				AB0DFDFE1952426F007DF69B /* string */,
+			);
+			name = algorithm;
+			sourceTree = "<group>";
+		};
+		AB0DFDFE1952426F007DF69B /* string */ = {
+			isa = PBXGroup;
+			children = (
+				AB0DFDFF195242AA007DF69B /* split.cpp */,
+				AB0DFE00195242AA007DF69B /* split.h */,
+				AB0DFE0319524382007DF69B /* starts_with.cpp */,
+				AB0DFE0419524382007DF69B /* starts_with.h */,
+			);
+			name = string;
+			sourceTree = "<group>";
+		};
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
+				AB0DFDFD19524268007DF69B /* algorithm */,
 				ABE169011948EA8D00C1E409 /* libgsl.a */,
 				ABE169021948EA8D00C1E409 /* libgslcblas.a */,
 				ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */,
@@ -734,6 +762,7 @@
 				ABEF4E841948D4A500B44AD5 /* spline_cplx.h in Headers */,
 				ABEF4EC91948D4A500B44AD5 /* diffusivity.h in Headers */,
 				ABEF4EA81948D4A500B44AD5 /* radiativeSysProp.h in Headers */,
+				AB0DFE02195242AA007DF69B /* split.h in Headers */,
 				ABEF4EAC1948D4A500B44AD5 /* temperature_scale.h in Headers */,
 				ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */,
 				ABEF4E9E1948D4A500B44AD5 /* statistical_tools.hpp in Headers */,
@@ -780,6 +809,7 @@
 				ABEF4ED61948D4A500B44AD5 /* emission.hpp in Headers */,
 				ABEF4EFE1948D4A500B44AD5 /* filesystem.hpp in Headers */,
 				ABEF4EAF1948D4A500B44AD5 /* cmplx_combination.h in Headers */,
+				AB0DFE0619524382007DF69B /* starts_with.h in Headers */,
 				ABEF4E981948D4A500B44AD5 /* estimationInterval.hpp in Headers */,
 				ABEF4EB71948D4A500B44AD5 /* methods.hpp in Headers */,
 				ABEF4ED81948D4A500B44AD5 /* noise.hpp in Headers */,
@@ -880,6 +910,7 @@
 				ABEF4ED11948D4A500B44AD5 /* omega.cpp in Sources */,
 				ABEF4E971948D4A500B44AD5 /* estimationInterval.cpp in Sources */,
 				ABEF4EBC1948D4A500B44AD5 /* poptea_initialize.cpp in Sources */,
+				AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */,
 				ABEF4EF31948D4A500B44AD5 /* heat2DAna.cpp in Sources */,
 				ABEF4EB81948D4A500B44AD5 /* pie.cpp in Sources */,
 				ABEF4E831948D4A500B44AD5 /* spline_cplx.cpp in Sources */,
@@ -908,6 +939,7 @@
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
+				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
 				ABEF4EF51948D4A500B44AD5 /* Iheat.cpp in Sources */,
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,
