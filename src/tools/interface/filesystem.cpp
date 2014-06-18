@@ -25,6 +25,8 @@ License
 #include <boost/filesystem.hpp>
 
 #include "tools/interface/filesystem.hpp"
+#include "algorithm/string/starts_with.h"
+#include "algorithm/string/split.h"
 
 namespace filesystem
 {
@@ -47,8 +49,7 @@ void makeDir(const std::string rootPath, const std::string &newDirectory)
 
 
 directory::directory(const std::string &workingDirectory_):
-  workingDirectory( workingDirectory_ )
-{}
+  workingDirectory( workingDirectory_ ), myDirectory( workingDirectory_ ){}
 
 directory::~directory(void){}
 void directory::mkdir(const std::string &newDirectory) const
@@ -62,6 +63,37 @@ void directory::mkdir(const std::string &newDirectory) const
 
 }
 
+std::string directory::working_directory_string() const {
+  using std::string;
+  using std::vector;
+  
+  using algorithm::string::split;
+  
+  const string& delimiter = "/";
+  const vector< string > folders =  split( pwd(), delimiter  ) ;
+  
+  const string last = folders.back();
+  
+  const string working_folder_only = !last.empty() ? folders.rbegin()[0]
+                                                   : folders.rbegin()[1] ;
+
+
+  return working_folder_only;
+}
+
+bool directory::working_directory_starts_with( const std::string& check ) const {
+  
+  BOOST_ASSERT( true ) ;
+  using std::string;
+  using std::vector;
+  
+  using algorithm::string::starts_with;
+
+  const string wk_folder = working_directory_string() ;
+  const bool pass = starts_with( wk_folder, check ) ;
+  return pass;
+}
+
 std::string directory::pwd(void) const
 {
   return workingDirectory;
@@ -72,6 +104,28 @@ std::string directory::abs( const std::string &relativePath) const
   return workingDirectory + "/" + relativePath;
 }
 
+directory directory::parent_path() const {
+
+  boost::filesystem::path parentPath = myDirectory.parent_path();
+  return directory( parentPath.string() ) ;
+}
+
+
+std::string directory::working_directory() const {
+  using std::string;
+  
+  const string working_path = pwd();
+  
+  
+  
+  const string myWorkingDirectory( "fix_this" ) ;
+  return myWorkingDirectory ;
+}
+
+std::vector<directory> directory::ls() const
+{
+  return ::filesystem::ls( pwd() ) ;
+}
 
 std::vector< directory > ls( const std::string &path_in )
 {

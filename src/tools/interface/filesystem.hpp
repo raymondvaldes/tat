@@ -37,11 +37,11 @@ void makeDir(const std::string rootPath, const std::string &newDirectory);
 
 
 
-class directory
-{
+class directory {
 private:
   const std::string workingDirectory;
-
+  const boost::filesystem::path myDirectory;
+  
 public:
   explicit directory(const std::string &workingDirectory_);
   ~directory(void);
@@ -49,9 +49,18 @@ public:
   std::string abs(const std::string &relativePath) const;
   void mkdir(const std::string &newDirectory) const;
   std::string pwd(void) const;
-};
+  std::vector<directory> ls() const ;
+  
+  directory parent_path() const ;
+  std::string working_directory() const;
+  std::string working_directory_string() const ;
+
+  
+  bool working_directory_starts_with( const std::string& starts) const;
+} ;
 
 std::vector< directory > ls( const std::string &path_in ) ;
+
 
 
 }
