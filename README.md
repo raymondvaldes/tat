@@ -17,9 +17,8 @@ The boost and gsl libraries can be downloaded using with the following:
 sudo port install boost-dev
 sudo port install gsl-dev
 
-#gsl libraries
-LIBS += -L/usr/lib -lgsl -lgslcblas -lm
-LIBS += -L/usr/lib -lboost_system -lboost_filesystem
+#status
+[ ![Codeship Status for raymondvaldes/tat](https://codeship.io/projects/d5d3fb70-dd59-0131-1240-527664cf38f6/status)](https://codeship.io/projects/24663)
 
 #compiler flags
 QMAKE_CXXFLAGS += -std=gnu++11
