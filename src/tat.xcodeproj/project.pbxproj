@@ -351,12 +351,12 @@
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
-				AB0DFDFD19524268007DF69B /* algorithm */,
 				ABE169011948EA8D00C1E409 /* libgsl.a */,
 				ABE169021948EA8D00C1E409 /* libgslcblas.a */,
 				ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */,
 				ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */,
 				ABE168FD1948EA3B00C1E409 /* libboost_system.a */,
+				AB0DFDFD19524268007DF69B /* algorithm */,
 				ABEF4DCB1948D4A500B44AD5 /* investigations */,
 				ABEF4DD21948D4A500B44AD5 /* math */,
 				ABEF4DFC1948D4A500B44AD5 /* physics */,

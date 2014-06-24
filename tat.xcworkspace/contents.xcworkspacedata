@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:tat-test/tat-test.xcodeproj">
+      location = "group:test/tat-test.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:tat-app/tat-app.xcodeproj">
