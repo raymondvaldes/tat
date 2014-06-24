@@ -37,10 +37,7 @@ int main( const int argc, char *argv[ ] ) {
   const pair< bool, string > run_analysis = loadOptions( argc, argv ) ;
   
   if( run_analysis.first ) {
-    cout << "Welcome back, Raymond!\n\n" ;
-    
     stopwatch globalStopWatch ;
-    
     investigations::execute( run_analysis.second ) ;
     
     cout << globalStopWatch.readoutLoud() << "\n";
