@@ -24,18 +24,26 @@
 \*----------------------------------------------------------------------------*/
 #include <cmath>
 #include "kinematics.h"
+#include <boost/assert.hpp>
 
 namespace physics{
 namespace classical_mechanics{
 
 double period_to_angularFrequency( const double period )
 {
+  const bool pass = period > 0 ;
+  BOOST_ASSERT( pass ) ;
+
   const double angularFrequency = 2 * M_PI / period;
   return angularFrequency ;
 }
 
-double  angularFrequency_to_period( const double angularFrequency )
+double angularFrequency_to_period( const double angularFrequency )
 {
+  const bool pass = angularFrequency > 0 ;
+  BOOST_ASSERT( pass ) ;
+
+
   const double period = 2 * M_PI / angularFrequency;
   return period;
 }
