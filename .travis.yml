@@ -5,4 +5,4 @@ before_script:
  - sudo apt-get install libboost-all-dev
  - sudo apt-get install libgsl0-dev
 scipt:
- - ./install
+ - install
