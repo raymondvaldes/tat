@@ -32,8 +32,10 @@ std::vector<std::string> split( const std::string& strs,
                                 const std::string& splitter ) {
   using std::vector;
   using std::string;
+  
   using boost::is_any_of;
   using boost::token_compress_on;
+  
   typedef vector< string > split_vector_type;
   
   split_vector_type SplitVec;
