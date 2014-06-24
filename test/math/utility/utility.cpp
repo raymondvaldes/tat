@@ -23,7 +23,8 @@
 #include <cmath>
 #include <istream>
 
-BOOST_AUTO_TEST_SUITE( math_utility )
+BOOST_AUTO_TEST_SUITE( math )
+BOOST_AUTO_TEST_SUITE( utility )
 
 BOOST_AUTO_TEST_CASE( random_0_to_1 ) {
   using std::array ;
@@ -311,5 +312,5 @@ BOOST_AUTO_TEST_CASE( checkLimits ) {
   checker( 0.01 ) ;
 }
 
-
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
