@@ -357,21 +357,14 @@
 				ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */,
 				ABE168FD1948EA3B00C1E409 /* libboost_system.a */,
 				AB0DFDFD19524268007DF69B /* algorithm */,
+				ABEF4DFC1948D4A500B44AD5 /* physics */,
 				ABEF4DCB1948D4A500B44AD5 /* investigations */,
 				ABEF4DD21948D4A500B44AD5 /* math */,
-				ABEF4DFC1948D4A500B44AD5 /* physics */,
 				ABEF4E001948D4A500B44AD5 /* sensible */,
 				ABEF4E0B1948D4A500B44AD5 /* thermal */,
 				ABEF4E6A1948D4A500B44AD5 /* tools */,
 				ABEF4D971948D02600B44AD5 /* libtatlib.a */,
 			);
-			sourceTree = "<group>";
-		};
-		ABE1692F194A223C00C1E409 /* stl */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = stl;
 			sourceTree = "<group>";
 		};
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
@@ -390,7 +383,6 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
-				ABE1692F194A223C00C1E409 /* stl */,
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
 				ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */,
 				ABEF4DDD1948D4A500B44AD5 /* bisection.hpp */,
