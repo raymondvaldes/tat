@@ -10,7 +10,6 @@
 
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MAIN
-#define BOOST_TEST_MODULE math_test
 #include <boost/test/unit_test.hpp>
 
 #include "math/utility.hpp"
