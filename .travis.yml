@@ -4,5 +4,5 @@ before_script:
  - sudo apt-get install qt4-qmake
  - sudo apt-get install libboost-all-dev
  - sudo apt-get install libgsl0-dev
-scipt:
- - install
+ - chmod +x install
+script: "./install"
