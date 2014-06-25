@@ -13,6 +13,9 @@ before_script:
  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
  - if [ "$CXX" = "g++" ]; then export g++="g++-4.8" gcc="gcc-4.8"; fi
 
+ - g++ --version
+ - gcc --version
+
  - chmod +x install
  - chmod u+w ~
 
