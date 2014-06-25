@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 'build this ..........'
 
-buildpath='/home/$USER/code/build/tat/release'
+buildpath="/home/${USER}/code/build/tat/release"
 mkdir -p ${buildpath}
 cd ${buildpath} 
 qmake /home/$USER/code/tat/src/tat.pro -r -spec linux-g++-64
