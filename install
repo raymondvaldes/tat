@@ -1,11 +1,13 @@
 #!/bin/bash
 echo 'build this ..........'
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 chmod u+w ~
 
-buildpath="/home/${USER}/code/build/tat/release"
+buildpath="${DIR}/build/release"
 mkdir -p ${buildpath}
 cd ${buildpath} 
-qmake /home/${USER}/code/tat/src/tat.pro -r -spec linux-g++-64
+qmake ${DIR}/src/tat.pro -r -spec linux-g++-64
 echo 'makefile..........finished'
 
 make -j8 -s 
