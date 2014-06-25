@@ -1,8 +1,11 @@
 language: cpp
 compiler: gcc
+cache: apt
+
 before_script:
  - sudo apt-get install qt4-qmake
  - sudo apt-get install libboost-all-dev
  - sudo apt-get install libgsl0-dev
  - chmod +x install
+ - chmod u+w ~
 script: "./install"
