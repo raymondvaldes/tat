@@ -10,6 +10,6 @@ before_script:
  - chmod u+w ~
 
 script:
- - "pwd"
- - "ls"
- - "./install"
+ - pwd
+ - ls
+ - ./install
