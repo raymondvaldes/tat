@@ -1,12 +1,12 @@
 #!/bin/bash
 echo 'build this ..........'
 
-cd /home/raymond/code/build/build-tat-Desktop_Qt_5_2_1_GCC_64bit-Release
-qmake /home/raymond/code/tat/src/tat.pro -r -spec linux-g++-64
+buildpath='/home/$USER/code/build/tat/release'
+mkdir -p ${buildpath}
+cd ${buildpath} 
+qmake /home/$USER/code/tat/src/tat.pro -r -spec linux-g++-64
 echo 'makefile..........finished'
 
 make -j8 -s 
 echo 'building..........finished'
 
-#cleanup
-#rm Makefile
