@@ -32,6 +32,9 @@ using std::pair;
 using std::vector;
 using std::make_pair;
 
+using std::floor;
+using std::sqrt;
+
 namespace math {
 //namespace geometry {
 
@@ -84,27 +87,31 @@ Interval::random_group_xCR( const size_t iter ) const
   return group_x_CR ;
 }
 
-vector< pair<double, double>  >
+vector< vector<double> >
 Interval::ordered_group_xCR( const size_t iter ) const
 {
-  size_t numberOfIntervals = std::floor( std::sqrt( iter * 2 ) ) ;
-  
+  size_t numberOfIntervals = floor( sqrt( iter * 2 ) ) ;
   if ( even( numberOfIntervals ) ) {
     numberOfIntervals++;
   }
   
-  typedef pair<double, double > boundPair;
-  vector< boundPair > group_x_CR( numberOfIntervals ) ;
+  typedef pair<double, double > boundPair ;
+  vector< boundPair > boundPairs( numberOfIntervals ) ;
+  vector< vector<double > > group_x_CR( numberOfIntervals ) ;
 
-  typedef vector<double> groupBounds;
-  const groupBounds boundInterval =
-    range1og10( get_left_end() , get_right_end(), numberOfIntervals );
+  typedef const vector<double> groupBounds ;
+  groupBounds boundInterval =
+    range1og10( get_left_end() , get_right_end(), numberOfIntervals ) ;
   
+  int i = 0;
   for ( const auto lowerBound : boundInterval ) {
     for ( const auto upperBound : boundInterval ) {
       if( lowerBound < upperBound ) {
         const boundPair subInterval( lowerBound, upperBound );
-        group_x_CR.push_back( CRfromSweepLimits( subInterval, get_pair() ) ) ;
+        const boundPair xCRpair( CRfromSweepLimits( subInterval, get_pair() ) );
+        
+        const vector<double> xCR( xCRpair.first, xCRpair.second ) ;
+        group_x_CR[i++] = xCR ;
       }
     }
   }
