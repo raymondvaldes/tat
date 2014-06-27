@@ -443,7 +443,7 @@ std::string ThermalSweepOptimizer::montecarloMap()
   {
   //  std::vector<double> myX_CR( group_x_CR[i].first, group_x_CR[i].second ) ;
     using math::estimation::x_to_kspace_unity;
-    std::vector<double> x_in =  x_to_kspace_unity( myX_CR.data() , 2 ) ;
+    vector<double> x_in =  x_to_kspace_unity( group_x_CR[i].data() , 2 ) ;
     uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
   }
 
