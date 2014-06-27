@@ -78,6 +78,7 @@ double kx_limiter2( const double ki, const double k_min, const double k_max ) {
 }
 
 std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
+  BOOST_ASSERT( n > 0 ) ;
   
   const size_t unity_start = 0;
   const size_t unity_end = 1;
