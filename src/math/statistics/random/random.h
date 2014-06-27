@@ -39,8 +39,6 @@ double x_bias( const double Xmean, const double Xstddev ) ;
 double random_in_logspace( const double start, const double end ) ;
 double random_0_to_1();
 
-
-
 }
 
 #endif /* defined(__tat__random__) */
