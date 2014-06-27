@@ -13,6 +13,8 @@
 		AB0DFE0619524382007DF69B /* starts_with.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE0419524382007DF69B /* starts_with.h */; };
 		AB553C4F195DE60100E2B7D1 /* interval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C4D195DE60100E2B7D1 /* interval.cpp */; };
 		AB553C50195DE60100E2B7D1 /* interval.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C4E195DE60100E2B7D1 /* interval.h */; };
+		AB553C53195DF13200E2B7D1 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C51195DF13200E2B7D1 /* random.cpp */; };
+		AB553C54195DF13200E2B7D1 /* random.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C52195DF13200E2B7D1 /* random.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
@@ -168,6 +170,8 @@
 		AB0DFE0419524382007DF69B /* starts_with.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = starts_with.h; path = algorithm/string/starts_with.h; sourceTree = "<group>"; };
 		AB553C4D195DE60100E2B7D1 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = geometry/interval.cpp; sourceTree = "<group>"; };
 		AB553C4E195DE60100E2B7D1 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = geometry/interval.h; sourceTree = "<group>"; };
+		AB553C51195DF13200E2B7D1 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = statistics/random/random.cpp; sourceTree = "<group>"; };
+		AB553C52195DF13200E2B7D1 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = random.h; path = statistics/random/random.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -382,6 +386,8 @@
 		AB553C47195DCFE300E2B7D1 /* random */ = {
 			isa = PBXGroup;
 			children = (
+				AB553C51195DF13200E2B7D1 /* random.cpp */,
+				AB553C52195DF13200E2B7D1 /* random.h */,
 			);
 			name = random;
 			sourceTree = "<group>";
@@ -846,6 +852,7 @@
 				ABEF4EC71948D4A500B44AD5 /* construct.hpp in Headers */,
 				ABEF4E801948D4A500B44AD5 /* complex.h in Headers */,
 				ABEF4E881948D4A500B44AD5 /* constrained.hpp in Headers */,
+				AB553C54195DF13200E2B7D1 /* random.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,6 +967,7 @@
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
 				ABEF4ED31948D4A500B44AD5 /* temperature.cpp in Sources */,
+				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
