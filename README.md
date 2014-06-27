@@ -18,7 +18,8 @@ sudo port install boost-dev
 sudo port install gsl-dev
 
 #status
-[ ![Codeship Status for raymondvaldes/tat](https://codeship.io/projects/d5d3fb70-dd59-0131-1240-527664cf38f6/status)](https://codeship.io/projects/24663)
+[![Build Status](https://travis-ci.org/raymondvaldes/tat.png)](https://travis-ci.org/raymondvaldes/tat)
+
 
 #compiler flags
 QMAKE_CXXFLAGS += -std=gnu++11
