@@ -54,7 +54,8 @@ public:
       const ThermalData& thermalData_in,
       const math::estimation::unknownList &thermalSweepSearch_in,
       const std::vector<thermal::model::labels> &sweepOptimizationGoal_in,
-      const sensible::layer coating , const size_t iter ) ;
+      const sensible::layer coating , const size_t iter,
+      const double lmin, const double lmax ) ;
 
   methods& operator=( const methods& that );
 

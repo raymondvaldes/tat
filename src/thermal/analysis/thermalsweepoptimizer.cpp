@@ -44,7 +44,8 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     const std::shared_ptr< PIE > &intervalEstimates_in,
     const math::estimation::unknownList thermalSweepSearch_in,
     const std::vector<thermal::model::labels> sweepOptimizationGoal_in,
-    const sensible::layer coating, const size_t iter_in)
+    const sensible::layer coating, const size_t iter_in,
+    const double lmin_in, const double lmax_in )
   : LMA_BASE( Settings_in, unknownParameters_, thermalData_in.size() ) ,
     bestfitMethod( bestfitMethod_in ),
     intervalEstimates( intervalEstimates_in ),
@@ -52,7 +53,8 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     sweepOptimizationGoal( sweepOptimizationGoal_in ),
     coatingTOinterpretFullRange( new sensible::layer( coating )),
     xSweep(0.5,0.5),
-    iter(iter_in)
+    iter(iter_in),
+    sweepSettings( lmin_in, lmax_in, iter_in )
 {
   updateWorkSpace( thermalSweepSearch_in, sweepOptimizationGoal_in );
 }
@@ -470,7 +472,6 @@ std::string ThermalSweepOptimizer::montecarloMap()
 
 
   std::ostringstream output;
-
   output << "#|-------------------------------------------------------------\n";
   output << "#| Contour Map of Experimental Optimization                    \n";
   output << "#|                                                             \n";
@@ -514,6 +515,17 @@ std::string ThermalSweepOptimizer::montecarloMap()
   }
   return output.str();
 
+}
+
+void ThermalSweepOptimizer::
+    uncertainty_for_subset_pushback_ouputResults( double *x )
+{
+  double fvec[2] = {0} ;
+  ThermalProp_Analysis( x , fvec ) ;
+
+  ///reset unknown parameters
+  reassign( unknownParameters , *unknownBestFit ) ;
+  coreSystem->updatefromInitial( (*unknownBestFit)() );
 }
 
 void ThermalSweepOptimizer::captureState( const sensible::layer &coat )
@@ -672,8 +684,8 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
    // std::cout << x[i] << "\n" ;
   }
 
-  x[0] = 0.52;
-  x[1] = 0.90;
+  x[0] = 0.62;
+  x[1] = 0.50;
 
   ///Transform inputs
   size_t j = 0;

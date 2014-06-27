@@ -106,7 +106,8 @@ public:
       const math::estimation::unknownList thermalSweepSearch_in,
       const std::vector< thermal::model::labels > sweepOptimizationGoal_in,
       const sensible::layer coating,
-      const size_t iter_in ) ;
+      const size_t iter_in,
+      const double lmin_in, const double lmax_in ) ;
   ~ThermalSweepOptimizer( void ) ;
 
   // public solver (yes just give it all this shit and it'll do the work for u)
@@ -144,7 +145,15 @@ private:
   std::pair<double, double> xSweep;
   std::pair<double, double> updatedLimits;
   std::shared_ptr< math::estimation::unknownList > unknownBestFit;
-
+  
+  struct SweepSettings {
+    const double lmin;
+    const double lmax;
+    const size_t iter;
+    SweepSettings( const double lmin_in, const double lmax_in,
+                   const size_t iter_in )
+      : lmin( lmin_in ), lmax( lmax_in ), iter( iter_in )  {};
+  } sweepSettings;
 
   // worker methods
   ThermalData sliceThermalData( const double xCenter, const double xRange,

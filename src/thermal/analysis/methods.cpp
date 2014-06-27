@@ -44,7 +44,8 @@ methods::methods(
     const ThermalData& thermalData_in ,
     const math::estimation::unknownList &thermalSweepSearch ,
     const std::vector<thermal::model::labels> &sweepOptimizationGoal,
-                 const sensible::layer coating, const size_t iter )
+    const sensible::layer coating,
+    const size_t iter, const double lmin, const double lmax )
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
     intervalEstimates( new PIE() ),
@@ -56,7 +57,7 @@ methods::methods(
                                  intervalEstimates ,
                                  thermalSweepSearch,
                                  sweepOptimizationGoal,
-                                 coating, iter) )
+                                 coating, iter, lmin, lmax ) )
 {
 }
 
@@ -147,10 +148,15 @@ loadMethodsfromFile( const boost::property_tree::ptree &mybranch,
     sweepOptimizationGoal.push_back( output ) ;
   }
 
-  const size_t iter = mybranch.get< size_t > ( "mappingIterations" );
+  const ptree ptchild3 = mybranch.get_child( "mapping" ) ;
+  const size_t iter_m = ptchild3.get< size_t >( "Iterations" ) ;
+  const double lthermal_min = ptchild3.get< double >( "lthermal_min" ) ;
+  const double lthermal_max = ptchild3.get< double >( "lthermal_max" ) ;
+
+
   const methods analysis( estSettings, parameterEstimation, thermData,
                           thermalSweep, sweepOptimizationGoal,
-                          coating, iter  ) ;
+                          coating, iter_m, lthermal_min, lthermal_max   ) ;
   return analysis;
 }
 
