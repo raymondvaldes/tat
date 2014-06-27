@@ -23,24 +23,23 @@
  
 \*----------------------------------------------------------------------------*/
 
-#ifndef __tat__random__
-#define __tat__random__
+#ifndef __tat__equalto__
+#define __tat__equalto__
 
+#include <cmath>
+#include <limits>
 
-namespace math{
+namespace math {
+  
+template< typename T1, typename T2 >
+bool equalto ( const T1 a, const T2 b )
+{
+  const double multi = ( a > b ? a : b ) ;
+  const double multi2 = ( multi >= 1 ? multi  : 1 ) ;
 
-double genWseed( const double x_min, const double x_max, const unsigned seed ) ;
-double x_ini( const double x_min, const double x_max ) ;
-int xINTrandom( const int xmin, const int xmax ) ;
-double x_normal( const double Xmean, const double Xstddev,
-                 const unsigned seed1 ) ;
-double x_normal( const double Xmean, const double Xstddev ) ;
-double x_bias( const double Xmean, const double Xstddev ) ;
-double random_in_logspace( const double start, const double end ) ;
-double random_0_to_1();
-
-
-
+  return (std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2 );
+}  
+  
 }
 
-#endif /* defined(__tat__random__) */
+#endif /* defined(__tat__equalto__) */

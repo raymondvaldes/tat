@@ -28,6 +28,7 @@ License
 #include "thermal/model/one_dim/numerical_2011/mesh.hpp"
 #include "math/statistical_tools.hpp"
 #include "math/utility.hpp"
+#include "math/utilities/equalto.h"
 
 #include <boost/assert.hpp>
 
