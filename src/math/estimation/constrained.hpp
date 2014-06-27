@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #ifndef CONSTRAINED_HPP
 #define CONSTRAINED_HPP
-
+#include <vector>
 
 namespace math{
 namespace estimation{
@@ -34,6 +34,8 @@ double x_limiter2( const double xi, const double x_min, const double x_max ) ;
 
 double kx_limiter1( const double ki ) ;
 double kx_limiter2( const double ki, const double k_min, const double k_max ) ;
+
+std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) ;
 
 }}
 

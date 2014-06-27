@@ -62,15 +62,13 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   return x ;
 }
 
-double kx_limiter1( const double ki )
-{
+double kx_limiter1( const double ki ) {
     //converts value to k-space
   BOOST_ASSERT(ki > 0);
   return std::log(ki);
 }
 
-double kx_limiter2( const double ki, const double k_min, const double k_max )
-{
+double kx_limiter2( const double ki, const double k_min, const double k_max ) {
   using std::log;
 
   BOOST_ASSERT( ki > k_min  && ki < k_max ) ;
@@ -78,5 +76,21 @@ double kx_limiter2( const double ki, const double k_min, const double k_max )
   
   return log( ( ( k_max - k_min ) / ( ki - k_min ) ) - 1 ) ;
 }
+
+std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
+  
+  const size_t unity_start = 0;
+  const size_t unity_end = 1;
+  
+  std::vector<double> x_output( n ) ;
+  for( size_t i = 0 ; i < n ; ++i ) {
+    x_output[i] = kx_limiter2( x[i], unity_start, unity_end ) ;
+  }
+  
+  
+  return x_output;
+}
+
+
 
 }}
