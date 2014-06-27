@@ -187,7 +187,11 @@ HEADERS += investigations/num_method2014.h \
            thermal/model/utilities/nondimensional/tau_0.h \
             investigations/execute.h \
             algorithm/string/starts_with.h \
-            algorithm/string/split.h
+            algorithm/string/split.h \
+            math/geometry/interval.h \
+	   math/statistics/random/random.h \
+	   math/utilities/equalto.h
+
 
 SOURCES += main.cpp \
            investigations/num_method2014.cpp \
@@ -260,4 +264,6 @@ SOURCES += main.cpp \
            thermal/model/utilities/nondimensional/tau_0.cpp \
            investigations/execute.cpp \
             algorithm/string/starts_with.cpp \
-            algorithm/string/split.cpp
+            algorithm/string/split.cpp \
+	    math/geometry/interval.cpp \
+	   math/statistics/random/random.cpp \
