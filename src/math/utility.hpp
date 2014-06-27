@@ -31,6 +31,9 @@ License
 #include <iostream>
 #include <typeinfo>
 #include <cstddef>
+
+#include "math/geometry/interval.h"
+
 namespace math{
 
 
@@ -45,28 +48,7 @@ double x_bias( const double Xmean, const double Xstddev ) ;
 
 
 
-struct Interval
-{
-private:
-  double left_end;
-  double right_end;
 
-public:
-  Interval( const std::pair<double, double> endpoints_input ) ;
-  
-  double get_left_end() const ;
-  double get_right_end() const ;
-  bool is_valid() const ;
-  bool is_invalid() const;
-  void set_ends( const std::pair<double, double> endpoints_input) ;
-  Interval get_log10_random_subInterval() const ;
-  std::pair<double, double> get_pair() const ;
-  
-  std::vector<std::vector<double>> random_group_xCR( const size_t val ) const;
-  
-  std::vector< std::pair<double,double>>
-    ordered_group_xCR( const size_t iter ) const;
-};
 
 
 template< typename T1, typename T2 >
@@ -159,8 +141,5 @@ double median_of_all( const double* sortedvector ,
 
 
 }
-
-
-
 
 #endif // UTILITY_HPP

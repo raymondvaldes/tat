@@ -24,10 +24,92 @@
 \*----------------------------------------------------------------------------*/
 
 #include "math/geometry/interval.h"
+#include "math/utility.hpp"
+#include <cmath>
+
+using std::pair;
+using std::vector;
+using std::make_pair;
 
 namespace math {
-namespace geometry {
+//namespace geometry {
+
+Interval::Interval( const pair<double, double> endpoints_input )
+  : left_end( endpoints_input.first ), right_end( endpoints_input.second ) {
+}
 
 
+double Interval::get_left_end() const {
+  return left_end ;
+}
 
-}}
+double Interval::get_right_end() const {
+  return right_end ;
+}
+
+bool Interval::is_valid() const {
+  return left_end < right_end ;
+}
+
+bool Interval::is_invalid() const {
+  return left_end >= right_end ;
+}
+
+void Interval::set_ends( const pair<double, double> endpoints_input) {
+  left_end = endpoints_input.first ;
+  right_end = endpoints_input.second ;
+}
+
+  pair<double, double> Interval::get_pair() const {
+  return make_pair( left_end, right_end ) ;
+}
+
+
+vector< vector < double > >
+Interval::random_group_xCR( const size_t iter ) const
+{
+  typedef const pair<double, double > pairDD ;
+
+  vector< vector<double>> group_x_CR( iter ) ;
+
+
+  for( size_t i = 0; i < iter ; ++i )
+  {
+    pairDD x_initial_CR = math::random_CR_from_limits( *this ) ;
+    double x[2] = { x_initial_CR.first, x_initial_CR.second } ;
+    group_x_CR[i].assign( x, x + 2 ) ;
+  }
+  
+  return group_x_CR ;
+}
+
+vector< pair<double, double>  >
+Interval::ordered_group_xCR( const size_t iter ) const
+{
+  size_t numberOfIntervals = std::floor( std::sqrt( iter * 2 ) ) ;
+  
+  if ( even( numberOfIntervals ) ) {
+    numberOfIntervals++;
+  }
+  
+  typedef pair<double, double > boundPair;
+  vector< boundPair > group_x_CR( numberOfIntervals ) ;
+
+  typedef vector<double> groupBounds;
+  const groupBounds boundInterval =
+    range1og10( get_left_end() , get_right_end(), numberOfIntervals );
+  
+  for ( const auto lowerBound : boundInterval ) {
+    for ( const auto upperBound : boundInterval ) {
+      if( lowerBound < upperBound ) {
+        const boundPair subInterval( lowerBound, upperBound );
+        group_x_CR.push_back( CRfromSweepLimits( subInterval, get_pair() ) ) ;
+      }
+    }
+  }
+  
+  return group_x_CR ;
+}
+
+//}
+}
