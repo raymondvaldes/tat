@@ -244,7 +244,7 @@ BOOST_AUTO_TEST_CASE( random_CR_from_limits ) {
 
 //doesn't matter what limits i give this function, i expect the random CR to
 // vary from 0->1
-  typedef const math::Interval_Ends Interval;
+  typedef const math::Interval Interval;
   typedef const std::pair<double, double> constPairDD ;
   using math::checkLimits;
   using math::CRfromSweepLimits;

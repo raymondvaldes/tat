@@ -11,6 +11,8 @@
 		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
 		AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFE0319524382007DF69B /* starts_with.cpp */; };
 		AB0DFE0619524382007DF69B /* starts_with.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE0419524382007DF69B /* starts_with.h */; };
+		AB553C4F195DE60100E2B7D1 /* interval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C4D195DE60100E2B7D1 /* interval.cpp */; };
+		AB553C50195DE60100E2B7D1 /* interval.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C4E195DE60100E2B7D1 /* interval.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
@@ -164,6 +166,8 @@
 		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
 		AB0DFE0319524382007DF69B /* starts_with.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = starts_with.cpp; path = algorithm/string/starts_with.cpp; sourceTree = "<group>"; };
 		AB0DFE0419524382007DF69B /* starts_with.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = starts_with.h; path = algorithm/string/starts_with.h; sourceTree = "<group>"; };
+		AB553C4D195DE60100E2B7D1 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = geometry/interval.cpp; sourceTree = "<group>"; };
+		AB553C4E195DE60100E2B7D1 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = geometry/interval.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -382,6 +386,15 @@
 			name = random;
 			sourceTree = "<group>";
 		};
+		AB553C48195DE30F00E2B7D1 /* geometry */ = {
+			isa = PBXGroup;
+			children = (
+				AB553C4D195DE60100E2B7D1 /* interval.cpp */,
+				AB553C4E195DE60100E2B7D1 /* interval.h */,
+			);
+			name = geometry;
+			sourceTree = "<group>";
+		};
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +411,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				AB553C48195DE30F00E2B7D1 /* geometry */,
 				AB553C46195DCF6D00E2B7D1 /* statistics */,
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
 				ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */,
@@ -776,6 +790,7 @@
 				ABEF4E9E1948D4A500B44AD5 /* statistical_tools.hpp in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
+				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
 				ABEF4EBF1948D4A500B44AD5 /* temp_cmplx.h in Headers */,
 				ABEF4EB31948D4A500B44AD5 /* lmdiff_poptea.hpp in Headers */,
 				ABEF4EA21948D4A500B44AD5 /* kinematics.h in Headers */,
@@ -932,6 +947,7 @@
 				ABEF4E7B1948D4A500B44AD5 /* sensitivityvaldes2013.cpp in Sources */,
 				ABEF4EC81948D4A500B44AD5 /* diffusivity.cpp in Sources */,
 				ABEF4EF11948D4A500B44AD5 /* Tss_ana.cpp in Sources */,
+				AB553C4F195DE60100E2B7D1 /* interval.cpp in Sources */,
 				ABEF4EB61948D4A500B44AD5 /* methods.cpp in Sources */,
 				ABEF4EBA1948D4A500B44AD5 /* poptea.cpp in Sources */,
 				ABEF4EED1948D4A500B44AD5 /* Numerical_Temperature.cpp in Sources */,

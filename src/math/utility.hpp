@@ -45,21 +45,21 @@ double x_bias( const double Xmean, const double Xstddev ) ;
 
 
 
-struct Interval_Ends
+struct Interval
 {
 private:
   double left_end;
   double right_end;
 
 public:
-  Interval_Ends( const std::pair<double, double> endpoints_input ) ;
+  Interval( const std::pair<double, double> endpoints_input ) ;
   
   double get_left_end() const ;
   double get_right_end() const ;
   bool is_valid() const ;
   bool is_invalid() const;
   void set_ends( const std::pair<double, double> endpoints_input) ;
-  Interval_Ends get_log10_random_subInterval() const ;
+  Interval get_log10_random_subInterval() const ;
   std::pair<double, double> get_pair() const ;
   
   std::vector<std::vector<double>> random_group_xCR( const size_t val ) const;
@@ -104,7 +104,7 @@ CRfromSweepLimits( const std::pair<double, double> inner_bounds,
                    const std::pair<double, double> limits ) ;
 
 std::pair<double, double>
-random_CR_from_limits( const Interval_Ends myInterval ) ;
+random_CR_from_limits( const Interval myInterval ) ;
 
 std::vector<double>
 range1og10( const double l_min, const double l_max, const size_t L_end );

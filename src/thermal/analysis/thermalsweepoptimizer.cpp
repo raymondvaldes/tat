@@ -429,8 +429,8 @@ std::string ThermalSweepOptimizer::montecarloMap()
   // sweep constraints
   typedef pair<double, double > pairDD ;
   const pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
-  using math::Interval_Ends;
-  const Interval_Ends myThermalLimits( thermalLimits ) ;
+  using math::Interval;
+  const Interval myThermalLimits( thermalLimits ) ;
   
 //  typedef const std::vector<std::vector<double>>  Group_x_CR;
 //  Group_x_CR group_x_CR = myThermalLimits.random_group_xCR( iter ) ;

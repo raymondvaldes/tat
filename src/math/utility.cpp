@@ -34,40 +34,40 @@ License
 namespace math{
 
 
-Interval_Ends::Interval_Ends( const std::pair<double, double> endpoints_input )
+Interval::Interval( const std::pair<double, double> endpoints_input )
   : left_end( endpoints_input.first ), right_end( endpoints_input.second ) {
 }
 
 
-double Interval_Ends::get_left_end() const {
+double Interval::get_left_end() const {
   return left_end ;
 }
 
-double Interval_Ends::get_right_end() const {
+double Interval::get_right_end() const {
   return right_end ;
 }
 
-bool Interval_Ends::is_valid() const {
+bool Interval::is_valid() const {
   return left_end < right_end ;
 }
 
-bool Interval_Ends::is_invalid() const {
+bool Interval::is_invalid() const {
   return left_end >= right_end ;
 }
 
-void Interval_Ends::set_ends( const std::pair<double, double> endpoints_input) {
+void Interval::set_ends( const std::pair<double, double> endpoints_input) {
   left_end = endpoints_input.first ;
   right_end = endpoints_input.second ;
 }
 
-std::pair<double, double> Interval_Ends::get_pair() const {
+std::pair<double, double> Interval::get_pair() const {
   using std::make_pair;
   return make_pair( left_end, right_end ) ;
 }
 
 
 std::vector< std::vector < double > >
-Interval_Ends::random_group_xCR( const size_t iter ) const
+Interval::random_group_xCR( const size_t iter ) const
 {
   typedef const std::pair<double, double > pairDD ;
 
@@ -85,7 +85,7 @@ Interval_Ends::random_group_xCR( const size_t iter ) const
 }
 
 std::vector< std::pair<double, double>  >
-Interval_Ends::ordered_group_xCR( const size_t iter ) const
+Interval::ordered_group_xCR( const size_t iter ) const
 {
   size_t numberOfIntervals = std::floor( std::sqrt( iter * 2 ) ) ;
   
@@ -124,7 +124,7 @@ get_log10_random_pair( const double left_end, const double right_end)  {
 }
 
 
-Interval_Ends Interval_Ends::get_log10_random_subInterval() const {
+Interval Interval::get_log10_random_subInterval() const {
   //given an absolute bound, return a random new set of inner limits
   //randomly generated such that the distribution is uniform in log10 space
 
@@ -132,7 +132,7 @@ Interval_Ends Interval_Ends::get_log10_random_subInterval() const {
   using std::make_pair;
   typedef const std::pair<double, double> constPairDD;
   
-  Interval_Ends myInterval( make_pair(0 , 0) ) ;
+  Interval myInterval( make_pair(0 , 0) ) ;
   
   do {
     constPairDD myRandoms = get_log10_random_pair( left_end, right_end ) ;
@@ -502,12 +502,12 @@ bool checkLimits( const double center, const double range )
 }
 
 std::pair<double, double>
-random_CR_from_limits( const Interval_Ends myInterval )
+random_CR_from_limits( const Interval myInterval )
 {
   //generates distribution a new distrubtion limits in terms of the logspace
   //center and decades. It used some global limits (input).
 
-  const Interval_Ends
+  const Interval
   mySubInterval = myInterval.get_log10_random_subInterval();
   
   return CRfromSweepLimits( mySubInterval.get_pair() , myInterval.get_pair() ) ;
