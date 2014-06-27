@@ -164,6 +164,7 @@ private:
                   const double error ) ;
   ThermalData updatedFromXsearch( double *x );
   void resize_ThermalCenterRange( double *x ) ;
+  void uncertainty_for_subset_pushback_ouputResults( double *x ) ;
 
   // current state
   OptimizerOutput::ExperimentAnalysisState currentState;
