@@ -423,51 +423,29 @@ std::string ThermalSweepOptimizer::montecarloMap()
   coreSystem->updatefromInitial( (*unknownParameters)() );
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
-  //sweep constraints
-  const double lmin_bound = 0.01 ;
-  const double lmax_bound = 10 ;
-  const pair<double, double>thermalLimits( lmin_bound, lmax_bound ) ;
-
-
   // This function will output a table of values from maping out
   ouputResults.clear() ;
 
+  // sweep constraints
+  typedef pair<double, double > pairDD ;
+  const pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
+  using math::Interval_Ends;
+  const Interval_Ends myThermalLimits( thermalLimits ) ;
+  
+//  typedef const std::vector<std::vector<double>>  Group_x_CR;
+//  Group_x_CR group_x_CR = myThermalLimits.random_group_xCR( iter ) ;
+
+  const std::vector<std::pair<double, double> >
+    group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
+
   for( size_t i = 0; i < iter ; ++i )
   {
-    ///create random start points and transform them
-    typedef pair<double, double > pairDD ;
-    pairDD thermalCenDec;
-    pairDD slicedThermalLimits;
-
-    using math::random_CR_from_limits;
-    using math::Interval_Ends;
+    std::vector<double> myX_CR( group_x_CR[i].first, group_x_CR[i].second ) ;
     
-    const Interval_Ends myThermalLimits( thermalLimits ) ;
-    const pairDD x_initial_CR = random_CR_from_limits( myThermalLimits ) ;
-
-//    const pair<double, double> CRinTHERMALSPACE =
-//    math::newThermalSweepLimits( x_initial_CR.first, x_initial_CR.second, myThermalLimits.get_pair() ) ;
-    
-  //  std::cout << x_initial_CR.first << "\t" << x_initial_CR.second << "\t" << CRinTHERMALSPACE.first << "\t" << CRinTHERMALSPACE.second << "\n";
-//ERROR IN CODE - PRODUCING CR BUT I NEED IT PRESENTED IN TERMS OF DATA %
-    /// transform it into something thermal_prop can understand
-    double x[2] = { 0 } ;
-    x[0] = x_initial_CR.first ;
-    x[1] = x_initial_CR.second ;
-
-    using math::estimation::kx_limiter2;
-    x[0] = kx_limiter2( x[ 0 ], 0, 1 ) ;
-    x[1] = kx_limiter2( x[ 1 ], 0, 1 ) ;
-
-    //std::cout << lminmax.first << "\t" << lminmax.second;
-    //std::cout << "\t" <<x_initial_CR.first << "\t" << x_initial_CR.second<< "\n" ;
-
-    double fvec[2] = {0} ;
-    ThermalProp_Analysis( x , fvec ) ;
-
-    ///reset unknown parameters
-    reassign( unknownParameters , *unknownBestFit ) ;
-    coreSystem->updatefromInitial( (*unknownBestFit)() );
+    std::cout << myX_CR.size()<<"\t" <<   myX_CR[0] <<"\t" << myX_CR[1] << "\n";
+    using math::estimation::x_to_kspace_unity;
+    std::vector<double> x_in =  x_to_kspace_unity( myX_CR.data() , 2 ) ;
+    uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
   }
 
 
