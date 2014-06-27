@@ -367,6 +367,21 @@
 			);
 			sourceTree = "<group>";
 		};
+		AB553C46195DCF6D00E2B7D1 /* statistics */ = {
+			isa = PBXGroup;
+			children = (
+				AB553C47195DCFE300E2B7D1 /* random */,
+			);
+			name = statistics;
+			sourceTree = "<group>";
+		};
+		AB553C47195DCFE300E2B7D1 /* random */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = random;
+			sourceTree = "<group>";
+		};
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +398,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				AB553C46195DCF6D00E2B7D1 /* statistics */,
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
 				ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */,
 				ABEF4DDD1948D4A500B44AD5 /* bisection.hpp */,
