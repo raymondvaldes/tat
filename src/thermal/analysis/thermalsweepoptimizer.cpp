@@ -418,15 +418,8 @@ ThermalSweepOptimizer::solve(
 }
 
 
-std::string ThermalSweepOptimizer::contourMapping()
-{
-  reassign ( unknownBestFit , *unknownParameters  ) ;
-  coreSystem->updatefromInitial( (*unknownParameters)() );
-  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
-  // This function will output a table of values from maping out
-  ouputResults.clear() ;
-
+std::string ThermalSweepOptimizer::contourMappingwithMC() {
   // sweep constraints
   typedef pair<double, double > pairDD ;
   const pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
@@ -438,6 +431,23 @@ std::string ThermalSweepOptimizer::contourMapping()
 
 //  const std::vector<std::pair<double, double> >
 //    group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
+
+  return contourMapping( group_x_CR ) ;
+}
+
+
+
+
+
+std::string ThermalSweepOptimizer::contourMapping(
+const vector< vector< double > > group_x_CR )
+{
+  reassign ( unknownBestFit , *unknownParameters  ) ;
+  coreSystem->updatefromInitial( (*unknownParameters)() );
+  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
+
+  // This function will output a table of values from maping out
+  ouputResults.clear() ;
 
   for( size_t i = 0; i < iter ; ++i )
   {

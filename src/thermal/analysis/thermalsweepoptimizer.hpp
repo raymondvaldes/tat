@@ -118,7 +118,7 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      ) ;
-  std::string contourMapping() ;
+  std::string contourMappingwithMC();
 
 private:
   // overide methods inherited
@@ -165,6 +165,7 @@ private:
   ThermalData updatedFromXsearch( double *x );
   void resize_ThermalCenterRange( double *x ) ;
   void uncertainty_for_subset_pushback_ouputResults( double *x ) ;
+  std::string contourMapping( const vector< vector< double > > group_x_CR ) ;
 
   // current state
   OptimizerOutput::ExperimentAnalysisState currentState;
