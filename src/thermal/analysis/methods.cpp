@@ -103,7 +103,7 @@ ThermalSweepOptimizer::OptimizerOutput methods::optimization(
 
 std::string methods::contourMapping()
 {
-  return lthermalSweepOptimizer->contourMappingwithMC() ;
+  return lthermalSweepOptimizer->contourMappingwithOrderedPoints() ;
 }
 
 

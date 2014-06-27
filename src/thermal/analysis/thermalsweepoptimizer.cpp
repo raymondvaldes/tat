@@ -37,6 +37,9 @@ using std::vector;
 using std::pair;
 using std::cout;
 
+using math::Interval;
+
+
 namespace thermal{
 namespace analysis{
 
@@ -420,7 +423,6 @@ ThermalSweepOptimizer::solve(
 
 
 std::string ThermalSweepOptimizer::contourMappingwithMC() {
-  // sweep constraints
   typedef pair<double, double > pairDD ;
   const pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
   using math::Interval;
@@ -429,12 +431,26 @@ std::string ThermalSweepOptimizer::contourMappingwithMC() {
   typedef const vector< vector< double > >  Group_x_CR;
   Group_x_CR group_x_CR = myThermalLimits.random_group_xCR( iter ) ;
 
-//  const std::vector<std::pair<double, double> >
-//    group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
 
   return contourMapping( group_x_CR ) ;
 }
 
+std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
+  typedef pair<double, double > pairDD ;
+  const pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
+  const Interval myThermalLimits( thermalLimits ) ;
+  
+  typedef vector< vector< double > >  Group_x_CR;
+  
+  Group_x_CR group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
+
+  for( auto val : group_x_CR ) {
+    std::cout << val[0] << "\t" << val[1] << "\n" ;
+  }
+std::cout << "hello, Raymond!!\n\n"; 
+//std::cout << "exiting here: .. "; abort();
+ return contourMapping( group_x_CR ) ;
+}
 
 
 
@@ -451,12 +467,10 @@ const vector< vector< double > > group_x_CR )
 
   for( size_t i = 0; i < iter ; ++i )
   {
-  //  std::vector<double> myX_CR( group_x_CR[i].first, group_x_CR[i].second ) ;
     using math::estimation::x_to_kspace_unity;
     vector<double> x_in =  x_to_kspace_unity( group_x_CR[i].data() , 2 ) ;
     uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
   }
-
 
   std::ostringstream output;
   output << "#|-------------------------------------------------------------\n";

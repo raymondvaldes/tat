@@ -118,7 +118,8 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      ) ;
-  std::string contourMappingwithMC();
+  std::string contourMappingwithMC() ;
+  std::string contourMappingwithOrderedPoints() ;
 
 private:
   // overide methods inherited

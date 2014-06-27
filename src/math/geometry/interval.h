@@ -54,8 +54,7 @@ public:
   
   std::vector<std::vector<double>> random_group_xCR( const size_t val ) const;
   
-  std::vector< std::pair<double,double>>
-    ordered_group_xCR( const size_t iter ) const;
+  std::vector<std::vector<double>> ordered_group_xCR( const size_t iter ) const;
 };
 
 
