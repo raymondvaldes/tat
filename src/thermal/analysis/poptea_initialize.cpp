@@ -35,7 +35,7 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir )
 {
   ///Initialize kernals
   const Kernal popteaCore = loadWorkingDirectoryKernal( dir ) ;
-  Poptea poptea = loadWorkingDirectoryPoptea ( dir, popteaCore);
+  Poptea poptea = loadWorkingDirectoryPoptea ( dir, popteaCore ) ;
   
   ///Output noise to test
   using thermal::emission::phase99;

@@ -411,38 +411,14 @@ ThermalSweepOptimizer::solve(
   return ouputResults;
 }
 
-//void ThermalSweepOptimizer::upSweepStartReset( void )
-//{
-//  bool pass = false;
-//
-//  while( !pass )
-//  {
-//    thermalSweepSearch.resetBestfits() ;
-//    pass = math::checkLimits( thermalSweepSearch.vectorUnknowns[0].initialVal() ,
-//                              thermalSweepSearch.vectorUnknowns[1].initialVal() ) ;
-//
-//  }
-//
-//
-//}
-
-
 
 std::string ThermalSweepOptimizer::montecarloMap()
 {
   using std::cout;
   using std::pair;
 
-  // Optimization process and then best-fit Info!!!
-  // The purpose here is to get the "best possible fit" and use that as my ref.
-  cout << "starting monte carlo method....  \n";
-
-//  solve( unknownParameters_in, thermalData_in, coreSystem_in, bestfitMethod_in,
-//         intervalEstimates_in ) ;
-//  bestfitMethod_in->solve( unknownParameters, thermalData_in, coreSystem_in ) ;
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );
-
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
   //sweep constraints
@@ -451,9 +427,7 @@ std::string ThermalSweepOptimizer::montecarloMap()
   const pair<double, double>thermalLimits( lmin_bound, lmax_bound ) ;
 
 
-  //This function will output a table of values from maping out
-//  constexpr double min = 0 ;
-//  constexpr double max = 1 ;
+  // This function will output a table of values from maping out
   ouputResults.clear() ;
 
   for( size_t i = 0; i < iter ; ++i )

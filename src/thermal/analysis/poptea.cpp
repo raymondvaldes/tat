@@ -39,7 +39,7 @@ Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
   reassign( unknownParameters, unknownParameters_);
 }
 
-class Poptea
+Poptea
 Poptea::loadConfig( const Kernal &coreSystem_,
                     const boost::property_tree::ptree &pt )
 {
@@ -70,7 +70,7 @@ Poptea::loadConfig( const Kernal &coreSystem_,
   return poptea ;
 }
 
-class Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
+Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
 {
   using boost::property_tree::ptree;
 
@@ -156,8 +156,8 @@ void Poptea::reloadThermalModel( const thermal::define::construct &in_ )
   coreSystem->thermalsys.reloadThermalConstruct( in_ );
 }
 
-Poptea loadWorkingDirectoryPoptea( const class filesystem::directory &dir,
-                                   const class Kernal &popteaCore )
+Poptea loadWorkingDirectoryPoptea( const filesystem::directory &dir,
+                                   const Kernal &popteaCore )
 {
   const std::string filename = "poptea.xml";
   boost::property_tree::ptree
