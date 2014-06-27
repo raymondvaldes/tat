@@ -45,6 +45,8 @@ double x_normal( const double Xmean, const double Xstddev,
                  const unsigned seed1 ) ;
 double x_normal( const double Xmean, const double Xstddev ) ;
 double x_bias( const double Xmean, const double Xstddev ) ;
+double random_in_logspace( const double start, const double end ) ;
+double random_0_to_1();
 
 
 
@@ -74,12 +76,10 @@ double percentilelog10( const double xmin, const double xmax, const double x ) ;
 
 void range( double* l_thermal, const double l_min, const double l_max,
             const size_t L_end ) ;
-double random_in_logspace( const double start, const double end ) ;
 
 std::vector<double>
   range( const double xstart, const double xend, const size_t size ) ;
 
-double random_0_to_1();
 
 std::pair<double, double>
 CRfromSweepLimits( const std::pair<double, double> inner_bounds,
@@ -139,6 +139,8 @@ bool odd( const integer x )
 double median_of_all( const double* sortedvector ,
                       const size_t size ) ;
 
+std::pair<double, double>
+get_log10_random_pair( const double left_end, const double right_end);
 
 }
 

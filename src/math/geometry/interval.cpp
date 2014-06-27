@@ -26,6 +26,7 @@
 #include "math/geometry/interval.h"
 #include "math/utility.hpp"
 #include <cmath>
+#include <boost/assert.hpp>
 
 using std::pair;
 using std::vector;
@@ -109,6 +110,24 @@ Interval::ordered_group_xCR( const size_t iter ) const
   }
   
   return group_x_CR ;
+}
+
+Interval Interval::get_log10_random_subInterval() const {
+  //given an absolute bound, return a random new set of inner limits
+  //randomly generated such that the distribution is uniform in log10 space
+
+  BOOST_ASSERT( this->is_valid() ) ;
+  using std::make_pair;
+  typedef const std::pair<double, double> constPairDD;
+  
+  Interval myInterval( make_pair(0 , 0) ) ;
+  
+  do {
+    constPairDD myRandoms = math::get_log10_random_pair( left_end, right_end ) ;
+    myInterval.set_ends( myRandoms ) ;
+  } while ( myInterval.is_invalid() ) ;
+
+  return myInterval ;
 }
 
 //}

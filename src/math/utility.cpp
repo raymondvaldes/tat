@@ -45,23 +45,7 @@ get_log10_random_pair( const double left_end, const double right_end)  {
 }
 
 
-Interval Interval::get_log10_random_subInterval() const {
-  //given an absolute bound, return a random new set of inner limits
-  //randomly generated such that the distribution is uniform in log10 space
 
-  BOOST_ASSERT( this->is_valid() ) ;
-  using std::make_pair;
-  typedef const std::pair<double, double> constPairDD;
-  
-  Interval myInterval( make_pair(0 , 0) ) ;
-  
-  do {
-    constPairDD myRandoms = get_log10_random_pair( left_end, right_end ) ;
-    myInterval.set_ends( myRandoms ) ;
-  } while ( myInterval.is_invalid() ) ;
-
-  return myInterval ;
-}
 
 
 double genWseed( const double x_min, const double x_max, const unsigned seed )
@@ -147,6 +131,20 @@ double x_normal(const double Xmean, const double Xstddev)
   std::normal_distribution<double> distribution(Xmean,Xstddev);
   return distribution(gen);
 }
+
+double x_bias(const double Xmean, const double Xstddev)
+{
+    double xguess = x_normal(Xmean,Xstddev);
+
+    while(xguess<Xmean)
+    {
+        xguess = x_normal(Xmean,Xstddev);
+    }
+
+    return xguess;
+}
+
+
   
 double arrayMax(const double* x, const size_t I)
 {
@@ -196,17 +194,7 @@ std::pair<double, double> OA_init( const double *x, const size_t span )
 
 
 
-double x_bias(const double Xmean, const double Xstddev)
-{
-    double xguess = x_normal(Xmean,Xstddev);
 
-    while(xguess<Xmean)
-    {
-        xguess = x_normal(Xmean,Xstddev);
-    }
-
-    return xguess;
-}
 
 double average(const double a, const double b)
 {
