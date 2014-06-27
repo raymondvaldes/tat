@@ -30,6 +30,7 @@ License
 #include <cstring>
 #include <iostream>
 #include <typeinfo>
+#include <cstddef>
 namespace math{
 
 
@@ -49,6 +50,11 @@ public:
   void set_ends( const std::pair<double, double> endpoints_input) ;
   Interval_Ends get_log10_random_subInterval() const ;
   std::pair<double, double> get_pair() const ;
+  
+  std::vector<std::vector<double>> random_group_xCR( const size_t val ) const;
+  
+  std::vector< std::pair<double,double>>
+    ordered_group_xCR( const size_t iter ) const;
 };
 
 double genWseed( const double x_min, const double x_max, const unsigned seed ) ;

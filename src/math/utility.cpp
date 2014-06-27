@@ -65,6 +65,54 @@ std::pair<double, double> Interval_Ends::get_pair() const {
   return make_pair( left_end, right_end ) ;
 }
 
+
+std::vector< std::vector < double > >
+Interval_Ends::random_group_xCR( const size_t iter ) const
+{
+  typedef const std::pair<double, double > pairDD ;
+
+  std::vector<std::vector<double>> group_x_CR( iter ) ;
+
+
+  for( size_t i = 0; i < iter ; ++i )
+  {
+    pairDD x_initial_CR = math::random_CR_from_limits( *this ) ;
+    double x[2] = { x_initial_CR.first, x_initial_CR.second } ;
+    group_x_CR[i].assign( x, x + 2 ) ;
+  }
+  
+  return group_x_CR ;
+}
+
+std::vector< std::pair<double, double>  >
+Interval_Ends::ordered_group_xCR( const size_t iter ) const
+{
+  size_t numberOfIntervals = std::floor( std::sqrt( iter * 2 ) ) ;
+  
+  if ( even( numberOfIntervals ) ) {
+    numberOfIntervals++;
+  }
+  
+  typedef std::pair<double, double > boundPair;
+  std::vector< boundPair > group_x_CR( numberOfIntervals ) ;
+
+  typedef std::vector<double> groupBounds;
+  const groupBounds boundInterval =
+    range1og10( get_left_end() , get_right_end(), numberOfIntervals );
+  
+  for ( const auto lowerBound : boundInterval ) {
+    for ( const auto upperBound : boundInterval ) {
+      if( lowerBound < upperBound ) {
+        const boundPair subInterval( lowerBound, upperBound );
+        group_x_CR.push_back( CRfromSweepLimits( subInterval, get_pair() ) ) ;
+      }
+    }
+  }
+  
+  return group_x_CR ;
+}
+
+
 std::pair<double, double>
 get_log10_random_pair( const double left_end, const double right_end)  {
   using std::make_pair;
@@ -549,6 +597,9 @@ double median_of_all( const double* sortedvector ,
   
   return medianout;
 }
+
+
+
 
 
 
