@@ -34,6 +34,17 @@ License
 namespace math{
 
 
+
+double genWseed( const double x_min, const double x_max, const unsigned seed ) ;
+double x_ini( const double x_min, const double x_max ) ;
+int xINTrandom( const int xmin, const int xmax ) ;
+double x_normal( const double Xmean, const double Xstddev,
+                 const unsigned seed1 ) ;
+double x_normal( const double Xmean, const double Xstddev ) ;
+double x_bias( const double Xmean, const double Xstddev ) ;
+
+
+
 struct Interval_Ends
 {
 private:
@@ -57,9 +68,6 @@ public:
     ordered_group_xCR( const size_t iter ) const;
 };
 
-double genWseed( const double x_min, const double x_max, const unsigned seed ) ;
-
-double x_ini( const double x_min, const double x_max ) ;
 
 template< typename T1, typename T2 >
 bool equalto ( const T1 a, const T2 b )
@@ -75,12 +83,6 @@ double arrayMin( const double* x, const size_t I ) ;
 std::pair<double, double> OA_init( const double *x, const size_t span ) ;
 
 
-int xINTrandom( const int xmin, const int xmax ) ;
-double x_normal( const double Xmean, const double Xstddev,
-                 const unsigned seed1 ) ;
-double x_normal( const double Xmean, const double Xstddev ) ;
-
-double x_bias( const double Xmean, const double Xstddev ) ;
 
 
 double average( const double a, const double b ) ;
