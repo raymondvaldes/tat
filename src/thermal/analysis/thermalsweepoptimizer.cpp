@@ -418,7 +418,7 @@ ThermalSweepOptimizer::solve(
 }
 
 
-std::string ThermalSweepOptimizer::montecarloMap()
+std::string ThermalSweepOptimizer::contourMapping()
 {
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );

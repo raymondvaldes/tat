@@ -103,7 +103,7 @@ ThermalSweepOptimizer::OptimizerOutput methods::optimization(
 
 std::string methods::montecarloMap()
 {
-  return lthermalSweepOptimizer->montecarloMap(  ) ;
+  return lthermalSweepOptimizer->contourMapping(  ) ;
 }
 
 

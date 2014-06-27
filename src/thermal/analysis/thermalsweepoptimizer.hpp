@@ -118,7 +118,7 @@ public:
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
      ) ;
-  std::string montecarloMap() ;
+  std::string contourMapping() ;
 
 private:
   // overide methods inherited
