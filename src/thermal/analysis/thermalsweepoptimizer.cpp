@@ -33,6 +33,10 @@ License
 #include "thermal/emission/phase99.hpp"
 #include "thermal/define/lthermal.h"
 
+using std::vector;
+using std::pair;
+using std::cout;
+
 namespace thermal{
 namespace analysis{
 
@@ -416,9 +420,6 @@ ThermalSweepOptimizer::solve(
 
 std::string ThermalSweepOptimizer::montecarloMap()
 {
-  using std::cout;
-  using std::pair;
-
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
@@ -432,17 +433,15 @@ std::string ThermalSweepOptimizer::montecarloMap()
   using math::Interval;
   const Interval myThermalLimits( thermalLimits ) ;
   
-//  typedef const std::vector<std::vector<double>>  Group_x_CR;
-//  Group_x_CR group_x_CR = myThermalLimits.random_group_xCR( iter ) ;
+  typedef const vector< vector< double > >  Group_x_CR;
+  Group_x_CR group_x_CR = myThermalLimits.random_group_xCR( iter ) ;
 
-  const std::vector<std::pair<double, double> >
-    group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
+//  const std::vector<std::pair<double, double> >
+//    group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
 
   for( size_t i = 0; i < iter ; ++i )
   {
-    std::vector<double> myX_CR( group_x_CR[i].first, group_x_CR[i].second ) ;
-    
-    std::cout << myX_CR.size()<<"\t" <<   myX_CR[0] <<"\t" << myX_CR[1] << "\n";
+  //  std::vector<double> myX_CR( group_x_CR[i].first, group_x_CR[i].second ) ;
     using math::estimation::x_to_kspace_unity;
     std::vector<double> x_in =  x_to_kspace_unity( myX_CR.data() , 2 ) ;
     uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
