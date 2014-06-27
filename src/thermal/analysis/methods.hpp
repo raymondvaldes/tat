@@ -78,7 +78,7 @@ public:
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in
       );
 
-  std::string montecarloMap();
+  std::string contourMapping();
 };
 
 methods

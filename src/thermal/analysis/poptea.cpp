@@ -131,7 +131,7 @@ ThermalSweepOptimizer::OptimizerOutput Poptea::optimization(void)
 std::string Poptea::thermalSweepMap( void )
 {
   BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" ) ;
-  return analysis.montecarloMap() ;
+  return analysis.contourMapping() ;
 }
 
 
