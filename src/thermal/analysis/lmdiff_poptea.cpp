@@ -214,20 +214,14 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
   thermalData->predictedEmission = phase99( *coreSystem, thermalData->omegas ) ;
 
   /// Evaluate Objective function
-//  double MSE = 0;
   for( size_t n = 0 ; n < thermalData->omegas.size() ; ++n )
   {
      fvec[n] =  thermalData->experimentalEmission[n] ;
      fvec[n] -= thermalData->predictedEmission[n] ;
-//     MSE += pow( fvec[n], 2);
   }
-//  MSE = sqrt( MSE );
 
   thermalData->lthermalPredicted =
       thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
-//  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
-//  std::cout << "\t" << MSE;
-//  std::cout << "\n";
 
   return;
 }
