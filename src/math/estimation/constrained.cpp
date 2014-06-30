@@ -24,8 +24,13 @@ License
 \*----------------------------------------------------------------------------*/
 #include <boost/assert.hpp>
 #include "math/estimation/constrained.hpp"
-#include <cmath>
-#include <iostream>
+#include "math/utilities/equalto.h"
+
+using std::vector;
+
+using std::abs;
+using std::exp;
+using std::log;
 
 namespace math{
 namespace estimation{
@@ -40,8 +45,8 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   // converts value from k-space to x_space. In k-space the parameter is free
   // to be any value.  In x-space the parameter is constrained between x_min
   // and x_max.
-  using std::abs;
-  using std::exp;
+  BOOST_ASSERT( x_min < x_max ) ;
+
   double
   x = x_max ;
   x -= x_min ;
@@ -65,7 +70,7 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
 double kx_limiter1( const double ki ) {
     //converts value to k-space
   BOOST_ASSERT(ki > 0);
-  return std::log(ki);
+  return log(ki);
 }
 
 double kx_limiter2( const double ki, const double k_min, const double k_max ) {
@@ -83,7 +88,7 @@ std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
   const size_t unity_start = 0;
   const size_t unity_end = 1;
   
-  std::vector<double> x_output( n ) ;
+  vector<double> x_output( n ) ;
   for( size_t i = 0 ; i < n ; ++i ) {
     x_output[i] = kx_limiter2( x[i], unity_start, unity_end ) ;
   }
