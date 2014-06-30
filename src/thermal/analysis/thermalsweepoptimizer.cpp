@@ -107,7 +107,6 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
-  
 
   const double xCenter = xSweep.first ;
   const double xRange = xSweep.second ;
@@ -417,7 +416,6 @@ std::string ThermalSweepOptimizer::contourMappingwithMC() {
   typedef const vector< vector< double > >  Group_x_CR;
   Group_x_CR group_x_CR = myThermalLimits.random_group_xCR( iter ) ;
 
-
   return contourMapping( group_x_CR ) ;
 }
 
@@ -432,14 +430,13 @@ std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
   return contourMapping( group_x_CR ) ;
 }
 
-
+#include "math/utility.hpp"
 
 
 std::string ThermalSweepOptimizer::contourMapping(
 const vector< vector< double > > group_x_CR )
 {
   using math::estimation::x_to_kspace_unity;
-
 
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );
@@ -496,7 +493,6 @@ const vector< vector< double > > group_x_CR )
     state.meanParameterError            << "\n";
   }
   return output.str();
-
 }
 
 void ThermalSweepOptimizer::
@@ -663,7 +659,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   {
       x[i] = xInitial[i];
       ipvt[i] = 9;
-   // std::cout << x[i] << "\n" ;
   }
 
   x[0] = 0.62;
@@ -673,10 +668,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   size_t j = 0;
   for( const auto& unknown : thermalSweepSearch() )
   {
-    //std::cout << x[j] << "\t";
     x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
-    //std::cout << unknown.lowerBound() << "\t" << unknown.upperBound() << "\t";
-    //std::cout << x[j] << "\n";
     j++;
   }
   
@@ -719,15 +711,10 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 
 void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 {
-  using std::sqrt;
-  using std::pow;
   using math::estimation::unknown;
 
   // update experimental data used based on search
-  //std::cout << x[0] << "\t" << x[1] << "\t";
   ThermalData updatedThermal = updatedFromXsearch( x ) ;
-  
-  //std::cout << x[0] << "\t" << x[1] << "\t";
   reassign( thermalData , updatedThermal ) ;
 
   // Parameter Estimation with PIE analysis
@@ -754,19 +741,14 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
     i++;
   }
 
-  
   currentState.meanParameterError /= sweepOptimizationGoal.size();
   
-  std::cout
-            << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
+  std::cout << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
             << thermalSweepSearch.vectorUnknowns[1].bestfit() << "\t"
-            << x[0] << "\t" << x[1] << "\t"
             << currentState.meanParameterError << "\t"
           //  <<fvec[0] << "\t" << fvec[1] << "\t" <<
          //   xSweep.first << "\t" << xSweep.second
             << "\n";
-  
-
   ouputResults.push_back( currentState ) ;
   
   
