@@ -120,6 +120,7 @@ public:
      ) ;
   std::string contourMappingwithMC() ;
   std::string contourMappingwithOrderedPoints() ;
+  std::string contourMappingwithOrderedPointUsingGrid() ;
 
 private:
   // overide methods inherited
@@ -146,7 +147,8 @@ private:
   std::pair<double, double> xSweep;
   std::pair<double, double> updatedLimits;
   std::shared_ptr< math::estimation::unknownList > unknownBestFit;
-  
+  std::string contourMapping_with_grid( const vector<std::pair<double, double > > lthermalGrid ) ;
+
   
   struct SweepSettings {
     const double lmin;

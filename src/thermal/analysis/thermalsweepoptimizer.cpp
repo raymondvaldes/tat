@@ -435,8 +435,68 @@ std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
   return contourMapping( group_x_CR ) ;
 }
 
+std::string ThermalSweepOptimizer::contourMappingwithOrderedPointUsingGrid() {
+
+  const math::Interval mygridboundaries( make_pair(.01, 10) ) ;
+  const vector< pair <double, double > > myGrid = mygridboundaries.gridInterval( iter ) ;
+  return contourMapping_with_grid( myGrid ) ;
+}
+
 #include "math/utility.hpp"
 
+std::string ThermalSweepOptimizer::contourMapping_with_grid(
+  const vector< pair < double, double > > lthermalGrid )
+{
+  using math::estimation::x_to_kspace_unity;
+
+  reassign ( unknownBestFit , *unknownParameters  ) ;
+  coreSystem->updatefromInitial( (*unknownParameters)() );
+  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
+
+  // This function will output a table of values from maping out
+  ouputResults.clear() ;
+
+  using thermal::define::omega;
+  using math::newThermalSweepLimits;
+
+  // Run simulations
+  for( size_t i = 0; i < iter ; ++i )
+  {    
+    typedef const double thermalPenetration;
+    thermalPenetration min = lthermalGrid[i].first ;
+    thermalPenetration max = lthermalGrid[i].second ;
+    
+    const bool xpasses = ( min < max ) ;
+    
+    if( xpasses ) {
+    
+      //calculate x_CR now form min and max
+      pair<double, double> xCR_pair = math::CRfromSweepLimits( lthermalGrid[i], make_pair(0.01,10) );
+  
+      const double center = xCR_pair.first ;
+      const double range = xCR_pair.second ;
+
+      const vector<double> x_real = { center, range } ;
+      vector<double> x_in =  x_to_kspace_unity( x_real.data() , 2 ) ;
+      uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
+    }
+    else {
+      const double length = coatingTOinterpretFullRange->depth ;
+      const double ktherm = coatingTOinterpretFullRange->kthermal.offset ;
+      const double psitherm = coatingTOinterpretFullRange->psithermal.offset ;
+      
+      const double omega_min = omega( length, min, ktherm, psitherm ) ;
+      const double omega_max = omega( length, max, ktherm, psitherm ) ;
+      
+      currentState.omegaLimits = make_pair( omega_min , omega_max ) ;
+      currentState.meanParameterError = 999;
+      ouputResults.push_back( currentState ) ;
+    }
+  }
+
+
+  return contourMappingResults();
+}
 
 std::string ThermalSweepOptimizer::contourMapping(
 const vector< vector< double > > group_x_CR )
@@ -452,6 +512,7 @@ const vector< vector< double > > group_x_CR )
 
   using thermal::define::omega;
   using math::newThermalSweepLimits;
+
 
   // Run simulations
   for( size_t i = 0; i < iter ; ++i )

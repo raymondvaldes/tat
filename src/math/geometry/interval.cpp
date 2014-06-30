@@ -88,31 +88,58 @@ Interval::random_group_xCR( const size_t iter ) const
   return group_x_CR ;
 }
 
-vector< vector<double> >
-Interval::ordered_group_xCR( const size_t iter ) const
-{
+size_t Interval::numberofOddIntervals( const size_t iter ) const {
+  
   size_t numberOfIntervals = floor( sqrt( iter * 2 ) ) ;
   if ( even( numberOfIntervals ) ) {
     numberOfIntervals++;
   }
+
+  return numberOfIntervals;
+}
+
+vector< pair<double, double > > Interval::gridInterval( const size_t iter ) const
+{
+  const size_t numberOfIntervals = numberofOddIntervals( iter ) ;
   
-  typedef pair<double, double > boundPair ;
+  typedef pair< double, double > boundPair ;
   vector< boundPair > boundPairs( numberOfIntervals ) ;
-  typedef const vector<double> groupBounds ;
-  vector< vector<double > > group_x_CR ;
+  typedef const vector< double > groupBounds ;
+  groupBounds boundInterval =
+    range1og10( get_left_end() , get_right_end(), numberOfIntervals ) ;
+  
+
+  for ( const auto lowerBound : boundInterval ) {
+    for ( const auto upperBound : boundInterval ) {
+      boundPairs.push_back( make_pair( lowerBound, upperBound ) ) ;
+    }
+  }
+  
+  return boundPairs;
+}
+
+vector< vector<double> >
+Interval::ordered_group_xCR( const size_t iter ) const
+{
+  const size_t numberOfIntervals = numberofOddIntervals( iter ) ;
+
+  
+  typedef pair< double, double > boundPair ;
+  vector< boundPair > boundPairs( numberOfIntervals ) ;
+  typedef const vector< double > groupBounds ;
+  vector< vector< double > > group_x_CR ;
   
   groupBounds boundInterval =
     range1og10( get_left_end() , get_right_end(), numberOfIntervals ) ;
   
   for ( const auto lowerBound : boundInterval ) {
     for ( const auto upperBound : boundInterval ) {
-      //if( lowerBound < upperBound ) {
+      if( lowerBound < upperBound ) {
         vector<double> myvect = myX_CR( lowerBound, upperBound ) ;
         group_x_CR.push_back( myvect ) ;
-      //}
+      }
     }
   }
-  
   return group_x_CR ;
 }
 
