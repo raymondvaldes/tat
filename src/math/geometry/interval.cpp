@@ -34,6 +34,7 @@ using std::make_pair;
 
 using std::floor;
 using std::sqrt;
+using std::cout;
 
 namespace math {
 //namespace geometry {
@@ -95,23 +96,19 @@ Interval::ordered_group_xCR( const size_t iter ) const
     numberOfIntervals++;
   }
   
-  typedef pair<double, double > boundPair ;
+  typedef const pair<double, double > boundPair ;
   vector< boundPair > boundPairs( numberOfIntervals ) ;
-  vector< vector<double > > group_x_CR( numberOfIntervals ) ;
-
   typedef const vector<double> groupBounds ;
+  vector< vector<double > > group_x_CR ;
+  
   groupBounds boundInterval =
     range1og10( get_left_end() , get_right_end(), numberOfIntervals ) ;
   
-  int i = 0;
   for ( const auto lowerBound : boundInterval ) {
     for ( const auto upperBound : boundInterval ) {
       if( lowerBound < upperBound ) {
-        const boundPair subInterval( lowerBound, upperBound );
-        const boundPair xCRpair( CRfromSweepLimits( subInterval, get_pair() ) );
-        
-        const vector<double> xCR( xCRpair.first, xCRpair.second ) ;
-        group_x_CR[i++] = xCR ;
+        vector<double> myvect = myX_CR( lowerBound, upperBound ) ;
+        group_x_CR.push_back( myvect ) ;
       }
     }
   }

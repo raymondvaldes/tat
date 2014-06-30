@@ -75,12 +75,24 @@ double kx_limiter1( const double ki ) {
 }
 
 double kx_limiter2( const double ki, const double k_min, const double k_max ) {
-  using std::log;
-
-  BOOST_ASSERT( ki > k_min  && ki < k_max ) ;
+  BOOST_ASSERT( ki >= k_min ) ;
+  BOOST_ASSERT( ki <= k_max ) ;
+  
+  using math::equalto;
+  double ki_adjusted = ki;
+  
+  constexpr double tol = 1e-14;
+  
+  if( equalto( ki, k_min ) ) {
+    ki_adjusted = k_min + tol ;
+  }
+  else if ( equalto( ki, k_max ) ) {
+    ki_adjusted = k_max - tol ;
+  }
   
   
-  return log( ( ( k_max - k_min ) / ( ki - k_min ) ) - 1 ) ;
+  
+  return log( ( ( k_max - k_min ) / ( ki_adjusted - k_min ) ) - 1 ) ;
 }
 
 std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) {

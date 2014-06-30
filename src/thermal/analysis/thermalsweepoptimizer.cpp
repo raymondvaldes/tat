@@ -36,6 +36,7 @@ License
 using std::vector;
 using std::pair;
 using std::cout;
+using std::make_pair;
 
 using math::Interval;
 
@@ -68,15 +69,12 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
 
 ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {}
 
-std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
+pair< double, double > ThermalSweepOptimizer::updateSweep( void )
 {
-  using std::make_pair;
-
   double thermalCenter = 0;
   double thermalRange = 0;
   using thermal::model::labels;
   
-
   for( const auto& unknown : thermalSweepSearch() )
   {
     const double bestfit  = unknown.bestfit();
@@ -89,11 +87,8 @@ std::pair< double, double > ThermalSweepOptimizer::updateSweep( void )
   return make_pair( thermalCenter, thermalRange ) ;
 }
 
-
 ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 {
-  //std::cout << "precheck3 " <<x[0] << "\t" << x[1] << " here3\n";
-
   //Update parameters with current bestfits by transforming x
   using math::estimation::unknownList;
   using math::estimation::x_limiter2;
@@ -113,14 +108,11 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   ///Load these to slice the thermal Data
   xSweep = updateSweep() ;
   
-  //std::cout  <<xSweep.first << "\t" << xSweep.second  << "\n";
-
 
   const double xCenter = xSweep.first ;
   const double xRange = xSweep.second ;
   const layer coatUpdate( coreSystem->TBCsystem.coating ) ;
   
- // std::cout << "check3 " <<xCenter << "\t" << xRange << " here3\n";
   return sliceThermalData( xCenter, xRange, coatUpdate ) ;
 }
 
@@ -131,8 +123,6 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
 
   const double strPos = center - range/2;
   const double endPos = center + range/2;
-
-//  const double tol = 0.0001;
 
   if( strPos < 0 || endPos > 1  )
   {
@@ -153,8 +143,6 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
   
 }
 
-
-
 void ThermalSweepOptimizer::pieAnalysis(void)
 {
 //  std::cout << "\nnow:\n";
@@ -163,8 +151,6 @@ void ThermalSweepOptimizer::pieAnalysis(void)
   coreSystem->updatefromBestFit( (*unknownParameters)() ) ;
   captureState( coreSystem->TBCsystem.coating ) ;
 }
-
-
 
 double ThermalSweepOptimizer::
 penalty( const std::pair<double, double>  thermalCenterRange ,
@@ -270,25 +256,26 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
   ppFinalResults( void )
 {
   std::ostringstream output ;
-
+  using std::ios;
+  using std::setw;
+  using std::setprecision;
+  using std::right;
+  
   output << unknownParameters->prettyPrint() ;
 
-  const double lthermCenter = lthermalCenterDecades.first;
-  const double lthermDecade = lthermalCenterDecades.second;
+  typedef const double thermalPenetration;
+  thermalPenetration center = lthermalCenterDecades.first ;
+  thermalPenetration decade = lthermalCenterDecades.second ;
 
-  const double lthermMin = lthermalLimits.first;
-  const double lthermMax = lthermalLimits.second;
+  thermalPenetration min = lthermalLimits.first ;
+  thermalPenetration max = lthermalLimits.second ;
 
-  output.setf( std::ios::fixed, std::ios::floatfield );
-  output << std::setprecision(3);
-  output << "| lthermal center: "<< std::setw(8) << std::right
-         << lthermCenter << "               |\n";
-  output << "| lthermal decades:"<< std::setw(8) << std::right
-         << lthermDecade << "               |\n";
-  output << "| lmin:     "<< std::setw(8) << std::right
-         << lthermMin << "                      |\n";
-  output << "| lmax:     "<< std::setw(8) << std::right
-         << lthermMax << "                      |\n";
+  output.setf( ios::fixed, ios::floatfield );
+  output << setprecision(3);
+  output << "| lthermal center: "<< setw(8) << right << center << "               |\n";
+  output << "| lthermal decades:"<< setw(8) << right << decade << "               |\n";
+  output << "| lmin:     "<< setw(8) << right << min << "                      |\n";
+  output << "| lmax:     "<< setw(8) << right << max << "                      |\n";
   output << "*-----------------------------------------*\n";
 
   return output.str() ;
@@ -423,10 +410,9 @@ ThermalSweepOptimizer::solve(
 
 
 std::string ThermalSweepOptimizer::contourMappingwithMC() {
-  typedef pair<double, double > pairDD ;
-  const pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
-  using math::Interval;
-  const Interval myThermalLimits( thermalLimits ) ;
+  typedef const pair<double, double > pairDD ;
+  pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
+  const math::Interval myThermalLimits( thermalLimits ) ;
   
   typedef const vector< vector< double > >  Group_x_CR;
   Group_x_CR group_x_CR = myThermalLimits.random_group_xCR( iter ) ;
@@ -436,20 +422,14 @@ std::string ThermalSweepOptimizer::contourMappingwithMC() {
 }
 
 std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
-  typedef pair<double, double > pairDD ;
-  const pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
-  const Interval myThermalLimits( thermalLimits ) ;
+  typedef const pair<double, double > pairDD ;
+  pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
+  const math::Interval myThermalLimits( thermalLimits ) ;
   
-  typedef vector< vector< double > >  Group_x_CR;
-  
+  typedef const vector< vector< double > >  Group_x_CR;
   Group_x_CR group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
 
-  for( auto val : group_x_CR ) {
-    std::cout << val[0] << "\t" << val[1] << "\n" ;
-  }
-std::cout << "hello, Raymond!!\n\n"; 
-//std::cout << "exiting here: .. "; abort();
- return contourMapping( group_x_CR ) ;
+  return contourMapping( group_x_CR ) ;
 }
 
 
