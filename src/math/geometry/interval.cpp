@@ -119,6 +119,21 @@ Interval::ordered_group_xCR( const size_t iter ) const
   return group_x_CR ;
 }
 
+vector<double> Interval::myX_CR( const double lmin, const double lmax ) const {
+  BOOST_ASSERT( lmin < lmax ) ;
+  BOOST_ASSERT( lmin >= left_end ) ;
+  BOOST_ASSERT( lmax <= right_end ) ;
+
+  typedef const pair< const double, const double > boundPair ;
+
+  boundPair subInterval( lmin, lmax ) ;
+  boundPair xCRpair = CRfromSweepLimits( subInterval, get_pair() ) ;
+  vector<double> xCR={ xCRpair.first, xCRpair.second } ;
+
+  return xCR;
+}
+
+
 Interval Interval::get_log10_random_subInterval() const {
   //given an absolute bound, return a random new set of inner limits
   //randomly generated such that the distribution is uniform in log10 space
