@@ -29,14 +29,19 @@ License
 #include "math/utility.hpp"
 #include "math/numIntegration/gslfunc.hpp"
 #include "math/estimation/lmdiff.hpp"
+#include "math/estimation/constrained.hpp"
 #include "tools/interface/exportfile.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "thermal/define/lthermal.h"
+#include "thermal/define/omega.h"
 
 using std::vector;
 using std::pair;
 using std::cout;
 using std::make_pair;
+
+using std::sqrt;
+using std::pow;
 
 using math::Interval;
 
@@ -445,11 +450,48 @@ const vector< vector< double > > group_x_CR )
   // This function will output a table of values from maping out
   ouputResults.clear() ;
 
+  using thermal::define::omega;
+  using math::newThermalSweepLimits;
+
+  // Run simulations
   for( size_t i = 0; i < iter ; ++i )
   {
-    vector<double> x_in =  x_to_kspace_unity( group_x_CR[i].data() , 2 ) ;
-    uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
+    const vector<double> x_real = group_x_CR[i] ;
+    const double xCenter = x_real[0] ;
+    const double xRange = x_real[1] ;
+    
+    const pair<double, double> thermalLimits(0.01,10);
+    const pair<double, double> sliced_therm =
+    newThermalSweepLimits( xCenter, xRange, thermalLimits ) ;
+    
+    const bool xpasses = ( sliced_therm.first < sliced_therm.second ) ;
+    
+    if( xpasses ) {
+      vector<double> x_in =  x_to_kspace_unity( x_real.data() , 2 ) ;
+      uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
+    }
+    else {
+      typedef const double thermalPenetration;
+      thermalPenetration min = sliced_therm.first ;
+      thermalPenetration max = sliced_therm.second ;
+      
+      const double length = coatingTOinterpretFullRange->depth ;
+      const double ktherm = coatingTOinterpretFullRange->kthermal.offset ;
+      const double psitherm = coatingTOinterpretFullRange->psithermal.offset ;
+      
+      const double omega_min = omega( length, min, ktherm, psitherm ) ;
+      const double omega_max = omega( length, max, ktherm, psitherm ) ;
+      
+      currentState.omegaLimits = make_pair( omega_min , omega_max ) ;
+      currentState.meanParameterError = 999;
+      ouputResults.push_back( currentState ) ;
+    }
   }
+  
+  return contourMappingResults();
+}
+
+std::string ThermalSweepOptimizer::contourMappingResults() {
 
   std::ostringstream output;
   output << "#|-------------------------------------------------------------\n";
@@ -746,8 +788,6 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
   std::cout << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
             << thermalSweepSearch.vectorUnknowns[1].bestfit() << "\t"
             << currentState.meanParameterError << "\t"
-          //  <<fvec[0] << "\t" << fvec[1] << "\t" <<
-         //   xSweep.first << "\t" << xSweep.second
             << "\n";
   ouputResults.push_back( currentState ) ;
   

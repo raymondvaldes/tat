@@ -126,7 +126,7 @@ private:
   void updateWorkSpace( const size_t Lend , const size_t N ) override;
   void updateWorkSpace(
       const math::estimation::unknownList &thermalSweepSearch_in,
-      const std::vector<thermal::model::labels> &sweepOptimizationGoal_in);
+      const std::vector<thermal::model::labels> &sweepOptimizationGoal_in ) ;
 
   void ThermalProp_Analysis( double *x, double *fvec ) override;
   void solve(
@@ -146,6 +146,7 @@ private:
   std::pair<double, double> xSweep;
   std::pair<double, double> updatedLimits;
   std::shared_ptr< math::estimation::unknownList > unknownBestFit;
+  
   
   struct SweepSettings {
     const double lmin;
@@ -167,6 +168,7 @@ private:
   void resize_ThermalCenterRange( double *x ) ;
   void uncertainty_for_subset_pushback_ouputResults( double *x ) ;
   std::string contourMapping( const vector< vector< double > > group_x_CR ) ;
+  std::string contourMappingResults();
 
   // current state
   OptimizerOutput::ExperimentAnalysisState currentState;
