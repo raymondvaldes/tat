@@ -438,6 +438,9 @@ std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
 std::string ThermalSweepOptimizer::contourMapping(
 const vector< vector< double > > group_x_CR )
 {
+  using math::estimation::x_to_kspace_unity;
+
+
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );
   reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
@@ -447,7 +450,6 @@ const vector< vector< double > > group_x_CR )
 
   for( size_t i = 0; i < iter ; ++i )
   {
-    using math::estimation::x_to_kspace_unity;
     vector<double> x_in =  x_to_kspace_unity( group_x_CR[i].data() , 2 ) ;
     uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
   }
@@ -482,7 +484,6 @@ const vector< vector< double > > group_x_CR )
     const double lmin = lthermal( length, kcond, psi, omegafirst ) ;
     const double lmax = lthermal( length, kcond, psi, omegasecond );
 
-    using std::pair;
     const pair<double, double > lthermCenDec =math::xCenterlog10( lmin, lmax );
 
     output <<
