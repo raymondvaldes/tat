@@ -109,6 +109,21 @@ vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
   return x_output;
 }
 
+vector<double> kspace_to_x_unity( const double* x, const size_t n ) {
+  BOOST_ASSERT( n > 0 ) ;
+  
+  typedef const size_t unity;
+  unity start = 0 ;
+  unity end = 1 ;
+  
+  vector<double> x_output( n ) ;
+  for( size_t i = 0 ; i < n ; ++i ) {
+    x_output[i] = x_limiter2( x[i], start, end ) ;
+  }
+  
+  return x_output;
+}
+
 
 
 }}
