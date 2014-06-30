@@ -24,7 +24,11 @@
 \*----------------------------------------------------------------------------*/
 
 #include "thermal/define/omega.h"
+#include "sensible/layer.h"
 #include <cmath>
+
+using std::pow;
+
 
 namespace thermal{
   namespace define{
@@ -32,8 +36,8 @@ namespace thermal{
 double omega( const double L_coat, const double l_thermal, const double k_c,
              const double psi_c )
 {
-  using std::pow;
   return ( k_c / psi_c ) / ( pow( L_coat * l_thermal , 2 ) );
 }
+
     
 }}
