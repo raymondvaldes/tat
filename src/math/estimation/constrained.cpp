@@ -90,20 +90,19 @@ double kx_limiter2( const double ki, const double k_min, const double k_max ) {
     ki_adjusted = k_max - tol ;
   }
   
-  
-  
   return log( ( ( k_max - k_min ) / ( ki_adjusted - k_min ) ) - 1 ) ;
 }
 
-std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
+vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
   BOOST_ASSERT( n > 0 ) ;
   
-  const size_t unity_start = 0;
-  const size_t unity_end = 1;
+  typedef const size_t unity;
+  unity start = 0 ;
+  unity end = 1 ;
   
   vector<double> x_output( n ) ;
   for( size_t i = 0 ; i < n ; ++i ) {
-    x_output[i] = kx_limiter2( x[i], unity_start, unity_end ) ;
+    x_output[i] = kx_limiter2( x[i], start, end ) ;
   }
   
   
