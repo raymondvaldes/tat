@@ -96,7 +96,7 @@ Interval::ordered_group_xCR( const size_t iter ) const
     numberOfIntervals++;
   }
   
-  typedef const pair<double, double > boundPair ;
+  typedef pair<double, double > boundPair ;
   vector< boundPair > boundPairs( numberOfIntervals ) ;
   typedef const vector<double> groupBounds ;
   vector< vector<double > > group_x_CR ;
