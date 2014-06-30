@@ -106,10 +106,10 @@ Interval::ordered_group_xCR( const size_t iter ) const
   
   for ( const auto lowerBound : boundInterval ) {
     for ( const auto upperBound : boundInterval ) {
-      if( lowerBound < upperBound ) {
+      //if( lowerBound < upperBound ) {
         vector<double> myvect = myX_CR( lowerBound, upperBound ) ;
         group_x_CR.push_back( myvect ) ;
-      }
+      //}
     }
   }
   
