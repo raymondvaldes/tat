@@ -29,15 +29,19 @@
 #include <cmath>
 #include <limits>
 
+
 namespace math {
   
 template< typename T1, typename T2 >
 bool equalto ( const T1 a, const T2 b )
 {
+  using std::abs;
+  using std::numeric_limits;
+
   const double multi = ( a > b ? a : b ) ;
   const double multi2 = ( multi >= 1 ? multi  : 1 ) ;
 
-  return (std::abs(a - b) < (std::numeric_limits<double>::epsilon()) * multi2 );
+  return ( abs(a - b) < ( numeric_limits<double>::epsilon()) * multi2 );
 }  
   
 }
