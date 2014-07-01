@@ -445,7 +445,7 @@ std::string ThermalSweepOptimizer::contourMappingwithOrderedPointUsingGrid() {
 #include "math/utility.hpp"
 
 std::string ThermalSweepOptimizer::contourMapping_with_grid(
-  const vector< pair < double, double > > lthermalGrid )
+  const vector< pair < double, double > > myGrid )
 {
   using math::estimation::x_to_kspace_unity;
 
@@ -463,15 +463,15 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
   for( size_t i = 0; i < iter ; ++i )
   {    
     typedef const double thermalPenetration;
-    thermalPenetration min = lthermalGrid[i].first ;
-    thermalPenetration max = lthermalGrid[i].second ;
+    thermalPenetration min = myGrid[i].first ;
+    thermalPenetration max = myGrid[i].second ;
     
     const bool xpasses = ( min < max ) ;
     
     if( xpasses ) {
     
       //calculate x_CR now form min and max
-      pair<double, double> xCR_pair = math::CRfromSweepLimits( lthermalGrid[i], make_pair(0.01,10) );
+      pair<double, double> xCR_pair = math::CRfromSweepLimits( myGrid[i], make_pair( 0.01, 10 ) ) ;
   
       const double center = xCR_pair.first ;
       const double range = xCR_pair.second ;
@@ -484,12 +484,12 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
       const double length = coatingTOinterpretFullRange->depth ;
       const double ktherm = coatingTOinterpretFullRange->kthermal.offset ;
       const double psitherm = coatingTOinterpretFullRange->psithermal.offset ;
-      
+
       const double omega_min = omega( length, min, ktherm, psitherm ) ;
       const double omega_max = omega( length, max, ktherm, psitherm ) ;
       
       currentState.omegaLimits = make_pair( omega_min , omega_max ) ;
-      currentState.meanParameterError = 999;
+      currentState.meanParameterError = 9999;
       ouputResults.push_back( currentState ) ;
     }
   }
@@ -544,7 +544,7 @@ const vector< vector< double > > group_x_CR )
       const double omega_max = omega( length, max, ktherm, psitherm ) ;
       
       currentState.omegaLimits = make_pair( omega_min , omega_max ) ;
-      currentState.meanParameterError = 999;
+      currentState.meanParameterError = 9999;
       ouputResults.push_back( currentState ) ;
     }
   }
@@ -584,11 +584,11 @@ std::string ThermalSweepOptimizer::contourMappingResults() {
     const double lmin = lthermal( length, kcond, psi, omegafirst ) ;
     const double lmax = lthermal( length, kcond, psi, omegasecond );
 
-    const pair<double, double > lthermCenDec =math::xCenterlog10( lmin, lmax );
+//    const pair<double, double > lthermCenDec =math::xCenterlog10( lmin, lmax );
 
     output <<
-    lthermCenDec.first                  << "\t" <<
-    lthermCenDec.second                 << "\t" <<
+//    lthermCenDec.first                  << "\t" <<
+//    lthermCenDec.second                 << "\t" <<
     lmin                                << "\t" <<
     lmax                                << "\t" <<
     omegafirst                          << "\t" <<
