@@ -100,11 +100,13 @@ size_t Interval::numberofOddIntervals( const size_t iter ) const {
 
 vector< pair<double, double > > Interval::gridInterval( const size_t iter ) const
 {
-  const size_t numberOfIntervals = numberofOddIntervals( iter ) ;
-  
   typedef pair< double, double > boundPair ;
-  vector< boundPair > boundPairs( numberOfIntervals ) ;
   typedef const vector< double > groupBounds ;
+
+
+  const size_t numberOfIntervals = numberofOddIntervals( iter ) ;
+  vector< boundPair > boundPairs;
+  
   groupBounds boundInterval =
     range1og10( get_left_end() , get_right_end(), numberOfIntervals ) ;
   
