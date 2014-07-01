@@ -451,7 +451,7 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
 
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );
-  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
+//  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
   // This function will output a table of values from maping out
   ouputResults.clear() ;
@@ -506,7 +506,7 @@ const vector< vector< double > > group_x_CR )
 
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );
-  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
+ // reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
   // This function will output a table of values from maping out
   ouputResults.clear() ;
@@ -588,8 +588,8 @@ std::string ThermalSweepOptimizer::contourMappingResults() {
 //    const pair<double, double > lthermCenDec =math::xCenterlog10( lmin, lmax );
 
     output <<
-//    lthermCenDec.first                  << "\t" <<
-//    lthermCenDec.second                 << "\t" <<
+    0                                   << "\t" <<
+    0                                   << "\t" <<
     lmin                                << "\t" <<
     lmax                                << "\t" <<
     omegafirst                          << "\t" <<
@@ -637,7 +637,7 @@ void ThermalSweepOptimizer::solve(
   coreSystem = coreSystem_in ;
 
   // Save true coating and fullrange thermal data
-  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating ) ;
+//  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating ) ;
   fullRangeThermalData = thermalData ;
 
   /// pre analysis on full-range
@@ -847,8 +847,18 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 
   currentState.meanParameterError /= sweepOptimizationGoal.size();
   
+  
+  ///get thermal limits
+  typedef const vector<double> ThermalSweep ;
+  ThermalSweep myThermalSweep = updatedThermal.get_lthermalSweep( *coatingTOinterpretFullRange ) ;
+  
+  
+  
+  
   std::cout << thermalSweepSearch.vectorUnknowns[0].bestfit() << "\t"
             << thermalSweepSearch.vectorUnknowns[1].bestfit() << "\t"
+            << myThermalSweep.front() << "\t"
+            << myThermalSweep.back() << "\t"
             << currentState.meanParameterError << "\t"
             << "\n";
   ouputResults.push_back( currentState ) ;
