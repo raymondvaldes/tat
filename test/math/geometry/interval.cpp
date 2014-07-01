@@ -93,12 +93,11 @@ BOOST_AUTO_TEST_CASE( gridInterval ) {
   typedef const vector< pair< double, double > > BoundPairs ;
   BoundPairs boundPairs = myInterval.gridInterval( subspacing ) ;
   
-  
-  BOOST_CHECK_CLOSE( boundPairs.front().first , myInterval.get_left_end(), tol ) ;
-  BOOST_CHECK_CLOSE( boundPairs.front().second, myInterval.get_left_end(), tol ) ;
+  BOOST_CHECK_CLOSE( boundPairs.front().first , myInterval.get_left_end(), tol);
+  BOOST_CHECK_CLOSE( boundPairs.front().second, myInterval.get_left_end(), tol);
 
-  BOOST_CHECK_CLOSE( boundPairs.back().first , myInterval.get_right_end(), tol ) ;
-  BOOST_CHECK_CLOSE( boundPairs.back().second, myInterval.get_right_end(), tol ) ;
+  BOOST_CHECK_CLOSE( boundPairs.back().first , myInterval.get_right_end(), tol);
+  BOOST_CHECK_CLOSE( boundPairs.back().second, myInterval.get_right_end(), tol);
 }
 
 

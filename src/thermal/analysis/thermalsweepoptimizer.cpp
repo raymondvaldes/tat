@@ -427,7 +427,7 @@ std::string ThermalSweepOptimizer::contourMappingwithMC() {
 std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
   typedef const pair<double, double > pairDD ;
   pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
-  const math::Interval myThermalLimits( thermalLimits ) ;
+  const Interval myThermalLimits( thermalLimits ) ;
   
   typedef const vector< vector< double > >  Group_x_CR;
   Group_x_CR group_x_CR = myThermalLimits.ordered_group_xCR( iter ) ;
@@ -437,7 +437,7 @@ std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
 
 std::string ThermalSweepOptimizer::contourMappingwithOrderedPointUsingGrid() {
 
-  const math::Interval mygridboundaries( make_pair(.01, 10) ) ;
+  const Interval mygridboundaries( make_pair(.01, 10) ) ;
   const vector< pair <double, double > > myGrid = mygridboundaries.gridInterval( iter ) ;
   return contourMapping_with_grid( myGrid ) ;
 }
@@ -479,6 +479,7 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
       const vector<double> x_real = { center, range } ;
       vector<double> x_in =  x_to_kspace_unity( x_real.data() , 2 ) ;
       uncertainty_for_subset_pushback_ouputResults( x_in.data() ) ;
+      
     }
     else {
       const double length = coatingTOinterpretFullRange->depth ;
