@@ -55,8 +55,11 @@ public:
   std::vector<std::vector<double>> random_group_xCR( const size_t val ) const;
   
   std::vector<std::vector<double>> ordered_group_xCR( const size_t iter ) const;
+  
   std::vector<double> myX_CR( const double lmin, const double lmax ) const ;
+  
   std::vector< std::pair<double, double > > gridInterval( const size_t iter ) const;
+  
   size_t numberofOddIntervals( const size_t iter ) const ;
 };
 
