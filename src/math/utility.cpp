@@ -31,6 +31,11 @@ License
 #include "math/statistics/random/random.h"
 #include "math/utilities/equalto.h"
 
+
+  using std::log10;
+  using std::pow;
+  using std::pair;
+
 namespace math{
 
 std::pair<double, double>
@@ -177,9 +182,7 @@ range( const double xstart, const double xend, const size_t size )
 std::pair<double, double>
 x_limits_from_cenDec( const double cen, const double dec )
 {
-  using std::log10;
-  using std::pow;
-  using std::pair;
+
 
   const double lmin = cen / pow( 10, dec / 2 ) ;
   const double lmax = lmin * pow( 10, dec ) ;
@@ -190,9 +193,8 @@ x_limits_from_cenDec( const double cen, const double dec )
 
 std::pair<double, double> xCenterlog10( const double lmin, const double lmax )
 {
-  using std::log10;
-  using std::pow;
-  using std::pair;
+  BOOST_ASSERT( lmin < lmax ) ;
+  BOOST_ASSERT( lmin > 0 ) ;
 
   const double dec = log10( lmax / lmin ) ;
   const double center = lmin * pow( 10, dec / 2 ) ;
