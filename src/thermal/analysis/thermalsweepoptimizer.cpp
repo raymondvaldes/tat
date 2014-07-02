@@ -448,10 +448,9 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
   const vector< pair < double, double > > myGrid )
 {
   using math::estimation::x_to_kspace_unity;
-
+  
   reassign ( unknownBestFit , *unknownParameters  ) ;
   coreSystem->updatefromInitial( (*unknownParameters)() );
-//  reassign( coatingTOinterpretFullRange, coreSystem->TBCsystem.coating  ) ;
 
   // This function will output a table of values from maping out
   ouputResults.clear() ;
@@ -460,18 +459,19 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
   using math::newThermalSweepLimits;
 
   // Run simulations
-  for( size_t i = 0; i < iter ; ++i )
-  {    
+  
+  
+  for( const auto myGridPoint : myGrid ) {
     typedef const double thermalPenetration;
-    thermalPenetration min = myGrid[i].first ;
-    thermalPenetration max = myGrid[i].second ;
+    thermalPenetration min = myGridPoint.first ;
+    thermalPenetration max = myGridPoint.second ;
     
     const bool xpasses = ( min < max ) ;
     
     if( xpasses ) {
     
       //calculate x_CR now form min and max
-      pair<double, double> xCR_pair = math::CRfromSweepLimits( myGrid[i], make_pair( 0.01, 10 ) ) ;
+      pair<double, double> xCR_pair = math::CRfromSweepLimits( myGridPoint, make_pair( 0.01, 10 ) ) ;
   
       const double center = xCR_pair.first ;
       const double range = xCR_pair.second ;
@@ -516,9 +516,8 @@ const vector< vector< double > > group_x_CR )
 
 
   // Run simulations
-  for( size_t i = 0; i < iter ; ++i )
+  for( const auto x_real : group_x_CR )
   {
-    const vector<double> x_real = group_x_CR[i] ;
     const double xCenter = x_real[0] ;
     const double xRange = x_real[1] ;
     
