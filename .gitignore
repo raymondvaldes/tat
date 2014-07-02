@@ -25,6 +25,10 @@ MakeFile
 
 # Data files
 *.dat
+#build files
+
+build/
+build
 
 # project folder files
 *.xcodeproj/
