@@ -27,6 +27,8 @@
 #include "thermal/define/lthermal.h"
 #include "math/utility.hpp"
 
+using std::isnormal;
+
 namespace thermal{ namespace model {namespace one_dim{
   
 analytical_2005::analytical_2005(
