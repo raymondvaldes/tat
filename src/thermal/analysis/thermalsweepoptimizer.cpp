@@ -814,6 +814,10 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
 
 void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
 {
+  BOOST_ASSERT( x != nullptr ) ;
+  BOOST_ASSERT( fvec != nullptr ) ;
+
+
   using math::estimation::unknown;
 
   // update experimental data used based on search
