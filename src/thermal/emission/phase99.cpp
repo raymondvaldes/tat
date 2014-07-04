@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <vector>
 #include <cstddef>
+#include <cmath>
 #include "thermal/emission/phase99.hpp"
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
