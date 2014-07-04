@@ -1443,7 +1443,7 @@ double enorm(int n,double x[])
 *     **********
 */
 BOOST_ASSERT( x != nullptr ) ;
-for( size_t i = 0 ; i < n ; ++i ) {
+for( int i = 0 ; i < n ; ++i ) {
   BOOST_ASSERT( !isnan( x[i] ) ) ;
 }
 
