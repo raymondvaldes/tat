@@ -92,7 +92,7 @@ analytical_2005::M_tilde( const complex<double> x_in, const double l ) const
 
 
   typedef const bool checkif ;
-  checkif verySmallThermalPenetration = ( !isnormal( M_x.real() ) & !isnormal( M_x.imag() ) ) ;
+  checkif verySmallThermalPenetration = ( !isnormal( M_x.real() ) || !isnormal( M_x.imag() ) ) ;
 
   if( verySmallThermalPenetration ) {
     BOOST_ASSERT( sinhSQRTi == coshSQRTi ) ;
@@ -127,7 +127,7 @@ analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
   
   
   typedef const bool checkif ;
-  checkif verySmallThermalPenetration = ( !isnormal( N_x.real() ) & !isnormal( N_x.imag() ) ) ;
+  checkif verySmallThermalPenetration = ( !isnormal( N_x.real() ) || !isnormal( N_x.imag() ) ) ;
 
   if( verySmallThermalPenetration ) {
     BOOST_ASSERT( sinhSQRTi == coshSQRTi ) ;
