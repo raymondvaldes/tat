@@ -34,6 +34,9 @@ namespace math{
 void cosfit( const double *dependent, const std::vector<double> &independent,
              double *x, size_t Nend)
 {
+  BOOST_ASSERT( dependent != nullptr ) ;
+  BOOST_ASSERT( x != nullptr ) ;
+
 
   constexpr size_t N = 3; // number  of constants to be fitted
   const size_t P = Nend-1;
