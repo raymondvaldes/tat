@@ -611,6 +611,16 @@ void lmpar( const int n, double *r, const int ldr, const int *ipvt,
             const double *diag, double *qtb, const double delta, double *par,
             double *x, double *sdiag, double *wa1, double *wa2 )
 {
+  BOOST_ASSERT( r != nullptr ) ;
+  BOOST_ASSERT( ipvt != nullptr ) ;
+  BOOST_ASSERT( diag != nullptr ) ;
+  BOOST_ASSERT( qtb != nullptr ) ;
+  BOOST_ASSERT( par != nullptr ) ;
+  BOOST_ASSERT( x != nullptr ) ;
+  BOOST_ASSERT( sdiag != nullptr ) ;
+  BOOST_ASSERT( wa1 != nullptr ) ;
+  BOOST_ASSERT( wa2 != nullptr ) ;
+  
 /*     **********
 *
 *     subroutine lmpar
@@ -930,6 +940,12 @@ void qrfac( const int m, const int n, double *a, int /*lda*/, const bool pivot,
             int *ipvt, int /*lipvt*/, double *rdiag, double *acnorm,
             double *wa )
 {
+BOOST_ASSERT( a != nullptr ) ;
+BOOST_ASSERT( ipvt != nullptr ) ;
+BOOST_ASSERT( rdiag != nullptr ) ;
+BOOST_ASSERT( acnorm != nullptr ) ;
+BOOST_ASSERT( wa != nullptr ) ;
+
 /*
 *     **********
 *
@@ -1426,6 +1442,12 @@ double enorm(int n,double x[])
 *
 *     **********
 */
+BOOST_ASSERT( x != nullptr ) ;
+for( size_t i = 0 ; i < n ; ++i ) {
+  BOOST_ASSERT( !isnan( x[i] ) ) ;
+}
+
+
 int i;
 double agiant, floatn,s1,s2,s3,xabs,x1max,x3max;
 double ans, temp;
@@ -1695,6 +1717,12 @@ void fdjac2(std::function<void( double*, double* )> fcn,
             int m, int n, double x[], double fvec[], double fjac[], int /*ldfjac*/,
             int *iflag, double epsfcn, double wa[])
 {
+
+BOOST_ASSERT( x != nullptr ) ;
+BOOST_ASSERT( fvec != nullptr ) ;
+BOOST_ASSERT( fjac != nullptr ) ;
+BOOST_ASSERT( iflag != nullptr ) ;
+BOOST_ASSERT( wa != nullptr ) ;
 /*
 *     **********
 *
@@ -1822,6 +1850,31 @@ void lmdif( std::function < void ( double*, double* ) > fcn,
             int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
             double *wa3, double *wa4)
 {
+
+BOOST_ASSERT( x!= nullptr ) ;
+BOOST_ASSERT( fvec!= nullptr ) ;
+BOOST_ASSERT( diag!= nullptr ) ;
+BOOST_ASSERT( info!= nullptr ) ;
+BOOST_ASSERT( nfev!= nullptr ) ;
+BOOST_ASSERT( fjac!= nullptr ) ;
+BOOST_ASSERT( ipvt!= nullptr ) ;
+BOOST_ASSERT( qtf!= nullptr ) ;
+BOOST_ASSERT( wa1!= nullptr ) ;
+BOOST_ASSERT( wa2!= nullptr ) ;
+BOOST_ASSERT( wa3!= nullptr ) ;
+BOOST_ASSERT( wa4!= nullptr ) ;
+
+if( (n <= 0) || ( m < (n-1) ) || (ldfjac < m) || (ftol < 0 )
+  || (xtol < 0 ) || (gtol < 0 ) || (maxfev <= 0)
+  || (factor <= 0 ) )
+{
+  std::cerr << (n <= 0)<< "\t" << (m < n) <<"\t" << (ldfjac < m)  <<"\t"
+            << (ftol < 0 ) << "\t" <<(xtol < 0 ) << "\t"
+            << (gtol < 0 ) << "\t" << (maxfev <= 0) <<"\t" <<(factor <= 0 )
+            << "\n";
+  throw;
+}
+
 /*
 *     **********
 *
@@ -2008,11 +2061,14 @@ using namespace math::estimation;
 //constexpr double MACHEP = 1.2e-16;
 //constexpr double DWARF = 1.0e-38;
 
+
+
 std::vector<double>xSave( static_cast<size_t>(n) ) ;
 for( size_t i = 0; i < static_cast<size_t>(n) ;  i++)
 {
   xSave[i] = x[i];
 }
+
 
 int iter = 0;
 int i,iflag,ij,jj,j,l;
@@ -2037,16 +2093,7 @@ xnorm = 0.0;
 *     check the input parameters for errors.
 */
 
-if( (n <= 0) || ( m < (n-1) ) || (ldfjac < m) || (ftol < zero)
-  || (xtol < zero) || (gtol < zero) || (maxfev <= 0)
-  || (factor <= zero) )
-{
-  std::cerr << (n <= 0)<< "\t" << (m < n) <<"\t" << (ldfjac < m)  <<"\t"
-            << (ftol < zero) << "\t" <<(xtol < zero) << "\t"
-            << (gtol < zero) << "\t" << (maxfev <= 0) <<"\t" <<(factor <= zero)
-            << "\n";
-  goto L300;
-}
+
 
 
 
@@ -2070,7 +2117,7 @@ PRINT( "lmdif\n" );
 */
 iflag = 1;
 
-fcn(x,fvec);
+fcn( x, fvec ) ;
 
 
 *nfev = 1;
