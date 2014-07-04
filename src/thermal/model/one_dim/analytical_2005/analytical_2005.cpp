@@ -74,19 +74,38 @@ complex<double> analytical_2005::eta ( const double Lambda_hat ) const
 complex<double>
 analytical_2005::M_tilde( const complex<double> x_in, const double l ) const
 {
+  BOOST_ASSERT(  l > 0 ) ;
+
   using std::sinh;
   using std::cosh;
   
-  const complex<double> sinhSQRTi = sinh( SQRTi / l ) ;
-  const complex<double> coshSQRTi = cosh( SQRTi / l ) ;
-  const complex<double>
-  gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+  typedef complex<double> complexD ;
+  const complexD SQRTi_div_l = SQRTi / l ;
+  const complexD sinhSQRTi = sinh( SQRTi_div_l ) ;
+  const complexD coshSQRTi = cosh( SQRTi_div_l ) ;
+  const complexD gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+  const double sinh_1_div_lambda = sinh( 1 / coat.Lambda ) ;
 
-  complex<double>
-  M_x = 1;
-  M_x -= x_in * sinhSQRTi / sinh( 1 / coat.Lambda ) ;
+  complexD M_x = 1 ;
+  M_x -= x_in * sinhSQRTi / sinh_1_div_lambda ;
   M_x /= gammaXcoshSQRTplusSinhSQRT ;
 
+
+  typedef const bool checkif ;
+  checkif verySmallThermalPenetration = ( !isnormal( M_x.real() ) & !isnormal( M_x.imag() ) ) ;
+
+  if( verySmallThermalPenetration ) {
+    BOOST_ASSERT( sinhSQRTi == coshSQRTi ) ;
+    const auto evaluate_Limit_of_M_tilde = [=](){
+      return - x_in / ( sinh_1_div_lambda * ( 1. + gamma ) ) ;
+    } ;
+  
+    M_x = evaluate_Limit_of_M_tilde() ;
+  }
+  
+  BOOST_ASSERT( !isnan( M_x.imag() ) ) ;
+  BOOST_ASSERT( !isnan( M_x.real() ) ) ;
+  
   return M_x;
 }
 
@@ -96,14 +115,33 @@ analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
   using std::sinh;
   using std::cosh;
   
-  const complex<double> sinhSQRTi = sinh( SQRTi / l ) ;
-  const complex<double> coshSQRTi = cosh( SQRTi / l ) ;
-  const complex<double>
-  gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+  typedef complex<double> complexD ;
+  const complexD sinhSQRTi = sinh( SQRTi / l ) ;
+  const complexD coshSQRTi = cosh( SQRTi / l ) ;
+  const complexD gammaXcoshSQRTplusSinhSQRT = gamma * coshSQRTi + sinhSQRTi;
+  const double cosh_1_div_lambda = cosh( 1 / coat.Lambda ) ;
   
   complex<double> N_x = 1;
-  N_x -= x_in * coshSQRTi / cosh( 1 / coat.Lambda ) ;
+  N_x -= x_in * coshSQRTi / cosh_1_div_lambda ;
   N_x /= gammaXcoshSQRTplusSinhSQRT ;
+  
+  
+  typedef const bool checkif ;
+  checkif verySmallThermalPenetration = ( !isnormal( N_x.real() ) & !isnormal( N_x.imag() ) ) ;
+
+  if( verySmallThermalPenetration ) {
+    BOOST_ASSERT( sinhSQRTi == coshSQRTi ) ;
+    const auto evaluate_Limit_of_N_tilde = [=](){
+      return - x_in / ( cosh_1_div_lambda * ( 1. + gamma ) ) ;
+    } ;
+  
+    N_x = evaluate_Limit_of_N_tilde() ;
+  }
+  
+  BOOST_ASSERT( !isnan( N_x.real() ) ) ;
+  BOOST_ASSERT( !isnan( N_x.imag() ) ) ;
+  
+  
   
   return N_x;
 }
@@ -211,6 +249,8 @@ complex<double> analytical_2005::
   
 double analytical_2005::phase_linear( const double omega ) const
 {
+  BOOST_ASSERT( omega > 0 ) ;
+
   /*See 2004 emission paper equation 19*/
   using std::exp;
   using thermal::define::lthermal;
@@ -232,7 +272,10 @@ double analytical_2005::phase_linear( const double omega ) const
   
   using std::arg;
   const double phase = arg( v/u*t + 4 * R1xExp2lambdaPLUS1 ) - M_PI_2;
+
   
+  BOOST_ASSERT( !isnan( phase ) ) ;
+
   return phase ;
 }
 
@@ -242,8 +285,13 @@ analytical_2005::sweep_phase_linear( const vector<double> &omega ) const
   const size_t NUM = omega.size() ;
   vector<double> results( NUM ) ;
   
-  for( size_t n = 0 ; n < NUM ; ++n )
-    { results[ n ] = phase_linear( omega[n] ) ; }
+  for( size_t n = 0 ; n < NUM ; ++n ) {
+    results[ n ] = phase_linear( omega[n] ) ;
+  }
+  
+  for( const auto val : results ) {
+    BOOST_ASSERT( !isnan( val ) ) ;
+  }
   
   return results;
 }

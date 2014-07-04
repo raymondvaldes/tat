@@ -82,6 +82,10 @@ Mesh::~Mesh()
 
 double Mesh::beta2_func(const double *variable, const double *constants)
 {
+  BOOST_ASSERT( variable != nullptr ) ;
+  BOOST_ASSERT( constants != nullptr ) ;
+
+
   std::vector<double> eta_( static_cast<size_t>( constants[1] ) , 0 ) ;
 
   constexpr double L1 = 1; //coating nondimensional thickness
@@ -123,6 +127,9 @@ void Mesh::minimizer(double *variable, double *constants,
                      double temp_variable_min, double temp_variable_max,
                      double min_goal, const size_t max_iterations)
 {
+  BOOST_ASSERT( variable != nullptr ) ;
+  BOOST_ASSERT( constants != nullptr ) ;
+
   double fraction = 0;
   //    double *temp_to_minimize = new double [max_iterations];
 
