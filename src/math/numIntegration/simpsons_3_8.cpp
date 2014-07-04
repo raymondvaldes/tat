@@ -22,7 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-
+#include <boost/assert.hpp>
 #include "math/numIntegration/simpsons_3_8.hpp"
 
 namespace math{
@@ -31,6 +31,9 @@ namespace math{
 double simpson_3_8( const double *Y, const double *X, const size_t A,
                     const size_t B)
 {
+  BOOST_ASSERT( Y != nullptr ) ;
+  BOOST_ASSERT( X != nullptr ) ;
+
     //A is lower limit element number, B is upper limit element number
     //calculates integral of Y dX from X[A] to X[B] using Y[n][i]
     double S = 0;
@@ -79,6 +82,8 @@ double simpson_3_8( const double *Y, const double *X, const size_t A,
 double simpson_3_8(const std::vector<double>& Y, const double *X,
                    const size_t A,const size_t B)
 {
+  BOOST_ASSERT( X != nullptr ) ;
+
     //A is lower limit element number, B is upper limit element number
     //calculates integral of Y dX from X[A] to X[B] using Y[n][i]
     double S = 0;
@@ -115,6 +120,8 @@ double simpson_3_8(const std::vector<double>& Y, const double *X,
 double simpson_3_8( const double *Y, const std::vector<double>& X,
                     const size_t A, const size_t B )
 {
+  BOOST_ASSERT( Y != nullptr ) ;
+
     //A is lower limit element number, B is upper limit element number
     //calculates integral of Y dX from X[A] to X[B] using Y[n][i]
     double S = 0;
