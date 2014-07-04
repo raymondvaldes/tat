@@ -265,6 +265,7 @@ void standardError(const size_t N, const double *cov, double* standardError)
 {
   BOOST_ASSERT( cov != nullptr ) ;
   BOOST_ASSERT( standardError != nullptr ) ;
+  BOOST_ASSERT( N > 0 ) ;
   
     for(size_t i=0; i<N; ++i)
     {
