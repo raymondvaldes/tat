@@ -94,6 +94,8 @@ pair< double, double > ThermalSweepOptimizer::updateSweep( void )
 
 ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
 {
+  BOOST_ASSERT( x != nullptr ) ;
+
   //Update parameters with current bestfits by transforming x
   using math::estimation::unknownList;
   using math::estimation::x_limiter2;
@@ -601,6 +603,9 @@ std::string ThermalSweepOptimizer::contourMappingResults() {
 void ThermalSweepOptimizer::
     uncertainty_for_subset_pushback_ouputResults( double *x )
 {
+  BOOST_ASSERT( x != nullptr ) ;
+
+
   double fvec[2] = {0} ;
   ThermalProp_Analysis( x , fvec ) ;
 

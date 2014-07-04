@@ -27,6 +27,7 @@ License
 #include <vector>
 #include <boost/foreach.hpp>
 #include <iostream>
+#include <boost/math/special_functions/fpclassify.hpp>
 
 #include "math/estimation/lmdiff.hpp"
 #include "math/statistical_tools.hpp"
@@ -106,48 +107,54 @@ LMA::paramter_estimation( int *info, int *nfev )
   const int n = static_cast<int>(unknownParameters->size());
 
   ///Create workspaces
-  double *x = new double[n];
-  double *fvec = new double[m];
-  double *qtf = new double[n];
-  double *wa1 = new double[n];
-  double *wa2 = new double[n];
-  double *wa3 = new double[n];
-  double *wa4 = new double[m];
-  double *fjac = new double[m*n];
-  double *wa5 = new double[m*n];
-  int *ipvt = new int[n]();
-  double *diag = new double[n]();
+  vector<double> fvec(m);
+  vector<double> qtf(n);
+  vector<double> wa1(n);
+  vector<double> wa2(n);
+  vector<double> wa3(n);
+  vector<double> wa4(m);
+  vector<double> fjac(m*n);
+
+  vector<int> ipvt(n);
+  vector<double> diag(n);
 
   ///populate initial values
-  vector<double> xInitial(0);
+  vector<double> x(n);
+  vector<double> xInitial;
 
   for( const auto &unknown : (*unknownParameters)() ) {
     xInitial.push_back( unknown.initialVal() );
   }
   
+  x = xInitial;
+  
+  
   for( size_t i=0 ; i< static_cast<size_t>(n) ; i++ ) {
-    x[i] = xInitial[i];
     ipvt[i] = 9;
   }
 
-  scaleDiag( diag, *unknownParameters , coreSystem->TBCsystem,
+  scaleDiag( diag.data(), *unknownParameters , coreSystem->TBCsystem,
              static_cast<int>(Settings.mode ) ) ;
+
+
 
   ///Transform inputs
   int j = 0;
   for( const auto& unknown : (*unknownParameters)() )
   {
-    x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
+    x[j] = kx_limiter2( xInitial[j], unknown.lowerBound(), unknown.upperBound() );
     j++;
   }
 
   ///levenberg-marquardt algorithm
   updateBindFunc();
-  lmdif( myReduced , m, n, x, fvec, Settings.ftol, Settings.xtol, Settings.gtol,
-         static_cast<int>(Settings.maxfev), Settings.epsfcn, diag,
+  lmdif( myReduced , m, n, x.data(), fvec.data(), Settings.ftol, Settings.xtol,
+         Settings.gtol,
+         static_cast<int>(Settings.maxfev), Settings.epsfcn, diag.data(),
          static_cast<int>(Settings.mode), Settings.factor,
-         static_cast<int>(Settings.nprint), info, nfev, fjac, m, ipvt, qtf, wa1,
-         wa2, wa3, wa4 ) ;
+         static_cast<int>(Settings.nprint), info, nfev, fjac.data(), m,
+         ipvt.data(), qtf.data(), wa1.data(), wa2.data(), wa3.data(),
+         wa4.data() ) ;
 
   //Transform outputs
   j=0;
@@ -168,18 +175,6 @@ LMA::paramter_estimation( int *info, int *nfev )
 
 //  std::cerr << "from inside bestfit " << thermalData->MSE << "\n";
 
-  delete [] qtf;
-  delete [] wa1;
-  delete [] wa2;
-  delete [] wa3;
-  delete [] wa4;
-  delete [] wa5;
-  delete [] ipvt;
-  delete [] fvec;
-  delete [] fjac;
-  delete [] diag;
-  delete [] x;
-
 //  std::cout << *nfev <<"\n";
 //  printPEstimates( coreSystem->TBCsystem, *unknownParameters ) ;
 
@@ -189,6 +184,14 @@ LMA::paramter_estimation( int *info, int *nfev )
 
 void LMA::ThermalProp_Analysis(double *x, double *fvec)
 {
+  BOOST_ASSERT( x != nullptr ) ;
+  BOOST_ASSERT( fvec != nullptr ) ;
+  
+  for( size_t i = 0 ; i < unknownParameters->size() ; ++i ) {
+    BOOST_ASSERT( !isnan( x[i] ) ) ;
+  }
+  
+  
   using math::estimation::unknownList;
   using math::estimation::x_limiter2;
   using thermal::emission::phase99;
@@ -222,6 +225,15 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
 
   thermalData->lthermalPredicted =
       thermalData->get_lthermalLimits( coreSystem->TBCsystem.coating ) ;
+
+
+
+  for( size_t j = 0 ; j < thermalData->omegas.size() ; ++j ) {
+    BOOST_ASSERT( !isnan( fvec[j] ) ) ;
+  }
+
+
+
 
   return;
 }

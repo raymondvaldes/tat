@@ -32,6 +32,8 @@ namespace analysis{
 void scaleDiag( double *diag, math::estimation::unknownList List,
                 const sensible::TBCsystem TBCsystem, const int mode )
 {
+  BOOST_ASSERT( diag != nullptr ) ;
+
   if( mode == 2 )
   {
     int i = 0;
