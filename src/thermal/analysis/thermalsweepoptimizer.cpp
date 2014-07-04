@@ -66,8 +66,8 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     sweepOptimizationGoal( sweepOptimizationGoal_in ),
     coatingTOinterpretFullRange( new sensible::layer( coating )),
     xSweep(0.5,0.5),
-    iter(iter_in),
-    sweepSettings( lmin_in, lmax_in, iter_in )
+    sweepSettings( lmin_in, lmax_in, iter_in ),
+    iter(iter_in)
 {
   updateWorkSpace( thermalSweepSearch_in, sweepOptimizationGoal_in );
 }
