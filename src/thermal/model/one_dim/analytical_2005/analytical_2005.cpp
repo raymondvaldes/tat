@@ -92,10 +92,14 @@ analytical_2005::M_tilde( const complex<double> x_in, const double l ) const
 
 
   typedef const bool checkif ;
-  checkif verySmallThermalPenetration = ( !isnormal( M_x.real() ) || !isnormal( M_x.imag() ) ) ;
-
+  checkif verySmallThermalPenetration =
+  ( isnan( M_x.real() ) ||
+    isnan( M_x.imag() ) ||
+    isinf( M_x.real() ) ||
+    isinf( M_x.imag() )
+  ) ;
+  
   if( verySmallThermalPenetration ) {
-    BOOST_ASSERT( sinhSQRTi == coshSQRTi ) ;
     const auto evaluate_Limit_of_M_tilde = [=](){
       return - x_in / ( sinh_1_div_lambda * ( 1. + gamma ) ) ;
     } ;
@@ -127,10 +131,14 @@ analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
   
   
   typedef const bool checkif ;
-  checkif verySmallThermalPenetration = ( !isnormal( N_x.real() ) || !isnormal( N_x.imag() ) ) ;
+  checkif verySmallThermalPenetration =
+    ( isnan( N_x.real() ) ||
+      isnan( N_x.imag() ) ||
+      isinf( N_x.real() ) ||
+      isinf( N_x.imag() )
+    ) ;
 
   if( verySmallThermalPenetration ) {
-    BOOST_ASSERT( sinhSQRTi == coshSQRTi ) ;
     const auto evaluate_Limit_of_N_tilde = [=](){
       return - x_in / ( cosh_1_div_lambda * ( 1. + gamma ) ) ;
     } ;
