@@ -34,12 +34,12 @@ int main( const int argc, char *argv[ ] ) {
   using std::pair ;
   
   using tools::programoptions::loadOptions ;
-  const pair< bool, string > run_analysis = loadOptions( argc, argv ) ;
+  typedef const pair<bool, string> run_this ;
+  run_this analysis = loadOptions( argc, argv ) ;
   
-  if( run_analysis.first ) {
+  if( analysis.first ) {
     stopwatch globalStopWatch ;
-    investigations::execute( run_analysis.second ) ;
-    
+    investigations::execute( analysis.second ) ;
     cout << globalStopWatch.readoutLoud() << "\n";
   }
  
