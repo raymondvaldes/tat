@@ -91,6 +91,7 @@ phase99( const thermal::analysis::Kernal &popteaCore,
   }
 
   for( const auto val : results ) {
+    using std::isnormal;
     BOOST_ASSERT( isnormal( val ) ) ;
   }
   
