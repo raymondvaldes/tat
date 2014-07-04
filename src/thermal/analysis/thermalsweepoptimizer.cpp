@@ -605,8 +605,8 @@ void ThermalSweepOptimizer::
 {
   BOOST_ASSERT( x != nullptr ) ;
 
-
-  double fvec[2] = {0} ;
+  
+  double fvec[3] = {0} ; //BUG FIX THIS
   ThermalProp_Analysis( x , fvec ) ;
 
   ///reset unknown parameters
