@@ -72,6 +72,9 @@ double arrayMin(const double* x, const size_t I)
 
 std::pair<double, double> OA_init( const double *x, const size_t span )
 {
+  BOOST_ASSERT( x != nullptr ) ;
+  BOOST_ASSERT( span > 0 ) ;
+
   /* Givin a harmonic response over the length of one period this function
      returns initial guesses of the amplitude and offset in the form of
      
