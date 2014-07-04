@@ -22,11 +22,14 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+
 #include <vector>
 #include <cmath>
 #include <limits>
 #include <cstddef>
 #include <iostream>
+
+#include <boost/assert.hpp>
 
 #include "math/statistical_tools.hpp"
 #include "math/numIntegration/gslfunc.hpp"
@@ -260,6 +263,9 @@ void covarianceMatrix(const size_t N, const double variance,
 
 void standardError(const size_t N, const double *cov, double* standardError)
 {
+  BOOST_ASSERT( cov != nullptr ) ;
+  BOOST_ASSERT( standardError != nullptr ) ;
+  
     for(size_t i=0; i<N; ++i)
     {
         standardError[i] = sqrt( cov[ i + N * i ] );
