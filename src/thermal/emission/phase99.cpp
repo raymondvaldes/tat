@@ -87,6 +87,10 @@ phase99( const thermal::analysis::Kernal &popteaCore,
       std::cout << "no model available"; exit(-2);
   }
 
+  for( const auto val : results ) {
+    BOOST_ASSERT( isnormal( val ) ) ;
+  }
+  
   return results;
 }
 
