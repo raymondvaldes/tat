@@ -25,6 +25,7 @@ before_script:
 
 
  - cd ${DIR}
+ - ls
  - chmod +x install
  - chmod u+w ~
 
