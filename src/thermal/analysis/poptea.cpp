@@ -95,6 +95,11 @@ void Poptea::updateExperimentalData( const std::vector<double> &omegas,
   loadedExperimental = true;
 
   thermalData->updateExperimental( input );
+  
+  
+  
+  
+  
 }
 
 Poptea::~Poptea(void){}

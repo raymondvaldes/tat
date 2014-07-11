@@ -42,6 +42,8 @@ class TBCsystem
 {
 public:
   layer coating;
+  layer truecoating;
+
   layer substrate;
   temperatureScale Temp;
   radiativeSysProp optical;

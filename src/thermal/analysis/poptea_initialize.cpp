@@ -26,6 +26,7 @@
 #include "thermal/analysis/poptea_initialize.h"
 #include "thermal/emission/noise.hpp"
 #include "thermal/emission/phase99.hpp"
+#include "tools/interface/exportfile.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -39,10 +40,15 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir )
   
   ///Output noise to test
   using thermal::emission::phase99;
-  const std::vector<double> emissionNominal =
-  phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
+  typedef const std::vector<double> sweep;
+  sweep emissionNominal = phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
   
+  
+
   poptea.updateExperimentalData( poptea.thermalData->omegas , emissionNominal );
+  
+
+
   
   return poptea;
 }
@@ -68,6 +74,13 @@ initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir )
   
   poptea.updateExperimentalData( poptea.thermalData->omegas ,
                                  emissionExperimental ) ;
+  
+  
+  typedef const std::string print_this_string;
+  print_this_string emission_raw =
+  poptea.thermalData->prettyPrint( poptea.coreSystem->TBCsystem.coating, emissionNominal ) ;
+  using tools::interface::exportfile;
+  exportfile( dir.pwd() + "/" + "thermalSweep.dat" , emission_raw ) ;
   
   return poptea;
 }

@@ -66,6 +66,7 @@ public:
     };
     std::shared_ptr< ThermalData > bestFitThermal ;
     std::shared_ptr< sensible::layer > bestFitCoat ;
+    std::shared_ptr< sensible::layer > trueCoat ;
 
     std::vector< SearchData > searchPath ;
     std::shared_ptr< math::estimation::unknownList > myUnknowns ;

@@ -141,7 +141,7 @@ void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 
 std::string PIE::PIEAnalysisOutput::ppThermalSweep( void )
 {
-  const std::string output = bestFitThermal->prettyPrint( *bestFitCoat ) ;
+  const std::string output = bestFitThermal->prettyPrint( *trueCoat ) ;
   return output;
 }
 
@@ -189,6 +189,8 @@ PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
   ThermalSweepTEMP.bestfit = *thermalData ;
   reassign ( ouputResults.bestFitThermal , *thermalData ) ;
   reassign ( ouputResults.bestFitCoat , coreSystem->TBCsystem.coating ) ;
+  reassign ( ouputResults.trueCoat , coreSystem->TBCsystem.truecoating ) ;
+
 
   parameterIntervalEstimates() ;
   reassign( ouputResults.myUnknowns, *unknownParameters ) ;

@@ -134,6 +134,42 @@ std::string ThermalData::prettyPrint( void )
 }
 
 
+
+std::string ThermalData::prettyPrint( const sensible::layer &coating,
+                                    const std::vector<double> nominalEmission )
+{
+  std::ostringstream output;
+
+  output << "#|-------------------------------------------------------------\n";
+  output << "#| Phase of Emission                                           \n";
+  output << "#|                                                             \n";
+  output << "#| columns...                                                  \n";
+  output << "#| omega      : heating wavelength                             \n";
+  output << "#| Lambda     : thermal penetration                            \n";
+  output << "#| expEmission: experimental phase of emit                     \n";
+  output << "#| modEmission: model output phase of emit  (nominal)          \n";
+  output << "#|                                                             \n";
+  output << "#|-------------------------------------------------------------\n";
+  const std::vector<double> lthermals = get_lthermalSweep( coating ) ;
+
+  assert( omegas.size() == lthermals.size() );
+  assert( omegas.size() == experimentalEmission.size() );
+  assert( omegas.size() == nominalEmission.size() );
+
+
+  for( size_t i = 0 ; i < omegas.size() ; ++i )
+  {
+    output << omegas[i]
+           << "\t" << lthermals[i]
+           << "\t" << experimentalEmission[i]
+           << "\t" << nominalEmission[i]
+           << "\n";
+  }
+
+  return output.str() ;
+}
+
+
 void ThermalData::clearVectors(void)
 {
   omegas.clear();

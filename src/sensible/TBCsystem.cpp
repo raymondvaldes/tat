@@ -34,8 +34,8 @@ TBCsystem::TBCsystem( const layer &coating_,
                       const temperatureScale &Temp_,
                       const radiativeSysProp &optical_,
                       const double radius_ )
-: coating(coating_), substrate(substrate_), Temp(Temp_), optical(optical_),
-radius(radius_)
+: coating(coating_), truecoating( coating_ ), substrate(substrate_),
+  Temp(Temp_), optical(optical_), radius(radius_)
 {
   gamma = gammaEval();
   a_sub = a_subEval();

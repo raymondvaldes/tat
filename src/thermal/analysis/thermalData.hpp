@@ -78,7 +78,9 @@ public:
   void updatefromBestFit( std::vector< math::estimation::unknown > list,
                           const sensible::layer &coating) ;
 
-  //printer
+//  printer
+  std::string prettyPrint( const sensible::layer &coating,
+                           const std::vector<double> nominalEmission ) ;
   std::string prettyPrint( const sensible::layer &coating ) ;
   std::string prettyPrint( void ) ;
 
