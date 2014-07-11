@@ -10,6 +10,12 @@ cd ${buildpath}
 qmake ${DIR}/src/tat.pro -r -spec linux-g++-64
 echo 'makefile..........finished'
 
-make -j8 -s 
+threads="$(nproc)"    
+
+
+make -j${threads} -s
+
 echo 'building..........finished'
+
+
 
