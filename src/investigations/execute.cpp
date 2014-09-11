@@ -27,28 +27,40 @@
 #include "investigations/execute.h"
 #include "investigations/num_method2014.h"
 #include "investigations/sensitivityvaldes2013.hpp"
+#include "investigations/taylor_uncertainty.h"
 #include "tools/interface/filesystem.hpp"
 
 namespace investigations {
 
-void execute( const std::string& mydirectory ) {
+void execute( const std::string& mydirectory, const std::string& sampleName,
+              const std::string& investigationName ) {
 
   using std::vector;
   using std::string;
+  using std::cout;
   using filesystem::directory;
   const directory directory_of_samples( mydirectory ) ;
   
-  const string sampleName = "APS" ;
-  
-  const auto investigations = []( const directory& active ) {
-    sensitivityvaldes2013::run( active ) ;
+  const auto investigations = [ & ] ( const directory& active )
+  {
+    if( investigationName == "PIE_Analsis") {
+      sensitivityvaldes2013::run( active ) ;
+    }
+    else if( investigationName == "1d_Numerical") {
+      num_method::run( active ) ;
+    }
+    else if( investigationName == "taylor_uncertainty") {
+      taylor_uncertainty::run( active ) ;
+    }
+    
+    else {
+      cout << "No investigation selected.\n" ;
+    }
   };
   
   const bool
   runCurrentDirectory =
   directory_of_samples.working_directory_starts_with( sampleName ) ;
-  
-  std::cout << runCurrentDirectory << "\n";
   
   if( runCurrentDirectory ) {
     investigations( directory_of_samples ) ;
@@ -61,6 +73,5 @@ void execute( const std::string& mydirectory ) {
       }
     }
   }
-  
 
 }}

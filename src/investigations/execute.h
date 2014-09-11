@@ -31,7 +31,9 @@
 
 namespace investigations {
 
-void execute( const std::string& directory_of_samples ) ;
+void execute( const std::string& directory_of_samples,
+              const std::string& sampleName,
+              const std::string& investigationName ) ;
 }
 
 #endif /* defined(__tat__File__) */

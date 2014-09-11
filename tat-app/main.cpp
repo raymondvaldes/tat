@@ -24,24 +24,32 @@ License
 \*----------------------------------------------------------------------------*/
 #include <iostream>
 
-#include "tools/programoptions.hpp"
+#include "tools/programoptions/programoptions.hpp"
 #include "tools/timing.h"
 #include "investigations/execute.h"
 
-int main( const int argc, char *argv[ ] ) {
-  using std::string ;
-  using std::cout ;
-  using std::pair ;
+void executeAnalysis( const tools::programoptions::MainArguments runArgs) {
+  using std::cout;
+  using std::string;
   
-  using tools::programoptions::loadOptions ;
-  typedef const pair<bool, string> run_this ;
-  run_this analysis = loadOptions( argc, argv ) ;
+  stopwatch globalStopWatch ;
   
-  if( analysis.first ) {
-    stopwatch globalStopWatch ;
-    investigations::execute( analysis.second ) ;
-    cout << globalStopWatch.readoutLoud() << "\n";
+  investigations::execute(
+    runArgs.run_directory(),
+    runArgs.run_samples(),
+    runArgs.run_investigationName()
+    ) ;
+  
+  cout << globalStopWatch.readoutLoud() << "\n";
+}
+
+int main( const int argc, const char *argv[ ] ) {
+  using tools::programoptions::MainArguments ;
+  const MainArguments runArgs( argc, argv ) ;
+  
+  if( runArgs.run_analysis() ) {
+    executeAnalysis( runArgs ) ;
   }
- 
+  
   return 0 ;
 }
