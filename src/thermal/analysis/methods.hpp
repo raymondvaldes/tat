@@ -34,7 +34,7 @@ License
 #include "thermal/analysis/lmdiff_poptea.hpp"
 #include "thermal/analysis/pie.hpp"
 #include "thermal/analysis/thermalsweepoptimizer.hpp"
-
+#include "thermal/analysis/gum_uncertainty.h"
 
 namespace thermal{
 namespace analysis{
@@ -46,6 +46,7 @@ private:
   std::shared_ptr< LMA > bestfitMethod;
   std::shared_ptr< PIE > intervalEstimates;
   std::shared_ptr< ThermalSweepOptimizer > lthermalSweepOptimizer;
+  std::shared_ptr< Taylor_uncertainty > taylor_uncertainty;
 
 public:
   //constructors
@@ -77,6 +78,11 @@ public:
       const std::shared_ptr< ThermalData > &thermalData_in,
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in
       );
+  
+  void GUM_uncertainty(
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in  ) ;
 
   std::string contourMapping();
 };

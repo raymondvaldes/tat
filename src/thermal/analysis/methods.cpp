@@ -57,7 +57,8 @@ methods::methods(
                                  intervalEstimates ,
                                  thermalSweepSearch,
                                  sweepOptimizationGoal,
-                                 coating, iter, lmin, lmax ) )
+                                 coating, iter, lmin, lmax ) ),
+    taylor_uncertainty( new Taylor_uncertainty() )
 {
 }
 
@@ -104,6 +105,16 @@ ThermalSweepOptimizer::OptimizerOutput methods::optimization(
 std::string methods::contourMapping()
 {
   return lthermalSweepOptimizer->contourMappingwithOrderedPointUsingGrid() ;
+}
+
+void methods::GUM_uncertainty(
+    const std::shared_ptr< math::estimation::unknownList > &list_in,
+    const std::shared_ptr< ThermalData > &thermalData_in,
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ){
+  
+  taylor_uncertainty->solve( list_in, thermalData_in, coreSystem_in );
+  
+  return;
 }
 
 
