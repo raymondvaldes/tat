@@ -50,7 +50,6 @@ void run( const filesystem::directory &dir )
   using thermal::emission::phase99;
   using thermal::analysis::sweep::temp_cplx_99;
 
-  size_t temp_resolution = 100;
 
   /// setup output
   Poptea poptea = initializePopTeawithNominalEmission( dir ) ;
@@ -67,6 +66,7 @@ void run( const filesystem::directory &dir )
   const double omega = poptea.thermalData->omegas[unit] ;
   std::cout << omega << "\n";
 
+  const size_t temp_resolution = 100;
   vector<complex<double >> heat1_cplx =
   temp_cplx_99( *( poptea.coreSystem ) , omega , temp_resolution ) ;
   const size_t z_pos = 0;
