@@ -161,6 +161,11 @@ void Poptea::reloadThermalModel( const thermal::define::construct &in_ )
   coreSystem->thermalsys.reloadThermalConstruct( in_ );
 }
 
+void Poptea::taylor_uncertainty( void )
+{
+  analysis.GUM_uncertainty( unknownParameters , thermalData, coreSystem ) ;
+}
+
 Poptea loadWorkingDirectoryPoptea( const filesystem::directory &dir,
                                    const Kernal &popteaCore )
 {
@@ -171,5 +176,8 @@ Poptea loadWorkingDirectoryPoptea( const filesystem::directory &dir,
 
   return Poptea::loadConfig( popteaCore, pt );
 }
+
+
+
 
 }}

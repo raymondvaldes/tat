@@ -64,13 +64,11 @@ public:
   ThermalSweepOptimizer::OptimizerOutput optimization( void ) ;
   std::string thermalSweepMap(void ) ;
   std::vector<double> thermalSweep( void ) const ;
+  void taylor_uncertainty( void ) ;
 
   /// Reload kernels
   void reloadAnalysis( const methods &analysis_in );
   void reloadThermalModel( const thermal::define::construct &in_ );
-
-  /// Reset
-//  void resetThermalSweepIni( void );
 
   /// Printers
   std::string ppThermalData( void ) ;
