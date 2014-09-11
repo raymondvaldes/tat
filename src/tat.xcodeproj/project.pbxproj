@@ -11,11 +11,15 @@
 		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
 		AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFE0319524382007DF69B /* starts_with.cpp */; };
 		AB0DFE0619524382007DF69B /* starts_with.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE0419524382007DF69B /* starts_with.h */; };
+		AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB26A3DA19C12073000685DF /* gum_uncertainty.cpp */; };
+		AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = AB26A3DB19C12073000685DF /* gum_uncertainty.h */; };
 		AB553C4F195DE60100E2B7D1 /* interval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C4D195DE60100E2B7D1 /* interval.cpp */; };
 		AB553C50195DE60100E2B7D1 /* interval.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C4E195DE60100E2B7D1 /* interval.h */; };
 		AB553C53195DF13200E2B7D1 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C51195DF13200E2B7D1 /* random.cpp */; };
 		AB553C54195DF13200E2B7D1 /* random.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C52195DF13200E2B7D1 /* random.h */; };
 		AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C57195DF3FB00E2B7D1 /* equalto.h */; };
+		ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */; };
+		ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
@@ -169,11 +173,15 @@
 		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
 		AB0DFE0319524382007DF69B /* starts_with.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = starts_with.cpp; path = algorithm/string/starts_with.cpp; sourceTree = "<group>"; };
 		AB0DFE0419524382007DF69B /* starts_with.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = starts_with.h; path = algorithm/string/starts_with.h; sourceTree = "<group>"; };
+		AB26A3DA19C12073000685DF /* gum_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gum_uncertainty.cpp; sourceTree = "<group>"; };
+		AB26A3DB19C12073000685DF /* gum_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gum_uncertainty.h; sourceTree = "<group>"; };
 		AB553C4D195DE60100E2B7D1 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = geometry/interval.cpp; sourceTree = "<group>"; };
 		AB553C4E195DE60100E2B7D1 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = geometry/interval.h; sourceTree = "<group>"; };
 		AB553C51195DF13200E2B7D1 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = statistics/random/random.cpp; sourceTree = "<group>"; };
 		AB553C52195DF13200E2B7D1 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = random.h; path = statistics/random/random.h; sourceTree = "<group>"; };
 		AB553C57195DF3FB00E2B7D1 /* equalto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = equalto.h; path = utilities/equalto.h; sourceTree = "<group>"; };
+		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
+		ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taylor_uncertainty.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -316,8 +324,8 @@
 		ABEF4E6F1948D4A500B44AD5 /* filesystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = filesystem.hpp; sourceTree = "<group>"; };
 		ABEF4E701948D4A500B44AD5 /* xml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xml.cpp; sourceTree = "<group>"; };
 		ABEF4E711948D4A500B44AD5 /* xml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xml.h; sourceTree = "<group>"; };
-		ABEF4E721948D4A500B44AD5 /* programoptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = programoptions.cpp; sourceTree = "<group>"; };
-		ABEF4E731948D4A500B44AD5 /* programoptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = programoptions.hpp; sourceTree = "<group>"; };
+		ABEF4E721948D4A500B44AD5 /* programoptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = programoptions.cpp; path = programoptions/programoptions.cpp; sourceTree = "<group>"; };
+		ABEF4E731948D4A500B44AD5 /* programoptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = programoptions.hpp; path = programoptions/programoptions.hpp; sourceTree = "<group>"; };
 		ABEF4E741948D4A500B44AD5 /* timing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timing.cpp; sourceTree = "<group>"; };
 		ABEF4E751948D4A500B44AD5 /* timing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timing.h; sourceTree = "<group>"; };
 		ABEF4E761948D4A500B44AD5 /* tools.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tools.hpp; sourceTree = "<group>"; };
@@ -411,6 +419,15 @@
 			name = utilities;
 			sourceTree = "<group>";
 		};
+		ABBCC1F219C0E980005E548A /* programoptions */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF4E721948D4A500B44AD5 /* programoptions.cpp */,
+				ABEF4E731948D4A500B44AD5 /* programoptions.hpp */,
+			);
+			name = programoptions;
+			sourceTree = "<group>";
+		};
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +437,8 @@
 				ABEF4DCF1948D4A500B44AD5 /* num_method2014.h */,
 				ABEF4DD01948D4A500B44AD5 /* sensitivityvaldes2013.cpp */,
 				ABEF4DD11948D4A500B44AD5 /* sensitivityvaldes2013.hpp */,
+				ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */,
+				ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */,
 			);
 			path = investigations;
 			sourceTree = "<group>";
@@ -581,6 +600,8 @@
 				ABEF4E251948D4A500B44AD5 /* thermalData.hpp */,
 				ABEF4E261948D4A500B44AD5 /* thermalsweepoptimizer.cpp */,
 				ABEF4E271948D4A500B44AD5 /* thermalsweepoptimizer.hpp */,
+				AB26A3DA19C12073000685DF /* gum_uncertainty.cpp */,
+				AB26A3DB19C12073000685DF /* gum_uncertainty.h */,
 			);
 			path = analysis;
 			sourceTree = "<group>";
@@ -758,9 +779,8 @@
 		ABEF4E6A1948D4A500B44AD5 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				ABBCC1F219C0E980005E548A /* programoptions */,
 				ABEF4E6B1948D4A500B44AD5 /* interface */,
-				ABEF4E721948D4A500B44AD5 /* programoptions.cpp */,
-				ABEF4E731948D4A500B44AD5 /* programoptions.hpp */,
 				ABEF4E741948D4A500B44AD5 /* timing.cpp */,
 				ABEF4E751948D4A500B44AD5 /* timing.h */,
 				ABEF4E761948D4A500B44AD5 /* tools.hpp */,
@@ -809,6 +829,7 @@
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
+				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
 				ABEF4EBF1948D4A500B44AD5 /* temp_cmplx.h in Headers */,
 				ABEF4EB31948D4A500B44AD5 /* lmdiff_poptea.hpp in Headers */,
 				ABEF4EA21948D4A500B44AD5 /* kinematics.h in Headers */,
@@ -844,6 +865,7 @@
 				ABEF4E961948D4A500B44AD5 /* simpsons_3_8.hpp in Headers */,
 				ABEF4E821948D4A500B44AD5 /* spline.h in Headers */,
 				ABEF4EDE1948D4A500B44AD5 /* laser.h in Headers */,
+				ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */,
 				ABEF4EFC1948D4A500B44AD5 /* exportfile.hpp in Headers */,
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
 				ABEF4EDC1948D4A500B44AD5 /* detector.h in Headers */,
@@ -955,12 +977,14 @@
 				AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */,
 				ABEF4EF31948D4A500B44AD5 /* heat2DAna.cpp in Sources */,
 				ABEF4EB81948D4A500B44AD5 /* pie.cpp in Sources */,
+				ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */,
 				ABEF4E831948D4A500B44AD5 /* spline_cplx.cpp in Sources */,
 				ABEF4E951948D4A500B44AD5 /* simpsons_3_8.cpp in Sources */,
 				ABEF4F031948D4A500B44AD5 /* timing.cpp in Sources */,
 				ABEF4EBE1948D4A500B44AD5 /* temp_cmplx.cpp in Sources */,
 				ABEF4EDB1948D4A500B44AD5 /* detector.cpp in Sources */,
 				ABEF4EFD1948D4A500B44AD5 /* filesystem.cpp in Sources */,
+				AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */,
 				ABEF4ED71948D4A500B44AD5 /* noise.cpp in Sources */,
 				ABEF4E811948D4A500B44AD5 /* spline.cpp in Sources */,
 				ABEF4E7B1948D4A500B44AD5 /* sensitivityvaldes2013.cpp in Sources */,
