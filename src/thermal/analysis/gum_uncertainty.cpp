@@ -11,14 +11,15 @@
 #include "algorithm/vector/subtract.h"
 #include "algorithm/vector/stdVector2ublasVector.h"
 
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/numeric/ublas/io.hpp>
-
 using std::pair;
 using std::make_pair;
 using std::vector;
 using algorithm::vector::subtract;
+using algorithm::vector::stdVector2ublasVector;
+
 typedef boost::numeric::ublas::vector<double> uVector;
+typedef std::vector<double> vectorData;
+typedef boost::numeric::ublas::matrix<double> uMatrix;
 
 namespace thermal {
 namespace analysis {
