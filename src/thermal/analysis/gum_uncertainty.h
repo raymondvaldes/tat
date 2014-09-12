@@ -38,6 +38,8 @@ class Taylor_uncertainty: private baseData
                     enum model::labels::Name d_first,
                     enum model::labels::Name d_second, const double dh) ;
   boost::numeric::ublas::matrix<double> jacobianY( void ) ;
+  double derivative_M( enum model::labels::Name d_first ,
+                       enum model::labels::Name d_second, const double dh ) ;
 
   
   public:

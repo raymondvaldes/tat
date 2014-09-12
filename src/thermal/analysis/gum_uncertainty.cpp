@@ -85,7 +85,6 @@ uVector Taylor_uncertainty::first_D_model( enum model::labels::Name derive ,
   return DerivativeModel;
 }
 
-double Taylor_uncertainty::sDerivative( enum model::labels::Name derive )
 
 uVector Taylor_uncertainty::second_D_model(
   enum model::labels::Name d_first , enum model::labels::Name d_second,
@@ -116,14 +115,30 @@ uVector Taylor_uncertainty::second_D_model(
 
   return diMi ;
 }
+
+double Taylor_uncertainty::derivative_M(
+  enum model::labels::Name d_first , enum model::labels::Name d_second,
+  const double dh )
 {
-  typedef std::vector<double> vectorData;
+  using boost::numeric::ublas::sum;
   using boost::numeric::ublas::element_prod;
-  using algorithm::vector::stdVector2ublasVector;
 
+  
+  const uVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
+  const uVector exper = stdVector2ublasVector( thermalData->experimentalEmission) ;
+  
+  const uVector first_DModel = first_D_model( d_first, dh ) ;
+  const uVector second_DModel = first_D_model( d_second, dh ) ;
+  const uVector second_D_Model = second_D_model( d_first, d_second, dh ) ;
+  
+  const uVector derivative_M_i =
+    2 * element_prod( second_D_Model, model - exper  )
+  + 2 * element_prod( first_DModel, second_DModel ) ;
 
-  uVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
-  uVector exper = stdVector2ublasVector( thermalData->experimentalEmission) ;
+  const double output = sum( derivative_M_i ) ;
+  return output;
+}
+
 
 uMatrix Taylor_uncertainty::jacobianY( void )
 {
