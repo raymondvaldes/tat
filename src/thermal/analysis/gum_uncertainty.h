@@ -10,10 +10,14 @@
 #define __tat__gum_uncertainty__
 
 #include <vector>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/io.hpp>
+
 #include "math/estimation/parameterestimation.hpp"
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/basedata.hpp"
 #include "thermal/analysis/kernal.hpp"
+
 
 namespace thermal {
 namespace analysis {
@@ -26,6 +30,9 @@ class Taylor_uncertainty: private baseData
   void modelData( void ) ;
   void modelDataDerivative( void ) ;
   double sDerivative( enum model::labels::Name derive ) ;
+  boost::numeric::ublas::vector<double> sDerivativeVector( void ) ;
+  double first_Derivative( enum model::labels::Name derive ) ;
+
   
   public:
   explicit Taylor_uncertainty( void ) ;
