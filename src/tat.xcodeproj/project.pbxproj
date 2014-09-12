@@ -26,6 +26,8 @@
 		ABB54FC619C22C7E0056823E /* add.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FC419C22C7E0056823E /* add.h */; };
 		ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */; };
 		ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */; };
+		ABB54FD119C35E300056823E /* ifzero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FCF19C35E300056823E /* ifzero.cpp */; };
+		ABB54FD219C35E300056823E /* ifzero.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FD019C35E300056823E /* ifzero.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
@@ -194,6 +196,8 @@
 		ABB54FC419C22C7E0056823E /* add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = add.h; path = algorithm/vector/add.h; sourceTree = "<group>"; };
 		ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stdVector2ublasVector.cpp; path = algorithm/vector/stdVector2ublasVector.cpp; sourceTree = "<group>"; };
 		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
+		ABB54FCF19C35E300056823E /* ifzero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifzero.cpp; path = algorithm/vector/ifzero.cpp; sourceTree = "<group>"; };
+		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -441,6 +445,8 @@
 				ABB54FC419C22C7E0056823E /* add.h */,
 				ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */,
 				ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */,
+				ABB54FCF19C35E300056823E /* ifzero.cpp */,
+				ABB54FD019C35E300056823E /* ifzero.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -852,6 +858,7 @@
 				AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */,
 				ABEF4EAC1948D4A500B44AD5 /* temperature_scale.h in Headers */,
 				ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */,
+				ABB54FD219C35E300056823E /* ifzero.h in Headers */,
 				ABEF4E9E1948D4A500B44AD5 /* statistical_tools.hpp in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
@@ -1044,6 +1051,7 @@
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,
 				ABEF4EB21948D4A500B44AD5 /* lmdiff_poptea.cpp in Sources */,
+				ABB54FD119C35E300056823E /* ifzero.cpp in Sources */,
 				ABEF4E871948D4A500B44AD5 /* constrained.cpp in Sources */,
 				ABEF4EDF1948D4A500B44AD5 /* setup.cpp in Sources */,
 				ABEF4EAE1948D4A500B44AD5 /* cmplx_combination.cpp in Sources */,
