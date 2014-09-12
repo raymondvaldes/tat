@@ -86,6 +86,36 @@ uVector Taylor_uncertainty::first_D_model( enum model::labels::Name derive ,
 }
 
 double Taylor_uncertainty::sDerivative( enum model::labels::Name derive )
+
+uVector Taylor_uncertainty::second_D_model(
+  enum model::labels::Name d_first , enum model::labels::Name d_second,
+  const double dh )
+{
+  const double fV = 1;
+  const vectorData omegas = thermalData->omegas ;
+  typedef const vector< pair< enum model::labels::Name, double > > List;
+  using emission::phase99Pertrub;
+
+  const auto eval = [&]( List list )
+  {
+    return stdVector2ublasVector( phase99Pertrub( *coreSystem, omegas, list ) );
+  };
+
+  List list_pp = { make_pair( d_first, fV + dh),make_pair( d_second, fV + dh )};
+  List list_pm = { make_pair( d_first, fV + dh),make_pair( d_second, fV - dh )};
+  List list_mp = { make_pair( d_first, fV - dh),make_pair( d_second, fV + dh )};
+  List list_mm = { make_pair( d_first, fV - dh),make_pair( d_second, fV - dh )};
+
+  const uVector model_pp = eval( list_pp ) ;
+  const uVector model_pm = eval( list_pm ) ;
+  const uVector model_mp = eval( list_mp ) ;
+  const uVector model_mm = eval( list_mm ) ;
+
+  const
+  uVector diMi = model_pp - model_pm - model_mp + model_mm / ( 4 * dh * dh ) ;
+
+  return diMi ;
+}
 {
   typedef std::vector<double> vectorData;
   using boost::numeric::ublas::element_prod;
