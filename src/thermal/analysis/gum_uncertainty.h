@@ -32,7 +32,8 @@ class Taylor_uncertainty: private baseData
   void modelDataDerivative( void ) ;
   double sDerivative( enum model::labels::Name derive ) ;
   boost::numeric::ublas::vector<double> sDerivativeVector( void ) ;
-  double first_Derivative( enum model::labels::Name derive ) ;
+  boost::numeric::ublas::vector<double>
+    first_D_model( enum model::labels::Name derive , const double dh) ;
 
   
   public:

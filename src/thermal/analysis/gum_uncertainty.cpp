@@ -63,9 +63,26 @@ Taylor_uncertainty::sDerivativeVector( void )
   return output;
 }
 
-double Taylor_uncertainty::first_Derivative( enum model::labels::Name derive ) {
+uVector Taylor_uncertainty::first_D_model( enum model::labels::Name derive ,
+                                           const double dh )
+{
+  const double dhx2 = dh * 2 ;
+  const double fullValue = 1 ;
+  
+  vector< pair< enum model::labels::Name, double > >
+    listplus= { make_pair( derive, fullValue + dh ) } ;
+  vector< pair< enum model::labels::Name, double > >
+    listminus= { make_pair( derive, fullValue - dh ) } ;
+  
+  const vectorData omegas = thermalData->omegas ;
+  const uVector modelplus =
+    stdVector2ublasVector( emission::phase99Pertrub( *coreSystem, omegas, listplus ) ) ;
+  const uVector modelmins =
+    stdVector2ublasVector( emission::phase99Pertrub( *coreSystem, omegas, listminus ) ) ;
+  
+  uVector DerivativeModel = ( modelplus - modelmins ) / ( dhx2 ) ;
 
-  return 0;
+  return DerivativeModel;
 }
 
 double Taylor_uncertainty::sDerivative( enum model::labels::Name derive )
