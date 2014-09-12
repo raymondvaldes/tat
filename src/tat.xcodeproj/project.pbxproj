@@ -20,6 +20,12 @@
 		AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C57195DF3FB00E2B7D1 /* equalto.h */; };
 		ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */; };
 		ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */; };
+		ABB54FBE19C221920056823E /* subtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FBC19C221920056823E /* subtract.cpp */; };
+		ABB54FBF19C221920056823E /* subtract.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FBD19C221920056823E /* subtract.h */; };
+		ABB54FC519C22C7E0056823E /* add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FC319C22C7E0056823E /* add.cpp */; };
+		ABB54FC619C22C7E0056823E /* add.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FC419C22C7E0056823E /* add.h */; };
+		ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */; };
+		ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
@@ -182,6 +188,12 @@
 		AB553C57195DF3FB00E2B7D1 /* equalto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = equalto.h; path = utilities/equalto.h; sourceTree = "<group>"; };
 		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
 		ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taylor_uncertainty.h; sourceTree = "<group>"; };
+		ABB54FBC19C221920056823E /* subtract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = subtract.cpp; path = algorithm/vector/subtract.cpp; sourceTree = "<group>"; };
+		ABB54FBD19C221920056823E /* subtract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = subtract.h; path = algorithm/vector/subtract.h; sourceTree = "<group>"; };
+		ABB54FC319C22C7E0056823E /* add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = add.cpp; path = algorithm/vector/add.cpp; sourceTree = "<group>"; };
+		ABB54FC419C22C7E0056823E /* add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = add.h; path = algorithm/vector/add.h; sourceTree = "<group>"; };
+		ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stdVector2ublasVector.cpp; path = algorithm/vector/stdVector2ublasVector.cpp; sourceTree = "<group>"; };
+		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -350,6 +362,7 @@
 		AB0DFDFD19524268007DF69B /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
+				ABB54FBA19C2215D0056823E /* vector */,
 				AB0DFDFE1952426F007DF69B /* string */,
 			);
 			name = algorithm;
@@ -417,6 +430,19 @@
 				AB553C57195DF3FB00E2B7D1 /* equalto.h */,
 			);
 			name = utilities;
+			sourceTree = "<group>";
+		};
+		ABB54FBA19C2215D0056823E /* vector */ = {
+			isa = PBXGroup;
+			children = (
+				ABB54FBC19C221920056823E /* subtract.cpp */,
+				ABB54FBD19C221920056823E /* subtract.h */,
+				ABB54FC319C22C7E0056823E /* add.cpp */,
+				ABB54FC419C22C7E0056823E /* add.h */,
+				ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */,
+				ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */,
+			);
+			name = vector;
 			sourceTree = "<group>";
 		};
 		ABBCC1F219C0E980005E548A /* programoptions */ = {
@@ -816,6 +842,7 @@
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				ABEF4EB11948D4A500B44AD5 /* kernal.hpp in Headers */,
 				ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */,
+				ABB54FBF19C221920056823E /* subtract.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
 				ABEF4EF61948D4A500B44AD5 /* Iheat.h in Headers */,
 				ABEF4E841948D4A500B44AD5 /* spline_cplx.h in Headers */,
@@ -866,6 +893,7 @@
 				ABEF4E821948D4A500B44AD5 /* spline.h in Headers */,
 				ABEF4EDE1948D4A500B44AD5 /* laser.h in Headers */,
 				ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */,
+				ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */,
 				ABEF4EFC1948D4A500B44AD5 /* exportfile.hpp in Headers */,
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
 				ABEF4EDC1948D4A500B44AD5 /* detector.h in Headers */,
@@ -882,6 +910,7 @@
 				ABEF4EA41948D4A500B44AD5 /* layer.h in Headers */,
 				ABEF4EBB1948D4A500B44AD5 /* poptea.hpp in Headers */,
 				ABEF4EEC1948D4A500B44AD5 /* Numerical_Setup.h in Headers */,
+				ABB54FC619C22C7E0056823E /* add.h in Headers */,
 				ABEF4EAA1948D4A500B44AD5 /* TBCsystem.h in Headers */,
 				ABEF4EC71948D4A500B44AD5 /* construct.hpp in Headers */,
 				ABEF4E801948D4A500B44AD5 /* complex.h in Headers */,
@@ -996,9 +1025,11 @@
 				ABEF4EED1948D4A500B44AD5 /* Numerical_Temperature.cpp in Sources */,
 				ABEF4EDD1948D4A500B44AD5 /* laser.cpp in Sources */,
 				ABEF4F011948D4A500B44AD5 /* programoptions.cpp in Sources */,
+				ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */,
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
 				ABEF4EB01948D4A500B44AD5 /* kernal.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
+				ABB54FBE19C221920056823E /* subtract.cpp in Sources */,
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
@@ -1007,6 +1038,7 @@
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
+				ABB54FC519C22C7E0056823E /* add.cpp in Sources */,
 				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
 				ABEF4EF51948D4A500B44AD5 /* Iheat.cpp in Sources */,
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
@@ -1074,11 +1106,11 @@
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PROFILING_CODE = YES;
 				LLVM_LTO = NO;
@@ -1141,11 +1173,11 @@
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LLVM_LTO = NO;
 				MACH_O_TYPE = staticlib;
