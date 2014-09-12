@@ -9,6 +9,7 @@
 #ifndef __tat__gum_uncertainty__
 #define __tat__gum_uncertainty__
 
+#include <vector>
 #include "math/estimation/parameterestimation.hpp"
 #include "thermal/analysis/thermalData.hpp"
 #include "thermal/analysis/basedata.hpp"
@@ -20,6 +21,11 @@ namespace analysis {
 class Taylor_uncertainty: private baseData
 {
   private:
+  const double tolDif = 0.01;
+  void experimentalData( void ) ;
+  void modelData( void ) ;
+  void modelDataDerivative( void ) ;
+  double sDerivative( enum model::labels::Name derive ) ;
   
   public:
   explicit Taylor_uncertainty( void ) ;
