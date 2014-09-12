@@ -27,6 +27,7 @@ License
 
 #include <vector>
 #include "thermal/analysis/kernal.hpp"
+#include "thermal/model/labels.h"
 
 namespace thermal{
   namespace emission{
@@ -34,11 +35,15 @@ namespace thermal{
 std::vector<double>
 phase99( const thermal::analysis::Kernal &popteaCore,
          const std::vector<double> &omegas);
+
+
+std::vector<double> phase99Pertrub(
+  const thermal::analysis::Kernal &popteaCore,
+  const std::vector<double> &omegas,
+  const std::vector< std::pair < enum model::labels::Name, double > > list );
+
+
+
   }
 }
-
-
-
-
-
 #endif // PHASE99_HPP

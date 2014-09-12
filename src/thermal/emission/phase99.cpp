@@ -32,12 +32,18 @@ License
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "thermal/model/one_dim/analytical_2005/analytical_2005.h"
 
+using std::vector;
+using std::cout;
+using std::pair;
+using thermal::analysis::Kernal;
+
 namespace thermal{
 namespace emission{
 
-std::vector<double>
-phase99( const thermal::analysis::Kernal &popteaCore,
-         const std::vector<double> &omegas)
+
+vector<double>
+phase99( const Kernal &popteaCore,
+         const vector<double> &omegas )
 {
   /*The phase for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code
@@ -45,7 +51,7 @@ phase99( const thermal::analysis::Kernal &popteaCore,
   a very high level. No further modifications of the code is necessary.*/
 
   const size_t L_end = omegas.size() ;
-  std::vector<double> results(L_end) ;
+  vector<double> results(L_end) ;
 
   switch( popteaCore.thermalsys.Construct.heat )
   {
@@ -81,13 +87,13 @@ phase99( const thermal::analysis::Kernal &popteaCore,
     }
 
     case define::HeatX::OneDimNumNonLin:
-      std::cout << "no model available"; exit(-2);
+      cout << "no model available"; exit(-2);
     case define::HeatX::TwoDimNumLin:
-      std::cout << "no model available"; exit(-2);
+      cout << "no model available"; exit(-2);
     case define::HeatX::TwoDimNumNonLin:
-      std::cout << "no model available"; exit(-2);
+      cout << "no model available"; exit(-2);
     default:
-      std::cout << "no model available"; exit(-2);
+      cout << "no model available"; exit(-2);
   }
 
   for( const auto val : results ) {
@@ -96,6 +102,20 @@ phase99( const thermal::analysis::Kernal &popteaCore,
   }
   
   return results;
+}
+
+vector<double> phase99Pertrub(
+  const Kernal &popteaCore,
+  const vector<double> &omegas,
+  const vector< pair < enum model::labels::Name, double > > list )
+{
+  Kernal popteaPerturb( popteaCore );
+  
+  for( auto val: list ) {
+    popteaPerturb.updateFromList( val.first, val.second ) ;
+  }
+
+  return phase99( popteaPerturb, omegas ) ;
 }
 
 }}
