@@ -43,12 +43,8 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir )
   typedef const std::vector<double> sweep;
   sweep emissionNominal = phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
   
-  
-
+  poptea.updateModelData( poptea.thermalData->omegas, emissionNominal ) ;
   poptea.updateExperimentalData( poptea.thermalData->omegas , emissionNominal );
-  
-
-
   
   return poptea;
 }
