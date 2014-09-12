@@ -66,7 +66,7 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
                                 coating.kthermal.offset,
                                 coating.psithermal.offset ) ;
   }
-
+  
   return L_end;
 }
 
