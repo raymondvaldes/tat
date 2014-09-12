@@ -27,6 +27,7 @@ License
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/equipment/setup.h"
 #include "thermal/model/one_dim/numerical_2011/mesh.hpp"
+
 #include "math/estimation/parameterestimation.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/utility.hpp"
@@ -111,11 +112,24 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list )
 {
   using math::estimation::unknown;
-  for( const unknown& unknown :  list )
+  for( const auto& unknown :  list )
   {
     const double val = unknown.initialVal();
     TBCsystem.updateVal( unknown.label() , val );
   }
+  TBCsystem.updateCoat();
+}
+
+void Kernal::updateFromList( const enum model::labels::Name mylabel ,
+                             const double percentChange )
+{
+  BOOST_ASSERT( percentChange > 0 ) ;
+  
+  const double val = TBCsystem.returnVal( mylabel ) ;
+  const double val_change = val * percentChange ;
+
+
+  TBCsystem.updateVal( mylabel , val_change ) ;
   TBCsystem.updateCoat();
 }
 

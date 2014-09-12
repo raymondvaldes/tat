@@ -27,10 +27,13 @@ License
 
 #include <boost/property_tree/ptree.hpp>
 
+#include "thermal/analysis/kernal.hpp"
 #include "thermal/equipment/setup.h"
 #include "math/estimation/parameterestimation.hpp"
 #include "tools/interface/filesystem.hpp"
 #include "thermal/define/model.hpp"
+#include "thermal/model/labels.h"
+
 #include "sensible/TBCsystem.h"
 
 namespace thermal {
@@ -58,7 +61,9 @@ public:
   double bEval(void) const;
   void updatefromBestFit( std::vector< math::estimation::unknown > list );
   void updatefromInitial( std::vector< math::estimation::unknown > list );
-  
+  void updateFromList( const enum model::labels::Name mylabel ,
+                       const double val ) ;
+
   // reload members
   void reloadthermalsys( const define::construct &other );
 
