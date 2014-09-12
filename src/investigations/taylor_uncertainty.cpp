@@ -7,7 +7,6 @@
 //
 
 #include "investigations/taylor_uncertainty.h"
-
 #include "thermal/analysis/poptea.hpp"
 #include "thermal/analysis/poptea_initialize.h"
 
@@ -20,11 +19,12 @@ void run( const filesystem::directory &dir ) {
   using std::cout;
   using thermal::analysis::Poptea;
   
-  /// setup poptea
-  Poptea poptea = thermal::analysis::initializePopTeawithNominalEmission( dir );
+  Poptea poptea = thermal::analysis::initializePopTeaAndLoadSimuEmission( dir );
+  poptea.bestFit() ;
+  poptea.taylor_uncertainty();
   
   
-  
+  cout << poptea.ppUnknownParameters() << "\n";
   cout << "Hello, world!!!";
 }
     
