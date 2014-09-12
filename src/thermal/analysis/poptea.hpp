@@ -57,6 +57,9 @@ public:
   /// Member operations that update on multiple members
   void updateExperimentalData( const std::vector<double> &omegas,
                                const std::vector<double> &input ) ;
+  void updateModelData( const std::vector<double> &omegas ,
+                        const std::vector<double> &input    ) ;
+
 
   /// Operations that give results
   double bestFit( void ) ;
