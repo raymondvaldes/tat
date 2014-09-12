@@ -60,17 +60,20 @@ std::string PIE::PIEAnalysisOutput::SearchData::pprint( void )
 
 void PIE::PIEAnalysisOutput::ThermalSweep::prettyPrint(const std::string folder)
 {
-  const std::string newFolder = "thermalSweep" ;
+  typedef const std::string filePath;
+  typedef const std::string outputString;
+
+  filePath newFolder = "thermalSweep" ;
   filesystem::makeDir( folder , newFolder ) ;
-  const std::string updatedPath = folder + "/" +newFolder ;
+  filePath updatedPath = folder + "/" +newFolder ;
 
-  const std::string output1 = bestfit.prettyPrint();
-  const std::string output2 = upperbound.prettyPrint();
-  const std::string output3 = lowerbound.prettyPrint();
+  outputString output1 = bestfit.prettyPrint();
+  outputString output2 = upperbound.prettyPrint();
+  outputString output3 = lowerbound.prettyPrint();
 
-  const std::string path1 =  updatedPath + "/" + "bestfit.dat" ;
-  const std::string path2 =  updatedPath + "/" + "upperbound.dat" ;
-  const std::string path3 =  updatedPath + "/" + "lowerbound.dat" ;
+  filePath path1 =  updatedPath + "/" + "bestfit.dat" ;
+  filePath path2 =  updatedPath + "/" + "upperbound.dat" ;
+  filePath path3 =  updatedPath + "/" + "lowerbound.dat" ;
 
   tools::interface::exportfile( path1 , output1 ) ;
   tools::interface::exportfile( path2 , output2 ) ;
