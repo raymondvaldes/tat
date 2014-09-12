@@ -72,9 +72,6 @@ public:
   void bestfitIntervalset ( const double min, const double max);
   double bestfitIntervalSpread( void ) const;
 
-  // reset randomly
-//  void reset(void);
-
   /// labels
   enum labels::Name label( void ) const ;
   labels getLabel ( void ) const;
@@ -106,8 +103,9 @@ public:
       loadConfigfromXML( const boost::property_tree::ptree pt ) ;
   ~unknownList() ;
 
-//  void resetBestfits( void ) ;
   std::string prettyPrint(void) ;
+  std::vector< enum labels::Name > get_enum_list( void ) ;
+  
 };
 
 class settings
