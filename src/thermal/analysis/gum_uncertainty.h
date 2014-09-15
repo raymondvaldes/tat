@@ -27,10 +27,13 @@ class Taylor_uncertainty: private baseData
 {
   private:
   const double tolDif = 0.01;
-  void experimentalData( void ) ;
-  void modelData( void ) ;
-  void modelDataDerivative( void ) ;
-  double sDerivative( enum model::labels::Name derive ) ;
+  const double dh = 1e-10;
+  size_t N_unknowns;
+  size_t N_knowns;
+  size_t N_dataPoints;
+
+  double sDerivative( const enum model::labels::Name derive,
+                      const size_t ith ) ;
   boost::numeric::ublas::vector<double> sDerivativeVector( void ) ;
   boost::numeric::ublas::vector<double>
     first_D_model( enum model::labels::Name derive , const double dh) ;

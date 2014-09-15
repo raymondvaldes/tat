@@ -35,24 +35,14 @@ void Taylor_uncertainty::solve(
   unknownParameters = list_in ;
   thermalData = thermalData_in ;
   coreSystem = coreSystem_in ;
+  N_unknowns = unknownParameters->size() ;
+  N_knowns = thermal::model::labels::numberOfLabels() ;
+  N_dataPoints = thermalData->size();
   
-  uVector output = sDerivativeVector();
-  for( auto& val: output )
-    std::cout << val << "\n";
-  
+  const uVector output = sDerivativeVector();
 }
 
-void Taylor_uncertainty::experimentalData( void ) {
-}
-
-void Taylor_uncertainty::modelData( void ) {
-}
-
-void Taylor_uncertainty::modelDataDerivative( void ) {
-}
-
-boost::numeric::ublas::vector<double>
-Taylor_uncertainty::sDerivativeVector( void )
+uVector Taylor_uncertainty::sDerivativeVector( void )
 {
   uVector output( unknownParameters->size() ) ;
   
