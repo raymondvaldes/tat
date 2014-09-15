@@ -83,14 +83,17 @@ void TBCsystem::updateVal( const enum labels::Name mylabel , const double val )
       optical.R1 = val;
       break;
     case labels::Name::lambda :
-      coating.lambda = val;
+      coating.setLambda( val ) ;
       break;
-    case labels::Name::thermalCenter:
-      std::cout << "not yet implemented, error!!"; exit(-68);
+    case labels::Name::length :
+      coating.setDepth( val ) ;
       break;
-    case labels::Name::thermalRange:
-      std::cout << "not yet implemented, error!!"; exit(-68);
-      break;      
+//    case labels::Name::thermalCenter:
+//      std::cout << "not yet implemented, error!!"; exit(-68);
+//      break;
+//    case labels::Name::thermalRange:
+//      std::cout << "not yet implemented, error!!"; exit(-68);
+//      break;      
     default:
       std::cout << "\nSwitch Error!!\n";
       exit(-68);
@@ -157,6 +160,8 @@ void TBCsystem::updateCoat(void)
   
   coating.psithermal.offset = effusivity_coat / sqrt(diffusivty_coat);
   coating.kthermal.offset = coating.psithermal.offset * diffusivty_coat;
+  
+  
   return;
 }
   
