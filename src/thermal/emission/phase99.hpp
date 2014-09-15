@@ -40,7 +40,8 @@ phase99( const thermal::analysis::Kernal &popteaCore,
 std::vector<double> phase99Pertrub(
   const thermal::analysis::Kernal &popteaCore,
   const std::vector<double> &omegas,
-  const std::vector< std::pair < enum model::labels::Name, double > > list );
+  const std::vector< std::pair < enum model::labels::Name, double > > list,
+  const size_t ith );
 
 
 

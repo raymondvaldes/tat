@@ -45,11 +45,6 @@ vector<double>
 phase99( const Kernal &popteaCore,
          const vector<double> &omegas )
 {
-  /*The phase for each thermal penetration is calculated in parallel using the
-  OpenMP framework.  This gives significant increases in the speed of the code
-  for all ranges of L_end.  This also allows the code to be parallelized at
-  a very high level. No further modifications of the code is necessary.*/
-
   const size_t L_end = omegas.size() ;
   vector<double> results(L_end) ;
 
@@ -104,18 +99,51 @@ phase99( const Kernal &popteaCore,
   return results;
 }
 
+
+
 vector<double> phase99Pertrub(
   const Kernal &popteaCore,
   const vector<double> &omegas,
-  const vector< pair < enum model::labels::Name, double > > list )
+  const vector< pair < enum model::labels::Name, double > > list,
+  const size_t ith )
 {
+  using model::labels::Name::omega;
+  using model::labels::Name::experimentalData;
+
   Kernal popteaPerturb( popteaCore );
+  vector<double> omegasPertrubed = omegas;
+
+  const size_t N = omegas.size();
+  BOOST_ASSERT( ith <= N ) ;
+  BOOST_ASSERT( ith >= 0 ) ;
   
   for( auto val: list ) {
-    popteaPerturb.updateFromList( val.first, val.second ) ;
+    const bool omegaV = val.first == omega ;
+    const bool experimentalV = val.first == experimentalData ;
+  
+    if( !omegaV && !experimentalV ) {
+      popteaPerturb.updateFromList( val.first, val.second ) ;
+    }
+    else {
+      BOOST_ASSERT( ith < N && ith >= 0 ) ;
+      if( omegaV ) {
+        omegasPertrubed[ith] *= val.second ;
+      }
+    }
+  }
+  
+  vector<double>
+  phaseSweep = phase99( popteaPerturb, omegasPertrubed ) ;
+
+
+  for( auto val: list ) {
+    if( val.first == experimentalData ) {
+        phaseSweep[ith] *= val.second ;
+    }
   }
 
-  return phase99( popteaPerturb, omegas ) ;
+
+  return phaseSweep ;
 }
 
 }}
