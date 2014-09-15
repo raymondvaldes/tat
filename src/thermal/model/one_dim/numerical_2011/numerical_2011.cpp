@@ -224,7 +224,7 @@ void numerical_2011::temperature_1D( const double omega1, const size_t iter,
   const double q_surface = 0;
   const double R0           = 0 ;
   const double L_coat       = coat.L ;
-  const double L_substrate  = sub_full.depth ;
+  const double L_substrate  = sub_full.getDepth() ;
   const double T_rear       = Temperature_interface ;
   
 

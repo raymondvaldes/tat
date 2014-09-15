@@ -62,7 +62,7 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
   using thermal::define::omega;
   for (size_t i=0; i < L_end; ++i )
   {
-    omegas[i] = omega( coating.depth, lthermalTEMP[i],
+    omegas[i] = omega( coating.getDepth(), lthermalTEMP[i],
                                 coating.kthermal.offset,
                                 coating.psithermal.offset ) ;
   }
@@ -195,12 +195,12 @@ std::pair<double, double>
 ThermalData::get_lthermalLimits( const sensible::layer &coating) const
 {
   using thermal::define::lthermal;
-  const double first = lthermal( coating.depth,
+  const double first = lthermal( coating.getDepth(),
                                           coating.kthermal.offset,
                                           coating.psithermal.offset,
                                           omegas.front() ) ;
 
-  const double second = lthermal( coating.depth,
+  const double second = lthermal( coating.getDepth(),
                                            coating.kthermal.offset,
                                            coating.psithermal.offset,
                                            omegas.back() ) ;
@@ -218,7 +218,7 @@ ThermalData::get_lthermalSweep( const sensible::layer &coating ) const
   std::vector<double> output(LEND);
   for (size_t i=0; i < LEND ; ++i )
   {
-    output[i] = lthermal( coating.depth, coating.kthermal.offset,
+    output[i] = lthermal( coating.getDepth(), coating.kthermal.offset,
                                    coating.psithermal.offset, omegas[i] ) ;
   }
 

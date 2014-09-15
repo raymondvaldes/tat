@@ -120,7 +120,7 @@ double TBCsystem::returnVal( const enum labels::Name mylabel ) const
       val = optical.R1;
       break;
     case labels::Name::lambda :
-      val = coating.lambda;
+      val = coating.getLambda();
       break;
     case labels::Name::thermalCenter:
       std::cout << "not yet implemented, error!!"; exit(-68);

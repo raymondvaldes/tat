@@ -77,8 +77,8 @@ class thermal::analysis::Kernal
   const double split  = ptchild3.get<double>( "mesh.split" );
   const size_t iter   = ptchild3.get<size_t>( "mesh.num_iter" );
   const numericalModel::Mesh mesh( M2, Rend, Nend, beta1, split,
-                                   Obj2.coating.depth,
-                                   Obj2.substrate.depth,
+                                   Obj2.coating.getDepth(),
+                                   Obj2.substrate.getDepth(),
                                    Obj1.laser.radius,
                                    Obj2.radius, iter);
 

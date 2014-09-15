@@ -34,11 +34,14 @@ namespace sensible{
 
 class layer
 {
+private:
+  double depth;
+  double Lambda;
+  double getOpticalPenetration( void ) ;
+  
 public:
   property kthermal;
   property psithermal;
-  double depth;
-  double lambda;
   double c = 1;
 
   double opticalPenetration(void) const;
@@ -50,6 +53,10 @@ public:
                   const double depth_, const double lambda_);
   ~layer(void);
   static layer loadConfigfromXMLTree( const boost::property_tree::ptree pt );
+  double getDepth( void ) const;
+  double getLambda( void ) const;
+  void setDepth( const double depth_in ) ;
+  void setLambda( const double Lambda_in ) ;
 };
 
 

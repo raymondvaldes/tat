@@ -36,7 +36,7 @@ one_dim::one_dim(
   const double gamma_in )
   :
   coat( coating_in.kthermal.offset, coating_in.psithermal.offset,
-        coating_in.depth, coating_in.lambda ),
+        coating_in.getDepth(), coating_in.getLambda() ),
   coat_full( coating_in ),
   sub_full( substrate_in ), 
   I_intensity_ss(             laser_in.Is ),

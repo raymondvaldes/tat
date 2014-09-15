@@ -37,13 +37,46 @@ layer::layer( const property kthermal_, const property psithermal_,
 : kthermal( kthermal_ ),
   psithermal( psithermal_ ),
   depth( depth_ ),
-  lambda( lambda_ )
-{}
+  Lambda( lambda_ )
+{
+  BOOST_ASSERT( depth_ > 0 ) ;
+  BOOST_ASSERT( lambda_ >= 0 ) ;
+}
 
 double layer::opticalPenetration(void) const
 {
-  return lambda * depth;
+  return Lambda * depth;
 }
+
+double layer::getDepth(void) const {
+  return depth;
+}
+
+double layer::getLambda( void ) const {
+  return Lambda;
+}
+
+void layer::setDepth( const double depth_in ) {
+  BOOST_ASSERT( depth_in > 0 ) ;
+
+  const double deltaOpt = opticalPenetration();
+  depth = depth_in;
+  Lambda = deltaOpt / depth;
+}
+
+void layer::setLambda( const double Lambda_in ) {
+  BOOST_ASSERT( Lambda_in > 0 ) ;
+
+  const double deltaOpt = opticalPenetration() ;
+  Lambda = Lambda_in ;
+  depth = deltaOpt / Lambda ;
+}
+
+
+double layer::getOpticalPenetration( void ) {
+  return depth * Lambda ;
+}
+
 
 double layer::thermalDiffusivity( void ) const
 {

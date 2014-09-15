@@ -47,7 +47,7 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
                      const double omega1,
                      thermal::define::Temperature Tprofile)
 {
-  const double lambda     = TBCsystem.coating.lambda;
+  const double lambda     = TBCsystem.coating.getLambda();
   const double R1         = TBCsystem.optical.R1;
   const double epsilon    = TBCsystem.gammaEval();
 
@@ -59,8 +59,8 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
   const double Is           = expSetup.laser.Is;
   const double It           = expSetup.laser.It;
   const double R0           = TBCsystem.optical.R0;
-  const double L_coat       = TBCsystem.coating.depth;
-  const double L_substrate  = TBCsystem.substrate.depth;
+  const double L_coat       = TBCsystem.coating.getDepth();
+  const double L_substrate  = TBCsystem.substrate.getDepth();
   const double Ttol         = TBCsystem.Temp.tolerance;
   const double T_rear       = TBCsystem.Temp.rear;
   const property *k1_thermal      = &TBCsystem.coating.kthermal;
