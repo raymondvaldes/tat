@@ -10,16 +10,30 @@
 #include "thermal/emission/phase99.hpp"
 #include "algorithm/vector/subtract.h"
 #include "algorithm/vector/stdVector2ublasVector.h"
+#include "math/numericalAnalysis/differentiation/firstDerivative/central_difference.h"
 
 using std::pair;
 using std::make_pair;
 using std::vector;
 using algorithm::vector::subtract;
 using algorithm::vector::stdVector2ublasVector;
+using thermal::emission::phase99Pertrub;
+using math::numericalAnalysis::differentiation::firstDerivative::centralDifference;
+using math::numericalAnalysis::differentiation::firstDerivative::central_difference_partial;
+using boost::numeric::ublas::sum;
+using boost::numeric::ublas::element_prod;
+typedef vector<double> vectorData;
+
+typedef boost::numeric::ublas::zero_vector<double> uZero_Vector;
+typedef boost::numeric::ublas::unit_vector<double> uUnit_Vector;
+typedef boost::numeric::ublas::matrix<double> uMatrix;
+typedef const enum thermal::model::labels::Name label;
+typedef const vector< enum thermal::model::labels::Name > EnumList ;
+typedef const vector< pair < enum thermal::model::labels::Name, double > > List;
 
 typedef boost::numeric::ublas::vector<double> uVector;
-typedef std::vector<double> vectorData;
-typedef boost::numeric::ublas::matrix<double> uMatrix;
+typedef const uVector cuVector;
+
 
 namespace thermal {
 namespace analysis {
@@ -30,7 +44,7 @@ Taylor_uncertainty::~Taylor_uncertainty( ){}
 void Taylor_uncertainty::solve(
          const std::shared_ptr< math::estimation::unknownList > &list_in,
          const std::shared_ptr< ThermalData > &thermalData_in,
-         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in){
+         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) {
   ///use the inputs
   unknownParameters = list_in ;
   thermalData = thermalData_in ;
@@ -44,125 +58,154 @@ void Taylor_uncertainty::solve(
 
 uVector Taylor_uncertainty::sDerivativeVector( void )
 {
-  uVector output( unknownParameters->size() ) ;
+  uVector output( N_unknowns ) ;
   
   size_t i = 0 ;
-  for( auto& val: unknownParameters->vectorUnknowns)
-      output[i++] = sDerivative( val.label() )  ;
+  for( auto& val: unknownParameters->vectorUnknowns )
+      output[i++] = sDerivative( val.label() , N_dataPoints )  ;
   
   return output;
 }
 
-uVector Taylor_uncertainty::first_D_model( enum model::labels::Name derive ,
-                                           const double dh )
+double Taylor_uncertainty::sDerivative( label derive, const size_t ith )
 {
-  const double dhx2 = dh * 2 ;
-  const double fullValue = 1 ;
-  
-  vector< pair< enum model::labels::Name, double > >
-    listplus= { make_pair( derive, fullValue + dh ) } ;
-  vector< pair< enum model::labels::Name, double > >
-    listminus= { make_pair( derive, fullValue - dh ) } ;
-  
-  const vectorData omegas = thermalData->omegas ;
-  const uVector modelplus =
-    stdVector2ublasVector( emission::phase99Pertrub( *coreSystem, omegas, listplus ) ) ;
-  const uVector modelmins =
-    stdVector2ublasVector( emission::phase99Pertrub( *coreSystem, omegas, listminus ) ) ;
-  
-  uVector DerivativeModel = ( modelplus - modelmins ) / ( dhx2 ) ;
+  cuVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
+  cuVector exper = stdVector2ublasVector( thermalData->experimentalEmission ) ;
 
-  return DerivativeModel;
+  cuVector DerivativeModel = first_D_model( derive, ith ) ;
+  cuVector DerivativeSpreSum = 2 * element_prod( DerivativeModel, model - exper ) ;
+  
+  return sum( DerivativeSpreSum ) ;
 }
-
-
-uVector Taylor_uncertainty::second_D_model(
-  enum model::labels::Name d_first , enum model::labels::Name d_second,
-  const double dh )
-{
-  const double fV = 1;
-  const vectorData omegas = thermalData->omegas ;
-  typedef const vector< pair< enum model::labels::Name, double > > List;
-  using emission::phase99Pertrub;
-
-  const auto eval = [&]( List list )
-  {
-    return stdVector2ublasVector( phase99Pertrub( *coreSystem, omegas, list ) );
-  };
-
-  List list_pp = { make_pair( d_first, fV + dh),make_pair( d_second, fV + dh )};
-  List list_pm = { make_pair( d_first, fV + dh),make_pair( d_second, fV - dh )};
-  List list_mp = { make_pair( d_first, fV - dh),make_pair( d_second, fV + dh )};
-  List list_mm = { make_pair( d_first, fV - dh),make_pair( d_second, fV - dh )};
-
-  const uVector model_pp = eval( list_pp ) ;
-  const uVector model_pm = eval( list_pm ) ;
-  const uVector model_mp = eval( list_mp ) ;
-  const uVector model_mm = eval( list_mm ) ;
-
-  const
-  uVector diMi = model_pp - model_pm - model_mp + model_mm / ( 4 * dh * dh ) ;
-
-  return diMi ;
-}
-
-double Taylor_uncertainty::derivative_M(
-  enum model::labels::Name d_first , enum model::labels::Name d_second,
-  const double dh )
-{
-  using boost::numeric::ublas::sum;
-  using boost::numeric::ublas::element_prod;
-
-  
-  const uVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
-  const uVector exper = stdVector2ublasVector( thermalData->experimentalEmission) ;
-  
-  const uVector first_DModel = first_D_model( d_first, dh ) ;
-  const uVector second_DModel = first_D_model( d_second, dh ) ;
-  const uVector second_D_Model = second_D_model( d_first, d_second, dh ) ;
-  
-  const uVector derivative_M_i =
-    2 * element_prod( second_D_Model, model - exper  )
-  + 2 * element_prod( first_DModel, second_DModel ) ;
-
-  const double output = sum( derivative_M_i ) ;
-  return output;
-}
-
 
 uMatrix Taylor_uncertainty::jacobianY( void )
 {
-  const size_t N = unknownParameters->size();
-  const double dh = 1e-10;
+  const EnumList myList = unknownParameters->get_enum_list() ;
   
-  typedef const std::vector< enum model::labels::Name > EnumList ;
-  EnumList myEnumList = unknownParameters->get_enum_list() ;
-  
-  uMatrix output( N , N ) ;
-  
-  for( size_t i = 0 ; i < N ; ++i )
-    for( size_t j= 0; j < N ; ++j )
-      output( i , j ) = derivative_M( myEnumList[i], myEnumList[j] , dh) ;
+  uMatrix output( N_unknowns , N_unknowns ) ;
+  for( size_t i = 0 ; i < N_unknowns ; ++i )
+    for( size_t j= 0; j < N_dataPoints ; ++j )
+      output( i , j ) = derivative_M( myList[i], myList[j] , j ) ;
  
   return output;
 }
 
-
-double Taylor_uncertainty::sDerivative( enum model::labels::Name derive )
+uMatrix Taylor_uncertainty::jacobianX( void )
 {
-  using boost::numeric::ublas::element_prod;
-  const double dh = 1e-10;
+  using model::labels::Name::experimentalData;
+  using model::labels::Name::omega;
 
-  const uVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
-  const uVector exper = stdVector2ublasVector( thermalData->experimentalEmission) ;
-
-  const uVector DerivativeModel = first_D_model( derive, dh ) ;
-  const uVector DerivativeSpreSum = 2 * element_prod( DerivativeModel, model - exper);
+  const size_t N = N_unknowns ;
+  const size_t M = 2 * N_dataPoints + ( N_knowns - 2 ) ;
+  uMatrix output( N , M ) ;
   
-  const double output = boost::numeric::ublas::sum( DerivativeSpreSum ) ;
+  const EnumList myList = unknownParameters->get_enum_list() ;
 
+  const EnumList myKnownList = myList;
+
+  for( size_t i = 0 ; i < N ; ++i ) {
+  
+    for( size_t j = 0 ; j < N_dataPoints ; ++j) {
+      output( i , j ) = derivative_M( myList[i], experimentalData , j ) ;
+    }
+    for( size_t j = 0 ; j < N_dataPoints ; ++j) {
+      output( i , j ) = derivative_M( myList[i], omega , j ) ;
+    }
+    for( size_t j = 0 ; j < (N_knowns - 2 ) ; ++j) {
+      output( i , j ) = derivative_M( myList[i], myKnownList[j] , N_dataPoints ) ;
+    }
+  }
   
   return output;
 }
+
+
+double Taylor_uncertainty::derivative_M(
+  const label d_first ,
+  const label d_second,
+  const size_t ith )
+{
+  cuVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
+  cuVector exper = stdVector2ublasVector( thermalData->experimentalEmission ) ;
+  
+  cuVector dSd1 = first_D_model( d_first, ith ) ;
+  cuVector dSd2 = first_D_model( d_second, ith ) ;
+  cuVector ddSd1d2 = second_D_model( d_first, d_second, ith ) ;
+
+  cuVector dXd2 = derivativeCi( N_dataPoints, ith ) ;
+  
+  cuVector output = 2 * (
+       element_prod( ( dXd2 - dSd2 ) , dSd1 )
+    +  element_prod( ddSd1d2 , exper - model ) );
+
+  return sum( output ) ;
+}
+
+uVector Taylor_uncertainty::evalModel( List list, const size_t ith ) {
+  return stdVector2ublasVector( phase99Pertrub( *coreSystem,
+                                                thermalData->omegas,
+                                                list, ith ) ) ;
+}
+
+uVector Taylor_uncertainty::first_D_model( label derive , const size_t ith ) {
+  using model::labels::Name::experimentalData;
+  const uZero_Vector myZeroVector( N_dataPoints ) ;
+
+  const bool modelParametersOnly = derive != experimentalData;
+  uVector DerivativeModel = myZeroVector ;
+  
+  if( modelParametersOnly )
+  {
+    const double fullValue = 1 ;
+    List listplus  = { make_pair( derive, fullValue + dh ) } ;
+    List listminus = { make_pair( derive, fullValue - dh ) } ;
+    
+    cuVector modelplus = evalModel( listplus, ith ) ;
+    cuVector modelmins = evalModel( listminus, ith ) ;
+    
+    DerivativeModel =
+    centralDifference( modelplus, modelmins, dh ) ;
+  }
+  
+  return DerivativeModel;
+}
+
+uVector Taylor_uncertainty::second_D_model( label d_first , label d_second,
+                                            const size_t ith )
+{
+
+  const auto listMaker = [&]( const bool mod1, const bool mod2 )
+  {
+    const double fV = 1;
+    const int modifier1 = mod1 ? 1 : -1 ;
+    const int modifier2 = mod2 ? 1 : -1 ;
+    List list_xx = {  make_pair( d_first, fV + (modifier1 * dh) ),
+                      make_pair( d_second, fV + (modifier2 * dh))};
+    return list_xx;
+  };
+  
+  List list_pp = listMaker( true, true ) ;
+  List list_pm = listMaker( true, false ) ;
+  List list_mp = listMaker( false, true ) ;
+  List list_mm = listMaker( false, false ) ;
+  
+  cuVector model_pp = evalModel( list_pp, ith ) ;
+  cuVector model_pm = evalModel( list_pm, ith ) ;
+  cuVector model_mp = evalModel( list_mp, ith ) ;
+  cuVector model_mm = evalModel( list_mm, ith ) ;
+
+  return central_difference_partial( model_pp, model_pm, model_mp, model_mm,dh);
+}
+
+uUnit_Vector Taylor_uncertainty::derivativeCi( const size_t maxSize,
+  const size_t ith)
+{
+  const uUnit_Vector output( maxSize, ith) ;
+  return output;
+}
+
+
+
+
 
 }}

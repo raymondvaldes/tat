@@ -36,18 +36,26 @@ class Taylor_uncertainty: private baseData
                       const size_t ith ) ;
   boost::numeric::ublas::vector<double> sDerivativeVector( void ) ;
   boost::numeric::ublas::vector<double>
-    first_D_model( enum model::labels::Name derive , const double dh) ;
+    first_D_model( const enum model::labels::Name derive ,
+                   const size_t ith) ;
   boost::numeric::ublas::vector<double> second_D_model(
-                    enum model::labels::Name d_first,
-                    enum model::labels::Name d_second, const double dh) ;
+                    const enum model::labels::Name d_first,
+                    const enum model::labels::Name d_second,
+                    const size_t ith) ;
   boost::numeric::ublas::matrix<double> jacobianY( void ) ;
-  double derivative_M( enum model::labels::Name d_first ,
-                       enum model::labels::Name d_second, const double dh ) ;
-
+  boost::numeric::ublas::matrix<double> jacobianX( void ) ;
+  double derivative_M( const enum model::labels::Name d_first ,
+                       const enum model::labels::Name d_second,
+                       const size_t ith ) ;
+  boost::numeric::ublas::vector<double> evalModel(
+  const vector< std::pair < enum thermal::model::labels::Name, double > > list,
+  const size_t ith ) ;
+  boost::numeric::ublas::unit_vector<double>
+  derivativeCi( const size_t maxSize, const size_t ith) ;
   
   public:
   explicit Taylor_uncertainty( void ) ;
-  ~Taylor_uncertainty( ) ;
+  ~Taylor_uncertainty() ;
 
   void solve(
          const std::shared_ptr< math::estimation::unknownList > &list_in,

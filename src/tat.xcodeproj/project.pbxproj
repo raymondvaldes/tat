@@ -33,6 +33,8 @@
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
 		ABE169031948EA8D00C1E409 /* libgsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE169011948EA8D00C1E409 /* libgsl.a */; };
 		ABE169041948EA8D00C1E409 /* libgslcblas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE169021948EA8D00C1E409 /* libgslcblas.a */; };
+		ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5219C737C000882E01 /* forward_difference.h */; };
+		ABEBCE5819C737E500882E01 /* central_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5619C737E500882E01 /* central_difference.h */; };
 		ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DCC1948D4A500B44AD5 /* execute.cpp */; };
 		ABEF4E781948D4A500B44AD5 /* execute.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DCD1948D4A500B44AD5 /* execute.h */; };
 		ABEF4E791948D4A500B44AD5 /* num_method2014.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DCE1948D4A500B44AD5 /* num_method2014.cpp */; };
@@ -203,6 +205,8 @@
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
 		ABE169011948EA8D00C1E409 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = ../../../../../usr/local/Cellar/gsl/1.16/lib/libgsl.a; sourceTree = "<group>"; };
 		ABE169021948EA8D00C1E409 /* libgslcblas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgslcblas.a; path = ../../../../../usr/local/Cellar/gsl/1.16/lib/libgslcblas.a; sourceTree = "<group>"; };
+		ABEBCE5219C737C000882E01 /* forward_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forward_difference.h; path = numericalAnalysis/differentiation/firstDerivative/forward_difference.h; sourceTree = "<group>"; };
+		ABEBCE5619C737E500882E01 /* central_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = central_difference.h; path = numericalAnalysis/differentiation/firstDerivative/central_difference.h; sourceTree = "<group>"; };
 		ABEF4D971948D02600B44AD5 /* libtatlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtatlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEF4DCC1948D4A500B44AD5 /* execute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = execute.cpp; sourceTree = "<group>"; };
 		ABEF4DCD1948D4A500B44AD5 /* execute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = execute.h; sourceTree = "<group>"; };
@@ -460,6 +464,39 @@
 			name = programoptions;
 			sourceTree = "<group>";
 		};
+		ABEBCE4F19C7364D00882E01 /* numericalAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				ABEBCE5019C736D400882E01 /* differentiation */,
+			);
+			name = numericalAnalysis;
+			sourceTree = "<group>";
+		};
+		ABEBCE5019C736D400882E01 /* differentiation */ = {
+			isa = PBXGroup;
+			children = (
+				ABEBCE5B19C73CB800882E01 /* secondDerivative */,
+				ABEBCE5919C73C5200882E01 /* firstDerivative */,
+			);
+			name = differentiation;
+			sourceTree = "<group>";
+		};
+		ABEBCE5919C73C5200882E01 /* firstDerivative */ = {
+			isa = PBXGroup;
+			children = (
+				ABEBCE5219C737C000882E01 /* forward_difference.h */,
+				ABEBCE5619C737E500882E01 /* central_difference.h */,
+			);
+			name = firstDerivative;
+			sourceTree = "<group>";
+		};
+		ABEBCE5B19C73CB800882E01 /* secondDerivative */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = secondDerivative;
+			sourceTree = "<group>";
+		};
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +515,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				ABEBCE4F19C7364D00882E01 /* numericalAnalysis */,
 				AB553C55195DF3A700E2B7D1 /* utilities */,
 				AB553C48195DE30F00E2B7D1 /* geometry */,
 				AB553C46195DCF6D00E2B7D1 /* statistics */,
@@ -854,6 +892,7 @@
 				ABEF4E841948D4A500B44AD5 /* spline_cplx.h in Headers */,
 				ABEF4EC91948D4A500B44AD5 /* diffusivity.h in Headers */,
 				ABEF4EA81948D4A500B44AD5 /* radiativeSysProp.h in Headers */,
+				ABEBCE5819C737E500882E01 /* central_difference.h in Headers */,
 				AB0DFE02195242AA007DF69B /* split.h in Headers */,
 				AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */,
 				ABEF4EAC1948D4A500B44AD5 /* temperature_scale.h in Headers */,
@@ -905,6 +944,7 @@
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
 				ABEF4EDC1948D4A500B44AD5 /* detector.h in Headers */,
 				ABEF4ED61948D4A500B44AD5 /* emission.hpp in Headers */,
+				ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */,
 				ABEF4EFE1948D4A500B44AD5 /* filesystem.hpp in Headers */,
 				ABEF4EAF1948D4A500B44AD5 /* cmplx_combination.h in Headers */,
 				AB0DFE0619524382007DF69B /* starts_with.h in Headers */,
