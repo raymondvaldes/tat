@@ -96,13 +96,12 @@ Kernal::~Kernal(void){}
 
 double Kernal::bEval(void) const
 {
-  return expSetup.laser.radius / TBCsystem.coating.depth;
+  return expSetup.laser.radius / TBCsystem.coating.getDepth();
 }
 
 void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 {
-  for( const auto& unknown :  list )
-  {
+  for( const auto& unknown :  list ) {
     const double val = unknown.bestfit();
     TBCsystem.updateVal( unknown.label() , val );
   }
@@ -112,8 +111,7 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
 void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list )
 {
   using math::estimation::unknown;
-  for( const auto& unknown :  list )
-  {
+  for( const auto& unknown :  list ) {
     const double val = unknown.initialVal();
     TBCsystem.updateVal( unknown.label() , val );
   }
