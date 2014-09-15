@@ -41,16 +41,26 @@ namespace thermal{
 
 class labels
 {
+private:
+
 public:
+  static size_t numberOfLabels(void) { return 10; };
+
   enum class Name: uint8_t
   {
-    gammaEff,
-    asub,
-    E1,
-    R1,
-    lambda,
+    gammaEff,           //1
+    asub,               //2
+    E1,                 //3
+    R1,                 //4
+    lambda,             //5
+    length,             //6
+    acoat,              //7
+    gammaSub,           //8
+    omega,              //9
+    experimentalData,   //10
+    
     thermalCenter,
-    thermalRange
+    thermalRange,
   };
   
   typedef boost::bimap< enum Name , std::string > NameBiTYPE;
@@ -62,12 +72,17 @@ public:
   ( Name::R1       , "R1")
   ( Name::lambda   , "lambda")
   ( Name::thermalCenter, "thermalCenter")
-  ( Name::thermalRange, "thermalRange");
+  ( Name::thermalRange, "thermalRange")
+  ( Name::experimentalData, "experimentalData")
+  ( Name::omega, "omega" )
+  ( Name::acoat, "acoat" )
+  ( Name::gammaSub, "gammaSub") ;
   
   explicit labels(void);
   explicit labels(const enum Name name_);
   Name getName(void) const;
   std::string getNameString(void) const;
+  
   
   labels& operator=( const labels& that );
   
