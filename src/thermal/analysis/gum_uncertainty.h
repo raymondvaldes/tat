@@ -53,7 +53,9 @@ class Taylor_uncertainty: private baseData
   const size_t ith ) ;
   boost::numeric::ublas::unit_vector<double>
   derivativeCi( const size_t maxSize, const size_t ith) ;
-  
+  vector< enum thermal::model::labels::Name > get_list_knowns( void ) ;
+  void jacobian( void ) ;
+
   public:
   explicit Taylor_uncertainty( void ) ;
   ~Taylor_uncertainty() ;

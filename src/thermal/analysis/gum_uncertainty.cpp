@@ -55,6 +55,29 @@ void Taylor_uncertainty::solve(
   N_dataPoints = thermalData->size();
   
   const uVector output = sDerivativeVector();
+  for( const auto& val : output )
+    std::cout << val << "\n";
+  
+  jacobian();
+}
+
+void Taylor_uncertainty::jacobian( void ) {
+  -jacobianY();
+  jacobianX();
+
+  
+  
+}
+
+double Taylor_uncertainty::sDerivative( label derive, const size_t ith )
+{
+  cuVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
+  cuVector exper = stdVector2ublasVector( thermalData->experimentalEmission ) ;
+
+  cuVector DerivativeModel = first_D_model( derive, ith ) ;
+  cuVector DerivativeSpreSum = 2 * element_prod( DerivativeModel, model - exper ) ;
+  
+  return sum( DerivativeSpreSum ) ;
 }
 
 uVector Taylor_uncertainty::sDerivativeVector( void )
@@ -89,6 +112,34 @@ uMatrix Taylor_uncertainty::jacobianY( void )
       output( i , j ) = derivative_M( myList[i], myList[j] , j ) ;
  
   return output;
+}
+
+vector< enum thermal::model::labels::Name >
+Taylor_uncertainty::get_list_knowns( void )
+{
+  using std::sort;
+  const thermal::model::labels myLabel;
+
+  const EnumList myParameterList = myLabel.getEnumList();
+  const EnumList listunknowns = unknownParameters->get_enum_list() ;
+
+  const size_t sizeOfKnowns = myParameterList.size() - listunknowns.size() ;
+  EnumList listKnowns;
+  
+  for( const auto& parameter : myParameterList) {
+    bool trackParameter = true;
+    for( const auto& unknown: listunknowns ) {
+      if( parameter == unknown )
+        trackParameter = false;
+    }
+    if( trackParameter == true )
+      listKnowns.push_back(parameter) ;
+  }
+  
+  
+  assert( listKnowns.size() == sizeOfKnowns ) ;
+  
+  return listunknowns;
 }
 
 uMatrix Taylor_uncertainty::jacobianX( void )
@@ -174,7 +225,6 @@ uVector Taylor_uncertainty::first_D_model( label derive , const size_t ith ) {
 uVector Taylor_uncertainty::second_D_model( label d_first , label d_second,
                                             const size_t ith )
 {
-
   const auto listMaker = [&]( const bool mod1, const bool mod2 )
   {
     const double fV = 1;
