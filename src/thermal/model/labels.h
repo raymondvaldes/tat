@@ -46,7 +46,7 @@ private:
 public:
   static size_t numberOfLabels(void) { return 10; };
 
-  enum class Name: uint8_t
+  enum class Name
   {
     gammaEff,           //1
     asub,               //2
@@ -62,6 +62,24 @@ public:
     thermalCenter,
     thermalRange,
   };
+
+  static std::vector< enum Name > getEnumList( void ) {
+    std::vector< enum Name > output( numberOfLabels() ) ;
+    output[0] = Name::gammaEff;
+    output[1] = Name::asub;
+    output[2] = Name::E1;
+    output[3] = Name::R1;
+    output[4] = Name::lambda;
+    output[5] = Name::length;
+    output[6] = Name::acoat;
+    output[7] = Name::gammaSub;
+    output[8] = Name::omega;
+    output[9] = Name::experimentalData;
+    
+    return output;
+  };
+
+  
   
   typedef boost::bimap< enum Name , std::string > NameBiTYPE;
   const NameBiTYPE nameMap =
@@ -70,7 +88,9 @@ public:
   ( Name::asub     , "asub")
   ( Name::E1       , "E1")
   ( Name::R1       , "R1")
-  ( Name::lambda   , "lambda")
+  ( Name::lambda   , "lambda" )
+  
+  ( Name::length   , "length" )
   ( Name::thermalCenter, "thermalCenter")
   ( Name::thermalRange, "thermalRange")
   ( Name::experimentalData, "experimentalData")
