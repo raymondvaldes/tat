@@ -198,14 +198,6 @@ unknownList::unknownList( std::vector< estimation::unknown> input )
   :vectorUnknowns(input)
 {}
 
-//void unknownList::resetBestfits( void )
-//{
-//  for( estimation::unknown& val : vectorUnknowns)
-//  {
-//    val.reset();
-//  }
-//}
-
 
 class unknownList unknownList::
         loadConfigfromXML(const boost::property_tree::ptree pt)
