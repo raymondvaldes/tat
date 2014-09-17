@@ -11,6 +11,7 @@
 #include "algorithm/vector/subtract.h"
 #include "algorithm/vector/stdVector2ublasVector.h"
 #include "math/numericalAnalysis/differentiation/firstDerivative/central_difference.h"
+#include "math/numericalAnalysis/matrixs/inversion.h"
 
 using std::pair;
 using std::make_pair;
@@ -61,12 +62,16 @@ void Taylor_uncertainty::solve(
   jacobian();
 }
 
-void Taylor_uncertainty::jacobian( void ) {
-  -jacobianY();
-  jacobianX();
+uMatrix Taylor_uncertainty::jacobian( void ) {
+  using math::numericalAnalysis::matrix::InvertMatrix;
+  using boost::numeric::ublas::prod;
 
+  const uMatrix Jy = jacobianY() ;
+  const uMatrix Jx = jacobianX() ;
+  const uMatrix invJy = InvertMatrix( Jy ) ;
   
-  
+  const uMatrix J = -prod( invJy, Jx );
+  return J;
 }
 
 double Taylor_uncertainty::sDerivative( label derive, const size_t ith )

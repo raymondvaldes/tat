@@ -28,6 +28,7 @@
 		ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */; };
 		ABB54FD119C35E300056823E /* ifzero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FCF19C35E300056823E /* ifzero.cpp */; };
 		ABB54FD219C35E300056823E /* ifzero.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FD019C35E300056823E /* ifzero.h */; };
+		ABDCB54019C934B30044553C /* inversion.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDCB53E19C934B30044553C /* inversion.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
 		ABE169001948EA3B00C1E409 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FD1948EA3B00C1E409 /* libboost_system.a */; };
@@ -200,6 +201,7 @@
 		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
 		ABB54FCF19C35E300056823E /* ifzero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifzero.cpp; path = algorithm/vector/ifzero.cpp; sourceTree = "<group>"; };
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
+		ABDCB53E19C934B30044553C /* inversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inversion.h; path = numericalAnalysis/matrixs/inversion.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
@@ -464,9 +466,18 @@
 			name = programoptions;
 			sourceTree = "<group>";
 		};
+		ABDCB53C19C9348A0044553C /* matrix */ = {
+			isa = PBXGroup;
+			children = (
+				ABDCB53E19C934B30044553C /* inversion.h */,
+			);
+			name = matrix;
+			sourceTree = "<group>";
+		};
 		ABEBCE4F19C7364D00882E01 /* numericalAnalysis */ = {
 			isa = PBXGroup;
 			children = (
+				ABDCB53C19C9348A0044553C /* matrix */,
 				ABEBCE5019C736D400882E01 /* differentiation */,
 			);
 			name = numericalAnalysis;
@@ -938,6 +949,7 @@
 				ABEF4E961948D4A500B44AD5 /* simpsons_3_8.hpp in Headers */,
 				ABEF4E821948D4A500B44AD5 /* spline.h in Headers */,
 				ABEF4EDE1948D4A500B44AD5 /* laser.h in Headers */,
+				ABDCB54019C934B30044553C /* inversion.h in Headers */,
 				ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */,
 				ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */,
 				ABEF4EFC1948D4A500B44AD5 /* exportfile.hpp in Headers */,
