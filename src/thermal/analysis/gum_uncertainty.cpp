@@ -5,7 +5,7 @@
 //  Created by Raymond Valdes on 9/10/14.
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
-
+#include <algorithm>
 #include "thermal/analysis/gum_uncertainty.h"
 #include "thermal/emission/phase99.hpp"
 #include "algorithm/vector/subtract.h"
@@ -28,7 +28,7 @@ typedef boost::numeric::ublas::zero_vector<double> uZero_Vector;
 typedef boost::numeric::ublas::unit_vector<double> uUnit_Vector;
 typedef boost::numeric::ublas::matrix<double> uMatrix;
 typedef const enum thermal::model::labels::Name label;
-typedef const vector< enum thermal::model::labels::Name > EnumList ;
+typedef vector< enum thermal::model::labels::Name > EnumList ;
 typedef const vector< pair < enum thermal::model::labels::Name, double > > List;
 
 typedef boost::numeric::ublas::vector<double> uVector;
@@ -53,7 +53,7 @@ void Taylor_uncertainty::solve(
   N_parameters = thermal::model::labels::numberOfLabels() ;
   N_knowns = N_parameters - N_unknowns ;
   N_dataPoints = thermalData->size();
-  
+
   const uVector output = sDerivativeVector();
   for( const auto& val : output )
     std::cout << val << "\n";
@@ -83,7 +83,7 @@ double Taylor_uncertainty::sDerivative( label derive, const size_t ith )
 uVector Taylor_uncertainty::sDerivativeVector( void )
 {
   uVector output( N_unknowns ) ;
-  
+
   size_t i = 0 ;
   for( auto& val: unknownParameters->vectorUnknowns )
       output[i++] = sDerivative( val.label() , N_dataPoints )  ;
@@ -91,26 +91,17 @@ uVector Taylor_uncertainty::sDerivativeVector( void )
   return output;
 }
 
-double Taylor_uncertainty::sDerivative( label derive, const size_t ith )
-{
-  cuVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
-  cuVector exper = stdVector2ublasVector( thermalData->experimentalEmission ) ;
-
-  cuVector DerivativeModel = first_D_model( derive, ith ) ;
-  cuVector DerivativeSpreSum = 2 * element_prod( DerivativeModel, model - exper ) ;
-  
-  return sum( DerivativeSpreSum ) ;
-}
 
 uMatrix Taylor_uncertainty::jacobianY( void )
 {
-  const EnumList myList = unknownParameters->get_enum_list() ;
+  const EnumList myList = get_list_knowns() ;
   
   uMatrix output( N_unknowns , N_unknowns ) ;
-  for( size_t i = 0 ; i < N_unknowns ; ++i )
-    for( size_t j= 0; j < N_dataPoints ; ++j )
-      output( i , j ) = derivative_M( myList[i], myList[j] , j ) ;
- 
+  for  ( size_t i = 0 ; i < N_unknowns ; ++i ) {
+    for( size_t j = 0 ; j < N_unknowns ; ++j )
+      output( i , j ) = derivative_M( myList[i], myList[j] , N_dataPoints ) ;
+  }
+  
   return output;
 }
 
@@ -149,22 +140,29 @@ uMatrix Taylor_uncertainty::jacobianX( void )
 
   const size_t N = N_unknowns ;
   const size_t M = 2 * N_dataPoints + ( N_knowns - 2 ) ;
-  uMatrix output( N , M ) ;
   
   const EnumList myList = unknownParameters->get_enum_list() ;
-
-  const EnumList myKnownList = myList;
-
+  const EnumList myKnownList = get_list_knowns();
+  
+  uMatrix output( N , M ) ;
   for( size_t i = 0 ; i < N ; ++i ) {
   
-    for( size_t j = 0 ; j < N_dataPoints ; ++j) {
-      output( i , j ) = derivative_M( myList[i], experimentalData , j ) ;
+    for( size_t j = 0 ; j < N_dataPoints ; ++j ) {
+      output( i , j ) = derivative_M( myList[i],
+                                      experimentalData ,
+                                      j ) ;
     }
-    for( size_t j = 0 ; j < N_dataPoints ; ++j) {
-      output( i , j ) = derivative_M( myList[i], omega , j ) ;
+    
+    for( size_t j = N_dataPoints ; j < 2 * N_dataPoints ; ++j ) {
+      output( i , j ) = derivative_M( myList[i],
+                                      omega ,
+                                      j - N_dataPoints ) ;
     }
-    for( size_t j = 0 ; j < (N_knowns - 2 ) ; ++j) {
-      output( i , j ) = derivative_M( myList[i], myKnownList[j] , N_dataPoints ) ;
+    
+    for( size_t j = 2 * N_dataPoints ; j < M ; ++j ) {
+      output( i , j ) = derivative_M( myList[i],
+                                      myKnownList[j - 2 * N_dataPoints] ,
+                                      N_dataPoints ) ;
     }
   }
   
@@ -184,10 +182,14 @@ double Taylor_uncertainty::derivative_M(
   cuVector dSd2 = first_D_model( d_second, ith ) ;
   cuVector ddSd1d2 = second_D_model( d_first, d_second, ith ) ;
 
-  cuVector dXd2 = derivativeCi( N_dataPoints, ith ) ;
+  const uZero_Vector myZeroVector( N_dataPoints ) ;
+  uVector dXd2 = myZeroVector ;
+  if( ith < N_dataPoints )
+    dXd2 = derivativeCi( N_dataPoints, ith ) ;
+
   
   cuVector output = 2 * (
-       element_prod( ( dXd2 - dSd2 ) , dSd1 )
+       element_prod( dSd1,  dXd2 - dSd2 )
     +  element_prod( ddSd1d2 , exper - model ) );
 
   return sum( output ) ;
