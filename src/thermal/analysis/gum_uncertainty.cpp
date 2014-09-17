@@ -50,7 +50,8 @@ void Taylor_uncertainty::solve(
   thermalData = thermalData_in ;
   coreSystem = coreSystem_in ;
   N_unknowns = unknownParameters->size() ;
-  N_knowns = thermal::model::labels::numberOfLabels() ;
+  N_parameters = thermal::model::labels::numberOfLabels() ;
+  N_knowns = N_parameters - N_unknowns ;
   N_dataPoints = thermalData->size();
   
   const uVector output = sDerivativeVector();

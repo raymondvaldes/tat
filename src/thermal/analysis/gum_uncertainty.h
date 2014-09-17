@@ -30,6 +30,7 @@ class Taylor_uncertainty: private baseData
   const double dh = 1e-10;
   size_t N_unknowns;
   size_t N_knowns;
+  size_t N_parameters;
   size_t N_dataPoints;
 
   double sDerivative( const enum model::labels::Name derive,
