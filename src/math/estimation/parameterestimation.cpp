@@ -183,11 +183,10 @@ void unknownList::operator() ( const std::vector< class unknown > &input )
 
 std::vector< enum labels::Name > unknownList::get_enum_list( void ) {
 
-  std::vector<enum labels::Name> output( size() ) ;
+  std::vector<enum labels::Name> output;
   
-  size_t i = 0;
   for( auto& val : vectorUnknowns )
-    output[i++] = val.label() ;
+    output.push_back( val.label() ) ;
   
   return output;
 }
