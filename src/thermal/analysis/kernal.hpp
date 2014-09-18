@@ -26,6 +26,8 @@ License
 #define popteaCore_HPP
 
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
+#include <vector>
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/equipment/setup.h"
@@ -63,7 +65,13 @@ public:
   void updatefromInitial( std::vector< math::estimation::unknown > list );
   void updateFromList( const enum model::labels::Name mylabel ,
                        const double val ) ;
-
+  
+  std::pair< std::shared_ptr< Kernal >, std::vector<double> >
+  updateCoreOmegaFromList(
+    const std::vector<double> &omegas,
+    const std::vector< std::pair < enum model::labels::Name, double > > list,
+    const size_t ith ) const;
+  
   // reload members
   void reloadthermalsys( const define::construct &other );
 

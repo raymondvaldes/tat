@@ -23,6 +23,7 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <exception>
+#include <memory>
 
 #include "thermal/analysis/kernal.hpp"
 #include "thermal/equipment/setup.h"
@@ -50,6 +51,48 @@ Kernal::Kernal( const equipment::setup &expSetup_,
 {
 
 }
+
+  
+std::pair< std::shared_ptr< Kernal >, std::vector<double> >
+Kernal::updateCoreOmegaFromList(
+    const std::vector<double> &omegas,
+    const std::vector< std::pair < enum model::labels::Name, double > > list,
+    const size_t ith ) const
+{
+  using model::labels::Name::omega;
+  using model::labels::Name::experimentalData;
+  using std::make_shared;
+  using std::shared_ptr;
+  using std::make_pair;
+  using std::vector;
+  
+  shared_ptr< Kernal > corePerturbed = make_shared<Kernal>(*this);
+  vector<double> omegasPertrubed = omegas;
+  
+  const size_t N = omegas.size();
+  BOOST_ASSERT( ith <= N ) ;
+  BOOST_ASSERT( ith >= 0 ) ;
+  
+  for( auto val: list )
+  {
+    const bool omegaV = val.first == omega ;
+    const bool experimentalV = val.first == experimentalData ;
+  
+    if( !omegaV && !experimentalV ) {
+      corePerturbed->updateFromList( val.first, val.second ) ;
+    }
+    else {
+      BOOST_ASSERT( ith < N && ith >= 0 ) ;
+      if( omegaV ) {
+        omegasPertrubed[ith] *= val.second ;
+      }
+    }
+  }
+  
+  
+  return make_pair( make_shared<Kernal>( *corePerturbed ) , omegasPertrubed ) ;
+}
+
 
 class thermal::analysis::Kernal
         Kernal::loadConfig( const boost::property_tree::ptree &pt,
