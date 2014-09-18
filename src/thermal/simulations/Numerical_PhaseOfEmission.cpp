@@ -49,7 +49,7 @@ double PhaseOfEmission1DNum( const double omega,
                   popteaCore.expSetup, omega, Tprofile ) ;
 
   ///Initiate emission model
-  const double Lcoat = popteaCore.TBCsystem.coating.depth ;
+  const double Lcoat = popteaCore.TBCsystem.coating.getDepth() ;
   const class thermal::Emission emission( popteaCore.expSetup.detector.wavelength,
                                           popteaCore.TBCsystem.Temp.base,
                                           popteaCore.thermalsys.mesh,
@@ -68,19 +68,19 @@ double PhaseOfEmission2DAna( const double omega,
     /// Initiate 2d analytical model
     const double k_coat  = popteaCore.TBCsystem.coating.kthermal.offset;
     const double psi_coat= popteaCore.TBCsystem.coating.psithermal.offset;
-    const double Lcoat = popteaCore.TBCsystem.coating.depth;
+    const double Lcoat = popteaCore.TBCsystem.coating.getDepth();
     const double csub = popteaCore.TBCsystem.substrate.c;
     const double ccoat = popteaCore.TBCsystem.coating.c;
 
     const class HeatModel2DAna
         heatmodel2DAna( popteaCore.TBCsystem.optical.R0,
                         popteaCore.TBCsystem.optical.R1,
-                        popteaCore.TBCsystem.coating.lambda,
+                        popteaCore.TBCsystem.coating.getLambda(),
                         popteaCore.expSetup.laser.It,
                         csub, popteaCore.TBCsystem.a_subEval(),
                         popteaCore.TBCsystem.gammaEval(),
                         popteaCore.bEval(), k_coat, Lcoat, psi_coat, ccoat,
-                        popteaCore.TBCsystem.substrate.lambda,
+                        popteaCore.TBCsystem.substrate.getLambda(),
                         popteaCore.thermalsys.mesh) ;
 
     /// Setup Temperature[n][r][z] Vector
@@ -154,10 +154,10 @@ double PhaseOfEmission1DAna( const double omega1, const double L_coat,
 double PhaseOfEmission1DAna( const double omega1,
                              const thermal::analysis::Kernal &popteaCore )
 {
-  const double L_coat   = popteaCore.TBCsystem.coating.depth ;
+  const double L_coat   = popteaCore.TBCsystem.coating.getDepth() ;
   const double k_c      = popteaCore.TBCsystem.coating.kthermal.offset ;
   const double psi    = popteaCore.TBCsystem.coating.psithermal.offset ;
-  const double lambda   = popteaCore.TBCsystem.coating.lambda ;
+  const double lambda   = popteaCore.TBCsystem.coating.getLambda() ;
   const double R1       = popteaCore.TBCsystem.optical.R1 ;
   const double gamma    = popteaCore.TBCsystem.gammaEval() ;
   const double E1   = popteaCore.TBCsystem.optical.Emit1;

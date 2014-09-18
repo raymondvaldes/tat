@@ -484,7 +484,7 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
       
     }
     else {
-      const double length = coatingTOinterpretFullRange->depth ;
+      const double length = coatingTOinterpretFullRange->getDepth() ;
       const double ktherm = coatingTOinterpretFullRange->kthermal.offset ;
       const double psitherm = coatingTOinterpretFullRange->psithermal.offset ;
 
@@ -538,7 +538,7 @@ const vector< vector< double > > group_x_CR )
       thermalPenetration min = sliced_therm.first ;
       thermalPenetration max = sliced_therm.second ;
       
-      const double length = coatingTOinterpretFullRange->depth ;
+      const double length = coatingTOinterpretFullRange->getDepth() ;
       const double ktherm = coatingTOinterpretFullRange->kthermal.offset ;
       const double psitherm = coatingTOinterpretFullRange->psithermal.offset ;
       
@@ -573,7 +573,7 @@ std::string ThermalSweepOptimizer::contourMappingResults() {
 
   const double kcond = coatingTOinterpretFullRange->kthermal.offset;
   const double psi = coatingTOinterpretFullRange->psithermal.offset;
-  const double length = coatingTOinterpretFullRange->depth;
+  const double length = coatingTOinterpretFullRange->getDepth();
 
 
   for( OptimizerOutput::ExperimentAnalysisState&state :
@@ -708,7 +708,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
       omegasMonoIncreasing.size() ) ;
 
   // Use omega to derive current lthermalsLimits that correspond to FullRange
-  const double coatingLength = updatedCoating.depth;
+  const double coatingLength = updatedCoating.getDepth();
   const double coatingK = updatedCoating.kthermal.offset;
   const double coatingPsi = updatedCoating.psithermal.offset;
 
