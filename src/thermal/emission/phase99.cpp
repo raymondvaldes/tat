@@ -107,41 +107,21 @@ vector<double> phase99Pertrub(
   const vector< pair < enum model::labels::Name, double > > list,
   const size_t ith )
 {
-  using model::labels::Name::omega;
-  using model::labels::Name::experimentalData;
-
-  Kernal popteaPerturb( popteaCore );
-  vector<double> omegasPertrubed = omegas;
-
-  const size_t N = omegas.size();
-  BOOST_ASSERT( ith <= N ) ;
-  BOOST_ASSERT( ith >= 0 ) ;
+  using std::shared_ptr;
   
-  for( auto val: list ) {
-    const bool omegaV = val.first == omega ;
-    const bool experimentalV = val.first == experimentalData ;
-  
-    if( !omegaV && !experimentalV ) {
-      popteaPerturb.updateFromList( val.first, val.second ) ;
-    }
-    else {
-      BOOST_ASSERT( ith < N && ith >= 0 ) ;
-      if( omegaV ) {
-        omegasPertrubed[ith] *= val.second ;
-      }
-    }
-  }
+  const pair< shared_ptr< Kernal >, vector<double> > perturbedVales =
+  popteaCore.updateCoreOmegaFromList( omegas, list, ith ) ;
+  const auto popteaPerturb = perturbedVales.first;
+  const auto omegasPertrubed = perturbedVales.second;
   
   vector<double>
-  phaseSweep = phase99( popteaPerturb, omegasPertrubed ) ;
-
+  phaseSweep = phase99( *popteaPerturb, omegasPertrubed ) ;
 
   for( auto val: list ) {
-    if( val.first == experimentalData ) {
+    if( val.first == model::labels::Name::experimentalData ) {
         phaseSweep[ith] *= val.second ;
     }
   }
-
 
   return phaseSweep ;
 }

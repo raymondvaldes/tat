@@ -26,8 +26,11 @@ namespace analysis {
 class Taylor_uncertainty: private baseData
 {
   private:
+  baseData SavedState;
+  
   const double tolDif = 0.01;
-  const double dh = 1e-10;
+  const double dh = 1e-8;
+  const double fullVal = 1;
   size_t N_unknowns;
   size_t N_knowns;
   size_t N_parameters;
@@ -55,6 +58,16 @@ class Taylor_uncertainty: private baseData
   derivativeCi( const size_t maxSize, const size_t ith) ;
   vector< enum thermal::model::labels::Name > get_list_knowns( void ) ;
   boost::numeric::ublas::matrix<double> jacobian( void ) ;
+  boost::numeric::ublas::matrix<double> Djacobian(
+    const enum thermal::model::labels::Name derive, const size_t ith );
+
+  void modifyModel( const enum thermal::model::labels::Name derive,
+                    const double val,
+                    const size_t ith ) ;
+  void saveModel() ;
+  void resetModel() ;
+  boost::numeric::ublas::vector<double> uncertaintyResults( void ) ;
+
 
   public:
   explicit Taylor_uncertainty( void ) ;

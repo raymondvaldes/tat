@@ -6,16 +6,23 @@
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
 #include <algorithm>
+#include <memory>
+#include <iostream>
 #include "thermal/analysis/gum_uncertainty.h"
 #include "thermal/emission/phase99.hpp"
 #include "algorithm/vector/subtract.h"
 #include "algorithm/vector/stdVector2ublasVector.h"
 #include "math/numericalAnalysis/differentiation/firstDerivative/central_difference.h"
 #include "math/numericalAnalysis/matrixs/inversion.h"
+#include "math/numericalAnalysis/ublas/apply_to_all.h"
 
 using std::pair;
 using std::make_pair;
 using std::vector;
+using std::make_shared;
+using std::shared_ptr;
+using math::estimation::unknownList;
+
 using algorithm::vector::subtract;
 using algorithm::vector::stdVector2ublasVector;
 using thermal::emission::phase99Pertrub;
@@ -28,6 +35,7 @@ typedef vector<double> vectorData;
 typedef boost::numeric::ublas::zero_vector<double> uZero_Vector;
 typedef boost::numeric::ublas::unit_vector<double> uUnit_Vector;
 typedef boost::numeric::ublas::matrix<double> uMatrix;
+using boost::numeric::ublas::prod ;
 typedef const enum thermal::model::labels::Name label;
 typedef vector< enum thermal::model::labels::Name > EnumList ;
 typedef const vector< pair < enum thermal::model::labels::Name, double > > List;
@@ -39,7 +47,8 @@ typedef const uVector cuVector;
 namespace thermal {
 namespace analysis {
 
-Taylor_uncertainty::Taylor_uncertainty( void ) {}
+Taylor_uncertainty::Taylor_uncertainty( void ){}
+
 Taylor_uncertainty::~Taylor_uncertainty( ){}
 
 void Taylor_uncertainty::solve(
@@ -47,9 +56,8 @@ void Taylor_uncertainty::solve(
          const std::shared_ptr< ThermalData > &thermalData_in,
          const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) {
   ///use the inputs
-  unknownParameters = list_in ;
-  thermalData = thermalData_in ;
-  coreSystem = coreSystem_in ;
+  assignPointer( list_in , thermalData_in , coreSystem_in ) ;
+  
   N_unknowns = unknownParameters->size() ;
   N_parameters = thermal::model::labels::numberOfLabels() ;
   N_knowns = N_parameters - N_unknowns ;
@@ -58,20 +66,104 @@ void Taylor_uncertainty::solve(
   const uVector output = sDerivativeVector();
   for( const auto& val : output )
     std::cout << val << "\n";
+}
+
+void Taylor_uncertainty::saveModel() {
+  SavedState.updateObjects( *coreSystem, *thermalData, *unknownParameters ) ;
+}
+
+void Taylor_uncertainty::resetModel() {
+  updateObjects( *SavedState.coreSystem,
+                 *SavedState.thermalData,
+                 *SavedState.unknownParameters) ;
+}
+
+void Taylor_uncertainty::modifyModel( label derive,
+                                      const double val,
+                                      const size_t ith )
+{
+  List listmodifiers = { make_pair( derive, val ) } ;
   
-  jacobian();
+  const pair< shared_ptr< Kernal >, vector<double> > perturbedVales =
+  coreSystem->updateCoreOmegaFromList( thermalData->omegas, listmodifiers, ith ) ;
+  
+  const auto popteaPerturb = perturbedVales.first;
+  const auto omegasPertrubed = perturbedVales.second;
+  
+  thermalData->omegas = omegasPertrubed;
+  updateObjects( *popteaPerturb, *thermalData, *unknownParameters) ;
+}
+
+uVector Taylor_uncertainty::uncertaintyResults( void ){
+
+  using model::labels::Name::experimentalData;
+  using model::labels::Name::omega;
+
+  const size_t N = N_unknowns ;
+  const size_t M = 2 * N_dataPoints + ( N - 2 ) ;
+  const uVector uncertaintyVector( M );
+
+  const EnumList myKnownList = get_list_knowns();
+
+  const auto eval = [&]( const model::labels::Name label, const size_t i )
+  {
+    const uUnit_Vector unitVector( M, i ) ;
+  
+    const uVector unitUncertainty = element_prod( uncertaintyVector,  unitVector ) ;
+    const uMatrix dJ= Djacobian( label , i ) ;
+  
+    uVector output = prod( dJ, unitUncertainty ) ;
+    return output = element_prod( output, output ) ;
+  };
+  
+  uVector output( N ) ;
+  
+  for( size_t i = 0 ; i < N_dataPoints ; ++i ) {
+    output += eval(experimentalData, i) ;
+  }
+    
+  for( size_t i = 0 ; i < N_dataPoints ; ++i ) {
+    output += eval( omega , i ) ;
+  }
+    
+  for( size_t i = 0 ; i < N_knowns ; ++i ) {
+    output += eval( myKnownList[i] , N_dataPoints ) ;
+  }
+  
+  using math::numericalAnalysis::ublas::apply_to_all;
+  using math::numericalAnalysis::ublas::functor::sqrt;
+  
+  return apply_to_all< sqrt<double> > ( output );
+}
+
+uMatrix Taylor_uncertainty::Djacobian( label derive, const size_t ith ) {
+
+  ///Basically I need to be able to get the derivative of the jacobian
+  ///with respect to the label.
+  
+  saveModel();
+  
+  modifyModel( derive, fullVal + dh , ith ) ;
+  uMatrix modelplus = jacobian();
+  resetModel();
+
+  modifyModel( derive, fullVal - dh , ith ) ;
+  uMatrix modelmins = jacobian();
+  resetModel();
+  
+  const uMatrix DerivativeModel = centralDifference( modelplus, modelmins, dh );
+  return DerivativeModel;
 }
 
 uMatrix Taylor_uncertainty::jacobian( void ) {
-  using math::numericalAnalysis::matrix::InvertMatrix;
-  using boost::numeric::ublas::prod;
+  using math::numericalAnalysis::matrix::InvertMatrix ;
 
   const uMatrix Jy = jacobianY() ;
   const uMatrix Jx = jacobianX() ;
   const uMatrix invJy = InvertMatrix( Jy ) ;
   
-  const uMatrix J = -prod( invJy, Jx );
-  return J;
+  const uMatrix J = -prod( invJy, Jx ) ;
+  return J ;
 }
 
 double Taylor_uncertainty::sDerivative( label derive, const size_t ith )
@@ -194,8 +286,8 @@ double Taylor_uncertainty::derivative_M(
 
   
   cuVector output = 2 * (
-       element_prod( dSd1,  dXd2 - dSd2 )
-    +  element_prod( ddSd1d2 , exper - model ) );
+       element_prod( dSd1,  dXd2 - dSd2 )               // DOUBLE CHECK
+    +  element_prod( ddSd1d2 , exper - model ) );       // DOUBLE CHECK
 
   return sum( output ) ;
 }
@@ -234,11 +326,10 @@ uVector Taylor_uncertainty::second_D_model( label d_first , label d_second,
 {
   const auto listMaker = [&]( const bool mod1, const bool mod2 )
   {
-    const double fV = 1;
     const int modifier1 = mod1 ? 1 : -1 ;
     const int modifier2 = mod2 ? 1 : -1 ;
-    List list_xx = {  make_pair( d_first, fV + (modifier1 * dh) ),
-                      make_pair( d_second, fV + (modifier2 * dh))};
+    List list_xx = {  make_pair( d_first, fullVal + (modifier1 * dh) ),
+                      make_pair( d_second, fullVal + (modifier2 * dh ) ) };
     return list_xx;
   };
   
