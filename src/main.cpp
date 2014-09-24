@@ -24,7 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <iostream>
 
-#include "tools/programoptions.hpp"
+#include "tools/programoptions/programoptions.hpp"
 #include "tools/timing.h"
 #include "investigations/execute.h"
 
