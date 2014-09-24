@@ -25,7 +25,6 @@ void run( const filesystem::directory &dir ) {
   
   
   cout << poptea.ppUnknownParameters() << "\n";
-  cout << "Hello, world!!!";
 }
     
 }}
