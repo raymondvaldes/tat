@@ -39,9 +39,8 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
   using std::string;
   using std::cout;
   using filesystem::directory;
-  const directory directory_of_samples( mydirectory ) ;
   
-  const auto investigations = [ & ] ( const directory& active )
+  const auto investigations = [ & ] ( const directory& active ) -> void
   {
     if( investigationName == "PIE_Analsis") {
       sensitivityvaldes2013::run( active ) ;
@@ -58,20 +57,21 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
     }
   };
   
-  const bool
-  runCurrentDirectory =
+  const auto directory_of_samples = directory{ mydirectory } ;
+  
+  const auto runCurrentDirectory =
   directory_of_samples.working_directory_starts_with( sampleName ) ;
   
   if( runCurrentDirectory ) {
     investigations( directory_of_samples ) ;
   }
   else {
-    const vector< directory > paths = directory_of_samples.ls() ;
+    const auto paths = directory_of_samples.ls() ;
     for( const directory& active : paths ) {
       if( active.working_directory_starts_with( sampleName ) ) {
         investigations( active ) ;
       }
     }
   }
-
+  
 }}
