@@ -124,7 +124,7 @@ HEADERS += investigations/num_method2014.h \
            sensible/radiativeSysProp.h \
            sensible/TBCsystem.h \
            sensible/temperature_scale.h \
-           tools/programoptions.hpp \
+           tools/programoptions/programoptions.hpp \
            tools/timing.h \
            tools/tools.hpp \
            math/algorithms/combinations.hpp \
@@ -204,7 +204,7 @@ SOURCES += main.cpp \
            sensible/radiativeSysProp.cpp \
            sensible/TBCsystem.cpp \
            sensible/temperature_scale.cpp \
-           tools/programoptions.cpp \
+           tools/programoptions/programoptions.cpp \
            tools/timing.cpp \
            math/algorithms/combinations.cpp \
            math/algorithms/complex.cpp \
