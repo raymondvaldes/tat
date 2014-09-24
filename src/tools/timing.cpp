@@ -29,35 +29,37 @@ License
 
 #include "tools/timing.h"
 
-std::chrono::high_resolution_clock::time_point stopwatch::checktime(void)
-{
-    return std::chrono::high_resolution_clock::now();
-}
+namespace tools{
 
 stopwatch::stopwatch(void)
 {
     start();
 }
 
-void stopwatch::start(void)
+auto stopwatch::checktime(void) -> std::chrono::high_resolution_clock::time_point
+{
+    return std::chrono::high_resolution_clock::now();
+}
+
+auto stopwatch::start(void) -> void
 {
     startTime = checktime();
 }
 
-void stopwatch::stop(void)
+auto stopwatch::stop(void) -> void
 {
     stopTime = checktime();
     clockSpan = std::chrono::duration_cast
             <std::chrono::duration<double>>(stopTime- startTime);
 }
 
-double stopwatch::returnTime(void)
+auto stopwatch::returnTime(void) -> double
 {
     stop();
     return clockSpan.count();
 }
 
-std::string stopwatch::readoutLoud( void )
+auto stopwatch::readoutLoud( void ) -> std::string
 {
   std::ostringstream output;
   output << "Stopwatch: " << std::setprecision(3)
@@ -65,5 +67,6 @@ std::string stopwatch::readoutLoud( void )
   return output.str();
 }
 
+}
 
 

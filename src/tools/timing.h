@@ -27,6 +27,7 @@ License
 #include <chrono>
 #include <string>
 
+namespace tools {
 class stopwatch
 {
 private:
@@ -39,11 +40,14 @@ private:
     std::chrono::high_resolution_clock::time_point checktime(void);
 
 public:
-    explicit stopwatch(void);
-    void start(void);
-    void stop(void);
-    double returnTime(void);
-    std::string readoutLoud(void);
+    explicit stopwatch( void ) ;
+  
+    auto start( void ) -> void ;
+    auto stop( void ) -> void ;
+    auto returnTime( void ) -> double ;
+    auto readoutLoud( void ) -> std::string ;
 };
+
+}
 
 #endif // TIMING_H
