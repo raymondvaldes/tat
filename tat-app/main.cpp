@@ -28,11 +28,13 @@ License
 #include "tools/timing.h"
 #include "investigations/execute.h"
 
-void executeAnalysis( const tools::programoptions::MainArguments runArgs) {
-  using std::cout;
-  using std::string;
-  
-  stopwatch globalStopWatch ;
+using std::string;
+using std::cout;
+using tools::programoptions::MainArguments;
+
+auto executeAnalysis( const MainArguments& runArgs ) -> string
+{
+  auto globalStopWatch = tools::stopwatch{} ;
   
   investigations::execute(
     runArgs.run_directory(),
@@ -40,15 +42,16 @@ void executeAnalysis( const tools::programoptions::MainArguments runArgs) {
     runArgs.run_investigationName()
     ) ;
   
-  cout << globalStopWatch.readoutLoud() << "\n";
+  return globalStopWatch.readoutLoud();
 }
 
 int main( const int argc, const char *argv[ ] ) {
-  using tools::programoptions::MainArguments ;
-  const MainArguments runArgs( argc, argv ) ;
+  const auto runArgs = MainArguments{ argc, argv };
+  const auto runAnalysis = runArgs.run_analysis();
   
-  if( runArgs.run_analysis() ) {
-    executeAnalysis( runArgs ) ;
+  if( runAnalysis ) {
+    const auto exeTimer = executeAnalysis( runArgs ) ;
+    cout << exeTimer << "\n" ;
   }
   
   return 0 ;
