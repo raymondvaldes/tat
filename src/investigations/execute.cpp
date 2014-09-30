@@ -57,6 +57,7 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
     }
   };
   
+  
   const auto directory_of_samples = directory{ mydirectory } ;
   
   const auto runCurrentDirectory =

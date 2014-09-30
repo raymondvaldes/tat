@@ -46,7 +46,7 @@ private:
 
     bool help( void ) const ;
     bool version( void ) const ;
-    bool build( void ) const ;
+    bool build( void ) const noexcept;
     void loadOptions( void ) const ;
 
 public:

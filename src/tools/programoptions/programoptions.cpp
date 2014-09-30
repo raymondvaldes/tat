@@ -26,6 +26,7 @@ License
 #include <sstream>
 #include <boost/program_options.hpp>
 #include <boost/version.hpp>
+#include <boost/predef.h>
 #include <gsl/gsl_version.h>
 #include "tools/programoptions/programoptions.hpp"
 
@@ -110,18 +111,27 @@ bool MainArguments::version(void) const
   return false;
 }
 
-bool MainArguments::build(void) const
+bool MainArguments::build(void) const noexcept
 {
-  std::cout << "Built with:\n";
-  std::cout << "Boost "
+  using std::cout;
+
+  cout << "Built with\n";
+  cout << "----------" << "\n\n" ;
+  
+  cout << "Boost:\n"
             << BOOST_VERSION / 100000     << "."  // major version
             << BOOST_VERSION / 100 % 1000 << "."  // minior version
             << BOOST_VERSION % 100                // patch level
-            << std::endl;
-  std::cout << "Gnu Scientific Library "
+            << "\n\n";
+  
+  cout << "Gnu Scientific Library: \n"
             << GSL_MAJOR_VERSION  << "."          // minior version
             << GSL_MINOR_VERSION                  // patch level
-            << std::endl;
+            << "\n\n";
+
+  cout << "Compiler info: \n"
+      << __VERSION__ << "\n";
+  
   return false;
 }
 
