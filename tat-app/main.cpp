@@ -24,6 +24,8 @@ License
 \*----------------------------------------------------------------------------*/
 #include <iostream>
 
+#include "thermal/pyrometry/twoColor/pyrometer.h"
+
 #include "tools/programoptions/programoptions.hpp"
 #include "tools/timing.h"
 #include "investigations/execute.h"
