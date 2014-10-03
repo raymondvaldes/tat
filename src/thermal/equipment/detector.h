@@ -33,11 +33,16 @@ namespace equipment{
 
 class Detector
 {
-public:
+private:
   double wavelength;
   double radius;
+
+public:
+
+  double getPeakWavelength(void)  const ;
+  double getSpotSizeRadius(void)  const ;
   
-  explicit Detector(const double wavelength_, const double radius_);
+  explicit Detector( const double wavelength_, const double radius_ ) ;
   ~Detector(void);
 };
   

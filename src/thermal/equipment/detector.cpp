@@ -36,6 +36,15 @@ Detector::Detector(const double wavelength_, const double radius_)
                    "check detector inputs\n\n" );
 }
 
+double Detector::getPeakWavelength(void) const  {
+
+  return wavelength;
+}
+
+double Detector::getSpotSizeRadius(void) const  {
+  return radius;
+}
+
 Detector::~Detector(void){}
   
 }}
