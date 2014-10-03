@@ -50,7 +50,8 @@ double PhaseOfEmission1DNum( const double omega,
 
   ///Initiate emission model
   const double Lcoat = popteaCore.TBCsystem.coating.getDepth() ;
-  const class thermal::Emission emission( popteaCore.expSetup.detector.wavelength,
+  const class thermal::Emission emission(
+                              popteaCore.expSetup.detector.getPeakWavelength(),
                                           popteaCore.TBCsystem.Temp.base,
                                           popteaCore.thermalsys.mesh,
                                           popteaCore.bEval() * Lcoat,
@@ -93,7 +94,8 @@ double PhaseOfEmission2DAna( const double omega,
     heatmodel2DAna.TemperatureDistro(T2DProfile, omega );
 
     ///Initiate emission model
-    const thermal::Emission emission( popteaCore.expSetup.detector.wavelength,
+    const thermal::Emission emission(
+                          popteaCore.expSetup.detector.getPeakWavelength(),
                                       popteaCore.TBCsystem.Temp.referance,
                                       popteaCore.thermalsys.mesh,
                                       popteaCore.bEval() * Lcoat,
