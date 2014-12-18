@@ -22,6 +22,8 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
+#include <iostream>
+
 #include "tools/interface/xml.h"
 #include "boost/property_tree/ptree.hpp"
 
