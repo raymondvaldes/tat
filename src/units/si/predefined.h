@@ -10,6 +10,7 @@
 #define __tat__length__
 
 #include <boost/units/systems/si.hpp>
+#include <boost/units/systems/si/length.hpp>
 
 namespace units {
 namespace si {
@@ -23,6 +24,21 @@ typedef boost::units::si::power power;
 typedef boost::units::si::solid_angle solid_angle;
 typedef boost::units::si::electric_potential electric_potential;
 typedef boost::units::si::dimensionless dimensionless ;
+typedef boost::units::si::velocity velocity;
+typedef boost::units::si::area area;
+typedef boost::units::si::time time;
+
+
+using boost::units::si::meters;
+using boost::units::si::meter;
+
+using boost::units::si::second;
+
+using boost::units::si::watts;
+using boost::units::si::watt;
+
+using boost::units::si::kelvin;
+
 
 }}
 
