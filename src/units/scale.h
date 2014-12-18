@@ -31,7 +31,6 @@ template<integer_type N, integer_type D = 1>
 
 
 
-//typedef make_scaled_unit< length, scale<10, static_rational<-9> > >::type nanometer;
 }
 
 #endif
