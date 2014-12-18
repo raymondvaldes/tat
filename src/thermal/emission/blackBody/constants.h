@@ -18,7 +18,7 @@ namespace thermal {
   constexpr double C1 = 59552197;    // [ W um^4 / m^2 ]
   constexpr double C2 = 14387.6; // [ um K ]
   
-  
+//   boost::units::si::constants::codata::epsilon_0;
 
     
 }}}

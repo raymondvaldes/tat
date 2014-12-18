@@ -12,5 +12,6 @@
 #include "units/si/predefined.h"
 #include "units/si/extension.h"
 #include "units/quantity.h"
+#include "units/si/constants/codata.h"
 
 #endif

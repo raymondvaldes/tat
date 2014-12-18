@@ -201,6 +201,11 @@
 		AB553C52195DF13200E2B7D1 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = random.h; path = statistics/random/random.h; sourceTree = "<group>"; };
 		AB553C57195DF3FB00E2B7D1 /* equalto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = equalto.h; path = utilities/equalto.h; sourceTree = "<group>"; };
 		AB6981A619CB638300940843 /* apply_to_all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apply_to_all.h; path = numericalAnalysis/ublas/apply_to_all.h; sourceTree = "<group>"; };
+		AB71907E19DF0B1B008FC395 /* codata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = codata.h; path = units/si/constants/codata.h; sourceTree = "<group>"; };
+		AB71907F19DF1354008FC395 /* thermal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = thermal.h; path = units/si/constants/thermal.h; sourceTree = "<group>"; };
+		AB71908019DF29D5008FC395 /* prefixes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = prefixes.h; path = units/si/prefixes.h; sourceTree = "<group>"; };
+		AB71908119DF2BAB008FC395 /* operators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = operators.h; path = units/operators.h; sourceTree = "<group>"; };
+		AB71908219DF2C73008FC395 /* base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = base.h; path = units/systems/si/base.h; sourceTree = "<group>"; };
 		AB71BD6319DE40B800C7F280 /* temperatureMeasurement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = temperatureMeasurement.h; path = pyrometry/twoColor/temperatureMeasurement.h; sourceTree = "<group>"; };
 		AB71BD6419DE416200C7F280 /* pyrometer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pyrometer.h; path = pyrometry/twoColor/pyrometer.h; sourceTree = "<group>"; };
 		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
@@ -473,6 +478,32 @@
 				AB6981A619CB638300940843 /* apply_to_all.h */,
 			);
 			name = ublas;
+			sourceTree = "<group>";
+		};
+		AB71908319DF3067008FC395 /* codata */ = {
+			isa = PBXGroup;
+			children = (
+				AB71907E19DF0B1B008FC395 /* codata.h */,
+			);
+			name = codata;
+			sourceTree = "<group>";
+		};
+		AB71BD6519DE70AB00C7F280 /* constants */ = {
+			isa = PBXGroup;
+			children = (
+				AB71908319DF3067008FC395 /* codata */,
+				AB71907F19DF1354008FC395 /* thermal.h */,
+			);
+			name = constants;
+			sourceTree = "<group>";
+		};
+		AB71BD6619DE724100C7F280 /* systems */ = {
+			isa = PBXGroup;
+			children = (
+				AB14652619DB931100710F45 /* si.h */,
+				ABF5D66419DB608600A70476 /* si */,
+			);
+			name = systems;
 			sourceTree = "<group>";
 		};
 		ABB4473D19DB365E009EC35F /* blackBody */ = {
@@ -951,11 +982,12 @@
 		ABF5D66319DB607700A70476 /* units */ = {
 			isa = PBXGroup;
 			children = (
-				ABF5D66419DB608600A70476 /* si */,
+				AB71BD6619DE724100C7F280 /* systems */,
 				ABF5D66D19DB6DC000A70476 /* physical_dimensions.h */,
 				ABF5D66F19DB6E4200A70476 /* scale.h */,
 				ABF5D66919DB61E900A70476 /* quantity.h */,
 				ABF5D67019DB76CB00A70476 /* unit.h */,
+				AB71908119DF2BAB008FC395 /* operators.h */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -965,7 +997,9 @@
 			children = (
 				ABF5D66619DB60BD00A70476 /* predefined.h */,
 				ABF5D66A19DB65AB00A70476 /* extension.h */,
-				AB14652619DB931100710F45 /* si.h */,
+				AB71908019DF29D5008FC395 /* prefixes.h */,
+				AB71908219DF2C73008FC395 /* base.h */,
+				AB71BD6519DE70AB00C7F280 /* constants */,
 			);
 			name = si;
 			sourceTree = "<group>";
