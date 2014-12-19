@@ -27,22 +27,23 @@ auto calibrationCoefficient(
 {
   using units::si::constants::C2_wien;
   using std::exp;
+  using std::log;
   
-  auto SR = signalRatio( first, second ) ;
-  const auto lambda_one = first.getwavelength();
-  const auto lambda_two = second.getwavelength();
+  const auto SR = signalRatio( second, first ) ;
+  const auto lambda_one = first.getElectromagneticWavelength();
+  const auto lambda_two = second.getElectromagneticWavelength();
   
   
   auto
-  output  =  C2_wien / lambda_one - C2_wien / lambda_two ;
-  output /= Temp;
+  gCoeff  =  C2_wien / lambda_one - C2_wien / lambda_two ;
+  gCoeff /= Temp;
   
-  output += 5 * log( lambda_two / lambda_one ) ;
-  output = exp( output ) ;
-  output /= SR ;
+  gCoeff += 5 * log( lambda_two / lambda_one ) ;
+  gCoeff = exp( gCoeff ) ;
+  gCoeff /= SR ;
   
   
-  return output;
+  return gCoeff;
 };
 
 

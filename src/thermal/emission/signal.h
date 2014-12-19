@@ -19,22 +19,23 @@ template< class signalType >
 class Signal{
 
 private:
-  units::quantity< units::si::length> wavelength;
+  units::quantity< units::si::length> electromagneticWavelength;
   units::quantity< signalType> intensity;
 
 public:
-  explicit Signal( const units::quantity< units::si::length> wavelength_in,
-                   const units::quantity< signalType> intensity_in ) 
-  : wavelength( wavelength_in ), intensity( intensity_in ) {};
+  explicit Signal( const units::quantity< units::si::length> &wavelength_in,
+                   const units::quantity< signalType> &intensity_in )
+  : electromagneticWavelength( wavelength_in ), intensity( intensity_in ) {};
 
 
-  units::quantity< units::si::length> getWavelength()  const{
- return wavelength ;
-}
 
-  units::quantity< signalType> getIntensity() const{
-  return intensity ;
-}
+  auto getElectromagneticWavelength() const {
+    return electromagneticWavelength ;
+  }
+
+  auto getIntensity() const {
+    return intensity ;
+  }
 
 
 

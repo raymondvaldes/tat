@@ -13,14 +13,14 @@
 #include "units/si/si.h"
 
 namespace thermal {
-  namespace emission {
+namespace emission {
   
 template< class signalType >
 auto signalRatio( const Signal<signalType> first,
-                  const Signal<signalType> second ) ->
-  units::quantity< units::si::dimensionless >
+                  const Signal<signalType> second )
+  -> units::quantity< units::si::dimensionless >
 {
-  return second.getIntensity() / first.getIntensity() ;
+  return first.getIntensity() / second.getIntensity() ;
 }
   
 }}

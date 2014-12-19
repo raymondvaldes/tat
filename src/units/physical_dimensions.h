@@ -20,8 +20,10 @@
 #include <boost/units/physical_dimensions/power.hpp>
 #include <boost/units/physical_dimensions/solid_angle.hpp>
 #include <boost/units/physical_dimensions/electric_potential.hpp>
+#include <boost/units/physical_dimensions/temperature.hpp>
 
 namespace units {
+  typedef boost::units::temperature_dimension temperature_dimension;
   
   typedef boost::units::time_base_dimension time_base_dimension;
   

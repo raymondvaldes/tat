@@ -49,9 +49,8 @@ auto executeAnalysis( const MainArguments& runArgs ) -> string
 
 int main( const int argc, const char *argv[ ] ) {
   const auto runArgs = MainArguments{ argc, argv };
-  const auto runAnalysis = runArgs.run_analysis();
 
-  if( runAnalysis ) {
+  if( runArgs.run_analysis() ) {
     const auto exeTimer = executeAnalysis( runArgs ) ;
     cout << exeTimer << "\n" ;
   }

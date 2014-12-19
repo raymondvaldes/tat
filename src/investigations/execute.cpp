@@ -28,6 +28,8 @@
 #include "investigations/num_method2014.h"
 #include "investigations/sensitivityvaldes2013.hpp"
 #include "investigations/taylor_uncertainty.h"
+#include "investigations/twoColorPyrometery.h"
+
 #include "tools/interface/filesystem.hpp"
 
 namespace investigations {
@@ -51,7 +53,9 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
     else if( investigationName == "taylor_uncertainty") {
       taylor_uncertainty::run( active ) ;
     }
-    
+    else if( investigationName == "twoColorPyrometery" ) {
+      twoColorPyrometery::run( active ) ;
+    }
     else {
       cout << "No investigation selected.\n" ;
     }

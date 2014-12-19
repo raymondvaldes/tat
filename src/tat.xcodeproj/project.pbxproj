@@ -185,6 +185,8 @@
 		ABF5D65D19DB40DD00A70476 /* calibrationCoefficient.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF5D65B19DB40DD00A70476 /* calibrationCoefficient.h */; };
 		ABF5D66119DB49FD00A70476 /* signal.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF5D65F19DB49FD00A70476 /* signal.h */; };
 		ABF5D66819DB60BD00A70476 /* predefined.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF5D66619DB60BD00A70476 /* predefined.h */; };
+		ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */; };
+		ABFC2CFC1A439F1D004C00AD /* twoColorPyrometery.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -380,6 +382,9 @@
 		ABF5D66D19DB6DC000A70476 /* physical_dimensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = physical_dimensions.h; path = units/physical_dimensions.h; sourceTree = "<group>"; };
 		ABF5D66F19DB6E4200A70476 /* scale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scale.h; path = units/scale.h; sourceTree = "<group>"; };
 		ABF5D67019DB76CB00A70476 /* unit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = unit.h; path = units/unit.h; sourceTree = "<group>"; };
+		ABFC2CF71A438D9C004C00AD /* signal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = signal.h; path = blackBody/signal.h; sourceTree = "<group>"; };
+		ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twoColorPyrometery.cpp; sourceTree = "<group>"; };
+		ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoColorPyrometery.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -512,6 +517,7 @@
 				ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */,
 				ABB4473F19DB37BF009EC35F /* planckWienApprox.h */,
 				ABB4474319DB386A009EC35F /* constants.h */,
+				ABFC2CF71A438D9C004C00AD /* signal.h */,
 			);
 			name = blackBody;
 			sourceTree = "<group>";
@@ -594,6 +600,8 @@
 				ABEF4DD11948D4A500B44AD5 /* sensitivityvaldes2013.hpp */,
 				ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */,
 				ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */,
+				ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */,
+				ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */,
 			);
 			path = investigations;
 			sourceTree = "<group>";
@@ -1030,6 +1038,7 @@
 				ABEBCE5819C737E500882E01 /* central_difference.h in Headers */,
 				AB0DFE02195242AA007DF69B /* split.h in Headers */,
 				AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */,
+				ABFC2CFC1A439F1D004C00AD /* twoColorPyrometery.h in Headers */,
 				ABEF4EAC1948D4A500B44AD5 /* temperature_scale.h in Headers */,
 				ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */,
 				ABB54FD219C35E300056823E /* ifzero.h in Headers */,
@@ -1225,6 +1234,7 @@
 				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
+				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
 				ABB54FC519C22C7E0056823E /* add.cpp in Sources */,
 				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
