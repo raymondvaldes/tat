@@ -91,9 +91,7 @@ void run( const filesystem::directory &dir )
   cout << "period is\t " << angularFrequency_to_period( omega )  << "\n" ;
   cout << "zpos is\t" << zval[z_pos ] << "\n";
   cout << "the complex number is:\t" << heat1_cplx[z_pos] << "\n" ;
-//  for( size_t i = 0 ; i < res ; ++i)
-//    cout << test[i] << "\n";
-//  cout << "\n\n";
+
   
   complex<double> time_transformed = Ttransient_to_Tcplx(test);
   cout << "the complex number is:\t" << time_transformed << "\n\n";
@@ -108,14 +106,9 @@ void run( const filesystem::directory &dir )
                 temp_resolution ) ;
   
   
-//  for(size_t i = 0 ; i < poptea.thermalData->size() ; ++i )
-//    cout << emission1[i] << "\t" <<  emission2[i] << "\n";
-  
   cout << "\n\n";
   cout << "complex temperature fields" << "\n";
   
-//  for(size_t i = 0 ; i < temp_resolution ; ++i )
-//    cout << heat1_cplx[i] << "\n";
   
   /// Part test
   // poptea.bestFit() ;
