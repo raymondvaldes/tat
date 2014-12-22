@@ -37,11 +37,7 @@ namespace investigations {
 void execute( const std::string& mydirectory, const std::string& sampleName,
               const std::string& investigationName ) {
 
-  using std::vector;
-  using std::string;
-  using std::cout;
   using filesystem::directory;
-  
   const auto investigations = [ & ] ( const directory& active ) -> void
   {
     if( investigationName == "PIE_Analsis") {
@@ -57,6 +53,7 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
       twoColorPyrometery::run( active ) ;
     }
     else {
+      using std::cout;
       cout << "No investigation selected.\n" ;
     }
   };
