@@ -9,11 +9,13 @@
 #ifndef __tat___colorPyrometery__
 #define __tat___colorPyrometery__
 
+#include "tools/interface/filesystem.hpp"
+
 
 namespace investigations{
 namespace twoColorPyrometery{
   
-  void run( const filesystem::directory &dir ) ;
+void run( const filesystem::directory &dir ) ;
 
   
 }}
