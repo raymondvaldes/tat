@@ -4,10 +4,4 @@
    <FileRef
       location = "group:tat-tdd/tat-tdd/tat-tdd.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:test/tat-test.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:tat-app/tat-app.xcodeproj">
-   </FileRef>
 </Workspace>

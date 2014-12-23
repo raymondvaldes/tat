@@ -21,14 +21,13 @@ int main(int argc, const char * argv[]) {
   
   using std::cout;
   cout << "\n";
-  cout << "**********-**********-**********-**********-**********-**********";
+  cout << "******************************************************";
   cout << "\n";
   
   string tatApp = "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app";
   tatApp += " --run /Users/raymondvaldes/Dropbox/investigations/develop";
   tatApp += " --sample APS";
   tatApp += " --investigation twoColorPyrometery";
-  
   system( tatApp.data() ) ;
 
   return 0;

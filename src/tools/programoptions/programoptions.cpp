@@ -33,15 +33,9 @@ License
 namespace tools{
 
 namespace programoptions{
-
-
-
+ 
 void MainArguments::loadOptions( void ) const
 {
-  //function modifie 'path' and 'run'
-
-  using std::make_pair;
-  
   namespace po = boost::program_options;
   po::options_description desc("Allowed options");
   desc.add_options()

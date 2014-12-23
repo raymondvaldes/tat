@@ -224,11 +224,11 @@
 		ABB54FCF19C35E300056823E /* ifzero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifzero.cpp; path = algorithm/vector/ifzero.cpp; sourceTree = "<group>"; };
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
 		ABDCB53E19C934B30044553C /* inversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inversion.h; path = numericalAnalysis/matrixs/inversion.h; sourceTree = "<group>"; };
-		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<group>"; };
-		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<group>"; };
-		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<group>"; };
-		ABE169011948EA8D00C1E409 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = ../../../../../usr/local/Cellar/gsl/1.16/lib/libgsl.a; sourceTree = "<group>"; };
-		ABE169021948EA8D00C1E409 /* libgslcblas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgslcblas.a; path = ../../../../../usr/local/Cellar/gsl/1.16/lib/libgslcblas.a; sourceTree = "<group>"; };
+		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<absolute>"; };
+		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<absolute>"; };
+		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<absolute>"; };
+		ABE169011948EA8D00C1E409 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = /usr/local/Cellar/gsl/1.16/lib/libgsl.a; sourceTree = "<absolute>"; };
+		ABE169021948EA8D00C1E409 /* libgslcblas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgslcblas.a; path = /usr/local/Cellar/gsl/1.16/lib/libgslcblas.a; sourceTree = "<absolute>"; };
 		ABEBCE5219C737C000882E01 /* forward_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forward_difference.h; path = numericalAnalysis/differentiation/firstDerivative/forward_difference.h; sourceTree = "<group>"; };
 		ABEBCE5619C737E500882E01 /* central_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = central_difference.h; path = numericalAnalysis/differentiation/firstDerivative/central_difference.h; sourceTree = "<group>"; };
 		ABEF4D971948D02600B44AD5 /* libtatlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtatlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -426,12 +426,8 @@
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
+				ABA2BD3B1A48BA21004F3C6E /* linked-libraries */,
 				ABF5D66319DB607700A70476 /* units */,
-				ABE169011948EA8D00C1E409 /* libgsl.a */,
-				ABE169021948EA8D00C1E409 /* libgslcblas.a */,
-				ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */,
-				ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */,
-				ABE168FD1948EA3B00C1E409 /* libboost_system.a */,
 				AB0DFDFD19524268007DF69B /* algorithm */,
 				ABEF4DFC1948D4A500B44AD5 /* physics */,
 				ABEF4DCB1948D4A500B44AD5 /* investigations */,
@@ -439,7 +435,6 @@
 				ABEF4E001948D4A500B44AD5 /* sensible */,
 				ABEF4E0B1948D4A500B44AD5 /* thermal */,
 				ABEF4E6A1948D4A500B44AD5 /* tools */,
-				ABEF4D971948D02600B44AD5 /* libtatlib.a */,
 			);
 			sourceTree = "<group>";
 		};
@@ -509,6 +504,19 @@
 				ABF5D66419DB608600A70476 /* si */,
 			);
 			name = systems;
+			sourceTree = "<group>";
+		};
+		ABA2BD3B1A48BA21004F3C6E /* linked-libraries */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF4D971948D02600B44AD5 /* libtatlib.a */,
+				ABE169011948EA8D00C1E409 /* libgsl.a */,
+				ABE169021948EA8D00C1E409 /* libgslcblas.a */,
+				ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */,
+				ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */,
+				ABE168FD1948EA3B00C1E409 /* libboost_system.a */,
+			);
+			name = "linked-libraries";
 			sourceTree = "<group>";
 		};
 		ABB4473D19DB365E009EC35F /* blackBody */ = {
