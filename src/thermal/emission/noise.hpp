@@ -41,16 +41,16 @@ public:
   int s1;
   explicit ExpNoiseSetting( const double a1_, const double b1_,
                             const bool d1_, const bool d2_,
-                            const int s1_, const double noiseRandom_);
+                            const int s1_, const double noiseRandom_) noexcept;
 
-  static ExpNoiseSetting initializeObj( const boost::property_tree::ptree &pt ) ;
-  static ExpNoiseSetting loadExpNoiseFile(const filesystem::directory &dir ) ;
+  static ExpNoiseSetting initializeObj( const boost::property_tree::ptree &pt ) noexcept;
+  static ExpNoiseSetting loadExpNoiseFile(const filesystem::directory &dir ) noexcept;
 };
 
 std::vector<double>
 addNoise( const std::vector<double> &emissionNominal_,
           const std::vector<double> &lthermal,
-          const thermal::emission::ExpNoiseSetting &para );
+          const thermal::emission::ExpNoiseSetting &para ) noexcept;
 /*
 a is the magnitude of the error at the edges of the range
 b is the stretching parameter that ranges from 1 < b < pi (use around 3)

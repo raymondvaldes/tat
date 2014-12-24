@@ -166,14 +166,14 @@ const
   return mean( Current(Tprofile, n, j) ,  Projected(Tprofile, n, j));
 }
 
-property::property(const double offset_,const double slope_)
+property::property(const double offset_,const double slope_) noexcept
 : offset(offset_), slope(slope_)
 {}
 
-property::property(void){}
+property::property(void) noexcept{}
 
 class property
-property::loadConfigfromXMLTree(const boost::property_tree::ptree pt)
+property::loadConfigfromXMLTree(const boost::property_tree::ptree pt) noexcept
 {
   const double offset_ = pt.get<double>( "offset" );
   const double slope_ = pt.get<double>( "slope" );

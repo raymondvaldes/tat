@@ -27,7 +27,7 @@
 
 namespace math{ namespace algorithms{
 
-vector<double> cmplx_split_real( const vector< complex<double> > &input)
+vector<double> cmplx_split_real( const vector< complex<double> > &input) noexcept
 {
   const size_t size = input.size();
   vector<double> output( size );
@@ -38,7 +38,7 @@ vector<double> cmplx_split_real( const vector< complex<double> > &input)
   return output;
 }
 
-vector<double> cmplx_split_imag( const vector< complex<double> > &input)
+vector<double> cmplx_split_imag( const vector< complex<double> > &input) noexcept
 {
   const size_t size = input.size();
   vector<double> output( size );
@@ -49,7 +49,7 @@ vector<double> cmplx_split_imag( const vector< complex<double> > &input)
   return output;
 }
 
-double cmplx_modulus( const std::complex<double> &input )
+double cmplx_modulus( const std::complex<double> &input ) noexcept
 {
   const double real = input.real();
   const double imag = input.imag();
@@ -61,7 +61,7 @@ double cmplx_modulus( const std::complex<double> &input )
   return output;
 }
 
-std::complex<double> mod_phase_to_cmplx( const double mod, const double arg )
+std::complex<double> mod_phase_to_cmplx( const double mod, const double arg ) noexcept
 {
   using std::complex;
   using std::exp;

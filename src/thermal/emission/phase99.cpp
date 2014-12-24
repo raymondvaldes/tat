@@ -43,7 +43,7 @@ namespace emission{
 
 vector<double>
 phase99( const Kernal &popteaCore,
-         const vector<double> &omegas )
+         const vector<double> &omegas ) noexcept
 {
   const size_t L_end = omegas.size() ;
   vector<double> results(L_end) ;
@@ -105,7 +105,7 @@ vector<double> phase99Pertrub(
   const Kernal &popteaCore,
   const vector<double> &omegas,
   const vector< pair < enum model::labels::Name, double > > list,
-  const size_t ith )
+  const size_t ith ) noexcept
 {
   using std::shared_ptr;
   

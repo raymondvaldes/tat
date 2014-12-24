@@ -32,7 +32,7 @@ namespace thermal{
 namespace analysis{
 
 Poptea
-initializePopTeawithNominalEmission( const filesystem::directory &dir )
+initializePopTeawithNominalEmission( const filesystem::directory &dir ) noexcept
 {
   ///Initialize kernals
   const Kernal popteaCore = loadWorkingDirectoryKernal( dir ) ;
@@ -51,7 +51,7 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir )
  
   
 Poptea
-initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir )
+initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir ) noexcept
 {
   using std::vector;
   

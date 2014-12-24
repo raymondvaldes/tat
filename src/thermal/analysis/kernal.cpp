@@ -43,7 +43,7 @@ namespace analysis{
 Kernal::Kernal( const equipment::setup &expSetup_,
                 const sensible::TBCsystem  &TBCsystem_,
                 const define::model &thermalsys_,
-                const filesystem::directory &DataDirectory_ )
+                const filesystem::directory &DataDirectory_ ) noexcept
   : expSetup(expSetup_),
     TBCsystem(TBCsystem_),
     thermalsys(thermalsys_),
@@ -57,7 +57,7 @@ std::pair< std::shared_ptr< Kernal >, std::vector<double> >
 Kernal::updateCoreOmegaFromList(
     const std::vector<double> &omegas,
     const std::vector< std::pair < enum model::labels::Name, double > > list,
-    const size_t ith ) const
+    const size_t ith ) const noexcept
 {
   using model::labels::Name::omega;
   using model::labels::Name::experimentalData;
@@ -94,31 +94,32 @@ Kernal::updateCoreOmegaFromList(
 }
 
 
-class thermal::analysis::Kernal
+thermal::analysis::Kernal
         Kernal::loadConfig( const boost::property_tree::ptree &pt,
-                            const filesystem::directory &DataDirectory_)
+                            const filesystem::directory &DataDirectory_) noexcept
 {
   using boost::property_tree::ptree;
-
-  const std::string conjunto = "kernal.";
+  using std::string;
+  
+  const string conjunto = "kernal.";
   const ptree ptchild1 = pt.get_child( conjunto + "experimentalSetup" );
   const equipment::setup Obj1( equipment::setup::loadConfigfromXML( ptchild1 ));
 
   const ptree ptchild2 = pt.get_child( conjunto + "TBCsystem" );
   const sensible::TBCsystem 
-    Obj2( sensible::TBCsystem ::loadConfig( ptchild2 ) );
+    Obj2( sensible::TBCsystem::loadConfig( ptchild2 ) );
 
   const ptree ptchild3 = pt.get_child( conjunto + "thermalModel" );
   const define::construct
     Construct( define::construct::loadConfigfromXML( ptchild3 ) );
 
   /// Mesh is intrinsically linked the TBCsystem and experimental setup
-  const size_t M2     = ptchild3.get<size_t>( "mesh.M2" );
-  const size_t Rend   = ptchild3.get<size_t>( "mesh.Rend");
-  const size_t Nend   = ptchild3.get<size_t>( "mesh.Nend" );
-  const double beta1  = ptchild3.get<double>( "mesh.beta1" );
-  const double split  = ptchild3.get<double>( "mesh.split" );
-  const size_t iter   = ptchild3.get<size_t>( "mesh.num_iter" );
+  const auto M2     = ptchild3.get<size_t>( "mesh.M2" );
+  const auto Rend   = ptchild3.get<size_t>( "mesh.Rend");
+  const auto Nend   = ptchild3.get<size_t>( "mesh.Nend" );
+  const auto beta1  = ptchild3.get<double>( "mesh.beta1" );
+  const auto split  = ptchild3.get<double>( "mesh.split" );
+  const auto iter   = ptchild3.get<size_t>( "mesh.num_iter" );
   const numericalModel::Mesh mesh( M2, Rend, Nend, beta1, split,
                                    Obj2.coating.getDepth(),
                                    Obj2.substrate.getDepth(),
@@ -132,17 +133,17 @@ class thermal::analysis::Kernal
   return kernal;
 }
 
-Kernal::~Kernal(void){}
+Kernal::~Kernal(void) noexcept{}
 
 
 
 
-double Kernal::bEval(void) const
+double Kernal::bEval(void) const noexcept
 {
   return expSetup.laser.radius / TBCsystem.coating.getDepth();
 }
 
-void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
+void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list ) noexcept
 {
   for( const auto& unknown :  list ) {
     const double val = unknown.bestfit();
@@ -151,7 +152,7 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list )
   TBCsystem.updateCoat();
 }
 
-void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list )
+void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list ) noexcept
 {
   using math::estimation::unknown;
   for( const auto& unknown :  list ) {
@@ -162,7 +163,7 @@ void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list )
 }
 
 void Kernal::updateFromList( const enum model::labels::Name mylabel ,
-                             const double percentChange )
+                             const double percentChange ) noexcept
 {
   BOOST_ASSERT( percentChange > 0 ) ;
   
@@ -175,8 +176,7 @@ void Kernal::updateFromList( const enum model::labels::Name mylabel ,
 }
 
 
-class Kernal
-    loadWorkingDirectoryKernal( const filesystem::directory &dir )
+Kernal loadWorkingDirectoryKernal( const filesystem::directory &dir ) noexcept
 {
   using boost::property_tree::ptree;
 
@@ -188,7 +188,7 @@ class Kernal
 }
 
 
-  void Kernal::reloadthermalsys( const define::construct &other )
+void Kernal::reloadthermalsys( const define::construct &other ) noexcept
 {
   
   thermalsys.reloadThermalConstruct( other );

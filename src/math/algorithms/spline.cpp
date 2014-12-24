@@ -30,7 +30,7 @@
 namespace math{
 namespace algorithms{
 
-mySpline::mySpline( const double *a, const double *b, const size_t c )
+mySpline::mySpline( const double *a, const double *b, const size_t c ) noexcept
   :
   xvar(a), func(b), N(c),
   spline( gsl_spline_alloc( gsl_interp_cspline, N ) ),
@@ -44,7 +44,7 @@ mySpline::mySpline( const double *a, const double *b, const size_t c )
   gsl_spline_init( spline, xvar, func, N);
 }
 
-mySpline::~mySpline(void)
+mySpline::~mySpline(void) noexcept
 {
   gsl_spline_free( spline ) ;
   gsl_interp_accel_free( acc ) ;
@@ -52,7 +52,7 @@ mySpline::~mySpline(void)
 }
 
 
-double mySpline::eval( const double xpos ) const
+double mySpline::eval( const double xpos ) const noexcept
 {
   constexpr double tol_spline = .000001;
   using std::abs;
@@ -77,7 +77,7 @@ double mySpline::eval( const double xpos ) const
   return gsl_spline_eval( spline, xposNew, acc );
 }
 
-double mySpline::CCallback( double d, void*params )
+double mySpline::CCallback( double d, void*params ) noexcept
 {
   return static_cast<mySpline*>(params)->eval(d);
 }

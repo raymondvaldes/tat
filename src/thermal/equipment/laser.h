@@ -35,12 +35,12 @@ namespace equipment{
 class Laser
 {
 private:
-  double area(void) const;
-  double IntensityTotal(void) const;
-  double IntensitySteady(void) const;
-  double IntensityTransient(void) const;
+  double area(void) const noexcept;
+  double IntensityTotal(void) const noexcept;
+  double IntensitySteady(void) const noexcept;
+  double IntensityTransient(void) const noexcept;
   double offset, amplitude;
-  void update(void);
+  void update(void) noexcept;
   
 public:
   double Qlaser;
@@ -48,12 +48,12 @@ public:
   double Is;
   double It;
   
-  explicit Laser(const double a, const double b, const double c,
-                 const double d);
-  ~Laser();
+  explicit Laser( const double a, const double b, const double c,
+                  const double d ) noexcept;
+  ~Laser() noexcept;
   
-  void updateRadius(const double r);
-  void updatePower(const double Qpower);
+  void updateRadius( const double r ) noexcept;
+  void updatePower( const double Qpower ) noexcept;
 };
   
   

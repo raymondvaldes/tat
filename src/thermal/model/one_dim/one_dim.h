@@ -45,7 +45,7 @@ class one_dim
     const double Lambda;
     
     explicit layer( const double k_in, const double psi_in, const double L_in,
-                    const double Lambda_in )
+                    const double Lambda_in ) noexcept
     : k( k_in ), psi( psi_in ), L( L_in ), Lambda( Lambda_in ) {}
   };
   
@@ -64,8 +64,8 @@ class one_dim
                     const sensible::layer &substrate_in,
                     const sensible::radiativeSysProp &radiative_prop_in,
                     const thermal::equipment::Laser &laser_in,
-                    const double temp_in, const double gamma_in ) ;
-  ~one_dim( void ) ;
+                    const double temp_in, const double gamma_in ) noexcept;
+  ~one_dim( void ) noexcept;
 };
 
 }}}

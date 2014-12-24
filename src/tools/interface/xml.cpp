@@ -30,7 +30,7 @@ License
 namespace tools{
 namespace interface{
 
-boost::property_tree::ptree getTreefromFile( const std::string &absPath )
+boost::property_tree::ptree getTreefromFile( const std::string &absPath ) noexcept
 {
   boost::property_tree::ptree tree;
 
@@ -40,8 +40,9 @@ boost::property_tree::ptree getTreefromFile( const std::string &absPath )
   }
   catch (std::exception& e)
   {
-    std::cerr << "file " << absPath << " not found! See --help\n";
-    std::cerr << e.what() << "\n\n";
+    using std::cerr;
+    cerr << "file " << absPath << " not found! See --help\n";
+    cerr << e.what() << "\n\n";
     exit(-2) ;
   }
 

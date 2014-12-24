@@ -37,12 +37,12 @@ using std::log;
 namespace math{
 namespace estimation{
 
-double x_limiter1( const double xi )
+double x_limiter1( const double xi ) noexcept
 {
   return exp(xi) ;
 }
 
-double x_limiter2( const double xi, const double x_min, const double x_max )
+double x_limiter2( const double xi, const double x_min, const double x_max ) noexcept
 {
   // converts value from k-space to x_space. In k-space the parameter is free
   // to be any value.  In x-space the parameter is constrained between x_min
@@ -68,13 +68,13 @@ double x_limiter2( const double xi, const double x_min, const double x_max )
   return x ;
 }
 
-double kx_limiter1( const double ki ) {
+double kx_limiter1( const double ki ) noexcept {
     //converts value to k-space
   BOOST_ASSERT(ki > 0);
   return log(ki);
 }
 
-double kx_limiter2( const double ki, const double k_min, const double k_max ) {
+double kx_limiter2( const double ki, const double k_min, const double k_max ) noexcept {
   BOOST_ASSERT( ki >= k_min ) ;
   BOOST_ASSERT( ki <= k_max ) ;
   
@@ -93,7 +93,7 @@ double kx_limiter2( const double ki, const double k_min, const double k_max ) {
   return log( ( ( k_max - k_min ) / ( ki_adjusted - k_min ) ) - 1 ) ;
 }
 
-vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
+vector<double> x_to_kspace_unity( const double* x, const size_t n ) noexcept {
   BOOST_ASSERT( n > 0 ) ;
   
   typedef const size_t unity;
@@ -109,7 +109,7 @@ vector<double> x_to_kspace_unity( const double* x, const size_t n ) {
   return x_output;
 }
 
-vector<double> kspace_to_x_unity( const double* x, const size_t n ) {
+vector<double> kspace_to_x_unity( const double* x, const size_t n ) noexcept {
   BOOST_ASSERT( n > 0 ) ;
   
   typedef const size_t unity;

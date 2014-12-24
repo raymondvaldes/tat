@@ -30,14 +30,14 @@ License
 namespace math{
 namespace algorithms{
 
-size_t factorial( const size_t n )
+size_t factorial( const size_t n ) noexcept
 {
     if (n == 0)
        return 1;
     return n * factorial(n - 1);
 }
 
-size_t permutations( const size_t n, const size_t r)
+size_t permutations( const size_t n, const size_t r) noexcept
 {
   size_t
   val = factorial(n);

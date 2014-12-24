@@ -28,13 +28,13 @@ namespace thermal{
 namespace define{
 
 model::model ( const construct &Construct_,
-               const numericalModel::Mesh &mesh_ )
+               const numericalModel::Mesh &mesh_ ) noexcept
   : Construct(Construct_), mesh(mesh_)
 {}
   
-model::~model(void){}
+model::~model(void) noexcept {}
 
-void model::reloadThermalConstruct( const construct &other_ )
+void model::reloadThermalConstruct( const construct &other_ ) noexcept
 {
   Construct = other_ ;
 }

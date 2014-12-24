@@ -34,7 +34,7 @@ using std::string;
 using std::cout;
 using tools::programoptions::MainArguments;
 
-auto executeAnalysis( const MainArguments& runArgs ) -> string
+auto executeAnalysis( const MainArguments& runArgs ) noexcept -> string
 {
   auto globalStopWatch = tools::stopwatch{} ;
 
@@ -47,7 +47,7 @@ auto executeAnalysis( const MainArguments& runArgs ) -> string
   return globalStopWatch.readoutLoud();
 }
 
-int main( const int argc, const char *argv[ ] ) {
+int main( const int argc, const char *argv[ ] ) noexcept {
   const auto runArgs = MainArguments{ argc, argv };
 
   if( runArgs.run_analysis() ) {

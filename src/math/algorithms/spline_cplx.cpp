@@ -33,14 +33,14 @@ using std::complex;
 
 
 spline_cplx::spline_cplx( const vector< complex<double> > &ind,
-                          const double* dep, const size_t c )
+                          const double* dep, const size_t c ) noexcept
   :real( dep, cmplx_split_real( ind ).data() , c ),
    imag( dep, cmplx_split_imag( ind ).data() , c )
 {
 }
 
 complex<double>
-spline_cplx::eval( const double xpos ) const
+spline_cplx::eval( const double xpos ) const noexcept
 {
   const complex<double> output( real.eval(xpos), imag.eval(xpos) );
   return output;

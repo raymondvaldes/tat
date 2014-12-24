@@ -39,14 +39,14 @@ public:
   enum HeatX heat;
   enum EmissionX emission;
 
-  construct & operator = (const construct & other);
+  construct & operator = (const construct & other) noexcept;
   explicit construct( const enum HeatX myHeat,
-                      const enum EmissionX myEmission );
+                      const enum EmissionX myEmission ) noexcept;
 
-  void update( const enum HeatX heat_in, const enum EmissionX emission_in );
-  static construct loadConfigfromXML( const boost::property_tree::ptree pt );
+  void update( const enum HeatX heat_in, const enum EmissionX emission_in ) noexcept;
+  static construct loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
 
-  ~construct(void);
+  ~construct(void) noexcept;
 };
 
 }}

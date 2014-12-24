@@ -32,7 +32,7 @@ namespace algorithm {
 namespace string {
   
 bool starts_with( const std::string& check_this,
-                  const std::string& begins_with ) ;
+                  const std::string& begins_with ) noexcept;
 
 }}
 

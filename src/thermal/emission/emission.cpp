@@ -36,7 +36,7 @@ namespace thermal{
   
 Emission::Emission( const double detector_lam_, const double T_ref_,
                     const numericalModel::Mesh mesh_, const double beamR_,
-                    const double E_sigma_):
+                    const double E_sigma_)  noexcept:
                     detector_lam(detector_lam_), T_ref(T_ref_), mesh(mesh_),
                     beamR(beamR_), E_sigma(E_sigma_)
 {
@@ -44,18 +44,18 @@ Emission::Emission( const double detector_lam_, const double T_ref_,
     EmissionTime = new double[mesh.Nend];
 }
 
-Emission::~Emission()
+Emission::~Emission() noexcept
 {
   delete[] Ib;
   delete[] EmissionTime;
 }
 
-double Emission::mean(const double x1, const double x2) const
+double Emission::mean(const double x1, const double x2) const noexcept
 {
     return (x1+x2) / 2;
 }
 
-double Emission::drArea(const double r0_, const double r1_) const
+double Emission::drArea(const double r0_, const double r1_) const noexcept
 {
     /*Differential area of a radial axi-symmetric element
     The area returned is the actual area calculated from the normalized
@@ -66,7 +66,7 @@ double Emission::drArea(const double r0_, const double r1_) const
     return M_PI * ( r1 * r1 - r0 * r0 );
 }
 
-double Emission::Ib_plank(const double Temperature) const
+double Emission::Ib_plank(const double Temperature) const noexcept
 {
     //Planck's law is used to describe the Planck distribution
     /*
@@ -98,7 +98,7 @@ double Emission::Ib_plank(const double Temperature) const
     return Ibp;
 }
 
-double Emission::emissionAxial(std::vector<double> &Temperature) const
+double Emission::emissionAxial(std::vector<double> &Temperature) const noexcept
 {
   /*
   Calculates the volumetric emission flux with respect to the axial
@@ -119,7 +119,7 @@ double Emission::emissionAxial(std::vector<double> &Temperature) const
 }
 
   double Emission::emissionAxial( const define::Temperature Tprofile,
-                                  const size_t nVal) const
+                                  const size_t nVal) const noexcept
 {
     /*
     Calculates the volumetric emission flux with respect to the axial
@@ -139,7 +139,7 @@ double Emission::emissionAxial(std::vector<double> &Temperature) const
     return E_sigma * Ib[z1] + 4 * simpson_3_8( Ib, mesh.z_norm, z0, z1 );
 }
 
-double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
+double Emission::emissionAxialLinear(std::vector<double> &Temperature) const noexcept
 {
     /*
     Calculates the volumetric emission flux with respect to the axial
@@ -159,7 +159,7 @@ double Emission::emissionAxialLinear(std::vector<double> &Temperature) const
 
 
 double Emission::emissionVolumetric2D(std::vector<std::vector<double>>&
-                                      Temperature) const
+                                      Temperature) const noexcept
 {
     /*
     Calculates the volumetric emission flux with respect to the axial
@@ -191,7 +191,7 @@ double Emission::emissionVolumetric2D(std::vector<std::vector<double>>&
 }
 
 double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
-                                 &Temperature) const
+                                 &Temperature) const noexcept
 {
     /*
     The volumetric emission is determined for one unique period of heating
@@ -210,7 +210,7 @@ double Emission::phase2D(std::vector< std::vector<std::vector<double>>>
     return OAPemission[2];
 }
 
-  double Emission::phase1D( const define::Temperature Tprofile ) const
+  double Emission::phase1D( const define::Temperature Tprofile ) const noexcept
 {
     /*
     The volumetric emission is determined for one unique period of heating

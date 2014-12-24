@@ -29,15 +29,15 @@
 
 namespace math{
 
-double genWseed( const double x_min, const double x_max, const unsigned seed ) ;
-double x_ini( const double x_min, const double x_max ) ;
-int xINTrandom( const int xmin, const int xmax ) ;
+double genWseed( const double x_min, const double x_max, const unsigned seed ) noexcept;
+double x_ini( const double x_min, const double x_max ) noexcept;
+int xINTrandom( const int xmin, const int xmax ) noexcept;
 double x_normal( const double Xmean, const double Xstddev,
-                 const unsigned seed1 ) ;
-double x_normal( const double Xmean, const double Xstddev ) ;
-double x_bias( const double Xmean, const double Xstddev ) ;
-double random_in_logspace( const double start, const double end ) ;
-double random_0_to_1();
+                 const unsigned seed1 ) noexcept;
+double x_normal( const double Xmean, const double Xstddev ) noexcept;
+double x_bias( const double Xmean, const double Xstddev ) noexcept;
+double random_in_logspace( const double start, const double end ) noexcept;
+double random_0_to_1() noexcept;
 
 }
 

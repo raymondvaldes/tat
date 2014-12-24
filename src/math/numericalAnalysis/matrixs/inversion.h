@@ -22,7 +22,7 @@ namespace numericalAnalysis {
 namespace matrix {
 
 template<typename M>
-M InvertMatrix(const M& input)
+M InvertMatrix(const M& input) noexcept
 {
   using namespace boost::numeric::ublas;
   typedef permutation_matrix<std::size_t> pmatrix;

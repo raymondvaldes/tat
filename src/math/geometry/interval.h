@@ -42,25 +42,25 @@ private:
   double right_end;
 
 public:
-  Interval( const std::pair<double, double> endpoints_input ) ;
+  Interval( const std::pair<double, double> endpoints_input ) noexcept;
   
-  double get_left_end() const ;
-  double get_right_end() const ;
-  bool is_valid() const ;
-  bool is_invalid() const;
-  void set_ends( const std::pair<double, double> endpoints_input) ;
-  Interval get_log10_random_subInterval() const ;
-  std::pair<double, double> get_pair() const ;
+  double get_left_end() const noexcept;
+  double get_right_end() const noexcept;
+  bool is_valid() const noexcept;
+  bool is_invalid() const noexcept;
+  void set_ends( const std::pair<double, double> endpoints_input) noexcept;
+  Interval get_log10_random_subInterval() const noexcept;
+  std::pair<double, double> get_pair() const noexcept;
   
-  std::vector<std::vector<double>> random_group_xCR( const size_t val ) const;
+  std::vector<std::vector<double>> random_group_xCR( const size_t val ) const noexcept;
   
-  std::vector<std::vector<double>> ordered_group_xCR( const size_t iter ) const;
+  std::vector<std::vector<double>> ordered_group_xCR( const size_t iter ) const noexcept;
   
-  std::vector<double> myX_CR( const double lmin, const double lmax ) const ;
+  std::vector<double> myX_CR( const double lmin, const double lmax ) const noexcept;
   
-  std::vector< std::pair<double, double > > gridInterval( const size_t iter ) const;
+  std::vector< std::pair<double, double > > gridInterval( const size_t iter ) const noexcept;
   
-  size_t numberofOddIntervals( const size_t iter ) const ;
+  size_t numberofOddIntervals( const size_t iter ) const noexcept;
 };
 
 

@@ -29,13 +29,13 @@
 namespace thermal{
   namespace equipment{
 
-setup::setup( Laser laser_, Detector detector_)
+setup::setup( Laser laser_, Detector detector_) noexcept
 : laser(laser_), detector(detector_)
 {
   q_surface = 0;
 }
 
-setup setup::loadConfigfromXML( const boost::property_tree::ptree pt )
+setup setup::loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept
 {
     //initialize laser
   using tools::interface::getItem;

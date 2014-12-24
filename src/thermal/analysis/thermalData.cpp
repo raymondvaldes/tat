@@ -35,21 +35,21 @@ License
 namespace thermal {
 namespace analysis{
 
-ThermalData::ThermalData(void)
+ThermalData::ThermalData(void) noexcept
 {}
 
 ThermalData::ThermalData( const double l_min, const double l_max,
                           const size_t lminPerDecarde,
-                          const sensible::layer &coating )
+                          const sensible::layer &coating ) noexcept
   : lthermalLimits(l_min, l_max), measurementsPerDecade(lminPerDecarde)
 {
   thermalSetup( l_min, l_max, coating );
 }
 
-ThermalData::~ThermalData(){}
+ThermalData::~ThermalData() noexcept{}
 
 size_t ThermalData::thermalSetup( const double lmin, const double lmax,
-                                  const sensible::layer &coating  )
+                                  const sensible::layer &coating  ) noexcept
 
 {
   size_t L_end = numMeasurements( lmin, lmax );
@@ -70,13 +70,13 @@ size_t ThermalData::thermalSetup( const double lmin, const double lmax,
   return L_end;
 }
 
-size_t ThermalData::size(void) const
+size_t ThermalData::size(void) const noexcept
 {
   return omegas.size();
 }
 
 std::string
-ThermalData::prettyPrint( const sensible::layer &coating )
+ThermalData::prettyPrint( const sensible::layer &coating ) noexcept
 {
   std::ostringstream output;
 
@@ -109,7 +109,7 @@ ThermalData::prettyPrint( const sensible::layer &coating )
   return output.str() ;
 }
 
-std::string ThermalData::prettyPrint( void )
+std::string ThermalData::prettyPrint( void ) noexcept
 {
   std::ostringstream output;
 
@@ -136,7 +136,7 @@ std::string ThermalData::prettyPrint( void )
 
 
 std::string ThermalData::prettyPrint( const sensible::layer &coating,
-                                    const std::vector<double> nominalEmission )
+                                    const std::vector<double> nominalEmission ) noexcept
 {
   std::ostringstream output;
 
@@ -185,14 +185,14 @@ void ThermalData::resizeVectors( const size_t Lend)
 }
 
 std::pair<double, double>
-ThermalData::get_omegaLimits( void ) const
+ThermalData::get_omegaLimits( void ) const noexcept
 {
   std::pair<double, double> output( omegas.front(), omegas.back() );
   return output;
 }
 
 std::pair<double, double>
-ThermalData::get_lthermalLimits( const sensible::layer &coating) const
+ThermalData::get_lthermalLimits( const sensible::layer &coating) const noexcept
 {
   using thermal::define::lthermal;
   const double first = lthermal( coating.getDepth(),
@@ -210,7 +210,7 @@ ThermalData::get_lthermalLimits( const sensible::layer &coating) const
 }
 
 std::vector<double>
-ThermalData::get_lthermalSweep( const sensible::layer &coating ) const
+ThermalData::get_lthermalSweep( const sensible::layer &coating ) const noexcept
 {
   const size_t LEND = omegas.size();
   using thermal::define::lthermal;
@@ -226,7 +226,7 @@ ThermalData::get_lthermalSweep( const sensible::layer &coating ) const
 }
 
 
-void ThermalData::updateExperimental( const std::vector<double> &input)
+void ThermalData::updateExperimental( const std::vector<double> &input) noexcept
 {
   BOOST_ASSERT( input.size() == experimentalEmission.size() );
   experimentalEmission = input;
@@ -234,7 +234,7 @@ void ThermalData::updateExperimental( const std::vector<double> &input)
 
 
 
-ThermalData& ThermalData::operator=( const ThermalData& that )
+ThermalData& ThermalData::operator=( const ThermalData& that ) noexcept
 {
   if(this != &that)
   {
@@ -252,7 +252,7 @@ ThermalData& ThermalData::operator=( const ThermalData& that )
 
 void ThermalData::
 updatefromBestFit( std::vector< math::estimation::unknown > list,
-                   const sensible::layer &coating  )
+                   const sensible::layer &coating  ) noexcept
 {
 
   double xCenter = 0;
@@ -277,7 +277,7 @@ updatefromBestFit( std::vector< math::estimation::unknown > list,
 
 }
 
-size_t ThermalData::numMeasurements( const double l_min, const double l_max )
+size_t ThermalData::numMeasurements( const double l_min, const double l_max ) noexcept
 {
   const size_t L_end = measurementsPerDecade;
   BOOST_ASSERT_MSG( ( l_min < l_max ) , "check min-max logic\n\n" );
@@ -355,7 +355,7 @@ size_t ThermalData::numMeasurements( const double l_min, const double l_max )
 
 class ThermalData ThermalData::
         loadConfigfromXML( const boost::property_tree::ptree pt,
-                           const sensible::layer &coating )
+                           const sensible::layer &coating ) noexcept
 {
   using boost::property_tree::ptree;
 

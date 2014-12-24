@@ -31,15 +31,16 @@
 #include <complex>
 
 namespace math { namespace algorithms{
+
 using std::vector;
 using std::complex;
 
-vector<double> cmplx_split_real( const vector< complex<double> > &input) ;
-vector<double> cmplx_split_imag( const vector< complex<double> > &input) ;
-double cmplx_modulus( const std::complex<double> &input ) ;
+vector<double> cmplx_split_real( const vector< complex<double> > &input) noexcept;
+vector<double> cmplx_split_imag( const vector< complex<double> > &input) noexcept;
+double cmplx_modulus( const std::complex<double> &input ) noexcept;
 
 std::complex<double>
-mod_phase_to_cmplx( const double mod, const double phase ) ;
+mod_phase_to_cmplx( const double mod, const double phase ) noexcept;
 
 }}
 

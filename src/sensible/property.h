@@ -49,8 +49,8 @@ public:
   double offset;
   double slope;
   
-  explicit property(const double offset_,const double slope_);
-  explicit property(void);
+  explicit property(const double offset_,const double slope_) noexcept;
+  explicit property(void) noexcept;
   
   double Current(const vector<vector<double>>& T, const size_t n,
                  const size_t j) const;
@@ -82,9 +82,8 @@ public:
                    const size_t j1, const size_t j2) const;
   
   double Projectedt(const Temperature Tprofile,
-                    const size_t n, const size_t, const size_t j)
-  const;
-  static property loadConfigfromXMLTree(const ptree pt);
+                    const size_t n, const size_t, const size_t j) const;
+  static property loadConfigfromXMLTree(const ptree pt) noexcept;
 };
 
   

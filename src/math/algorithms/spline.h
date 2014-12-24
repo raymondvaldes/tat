@@ -46,13 +46,13 @@ private:
   gsl_interp_accel *acc   = gsl_interp_accel_alloc();  ///Ptr interpolation iter
   gsl_spline *spline      = nullptr; ///Declare pointer to interpolations
   gsl_integration_workspace *workspace  = nullptr;
-  static double CCallback(double d, void*params);
+  static double CCallback(double d, void*params) noexcept;
 
 public:
-  explicit mySpline( const double* a, const double* b, const size_t c ) ;
-  ~mySpline( void ) ;
+  explicit mySpline( const double* a, const double* b, const size_t c ) noexcept;
+  ~mySpline( void ) noexcept;
   
-  double eval( const double xpos ) const;
+  double eval( const double xpos ) const noexcept;
 };
 
 }

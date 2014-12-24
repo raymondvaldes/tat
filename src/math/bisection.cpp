@@ -43,13 +43,13 @@ size_t PrecisionToBits(const size_t precision)
 }
 
 
- double solve::myRootFunc(const double x) const
+ double solve::myRootFunc(const double x) const noexcept
 {
   return myF(x) - phi;
 }
 
 solve::solve( std::function<double(double)> myF_ , const double phi_,
-                const double min_, const double max_)
+                const double min_, const double max_) noexcept
   : myF(myF_), phi(phi_), min(min_), max(max_)
 {
   constexpr double tol  = 0.0001;
@@ -77,7 +77,7 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
   }
 }
 
-void solve::BisectMethod(void)
+void solve::BisectMethod(void) noexcept
 {
   using std::placeholders::_1;
   const std::function<double(double)>
@@ -95,21 +95,21 @@ void solve::BisectMethod(void)
   bestGuess = math::average( result.first , result.second ) ;
 }
 
-double solve::returnSoln(void) const
+double solve::returnSoln(void) const noexcept
 {
   return bestGuess;
 }
 
-size_t solve::returnIterations(void) const
+size_t solve::returnIterations(void) const noexcept
 {
   return maxInt;
 }
 
-double solve::returnSolnTolerance(void) const
+double solve::returnSolnTolerance(void) const noexcept
 {
   return solnTolerance;
 }
 
-solve::~solve(void){}
+solve::~solve(void) noexcept{}
 
 }

@@ -16,7 +16,7 @@ namespace algorithm {
 namespace vector{
 
 std::vector<double> subtract(  const std::vector<double>& firstvec,
-                               const std::vector<double>& secondvec){
+                               const std::vector<double>& secondvec) noexcept{
   using std::transform;
   using std::minus;
   

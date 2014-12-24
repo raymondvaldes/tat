@@ -28,7 +28,7 @@
 namespace thermal{
 namespace equipment{
 
-Detector::Detector(const double wavelength_, const double radius_)
+Detector::Detector(const double wavelength_, const double radius_) noexcept
 :wavelength(wavelength_), radius(radius_)
 {
   BOOST_ASSERT_MSG( ( wavelength > 0 )     &&
@@ -36,15 +36,15 @@ Detector::Detector(const double wavelength_, const double radius_)
                    "check detector inputs\n\n" );
 }
 
-double Detector::getPeakWavelength(void) const  {
+double Detector::getPeakWavelength(void) const noexcept {
 
   return wavelength;
 }
 
-double Detector::getSpotSizeRadius(void) const  {
+double Detector::getSpotSizeRadius(void) const noexcept {
   return radius;
 }
 
-Detector::~Detector(void){}
+Detector::~Detector(void) noexcept {}
   
 }}

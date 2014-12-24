@@ -37,26 +37,26 @@ class layer
 private:
   double depth;
   double Lambda;
-  double getOpticalPenetration( void ) ;
+  double getOpticalPenetration( void ) noexcept;
   
 public:
   property kthermal;
   property psithermal;
   double c = 1;
 
-  double opticalPenetration(void) const;
-  double thermalDiffusivity(void) const;
-  double thermalEffusivity(void) const;
+  double opticalPenetration(void) const noexcept;
+  double thermalDiffusivity(void) const noexcept;
+  double thermalEffusivity(void) const noexcept;
 
   explicit layer( const property kthermal_,
                   const property psithermal_,
-                  const double depth_, const double lambda_);
-  ~layer(void);
-  static layer loadConfigfromXMLTree( const boost::property_tree::ptree pt );
-  double getDepth( void ) const;
-  double getLambda( void ) const;
-  void setDepth( const double depth_in ) ;
-  void setLambda( const double Lambda_in ) ;
+                  const double depth_, const double lambda_) noexcept;
+  ~layer(void) noexcept;
+  static layer loadConfigfromXMLTree( const boost::property_tree::ptree pt ) noexcept;
+  double getDepth( void ) const noexcept;
+  double getLambda( void ) const noexcept;
+  void setDepth( const double depth_in ) noexcept;
+  void setLambda( const double Lambda_in ) noexcept;
 };
 
 

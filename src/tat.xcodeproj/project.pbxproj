@@ -62,8 +62,6 @@
 		ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DE21948D4A500B44AD5 /* cosfit.hpp */; };
 		ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DE31948D4A500B44AD5 /* lmdiff.cpp */; };
 		ABEF4E8C1948D4A500B44AD5 /* lmdiff.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DE41948D4A500B44AD5 /* lmdiff.hpp */; };
-		ABEF4E8D1948D4A500B44AD5 /* lmdiff_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DE51948D4A500B44AD5 /* lmdiff_helper.cpp */; };
-		ABEF4E8E1948D4A500B44AD5 /* lmdiff_helper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DE61948D4A500B44AD5 /* lmdiff_helper.hpp */; };
 		ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DE71948D4A500B44AD5 /* parameterestimation.cpp */; };
 		ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DE81948D4A500B44AD5 /* parameterestimation.hpp */; };
 		ABEF4E911948D4A500B44AD5 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DE91948D4A500B44AD5 /* utils.cpp */; };
@@ -254,8 +252,6 @@
 		ABEF4DE21948D4A500B44AD5 /* cosfit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cosfit.hpp; sourceTree = "<group>"; };
 		ABEF4DE31948D4A500B44AD5 /* lmdiff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lmdiff.cpp; sourceTree = "<group>"; };
 		ABEF4DE41948D4A500B44AD5 /* lmdiff.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lmdiff.hpp; sourceTree = "<group>"; };
-		ABEF4DE51948D4A500B44AD5 /* lmdiff_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lmdiff_helper.cpp; sourceTree = "<group>"; };
-		ABEF4DE61948D4A500B44AD5 /* lmdiff_helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lmdiff_helper.hpp; sourceTree = "<group>"; };
 		ABEF4DE71948D4A500B44AD5 /* parameterestimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parameterestimation.cpp; sourceTree = "<group>"; };
 		ABEF4DE81948D4A500B44AD5 /* parameterestimation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = parameterestimation.hpp; sourceTree = "<group>"; };
 		ABEF4DE91948D4A500B44AD5 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
@@ -660,8 +656,6 @@
 				ABEF4DE21948D4A500B44AD5 /* cosfit.hpp */,
 				ABEF4DE31948D4A500B44AD5 /* lmdiff.cpp */,
 				ABEF4DE41948D4A500B44AD5 /* lmdiff.hpp */,
-				ABEF4DE51948D4A500B44AD5 /* lmdiff_helper.cpp */,
-				ABEF4DE61948D4A500B44AD5 /* lmdiff_helper.hpp */,
 				ABEF4DE71948D4A500B44AD5 /* parameterestimation.cpp */,
 				ABEF4DE81948D4A500B44AD5 /* parameterestimation.hpp */,
 				ABEF4DE91948D4A500B44AD5 /* utils.cpp */,
@@ -1030,7 +1024,6 @@
 				ABEF4F001948D4A500B44AD5 /* xml.h in Headers */,
 				ABEF4EE01948D4A500B44AD5 /* setup.h in Headers */,
 				ABEF4EDA1948D4A500B44AD5 /* phase99.hpp in Headers */,
-				ABEF4E8E1948D4A500B44AD5 /* lmdiff_helper.hpp in Headers */,
 				ABEF4EC31948D4A500B44AD5 /* thermalData.hpp in Headers */,
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
@@ -1203,7 +1196,6 @@
 				ABEF4EF71948D4A500B44AD5 /* tau_0.cpp in Sources */,
 				ABEF4EC21948D4A500B44AD5 /* thermalData.cpp in Sources */,
 				ABEF4EA11948D4A500B44AD5 /* kinematics.cpp in Sources */,
-				ABEF4E8D1948D4A500B44AD5 /* lmdiff_helper.cpp in Sources */,
 				ABEF4ECE1948D4A500B44AD5 /* model.cpp in Sources */,
 				ABEF4ED11948D4A500B44AD5 /* omega.cpp in Sources */,
 				ABEF4E971948D4A500B44AD5 /* estimationInterval.cpp in Sources */,

@@ -31,7 +31,7 @@
 namespace thermal{
   namespace define{
 
-double diffusivity( const double k, const double rhoCp ) ;
+double diffusivity( const double k, const double rhoCp ) noexcept ;
 
   }}
 

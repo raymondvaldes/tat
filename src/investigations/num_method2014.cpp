@@ -38,7 +38,7 @@ namespace investigations{
     
 using namespace thermal::analysis;
 
-void run( const filesystem::directory &dir )
+void run( const filesystem::directory &dir ) noexcept
 {
   using std::string;
   using std::vector;

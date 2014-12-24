@@ -41,8 +41,8 @@ public:
   Detector detector;
   double q_surface;
   
-  explicit setup( Laser laser_,  Detector detector_);
-  static class setup loadConfigfromXML( const boost::property_tree::ptree pt );
+  explicit setup( Laser laser_,  Detector detector_) noexcept;
+  static setup loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
 };
 
 }}

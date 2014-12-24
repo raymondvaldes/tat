@@ -33,7 +33,7 @@ TBCsystem::TBCsystem( const layer &coating_,
                       const layer &substrate_,
                       const temperatureScale &Temp_,
                       const radiativeSysProp &optical_,
-                      const double radius_ )
+                      const double radius_ ) noexcept
 : coating(coating_), truecoating( coating_ ), substrate(substrate_),
   Temp(Temp_), optical(optical_), radius(radius_)
 {
@@ -41,9 +41,9 @@ TBCsystem::TBCsystem( const layer &coating_,
   a_sub = a_subEval();
 }
   
-TBCsystem::~TBCsystem(void){}
+TBCsystem::~TBCsystem(void) noexcept{}
 
-TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree &pt)
+TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree &pt) noexcept
 {
   using boost::property_tree::ptree;
   
@@ -66,7 +66,7 @@ TBCsystem TBCsystem::loadConfig(const boost::property_tree::ptree &pt)
   return  TBCsystemObj;
 }
 
-void TBCsystem::updateVal( const enum labels::Name mylabel , const double val )
+void TBCsystem::updateVal( const enum labels::Name mylabel , const double val ) noexcept
 {
   switch( mylabel )
   {
@@ -104,7 +104,7 @@ void TBCsystem::updateVal( const enum labels::Name mylabel , const double val )
 
 
 
-double TBCsystem::returnVal( const enum labels::Name mylabel ) const
+double TBCsystem::returnVal( const enum labels::Name mylabel ) const noexcept
 {
   double val( 0 ) ;
   
@@ -139,18 +139,18 @@ double TBCsystem::returnVal( const enum labels::Name mylabel ) const
   return val;
 }
 
-double TBCsystem::gammaEval(void) const
+double TBCsystem::gammaEval(void) const noexcept
 {
   return substrate.thermalEffusivity() / coating.thermalEffusivity();
 }
 
-double TBCsystem::a_subEval(void) const
+double TBCsystem::a_subEval(void) const noexcept
 {
   using std::sqrt;
   return sqrt(substrate.thermalDiffusivity() / coating.thermalDiffusivity());
 }
 
-void TBCsystem::updateCoat(void)
+void TBCsystem::updateCoat(void) noexcept
 {
   using std::pow;
   using std::sqrt;

@@ -58,17 +58,17 @@ public:
                       const layer &substrate_,
                       const temperatureScale &Temp_,
                       const radiativeSysProp &optical_,
-                      const double radius_ ) ;
-  static TBCsystem loadConfig( const boost::property_tree::ptree &pt ) ;
-  ~TBCsystem(void);
+                      const double radius_ ) noexcept;
+  static TBCsystem loadConfig( const boost::property_tree::ptree &pt ) noexcept;
+  ~TBCsystem(void) noexcept;
   
     /// Member operations that update on multiple members
-  void updateVal( const enum labels::Name mylabel , const double val ) ;
-  double returnVal( const enum labels::Name mylabel ) const ;
+  void updateVal( const enum labels::Name mylabel , const double val ) noexcept;
+  double returnVal( const enum labels::Name mylabel ) const noexcept;
   
-  double gammaEval( void ) const ;
-  double a_subEval( void ) const ;
-  void updateCoat( void );
+  double gammaEval( void ) const noexcept;
+  double a_subEval( void ) const noexcept;
+  void updateCoat( void ) noexcept;
 };
   
 }

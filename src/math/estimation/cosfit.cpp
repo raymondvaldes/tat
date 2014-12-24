@@ -32,7 +32,7 @@ namespace math{
 
 
 void cosfit( const double *dependent, const std::vector<double> &independent,
-             double *x, size_t Nend)
+             double *x, size_t Nend) noexcept
 {
   BOOST_ASSERT( dependent != nullptr ) ;
   BOOST_ASSERT( x != nullptr ) ;
@@ -144,7 +144,7 @@ void cosfit( const double *dependent, const std::vector<double> &independent,
 
 
 void cosfcn1( int P, int /*N*/, double *x, double *fvec, int */*iflag*/,
-              double **variables )
+              double **variables ) noexcept
 {  // function to be fitted:
    // dependent[i] = x[0] + x[1] * cos( independent[i]*2*PI + x[2] )
    // constants to be found by the fit are: x[0],x[1],x[2] which respectively

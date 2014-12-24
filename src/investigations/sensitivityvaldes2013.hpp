@@ -33,8 +33,8 @@ License
 namespace investigations{
 namespace sensitivityvaldes2013{
 
-void run(const filesystem::directory &dir ) ;
-void demo( const filesystem::directory &dir ) ;
+void run(const filesystem::directory &dir ) noexcept;
+void demo( const filesystem::directory &dir ) noexcept;
 
 
 }}

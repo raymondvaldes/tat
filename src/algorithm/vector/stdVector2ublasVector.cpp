@@ -14,7 +14,7 @@ namespace algorithm {
 namespace vector{
 
 boost::numeric::ublas::vector<double>
-stdVector2ublasVector( const std::vector<double>& input ) {
+stdVector2ublasVector( const std::vector<double>& input ) noexcept {
 
   using boost::numeric::ublas::vector;
   using std::copy;

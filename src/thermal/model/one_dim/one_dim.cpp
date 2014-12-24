@@ -33,7 +33,7 @@ one_dim::one_dim(
   const sensible::radiativeSysProp &radiative_prop_in,
   const thermal::equipment::Laser &laser_in,
   const double temp_in,
-  const double gamma_in )
+  const double gamma_in ) noexcept
   :
   coat( coating_in.kthermal.offset, coating_in.psithermal.offset,
         coating_in.getDepth(), coating_in.getLambda() ),
@@ -47,6 +47,6 @@ one_dim::one_dim(
   Emit1(                      radiative_prop_in.Emit1 )
 {}
   
-one_dim::~one_dim( void ) {}
+one_dim::~one_dim( void ) noexcept {}
 
 }}}

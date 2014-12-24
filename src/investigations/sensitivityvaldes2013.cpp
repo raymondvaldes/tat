@@ -43,7 +43,7 @@ namespace sensitivityvaldes2013
 
 using namespace thermal::analysis;
 
-void run( const filesystem::directory &dir )
+void run( const filesystem::directory &dir ) noexcept
 {
   using std::string;
   using std::to_string;
@@ -94,7 +94,7 @@ return;
 
 
 
-void demo( const filesystem::directory &dir )
+void demo( const filesystem::directory &dir ) noexcept
 {
   using thermal::analysis::initializePopTeaAndLoadSimuEmission;
   thermal::analysis::Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );

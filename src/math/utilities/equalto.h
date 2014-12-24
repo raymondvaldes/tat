@@ -33,7 +33,7 @@
 namespace math {
   
 template< typename T1, typename T2 >
-bool equalto ( const T1 a, const T2 b )
+bool equalto ( const T1 a, const T2 b ) noexcept
 {
   using std::abs;
   using std::numeric_limits;

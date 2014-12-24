@@ -15,7 +15,7 @@
 namespace investigations{
 namespace twoColorPyrometery{
   
-void run( const filesystem::directory &dir ) ;
+void run( const filesystem::directory &dir ) noexcept ;
 
   
 }}

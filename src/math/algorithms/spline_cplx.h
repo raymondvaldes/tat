@@ -41,9 +41,9 @@ private:
 
 public:
   explicit spline_cplx( const std::vector< std::complex<double> > &ind,
-                        const double* dep, const size_t c ) ;
+                        const double* dep, const size_t c ) noexcept;
  // ~spline_cplx( void ) ;
-  std::complex<double> eval( const double xpos ) const;
+  std::complex<double> eval( const double xpos ) const noexcept;
 };
 
 

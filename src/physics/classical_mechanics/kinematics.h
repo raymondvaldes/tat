@@ -31,8 +31,8 @@
 namespace physics{
 namespace classical_mechanics{
 
-double period_to_angularFrequency( const double period );
-double angularFrequency_to_period( const double angularFrequency );
+double period_to_angularFrequency( const double period ) noexcept;
+double angularFrequency_to_period( const double angularFrequency ) noexcept;
 
 }}
 

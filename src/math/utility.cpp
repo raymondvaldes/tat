@@ -39,7 +39,7 @@ License
 namespace math{
 
 std::pair<double, double>
-get_log10_random_pair( const double left_end, const double right_end)  {
+get_log10_random_pair( const double left_end, const double right_end) noexcept {
   using std::make_pair;
   
   const double myleft = random_in_logspace( left_end, right_end ) ;
@@ -48,7 +48,7 @@ get_log10_random_pair( const double left_end, const double right_end)  {
   return make_pair( myleft, myright ) ;
 }
 
-double arrayMax(const double* x, const size_t I)
+double arrayMax(const double* x, const size_t I) noexcept
 {
     double maxi = x[0];
     for(size_t i = 1; i < I ; ++i)
@@ -59,7 +59,7 @@ double arrayMax(const double* x, const size_t I)
     return maxi;
 }
 
-double arrayMin(const double* x, const size_t I)
+double arrayMin(const double* x, const size_t I) noexcept
 {
     double maxi = x[0];
     for(size_t i = 1; i < I ; ++i)
@@ -70,7 +70,7 @@ double arrayMin(const double* x, const size_t I)
     return maxi;
 }
 
-std::pair<double, double> OA_init( const double *x, const size_t span )
+std::pair<double, double> OA_init( const double *x, const size_t span ) noexcept
 {
   BOOST_ASSERT( x != nullptr ) ;
   BOOST_ASSERT( span > 0 ) ;
@@ -101,7 +101,7 @@ std::pair<double, double> OA_init( const double *x, const size_t span )
 
 
 
-double average(const double a, const double b)
+double average(const double a, const double b) noexcept
 {
     double val = a;
     val += b;
@@ -109,7 +109,7 @@ double average(const double a, const double b)
     return val;
 }
 
-double percentile(const double xmin, const double xmax, const double x)
+double percentile(const double xmin, const double xmax, const double x) noexcept
 {
     /*
     This function returns the percentile of x in log10 space with respect to the
@@ -125,7 +125,7 @@ double percentile(const double xmin, const double xmax, const double x)
     return x / (xmax-xmin);
 }
 
-double percentilelog10(const double xmin, const double xmax, const double x)
+double percentilelog10(const double xmin, const double xmax, const double x) noexcept
 {
     /*
     This function returns the percentile of x in log10 space with respect to the
@@ -139,10 +139,11 @@ double percentilelog10(const double xmin, const double xmax, const double x)
     constexpr double epsilon = 1e-12;
     if( ( (x-epsilon) > xmax) || ( (x+epsilon) < xmin ) )
     {
-        std::cerr << "\n" << xmin << "\t" << xmax << "\t" << x << "\t"
+        using std::cerr;
+        cerr << "\n" << xmin << "\t" << xmax << "\t" << x << "\t"
         << (x > xmax) << "\t" << (x < xmin) << "\n";
 
-        std::cerr << "\noutside range logspace\n";
+        cerr << "\noutside range logspace\n";
         exit(-99);
     }
 
@@ -152,15 +153,17 @@ double percentilelog10(const double xmin, const double xmax, const double x)
 }
 
 double valFROMpercentileLog10( const double input,  const double xmin,
-                               const double xmax )
+                               const double xmax ) noexcept
 {
   BOOST_ASSERT( input <= 1 && input >=0) ;
-  return xmin * std::pow( xmax / xmin , input );
+  using std::pow;
+  
+  return xmin * pow( xmax / xmin , input );
 }
 
 
 void range( double* l_thermal, const double l_min, const double l_max,
-            const size_t L_end )
+            const size_t L_end ) noexcept
 {
     for(size_t i = 0 ; i <  L_end; ++i)
     {
@@ -169,9 +172,10 @@ void range( double* l_thermal, const double l_min, const double l_max,
 }
 
 std::vector<double>
-range( const double xstart, const double xend, const size_t size )
+range( const double xstart, const double xend, const size_t size ) noexcept
 {
-  std::vector<double> result( size );
+  using std::vector;
+  vector<double> result( size );
   size_t i = 0;
   for( auto& val : result )
   { 
@@ -183,10 +187,11 @@ range( const double xstart, const double xend, const size_t size )
 }
 
 std::pair<double, double>
-x_limits_from_cenDec( const double cen, const double dec )
+x_limits_from_cenDec( const double cen, const double dec ) noexcept
 {
-
-
+  using std::pow;
+  using std::pair;
+  
   const double lmin = cen / pow( 10, dec / 2 ) ;
   const double lmax = lmin * pow( 10, dec ) ;
 
@@ -194,10 +199,11 @@ x_limits_from_cenDec( const double cen, const double dec )
   return output;
 }
 
-std::pair<double, double> xCenterlog10( const double lmin, const double lmax )
+std::pair<double, double> xCenterlog10( const double lmin, const double lmax ) noexcept
 {
   BOOST_ASSERT( lmin < lmax ) ;
   BOOST_ASSERT( lmin > 0 ) ;
+  using std::pair;
 
   const double dec = log10( lmax / lmin ) ;
   const double center = lmin * pow( 10, dec / 2 ) ;
@@ -207,7 +213,7 @@ std::pair<double, double> xCenterlog10( const double lmin, const double lmax )
 }
 
 std::vector<double>
-range1og10( const double start, const double end, const size_t points )
+range1og10( const double start, const double end, const size_t points ) noexcept
 {
   //Creates a finite uniform distribution from lmin to lmax in log10space
 
@@ -246,7 +252,7 @@ range1og10( const double start, const double end, const size_t points )
   return output;
 }
 
-double xspread( const double xmin, const double xnominal, const double xmax)
+double xspread( const double xmin, const double xnominal, const double xmax) noexcept
 {
   return (xmax - xmin) / xnominal;
 }
@@ -254,7 +260,7 @@ double xspread( const double xmin, const double xnominal, const double xmax)
 
 std::pair<double, double>
 CRfromSweepLimits( const std::pair<double, double> inner_bounds,
-                   const std::pair<double, double> outer_bounds )
+                   const std::pair<double, double> outer_bounds ) noexcept
 {
   BOOST_ASSERT( outer_bounds.first > 0 ) ;
   BOOST_ASSERT( inner_bounds.first  <= inner_bounds.second ) ;
@@ -281,11 +287,11 @@ CRfromSweepLimits( const std::pair<double, double> inner_bounds,
   return output;
 }
 
-bool checkLimits( const std::pair<double, double> CRpair ) {
+bool checkLimits( const std::pair<double, double> CRpair ) noexcept {
   return checkLimits( CRpair.first, CRpair.second ) ;
 }
 
-bool checkLimits( const double center, const double range )
+bool checkLimits( const double center, const double range ) noexcept
 {
   // The center and range are used to charactize the data set.  The following
   /// are defined:
@@ -313,7 +319,7 @@ bool checkLimits( const double center, const double range )
 }
 
 std::pair<double, double>
-random_CR_from_limits( const Interval myInterval )
+random_CR_from_limits( const Interval myInterval ) noexcept
 {
   //generates distribution a new distrubtion limits in terms of the logspace
   //center and decades. It used some global limits (input).
@@ -327,7 +333,7 @@ random_CR_from_limits( const Interval myInterval )
 
 std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
-                       const std::pair<double, double> limits )
+                       const std::pair<double, double> limits ) noexcept
 {
   using math::valFROMpercentileLog10;
   
@@ -366,7 +372,7 @@ newThermalSweepLimits( const double center, const double range,
   return output;
 }
 
-bool within_tolerance( const double x1, const double x2, const double tol ) {
+bool within_tolerance( const double x1, const double x2, const double tol ) noexcept {
 
   assert( tol > 0 ) ;
   
@@ -376,7 +382,7 @@ bool within_tolerance( const double x1, const double x2, const double tol ) {
   return close_enough ;
 }
 
-double average_of_all( const double* myarray, const size_t size){
+double average_of_all( const double* myarray, const size_t size) noexcept{
   double sum  = 0 ;
   for( size_t i = 0 ;  i < size ; ++i ) {
     sum += myarray[i] ;
@@ -387,7 +393,7 @@ double average_of_all( const double* myarray, const size_t size){
 }
 
 double median_of_all( const double* sortedvector ,
-                      const size_t size )
+                      const size_t size ) noexcept
 {
   using math::mean;
   using std::is_sorted;

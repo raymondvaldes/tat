@@ -31,7 +31,7 @@
 namespace thermal{
   namespace define{
 
-double effusivity( const double k, const double rhoCp ) ;
+double effusivity( const double k, const double rhoCp ) noexcept;
 
   }}
 #endif /* defined(__tat__effusivity__) */

@@ -61,26 +61,26 @@ public:
   explicit Mesh( const size_t M2_, const size_t Rend_, const size_t Nend_,
                  const double beta1_, const double split_, const double L_coat_,
                  const double L_substrate_, const double CO2Radius_,
-                 const double Rdomain_, const size_t numIter_);
-  ~Mesh();
+                 const double Rdomain_, const size_t numIter_) noexcept;
+  ~Mesh() noexcept;
 
   void meshUpdate(const double L_coat, const double L_substrate,
-                  const double CO2Radius, const double Rdomain);
+                  const double CO2Radius, const double Rdomain) noexcept;
 
 private:
   const double beta1, split;
   mutable double beta2;
 
-  double beta2_func(const double *variable, const double *constants);
+  double beta2_func(const double *variable, const double *constants) noexcept;
   void minimizer(double *variable, double *constants,
                  double temp_variable_min, double temp_variable_max,
-                 double min_goal, const size_t max_iterations);
-  double z_eta(const double eta_, const double beta1_, const double beta2_);
-  double find_beta2(const double L_coat, const double L_substrate);
-  size_t discretizeSpace(const double L_coat, const double L_substrate);
-  double z_eta(const double eta_);
-  double D_eta(const double z_norm_);
-  void zUpdate();
+                 double min_goal, const size_t max_iterations) noexcept;
+  double z_eta(const double eta_, const double beta1_, const double beta2_) noexcept;
+  double find_beta2(const double L_coat, const double L_substrate) noexcept;
+  size_t discretizeSpace(const double L_coat, const double L_substrate) noexcept;
+  double z_eta(const double eta_) noexcept;
+  double D_eta(const double z_norm_) noexcept;
+  void zUpdate() noexcept;
 
 public:
   size_t iter;

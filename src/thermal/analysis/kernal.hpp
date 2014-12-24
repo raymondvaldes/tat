@@ -54,34 +54,34 @@ public:
   Kernal( const equipment::setup &expSetup_,
           const sensible::TBCsystem &TBCsystem_,
           const define::model &thermalsys_,
-          const filesystem::directory &DataDirectory_ ) ;
+          const filesystem::directory &DataDirectory_ ) noexcept;
   static Kernal loadConfig( const boost::property_tree::ptree &pt,
-                            const filesystem::directory &DataDirectory_);
-  ~Kernal( void );
+                            const filesystem::directory &DataDirectory_) noexcept;
+  ~Kernal( void ) noexcept;
 
   /// Operations that give results
-  double bEval(void) const;
-  void updatefromBestFit( std::vector< math::estimation::unknown > list );
-  void updatefromInitial( std::vector< math::estimation::unknown > list );
+  double bEval(void) const noexcept;
+  void updatefromBestFit( std::vector< math::estimation::unknown > list ) noexcept;
+  void updatefromInitial( std::vector< math::estimation::unknown > list ) noexcept;
   void updateFromList( const enum model::labels::Name mylabel ,
-                       const double val ) ;
+                       const double val ) noexcept;
   
   std::pair< std::shared_ptr< Kernal >, std::vector<double> >
   updateCoreOmegaFromList(
     const std::vector<double> &omegas,
     const std::vector< std::pair < enum model::labels::Name, double > > list,
-    const size_t ith ) const;
+    const size_t ith ) const noexcept;
   
   // reload members
-  void reloadthermalsys( const define::construct &other );
+  void reloadthermalsys( const define::construct &other ) noexcept;
 
 };
 
-Kernal loadWorkingDirectoryKernal(const filesystem::directory &dir);
+Kernal loadWorkingDirectoryKernal(const filesystem::directory &dir) noexcept;
 }}
 
 template<typename OBJ>
-void reassign( std::shared_ptr< OBJ > &var, const OBJ &input )
+void reassign( std::shared_ptr< OBJ > &var, const OBJ &input ) noexcept
 { var.reset( new OBJ( input )  ); }
 
 

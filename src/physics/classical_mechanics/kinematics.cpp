@@ -29,7 +29,7 @@
 namespace physics{
 namespace classical_mechanics{
 
-double period_to_angularFrequency( const double period )
+double period_to_angularFrequency( const double period ) noexcept
 {
   const bool pass = period > 0 ;
   BOOST_ASSERT( pass ) ;
@@ -38,7 +38,7 @@ double period_to_angularFrequency( const double period )
   return angularFrequency ;
 }
 
-double angularFrequency_to_period( const double angularFrequency )
+double angularFrequency_to_period( const double angularFrequency ) noexcept
 {
   const bool pass = angularFrequency > 0 ;
   BOOST_ASSERT( pass ) ;

@@ -39,11 +39,11 @@ private:
 
 public:
 
-  double getPeakWavelength(void)  const ;
-  double getSpotSizeRadius(void)  const ;
+  double getPeakWavelength(void)  const noexcept ;
+  double getSpotSizeRadius(void)  const noexcept;
   
-  explicit Detector( const double wavelength_, const double radius_ ) ;
-  ~Detector(void);
+  explicit Detector( const double wavelength_, const double radius_ ) noexcept;
+  ~Detector(void) noexcept;
 };
   
   

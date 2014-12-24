@@ -16,7 +16,7 @@ namespace firstDerivative {
 
 template <typename Type>
 Type forward_difference( Type func, Type func_plus,
-                         Type dx )
+                         Type dx ) noexcept
 {
   const Type output = ( func_plus - func ) / dx ;
   return output;

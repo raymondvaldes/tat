@@ -34,14 +34,14 @@ namespace thermal{
 
 ExpNoiseSetting::ExpNoiseSetting( const double a1_, const double b1_,
                                   const bool d1_, const bool d2_,
-                                  const int s1_, const double noiseRandom_):
-    a(a1_), b(b1_), noiseRandom(noiseRandom_), d1(d1_), d2(d2_), s1(s1_)
+                                  const int s1_, const double noiseRandom_) noexcept
+  : a(a1_), b(b1_), noiseRandom(noiseRandom_), d1(d1_), d2(d2_), s1(s1_)
 {}
 
 std::vector<double>
 addNoise( const std::vector<double> &emissionNominal_,
           const std::vector<double> &lthermal,
-          const thermal::emission::ExpNoiseSetting &para )
+          const thermal::emission::ExpNoiseSetting &para ) noexcept
 
 {
   const double lmin = lthermal.front();
@@ -58,11 +58,12 @@ addNoise( const std::vector<double> &emissionNominal_,
 
   if( (a < 0) || (b < 1) || (b > M_PI) )
   {
-     std::cerr << "parameters (a,b) out of range"; exit(-99);
+    using std::cerr;
+    cerr << "parameters (a,b) out of range";
+    exit(-99);
   }
   
   using std::vector;
-
   vector<double> output( emissionNominal_ ) ;
   for( size_t i=0 ; i < lthermal.size() ; ++i )
   {
@@ -104,7 +105,7 @@ addNoise( const std::vector<double> &emissionNominal_,
 
 
 ExpNoiseSetting
-ExpNoiseSetting::initializeObj(const boost::property_tree::ptree &pt )
+ExpNoiseSetting::initializeObj(const boost::property_tree::ptree &pt ) noexcept
 {
   //initialize parameter estimation settings
   const double a1_     = pt.get<double>( "bias-noise" );
@@ -120,16 +121,17 @@ ExpNoiseSetting::initializeObj(const boost::property_tree::ptree &pt )
 }
 
 ExpNoiseSetting
-ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory &dir )
+ExpNoiseSetting::loadExpNoiseFile( const class filesystem::directory &dir ) noexcept
 {
-  const std::string filename = "EmissionNoise.xml";
-  const std::string absPath = dir.abs( filename );
+  using std::string;
+  const string filename = "EmissionNoise.xml";
+  const string absPath = dir.abs( filename );
 
   using boost::property_tree::ptree;
   ptree pt = tools::interface::getTreefromFile( absPath ) ;
 
   //pass child to settings object
-  const std::string conjunto = "simulated-emission." ;
+  const string conjunto = "simulated-emission." ;
   const ptree ptchild1 = pt.get_child( conjunto + "settings");
 
 

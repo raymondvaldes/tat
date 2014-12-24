@@ -37,11 +37,11 @@ class Emission
 public:
   explicit Emission( const double detector_lam_, const double T_ref_,
                      const numericalModel::Mesh mesh, const double beamR_,
-                     const double E_sigma_ );
-  ~Emission();
+                     const double E_sigma_ ) noexcept;
+  ~Emission() noexcept;
   double phase2D( std::vector< std::vector< std::vector< double > > >
-                         &Temperature) const;
-  double phase1D(const define::Temperature Tprofile) const;
+                         &Temperature) const noexcept;
+  double phase1D(const define::Temperature Tprofile) const noexcept;
 
 private:
   mutable double *Ib;
@@ -51,16 +51,16 @@ private:
   const class numericalModel::Mesh mesh;
   const double beamR, E_sigma;
 
-  double mean(const double x1, const double x2) const;
-  double drArea(const double r0_, const double r1_) const;
-  double Ib_plank(const double Temperature) const;
-  double emissionAxial(std::vector<double> &Temperature) const;
+  double mean(const double x1, const double x2) const noexcept;
+  double drArea(const double r0_, const double r1_) const noexcept;
+  double Ib_plank(const double Temperature) const noexcept;
+  double emissionAxial(std::vector<double> &Temperature) const noexcept;
   double emissionAxial(const define::Temperature Tprofile, const size_t nVal)
-  const;
+  const noexcept;
 
-  double emissionAxialLinear(std::vector<double> &Temperature) const;
+  double emissionAxialLinear(std::vector<double> &Temperature) const noexcept;
   double emissionVolumetric2D(std::vector<std::vector<double>>&Temperature)
-  const;
+  const noexcept;
 };
 
 

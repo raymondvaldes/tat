@@ -33,10 +33,10 @@ namespace math{
   namespace estimation{
 
 void cosfit( const double *dependent,const std::vector<double> &independentVec,
-             double *x, size_t Nend) ;
+             double *x, size_t Nend) noexcept;
 
 void cosfcn1( int P, int /*N*/, double *x, double *fvec, int */*iflag*/,
-              double **variables);
+              double **variables) noexcept;
 
   }
 }

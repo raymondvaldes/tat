@@ -39,39 +39,39 @@ using std::cout;
 namespace math {
 //namespace geometry {
 
-Interval::Interval( const pair<double, double> endpoints_input )
+Interval::Interval( const pair<double, double> endpoints_input ) noexcept
   : left_end( endpoints_input.first ), right_end( endpoints_input.second ) {
 }
 
 
-double Interval::get_left_end() const {
+double Interval::get_left_end() const noexcept {
   return left_end ;
 }
 
-double Interval::get_right_end() const {
+double Interval::get_right_end() const noexcept {
   return right_end ;
 }
 
-bool Interval::is_valid() const {
+bool Interval::is_valid() const noexcept {
   return left_end < right_end ;
 }
 
-bool Interval::is_invalid() const {
+bool Interval::is_invalid() const noexcept {
   return left_end >= right_end ;
 }
 
-void Interval::set_ends( const pair<double, double> endpoints_input) {
+void Interval::set_ends( const pair<double, double> endpoints_input) noexcept {
   left_end = endpoints_input.first ;
   right_end = endpoints_input.second ;
 }
 
-  pair<double, double> Interval::get_pair() const {
+  pair<double, double> Interval::get_pair() const noexcept {
   return make_pair( left_end, right_end ) ;
 }
 
 
 vector< vector < double > >
-Interval::random_group_xCR( const size_t iter ) const
+Interval::random_group_xCR( const size_t iter ) const noexcept
 {
   typedef const pair<double, double > pairDD ;
 
@@ -88,7 +88,7 @@ Interval::random_group_xCR( const size_t iter ) const
   return group_x_CR ;
 }
 
-size_t Interval::numberofOddIntervals( const size_t iter ) const {
+size_t Interval::numberofOddIntervals( const size_t iter ) const noexcept {
   
   size_t numberOfIntervals = floor( sqrt( iter * 2 ) ) ;
   if ( even( numberOfIntervals ) ) {
@@ -98,7 +98,7 @@ size_t Interval::numberofOddIntervals( const size_t iter ) const {
   return numberOfIntervals;
 }
 
-vector< pair<double, double > > Interval::gridInterval( const size_t iter ) const
+vector< pair<double, double > > Interval::gridInterval( const size_t iter ) const noexcept
 {
   typedef pair< double, double > boundPair ;
   typedef const vector< double > groupBounds ;
@@ -121,7 +121,7 @@ vector< pair<double, double > > Interval::gridInterval( const size_t iter ) cons
 }
 
 vector< vector<double> >
-Interval::ordered_group_xCR( const size_t iter ) const
+Interval::ordered_group_xCR( const size_t iter ) const noexcept
 {
   const size_t numberOfIntervals = numberofOddIntervals( iter ) ;
 
@@ -145,7 +145,7 @@ Interval::ordered_group_xCR( const size_t iter ) const
   return group_x_CR ;
 }
 
-vector<double> Interval::myX_CR( const double lmin, const double lmax ) const {
+vector<double> Interval::myX_CR( const double lmin, const double lmax ) const noexcept {
   BOOST_ASSERT( lmin < lmax ) ;
   BOOST_ASSERT( lmin >= left_end ) ;
   BOOST_ASSERT( lmax <= right_end ) ;
@@ -160,7 +160,7 @@ vector<double> Interval::myX_CR( const double lmin, const double lmax ) const {
 }
 
 
-Interval Interval::get_log10_random_subInterval() const {
+Interval Interval::get_log10_random_subInterval() const noexcept {
   //given an absolute bound, return a random new set of inner limits
   //randomly generated such that the distribution is uniform in log10 space
 

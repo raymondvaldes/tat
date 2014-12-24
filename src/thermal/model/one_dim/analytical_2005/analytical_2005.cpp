@@ -37,16 +37,16 @@ analytical_2005::analytical_2005(
   const sensible::radiativeSysProp &radiative_prop_in,
   const thermal::equipment::Laser &laser_in,
   const double temp_in,
-  const double gamma_in )
+  const double gamma_in ) noexcept
   :
   one_dim( coating_in, substrate_in, radiative_prop_in, laser_in, temp_in,
            gamma_in ), _i_ ( 0 , 1 ), SQRTi( std::sqrt( _i_ ) )
   {}
   
-analytical_2005::~analytical_2005( void ) {}
+analytical_2005::~analytical_2005( void ) noexcept{}
 
 
-complex<double> analytical_2005::F_tilde( const double lthermal ) const
+complex<double> analytical_2005::F_tilde( const double lthermal ) const noexcept
 {
   using std::sqrt;
   const complex<double> sqrtIdivLthermal = SQRTi / lthermal;
@@ -60,12 +60,12 @@ complex<double> analytical_2005::F_tilde( const double lthermal ) const
   return out;
 }
 
-double analytical_2005::Lambda_hat ( const double lthermal ) const
+double analytical_2005::Lambda_hat ( const double lthermal ) const noexcept
 {
   return coat.Lambda / lthermal ;
 }
 
-complex<double> analytical_2005::eta ( const double Lambda_hat ) const
+complex<double> analytical_2005::eta ( const double Lambda_hat ) const noexcept
 {
   using std::pow;
   
@@ -74,7 +74,7 @@ complex<double> analytical_2005::eta ( const double Lambda_hat ) const
 }
 
 complex<double>
-analytical_2005::M_tilde( const complex<double> x_in, const double l ) const
+analytical_2005::M_tilde( const complex<double> x_in, const double l ) const noexcept
 {
   BOOST_ASSERT(  l > 0 ) ;
 
@@ -116,7 +116,7 @@ analytical_2005::M_tilde( const complex<double> x_in, const double l ) const
 }
 
 complex<double>
-analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
+analytical_2005::N_tilde( const complex<double> x_in, const double l ) const noexcept
 {
   using std::sinh;
   using std::cosh;
@@ -156,7 +156,7 @@ analytical_2005::N_tilde( const complex<double> x_in, const double l ) const
   return N_x;
 }
   
-double analytical_2005::T_ss_R1eq1_eval( const double z ) const
+double analytical_2005::T_ss_R1eq1_eval( const double z ) const noexcept
 {
   using std::exp;
   using std::sinh;
@@ -176,7 +176,7 @@ double analytical_2005::T_ss_R1eq1_eval( const double z ) const
 }
 
 complex<double> analytical_2005::
-  T_tt_R1eq1_eval( const double omega, const double z ) const
+  T_tt_R1eq1_eval( const double omega, const double z ) const noexcept
 {
   using std::sqrt;
   using std::exp;
@@ -218,7 +218,7 @@ complex<double> analytical_2005::
 
 
 complex<double> analytical_2005::
-  T_tt_eval_cplx( const double omega, const double z ) const
+  T_tt_eval_cplx( const double omega, const double z ) const noexcept
 {
   using std::exp;
   using std::sqrt;
@@ -257,7 +257,7 @@ complex<double> analytical_2005::
   return output;
 }
   
-double analytical_2005::phase_linear( const double omega ) const
+double analytical_2005::phase_linear( const double omega ) const noexcept
 {
   BOOST_ASSERT( omega > 0 ) ;
 
@@ -290,7 +290,7 @@ double analytical_2005::phase_linear( const double omega ) const
 }
 
 vector<double>
-analytical_2005::sweep_phase_linear( const vector<double> &omega ) const
+analytical_2005::sweep_phase_linear( const vector<double> &omega ) const noexcept
 {
   const size_t NUM = omega.size() ;
   vector<double> results( NUM ) ;
@@ -308,7 +308,7 @@ analytical_2005::sweep_phase_linear( const vector<double> &omega ) const
 
 
 math::algorithms::spline_cplx
-analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega ) const
+analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega ) const noexcept
 {
   using std::vector;
   using math::range;
@@ -333,7 +333,7 @@ analytical_2005::T_tt_R1eq1_cplx_sweep( const double omega ) const
 }
 
   
-double analytical_2005::phase_nonlinear( const double omega ) const
+double analytical_2005::phase_nonlinear( const double omega ) const noexcept
 {
   /*Nonlinear emission field will be calculated based on the analytical 
    temperature field.  This should be very similar to the linear model for

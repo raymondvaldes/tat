@@ -47,7 +47,7 @@ void lmdif(void (*fcn)(int, int, double*, double*, int*, double**), int m,
            double xtol, double gtol, int maxfev, double epsfcn, double *diag,
            int mode, double factor, int nprint, int *info, int *nfev,
            double *fjac, int ldfjac, int *ipvt, double *qtf, double *wa1,
-           double *wa2, double *wa3, double *wa4, double */*wa5*/)
+           double *wa2, double *wa3, double *wa4, double */*wa5*/) noexcept 
 {
 /*
 *     **********
@@ -609,7 +609,7 @@ if(nprint > 0)
   
 void lmpar( const int n, double *r, const int ldr, const int *ipvt,
             const double *diag, double *qtb, const double delta, double *par,
-            double *x, double *sdiag, double *wa1, double *wa2 )
+            double *x, double *sdiag, double *wa1, double *wa2 ) noexcept
 {
   BOOST_ASSERT( r != nullptr ) ;
   BOOST_ASSERT( ipvt != nullptr ) ;
@@ -938,7 +938,7 @@ if(iter == 0)
 
 void qrfac( const int m, const int n, double *a, int /*lda*/, const bool pivot,
             int *ipvt, int /*lipvt*/, double *rdiag, double *acnorm,
-            double *wa )
+            double *wa ) noexcept
 {
 BOOST_ASSERT( a != nullptr ) ;
 BOOST_ASSERT( ipvt != nullptr ) ;
@@ -1166,7 +1166,7 @@ double r[],diag[],qtb[],x[],sdiag[],wa[];
 
 void qrsolv( const int n,  double r[], const int ldr, const int ipvt[],
              const double diag[], const double qtb[],  double x[],
-             double sdiag[], double wa[] )
+             double sdiag[], double wa[] ) noexcept
 {
 /*
 *     **********
@@ -1401,7 +1401,7 @@ for( j=0; j<n; j++ )
 }
 /************************enorm.c*************************/
 
-double enorm(int n,double x[])
+double enorm(int n,double x[]) noexcept
 {
 /*
 *     **********
@@ -1543,7 +1543,7 @@ return(ans);
 
 void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
             int m,int n,double x[],double fvec[],double **variables,
-            double fjac[],int /*ldfjac*/, int *iflag,double epsfcn,double wa[])
+            double fjac[],int /*ldfjac*/, int *iflag,double epsfcn,double wa[]) noexcept
 {
 /*
 *     **********
@@ -1667,7 +1667,7 @@ void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
 
 /************************lmmisc.c*************************/
 
-double dmax1(double a,double b)
+double dmax1(double a,double b) noexcept
 {
 if( a >= b )
   return(a);
@@ -1675,7 +1675,7 @@ else
   return(b);
 }
 
-double dmin1(double a,double b)
+double dmin1(double a,double b) noexcept
 {
 if( a <= b )
   return(a);
@@ -1683,7 +1683,7 @@ else
   return(b);
 }
 
-int min0(int a,int b)
+int min0(int a,int b) noexcept
 {
 if( a <= b )
   return(a);
@@ -1691,12 +1691,12 @@ else
   return(b);
 }
 
-int mod(int k,int m )
+int mod(int k,int m ) noexcept
 {
 return( k % m );
 }
 
-void pmat(int m,int n,double y[] )
+void pmat(int m,int n,double y[] ) noexcept
 {
 int i, j, k;
 
@@ -1715,7 +1715,7 @@ for( i=0; i<m; i++ )
 
 void fdjac2(std::function<void( double*, double* )> fcn,
             int m, int n, double x[], double fvec[], double fjac[], int /*ldfjac*/,
-            int *iflag, double epsfcn, double wa[])
+            int *iflag, double epsfcn, double wa[]) noexcept
 {
 
 BOOST_ASSERT( x != nullptr ) ;
@@ -1848,7 +1848,7 @@ void lmdif( std::function < void ( double*, double* ) > fcn,
             double gtol, int maxfev, double epsfcn, double *diag, int mode,
             double factor, int nprint, int *info, int *nfev, double *fjac,
             int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
-            double *wa3, double *wa4)
+            double *wa3, double *wa4) noexcept
 {
 
 BOOST_ASSERT( x!= nullptr ) ;

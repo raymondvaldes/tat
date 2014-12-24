@@ -18,7 +18,7 @@ namespace firstDerivative {
 
 template <typename Type, typename Element>
 Type centralDifference( const Type func_plus, const Type func_minus, 
-                        const Element dx)
+                        const Element dx) noexcept
 {
   const Type output = ( func_plus - func_minus )  / ( 2 * dx) ;
   return output;
@@ -27,7 +27,7 @@ Type centralDifference( const Type func_plus, const Type func_minus,
 template <typename Type, typename Element>
 Type central_difference_partial( const Type func_pp, const Type func_pm,
                                  const Type func_mp, const Type func_mm,
-                                 const Element dx )
+                                 const Element dx ) noexcept
 {
   Type
   output  = func_pp ;

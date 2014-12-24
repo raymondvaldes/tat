@@ -30,14 +30,14 @@ namespace sensible{
 
 temperatureScale::
 temperatureScale( const double tolerance_, const double referance_,
-                  const double base_, const double rear_ ):
+                  const double base_, const double rear_ ) noexcept:
 tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
 {}
 
-temperatureScale::~temperatureScale( void ) { }
+temperatureScale::~temperatureScale( void ) noexcept { }
 
 struct temperatureScale temperatureScale::
-loadConfigfromXML( const boost::property_tree::ptree pt )
+loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept
 {
     //initialize parameter estimation settings
   const double tolerance    = pt.get<double>( "tolerance" );
@@ -45,7 +45,7 @@ loadConfigfromXML( const boost::property_tree::ptree pt )
   const double base         = pt.get<double>( "base" );
   const double rear         = pt.get<double>( "rear" );
   
-  struct temperatureScale TemperatureScale(tolerance, referance, base, rear);
+  temperatureScale TemperatureScale(tolerance, referance, base, rear);
   return TemperatureScale;
 }
 

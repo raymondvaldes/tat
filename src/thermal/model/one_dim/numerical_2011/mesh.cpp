@@ -37,7 +37,7 @@ namespace numericalModel
 Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
            const double beta1_, const double split_, const double L_coat_,
            const double L_substrate_, const double CO2Radius_,
-           const double Rdomain_, const size_t numIter_)
+           const double Rdomain_, const size_t numIter_) noexcept
            :M2(M2_), Rend(Rend_), Nend(Nend_), beta1(beta1_), split(split_),
              iter(numIter_)
 {
@@ -76,11 +76,11 @@ Mesh::Mesh(const size_t M2_, const size_t Rend_, const size_t Nend_,
   meshUpdate(L_coat_, L_substrate_, CO2Radius_, Rdomain_);
 }
 
-Mesh::~Mesh()
+Mesh::~Mesh() noexcept
 {
 }
 
-double Mesh::beta2_func(const double *variable, const double *constants)
+double Mesh::beta2_func(const double *variable, const double *constants) noexcept
 {
   BOOST_ASSERT( variable != nullptr ) ;
   BOOST_ASSERT( constants != nullptr ) ;
@@ -125,7 +125,7 @@ double Mesh::beta2_func(const double *variable, const double *constants)
 
 void Mesh::minimizer(double *variable, double *constants,
                      double temp_variable_min, double temp_variable_max,
-                     double min_goal, const size_t max_iterations)
+                     double min_goal, const size_t max_iterations) noexcept
 {
   BOOST_ASSERT( variable != nullptr ) ;
   BOOST_ASSERT( constants != nullptr ) ;
@@ -176,7 +176,7 @@ void Mesh::minimizer(double *variable, double *constants,
   return;
 }
 
-double Mesh::find_beta2(const double L_coat, const double L_substrate)
+double Mesh::find_beta2(const double L_coat, const double L_substrate) noexcept
 {
   ////minimizer start (to find beta2)
   constexpr size_t beta_iter = {100};
@@ -190,7 +190,7 @@ double Mesh::find_beta2(const double L_coat, const double L_substrate)
   return variable;
 }
 
-size_t Mesh::discretizeSpace(const double L_coat, const double L_substrate)
+size_t Mesh::discretizeSpace(const double L_coat, const double L_substrate) noexcept
 {
   constexpr double L1 = 1; //coating nondimensional thickness
                            //z transformed to eta from 0-L_coat  to 0-1.
@@ -237,12 +237,12 @@ size_t Mesh::discretizeSpace(const double L_coat, const double L_substrate)
   return M1_;
 }
 
-double Mesh::z_eta(const double eta_)
+double Mesh::z_eta(const double eta_) noexcept
 {
   return z_eta(eta_, beta1, beta2);
 }
 
-double Mesh::z_eta(const double eta_, const double beta1_, const double beta2_)
+double Mesh::z_eta(const double eta_, const double beta1_, const double beta2_) noexcept
 {
   /* z_norm accounts for z_real after it has been normalized by L_coat
       and L_substrat double B;*/
@@ -271,7 +271,7 @@ double Mesh::z_eta(const double eta_, const double beta1_, const double beta2_)
   return -1;
 }
 
-double Mesh::D_eta(const double z_norm_)
+double Mesh::D_eta(const double z_norm_) noexcept
 {
   //z_norm accounts for z_real after it has been normalized by
   //L_coat and L_substrate
@@ -293,7 +293,7 @@ double Mesh::D_eta(const double z_norm_)
   return -1;
 }
 
-void Mesh::zUpdate()
+void Mesh::zUpdate() noexcept
 {
   /*
   Attempted to autovectorize the for loop but was unable due to the
@@ -334,7 +334,7 @@ void Mesh::zUpdate()
 }
 
 void Mesh::meshUpdate(const double L_coat, const double L_substrate,
-                      const double CO2Radius, const double Rdomain)
+                      const double CO2Radius, const double Rdomain) noexcept
 {
   beta2 = find_beta2(L_substrate, L_coat);
   M1 = discretizeSpace(L_coat, L_substrate);

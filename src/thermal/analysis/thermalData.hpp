@@ -37,7 +37,7 @@ namespace analysis{
 class ThermalData
 {
 private:
-  size_t numMeasurements(const double lmin_, const double lmax_);
+  size_t numMeasurements(const double lmin_, const double lmax_) noexcept;
   void clearVectors(void);
   void resizeVectors( const size_t Lend);
   std::pair<double, double> lthermalLimits;
@@ -53,36 +53,36 @@ public:
   //Constructors, destructors and assignment operators
   explicit ThermalData( const double l_min, const double l_max,
                         const size_t lminPerDecarde,
-                        const sensible::layer &coating ) ;
-  explicit ThermalData( void ) ;
-  ThermalData& operator = ( const ThermalData& that ) ;
-  ~ThermalData();
+                        const sensible::layer &coating ) noexcept;
+  explicit ThermalData( void ) noexcept;
+  ThermalData& operator = ( const ThermalData& that ) noexcept;
+  ~ThermalData() noexcept;
 
   static class ThermalData
   loadConfigfromXML( const boost::property_tree::ptree pt,
-                     const sensible::layer &coating ) ;
+                     const sensible::layer &coating ) noexcept;
 
   //get information
-  size_t size( void ) const;
-  vector<double> get_lthermalSweep( const sensible::layer &coating ) const ;
+  size_t size( void ) const noexcept;
+  vector<double> get_lthermalSweep( const sensible::layer &coating ) const noexcept;
   std::pair<double, double>
-  get_lthermalLimits( const sensible::layer &coating ) const ;
-  std::pair<double, double> get_omegaLimits( void ) const ;
+  get_lthermalLimits( const sensible::layer &coating ) const noexcept;
+  std::pair<double, double> get_omegaLimits( void ) const noexcept;
 
   //modify data
-  void updateExperimental( const std::vector<double> &input ) ;
+  void updateExperimental( const std::vector<double> &input ) noexcept;
   
   size_t thermalSetup( const double lmin, const double lmax,
-                       const sensible::layer &coating ) ;
+                       const sensible::layer &coating ) noexcept;
   
   void updatefromBestFit( std::vector< math::estimation::unknown > list,
-                          const sensible::layer &coating) ;
+                          const sensible::layer &coating) noexcept;
 
 //  printer
   std::string prettyPrint( const sensible::layer &coating,
-                           const std::vector<double> nominalEmission ) ;
-  std::string prettyPrint( const sensible::layer &coating ) ;
-  std::string prettyPrint( void ) ;
+                           const std::vector<double> nominalEmission ) noexcept ;
+  std::string prettyPrint( const sensible::layer &coating ) noexcept;
+  std::string prettyPrint( void ) noexcept;
 
 };
 

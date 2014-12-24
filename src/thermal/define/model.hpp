@@ -38,12 +38,12 @@ public:
   numericalModel::Mesh mesh;
 
   explicit model ( const construct &Construct_,
-                   const numericalModel::Mesh &mesh_);
+                   const numericalModel::Mesh &mesh_) noexcept;
   
   //reload members
-  void reloadThermalConstruct( const construct &other_ );
+  void reloadThermalConstruct( const construct &other_ ) noexcept;
   
-  ~model(void);
+  ~model(void) noexcept;
 };
 
 }}

@@ -15,7 +15,7 @@ namespace algorithm {
 namespace vector{
 
 std::vector<double> subtract( const std::vector<double>& foo,
-                               const std::vector<double>& bar);
+                               const std::vector<double>& bar) noexcept;
 
 }}
 

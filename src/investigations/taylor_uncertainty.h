@@ -16,7 +16,7 @@
 namespace investigations{
   namespace taylor_uncertainty{
 
-void run( const filesystem::directory &dir ) ;
+void run( const filesystem::directory &dir ) noexcept;
 
     
     

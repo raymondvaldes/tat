@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[]) noexcept {
   
   using std::string;
   string tatTest = "/tmp/tat-test.dst/usr/local/bin/tat-test";

@@ -50,18 +50,18 @@ private:
   const double max;
   double bestGuess;
   double solnTolerance;
-  double myRootFunc(const double x) const;
-  void BisectMethod(void);
+  double myRootFunc(const double x) const noexcept;
+  void BisectMethod(void) noexcept;
 
 public:
   solve( std::function<double(double)> myF_ , const double phi_,
-         const double min_, const double max_);
-  ~solve(void);
+         const double min_, const double max_) noexcept;
+  ~solve(void) noexcept;
 
   bool pass;
-  double returnSoln(void) const ;
-  size_t returnIterations(void) const ;
-  double returnSolnTolerance(void) const;
+  double returnSoln(void) const noexcept;
+  size_t returnIterations(void) const noexcept;
+  double returnSolnTolerance(void) const noexcept;
 };
 
 }

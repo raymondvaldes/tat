@@ -34,7 +34,7 @@ namespace math{
 
 
 
-double genWseed( const double x_min, const double x_max, const unsigned seed )
+double genWseed( const double x_min, const double x_max, const unsigned seed ) noexcept
 {
   ( void ) seed;
       
@@ -45,7 +45,7 @@ double genWseed( const double x_min, const double x_max, const unsigned seed )
   return dis( gen ) ;
 }
 
-double random_in_logspace( const double start, const double end )
+double random_in_logspace( const double start, const double end ) noexcept
 {
   BOOST_ASSERT_MSG( start < end, "Setup issue" ) ;
   BOOST_ASSERT_MSG( start > 0, "must be positive for logspace transform" ) ;
@@ -57,13 +57,13 @@ double random_in_logspace( const double start, const double end )
   return xini ;
 }
   
-double random_0_to_1() {
+double random_0_to_1() noexcept {
   const double lowerbound = 0 ;
   const double upperbound = 1 ;
   return x_ini( lowerbound, upperbound ) ;
 }
   
-double x_ini( const double x_min, const double x_max )
+double x_ini( const double x_min, const double x_max ) noexcept
 {
 /*
     Creates a random parameter between two open bounds
@@ -85,7 +85,7 @@ double x_ini( const double x_min, const double x_max )
   return xini;
 }
 
-int xINTrandom(const int xmin, const int xmax)
+int xINTrandom(const int xmin, const int xmax) noexcept
 {
   std::mt19937 gen;
   typedef std::chrono::high_resolution_clock myclock;
@@ -100,7 +100,7 @@ int xINTrandom(const int xmin, const int xmax)
   
 }
   
-double x_normal(const double Xmean, const double Xstddev, const unsigned seed1)
+double x_normal(const double Xmean, const double Xstddev, const unsigned seed1) noexcept
 {
   std::mt19937 gen;
   gen.seed(seed1);
@@ -109,7 +109,7 @@ double x_normal(const double Xmean, const double Xstddev, const unsigned seed1)
   return distribution(gen);
 }
 
-double x_normal(const double Xmean, const double Xstddev)
+double x_normal(const double Xmean, const double Xstddev) noexcept
 {
   std::random_device rd;
   std::mt19937 gen( rd() ) ;
@@ -118,7 +118,7 @@ double x_normal(const double Xmean, const double Xstddev)
   return distribution(gen);
 }
 
-double x_bias(const double Xmean, const double Xstddev)
+double x_bias(const double Xmean, const double Xstddev) noexcept
 {
     double xguess = x_normal(Xmean,Xstddev);
 

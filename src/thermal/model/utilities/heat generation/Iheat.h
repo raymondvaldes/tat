@@ -31,10 +31,10 @@
 namespace thermal{
 namespace model{
 
-double Iheat(double Isteady, double Itransient, double omega, double t) ;
+double Iheat(double Isteady, double Itransient, double omega, double t) noexcept;
 
 double Iheat_int(const double Isteady,const double Itransient,
-                        const double omega, const double t);
+                        const double omega, const double t) noexcept;
 
 
 }}

@@ -14,7 +14,7 @@
 namespace investigations{
   namespace taylor_uncertainty{
     
-void run( const filesystem::directory &dir ) {
+void run( const filesystem::directory &dir ) noexcept {
 
   using std::cout;
   using thermal::analysis::Poptea;

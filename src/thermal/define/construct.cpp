@@ -31,11 +31,11 @@ namespace thermal{
 namespace define{
   
 construct::construct( const enum HeatX myHeat,
-                      const enum EmissionX myEmission )
+                      const enum EmissionX myEmission ) noexcept
   :heat(myHeat), emission(myEmission){}
 
 
-construct construct::loadConfigfromXML( const boost::property_tree::ptree pt)
+construct construct::loadConfigfromXML( const boost::property_tree::ptree pt) noexcept
 {
   using std::string;
 
@@ -67,13 +67,13 @@ construct construct::loadConfigfromXML( const boost::property_tree::ptree pt)
 }
 
 void construct::update( const enum HeatX heat_in,
-                        const enum EmissionX emission_in )
+                        const enum EmissionX emission_in ) noexcept
 {
   heat = heat_in;
   emission = emission_in;
 }
 
-construct& construct::operator = (const construct & other)
+construct& construct::operator = (const construct & other) noexcept
 {
   if (this != &other) // protect against invalid self-assignment
   {
@@ -85,7 +85,7 @@ construct& construct::operator = (const construct & other)
   return *this;
 }
   
-construct::~construct(void){}
+construct::~construct(void) noexcept {}
 
   
   

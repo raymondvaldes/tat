@@ -41,10 +41,10 @@ public:
   double R1;
   double Emit1;
   explicit radiativeSysProp( const double R0_, const double R1_,
-                            const double Emit1_);
+                            const double Emit1_) noexcept;
   static radiativeSysProp
-  loadConfig( const boost::property_tree::ptree pt );
-  ~radiativeSysProp(void);
+  loadConfig( const boost::property_tree::ptree pt ) noexcept;
+  ~radiativeSysProp(void) noexcept;
 };
 
 }

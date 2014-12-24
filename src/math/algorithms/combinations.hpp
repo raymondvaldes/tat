@@ -32,7 +32,7 @@ namespace math{
 namespace algorithms{
 
 template<typename OBJ>
-std::vector< std::vector<OBJ> > combos_minusOne( const std::vector<OBJ> input )
+std::vector< std::vector<OBJ> > combos_minusOne( const std::vector<OBJ> input ) noexcept
 {
   using std::vector;
   
@@ -53,8 +53,8 @@ std::vector< std::vector<OBJ> > combos_minusOne( const std::vector<OBJ> input )
   return output;
 }
 
-size_t factorial( const size_t n );
-size_t permutations( const size_t n, const size_t r);
+size_t factorial( const size_t n ) noexcept;
+size_t permutations( const size_t n, const size_t r) noexcept;
 
 }}
 

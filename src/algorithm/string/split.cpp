@@ -29,7 +29,7 @@ namespace algorithm{
 namespace string{
 
 std::vector<std::string> split( const std::string& strs,
-                                const std::string& splitter ) {
+                                const std::string& splitter ) noexcept {
   using std::vector;
   using std::string;
   

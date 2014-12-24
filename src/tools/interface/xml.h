@@ -33,7 +33,7 @@ License
 namespace tools{
 namespace interface{
 
-boost::property_tree::ptree getTreefromFile( const std::string &absPath ) ;
+boost::property_tree::ptree getTreefromFile( const std::string &absPath ) noexcept;
 boost::property_tree::ptree getBranch( const std::string &trunk,
                                        const std::string &branch,
                                        const boost::property_tree::ptree &pt );

@@ -43,10 +43,10 @@ public:
   double rear;
   
   explicit temperatureScale( const double tolerance_,const double referance_,
-                             const double base_, const double rear_);
+                             const double base_, const double rear_) noexcept;
   static struct temperatureScale
-  loadConfigfromXML( const boost::property_tree::ptree pt );
-  ~temperatureScale( void );
+  loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
+  ~temperatureScale( void ) noexcept;
 };
   
   
