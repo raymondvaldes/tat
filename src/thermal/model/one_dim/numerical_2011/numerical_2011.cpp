@@ -41,17 +41,17 @@ numerical_2011::numerical_2011(
   const sensible::radiativeSysProp &radiative_prop_in,
   const thermal::equipment::Laser &laser_in,
   const double temp_in,
-  const double gamma_in )
+  const double gamma_in ) noexcept
   :
   one_dim( coating_in, substrate_in, radiative_prop_in, laser_in, temp_in,
            gamma_in )
   {}
   
-numerical_2011::~numerical_2011( void ) {}
+numerical_2011::~numerical_2011( void ) noexcept{}
 
 
 double numerical_2011::gspatial( double z, double opt, double lambda, double R1,
-                                 double Iplus0, double Iplus1 ) const
+                                 double Iplus0, double Iplus1 ) const noexcept
 {
 // z must be normalized by the coating thickness
   double gs ;
@@ -70,7 +70,7 @@ double numerical_2011::gspatial( double z, double opt, double lambda, double R1,
 
 double numerical_2011::gs_int( const double eta, const double opt,
                                const double lambda, const double R1,
-                               const double Iplus0, const double Iplus1 ) const
+                               const double Iplus0, const double Iplus1 ) const noexcept
 {
   using std::exp;
   
@@ -97,7 +97,7 @@ double numerical_2011::gs_int( const double eta, const double opt,
 }
 
 
-double numerical_2011::t_tau( const double tau, const double tau_ref ) const
+double numerical_2011::t_tau( const double tau, const double tau_ref ) const noexcept
 {
     return tau * tau_ref;
 }
@@ -105,7 +105,7 @@ double numerical_2011::t_tau( const double tau, const double tau_ref ) const
 double numerical_2011::Iaverage( const double Is, const double It,
                                  const double omega, const double tau_ref,
                                  const vector<double>&tau,
-                                 const size_t n ) const
+                                 const size_t n ) const noexcept
 {
     double I_avg;
   
@@ -121,7 +121,7 @@ double numerical_2011::Iaverage( const double Is, const double It,
 double numerical_2011::Gaverage( const double opt, const double lambda,
                                  const double R1, const double Iplus0,
                                  const double Iplus1, const double z1,
-                                 const double z2) const
+                                 const double z2) const noexcept
 {
     double generation = gs_int( z2, opt, lambda, R1, Iplus0, Iplus1) ;
     generation -= gs_int( z1, opt, lambda, R1, Iplus0, Iplus1) ;
@@ -133,7 +133,7 @@ complex<double> numerical_2011::Tac1D_ana( const double z,const double R0,
                                            const double R1,
                                            const double epsilon,
                                            const double Lam,
-                                           const double Lthrm ) const
+                                           const double Lthrm ) const noexcept
 {
   using std::sinh;
   using std::cosh;
@@ -179,7 +179,7 @@ complex<double> numerical_2011::Tac1D_ana( const double z,const double R0,
 
 
 double numerical_2011::Iplus0Func( const double R0, const double R1,
-                                   const double lambda ) const
+                                   const double lambda ) const noexcept
 {
   using std::exp;
 
@@ -194,7 +194,7 @@ double numerical_2011::Iplus0Func( const double R0, const double R1,
 }
 
 double numerical_2011::Iplus1Func( const double R0, const double R1,
-                                   const double lambda ) const
+                                   const double lambda ) const noexcept
 {
   using std::exp;
 
@@ -209,7 +209,7 @@ double numerical_2011::Iplus1Func( const double R0, const double R1,
 void numerical_2011::temperature_1D( const double omega1, const size_t iter,
                                      const double Ttol,
                                      numericalModel::Mesh mesh,
-                                     thermal::define::Temperature Tprofile ) const
+                                     thermal::define::Temperature Tprofile ) const noexcept
 {
   using std::vector;
   using std::abs;
@@ -410,7 +410,7 @@ double numerical_2011::abMatrixPrepopulate( vector<double>& B1,
                            const vector<double>& z_j,
                            const vector<double>&d_eta_plus,
                            const vector<double>&deltaZ,
-                           const vector<double>&d_eta_minus) const
+                           const vector<double>&d_eta_minus) const noexcept
 {
 //Front Surface
     const double delEta =  eta[1] - eta[0] ;
@@ -495,7 +495,7 @@ void numerical_2011::heatingProfile(const double opt, const double lambda,
                     const vector<double>& z_jplus,
                     const vector<double>& z_jminus,
                     const vector<double>& z_j, double*genProfile,
-                    const size_t M1 ) const
+                    const size_t M1 ) const noexcept
 {
     for(size_t j=0; j ==0; ++j)
         genProfile[j] = Gaverage(opt, lambda, R1, Iplus0, Iplus1, z_j[j],
@@ -522,7 +522,7 @@ void numerical_2011::bMatrixPrepopulate1(const size_t n, vector<double>& B2,
                          const vector<double>& z_jminus,
                          const vector<double>& z_j,
                          const vector<double>&deltaZ,
-                         const double* genProfile, const double T_rear) const
+                         const double* genProfile, const double T_rear) const noexcept
 {
 //Update A matrix based on temperature an time
     const double I_avg  = Iaverage(Is, It, omega, tau_ref, tau, n);
@@ -589,7 +589,7 @@ void numerical_2011::Ab_transient( const size_t n,
                                    const sensible::property *kLayer2,
                                    const sensible::property *psiLayer1,
                                    const sensible::property *psiLayer2
-                                  ) const
+                                  ) const noexcept
 {
 ///Update A matrix based on temperature and time
 ///Front Surface

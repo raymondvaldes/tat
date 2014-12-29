@@ -59,21 +59,21 @@ public:
       std::pair<double, double> lthermalCenterDecades ;
       std::pair<double, double> omegaLimits;
 
-      std::string ppFinalResults( void ) ;
-      std::string ppEmissionSweep( void ) ;
-      void ppExportEmissionSweep( const std::string path ) ;
-      void ppExportAll( const std::string path );
+      std::string ppFinalResults( void ) noexcept;
+      std::string ppEmissionSweep( void ) noexcept;
+      void ppExportEmissionSweep( const std::string path ) noexcept;
+      void ppExportAll( const std::string path ) noexcept;
 
-      void clear( void ) ;
+      void clear( void ) noexcept;
     };
 
     struct SearchPath
     {
       std::shared_ptr< sensible::layer > coating_final ;
       std::vector< ExperimentAnalysisState > path ;
-      void clear( void ) ;
-      void push_back( const ExperimentAnalysisState &data_in ) ;
-      std::string prettyPrint( void ) ;
+      void clear( void ) noexcept;
+      void push_back( const ExperimentAnalysisState &data_in ) noexcept;
+      std::string prettyPrint( void ) noexcept;
     } searchPath ;
 
     struct Comparison
@@ -82,17 +82,17 @@ public:
       std::shared_ptr< ExperimentAnalysisState > after ;
       std::shared_ptr< ThermalData > preFitted ;
       std::shared_ptr< ThermalData > postFitted ;
-      void prettyPrint( const std::string path );
+      void prettyPrint( const std::string path ) noexcept;
     } results ;
 
     /// Post-PIE analysis methods
-    void push_back( const ExperimentAnalysisState &data_in ) ;
-    void pp2Folder( const std::string path , const std::string i) ;
-    void clear( void ) ;
+    void push_back( const ExperimentAnalysisState &data_in ) noexcept;
+    void pp2Folder( const std::string path , const std::string i) noexcept;
+    void clear( void ) noexcept;
     void addBefore( const ExperimentAnalysisState &input,
-                    const std::shared_ptr<ThermalData> &thermalData);
+                    const std::shared_ptr<ThermalData> &thermalData) noexcept;
     void addAfter( const ExperimentAnalysisState &input,
-                   const std::shared_ptr<Kernal> &coreSystem  );
+                   const std::shared_ptr<Kernal> &coreSystem ) noexcept;
 
   } ouputResults;
 
@@ -107,8 +107,8 @@ public:
       const std::vector< thermal::model::labels > sweepOptimizationGoal_in,
       const sensible::layer coating,
       const size_t iter_in,
-      const double lmin_in, const double lmax_in ) ;
-  ~ThermalSweepOptimizer( void ) ;
+      const double lmin_in, const double lmax_in ) noexcept;
+  ~ThermalSweepOptimizer( void ) noexcept;
 
   // public solver (yes just give it all this shit and it'll do the work for u)
   OptimizerOutput solve(
@@ -117,23 +117,23 @@ public:
      const std::shared_ptr<Kernal> &coreSystem_in,
      const std::shared_ptr< LMA > &bestfitMethod_in,
      const std::shared_ptr< PIE > &intervalEstimates_in
-     ) ;
-  std::string contourMappingwithMC() ;
-  std::string contourMappingwithOrderedPoints() ;
-  std::string contourMappingwithOrderedPointUsingGrid() ;
+     ) noexcept;
+  std::string contourMappingwithMC() noexcept;
+  std::string contourMappingwithOrderedPoints() noexcept;
+  std::string contourMappingwithOrderedPointUsingGrid() noexcept;
 
 private:
   // overide methods inherited
-  void updateWorkSpace( const size_t Lend , const size_t N ) override;
+  void updateWorkSpace( const size_t Lend , const size_t N ) noexcept override ;
   void updateWorkSpace(
       const math::estimation::unknownList &thermalSweepSearch_in,
-      const std::vector<thermal::model::labels> &sweepOptimizationGoal_in ) ;
+      const std::vector<thermal::model::labels> &sweepOptimizationGoal_in ) noexcept;
 
-  void ThermalProp_Analysis( double *x, double *fvec ) override;
+  void ThermalProp_Analysis( double *x, double *fvec ) noexcept override ;
   void solve(
     const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
-    const std::shared_ptr<Kernal> &coreSystem_in ) override;
+    const std::shared_ptr<Kernal> &coreSystem_in ) noexcept override ;
 
   // settings Objects
   std::shared_ptr< LMA > bestfitMethod;
@@ -147,7 +147,7 @@ private:
   std::pair<double, double> xSweep;
   std::pair<double, double> updatedLimits;
   std::shared_ptr< math::estimation::unknownList > unknownBestFit;
-  std::string contourMapping_with_grid( const vector<std::pair<double, double > > lthermalGrid ) ;
+  std::string contourMapping_with_grid( const vector<std::pair<double, double > > lthermalGrid ) noexcept;
 
   
   struct SweepSettings {
@@ -155,29 +155,29 @@ private:
     const double lmax;
     const size_t iter;
     SweepSettings( const double lmin_in, const double lmax_in,
-                   const size_t iter_in )
+                   const size_t iter_in ) noexcept
       : lmin( lmin_in ), lmax( lmax_in ), iter( iter_in )  {};
   } sweepSettings;
 
   // worker methods
   ThermalData sliceThermalData( const double xCenter, const double xRange,
-                                const sensible::layer updatedCoating ) ;
-  std::pair< double, double > updateSweep( void ) ;
-  void pieAnalysis(void);
+                                const sensible::layer updatedCoating ) noexcept;
+  std::pair< double, double > updateSweep( void ) noexcept;
+  void pieAnalysis(void) noexcept;
   double penalty( const std::pair<double, double>  thermalCenterRange,
-                  const double error ) ;
-  ThermalData updatedFromXsearch( double *x );
-  void resize_ThermalCenterRange( double *x ) ;
-  void uncertainty_for_subset_pushback_ouputResults( double *x ) ;
-  std::string contourMapping( const vector< vector< double > > group_x_CR ) ;
-  std::string contourMappingResults();
+                  const double error ) noexcept;
+  ThermalData updatedFromXsearch( double *x ) noexcept;
+  void resize_ThermalCenterRange( double *x ) noexcept;
+  void uncertainty_for_subset_pushback_ouputResults( double *x ) noexcept;
+  std::string contourMapping( const vector< vector< double > > group_x_CR ) noexcept;
+  std::string contourMappingResults() noexcept;
 
   // current state
   OptimizerOutput::ExperimentAnalysisState currentState;
-  void captureState(const sensible::layer &coat );
+  void captureState(const sensible::layer &coat ) noexcept;
 
   // solvers
-  void optimizer( int *info, int *nfev );
+  void optimizer( int *info, int *nfev ) noexcept;
 
   // thermal mapping
   const size_t iter;

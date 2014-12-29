@@ -38,9 +38,9 @@ class ThermalData
 {
 private:
   size_t numMeasurements(const double lmin_, const double lmax_) noexcept;
-  void clearVectors(void);
-  void resizeVectors( const size_t Lend);
-  std::pair<double, double> lthermalLimits;
+  void clearVectors(void) noexcept;
+  void resizeVectors( const size_t Lend) noexcept;
+  std::pair<double, double> lthermalLimits ;
 
 public:
   vector<double> omegas;

@@ -37,7 +37,7 @@ namespace sensitivityAnalysis
 class step4
 {
 public:
-  double solve()
+  double solve() noexcept
   {
     using std::placeholders::_1;
     const std::function<double(double)>
@@ -48,7 +48,7 @@ public:
     return ojb.returnSoln();
   }
 
-  double gfunc(double x)
+  double gfunc(double x) noexcept
   {
     return x*x - 3*x + 1;  // Replace with your function
   }

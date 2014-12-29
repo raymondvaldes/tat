@@ -42,30 +42,30 @@ namespace math{
 unknown::unknown(enum thermal::model::labels::Name name_,
                  const double lower_,
                  const double upper_,
-                 const double initialGuess_)
+                 const double initialGuess_) noexcept
     :name(name_), constraint(lower_, upper_), initialGuess(initialGuess_),
     bestfitval(initialGuess_), bestfitInterval(0,0)
 {}
 
-unknown::~unknown(){}
+unknown::~unknown() noexcept {}
 
-bool unknown::compareName( const unknown& input ) const
+bool unknown::compareName( const unknown& input ) const noexcept
 {
   return input.label() == label();
 }
 
-bool unknown::operator == ( const unknown& input ) const
+bool unknown::operator == ( const unknown& input ) const noexcept
 {
   return compareName(input);
 }
 
-bool unknown::operator != ( const unknown& input ) const
+bool unknown::operator != ( const unknown& input ) const noexcept
 {
   return !compareName(input);
 }
 
 
-double unknown::bestfitIntervalSpread( void ) const
+double unknown::bestfitIntervalSpread( void ) const noexcept
 {
   return  (bestfitInterval.upper - bestfitInterval.lower) / bestfitval;
 }
@@ -76,7 +76,7 @@ double unknown::bestfitIntervalSpread( void ) const
 //  initialGuess = math::average(constraint.lower, constraint.upper);
 //}
 
-void unknown::Initialset(const double initial)
+void unknown::Initialset(const double initial) noexcept
 {
   initialGuess = initial;
 }
@@ -86,48 +86,48 @@ void unknown::Initialset(const double initial)
 //  initialGuess = math::x_ini( constraint.lower, constraint.upper ) ;
 //}
 
-double unknown::initialVal(void) const
+double unknown::initialVal(void) const noexcept
 {
   return initialGuess;
 }
 
-double unknown::bestfit(void) const
+double unknown::bestfit(void) const noexcept
 {
   return bestfitval;
 }
 
-double unknown::upperBound(void) const
+double unknown::upperBound(void) const noexcept
 {
   return constraint.upper;
 }
-double unknown::lowerBound(void) const
+double unknown::lowerBound(void) const noexcept
 {
   return constraint.lower;
 }
 
-void unknown::bestfitset(const double input)
+void unknown::bestfitset(const double input) noexcept
 {
   bestfitval = input;
 }
 
-enum thermal::model::labels::Name unknown::label(void) const
+enum thermal::model::labels::Name unknown::label(void) const noexcept
 {
   return name.getName();
 }
 
-thermal::model::labels unknown::getLabel ( void ) const
+thermal::model::labels unknown::getLabel ( void ) const noexcept
 {
   return name;
 }
 
 
 
-unknown::bounds::bounds( void ){}
+unknown::bounds::bounds( void ) noexcept{}
 
-unknown::bounds::bounds(const double lower_, const double upper_)
+unknown::bounds::bounds(const double lower_, const double upper_) noexcept
 :lower(lower_), upper(upper_){}
 
-void unknown::bestfitIntervalset ( const double min, const double max)
+void unknown::bestfitIntervalset ( const double min, const double max) noexcept
 {
   bestfitInterval.lower = min;
   bestfitInterval.upper = max;
@@ -135,7 +135,7 @@ void unknown::bestfitIntervalset ( const double min, const double max)
 
 
 
-void unknownList::addUnknown( const class estimation::unknown &input )
+void unknownList::addUnknown( const class estimation::unknown &input ) noexcept
 {
   vectorUnknowns.push_back(input);
 }
@@ -143,7 +143,7 @@ void unknownList::addUnknown( const class estimation::unknown &input )
 
 void unknownList::addUnknown(enum thermal::model::labels::Name name,
                              const double lower,
-                             const double upper, const double initialGuess)
+                             const double upper, const double initialGuess) noexcept
 {
   using std::abs;
   const double tol = 1e-12;
@@ -160,18 +160,18 @@ void unknownList::addUnknown(enum thermal::model::labels::Name name,
   return;
 }
 
-size_t unknownList::size(void) const
+size_t unknownList::size(void) const noexcept
 {
   return vectorUnknowns.size();
 }
 
 
-std::vector<class unknown> unknownList::operator() (void) const
+std::vector<class unknown> unknownList::operator() (void) const noexcept
 {
   return vectorUnknowns;
 }
 
-void unknownList::operator() ( const std::vector< class unknown > &input )
+void unknownList::operator() ( const std::vector< class unknown > &input ) noexcept
 {
   vectorUnknowns.clear();
 
@@ -181,7 +181,7 @@ void unknownList::operator() ( const std::vector< class unknown > &input )
   }
 }
 
-std::vector< enum labels::Name > unknownList::get_enum_list( void ) {
+std::vector< enum labels::Name > unknownList::get_enum_list( void ) noexcept {
 
   std::vector<enum labels::Name> output;
   
@@ -192,14 +192,14 @@ std::vector< enum labels::Name > unknownList::get_enum_list( void ) {
 }
 
 
-unknownList::unknownList(){}
-unknownList::unknownList( std::vector< estimation::unknown> input )
+unknownList::unknownList() noexcept{}
+unknownList::unknownList( std::vector< estimation::unknown> input ) noexcept
   :vectorUnknowns(input)
 {}
 
 
 class unknownList unknownList::
-        loadConfigfromXML(const boost::property_tree::ptree pt)
+        loadConfigfromXML(const boost::property_tree::ptree pt) noexcept
 {
   using boost::property_tree::ptree;
   unknownList unknownListObj;
@@ -234,7 +234,7 @@ class unknownList unknownList::
 }
 
 std::string
-unknownList::prettyPrint( void )
+unknownList::prettyPrint( void ) noexcept
 {
   std::ostringstream output ;
 
@@ -259,14 +259,14 @@ unknownList::prettyPrint( void )
   return output.str() ;
 }
 
-unknownList::~unknownList(){}
+unknownList::~unknownList() noexcept{}
 
 
 
-settings::~settings(void){}
+settings::~settings(void) noexcept{}
 
 struct settings settings::
-    loadConfigfromXML(const boost::property_tree::ptree pt)
+    loadConfigfromXML(const boost::property_tree::ptree pt) noexcept
 {
     //initialize parameter estimation settings
     const double ftol     = pt.get<double>( "ftol" );
@@ -287,7 +287,7 @@ struct settings settings::
 settings::settings( const double ftol_, const double xtol_, const double gtol_,
                      const size_t maxfev_, const double epsfcn_,
                      const double factor_, const size_t mode_,
-                     const size_t nprint_ )
+                     const size_t nprint_ ) noexcept
   :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_), epsfcn(epsfcn_),
     factor(factor_), mode(mode_), nprint(nprint_){}
 

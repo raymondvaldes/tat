@@ -170,14 +170,14 @@ std::string ThermalData::prettyPrint( const sensible::layer &coating,
 }
 
 
-void ThermalData::clearVectors(void)
+void ThermalData::clearVectors(void) noexcept
 {
   omegas.clear();
   experimentalEmission.clear();
   predictedEmission.clear();
 }
 
-void ThermalData::resizeVectors( const size_t Lend)
+void ThermalData::resizeVectors( const size_t Lend) noexcept
 {
   omegas.resize( Lend );
   experimentalEmission.resize( Lend );

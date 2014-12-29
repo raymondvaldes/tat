@@ -37,15 +37,15 @@ private:
     std::chrono::high_resolution_clock::time_point tdel;
 
     std::chrono::duration<double> clockSpan;
-    std::chrono::high_resolution_clock::time_point checktime(void);
+    std::chrono::high_resolution_clock::time_point checktime(void) noexcept;
 
 public:
-    explicit stopwatch( void ) ;
+    explicit stopwatch( void ) noexcept;
   
-    auto start( void ) -> void ;
-    auto stop( void ) -> void ;
-    auto returnTime( void ) -> double ;
-    auto readoutLoud( void ) -> std::string ;
+    auto start( void ) noexcept -> void ;
+    auto stop( void ) noexcept -> void ;
+    auto returnTime( void ) noexcept -> double ;
+    auto readoutLoud( void ) noexcept -> std::string ;
 };
 
 }

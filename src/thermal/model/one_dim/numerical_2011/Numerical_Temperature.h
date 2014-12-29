@@ -48,7 +48,7 @@ class matrixArrays
     const size_t M2;
     double B4;
 
-    explicit matrixArrays( const size_t length )
+    explicit matrixArrays( const size_t length ) noexcept
       : A1(length), A2(length), A3(length), b(length), Temperature(length),
       B1(length), B2(length), B3(length), M2(length){}
 };
@@ -56,13 +56,13 @@ class matrixArrays
 
 std::complex<double> Tac1D_ana( const double z, const double R0,
                                 const double R1, const double epsilon,
-                                const double Lam, const double Lthrm);
+                                const double Lam, const double Lthrm) noexcept;
 
 void temperature_1D( const sensible::TBCsystem  TBCsystem,
                      const thermal::define::model thermalsys,
                      const thermal::equipment::setup expSetup,
                      const double omega1,
-                     thermal::define::Temperature Tprofile);
+                     thermal::define::Temperature Tprofile) noexcept;
 
 double abMatrixPrepopulate( std::vector<double>& B1,
                             std::vector<double>& B2,
@@ -78,7 +78,7 @@ double abMatrixPrepopulate( std::vector<double>& B1,
                             const std::vector<double>& z_j,
                             const std::vector<double> &d_eta_plus,
                             const std::vector<double> &deltaZ,
-                            const std::vector<double> &d_eta_minus);
+                            const std::vector<double> &d_eta_minus) noexcept;
 
 void bMatrixPrepopulate1( const size_t n, std::vector<double>& B2,
                           std::vector<double>& b, const size_t M1,
@@ -89,18 +89,18 @@ void bMatrixPrepopulate1( const size_t n, std::vector<double>& B2,
                           const std::vector<double>& z_jminus,
                           const std::vector<double>& z_j,
                           const std::vector<double>& deltaZ,
-                          const double* genProfile, const double T_rear );
+                          const double* genProfile, const double T_rear ) noexcept;
 
 double Gaverage( const double opt, const double lambda, const double R1,
                  const double Iplus0, const double Iplus1, const double z1,
-                 const double z2 );
+                 const double z2 ) noexcept;
 
 void heatingProfile( const double opt, const double lambda, const double R1,
                      const double Iplus0, const double Iplus1,
                      const std::vector<double>& z_jplus,
                      const std::vector<double>& z_jminus,
                      const std::vector<double>& z_j, double*genProfile,
-                     const size_t M1 );
+                     const size_t M1 ) noexcept;
 
 void Ab_transient( const size_t n,
                    std::vector<double>& A1,
@@ -116,14 +116,14 @@ void Ab_transient( const size_t n,
                    const property *kLayer1,
                    const property *kLayer2,
                    const property *psiLayer1,
-                   const property *psiLayer2) ;
+                   const property *psiLayer2) noexcept;
 
-double t_tau( const double tau, const double tau_ref ) ;
+double t_tau( const double tau, const double tau_ref ) noexcept;
 double Iaverage( const double Is, const double It, const double omega,
                  const double tau_ref, const std::vector<double> &tau,
-                 const size_t n) ;
+                 const size_t n) noexcept;
 
-double Iplus1Func( const double R0, const double R1, const double lambda ) ;
-double Iplus0Func( const double R0, const double R1, const double lambda ) ;
+double Iplus1Func( const double R0, const double R1, const double lambda ) noexcept;
+double Iplus0Func( const double R0, const double R1, const double lambda ) noexcept;
 
 #endif // NUMERICAL_TEMPERATURE_H_INCLUDED

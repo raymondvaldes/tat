@@ -46,19 +46,26 @@ void fdjac2(void (*fcn)(int, int, double*, double*, int*,double **),
 double enorm(int n,double x[])noexcept ;
 
 int mod(int k,int m) noexcept;
+
 double dmin1(double a,double b)noexcept;
+
 int min0(int a,int b)noexcept;
+
 void pmat(int m,int n,double y[])noexcept;
 
 void qrfac( const int m, const int n, double a[], int /*lda*/, const bool pivot,
             int ipvt[], int /*lipvt*/, double rdiag[], double acnorm[],
             double wa[] ) noexcept;
+    
 double dmax1(double a,double b) noexcept;
+
 void lmpar( const int n, double *r, const int ldr, const int *ipvt,
             const double *diag, double *qtb, const double delta, double *par,
             double *x, double *sdiag, double *wa1, double *wa2 ) noexcept;
+    
 //void qrsolv(int n,double r[],int ldr,int ipvt[],double diag[],double qtb[],
 //            double x[],double sdiag[],double wa[]);
+
 void qrsolv( const int n,  double r[], const int ldr, const int ipvt[],
               const double diag[], const double qtb[],  double x[], double sdiag[],
                double wa[] ) noexcept;

@@ -41,8 +41,8 @@ private:
   {
     double lower;
     double upper;
-    bounds( void ) ;
-    bounds( const double lower_, const double  upper_ ) ;
+    bounds( void ) noexcept;
+    bounds( const double lower_, const double  upper_ ) noexcept;
   };
   struct labels name;
   const struct bounds constraint;
@@ -55,30 +55,30 @@ public:
   unknown( enum labels::Name name_,
            const double lower_,
            const double upper_,
-           const double initialGuess_) ;
-  ~unknown();
+           const double initialGuess_) noexcept;
+  ~unknown() noexcept;
 
   struct bounds bestfitInterval;
 
   /// return values
-  double bestfit( void ) const ;
-  double upperBound( void ) const ;
-  double lowerBound( void ) const ;
-  double initialVal( void ) const ;
+  double bestfit( void ) const noexcept;
+  double upperBound( void ) const noexcept;
+  double lowerBound( void ) const noexcept;
+  double initialVal( void ) const noexcept;
 
   /// set values with inputs
-  void bestfitset( const double input ) ;
-  void Initialset( const double input ) ;
-  void bestfitIntervalset ( const double min, const double max);
-  double bestfitIntervalSpread( void ) const;
+  void bestfitset( const double input ) noexcept;
+  void Initialset( const double input ) noexcept;
+  void bestfitIntervalset ( const double min, const double max) noexcept;
+  double bestfitIntervalSpread( void ) const noexcept;
 
   /// labels
-  enum labels::Name label( void ) const ;
-  labels getLabel ( void ) const;
+  enum labels::Name label( void ) const noexcept;
+  labels getLabel ( void ) const noexcept;
 
-  bool compareName( const unknown& input ) const ;
-  bool operator == ( const unknown& input ) const ;
-  bool operator != ( const unknown& input ) const ;
+  bool compareName( const unknown& input ) const noexcept;
+  bool operator == ( const unknown& input ) const noexcept;
+  bool operator != ( const unknown& input ) const noexcept;
 };
 
 class unknownList
@@ -86,25 +86,25 @@ class unknownList
 public:
   std::vector< estimation::unknown> vectorUnknowns;
 
-  std::vector< estimation::unknown> operator() (void) const;
-  void operator() ( const std::vector<class unknown> &input );
+  std::vector< estimation::unknown> operator() (void) const noexcept;
+  void operator() ( const std::vector<class unknown> &input )noexcept;
 
   void addUnknown( labels::Name name,
                    const double lower, const double upper,
-                   const double initialGuess ) ;
-  void addUnknown(const unknown &input );
+                   const double initialGuess ) noexcept;
+  void addUnknown(const unknown &input ) noexcept;
 
-  size_t size(void) const;
+  size_t size(void) const noexcept;
 
-  unknownList();
-  unknownList( std::vector< estimation::unknown> input )  ;
+  unknownList() noexcept;
+  unknownList( std::vector< estimation::unknown> input ) noexcept;
 
   static unknownList
-      loadConfigfromXML( const boost::property_tree::ptree pt ) ;
-  ~unknownList() ;
+      loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
+  ~unknownList() noexcept;
 
-  std::string prettyPrint(void) ;
-  std::vector< enum labels::Name > get_enum_list( void ) ;
+  std::string prettyPrint(void) noexcept;
+  std::vector< enum labels::Name > get_enum_list( void ) noexcept;
   
 };
 
@@ -122,12 +122,12 @@ public:
   const size_t factorMax = 10;
   const size_t factorScale = 5;
 
-  static struct settings loadConfigfromXML( const boost::property_tree::ptree pt );
-  ~settings(void);
+  static struct settings loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
+  ~settings(void) noexcept;
   explicit settings( const double ftol_, const double xtol_, const double gtol_,
                      const size_t maxfev_, const double epsfcn_,
                      const double factor_, const size_t mode_,
-                     const size_t nprint_ );
+                     const size_t nprint_ ) noexcept;
 };
 
 

@@ -29,7 +29,7 @@ namespace math{
   namespace numIntegration{
 
 double simpson_3_8( const double *Y, const double *X, const size_t A,
-                    const size_t B)
+                    const size_t B) noexcept
 {
   BOOST_ASSERT( Y != nullptr ) ;
   BOOST_ASSERT( X != nullptr ) ;
@@ -80,7 +80,7 @@ double simpson_3_8( const double *Y, const double *X, const size_t A,
 }
 
 double simpson_3_8(const std::vector<double>& Y, const double *X,
-                   const size_t A,const size_t B)
+                   const size_t A,const size_t B) noexcept
 {
   BOOST_ASSERT( X != nullptr ) ;
 
@@ -118,7 +118,7 @@ double simpson_3_8(const std::vector<double>& Y, const double *X,
 }
 
 double simpson_3_8( const double *Y, const std::vector<double>& X,
-                    const size_t A, const size_t B )
+                    const size_t A, const size_t B ) noexcept
 {
   BOOST_ASSERT( Y != nullptr ) ;
 
@@ -158,7 +158,7 @@ double simpson_3_8( const double *Y, const std::vector<double>& X,
 std::complex<double> simpson_3_8Complex(const double* YReal,
                                         const double* YCPLX,
                                         const double* X,
-                                        const size_t A,const size_t B)
+                                        const size_t A,const size_t B) noexcept
 {
     const double
     sumReal = simpson_3_8(YReal, X, A, B);

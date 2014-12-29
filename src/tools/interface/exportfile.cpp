@@ -33,7 +33,7 @@ License
 namespace tools{
 namespace interface{
 
-void exportfile( const std::string &fullpath, const std::string &input )
+void exportfile( const std::string &fullpath, const std::string &input ) noexcept
 {
   std::ofstream myfile ;
   myfile.open( fullpath ) ;

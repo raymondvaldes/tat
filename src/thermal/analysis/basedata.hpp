@@ -39,7 +39,7 @@ public:
   std::shared_ptr< math::estimation::unknownList > unknownParameters;
   
   void updateObjects( const Kernal& coreSystemIn, const ThermalData& thermalDataIn,
-               const math::estimation::unknownList& unknownParametersIn ) {
+               const math::estimation::unknownList& unknownParametersIn ) noexcept {
     using std::make_shared;
     
     coreSystem = make_shared< Kernal >( coreSystemIn ) ;
@@ -49,7 +49,7 @@ public:
   
   void assignPointer( const std::shared_ptr< math::estimation::unknownList > &list_in,
          const std::shared_ptr< ThermalData > &thermalData_in,
-         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept
   {
     unknownParameters = list_in ;
     thermalData = thermalData_in ;

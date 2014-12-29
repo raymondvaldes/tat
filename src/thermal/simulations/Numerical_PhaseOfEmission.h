@@ -30,17 +30,17 @@ License
 
 
 double PhaseOfEmission2DAna( const double omega,
-                             const thermal::analysis::Kernal &popteaCore);
+                             const thermal::analysis::Kernal &popteaCore) noexcept;
 
 double PhaseOfEmission1DNum( const double omega,
-                             const thermal::analysis::Kernal &popteaCore);
+                             const thermal::analysis::Kernal &popteaCore) noexcept;
 
 double PhaseOfEmission1DAna( const double omega1, const double L_coat,
                              const double k_c, const double psi_c,
                              const double lambda, const double R1 ,
-                             const double gamma, const double Esigma);
+                             const double gamma, const double Esigma) noexcept;
 
 double PhaseOfEmission1DAna( const double omega1,
-                             const thermal::analysis::Kernal &popteaCore );
+                             const thermal::analysis::Kernal &popteaCore ) noexcept;
 
 #endif // NUMERICAL_PHASEOFEMISSION_H_INCLUDED

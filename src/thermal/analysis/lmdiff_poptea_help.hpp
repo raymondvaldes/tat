@@ -32,7 +32,7 @@ namespace thermal {
 namespace analysis{
 
   void scaleDiag( double *diag, math::estimation::unknownList List,
-                  const sensible::TBCsystem TBCsystem, const int mode );
+                  const sensible::TBCsystem TBCsystem, const int mode ) noexcept;
 
 class LMA_workingArrays
 {
@@ -42,9 +42,9 @@ public:
 
   double MSEinitial;
 
-  LMA_workingArrays(const size_t Lend_, const size_t N_);
-  ~LMA_workingArrays(void);
-  void updateArraySize(const size_t Lend_, const size_t N);
+  LMA_workingArrays(const size_t Lend_, const size_t N_) noexcept;
+  ~LMA_workingArrays(void) noexcept;
+  void updateArraySize(const size_t Lend_, const size_t N) noexcept;
 };
 
 

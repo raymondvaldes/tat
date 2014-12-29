@@ -44,18 +44,18 @@ private:
     mutable std::string sampleName;
     mutable std::string investigationName;
 
-    bool help( void ) const ;
-    bool version( void ) const ;
+    bool help( void ) const noexcept;
+    bool version( void ) const noexcept;
     bool build( void ) const noexcept;
-    void loadOptions( void ) const ;
+    void loadOptions( void ) const noexcept;
 
 public:
-    MainArguments( const int argc_in, const char **argv_in ) ;
+    MainArguments( const int argc_in, const char **argv_in ) noexcept;
 
-    bool run_analysis( void ) const ;
-    std::string run_directory( void ) const ;
-    std::string run_samples( void ) const ;
-    std::string run_investigationName( void ) const ;
+    bool run_analysis( void ) const noexcept;
+    std::string run_directory( void ) const noexcept;
+    std::string run_samples( void ) const noexcept;
+    std::string run_investigationName( void ) const noexcept;
 };
 
 

@@ -58,7 +58,7 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
     const math::estimation::unknownList thermalSweepSearch_in,
     const std::vector<thermal::model::labels> sweepOptimizationGoal_in,
     const sensible::layer coating, const size_t iter_in,
-    const double lmin_in, const double lmax_in )
+    const double lmin_in, const double lmax_in ) noexcept
   : LMA_BASE( Settings_in, unknownParameters_, thermalData_in.size() ) ,
     bestfitMethod( bestfitMethod_in ),
     intervalEstimates( intervalEstimates_in ),
@@ -72,9 +72,9 @@ ThermalSweepOptimizer::ThermalSweepOptimizer(
   updateWorkSpace( thermalSweepSearch_in, sweepOptimizationGoal_in );
 }
 
-ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) {}
+ThermalSweepOptimizer::~ThermalSweepOptimizer( void ) noexcept {}
 
-pair< double, double > ThermalSweepOptimizer::updateSweep( void )
+pair< double, double > ThermalSweepOptimizer::updateSweep( void ) noexcept
 {
   double thermalCenter = 0;
   double thermalRange = 0;
@@ -92,7 +92,7 @@ pair< double, double > ThermalSweepOptimizer::updateSweep( void )
   return make_pair( thermalCenter, thermalRange ) ;
 }
 
-ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
+ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x ) noexcept
 {
   BOOST_ASSERT( x != nullptr ) ;
 
@@ -122,7 +122,7 @@ ThermalData ThermalSweepOptimizer::updatedFromXsearch(  double *x )
   return sliceThermalData( xCenter, xRange, coatUpdate ) ;
 }
 
-void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
+void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x ) noexcept
 {
   const double center = x[0];
   const double range = x[1];
@@ -149,7 +149,7 @@ void ThermalSweepOptimizer::resize_ThermalCenterRange( double*x )
   
 }
 
-void ThermalSweepOptimizer::pieAnalysis(void)
+void ThermalSweepOptimizer::pieAnalysis(void) noexcept
 {
 //  std::cout << "\nnow:\n";
   intervalEstimates->solve( unknownParameters , thermalData , coreSystem ,
@@ -160,7 +160,7 @@ void ThermalSweepOptimizer::pieAnalysis(void)
 
 double ThermalSweepOptimizer::
 penalty( const std::pair<double, double>  thermalCenterRange ,
-         const double scale )
+         const double scale ) noexcept
 {
   using std::pow;
   using std::abs;
@@ -195,14 +195,14 @@ penalty( const std::pair<double, double>  thermalCenterRange ,
 }
 
 
-void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N )
+void ThermalSweepOptimizer::updateWorkSpace( const size_t Lend, const size_t N ) noexcept
 {
   LMA_workspace.updateArraySize( Lend , N );
 }
 
 void ThermalSweepOptimizer::updateWorkSpace(
     const math::estimation::unknownList &thermalSweepSearch_in,
-    const std::vector<thermal::model::labels> &sweepOptimizationGoal_in)
+    const std::vector<thermal::model::labels> &sweepOptimizationGoal_in) noexcept
 {
   const size_t Lend = sweepOptimizationGoal_in.size();
   const size_t N = thermalSweepSearch_in.size();
@@ -211,7 +211,7 @@ void ThermalSweepOptimizer::updateWorkSpace(
 
 void ThermalSweepOptimizer::OptimizerOutput::
 addBefore( const ExperimentAnalysisState &input,
-           const std::shared_ptr<ThermalData> &thermalData  )
+           const std::shared_ptr<ThermalData> &thermalData  ) noexcept
 {
   reassign( results.before , input ) ;
   results.preFitted = thermalData ;
@@ -219,7 +219,7 @@ addBefore( const ExperimentAnalysisState &input,
 
 void ThermalSweepOptimizer::OptimizerOutput::
 addAfter( const ExperimentAnalysisState &input,
-          const std::shared_ptr<Kernal> &coreSystem  )
+          const std::shared_ptr<Kernal> &coreSystem  ) noexcept
 {
   ///This saves the 'after' state.
   reassign( results.after , input ) ;
@@ -232,13 +232,13 @@ addAfter( const ExperimentAnalysisState &input,
       phase99( *(coreSystem) , results.postFitted->omegas ) ;
 }
 
-void ThermalSweepOptimizer::OptimizerOutput::clear( void )
+void ThermalSweepOptimizer::OptimizerOutput::clear( void ) noexcept
 {
   searchPath.clear() ;
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path ,
-                                                       const std::string i)
+                                                       const std::string i) noexcept
 {
   using tools::interface::exportfile;
   using std::string;
@@ -259,7 +259,7 @@ void ThermalSweepOptimizer::OptimizerOutput::pp2Folder(const std::string path ,
 
 
 std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
-  ppFinalResults( void )
+  ppFinalResults( void ) noexcept
 {
   std::ostringstream output ;
   using std::ios;
@@ -288,7 +288,7 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 }
 
 std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
-  ppEmissionSweep( void )
+  ppEmissionSweep( void ) noexcept
 {
   std::ostringstream output ;
   output << thermalData->prettyPrint( *coating ) ;
@@ -297,7 +297,7 @@ std::string ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
-ppExportEmissionSweep( const std::string path )
+ppExportEmissionSweep( const std::string path ) noexcept
 {
   const std::string fullpath =  path + "/" +  "emission.dat" ;
   const std::string output = ppEmissionSweep() ;
@@ -306,7 +306,7 @@ ppExportEmissionSweep( const std::string path )
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
-ppExportAll( const std::string path )
+ppExportAll( const std::string path ) noexcept
 {
   ppExportEmissionSweep( path ) ;
   const std::string output = ppFinalResults();
@@ -318,7 +318,7 @@ ppExportAll( const std::string path )
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::ExperimentAnalysisState::
-clear( void )
+clear( void ) noexcept
 {
   thermalData.reset() ;
   coating.reset() ;
@@ -329,7 +329,7 @@ clear( void )
 }
 
 std::string ThermalSweepOptimizer::OptimizerOutput::SearchPath::
-prettyPrint( void )
+prettyPrint( void ) noexcept
 {
   std::ostringstream output;
 
@@ -360,14 +360,14 @@ prettyPrint( void )
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::SearchPath::
-push_back( const ExperimentAnalysisState &data_in )
+push_back( const ExperimentAnalysisState &data_in ) noexcept
 {
   path.push_back( data_in ) ;
 }
 
 
 void ThermalSweepOptimizer::OptimizerOutput::Comparison::
-prettyPrint( const std::string folder )
+prettyPrint( const std::string folder ) noexcept
 {
   using std::string;
   using filesystem::makeDir;
@@ -385,13 +385,13 @@ prettyPrint( const std::string folder )
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::SearchPath::
-clear( void )
+clear( void ) noexcept
 {
   path.clear();
 }
 
 void ThermalSweepOptimizer::OptimizerOutput::
-  push_back( const ExperimentAnalysisState &data_in )
+  push_back( const ExperimentAnalysisState &data_in ) noexcept
 {
   searchPath.push_back( data_in ) ;
 }
@@ -402,7 +402,7 @@ ThermalSweepOptimizer::solve(
     const std::shared_ptr<ThermalData> &thermalData_in,
     const std::shared_ptr<Kernal> &coreSystem_in,
     const std::shared_ptr<LMA> &bestfitMethod_in,
-    const std::shared_ptr<PIE> &intervalEstimates_in )
+    const std::shared_ptr<PIE> &intervalEstimates_in ) noexcept
 {
   ouputResults.clear();
 
@@ -415,7 +415,7 @@ ThermalSweepOptimizer::solve(
 
 
 
-std::string ThermalSweepOptimizer::contourMappingwithMC() {
+std::string ThermalSweepOptimizer::contourMappingwithMC() noexcept {
   typedef const pair<double, double > pairDD ;
   pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
   const math::Interval myThermalLimits( thermalLimits ) ;
@@ -426,7 +426,7 @@ std::string ThermalSweepOptimizer::contourMappingwithMC() {
   return contourMapping( group_x_CR ) ;
 }
 
-std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
+std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() noexcept {
   typedef const pair<double, double > pairDD ;
   pairDD thermalLimits( sweepSettings.lmin, sweepSettings.lmax ) ;
   const Interval myThermalLimits( thermalLimits ) ;
@@ -437,7 +437,7 @@ std::string ThermalSweepOptimizer::contourMappingwithOrderedPoints() {
   return contourMapping( group_x_CR ) ;
 }
 
-std::string ThermalSweepOptimizer::contourMappingwithOrderedPointUsingGrid() {
+std::string ThermalSweepOptimizer::contourMappingwithOrderedPointUsingGrid() noexcept {
 
   const Interval mygridboundaries( make_pair(.01, 10) ) ;
   const vector< pair <double, double > > myGrid = mygridboundaries.gridInterval( iter ) ;
@@ -447,7 +447,7 @@ std::string ThermalSweepOptimizer::contourMappingwithOrderedPointUsingGrid() {
 #include "math/utility.hpp"
 
 std::string ThermalSweepOptimizer::contourMapping_with_grid(
-  const vector< pair < double, double > > myGrid )
+  const vector< pair < double, double > > myGrid ) noexcept
 {
   using math::estimation::x_to_kspace_unity;
   
@@ -502,7 +502,7 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
 }
 
 std::string ThermalSweepOptimizer::contourMapping(
-const vector< vector< double > > group_x_CR )
+const vector< vector< double > > group_x_CR ) noexcept
 {
   using math::estimation::x_to_kspace_unity;
 
@@ -554,7 +554,7 @@ const vector< vector< double > > group_x_CR )
   return contourMappingResults();
 }
 
-std::string ThermalSweepOptimizer::contourMappingResults() {
+std::string ThermalSweepOptimizer::contourMappingResults() noexcept {
 
   std::ostringstream output;
   output << "#|-------------------------------------------------------------\n";
@@ -601,7 +601,7 @@ std::string ThermalSweepOptimizer::contourMappingResults() {
 }
 
 void ThermalSweepOptimizer::
-    uncertainty_for_subset_pushback_ouputResults( double *x )
+    uncertainty_for_subset_pushback_ouputResults( double *x ) noexcept
 {
   BOOST_ASSERT( x != nullptr ) ;
 
@@ -614,7 +614,7 @@ void ThermalSweepOptimizer::
   coreSystem->updatefromInitial( (*unknownBestFit)() );
 }
 
-void ThermalSweepOptimizer::captureState( const sensible::layer &coat )
+void ThermalSweepOptimizer::captureState( const sensible::layer &coat ) noexcept
 {
   currentState.lthermalLimits = thermalData->get_lthermalLimits( coat ) ;
   currentState.lthermalCenterDecades =
@@ -633,7 +633,7 @@ void ThermalSweepOptimizer::captureState( const sensible::layer &coat )
 void ThermalSweepOptimizer::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
-    const std::shared_ptr<Kernal> &coreSystem_in )
+    const std::shared_ptr<Kernal> &coreSystem_in ) noexcept
 {
   ///at this point all the input objects have been set
   unknownParameters = unknownParameters_in ;
@@ -673,7 +673,7 @@ void ThermalSweepOptimizer::solve(
 
 ThermalData ThermalSweepOptimizer::sliceThermalData(
     const double xCenter, const double xRange,
-    const sensible::layer updatedCoating )
+    const sensible::layer updatedCoating ) noexcept
 {
   using std::pair;
   using std::vector;
@@ -737,7 +737,7 @@ ThermalData ThermalSweepOptimizer::sliceThermalData(
   return output;
 }
 
-void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
+void ThermalSweepOptimizer::optimizer( int *info, int *nfev ) noexcept
 {
   using std::vector;
 
@@ -817,7 +817,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev )
   delete [] x;
 }
 
-void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec )
+void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec ) noexcept
 {
   BOOST_ASSERT( x != nullptr ) ;
   BOOST_ASSERT( fvec != nullptr ) ;

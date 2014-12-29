@@ -28,7 +28,7 @@
 
 namespace thermal{namespace model{
 
-double tau_0(const double omega)
+double tau_0(const double omega) noexcept
 {
   return ( 2. * M_PI ) / omega;
 }

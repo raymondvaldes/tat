@@ -42,14 +42,14 @@ namespace analysis{
 
 LMA_BASE::LMA_BASE( const math::estimation::settings &Settings_,
                     const math::estimation::unknownList &unknownParameters_,
-                    const size_t Lend_ )
+                    const size_t Lend_ ) noexcept
   : Settings(Settings_), LMA_workspace( Lend_, unknownParameters_.size() )
 {}
 
-LMA_BASE::~LMA_BASE() {}
+LMA_BASE::~LMA_BASE() noexcept {}
 
 
-void LMA_BASE::updateBindFunc( void )
+void LMA_BASE::updateBindFunc( void ) noexcept
 {
   using std::bind;
   using std::placeholders::_1;
@@ -58,7 +58,7 @@ void LMA_BASE::updateBindFunc( void )
   myReduced = bind( &LMA_BASE::ThermalProp_Analysis, this , _1, _2 ) ;
 }
 
-void LMA::updateWorkSpace( const size_t Lend, const size_t N )
+void LMA::updateWorkSpace( const size_t Lend, const size_t N ) noexcept
 {
   LMA_workspace.updateArraySize( Lend , N );
 }
@@ -66,18 +66,18 @@ void LMA::updateWorkSpace( const size_t Lend, const size_t N )
 
 LMA::LMA( const math::estimation::settings &Settings_,
           const math::estimation::unknownList &unknownParameters_,
-          const size_t Lend_ )
+          const size_t Lend_ ) noexcept
   : LMA_BASE( Settings_, unknownParameters_, Lend_ )
 {}
 
-LMA::~LMA(void){}
+LMA::~LMA(void) noexcept {}
 
 
 
 void LMA::solve(
     const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
     const std::shared_ptr<ThermalData> &thermalData_in,
-    const std::shared_ptr<Kernal> &coreSystem_in )
+    const std::shared_ptr<Kernal> &coreSystem_in ) noexcept
 {
   unknownParameters = unknownParameters_in ;
   thermalData = thermalData_in ;
@@ -95,7 +95,7 @@ void LMA::solve(
 
 
 class ThermalData
-LMA::paramter_estimation( int *info, int *nfev )
+LMA::paramter_estimation( int *info, int *nfev ) noexcept
 {
   using std::vector;
   using thermal::emission::phase99;
@@ -182,7 +182,7 @@ LMA::paramter_estimation( int *info, int *nfev )
 }
 
 
-void LMA::ThermalProp_Analysis(double *x, double *fvec)
+void LMA::ThermalProp_Analysis(double *x, double *fvec) noexcept
 {
   BOOST_ASSERT( x != nullptr ) ;
   BOOST_ASSERT( fvec != nullptr ) ;
@@ -241,7 +241,7 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec)
 }}
 
 void printPEstimates( const sensible::TBCsystem  TBCSystem,
-                      math::estimation::unknownList list )
+                      math::estimation::unknownList list ) noexcept
 {
   using std::cout;
   

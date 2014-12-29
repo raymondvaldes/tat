@@ -43,13 +43,13 @@ public:
                            const double k_coat, const double L_,
                            const double psi_coat_, const double ccoat_,
                            const double lambda_Sub_,
-                           const class numericalModel::Mesh mesh_ ) ;
+                           const class numericalModel::Mesh mesh_ ) noexcept;
 
-  ~HeatModel2DAna(void) ;
+  ~HeatModel2DAna(void) noexcept;
   void TemperatureDistro( std::vector< std::vector< std::vector< double > > >
-                          &Temperature,const double omega) const;
-  void TemperaturePrintOut( const std::string dir, const double L_coat ) const;
-  void testing( void ) const;
+                          &Temperature,const double omega) const noexcept;
+  void TemperaturePrintOut( const std::string dir, const double L_coat ) const noexcept;
+  void testing( void ) const noexcept;
 
 private:
   const double R0, R1, lambda, It, csub, asub, gamma, beam;
@@ -73,39 +73,39 @@ private:
   mutable std::complex<double>*funcComplexZ;
 
   ///member functions
-  double radJ0(void) const;
-  double radJ1(void) const;
-  double radJ2(void) const;
-  double gSpatial(const double zNorm) const;
-  std::complex<double> nuTilde(const double nu, const double ltherm) const;
-  std::complex<double> nuHat(const double nu, const double ltherm) const;
-  std::complex<double> fFunc(const double nu, const double ltherm ) const;
+  double radJ0(void) const noexcept;
+  double radJ1(void) const noexcept;
+  double radJ2(void) const noexcept;
+  double gSpatial(const double zNorm) const noexcept;
+  std::complex<double> nuTilde(const double nu, const double ltherm) const noexcept;
+  std::complex<double> nuHat(const double nu, const double ltherm) const noexcept;
+  std::complex<double> fFunc(const double nu, const double ltherm ) const noexcept;
   std::complex<double> fFunc(const double ltherm,
                              const std::complex<double> nuHAT,
-                             const std::complex<double> nuTIlde ) const;
+                             const std::complex<double> nuTIlde ) const noexcept;
   std::complex<double> HFunc(const double nu, const double ltherm,
-                             const double zNorm) const;
+                             const double zNorm) const noexcept;
   std::complex<double> HFunc(const double ltherm,
                              const double zNorm,
                              const std::complex<double> nuHAT,
-                             const std::complex<double> nuTIlde) const;
+                             const std::complex<double> nuTIlde) const noexcept;
   std::complex<double> hTildeCoat(const double nu, const double ltherm,
-                                  const double zNorm) const;
+                                  const double zNorm) const noexcept;
   std::complex<double> hTildeSubstrate(const double nu, const double ltherm,
-                                       const double zNorm) const;
+                                       const double zNorm) const noexcept;
   std::complex<double> iHankel(std::complex<double>(HeatModel2DAna::*hfunc)
-                              (const double, const double, const double)const,
+                              (const double, const double, const double) const,
                                const double rNorm, const double zNorm,
-                               const double ltherm)const;
-  std::complex<double> iHankel(const size_t r, const size_t z) const;
-  void CPLXWorkingArrays(const double ltherm) const;
+                               const double ltherm) const noexcept;
+  std::complex<double> iHankel(const size_t r, const size_t z) const noexcept;
+  void CPLXWorkingArrays(const double ltherm) const noexcept;
   std::complex<double> TempTComplex(const double rNorm, const double zNorm,
-                                    const double ltherm) const;
+                                    const double ltherm) const noexcept;
   std::complex<double> theta(const double r, const double z,
-                             const double ltherm) const;
+                             const double ltherm) const noexcept;
   double TempT(const double rNorm, const double zNorm, const double tau,
-               const double omega) const;
-  void cleanup(void) const;
+               const double omega) const noexcept;
+  void cleanup(void) const noexcept;
 };
 
 

@@ -33,7 +33,7 @@ License
 namespace filesystem
 {
 
-void makeDir(const std::string &rootPath, const std::string &newDirectory);
+void makeDir(const std::string &rootPath, const std::string &newDirectory) noexcept;
 
 
 
@@ -43,23 +43,23 @@ private:
   const boost::filesystem::path myDirectory;
   
 public:
-  explicit directory(const std::string &workingDirectory_);
-  ~directory(void);
+  explicit directory(const std::string &workingDirectory_) noexcept;
+  ~directory(void) noexcept;
 
   std::string abs(const std::string &relativePath) const noexcept;
   void mkdir(const std::string &newDirectory) const;
-  std::string pwd(void) const;
-  std::vector<directory> ls() const ;
+  std::string pwd(void) const noexcept;
+  std::vector<directory> ls() const noexcept;
   
-  directory parent_path() const ;
-  std::string working_directory() const;
-  std::string working_directory_string() const ;
+  directory parent_path() const noexcept;
+  std::string working_directory() const noexcept;
+  std::string working_directory_string() const noexcept;
 
   
-  bool working_directory_starts_with( const std::string& starts) const;
+  bool working_directory_starts_with( const std::string& starts) const noexcept;
 } ;
 
-std::vector< directory > ls( const std::string &path_in ) ;
+std::vector< directory > ls( const std::string &path_in ) noexcept;
 
 
 

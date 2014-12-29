@@ -41,9 +41,9 @@ class property
 {
 private:
   static constexpr bool tempDependent = false;
-  double Current( const double temperature) const;
+  double Current( const double temperature) const noexcept;
   
-  double Projected( const double temperature1, const double temperature2) const;
+  double Projected( const double temperature1, const double temperature2) const noexcept;
   
 public:
   double offset;
@@ -53,36 +53,36 @@ public:
   explicit property(void) noexcept;
   
   double Current(const vector<vector<double>>& T, const size_t n,
-                 const size_t j) const;
+                 const size_t j) const noexcept;
   
   double Current(const vector<vector<double>>& T, const size_t n,
-                 const size_t j1, const size_t j2) const;
+                 const size_t j1, const size_t j2) const noexcept;
   
   
   double Current(const Temperature Tprofile, const size_t n,
-                 const size_t j) const;
+                 const size_t j) const noexcept;
   
   double Current(const Temperature Tprofile, const size_t n,
-                 const size_t j1, const size_t j2) const;
+                 const size_t j1, const size_t j2) const noexcept;
   
   
   double Projected(const vector< vector<double>>& T,
-                   const size_t n, const size_t j) const;
+                   const size_t n, const size_t j) const noexcept;
   
   double Projected(const vector< vector<double>>& T, const size_t n,
-                   const size_t j1, const size_t j2) const;
+                   const size_t j1, const size_t j2) const noexcept;
   
   double Projectedt( const vector< vector<double>>& T,
-                     const size_t n, const size_t, const size_t j) const;
+                     const size_t n, const size_t, const size_t j) const noexcept;
   
   double Projected( const Temperature Tprofile,
-                    const size_t n, const size_t j) const;
+                    const size_t n, const size_t j) const noexcept;
   
   double Projected(const Temperature Tprofile, const size_t n,
-                   const size_t j1, const size_t j2) const;
+                   const size_t j1, const size_t j2) const noexcept;
   
   double Projectedt(const Temperature Tprofile,
-                    const size_t n, const size_t, const size_t j) const;
+                    const size_t n, const size_t, const size_t j) const noexcept;
   static property loadConfigfromXMLTree(const ptree pt) noexcept;
 };
 

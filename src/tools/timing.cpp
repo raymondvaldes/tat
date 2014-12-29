@@ -31,35 +31,35 @@ License
 
 namespace tools{
 
-stopwatch::stopwatch(void)
+stopwatch::stopwatch(void) noexcept
 {
     start();
 }
 
-auto stopwatch::checktime(void) -> std::chrono::high_resolution_clock::time_point
+auto stopwatch::checktime(void) noexcept -> std::chrono::high_resolution_clock::time_point
 {
     return std::chrono::high_resolution_clock::now();
 }
 
-auto stopwatch::start(void) -> void
+auto stopwatch::start(void) noexcept -> void
 {
     startTime = checktime();
 }
 
-auto stopwatch::stop(void) -> void
+auto stopwatch::stop(void) noexcept -> void
 {
     stopTime = checktime();
     clockSpan = std::chrono::duration_cast
             <std::chrono::duration<double>>(stopTime- startTime);
 }
 
-auto stopwatch::returnTime(void) -> double
+auto stopwatch::returnTime(void) noexcept -> double
 {
     stop();
     return clockSpan.count();
 }
 
-auto stopwatch::readoutLoud( void ) -> std::string
+auto stopwatch::readoutLoud( void ) noexcept -> std::string
 {
   std::ostringstream output;
   output << "Stopwatch: " << std::setprecision(3)

@@ -34,18 +34,18 @@ namespace math{
   namespace numIntegration{
 
 double simpson_3_8( const double *Y, const double *X, const size_t A,
-                    const size_t B);
+                    const size_t B) noexcept;
 
 double simpson_3_8(const std::vector<double>& Y, const double *X,
-                   const size_t A,const size_t B);
+                   const size_t A,const size_t B) noexcept;
 
 double simpson_3_8( const double *Y, const std::vector<double>& X,
-                    const size_t A, const size_t B );
+                    const size_t A, const size_t B ) noexcept;
 
 std::complex<double> simpson_3_8Complex(const double* YReal,
                                         const double* YCPLX,
                                         const double* X,
-                                        const size_t A,const size_t B);
+                                        const size_t A,const size_t B) noexcept;
 
 
 

@@ -35,7 +35,7 @@ License
 #include "math/numIntegration/gslfunc.hpp"
 
 void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
-                   const size_t x, const size_t y, const size_t z)
+                   const size_t x, const size_t y, const size_t z) noexcept
 {
   Vnew.resize(x);
   for(size_t i = 0; i < x ; ++i )
@@ -51,7 +51,7 @@ void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
 }
 
 void vector2DSetup(std::vector< std::vector< double > > &Vnew,
-                   const size_t x, const size_t y)
+                   const size_t x, const size_t y) noexcept
 {
     Vnew.resize(x);
     for(size_t i = 0; i < x ; ++i )
@@ -60,7 +60,7 @@ void vector2DSetup(std::vector< std::vector< double > > &Vnew,
     }
 }
 
-double rss(const double N, const double* exp, const double* x_hat)
+double rss(const double N, const double* exp, const double* x_hat) noexcept
 {
     /*
         This function calculated the residual sum of squares between an
@@ -78,7 +78,7 @@ double rss(const double N, const double* exp, const double* x_hat)
     return sum;
 }
 
-double variance(const size_t P, const size_t N, const double S)
+double variance(const size_t P, const size_t N, const double S) noexcept
 {
     /*
         The estimate of the variance (sigma^2)  is obtained from the degrees of
@@ -91,7 +91,7 @@ double variance(const size_t P, const size_t N, const double S)
 }
 
 double chisquare(const size_t N, const double*emissionExp,
-                    const double* emissionEst)
+                    const double* emissionEst) noexcept
 {
     /*
         The objective function is evaluated for all the measurements.
@@ -109,7 +109,7 @@ double chisquare(const size_t N, const double*emissionExp,
 }
 
 double Sobjective(const size_t L_end, const double*emissionExp,
-                  const double* emissionNum)
+                  const double* emissionNum) noexcept
 {
     /*
         The objective function is evaluated for all the measurements and the
@@ -127,7 +127,7 @@ double Sobjective(const size_t L_end, const double*emissionExp,
 }
 
 double MSE(const size_t N, std::vector<double> &emissionExp,
-           std::vector<double> &emissionEst)
+           std::vector<double> &emissionEst) noexcept
 {
     /*
         The objective function is evaluated for all the measurements and the
@@ -144,7 +144,7 @@ double MSE(const size_t N, std::vector<double> &emissionExp,
 }
 
 double MSE(const size_t N, const double* const emissionExp,
-           const double* const emissionEst)
+           const double* const emissionEst) noexcept
 {
     /*
         The objective function is evaluated for all the measurements and the
@@ -161,7 +161,7 @@ double MSE(const size_t N, const double* const emissionExp,
     return 100*(fvec_objective / N);
 }
 
-void matrixTranspose(const size_t P, const size_t N, double*matrix)
+void matrixTranspose(const size_t P, const size_t N, double*matrix) noexcept
 {
     /*
        N is parameters being estimated
@@ -180,7 +180,7 @@ void matrixTranspose(const size_t P, const size_t N, double*matrix)
 }
 
 void matrixTranspose( const size_t P, const size_t N, const double*matrix,
-                      double*matrixT )
+                      double*matrixT ) noexcept
 {
     /*
        N is parameters being estimated
@@ -200,7 +200,7 @@ void matrixTranspose( const size_t P, const size_t N, const double*matrix,
 
 void matrixDot(const double* MatrixA, const size_t rowA, const size_t columnA,
                const double* MatrixB, const size_t rowB, const size_t columnB,
-               double* MatrixResultant)
+               double* MatrixResultant) noexcept
 {
     /*
         This is for matrices arranged in 1D with the indexes such that:
@@ -237,7 +237,7 @@ void matrixDot(const double* MatrixA, const size_t rowA, const size_t columnA,
 }
 
 void covarianceMatrix(const size_t N, const double variance,
-                      const double* Amatrix, double* cov)
+                      const double* Amatrix, double* cov) noexcept
 {
     /*
         The covariance matrix is the product of the variance and the jacobian
@@ -261,7 +261,7 @@ void covarianceMatrix(const size_t N, const double variance,
     return;
 }
 
-void standardError(const size_t N, const double *cov, double* standardError)
+void standardError(const size_t N, const double *cov, double* standardError) noexcept
 {
   BOOST_ASSERT( cov != nullptr ) ;
   BOOST_ASSERT( standardError != nullptr ) ;
@@ -276,7 +276,7 @@ void standardError(const size_t N, const double *cov, double* standardError)
 }
 
 void printVariable(const double X1, const double X2, const double X3,
-                   const size_t X4)
+                   const size_t X4) noexcept
 {
     std::cout << "\n";
     std::cout << X1 << "\t"<< X2 << "\t" << X3 << "\t" << X4;
@@ -284,7 +284,7 @@ void printVariable(const double X1, const double X2, const double X3,
     return;
 }
 
-void printArray(const double* const matrix, const size_t N)
+void printArray(const double* const matrix, const size_t N) noexcept
 {
     std::cout << "\n";
     for(size_t j = 0 ; j < N ; ++j)
@@ -295,7 +295,7 @@ void printArray(const double* const matrix, const size_t N)
     return;
 }
 
-void printArray(const std::vector<double> &matrix, const size_t N)
+void printArray(const std::vector<double> &matrix, const size_t N) noexcept
 {
     std::cout << "\n";
     for(size_t j = 0 ; j < N ; ++j)
@@ -306,7 +306,7 @@ void printArray(const std::vector<double> &matrix, const size_t N)
     return;
 }
 
-void printArray2d(const size_t N, const size_t M, const double* const matrix)
+void printArray2d(const size_t N, const size_t M, const double* const matrix) noexcept
 {
     for(size_t j = 0 ; j < M ; ++j)
     {
@@ -320,7 +320,7 @@ void printArray2d(const size_t N, const size_t M, const double* const matrix)
 }
 
 void printArray2d(const size_t N, const size_t M,
-                  const std::vector<std::vector<double>>& matrix)
+                  const std::vector<std::vector<double>>& matrix) noexcept
 {
     for(size_t j = 0 ; j < M ; ++j)
     {
@@ -333,7 +333,7 @@ void printArray2d(const size_t N, const size_t M,
     return;
 }
 
-void Amatrix(const size_t P, const size_t N, const double*fjac, double* Amatrix)
+void Amatrix(const size_t P, const size_t N, const double*fjac, double* Amatrix) noexcept
 {
     /*
         The A matrix is defined as the transpose of the jacobian dot product with
@@ -355,7 +355,7 @@ void Amatrix(const size_t P, const size_t N, const double*fjac, double* Amatrix)
 
 
 double MSEarea(const size_t N, std::vector<double> &func1,
-               std::vector<double> &func2)
+               std::vector<double> &func2) noexcept
 {
     ///Startup and initialization
     double sum = 0;

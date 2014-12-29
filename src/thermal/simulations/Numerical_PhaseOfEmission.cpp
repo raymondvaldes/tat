@@ -37,7 +37,7 @@ License
 
 
 double PhaseOfEmission1DNum( const double omega,
-                             const thermal::analysis::Kernal &popteaCore)
+                             const thermal::analysis::Kernal &popteaCore) noexcept
 {
   using thermal::define::Temperature;
   Temperature Tprofile( popteaCore.thermalsys.mesh.Nend,
@@ -50,7 +50,7 @@ double PhaseOfEmission1DNum( const double omega,
 
   ///Initiate emission model
   const double Lcoat = popteaCore.TBCsystem.coating.getDepth() ;
-  const class thermal::Emission emission(
+  const thermal::Emission emission(
                               popteaCore.expSetup.detector.getPeakWavelength(),
                                           popteaCore.TBCsystem.Temp.base,
                                           popteaCore.thermalsys.mesh,
@@ -64,7 +64,7 @@ double PhaseOfEmission1DNum( const double omega,
 }
 
 double PhaseOfEmission2DAna( const double omega,
-                             const class thermal::analysis::Kernal &popteaCore)
+                             const class thermal::analysis::Kernal &popteaCore) noexcept
 {
     /// Initiate 2d analytical model
     const double k_coat  = popteaCore.TBCsystem.coating.kthermal.offset;
@@ -112,7 +112,7 @@ double PhaseOfEmission2DAna( const double omega,
 double PhaseOfEmission1DAna( const double omega1, const double L_coat,
                              const double k_c, const double psi_c,
                              const double lambda, const double R1,
-                             const double gamma, const double Esigma )
+                             const double gamma, const double Esigma ) noexcept
 {
   using thermal::define::lthermal;
   const double l = lthermal( L_coat , k_c , psi_c , omega1 ) ;
@@ -154,7 +154,7 @@ double PhaseOfEmission1DAna( const double omega1, const double L_coat,
 }
 
 double PhaseOfEmission1DAna( const double omega1,
-                             const thermal::analysis::Kernal &popteaCore )
+                             const thermal::analysis::Kernal &popteaCore ) noexcept
 {
   const double L_coat   = popteaCore.TBCsystem.coating.getDepth() ;
   const double k_c      = popteaCore.TBCsystem.coating.kthermal.offset ;

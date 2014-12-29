@@ -53,26 +53,26 @@ private:
     const size_t M2;
     double B4;
 
-    explicit matrixArrays( const size_t length )
+    explicit matrixArrays( const size_t length ) noexcept
       : A1(length), A2(length), A3(length), b(length), Temperature(length),
       B1(length), B2(length), B3(length), M2(length){}
   };
 
 
   double gspatial( double eta, double opt, double lambda, double R1,
-                   double Iplus0, double Iplus1 ) const;
+                   double Iplus0, double Iplus1 ) const noexcept;
   double gs_int( const double eta, const double opt, const double lambda,
-                 const double R1, const double Iplus0, const double Iplus1 ) const;
-  double t_tau( const double tau, const double tau_ref ) const;
+                 const double R1, const double Iplus0, const double Iplus1 ) const noexcept;
+  double t_tau( const double tau, const double tau_ref ) const noexcept;
   double Iaverage( const double Is, const double It, const double omega,
                    const double tau_ref,
                    const vector<double>&tau,
-                   const size_t n ) const;
+                   const size_t n ) const noexcept;
   double Gaverage( const double opt, const double lambda, const double R1,
                    const double Iplus0, const double Iplus1, const double z1,
-                   const double z2 ) const;
-  double Iplus0Func( const double R0, const double R1, const double lambda ) const;
-  double Iplus1Func( const double R0, const double R1, const double lambda ) const;
+                   const double z2 ) const noexcept;
+  double Iplus0Func( const double R0, const double R1, const double lambda ) const noexcept;
+  double Iplus1Func( const double R0, const double R1, const double lambda ) const noexcept;
   double abMatrixPrepopulate( vector<double>& B1,
                               vector<double>& B2,
                               vector<double>& B3,
@@ -87,14 +87,14 @@ private:
                               const vector<double>& z_j,
                               const vector<double>&d_eta_plus,
                               const vector<double>&deltaZ,
-                              const vector<double>&d_eta_minus ) const;
+                              const vector<double>&d_eta_minus ) const noexcept;
 
   void heatingProfile( const double opt, const double lambda,
                        const double R1, const double Iplus0, const double Iplus1,
                        const vector<double>& z_jplus,
                        const vector<double>& z_jminus,
                        const vector<double>& z_j, double*genProfile,
-                       const size_t M1 ) const ;
+                       const size_t M1 ) const noexcept;
 
   void bMatrixPrepopulate1( const size_t n, std::vector<double>& B2,
                             vector<double>& b, const size_t M1,
@@ -107,11 +107,11 @@ private:
                             const vector<double>& z_j,
                             const vector<double>&deltaZ,
                             const double* genProfile,
-                            const double T_rear ) const;
+                            const double T_rear ) const noexcept;
   
   complex<double> Tac1D_ana( const double z, const double R0, const double R1,
                              const double epsilon, const double Lam,
-                             const double Lthrm ) const;
+                             const double Lthrm ) const noexcept;
   
   void Ab_transient( const size_t n,
                      vector<double>& A1,
@@ -128,7 +128,7 @@ private:
                      const sensible::property *kLayer2,
                      const sensible::property *psiLayer1,
                      const sensible::property *psiLayer2
-                   ) const;
+                   ) const noexcept;
   
 
 public:
@@ -137,12 +137,12 @@ public:
                            const sensible::radiativeSysProp &radiative_prop_in,
                            const thermal::equipment::Laser &laser_in,
                            const double temp_in,
-                           const double gamma_in ) ;
-  ~numerical_2011( void ) ;
+                           const double gamma_in ) noexcept;
+  ~numerical_2011( void ) noexcept;
   
   void temperature_1D( const double omega1, const size_t iter,
                        const double Ttol, numericalModel::Mesh mesh,
-                       thermal::define::Temperature Tprofile ) const ;
+                       thermal::define::Temperature Tprofile ) const noexcept;
   
 };
 

@@ -31,7 +31,7 @@
 
 namespace thermal{namespace model{
 
-double tau_0(const double omega);
+double tau_0(const double omega) noexcept;
 
 }}
 #endif /* defined(__tat__tau0__) */

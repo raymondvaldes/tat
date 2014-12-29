@@ -32,7 +32,7 @@ License
 namespace filesystem
 {
 
-void makeDir(const std::string &rootPath, const std::string &newDirectory)
+void makeDir(const std::string &rootPath, const std::string &newDirectory) noexcept
 {
   
   const std::string fullpath = rootPath + "/" + newDirectory ;
@@ -49,10 +49,10 @@ void makeDir(const std::string &rootPath, const std::string &newDirectory)
 }
 
 
-directory::directory(const std::string &workingDirectory_):
+directory::directory(const std::string &workingDirectory_) noexcept:
   workingDirectory( workingDirectory_ ), myDirectory( workingDirectory_ ){}
 
-directory::~directory(void){}
+directory::~directory(void) noexcept {}
 void directory::mkdir(const std::string &newDirectory) const
 {
   if ( ! boost::filesystem::is_directory( abs( newDirectory ) ) )
@@ -64,7 +64,7 @@ void directory::mkdir(const std::string &newDirectory) const
 
 }
 
-std::string directory::working_directory_string() const {
+std::string directory::working_directory_string() const noexcept {
   using std::string;
   using std::vector;
   
@@ -82,7 +82,7 @@ std::string directory::working_directory_string() const {
   return working_folder_only;
 }
 
-bool directory::working_directory_starts_with( const std::string& check ) const {
+bool directory::working_directory_starts_with( const std::string& check ) const noexcept {
   
   BOOST_ASSERT( true ) ;
   using std::string;
@@ -95,7 +95,7 @@ bool directory::working_directory_starts_with( const std::string& check ) const 
   return pass;
 }
 
-std::string directory::pwd(void) const
+std::string directory::pwd(void) const noexcept
 {
   return workingDirectory;
 }
@@ -105,14 +105,14 @@ std::string directory::abs( const std::string &relativePath) const noexcept
   return workingDirectory + "/" + relativePath;
 }
 
-directory directory::parent_path() const {
+directory directory::parent_path() const noexcept {
 
   boost::filesystem::path parentPath = myDirectory.parent_path();
   return directory( parentPath.string() ) ;
 }
 
 
-std::string directory::working_directory() const {
+std::string directory::working_directory() const noexcept {
   using std::string;
   
   const string working_path = pwd();
@@ -123,12 +123,12 @@ std::string directory::working_directory() const {
   return myWorkingDirectory ;
 }
 
-std::vector<directory> directory::ls() const
+std::vector<directory> directory::ls() const noexcept
 {
   return ::filesystem::ls( pwd() ) ;
 }
 
-std::vector< directory > ls( const std::string &path_in )
+std::vector< directory > ls( const std::string &path_in ) noexcept
 {
   using namespace boost::filesystem;
   path p ( path_in );

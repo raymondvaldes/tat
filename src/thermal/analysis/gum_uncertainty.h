@@ -37,46 +37,46 @@ class Taylor_uncertainty: private baseData
   size_t N_dataPoints;
 
   double sDerivative( const enum model::labels::Name derive,
-                      const size_t ith ) ;
-  boost::numeric::ublas::vector<double> sDerivativeVector( void ) ;
+                      const size_t ith ) noexcept;
+  boost::numeric::ublas::vector<double> sDerivativeVector( void ) noexcept;
   boost::numeric::ublas::vector<double>
     first_D_model( const enum model::labels::Name derive ,
-                   const size_t ith) ;
+                   const size_t ith) noexcept;
   boost::numeric::ublas::vector<double> second_D_model(
                     const enum model::labels::Name d_first,
                     const enum model::labels::Name d_second,
-                    const size_t ith) ;
-  boost::numeric::ublas::matrix<double> jacobianY( void ) ;
-  boost::numeric::ublas::matrix<double> jacobianX( void ) ;
+                    const size_t ith) noexcept;
+  boost::numeric::ublas::matrix<double> jacobianY( void ) noexcept;
+  boost::numeric::ublas::matrix<double> jacobianX( void ) noexcept;
   double derivative_M( const enum model::labels::Name d_first ,
                        const enum model::labels::Name d_second,
-                       const size_t ith ) ;
+                       const size_t ith ) noexcept;
   boost::numeric::ublas::vector<double> evalModel(
   const vector< std::pair < enum thermal::model::labels::Name, double > > list,
-  const size_t ith ) ;
+  const size_t ith ) noexcept;
   boost::numeric::ublas::unit_vector<double>
-  derivativeCi( const size_t maxSize, const size_t ith) ;
-  vector< enum thermal::model::labels::Name > get_list_knowns( void ) ;
-  boost::numeric::ublas::matrix<double> jacobian( void ) ;
+  derivativeCi( const size_t maxSize, const size_t ith) noexcept;
+  vector< enum thermal::model::labels::Name > get_list_knowns( void ) noexcept;
+  boost::numeric::ublas::matrix<double> jacobian( void ) noexcept;
   boost::numeric::ublas::matrix<double> Djacobian(
-    const enum thermal::model::labels::Name derive, const size_t ith );
+    const enum thermal::model::labels::Name derive, const size_t ith ) noexcept;
 
   void modifyModel( const enum thermal::model::labels::Name derive,
                     const double val,
-                    const size_t ith ) ;
-  void saveModel() ;
-  void resetModel() ;
-  boost::numeric::ublas::vector<double> uncertaintyResults( void ) ;
+                    const size_t ith ) noexcept;
+  void saveModel() noexcept;
+  void resetModel() noexcept;
+  boost::numeric::ublas::vector<double> uncertaintyResults( void ) noexcept;
 
 
   public:
-  explicit Taylor_uncertainty( void ) ;
-  ~Taylor_uncertainty() ;
+  explicit Taylor_uncertainty( void ) noexcept;
+  ~Taylor_uncertainty() noexcept;
 
   void solve(
          const std::shared_ptr< math::estimation::unknownList > &list_in,
          const std::shared_ptr< ThermalData > &thermalData_in,
-         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
+         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept;
 };
 
 

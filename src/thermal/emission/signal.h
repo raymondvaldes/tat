@@ -24,7 +24,7 @@ private:
 
 public:
   explicit Signal( const units::quantity< units::si::length> &wavelength_in,
-                   const units::quantity< signalType> &intensity_in )
+                   const units::quantity< signalType> &intensity_in ) noexcept
   : electromagneticWavelength( wavelength_in ), intensity( intensity_in ) {};
 
 

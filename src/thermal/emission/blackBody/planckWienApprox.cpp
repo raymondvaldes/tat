@@ -18,7 +18,7 @@ namespace thermal {
 namespace emission {
 namespace blackBody {
   
-double plankWienApprox( const double wavelength, const double temperature ) {
+double plankWienApprox( const double wavelength, const double temperature ) noexcept {
 
   BOOST_ASSERT( temperature > 0 );
   BOOST_ASSERT( wavelength > 0 ) ;

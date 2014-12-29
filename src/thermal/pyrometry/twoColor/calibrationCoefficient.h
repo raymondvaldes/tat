@@ -22,7 +22,7 @@ template< class signalType >
 auto calibrationCoefficient(
   const emission::Signal< signalType > first,
   const emission::Signal< signalType > second,
-  const units::quantity< units::si::temperature> Temp )
+  const units::quantity< units::si::temperature> Temp ) noexcept
   -> units::quantity< units::si::dimensionless >
 {
   using units::si::constants::C2_wien;

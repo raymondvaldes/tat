@@ -34,6 +34,6 @@ namespace math{namespace solvers{
 
 void solveMatrix(const size_t n, const std::vector<double>& b,
                  const std::vector<double>& d, const std::vector<double>& a,
-                 const std::vector<double>& C, std::vector<double>& u);
+                 const std::vector<double>& C, std::vector<double>& u) noexcept;
 }}
 #endif /* defined(__tat__tma__) */

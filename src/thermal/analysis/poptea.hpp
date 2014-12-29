@@ -47,38 +47,38 @@ public:
       const Kernal &coreSystem_ ,
       const ThermalData &thermaldata_,
       const math::estimation::unknownList &unknownParameters_,
-      const methods analysis_in ) ;
+      const methods analysis_in ) noexcept;
 
   static Poptea loadConfig( const Kernal &coreSystem_,
-                            const boost::property_tree::ptree &pt ) ;
-  static Poptea loadConfigfromFile( const filesystem::directory &dir ) ;
-  ~Poptea( void ) ;
+                            const boost::property_tree::ptree &pt ) noexcept;
+  static Poptea loadConfigfromFile( const filesystem::directory &dir ) noexcept;
+  ~Poptea( void ) noexcept;
 
   /// Member operations that update on multiple members
   void updateExperimentalData( const std::vector<double> &omegas,
-                               const std::vector<double> &input ) ;
+                               const std::vector<double> &input ) noexcept;
   void updateModelData( const std::vector<double> &omegas ,
-                        const std::vector<double> &input    ) ;
+                        const std::vector<double> &input    ) noexcept;
 
 
   /// Operations that give results
-  double bestFit( void ) ;
-  thermal::analysis::PIE::PIEAnalysisOutput PIE( void ) ;
-  ThermalSweepOptimizer::OptimizerOutput optimization( void ) ;
-  std::string thermalSweepMap(void ) ;
-  std::vector<double> thermalSweep( void ) const ;
-  void taylor_uncertainty( void ) ;
+  double bestFit( void ) noexcept;
+  thermal::analysis::PIE::PIEAnalysisOutput PIE( void ) noexcept;
+  ThermalSweepOptimizer::OptimizerOutput optimization( void ) noexcept;
+  std::string thermalSweepMap(void ) noexcept;
+  std::vector<double> thermalSweep( void ) const noexcept;
+  void taylor_uncertainty( void ) noexcept;
 
   /// Reload kernels
-  void reloadAnalysis( const methods &analysis_in );
-  void reloadThermalModel( const thermal::define::construct &in_ );
+  void reloadAnalysis( const methods &analysis_in ) noexcept;
+  void reloadThermalModel( const thermal::define::construct &in_ ) noexcept;
 
   /// Printers
-  std::string ppThermalData( void ) ;
-  std::string ppUnknownParameters( void ) ;
+  std::string ppThermalData( void ) noexcept;
+  std::string ppUnknownParameters( void ) noexcept;
 } ;
 
 Poptea loadWorkingDirectoryPoptea( const filesystem::directory &dir,
-                                   const Kernal &popteaCore );
+                                   const Kernal &popteaCore ) noexcept;
 }}
 #endif // poptea_HPP

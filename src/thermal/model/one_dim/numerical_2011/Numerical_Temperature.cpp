@@ -45,7 +45,7 @@ void temperature_1D( const sensible::TBCsystem  TBCsystem,
                      const thermal::define::model thermalsys,
                      const thermal::equipment::setup expSetup,
                      const double omega1,
-                     thermal::define::Temperature Tprofile)
+                     thermal::define::Temperature Tprofile) noexcept
 {
   const double lambda     = TBCsystem.coating.getLambda();
   const double R1         = TBCsystem.optical.R1;
@@ -246,7 +246,7 @@ double abMatrixPrepopulate(std::vector<double>& B1,
                            const std::vector<double>& z_j,
                            const std::vector<double>&d_eta_plus,
                            const std::vector<double>&deltaZ,
-                           const std::vector<double>&d_eta_minus)
+                           const std::vector<double>&d_eta_minus) noexcept
 {
 //Front Surface
     const double delEta =  eta[1] - eta[0] ;
@@ -331,7 +331,7 @@ void heatingProfile(const double opt, const double lambda,
                     const std::vector<double>& z_jplus,
                     const std::vector<double>& z_jminus,
                     const std::vector<double>& z_j, double*genProfile,
-                    const size_t M1 )
+                    const size_t M1 ) noexcept
 {
     for(size_t j=0; j ==0; ++j)
         genProfile[j] = Gaverage(opt, lambda, R1, Iplus0, Iplus1, z_j[j],
@@ -358,7 +358,7 @@ void bMatrixPrepopulate1(const size_t n, std::vector<double>& B2,
                          const std::vector<double>& z_jminus,
                          const std::vector<double>& z_j,
                          const std::vector<double>&deltaZ,
-                         const double* genProfile, const double T_rear)
+                         const double* genProfile, const double T_rear) noexcept
 {
 //Update A matrix based on temperature an time
     const double I_avg  = Iaverage(Is, It, omega, tau_ref, tau, n);
@@ -425,7 +425,7 @@ void Ab_transient(const size_t n,
                   const class property *kLayer2,
                   const class property *psiLayer1,
                   const class property *psiLayer2
-                  )
+                  ) noexcept
 {
 ///Update A matrix based on temperature and time
 ///Front Surface
@@ -607,7 +607,7 @@ void Ab_transient(const size_t n,
 
 std::complex<double> Tac1D_ana(const double z,const double R0,const double R1,
                                const double epsilon, const double Lam,
-                               const double Lthrm)
+                               const double Lthrm) noexcept
 {
     constexpr   std::complex<double> _i_ (0.0, 1.0);
     const       std::complex<double> sqrtIdivL =  sqrt(_i_) / Lthrm;
@@ -647,7 +647,7 @@ std::complex<double> Tac1D_ana(const double z,const double R0,const double R1,
 
 
 
-double t_tau(const double tau, const double tau_ref)
+double t_tau(const double tau, const double tau_ref) noexcept
 {
     return tau * tau_ref;
 }
@@ -655,7 +655,7 @@ double t_tau(const double tau, const double tau_ref)
 double Iaverage(const double Is, const double It, const double omega,
                 const double tau_ref,
                 const std::vector<double>&tau,
-                const size_t n)
+                const size_t n) noexcept
 {
     double I_avg;
   
@@ -670,7 +670,7 @@ double Iaverage(const double Is, const double It, const double omega,
 
 double Gaverage(const double opt, const double lambda, const double R1,
                 const double Iplus0, const double Iplus1, const double z1,
-                const double z2)
+                const double z2) noexcept
 {
     double generation = gs_int( z2, opt, lambda, R1, Iplus0, Iplus1) ;
     generation -= gs_int( z1, opt, lambda, R1, Iplus0, Iplus1) ;
@@ -680,7 +680,7 @@ double Gaverage(const double opt, const double lambda, const double R1,
 
 
 
-double Iplus0Func(const double R0, const double R1, const double lambda)
+double Iplus0Func(const double R0, const double R1, const double lambda) noexcept
 {
     double Ip0 = R0;
     Ip0 *= R1;
@@ -692,7 +692,7 @@ double Iplus0Func(const double R0, const double R1, const double lambda)
     return Ip0;
 }
 
-double Iplus1Func(const double R0, const double R1, const double lambda)
+double Iplus1Func(const double R0, const double R1, const double lambda) noexcept
 {
     double Ip1 = 1;
     Ip1 -= R0 ;

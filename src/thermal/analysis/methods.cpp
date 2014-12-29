@@ -45,7 +45,7 @@ methods::methods(
     const math::estimation::unknownList &thermalSweepSearch ,
     const std::vector<thermal::model::labels> &sweepOptimizationGoal,
     const sensible::layer coating,
-    const size_t iter, const double lmin, const double lmax )
+    const size_t iter, const double lmin, const double lmax ) noexcept
   : bestfitMethod( new LMA( Settings_in, unknownParameters_in,
                             thermalData_in.size() ) ),
     intervalEstimates( new PIE() ),
@@ -62,7 +62,7 @@ methods::methods(
 {
 }
 
-methods& methods::operator=( const methods& that )
+methods& methods::operator=( const methods& that ) noexcept
 {
   if(this != &that)
   {
@@ -76,7 +76,7 @@ methods& methods::operator=( const methods& that )
 double methods::bestFit(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
     const std::shared_ptr< ThermalData > &thermalData_in,
-    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept
 {
   bestfitMethod->solve( list_in, thermalData_in, coreSystem_in );
   return thermalData_in->MSE;
@@ -86,7 +86,7 @@ PIE::PIEAnalysisOutput
 methods::parameterIntervalEstimates(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
     const std::shared_ptr< ThermalData > &thermalData_in,
-    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept
 {
   return intervalEstimates->solve( list_in, thermalData_in, coreSystem_in,
                             bestfitMethod );
@@ -95,14 +95,14 @@ methods::parameterIntervalEstimates(
 ThermalSweepOptimizer::OptimizerOutput methods::optimization(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
     const std::shared_ptr< ThermalData > &thermalData_in,
-    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in )
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept
 {
   return lthermalSweepOptimizer->solve( list_in, thermalData_in, coreSystem_in,
                                         bestfitMethod, intervalEstimates ) ;
 
 }
 
-std::string methods::contourMapping()
+std::string methods::contourMapping() noexcept
 {
   return lthermalSweepOptimizer->contourMappingwithOrderedPointUsingGrid() ;
 }
@@ -110,7 +110,7 @@ std::string methods::contourMapping()
 void methods::GUM_uncertainty(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
     const std::shared_ptr< ThermalData > &thermalData_in,
-    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ){
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept{
   
   taylor_uncertainty->solve( list_in, thermalData_in, coreSystem_in );
   
@@ -123,7 +123,7 @@ methods
 loadMethodsfromFile( const boost::property_tree::ptree &mybranch,
                      const math::estimation::unknownList &parameterEstimation,
                      const ThermalData &thermData,
-                     const sensible::layer &coating )
+                     const sensible::layer &coating ) noexcept
 {
   using math::estimation::unknownList;
   using math::estimation::settings;

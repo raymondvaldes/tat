@@ -29,7 +29,7 @@
 namespace sensible{
   
   
-double property::Current(const double temperature) const
+double property::Current(const double temperature) const noexcept
 {
   if(!tempDependent) return offset;
   
@@ -42,7 +42,7 @@ double property::Current(const double temperature) const
 }
 
 double property::Projected(const double temperature1, const double temperature2)
-const
+const noexcept
 {
   if(!tempDependent) return offset;
   
@@ -56,7 +56,7 @@ const
 }
 
 double property::Current(const std::vector<std::vector<double>>& T, const size_t n,
-                         const size_t j) const
+                         const size_t j) const noexcept
 {
   if(!tempDependent) return offset;
   
@@ -64,7 +64,7 @@ double property::Current(const std::vector<std::vector<double>>& T, const size_t
 }
 
 double property::Current(const std::vector<std::vector<double>>& T, const size_t n,
-                         const size_t j1, const size_t j2) const
+                         const size_t j1, const size_t j2) const noexcept
 {
   if(!tempDependent) return offset;
   
@@ -74,7 +74,7 @@ double property::Current(const std::vector<std::vector<double>>& T, const size_t
 
 
 double property::Current(const class Temperature Tprofile, const size_t n,
-                         const size_t j) const
+                         const size_t j) const noexcept
 {
   if(!tempDependent) return offset;
   
@@ -82,7 +82,7 @@ double property::Current(const class Temperature Tprofile, const size_t n,
 }
 
 double property::Current(const class Temperature Tprofile, const size_t n,
-                         const size_t j1, const size_t j2) const
+                         const size_t j1, const size_t j2) const noexcept
 {
   if(!tempDependent) return offset;
   using math::mean;
@@ -93,7 +93,7 @@ double property::Current(const class Temperature Tprofile, const size_t n,
 
 
 double property::Projected(const std::vector<std::vector<double>>& T,
-                           const size_t n, const size_t j) const
+                           const size_t n, const size_t j) const noexcept
 {
   if(!tempDependent) return offset;
   
@@ -105,7 +105,7 @@ double property::Projected(const std::vector<std::vector<double>>& T,
 
 double property::Projected(const std::vector<std::vector<double>>& T, const size_t n,
                            const size_t j1, const size_t j2)
-const
+const noexcept
 {
   if(!tempDependent) return offset;
   using math::mean;
@@ -120,7 +120,7 @@ const
 
 double property::Projectedt(const std::vector<std::vector<double>>& T,
                             const size_t n,const size_t /*n1*/, const size_t j)
-const
+const noexcept
 {
   if(!tempDependent) return offset;
   using math::mean;
@@ -129,7 +129,7 @@ const
 }
 
 double property::Projected(const class Temperature Tprofile,
-                           const size_t n, const size_t j) const
+                           const size_t n, const size_t j) const noexcept
 {
   if(!tempDependent) return offset;
   
@@ -142,7 +142,7 @@ double property::Projected(const class Temperature Tprofile,
 
 double property::Projected(const class Temperature Tprofile, const size_t n,
                            const size_t j1, const size_t j2)
-const
+const noexcept
 {
   if(!tempDependent) return offset;
   using math::mean;
@@ -158,7 +158,7 @@ const
 
 double property::Projectedt(const class Temperature Tprofile,
                             const size_t n,const size_t /*n1*/, const size_t j)
-const
+const noexcept
 {
   if(!tempDependent) return offset;
   using math::mean;

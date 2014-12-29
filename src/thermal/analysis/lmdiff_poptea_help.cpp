@@ -30,7 +30,7 @@ namespace thermal {
 namespace analysis{
 
 void scaleDiag( double *diag, math::estimation::unknownList List,
-                const sensible::TBCsystem TBCsystem, const int mode )
+                const sensible::TBCsystem TBCsystem, const int mode ) noexcept
 {
   BOOST_ASSERT( diag != nullptr ) ;
 
@@ -43,12 +43,12 @@ void scaleDiag( double *diag, math::estimation::unknownList List,
   }
 }
 
-LMA_workingArrays::LMA_workingArrays(const size_t Lend_, const size_t N_)
+LMA_workingArrays::LMA_workingArrays(const size_t Lend_, const size_t N_) noexcept
 {
   updateArraySize( Lend_, N_ ) ;
 }
 
-void LMA_workingArrays::updateArraySize( const size_t Lend_, const size_t N )
+void LMA_workingArrays::updateArraySize( const size_t Lend_, const size_t N ) noexcept
 {
   /*Lend_ is the total number of unique measurements in a dataset,
   this value is based on the range and the set minimum*/
@@ -57,7 +57,7 @@ void LMA_workingArrays::updateArraySize( const size_t Lend_, const size_t N )
   fvec.resize( Lend_ ) ;
 }
 
-LMA_workingArrays::~LMA_workingArrays(void)
+LMA_workingArrays::~LMA_workingArrays(void) noexcept
 {}
 
 

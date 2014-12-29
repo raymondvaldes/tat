@@ -45,11 +45,17 @@ public:
   Interval( const std::pair<double, double> endpoints_input ) noexcept;
   
   double get_left_end() const noexcept;
+  
   double get_right_end() const noexcept;
+  
   bool is_valid() const noexcept;
+  
   bool is_invalid() const noexcept;
+  
   void set_ends( const std::pair<double, double> endpoints_input) noexcept;
+  
   Interval get_log10_random_subInterval() const noexcept;
+  
   std::pair<double, double> get_pair() const noexcept;
   
   std::vector<std::vector<double>> random_group_xCR( const size_t val ) const noexcept;

@@ -33,12 +33,12 @@ License
 namespace thermal{
 namespace analysis{
 
-PIE::PIE( void )
+PIE::PIE( void ) noexcept
 { }
 
-PIE::~PIE(){}
+PIE::~PIE() noexcept {} 
 
-std::string PIE::PIEAnalysisOutput::SearchData::pprint( void )
+std::string PIE::PIEAnalysisOutput::SearchData::pprint( void ) noexcept
 {
   std::ostringstream output ;
 
@@ -58,7 +58,7 @@ std::string PIE::PIEAnalysisOutput::SearchData::pprint( void )
   return output.str() ;
 }
 
-void PIE::PIEAnalysisOutput::ThermalSweep::prettyPrint(const std::string folder)
+void PIE::PIEAnalysisOutput::ThermalSweep::prettyPrint(const std::string folder) noexcept
 {
   typedef const std::string filePath;
   typedef const std::string outputString;
@@ -82,13 +82,13 @@ void PIE::PIEAnalysisOutput::ThermalSweep::prettyPrint(const std::string folder)
 
 
 void PIE::PIEAnalysisOutput::SearchData::
-  ppThermalSweep ( const std::string folder)
+  ppThermalSweep ( const std::string folder) noexcept
 {
   thermalSweep.prettyPrint( folder );
 }
 
 
-double PIE::bestFit()
+double PIE::bestFit() noexcept
 {
   bestfitMethod->solve( unknownParameters, thermalData, coreSystem ) ;
   return thermalData->MSE;
@@ -96,7 +96,7 @@ double PIE::bestFit()
 
 
 PIE::PIEAnalysisOutput::SearchData PIE::PIEAnalysisOutput::
-retrieveSearchData( const thermal::model::labels::Name input )
+retrieveSearchData( const thermal::model::labels::Name input ) noexcept
 {
   SearchData myOutput;
 
@@ -112,7 +112,7 @@ retrieveSearchData( const thermal::model::labels::Name input )
   return myOutput;
 }
 
-void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
+void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path ) noexcept
 {
   std::string pieResults = myUnknowns->prettyPrint();
   tools::interface::exportfile( path + "/" + "pie.dat" , pieResults ) ;
@@ -142,14 +142,14 @@ void PIE::PIEAnalysisOutput::pp2Folder(  const std::string path )
 
 }
 
-std::string PIE::PIEAnalysisOutput::ppThermalSweep( void )
+std::string PIE::PIEAnalysisOutput::ppThermalSweep( void ) noexcept
 {
   const std::string output = bestFitThermal->prettyPrint( *trueCoat ) ;
   return output;
 }
 
 std::string PIE::PIEAnalysisOutput::
-ppSearchPath( const thermal::model::labels::Name input )
+ppSearchPath( const thermal::model::labels::Name input ) noexcept
 {
   SearchData myData = retrieveSearchData( input ) ;
   const std::string output = myData.pprint() ;
@@ -158,7 +158,7 @@ ppSearchPath( const thermal::model::labels::Name input )
 }
 
 std::string PIE::PIEAnalysisOutput::
-ppEmissionLimits( const thermal::model::labels::Name input )
+ppEmissionLimits( const thermal::model::labels::Name input ) noexcept
 {
   SearchData myData = retrieveSearchData( input ) ;
 
@@ -168,7 +168,7 @@ ppEmissionLimits( const thermal::model::labels::Name input )
 
 
 
-void PIE::PIEAnalysisOutput::clear( void )
+void PIE::PIEAnalysisOutput::clear( void ) noexcept
 {
   searchPath.clear();
 }
@@ -177,7 +177,7 @@ PIE::PIEAnalysisOutput
 PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
             const std::shared_ptr<ThermalData> &thermalData_in,
             const std::shared_ptr<Kernal> &coreSystem_in, 
-            const std::shared_ptr<LMA> bestfitMethod_in )
+            const std::shared_ptr<LMA> bestfitMethod_in ) noexcept
 {
   ouputResults.clear();
 
@@ -201,7 +201,7 @@ PIE::solve( const std::shared_ptr<math::estimation::unknownList> &list_in,
   return ouputResults;
 }
 
-void PIE::parameterIntervalEstimates( void )
+void PIE::parameterIntervalEstimates( void ) noexcept
 {
   /// Save experimental data, quality-of-fit, unknownParameter List
   using math::estimation::unknown;
@@ -286,7 +286,7 @@ void PIE::parameterIntervalEstimates( void )
 
 double PIE::solveFORx( const double target , const double min, const double max,
                        const enum thermal::model::labels::Name mylabel,
-                       const std::string &bound )
+                       const std::string &bound ) noexcept
 {
   using std::function;
   using std::bind;
@@ -307,7 +307,7 @@ double PIE::solveFORx( const double target , const double min, const double max,
 }
 
 double PIE::Gfunc( const double val ,
-                   const enum thermal::model::labels::Name &mylabel )
+                   const enum thermal::model::labels::Name &mylabel ) noexcept
 {
   using std::pair;
 
@@ -322,14 +322,14 @@ double PIE::Gfunc( const double val ,
   return error;
 }
 
-void PIE::saveExperimental( const ThermalData& thermalData_in )
+void PIE::saveExperimental( const ThermalData& thermalData_in ) noexcept
 {
   SAVEExperimental = thermalData_in.experimentalEmission;
   SAVEpredictions = thermalData_in.predictedEmission;
   SAVEomega = thermalData_in.omegas;
 }
 
-void PIE::reloadExperimental( void )
+void PIE::reloadExperimental( void ) noexcept
 {
   thermalData->experimentalEmission = SAVEExperimental;
   thermalData->predictedEmission = SAVEpredictions;
@@ -337,7 +337,7 @@ void PIE::reloadExperimental( void )
 }
 
 void PIE::updateExperimentalData( const std::vector<double> &input,
-                                  ThermalData &thermalData_in )
+                                  ThermalData &thermalData_in ) noexcept
 {
   thermalData_in.updateExperimental( input );
 }

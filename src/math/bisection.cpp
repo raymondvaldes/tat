@@ -33,7 +33,7 @@ License
 
 namespace math{
 
-size_t PrecisionToBits(const size_t precision)
+size_t PrecisionToBits(const size_t precision) noexcept
 {
   /*Enter the number of decimal precision required*/
   const double log10of2 = std::log10(2) ;

@@ -31,7 +31,7 @@
 namespace math{namespace solvers{
 
 double SOR( double**A, double*b, const size_t M2, double*phi, double omega,
-            double error);
+            double error) noexcept;
             
 }}
 #endif /* defined(__tat__sor__) */

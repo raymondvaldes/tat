@@ -41,7 +41,7 @@ HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
                                 const double k_coat_, const double L_,
                                 const double psi_coat_, const double ccoat_,
                                 const double lambda_Sub_,
-                                const class numericalModel::Mesh mesh_ )
+                                const class numericalModel::Mesh mesh_ ) noexcept
   : R0(R0_), R1(R1_), lambda(lambda_), It(It_), csub(csub_), asub(asub_),
     gamma(gamma_), beam(beam_), k_coat(k_coat_), L(L_), psi_coat(psi_coat_),
     ccoat(ccoat_), lambda_Sub(lambda_Sub_), mesh(mesh_)
@@ -64,13 +64,13 @@ HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
   math::range( nuSpace, nuStart, nuEnd, nuSize ) ;
 }
 
-HeatModel2DAna::~HeatModel2DAna(void)
+HeatModel2DAna::~HeatModel2DAna(void) noexcept
 {
   cleanup();
 }
 
 
-void HeatModel2DAna::cleanup(void) const
+void HeatModel2DAna::cleanup(void) const noexcept
 {
   delete[] funcComplex;
   delete[] funcComplexR;
@@ -81,14 +81,14 @@ void HeatModel2DAna::cleanup(void) const
   delete[] funcImag;
 }
 
-double HeatModel2DAna::radJ0(void) const
+double HeatModel2DAna::radJ0(void) const noexcept
 {
   /* Radiosity J0 is the flux into the coating from the top surface */
   const double product =  R0 * R1 * exp(-2./lambda);
   return 1 + product / (1.- product);
 }
 
-double HeatModel2DAna::radJ1(void) const
+double HeatModel2DAna::radJ1(void) const noexcept
 {
   /* Radiosity J1 is the flux into the coating from the interface */
   double
@@ -98,7 +98,7 @@ double HeatModel2DAna::radJ1(void) const
   return radiosity;
 }
 
-double HeatModel2DAna::radJ2(void) const
+double HeatModel2DAna::radJ2(void) const noexcept
 {
   /* Radiosity J2 is the flux into the substrate from the interface */
   double
@@ -111,7 +111,7 @@ double HeatModel2DAna::radJ2(void) const
   return radiosity;
 }
 
-double HeatModel2DAna::gSpatial(const double zNorm) const
+double HeatModel2DAna::gSpatial(const double zNorm) const noexcept
 {
   /*
   zNorm is the axial spatial parameter of the volumetric heating
@@ -137,7 +137,7 @@ double HeatModel2DAna::gSpatial(const double zNorm) const
 }
 
 std::complex<double> HeatModel2DAna::nuTilde(const double nu,
-                                             const double ltherm) const
+                                             const double ltherm) const noexcept
 {
   double
   realNum = nu;
@@ -151,7 +151,7 @@ std::complex<double> HeatModel2DAna::nuTilde(const double nu,
 }
 
 std::complex<double> HeatModel2DAna::nuHat(const double nu,
-                                           const double ltherm) const
+                                           const double ltherm) const noexcept
 {
   double
   realNum = nu;
@@ -165,7 +165,7 @@ std::complex<double> HeatModel2DAna::nuHat(const double nu,
 }
 
 std::complex<double> HeatModel2DAna::fFunc(const double nu,
-                                           const double ltherm ) const
+                                           const double ltherm ) const noexcept
 {
   const std::complex<double> nuHAT = nuHat(nu, ltherm);
   const std::complex<double> nuTIlde = nuTilde(nu, ltherm);
@@ -176,7 +176,7 @@ std::complex<double> HeatModel2DAna::fFunc(const double nu,
 std::complex<double> HeatModel2DAna::fFunc(const double ltherm,
                                            const std::complex<double> nuHAT,
                                            const std::complex<double> nuTIlde)
-                                           const
+                                           const noexcept
 {
   std::complex<double>
   retrn = tanh( nuTIlde / ltherm);
@@ -193,7 +193,7 @@ std::complex<double> HeatModel2DAna::fFunc(const double ltherm,
 }
 
 std::complex<double> HeatModel2DAna::HFunc(const double nu, const double ltherm,
-                                           const double z) const
+                                           const double z) const noexcept
 {
   const std::complex<double> nuHAT = nuHat(nu, ltherm);
   const std::complex<double> nuTIlde = nuTilde(nu, ltherm);
@@ -203,7 +203,7 @@ std::complex<double> HeatModel2DAna::HFunc(const double nu, const double ltherm,
 std::complex<double>
 HeatModel2DAna::HFunc(const double ltherm, const double zNorm,
                       const std::complex<double> nuHAT,
-                      const std::complex<double> nuTIlde) const
+                      const std::complex<double> nuTIlde) const noexcept
 {
   const double z = zNorm;
 
@@ -279,7 +279,7 @@ HeatModel2DAna::HFunc(const double ltherm, const double zNorm,
 
 std::complex<double>
 HeatModel2DAna::hTildeCoat(const double nu, const double ltherm,
-                           const double zNorm) const
+                           const double zNorm) const noexcept
 {
   const double retrn1a = ltherm * exp(-nu*nu / 4);
   const std::complex<double> nuHAT = nuHat(nu, ltherm);
@@ -334,7 +334,7 @@ HeatModel2DAna::hTildeCoat(const double nu, const double ltherm,
 
 std::complex<double>
 HeatModel2DAna::hTildeSubstrate(const double nu, const double ltherm,
-                                const double zNorm) const
+                                const double zNorm) const noexcept
 {
   if(zNorm <= 1)
   {
@@ -358,7 +358,7 @@ std::complex<double>
 HeatModel2DAna::iHankel(std::complex<double>(HeatModel2DAna::*hfunc)
                         (const double, const double, const double) const,
                         const double r, const double z, const double ltherm)
-                        const
+                        const noexcept
 {
   /*
   The definite integral of a complex integrand is the sum if the
@@ -393,7 +393,7 @@ HeatModel2DAna::iHankel(std::complex<double>(HeatModel2DAna::*hfunc)
 }
 
 std::complex<double>
-HeatModel2DAna::theta(const double r, const double z, const double ltherm) const
+HeatModel2DAna::theta(const double r, const double z, const double ltherm) const noexcept
 {
   ///execute inverse hankel
   std::complex<double> iHankelResult;
@@ -411,14 +411,14 @@ HeatModel2DAna::theta(const double r, const double z, const double ltherm) const
 
 std::complex<double>
 HeatModel2DAna::TempTComplex(const double r, const double z,
-                             const double ltherm) const
+                             const double ltherm) const noexcept
 {
   return theta(r, z, ltherm) * ( L * It * ( 1 - R0 ) / k_coat );
 }
 
 double
 HeatModel2DAna::TempT(const double r, const double z, const double tau_,
-                      const double omega) const
+                      const double omega) const noexcept
 {
   /*
   The transient temperature (real). The parameters are normalized
@@ -435,7 +435,7 @@ HeatModel2DAna::TempT(const double r, const double z, const double tau_,
 }
 
 std::complex<double>
-HeatModel2DAna::iHankel(const size_t r, const size_t z) const
+HeatModel2DAna::iHankel(const size_t r, const size_t z) const noexcept
 {
   for(size_t n = 0; n < nuSize ;  ++n)
   {
@@ -456,7 +456,7 @@ HeatModel2DAna::iHankel(const size_t r, const size_t z) const
 
 void
 HeatModel2DAna::TemperatureDistro(std::vector<std::vector<std::vector<double>>>
-                                  &Temperature, const double omega) const
+                                  &Temperature, const double omega) const noexcept
 {
   ///Determine the thermal penetration based on the omega
   using thermal::define::lthermal;
@@ -488,7 +488,7 @@ HeatModel2DAna::TemperatureDistro(std::vector<std::vector<std::vector<double>>>
 
 void
 HeatModel2DAna::TemperaturePrintOut(const std::string dir, const double L_coat)
-                                    const
+                                    const noexcept
 {
   /// Setup Temperature[n][r][z] Vector
   std::vector< std::vector< std::vector< double > > > T2DProfile;
@@ -525,7 +525,7 @@ HeatModel2DAna::TemperaturePrintOut(const std::string dir, const double L_coat)
 }
 
 void
-HeatModel2DAna::CPLXWorkingArrays(const double ltherm) const
+HeatModel2DAna::CPLXWorkingArrays(const double ltherm) const noexcept
 {
   ///workspaces
   for(size_t n = 0 ; n < nuSize; ++n)
@@ -555,7 +555,7 @@ HeatModel2DAna::CPLXWorkingArrays(const double ltherm) const
 
 
 
-void HeatModel2DAna::testing(void) const
+void HeatModel2DAna::testing(void) const noexcept
 {
     constexpr size_t precO = 14;
     constexpr double nuInc = 0.25;

@@ -31,7 +31,7 @@ namespace analysis{
 
 Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
                 const math::estimation::unknownList &unknownParameters_,
-                const methods analysis_in )
+                const methods analysis_in ) noexcept
     : analysis( analysis_in )
 {
   reassign( coreSystem, coreSystem_);
@@ -41,7 +41,7 @@ Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
 
 Poptea
 Poptea::loadConfig( const Kernal &coreSystem_,
-                    const boost::property_tree::ptree &pt )
+                    const boost::property_tree::ptree &pt ) noexcept
 {
   using math::estimation::unknownList;
   using boost::property_tree::ptree;
@@ -70,7 +70,7 @@ Poptea::loadConfig( const Kernal &coreSystem_,
   return poptea ;
 }
 
-Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
+Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir) noexcept
 {
   using boost::property_tree::ptree;
 
@@ -89,7 +89,7 @@ Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir)
 
 
 void Poptea::updateExperimentalData( const std::vector<double> &omegas,
-                                     const std::vector<double> &input )
+                                     const std::vector<double> &input ) noexcept
 {
   BOOST_ASSERT( input.size() == omegas.size());
   loadedExperimental = true;
@@ -98,22 +98,22 @@ void Poptea::updateExperimentalData( const std::vector<double> &omegas,
 }
 
 void Poptea::updateModelData( const std::vector<double> &omegas,
-                              const std::vector<double> &input )
+                              const std::vector<double> &input ) noexcept
 {
   BOOST_ASSERT( omegas == thermalData->omegas ) ;
   BOOST_ASSERT( input.size() == thermalData->size() ) ;
   thermalData->predictedEmission = input ;
 }
 
-Poptea::~Poptea(void){}
+Poptea::~Poptea(void) noexcept {}
 
-std::vector<double> Poptea::thermalSweep(void) const
+std::vector<double> Poptea::thermalSweep(void) const noexcept
 {
   return thermalData->get_lthermalSweep( coreSystem->TBCsystem.coating ) ;
 }
 
 
-double Poptea::bestFit( void )
+double Poptea::bestFit( void ) noexcept
 {
   runbestfit = true;
   const double output = analysis.bestFit( unknownParameters, thermalData,
@@ -123,20 +123,20 @@ double Poptea::bestFit( void )
   return  output;
 }
 
-thermal::analysis::PIE::PIEAnalysisOutput Poptea::PIE( void )
+thermal::analysis::PIE::PIEAnalysisOutput Poptea::PIE( void ) noexcept
 {
   return analysis.parameterIntervalEstimates( unknownParameters , thermalData,
                                               coreSystem ) ;
 }
 
-ThermalSweepOptimizer::OptimizerOutput Poptea::optimization(void)
+ThermalSweepOptimizer::OptimizerOutput Poptea::optimization(void) noexcept
 {
   BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" );
 
   return analysis.optimization( unknownParameters , thermalData, coreSystem ) ;
 }
 
-std::string Poptea::thermalSweepMap( void )
+std::string Poptea::thermalSweepMap( void ) noexcept
 {
   BOOST_ASSERT_MSG( loadedExperimental , "must load experimental data!" ) ;
   return analysis.contourMapping() ;
@@ -144,33 +144,33 @@ std::string Poptea::thermalSweepMap( void )
 
 
 
-std::string Poptea::ppUnknownParameters ( void )
+std::string Poptea::ppUnknownParameters ( void ) noexcept
 {
   return unknownParameters->prettyPrint();
 }
 
-std::string Poptea::ppThermalData( void )
+std::string Poptea::ppThermalData( void ) noexcept
 {
   return thermalData->prettyPrint( coreSystem->TBCsystem.coating ) ;
 }
 
-void Poptea::reloadAnalysis( const methods &analysis_in )
+void Poptea::reloadAnalysis( const methods &analysis_in ) noexcept
 {
   analysis = analysis_in;
 }
   
-void Poptea::reloadThermalModel( const thermal::define::construct &in_ )
+void Poptea::reloadThermalModel( const thermal::define::construct &in_ ) noexcept
 {
   coreSystem->thermalsys.reloadThermalConstruct( in_ );
 }
 
-void Poptea::taylor_uncertainty( void )
+void Poptea::taylor_uncertainty( void ) noexcept
 {
   analysis.GUM_uncertainty( unknownParameters , thermalData, coreSystem ) ;
 }
 
 Poptea loadWorkingDirectoryPoptea( const filesystem::directory &dir,
-                                   const Kernal &popteaCore )
+                                   const Kernal &popteaCore ) noexcept
 {
   const std::string filename = "poptea.xml";
   boost::property_tree::ptree

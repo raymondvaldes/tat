@@ -31,14 +31,14 @@ namespace math{
 namespace numIntegration{
 
 
-double fintegrate(double x, void *p)
+double fintegrate(double x, void *p) noexcept
 {
   mySpline &params = *reinterpret_cast<struct mySpline *>(p);
   return params.eval(x);
 }
 
 double integrate( mySpline *Func, const double xlow,
-                  const double xhigh)
+                  const double xhigh) noexcept
 {
     //http://www.bnikolic.co.uk/nqm/1dinteg/gslgk.html
 

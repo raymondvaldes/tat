@@ -44,7 +44,7 @@ class labels
 private:
 
 public:
-  static size_t numberOfLabels(void) { return 10; };
+  static size_t numberOfLabels(void) noexcept { return 10; };
 
   enum class Name
   {
@@ -63,7 +63,7 @@ public:
     thermalRange,
   };
 
-  static std::vector< enum Name > getEnumList( void ) {
+  static std::vector< enum Name > getEnumList( void ) noexcept {
     std::vector< enum Name > output( numberOfLabels() ) ;
     output[0] = Name::gammaEff;
     output[1] = Name::asub;
@@ -98,13 +98,13 @@ public:
   ( Name::acoat, "acoat" )
   ( Name::gammaSub, "gammaSub") ;
   
-  explicit labels(void);
-  explicit labels(const enum Name name_);
-  Name getName(void) const;
-  std::string getNameString(void) const;
+  explicit labels(void) noexcept;
+  explicit labels(const enum Name name_) noexcept;
+  Name getName(void) const noexcept;
+  std::string getNameString(void) const noexcept;
   
   
-  labels& operator=( const labels& that );
+  labels& operator=( const labels& that ) noexcept;
   
 private:
   enum Name name;

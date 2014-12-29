@@ -29,7 +29,7 @@
 namespace math{namespace solvers{
 
 double SOR(double **A, double *b,const size_t n,double *phi, double omega,
-           double error)
+           double error) noexcept
 {
 	// omega is the relaxation parameter
 	double sigma;

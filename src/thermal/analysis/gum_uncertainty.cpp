@@ -47,14 +47,14 @@ typedef const uVector cuVector;
 namespace thermal {
 namespace analysis {
 
-Taylor_uncertainty::Taylor_uncertainty( void ){}
+Taylor_uncertainty::Taylor_uncertainty( void ) noexcept{}
 
-Taylor_uncertainty::~Taylor_uncertainty( ){}
+Taylor_uncertainty::~Taylor_uncertainty( ) noexcept {}
 
 void Taylor_uncertainty::solve(
          const std::shared_ptr< math::estimation::unknownList > &list_in,
          const std::shared_ptr< ThermalData > &thermalData_in,
-         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) {
+         const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept {
   ///use the inputs
   assignPointer( list_in , thermalData_in , coreSystem_in ) ;
   
@@ -68,11 +68,11 @@ void Taylor_uncertainty::solve(
     std::cout << val << "\n";
 }
 
-void Taylor_uncertainty::saveModel() {
+void Taylor_uncertainty::saveModel() noexcept {
   SavedState.updateObjects( *coreSystem, *thermalData, *unknownParameters ) ;
 }
 
-void Taylor_uncertainty::resetModel() {
+void Taylor_uncertainty::resetModel() noexcept {
   updateObjects( *SavedState.coreSystem,
                  *SavedState.thermalData,
                  *SavedState.unknownParameters) ;
@@ -80,7 +80,7 @@ void Taylor_uncertainty::resetModel() {
 
 void Taylor_uncertainty::modifyModel( label derive,
                                       const double val,
-                                      const size_t ith )
+                                      const size_t ith ) noexcept
 {
   List listmodifiers = { make_pair( derive, val ) } ;
   
@@ -94,7 +94,7 @@ void Taylor_uncertainty::modifyModel( label derive,
   updateObjects( *popteaPerturb, *thermalData, *unknownParameters) ;
 }
 
-uVector Taylor_uncertainty::uncertaintyResults( void ){
+uVector Taylor_uncertainty::uncertaintyResults( void ) noexcept{
 
   using model::labels::Name::experimentalData;
   using model::labels::Name::omega;
@@ -136,7 +136,7 @@ uVector Taylor_uncertainty::uncertaintyResults( void ){
   return apply_to_all< sqrt<double> > ( output );
 }
 
-uMatrix Taylor_uncertainty::Djacobian( label derive, const size_t ith ) {
+uMatrix Taylor_uncertainty::Djacobian( label derive, const size_t ith ) noexcept {
 
   ///Basically I need to be able to get the derivative of the jacobian
   ///with respect to the label.
@@ -155,7 +155,7 @@ uMatrix Taylor_uncertainty::Djacobian( label derive, const size_t ith ) {
   return DerivativeModel;
 }
 
-uMatrix Taylor_uncertainty::jacobian( void ) {
+uMatrix Taylor_uncertainty::jacobian( void ) noexcept {
   using math::numericalAnalysis::matrix::InvertMatrix ;
 
   const uMatrix Jy = jacobianY() ;
@@ -166,7 +166,7 @@ uMatrix Taylor_uncertainty::jacobian( void ) {
   return J ;
 }
 
-double Taylor_uncertainty::sDerivative( label derive, const size_t ith )
+double Taylor_uncertainty::sDerivative( label derive, const size_t ith ) noexcept
 {
   cuVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
   cuVector exper = stdVector2ublasVector( thermalData->experimentalEmission ) ;
@@ -177,7 +177,7 @@ double Taylor_uncertainty::sDerivative( label derive, const size_t ith )
   return sum( DerivativeSpreSum ) ;
 }
 
-uVector Taylor_uncertainty::sDerivativeVector( void )
+uVector Taylor_uncertainty::sDerivativeVector( void ) noexcept
 {
   uVector output( N_unknowns ) ;
 
@@ -189,7 +189,7 @@ uVector Taylor_uncertainty::sDerivativeVector( void )
 }
 
 
-uMatrix Taylor_uncertainty::jacobianY( void )
+uMatrix Taylor_uncertainty::jacobianY( void ) noexcept
 {
   const EnumList myList = get_list_knowns() ;
   
@@ -203,7 +203,7 @@ uMatrix Taylor_uncertainty::jacobianY( void )
 }
 
 vector< enum thermal::model::labels::Name >
-Taylor_uncertainty::get_list_knowns( void )
+Taylor_uncertainty::get_list_knowns( void ) noexcept
 {
   using std::sort;
   const thermal::model::labels myLabel;
@@ -230,7 +230,7 @@ Taylor_uncertainty::get_list_knowns( void )
   return listunknowns;
 }
 
-uMatrix Taylor_uncertainty::jacobianX( void )
+uMatrix Taylor_uncertainty::jacobianX( void ) noexcept
 {
   using model::labels::Name::experimentalData;
   using model::labels::Name::omega;
@@ -270,7 +270,7 @@ uMatrix Taylor_uncertainty::jacobianX( void )
 double Taylor_uncertainty::derivative_M(
   const label d_first ,
   const label d_second,
-  const size_t ith )
+  const size_t ith ) noexcept
 {
   cuVector model = stdVector2ublasVector( thermalData->predictedEmission ) ;
   cuVector exper = stdVector2ublasVector( thermalData->experimentalEmission ) ;
@@ -292,13 +292,13 @@ double Taylor_uncertainty::derivative_M(
   return sum( output ) ;
 }
 
-uVector Taylor_uncertainty::evalModel( List list, const size_t ith ) {
+uVector Taylor_uncertainty::evalModel( List list, const size_t ith ) noexcept {
   return stdVector2ublasVector( phase99Pertrub( *coreSystem,
                                                 thermalData->omegas,
                                                 list, ith ) ) ;
 }
 
-uVector Taylor_uncertainty::first_D_model( label derive , const size_t ith ) {
+uVector Taylor_uncertainty::first_D_model( label derive , const size_t ith ) noexcept {
   using model::labels::Name::experimentalData;
   const uZero_Vector myZeroVector( N_dataPoints ) ;
 
@@ -322,7 +322,7 @@ uVector Taylor_uncertainty::first_D_model( label derive , const size_t ith ) {
 }
 
 uVector Taylor_uncertainty::second_D_model( label d_first , label d_second,
-                                            const size_t ith )
+                                            const size_t ith ) noexcept
 {
   const auto listMaker = [&]( const bool mod1, const bool mod2 )
   {
@@ -347,7 +347,7 @@ uVector Taylor_uncertainty::second_D_model( label d_first , label d_second,
 }
 
 uUnit_Vector Taylor_uncertainty::derivativeCi( const size_t maxSize,
-  const size_t ith)
+  const size_t ith) noexcept
 {
   const uUnit_Vector output( maxSize, ith) ;
   return output;

@@ -35,9 +35,9 @@ namespace math{
 
 using math::algorithms::mySpline;
 
-double fintegrate( double x, void *p ) ;
+double fintegrate( double x, void *p ) noexcept;
 double integrate( mySpline *Func, const double xlow,
-                  const double xhigh ) ;
+                  const double xhigh ) noexcept;
 
   }
 }

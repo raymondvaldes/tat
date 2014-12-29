@@ -27,12 +27,12 @@ License
 //SLATE FOR DELETETION//
 
 double gspatial(double eta, double opt, double lambda, double R1,
-                double Iplus0, double Iplus1);
+                double Iplus0, double Iplus1) noexcept;
 //SLATE FOR DELETETION//
 
 
 double gs_int(const double eta, const double opt, const double lambda,
-              const double R1, const double Iplus0, const double Iplus1);
+              const double R1, const double Iplus0, const double Iplus1) noexcept;
 
 
 #endif // NUMERICAL_SETUP_H_INCLUDED

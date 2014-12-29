@@ -36,7 +36,7 @@ namespace analysis{
 
 std::vector<double>
 Tcplx_to_Ttransient( const std::complex<double> &cplx , const double omega,
-                     const size_t res )
+                     const size_t res ) noexcept
 {
   using std::arg;
   using std::exp;
@@ -62,7 +62,7 @@ Tcplx_to_Ttransient( const std::complex<double> &cplx , const double omega,
 }
 
 std::complex<double>
-Ttransient_to_Tcplx( const std::vector<double> Ttransient )
+Ttransient_to_Tcplx( const std::vector<double> Ttransient ) noexcept
 {
   /* Only one period or wavelength of thermal transient temperature data can
      be sent as the arguement. This can be verified by using an assert */
@@ -106,7 +106,7 @@ Ttransient_to_Tcplx( const std::vector<double> Ttransient )
 
 #include "math/utility.hpp"
 std::vector<double>
-t_cmplx_to_t_time( const double omega, const double res )
+t_cmplx_to_t_time( const double omega, const double res ) noexcept
 {
   using physics::classical_mechanics::angularFrequency_to_period ;
   const double period = angularFrequency_to_period( omega ) ;

@@ -33,7 +33,7 @@ namespace thermal{
   namespace define{
 
 double omega( const double L_coat, const double l_thermal, const double k_c,
-              const double psi_c );
+              const double psi_c ) noexcept;
 
     
 }}

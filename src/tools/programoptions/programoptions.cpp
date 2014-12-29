@@ -34,7 +34,7 @@ namespace tools{
 
 namespace programoptions{
  
-void MainArguments::loadOptions( void ) const
+void MainArguments::loadOptions( void ) const noexcept
 {
   namespace po = boost::program_options;
   po::options_description desc("Allowed options");
@@ -83,12 +83,12 @@ void MainArguments::loadOptions( void ) const
   if( vm.count( "investigation" ) ) {}
 }
 
-bool MainArguments::help( void ) const
+bool MainArguments::help( void ) const noexcept
 {
   return false;
 }
 
-bool MainArguments::version(void) const
+bool MainArguments::version(void) const noexcept
 {
   std::cout << "\nT A T : " ;
   std::cout << "Thermal Analysis Toolbox\n";
@@ -129,25 +129,25 @@ bool MainArguments::build(void) const noexcept
   return false;
 }
 
-bool MainArguments::run_analysis( void ) const {
+bool MainArguments::run_analysis( void ) const noexcept {
   return run;
 }
 
-std::string MainArguments::run_directory( void ) const {
+std::string MainArguments::run_directory( void ) const noexcept {
   return path;
 }
 
-std::string MainArguments::run_samples( void ) const {
+std::string MainArguments::run_samples( void ) const noexcept {
   return sampleName;
 }
 
-std::string MainArguments::run_investigationName( void ) const {
+std::string MainArguments::run_investigationName( void ) const noexcept {
   return investigationName;
 }
   
 
 
-MainArguments::MainArguments( const int argc_in, const char **argv_in )
+MainArguments::MainArguments( const int argc_in, const char **argv_in ) noexcept
   : argc( argc_in ), argv( argv_in )
 {
   loadOptions();

@@ -21,7 +21,7 @@ auto temperatureSteady(   const units::quantity< units::si::dimensionless > cali
                           const units::quantity< units::si::dimensionless > signalRatio,
                           const units::quantity< units::si::length > wavelength_one,
                           const units::quantity< units::si::length > wavelength_two
-                          ) -> units::quantity< units::si::temperature>
+                          ) noexcept -> units::quantity< units::si::temperature>
 {
   using units::si::constants::C2_wien;
   using std::log;

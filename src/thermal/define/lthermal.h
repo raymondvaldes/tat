@@ -32,10 +32,10 @@ namespace thermal{
   namespace define{
 
 double lthermal( const double L_coat, const double k_c, const double psi_c,
-                const double omega ) ;
+                const double omega ) noexcept;
 
-double lthermal_freq( const double diff, const double freq,  const double L_c );
-double lthermal_omeg( const double diff, const double omega, const double L_c );
+double lthermal_freq( const double diff, const double freq,  const double L_c ) noexcept;
+double lthermal_omeg( const double diff, const double omega, const double L_c ) noexcept;
     
   }}
 #endif /* defined(__tat__thermalpenetration__) */

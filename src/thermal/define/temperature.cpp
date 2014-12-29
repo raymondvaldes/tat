@@ -29,13 +29,13 @@ namespace thermal{
   namespace define{
   
 
-Temperature::Temperature( const size_t Nend_, const size_t M2_ )
+Temperature::Temperature( const size_t Nend_, const size_t M2_ ) noexcept
 : Nend(Nend_), M2(M2_)
 {
   temperature = new double[Nend_ * M2_];
 }
 
-vector<double> Temperature::eval_at_z( const size_t val ) const
+vector<double> Temperature::eval_at_z( const size_t val ) const noexcept
 {
   vector<double> output( Nend ) ;
 
@@ -46,7 +46,7 @@ vector<double> Temperature::eval_at_z( const size_t val ) const
 }
 
 
-vector<double> Temperature::eval_at_t( const size_t val ) const
+vector<double> Temperature::eval_at_t( const size_t val ) const noexcept
 {
   vector<double> output( M2 ) ;
   
@@ -56,17 +56,17 @@ vector<double> Temperature::eval_at_t( const size_t val ) const
   return output;
 }
 
-double Temperature::eval( const size_t i, const size_t j ) const
+double Temperature::eval( const size_t i, const size_t j ) const noexcept
 {
   return temperature[j + M2 * i];
 }
 
-void Temperature::assgn( const size_t i, const size_t j, const double value )
+void Temperature::assgn( const size_t i, const size_t j, const double value ) noexcept
 {
   temperature[j + M2 * i] = value;
 }
 
-void Temperature::cleanup( void )
+void Temperature::cleanup( void ) noexcept
 {
   delete[]temperature;
 }

@@ -56,42 +56,42 @@ public:
       const math::estimation::unknownList &thermalSweepSearch_in,
       const std::vector<thermal::model::labels> &sweepOptimizationGoal_in,
       const sensible::layer coating , const size_t iter,
-      const double lmin, const double lmax ) ;
+      const double lmin, const double lmax ) noexcept;
 
-  methods& operator=( const methods& that );
+  methods& operator=( const methods& that ) noexcept;
 
   //output methods
   double bestFit(
       const std::shared_ptr< math::estimation::unknownList > &list_in,
       const std::shared_ptr< ThermalData > &thermalData_in,
-      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
+      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept;
 
   PIE::PIEAnalysisOutput
   parameterIntervalEstimates(
       const std::shared_ptr< math::estimation::unknownList > &list_in,
       const std::shared_ptr< ThermalData > &thermalData_in,
-      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) ;
+      const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in ) noexcept;
 
   ThermalSweepOptimizer::OptimizerOutput
   optimization(
       const std::shared_ptr< math::estimation::unknownList > &list_in,
       const std::shared_ptr< ThermalData > &thermalData_in,
       const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in
-      );
+      ) noexcept;
   
   void GUM_uncertainty(
     const std::shared_ptr< math::estimation::unknownList > &list_in,
     const std::shared_ptr< ThermalData > &thermalData_in,
-    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in  ) ;
+    const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in  ) noexcept;
 
-  std::string contourMapping();
+  std::string contourMapping() noexcept;
 };
 
 methods
 loadMethodsfromFile(const boost::property_tree::ptree &ptchild4,
                      const math::estimation::unknownList &parameterEstimation,
                      const ThermalData &thermData,
-                     const sensible::layer &coating ) ;
+                     const sensible::layer &coating ) noexcept;
 
 
 }}

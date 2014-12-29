@@ -29,7 +29,7 @@ namespace thermal{
   namespace model{
 
 
-labels& labels::operator=( const labels& that )
+labels& labels::operator=( const labels& that ) noexcept
 {
   if(this != &that)
   {
@@ -39,16 +39,16 @@ labels& labels::operator=( const labels& that )
 }
 
 
-labels::labels(void) {}
+labels::labels(void) noexcept {}
 
-labels::labels(const Name name_):name(name_){}
+labels::labels(const Name name_) noexcept:name(name_){}
 
-enum labels::Name labels::getName(void) const
+enum labels::Name labels::getName(void) const noexcept
 {
   return name;
 }
 
-std::string labels::getNameString(void) const
+std::string labels::getNameString(void) const noexcept
 {
   return nameMap.left.at( name ) ;
 }

@@ -51,7 +51,7 @@ public:
       ThermalData lowerbound;
       ThermalData bestfit;
       ThermalData upperbound;
-      void prettyPrint( const std::string folder );
+      void prettyPrint( const std::string folder ) noexcept;
     };
 
     class SearchData
@@ -61,8 +61,8 @@ public:
       std::vector< std::pair< double, ThermalData > > allThermalData ;
       ThermalSweep thermalSweep;
 
-      std::string pprint( void ) ;
-      void ppThermalSweep ( const std::string folder) ;
+      std::string pprint( void ) noexcept;
+      void ppThermalSweep ( const std::string folder) noexcept;
     };
     std::shared_ptr< ThermalData > bestFitThermal ;
     std::shared_ptr< sensible::layer > bestFitCoat ;
@@ -73,41 +73,41 @@ public:
 
 
     /// Post-PIE analysis methods
-    std::string ppThermalSweep ( void );
-    std::string ppSearchPath( const labels::Name input ) ;
-    std::string ppEmissionLimits( const labels::Name input ) ;
-    void pp2Folder(const std::string path );
-    void clear( void ) ;
+    std::string ppThermalSweep ( void ) noexcept;
+    std::string ppSearchPath( const labels::Name input ) noexcept;
+    std::string ppEmissionLimits( const labels::Name input ) noexcept;
+    void pp2Folder(const std::string path ) noexcept;
+    void clear( void ) noexcept;
 
   private:
-    SearchData retrieveSearchData(const labels::Name input ) ;
+    SearchData retrieveSearchData(const labels::Name input ) noexcept;
   } ouputResults;
 
 
-  explicit PIE( void ) ;
-  ~PIE( ) ;
+  explicit PIE( void ) noexcept;
+  ~PIE( ) noexcept;
 
   PIEAnalysisOutput
   solve( const std::shared_ptr< math::estimation::unknownList > &list_in,
          const std::shared_ptr< ThermalData > &thermalData_in,
          const std::shared_ptr< thermal::analysis::Kernal > &coreSystem_in,
-         const std::shared_ptr< LMA > bestfitMethod_in ) ;
+         const std::shared_ptr< LMA > bestfitMethod_in ) noexcept;
 
 private:
   /// Heavy duty workers
   std::shared_ptr< LMA > bestfitMethod;
-  double bestFit();
-  void parameterIntervalEstimates( void ) ;
+  double bestFit() noexcept;
+  void parameterIntervalEstimates( void ) noexcept;
 
   /// worker methods
-  double Gfunc( const double x , const labels::Name &mylabel ) ;
+  double Gfunc( const double x , const labels::Name &mylabel ) noexcept;
   void updateExperimentalData( const std::vector<double> &input,
-                               ThermalData &thermalData_in ) ;
-  void saveExperimental( const ThermalData& thermalData_in ) ;
-  void reloadExperimental( void );
+                               ThermalData &thermalData_in ) noexcept;
+  void saveExperimental( const ThermalData& thermalData_in ) noexcept;
+  void reloadExperimental( void ) noexcept;
   double solveFORx( const double target , const double min, const double max,
                     const labels::Name mylabel,
-                    const std::string &bound ) ;
+                    const std::string &bound ) noexcept;
 
   PIEAnalysisOutput::SearchData dataTempStorage;
   PIEAnalysisOutput::ThermalSweep ThermalSweepTEMP;

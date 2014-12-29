@@ -29,19 +29,19 @@ namespace thermal{
   namespace define{
 
 double lthermal( const double L_coat, const double k_c, const double psi_c,
-                const double omega )
+                const double omega ) noexcept
 {
   const double diff = k_c / psi_c ;
   return lthermal_omeg( diff, omega, L_coat );
 }
 
-double lthermal_freq( const double diff, const double freq,  const double L_c )
+double lthermal_freq( const double diff, const double freq,  const double L_c ) noexcept
 {
   const double omega = 2 * M_PI * freq ;
   return lthermal_omeg( diff, omega, L_c ) ;
 }
 
-double lthermal_omeg( const double diff, const double omega, const double L_c )
+double lthermal_omeg( const double diff, const double omega, const double L_c ) noexcept
 {
   using std::sqrt;
   return sqrt( diff / omega ) / L_c ;

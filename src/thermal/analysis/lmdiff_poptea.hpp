@@ -57,20 +57,20 @@ protected:
   int info = -1;
   std::function< void( double*, double* ) > myReduced;
 
-  virtual void ThermalProp_Analysis( double *x, double *fvec ) = 0 ;
-  void updateBindFunc( void );
-  virtual void updateWorkSpace(const size_t Lend , const size_t N) = 0;
+  virtual void ThermalProp_Analysis( double *x, double *fvec ) noexcept = 0 ;
+  void updateBindFunc( void ) noexcept;
+  virtual void updateWorkSpace(const size_t Lend , const size_t N) noexcept = 0;
 
 public:
   explicit LMA_BASE( const math::estimation::settings &Settings_,
                      const math::estimation::unknownList &unknownParameters_,
-                     const size_t Lend_ );
-  virtual ~LMA_BASE();
+                     const size_t Lend_ ) noexcept;
+  virtual ~LMA_BASE() noexcept;
 
   virtual void solve(
       const std::shared_ptr<math::estimation::unknownList>&unknownParameters_in,
       const std::shared_ptr<ThermalData> &thermalData_in,
-      const std::shared_ptr<Kernal> &coreSystem_in ) = 0;
+      const std::shared_ptr<Kernal> &coreSystem_in ) noexcept = 0 ;
 };
 
 
@@ -78,25 +78,25 @@ public:
 class LMA: public LMA_BASE
 {
 private:
-  void ThermalProp_Analysis( double *x, double *fvec ) override;
-  ThermalData paramter_estimation(int *info, int *nfev);
-  void updateWorkSpace(const size_t Lend , const size_t N) override;
+  void ThermalProp_Analysis( double *x, double *fvec ) noexcept override ;
+  ThermalData paramter_estimation(int *info, int *nfev) noexcept;
+  void updateWorkSpace(const size_t Lend , const size_t N) noexcept override ;
 
 public:
   class BestFitAnalysisOutput
   {
     public:
-    void clear( void ) ;
+    void clear( void ) noexcept;
   };
 
   explicit LMA( const math::estimation::settings &Settings_,
                 const math::estimation::unknownList &unknownParameters,
-                const size_t Lend_) ;
-  ~LMA(void);
+                const size_t Lend_) noexcept;
+  ~LMA(void) noexcept;
   void solve(
       const std::shared_ptr<math::estimation::unknownList> &unknownParameters_in,
       const std::shared_ptr<ThermalData> &thermalData_in,
-      const std::shared_ptr<Kernal> &coreSystem_in ) override;
+      const std::shared_ptr<Kernal> &coreSystem_in ) noexcept override ;
 };
 
 
@@ -104,6 +104,6 @@ public:
 
 
 void printPEstimates( const sensible::TBCsystem TBCSystem,
-                      math::estimation::unknownList list );
+                      math::estimation::unknownList list ) noexcept;
 
 #endif // LMDIFF_POPTEA_HPP

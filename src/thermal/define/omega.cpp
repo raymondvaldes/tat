@@ -34,7 +34,7 @@ namespace thermal{
   namespace define{
 
 double omega( const double L_coat, const double l_thermal, const double k_c,
-             const double psi_c )
+             const double psi_c ) noexcept
 {
   return ( k_c / psi_c ) / ( pow( L_coat * l_thermal , 2 ) );
 }

@@ -38,7 +38,7 @@ License
 
 namespace math{
 
-size_t PrecisionToBits(const size_t precision);
+size_t PrecisionToBits(const size_t precision) noexcept;
 
 class solve
 {

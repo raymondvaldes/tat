@@ -30,12 +30,15 @@ namespace math{
 namespace estimation{
 
 double x_limiter1( const double xi ) noexcept;
+
 double x_limiter2( const double xi, const double x_min, const double x_max ) noexcept;
 
 double kx_limiter1( const double ki ) noexcept;
+
 double kx_limiter2( const double ki, const double k_min, const double k_max ) noexcept;
 
 std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) noexcept;
+
 std::vector<double> kspace_to_x_unity( const double* x, const size_t n ) noexcept;
 
 }}

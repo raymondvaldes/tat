@@ -27,11 +27,11 @@ class Signal: public thermal::emission::Signal
   public:
     explicit Signal( const units::quantity< units::si::length> &wavelength_in,
                      const units::quantity< signalType> &intensity_in,
-                     const units::quantity< temperature_dimension> &Temp_in )
+                     const units::quantity< temperature_dimension> &Temp_in ) noexcept
     : thermal::emission::Signal( wavelength_in, intensity_in ),
       sourceTemperature( Temp_in ) { };
 
-    auto getTemperature( void ) {
+    auto getTemperature( void ) noexcept {
       return sourceTemperature;
     }
 }

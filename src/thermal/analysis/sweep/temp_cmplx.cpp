@@ -37,7 +37,7 @@ namespace sweep{
 
 std::vector< std::complex<double> >
 temp_cplx_99( const thermal::analysis::Kernal &popteaCore,
-              const double omega , const size_t M1)
+              const double omega , const size_t M1) noexcept
 {
   /*The result for each thermal penetration is calculated in parallel using the
   OpenMP framework.  This gives significant increases in the speed of the code

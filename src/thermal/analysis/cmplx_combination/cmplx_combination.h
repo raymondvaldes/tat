@@ -38,13 +38,13 @@ namespace analysis{
 
 std::vector<double>
 Tcplx_to_Ttransient( const std::complex<double> &cplx , const double w,
-                     const size_t res ) ;
+                     const size_t res ) noexcept;
 
 std::complex<double>
-Ttransient_to_Tcplx( const std::vector<double> Ttransient ) ;
+Ttransient_to_Tcplx( const std::vector<double> Ttransient ) noexcept;
   
 std::vector<double>
-t_cmplx_to_t_time( const double omega, const double res ) ;
+t_cmplx_to_t_time( const double omega, const double res ) noexcept;
 
 }}
 
