@@ -37,7 +37,7 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir ) noexcept
   ///Initialize kernals
   const Kernal popteaCore = loadWorkingDirectoryKernal( dir ) ;
   Poptea poptea = loadWorkingDirectoryPoptea ( dir, popteaCore ) ;
-  
+
   ///Output noise to test
   using thermal::emission::phase99;
   typedef const std::vector<double> sweep;
