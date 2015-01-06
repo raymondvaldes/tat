@@ -30,13 +30,20 @@ namespace algorithm {
 namespace string {
   
 bool starts_with( const std::string& check_this,
-                  const std::string& begins_with ) noexcept {
-  const bool lengthrequirement = check_this.length() >= begins_with.length() ;
-  BOOST_ASSERT( lengthrequirement ) ;
+                  const std::string& begins_with ) noexcept
+{
+  //const bool lengthrequirement = check_this.length() >= begins_with.length() ;
+ // BOOST_ASSERT( lengthrequirement ) ;
   using boost::starts_with;
   
   const bool pass = starts_with( check_this, begins_with ) ;
   return pass;
+}
+
+bool starts_with_not( const std::string& check_this,
+                      const std::string& begins_with ) noexcept
+{
+  return !starts_with( check_this, begins_with ) ;
 }
 
 

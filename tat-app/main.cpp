@@ -31,7 +31,6 @@ License
 #include "investigations/execute.h"
 
 using std::string;
-using std::cout;
 using tools::programoptions::MainArguments;
 
 auto executeAnalysis( const MainArguments& runArgs ) noexcept -> string
@@ -47,11 +46,16 @@ auto executeAnalysis( const MainArguments& runArgs ) noexcept -> string
   return globalStopWatch.readoutLoud();
 }
 
-int main( const int argc, const char *argv[ ] ) noexcept {
+int main( const int argc, const char *argv[ ] ) noexcept
+{
+
   const auto runArgs = MainArguments{ argc, argv };
 
   if( runArgs.run_analysis() ) {
+    using std::cout;
+    
     const auto exeTimer = executeAnalysis( runArgs ) ;
+    
     cout << exeTimer << "\n" ;
   }
 
