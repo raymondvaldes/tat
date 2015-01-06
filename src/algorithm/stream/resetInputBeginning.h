@@ -15,8 +15,7 @@
 namespace algorithm {
 namespace stream {
   
-template <class T>
-void resetToBeginnging( T& inputStream ) noexcept{
+void resetToBeginnging( std::istream& inputStream ) noexcept{
 
   inputStream.clear();
   inputStream.seekg( 0, std::ios::beg ) ;

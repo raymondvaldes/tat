@@ -15,8 +15,7 @@
 #include <vector>
 #include <sstream>
 
-#include "algorithm/string/starts_with.h"
-#include "algorithm/stream/resetInputBeginning.h"
+//#include "algorithm/stream/getline.h"
 
 namespace tools {
 namespace interface {
@@ -26,52 +25,34 @@ class columnData{
 
 private:
   
-  std::ifstream inputFileStream ;
-  std::ostringstream cleanFileStream;
+  std::ifstream my_ifstream ;
+  std::stringstream cleanFileStream ;
   mutable std::string defaultIgnoreCharacter = "#" ;
   
-  auto validateOpenFile( void ) -> void ;
-  auto saveDataLine( void ) noexcept -> void ;
+  auto NumberOfColumns(void)          noexcept -> size_t;
+  auto NumberofRows(void)             noexcept -> size_t;
+  auto completeMatrix(void)           noexcept -> bool;
 
-  auto NumberOfColumns(void) noexcept -> size_t;
-  auto NumberofRows(void) noexcept -> size_t ;
-  
+  auto saveDataLine( void )           noexcept -> void ;
+  auto eliminateCommentLines( void )  noexcept -> void ;
+  auto changeIgnoreLines( const std::string& myChar )   noexcept -> void ;
+  auto updateCommentSymbol( const std::string& Symbol ) noexcept -> void ;
+
 public:
 
 // Constructors and Destructors
   explicit columnData( const std::string& filePathIn );
-  
   ~columnData( void ) noexcept {} ;
   
-  
-// Helper functions
-  auto eliminateCommentLines( void ) noexcept -> void ;
-  
-  auto endOfFile( void ) noexcept -> bool ;
-  
-  auto NotEOF( void ) noexcept -> bool ;
-  
-  auto updateCommentSymbol( const std::string& Symbol ) noexcept -> void ;
-  
-  auto readLine( void ) noexcept -> std::string ;
-  
-  auto rejectLine( const std::string& line ) noexcept -> bool;
-  
-  auto changeIgnoreLines( const std::string& myChar ) noexcept -> void ;
-  
-  auto file_is_open( void ) const noexcept -> bool ;
-  
-  auto file_is_closed( void ) const noexcept -> bool ;
   
 // Template functions
   template< class T>
   auto getColumn( const size_t columnNumber ) noexcept -> std::vector<T>
   {
-    const std::vector< T > myColumn ;
+    using std::vector;
+    vector< T > myColumn(0) ;
     
-    
-    
-    
+//    myColumn.push_back( algorithm::stream::getline( cleanFileStream ) );
     
     return myColumn;
   }

@@ -22,6 +22,9 @@
 		AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD011A57261F00AB7E11 /* columnData.h */; };
 		AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */; };
 		AB8AA4341A5B60710065E7F8 /* columnData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8AA4331A5B60710065E7F8 /* columnData.cpp */; };
+		AB8AA4381A5C68650065E7F8 /* getline.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4361A5C68650065E7F8 /* getline.h */; };
+		AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */; };
+		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
 		ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */; };
 		ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */; };
 		ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */; };
@@ -214,6 +217,10 @@
 		AB7EAD011A57261F00AB7E11 /* columnData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = columnData.h; path = import/columnData.h; sourceTree = "<group>"; };
 		AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resetInputBeginning.h; path = algorithm/stream/resetInputBeginning.h; sourceTree = "<group>"; };
 		AB8AA4331A5B60710065E7F8 /* columnData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = columnData.cpp; path = import/columnData.cpp; sourceTree = "<group>"; };
+		AB8AA4361A5C68650065E7F8 /* getline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = getline.h; path = algorithm/stream/getline.h; sourceTree = "<group>"; };
+		AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = validateOpenStream.h; path = algorithm/stream/validateOpenStream.h; sourceTree = "<group>"; };
+		AB8AA43E1A5C68AB0065E7F8 /* eof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eof.h; path = algorithm/stream/eof.h; sourceTree = "<group>"; };
+		AB8AA4421A5C6CEF0065E7F8 /* is_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = is_open.h; path = algorithm/stream/is_open.h; sourceTree = "<group>"; };
 		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
 		ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taylor_uncertainty.h; sourceTree = "<group>"; };
 		ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planckWienApprox.cpp; path = blackBody/planckWienApprox.cpp; sourceTree = "<group>"; };
@@ -529,6 +536,10 @@
 			isa = PBXGroup;
 			children = (
 				AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */,
+				AB8AA4361A5C68650065E7F8 /* getline.h */,
+				AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */,
+				AB8AA43E1A5C68AB0065E7F8 /* eof.h */,
+				AB8AA4421A5C6CEF0065E7F8 /* is_open.h */,
 			);
 			name = stream;
 			sourceTree = "<group>";
@@ -1058,6 +1069,7 @@
 				ABEF4EE01948D4A500B44AD5 /* setup.h in Headers */,
 				ABEF4EDA1948D4A500B44AD5 /* phase99.hpp in Headers */,
 				ABEF4EC31948D4A500B44AD5 /* thermalData.hpp in Headers */,
+				AB8AA4381A5C68650065E7F8 /* getline.h in Headers */,
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
 				ABEF4EB11948D4A500B44AD5 /* kernal.hpp in Headers */,
@@ -1076,6 +1088,7 @@
 				ABEF4EAC1948D4A500B44AD5 /* temperature_scale.h in Headers */,
 				ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */,
 				ABB54FD219C35E300056823E /* ifzero.h in Headers */,
+				AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */,
 				ABEF4E9E1948D4A500B44AD5 /* statistical_tools.hpp in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,
@@ -1099,6 +1112,7 @@
 				ABEF4EE81948D4A500B44AD5 /* mesh.hpp in Headers */,
 				ABEF4F051948D4A500B44AD5 /* tools.hpp in Headers */,
 				ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */,
+				AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */,
 				ABEF4E861948D4A500B44AD5 /* bisection.hpp in Headers */,
 				ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */,
 				ABEF4EEE1948D4A500B44AD5 /* Numerical_Temperature.h in Headers */,

@@ -8,31 +8,30 @@
 
 #include "tools/interface/import/columnData.h"
 
+#include "algorithm/string/starts_with.h"
+#include "algorithm/stream/resetInputBeginning.h"
+#include "algorithm/stream/eof.h"
+#include "algorithm/stream/getline.h"
+#include "algorithm/stream/validateOpenStream.h"
+
 namespace tools {
 namespace interface {
 namespace import {
 
-  auto columnData::validateOpenFile( void ) -> void {
-    const bool throwException = file_is_closed( ) ;
-    
-    if( throwException ) {
-      using std::invalid_argument;
-      throw invalid_argument( "no file found" ) ;
-    }
-  }
-
-
   columnData::columnData( const std::string& filePathIn )
-  : inputFileStream( filePathIn, std::ifstream::in )
+  : my_ifstream( filePathIn, std::ifstream::in )
   {
-    validateOpenFile();
+    using algorithm::stream::validateOpenFile;
+    
+    validateOpenFile( my_ifstream );
     eliminateCommentLines();
   }
 
   auto columnData::saveDataLine( void ) noexcept -> void
   {
     using std::string;
-    const string currentLine = readLine() ;
+    using algorithm::stream::getline;
+    const string currentLine = getline( my_ifstream ) ;
     
     using algorithm::string::starts_with_not;
     const bool NotcommentLine = starts_with_not( currentLine, defaultIgnoreCharacter ) ;
@@ -44,51 +43,16 @@ namespace import {
 
   auto columnData::eliminateCommentLines( void ) noexcept -> void
   {
-    while( NotEOF() ) {
+    using algorithm::stream::not_eof;
+    while( not_eof( my_ifstream ) ) {
       saveDataLine();
     }
-  }
-
-  auto columnData::endOfFile(void) noexcept -> bool
-  {
-    return inputFileStream.eof();
-  }
-
-  auto columnData::NotEOF(void) noexcept -> bool
-  {
-    return !endOfFile();
   }
 
   auto columnData::updateCommentSymbol( const std::string& Symbol ) noexcept -> void
   {
     defaultIgnoreCharacter = Symbol;
     eliminateCommentLines();
-  }
-
-  auto columnData::file_is_open() const noexcept -> bool
-  {
-    return inputFileStream.is_open();
-  }
-
-  auto columnData::file_is_closed() const noexcept -> bool
-  {
-    return !file_is_open();
-  }
-
-  auto columnData::readLine() noexcept -> std::string
-  {
-    using std::string;
-    using std::getline;
-
-    string getsThisLine ;
-    getline( inputFileStream , getsThisLine ) ;
-    
-    return getsThisLine ;
-  }
-
-  auto columnData::rejectLine( const std::string& line ) noexcept -> bool
-  {
-    return line.empty();
   }
 
 
@@ -99,17 +63,13 @@ namespace import {
     using algorithm::stream::resetToBeginnging;
     using std::ifstream;
     
-    resetToBeginnging<ifstream>( inputFileStream ) ;
+    resetToBeginnging( my_ifstream ) ;
     
     eliminateCommentLines();
   }
   
-  
-
   auto columnData::NumberOfColumns(void) noexcept -> size_t
   {
-    
-  
     return 0;
   }
   
