@@ -25,6 +25,7 @@
 		AB8AA4381A5C68650065E7F8 /* getline.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4361A5C68650065E7F8 /* getline.h */; };
 		AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */; };
 		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
+		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
 		ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */; };
 		ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */; };
 		ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */; };
@@ -221,6 +222,8 @@
 		AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = validateOpenStream.h; path = algorithm/stream/validateOpenStream.h; sourceTree = "<group>"; };
 		AB8AA43E1A5C68AB0065E7F8 /* eof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eof.h; path = algorithm/stream/eof.h; sourceTree = "<group>"; };
 		AB8AA4421A5C6CEF0065E7F8 /* is_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = is_open.h; path = algorithm/stream/is_open.h; sourceTree = "<group>"; };
+		AB8AA4441A5DF13F0065E7F8 /* trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trim.h; path = algorithm/string/trim.h; sourceTree = "<group>"; };
+		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
 		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
 		ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taylor_uncertainty.h; sourceTree = "<group>"; };
 		ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planckWienApprox.cpp; path = blackBody/planckWienApprox.cpp; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 				AB0DFE00195242AA007DF69B /* split.h */,
 				AB0DFE0319524382007DF69B /* starts_with.cpp */,
 				AB0DFE0419524382007DF69B /* starts_with.h */,
+				AB8AA4441A5DF13F0065E7F8 /* trim.h */,
+				AB8AA4471A5E20480065E7F8 /* trim_all.h */,
 			);
 			name = string;
 			sourceTree = "<group>";
@@ -523,13 +528,6 @@
 				AB8AA4331A5B60710065E7F8 /* columnData.cpp */,
 			);
 			name = import;
-			sourceTree = "<group>";
-		};
-		AB7EAD041A57302800AB7E11 /* ifstream */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ifstream;
 			sourceTree = "<group>";
 		};
 		AB7EAD131A58C3B400AB7E11 /* stream */ = {
@@ -1003,7 +1001,6 @@
 		ABEF4E6B1948D4A500B44AD5 /* interface */ = {
 			isa = PBXGroup;
 			children = (
-				AB7EAD041A57302800AB7E11 /* ifstream */,
 				AB7EACFF1A56539500AB7E11 /* import */,
 				ABEF4E6C1948D4A500B44AD5 /* exportfile.cpp */,
 				ABEF4E6D1948D4A500B44AD5 /* exportfile.hpp */,
@@ -1158,6 +1155,7 @@
 				ABEF4EEC1948D4A500B44AD5 /* Numerical_Setup.h in Headers */,
 				ABB54FC619C22C7E0056823E /* add.h in Headers */,
 				ABEF4EAA1948D4A500B44AD5 /* TBCsystem.h in Headers */,
+				AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */,
 				ABEF4EC71948D4A500B44AD5 /* construct.hpp in Headers */,
 				ABF5D66119DB49FD00A70476 /* signal.h in Headers */,
 				ABEF4E801948D4A500B44AD5 /* complex.h in Headers */,
@@ -1465,7 +1463,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = c11;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1512,7 +1510,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = c11;

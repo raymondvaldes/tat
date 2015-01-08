@@ -15,10 +15,17 @@
 namespace algorithm {
 namespace stream {
   
-void resetToBeginnging( std::istream& inputStream ) noexcept{
-
+void clear( std::istream& inputStream) noexcept {
   inputStream.clear();
+}
+
+void seekBeginning( std::istream& inputStream) noexcept {
   inputStream.seekg( 0, std::ios::beg ) ;
+}
+
+void resetStreamToBeginnging( std::istream& inputStream ) noexcept{
+  clear(inputStream);
+  seekBeginning(inputStream);
 }
 
 }}

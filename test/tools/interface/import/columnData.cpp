@@ -30,43 +30,28 @@ BOOST_AUTO_TEST_CASE( constructor_fails) {
 
 BOOST_AUTO_TEST_CASE( constructor_opens ) {
 
-  const std::string myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
-
   BOOST_CHECK_NO_THROW( columnData(
   "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt" ) ) ;
-  
-  
-  columnData myData(myInput);
-  
-//  BOOST_CHECK( myData.file_is_open() ) ;
-//  BOOST_CHECK( !myData.file_is_closed() ) ;
 }
 
+
+BOOST_AUTO_TEST_CASE( read_rows ) {
+
+  const auto myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
+  columnData myData( myInput ) ;
+
+  const auto firstRow = myData.getRow( 5 ) ;
+
+}
 
 BOOST_AUTO_TEST_CASE( read_columns ) {
 
-  const std::string myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
+  const auto myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
   columnData myData( myInput ) ;
 
-  using std::vector;
-  using std::string;
-  
-  vector< string > firstColumn(0);
-  
-  firstColumn =
-   myData.getColumn<string>( 1 ) ;
-  
-  
-  
-  std::cout << "\n\n" ;
-  std::cout << "this vector is " ;
-  std::cout <<  (firstColumn.empty() ? "empty ": "not empty") << "\n" ;
-  
-  for( auto& val : firstColumn )
-    std::cout << val << "\n";
+  const auto firstColumns = myData.getColumn( 2 ) ;
+
 }
-
-
 
 
 

@@ -15,7 +15,6 @@
 #include <vector>
 #include <sstream>
 
-//#include "algorithm/stream/getline.h"
 
 namespace tools {
 namespace interface {
@@ -25,18 +24,19 @@ class columnData{
 
 private:
   
-  std::ifstream my_ifstream ;
-  std::stringstream cleanFileStream ;
-  mutable std::string defaultIgnoreCharacter = "#" ;
+  mutable std::ifstream my_ifstream ;
+  mutable std::stringstream cleanFileStream ;
+  mutable std::string IgnoreCharacter = "#" ;
   
-  auto NumberOfColumns(void)          noexcept -> size_t;
-  auto NumberofRows(void)             noexcept -> size_t;
-  auto completeMatrix(void)           noexcept -> bool;
-
-  auto saveDataLine( void )           noexcept -> void ;
-  auto eliminateCommentLines( void )  noexcept -> void ;
-  auto changeIgnoreLines( const std::string& myChar )   noexcept -> void ;
+  mutable std::vector < std::vector<std::string> > rows;
+  mutable std::vector < std::vector<std::string> > columns;
+  
+  auto saveDataLine( void ) noexcept -> void ;
+  auto extractDataLines( void )  noexcept -> void ;
   auto updateCommentSymbol( const std::string& Symbol ) noexcept -> void ;
+
+  auto verifyDataIntegrity(void) noexcept -> bool;
+  auto resetDataVectors(void) noexcept -> void; 
 
 public:
 
@@ -44,26 +44,19 @@ public:
   explicit columnData( const std::string& filePathIn );
   ~columnData( void ) noexcept {} ;
   
-  
 // Template functions
-  template< class T>
-  auto getColumn( const size_t columnNumber ) noexcept -> std::vector<T>
-  {
-    using std::vector;
-    vector< T > myColumn(0) ;
-    
-//    myColumn.push_back( algorithm::stream::getline( cleanFileStream ) );
-    
-    return myColumn;
-  }
+  auto processData( void )
+    -> void;
+
+  auto getColumn( const size_t columnNumber ) noexcept
+    -> std::vector<std::string>;
   
-  template< class T>
-  auto getRow( const size_t columnNumber ) noexcept -> std::vector<T>
-  {
-    const std::vector< T > myColumn( columnNumber ) ;
-    
-    return myColumn;
-  }
+  auto getRow( const size_t rowNumber ) noexcept
+    -> std::vector<std::string>;
+  
+  auto getElement( const size_t rowNumber, const size_t columnNumber ) noexcept
+    -> std::string;
+
   
 };
 

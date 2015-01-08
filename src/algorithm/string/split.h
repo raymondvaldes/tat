@@ -27,7 +27,6 @@
 #define __tat__split__
 
 
-#include <boost/algorithm/string.hpp>
 #include <vector>
 #include <string>
 

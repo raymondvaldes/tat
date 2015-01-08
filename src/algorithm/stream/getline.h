@@ -19,10 +19,10 @@ namespace stream {
   auto getline( std::istream& inputStream ) noexcept -> std::string
   {
     using std::string;
-    string getsThisLine(0) ;
+    string getsThisLine ;
     
     using std::getline;
-    getline( inputStream , getsThisLine ) ;
+    getline( inputStream , getsThisLine, '\n' ) ;
     
     return getsThisLine ;
   }

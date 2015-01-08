@@ -22,7 +22,7 @@
  Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
  
 \*----------------------------------------------------------------------------*/
-
+#include <boost/algorithm/string.hpp>
 #include "algorithm/string/split.h"
 
 namespace algorithm{
