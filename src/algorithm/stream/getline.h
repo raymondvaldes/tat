@@ -16,7 +16,7 @@
 namespace algorithm {
 namespace stream {
 
-  auto getline( std::istream& inputStream ) noexcept -> std::string
+  inline auto getline( std::istream& inputStream ) noexcept -> std::string
   {
     using std::string;
     string getsThisLine ;

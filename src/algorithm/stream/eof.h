@@ -15,12 +15,12 @@ namespace algorithm {
 namespace stream {
 
   
-  auto eof( const std::ios& stream) noexcept -> bool
+  inline auto eof( const std::ios& stream) noexcept -> bool
   {
     return stream.eof();
   }
 
-  auto not_eof( const std::ios& stream ) noexcept -> bool
+  inline auto not_eof( const std::ios& stream ) noexcept -> bool
   {
     return !eof( stream );
   }

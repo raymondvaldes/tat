@@ -14,22 +14,22 @@
 namespace algorithm {
 namespace stream {
 
-  auto is_open( const std::ifstream& stream ) noexcept -> bool
+  inline auto is_open( const std::ifstream& stream ) noexcept -> bool
   {
     return stream.is_open();
   }
   
-  auto is_closed( const std::ifstream& stream ) noexcept -> bool
+  inline auto is_closed( const std::ifstream& stream ) noexcept -> bool
   {
     return !is_open( stream );
   }
 
-  auto is_open( const std::ofstream& stream ) noexcept -> bool
+  inline auto is_open( const std::ofstream& stream ) noexcept -> bool
   {
     return stream.is_open();
   }
   
-  auto is_closed( const std::ofstream& stream ) noexcept -> bool
+  inline auto is_closed( const std::ofstream& stream ) noexcept -> bool
   {
     return !is_open( stream );
   }

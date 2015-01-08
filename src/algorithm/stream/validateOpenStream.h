@@ -25,12 +25,12 @@ namespace stream {
     }
   };
 
-  auto validateOpenFile( const std::ifstream& stream ) -> void
+  inline auto validateOpenFile( const std::ifstream& stream ) -> void
   {
     validation(stream);
   }
 
-  auto validateOpenFile( const std::ofstream& stream ) -> void
+  inline auto validateOpenFile( const std::ofstream& stream ) -> void
   {
     validation(stream);
   }

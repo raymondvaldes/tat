@@ -130,7 +130,6 @@ namespace import {
         i = 0;
         j++;
       }
-      
     }
 
     return matrixForm;
@@ -161,7 +160,6 @@ namespace import {
     BOOST_ASSERT( rowNumber > 0 );
     return rows[ rowNumber - 1 ] ;
   }
-  
   
   auto columnData::getElement(
     const size_t rowNumber, const size_t columnNumber )

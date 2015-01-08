@@ -14,7 +14,7 @@ int main(int argc, const char * argv[]) noexcept
   using std::string;
 
   {
-    string tatTest = "/tmp/tat-test.dst/usr/local/bin/tat-test";
+    auto tatTest = string("/tmp/tat-test.dst/usr/local/bin/tat-test");
     tatTest += " --log_level=warning";
     tatTest += " --color_output";
     tatTest += " --show_progress=yes";
@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) noexcept
   }
   
   {
-    string tatApp = "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app";
+    auto tatApp = string("/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app");
     tatApp += " --run /Users/raymondvaldes/Dropbox/investigations/develop";
     tatApp += " --sample APS";
     tatApp += " --investigation twoColorPyrometery";

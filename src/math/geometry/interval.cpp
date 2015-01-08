@@ -89,8 +89,8 @@ Interval::random_group_xCR( const size_t iter ) const noexcept
 }
 
 size_t Interval::numberofOddIntervals( const size_t iter ) const noexcept {
-  
-  size_t numberOfIntervals = floor( sqrt( iter * 2 ) ) ;
+  BOOST_ASSERT( iter > 0 ) ;
+  size_t numberOfIntervals = (size_t)floor( sqrt( iter * 2 ) ) ;
   if ( even( numberOfIntervals ) ) {
     numberOfIntervals++;
   }

@@ -109,9 +109,12 @@ std::vector<double>
 t_cmplx_to_t_time( const double omega, const double res ) noexcept
 {
   using physics::classical_mechanics::angularFrequency_to_period ;
-  const double period = angularFrequency_to_period( omega ) ;
+  const auto period = angularFrequency_to_period( omega ) ;
   
-  const std::vector<double> time = math::range(0, period, res) ;
+  using std::lrint;
+  const size_t increments = lrint( period / res);
+  
+  const auto time = math::range(0, period, increments) ;
   
   return time;
 
