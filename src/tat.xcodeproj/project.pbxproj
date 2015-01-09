@@ -1418,8 +1418,8 @@
 				VALID_ARCHS = x86_64;
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = (
-					"-Wno-gnu",
-					"-fslp-vectorize-aggressive",
+					"-march=native",
+					"-pipe",
 				);
 			};
 			name = Debug;
@@ -1499,8 +1499,8 @@
 				VALID_ARCHS = x86_64;
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = (
-					"-Wno-gnu",
-					"-fslp-vectorize-aggressive",
+					"-march=native",
+					"-pipe",
 				);
 			};
 			name = Release;
