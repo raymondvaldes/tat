@@ -22,13 +22,27 @@ namespace tools {
 namespace interface {
 namespace import {
 
-  columnData::columnData( const std::string& filePathIn )
-  : my_ifstream( filePathIn, std::ifstream::in )
+  auto columnData::validateAndProcess(void) -> void
   {
     using algorithm::stream::validateOpenFile ;
     validateOpenFile( my_ifstream ) ;
-    
     processData();
+  }
+
+  columnData::columnData( const std::string& filePathIn )
+  : my_ifstream( filePathIn, std::ifstream::in ),
+    IgnoreCharacter("#")
+  {
+    validateAndProcess();
+  }
+  
+  columnData::columnData( const std::string& filePathIn,
+                          const std::string& ignoreCharacterIn )
+  : my_ifstream( filePathIn, std::ifstream::in ),
+    IgnoreCharacter(ignoreCharacterIn)
+  
+  {
+    validateAndProcess();
   }
   
   auto columnData::processData( void ) -> void
@@ -69,13 +83,6 @@ namespace import {
     }
   }
 
-  auto columnData::updateCommentSymbol( const std::string& Symbol )
-    noexcept -> void
-  {
-    IgnoreCharacter = Symbol;
-    processData();
-  }
-  
   auto columnData::verifyDataIntegrity(void) noexcept -> bool
   {
     size_t nColumns = 0;

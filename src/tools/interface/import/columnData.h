@@ -26,27 +26,30 @@ private:
   
   mutable std::ifstream my_ifstream ;
   mutable std::stringstream cleanFileStream ;
-  mutable std::string IgnoreCharacter = "#" ;
+  const std::string IgnoreCharacter ;
   
   mutable std::vector < std::vector<std::string> > rows;
   mutable std::vector < std::vector<std::string> > columns;
   
-  auto saveDataLine( void ) noexcept -> void ;
-  auto extractDataLines( void )  noexcept -> void ;
-  auto updateCommentSymbol( const std::string& Symbol ) noexcept -> void ;
+  auto saveDataLine( void ) noexcept
+    -> void ;
+  auto extractDataLines( void )  noexcept
+    -> void ;
 
-  auto verifyDataIntegrity(void) noexcept -> bool;
-  auto resetDataVectors(void) noexcept -> void; 
+  auto verifyDataIntegrity(void) noexcept
+    -> bool;
+  auto resetDataVectors(void) noexcept
+    -> void;
+  auto processData( void )
+    -> void;
+  auto validateAndProcess(void) -> void;
 
 public:
 
 // Constructors and Destructors
   explicit columnData( const std::string& filePathIn );
-  ~columnData( void ) noexcept {} ;
-  
-// Template functions
-  auto processData( void )
-    -> void;
+  explicit columnData( const std::string& filePathIn,
+                       const std::string& ignoreCharacterIn );
 
   auto getColumn( const size_t columnNumber ) noexcept
     -> std::vector<std::string>;
@@ -56,8 +59,6 @@ public:
   
   auto getElement( const size_t rowNumber, const size_t columnNumber ) noexcept
     -> std::string;
-
-  
 };
 
 

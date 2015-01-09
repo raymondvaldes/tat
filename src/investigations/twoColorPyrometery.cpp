@@ -21,7 +21,7 @@ void run( const filesystem::directory &dir ) noexcept {
   Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
   poptea.bestFit() ;
   
-
+  std::cout << "this is where the breakpoint should be:!!!!"<< "\n\n";
   using std::cout;
   cout << poptea.ppUnknownParameters() << "\n";
 }

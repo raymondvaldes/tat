@@ -33,7 +33,8 @@ License
 using std::string;
 using tools::programoptions::MainArguments;
 
-auto executeAnalysis( const MainArguments& runArgs ) noexcept -> string
+inline auto executeAnalysis( const MainArguments& runArgs ) noexcept
+  -> string
 {
   auto globalStopWatch = tools::stopwatch{} ;
 
@@ -48,7 +49,6 @@ auto executeAnalysis( const MainArguments& runArgs ) noexcept -> string
 
 int main( const int argc, const char *argv[ ] ) noexcept
 {
-
   const auto runArgs = MainArguments{ argc, argv };
 
   if( runArgs.run_analysis() ) {

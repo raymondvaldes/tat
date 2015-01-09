@@ -542,6 +542,42 @@
 			name = stream;
 			sourceTree = "<group>";
 		};
+		AB81C4541A6040BD0076BF03 /* sensitivityvaldes2013 */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF4DD01948D4A500B44AD5 /* sensitivityvaldes2013.cpp */,
+				ABEF4DD11948D4A500B44AD5 /* sensitivityvaldes2013.hpp */,
+			);
+			name = sensitivityvaldes2013;
+			sourceTree = "<group>";
+		};
+		AB81C4571A6040DD0076BF03 /* taylor_uncertainty */ = {
+			isa = PBXGroup;
+			children = (
+				ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */,
+				ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */,
+			);
+			name = taylor_uncertainty;
+			sourceTree = "<group>";
+		};
+		AB81C4581A6040E40076BF03 /* twoColorPyrometery */ = {
+			isa = PBXGroup;
+			children = (
+				ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */,
+				ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */,
+			);
+			name = twoColorPyrometery;
+			sourceTree = "<group>";
+		};
+		AB81C4591A6041020076BF03 /* num_method2014 */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF4DCE1948D4A500B44AD5 /* num_method2014.cpp */,
+				ABEF4DCF1948D4A500B44AD5 /* num_method2014.h */,
+			);
+			name = num_method2014;
+			sourceTree = "<group>";
+		};
 		ABA2BD3B1A48BA21004F3C6E /* linked-libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,16 +672,12 @@
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
+				AB81C4591A6041020076BF03 /* num_method2014 */,
+				AB81C4581A6040E40076BF03 /* twoColorPyrometery */,
+				AB81C4571A6040DD0076BF03 /* taylor_uncertainty */,
+				AB81C4541A6040BD0076BF03 /* sensitivityvaldes2013 */,
 				ABEF4DCC1948D4A500B44AD5 /* execute.cpp */,
 				ABEF4DCD1948D4A500B44AD5 /* execute.h */,
-				ABEF4DCE1948D4A500B44AD5 /* num_method2014.cpp */,
-				ABEF4DCF1948D4A500B44AD5 /* num_method2014.h */,
-				ABEF4DD01948D4A500B44AD5 /* sensitivityvaldes2013.cpp */,
-				ABEF4DD11948D4A500B44AD5 /* sensitivityvaldes2013.hpp */,
-				ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */,
-				ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */,
-				ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */,
-				ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */,
 			);
 			path = investigations;
 			sourceTree = "<group>";
@@ -1319,7 +1351,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_ASSIGN_ENUM = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
@@ -1353,7 +1385,7 @@
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_UNROLL_LOOPS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1367,7 +1399,7 @@
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1404,7 +1436,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_ASSIGN_ENUM = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
@@ -1434,7 +1466,7 @@
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_UNROLL_LOOPS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1448,7 +1480,7 @@
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1489,6 +1521,7 @@
 				DEPLOYMENT_POSTPROCESSING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1505,7 +1538,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/opt/boost/include,
 					/usr/local/include/,
 				);
 				INSTALL_PATH = /usr/local/bin;
@@ -1547,6 +1579,7 @@
 				DEPLOYMENT_POSTPROCESSING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_PEDANTIC = YES;
@@ -1558,7 +1591,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/opt/boost/include,
 					/usr/local/include/,
 				);
 				INSTALL_PATH = /usr/local/bin;

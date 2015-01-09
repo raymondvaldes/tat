@@ -35,8 +35,8 @@
 namespace investigations {
 
 void execute( const std::string& mydirectory, const std::string& sampleName,
-              const std::string& investigationName ) noexcept {
-
+              const std::string& investigationName ) noexcept
+{
   using filesystem::directory;
   const auto investigations = [ & ] ( const directory& active ) -> void
   {

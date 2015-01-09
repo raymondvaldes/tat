@@ -61,34 +61,35 @@ BOOST_AUTO_TEST_CASE( random_0_to_1 ) {
 BOOST_AUTO_TEST_CASE( random_in_logspace ) {
   using math::random_in_logspace ;
 
-  constexpr size_t units = 5000 ;
-  constexpr double tol = 0.1 ;
+  constexpr size_t units = 1000;
+  constexpr double tol = 0.2 ;
   
   const auto rand_checker = [tol, units]( const double min ) {
-    const double mid = min * 10 ;
-    const double max = min * 100 ;
+  const double mid = min * 10 ;
+  const double max = min * 100 ;
 
-    vector<double> out(units);
-    for( auto& output: out ) {
-      output = random_in_logspace( min, max ) ;
-    }
-    sort ( out.begin(), out.end() ) ;
-    
-    const bool none_less_than_min = out.front() > min  ;
-    BOOST_CHECK( none_less_than_min ) ;
+  vector<double> out(units);
+  for( auto& output: out ) {
+    output = random_in_logspace( min, max ) ;
+  }
+  
+  sort ( out.begin(), out.end() ) ;
+  
+  const bool none_less_than_min = out.front() > min  ;
+  BOOST_CHECK( none_less_than_min ) ;
 
-    const bool none_greater_than_max = out.back() < max ;
-    BOOST_CHECK( none_greater_than_max) ;
+  const bool none_greater_than_max = out.back() < max ;
+  BOOST_CHECK( none_greater_than_max) ;
 
-    
-    BOOST_CHECK_CLOSE_FRACTION( out.front(), min, tol ) ;
-    BOOST_CHECK_CLOSE_FRACTION( out.back(), max, tol ) ;
+  
+  BOOST_CHECK_CLOSE_FRACTION( out.front(), min, tol ) ;
+  BOOST_CHECK_CLOSE_FRACTION( out.back(), max, tol ) ;
 
-    const double median = median_of_all( out.data(), out.size() ) ;
-    BOOST_CHECK_CLOSE_FRACTION( median, mid, tol ) ;
+  const double median = median_of_all( out.data(), out.size() ) ;
+  BOOST_CHECK_CLOSE_FRACTION( median, mid, tol ) ;
   };
   
-  rand_checker( .01 ) ;
+  rand_checker( .02 ) ;
 }
 
 BOOST_AUTO_TEST_SUITE_END()

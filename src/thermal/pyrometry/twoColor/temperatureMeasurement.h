@@ -17,7 +17,7 @@ namespace thermal{
 namespace pyrometer{
 namespace twoColor{
 
-auto temperatureSteady(   const units::quantity< units::si::dimensionless > calibrationCoefficient,
+inline auto temperatureSteady(   const units::quantity< units::si::dimensionless > calibrationCoefficient,
                           const units::quantity< units::si::dimensionless > signalRatio,
                           const units::quantity< units::si::length > wavelength_one,
                           const units::quantity< units::si::length > wavelength_two
