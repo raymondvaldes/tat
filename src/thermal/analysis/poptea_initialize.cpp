@@ -48,7 +48,26 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir ) noexcept
   
   return poptea;
 }
- 
+
+Poptea
+initializePopTeawithExperimentalEmission( const filesystem::directory &dir ) noexcept
+{
+  Poptea poptea = initializePopTeawithNominalEmission( dir );
+
+
+
+
+  //poptea.updateExperimentalData( poptea.thermalData->omegas ,
+ //                                emissionExperimental ) ;
+  
+  return poptea;
+}
+
+
+
+
+
+
   
 Poptea
 initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir ) noexcept

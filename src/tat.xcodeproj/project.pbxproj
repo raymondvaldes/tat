@@ -39,6 +39,10 @@
 		ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */; };
 		ABB54FD119C35E300056823E /* ifzero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FCF19C35E300056823E /* ifzero.cpp */; };
 		ABB54FD219C35E300056823E /* ifzero.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FD019C35E300056823E /* ifzero.h */; };
+		ABC648641A65B5EB008FA721 /* main-app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC648621A65B5EB008FA721 /* main-app.cpp */; };
+		ABC648651A65B5EB008FA721 /* main-app.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC648631A65B5EB008FA721 /* main-app.h */; };
+		ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC648661A65B891008FA721 /* vector2cstringArray.cpp */; };
+		ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC648671A65B891008FA721 /* vector2cstringArray.h */; };
 		ABDCB54019C934B30044553C /* inversion.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDCB53E19C934B30044553C /* inversion.h */; };
 		ABE168FE1948EA3B00C1E409 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */; };
 		ABE168FF1948EA3B00C1E409 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */; };
@@ -237,6 +241,10 @@
 		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
 		ABB54FCF19C35E300056823E /* ifzero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifzero.cpp; path = algorithm/vector/ifzero.cpp; sourceTree = "<group>"; };
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
+		ABC648621A65B5EB008FA721 /* main-app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "main-app.cpp"; sourceTree = "<group>"; };
+		ABC648631A65B5EB008FA721 /* main-app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "main-app.h"; sourceTree = "<group>"; };
+		ABC648661A65B891008FA721 /* vector2cstringArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vector2cstringArray.cpp; path = algorithm/vector/vector2cstringArray.cpp; sourceTree = "<group>"; };
+		ABC648671A65B891008FA721 /* vector2cstringArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2cstringArray.h; path = algorithm/vector/vector2cstringArray.h; sourceTree = "<group>"; };
 		ABDCB53E19C934B30044553C /* inversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inversion.h; path = numericalAnalysis/matrixs/inversion.h; sourceTree = "<group>"; };
 		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<absolute>"; };
 		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<absolute>"; };
@@ -613,6 +621,8 @@
 				ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */,
 				ABB54FCF19C35E300056823E /* ifzero.cpp */,
 				ABB54FD019C35E300056823E /* ifzero.h */,
+				ABC648661A65B891008FA721 /* vector2cstringArray.cpp */,
+				ABC648671A65B891008FA721 /* vector2cstringArray.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -678,6 +688,8 @@
 				AB81C4541A6040BD0076BF03 /* sensitivityvaldes2013 */,
 				ABEF4DCC1948D4A500B44AD5 /* execute.cpp */,
 				ABEF4DCD1948D4A500B44AD5 /* execute.h */,
+				ABC648621A65B5EB008FA721 /* main-app.cpp */,
+				ABC648631A65B5EB008FA721 /* main-app.h */,
 			);
 			path = investigations;
 			sourceTree = "<group>";
@@ -1176,6 +1188,7 @@
 				AB0DFE0619524382007DF69B /* starts_with.h in Headers */,
 				ABEF4E981948D4A500B44AD5 /* estimationInterval.hpp in Headers */,
 				ABEF4EB71948D4A500B44AD5 /* methods.hpp in Headers */,
+				ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */,
 				ABEF4ED81948D4A500B44AD5 /* noise.hpp in Headers */,
 				ABF5D66819DB60BD00A70476 /* predefined.h in Headers */,
 				ABEF4ED01948D4A500B44AD5 /* model_type.h in Headers */,
@@ -1185,6 +1198,7 @@
 				ABEF4EA41948D4A500B44AD5 /* layer.h in Headers */,
 				ABEF4EBB1948D4A500B44AD5 /* poptea.hpp in Headers */,
 				ABEF4EEC1948D4A500B44AD5 /* Numerical_Setup.h in Headers */,
+				ABC648651A65B5EB008FA721 /* main-app.h in Headers */,
 				ABB54FC619C22C7E0056823E /* add.h in Headers */,
 				ABEF4EAA1948D4A500B44AD5 /* TBCsystem.h in Headers */,
 				AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */,
@@ -1256,8 +1270,10 @@
 				AB8AA4341A5B60710065E7F8 /* columnData.cpp in Sources */,
 				ABEF4EFF1948D4A500B44AD5 /* xml.cpp in Sources */,
 				ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */,
+				ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */,
 				ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */,
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,
+				ABC648641A65B5EB008FA721 /* main-app.cpp in Sources */,
 				ABEF4EB41948D4A500B44AD5 /* lmdiff_poptea_help.cpp in Sources */,
 				ABEF4ECA1948D4A500B44AD5 /* effusivity.cpp in Sources */,
 				ABEF4EEF1948D4A500B44AD5 /* one_dim.cpp in Sources */,

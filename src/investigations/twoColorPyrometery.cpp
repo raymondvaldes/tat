@@ -16,13 +16,16 @@ namespace twoColorPyrometery{
 void run( const filesystem::directory &dir ) noexcept {
 
   using thermal::analysis::Poptea;
-  using thermal::analysis::initializePopTeaAndLoadSimuEmission;
+  using thermal::analysis::initializePopTeawithExperimentalEmission;
   
-  Poptea poptea = initializePopTeaAndLoadSimuEmission( dir );
+  Poptea poptea = initializePopTeawithExperimentalEmission( dir );
   poptea.bestFit() ;
+  
+  
+  
+  
   
   using std::cout;
   cout << poptea.ppUnknownParameters() << "\n";
 }
-  
 }}

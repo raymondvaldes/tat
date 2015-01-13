@@ -9,8 +9,6 @@
 #ifndef tat_pyrometer_h
 #define tat_pyrometer_h
 
-#include "thermal/pyrometry/twoColor/calibrationCoefficient.h"
-#include "thermal/pyrometry/twoColor/temperatureMeasurement.h"
 
 namespace thermal {
   namespace pyrometer{

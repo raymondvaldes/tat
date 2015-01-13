@@ -22,42 +22,10 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <iostream>
 
-#include "thermal/pyrometry/twoColor/pyrometer.h"
-
-#include "tools/programoptions/programoptions.hpp"
-#include "tools/timing.h"
-#include "investigations/execute.h"
-
-using std::string;
-using tools::programoptions::MainArguments;
-
-inline auto executeAnalysis( const MainArguments& runArgs ) noexcept
-  -> string
-{
-  auto globalStopWatch = tools::stopwatch{} ;
-
-  investigations::execute(
-    runArgs.run_directory(),
-    runArgs.run_samples(),
-    runArgs.run_investigationName()
-    ) ;
-
-  return globalStopWatch.readoutLoud();
-}
+#include "investigations/main-app.h"
 
 int main( const int argc, const char *argv[ ] ) noexcept
 {
-  const auto runArgs = MainArguments{ argc, argv };
-
-  if( runArgs.run_analysis() ) {
-    using std::cout;
-    
-    const auto exeTimer = executeAnalysis( runArgs ) ;
-    
-    cout << exeTimer << "\n" ;
-  }
-
-  return 0 ;
+  return investigations::main_app( argc, argv);
 }

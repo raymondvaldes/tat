@@ -35,7 +35,7 @@ namespace analysis{
 
 Poptea initializePopTeawithNominalEmission( const filesystem::directory &dir ) noexcept;
 Poptea initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir ) noexcept;
-  
+Poptea initializePopTeawithExperimentalEmission( const filesystem::directory &dir ) noexcept;
   
 }}
 

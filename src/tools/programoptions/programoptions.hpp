@@ -29,7 +29,6 @@ License
 #include <utility>
 #include <string>
 #include <sstream>
-//#include <boost/program_options.hpp>
 
 namespace tools{
 namespace programoptions{
@@ -50,7 +49,7 @@ private:
     void loadOptions( void ) const noexcept;
 
 public:
-    MainArguments( const int argc_in, const char **argv_in ) noexcept;
+     MainArguments( const int argc_in, const char **argv_in ) noexcept;
 
     bool run_analysis( void ) const noexcept;
     std::string run_directory( void ) const noexcept;

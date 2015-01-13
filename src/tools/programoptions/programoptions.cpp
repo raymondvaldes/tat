@@ -67,6 +67,7 @@ void MainArguments::loadOptions( void ) const noexcept
 
   po::notify( vm ) ;
 
+
   if( vm.count( "help" ) )
     { run = help( /*desc*/ ) ; }
 
