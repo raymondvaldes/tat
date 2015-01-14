@@ -30,6 +30,7 @@ License
 
 #include "thermal/analysis/pie.hpp"
 #include "thermal/analysis/methods.hpp"
+#include "units/units.h"
 
 namespace thermal {
 namespace analysis{
@@ -40,6 +41,38 @@ private:
   bool loadedExperimental = false;
   bool runbestfit = false;
   methods analysis;
+  
+
+  class ExperimentalData{
+    public:
+      class uniqueMeasurement{
+        public:
+          const units::quantity<units::frequency_dimension> heatingFrequency;
+          const units::quantity<units::length_dimension> heatingWavelength;
+          const units::quantity<units::length_dimension> detectorWavelength;
+        
+          const units::quantity<units::dimensionless_type> modulatorAmplitude;
+          const units::quantity<units::dimensionless_type> laserWidth;
+          const units::quantity<units::dimensionless_type> referenceAmplitude;
+          const units::quantity<units::dimensionless_type> referenceArgument;
+
+          const units::quantity<units::dimensionless_type> signalArgument;
+          const units::quantity<units::dimensionless_type> signal2NoiseRatio;
+          const units::quantity<units::dimensionless_type> runningSignal2NoiseRatio;
+          const units::quantity<units::amount_dimension> signalsAveraged;
+          const units::quantity<units::electric_potential_dimension> signalAmplitude;
+          const units::quantity<units::electric_potential_dimension> signalUncertainty;
+        
+          const units::quantity<units::amount_dimension> signalSamples;
+          const units::quantity<units::time_dimension> signalMeasurementTime;
+          const units::quantity<units::electric_potential_dimension> signalGround;
+      };
+    
+      explicit ExperimentalData(void);
+    
+    private:
+  };
+
 
 public:
   /// constructors and object creators

@@ -26,6 +26,7 @@
 		AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */; };
 		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
+		ABA58A181A67257400573ED8 /* units.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A171A67257400573ED8 /* units.h */; };
 		ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */; };
 		ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */; };
 		ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */; };
@@ -228,6 +229,7 @@
 		AB8AA4421A5C6CEF0065E7F8 /* is_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = is_open.h; path = algorithm/stream/is_open.h; sourceTree = "<group>"; };
 		AB8AA4441A5DF13F0065E7F8 /* trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trim.h; path = algorithm/string/trim.h; sourceTree = "<group>"; };
 		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
+		ABA58A171A67257400573ED8 /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = units.h; path = units/units.h; sourceTree = "<group>"; };
 		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
 		ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taylor_uncertainty.h; sourceTree = "<group>"; };
 		ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planckWienApprox.cpp; path = blackBody/planckWienApprox.cpp; sourceTree = "<group>"; };
@@ -401,7 +403,6 @@
 		ABF5D66A19DB65AB00A70476 /* extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = extension.h; path = units/si/extension.h; sourceTree = "<group>"; };
 		ABF5D66D19DB6DC000A70476 /* physical_dimensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = physical_dimensions.h; path = units/physical_dimensions.h; sourceTree = "<group>"; };
 		ABF5D66F19DB6E4200A70476 /* scale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scale.h; path = units/scale.h; sourceTree = "<group>"; };
-		ABF5D67019DB76CB00A70476 /* unit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = unit.h; path = units/unit.h; sourceTree = "<group>"; };
 		ABFC2CF71A438D9C004C00AD /* signal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = signal.h; path = blackBody/signal.h; sourceTree = "<group>"; };
 		ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twoColorPyrometery.cpp; sourceTree = "<group>"; };
 		ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoColorPyrometery.h; sourceTree = "<group>"; };
@@ -1081,8 +1082,8 @@
 				ABF5D66D19DB6DC000A70476 /* physical_dimensions.h */,
 				ABF5D66F19DB6E4200A70476 /* scale.h */,
 				ABF5D66919DB61E900A70476 /* quantity.h */,
-				ABF5D67019DB76CB00A70476 /* unit.h */,
 				AB71908119DF2BAB008FC395 /* operators.h */,
+				ABA58A171A67257400573ED8 /* units.h */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -1130,6 +1131,7 @@
 				ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */,
 				ABB54FD219C35E300056823E /* ifzero.h in Headers */,
 				AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */,
+				ABA58A181A67257400573ED8 /* units.h in Headers */,
 				ABEF4E9E1948D4A500B44AD5 /* statistical_tools.hpp in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,

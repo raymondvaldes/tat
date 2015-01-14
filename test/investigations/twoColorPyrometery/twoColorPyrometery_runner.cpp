@@ -26,14 +26,14 @@ BOOST_AUTO_TEST_CASE( startup ) {
   std::vector<std::string> myArguments = {
     "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
     "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color",
-    "--sample",         "APS",
+    "--sample",         "TBC",
     "--investigation",  "twoColorPyrometery"
        };
   using algorithm::vector::vector2cstringArray;
   std::vector<char const *> vec2 = vector2cstringArray(myArguments);
 
   using investigations::main_app;
-  main_app( vec2.size() , vec2.data() );
+  main_app( vec2.size() , vec2.data() ) ;
 
 }
 

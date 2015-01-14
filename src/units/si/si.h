@@ -11,7 +11,12 @@
 
 #include "units/si/predefined.h"
 #include "units/si/extension.h"
+#include "units/si/prefixes.h"
+
 #include "units/quantity.h"
+#include "units/physical_dimensions.h"
+
 #include "units/si/constants/codata.h"
+#include "units/si/constants/thermal.h"
 
 #endif

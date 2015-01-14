@@ -19,7 +19,6 @@
 #include "units/operators.h"
 #include "units/physical_dimensions.h"
 #include "units/si/si.h"
-#include "units/unit.h"
 #include "units/si/predefined.h"
 
 namespace units {

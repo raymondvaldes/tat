@@ -18,7 +18,8 @@ void run( const filesystem::directory &dir ) noexcept {
   using thermal::analysis::Poptea;
   using thermal::analysis::initializePopTeawithExperimentalEmission;
   
-  Poptea poptea = initializePopTeawithExperimentalEmission( dir );
+  auto poptea = Poptea{
+    initializePopTeawithExperimentalEmission( dir ) };
   poptea.bestFit() ;
   
   

@@ -13,8 +13,6 @@
 
 namespace units{
 
-
-
 template<class Unit,class Y = double>
   using quantity = boost::units::quantity<Unit, Y>;
 

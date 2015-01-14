@@ -27,7 +27,7 @@ typedef boost::units::si::dimensionless dimensionless ;
 typedef boost::units::si::velocity velocity;
 typedef boost::units::si::area area;
 typedef boost::units::si::time time;
-
+typedef boost::units::si::frequency frequency;
 
 using boost::units::si::meters;
 using boost::units::si::meter;
@@ -36,6 +36,8 @@ using boost::units::si::second;
 
 using boost::units::si::watts;
 using boost::units::si::watt;
+
+using boost::units::si::volts;
 
 using boost::units::si::kelvin;
 

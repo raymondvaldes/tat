@@ -41,7 +41,8 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir ) noexcept
   ///Output noise to test
   using thermal::emission::phase99;
   typedef const std::vector<double> sweep;
-  sweep emissionNominal = phase99( *(poptea.coreSystem) , poptea.thermalData->omegas ) ;
+  sweep emissionNominal = phase99( *(poptea.coreSystem) ,
+    poptea.thermalData->omegas ) ;
   
   poptea.updateModelData( poptea.thermalData->omegas, emissionNominal ) ;
   poptea.updateExperimentalData( poptea.thermalData->omegas , emissionNominal );
@@ -50,11 +51,10 @@ initializePopTeawithNominalEmission( const filesystem::directory &dir ) noexcept
 }
 
 Poptea
-initializePopTeawithExperimentalEmission( const filesystem::directory &dir ) noexcept
+initializePopTeawithExperimentalEmission( const filesystem::directory &dir )
+  noexcept
 {
   Poptea poptea = initializePopTeawithNominalEmission( dir );
-
-
 
 
   //poptea.updateExperimentalData( poptea.thermalData->omegas ,
