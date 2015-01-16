@@ -25,6 +25,8 @@ License
 #include <boost/foreach.hpp>
 #include "thermal/analysis/poptea.hpp"
 #include "tools/interface/xml.h"
+#include "tools/interface/import/columnData.h"
+#include "algorithm/vector/VectorString2Typename.h"
 
 namespace thermal {
 namespace analysis{  
@@ -37,6 +39,31 @@ Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
   reassign( coreSystem, coreSystem_);
   reassign( thermalData, thermaldata_);
   reassign( unknownParameters, unknownParameters_);
+}
+
+auto Poptea::loadTBDfile( const filesystem::directory &dir,
+                          const std::string& inputFileName )
+  -> std::vector< units::quantity<units::si::electric_potential >>
+{
+  using tools::interface::import::columnData;
+  
+  const auto myFileName = dir.abs( inputFileName );
+  const columnData myData{ myFileName } ;
+  
+  const auto myEmissionStream = myData.getColumn(3);
+  
+  using units::quantity;
+  using units::si::electric_potential;
+  using units::si::volts;
+  using units::si::milli;
+
+  const auto myMilliVolts = quantity<electric_potential>( 1 * milli * volts );
+
+  using algorithm::vector::string2typename;
+  const auto myEmissionVector = string2typename
+    < quantity<electric_potential> > ( myEmissionStream,  myMilliVolts ) ;
+
+  return myEmissionVector;
 }
 
 Poptea
@@ -179,7 +206,6 @@ Poptea loadWorkingDirectoryPoptea( const filesystem::directory &dir,
 
   return Poptea::loadConfig( popteaCore, pt );
 }
-
 
 
 

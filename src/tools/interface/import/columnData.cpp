@@ -153,7 +153,7 @@ namespace import {
       column.clear();
   }
   
-  auto columnData::getColumn( const size_t columnNumber )
+  auto columnData::getColumn( const size_t columnNumber ) const
     noexcept -> std::vector<std::string>
   {
     BOOST_ASSERT( columnNumber > 0 );
@@ -161,7 +161,7 @@ namespace import {
     return columns[ columnNumber - 1 ] ;
   }
   
-  auto columnData::getRow( const size_t rowNumber )
+  auto columnData::getRow( const size_t rowNumber ) const
     noexcept -> std::vector<std::string>
   {
     BOOST_ASSERT( rowNumber > 0 );
@@ -169,7 +169,7 @@ namespace import {
   }
   
   auto columnData::getElement(
-    const size_t rowNumber, const size_t columnNumber )
+    const size_t rowNumber, const size_t columnNumber ) const
   noexcept -> std::string
   {
     return rows[ rowNumber - 1 ][ columnNumber - 1] ;

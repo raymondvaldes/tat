@@ -41,7 +41,6 @@ int main_app( const int argc, const char *argv[ ] ) noexcept
 {
 
   const auto runArgs = MainArguments{ argc, argv };
-  std::vector<std::string> arguments(argv + 1, argv + argc);
 
   if( runArgs.run_analysis() ) {
     using std::cout;

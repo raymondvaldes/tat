@@ -32,6 +32,64 @@ License
 namespace filesystem
 {
 
+std::vector< directory > ls( const std::string &path_in ) noexcept;
+
+
+std::vector< directory > ls( const std::string &path_in ) noexcept
+{
+  using namespace boost::filesystem;
+  path p ( path_in );
+  std::vector< directory > output;
+
+  size_t dir_count = 0;
+  size_t file_count = 0;
+  size_t other_count = 0;
+
+  if (!exists(p))
+  {
+    std::cout << "\nNot found: " << path_in << std::endl;
+    return output;
+  }
+
+  if( is_directory( p ) )
+  {
+    directory_iterator end_iter;
+
+    for ( directory_iterator dir_itr(p) ;  dir_itr != end_iter; ++dir_itr )
+    {
+      try
+      {
+        if( is_directory( dir_itr->status() ) )
+        {
+          ++dir_count;
+          const boost::filesystem::path temp_dir( dir_itr->path() ) ;
+          const directory mytemp ( temp_dir.string() ) ;
+          output.push_back( mytemp ) ;
+        }
+        else if ( is_regular_file( dir_itr->status() ) )
+        {
+          ++file_count;
+        }
+        else
+        {
+          ++other_count;
+        }
+      }
+      catch (const boost::filesystem::filesystem_error& ex)
+      {
+        std::cerr << ex.what() << "\n";
+      }
+    }
+  }
+  else // must be a file
+  {
+    std::cout << "\nFound: " << p << "\n";
+  }
+
+  return output;
+}
+
+
 void makeDir(const std::string &rootPath, const std::string &newDirectory) noexcept
 {
   
@@ -128,61 +186,5 @@ std::vector<directory> directory::ls() const noexcept
   return ::filesystem::ls( pwd() ) ;
 }
 
-std::vector< directory > ls( const std::string &path_in ) noexcept
-{
-  using namespace boost::filesystem;
-  path p ( path_in );
-  std::vector< directory > output;
-
-  size_t dir_count = 0;
-  size_t file_count = 0;
-  size_t other_count = 0;
-
-  if (!exists(p))
-  {
-    std::cout << "\nNot found: " << path_in << std::endl;
-    return output;
-  }
-
-  if( is_directory( p ) )
-  {
-    directory_iterator end_iter;
-
-    for ( directory_iterator dir_itr(p) ;  dir_itr != end_iter; ++dir_itr )
-    {
-      try
-      {
-        if( is_directory( dir_itr->status() ) )
-        {
-          ++dir_count;
-          //std::cout << dir_itr->path().filename() << " [directory]\n";
-          const boost::filesystem::path temp_dir( dir_itr->path() ) ;
-          const directory mytemp ( temp_dir.string() ) ;
-          output.push_back( mytemp ) ;
-        }
-        else if ( is_regular_file( dir_itr->status() ) )
-        {
-          ++file_count;
-          //std::cout << dir_itr->path().filename() << "\n";
-        }
-        else
-        {
-          ++other_count;
-          //std::cout << dir_itr->path().filename() << " [other]\n";
-        }
-      }
-      catch (const boost::filesystem::filesystem_error& ex)
-      {
-        std::cerr << ex.what() << "\n";
-      }
-    }
-  }
-  else // must be a file
-  {
-    std::cout << "\nFound: " << p << "\n";
-  }
-
-  return output;
-}
 
 }

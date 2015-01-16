@@ -27,6 +27,9 @@
 		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
 		ABA58A181A67257400573ED8 /* units.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A171A67257400573ED8 /* units.h */; };
+		ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA58A1A1A67489E00573ED8 /* path.cpp */; };
+		ABA58A1D1A67489E00573ED8 /* path.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A1B1A67489E00573ED8 /* path.h */; };
+		ABA58A1F1A675DC300573ED8 /* VectorString2Typename.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A1E1A675DC300573ED8 /* VectorString2Typename.h */; };
 		ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */; };
 		ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */; };
 		ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */; };
@@ -230,6 +233,9 @@
 		AB8AA4441A5DF13F0065E7F8 /* trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trim.h; path = algorithm/string/trim.h; sourceTree = "<group>"; };
 		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
 		ABA58A171A67257400573ED8 /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = units.h; path = units/units.h; sourceTree = "<group>"; };
+		ABA58A1A1A67489E00573ED8 /* path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path.cpp; path = filesystem/path.cpp; sourceTree = "<group>"; };
+		ABA58A1B1A67489E00573ED8 /* path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = path.h; path = filesystem/path.h; sourceTree = "<group>"; };
+		ABA58A1E1A675DC300573ED8 /* VectorString2Typename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VectorString2Typename.h; path = algorithm/vector/VectorString2Typename.h; sourceTree = "<group>"; };
 		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
 		ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taylor_uncertainty.h; sourceTree = "<group>"; };
 		ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planckWienApprox.cpp; path = blackBody/planckWienApprox.cpp; sourceTree = "<group>"; };
@@ -450,6 +456,7 @@
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
+				ABA58A191A67487D00573ED8 /* filesystem */,
 				ABA2BD3B1A48BA21004F3C6E /* linked-libraries */,
 				ABF5D66319DB607700A70476 /* units */,
 				AB0DFDFD19524268007DF69B /* algorithm */,
@@ -600,6 +607,15 @@
 			name = "linked-libraries";
 			sourceTree = "<group>";
 		};
+		ABA58A191A67487D00573ED8 /* filesystem */ = {
+			isa = PBXGroup;
+			children = (
+				ABA58A1A1A67489E00573ED8 /* path.cpp */,
+				ABA58A1B1A67489E00573ED8 /* path.h */,
+			);
+			name = filesystem;
+			sourceTree = "<group>";
+		};
 		ABB4473D19DB365E009EC35F /* blackBody */ = {
 			isa = PBXGroup;
 			children = (
@@ -614,6 +630,7 @@
 		ABB54FBA19C2215D0056823E /* vector */ = {
 			isa = PBXGroup;
 			children = (
+				ABA58A1E1A675DC300573ED8 /* VectorString2Typename.h */,
 				ABB54FBC19C221920056823E /* subtract.cpp */,
 				ABB54FBD19C221920056823E /* subtract.h */,
 				ABB54FC319C22C7E0056823E /* add.cpp */,
@@ -1140,6 +1157,7 @@
 				ABB4474519DB386A009EC35F /* constants.h in Headers */,
 				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
 				ABEF4EBF1948D4A500B44AD5 /* temp_cmplx.h in Headers */,
+				ABA58A1D1A67489E00573ED8 /* path.h in Headers */,
 				ABEF4EB31948D4A500B44AD5 /* lmdiff_poptea.hpp in Headers */,
 				ABEF4EA21948D4A500B44AD5 /* kinematics.h in Headers */,
 				ABEF4E781948D4A500B44AD5 /* execute.h in Headers */,
@@ -1182,6 +1200,7 @@
 				ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */,
 				ABEF4EFC1948D4A500B44AD5 /* exportfile.hpp in Headers */,
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
+				ABA58A1F1A675DC300573ED8 /* VectorString2Typename.h in Headers */,
 				ABEF4EDC1948D4A500B44AD5 /* detector.h in Headers */,
 				ABEF4ED61948D4A500B44AD5 /* emission.hpp in Headers */,
 				ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */,
@@ -1330,6 +1349,7 @@
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
 				ABEF4ED31948D4A500B44AD5 /* temperature.cpp in Sources */,
 				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
+				ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */,
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
@@ -1530,7 +1550,12 @@
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION = deep;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CLANG_WARN_BOOL_CONVERSION = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_ENUM_CONVERSION = NO;
+				CLANG_WARN_INT_CONVERSION = NO;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1541,12 +1566,14 @@
 				EXECUTABLE_PREFIX = lib;
 				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -1588,7 +1615,12 @@
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION = deep;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CLANG_WARN_BOOL_CONVERSION = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_ENUM_CONVERSION = NO;
+				CLANG_WARN_INT_CONVERSION = NO;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1600,6 +1632,8 @@
 				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;

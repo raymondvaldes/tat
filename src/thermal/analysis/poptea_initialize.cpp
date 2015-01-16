@@ -22,11 +22,13 @@
  Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
  
 \*----------------------------------------------------------------------------*/
+#include <algorithm>
 
 #include "thermal/analysis/poptea_initialize.h"
 #include "thermal/emission/noise.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "tools/interface/exportfile.hpp"
+#include "units.h"
 
 namespace thermal{
 namespace analysis{
@@ -54,11 +56,28 @@ Poptea
 initializePopTeawithExperimentalEmission( const filesystem::directory &dir )
   noexcept
 {
+  using units::quantity;
+  using units::si::electric_potential;
+  
   Poptea poptea = initializePopTeawithNominalEmission( dir );
+  
+  
+  auto transientDetectorSignal =
+  poptea.loadTBDfile( dir,  std::string{ "graphite_400F_4.4_2.82843_0.dat" } ) ;
 
 
-  //poptea.updateExperimentalData( poptea.thermalData->omegas ,
- //                                emissionExperimental ) ;
+  using units::si::milli;
+  using units::si::volts;
+  const auto signalDCoffset = quantity<electric_potential>( 50 * volts );
+
+  using std::transform;
+  transform( transientDetectorSignal.begin(),
+             transientDetectorSignal.end(),
+             transientDetectorSignal.begin(),
+      [&]( auto &val) { return val + signalDCoffset ; } );
+  
+  
+
   
   return poptea;
 }

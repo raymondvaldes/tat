@@ -38,6 +38,11 @@ typedef divide_typeof_helper< length, temperature >::type length_over_temperatur
 
 typedef multiply_typeof_helper< length, temperature>::type length_temperature;
 
+
+
+
+
+
 }}
 
 #endif

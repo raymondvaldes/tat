@@ -92,7 +92,11 @@ public:
                                const std::vector<double> &input ) noexcept;
   void updateModelData( const std::vector<double> &omegas ,
                         const std::vector<double> &input    ) noexcept;
-
+  auto loadTBDfile( const filesystem::directory &dir,
+                    const std::string& inputFileName )
+    -> std::vector< units::quantity<units::si::electric_potential >> ;
+  
+  
 
   /// Operations that give results
   double bestFit( void ) noexcept;

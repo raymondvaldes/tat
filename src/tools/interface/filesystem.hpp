@@ -59,7 +59,7 @@ public:
   bool working_directory_starts_with( const std::string& starts) const noexcept;
 } ;
 
-std::vector< directory > ls( const std::string &path_in ) noexcept;
+//  auto ls( const std::string &path_in ) noexcept -> std::vector< directory >;
 
 
 

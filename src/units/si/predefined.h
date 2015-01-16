@@ -11,10 +11,12 @@
 
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/si/length.hpp>
+#include "units/scale.h"
 
 namespace units {
 namespace si {
 
+//Dimensions
 typedef boost::units::si::length length;
 typedef boost::units::si::mass_density mass_density;
 typedef boost::units::si::mass mass;
@@ -29,18 +31,26 @@ typedef boost::units::si::area area;
 typedef boost::units::si::time time;
 typedef boost::units::si::frequency frequency;
 
+
+//Units
 using boost::units::si::meters;
 using boost::units::si::meter;
-
 using boost::units::si::second;
-
 using boost::units::si::watts;
 using boost::units::si::watt;
-
 using boost::units::si::volts;
-
 using boost::units::si::kelvin;
 
+typedef make_scaled_unit<
+        electric_potential::unit_type,
+        boost::units::scale<10, boost::units::static_rational<-3> > >::type
+        millivolts;
+
+typedef make_scaled_unit<
+        boost::units::si::length::unit_type,
+        boost::units::scale<10, boost::units::static_rational<-3> >>::type
+        millimeter;
+typedef millimeter millimeters;
 
 }}
 

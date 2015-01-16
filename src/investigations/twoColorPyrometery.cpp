@@ -14,19 +14,26 @@ namespace investigations{
 namespace twoColorPyrometery{
   
 void run( const filesystem::directory &dir ) noexcept {
-
   using thermal::analysis::Poptea;
+
+  {
   using thermal::analysis::initializePopTeawithExperimentalEmission;
-  
   auto poptea = Poptea{
     initializePopTeawithExperimentalEmission( dir ) };
-  poptea.bestFit() ;
+    
+  }
   
   
   
   
   
-  using std::cout;
-  cout << poptea.ppUnknownParameters() << "\n";
+
+  {
+    using thermal::analysis::initializePopTeaAndLoadSimuEmission;
+    auto poptea = Poptea{
+      initializePopTeaAndLoadSimuEmission( dir ) };
+    poptea.bestFit() ;
+    std::cout << poptea.ppUnknownParameters() << "\n";
+  }
 }
 }}

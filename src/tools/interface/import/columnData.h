@@ -51,13 +51,13 @@ public:
   explicit columnData( const std::string& filePathIn,
                        const std::string& ignoreCharacterIn );
 
-  auto getColumn( const size_t columnNumber ) noexcept
+  auto getColumn( const size_t columnNumber ) const noexcept
     -> std::vector<std::string>;
   
-  auto getRow( const size_t rowNumber ) noexcept
+  auto getRow( const size_t rowNumber ) const noexcept
     -> std::vector<std::string>;
   
-  auto getElement( const size_t rowNumber, const size_t columnNumber ) noexcept
+  auto getElement( const size_t rowNumber, const size_t columnNumber ) const noexcept
     -> std::string;
 };
 

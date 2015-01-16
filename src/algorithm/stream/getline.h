@@ -19,9 +19,9 @@ namespace stream {
   inline auto getline( std::istream& inputStream ) noexcept -> std::string
   {
     using std::string;
-    string getsThisLine ;
-    
     using std::getline;
+
+    string getsThisLine ;
     getline( inputStream , getsThisLine, '\n' ) ;
     
     return getsThisLine ;

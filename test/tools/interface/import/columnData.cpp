@@ -73,6 +73,19 @@ BOOST_AUTO_TEST_CASE( getColumn ) {
   BOOST_CHECK( fail );
 }
 
+
+BOOST_AUTO_TEST_CASE( getDataFile ) {
+  typedef std::vector<std::string> vector_strings;
+  const auto myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/graphite_400F_4.4_2.82843_0.dat";
+  
+  columnData myData( myInput ) ;
+
+  const auto extractedColumn = myData.getColumn( 1 ) ;
+  
+  
+}
+
+
 BOOST_AUTO_TEST_CASE( getElement ) {
 
   const auto myInput =
