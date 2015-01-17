@@ -38,6 +38,7 @@ typedef divide_typeof_helper< length, temperature >::type length_over_temperatur
 
 typedef multiply_typeof_helper< length, temperature>::type length_temperature;
 
+typedef divide_typeof_helper< dimensionless, temperature>::type one_over_temperature;
 
 
 

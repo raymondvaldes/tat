@@ -17,11 +17,13 @@ namespace thermal{
 namespace pyrometer{
 namespace twoColor{
 
-inline auto temperatureSteady(   const units::quantity< units::si::dimensionless > calibrationCoefficient,
-                          const units::quantity< units::si::dimensionless > signalRatio,
-                          const units::quantity< units::si::length > wavelength_one,
-                          const units::quantity< units::si::length > wavelength_two
-                          ) noexcept -> units::quantity< units::si::temperature>
+inline auto temperatureSteady(
+  const units::quantity< units::si::dimensionless > calibrationCoefficient,
+  const units::quantity< units::si::dimensionless > signalRatio,
+  const units::quantity< units::si::length > wavelength_one,
+  const units::quantity< units::si::length > wavelength_two
+  ) noexcept
+  -> units::quantity< units::si::temperature>
 {
   using units::si::constants::C2_wien;
   using std::log;

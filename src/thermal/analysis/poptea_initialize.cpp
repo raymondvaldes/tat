@@ -28,7 +28,6 @@
 #include "thermal/emission/noise.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "tools/interface/exportfile.hpp"
-#include "units.h"
 
 namespace thermal{
 namespace analysis{
@@ -62,21 +61,7 @@ initializePopTeawithExperimentalEmission( const filesystem::directory &dir )
   Poptea poptea = initializePopTeawithNominalEmission( dir );
   
   
-  auto transientDetectorSignal =
-  poptea.loadTBDfile( dir,  std::string{ "graphite_400F_4.4_2.82843_0.dat" } ) ;
 
-
-  using units::si::milli;
-  using units::si::volts;
-  const auto signalDCoffset = quantity<electric_potential>( 50 * volts );
-
-  using std::transform;
-  transform( transientDetectorSignal.begin(),
-             transientDetectorSignal.end(),
-             transientDetectorSignal.begin(),
-      [&]( auto &val) { return val + signalDCoffset ; } );
-  
-  
 
   
   return poptea;

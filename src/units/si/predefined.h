@@ -11,6 +11,7 @@
 
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/si/length.hpp>
+#include <boost/units/systems/si/angular_velocity.hpp>
 #include "units/scale.h"
 
 namespace units {
@@ -30,9 +31,16 @@ typedef boost::units::si::velocity velocity;
 typedef boost::units::si::area area;
 typedef boost::units::si::time time;
 typedef boost::units::si::frequency frequency;
+typedef boost::units::si::angular_velocity angular_velocity;
+typedef angular_velocity angular_frequency;
 
 
 //Units
+///typedef boost::units::si::radian_per_second radian_per_second;
+//typedef boost::units::si::radians_per_second radians_per_second;
+using boost::units::si::radians;
+using boost::units::si::radian;
+
 using boost::units::si::meters;
 using boost::units::si::meter;
 using boost::units::si::second;
@@ -40,6 +48,8 @@ using boost::units::si::watts;
 using boost::units::si::watt;
 using boost::units::si::volts;
 using boost::units::si::kelvin;
+using boost::units::si::hertz;
+
 
 typedef make_scaled_unit<
         electric_potential::unit_type,

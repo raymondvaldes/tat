@@ -29,10 +29,22 @@ License
 namespace math{
   namespace estimation{
 
+void cosfit(  )
+//This equation should accept a vector of quantities and output a phase,
+//  amplitude, a and offset according to the equation
+//  f(x)  = Offset + Amplitude ( cos ( wt + phase ) )
+//
+//  Inputs: Vector pair of ( t (time) and q (quantities) ),
+//  and angular frequency.
+//
+//  The output will be a tuple of type { quantity-offset, quantity-amplitude,
+// phase-dimensionless).
+
+
 
 
 void cosfit( const double *dependent, const std::vector<double> &independent,
-             double *x, size_t Nend) noexcept
+             double *x, const size_t Nend) noexcept
 {
   BOOST_ASSERT( dependent != nullptr ) ;
   BOOST_ASSERT( x != nullptr ) ;
