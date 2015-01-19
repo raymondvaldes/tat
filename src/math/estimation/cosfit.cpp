@@ -25,11 +25,12 @@ License
 #include "math/estimation/cosfit.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/lmdiff.hpp"
+#include "math/functions/periodic.h"
 
 namespace math{
   namespace estimation{
 
-void cosfit(  )
+//void cosfit(  )
 //This equation should accept a vector of quantities and output a phase,
 //  amplitude, a and offset according to the equation
 //  f(x)  = Offset + Amplitude ( cos ( wt + phase ) )

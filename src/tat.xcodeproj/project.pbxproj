@@ -226,6 +226,7 @@
 		AB60876E1A69B02B009B1E85 /* calibratedSignalRatio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibratedSignalRatio.h; path = pyrometry/twoColor/calibratedSignalRatio.h; sourceTree = "<group>"; };
 		AB6087711A69B9FB009B1E85 /* signalRatio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = signalRatio.cpp; path = pyrometry/twoColor/signalRatio.cpp; sourceTree = "<group>"; };
 		AB6087721A69B9FB009B1E85 /* signalRatio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = signalRatio.h; path = pyrometry/twoColor/signalRatio.h; sourceTree = "<group>"; };
+		AB6087761A69E53F009B1E85 /* periodic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = periodic.h; path = functions/periodic.h; sourceTree = "<group>"; };
 		AB6981A619CB638300940843 /* apply_to_all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apply_to_all.h; path = numericalAnalysis/ublas/apply_to_all.h; sourceTree = "<group>"; };
 		AB71907E19DF0B1B008FC395 /* codata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = codata.h; path = units/si/constants/codata.h; sourceTree = "<group>"; };
 		AB71907F19DF1354008FC395 /* thermal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = thermal.h; path = units/si/constants/thermal.h; sourceTree = "<group>"; };
@@ -514,11 +515,12 @@
 			name = utilities;
 			sourceTree = "<group>";
 		};
-		AB6087751A69E4D0009B1E85 /* function */ = {
+		AB6087751A69E4D0009B1E85 /* functions */ = {
 			isa = PBXGroup;
 			children = (
+				AB6087761A69E53F009B1E85 /* periodic.h */,
 			);
-			name = function;
+			name = functions;
 			sourceTree = "<group>";
 		};
 		AB6981A419CB636600940843 /* ublas */ = {
@@ -733,7 +735,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
-				AB6087751A69E4D0009B1E85 /* function */,
+				AB6087751A69E4D0009B1E85 /* functions */,
 				ABEBCE4F19C7364D00882E01 /* numericalAnalysis */,
 				AB553C55195DF3A700E2B7D1 /* utilities */,
 				AB553C48195DE30F00E2B7D1 /* geometry */,

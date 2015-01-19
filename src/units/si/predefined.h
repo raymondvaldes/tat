@@ -18,32 +18,36 @@ namespace units {
 namespace si {
 
 //Dimensions
-typedef boost::units::si::length length;
-typedef boost::units::si::mass_density mass_density;
-typedef boost::units::si::mass mass;
+typedef boost::units::si::length              length;
+typedef boost::units::si::mass_density        mass_density;
+typedef boost::units::si::mass                mass;
 
-typedef boost::units::si::temperature temperature;
-typedef boost::units::si::power power;
-typedef boost::units::si::solid_angle solid_angle;
-typedef boost::units::si::electric_potential electric_potential;
-typedef boost::units::si::dimensionless dimensionless ;
-typedef boost::units::si::velocity velocity;
-typedef boost::units::si::area area;
-typedef boost::units::si::time time;
-typedef boost::units::si::frequency frequency;
-typedef boost::units::si::angular_velocity angular_velocity;
-typedef angular_velocity angular_frequency;
-
+typedef boost::units::si::temperature         temperature;
+typedef boost::units::si::power               power;
+typedef boost::units::si::plane_angle         plane_angle;
+typedef boost::units::si::solid_angle         solid_angle;
+typedef boost::units::si::electric_potential  electric_potential;
+typedef boost::units::si::dimensionless       dimensionless ;
+typedef boost::units::si::velocity            velocity;
+typedef boost::units::si::area                area;
+typedef boost::units::si::time                time;
+typedef boost::units::si::frequency           frequency;
+typedef boost::units::si::angular_velocity    angular_velocity;
+typedef angular_velocity                      angular_frequency;
 
 //Units
-///typedef boost::units::si::radian_per_second radian_per_second;
-//typedef boost::units::si::radians_per_second radians_per_second;
+
+using boost::units::si::radian_per_second;
+using boost::units::si::radians_per_second;
+
 using boost::units::si::radians;
 using boost::units::si::radian;
 
 using boost::units::si::meters;
 using boost::units::si::meter;
 using boost::units::si::second;
+using boost::units::si::seconds;
+
 using boost::units::si::watts;
 using boost::units::si::watt;
 using boost::units::si::volts;
