@@ -49,8 +49,6 @@ private:
   double initialGuess;
   double bestfitval;
 
-//  void Initialauto( void ) ;
-
 public:
   unknown( enum labels::Name name_,
            const double lower_,

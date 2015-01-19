@@ -28,11 +28,28 @@ License
 #include <iomanip>
 #include "thermal/model/two_dim/analytical_2009/heat2DAna.hpp"
 #include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
-#include "math/statistical_tools.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "math/utility.hpp"
 #include "math/numIntegration/simpsons_3_8.hpp"
 #include "thermal/define/lthermal.h"
+
+
+
+inline void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
+                   const size_t x, const size_t y, const size_t z) noexcept
+{
+  Vnew.resize(x);
+  for(size_t i = 0; i < x ; ++i )
+  {
+    Vnew[i].resize(y);
+
+    for(size_t j = 0; j < y ; ++j)
+    {
+       Vnew[i][j].resize(z);
+    }
+  }
+  return;
+}
 
 HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
                                 const double lambda_, const double It_,

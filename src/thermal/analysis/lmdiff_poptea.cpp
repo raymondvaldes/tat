@@ -30,7 +30,6 @@ License
 #include <boost/math/special_functions/fpclassify.hpp>
 
 #include "math/estimation/lmdiff.hpp"
-#include "math/statistical_tools.hpp"
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/utils.hpp"
 #include "math/utility.hpp"

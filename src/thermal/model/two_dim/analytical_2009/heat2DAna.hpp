@@ -28,7 +28,6 @@ License
 #include <complex>
 
 #include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
-#include "math/statistical_tools.hpp"
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "math/utility.hpp"
 #include "math/numIntegration/simpsons_3_8.hpp"

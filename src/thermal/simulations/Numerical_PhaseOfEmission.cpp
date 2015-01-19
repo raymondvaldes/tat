@@ -22,8 +22,6 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include "math/statistical_tools.hpp"
-
 #include "thermal/model/two_dim/analytical_2009/heat2DAna.hpp"
 #include "thermal/emission/emission.hpp"
 #include "thermal/analysis/kernal.hpp"
@@ -35,6 +33,22 @@ License
 #include "thermal/define/temperature.h"
 #include "thermal/define/lthermal.h"
 
+
+inline void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
+                   const size_t x, const size_t y, const size_t z) noexcept
+{
+  Vnew.resize(x);
+  for(size_t i = 0; i < x ; ++i )
+  {
+    Vnew[i].resize(y);
+
+    for(size_t j = 0; j < y ; ++j)
+    {
+       Vnew[i][j].resize(z);
+    }
+  }
+  return;
+}
 
 double PhaseOfEmission1DNum( const double omega,
                              const thermal::analysis::Kernal &popteaCore) noexcept

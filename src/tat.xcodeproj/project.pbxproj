@@ -96,8 +96,6 @@
 		ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DF51948D4A500B44AD5 /* sor.h */; };
 		ABEF4E9B1948D4A500B44AD5 /* tma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DF61948D4A500B44AD5 /* tma.cpp */; };
 		ABEF4E9C1948D4A500B44AD5 /* tma.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DF71948D4A500B44AD5 /* tma.h */; };
-		ABEF4E9D1948D4A500B44AD5 /* statistical_tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DF81948D4A500B44AD5 /* statistical_tools.cpp */; };
-		ABEF4E9E1948D4A500B44AD5 /* statistical_tools.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DF91948D4A500B44AD5 /* statistical_tools.hpp */; };
 		ABEF4E9F1948D4A500B44AD5 /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DFA1948D4A500B44AD5 /* utility.cpp */; };
 		ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DFB1948D4A500B44AD5 /* utility.hpp */; };
 		ABEF4EA11948D4A500B44AD5 /* kinematics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DFE1948D4A500B44AD5 /* kinematics.cpp */; };
@@ -310,8 +308,6 @@
 		ABEF4DF51948D4A500B44AD5 /* sor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sor.h; sourceTree = "<group>"; };
 		ABEF4DF61948D4A500B44AD5 /* tma.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tma.cpp; sourceTree = "<group>"; };
 		ABEF4DF71948D4A500B44AD5 /* tma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tma.h; sourceTree = "<group>"; };
-		ABEF4DF81948D4A500B44AD5 /* statistical_tools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = statistical_tools.cpp; sourceTree = "<group>"; };
-		ABEF4DF91948D4A500B44AD5 /* statistical_tools.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = statistical_tools.hpp; sourceTree = "<group>"; };
 		ABEF4DFA1948D4A500B44AD5 /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
 		ABEF4DFB1948D4A500B44AD5 /* utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utility.hpp; sourceTree = "<group>"; };
 		ABEF4DFE1948D4A500B44AD5 /* kinematics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kinematics.cpp; sourceTree = "<group>"; };
@@ -468,16 +464,8 @@
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
-				ABA58A191A67487D00573ED8 /* filesystem */,
+				AB932DF21A6DB76E00ECF117 /* source */,
 				ABA2BD3B1A48BA21004F3C6E /* linked-libraries */,
-				ABF5D66319DB607700A70476 /* units */,
-				AB0DFDFD19524268007DF69B /* algorithm */,
-				ABEF4DFC1948D4A500B44AD5 /* physics */,
-				ABEF4DCB1948D4A500B44AD5 /* investigations */,
-				ABEF4DD21948D4A500B44AD5 /* math */,
-				ABEF4E001948D4A500B44AD5 /* sensible */,
-				ABEF4E0B1948D4A500B44AD5 /* thermal */,
-				ABEF4E6A1948D4A500B44AD5 /* tools */,
 			);
 			sourceTree = "<group>";
 		};
@@ -614,6 +602,22 @@
 			name = num_method2014;
 			sourceTree = "<group>";
 		};
+		AB932DF21A6DB76E00ECF117 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				ABA58A191A67487D00573ED8 /* filesystem */,
+				ABF5D66319DB607700A70476 /* units */,
+				AB0DFDFD19524268007DF69B /* algorithm */,
+				ABEF4DFC1948D4A500B44AD5 /* physics */,
+				ABEF4DCB1948D4A500B44AD5 /* investigations */,
+				ABEF4DD21948D4A500B44AD5 /* math */,
+				ABEF4E001948D4A500B44AD5 /* sensible */,
+				ABEF4E0B1948D4A500B44AD5 /* thermal */,
+				ABEF4E6A1948D4A500B44AD5 /* tools */,
+			);
+			name = source;
+			sourceTree = "<group>";
+		};
 		ABA2BD3B1A48BA21004F3C6E /* linked-libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,8 +751,6 @@
 				ABEF4DEB1948D4A500B44AD5 /* numIntegration */,
 				ABEF4DF01948D4A500B44AD5 /* sensitivityAnalysis */,
 				ABEF4DF31948D4A500B44AD5 /* solvers */,
-				ABEF4DF81948D4A500B44AD5 /* statistical_tools.cpp */,
-				ABEF4DF91948D4A500B44AD5 /* statistical_tools.hpp */,
 				ABEF4DFA1948D4A500B44AD5 /* utility.cpp */,
 				ABEF4DFB1948D4A500B44AD5 /* utility.hpp */,
 			);
@@ -1178,7 +1180,6 @@
 				AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */,
 				ABA58A181A67257400573ED8 /* units.h in Headers */,
 				AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */,
-				ABEF4E9E1948D4A500B44AD5 /* statistical_tools.hpp in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
@@ -1402,7 +1403,6 @@
 				ABEF4EF91948D4A500B44AD5 /* Numerical_PhaseOfEmission.cpp in Sources */,
 				ABEF4EE51948D4A500B44AD5 /* analytical_2005.cpp in Sources */,
 				AB60876F1A69B02B009B1E85 /* calibratedSignalRatio.cpp in Sources */,
-				ABEF4E9D1948D4A500B44AD5 /* statistical_tools.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

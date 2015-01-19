@@ -38,15 +38,22 @@ namespace math{
 
 double arrayMax( const double* x, const size_t I ) noexcept;
 double arrayMin( const double* x, const size_t I ) noexcept;
+
+void range( double* l_thermal, const double l_min, const double l_max,
+            const size_t L_end ) noexcept;
+  
 std::pair<double, double> OA_init( const double *x, const size_t span ) noexcept;
+double average_of_all( const double* myarray, const size_t size) noexcept;
+
+double median_of_all( const double* sortedvector ,
+                      const size_t size ) noexcept;
+
 
 double average( const double a, const double b ) noexcept;
 double percentile( const double xmin, const double xmax, const double x ) noexcept;
 double percentilelog10( const double xmin, const double xmax, const double x ) noexcept;
 
 
-void range( double* l_thermal, const double l_min, const double l_max,
-            const size_t L_end ) noexcept;
 
 std::vector<double>
   range( const double xstart, const double xend, const size_t size ) noexcept;
@@ -88,7 +95,6 @@ bool checkLimits( const double center, const double range ) noexcept;
 bool checkLimits( const std::pair<double, double> CRpair ) noexcept;
 
 
-double average_of_all( const double* myarray, const size_t size) noexcept;
 bool within_tolerance( const double x1, const double x2, const double tol ) noexcept;
 
 template< typename integer >
@@ -106,9 +112,6 @@ bool odd( const integer x ) noexcept
   const bool pass = !fail ;
   return pass;
 }
-
-double median_of_all( const double* sortedvector ,
-                      const size_t size ) noexcept;
 
 std::pair<double, double>
 get_log10_random_pair( const double left_end, const double right_end) noexcept;

@@ -27,7 +27,6 @@ License
 #include "thermal/simulations/Numerical_PhaseOfEmission.h"
 #include "thermal/model/one_dim/numerical_2011/Numerical_Temperature.h"
 #include "thermal/model/one_dim/numerical_2011/mesh.hpp"
-#include "math/statistical_tools.hpp"
 #include "math/utility.hpp"
 #include "thermal/define/lthermal.h"
 #include "thermal/define/temperature.h"

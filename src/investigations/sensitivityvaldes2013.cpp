@@ -31,7 +31,7 @@ License
 #include "math/bisection.hpp"
 #include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/emission/noise.hpp"
-#include "math/statistical_tools.hpp"
+
 #include "tools/interface/exportfile.hpp"
 #include "tools/interface/xml.h"
 #include "thermal/analysis/poptea_initialize.h"
