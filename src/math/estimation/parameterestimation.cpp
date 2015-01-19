@@ -31,7 +31,6 @@ License
 
 #include "math/estimation/parameterestimation.hpp"
 
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "thermal/model/one_dim/numerical_2011/Numerical_Setup.h"
 #include "math/utility.hpp"
 

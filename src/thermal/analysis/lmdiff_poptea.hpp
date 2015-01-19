@@ -37,7 +37,6 @@ License
 #include "thermal/analysis/lmdiff_poptea_help.hpp"
 #include "thermal/analysis/thermalData.hpp"
 #include "math/estimation/parameterestimation.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
 #include "math/bisection.hpp"
 #include "tools/interface/filesystem.hpp"
 #include "thermal/define/model.hpp"

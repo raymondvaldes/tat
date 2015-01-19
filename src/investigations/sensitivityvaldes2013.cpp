@@ -29,7 +29,7 @@ License
 #include "thermal/analysis/poptea.hpp"
 #include "thermal/emission/phase99.hpp"
 #include "math/bisection.hpp"
-#include "math/sensitivityAnalysis/estimationInterval.hpp"
+
 #include "thermal/emission/noise.hpp"
 
 #include "tools/interface/exportfile.hpp"

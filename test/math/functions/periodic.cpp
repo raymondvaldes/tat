@@ -7,6 +7,9 @@
 //
 
 #include "math/functions/periodic.h"
+#include "math/functions/sine.h"
+#include "math/functions/cosine.h"
+
 #include "units/units.h"
 
 #define BOOST_TEST_NO_LIB

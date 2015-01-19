@@ -31,6 +31,9 @@
 		AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */; };
 		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
+		AB932DF51A6DC0E700ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF41A6DC0E700ECF117 /* sine.h */; };
+		AB932DFA1A6DC23200ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF81A6DC23200ECF117 /* sine.h */; };
+		AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DFB1A6DC2BB00ECF117 /* cosine.h */; };
 		ABA58A181A67257400573ED8 /* units.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A171A67257400573ED8 /* units.h */; };
 		ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA58A1A1A67489E00573ED8 /* path.cpp */; };
 		ABA58A1D1A67489E00573ED8 /* path.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A1B1A67489E00573ED8 /* path.h */; };
@@ -90,8 +93,6 @@
 		ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DED1948D4A500B44AD5 /* gslfunc.hpp */; };
 		ABEF4E951948D4A500B44AD5 /* simpsons_3_8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DEE1948D4A500B44AD5 /* simpsons_3_8.cpp */; };
 		ABEF4E961948D4A500B44AD5 /* simpsons_3_8.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DEF1948D4A500B44AD5 /* simpsons_3_8.hpp */; };
-		ABEF4E971948D4A500B44AD5 /* estimationInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DF11948D4A500B44AD5 /* estimationInterval.cpp */; };
-		ABEF4E981948D4A500B44AD5 /* estimationInterval.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DF21948D4A500B44AD5 /* estimationInterval.hpp */; };
 		ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DF41948D4A500B44AD5 /* sor.cpp */; };
 		ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEF4DF51948D4A500B44AD5 /* sor.h */; };
 		ABEF4E9B1948D4A500B44AD5 /* tma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DF61948D4A500B44AD5 /* tma.cpp */; };
@@ -242,6 +243,10 @@
 		AB8AA4421A5C6CEF0065E7F8 /* is_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = is_open.h; path = algorithm/stream/is_open.h; sourceTree = "<group>"; };
 		AB8AA4441A5DF13F0065E7F8 /* trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trim.h; path = algorithm/string/trim.h; sourceTree = "<group>"; };
 		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
+		AB932DF41A6DC0E700ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = functions/sine.h; sourceTree = "<group>"; };
+		AB932DF61A6DC0F400ECF117 /* cosine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = functions/cosine.h; sourceTree = "<group>"; };
+		AB932DF81A6DC23200ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = curveFit/sine.h; sourceTree = "<group>"; };
+		AB932DFB1A6DC2BB00ECF117 /* cosine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = curveFit/cosine.h; sourceTree = "<group>"; };
 		ABA58A171A67257400573ED8 /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = units.h; path = units/units.h; sourceTree = "<group>"; };
 		ABA58A1A1A67489E00573ED8 /* path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path.cpp; path = filesystem/path.cpp; sourceTree = "<group>"; };
 		ABA58A1B1A67489E00573ED8 /* path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = path.h; path = filesystem/path.h; sourceTree = "<group>"; };
@@ -286,8 +291,8 @@
 		ABEF4DD91948D4A500B44AD5 /* spline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spline.h; sourceTree = "<group>"; };
 		ABEF4DDA1948D4A500B44AD5 /* spline_cplx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spline_cplx.cpp; sourceTree = "<group>"; };
 		ABEF4DDB1948D4A500B44AD5 /* spline_cplx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spline_cplx.h; sourceTree = "<group>"; };
-		ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bisection.cpp; sourceTree = "<group>"; };
-		ABEF4DDD1948D4A500B44AD5 /* bisection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bisection.hpp; sourceTree = "<group>"; };
+		ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bisection.cpp; path = ../bisection.cpp; sourceTree = "<group>"; };
+		ABEF4DDD1948D4A500B44AD5 /* bisection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bisection.hpp; path = ../bisection.hpp; sourceTree = "<group>"; };
 		ABEF4DDF1948D4A500B44AD5 /* constrained.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = constrained.cpp; sourceTree = "<group>"; };
 		ABEF4DE01948D4A500B44AD5 /* constrained.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = constrained.hpp; sourceTree = "<group>"; };
 		ABEF4DE11948D4A500B44AD5 /* cosfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cosfit.cpp; sourceTree = "<group>"; };
@@ -302,14 +307,12 @@
 		ABEF4DED1948D4A500B44AD5 /* gslfunc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslfunc.hpp; sourceTree = "<group>"; };
 		ABEF4DEE1948D4A500B44AD5 /* simpsons_3_8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simpsons_3_8.cpp; sourceTree = "<group>"; };
 		ABEF4DEF1948D4A500B44AD5 /* simpsons_3_8.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simpsons_3_8.hpp; sourceTree = "<group>"; };
-		ABEF4DF11948D4A500B44AD5 /* estimationInterval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = estimationInterval.cpp; sourceTree = "<group>"; };
-		ABEF4DF21948D4A500B44AD5 /* estimationInterval.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = estimationInterval.hpp; sourceTree = "<group>"; };
 		ABEF4DF41948D4A500B44AD5 /* sor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sor.cpp; sourceTree = "<group>"; };
 		ABEF4DF51948D4A500B44AD5 /* sor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sor.h; sourceTree = "<group>"; };
 		ABEF4DF61948D4A500B44AD5 /* tma.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tma.cpp; sourceTree = "<group>"; };
 		ABEF4DF71948D4A500B44AD5 /* tma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tma.h; sourceTree = "<group>"; };
-		ABEF4DFA1948D4A500B44AD5 /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
-		ABEF4DFB1948D4A500B44AD5 /* utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utility.hpp; sourceTree = "<group>"; };
+		ABEF4DFA1948D4A500B44AD5 /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utility.cpp; path = ../utility.cpp; sourceTree = "<group>"; };
+		ABEF4DFB1948D4A500B44AD5 /* utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = utility.hpp; path = ../utility.hpp; sourceTree = "<group>"; };
 		ABEF4DFE1948D4A500B44AD5 /* kinematics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kinematics.cpp; sourceTree = "<group>"; };
 		ABEF4DFF1948D4A500B44AD5 /* kinematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kinematics.h; sourceTree = "<group>"; };
 		ABEF4E011948D4A500B44AD5 /* layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = layer.cpp; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 			isa = PBXGroup;
 			children = (
 				AB6087761A69E53F009B1E85 /* periodic.h */,
+				AB932DF41A6DC0E700ECF117 /* sine.h */,
+				AB932DF61A6DC0F400ECF117 /* cosine.h */,
 			);
 			name = functions;
 			sourceTree = "<group>";
@@ -616,6 +621,15 @@
 				ABEF4E6A1948D4A500B44AD5 /* tools */,
 			);
 			name = source;
+			sourceTree = "<group>";
+		};
+		AB932DF31A6DBAC700ECF117 /* curveFIt */ = {
+			isa = PBXGroup;
+			children = (
+				AB932DF81A6DC23200ECF117 /* sine.h */,
+				AB932DFB1A6DC2BB00ECF117 /* cosine.h */,
+			);
+			name = curveFIt;
 			sourceTree = "<group>";
 		};
 		ABA2BD3B1A48BA21004F3C6E /* linked-libraries */ = {
@@ -739,20 +753,16 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				AB932DF31A6DBAC700ECF117 /* curveFIt */,
 				AB6087751A69E4D0009B1E85 /* functions */,
 				ABEBCE4F19C7364D00882E01 /* numericalAnalysis */,
 				AB553C55195DF3A700E2B7D1 /* utilities */,
 				AB553C48195DE30F00E2B7D1 /* geometry */,
 				AB553C46195DCF6D00E2B7D1 /* statistics */,
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
-				ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */,
-				ABEF4DDD1948D4A500B44AD5 /* bisection.hpp */,
 				ABEF4DDE1948D4A500B44AD5 /* estimation */,
 				ABEF4DEB1948D4A500B44AD5 /* numIntegration */,
-				ABEF4DF01948D4A500B44AD5 /* sensitivityAnalysis */,
 				ABEF4DF31948D4A500B44AD5 /* solvers */,
-				ABEF4DFA1948D4A500B44AD5 /* utility.cpp */,
-				ABEF4DFB1948D4A500B44AD5 /* utility.hpp */,
 			);
 			path = math;
 			sourceTree = "<group>";
@@ -760,6 +770,8 @@
 		ABEF4DD31948D4A500B44AD5 /* algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				ABEF4DFA1948D4A500B44AD5 /* utility.cpp */,
+				ABEF4DFB1948D4A500B44AD5 /* utility.hpp */,
 				ABEF4DD41948D4A500B44AD5 /* combinations.cpp */,
 				ABEF4DD51948D4A500B44AD5 /* combinations.hpp */,
 				ABEF4DD61948D4A500B44AD5 /* complex.cpp */,
@@ -800,18 +812,11 @@
 			path = numIntegration;
 			sourceTree = "<group>";
 		};
-		ABEF4DF01948D4A500B44AD5 /* sensitivityAnalysis */ = {
-			isa = PBXGroup;
-			children = (
-				ABEF4DF11948D4A500B44AD5 /* estimationInterval.cpp */,
-				ABEF4DF21948D4A500B44AD5 /* estimationInterval.hpp */,
-			);
-			path = sensitivityAnalysis;
-			sourceTree = "<group>";
-		};
 		ABEF4DF31948D4A500B44AD5 /* solvers */ = {
 			isa = PBXGroup;
 			children = (
+				ABEF4DDC1948D4A500B44AD5 /* bisection.cpp */,
+				ABEF4DDD1948D4A500B44AD5 /* bisection.hpp */,
 				ABEF4DF41948D4A500B44AD5 /* sor.cpp */,
 				ABEF4DF51948D4A500B44AD5 /* sor.h */,
 				ABEF4DF61948D4A500B44AD5 /* tma.cpp */,
@@ -1183,6 +1188,7 @@
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
+				AB932DF51A6DC0E700ECF117 /* sine.h in Headers */,
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
 				ABB4474519DB386A009EC35F /* constants.h in Headers */,
 				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
@@ -1237,11 +1243,12 @@
 				ABEF4EFE1948D4A500B44AD5 /* filesystem.hpp in Headers */,
 				ABEF4EAF1948D4A500B44AD5 /* cmplx_combination.h in Headers */,
 				AB0DFE0619524382007DF69B /* starts_with.h in Headers */,
-				ABEF4E981948D4A500B44AD5 /* estimationInterval.hpp in Headers */,
 				ABEF4EB71948D4A500B44AD5 /* methods.hpp in Headers */,
 				ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */,
 				ABEF4ED81948D4A500B44AD5 /* noise.hpp in Headers */,
 				ABF5D66819DB60BD00A70476 /* predefined.h in Headers */,
+				AB932DFA1A6DC23200ECF117 /* sine.h in Headers */,
+				AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */,
 				ABEF4ED01948D4A500B44AD5 /* model_type.h in Headers */,
 				ABEF4E7A1948D4A500B44AD5 /* num_method2014.h in Headers */,
 				AB6981A819CB638300940843 /* apply_to_all.h in Headers */,
@@ -1346,7 +1353,6 @@
 				ABEF4EA11948D4A500B44AD5 /* kinematics.cpp in Sources */,
 				ABEF4ECE1948D4A500B44AD5 /* model.cpp in Sources */,
 				ABEF4ED11948D4A500B44AD5 /* omega.cpp in Sources */,
-				ABEF4E971948D4A500B44AD5 /* estimationInterval.cpp in Sources */,
 				ABEF4EBC1948D4A500B44AD5 /* poptea_initialize.cpp in Sources */,
 				AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */,
 				ABEF4EF31948D4A500B44AD5 /* heat2DAna.cpp in Sources */,
