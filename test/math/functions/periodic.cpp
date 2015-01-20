@@ -9,6 +9,7 @@
 #include "math/functions/periodic.h"
 #include "math/functions/sine.h"
 #include "math/functions/cosine.h"
+#include "math/functions/PeriodicProperties.h"
 
 #include "units/units.h"
 
@@ -31,6 +32,7 @@ using units::si::seconds;
 using units::si::milli;
 const auto millivolts = milli * volts;
 using math::functions::Periodic;
+using math::functions::PeriodicProperties;
 
 
 struct periodicProperties {
@@ -38,6 +40,10 @@ struct periodicProperties {
   quantity< electric_potential > amplitude = 1.0 * volts ;
   quantity< angular_frequency > omega = 1.0 * radians_per_second ;
   quantity< plane_angle > phase = 0 * radians ;
+  
+  PeriodicProperties< electric_potential >
+  myProperties = PeriodicProperties< electric_potential >
+  ( offset, amplitude, omega, phase ) ;
   
 } ;
 
@@ -48,7 +54,7 @@ BOOST_AUTO_TEST_CASE( sine_function ) {
 
   using math::functions::Sine;
   auto sinFunc =
-  Sine<electric_potential>( offset, amplitude, omega, phase ) ;
+  Sine<electric_potential>( myProperties ) ;
 
   using std::sin;
   BOOST_CHECK_CLOSE( sinFunc( 0.1 * seconds ).value() , sin( 0.1 ) , 1e-14 ) ;
@@ -62,7 +68,7 @@ BOOST_AUTO_TEST_CASE( cosine_function ) {
 
   using math::functions::Cosine;
   const auto cosFunc =
-  Cosine<electric_potential>( offset, amplitude, omega, phase ) ;
+  Cosine<electric_potential>( myProperties ) ;
 
   using std::cos;
   cosFunc( 0.1 * seconds ).value();

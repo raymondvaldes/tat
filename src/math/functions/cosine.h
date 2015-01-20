@@ -31,13 +31,10 @@ private:
   
 public:
   explicit Cosine(
-    const units::quantity<T> offsetIn,
-    const units::quantity<T> amplitudeIn,
-    const units::quantity<units::si::angular_frequency> omegaIn,
-    const units::quantity<units::si::plane_angle> phaseIn
-    ) noexcept
-    : Periodic<T>( offsetIn, amplitudeIn, omegaIn , phaseIn)
-    {};
+    const PeriodicProperties<T> inputProperties
+  ) noexcept
+  : Periodic<T>( inputProperties )
+  {}
 
 };
 
