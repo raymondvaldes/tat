@@ -43,16 +43,34 @@ BOOST_FIXTURE_TEST_SUITE( cosine_fitting, InternalperiodicProperties )
 BOOST_AUTO_TEST_CASE( cosine_fit_constructor )
 {
   using math::functions::PeriodicProperties;
-
-  auto myVectVolts = vector< quantity< electric_potential > >();
+  using units::si::seconds;
   
-  auto myTimeVector = vector< quantity< units::si::time > >( );
+  auto myVectVolts = vector< quantity< electric_potential > >{
+    1     * volts,
+    0.995 * volts,
+    0.980 * volts,
+    0.955 * volts
+    };
+  
+  auto myTimeVector = vector< quantity< units::si::time > >{
+    0     * seconds,
+    0.10  * seconds,
+    0.2   * seconds,
+    0.3   * seconds
+    };
   
   auto initialConditions =
   PeriodicProperties<electric_potential>( offset, amplitude, omega, phase );
   
   using namespace math::curveFit;
+  const auto fittedCosine =
   curveFit::cosine( myTimeVector, myVectVolts, initialConditions );
+
+  for( const auto val : myTimeVector )
+  
+  for( size_t i = 0 ; i < myVectVolts.size() ; ++i)
+    BOOST_CHECK_CLOSE( myVectVolts[i].value() ,
+                       fittedCosine( myTimeVector[i] ).value() , 1e-2) ;
 
 }
 

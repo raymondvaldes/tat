@@ -283,10 +283,14 @@ struct settings settings::
     return ParaEstSetting;
 }
 
-settings::settings( const double ftol_, const double xtol_, const double gtol_,
-                     const size_t maxfev_, const double epsfcn_,
-                     const double factor_, const size_t mode_,
-                     const size_t nprint_ ) noexcept
+settings::settings( const double ftol_,
+                     const double xtol_,
+                     const double gtol_,
+                     const size_t maxfev_ ,
+                     const double epsfcn_,
+                     const double factor_,
+                     const size_t mode_ ,
+                     const size_t nprint_) noexcept
   :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_), epsfcn(epsfcn_),
     factor(factor_), mode(mode_), nprint(nprint_){}
 

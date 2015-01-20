@@ -33,11 +33,11 @@ private:
     assert( amplitude.value() > 0  ) ;
   };
 
-protected:
-  const units::quantity<T> offset;
-  const units::quantity<T> amplitude;
-  const units::quantity<units::si::angular_frequency> omega;
-  const units::quantity<units::si::plane_angle> phase;
+public:
+  units::quantity<T> offset;
+  units::quantity<T> amplitude;
+  units::quantity<units::si::angular_frequency> omega;
+  units::quantity<units::si::plane_angle> phase;
   
 public:
   explicit PeriodicProperties(
