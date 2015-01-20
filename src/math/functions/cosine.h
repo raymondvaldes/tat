@@ -35,7 +35,7 @@ public:
   ) noexcept
   : Periodic<T>( inputProperties )
   {}
-
+  ~Cosine(){};
 };
 
 } // namespace functions

@@ -64,7 +64,9 @@ typedef make_scaled_unit<
         boost::units::si::length::unit_type,
         boost::units::scale<10, boost::units::static_rational<-3> >>::type
         millimeter;
-typedef millimeter millimeters;
+
+
+
 
 }}
 

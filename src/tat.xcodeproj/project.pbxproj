@@ -18,6 +18,9 @@
 		AB553C53195DF13200E2B7D1 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C51195DF13200E2B7D1 /* random.cpp */; };
 		AB553C54195DF13200E2B7D1 /* random.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C52195DF13200E2B7D1 /* random.h */; };
 		AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C57195DF3FB00E2B7D1 /* equalto.h */; };
+		AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5FDFDA1A6EE30F0017CEBB /* bimap.h */; };
+		AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5FDFDC1A6EE7BF0017CEBB /* settings.h */; };
+		AB5FDFDF1A6EE7F50017CEBB /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5FDFDE1A6EE7F50017CEBB /* settings.cpp */; };
 		AB6087671A69A6B9009B1E85 /* normalizedSignalRatio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6087661A69A6B9009B1E85 /* normalizedSignalRatio.cpp */; };
 		AB60876F1A69B02B009B1E85 /* calibratedSignalRatio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB60876D1A69B02B009B1E85 /* calibratedSignalRatio.cpp */; };
 		AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */ = {isa = PBXBuildFile; fileRef = AB60876E1A69B02B009B1E85 /* calibratedSignalRatio.h */; };
@@ -218,6 +221,9 @@
 		AB553C51195DF13200E2B7D1 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = statistics/random/random.cpp; sourceTree = "<group>"; };
 		AB553C52195DF13200E2B7D1 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = random.h; path = statistics/random/random.h; sourceTree = "<group>"; };
 		AB553C57195DF3FB00E2B7D1 /* equalto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = equalto.h; path = utilities/equalto.h; sourceTree = "<group>"; };
+		AB5FDFDA1A6EE30F0017CEBB /* bimap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bimap.h; path = bimap/bimap.h; sourceTree = "<group>"; };
+		AB5FDFDC1A6EE7BF0017CEBB /* settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
+		AB5FDFDE1A6EE7F50017CEBB /* settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
 		AB6087651A69A4E6009B1E85 /* normalizedSignalRatio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = normalizedSignalRatio.h; path = pyrometry/twoColor/normalizedSignalRatio.h; sourceTree = "<group>"; };
 		AB6087661A69A6B9009B1E85 /* normalizedSignalRatio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = normalizedSignalRatio.cpp; path = pyrometry/twoColor/normalizedSignalRatio.cpp; sourceTree = "<group>"; };
 		AB60876D1A69B02B009B1E85 /* calibratedSignalRatio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = calibratedSignalRatio.cpp; path = pyrometry/twoColor/calibratedSignalRatio.cpp; sourceTree = "<group>"; };
@@ -263,6 +269,7 @@
 		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
 		ABB54FCF19C35E300056823E /* ifzero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifzero.cpp; path = algorithm/vector/ifzero.cpp; sourceTree = "<group>"; };
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
+		ABC5B8A11A6F05E500D893C9 /* periodicData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = periodicData.h; path = functions/periodicData.h; sourceTree = "<group>"; };
 		ABC648621A65B5EB008FA721 /* main-app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "main-app.cpp"; sourceTree = "<group>"; };
 		ABC648631A65B5EB008FA721 /* main-app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "main-app.h"; sourceTree = "<group>"; };
 		ABC648661A65B891008FA721 /* vector2cstringArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vector2cstringArray.cpp; path = algorithm/vector/vector2cstringArray.cpp; sourceTree = "<group>"; };
@@ -505,6 +512,14 @@
 			name = utilities;
 			sourceTree = "<group>";
 		};
+		AB5FDFD81A6EE2E40017CEBB /* bimap */ = {
+			isa = PBXGroup;
+			children = (
+				AB5FDFDA1A6EE30F0017CEBB /* bimap.h */,
+			);
+			name = bimap;
+			sourceTree = "<group>";
+		};
 		AB6087751A69E4D0009B1E85 /* functions */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,6 +527,7 @@
 				AB6087761A69E53F009B1E85 /* periodic.h */,
 				AB932DF41A6DC0E700ECF117 /* sine.h */,
 				AB932DF61A6DC0F400ECF117 /* cosine.h */,
+				ABC5B8A11A6F05E500D893C9 /* periodicData.h */,
 			);
 			name = functions;
 			sourceTree = "<group>";
@@ -796,6 +812,8 @@
 				ABEF4DE81948D4A500B44AD5 /* parameterestimation.hpp */,
 				ABEF4DE91948D4A500B44AD5 /* utils.cpp */,
 				ABEF4DEA1948D4A500B44AD5 /* utils.hpp */,
+				AB5FDFDC1A6EE7BF0017CEBB /* settings.h */,
+				AB5FDFDE1A6EE7F50017CEBB /* settings.cpp */,
 			);
 			path = estimation;
 			sourceTree = "<group>";
@@ -1078,6 +1096,7 @@
 		ABEF4E6A1948D4A500B44AD5 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				AB5FDFD81A6EE2E40017CEBB /* bimap */,
 				ABBCC1F219C0E980005E548A /* programoptions */,
 				ABEF4E6B1948D4A500B44AD5 /* interface */,
 				ABEF4E741948D4A500B44AD5 /* timing.cpp */,
@@ -1166,6 +1185,7 @@
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
 				ABEF4EB11948D4A500B44AD5 /* kernal.hpp in Headers */,
+				AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */,
 				ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */,
 				ABB54FBF19C221920056823E /* subtract.h in Headers */,
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
@@ -1218,6 +1238,7 @@
 				ABEF4EF81948D4A500B44AD5 /* tau_0.h in Headers */,
 				ABF5D65D19DB40DD00A70476 /* calibrationCoefficient.h in Headers */,
 				ABEF4EC11948D4A500B44AD5 /* temp_ss.h in Headers */,
+				AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */,
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
 				ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */,
 				ABEF4E9C1948D4A500B44AD5 /* tma.h in Headers */,
@@ -1330,6 +1351,7 @@
 				ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */,
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,
 				ABC648641A65B5EB008FA721 /* main-app.cpp in Sources */,
+				AB5FDFDF1A6EE7F50017CEBB /* settings.cpp in Sources */,
 				ABEF4EB41948D4A500B44AD5 /* lmdiff_poptea_help.cpp in Sources */,
 				ABEF4ECA1948D4A500B44AD5 /* effusivity.cpp in Sources */,
 				ABEF4EEF1948D4A500B44AD5 /* one_dim.cpp in Sources */,

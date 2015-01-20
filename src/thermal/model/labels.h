@@ -30,11 +30,8 @@
 #include <cstddef>
 #include <string>
 
-#include <boost/bimap.hpp>
-#include <boost/assign/list_inserter.hpp>
-#include <boost/bimap/unordered_set_of.hpp>
-#include <boost/bimap/list_of.hpp>
-#include <boost/assign/list_of.hpp>
+#include "tools/bimap/bimap.h"
+
 
 namespace thermal{
   namespace model{

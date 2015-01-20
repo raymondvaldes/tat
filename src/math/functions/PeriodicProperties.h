@@ -39,6 +39,38 @@ public:
   units::quantity<units::si::angular_frequency> omega;
   units::quantity<units::si::plane_angle> phase;
   
+  auto get_period() -> units::quantity< units::si::time >
+  {
+    return units::quantity<units::si::dimensionless>(1) / get_temporalFrequency();
+  } ;
+  
+  auto get_angularFrequency() -> units::quantity< units::si::angular_frequency>
+  {
+    return omega;
+  };
+
+  auto get_temporalFrequency() -> units::quantity< units::si::frequency>
+  {
+    return omega / ( units::si::radians );
+  };
+
+  auto get_phase() ->units::quantity< units::si::plane_angle>
+  {
+    return phase;
+  };
+
+  auto get_offset() ->units::quantity<T>
+  {
+    return offset;
+  };
+  
+  auto get_amplitude() -> units::quantity<T>
+  {
+    return amplitude;
+  };
+  
+  
+  
 public:
   explicit PeriodicProperties(
     const units::quantity<T> offsetIn,

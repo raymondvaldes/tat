@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "math/curveFit/cosine.h"
-
 #define BOOST_TEST_NO_LIB
+
+#include "math/curveFit/cosine.h"
 #include <boost/test/unit_test.hpp>
 #include <boost/test/execution_monitor.hpp>
 

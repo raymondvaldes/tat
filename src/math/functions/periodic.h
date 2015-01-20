@@ -29,6 +29,7 @@ public:
   ) noexcept
   : PeriodicProperties<T>( inputProperties )
   {}
+  virtual ~Periodic(){}
   
   auto operator()( const units::quantity<units::si::time> inputTime  ) const
   -> units::quantity<T>

@@ -12,7 +12,6 @@
 #include <vector>
 #include <cassert>
 #include "math/functions/cosine.h"
-#include "math/estimation/parameterestimation.hpp"
 #include "math/estimation/lmdiff.hpp"
 
 namespace math {
@@ -40,36 +39,37 @@ auto cosine( const std::vector< units::quantity< units::si::time > > &inputTime,
 noexcept
 -> functions::Cosine<T>
 {
+  using std::function;
+  using units::quantity;
+  using units::si::plane_angle;
+  using functions::PeriodicProperties;
+  using functions::Cosine;
+
+
   math::estimation::settings Settings;
   
   int dataPointsToFit = inputTime.size();
 
   const auto CosineGenerator = [  ]
-  ( double*x, const functions::PeriodicProperties< T > &initialConditions )
+  ( double*x, const functions::PeriodicProperties< T > &input )
   -> functions::Cosine<T>
   {
-    using units::quantity;
-    using units::si::plane_angle;
-
-    using functions::PeriodicProperties;
-    auto updatedProperties = PeriodicProperties<T>( initialConditions );
+    auto updatedProperties = PeriodicProperties<T>( input );
     
     updatedProperties.offset = quantity< T >::from_value( x[0] ) ;
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
     updatedProperties.phase = quantity< plane_angle >::from_value( x[2] );
 
-    using functions::Cosine;
     return Cosine<T>( updatedProperties ) ;
   };
 
-  using std::function;
   function<void ( double*, double* )> fcn =
   [ &inputTime, &inputSignal, &initialConditions, &CosineGenerator ]
   ( double *x, double *fvec )
   {
     const auto myCosineFunction = CosineGenerator( x, initialConditions );
 
-    for( int i = 0 ; i < inputTime.size() ; ++i )
+    for( size_t i = 0 ; i < inputTime.size() ; ++i )
     {
       const auto val = myCosineFunction( inputTime[i] ) -  inputSignal[i] ;
       fvec[i] = val.value() ;

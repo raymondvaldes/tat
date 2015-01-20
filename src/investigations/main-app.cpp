@@ -20,6 +20,7 @@
 
 namespace investigations{
 
+using std::cout;
 using std::string;
 using tools::programoptions::MainArguments;
 
@@ -43,11 +44,10 @@ int main_app( const int argc, const char *argv[ ] ) noexcept
   const auto runArgs = MainArguments{ argc, argv };
 
   if( runArgs.run_analysis() ) {
-    using std::cout;
-    
+  
     const auto exeTimer = executeAnalysis( runArgs ) ;
     
-    cout << exeTimer << "\n" ;
+   // cout <<"\n\n\n"<< exeTimer << "\n" ;
   }
 
   return 0 ;

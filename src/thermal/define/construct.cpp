@@ -22,8 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <boost/bimap.hpp>
-#include <boost/assign.hpp>
+#include "tools/bimap/bimap.h"
 
 #include "thermal/define/construct.hpp"
 

@@ -106,31 +106,7 @@ public:
   
 };
 
-class settings
-{
-public:
-  double ftol;
-  double xtol;
-  double gtol;
-  size_t maxfev;
-  double epsfcn;
-  double factor;
-  size_t mode;
-  size_t nprint;
-  const size_t factorMax = 10;
-  const size_t factorScale = 5;
 
-  static struct settings loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
-  ~settings(void) noexcept;
-  explicit settings( const double ftol_ = 1.e-10,
-                     const double xtol_ = 1.e-10,
-                     const double gtol_ = 1.e-10,
-                     const size_t maxfev_ = 1e8,
-                     const double epsfcn_ = 1.e-12,
-                     const double factor_ = 1,
-                     const size_t mode_ = 1,
-                     const size_t nprint_ = 0 ) noexcept;
-};
 
 
   }
