@@ -70,6 +70,8 @@ void qrsolv( const int n,  double r[], const int ldr, const int ipvt[],
               const double diag[], const double qtb[],  double x[], double sdiag[],
                double wa[] ) noexcept;
 
+
+
 void fdjac2(std::function<void( double*, double* )> fcn,
             int m, int n, double x[], double fvec[], double fjac[], int /*ldfjac*/,
             int *iflag, double epsfcn, double wa[]) noexcept;
@@ -80,6 +82,13 @@ void lmdif(std::function < void ( double*, double* ) > fcn,
             double factor, int nprint, int *info, int *nfev, double *fjac,
             int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
             double *wa3, double *wa4) noexcept;
+
+
+void lmdif(std::function < void ( double*, double* ) > fcn,
+            int dataPoints, std::vector<double>& initialConditions,
+            const settings &Settings) noexcept;
+
+
   }
 }
 

@@ -32,7 +32,6 @@
 		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
 		AB932DF51A6DC0E700ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF41A6DC0E700ECF117 /* sine.h */; };
-		AB932DFA1A6DC23200ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF81A6DC23200ECF117 /* sine.h */; };
 		AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DFB1A6DC2BB00ECF117 /* cosine.h */; };
 		ABA58A181A67257400573ED8 /* units.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A171A67257400573ED8 /* units.h */; };
 		ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA58A1A1A67489E00573ED8 /* path.cpp */; };
@@ -245,7 +244,6 @@
 		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
 		AB932DF41A6DC0E700ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = functions/sine.h; sourceTree = "<group>"; };
 		AB932DF61A6DC0F400ECF117 /* cosine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = functions/cosine.h; sourceTree = "<group>"; };
-		AB932DF81A6DC23200ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = curveFit/sine.h; sourceTree = "<group>"; };
 		AB932DFB1A6DC2BB00ECF117 /* cosine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = curveFit/cosine.h; sourceTree = "<group>"; };
 		AB932E001A6DDBEE00ECF117 /* PeriodicProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PeriodicProperties.h; path = functions/PeriodicProperties.h; sourceTree = "<group>"; };
 		ABA58A171A67257400573ED8 /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = units.h; path = units/units.h; sourceTree = "<group>"; };
@@ -629,7 +627,6 @@
 			isa = PBXGroup;
 			children = (
 				AB932DFB1A6DC2BB00ECF117 /* cosine.h */,
-				AB932DF81A6DC23200ECF117 /* sine.h */,
 			);
 			name = curveFIt;
 			sourceTree = "<group>";
@@ -1249,7 +1246,6 @@
 				ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */,
 				ABEF4ED81948D4A500B44AD5 /* noise.hpp in Headers */,
 				ABF5D66819DB60BD00A70476 /* predefined.h in Headers */,
-				AB932DFA1A6DC23200ECF117 /* sine.h in Headers */,
 				AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */,
 				ABEF4ED01948D4A500B44AD5 /* model_type.h in Headers */,
 				ABEF4E7A1948D4A500B44AD5 /* num_method2014.h in Headers */,

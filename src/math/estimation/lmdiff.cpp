@@ -26,6 +26,7 @@ License
 #include "math/estimation/lmdiff.hpp"
 
 namespace math{
+
 namespace estimation{
 
 #ifndef __USEWXLOG__
@@ -2464,5 +2465,45 @@ if(nprint > 0)
 }
 
 
+void lmdif(std::function < void ( double*, double* ) > fcn,
+            int dataPoints, std::vector<double>& initialConditions,
+            const settings &Settings) noexcept
+{
+  //const int m = static_cast<int>(thermalData->omegas.size());
+ // const int n = static_cast<int>(unknownParameters->size());
+
+  int m = dataPoints ;
+  int n = initialConditions.size();
+
+  int nfev;
+  int info=0;
+
+  int ldfjac = m;
+  
+  ///Create workspaces
+  using std::vector;
+  vector<double> fvec(m);
+  vector<double> qtf(n);
+  vector<double> wa1(n);
+  vector<double> wa2(n);
+  vector<double> wa3(n);
+  vector<double> wa4(m);
+  vector<double> fjac(m*n);
+
+  vector<int> ipvt(n);
+  vector<double> diag(n);
+  
+  lmdif( fcn , m, n, initialConditions.data(), fvec.data(), Settings.ftol,
+         Settings.xtol,
+         Settings.gtol,
+         static_cast<int>(Settings.maxfev), Settings.epsfcn, diag.data(),
+         static_cast<int>(Settings.mode), Settings.factor,
+         static_cast<int>(Settings.nprint),
+         &info, &nfev, fjac.data(), ldfjac,
+         ipvt.data(), qtf.data(), wa1.data(), wa2.data(), wa3.data(),
+         wa4.data() ) ;
 }
-}
+
+} // namespace estimation
+
+} // namespace math

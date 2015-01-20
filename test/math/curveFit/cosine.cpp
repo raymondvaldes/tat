@@ -29,7 +29,7 @@ using math::functions::Periodic;
 BOOST_AUTO_TEST_SUITE( math )
 BOOST_AUTO_TEST_SUITE( curveFit )
 
-struct periodicProperties {
+struct InternalperiodicProperties {
   quantity< electric_potential > offset =  0 * volts  ;
   quantity< electric_potential > amplitude = 1.0 * volts ;
   quantity< angular_frequency > omega = 1.0 * radians_per_second ;
@@ -37,18 +37,22 @@ struct periodicProperties {
   
 } ;
 
-BOOST_FIXTURE_TEST_SUITE( cosine_fitting, periodicProperties )
+BOOST_FIXTURE_TEST_SUITE( cosine_fitting, InternalperiodicProperties )
 
 
 BOOST_AUTO_TEST_CASE( cosine_fit_constructor )
 {
+  using math::functions::PeriodicProperties;
 
   auto myVectVolts = vector< quantity< electric_potential > >();
   
   auto myTimeVector = vector< quantity< units::si::time > >( );
   
+  auto initialConditions =
+  PeriodicProperties<electric_potential>( offset, amplitude, omega, phase );
+  
   using namespace math::curveFit;
-//  curveFit::cosine( myTimeVector, myVectVolts,  );
+  curveFit::cosine( myTimeVector, myVectVolts, initialConditions );
 
 }
 
