@@ -96,9 +96,14 @@ void run( const filesystem::directory &dir ) noexcept
     }
 
 
-
-
-
+//
+//  auto initialConditions =
+//  PeriodicProperties<electric_potential>( offset, amplitude, omega, phase );
+//  
+//  using namespace math::curveFit;
+//  const auto fittedCosine =
+//  curveFit::cosine( myTimeVector, normalizedSRVector, initialConditions );
+//
 
 
 

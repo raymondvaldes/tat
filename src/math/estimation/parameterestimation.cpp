@@ -22,7 +22,6 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <boost/foreach.hpp>
 #include <exception>
 #include <iomanip>
 #include <iostream>
@@ -205,8 +204,7 @@ class unknownList unknownList::
 
   // Iterate over 'unknown' branches
   thermal::model::labels labels;
-  BOOST_FOREACH( const ptree::value_type &v,
-                 pt.get_child( "unknownParameters" ) )
+  for( const ptree::value_type &v : pt.get_child( "unknownParameters" ) )
   {
     //retrieve subtree
     const ptree& child = v.second;

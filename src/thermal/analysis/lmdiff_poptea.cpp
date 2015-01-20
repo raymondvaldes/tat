@@ -25,7 +25,6 @@ License
 #include <functional>
 #include <cstddef>
 #include <vector>
-#include <boost/foreach.hpp>
 #include <iostream>
 #include <boost/math/special_functions/fpclassify.hpp>
 

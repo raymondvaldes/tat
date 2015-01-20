@@ -22,7 +22,6 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-#include <boost/foreach.hpp>
 #include "thermal/analysis/poptea.hpp"
 #include "tools/interface/xml.h"
 #include "tools/interface/import/columnData.h"

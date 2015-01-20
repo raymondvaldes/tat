@@ -25,7 +25,6 @@ License
 #include <vector>
 #include <string>
 #include <functional>
-#include <boost/foreach.hpp>
 #include <boost/property_tree/ptree.hpp>
 
 #include "thermal/analysis/kernal.hpp"
@@ -136,8 +135,7 @@ loadMethodsfromFile( const boost::property_tree::ptree &mybranch,
   const unknownList thermalSweep( unknownList::loadConfigfromXML( mybranch ) ) ;
 
   std::vector< thermal::model::labels > sweepOptimizationGoal ;
-  BOOST_FOREACH( const ptree::value_type &v,
-                 mybranch.get_child( "parameters" ) )
+  for( const ptree::value_type &v : mybranch.get_child( "parameters" ) )
   {
     //retrieve subtree
     const ptree& child = v.second ;
