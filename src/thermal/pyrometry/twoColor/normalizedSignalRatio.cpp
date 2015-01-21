@@ -29,8 +29,8 @@ auto normalizedSignalRatio(
 
   const auto
   result =
-    (log( SignalRatio ) - 5*log( wavelength1/wavelength2 ) )
-    / ( C2_wien / wavelength1 - C2_wien / wavelength2 ) ;
+    (log( SignalRatio ) - 5 * log( wavelength2/wavelength1 ) )
+    / ( C2_wien / wavelength2 - C2_wien / wavelength1 ) ;
 
   return result;
 }

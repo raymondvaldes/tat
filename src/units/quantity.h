@@ -10,11 +10,18 @@
 #define tat_quantity_h
 
 #include <boost/units/quantity.hpp>
+#include <boost/units/io.hpp>
+
 
 namespace units{
 
 template<class Unit,class Y = double>
   using quantity = boost::units::quantity<Unit, Y>;
+
+
+  using boost::units::binary_prefix;
+  using boost::units::engineering_prefix;
+  using boost::units::no_prefix;
 
 }
 

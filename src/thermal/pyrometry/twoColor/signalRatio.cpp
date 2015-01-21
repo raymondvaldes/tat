@@ -24,7 +24,7 @@ auto signalRatio(
   assert( signal1.value() > 0 );
   assert( signal2.value() > 0 );
   
-  return signal1 / signal2;
+  return signal1 / signal2 ;
 }
 
   

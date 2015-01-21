@@ -40,18 +40,19 @@ auto run( const filesystem::directory &dir ) noexcept -> void
     using units::si::milli;
     using units::si::volts;
     using units::si::electric_potential;
-    const auto signalDCoffset = quantity<electric_potential>( 40 * milli *volts );
+    const auto signalDCoffset1 = quantity<electric_potential>( 77.42 * milli *volts );
+    const auto signalDCoffset2 = quantity<electric_potential>( 94.457 * milli *volts );
 
     using std::transform;
     transform( transientDetectorSignal44.begin(),
                transientDetectorSignal44.end(),
                transientDetectorSignal44.begin(),
-        [&]( auto &val) { return val + signalDCoffset ; } );
+        [&]( auto &val) { return val + signalDCoffset1 ; } );
     
     transform( transientDetectorSignal54.begin(),
                transientDetectorSignal54.end(),
                transientDetectorSignal54.begin(),
-        [&]( auto &val) { return val + signalDCoffset ; } );
+        [&]( auto &val) { return val + signalDCoffset2 ; } );
     
     
     using units::si::meter;
@@ -61,7 +62,7 @@ auto run( const filesystem::directory &dir ) noexcept -> void
     
     
     using units::si::dimensionless;
-    const auto gCoeff = quantity< dimensionless >( 0.956 );
+    const auto gCoeff = quantity< dimensionless >( 0.955943212775443 );
     
     using units::si::length;
     using units::si::micro;
@@ -92,10 +93,12 @@ auto run( const filesystem::directory &dir ) noexcept -> void
       using thermal::pyrometer::twoColor::calibratedSignalRatio;
 
       const auto SR = signalRatio( transientDetectorSignal44[i],
-                                   transientDetectorSignal54[i] );
+                                   transientDetectorSignal54[i] ) ;
       const auto gSR = calibratedSignalRatio( SR, gCoeff ) ;
       
       normalizedSRVector.push_back( normalizedSignalRatio( gSR , wavelength1, wavelength2 ) ) ;
+      
+      
     }
 
     
@@ -146,8 +149,8 @@ auto run( const filesystem::directory &dir ) noexcept -> void
     using std::cout;
     using std::endl;
     
-    cout << "\n";
-    cout << "stage temperature\t" <<  quantity<units::si::temperature>(400 * units::si::kelvin) << endl;
+    cout << "\n" << units::engineering_prefix;
+    cout << "stage temperature\t" <<  quantity<units::si::temperature>(477 * units::si::kelvin) << endl;
     cout << "signal frequency\t" << temperoralFrequency << endl;
     cout << "detector wavelength\t" << wavelength1 << endl;
     cout << "detector wavelength\t" << wavelength2 << endl;
