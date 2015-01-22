@@ -10,12 +10,34 @@
 #define __tat__add__
 
 #include <vector>
+#include <algorithm>    // std::transform
+#include <functional>   // std::plus
 
 namespace algorithm {
 namespace vector{
 
-std::vector<double> add( const std::vector<double>& foo,
-                         const std::vector<double>& bar) noexcept;
+
+template< typename T >
+decltype( auto )
+add( const std::vector<T>& firstvec, const std::vector<T>& secondvec)
+noexcept
+{
+  using std::vector;
+  using std::plus;
+  using std::transform;
+  
+  const auto length = firstvec.size();
+  BOOST_ASSERT( length == secondvec.size() );
+
+  vector<T> result( length ) ;
+  
+  transform( firstvec.begin(), firstvec.end(),
+             secondvec.begin(),
+             result.begin(), plus<double>());
+
+  return result;
+}
+
 
 }}
 

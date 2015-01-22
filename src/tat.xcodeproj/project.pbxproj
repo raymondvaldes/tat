@@ -45,9 +45,7 @@
 		ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */; };
 		ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB4473F19DB37BF009EC35F /* planckWienApprox.h */; };
 		ABB4474519DB386A009EC35F /* constants.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB4474319DB386A009EC35F /* constants.h */; };
-		ABB54FBE19C221920056823E /* subtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FBC19C221920056823E /* subtract.cpp */; };
 		ABB54FBF19C221920056823E /* subtract.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FBD19C221920056823E /* subtract.h */; };
-		ABB54FC519C22C7E0056823E /* add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FC319C22C7E0056823E /* add.cpp */; };
 		ABB54FC619C22C7E0056823E /* add.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FC419C22C7E0056823E /* add.h */; };
 		ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */; };
 		ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */; };
@@ -261,9 +259,7 @@
 		ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planckWienApprox.cpp; path = blackBody/planckWienApprox.cpp; sourceTree = "<group>"; };
 		ABB4473F19DB37BF009EC35F /* planckWienApprox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = planckWienApprox.h; path = blackBody/planckWienApprox.h; sourceTree = "<group>"; };
 		ABB4474319DB386A009EC35F /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = blackBody/constants.h; sourceTree = "<group>"; };
-		ABB54FBC19C221920056823E /* subtract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = subtract.cpp; path = algorithm/vector/subtract.cpp; sourceTree = "<group>"; };
 		ABB54FBD19C221920056823E /* subtract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = subtract.h; path = algorithm/vector/subtract.h; sourceTree = "<group>"; };
-		ABB54FC319C22C7E0056823E /* add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = add.cpp; path = algorithm/vector/add.cpp; sourceTree = "<group>"; };
 		ABB54FC419C22C7E0056823E /* add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = add.h; path = algorithm/vector/add.h; sourceTree = "<group>"; };
 		ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stdVector2ublasVector.cpp; path = algorithm/vector/stdVector2ublasVector.cpp; sourceTree = "<group>"; };
 		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
@@ -684,9 +680,7 @@
 			isa = PBXGroup;
 			children = (
 				ABA58A1E1A675DC300573ED8 /* VectorString2Typename.h */,
-				ABB54FBC19C221920056823E /* subtract.cpp */,
 				ABB54FBD19C221920056823E /* subtract.h */,
-				ABB54FC319C22C7E0056823E /* add.cpp */,
 				ABB54FC419C22C7E0056823E /* add.h */,
 				ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */,
 				ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */,
@@ -1401,7 +1395,6 @@
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
 				ABEF4EB01948D4A500B44AD5 /* kernal.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
-				ABB54FBE19C221920056823E /* subtract.cpp in Sources */,
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
@@ -1412,7 +1405,6 @@
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
-				ABB54FC519C22C7E0056823E /* add.cpp in Sources */,
 				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
 				ABEF4EF51948D4A500B44AD5 /* Iheat.cpp in Sources */,
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
