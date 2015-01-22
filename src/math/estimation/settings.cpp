@@ -12,11 +12,8 @@ namespace math{
 
 namespace estimation{
 
-
-  settings::~settings(void) noexcept{}
-
-  struct settings settings::
-      loadConfigfromXML(const boost::property_tree::ptree pt) noexcept
+settings
+settings::loadConfigfromXML(const boost::property_tree::ptree pt) noexcept
   {
       //initialize parameter estimation settings
       const double ftol     = pt.get<double>( "ftol" );
@@ -27,11 +24,8 @@ namespace estimation{
       const double factor   = pt.get<double>( "factor" );
       const size_t mode        = pt.get<size_t>( "mode" );
       const size_t nprint      = pt.get<size_t>( "nprint" );
-
-      class estimation::settings
-      ParaEstSetting(ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint);
-
-      return ParaEstSetting;
+    
+      return settings{ ftol, xtol, gtol, maxfev, epsfcn, factor, mode, nprint };
   }
 
   settings::settings( const double ftol_,

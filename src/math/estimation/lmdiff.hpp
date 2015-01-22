@@ -47,7 +47,7 @@ void lmdif(std::function < void ( double*, double* ) > fcn,
 
 
 void lmdif(std::function < void ( double*, double* ) > fcn,
-            int dataPoints, std::vector<double>& initialConditions,
+            const size_t dataPoints, std::vector<double>& initialConditions,
             const settings &Settings) noexcept;
 
 

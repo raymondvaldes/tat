@@ -20,7 +20,8 @@ template< typename T >
 class Periodic: public PeriodicProperties<T>
 {
 private:
-  virtual auto evaluate( const units::quantity<units::si::time> time ) const
+  virtual auto
+  evaluate( const units::quantity<units::si::time> time ) const
   noexcept  -> units::quantity<T> = 0;
   
 public:
@@ -29,9 +30,11 @@ public:
   ) noexcept
   : PeriodicProperties<T>( inputProperties )
   {}
+  
   virtual ~Periodic(){}
   
-  auto operator()( const units::quantity<units::si::time> inputTime  ) const
+  auto
+  operator()( const units::quantity<units::si::time> inputTime  ) const noexcept
   -> units::quantity<T>
   {
     return evaluate( inputTime ) ;

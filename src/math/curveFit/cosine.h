@@ -34,25 +34,27 @@ struct propertiesToFit{
 template< typename T >
 auto cosine( const std::vector< units::quantity< units::si::time > > &inputTime,
              const std::vector< units::quantity< T > > &inputSignal,
-             const functions::PeriodicProperties< T > initialConditions,
+             const functions::PeriodicProperties< T > &initialConditions,
              const propertiesToFit fittingGuide =
              propertiesToFit{true, true, true, false} )
 noexcept
 -> functions::Cosine<T>
 {
+  using std::vector;
   using std::function;
   using units::quantity;
   using units::si::plane_angle;
   using functions::PeriodicProperties;
   using functions::Cosine;
 
-
-  math::estimation::settings Settings;
-  
-  int dataPointsToFit = inputTime.size();
+  {
+    assert( !inputTime.empty() ) ;
+    assert( !inputSignal.empty() ) ;
+    assert( inputTime.size() == inputSignal.size() ) ;
+  }
 
   const auto CosineGenerator = [  ]
-  ( const double*x, const functions::PeriodicProperties< T > &input )
+  ( const double*x, const functions::PeriodicProperties< T > &input ) noexcept
   -> functions::Cosine<T>
   {
     auto updatedProperties = PeriodicProperties<T>( input );
@@ -66,7 +68,7 @@ noexcept
 
   auto minimizationEquation =
   [ &inputTime, &inputSignal, &initialConditions, &CosineGenerator ]
-  ( const double *x, double *fvec )
+  ( const double *x, double *fvec ) noexcept
   {
     const auto myCosineFunction = CosineGenerator( x, initialConditions );
 
@@ -77,15 +79,16 @@ noexcept
     }
   };
 
-  using std::vector;
-  vector<double> fittingVector = {
+  auto parameters2Fit = vector<double>{
     initialConditions.offset.value(),
     initialConditions.amplitude.value(),
     initialConditions.phase.value() } ;
  
-  lmdif( minimizationEquation, dataPointsToFit, fittingVector, Settings ) ;
+  const auto numberPoints2Fit =  inputTime.size() ;
+  lmdif( minimizationEquation, numberPoints2Fit,
+          parameters2Fit, math::estimation::settings{} ) ;
 
-  return CosineGenerator( fittingVector.data(), initialConditions ) ;
+  return CosineGenerator( parameters2Fit.data(), initialConditions ) ;
 };
 
 } // namespace curveFit

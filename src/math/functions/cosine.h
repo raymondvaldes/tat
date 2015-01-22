@@ -23,9 +23,9 @@ private:
   const noexcept
   -> units::quantity<T>
   {
-    const auto angle = this->omega * time + this->phase ;
-  
     using std::cos;
+  
+    const auto angle = this->omega * time + this->phase ;
     return this->offset + this->amplitude * cos( angle.value() ) ;
   }
   
@@ -35,7 +35,6 @@ public:
   ) noexcept
   : Periodic<T>( inputProperties )
   {}
-  ~Cosine(){};
 };
 
 } // namespace functions

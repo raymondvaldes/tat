@@ -24,12 +24,11 @@ private:
   auto checkInputArguments( void ) -> void
   {
     using units::si::radians;
+    using units::si::radians_per_second;
+    
     assert( phase <= M_PI * radians &&
             phase >= -M_PI* radians ) ;
-    
-    using units::si::radians_per_second;
     assert( omega > 0 * radians_per_second );
-    
     assert( amplitude.value() > 0  ) ;
   };
 
@@ -39,36 +38,35 @@ public:
   units::quantity<units::si::angular_frequency> omega;
   units::quantity<units::si::plane_angle> phase;
   
-  auto get_period() -> units::quantity< units::si::time >
+  auto get_period() noexcept -> units::quantity< units::si::time >
   {
     return units::quantity<units::si::dimensionless>(1) / get_temporalFrequency();
   } ;
   
-  auto get_angularFrequency() -> units::quantity< units::si::angular_frequency>
+  auto get_angularFrequency() noexcept -> units::quantity< units::si::angular_frequency>
   {
     return omega;
   };
 
-  auto get_temporalFrequency() -> units::quantity< units::si::frequency>
+  auto get_temporalFrequency() noexcept -> units::quantity< units::si::frequency>
   {
     return omega / ( units::si::radians );
   };
 
-  auto get_phase() ->units::quantity< units::si::plane_angle>
+  auto get_phase() noexcept -> units::quantity< units::si::plane_angle>
   {
     return phase;
   };
 
-  auto get_offset() ->units::quantity<T>
+  auto get_offset() noexcept -> units::quantity<T>
   {
     return offset;
   };
   
-  auto get_amplitude() -> units::quantity<T>
+  auto get_amplitude() noexcept -> units::quantity<T>
   {
     return amplitude;
   };
-  
   
   
 public:
@@ -90,8 +88,8 @@ public:
     const units::quantity<units::si::frequency> frequencyIn,
     const units::quantity<units::si::plane_angle> phaseIn
     ) noexcept
-    : offset( offsetIn), amplitude(amplitudeIn),
-      omega( M_2_PI * frequencyIn ), phase(phaseIn)
+    : offset( offsetIn ), amplitude( amplitudeIn ),
+      omega( M_2_PI * frequencyIn ), phase( phaseIn )
     {
       checkInputArguments();
     };
