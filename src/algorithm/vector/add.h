@@ -26,10 +26,11 @@ noexcept
   using std::plus;
   using std::transform;
   
-  const auto length = firstvec.size();
-  BOOST_ASSERT( length == secondvec.size() );
-
-  vector<T> result( length ) ;
+  const auto vectorSize = firstvec.size();
+  BOOST_ASSERT( vectorSize > 0 ) ;
+  BOOST_ASSERT( vectorSize == secondvec.size() );
+  
+  vector<T> result( vectorSize ) ;
   
   transform( firstvec.begin(), firstvec.end(),
              secondvec.begin(),

@@ -7,23 +7,34 @@
 //
 
 #include "algorithm/vector/vector2cstringArray.h"
-
+#include <cassert>      // assert
+#include <algorithm>    // std::generate
 
 namespace algorithm {
 namespace vector {
 
-auto vector2cstringArray( const std::vector<std::string> & myString )
+
+
+auto vector2cstringArray( const std::vector<std::string> & inputVector )
   -> std::vector<char const *>
 {
+  using std::vector;
+  using std::transform;
 
-  std::vector<char const *> vec2;
-  vec2.reserve( myString.size() );
+  const auto vectorSize = inputVector.size();
+  const auto atLeastSingleString = vectorSize > 0 ;
+  assert( atLeastSingleString );
   
-  for (auto const & str : myString ) {
-    vec2.push_back( str.c_str() );
-  }
+
+  const auto string2c_str = []( const auto& aString )
+  { return aString.c_str(); };
+
+  auto outputVector = vector< char const *>( vectorSize );
   
-  return vec2;
+  transform(  inputVector.begin(), inputVector.end(),
+              outputVector.begin(), string2c_str ) ;
+
+  return outputVector;
 }
 
 }}

@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <cassert>
+#include <algorithm>
 #include "math/functions/cosine.h"
 #include "math/estimation/lmdiff.hpp"
 
@@ -51,7 +52,7 @@ noexcept
   int dataPointsToFit = inputTime.size();
 
   const auto CosineGenerator = [  ]
-  ( double*x, const functions::PeriodicProperties< T > &input )
+  ( const double*x, const functions::PeriodicProperties< T > &input )
   -> functions::Cosine<T>
   {
     auto updatedProperties = PeriodicProperties<T>( input );
@@ -63,9 +64,9 @@ noexcept
     return Cosine<T>( updatedProperties ) ;
   };
 
-  function<void ( double*, double* )> fcn =
+  auto minimizationEquation =
   [ &inputTime, &inputSignal, &initialConditions, &CosineGenerator ]
-  ( double *x, double *fvec )
+  ( const double *x, double *fvec )
   {
     const auto myCosineFunction = CosineGenerator( x, initialConditions );
 
@@ -82,7 +83,7 @@ noexcept
     initialConditions.amplitude.value(),
     initialConditions.phase.value() } ;
  
-  lmdif( fcn, dataPointsToFit, fittingVector, Settings ) ;
+  lmdif( minimizationEquation, dataPointsToFit, fittingVector, Settings ) ;
 
   return CosineGenerator( fittingVector.data(), initialConditions ) ;
 };

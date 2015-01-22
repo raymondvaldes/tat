@@ -149,6 +149,7 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list ) 
     const double val = unknown.bestfit();
     TBCsystem.updateVal( unknown.label() , val );
   }
+  
   TBCsystem.updateCoat();
 }
 

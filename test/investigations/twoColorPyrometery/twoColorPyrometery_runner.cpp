@@ -16,6 +16,12 @@
 #include "investigations/main-app.h"
 #include "algorithm/vector/vector2cstringArray.h"
 
+using std::vector;
+using std::string;
+
+using investigations::main_app;
+using algorithm::vector::vector2cstringArray;
+
 
 BOOST_AUTO_TEST_SUITE( investigations )
 BOOST_AUTO_TEST_SUITE( twoColorPyrometery )
@@ -23,18 +29,15 @@ BOOST_AUTO_TEST_SUITE( twoColorPyrometery )
 
 BOOST_AUTO_TEST_CASE( startup ) {
   
-  std::vector<std::string> myArguments = {
+  vector<string> myArguments = {
     "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
     "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color",
     "--sample",         "graphite",
     "--investigation",  "twoColorPyrometery"
        };
-  using algorithm::vector::vector2cstringArray;
-  std::vector<char const *> vec2 = vector2cstringArray(myArguments);
+  vector<char const *> vec2 = vector2cstringArray(myArguments);
 
-  using investigations::main_app;
   main_app( vec2.size() , vec2.data() );
-
 }
 
 BOOST_AUTO_TEST_SUITE_END()

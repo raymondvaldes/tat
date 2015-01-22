@@ -196,7 +196,7 @@ unknownList::unknownList( std::vector< estimation::unknown> input ) noexcept
 {}
 
 
-class unknownList unknownList::
+unknownList unknownList::
         loadConfigfromXML(const boost::property_tree::ptree pt) noexcept
 {
   using boost::property_tree::ptree;

@@ -16,31 +16,31 @@
 namespace algorithm {
 namespace vector{
   
-  template <typename Quantity >
-  auto string2typename( const std::vector<std::string> & inputVector,
-                        const Quantity unit_type  )
-    -> std::vector< Quantity >
+template <typename Quantity >
+auto string2typename( const std::vector<std::string> & inputVector,
+                      const Quantity unit_type  )
+  -> std::vector< Quantity >
+{
+  using std::vector;
+  using std::string;
+  using std::transform;
+  
+  const auto stringToDoubleInitilizer = [=]( const string& strng )
   {
-    using std::vector;
-    auto outputVector = vector< Quantity >( inputVector.size() );
-    
-    
-    using std::string;
-    const auto stringToDoubleInitilizer = [=]( const string& strng )
-    {
-      using std::stod;
-      const auto myElectricity = Quantity( stod(strng) * unit_type );
-      return myElectricity ;
-    };
-    
-    using std::transform;
-    transform (
-      inputVector.begin(), inputVector.end(),
-      outputVector.begin(), stringToDoubleInitilizer
-      );
-    
-    return outputVector;
+    using std::stod;
+    return Quantity( stod(strng) * unit_type ) ;
   };
+
+
+  auto outputVector = vector< Quantity >( inputVector.size() );
+  
+  transform (
+    inputVector.begin(), inputVector.end(),
+    outputVector.begin(), stringToDoubleInitilizer
+    );
+  
+  return outputVector;
+};
   
 }}
 
