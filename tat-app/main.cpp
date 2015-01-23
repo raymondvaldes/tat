@@ -22,7 +22,7 @@ License
     Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
 
 \*----------------------------------------------------------------------------*/
-
+//#define NDEBUG
 #include "investigations/main-app.h"
 
 int main( const int argc, const char *argv[ ] ) noexcept

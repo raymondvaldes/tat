@@ -37,7 +37,6 @@ void lmdif(void (*fcn)(int, int, double*, double*, int*, double**), int m,
            double *fjac, int ldfjac, int *ipvt, double *qtf, double *wa1,
            double *wa2, double *wa3, double *wa4, double *) noexcept;
 
-
 void lmdif(std::function < void ( double*, double* ) > fcn,
             int m, int n, double *x, double *fvec, double ftol, double xtol,
             double gtol, int maxfev, double epsfcn, double *diag, int mode,
@@ -45,11 +44,9 @@ void lmdif(std::function < void ( double*, double* ) > fcn,
             int ldfjac, int *ipvt, double *qtf, double *wa1, double *wa2,
             double *wa3, double *wa4) noexcept;
 
-
 void lmdif(std::function < void ( double*, double* ) > fcn,
             const size_t dataPoints, std::vector<double>& initialConditions,
             const settings &Settings) noexcept;
-
 
   }
 }

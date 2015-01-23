@@ -9,34 +9,26 @@
 #ifndef tat_predictedTemperature_h
 #define tat_predictedTemperature_h
 
-#include "thermal/emission/signal.h"
-#include "units/si/si.h"
-#include "units/si/constants/thermal.h"
+#include "units/units.h"
 
 namespace thermal{
+
 namespace pyrometer{
+
 namespace twoColor{
 
-inline auto temperatureSteady(
+auto temperatureSteady(
   const units::quantity< units::si::dimensionless > calibrationCoefficient,
   const units::quantity< units::si::dimensionless > signalRatio,
   const units::quantity< units::si::length > wavelength_one,
   const units::quantity< units::si::length > wavelength_two
   ) noexcept
-  -> units::quantity< units::si::temperature>
-{
-  using units::si::constants::C2_wien;
-  using std::log;
+  -> units::quantity< units::si::temperature>;
   
-  const auto SR = signalRatio ;
-  const auto G = calibrationCoefficient;
-  
-  auto
-  temp = C2_wien / wavelength_one - C2_wien / wavelength_two ;
-  temp /= log( G * SR ) - 5 * log( wavelength_one / wavelength_two );
+} // namespace twoColor
 
-  return temp;
-}
+} // namespace pyrometer
 
-}}}
+} // namespace thermal
+
 #endif

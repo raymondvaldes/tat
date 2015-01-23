@@ -420,10 +420,10 @@ void Ab_transient(const size_t n,
                   const std::vector<double>& B2,
                   const std::vector<double>& B3,
                   const double B4,
-                  const class property *kLayer1,
-                  const class property *kLayer2,
-                  const class property *psiLayer1,
-                  const class property *psiLayer2
+                  const property *kLayer1,
+                  const property *kLayer2,
+                  const property *psiLayer1,
+                  const property *psiLayer2
                   ) noexcept
 {
 ///Update A matrix based on temperature and time

@@ -9,6 +9,8 @@
 #ifndef __tat__calibrationCoefficient__
 #define __tat__calibrationCoefficient__
 
+#include <cassert>
+
 #include "units/si/si.h"
 #include "units/si/constants/thermal.h"
 #include "thermal/emission/signal.h"
@@ -25,6 +27,8 @@ auto calibrationCoefficient(
   const units::quantity< units::si::temperature> Temp ) noexcept
   -> units::quantity< units::si::dimensionless >
 {
+  assert( Temp > 0 ) ;
+
   using units::si::constants::C2_wien;
   using std::exp;
   using std::log;
@@ -32,7 +36,6 @@ auto calibrationCoefficient(
   const auto SR = signalRatio( second, first ) ;
   const auto lambda_one = first.getElectromagneticWavelength();
   const auto lambda_two = second.getElectromagneticWavelength();
-  
   
   auto
   gCoeff  =  C2_wien / lambda_one - C2_wien / lambda_two ;

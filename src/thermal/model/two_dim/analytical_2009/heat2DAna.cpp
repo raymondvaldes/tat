@@ -23,7 +23,6 @@ License
 
 \*----------------------------------------------------------------------------*/
 #include <complex>
-#include <gsl/gsl_sf_bessel.h>
 #include <fstream>
 #include <iomanip>
 #include "thermal/model/two_dim/analytical_2009/heat2DAna.hpp"
@@ -33,6 +32,7 @@ License
 #include "math/numIntegration/simpsons_3_8.hpp"
 #include "thermal/define/lthermal.h"
 
+#include <gsl/gsl_sf_bessel.h>
 
 
 inline void vector3DSetup(std::vector< std::vector< std::vector< double > > > &Vnew,
