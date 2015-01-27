@@ -15,6 +15,7 @@
 		AB0DFE0619524382007DF69B /* starts_with.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE0419524382007DF69B /* starts_with.h */; };
 		AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB26A3DA19C12073000685DF /* gum_uncertainty.cpp */; };
 		AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = AB26A3DB19C12073000685DF /* gum_uncertainty.h */; };
+		AB44D7D51A77140E000BF19F /* algorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = AB44D7D41A77140E000BF19F /* algorithm.h */; };
 		AB553C4F195DE60100E2B7D1 /* interval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C4D195DE60100E2B7D1 /* interval.cpp */; };
 		AB553C50195DE60100E2B7D1 /* interval.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C4E195DE60100E2B7D1 /* interval.h */; };
 		AB553C53195DF13200E2B7D1 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C51195DF13200E2B7D1 /* random.cpp */; };
@@ -218,6 +219,7 @@
 		AB14652619DB931100710F45 /* si.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = si.h; path = units/si/si.h; sourceTree = "<group>"; };
 		AB26A3DA19C12073000685DF /* gum_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gum_uncertainty.cpp; sourceTree = "<group>"; };
 		AB26A3DB19C12073000685DF /* gum_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gum_uncertainty.h; sourceTree = "<group>"; };
+		AB44D7D41A77140E000BF19F /* algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = algorithm.h; path = algorithm/algorithm.h; sourceTree = "<group>"; };
 		AB553C4D195DE60100E2B7D1 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = geometry/interval.cpp; sourceTree = "<group>"; };
 		AB553C4E195DE60100E2B7D1 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = geometry/interval.h; sourceTree = "<group>"; };
 		AB553C51195DF13200E2B7D1 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = statistics/random/random.cpp; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				AB7EAD131A58C3B400AB7E11 /* stream */,
 				ABB54FBA19C2215D0056823E /* vector */,
 				AB0DFDFE1952426F007DF69B /* string */,
+				AB44D7D41A77140E000BF19F /* algorithm.h */,
 			);
 			name = algorithm;
 			sourceTree = "<group>";
@@ -468,6 +471,17 @@
 				AB06EDA81A719E7C00F9FDBD /* string2c_str.h */,
 			);
 			name = string;
+			sourceTree = "<group>";
+		};
+		AB115F1B1A771C37001BB75A /* main-app */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF4DCC1948D4A500B44AD5 /* execute.cpp */,
+				ABEF4DCD1948D4A500B44AD5 /* execute.h */,
+				ABC648621A65B5EB008FA721 /* main-app.cpp */,
+				ABC648631A65B5EB008FA721 /* main-app.h */,
+			);
+			name = "main-app";
 			sourceTree = "<group>";
 		};
 		AB37106818653C7D000092C5 = {
@@ -751,14 +765,11 @@
 		ABEF4DCB1948D4A500B44AD5 /* investigations */ = {
 			isa = PBXGroup;
 			children = (
+				AB115F1B1A771C37001BB75A /* main-app */,
 				AB81C4591A6041020076BF03 /* num_method2014 */,
 				AB81C4581A6040E40076BF03 /* twoColorPyrometery */,
 				AB81C4571A6040DD0076BF03 /* taylor_uncertainty */,
 				AB81C4541A6040BD0076BF03 /* sensitivityvaldes2013 */,
-				ABEF4DCC1948D4A500B44AD5 /* execute.cpp */,
-				ABEF4DCD1948D4A500B44AD5 /* execute.h */,
-				ABC648621A65B5EB008FA721 /* main-app.cpp */,
-				ABC648631A65B5EB008FA721 /* main-app.h */,
 			);
 			path = investigations;
 			sourceTree = "<group>";
@@ -1229,6 +1240,7 @@
 				ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */,
 				AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */,
 				ABEF4E861948D4A500B44AD5 /* bisection.hpp in Headers */,
+				AB44D7D51A77140E000BF19F /* algorithm.h in Headers */,
 				ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */,
 				ABEF4EEE1948D4A500B44AD5 /* Numerical_Temperature.h in Headers */,
 				ABEF4F021948D4A500B44AD5 /* programoptions.hpp in Headers */,
