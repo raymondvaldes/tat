@@ -7,10 +7,9 @@
 //
 
 #define BOOST_TEST_NO_LIB
+#include <boost/test/unit_test.hpp>
 
 #include <iostream>
-
-#include <boost/test/unit_test.hpp>
 
 #include "units/units.h"
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio.h"
@@ -18,8 +17,11 @@
 #include "thermal/pyrometry/twoColor/calibratedSignalRatio.h"
 
 BOOST_AUTO_TEST_SUITE( thermal )
+
 BOOST_AUTO_TEST_SUITE( pyrometry )
+
 BOOST_AUTO_TEST_SUITE( twoColor )
+
 
 using units::quantity;
 using units::si::length;
