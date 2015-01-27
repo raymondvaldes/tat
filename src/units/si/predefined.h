@@ -12,7 +12,8 @@
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/angular_velocity.hpp>
-#include "units/scale.h"
+
+#include "units/si/prefixes.h"
 
 namespace units {
 namespace si {
@@ -55,17 +56,20 @@ using boost::units::si::kelvin;
 using boost::units::si::hertz;
 
 
-typedef make_scaled_unit<
-        electric_potential::unit_type,
-        boost::units::scale<10, boost::units::static_rational<-3> > >::type
-        millivolts;
+//
+//typedef make_scaled_unit<
+//        electric_potential::unit_type,
+//        boost::units::scale<10, boost::units::static_rational<-3> > >::type
+//        millivolts;
+//
+//typedef make_scaled_unit<
+//        boost::units::si::length::unit_type,
+//        boost::units::scale<10, boost::units::static_rational<-3> >>::type
+        //millimeter;
 
-typedef make_scaled_unit<
-        boost::units::si::length::unit_type,
-        boost::units::scale<10, boost::units::static_rational<-3> >>::type
-        millimeter;
-
-
+//more stuff
+const auto micrometers = micro * meters;
+const auto millimeters = milli * meters;
 
 
 }}
