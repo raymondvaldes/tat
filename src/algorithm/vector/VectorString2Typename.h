@@ -11,7 +11,7 @@
 
 #include <vector>
 #include <string>
-#include <algorithm>
+#include "algorithm/algorithm.h"
 
 namespace algorithm {
 namespace vector{
@@ -34,10 +34,8 @@ auto string2typename( const std::vector<std::string> & inputVector,
 
   auto outputVector = vector< Quantity >( inputVector.size() );
   
-  transform (
-    inputVector.begin(), inputVector.end(),
-    outputVector.begin(), stringToDoubleInitilizer
-    );
+  algorithm::transform(
+  inputVector, outputVector.begin(), stringToDoubleInitilizer );
   
   return outputVector;
 };

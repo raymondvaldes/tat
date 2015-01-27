@@ -12,7 +12,8 @@
 
 
 namespace investigations{
-  namespace taylor_uncertainty{
+
+namespace taylor_uncertainty{
     
 void run( const filesystem::directory &dir ) noexcept {
 
@@ -27,4 +28,6 @@ void run( const filesystem::directory &dir ) noexcept {
   cout << poptea.ppUnknownParameters() << "\n";
 }
     
-}}
+} // namespace taylor_uncertainty
+
+} // namespace investigations

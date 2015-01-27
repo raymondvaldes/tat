@@ -8,7 +8,8 @@
 
 #include "algorithm/vector/stdVector2ublasVector.h"
 #include <boost/assert.hpp>
-#include <algorithm>
+#include "algorithm/algorithm.h"
+//#include <algorithm>
 
 namespace algorithm {
 namespace vector{
@@ -21,7 +22,7 @@ stdVector2ublasVector( const std::vector<double>& input ) noexcept {
   
   vector<double> output( input.size() );
   
-  copy(input.begin(), input.end(), output.begin());
+  algorithm::copy( input, output.begin() );
 
   return output;
 }

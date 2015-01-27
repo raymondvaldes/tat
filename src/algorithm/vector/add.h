@@ -10,8 +10,9 @@
 #define __tat__add__
 
 #include <vector>
-#include <algorithm>    // std::transform
 #include <functional>   // std::plus
+
+#include "algorithm/algorithm.h"
 
 namespace algorithm {
 namespace vector{
@@ -32,9 +33,7 @@ noexcept
   
   vector<T> result( vectorSize ) ;
   
-  transform( firstvec.begin(), firstvec.end(),
-             secondvec.begin(),
-             result.begin(), plus<double>());
+  algorithm::transform( firstvec,  secondvec, result.begin(), plus<double>());
 
   return result;
 }

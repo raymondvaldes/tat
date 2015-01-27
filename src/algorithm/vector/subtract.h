@@ -10,8 +10,9 @@
 #define __tat__subtract__
 
 #include <vector>
-#include <algorithm>    // std::transform
 #include <functional>   // std::plus
+
+#include "algorithm/algorithm.h"
 
 namespace algorithm {
 namespace vector{
@@ -30,8 +31,7 @@ noexcept
   BOOST_ASSERT( vectorSize == secondvec.size() );
 
   vector<T> result( vectorSize ) ;
-  transform( firstvec.begin(), firstvec.end(),
-             secondvec.begin(),
+  algorithm::transform( firstvec, secondvec,
              result.begin(), minus<double>() );
 
   return result;

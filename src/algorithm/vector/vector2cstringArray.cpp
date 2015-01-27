@@ -8,7 +8,7 @@
 
 #include "algorithm/vector/vector2cstringArray.h"
 #include <cassert>      // assert
-#include <algorithm>    // std::generate
+#include "algorithm/algorithm.h"
 
 namespace algorithm {
 namespace vector {
@@ -31,8 +31,7 @@ auto vector2cstringArray( const std::vector<std::string> & inputVector )
 
   auto outputVector = vector< char const *>( vectorSize );
   
-  transform(  inputVector.begin(), inputVector.end(),
-              outputVector.begin(), string2c_str ) ;
+  algorithm::transform(  inputVector, outputVector.begin(), string2c_str ) ;
 
   return outputVector;
 }

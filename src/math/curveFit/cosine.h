@@ -19,6 +19,7 @@ namespace math {
 
 namespace curveFit {
 
+
 struct propertiesToFit{
   const bool offset;
   const bool amplitude;
@@ -40,12 +41,15 @@ auto cosine( const std::vector< units::quantity< units::si::time > > &inputTime,
 noexcept
 -> functions::Cosine<T>
 {
-  using std::vector;
-  using std::function;
-  using units::quantity;
-  using units::si::plane_angle;
-  using functions::PeriodicProperties;
-  using functions::Cosine;
+
+    using std::vector;
+    using std::function;
+    using units::quantity;
+    using units::si::plane_angle;
+    using functions::PeriodicProperties;
+    using functions::Cosine;
+    
+  
 
   {
     assert( !inputTime.empty() ) ;
@@ -71,12 +75,15 @@ noexcept
   ( const double *x, double *fvec ) noexcept
   {
     const auto myCosineFunction = CosineGenerator( x, initialConditions );
-
-    for( size_t i = 0 ; i < inputTime.size() ; ++i )
+    const auto residual = [ & ]( const int i )
     {
-      const auto val = myCosineFunction( inputTime[i] ) -  inputSignal[i] ;
-      fvec[i] = val.value() ;
-    }
+      return ( myCosineFunction( inputTime[i] ) -  inputSignal[i] ).value();
+    };
+
+    using std::generate;
+    int i(0);
+    generate( fvec, fvec + inputTime.size() , [&](){ return residual(i++); } ) ;
+    
   };
 
   auto parameters2Fit = vector<double>{
