@@ -9,7 +9,6 @@
 #ifndef tat_Header_h
 #define tat_Header_h
 
-
 #include "math/functions/PeriodicProperties.h"
 
 namespace math {
@@ -34,8 +33,8 @@ public:
   virtual ~Periodic(){}
   
   auto
-  operator()( const units::quantity<units::si::time> inputTime  ) const noexcept
-  -> units::quantity<T>
+  operator()( const units::quantity<units::si::time> inputTime  ) const
+  noexcept -> units::quantity<T>
   {
     return evaluate( inputTime ) ;
   }

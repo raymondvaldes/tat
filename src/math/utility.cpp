@@ -186,6 +186,9 @@ range( const double xstart, const double xend, const size_t size ) noexcept
   return result;
 }
 
+
+
+
 std::pair<double, double>
 x_limits_from_cenDec( const double cen, const double dec ) noexcept
 {

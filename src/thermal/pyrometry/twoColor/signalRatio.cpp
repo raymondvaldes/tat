@@ -8,7 +8,7 @@
 #include <cassert>
 #include "signalRatio.h"
 
-#include "units/units.h"
+#include "units.h"
 
 namespace thermal{
 

@@ -9,7 +9,7 @@
 #ifndef tat_predictedTemperature_h
 #define tat_predictedTemperature_h
 
-#include "units/units.h"
+#include "units.h"
 
 namespace thermal{
 

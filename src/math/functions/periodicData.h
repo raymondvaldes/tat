@@ -14,7 +14,7 @@
 #include <vector>       // std::vector
 #include <cassert>      // assert
 
-#include "units/units.h"  // units::quantity
+#include "units.h"  // units::quantity
 
 namespace math {
   
@@ -34,15 +34,13 @@ public:
   ) noexcept
   : timeVector( timeIn ), dataVector( signalsIn )
   {
-    const auto timeVectorSize = timeVector.size();
-    const auto dataVectorSize = dataVector.size();
-    assert( timeVectorSize > 0 ) ;
-    assert( dataVectorSize > 0 ) ;
-    assert( timeVectorSize == dataVectorSize );
+    assert( !timeVector.empty() ) ;
+    assert( !dataVector.empty() ) ;
+    assert( timeVector.size() == dataVector.size() );
   }
   
-  auto initialEstimateAmplitude() noexcept
-  -> units::quantity< T >
+  auto initialEstimateAmplitude() const
+  noexcept -> units::quantity< T >
   {
     using units::quantity;
     using units::si::dimensionless;
@@ -56,8 +54,8 @@ public:
     return ( max - min ) / quantity< dimensionless >( 2 );
   };
   
-  auto initialEstimateOffset() noexcept
-  -> units::quantity< T >
+  auto initialEstimateOffset() const
+  noexcept -> units::quantity< T >
   {
     using units::quantity;
     using std::accumulate;

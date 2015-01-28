@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "units/units.h"
+#include "units.h"
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio.h"
 #include "thermal/pyrometry/twoColor/signalRatio.h"
 #include "thermal/pyrometry/twoColor/calibratedSignalRatio.h"

@@ -28,6 +28,13 @@ BOOST_UNITS_PHYSICAL_CONSTANT(  C2_wien ,
                                 quantity<length_temperature>,
                                 0.01439 *  meters  * kelvin,
                                 0.0 * meters * kelvin ) ;
+
+BOOST_UNITS_PHYSICAL_CONSTANT(  PI_radians ,
+                                quantity<plane_angle>,
+                                M_PI *  radians,
+                                0.0 * radians ) ;
+
 }}}
+
 
 #endif

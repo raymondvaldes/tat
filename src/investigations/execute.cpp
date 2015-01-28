@@ -23,6 +23,7 @@
  
 \*----------------------------------------------------------------------------*/
 
+#include <algorithm>
 #include <boost/filesystem.hpp>
 #include "investigations/execute.h"
 #include "investigations/num_method2014.h"
@@ -32,13 +33,15 @@
 
 #include "tools/interface/filesystem.hpp"
 
+using std::for_each;
+
 namespace investigations {
 
 void execute( const std::string& mydirectory, const std::string& sampleName,
               const std::string& investigationName ) noexcept
 {
   using filesystem::directory;
-  const auto investigations = [ & ] ( const directory& active ) -> void
+  const auto run_investigation = [ & ] ( const directory& active ) -> void
   {
     if( investigationName == "PIE_Analsis") {
       sensitivityvaldes2013::run( active ) ;
@@ -65,15 +68,17 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
   directory_of_samples.working_directory_starts_with( sampleName ) ;
   
   if( runCurrentDirectory ) {
-    investigations( directory_of_samples ) ;
+    run_investigation( directory_of_samples ) ;
   }
   else {
     const auto paths = directory_of_samples.ls() ;
-    for( const directory& active : paths ) {
-      if( active.working_directory_starts_with( sampleName ) ) {
-        investigations( active ) ;
+    
+    for_each( paths.begin(), paths.end(), [&]( const auto & pathElement )
+    {
+      if( pathElement.working_directory_starts_with( sampleName ) ) {
+        run_investigation( pathElement ) ;
       }
-    }
+    });
   }
   
 }}

@@ -11,7 +11,7 @@
 
 #include <cmath>
 #include <cassert>
-#include "units/units.h"
+#include "units.h"
 
 namespace math {
   
@@ -33,37 +33,43 @@ private:
   };
 
 public:
-  units::quantity<T> offset;
-  units::quantity<T> amplitude;
-  units::quantity<units::si::angular_frequency> omega;
-  units::quantity<units::si::plane_angle> phase;
+  units::quantity< T > offset;
+  units::quantity< T > amplitude;
+  units::quantity< units::si::angular_frequency > omega;
+  units::quantity< units::si::plane_angle > phase;
   
-  auto get_period() noexcept -> units::quantity< units::si::time >
+  auto get_period() const
+  noexcept -> units::quantity< units::si::time >
   {
     return units::quantity<units::si::dimensionless>(1) / get_temporalFrequency();
   } ;
   
-  auto get_angularFrequency() noexcept -> units::quantity< units::si::angular_frequency>
+  auto get_angularFrequency() const
+  noexcept -> units::quantity< units::si::angular_frequency>
   {
     return omega;
   };
 
-  auto get_temporalFrequency() noexcept -> units::quantity< units::si::frequency>
+  auto get_temporalFrequency() const
+  noexcept -> units::quantity< units::si::frequency>
   {
     return omega / ( units::si::radians );
   };
 
-  auto get_phase() noexcept -> units::quantity< units::si::plane_angle>
+  auto get_phase() const
+  noexcept -> units::quantity< units::si::plane_angle>
   {
     return phase;
   };
 
-  auto get_offset() noexcept -> units::quantity<T>
+  auto get_offset() const
+  noexcept -> units::quantity<T>
   {
     return offset;
   };
   
-  auto get_amplitude() noexcept -> units::quantity<T>
+  auto get_amplitude() const
+  noexcept -> units::quantity<T>
   {
     return amplitude;
   };
@@ -74,25 +80,25 @@ public:
     const units::quantity<T> offsetIn,
     const units::quantity<T> amplitudeIn,
     const units::quantity<units::si::angular_frequency> omegaIn,
-    const units::quantity<units::si::plane_angle> phaseIn
-    ) noexcept
+    const units::quantity<units::si::plane_angle> phaseIn )
+  noexcept
     : offset( offsetIn), amplitude(amplitudeIn),
       omega( omegaIn ), phase(phaseIn)
     {
-      checkInputArguments();
+      checkInputArguments() ;
     };
 
-  explicit PeriodicProperties(
-    const units::quantity<T> offsetIn,
-    const units::quantity<T> amplitudeIn,
-    const units::quantity<units::si::frequency> frequencyIn,
-    const units::quantity<units::si::plane_angle> phaseIn
-    ) noexcept
-    : offset( offsetIn ), amplitude( amplitudeIn ),
-      omega( M_2_PI * frequencyIn ), phase( phaseIn )
-    {
-      checkInputArguments();
-    };
+//  explicit PeriodicProperties(
+//    const units::quantity<T> offsetIn,
+//    const units::quantity<T> amplitudeIn,
+//    const units::quantity<units::si::frequency> frequencyIn,
+//    const units::quantity<units::si::plane_angle> phaseIn )
+//  noexcept
+//    : offset( offsetIn ), amplitude( amplitudeIn ),
+//      omega( 2 * M_PI * frequencyIn ), phase( phaseIn )
+//    {
+//      checkInputArguments();
+//    };
   
 };
 

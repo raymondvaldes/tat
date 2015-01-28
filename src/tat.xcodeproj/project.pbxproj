@@ -39,6 +39,10 @@
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
 		AB932DF51A6DC0E700ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF41A6DC0E700ECF117 /* sine.h */; };
 		AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DFB1A6DC2BB00ECF117 /* cosine.h */; };
+		ABA48C381A7843F90025666F /* range.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48C361A7843F90025666F /* range.h */; };
+		ABA48C3A1A78553C0025666F /* cmath.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48C391A78553C0025666F /* cmath.h */; };
+		ABA48C4B1A78717F0025666F /* wrap2pi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA48C491A78717F0025666F /* wrap2pi.cpp */; };
+		ABA48C4C1A78717F0025666F /* wrap2pi.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48C4A1A78717F0025666F /* wrap2pi.h */; };
 		ABA58A181A67257400573ED8 /* units.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A171A67257400573ED8 /* units.h */; };
 		ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA58A1A1A67489E00573ED8 /* path.cpp */; };
 		ABA58A1D1A67489E00573ED8 /* path.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A1B1A67489E00573ED8 /* path.h */; };
@@ -255,7 +259,11 @@
 		AB932DF61A6DC0F400ECF117 /* cosine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = functions/cosine.h; sourceTree = "<group>"; };
 		AB932DFB1A6DC2BB00ECF117 /* cosine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = curveFit/cosine.h; sourceTree = "<group>"; };
 		AB932E001A6DDBEE00ECF117 /* PeriodicProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PeriodicProperties.h; path = functions/PeriodicProperties.h; sourceTree = "<group>"; };
-		ABA58A171A67257400573ED8 /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = units.h; path = units/units.h; sourceTree = "<group>"; };
+		ABA48C361A7843F90025666F /* range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = range.h; path = construct/range.h; sourceTree = "<group>"; };
+		ABA48C391A78553C0025666F /* cmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmath.h; path = units/cmath.h; sourceTree = "<group>"; };
+		ABA48C491A78717F0025666F /* wrap2pi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrap2pi.cpp; path = functions/wrap2pi.cpp; sourceTree = "<group>"; };
+		ABA48C4A1A78717F0025666F /* wrap2pi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrap2pi.h; path = functions/wrap2pi.h; sourceTree = "<group>"; };
+		ABA58A171A67257400573ED8 /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = units.h; path = /Users/raymondvaldes/code/tat/src/units.h; sourceTree = "<absolute>"; };
 		ABA58A1A1A67489E00573ED8 /* path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path.cpp; path = filesystem/path.cpp; sourceTree = "<group>"; };
 		ABA58A1B1A67489E00573ED8 /* path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = path.h; path = filesystem/path.h; sourceTree = "<group>"; };
 		ABA58A1E1A675DC300573ED8 /* VectorString2Typename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VectorString2Typename.h; path = algorithm/vector/VectorString2Typename.h; sourceTree = "<group>"; };
@@ -542,6 +550,8 @@
 				AB932DF41A6DC0E700ECF117 /* sine.h */,
 				AB932DF61A6DC0F400ECF117 /* cosine.h */,
 				ABC5B8A11A6F05E500D893C9 /* periodicData.h */,
+				ABA48C491A78717F0025666F /* wrap2pi.cpp */,
+				ABA48C4A1A78717F0025666F /* wrap2pi.h */,
 			);
 			name = functions;
 			sourceTree = "<group>";
@@ -640,6 +650,7 @@
 		AB932DF21A6DB76E00ECF117 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				ABA58A171A67257400573ED8 /* units.h */,
 				ABA58A191A67487D00573ED8 /* filesystem */,
 				ABF5D66319DB607700A70476 /* units */,
 				AB0DFDFD19524268007DF69B /* algorithm */,
@@ -672,6 +683,14 @@
 				ABE168FD1948EA3B00C1E409 /* libboost_system.a */,
 			);
 			name = "linked-libraries";
+			sourceTree = "<group>";
+		};
+		ABA48C341A7843CE0025666F /* construct */ = {
+			isa = PBXGroup;
+			children = (
+				ABA48C361A7843F90025666F /* range.h */,
+			);
+			name = construct;
 			sourceTree = "<group>";
 		};
 		ABA58A191A67487D00573ED8 /* filesystem */ = {
@@ -777,6 +796,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				ABA48C341A7843CE0025666F /* construct */,
 				AB932DF31A6DBAC700ECF117 /* curveFIt */,
 				AB6087751A69E4D0009B1E85 /* functions */,
 				ABEBCE4F19C7364D00882E01 /* numericalAnalysis */,
@@ -1161,7 +1181,7 @@
 				ABF5D66F19DB6E4200A70476 /* scale.h */,
 				ABF5D66919DB61E900A70476 /* quantity.h */,
 				AB71908119DF2BAB008FC395 /* operators.h */,
-				ABA58A171A67257400573ED8 /* units.h */,
+				ABA48C391A78553C0025666F /* cmath.h */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -1169,11 +1189,11 @@
 		ABF5D66419DB608600A70476 /* si */ = {
 			isa = PBXGroup;
 			children = (
+				AB71BD6519DE70AB00C7F280 /* constants */,
 				ABF5D66619DB60BD00A70476 /* predefined.h */,
 				ABF5D66A19DB65AB00A70476 /* extension.h */,
 				AB71908019DF29D5008FC395 /* prefixes.h */,
 				AB71908219DF2C73008FC395 /* base.h */,
-				AB71BD6519DE70AB00C7F280 /* constants */,
 			);
 			name = si;
 			sourceTree = "<group>";
@@ -1195,6 +1215,7 @@
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
 				ABEF4EB11948D4A500B44AD5 /* kernal.hpp in Headers */,
 				AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */,
+				ABA48C3A1A78553C0025666F /* cmath.h in Headers */,
 				ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */,
 				ABB54FBF19C221920056823E /* subtract.h in Headers */,
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
@@ -1218,6 +1239,7 @@
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
 				AB932DF51A6DC0E700ECF117 /* sine.h in Headers */,
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
+				ABA48C381A7843F90025666F /* range.h in Headers */,
 				ABB4474519DB386A009EC35F /* constants.h in Headers */,
 				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
 				AB06EDA91A719E7C00F9FDBD /* string2c_str.h in Headers */,
@@ -1231,6 +1253,7 @@
 				ABEF4EEA1948D4A500B44AD5 /* numerical_2011.h in Headers */,
 				ABEF4E921948D4A500B44AD5 /* utils.hpp in Headers */,
 				ABEF4EAD1948D4A500B44AD5 /* basedata.hpp in Headers */,
+				ABA48C4C1A78717F0025666F /* wrap2pi.h in Headers */,
 				ABEF4EB51948D4A500B44AD5 /* lmdiff_poptea_help.hpp in Headers */,
 				ABEF4EBD1948D4A500B44AD5 /* poptea_initialize.h in Headers */,
 				AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */,
@@ -1407,6 +1430,7 @@
 				ABEF4EB61948D4A500B44AD5 /* methods.cpp in Sources */,
 				ABEF4EBA1948D4A500B44AD5 /* poptea.cpp in Sources */,
 				ABEF4EED1948D4A500B44AD5 /* Numerical_Temperature.cpp in Sources */,
+				ABA48C4B1A78717F0025666F /* wrap2pi.cpp in Sources */,
 				ABEF4EDD1948D4A500B44AD5 /* laser.cpp in Sources */,
 				ABEF4F011948D4A500B44AD5 /* programoptions.cpp in Sources */,
 				ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */,
@@ -1471,7 +1495,7 @@
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -1516,6 +1540,11 @@
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-march=native",
+					"-pipe",
+				);
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
@@ -1523,10 +1552,7 @@
 				STRIP_STYLE = all;
 				VALID_ARCHS = x86_64;
 				VERSIONING_SYSTEM = "";
-				WARNING_CFLAGS = (
-					"-march=native",
-					"-pipe",
-				);
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -1597,6 +1623,11 @@
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-march=native",
+					"-pipe",
+				);
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
@@ -1604,10 +1635,7 @@
 				STRIP_STYLE = all;
 				VALID_ARCHS = x86_64;
 				VERSIONING_SYSTEM = "";
-				WARNING_CFLAGS = (
-					"-march=native",
-					"-pipe",
-				);
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};
@@ -1616,7 +1644,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_ENABLE_MODULES = NO;
-				CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION = deep;
+				CLANG_STATIC_ANALYZER_MODE_ON_ANALYZE_ACTION = shallow;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CLANG_WARN_BOOL_CONVERSION = NO;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
@@ -1628,7 +1656,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
@@ -1665,14 +1693,11 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SEPARATE_STRIP = NO;
 				STRIP_STYLE = all;
 				USER_HEADER_SEARCH_PATHS = "~/code/tat/src";
-				WARNING_CFLAGS = (
-					"-Wno-gnu",
-					"-fslp-vectorize-aggressive",
-				);
+				WARNING_CFLAGS = "-Wno-gnu";
 			};
 			name = Debug;
 		};
@@ -1728,10 +1753,7 @@
 				SEPARATE_STRIP = NO;
 				STRIP_STYLE = all;
 				USER_HEADER_SEARCH_PATHS = "~/code/tat/src";
-				WARNING_CFLAGS = (
-					"-Wno-gnu",
-					"-fslp-vectorize-aggressive",
-				);
+				WARNING_CFLAGS = "-Wno-gnu";
 			};
 			name = Release;
 		};

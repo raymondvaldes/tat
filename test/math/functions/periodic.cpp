@@ -11,7 +11,7 @@
 #include "math/functions/cosine.h"
 #include "math/functions/PeriodicProperties.h"
 
-#include "units/units.h"
+#include "units.h"
 
 #define BOOST_TEST_NO_LIB
 #include <boost/test/unit_test.hpp>
@@ -36,10 +36,10 @@ using math::functions::PeriodicProperties;
 
 
 struct periodicProperties {
-  quantity< electric_potential > offset =  0 * volts  ;
+  quantity< electric_potential > offset =  200 * volts  ;
   quantity< electric_potential > amplitude = 1.0 * volts ;
   quantity< angular_frequency > omega = 1.0 * radians_per_second ;
-  quantity< plane_angle > phase = 0 * radians ;
+  quantity< plane_angle > phase = 1.2 * radians ;
   
   PeriodicProperties< electric_potential >
   myProperties = PeriodicProperties< electric_potential >
@@ -50,6 +50,8 @@ struct periodicProperties {
 BOOST_FIXTURE_TEST_SUITE( periodic, periodicProperties)
 
 
+
+
 BOOST_AUTO_TEST_CASE( sine_function ) {
 
   using math::functions::Sine;
@@ -57,9 +59,15 @@ BOOST_AUTO_TEST_CASE( sine_function ) {
   Sine<electric_potential>( myProperties ) ;
 
   using std::sin;
-  BOOST_CHECK_CLOSE( sinFunc( 0.1 * seconds ).value() , sin( 0.1 ) , 1e-14 ) ;
-  BOOST_CHECK_CLOSE( sinFunc( -0.1 * seconds ).value() , sin( -0.1 ) , 1e-14 ) ;
-  BOOST_CHECK_CLOSE( sinFunc( 0 * seconds ).value() , sin( 0 ) , 1e-14 ) ;
+  
+  const auto mySin = [&]( const double t ){
+    return offset.value()
+    + amplitude.value() * std::sin( omega.value()  * t + phase.value() );
+  };
+  
+  BOOST_CHECK_CLOSE( sinFunc( 0.1 * seconds ).value() , mySin( 0.1 ) , 1e-14 ) ;
+  BOOST_CHECK_CLOSE( sinFunc( -0.1 * seconds ).value() , mySin( -0.1 ) , 1e-14 ) ;
+  BOOST_CHECK_CLOSE( sinFunc( 0 * seconds ).value() , mySin( 0 ) , 1e-14 ) ;
   
 
 }
@@ -70,11 +78,16 @@ BOOST_AUTO_TEST_CASE( cosine_function ) {
   const auto cosFunc =
   Cosine<electric_potential>( myProperties ) ;
 
+  const auto myCos = [&]( const double t ){
+    return offset.value()
+    + amplitude.value() * std::cos( omega.value()  * t + phase.value() );
+  };
+
   using std::cos;
   cosFunc( 0.1 * seconds ).value();
-  BOOST_CHECK_CLOSE( cosFunc( 0.1 * seconds ).value() , cos( 0.1 ) , 1e-14 ) ;
-  BOOST_CHECK_CLOSE( cosFunc( -0.1 * seconds ).value() , cos( -0.1 ) , 1e-14 ) ;
-  BOOST_CHECK_CLOSE( cosFunc( 0 * seconds ).value() , cos( 0 ) , 1e-14 ) ;
+  BOOST_CHECK_CLOSE( cosFunc( 0.1 * seconds ).value() , myCos( 0.1 ) , 1e-14 ) ;
+  BOOST_CHECK_CLOSE( cosFunc( -0.1 * seconds ).value() , myCos( -0.1 ) , 1e-14 ) ;
+  BOOST_CHECK_CLOSE( cosFunc( 0 * seconds ).value() , myCos( 0 ) , 1e-14 ) ;
   
 
 }

@@ -9,7 +9,7 @@
 #ifndef tat_normalizedSignalRatio_h
 #define tat_normalizedSignalRatio_h
 
-#include "units/units.h"
+#include "units.h"
 
 namespace thermal{
 

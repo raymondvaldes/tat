@@ -8,70 +8,71 @@
 
 #define BOOST_TEST_NO_LIB
 
+#include <algorithm>
+#include <iostream>
+
 #include "math/curveFit/cosine.h"
+#include "math/construct/range.h"
 #include <boost/test/unit_test.hpp>
 #include <boost/test/execution_monitor.hpp>
 
-  using std::vector;
+using std::generate;
+using std::vector;
 using units::quantity;
-using units::si::electric_potential;
-using units::si::angular_frequency;
-using units::si::radians;
-using units::si::radians_per_second;
-using units::si::plane_angle;
-using units::si::volts;
-using units::si::seconds;
+using namespace units::si;
 
-using units::si::milli;
-const auto millivolts = milli * volts;
 using math::functions::Periodic;
+using math::functions::PeriodicProperties;
+using math::construct::range_from_0;
 
 BOOST_AUTO_TEST_SUITE( math )
 BOOST_AUTO_TEST_SUITE( curveFit )
 
 struct InternalperiodicProperties {
-  quantity< electric_potential > offset =  0 * volts  ;
-  quantity< electric_potential > amplitude = 1.0 * volts ;
-  quantity< angular_frequency > omega = 1.0 * radians_per_second ;
-  quantity< plane_angle > phase = 0 * radians ;
+  quantity< electric_potential > offset =  100 * volts  ;
+  quantity< electric_potential > amplitude = 0.01 * volts ;
+  quantity< plane_angle > phase = -1 * radians ;
+  
+  quantity< angular_frequency > omega = 2.5 * radians_per_second ;
+  quantity< frequency > myFrequency = omega /  ( M_PI * radians ) ;
+  quantity< units::si::time > period = quantity<dimensionless>(1) / myFrequency;
+
+  quantity< electric_potential > offset_initial =  5 * volts  ;
+  quantity< electric_potential > amplitude_initial = 2.0 * volts ;
+  quantity< plane_angle > phase_initial = -0.1 * radians ;
   
 } ;
 
 BOOST_FIXTURE_TEST_SUITE( cosine_fitting, InternalperiodicProperties )
 
 
-BOOST_AUTO_TEST_CASE( cosine_fit_constructor )
+BOOST_AUTO_TEST_CASE( cosine_fit_test )
 {
-  using math::functions::PeriodicProperties;
-  using units::si::seconds;
+  const auto tol = 1e-10;
+  const auto points = 101;
   
-  auto myVectVolts = vector< quantity< electric_potential > >{
-    1     * volts,
-    0.995 * volts,
-    0.980 * volts,
-    0.955 * volts
-    };
+  auto myTime = range_from_0( period, points );
   
-  auto myTimeVector = vector< quantity< units::si::time > >{
-    0     * seconds,
-    0.10  * seconds,
-    0.2   * seconds,
-    0.3   * seconds
-    };
+  auto myVectVolts = vector< quantity< electric_potential > >( points, 0 * volts );
   
-  auto initialConditions =
-  PeriodicProperties<electric_potential>( offset, amplitude, omega, phase );
+  auto i = 0 ;
+  generate( myVectVolts.begin(), myVectVolts.end(), [&]()
+  {
+    return offset + amplitude * cos( omega * myTime[i++] + phase ) ;
+  } ) ;
+
+  const auto initialConditions =
+  PeriodicProperties<electric_potential>( offset_initial, amplitude_initial, omega, phase_initial );
   
   using namespace math::curveFit;
   const auto fittedCosine =
-  curveFit::cosine( myTimeVector, myVectVolts, initialConditions );
+  curveFit::cosine( myTime, myVectVolts, initialConditions );
 
-  for( const auto val : myTimeVector )
   
-  for( size_t i = 0 ; i < myVectVolts.size() ; ++i)
-    BOOST_CHECK_CLOSE( myVectVolts[i].value() ,
-                       fittedCosine( myTimeVector[i] ).value() , 1e-2) ;
-
+  BOOST_CHECK_CLOSE_FRACTION( omega.value(), fittedCosine.omega.value(), tol   ) ;
+  BOOST_CHECK_CLOSE_FRACTION( amplitude.value(), fittedCosine.amplitude.value(), tol   ) ;
+  BOOST_CHECK_CLOSE_FRACTION( offset.value(), fittedCosine.offset.value(), tol   ) ;
+  BOOST_CHECK_CLOSE_FRACTION( phase.value(), fittedCosine.phase.value(),  tol);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

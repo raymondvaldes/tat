@@ -8,6 +8,9 @@
 
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio.h"
 
+using std::log;
+using units::si::constants::C2_wien;
+
 namespace thermal{
 
 namespace pyrometer{
@@ -24,12 +27,9 @@ auto normalizedSignalRatio(
   assert( wavelength1.value() > 0 );
   assert( wavelength2.value() > 0 );
 
-  using std::log;
-  using units::si::constants::C2_wien;
-
   const auto
   result =
-    (log( SignalRatio ) - 5 * log( wavelength2/wavelength1 ) )
+    ( log( SignalRatio ) - 5 * log( wavelength2 / wavelength1 ) )
     / ( C2_wien / wavelength2 - C2_wien / wavelength1 ) ;
 
   return result;
