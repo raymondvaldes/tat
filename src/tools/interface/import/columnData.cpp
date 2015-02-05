@@ -18,6 +18,11 @@
 #include "algorithm/string/trim.h"
 #include "algorithm/string/trim_all.h"
 
+using std::for_each;
+using std::begin;
+using std::end;
+using std::invalid_argument;
+
 namespace tools {
 namespace interface {
 namespace import {
@@ -53,7 +58,6 @@ namespace import {
     const auto throwException = poorDataIntegrity ;
     
     if( throwException ) {
-      using std::invalid_argument;
       throw invalid_argument( "Input data not in matrix form." ) ;
     }
   }
@@ -122,21 +126,21 @@ namespace import {
     if( matrixForm )
     {
       columns.resize( nColumns ) ;
-      for( auto& column: columns) {
+      
+      for_each( begin( columns ), end( columns ), [=](auto& column){
         column.resize( nRows ) ;
-      }
+      }  );
       
-      size_t i = 0 ;
-      size_t j = 0 ;
-      
-      for( const auto& row: rows) {
-        for( const auto& Element: row ) {
-          columns[i][j] = Element;
-          i++;
-        }
+      auto i = 0 ;
+      auto j = 0 ;
+      for_each( begin( rows ), end( rows ), [&]( auto& row ){
+        for_each( begin( row ), end( row ), [&]( auto& Element){
+          columns[i++][j] = Element;
+        }  );
+        
         i = 0;
         j++;
-      }
+      } );
     }
 
     return matrixForm;
@@ -145,12 +149,15 @@ namespace import {
   auto columnData::resetDataVectors(void) noexcept -> void
   {
     rows.clear();
-    for( auto&row: rows )
+    for_each( begin(rows), end(rows), []( auto& row){
       row.clear();
+    } );
     
     columns.clear();
-    for( auto&column: columns )
+    for_each( begin( columns ), end( columns ), [](auto& column){
       column.clear();
+    } );
+    
   }
   
   auto columnData::getColumn( const size_t columnNumber ) const

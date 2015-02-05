@@ -9,7 +9,7 @@
 #ifndef __tat__calibrationCoefficient__
 #define __tat__calibrationCoefficient__
 
-#include <cassert>
+#include "assert/assertExtensions.h"
 
 #include "units/si/si.h"
 #include "units/si/constants/thermal.h"
@@ -27,7 +27,7 @@ auto calibrationCoefficient(
   const units::quantity< units::si::temperature> Temp ) noexcept
   -> units::quantity< units::si::dimensionless >
 {
-  assert( Temp > 0 ) ;
+  assert_positive( Temp ) ;
 
   using units::si::constants::C2_wien;
   using std::exp;

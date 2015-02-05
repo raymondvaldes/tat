@@ -26,6 +26,7 @@ auto normalizedSignalRatio(
   assert( SignalRatio.value() > 0 );
   assert( wavelength1.value() > 0 );
   assert( wavelength2.value() > 0 );
+  assert( wavelength1 != wavelength2 ) ;
 
   const auto
   result =

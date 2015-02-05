@@ -43,6 +43,7 @@
 		ABA48C3A1A78553C0025666F /* cmath.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48C391A78553C0025666F /* cmath.h */; };
 		ABA48C4B1A78717F0025666F /* wrap2pi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA48C491A78717F0025666F /* wrap2pi.cpp */; };
 		ABA48C4C1A78717F0025666F /* wrap2pi.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48C4A1A78717F0025666F /* wrap2pi.h */; };
+		ABA48C511A79A7670025666F /* assertExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48C4F1A79A7670025666F /* assertExtensions.h */; };
 		ABA58A181A67257400573ED8 /* units.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A171A67257400573ED8 /* units.h */; };
 		ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA58A1A1A67489E00573ED8 /* path.cpp */; };
 		ABA58A1D1A67489E00573ED8 /* path.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A1B1A67489E00573ED8 /* path.h */; };
@@ -263,6 +264,7 @@
 		ABA48C391A78553C0025666F /* cmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmath.h; path = units/cmath.h; sourceTree = "<group>"; };
 		ABA48C491A78717F0025666F /* wrap2pi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrap2pi.cpp; path = functions/wrap2pi.cpp; sourceTree = "<group>"; };
 		ABA48C4A1A78717F0025666F /* wrap2pi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrap2pi.h; path = functions/wrap2pi.h; sourceTree = "<group>"; };
+		ABA48C4F1A79A7670025666F /* assertExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = assertExtensions.h; path = assert/assertExtensions.h; sourceTree = "<group>"; };
 		ABA58A171A67257400573ED8 /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = units.h; path = /Users/raymondvaldes/code/tat/src/units.h; sourceTree = "<absolute>"; };
 		ABA58A1A1A67489E00573ED8 /* path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path.cpp; path = filesystem/path.cpp; sourceTree = "<group>"; };
 		ABA58A1B1A67489E00573ED8 /* path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = path.h; path = filesystem/path.h; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 		AB932DF21A6DB76E00ECF117 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				ABA48C4D1A79A74A0025666F /* assert */,
 				ABA58A171A67257400573ED8 /* units.h */,
 				ABA58A191A67487D00573ED8 /* filesystem */,
 				ABF5D66319DB607700A70476 /* units */,
@@ -691,6 +694,14 @@
 				ABA48C361A7843F90025666F /* range.h */,
 			);
 			name = construct;
+			sourceTree = "<group>";
+		};
+		ABA48C4D1A79A74A0025666F /* assert */ = {
+			isa = PBXGroup;
+			children = (
+				ABA48C4F1A79A7670025666F /* assertExtensions.h */,
+			);
+			name = assert;
 			sourceTree = "<group>";
 		};
 		ABA58A191A67487D00573ED8 /* filesystem */ = {
@@ -1313,6 +1324,7 @@
 				ABB54FC619C22C7E0056823E /* add.h in Headers */,
 				ABEF4EAA1948D4A500B44AD5 /* TBCsystem.h in Headers */,
 				AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */,
+				ABA48C511A79A7670025666F /* assertExtensions.h in Headers */,
 				ABEF4EC71948D4A500B44AD5 /* construct.hpp in Headers */,
 				ABF5D66119DB49FD00A70476 /* signal.h in Headers */,
 				ABEF4E801948D4A500B44AD5 /* complex.h in Headers */,

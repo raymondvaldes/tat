@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE( startup ) {
   vector<string> myArguments = {
     "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
     "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color",
-    "--sample",         "graphite",
+    "--sample",         "graphite_400F_jan28_v2_wav",
     "--investigation",  "twoColorPyrometery"
        };
   vector<char const *> vec2 = vector2cstringArray(myArguments);

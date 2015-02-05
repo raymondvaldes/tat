@@ -299,6 +299,8 @@ analytical_2005::sweep_phase_linear( const vector<double> &omega ) const noexcep
     results[ n ] = phase_linear( omega[n] ) ;
   }
   
+
+  
   for( const auto val : results ) {
     BOOST_ASSERT( !isnan( val ) ) ;
   }

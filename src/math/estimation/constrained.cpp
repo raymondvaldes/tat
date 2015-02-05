@@ -24,6 +24,7 @@ License
 \*----------------------------------------------------------------------------*/
 #include <cmath>
 #include <boost/assert.hpp>
+#include <algorithm>
 
 #include "math/estimation/constrained.hpp"
 #include "math/utilities/equalto.h"
@@ -98,12 +99,21 @@ vector<double> x_to_kspace_unity( const double* x, const size_t n ) noexcept {
   
   typedef const size_t unity;
   unity start = 0 ;
-  unity end = 1 ;
+  unity finish = 1 ;
   
-  vector<double> x_output( n ) ;
+  vector<double> x_output( n, 0 ) ;
+  
   for( size_t i = 0 ; i < n ; ++i ) {
-    x_output[i] = kx_limiter2( x[i], start, end ) ;
+    x_output[i] = kx_limiter2( x[i], start, finish ) ;
   }
+  
+//  using std::transform;
+//  using std::begin;
+//  using std::end;
+//  transform( x, x + n, x_output, []( const auto& x_ith )
+//    {
+//      return kx_limiter2( x_ith, start, finish );
+//    } );
   
   
   return x_output;

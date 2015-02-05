@@ -73,6 +73,7 @@ using boost::units::si::hertz;
 //more stuff
 const auto micrometers = micro * meters;
 const auto millimeters = milli * meters;
+const auto millivolts = milli * volts;
 
 
 }}

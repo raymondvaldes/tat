@@ -24,7 +24,9 @@ namespace investigations{
 
 namespace twoColorPyrometery{
   
-
+  using std::for_each;
+  using std::begin;
+  using std::end;
   using std::generate;
   using std::transform;
   using std::vector;
@@ -54,15 +56,29 @@ auto run( const filesystem::directory &dir ) noexcept -> void
     auto poptea = Poptea{
       initializePopTeawithExperimentalEmission( dir ) };
   
-    auto transientDetectorSignal44 =
-    poptea.loadTBDfile( dir,  std::string{ "graphite_400F_oneFreq_4.4_2.82843_7.dat" } ) ;
+    auto transientDetectorSignal1 =
+    poptea.loadTBDfile( dir,  std::string{ "graphite_400F_jan28_v2_5.4_2.82843_10.dat" } ) ;
+    
+    auto transientDetectorSignal2 =
+    poptea.loadTBDfile( dir,  std::string{ "graphite_400F_jan28_v2_4.4_2.82843_4.dat" } ) ;
 
-    auto transientDetectorSignal54 =
-    poptea.loadTBDfile( dir,  std::string{ "graphite_400F_oneFreq_5.4_2.82843_8.dat" } ) ;
 
-    const auto millivolts = milli*volts;
-    const auto signalDCoffset1 = quantity<electric_potential>( 88.0 * millivolts );   /*graphite*/ /*predicted T_ss = 477 K */
-    const auto signalDCoffset2 = quantity<electric_potential>( 112.0 * millivolts );  /*graphite*/
+    const auto signalBackground = quantity<electric_potential> ( 3.403  * volts ) ;
+    const auto signalDC1 = quantity<electric_potential>(  3.59  * volts );
+    const auto signalDC2 = quantity<electric_potential>(  3.63  * volts );
+    
+    const auto gCoeff = quantity< dimensionless >( .766 ) ; /*graphite at 400F*/
+    const auto wavelength1 = quantity<length>( 3.837130694 * micrometers ) ;
+    const auto wavelength2 = quantity<length>( 4.837130694 * micrometers ) ;
+    const auto temperoralFrequency = quantity<frequency>( 2.82843 * hertz ) ;
+    
+    
+    auto signalDCoffset1 = signalDC1 - signalBackground ;
+    auto signalDCoffset2 = signalDC2 - signalBackground ;
+
+
+ //     signalDCoffset1 = quantity<electric_potential>( 0.807 * millivolts );
+//     signalDCoffset2 = quantity<electric_potential>( 0.985 * millivolts );
 
 /*
 /add thermocouple , use high temp epoxy [do this no matter what!!]
@@ -92,34 +108,36 @@ auto run( const filesystem::directory &dir ) noexcept -> void
   scenario.
   */
   
+    const auto multiplier = 1;
+  
     algorithm::transform(
-      transientDetectorSignal44,
-      transientDetectorSignal44.begin(),
-      [&]( auto &val) noexcept { return val + signalDCoffset1 ; }) ;
+      transientDetectorSignal1,
+      transientDetectorSignal1.begin(),
+      [&]( auto &val) noexcept
+      {
+        return scale_by_nondimensional(val, multiplier) + signalDCoffset1 ;
+      }) ;
 
     algorithm::transform(
-      transientDetectorSignal54,
-      transientDetectorSignal54.begin(),
-      [&]( auto &val) noexcept { return val + signalDCoffset2 ; } );
-
-    const auto gCoeff = quantity< dimensionless >( 0.955943212775443 ); /*graphite at 400F*/
-
-    const auto wavelength1 = quantity<length>( 4.4 * micrometers ) ;
-    const auto wavelength2 = quantity<length>( 5.4 * micrometers ) ;
+      transientDetectorSignal2,
+      transientDetectorSignal2.begin(),
+      [&]( auto &val) noexcept
+      {
+        return scale_by_nondimensional(val, multiplier) + signalDCoffset2 ;
+      } );
 
 
-    const auto temperoralFrequency = quantity<frequency>( 2.82843 * hertz ) ;
     
     auto normalizedSRVector =
-    vector<quantity<one_over_temperature>>( transientDetectorSignal44.size() );
+    vector<quantity<one_over_temperature>>( transientDetectorSignal1.size() );
     
 
     auto i = 0;
     const auto normalizeSR_function =
     [&]()
     {
-      const auto SR = signalRatio( transientDetectorSignal44[i],
-                                   transientDetectorSignal54[i] ) ;
+      const auto SR = signalRatio( transientDetectorSignal1[i],
+                                   transientDetectorSignal2[i] ) ;
       const auto gSR = calibratedSignalRatio( SR, gCoeff ) ;
       i++;
       
@@ -130,7 +148,7 @@ auto run( const filesystem::directory &dir ) noexcept -> void
     
     const auto dataPoints = quantity< dimensionless > ( 2049 );
     const auto cycles = quantity< dimensionless >( 6 ) ;
-    const auto period = quantity< dimensionless >(1) / temperoralFrequency;
+    const auto period = quantity< dimensionless >( 1 ) / temperoralFrequency;
     
     auto myTimeVector = vector< quantity< time > >( dataPoints.value(), 0 * seconds );
     {
@@ -162,7 +180,7 @@ auto run( const filesystem::directory &dir ) noexcept -> void
     ) ;
 
     const auto fittedCosine =
-    math::curveFit::cosine<one_over_temperature>( myTimeVector, normalizedSRVector, initialConditions );
+    math::curveFit::cosine( myTimeVector, normalizedSRVector, initialConditions );
 
     const auto myFittedAmplitude = fittedCosine.get_amplitude() ;
     const auto myFittedOffset = fittedCosine.get_offset() ;
@@ -173,7 +191,7 @@ auto run( const filesystem::directory &dir ) noexcept -> void
 
     
     cout << "\n" << units::engineering_prefix;
-    cout << "stage temperature\t\t" <<  quantity< temperature >(477 * kelvin) << endl;
+    cout << "stage temperature\t\t" <<  quantity< temperature >( 477 * kelvin ) << endl;
     cout << "signal frequency\t\t" << temperoralFrequency << endl << endl;
     cout << "detector wavelength\t\t" << wavelength1 << endl;
     cout << "detector wavelength\t\t" << wavelength2 << endl << endl;
