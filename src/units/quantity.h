@@ -19,6 +19,9 @@ template<class Unit,class Y = double>
   using quantity = boost::units::quantity<Unit, Y>;
 
   
+template<class Dim,class System, class Enable>
+  using unit = boost::units::unit< Dim, System, Enable >;
+  
   
 
   using boost::units::binary_prefix;

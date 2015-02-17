@@ -35,9 +35,10 @@ typedef boost::units::si::time                time;
 typedef boost::units::si::frequency           frequency;
 typedef boost::units::si::angular_velocity    angular_velocity;
 typedef angular_velocity                      angular_frequency;
+typedef boost::units::si::pressure            pressure;
+typedef boost::units::si::wavenumber          wavenumber;
 
 //Units
-
 using boost::units::si::radian_per_second;
 using boost::units::si::radians_per_second;
 
@@ -54,21 +55,6 @@ using boost::units::si::watt;
 using boost::units::si::volts;
 using boost::units::si::kelvin;
 using boost::units::si::hertz;
-
-
-
-
-
-//
-//typedef make_scaled_unit<
-//        electric_potential::unit_type,
-//        boost::units::scale<10, boost::units::static_rational<-3> > >::type
-//        millivolts;
-//
-//typedef make_scaled_unit<
-//        boost::units::si::length::unit_type,
-//        boost::units::scale<10, boost::units::static_rational<-3> >>::type
-        //millimeter;
 
 //more stuff
 const auto micrometers = micro * meters;

@@ -22,9 +22,8 @@
 #include "units/si/predefined.h"
 
 namespace units {
-namespace si {
 
-typedef boost::units::si::system siSystem;
+namespace si {
 
 typedef divide_typeof_helper<power,solid_angle>::type power_over_solid_angle;
 
@@ -40,10 +39,16 @@ typedef multiply_typeof_helper< length, temperature>::type length_temperature;
 
 typedef divide_typeof_helper< dimensionless, temperature>::type one_over_temperature;
 
+typedef divide_typeof_helper< pressure, time >::type pressure_over_time;
+
+
+///custom dimensions
+typedef divide_typeof_helper< length , dimensionless >::type wavelength;
 
 
 
+} // namespace si
 
-}}
+} // namespace units
 
 #endif

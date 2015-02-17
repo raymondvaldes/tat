@@ -41,6 +41,11 @@ inline auto assert_gt( Type const a, Type const b ) {
   assert( a  > b ) ;
 }
 
+template < typename Type >
+inline auto assert_gt_zero( Type const a ) {
+  assert( a  > 0. ) ;
+}
+
 
 template < typename Type >
 inline auto assert_ge( Type const a, Type const b ) {

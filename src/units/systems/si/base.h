@@ -11,16 +11,14 @@
 
 #include <boost/units/systems/si/base.hpp>
 
-
 namespace units {
-  namespace si{
-    namespace system{
+
+namespace si{
   
-typedef boost::units::si::system siSystem;
-  
-  
-    }
-  }
-}
+typedef boost::units::si::system system;
+    
+} // namespace si
+
+} // namespace units
 
 #endif

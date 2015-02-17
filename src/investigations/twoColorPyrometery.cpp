@@ -64,10 +64,11 @@ auto run( const filesystem::directory &dir ) noexcept -> void
 
 
     const auto signalBackground = quantity<electric_potential> ( 3.403  * volts ) ;
-    const auto signalDC1 = quantity<electric_potential>(  3.59  * volts );
-    const auto signalDC2 = quantity<electric_potential>(  3.63  * volts );
+    const auto signalDC1 = quantity<electric_potential>(  3.63  * volts );
+    const auto signalDC2 = quantity<electric_potential>(  3.59  * volts );
+
     
-    const auto gCoeff = quantity< dimensionless >( .766 ) ; /*graphite at 400F*/
+    const auto gCoeff = quantity< dimensionless >( 1.305 ) ; /*graphite at 400F*/
     const auto wavelength1 = quantity<length>( 3.837130694 * micrometers ) ;
     const auto wavelength2 = quantity<length>( 4.837130694 * micrometers ) ;
     const auto temperoralFrequency = quantity<frequency>( 2.82843 * hertz ) ;
@@ -108,7 +109,7 @@ auto run( const filesystem::directory &dir ) noexcept -> void
   scenario.
   */
   
-    const auto multiplier = 1;
+    const auto multiplier = 0.00001;
   
     algorithm::transform(
       transientDetectorSignal1,

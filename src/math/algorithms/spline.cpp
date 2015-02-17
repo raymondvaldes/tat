@@ -26,11 +26,12 @@
 
 #include "math/algorithms/spline.h"
 #include <cmath>
+#include <cassert>
 
 namespace math{
 namespace algorithms{
 
-mySpline::mySpline( const double *a, const double *b, const size_t c ) noexcept
+mySpline::mySpline(  double const * const a, double const * const b, const size_t c ) noexcept
   :
   xvar(a), func(b), N(c),
   spline( gsl_spline_alloc( gsl_interp_cspline, N ) ),
@@ -41,7 +42,7 @@ mySpline::mySpline( const double *a, const double *b, const size_t c ) noexcept
       b ...dependent array
       c ...size of array */
   ///alloc space for the mySpline anbd assign to pointer
-  gsl_spline_init( spline, xvar, func, N);
+  gsl_spline_init( spline, xvar, func, N );
 }
 
 mySpline::~mySpline(void) noexcept
@@ -54,27 +55,10 @@ mySpline::~mySpline(void) noexcept
 
 double mySpline::eval( const double xpos ) const noexcept
 {
-  constexpr double tol_spline = .000001;
-  using std::abs;
-
-  double xposNew = xpos;
+  assert( xpos > xvar[0] ) ;
+  assert( xpos < xvar[N-1]  ) ;
   
-  if( abs( xpos - xvar[0]   ) < tol_spline * xvar[0]  )
-    xposNew = xvar[0] + tol;
-  
-  if( abs( xpos - xvar[N-1] ) < tol_spline * xvar[N-1] )
-    xposNew = xvar[N-1] - tol;
-
-
-  if( xposNew < xvar[0] || xposNew > xvar[N-1] )
-  {
-    std::cout << "outside range!!\n\n"
-    <<xpos<<" is outside of range "<<xvar[0]<<"\t"<<xvar[N-1]<<"\n";
-    exit(-71);
-    return 0;
-  }
-
-  return gsl_spline_eval( spline, xposNew, acc );
+  return gsl_spline_eval( spline, xpos, acc );
 }
 
 double mySpline::CCallback( double d, void*params ) noexcept

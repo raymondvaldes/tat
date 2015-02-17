@@ -7,6 +7,7 @@
 //
 
 #include "math/functions/wrap2pi.h"
+#include "units/si/constants/thermal.h"
 #include <cmath>
 
 namespace math {

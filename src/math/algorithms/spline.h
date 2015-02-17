@@ -39,9 +39,9 @@ class mySpline
 private:
   static constexpr size_t limit = 1001;    //defines size of workspace
   static constexpr double tol = 1e-14;
-  const double* xvar;
-  const double* func;
-  const size_t  N;
+  double const * const xvar;
+  double const * const func;
+  size_t const N;
 
   gsl_interp_accel *acc   = gsl_interp_accel_alloc();  ///Ptr interpolation iter
   gsl_spline *spline      = nullptr; ///Declare pointer to interpolations
@@ -54,6 +54,7 @@ public:
   
   double eval( const double xpos ) const noexcept;
 };
+
 
 }
 }

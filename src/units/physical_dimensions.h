@@ -26,6 +26,7 @@
 #include <boost/units/physical_dimensions/amount.hpp>
 
 namespace units {
+
   typedef boost::units::temperature_dimension temperature_dimension;
   
   typedef boost::units::time_dimension time_dimension;
@@ -54,7 +55,7 @@ namespace units {
   
   typedef boost::units::amount_dimension amount_dimension;
   
-}
+} // namespace units
 
 
 #endif

@@ -11,13 +11,16 @@
 
 #include "assert/assertExtensions.h"
 
+#include "units.h"
 #include "units/si/si.h"
 #include "units/si/constants/thermal.h"
 #include "thermal/emission/signal.h"
 #include "thermal/emission/signalRatio.h"
 
 namespace thermal {
+
 namespace pyrometry {
+
 namespace twoColor {
 
 template< class signalType >
@@ -49,7 +52,10 @@ auto calibrationCoefficient(
   return gCoeff;
 };
 
+} // namespace twoColor
 
-}}}
+} // namespace pyrometry
+
+} // namespace thermal
 
 #endif /* defined(__tat__calibrationCoefficient__) */
