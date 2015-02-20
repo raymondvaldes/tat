@@ -25,27 +25,24 @@ class gCoefficient{
 private:
 
   std::vector< units::quantity< units::si::wavelength  > > wavelengths;
+  
   std::vector< units::quantity< units::si::electric_potential > > detectorSignals;
+  
   units::quantity< units::si::temperature > source_temperature;
 
 public:
 
-  explicit gCoefficient(
-    const std::vector< units::quantity< units::si::wavelength  > >& wavelengthsIn,
-    const std::vector< units::quantity< units::si::electric_potential > > &detectorSignalsIn,
-    const units::quantity< units::si::temperature > &source_temperatureIn
-    ) noexcept;
+  explicit gCoefficient (
+    std::vector< units::quantity< units::si::wavelength  > > const & wavelengthsIn,
+    std::vector< units::quantity< units::si::electric_potential > > const & detectorSignalsIn,
+    units::quantity< units::si::temperature > const & source_temperatureIn
+    ) noexcept ;
   
-  auto
-  at( units::quantity< units::si::wavelength > first,
-      units::quantity< units::si::wavelength > second )
-  noexcept
+  auto at( units::quantity< units::si::wavelength > const & first,
+           units::quantity< units::si::wavelength > const & second ) const noexcept
   -> units::quantity< units::si::dimensionless >;
   
-  
-  auto
-  sourceTemperature( void )
-  noexcept
+  auto sourceTemperature( void ) const noexcept
   -> units::quantity< units::si::temperature>;
   
 };
