@@ -13,12 +13,13 @@
 #include <algorithm>
 
 #include "units.h"
+
 namespace algorithm {
 
 namespace vector {
 
 template< typename UnitType >
-auto quantityTodouble( const std::vector< units::quantity< UnitType > >  &input )
+auto quantityTodouble( std::vector< units::quantity< UnitType > > const & input )
 noexcept -> std::vector< double >
 {
   using std::vector;
@@ -36,24 +37,6 @@ noexcept -> std::vector< double >
   return output;
 }
 
-template< typename UnitType >
-auto doubleToQuantity( const std::vector< double >  &input )
-noexcept -> std::vector< units::quantity< UnitType > >
-{
-  using std::vector;
-  using std::transform;
-  using std::begin;
-  using std::end;
-
-  vector< units::quantity< UnitType > > output( input.size() ) ;
-
-  transform( begin( input ), end( input ), begin( output ), []( const auto& val )
-  {
-    return units::quantity< UnitType >::from_value( val )  ;
-  } );
-  
-  return output;
-}
   
 } // namespace vector
   
