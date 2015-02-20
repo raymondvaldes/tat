@@ -11,12 +11,11 @@
 
 #include "tools/interface/filesystem.hpp"
 
-
 namespace investigations{
 
 namespace twoColorPyrometery{
   
-auto run( const filesystem::directory &dir ) noexcept -> void  ;
+auto run( filesystem::directory const & dir ) noexcept -> void  ;
   
 } // namespace twoColorPyrometery
 
