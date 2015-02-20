@@ -20,6 +20,8 @@
 
 #include "units.h"
 
+#include "investigations/twoColorPyrometery/calculateCalibrationCoefficients.h"
+
 namespace investigations{
 
 namespace twoColorPyrometery{
@@ -50,8 +52,13 @@ namespace twoColorPyrometery{
   using math::functions::PeriodicProperties;
   using math::curveFit::cosine;
 
-auto run( const filesystem::directory &dir ) noexcept -> void
+auto run( filesystem::directory const & dir ) noexcept -> void
 {
+
+  calculateCalibrationCoefficients( dir ) ;
+
+
+
   {
     auto poptea = Poptea{
       initializePopTeawithExperimentalEmission( dir ) };
@@ -192,7 +199,7 @@ auto run( const filesystem::directory &dir ) noexcept -> void
 
     
     cout << "\n" << units::engineering_prefix;
-    cout << "stage temperature\t\t" <<  quantity< temperature >( 477 * kelvin ) << endl;
+    cout << "stage temperature\t\t" <<  quantity< units::si::temperature >( 477 * kelvin ) << endl;
     cout << "signal frequency\t\t" << temperoralFrequency << endl << endl;
     cout << "detector wavelength\t\t" << wavelength1 << endl;
     cout << "detector wavelength\t\t" << wavelength2 << endl << endl;
