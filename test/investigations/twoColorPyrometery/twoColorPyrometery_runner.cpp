@@ -20,7 +20,7 @@ using std::vector;
 using std::string;
 
 using investigations::main_app;
-using algorithm::vector::vector2cstringArray;
+using algorithm::vector::string2charPtr;
 
 
 BOOST_AUTO_TEST_SUITE( investigations )
@@ -35,7 +35,7 @@ BOOST_AUTO_TEST_CASE( startup ) {
     "--sample",         "graphite_400F_jan28_v2_wav",
     "--investigation",  "twoColorPyrometery"
        };
-  vector<char const *> vec2 = vector2cstringArray(myArguments);
+  vector<char const *> vec2 = string2charPtr(myArguments);
 
   main_app( vec2.size() , vec2.data() );
 }
