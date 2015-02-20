@@ -52,7 +52,7 @@ namespace import {
   
   auto columnData::processData( void ) -> void
   {
-    extractDataLines();
+    extract_file_to_stream();
   
     auto const poorDataIntegrity = !verifyDataIntegrity() ;
     auto const throwException = poorDataIntegrity ;
@@ -62,7 +62,7 @@ namespace import {
     }
   }
   
-  auto columnData::extractDataLines( void ) noexcept -> void
+  auto columnData::extract_file_to_stream( void ) noexcept -> void
   {
     using algorithm::stream::not_eof;
     while( not_eof( my_ifstream ) ) {
@@ -117,8 +117,9 @@ namespace import {
     {
       using algorithm::stream::getline;
       auto const currentLine = getline( cleanFileStream ) ;
+      auto const line_has_content = !currentLine.empty();
       
-      if( !currentLine.empty() ) {
+      if( line_has_content ) {
         recordDataFromLine(currentLine);
       }
     };

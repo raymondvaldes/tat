@@ -34,7 +34,7 @@ private:
   auto saveDataLine( void ) noexcept
     -> void ;
   
-  auto extractDataLines( void )  noexcept
+  auto extract_file_to_stream( void )  noexcept
     -> void ;
 
   auto verifyDataIntegrity(void) noexcept
