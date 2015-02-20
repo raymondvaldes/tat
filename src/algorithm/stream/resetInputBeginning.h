@@ -19,13 +19,13 @@ inline void clear( std::istream& inputStream) noexcept {
   inputStream.clear();
 }
 
-inline void seekBeginning( std::istream& inputStream) noexcept {
+inline void seekBeginning_of_file( std::istream& inputStream) noexcept {
   inputStream.seekg( 0, std::ios::beg ) ;
 }
 
 inline void resetStreamToBeginnging( std::istream& inputStream ) noexcept{
   clear(inputStream);
-  seekBeginning(inputStream);
+  seekBeginning_of_file(inputStream);
 }
 
 }}
