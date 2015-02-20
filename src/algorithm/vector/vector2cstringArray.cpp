@@ -6,34 +6,36 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "algorithm/vector/vector2cstringArray.h"
 #include <cassert>      // assert
+
+
+#include "algorithm/vector/vector2cstringArray.h"
 #include "algorithm/algorithm.h"
 
 namespace algorithm {
+
 namespace vector {
 
-
-
-auto vector2cstringArray( const std::vector<std::string> & inputVector )
+auto string2charPtr( std::vector<std::string> const & inputVector ) noexcept
   -> std::vector<char const *>
 {
   using std::vector;
-  using std::transform;
 
-  const auto vectorSize = inputVector.size();
-  const auto atLeastSingleString = vectorSize > 0 ;
-  assert( atLeastSingleString );
+  auto const empty = inputVector.empty();
+  assert( !empty );
   
+  auto const string2c_str = []( const auto& aString )
+  {
+    return aString.c_str();
+  };
 
-  const auto string2c_str = []( const auto& aString )
-  { return aString.c_str(); };
-
-  auto outputVector = vector< char const *>( vectorSize );
+  auto outputVector = vector< char const *>( inputVector.size() );
   
   algorithm::transform(  inputVector, outputVector.begin(), string2c_str ) ;
 
   return outputVector;
 }
 
-}}
+} // namespace vector
+
+} // namespace algorithm

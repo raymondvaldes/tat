@@ -15,7 +15,7 @@
 namespace algorithm {
 namespace vector {
 
-auto vector2cstringArray( const std::vector<std::string> & myString )
+auto string2charPtr( const std::vector<std::string> & myString ) noexcept
   -> std::vector<char const *>;
 
   
