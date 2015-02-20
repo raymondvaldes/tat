@@ -17,6 +17,7 @@
 #include "algorithm/string/split.h"
 #include "algorithm/string/trim.h"
 #include "algorithm/string/trim_all.h"
+#include "math/matrixAnalysis/valid.h"
 
 using std::for_each;
 using std::begin;
@@ -24,7 +25,9 @@ using std::end;
 using std::invalid_argument;
 
 namespace tools {
+
 namespace interface {
+
 namespace import {
 
   auto columnData::validateAndProcess(void) -> void
@@ -36,9 +39,7 @@ namespace import {
 
   columnData::columnData( std::string const & filePathIn )
   : columnData( filePathIn, "#")
-  {
-  //  validateAndProcess();
-  }
+  {}
 
   columnData::columnData( std::string const & filePathIn,
                           std::string const & ignoreCharacterIn )
@@ -53,8 +54,8 @@ namespace import {
   {
     extractDataLines();
   
-    const auto poorDataIntegrity = !verifyDataIntegrity() ;
-    const auto throwException = poorDataIntegrity ;
+    auto const poorDataIntegrity = !verifyDataIntegrity() ;
+    auto const throwException = poorDataIntegrity ;
     
     if( throwException ) {
       throw invalid_argument( "Input data not in matrix form." ) ;
@@ -72,14 +73,15 @@ namespace import {
   auto columnData::saveDataLine( void ) noexcept -> void
   {
     using algorithm::stream::getline;
-    auto currentLine = getline( my_ifstream ) ;
-    
     using algorithm::string::trim;
+    using algorithm::string::starts_with_not;
+    
+    auto currentLine = getline( my_ifstream ) ;
+
     trim( currentLine );
 
-    using algorithm::string::starts_with_not;
-    const auto NotcommentLine = starts_with_not( currentLine, IgnoreCharacter );
-    const auto NotBlankLine = !currentLine.empty();
+    auto const NotcommentLine = starts_with_not( currentLine, IgnoreCharacter );
+    auto const NotBlankLine = !currentLine.empty();
     
     if( NotcommentLine && NotBlankLine ) {
       cleanFileStream << currentLine << "\n" ;
@@ -88,50 +90,48 @@ namespace import {
 
   auto columnData::verifyDataIntegrity(void) noexcept -> bool
   {
-    size_t nColumns = 0;
-    size_t nRows = 0;
-    size_t nElements = 0;
-    resetDataVectors();
-    
-    using algorithm::stream::seekBeginning;
-    seekBeginning( cleanFileStream ) ;
-    
+    using algorithm::stream::seekBeginning_of_file;
     using algorithm::stream::not_eof;
+    using math::matrixAnalysis::valid;
 
-    while( not_eof( cleanFileStream ) )
+    auto nColumns = size_t(0);
+    auto nRows = size_t(0);
+    auto nElements = size_t(0);
+    
+    const auto recordDataFromLine = [&]( auto& myLine )
     {
-      using algorithm::stream::getline;
-      const auto myLine = getline( cleanFileStream ) ;
-      
-      if( !myLine.empty() ) {
-        nRows++;
-
         using algorithm::string::trim_fill_copy;
-        auto myLineTrimmed = trim_fill_copy( myLine, "\t");
-
         using algorithm::string::split;
+        
+        nRows++;
+        auto myLineTrimmed = trim_fill_copy( myLine, "\t") ;
         auto myRowElements = split( myLineTrimmed, "\t" ) ;
         
         rows.push_back( myRowElements );
 
         nElements += myRowElements.size();
         nColumns = myRowElements.size();
-      }
-    }
-    rows.shrink_to_fit() ;
+    };
 
-    const auto matrixForm = ( nElements == nRows * nColumns ) ;
-    
-    if( matrixForm )
+    const auto recordDataFromStream = [&]()
     {
+      using algorithm::stream::getline;
+      auto const currentLine = getline( cleanFileStream ) ;
+      
+      if( !currentLine.empty() ) {
+        recordDataFromLine(currentLine);
+      }
+    };
+    
+    const auto populateDataContainer = [&](){
       columns.resize( nColumns ) ;
       
       for_each( begin( columns ), end( columns ), [=](auto& column){
         column.resize( nRows ) ;
       }  );
       
-      auto i = 0 ;
-      auto j = 0 ;
+      auto i = size_t(0) ;
+      auto j = size_t(0) ;
       for_each( begin( rows ), end( rows ), [&]( auto& row ){
         for_each( begin( row ), end( row ), [&]( auto& Element){
           columns[i++][j] = Element;
@@ -140,12 +140,26 @@ namespace import {
         i = 0;
         j++;
       } );
+    };
+    
+    clearDataVectors();
+    
+    seekBeginning_of_file( cleanFileStream ) ;
+
+    while( not_eof( cleanFileStream ) ) {
+      recordDataFromStream();
     }
 
-    return matrixForm;
+    auto const is_validMatrix = valid( nRows, nColumns, nElements ) ;
+    
+    if( is_validMatrix ) {
+      populateDataContainer();
+    }
+
+    return is_validMatrix;
   }
   
-  auto columnData::resetDataVectors(void) noexcept -> void
+  auto columnData::clearDataVectors(void) noexcept -> void
   {
     rows.clear();
     for_each( begin(rows), end(rows), []( auto& row){
@@ -163,7 +177,6 @@ namespace import {
     noexcept -> std::vector<std::string>
   {
     BOOST_ASSERT( columnNumber > 0 );
-
     return columns[ columnNumber - 1 ] ;
   }
   
@@ -185,4 +198,8 @@ namespace import {
     return rows.size();
   }
       
-}}}
+} // namespace import
+
+} // namespace interface
+
+} // namespace tools

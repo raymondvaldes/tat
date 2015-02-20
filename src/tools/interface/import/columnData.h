@@ -40,7 +40,7 @@ private:
   auto verifyDataIntegrity(void) noexcept
     -> bool;
   
-  auto resetDataVectors(void) noexcept
+  auto clearDataVectors(void) noexcept
     -> void;
   
   auto processData( void )
