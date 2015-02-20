@@ -29,19 +29,26 @@ public:
 
   
 public:
-  Spectrum( SignalList const & inputSignals,
-  units::quantity< units::absolute <units::si::temperature > > const & sourceTemperatureIn )
+  explicit Spectrum(
+    SignalList const & inputSignals,
+    units::quantity< units::absolute <units::si::temperature > > const & sourceTemperatureIn )
   noexcept : sourceTemperature( sourceTemperatureIn ), signals(inputSignals)
-  {
-  };
+  {} ;
 
-
-  Spectrum( size_t const N,
-  units::quantity< units::absolute <units::si::temperature > > const & sourceTemperatureIn )
+  explicit Spectrum( size_t const N,
+    units::quantity< units::absolute <units::si::temperature > > const & sourceTemperatureIn )
   noexcept : sourceTemperature( sourceTemperatureIn ), signals()
   {
     signals.reserve(N);
   };
+  
+  explicit Spectrum(
+    SignalList const & inputSignals,
+    units::quantity< units::absolute<units::celsius::temperature> > const & sourceTemperatureIn
+  ) noexcept:
+  Spectrum( inputSignals,
+  units::absolute_conv_C_to_K_type::convert( sourceTemperatureIn ))
+  {}
 
 
   auto push_back( Signal< SignalType > const & input )
