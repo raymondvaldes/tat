@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB06EDAB1A71C6B500F9FDBD /* temperatureMeasurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */; };
+		AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BA1A97C7B600EEA759 /* valid.h */; };
 		AB0DFE01195242AA007DF69B /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFDFF195242AA007DF69B /* split.cpp */; };
 		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
 		AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFE0319524382007DF69B /* starts_with.cpp */; };
@@ -228,6 +229,7 @@
 
 /* Begin PBXFileReference section */
 		AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperatureMeasurement.cpp; path = pyrometry/twoColor/temperatureMeasurement.cpp; sourceTree = "<group>"; };
+		AB0C51BA1A97C7B600EEA759 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = matrixAnalysis/valid.h; sourceTree = "<group>"; };
 		AB0DFDFF195242AA007DF69B /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = split.cpp; path = algorithm/string/split.cpp; sourceTree = "<group>"; };
 		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
 		AB0DFE0319524382007DF69B /* starts_with.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = starts_with.cpp; path = algorithm/string/starts_with.cpp; sourceTree = "<group>"; };
@@ -484,6 +486,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB0C51B91A97C79500EEA759 /* matrixAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				AB0C51BA1A97C7B600EEA759 /* valid.h */,
+			);
+			name = matrixAnalysis;
+			sourceTree = "<group>";
+		};
 		AB0DFDFD19524268007DF69B /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,6 +853,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				AB0C51B91A97C79500EEA759 /* matrixAnalysis */,
 				ABA48C341A7843CE0025666F /* construct */,
 				AB932DF31A6DBAC700ECF117 /* curveFIt */,
 				AB6087751A69E4D0009B1E85 /* functions */,
@@ -1286,6 +1297,7 @@
 				AB8F0CB21A8592F70091196B /* quantityTodouble.h in Headers */,
 				ABB54FD219C35E300056823E /* ifzero.h in Headers */,
 				AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */,
+				AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */,
 				ABA58A181A67257400573ED8 /* units.h in Headers */,
 				AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,

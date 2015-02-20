@@ -74,7 +74,8 @@ auto const myFirstSignal =
     });
 
 
-
+    for( const auto& signal : signals )
+      std::cout << signal << "\n";
   
   
    // auto const myEmissionSpecturm200 = Spectrum<electric_potential>( signals, emissionTempKelvin ) ;
