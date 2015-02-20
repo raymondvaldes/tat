@@ -12,8 +12,11 @@
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/angular_velocity.hpp>
-
 #include "units/si/prefixes.h"
+
+#include <boost/units/systems/temperature/celsius.hpp>
+#include <boost/units/systems/temperature/fahrenheit.hpp>
+
 
 namespace units {
 namespace si {
@@ -54,14 +57,47 @@ using boost::units::si::watts;
 using boost::units::si::watt;
 using boost::units::si::volts;
 using boost::units::si::kelvin;
+
+using namespace boost::units::celsius;
+using namespace boost::units::fahrenheit;
+
+
+
 using boost::units::si::hertz;
 
 //more stuff
-const auto micrometers = micro * meters;
-const auto millimeters = milli * meters;
-const auto millivolts = milli * volts;
+static auto const nanometers = nano * meters;
+static const auto micrometers = micro * meters;
+
+static const auto millimeters = milli * meters;
+static const auto millivolts = milli * volts;
 
 
-}}
+} //namespace si
+
+using boost::units::absolute;
+
+typedef boost::units::conversion_helper<
+        boost::units::quantity<absolute<boost::units::fahrenheit::temperature> >,
+        boost::units::quantity<absolute<boost::units::si::temperature> > >
+        absolute_conv_F_to_K_type;
+  
+typedef boost::units::conversion_helper<
+        boost::units::quantity<boost::units::fahrenheit::temperature>,
+        boost::units::quantity<boost::units::si::temperature> >
+        relative_conv_F_to_K_type;
+
+typedef boost::units::conversion_helper<
+        boost::units::quantity<absolute<boost::units::celsius::temperature> >,
+        boost::units::quantity<absolute<boost::units::si::temperature> > >
+        absolute_conv_C_to_K_type;
+  
+typedef boost::units::conversion_helper<
+        boost::units::quantity<boost::units::celsius::temperature>,
+        boost::units::quantity<boost::units::si::temperature> >
+        relative_conv_C_to_K_type;
+
+
+} //namespace units
 
 #endif /* defined(__tat__length__) */
