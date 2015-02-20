@@ -34,15 +34,14 @@ namespace import {
     processData();
   }
 
-  columnData::columnData( const std::string& filePathIn )
-  : my_ifstream( filePathIn, std::ifstream::in ),
-    IgnoreCharacter("#")
+  columnData::columnData( std::string const & filePathIn )
+  : columnData( filePathIn, "#")
   {
-    validateAndProcess();
+  //  validateAndProcess();
   }
-  
-  columnData::columnData( const std::string& filePathIn,
-                          const std::string& ignoreCharacterIn )
+
+  columnData::columnData( std::string const & filePathIn,
+                          std::string const & ignoreCharacterIn )
   : my_ifstream( filePathIn, std::ifstream::in ),
     IgnoreCharacter(ignoreCharacterIn)
   
@@ -160,7 +159,7 @@ namespace import {
     
   }
   
-  auto columnData::getColumn( const size_t columnNumber ) const
+  auto columnData::getColumn( size_t const columnNumber ) const
     noexcept -> std::vector<std::string>
   {
     BOOST_ASSERT( columnNumber > 0 );
@@ -168,21 +167,20 @@ namespace import {
     return columns[ columnNumber - 1 ] ;
   }
   
-  auto columnData::getRow( const size_t rowNumber ) const
+  auto columnData::getRow( size_t const rowNumber ) const
     noexcept -> std::vector<std::string>
   {
     BOOST_ASSERT( rowNumber > 0 );
     return rows[ rowNumber - 1 ] ;
   }
   
-  auto columnData::getElement(
-    const size_t rowNumber, const size_t columnNumber ) const
+  auto columnData::getElement( size_t const rowN, size_t const columnN ) const
   noexcept -> std::string
   {
-    return rows[ rowNumber - 1 ][ columnNumber - 1] ;
+    return rows[ rowN - 1 ][ columnN - 1] ;
   }
 
-  auto columnData::size(void) const noexcept -> size_t
+  auto columnData::size( void ) const noexcept -> size_t
   {
     return rows.size();
   }
