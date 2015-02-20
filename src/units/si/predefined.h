@@ -13,12 +13,27 @@
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/angular_velocity.hpp>
 #include "units/si/prefixes.h"
-
+#include "units/quantity.h"
 #include <boost/units/systems/temperature/celsius.hpp>
 #include <boost/units/systems/temperature/fahrenheit.hpp>
 
 
 namespace units {
+
+namespace celsius {
+
+  using boost::units::celsius::temperature;
+
+} // namespace celsius
+
+namespace fahrenheit {
+
+  using boost::units::fahrenheit::temperature;
+  
+} // namespace fahrenheit
+
+
+
 namespace si {
 
 //Dimensions
@@ -76,26 +91,36 @@ static const auto millivolts = milli * volts;
 } //namespace si
 
 using boost::units::absolute;
+using boost::units::conversion_helper;
 
-typedef boost::units::conversion_helper<
-        boost::units::quantity<absolute<boost::units::fahrenheit::temperature> >,
-        boost::units::quantity<absolute<boost::units::si::temperature> > >
+typedef conversion_helper<
+        quantity<absolute<fahrenheit::temperature> >,
+        quantity<absolute<boost::units::si::temperature> > >
         absolute_conv_F_to_K_type;
   
-typedef boost::units::conversion_helper<
-        boost::units::quantity<boost::units::fahrenheit::temperature>,
-        boost::units::quantity<boost::units::si::temperature> >
+typedef conversion_helper<
+        quantity<fahrenheit::temperature>,
+        quantity<si::temperature> >
         relative_conv_F_to_K_type;
 
-typedef boost::units::conversion_helper<
-        boost::units::quantity<absolute<boost::units::celsius::temperature> >,
-        boost::units::quantity<absolute<boost::units::si::temperature> > >
+typedef conversion_helper<
+        quantity<absolute<celsius::temperature> >,
+        quantity<absolute<si::temperature> > >
         absolute_conv_C_to_K_type;
   
-typedef boost::units::conversion_helper<
-        boost::units::quantity<boost::units::celsius::temperature>,
-        boost::units::quantity<boost::units::si::temperature> >
+typedef conversion_helper<
+        quantity<celsius::temperature>,
+        quantity<si::temperature> >
         relative_conv_C_to_K_type;
+
+
+namespace celsius{
+  using degrees = units::absolute<units::celsius::temperature> ;
+}
+
+namespace fahrenheit{
+  using degrees = units::absolute<units::fahrenheit::temperature> ;
+}
 
 
 } //namespace units
