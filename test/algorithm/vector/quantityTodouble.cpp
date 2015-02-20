@@ -9,7 +9,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include "algorithm/vector/quantityTodouble.h"
-
+#include "algorithm/vector/doubleToQuantity.h"
 
 BOOST_AUTO_TEST_SUITE( algorithm )
 
@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE( doubleToquantityTest ) {
   
 
   using algorithm::vector::doubleToQuantity;
-  const auto myVectorDouble = doubleToQuantity< units::si::length >( myVector );
+  const auto myVectorDouble = doubleToQuantity< units::si::length >( myVector , units::si::meter);
 
   constexpr auto tol = 0.0000001;
   
