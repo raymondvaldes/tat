@@ -90,10 +90,12 @@ std::vector< directory > ls( const std::string &path_in ) noexcept
 }
 
 
-void makeDir(const std::string &rootPath, const std::string &newDirectory) noexcept
+void makeDir( const std::string &rootPath, const std::string &newDirectory ) noexcept
 {
+  assert( !rootPath.empty()  );
+  assert( !newDirectory.empty() );
   
-  const std::string fullpath = rootPath + "/" + newDirectory ;
+  auto const fullpath = rootPath + "/" + newDirectory ;
   const boost::filesystem::path directory( fullpath ) ;
   
   try {
@@ -107,19 +109,16 @@ void makeDir(const std::string &rootPath, const std::string &newDirectory) noexc
 }
 
 
-directory::directory(const std::string &workingDirectory_) noexcept:
+directory::directory( const std::string &workingDirectory_ ) noexcept:
   workingDirectory( workingDirectory_ ), myDirectory( workingDirectory_ ){}
 
-directory::~directory(void) noexcept {}
+
 void directory::mkdir(const std::string &newDirectory) const
 {
   if ( ! boost::filesystem::is_directory( abs( newDirectory ) ) )
   {
-
     makeDir( workingDirectory , newDirectory ) ;
   }
-
-
 }
 
 std::string directory::working_directory_string() const noexcept {
@@ -129,11 +128,11 @@ std::string directory::working_directory_string() const noexcept {
   using algorithm::string::split;
   
   const string& delimiter = "/";
-  const vector< string > folders =  split( pwd(), delimiter  ) ;
+  auto const folders =  split( pwd(), delimiter  ) ;
   
-  const string last = folders.back();
+  auto const last = folders.back();
   
-  const string working_folder_only = !last.empty() ? folders.rbegin()[0]
+  auto const working_folder_only = !last.empty() ? folders.rbegin()[0]
                                                    : folders.rbegin()[1] ;
 
 
@@ -142,14 +141,14 @@ std::string directory::working_directory_string() const noexcept {
 
 bool directory::working_directory_starts_with( const std::string& check ) const noexcept {
   
-  BOOST_ASSERT( true ) ;
+  BOOST_ASSERT( !check.empty() ) ;
   using std::string;
   using std::vector;
   
   using algorithm::string::starts_with;
 
-  const string wk_folder = working_directory_string() ;
-  const bool pass = starts_with( wk_folder, check ) ;
+  auto const wk_folder = working_directory_string() ;
+  auto const pass = starts_with( wk_folder, check ) ;
   return pass;
 }
 
@@ -160,26 +159,19 @@ std::string directory::pwd(void) const noexcept
 
 std::string directory::abs( const std::string &relativePath) const noexcept
 {
+  BOOST_ASSERT( !relativePath.empty() ) ;
+
   return workingDirectory + "/" + relativePath;
 }
 
 directory directory::parent_path() const noexcept {
 
   boost::filesystem::path parentPath = myDirectory.parent_path();
-  return directory( parentPath.string() ) ;
+ 
+   return directory( parentPath.string() ) ;
 }
 
 
-std::string directory::working_directory() const noexcept {
-  using std::string;
-  
-  const string working_path = pwd();
-  
-  
-  
-  const string myWorkingDirectory( "fix_this" ) ;
-  return myWorkingDirectory ;
-}
 
 std::vector<directory> directory::ls() const noexcept
 {
