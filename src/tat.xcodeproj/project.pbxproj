@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB06EDA91A719E7C00F9FDBD /* string2c_str.h in Headers */ = {isa = PBXBuildFile; fileRef = AB06EDA81A719E7C00F9FDBD /* string2c_str.h */; };
 		AB06EDAB1A71C6B500F9FDBD /* temperatureMeasurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */; };
 		AB0DFE01195242AA007DF69B /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFDFF195242AA007DF69B /* split.cpp */; };
 		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
@@ -216,10 +215,18 @@
 		ABF5D66819DB60BD00A70476 /* predefined.h in Headers */ = {isa = PBXBuildFile; fileRef = ABF5D66619DB60BD00A70476 /* predefined.h */; };
 		ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */; };
 		ABFC2CFC1A439F1D004C00AD /* twoColorPyrometery.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */; };
+		ABFC9E631A9424C500F124F1 /* calculateCalibrationCoefficients.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC9E611A9424C500F124F1 /* calculateCalibrationCoefficients.cpp */; };
+		ABFC9E641A9424C500F124F1 /* calculateCalibrationCoefficients.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E621A9424C500F124F1 /* calculateCalibrationCoefficients.h */; };
+		ABFC9E671A94372A00F124F1 /* stringToDouble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC9E651A94372A00F124F1 /* stringToDouble.cpp */; };
+		ABFC9E681A94372A00F124F1 /* stringToDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E661A94372A00F124F1 /* stringToDouble.h */; };
+		ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC9E691A94420300F124F1 /* doubleToString.cpp */; };
+		ABFC9E6C1A94420300F124F1 /* doubleToString.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6A1A94420300F124F1 /* doubleToString.h */; };
+		ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */; };
+		ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */; };
+		ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E711A96B53900F124F1 /* spectrum.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AB06EDA81A719E7C00F9FDBD /* string2c_str.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string2c_str.h; path = algorithm/string/string2c_str.h; sourceTree = "<group>"; };
 		AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperatureMeasurement.cpp; path = pyrometry/twoColor/temperatureMeasurement.cpp; sourceTree = "<group>"; };
 		AB0DFDFF195242AA007DF69B /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = split.cpp; path = algorithm/string/split.cpp; sourceTree = "<group>"; };
 		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
@@ -450,6 +457,15 @@
 		ABFC2CF71A438D9C004C00AD /* signal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = signal.h; path = blackBody/signal.h; sourceTree = "<group>"; };
 		ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twoColorPyrometery.cpp; sourceTree = "<group>"; };
 		ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoColorPyrometery.h; sourceTree = "<group>"; };
+		ABFC9E611A9424C500F124F1 /* calculateCalibrationCoefficients.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = calculateCalibrationCoefficients.cpp; path = twoColorPyrometery/calculateCalibrationCoefficients.cpp; sourceTree = "<group>"; };
+		ABFC9E621A9424C500F124F1 /* calculateCalibrationCoefficients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calculateCalibrationCoefficients.h; path = twoColorPyrometery/calculateCalibrationCoefficients.h; sourceTree = "<group>"; };
+		ABFC9E651A94372A00F124F1 /* stringToDouble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stringToDouble.cpp; path = algorithm/vector/stringToDouble.cpp; sourceTree = "<group>"; };
+		ABFC9E661A94372A00F124F1 /* stringToDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringToDouble.h; path = algorithm/vector/stringToDouble.h; sourceTree = "<group>"; };
+		ABFC9E691A94420300F124F1 /* doubleToString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = doubleToString.cpp; path = algorithm/vector/doubleToString.cpp; sourceTree = "<group>"; };
+		ABFC9E6A1A94420300F124F1 /* doubleToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = doubleToString.h; path = algorithm/vector/doubleToString.h; sourceTree = "<group>"; };
+		ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = doubleToQuantity.h; path = algorithm/vector/doubleToQuantity.h; sourceTree = "<group>"; };
+		ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringToQuantity.h; path = algorithm/vector/stringToQuantity.h; sourceTree = "<group>"; };
+		ABFC9E711A96B53900F124F1 /* spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spectrum.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,7 +504,6 @@
 				AB0DFE0419524382007DF69B /* starts_with.h */,
 				AB8AA4441A5DF13F0065E7F8 /* trim.h */,
 				AB8AA4471A5E20480065E7F8 /* trim_all.h */,
-				AB06EDA81A719E7C00F9FDBD /* string2c_str.h */,
 			);
 			name = string;
 			sourceTree = "<group>";
@@ -648,6 +663,8 @@
 			children = (
 				ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */,
 				ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */,
+				ABFC9E611A9424C500F124F1 /* calculateCalibrationCoefficients.cpp */,
+				ABFC9E621A9424C500F124F1 /* calculateCalibrationCoefficients.h */,
 			);
 			name = twoColorPyrometery;
 			sourceTree = "<group>";
@@ -749,6 +766,12 @@
 				ABC648661A65B891008FA721 /* vector2cstringArray.cpp */,
 				ABC648671A65B891008FA721 /* vector2cstringArray.h */,
 				AB8F0CB01A8592F70091196B /* quantityTodouble.h */,
+				ABFC9E651A94372A00F124F1 /* stringToDouble.cpp */,
+				ABFC9E661A94372A00F124F1 /* stringToDouble.h */,
+				ABFC9E691A94420300F124F1 /* doubleToString.cpp */,
+				ABFC9E6A1A94420300F124F1 /* doubleToString.h */,
+				ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */,
+				ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -1028,6 +1051,7 @@
 				ABEF4E3E1948D4A500B44AD5 /* phase99.hpp */,
 				ABF5D65219DB3EED00A70476 /* signalRatio.h */,
 				ABF5D65F19DB49FD00A70476 /* signal.h */,
+				ABFC9E711A96B53900F124F1 /* spectrum.h */,
 			);
 			path = emission;
 			sourceTree = "<group>";
@@ -1235,6 +1259,7 @@
 				AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */,
 				ABEF4F001948D4A500B44AD5 /* xml.h in Headers */,
 				ABEF4EE01948D4A500B44AD5 /* setup.h in Headers */,
+				ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */,
 				ABEF4EDA1948D4A500B44AD5 /* phase99.hpp in Headers */,
 				ABEF4EC31948D4A500B44AD5 /* thermalData.hpp in Headers */,
 				AB8AA4381A5C68650065E7F8 /* getline.h in Headers */,
@@ -1245,6 +1270,7 @@
 				ABA48C3A1A78553C0025666F /* cmath.h in Headers */,
 				ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */,
 				ABB54FBF19C221920056823E /* subtract.h in Headers */,
+				ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */,
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
 				ABEF4EF61948D4A500B44AD5 /* Iheat.h in Headers */,
@@ -1271,7 +1297,6 @@
 				ABA48C381A7843F90025666F /* range.h in Headers */,
 				ABB4474519DB386A009EC35F /* constants.h in Headers */,
 				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
-				AB06EDA91A719E7C00F9FDBD /* string2c_str.h in Headers */,
 				ABEF4EBF1948D4A500B44AD5 /* temp_cmplx.h in Headers */,
 				ABA58A1D1A67489E00573ED8 /* path.h in Headers */,
 				ABEF4EB31948D4A500B44AD5 /* lmdiff_poptea.hpp in Headers */,
@@ -1289,6 +1314,7 @@
 				ABEF4ECF1948D4A500B44AD5 /* model.hpp in Headers */,
 				ABEF4EE81948D4A500B44AD5 /* mesh.hpp in Headers */,
 				ABEF4F051948D4A500B44AD5 /* tools.hpp in Headers */,
+				ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */,
 				ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */,
 				AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */,
 				ABEF4E861948D4A500B44AD5 /* bisection.hpp in Headers */,
@@ -1296,6 +1322,7 @@
 				ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */,
 				ABEF4EEE1948D4A500B44AD5 /* Numerical_Temperature.h in Headers */,
 				ABEF4F021948D4A500B44AD5 /* programoptions.hpp in Headers */,
+				ABFC9E641A9424C500F124F1 /* calculateCalibrationCoefficients.h in Headers */,
 				ABEF4E7C1948D4A500B44AD5 /* sensitivityvaldes2013.hpp in Headers */,
 				ABEF4EA61948D4A500B44AD5 /* property.h in Headers */,
 				ABEF4EF81948D4A500B44AD5 /* tau_0.h in Headers */,
@@ -1328,6 +1355,7 @@
 				ABEF4EAF1948D4A500B44AD5 /* cmplx_combination.h in Headers */,
 				AB0DFE0619524382007DF69B /* starts_with.h in Headers */,
 				ABEF4EB71948D4A500B44AD5 /* methods.hpp in Headers */,
+				ABFC9E6C1A94420300F124F1 /* doubleToString.h in Headers */,
 				ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */,
 				ABEF4ED81948D4A500B44AD5 /* noise.hpp in Headers */,
 				ABF5D66819DB60BD00A70476 /* predefined.h in Headers */,
@@ -1337,6 +1365,7 @@
 				AB6981A819CB638300940843 /* apply_to_all.h in Headers */,
 				ABEF4EE41948D4A500B44AD5 /* labels.h in Headers */,
 				ABEF4EA41948D4A500B44AD5 /* layer.h in Headers */,
+				ABFC9E681A94372A00F124F1 /* stringToDouble.h in Headers */,
 				ABEF4EBB1948D4A500B44AD5 /* poptea.hpp in Headers */,
 				ABEF4EEC1948D4A500B44AD5 /* Numerical_Setup.h in Headers */,
 				ABC648651A65B5EB008FA721 /* main-app.h in Headers */,
@@ -1414,6 +1443,7 @@
 				ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */,
 				ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */,
 				AB06EDAB1A71C6B500F9FDBD /* temperatureMeasurement.cpp in Sources */,
+				ABFC9E671A94372A00F124F1 /* stringToDouble.cpp in Sources */,
 				ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */,
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,
 				ABC648641A65B5EB008FA721 /* main-app.cpp in Sources */,
@@ -1425,6 +1455,7 @@
 				ABEF4EC61948D4A500B44AD5 /* construct.cpp in Sources */,
 				ABEF4E931948D4A500B44AD5 /* gslfunc.cpp in Sources */,
 				ABEF4E9F1948D4A500B44AD5 /* utility.cpp in Sources */,
+				ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */,
 				ABEF4E791948D4A500B44AD5 /* num_method2014.cpp in Sources */,
 				ABEF4EFB1948D4A500B44AD5 /* exportfile.cpp in Sources */,
 				ABEF4E9B1948D4A500B44AD5 /* tma.cpp in Sources */,
@@ -1469,6 +1500,7 @@
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
 				ABEF4EB01948D4A500B44AD5 /* kernal.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
+				ABFC9E631A9424C500F124F1 /* calculateCalibrationCoefficients.cpp in Sources */,
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
