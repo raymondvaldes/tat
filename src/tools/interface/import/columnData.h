@@ -26,39 +26,47 @@ private:
   
   mutable std::ifstream my_ifstream ;
   mutable std::stringstream cleanFileStream ;
-  const std::string IgnoreCharacter ;
+  std::string IgnoreCharacter ;
   
   mutable std::vector < std::vector<std::string> > rows;
   mutable std::vector < std::vector<std::string> > columns;
   
   auto saveDataLine( void ) noexcept
     -> void ;
+  
   auto extractDataLines( void )  noexcept
     -> void ;
 
   auto verifyDataIntegrity(void) noexcept
     -> bool;
+  
   auto resetDataVectors(void) noexcept
     -> void;
+  
   auto processData( void )
     -> void;
-  auto validateAndProcess(void) -> void;
+  
+  auto validateAndProcess(void)
+    -> void;
 
 public:
 
 // Constructors and Destructors
-  explicit columnData( const std::string& filePathIn );
-  explicit columnData( const std::string& filePathIn,
-                       const std::string& ignoreCharacterIn );
+  explicit columnData( std::string const & filePathIn );
+  
+  explicit columnData( std::string const & filePathIn,
+                       std::string const & ignoreCharacterIn );
 
-  auto getColumn( const size_t columnNumber ) const noexcept
+  auto getColumn( size_t const columnNumber ) const noexcept
     -> std::vector<std::string>;
   
-  auto getRow( const size_t rowNumber ) const noexcept
+  auto getRow( size_t const rowNumber ) const noexcept
     -> std::vector<std::string>;
   
-  auto getElement( const size_t rowNumber, const size_t columnNumber ) const noexcept
+  auto getElement( size_t const rowNumber, size_t const columnNumber ) const noexcept
     -> std::string;
+  
+  auto size(void) const noexcept -> size_t;
 };
 
 

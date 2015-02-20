@@ -181,5 +181,10 @@ namespace import {
   {
     return rows[ rowNumber - 1 ][ columnNumber - 1] ;
   }
+
+  auto columnData::size(void) const noexcept -> size_t
+  {
+    return rows.size();
+  }
       
 }}}
