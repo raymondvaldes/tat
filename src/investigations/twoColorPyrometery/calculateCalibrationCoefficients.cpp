@@ -25,7 +25,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 -> void
 {
   get_file_and_Import_Data();
-  {
+  
     using units::si::length;
     using units::si::millimeters;
     using units::si::volts;
@@ -47,14 +47,11 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     using thermal::emission::Spectrum;
     using std::generate;
     
-auto const myFirstSignal =
+    auto const myFirstSignal =
       thermal::emission::Signal<units::si::electric_potential>
       ( myWavelengths[0], myEmission200C[0] );
 
-    using celcius = units::absolute<boost::units::celsius::temperature>;
-    auto emissionTemperature =  200 * celcius() ;
-    
-    auto emissionTempKelvin = units::absolute_conv_C_to_K_type::convert( emissionTemperature ) ;
+    auto const emissionTemperature =  200 * units::celsius::degrees() ;
 
     auto signals = std::vector< Signal<units::si::electric_potential> >();
     signals.reserve(N);
@@ -62,7 +59,7 @@ auto const myFirstSignal =
     
     auto i = 0;
     std::for_each( myWavelengths.begin(), myWavelengths.end() ,
-    [&]( auto const & val)
+    [&]( auto const & val )
     {
       auto const mySignal =
       thermal::emission::Signal<units::si::electric_potential>
@@ -74,43 +71,28 @@ auto const myFirstSignal =
     });
 
 
+    auto const myEmissionSpecturm200 = Spectrum<electric_potential>( signals, emissionTemperature ) ;
+
+
+
     for( const auto& signal : signals )
       std::cout << signal << "\n";
+
   
-  
-   // auto const myEmissionSpecturm200 = Spectrum<electric_potential>( signals, emissionTempKelvin ) ;
-    
-    
-//    
-//    using std::for_each;
-//    for_each(
-//      begin( myEmissionSpecturm200.signals ),
-//      end( myEmissionSpecturm200.signals ), []( auto& Element ){
-//        std::cout << Element << "\n";
-//    });
-
-
-    
-    
-    
-
-    
-
-
 //    auto myEmission250C = stringToQuantity< electric_potential >( myData.getColumn( 3 ) , volts) ;
 //    auto myEmission300C = stringToQuantity< electric_potential >( myData.getColumn( 4 ) , volts) ;
 //    auto myEmission350C = stringToQuantity< electric_potential >( myData.getColumn( 5 ) , volts) ;
-//
-//
-//
-//    
-  }
-
+  
   
   calculate_calibration_coefficients();
-  {
+  //{
   
-  }
+  
+  
+  
+  //}
+  
+  
   
   output_Vectors_With_calibration_Coefficients();
   {
