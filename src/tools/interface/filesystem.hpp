@@ -33,36 +33,40 @@ License
 namespace filesystem
 {
 
-void makeDir(const std::string &rootPath, const std::string &newDirectory) noexcept;
-
-
+void makeDir( std::string const & rootPath, std::string const & newDirectory ) noexcept;
 
 class directory {
+
 private:
   const std::string workingDirectory;
+  
   const boost::filesystem::path myDirectory;
   
 public:
-  explicit directory(const std::string &workingDirectory_) noexcept;
-  ~directory(void) noexcept;
+  explicit directory( std::string const & workingDirectory_ ) noexcept;
 
-  std::string abs(const std::string &relativePath) const noexcept;
-  void mkdir(const std::string &newDirectory) const;
-  std::string pwd(void) const noexcept;
-  std::vector<directory> ls() const noexcept;
+  auto abs( std::string const & relativePath) const noexcept
+  -> std::string;
   
-  directory parent_path() const noexcept;
-  std::string working_directory() const noexcept;
-  std::string working_directory_string() const noexcept;
+  auto mkdir( std::string const & newDirectory) const
+  -> void;
+  
+  auto pwd( void ) const noexcept
+  -> std::string;
+  
+  auto ls( void ) const noexcept
+  -> std::vector<directory>;
+  
+  auto parent_path( void ) const noexcept
+  -> directory;
+  
+  auto working_directory_string( void ) const noexcept
+  -> std::string;
 
-  
-  bool working_directory_starts_with( const std::string& starts) const noexcept;
+  auto working_directory_starts_with( std::string const & starts) const noexcept
+  -> bool;
 } ;
 
-//  auto ls( const std::string &path_in ) noexcept -> std::vector< directory >;
-
-
-
-}
+} // namespace filesystem
 
 #endif // FILESYSTEM_HPP_INCLUDED
