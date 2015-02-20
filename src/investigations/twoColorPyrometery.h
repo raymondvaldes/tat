@@ -13,10 +13,13 @@
 
 
 namespace investigations{
+
 namespace twoColorPyrometery{
   
 auto run( const filesystem::directory &dir ) noexcept -> void  ;
   
-}}
+} // namespace twoColorPyrometery
+
+} // namespace investigations
 
 #endif /* defined(__tat___colorPyrometery__) */
