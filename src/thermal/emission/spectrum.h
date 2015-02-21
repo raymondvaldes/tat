@@ -34,13 +34,6 @@ public:
     units::quantity< units::absolute <units::si::temperature > > const & sourceTemperatureIn )
   noexcept : sourceTemperature( sourceTemperatureIn ), signals(inputSignals)
   {} ;
-
-  explicit Spectrum( size_t const N,
-    units::quantity< units::absolute <units::si::temperature > > const & sourceTemperatureIn )
-  noexcept : sourceTemperature( sourceTemperatureIn ), signals()
-  {
-    signals.reserve(N);
-  };
   
   explicit Spectrum(
     SignalList const & inputSignals,
@@ -49,13 +42,6 @@ public:
   Spectrum( inputSignals,
   units::absolute_conv_C_to_K_type::convert( sourceTemperatureIn ))
   {}
-
-
-  auto push_back( Signal< SignalType > const & input )
-  noexcept -> void
-  {
-    signals.push_back(input) ;
-  } ;
 
 
   auto source_Temperature(void)
