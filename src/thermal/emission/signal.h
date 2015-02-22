@@ -23,17 +23,17 @@ template< typename signalType >
 class Signal{
 
 private:
-  units::quantity< units::si::length>  electromagneticWavelength;
+  units::quantity< units::si::wavelength>  electromagneticWavelength;
   units::quantity< signalType>  intensity;
 
 public:
-  explicit Signal( units::quantity< units::si::length> const & wavelength_in,
+  explicit Signal( units::quantity< units::si::wavelength> const & wavelength_in,
                    units::quantity< signalType> const & intensity_in )
                    noexcept
   : electromagneticWavelength( wavelength_in ), intensity( intensity_in ) {};
 
   auto getElectromagneticWavelength() const noexcept
-  -> units::quantity< units::si::length>
+  -> units::quantity< units::si::wavelength>
   {
     return electromagneticWavelength ;
   }
@@ -49,11 +49,40 @@ public:
 template<typename signalType>
 std::ostream& operator<<(std::ostream& out, const Signal<signalType>& mySignal)
 {
-    out  <<mySignal.getElectromagneticWavelength() <<  "\t"
+    out << mySignal.getElectromagneticWavelength() <<  "\t"
         << mySignal.getIntensity() ;
     return out;
 }
 
+template<typename signalType>
+bool operator< ( Signal<signalType> const & first, Signal<signalType> const & second)
+{
+    return ( first.getElectromagneticWavelength() < second.getElectromagneticWavelength() );
+}
+
+template<typename signalType>
+bool operator> ( Signal<signalType> const & first, Signal<signalType> const & second)
+{
+    return ( first.getElectromagneticWavelength() > second.getElectromagneticWavelength() );
+}
+
+template<typename signalType>
+bool operator<= ( Signal<signalType> const & first, Signal<signalType> const & second)
+{
+    return ( first.getElectromagneticWavelength() <= second.getElectromagneticWavelength() );
+}
+
+template<typename signalType>
+bool operator>= ( Signal<signalType> const & first, Signal<signalType> const & second)
+{
+    return ( first.getElectromagneticWavelength() >= second.getElectromagneticWavelength() );
+}
+
+template<typename signalType>
+bool operator== ( Signal<signalType> const & first, Signal<signalType> const & second)
+{
+    return ( first.getElectromagneticWavelength() == second.getElectromagneticWavelength() );
+}
 
 }
 
