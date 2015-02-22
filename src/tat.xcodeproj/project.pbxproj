@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AB06EDAB1A71C6B500F9FDBD /* temperatureMeasurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */; };
 		AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BA1A97C7B600EEA759 /* valid.h */; };
+		AB0C51BD1A97FDF400EEA759 /* calibrationGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */; };
 		AB0DFE01195242AA007DF69B /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFDFF195242AA007DF69B /* split.cpp */; };
 		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
 		AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFE0319524382007DF69B /* starts_with.cpp */; };
@@ -230,6 +231,7 @@
 /* Begin PBXFileReference section */
 		AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperatureMeasurement.cpp; path = pyrometry/twoColor/temperatureMeasurement.cpp; sourceTree = "<group>"; };
 		AB0C51BA1A97C7B600EEA759 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = matrixAnalysis/valid.h; sourceTree = "<group>"; };
+		AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibrationGenerator.h; path = pyrometry/twoColor/calibrationGenerator.h; sourceTree = "<group>"; };
 		AB0DFDFF195242AA007DF69B /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = split.cpp; path = algorithm/string/split.cpp; sourceTree = "<group>"; };
 		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
 		AB0DFE0319524382007DF69B /* starts_with.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = starts_with.cpp; path = algorithm/string/starts_with.cpp; sourceTree = "<group>"; };
@@ -1231,6 +1233,7 @@
 				AB6087721A69B9FB009B1E85 /* signalRatio.h */,
 				AB8F0CA91A8581FE0091196B /* gCoefficient.cpp */,
 				AB8F0CAA1A8581FE0091196B /* gCoefficient.h */,
+				AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */,
 			);
 			name = twoColor;
 			sourceTree = "<group>";
@@ -1350,6 +1353,7 @@
 				ABEF4EC51948D4A500B44AD5 /* thermalsweepoptimizer.hpp in Headers */,
 				ABEF4EF21948D4A500B44AD5 /* Tss_ana.h in Headers */,
 				AB8F0CAC1A8581FE0091196B /* gCoefficient.h in Headers */,
+				AB0C51BD1A97FDF400EEA759 /* calibrationGenerator.h in Headers */,
 				ABEF4EF41948D4A500B44AD5 /* heat2DAna.hpp in Headers */,
 				ABEF4E961948D4A500B44AD5 /* simpsons_3_8.hpp in Headers */,
 				ABEF4E821948D4A500B44AD5 /* spline.h in Headers */,
