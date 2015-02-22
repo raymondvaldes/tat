@@ -43,6 +43,15 @@ public:
   {
     return intensity ;
   }
+  
+  auto if_wavelength( units::quantity< units::si::wavelength > const & lambda  )
+  const noexcept-> bool
+  {
+    auto const value = 1e-14;
+    auto const tol = units::quantity< units::si::wavelength>::from_value( value ) ;
+      
+    return ( units::abs( electromagneticWavelength - lambda ) < tol ) ;
+  }
 };
 
 
