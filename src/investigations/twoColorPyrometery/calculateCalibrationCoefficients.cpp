@@ -10,7 +10,7 @@
 #include "tools/interface/import/columnData.h"
 #include "thermal/emission/signal.h"
 #include "thermal/emission/spectrum.h"
-
+#include "thermal/pyrometry/twoColor/calibrationGenerator.h"
 #include "algorithm/vector/stringToQuantity.h"
 
 namespace investigations {
@@ -73,11 +73,11 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 
     auto const myEmissionSpecturm200 = Spectrum<electric_potential>( signals, emissionTemperature ) ;
 
-
-
-    for( const auto& signal : signals )
-      std::cout << signal << "\n";
-
+    using thermal::pyrometry::twoColor::calibrationGenerator;
+    auto const cGenerator = calibrationGenerator<electric_potential>(myEmissionSpecturm200);
+    
+    auto myDelta = units::quantity<units::si::wavelength>(1.0 * units::si::micrometers) ;
+    cGenerator.coefficientsAt( myDelta );
   
 //    auto myEmission250C = stringToQuantity< electric_potential >( myData.getColumn( 3 ) , volts) ;
 //    auto myEmission300C = stringToQuantity< electric_potential >( myData.getColumn( 4 ) , volts) ;
