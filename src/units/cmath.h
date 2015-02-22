@@ -16,6 +16,7 @@ namespace units {
   using boost::units::cos;
   using boost::units::sin;
   using boost::units::fmod;
+  using boost::units::abs;
   
 } // namespace units
 
