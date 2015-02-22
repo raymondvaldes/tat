@@ -44,34 +44,63 @@ public:
     using std::end;
     using std::for_each;
   
-    //determine size
-    auto N = 0;
-    
-    auto const min = spectrum.min() ;
-    auto const max = spectrum.max() ;
-
+ //   //determine size//
+//    auto N = 0;
 
     // loop through the spectrum where it checks if the value + delta is a valid point
     //if it is then it can push back the info to a new container
     // new container stores the two signals at ( pt1, pt1+delta)
     // then i can do analysis on the new container
-    auto myWavelengths = std::make_pair( min, max );
     
-
-    auto
-    pass = spectrum.if_available( min.getElectromagneticWavelength() ) ;
-    pass = spectrum.if_available( min.getElectromagneticWavelength() ) ;
+    auto lambdaPairs =
+      std::vector<
+        std::pair<
+          units::quantity< units::si::wavelength >,
+          units::quantity< units::si::wavelength >
+          >
+      >(0);
   
-    for_each( begin(spectrum), end(spectrum), []( auto const & val){
-      std::cout << "hello, world!\n";
-    } );
+    //save available
+    auto const push_back_lambdaPair = [&]( auto const & val) {
+      auto const first = val.getElectromagneticWavelength() ;
+      auto const second = first + delta ;
+
+      auto const both_are_available = spectrum.if_available( second ) ;
+
+      if( both_are_available ) {
+        lambdaPairs.push_back( std::make_pair( first, second ) ) ;
+      }
+    };
     
+    for_each( begin(spectrum), end(spectrum), push_back_lambdaPair );
+    auto const N_signal_pairs = lambdaPairs.size();
+
+    // container that has the two signals based on the wavelenghts lambda
+    auto signalPairs =
+      std::vector<
+        std::pair< emission::Signal<T>, emission::Signal<T> >
+      >();
+    signalPairs.reserve( N_signal_pairs );
     
+    for_each( begin(lambdaPairs), end(lambdaPairs),
+      [&]( auto const &lambdaPair )
+      {
+        auto const first = spectrum.at_wavelength( lambdaPair.first ) ;
+        auto const second = spectrum.at_wavelength( lambdaPair.second );
+  
+        signalPairs.push_back( std::make_pair( first, second ) ) ;
+      } );
     
     // populate vector
     auto coefficients =
-    std::vector< units::quantity< units::si::dimensionless> >( N );
+    std::vector< units::quantity< units::si::dimensionless> >(N_signal_pairs);
     
+    for_each( begin(signalPairs), end( signalPairs ),
+      [&](auto const &signalPair)
+      {
+//        auto const first =
+//        auto const second =
+      } ) ;
     
     
     return coefficients;

@@ -77,7 +77,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     auto const cGenerator = calibrationGenerator<electric_potential>(myEmissionSpecturm200);
     
     auto myDelta = units::quantity<units::si::wavelength>(1.0 * units::si::micrometers) ;
-    cGenerator.coefficientsAt( myDelta );
+    auto coefficients = cGenerator.coefficientsAt( myDelta );
   
 //    auto myEmission250C = stringToQuantity< electric_potential >( myData.getColumn( 3 ) , volts) ;
 //    auto myEmission300C = stringToQuantity< electric_potential >( myData.getColumn( 4 ) , volts) ;
