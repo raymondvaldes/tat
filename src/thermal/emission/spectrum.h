@@ -83,28 +83,42 @@ public:
     auto const pass = any_of( begin(signals), end(signals),
     [&input]( auto const &val )
     {
-      auto const value = 1e-14;
-      auto const tol = units::quantity< units::si::wavelength>::from_value( value ) ;
-      
-      return ( abs( val.getElectromagneticWavelength() - input ) < tol ) ;
+      return val.if_wavelength( input ) ;
     } );
     
     return pass;
   }
+
+  auto at_wavelength( units::quantity< units::si::wavelength > eval )
+  const noexcept -> Signal< SignalType >
+  {
+    using std::find_if;
+    using std::begin;
+    using std::end;
+    
+    auto const found_signal = find_if( begin(signals), end(signals),
+    [&]( auto & signal )
+    {
+      assert( if_available( eval ) );
+      return signal.if_wavelength( eval ) ;
+    } ) ;
+    
+    return *found_signal;
+  }
   
-    //iterators
-    typedef typename std::vector< Signal< SignalType > >::iterator iterator;
-  
-    typedef typename std::vector< Signal< SignalType > >::const_iterator const_iterator;
+  //iterators
+  typedef typename std::vector< Signal< SignalType > >::iterator iterator;
+
+  typedef typename std::vector< Signal< SignalType > >::const_iterator const_iterator;
 
 
-    iterator begin() { return signals.begin(); }
+  iterator begin() { return signals.begin(); }
 
-    const_iterator begin() const { return signals.begin(); }
+  const_iterator begin() const { return signals.begin(); }
 
-    iterator end() { return signals.end(); }
+  iterator end() { return signals.end(); }
 
-    const_iterator end() const { return signals.end(); }
+  const_iterator end() const { return signals.end(); }
   
 };
 
