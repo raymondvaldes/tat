@@ -23,7 +23,6 @@ template<class Dim,class System, class Enable>
   using unit = boost::units::unit< Dim, System, Enable >;
   
   
-
   using boost::units::binary_prefix;
   using boost::units::engineering_prefix;
   using boost::units::no_prefix;
