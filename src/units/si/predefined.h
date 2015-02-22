@@ -83,10 +83,15 @@ using boost::units::si::hertz;
 //more stuff
 static auto const nanometers = nano * meters;
 static const auto micrometers = micro * meters;
-
 static const auto millimeters = milli * meters;
-static const auto millivolts = milli * volts;
+static const auto centimeters = centi * meters;
+static const auto kilometers = kilo * meters;
 
+static const auto microvolts = micro * volts;
+static const auto millivolts = milli * volts;
+static const auto kilovolts = kilo * volts;
+static const auto megavolts = mega * volts;
+static const auto gigavolts = giga * volts;
 
 } //namespace si
 
