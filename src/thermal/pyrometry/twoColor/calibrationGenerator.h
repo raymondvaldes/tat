@@ -13,6 +13,7 @@
 #include <vector>
 #include <utility>
 #include "thermal/emission/spectrum.h"
+#include "thermal/pyrometry/twoColor/calibrationCoefficient.h"
 
 namespace thermal {
 
@@ -26,9 +27,6 @@ class calibrationGenerator {
 private:
   emission::Spectrum<T> spectrum;
 
-
-
-
 public:
   explicit
   calibrationGenerator( emission::Spectrum<T> const & spectrumInput )
@@ -40,12 +38,13 @@ public:
   const noexcept
   -> std::vector< units::quantity< units::si::dimensionless> >
   {
+    using std::vector;
     using std::begin;
+    using std::pair;
+    using std::make_pair;
     using std::end;
     using std::for_each;
   
- //   //determine size//
-//    auto N = 0;
 
     // loop through the spectrum where it checks if the value + delta is a valid point
     //if it is then it can push back the info to a new container
@@ -53,8 +52,8 @@ public:
     // then i can do analysis on the new container
     
     auto lambdaPairs =
-      std::vector<
-        std::pair<
+      vector<
+        pair<
           units::quantity< units::si::wavelength >,
           units::quantity< units::si::wavelength >
           >
@@ -68,7 +67,7 @@ public:
       auto const both_are_available = spectrum.if_available( second ) ;
 
       if( both_are_available ) {
-        lambdaPairs.push_back( std::make_pair( first, second ) ) ;
+        lambdaPairs.push_back( make_pair( first, second ) ) ;
       }
     };
     
@@ -77,30 +76,38 @@ public:
 
     // container that has the two signals based on the wavelenghts lambda
     auto signalPairs =
-      std::vector<
-        std::pair< emission::Signal<T>, emission::Signal<T> >
+      vector<
+        pair< emission::Signal<T>, emission::Signal<T> >
       >();
     signalPairs.reserve( N_signal_pairs );
     
     for_each( begin(lambdaPairs), end(lambdaPairs),
-      [&]( auto const &lambdaPair )
-      {
+    [&]( auto const &lambdaPair )
+    {
         auto const first = spectrum.at_wavelength( lambdaPair.first ) ;
         auto const second = spectrum.at_wavelength( lambdaPair.second );
   
-        signalPairs.push_back( std::make_pair( first, second ) ) ;
-      } );
+        signalPairs.push_back( make_pair( first, second ) ) ;
+    } );
     
     // populate vector
     auto coefficients =
-    std::vector< units::quantity< units::si::dimensionless> >(N_signal_pairs);
+    vector< units::quantity< units::si::dimensionless> >( N_signal_pairs ) ;
     
     for_each( begin(signalPairs), end( signalPairs ),
-      [&](auto const &signalPair)
-      {
-//        auto const first =
-//        auto const second =
-      } ) ;
+    [&](auto const &signalPair)
+    {
+      using thermal::pyrometry::twoColor::calibrationCoefficient;
+    
+      auto const first = signalPair.first;
+      auto const second = signalPair.second;
+      
+      auto const coefficient =
+      calibrationCoefficient( first, second, spectrum.source_Temperature() ) ;
+      
+      coefficients.push_back( coefficient );
+      std::cout << coefficient << "\n";
+    } ) ;
     
     
     return coefficients;
