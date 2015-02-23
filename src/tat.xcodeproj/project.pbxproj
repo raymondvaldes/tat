@@ -22,6 +22,7 @@
 		AB553C53195DF13200E2B7D1 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C51195DF13200E2B7D1 /* random.cpp */; };
 		AB553C54195DF13200E2B7D1 /* random.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C52195DF13200E2B7D1 /* random.h */; };
 		AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C57195DF3FB00E2B7D1 /* equalto.h */; };
+		AB564F071A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h in Headers */ = {isa = PBXBuildFile; fileRef = AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */; };
 		AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5FDFDA1A6EE30F0017CEBB /* bimap.h */; };
 		AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5FDFDC1A6EE7BF0017CEBB /* settings.h */; };
 		AB5FDFDF1A6EE7F50017CEBB /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5FDFDE1A6EE7F50017CEBB /* settings.cpp */; };
@@ -244,6 +245,7 @@
 		AB553C51195DF13200E2B7D1 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = statistics/random/random.cpp; sourceTree = "<group>"; };
 		AB553C52195DF13200E2B7D1 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = random.h; path = statistics/random/random.h; sourceTree = "<group>"; };
 		AB553C57195DF3FB00E2B7D1 /* equalto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = equalto.h; path = utilities/equalto.h; sourceTree = "<group>"; };
+		AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fill_with_list_values_as_constructor_arg.h; path = algorithm/vector/fill_with_list_values_as_constructor_arg.h; sourceTree = "<group>"; };
 		AB5FDFDA1A6EE30F0017CEBB /* bimap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bimap.h; path = bimap/bimap.h; sourceTree = "<group>"; };
 		AB5FDFDC1A6EE7BF0017CEBB /* settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
 		AB5FDFDE1A6EE7F50017CEBB /* settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 				ABFC9E6A1A94420300F124F1 /* doubleToString.h */,
 				ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */,
 				ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */,
+				AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -1353,6 +1356,7 @@
 				ABEF4EC51948D4A500B44AD5 /* thermalsweepoptimizer.hpp in Headers */,
 				ABEF4EF21948D4A500B44AD5 /* Tss_ana.h in Headers */,
 				AB8F0CAC1A8581FE0091196B /* gCoefficient.h in Headers */,
+				AB564F071A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h in Headers */,
 				AB0C51BD1A97FDF400EEA759 /* calibrationGenerator.h in Headers */,
 				ABEF4EF41948D4A500B44AD5 /* heat2DAna.hpp in Headers */,
 				ABEF4E961948D4A500B44AD5 /* simpsons_3_8.hpp in Headers */,

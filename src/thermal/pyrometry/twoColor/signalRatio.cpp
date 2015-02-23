@@ -21,8 +21,8 @@ auto signalRatio(
   units::quantity<units::si::electric_potential> second
 ) noexcept -> units::quantity< units::si::dimensionless >
 {
-  assert( first.value() > 0 );
-  assert( second.value() > 0 );
+  assert( first.value() > 0 ) ;
+  assert( second.value() > 0 ) ;
   
   return second / first ;
 }
