@@ -12,6 +12,7 @@
 #include "thermal/emission/spectrum.h"
 #include "thermal/pyrometry/twoColor/calibrationGenerator.h"
 #include "algorithm/vector/stringToQuantity.h"
+#include "algorithm/vector/fill_with_list_values_as_constructor_arg.h"
 
 namespace investigations {
 
@@ -25,67 +26,56 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 -> void
 {
   get_file_and_Import_Data();
-  
+    using algorithm::vector::fill_with_list_values_as_constructor_arg;
+    using units::quantity;
     using units::si::length;
-    using units::si::millimeters;
+    using units::si::micrometers;
     using units::si::volts;
     using units::si::electric_potential;
+    using units::si::wavelength;
+    namespace celsius = units::celsius;
+  
     using algorithm::vector::stringToQuantity;
     using tools::interface::import::columnData;
-
-    auto myParentPath = dir.parent_path() ;
-    auto myPath = myParentPath.pwd() + "/calibration/" + "blackBody.txt";
-    
-    auto myData = columnData( myPath, "," ) ;
-    auto N = myData.size();
-    
-    auto myWavelengths = stringToQuantity< length >( myData.getColumn( 1 ) , units::si::micrometers) ;
-    auto myEmission200C = stringToQuantity< electric_potential >( myData.getColumn( 2 ) , volts ) ;
-    
-    
+    using thermal::pyrometry::twoColor::calibrationGenerator;
     using thermal::emission::Signal;
     using thermal::emission::Spectrum;
-    using std::generate;
+    using std::for_each;
+    using std::vector;
+
+    auto const myParentPath = dir.parent_path() ;
+    auto const myPath = myParentPath.pwd() + "/calibration/" + "blackBody.txt";
     
-    auto const myFirstSignal =
-      thermal::emission::Signal<units::si::electric_potential>
-      ( myWavelengths[0], myEmission200C[0] );
-
-    auto const emissionTemperature =  200 * units::celsius::degrees() ;
-
-    auto signals = std::vector< Signal<units::si::electric_potential> >();
-    signals.reserve(N);
-    
-    
-    auto i = 0;
-    std::for_each( myWavelengths.begin(), myWavelengths.end() ,
-    [&]( auto const & val )
-    {
-      auto const mySignal =
-      thermal::emission::Signal<units::si::electric_potential>
-      ( myWavelengths[i], myEmission200C[i] );
-      
-      signals.push_back(mySignal);
-      
-      i++;
-    });
+    auto const myData = columnData( myPath, "," ) ;
+  
+    auto const firstColumn = 1;
+    auto const secondColumn = 2;
+  
+    auto const myWavelengths = stringToQuantity< length >(
+      myData.getColumn( firstColumn ) , micrometers ) ;
+    auto const myEmission200C = stringToQuantity< electric_potential >(
+      myData.getColumn( secondColumn ) , volts ) ;
+  
+    auto const emissionTemperature =  200 * celsius::degrees() ;
 
 
-    auto const myEmissionSpecturm200 = Spectrum<electric_potential>( signals, emissionTemperature ) ;
+    auto const signals = fill_with_list_values_as_constructor_arg <
+      Signal< electric_potential > >( myWavelengths, myEmission200C ) ;
+    auto const delta_lambda = quantity< wavelength >( 1.0 * micrometers ) ;
 
-    using thermal::pyrometry::twoColor::calibrationGenerator;
-    auto const cGenerator = calibrationGenerator<electric_potential>(myEmissionSpecturm200);
-    
-    auto myDelta = units::quantity<units::si::wavelength>(1.0 * units::si::micrometers) ;
-    auto coefficients = cGenerator.coefficientsAt( myDelta );
+ // calculate_calibration_coefficients();
+  //{
+    auto const emission_spectrum = Spectrum<electric_potential>( signals, emissionTemperature ) ;
+    auto const cGenerator = calibrationGenerator<electric_potential>( emission_spectrum );
+    auto const coefficients = cGenerator.coefficientsAt( delta_lambda );
+  
+  
+  
+  
   
 //    auto myEmission250C = stringToQuantity< electric_potential >( myData.getColumn( 3 ) , volts) ;
 //    auto myEmission300C = stringToQuantity< electric_potential >( myData.getColumn( 4 ) , volts) ;
 //    auto myEmission350C = stringToQuantity< electric_potential >( myData.getColumn( 5 ) , volts) ;
-  
-  
-  calculate_calibration_coefficients();
-  //{
   
   
   
