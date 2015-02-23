@@ -55,8 +55,8 @@ public:
   } ;
   
 
-  auto source_Temperature(void)
-  noexcept -> units::quantity< units::si::temperature >
+  auto source_Temperature(void) const noexcept
+  -> units::quantity< units::absolute< units::si::temperature > >
   {
     return sourceTemperature;
   }
