@@ -115,7 +115,8 @@ private:
      
       auto const N_pairs = signalPairs.size();
    
-      auto coefficients = vector< quantity< dimensionless> >( N_pairs ) ;
+      auto coefficients = vector< quantity< dimensionless> >() ;
+      coefficients.reserve( N_pairs );
      
       for_each( begin( signalPairs ), end( signalPairs ),
       [&](auto const &signalPair)
@@ -129,7 +130,6 @@ private:
         calibrationCoefficient( first, second, spectrum.source_Temperature() ) ;
         
         coefficients.push_back( coefficient );
-        std::cout << coefficient << "\n";
       } ) ;
      
       return coefficients;
@@ -189,13 +189,10 @@ public:
 
   auto coefficientsAt( units::quantity< units::si::wavelength > const & delta )
   const noexcept
-  -> std::vector<
-      std::pair<
+  -> std::vector< std::pair<
         std::pair<  units::quantity<units::si::wavelength>,
                     units::quantity< units::si::wavelength> > ,
-        units::quantity< units::si::dimensionless >
-      >
-    >
+        units::quantity< units::si::dimensionless > > >
   {
     auto const lambdaPairs = extract_wavelength_pairs( delta );
     
@@ -204,7 +201,9 @@ public:
     auto const coefficients = evaluate_signals_for_calibration( signalPairs ) ;
     
     auto const output = compose_calibration_data( lambdaPairs, coefficients ) ;
-    
+
+    assert( lambdaPairs.size() == output.size() );
+
     return output ;
   }
 
