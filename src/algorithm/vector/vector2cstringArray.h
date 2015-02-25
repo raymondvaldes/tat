@@ -11,14 +11,38 @@
 
 #include <vector>
 #include <string>
+#include <cassert>
+
+#include "algorithm/algorithm.h"
 
 namespace algorithm {
+
 namespace vector {
 
-auto string2charPtr( const std::vector<std::string> & myString ) noexcept
-  -> std::vector<char const *>;
+inline auto string2charPtr( std::vector<std::string> const & input ) noexcept
+  -> std::vector<char const *>
+{
+  using std::vector;
+  using algorithm::transform;
+  using std::begin;
+  
+  auto const empty = input.empty();
+  auto const count = input.size();
+  assert( !empty );
+  
+  auto const string2c_str = []( const auto& aString )
+  {
+    return aString.c_str();
+  };
 
+  auto output = vector< char const *>( count );
   
-  
-}}
+  transform(  input, begin( output ), string2c_str ) ;
+
+  return output;
+}
+
+}
+
+}
 #endif /* defined(__tat__vector2cstringArray__) */

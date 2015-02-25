@@ -12,6 +12,7 @@
 using std::find;
 
 namespace algorithm {
+
 namespace vector{
 
 bool ifzero( const double* vec, const size_t N ) noexcept {

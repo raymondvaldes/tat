@@ -28,7 +28,7 @@ License
 #include <cmath>
 
 #include "math/utility.hpp"
-#include "math/statistics/random/random.h"
+#include "math/random/random.h"
 #include "math/utilities/equalto.h"
 
 

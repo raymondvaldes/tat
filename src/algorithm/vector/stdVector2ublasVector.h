@@ -14,11 +14,14 @@
 #include <vector>
 
 namespace algorithm {
+
 namespace vector{
 
 boost::numeric::ublas::vector<double>
 stdVector2ublasVector( const std::vector<double>& input ) noexcept;
 
+} // namespace vector
 
-}}
+} // namespace algorithm
+
 #endif /* defined(__tat__stdVector2ublasVector__) */

@@ -25,7 +25,7 @@ License
 #include <cmath>
 #include "thermal/emission/noise.hpp"
 #include "math/utility.hpp"
-#include "math/statistics/random/random.h"
+#include "math/random/random.h"
 #include "tools/interface/xml.h"
 
 namespace thermal{

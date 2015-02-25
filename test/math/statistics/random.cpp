@@ -8,7 +8,7 @@
 
 #define BOOST_TEST_NO_LIB
 #include <boost/test/unit_test.hpp>
-#include "math/statistics/random/random.h"
+#include "math/random/random.h"
 #include "math/utility.hpp"
 
 using std::vector ;

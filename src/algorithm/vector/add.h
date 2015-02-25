@@ -15,8 +15,8 @@
 #include "algorithm/algorithm.h"
 
 namespace algorithm {
-namespace vector{
 
+namespace vector{
 
 template< typename T >
 decltype( auto )
@@ -38,8 +38,9 @@ noexcept
   return result;
 }
 
+} // namespace vector
 
-}}
+} // namespace algorithm
 
 
 #endif /* defined(__tat__add__) */

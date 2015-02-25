@@ -12,13 +12,18 @@
 #include <vector>
 
 namespace algorithm {
+
 namespace vector{
 
 bool ifzero( const double* vec, const size_t N ) noexcept;
+
 bool if_not_zero( const double* vec, const size_t N ) noexcept;
 
-bool ifzero( const std::vector<double>& vec )noexcept;
-bool if_not_zero( const std::vector<double>& vec )noexcept;
+bool ifzero( const std::vector<double>& vec ) noexcept;
 
-}}
+bool if_not_zero( const std::vector<double>& vec ) noexcept;
+
+}
+
+}
 #endif /* defined(__tat__ifzero__) */

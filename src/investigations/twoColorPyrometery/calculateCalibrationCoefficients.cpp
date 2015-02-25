@@ -17,6 +17,7 @@
 #include "algorithm/vector/fill_with_list_values_as_constructor_arg.h"
 
 #include <algorithm> 
+#include <valarray>
 
 namespace investigations {
 
@@ -81,26 +82,14 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     auto const emmissionColumnVerification = 2;
     auto const emissionTemperatureVerification =  204.5 * celsius::degrees() ;
   
-    auto const emmissionColumn2 = 2;
-    auto const emissionTemperature200 =  200 * celsius::degrees() ;
-  
-    auto const emmissionColumn3 = 3 ;
-    auto const emissionTemperature300 =  300 * celsius::degrees() ;
-
-    auto const emmissionColumn4 = 4 ;
-    auto const emissionTemperature400 =  400 * celsius::degrees() ;
-
-    auto const emmissionColumn5 = 5 ;
-    auto const emissionTemperature500 =  500 * celsius::degrees() ;
-  
     auto const delta_lambda = quantity< wavelength >( 1.0 * micrometers ) ;
   //  auto const wavelength_offset = quantity< wavelength >( -.57412 * micrometers );
     auto const wavelength_offset = quantity< wavelength >( 0 * micrometers );
 
   
     auto const myParentPath = dir.parent_path() ;
-    auto const myPathNew = myParentPath.pwd() + "/calibration/" + "blackBody.txt";
-    auto const myPathVerification = myParentPath.pwd() + "/calibration/" + "blackBody_verifcation.txt";
+    auto const myPathNew = myParentPath.pwd() + "/calibration/" + "blackBody_updated.txt";
+    auto const myPathVerification = myParentPath.pwd() + "/calibration/" + "blackBody_updated.txt";
 
     auto const evaluateRawData = [&]( auto const emmissionColumn,
                                       auto const emissionTemperature,
@@ -127,25 +116,42 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     };
   
 
+
     {
-      auto const c300 = evaluateRawData( emmissionColumn3, emissionTemperature300, myPathNew );
-      auto const c400 = evaluateRawData( emmissionColumn4, emissionTemperature400, myPathNew );
-      auto const c500 = evaluateRawData( emmissionColumn5, emissionTemperature500, myPathNew );
+      auto const c2 = evaluateRawData( 2, 200 * celsius::degrees(), myPathNew );
+      auto const c3 = evaluateRawData( 3, 250 * celsius::degrees(), myPathNew );
+      auto const c4 = evaluateRawData( 4, 300 * celsius::degrees(), myPathNew );
+      auto const c5 = evaluateRawData( 5, 350 * celsius::degrees(), myPathNew );
+      auto const c6 = evaluateRawData( 6, 400 * celsius::degrees(), myPathNew );
+      auto const c7 = evaluateRawData( 7, 450 * celsius::degrees(), myPathNew );
+      auto const c8 = evaluateRawData( 8, 500 * celsius::degrees(), myPathNew );
+      auto const c9 = evaluateRawData( 9, 600 * celsius::degrees(), myPathNew );
+      auto const c10 = evaluateRawData( 10, 700 * celsius::degrees(), myPathNew );
+      auto const c11 = evaluateRawData( 11, 800 * celsius::degrees(), myPathNew );
+      auto const c12 = evaluateRawData( 12, 900 * celsius::degrees(), myPathNew );
+      auto const c13 = evaluateRawData( 13, 1000 * celsius::degrees(), myPathNew );
     
       auto i = 0;
-      std::for_each( c300.begin(), c300.end(), [&]( const auto & val )
+      std::for_each( c2.begin(), c2.end(), [&]( const auto & val )
       {
-        std::cout <<  c300[i].second.value() << "\t" <<
-                      c400[i].second.value() <<"\t"<<
-                      c500[i].second.value() << "\n";
-        ++i;
+        std::cout <<  c2[i].second.value() << "\t" <<
+                      c3[i].second.value() << "\t" <<
+                      c4[i].second.value() << "\t" <<
+                      c5[i].second.value() << "\t" <<
+                      c6[i].second.value() << "\t" <<
+                      c7[i].second.value() << "\t" <<
+                      c8[i].second.value() << "\t" <<
+                      c9[i].second.value() << "\t" <<
+                      c10[i].second.value() << "\t" <<
+                      c11[i].second.value() << "\t" <<
+                      c12[i].second.value() << "\t" <<
+                      c13[i].second.value() << "\n";
+                ++i;
       } );
-    }
+      
+  
 
-
-
-
-
+  }
 
   
 //      std::cout << "\n\n\n";

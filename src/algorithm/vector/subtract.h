@@ -10,11 +10,12 @@
 #define __tat__subtract__
 
 #include <vector>
-#include <functional>   // std::plus
+#include <functional>   // std::minus
 
 #include "algorithm/algorithm.h"
 
 namespace algorithm {
+
 namespace vector{
 
 template< typename T >
@@ -36,7 +37,10 @@ noexcept
 
   return result;
 }
-}}
+
+} // namespace vector
+
+} // naemspace algorithm
 
 
 #endif /* defined(__tat__subtract__) */

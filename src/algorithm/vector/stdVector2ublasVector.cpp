@@ -12,6 +12,7 @@
 //#include <algorithm>
 
 namespace algorithm {
+
 namespace vector{
 
 boost::numeric::ublas::vector<double>
@@ -27,5 +28,6 @@ stdVector2ublasVector( const std::vector<double>& input ) noexcept {
   return output;
 }
 
+} // namespace vector
 
-}}
+} // namespace algorithm
