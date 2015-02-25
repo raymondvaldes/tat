@@ -82,9 +82,9 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     auto const emmissionColumnVerification = 2;
     auto const emissionTemperatureVerification =  204.5 * celsius::degrees() ;
   
-    auto const delta_lambda = quantity< wavelength >( 1.0 * micrometers ) ;
-  //  auto const wavelength_offset = quantity< wavelength >( -.57412 * micrometers );
-    auto const wavelength_offset = quantity< wavelength >( 0 * micrometers );
+    auto const delta_lambda = quantity< wavelength >( 0.3 * micrometers ) ;
+    auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
+ //   auto const wavelength_offset = quantity< wavelength >( 0 * micrometers );
 
   
     auto const myParentPath = dir.parent_path() ;
@@ -130,6 +130,8 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
       auto const c11 = evaluateRawData( 11, 800 * celsius::degrees(), myPathNew );
       auto const c12 = evaluateRawData( 12, 900 * celsius::degrees(), myPathNew );
       auto const c13 = evaluateRawData( 13, 1000 * celsius::degrees(), myPathNew );
+//      auto const c14 = evaluateRawData( 14, 1100 * celsius::degrees(), myPathNew );
+//      auto const c15 = evaluateRawData( 15, 1200 * celsius::degrees(), myPathNew );
     
       auto i = 0;
       std::for_each( c2.begin(), c2.end(), [&]( const auto & val )
@@ -145,7 +147,10 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
                       c10[i].second.value() << "\t" <<
                       c11[i].second.value() << "\t" <<
                       c12[i].second.value() << "\t" <<
-                      c13[i].second.value() << "\n";
+                      c13[i].second.value() << "\t" ;
+//                      c14[i].second.value() << "\t" <<
+//                      c15[i].second.value() ;
+                      std::cout << "\n";
                 ++i;
       } );
       
