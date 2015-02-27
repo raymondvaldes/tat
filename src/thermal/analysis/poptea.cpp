@@ -26,6 +26,7 @@ License
 #include "tools/interface/xml.h"
 #include "tools/interface/import/columnData.h"
 #include "algorithm/vector/VectorString2Typename.h"
+#include "algorithm/vector/stringToQuantity.h"
 
 namespace thermal {
 namespace analysis{  
@@ -40,27 +41,26 @@ Poptea::Poptea( const Kernal &coreSystem_ , const ThermalData &thermaldata_,
   reassign( unknownParameters, unknownParameters_);
 }
 
-auto Poptea::loadTBDfile( const filesystem::directory &dir,
-                          const std::string& inputFileName )
+auto Poptea::loadTBDfile( filesystem::directory const & dir,
+                          std::string const & inputFileName )
   -> std::vector< units::quantity<units::si::electric_potential >>
 {
-  using tools::interface::import::columnData;
-  
-  const auto myFileName = dir.abs( inputFileName );
-  const columnData myData{ myFileName } ;
-  
-  const auto myEmissionStream = myData.getColumn(3);
-  
   using units::quantity;
   using units::si::electric_potential;
-  using units::si::volts;
-  using units::si::milli;
+  using units::si::millivolts;
+  
+  using tools::interface::import::columnData;
+  using algorithm::vector::stringToQuantity;
+  
 
-  const auto myMilliVolts = quantity<electric_potential>( 1 * milli * volts );
+  auto const fileName_string = dir.abs( inputFileName );
+  columnData const myData{ fileName_string } ;
+  
+  auto const strings = myData.getColumn(3);
 
-  using algorithm::vector::string2typename;
-  const auto myEmissionVector = string2typename
-    < quantity<electric_potential> > ( myEmissionStream,  myMilliVolts ) ;
+  auto const myEmissionVector =
+  stringToQuantity< electric_potential >( strings, millivolts  ) ;
+
 
   return myEmissionVector;
 }
