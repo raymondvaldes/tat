@@ -153,9 +153,6 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
                       std::cout << "\n";
                 ++i;
       } );
-      
-  
-
   }
 
   
