@@ -88,35 +88,9 @@ auto run( filesystem::directory const & dir ) noexcept -> void
  //     signalDCoffset1 = quantity<electric_potential>( 0.807 * millivolts );
 //     signalDCoffset2 = quantity<electric_potential>( 0.985 * millivolts );
 
-/*
-/add thermocouple , use high temp epoxy [do this no matter what!!]
-/also concern about the actual wavelength, do offset using CO2 absorption band
 
-  Which samples do I want to run?  I want to do a handful of well characterized 
-  ones like graphite, steel, use low conductivity metals. Use a sample as the 
-  calibration.
   
-  Make non-contact measurements using unknown color (get the transient field) 
-  first!.
- 
-  Which TBCs?  Can I use the temperature information to make predictions of the 
-  temperature field? How do I know the properties of the samples that I am 
-  trying to solve for?
-
-  Can I then use this to make temperature measurements?  Yes, by varying the 
-  stage temperature or external temperature of the sample.
-  
-  What do I need?  I need to know the DC offest and we can get that by doing a 
-  single blocked measurement and recording that data in wave filesnames (along 
-  with the number of cycles).
-  
-  How do I deal with TBCs that are translucent without graphite coating?
-  As long as temperature detected is close to the stage temperature then the 
-  properties in the equation will not be temperature dependent. Maintain that 
-  scenario.
-  */
-  
-    const auto multiplier = 0.00001;
+    const auto multiplier = 1;
   
     algorithm::transform(
       transientDetectorSignal1,
@@ -210,6 +184,8 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   }
 
 
+  /// the only reason i have this is so that I can quickly initialize
+  /// my fitting algorithm with the known inputs.
   if(false)
   {
     using thermal::analysis::initializePopTeaAndLoadSimuEmission;
