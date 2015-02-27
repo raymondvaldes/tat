@@ -24,6 +24,7 @@ using algorithm::vector::string2charPtr;
 
 
 BOOST_AUTO_TEST_SUITE( investigations )
+
 BOOST_AUTO_TEST_SUITE( twoColorPyrometery )
 
 
@@ -40,5 +41,6 @@ BOOST_AUTO_TEST_CASE( startup ) {
   main_app( vec2.size() , vec2.data() );
 }
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END() // twColorPyrometery
+
+BOOST_AUTO_TEST_SUITE_END() // investigations
