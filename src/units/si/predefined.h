@@ -10,10 +10,12 @@
 #define __tat__length__
 
 #include <boost/units/systems/si.hpp>
-#include <boost/units/systems/si/length.hpp>
-#include <boost/units/systems/si/angular_velocity.hpp>
+
+#include "units/physical_dimensions.h"
+#include "units/systems/si/base.h"
 #include "units/si/prefixes.h"
 #include "units/quantity.h"
+
 #include <boost/units/systems/temperature/celsius.hpp>
 #include <boost/units/systems/temperature/fahrenheit.hpp>
 
@@ -33,13 +35,15 @@ namespace fahrenheit {
 } // namespace fahrenheit
 
 
-
 namespace si {
 
 //Dimensions
-typedef boost::units::si::length              length;
-typedef boost::units::si::mass_density        mass_density;
-typedef boost::units::si::mass                mass;
+using length        = boost::units::si::length;
+using mass_density  = boost::units::si::mass_density;
+using mass          = boost::units::si::mass;
+using kinematic_viscosity = boost::units::si::kinematic_viscosity;
+using dynamic_viscosity = boost::units::si::dynamic_viscosity;
+using acceleration = boost::units::si::acceleration;
 
 typedef boost::units::si::temperature         temperature;
 typedef boost::units::si::power               power;
@@ -49,12 +53,84 @@ typedef boost::units::si::electric_potential  electric_potential;
 typedef boost::units::si::dimensionless       dimensionless ;
 typedef boost::units::si::velocity            velocity;
 typedef boost::units::si::area                area;
+typedef boost::units::si::volume              volume;
 typedef boost::units::si::time                time;
 typedef boost::units::si::frequency           frequency;
 typedef boost::units::si::angular_velocity    angular_velocity;
 typedef angular_velocity                      angular_frequency;
 typedef boost::units::si::pressure            pressure;
 typedef boost::units::si::wavenumber          wavenumber;
+typedef boost::units::si::conductivity        electrical_conductivity;
+
+/// Add dimensions to the SI system
+  using thermal_conductivity =
+    unit< thermal_conductivity_dimension , si::system>;
+  
+  using thermal_diffusivity =
+    unit< thermal_diffusivity_dimension , si::system >;
+  
+  using volumetric_thermal_expansion_coefficient =
+    unit< volumetric_thermal_expansion_coefficient_dimension, si::system > ;
+
+  using Archimedes_number = dimensionless;
+  using Bingham_number = dimensionless;
+  using Biot_number = dimensionless;
+  using Blake_number = dimensionless;
+  using Bodenstein_number = dimensionless;
+  using Brinkman_number = dimensionless;
+  using Capillary_number = dimensionless;
+  
+  using Cauchy_number = dimensionless;
+  using Cavitation_number = dimensionless;
+  using Coefficient_of_Frication = dimensionless;
+  using Condensation_number = dimensionless;
+
+  using Dean_number = dimensionless;
+  using Drag_coefficient = dimensionless;
+  using Eckert_number = dimensionless;
+  using Elasticity_number = dimensionless;
+
+  using Etovos_number = dimensionless;
+  using Euler_coefficient = dimensionless;
+  using Fourier_number = dimensionless;
+  using Frictio_factor = dimensionless;
+
+  using Froude_number = dimensionless;
+  using Galileo_number = dimensionless;
+  using Gratz_number = dimensionless;
+  using Grashof_number = dimensionless;
+
+  using Colburn_j_factor_h = dimensionless;
+  using Colburn_j_factor_m = dimensionless;
+  using Hodgson_number = dimensionless;
+  using Jakob_number = dimensionless;
+  
+  using Knudsen_number = dimensionless;
+  using Lewis_number = dimensionless;
+  using Mach_number = dimensionless;
+  using Nusselt_number = dimensionless;
+  
+  using Ohnesorge_number = dimensionless;
+  using Peclet_number = dimensionless;
+  using Peclet_number_mass_transfer = dimensionless;
+  using Pipeline_parameter = dimensionless;
+
+  using Power_number = dimensionless;
+  using Prandtl_number = dimensionless;
+  using Rayleigh_number = dimensionless;
+  using Reynolds_number = dimensionless;
+  using Richardson_number = dimensionless;
+  
+  using Schmidt_number = dimensionless;
+  using Sherwood_number = dimensionless;
+  using Stanton_number = dimensionless;
+  using Stanton_number_mass = dimensionless;
+
+  using Strouhal_number = dimensionless;
+  using Weber_number = dimensionless;
+
+
+
 
 //Units
 using boost::units::si::radian_per_second;
@@ -76,8 +152,6 @@ using boost::units::si::kelvin;
 using namespace boost::units::celsius;
 using namespace boost::units::fahrenheit;
 
-
-
 using boost::units::si::hertz;
 
 //more stuff
@@ -93,7 +167,15 @@ static const auto kilovolts = kilo * volts;
 static const auto megavolts = mega * volts;
 static const auto gigavolts = giga * volts;
 
+// nameless units
+auto static const thermal_diffusivity_units = meter * meter / second ;
+auto static const kinematic_viscosity_units = meter * meter / second ;
+auto static const volumetric_thermal_expansion_coefficient_units = meter / kelvin / meter ;
+
 } //namespace si
+
+
+
 
 using boost::units::absolute;
 using boost::units::conversion_helper;
@@ -120,11 +202,11 @@ typedef conversion_helper<
 
 
 namespace celsius{
-  using degrees = units::absolute<units::celsius::temperature> ;
+  using degrees = absolute< celsius::temperature > ;
 }
 
 namespace fahrenheit{
-  using degrees = units::absolute<units::fahrenheit::temperature> ;
+  using degrees = absolute< fahrenheit::temperature > ;
 }
 
 
