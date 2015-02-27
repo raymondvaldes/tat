@@ -19,7 +19,7 @@ template<class Unit,class Y = double>
   using quantity = boost::units::quantity<Unit, Y>;
 
   
-template<class Dim,class System, class Enable>
+template<class Dim,class System, class Enable = void>
   using unit = boost::units::unit< Dim, System, Enable >;
   
   
