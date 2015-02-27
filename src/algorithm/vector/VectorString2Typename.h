@@ -17,28 +17,52 @@ namespace algorithm {
 namespace vector{
   
 template <typename Quantity >
-auto string2typename( const std::vector<std::string> & inputVector,
-                      const Quantity unit_type  )
-  -> std::vector< Quantity >
+auto string_to_quantity( const std::vector<std::string> & inputVector,
+                         const Quantity units  ) noexcept
+-> std::vector< Quantity >
 {
   using std::vector;
   using std::string;
-  using std::transform;
+  using algorithm::transform;
   
-  const auto stringToDoubleInitilizer = [=]( const string& strng )
+  const auto stringToDoubleInitilizer = [=]( const string & strng )
   {
     using std::stod;
-    return Quantity( stod(strng) * unit_type ) ;
+    return Quantity( stod(strng) * units ) ;
   };
 
 
   auto outputVector = vector< Quantity >( inputVector.size() );
   
-  algorithm::transform(
-  inputVector, outputVector.begin(), stringToDoubleInitilizer );
+  transform( inputVector, outputVector.begin(), stringToDoubleInitilizer );
   
   return outputVector;
 };
+  
+
+//template <typename Quantity >
+//auto string_to_quantity( const std::vector<std::string> & inputVector,
+//                         const Quantity units  ) noexcept
+//-> std::vector< Quantity >
+//{
+//  using std::vector;
+//  using std::string;
+//  using algorithm::transform;
+//  
+//  const auto stringToDoubleInitilizer = [=]( const string & strng )
+//  {
+//    using std::stod;
+//    return Quantity( stod(strng) * units ) ;
+//  };
+//
+//
+//  auto outputVector = vector< Quantity >( inputVector.size() );
+//  
+//  transform( inputVector, outputVector.begin(), stringToDoubleInitilizer );
+//  
+//  return outputVector;
+//};
+  
   
 }}
 

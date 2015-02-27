@@ -29,7 +29,8 @@ noexcept -> std::vector< units::quantity< UnitType > >
 
   auto output = vector< units::quantity< UnitType > >( input.size() ) ;
 
-  transform( begin( input ), end( input ), begin( output ), [&]( const auto& val )
+  transform( begin( input ), end( input ), begin( output ),
+  [&]( const auto& val ) noexcept
   {
     auto const val_Dimensioned = units::quantity< UnitType > ( val * myDim ) ;
     return val_Dimensioned  ;
