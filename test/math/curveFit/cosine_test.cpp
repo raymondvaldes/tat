@@ -48,8 +48,8 @@ BOOST_FIXTURE_TEST_SUITE( cosine_fitting, InternalperiodicProperties )
 
 BOOST_AUTO_TEST_CASE( cosine_fit_test )
 {
-  const auto tol = 1e-10;
-  const auto points = 101;
+  auto const tol = 1e-10;
+  auto const points = 101;
   
   auto myTime = range_from_0( period, points );
   
@@ -61,11 +61,11 @@ BOOST_AUTO_TEST_CASE( cosine_fit_test )
     return offset + amplitude * cos( omega * myTime[i++] + phase ) ;
   } ) ;
 
-  const auto initialConditions =
+  auto const initialConditions =
   PeriodicProperties<electric_potential>( offset_initial, amplitude_initial, omega, phase_initial );
   
   using namespace math::curveFit;
-  const auto fittedCosine =
+  auto const fittedCosine =
   curveFit::cosine( myTime, myVectVolts, initialConditions );
 
   

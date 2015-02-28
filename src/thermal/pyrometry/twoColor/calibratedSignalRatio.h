@@ -18,9 +18,9 @@ namespace pyrometer{
 namespace twoColor{
 
 auto calibratedSignalRatio(
-  units::quantity<units::si::dimensionless> signalRatio,
-  units::quantity<units::si::dimensionless> gCoeff
-  ) noexcept -> units::quantity<units::si::dimensionless> ;
+  units::quantity<units::si::dimensionless> const & signalRatio,
+  units::quantity<units::si::dimensionless> const & gCoeff
+  ) noexcept -> units::quantity<units::si::dimensionless>;
 
 }
 

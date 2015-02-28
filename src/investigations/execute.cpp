@@ -41,7 +41,7 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
               const std::string& investigationName ) noexcept
 {
   using filesystem::directory;
-  const auto run_investigation = [ & ] ( const directory& active ) -> void
+  auto const run_investigation = [ & ] ( const directory& active ) -> void
   {
     if( investigationName == "PIE_Analsis") {
       sensitivityvaldes2013::run( active ) ;
@@ -62,18 +62,18 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
   };
   
   
-  const auto directory_of_samples = directory{ mydirectory } ;
+  auto const directory_of_samples = directory{ mydirectory } ;
   
-  const auto runCurrentDirectory =
+  auto const runCurrentDirectory =
   directory_of_samples.working_directory_starts_with( sampleName ) ;
   
   if( runCurrentDirectory ) {
     run_investigation( directory_of_samples ) ;
   }
   else {
-    const auto paths = directory_of_samples.ls() ;
+    auto const paths = directory_of_samples.ls() ;
     
-    for_each( paths.begin(), paths.end(), [&]( const auto & pathElement )
+    for_each( paths.begin(), paths.end(), [&]( auto const & pathElement )
     {
       if( pathElement.working_directory_starts_with( sampleName ) ) {
         run_investigation( pathElement ) ;

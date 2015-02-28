@@ -35,6 +35,7 @@ struct propertiesToFit{
     phase( phaseIn ), frequency( frequencyIn ) {}
 
 };
+  
 
 template< typename T >
 auto cosine( const std::vector< units::quantity< units::si::time > > &inputTime,
@@ -60,7 +61,7 @@ noexcept -> functions::Cosine<T>
     assert( inputTime.size() == inputSignal.size() ) ;
   }
 
-  const auto CosineFactory = [  ]
+  auto const CosineFactory = [  ]
   ( const double*x, const functions::PeriodicProperties< T > &input )
   noexcept
   {
@@ -69,7 +70,7 @@ noexcept -> functions::Cosine<T>
     updatedProperties.offset = quantity< T >::from_value( x[0] ) ;
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
     
-    const auto phase_angle = x[2] * units::si::radians;
+    auto const phase_angle = x[2] * units::si::radians;
     updatedProperties.phase = phase_angle ;
     
     updatedProperties.phase = wrap2pi( phase_angle ) ;
@@ -77,14 +78,14 @@ noexcept -> functions::Cosine<T>
     return Cosine<T>( updatedProperties ) ;
   };
 
-  const auto minimizationEquation =
+  auto const minimizationEquation =
   [ &inputTime, &inputSignal, &initialConditions, &CosineFactory ]
   ( const double *x, double *fvec )
   noexcept
   {
-    const auto myCosineFunction = CosineFactory( x, initialConditions );
+    auto const myCosineFunction = CosineFactory( x, initialConditions );
     
-    const auto residual = [ & ]( const int i )
+    auto const residual = [ & ]( const int i )
     {
       return ( myCosineFunction( inputTime[i] ) -  inputSignal[i] ).value();
     };
@@ -99,12 +100,22 @@ noexcept -> functions::Cosine<T>
     initialConditions.amplitude.value(),
     initialConditions.phase.value() } ;
  
-  const auto numberPoints2Fit =  inputTime.size() ;
+  auto const numberPoints2Fit =  inputTime.size() ;
   
   lmdif( minimizationEquation, numberPoints2Fit, unknownParameters, settings{});
 
   return CosineFactory( unknownParameters.data(), initialConditions ) ;
 };
+
+
+template< typename T >
+auto cosine(  std::pair< std::vector< units::quantity<units::si::time> >,
+              std::vector< units::quantity< T > > > const & input,
+              functions::PeriodicProperties< T > const & initialConditions)
+noexcept -> functions::Cosine<T>
+{
+  return cosine( input.first, input.second, initialConditions );
+}
 
 } // namespace curveFit
 

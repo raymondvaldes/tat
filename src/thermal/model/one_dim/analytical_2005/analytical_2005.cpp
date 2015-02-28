@@ -102,7 +102,7 @@ analytical_2005::M_tilde( const complex<double> x_in, const double l ) const noe
   ) ;
   
   if( verySmallThermalPenetration ) {
-    const auto evaluate_Limit_of_M_tilde = [=](){
+    auto const evaluate_Limit_of_M_tilde = [=](){
       return - x_in / ( sinh_1_div_lambda * ( 1. + gamma ) ) ;
     } ;
   
@@ -141,7 +141,7 @@ analytical_2005::N_tilde( const complex<double> x_in, const double l ) const noe
     ) ;
 
   if( verySmallThermalPenetration ) {
-    const auto evaluate_Limit_of_N_tilde = [=](){
+    auto const evaluate_Limit_of_N_tilde = [=](){
       return - x_in / ( cosh_1_div_lambda * ( 1. + gamma ) ) ;
     } ;
   
@@ -301,7 +301,7 @@ analytical_2005::sweep_phase_linear( const vector<double> &omega ) const noexcep
   
 
   
-  for( const auto val : results ) {
+  for( auto const val : results ) {
     BOOST_ASSERT( !isnan( val ) ) ;
   }
   

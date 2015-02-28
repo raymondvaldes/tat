@@ -110,7 +110,7 @@ vector<double> x_to_kspace_unity( const double* x, const size_t n ) noexcept {
 //  using std::transform;
 //  using std::begin;
 //  using std::end;
-//  transform( x, x + n, x_output, []( const auto& x_ith )
+//  transform( x, x + n, x_output, []( auto const& x_ith )
 //    {
 //      return kx_limiter2( x_ith, start, finish );
 //    } );

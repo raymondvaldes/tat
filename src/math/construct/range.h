@@ -29,9 +29,9 @@ auto range( const T start, const T end, const size_t points ) noexcept
   using units::quantity;
   using namespace units::si;
   
-  const auto span = end - start ;
+  auto const span = end - start ;
   
-  const auto increment = span / units::quantity<dimensionless>( points - 1 ) ;
+  auto const increment = span / units::quantity<dimensionless>( points - 1 ) ;
   
   
   auto running_value = start ;
@@ -52,7 +52,7 @@ template <class T>
 auto range_from_0( const T end, const size_t points ) noexcept
 {
   
-  const auto start = T::from_value(0) ;
+  auto const start = T::from_value(0) ;
   
   return range( start, end , points ) ;
 }

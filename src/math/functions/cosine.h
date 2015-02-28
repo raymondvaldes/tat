@@ -25,7 +25,7 @@ private:
   {
     using std::cos;
   
-    const auto angle = this->omega * time + this->phase ;
+    auto const angle = this->omega * time + this->phase ;
     return this->offset + this->amplitude * cos( angle.value() ) ;
   }
   

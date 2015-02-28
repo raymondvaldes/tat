@@ -114,12 +114,12 @@ thermal::analysis::Kernal
     Construct( define::construct::loadConfigfromXML( ptchild3 ) );
 
   /// Mesh is intrinsically linked the TBCsystem and experimental setup
-  const auto M2     = ptchild3.get<size_t>( "mesh.M2" );
-  const auto Rend   = ptchild3.get<size_t>( "mesh.Rend");
-  const auto Nend   = ptchild3.get<size_t>( "mesh.Nend" );
-  const auto beta1  = ptchild3.get<double>( "mesh.beta1" );
-  const auto split  = ptchild3.get<double>( "mesh.split" );
-  const auto iter   = ptchild3.get<size_t>( "mesh.num_iter" );
+  auto const M2     = ptchild3.get<size_t>( "mesh.M2" );
+  auto const Rend   = ptchild3.get<size_t>( "mesh.Rend");
+  auto const Nend   = ptchild3.get<size_t>( "mesh.Nend" );
+  auto const beta1  = ptchild3.get<double>( "mesh.beta1" );
+  auto const split  = ptchild3.get<double>( "mesh.split" );
+  auto const iter   = ptchild3.get<size_t>( "mesh.num_iter" );
   const numericalModel::Mesh mesh( M2, Rend, Nend, beta1, split,
                                    Obj2.coating.getDepth(),
                                    Obj2.substrate.getDepth(),
@@ -145,7 +145,7 @@ double Kernal::bEval(void) const noexcept
 
 void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list ) noexcept
 {
-  for( const auto& unknown :  list ) {
+  for( auto const& unknown :  list ) {
     const double val = unknown.bestfit();
     TBCsystem.updateVal( unknown.label() , val );
   }
@@ -156,7 +156,7 @@ void Kernal::updatefromBestFit( std::vector< math::estimation::unknown > list ) 
 void Kernal::updatefromInitial( std::vector< math::estimation::unknown > list ) noexcept
 {
   using math::estimation::unknown;
-  for( const auto& unknown :  list ) {
+  for( auto const& unknown :  list ) {
     const double val = unknown.initialVal();
     TBCsystem.updateVal( unknown.label() , val );
   }

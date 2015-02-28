@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE( within_tolerance ) {
   
   constexpr double tol = 0.0001 ;
 
-  const auto within_tol_checker = [=]( const double val, const double val2 ) {
+  auto const within_tol_checker = [=]( const double val, const double val2 ) {
     const double diff = abs( val - val2 ) ;
     const bool trueAnswer = diff < tol ;
     const bool pass = within_tolerance( val, val2, tol ) == trueAnswer ;
@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE( average_of_all ) {
   constexpr size_t size = 99 ;
   constexpr double tol_rel = .02 ;
 
-  const auto avg_checker = [ = ]( const double test_case ) {
+  auto const avg_checker = [ = ]( const double test_case ) {
     vector<double> scalefunc( size ) ;
 
     for( size_t i = 0 ; i < size ; ++i ) {
@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE( median_of_all ) {
   using math::median_of_all;
 
   const double tol = 0.05 ;
-  const auto checker = [tol]( const vector<double> sorted,const double answer){
+  auto const checker = [tol]( const vector<double> sorted,const double answer){
     const double calc_median = median_of_all( sorted.data(), sorted.size() ) ;
     const bool pass = within_tolerance( calc_median, answer, tol ) ;
     BOOST_CHECK_MESSAGE( pass ,
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_CASE( percentilelog10 ) {
   
   const double tol = 1e-10 ;
   
-  const auto checker = [tol]( const double min ) {
+  auto const checker = [tol]( const double min ) {
     const double mid = 10 * min ;
     const double max = 100 * min ;
     
@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE( CRfromSweepLimits ) {
   using math::CRfromSweepLimits;
   using std::make_pair;
   
-  const auto checker = [] ( constPairDD outer_bounds ) {
+  auto const checker = [] ( constPairDD outer_bounds ) {
     constPairDD fullset = outer_bounds ;
     constPairDD full_calc = CRfromSweepLimits( fullset, outer_bounds ) ;
     const double center = 0.5;
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE( CRfromSweepLimits ) {
 //  const int Iters = 5000 ;
 //  const double tol = .1;
 //
-//  const auto checker = [] ( Interval masterInterval ) {
+//  auto const checker = [] ( Interval masterInterval ) {
 //    Interval subInterval = masterInterval.get_log10_random_subInterval() ;
 //  
 //    constPairDD myCR =
@@ -193,7 +193,7 @@ BOOST_AUTO_TEST_CASE( CRfromSweepLimits ) {
 //  } ;
 //
 //
-//  const auto checkerIterator = [&] ( constPairDD myPair ) {
+//  auto const checkerIterator = [&] ( constPairDD myPair ) {
 //    vector< double > Centers(Iters) ;
 //    vector< double > Ranges(Iters) ;
 //    for( int i = 0 ; i < Iters ; ++i ) {
@@ -218,7 +218,7 @@ BOOST_AUTO_TEST_CASE( CRfromSweepLimits ) {
 BOOST_AUTO_TEST_CASE( checkLimits ) {
   using math::checkLimits;
   
-  const auto checker = [] ( const double center ) {
+  auto const checker = [] ( const double center ) {
     const double rangemax = ( center > 0.5 ) ? 2 * ( 1 - center ) : center * 2 ;
 
     constexpr double tol = .00001;

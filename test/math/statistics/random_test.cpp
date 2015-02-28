@@ -38,11 +38,11 @@ BOOST_AUTO_TEST_SUITE( random_stuff )
 //  }
 //  sort ( out.begin(), out.end() ) ;
 //  
-//  const auto less_min = []( const double i ){ return i < min ; } ;
+//  auto const less_min = []( const double i ){ return i < min ; } ;
 //  const bool none_less_min = none_of( out.begin(), out.end(), less_min ) ;
 //  BOOST_CHECK( none_less_min ) ;
 //
-//  const auto greater_max = []( const double i ){ return i > max ; } ;
+//  auto const greater_max = []( const double i ){ return i > max ; } ;
 //  const bool none_greater_max = none_of( out.begin(), out.end(), greater_max ) ;
 //  BOOST_CHECK( none_greater_max) ;
 //
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_SUITE( random_stuff )
 //  constexpr size_t units = 1000;
 //  constexpr double tol = 0.2 ;
 //  
-//  const auto rand_checker = [tol, units]( const double min ) {
+//  auto const rand_checker = [tol, units]( const double min ) {
 //  const double mid = min * 10 ;
 //  const double max = min * 100 ;
 //

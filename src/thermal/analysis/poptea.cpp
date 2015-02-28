@@ -24,8 +24,8 @@ License
 \*----------------------------------------------------------------------------*/
 #include "thermal/analysis/poptea.hpp"
 #include "tools/interface/xml.h"
+
 #include "tools/interface/import/columnData.h"
-#include "algorithm/vector/VectorString2Typename.h"
 #include "algorithm/vector/stringToQuantity.h"
 
 namespace thermal {
@@ -56,11 +56,10 @@ auto Poptea::loadTBDfile( filesystem::directory const & dir,
   auto const fileName_string = dir.abs( inputFileName );
   columnData const myData{ fileName_string } ;
   
-  auto const strings = myData.getColumn(3);
+  auto const strings = myData.getColumn( 3 ) ;
 
   auto const myEmissionVector =
   stringToQuantity< electric_potential >( strings, millivolts  ) ;
-
 
   return myEmissionVector;
 }

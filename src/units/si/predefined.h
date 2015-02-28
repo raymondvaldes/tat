@@ -10,14 +10,15 @@
 #define __tat__length__
 
 #include <boost/units/systems/si.hpp>
+#include <boost/units/systems/temperature/celsius.hpp>
+#include <boost/units/systems/temperature/fahrenheit.hpp>
 
 #include "units/physical_dimensions.h"
 #include "units/systems/si/base.h"
 #include "units/si/prefixes.h"
 #include "units/quantity.h"
 
-#include <boost/units/systems/temperature/celsius.hpp>
-#include <boost/units/systems/temperature/fahrenheit.hpp>
+
 
 
 namespace units {
@@ -156,16 +157,16 @@ using boost::units::si::hertz;
 
 //more stuff
 static auto const nanometers = nano * meters;
-static const auto micrometers = micro * meters;
-static const auto millimeters = milli * meters;
-static const auto centimeters = centi * meters;
-static const auto kilometers = kilo * meters;
+static auto const micrometers = micro * meters;
+static auto const millimeters = milli * meters;
+static auto const centimeters = centi * meters;
+static auto const kilometers = kilo * meters;
 
-static const auto microvolts = micro * volts;
-static const auto millivolts = milli * volts;
-static const auto kilovolts = kilo * volts;
-static const auto megavolts = mega * volts;
-static const auto gigavolts = giga * volts;
+static auto const microvolts = micro * volts;
+static auto const millivolts = milli * volts;
+static auto const kilovolts = kilo * volts;
+static auto const megavolts = mega * volts;
+static auto const gigavolts = giga * volts;
 
 // nameless units
 auto static const thermal_diffusivity_units = meter * meter / second ;

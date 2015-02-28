@@ -27,7 +27,7 @@ noexcept
   using std::plus;
   using std::transform;
   
-  const auto vectorSize = firstvec.size();
+  auto const vectorSize = firstvec.size();
   BOOST_ASSERT( vectorSize > 0 ) ;
   BOOST_ASSERT( vectorSize == secondvec.size() );
   

@@ -29,7 +29,7 @@ noexcept -> std::vector< double >
 
   vector<double> output( input.size() ) ;
 
-  transform( begin( input ), end( input ), begin( output ), []( const auto& val )
+  transform( begin( input ), end( input ), begin( output ), []( auto const& val )
   {
     return val.value();
   } );

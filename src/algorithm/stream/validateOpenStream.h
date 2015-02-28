@@ -15,7 +15,7 @@
 namespace algorithm {
 namespace stream {
 
-  auto validation = [](const auto& stream )-> void
+  auto validation = [](auto const& stream )-> void
   {
     const bool throwException = is_closed( stream ) ;
     

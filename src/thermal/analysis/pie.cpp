@@ -227,7 +227,7 @@ void PIE::parameterIntervalEstimates( void ) noexcept
       unknownParaLists = combos_minusOne( originalListParams );
 
   vector< enum thermal::model::labels::Name  > parametersToBeManipulated;
-  for ( const auto& unknown : originalListParams )
+  for ( auto const& unknown : originalListParams )
     parametersToBeManipulated.push_back( unknown.label() );
 
   /// update list of parameters using unknownIterations

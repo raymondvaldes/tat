@@ -17,8 +17,8 @@ namespace pyrometer{
 namespace twoColor{
 
 auto signalRatio(
-  units::quantity<units::si::electric_potential> first,
-  units::quantity<units::si::electric_potential> second
+  units::quantity<units::si::electric_potential> const & first,
+  units::quantity<units::si::electric_potential> const & second
 ) noexcept -> units::quantity< units::si::dimensionless >
 {
   assert( first.value() > 0 ) ;

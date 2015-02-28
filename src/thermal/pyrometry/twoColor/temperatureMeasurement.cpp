@@ -38,8 +38,8 @@ auto temperatureSteady(
   using units::si::constants::C2_wien;
   using std::log;
   
-  const auto SR = signalRatio ;
-  const auto G = calibrationCoefficient;
+  auto const SR = signalRatio ;
+  auto const G = calibrationCoefficient;
   
   auto
   temp = C2_wien / wavelength_one - C2_wien / wavelength_two ;

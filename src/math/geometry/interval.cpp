@@ -111,8 +111,8 @@ vector< pair<double, double > > Interval::gridInterval( const size_t iter ) cons
     range1og10( get_left_end() , get_right_end(), numberOfIntervals ) ;
   
 
-  for ( const auto lowerBound : boundInterval ) {
-    for ( const auto upperBound : boundInterval ) {
+  for ( auto const lowerBound : boundInterval ) {
+    for ( auto const upperBound : boundInterval ) {
       boundPairs.push_back( make_pair( lowerBound, upperBound ) ) ;
     }
   }
@@ -134,8 +134,8 @@ Interval::ordered_group_xCR( const size_t iter ) const noexcept
   groupBounds boundInterval =
     range1og10( get_left_end() , get_right_end(), numberOfIntervals ) ;
   
-  for ( const auto lowerBound : boundInterval ) {
-    for ( const auto upperBound : boundInterval ) {
+  for ( auto const lowerBound : boundInterval ) {
+    for ( auto const upperBound : boundInterval ) {
       if( lowerBound < upperBound ) {
         vector<double> myvect = myX_CR( lowerBound, upperBound ) ;
         group_x_CR.push_back( myvect ) ;

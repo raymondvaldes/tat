@@ -30,7 +30,7 @@ inline auto string2charPtr( std::vector<std::string> const & input ) noexcept
   auto const count = input.size();
   assert( !empty );
   
-  auto const string2c_str = []( const auto& aString )
+  auto const string2c_str = []( auto const& aString )
   {
     return aString.c_str();
   };

@@ -173,7 +173,7 @@ void unknownList::operator() ( const std::vector< class unknown > &input ) noexc
 {
   vectorUnknowns.clear();
 
-  for( const auto& val : input )
+  for( auto const& val : input )
   {
     addUnknown( val ) ;
   }

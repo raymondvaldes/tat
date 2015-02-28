@@ -257,7 +257,7 @@ updatefromBestFit( std::vector< math::estimation::unknown > list,
 
   double xCenter = 0;
   double xRange = 0;
-  for( const auto& unknown :  list )
+  for( auto const& unknown :  list )
   {
     if( unknown.label() == thermal::model::labels::Name::thermalCenter )
       { xCenter = unknown.bestfit(); }

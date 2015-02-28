@@ -27,7 +27,7 @@ auto stringToDouble( std::vector<std::string> const &  input ) noexcept -> std::
   auto output = std::vector<double>( N ) ;
 
   transform( begin( input ), end( input ), begin( output ),
-  []( const auto& E)
+  []( auto const& E)
   {
     return stod( E )  ;
   }  ) ;

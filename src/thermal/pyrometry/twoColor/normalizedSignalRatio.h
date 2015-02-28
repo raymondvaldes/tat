@@ -18,10 +18,10 @@ namespace pyrometer{
 namespace twoColor{
 
 auto normalizedSignalRatio(
-  units::quantity<units::si::dimensionless> SignalRatio,
-  units::quantity<units::si::length> wavelength1,
-  units::quantity<units::si::length> wavelength2
-) noexcept -> units::quantity< units::si::one_over_temperature >;
+  units::quantity<units::si::dimensionless> const & SignalRatio,
+  units::quantity<units::si::wavelength> const & first,
+  units::quantity<units::si::wavelength> const & second
+  ) noexcept -> units::quantity< units::si::one_over_temperature >;
   
 }
   

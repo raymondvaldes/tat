@@ -98,7 +98,7 @@ namespace import {
     auto nRows = size_t(0);
     auto nElements = size_t(0);
     
-    const auto recordDataFromLine = [&]( auto& myLine )
+    auto const recordDataFromLine = [&]( auto& myLine )
     {
         using algorithm::string::trim_fill_copy;
         using algorithm::string::split;
@@ -113,7 +113,7 @@ namespace import {
         nColumns = myRowElements.size();
     };
 
-    const auto recordDataFromStream = [&]()
+    auto const recordDataFromStream = [&]()
     {
       using algorithm::stream::getline;
       auto const currentLine = getline( cleanFileStream ) ;
@@ -124,7 +124,7 @@ namespace import {
       }
     };
     
-    const auto populateDataContainer = [&](){
+    auto const populateDataContainer = [&](){
       columns.resize( nColumns ) ;
       
       for_each( begin( columns ), end( columns ), [=](auto& column){

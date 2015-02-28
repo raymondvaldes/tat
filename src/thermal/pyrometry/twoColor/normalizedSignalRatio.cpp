@@ -18,21 +18,21 @@ namespace pyrometer{
 namespace twoColor{
 
 auto normalizedSignalRatio(
-  units::quantity<units::si::dimensionless> SignalRatio,
-  units::quantity<units::si::length> wavelength1,
-  units::quantity<units::si::length> wavelength2
+  units::quantity<units::si::dimensionless> const & SignalRatio,
+  units::quantity<units::si::wavelength> const & first,
+  units::quantity<units::si::wavelength> const & second
   )
 noexcept -> units::quantity< units::si::one_over_temperature >
 {
   assert( SignalRatio > 0 );
-  assert( wavelength1.value() > 0 );
-  assert( wavelength2.value() > 0 );
-  assert( wavelength1 < wavelength2 ) ;
+  assert( first.value() > 0 );
+  assert( second.value() > 0 );
+  assert( first < second ) ;
 
   auto const
   result =
-    ( log( SignalRatio ) - 5 * log( wavelength1 / wavelength2 ) )
-    / ( C2_wien / wavelength1 - C2_wien / wavelength2 ) ;
+    ( log( SignalRatio ) - 5 * log( first / second ) )
+    / ( C2_wien / first - C2_wien / second ) ;
 
   return result;
 }

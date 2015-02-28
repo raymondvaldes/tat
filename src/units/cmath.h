@@ -57,7 +57,6 @@ namespace units {
   using boost::units::atan;
   using boost::units::atan2;
   
-  
 } // namespace units
 
 #endif

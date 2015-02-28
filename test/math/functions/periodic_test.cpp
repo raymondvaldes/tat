@@ -30,7 +30,7 @@ using units::si::volts;
 using units::si::seconds;
 
 using units::si::milli;
-const auto millivolts = milli * volts;
+auto const millivolts = milli * volts;
 using math::functions::Periodic;
 using math::functions::PeriodicProperties;
 
@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE( sine_function ) {
 
   using std::sin;
   
-  const auto mySin = [&]( const double t ){
+  auto const mySin = [&]( const double t ){
     return offset.value()
     + amplitude.value() * std::sin( omega.value()  * t + phase.value() );
   };
@@ -75,10 +75,10 @@ BOOST_AUTO_TEST_CASE( sine_function ) {
 BOOST_AUTO_TEST_CASE( cosine_function ) {
 
   using math::functions::Cosine;
-  const auto cosFunc =
+  auto const cosFunc =
   Cosine<electric_potential>( myProperties ) ;
 
-  const auto myCos = [&]( const double t ){
+  auto const myCos = [&]( const double t ){
     return offset.value()
     + amplitude.value() * std::cos( omega.value()  * t + phase.value() );
   };

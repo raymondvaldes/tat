@@ -64,7 +64,7 @@ void Taylor_uncertainty::solve(
   N_dataPoints = thermalData->size();
 
   const uVector output = sDerivativeVector();
-  for( const auto& val : output )
+  for( auto const& val : output )
     std::cout << val << "\n";
 }
 
@@ -87,8 +87,8 @@ void Taylor_uncertainty::modifyModel( label derive,
   const pair< shared_ptr< Kernal >, vector<double> > perturbedVales =
   coreSystem->updateCoreOmegaFromList( thermalData->omegas, listmodifiers, ith ) ;
   
-  const auto popteaPerturb = perturbedVales.first;
-  const auto omegasPertrubed = perturbedVales.second;
+  auto const popteaPerturb = perturbedVales.first;
+  auto const omegasPertrubed = perturbedVales.second;
   
   thermalData->omegas = omegasPertrubed;
   updateObjects( *popteaPerturb, *thermalData, *unknownParameters) ;
@@ -105,7 +105,7 @@ uVector Taylor_uncertainty::uncertaintyResults( void ) noexcept{
 
   const EnumList myKnownList = get_list_knowns();
 
-  const auto eval = [&]( const model::labels::Name label, const size_t i )
+  auto const eval = [&]( const model::labels::Name label, const size_t i )
   {
     const uUnit_Vector unitVector( M, i ) ;
   
@@ -214,9 +214,9 @@ Taylor_uncertainty::get_list_knowns( void ) noexcept
   const size_t sizeOfKnowns = myParameterList.size() - listunknowns.size() ;
   EnumList listKnowns;
   
-  for( const auto& parameter : myParameterList) {
+  for( auto const& parameter : myParameterList) {
     bool trackParameter = true;
-    for( const auto& unknown: listunknowns ) {
+    for( auto const& unknown: listunknowns ) {
       if( parameter == unknown )
         trackParameter = false;
     }
@@ -324,7 +324,7 @@ uVector Taylor_uncertainty::first_D_model( label derive , const size_t ith ) noe
 uVector Taylor_uncertainty::second_D_model( label d_first , label d_second,
                                             const size_t ith ) noexcept
 {
-  const auto listMaker = [&]( const bool mod1, const bool mod2 )
+  auto const listMaker = [&]( const bool mod1, const bool mod2 )
   {
     const int modifier1 = mod1 ? 1 : -1 ;
     const int modifier2 = mod2 ? 1 : -1 ;

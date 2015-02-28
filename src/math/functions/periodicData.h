@@ -8,12 +8,13 @@
 
 #ifndef tat_periodicData_h
 #define tat_periodicData_h
-
+#include <utility>
 #include <algorithm>    // std::minmax_element
 #include <numeric>      // std::accumulate
 #include <vector>       // std::vector
 #include <cassert>      // assert
 
+#include "algorithm.h"
 #include "units.h"  // units::quantity
 
 namespace math {
@@ -28,6 +29,11 @@ private:
   const std::vector< units::quantity<T>> dataVector;
   
 public:
+  explicit PeriodicData(
+    std::pair< std::vector< units::quantity<units::si::time> >,
+    std::vector< units::quantity< T > > > const & input ) noexcept
+    : PeriodicData{ input.first, input.second }  {}
+
   explicit PeriodicData(
     const std::vector< units::quantity<units::si::time> > timeIn,
     const std::vector< units::quantity< T > > signalsIn
@@ -46,10 +52,10 @@ public:
     using units::si::dimensionless;
     using std::minmax_element;
     
-    const auto result = minmax_element ( dataVector.begin(), dataVector.end() ) ;
+    auto const result = minmax_element ( dataVector.begin(), dataVector.end() ) ;
     
-    const auto min = *result.first;
-    const auto max = *result.second;
+    auto const min = *result.first;
+    auto const max = *result.second;
 
     return ( max - min ) / quantity< dimensionless >( 2 );
   };
@@ -58,14 +64,12 @@ public:
   noexcept -> units::quantity< T >
   {
     using units::quantity;
-    using std::accumulate;
+    using algorithm::accumulate;
     using units::si::dimensionless;
     
-    const auto sum =
-    accumulate( dataVector.begin(), dataVector.end(),
-    quantity< T >::from_value( 0 ) );
-
-    auto average = sum / quantity< dimensionless >( dataVector.size() );
+    auto const sum = accumulate( dataVector, quantity< T >::from_value( 0 ) );
+    auto const count = quantity< dimensionless >( dataVector.size() );
+    auto const average = sum / count ;
 
     return average;
   }

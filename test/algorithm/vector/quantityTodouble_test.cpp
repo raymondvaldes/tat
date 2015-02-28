@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE( quantityTodoubleTest ) {
   
 
   using algorithm::vector::quantityTodouble;
-  const auto myVectorDouble = quantityTodouble( myVector );
+  auto const myVectorDouble = quantityTodouble( myVector );
 
   constexpr auto tol = 0.0000001;
   
@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE( doubleToquantityTest ) {
   
 
   using algorithm::vector::doubleToQuantity;
-  const auto myVectorDouble = doubleToQuantity< units::si::length >( myVector , units::si::meter);
+  auto const myVectorDouble = doubleToQuantity< units::si::length >( myVector , units::si::meter);
 
   constexpr auto tol = 0.0000001;
   

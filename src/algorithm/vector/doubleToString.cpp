@@ -28,7 +28,7 @@ auto doubleToString( std::vector<double> const &  input ) noexcept -> std::vecto
   auto output = vector< string >( N ) ;
 
   transform( begin( input ), end( input ), begin( output ),
-  []( const auto& E)
+  []( auto const& E)
   {
     return to_string( E )  ;
   }  ) ;

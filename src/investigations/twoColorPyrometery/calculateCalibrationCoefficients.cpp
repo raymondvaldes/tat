@@ -134,7 +134,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 //      auto const c15 = evaluateRawData( 15, 1200 * celsius::degrees(), myPathNew );
     
       auto i = 0;
-      std::for_each( c2.begin(), c2.end(), [&]( const auto & val )
+      std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
       {
         std::cout <<  c2[i].second.value() << "\t" <<
                       c3[i].second.value() << "\t" <<

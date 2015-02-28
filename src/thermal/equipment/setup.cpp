@@ -39,15 +39,15 @@ setup setup::loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept
 {
     //initialize laser
   using tools::interface::getItem;
-  const auto power      = getItem<double>( pt, "Laser.power" ) ;
-  const auto radius     = getItem<double>( pt, "Laser.radius" ) ;
-  const auto offset     = getItem<double>( pt, "Laser.offset" ) ;
-  const auto amplitude  = getItem<double>( pt, "Laser.amplitude" ) ;
+  auto const power      = getItem<double>( pt, "Laser.power" ) ;
+  auto const radius     = getItem<double>( pt, "Laser.radius" ) ;
+  auto const offset     = getItem<double>( pt, "Laser.offset" ) ;
+  auto const amplitude  = getItem<double>( pt, "Laser.amplitude" ) ;
   const Laser CO2Laser( power, radius, offset, amplitude );
   
     //initialize detector
-  const auto detector_rad = getItem<double>( pt, "Detector.radius" );
-  const auto detector_lam = getItem<double>( pt, "Detector.lambda" );
+  auto const detector_rad = getItem<double>( pt, "Detector.radius" );
+  auto const detector_lam = getItem<double>( pt, "Detector.lambda" );
   const Detector Emissiondetector( detector_lam, detector_rad );
   
     //initialize experimental setup object

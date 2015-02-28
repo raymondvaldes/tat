@@ -80,7 +80,7 @@ pair< double, double > ThermalSweepOptimizer::updateSweep( void ) noexcept
   double thermalRange = 0;
   using thermal::model::labels;
   
-  for( const auto& unknown : thermalSweepSearch() )
+  for( auto const& unknown : thermalSweepSearch() )
   {
     const double bestfit  = unknown.bestfit();
     if ( unknown.label() == labels::Name::thermalCenter  )
@@ -463,7 +463,7 @@ std::string ThermalSweepOptimizer::contourMapping_with_grid(
   // Run simulations
   
   
-  for( const auto myGridPoint : myGrid ) {
+  for( auto const myGridPoint : myGrid ) {
     typedef const double thermalPenetration;
     thermalPenetration min = myGridPoint.first ;
     thermalPenetration max = myGridPoint.second ;
@@ -518,7 +518,7 @@ const vector< vector< double > > group_x_CR ) noexcept
 
 
   // Run simulations
-  for( const auto x_real : group_x_CR )
+  for( auto const x_real : group_x_CR )
   {
     const double xCenter = x_real[0] ;
     const double xRange = x_real[1] ;
@@ -760,7 +760,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev ) noexcept
 
   ///populate initial values
   vector<double> xInitial(0) ;
-  for( const auto &unknown : thermalSweepSearch() )
+  for( auto const &unknown : thermalSweepSearch() )
     xInitial.push_back( unknown.initialVal() );
   
   for( size_t i=0 ; i< n ; i++ )
@@ -774,7 +774,7 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev ) noexcept
 
   ///Transform inputs
   size_t j = 0;
-  for( const auto& unknown : thermalSweepSearch() )
+  for( auto const& unknown : thermalSweepSearch() )
   {
     x[j] = kx_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
     j++;

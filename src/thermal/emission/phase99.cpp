@@ -91,7 +91,7 @@ phase99( const Kernal &popteaCore,
       cout << "no model available"; exit(-2);
   }
 
-  for( const auto val : results ) {
+  for( auto const val : results ) {
     using std::isnormal;
     BOOST_ASSERT( isnormal( val ) ) ;
   }
@@ -111,8 +111,8 @@ vector<double> phase99Pertrub(
   
   const pair< shared_ptr< Kernal >, vector<double> > perturbedVales =
   popteaCore.updateCoreOmegaFromList( omegas, list, ith ) ;
-  const auto popteaPerturb = perturbedVales.first;
-  const auto omegasPertrubed = perturbedVales.second;
+  auto const popteaPerturb = perturbedVales.first;
+  auto const omegasPertrubed = perturbedVales.second;
   
   vector<double>
   phaseSweep = phase99( *popteaPerturb, omegasPertrubed ) ;

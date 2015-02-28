@@ -25,7 +25,7 @@ private:
   {
     using std::sin;
   
-    const auto angle = this->omega * time + this->phase ;
+    auto const angle = this->omega * time + this->phase ;
     return this->offset + this->amplitude * sin( angle.value() ) ;
   }
   

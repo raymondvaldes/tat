@@ -43,7 +43,7 @@ bool starts_with( const std::string& check_this,
 bool starts_with_not( const std::string& check_this,
                       const std::string& begins_with ) noexcept
 {
-  const auto startsWith = starts_with( check_this, begins_with ) ;
+  auto const startsWith = starts_with( check_this, begins_with ) ;
   return !startsWith ;
 }
 

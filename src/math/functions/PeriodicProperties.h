@@ -88,17 +88,17 @@ public:
       checkInputArguments() ;
     };
 
-//  explicit PeriodicProperties(
-//    const units::quantity<T> offsetIn,
-//    const units::quantity<T> amplitudeIn,
-//    const units::quantity<units::si::frequency> frequencyIn,
-//    const units::quantity<units::si::plane_angle> phaseIn )
-//  noexcept
-//    : offset( offsetIn ), amplitude( amplitudeIn ),
-//      omega( 2 * M_PI * frequencyIn ), phase( phaseIn )
-//    {
-//      checkInputArguments();
-//    };
+  explicit PeriodicProperties(
+    const units::quantity<T> offsetIn,
+    const units::quantity<T> amplitudeIn,
+    const units::quantity<units::si::frequency> temperoralFrequency,
+    const units::quantity<units::si::plane_angle> phaseIn )
+  noexcept
+    : PeriodicProperties( offsetIn, amplitudeIn,
+      2 * M_PI * units::si::radians * temperoralFrequency, phaseIn)
+    {};
+
+
   
 };
 

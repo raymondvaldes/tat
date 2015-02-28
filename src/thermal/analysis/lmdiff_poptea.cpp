@@ -120,7 +120,7 @@ LMA::paramter_estimation( int *info, int *nfev ) noexcept
   vector<double> x(n);
   vector<double> xInitial;
 
-  for( const auto &unknown : (*unknownParameters)() ) {
+  for( auto const &unknown : (*unknownParameters)() ) {
     xInitial.push_back( unknown.initialVal() );
   }
   
@@ -138,7 +138,7 @@ LMA::paramter_estimation( int *info, int *nfev ) noexcept
 
   ///Transform inputs
   int j = 0;
-  for( const auto& unknown : (*unknownParameters)() )
+  for( auto const& unknown : (*unknownParameters)() )
   {
     x[j] = kx_limiter2( xInitial[j], unknown.lowerBound(), unknown.upperBound() );
     j++;
@@ -243,7 +243,7 @@ void printPEstimates( const sensible::TBCsystem  TBCSystem,
 {
   using std::cout;
   
-  for( const auto& unknown : list() )
+  for( auto const& unknown : list() )
   {
     cout << TBCSystem.returnVal( unknown.label() ) << "  ";
   }
