@@ -8,6 +8,8 @@
 
 #include <cassert>
 
+#include "assert/assertExtensions.h"
+
 #include "algorithm/algorithm.h"
 
 #include "investigations/twoColorPyrometery.h"
@@ -28,6 +30,7 @@
 #include "investigations/twoColorPyrometery/calculateCalibrationCoefficients.h"
 #include "algorithm/vector/stringToQuantity.h"
 #include "algorithm/vector/repeatElements.h"
+#include "tools/interface/xml.h"
 
 namespace investigations{
 
@@ -43,7 +46,11 @@ struct Detector_measurement {
   
   Detector_measurement( units::quantity< units::si::time > const & timestamp_In,
                         units::quantity< units::si::electric_potential > const & signal_In )
-  : reference_time( timestamp_In ), signal( signal_In ) {};
+  : reference_time( timestamp_In ), signal( signal_In )
+  {
+    assert_ge_zero( timestamp_In );
+    assert_gt_zero( signal_In );
+  };
 };
 
 struct Detector_measurements{
@@ -57,21 +64,26 @@ struct Detector_measurements{
     std::vector< units::quantity< units::si::electric_potential > > const & signals )
     : wavelength( wavelengthIn), measurements( signals.size() )
   {
-    using std::vector;
-  
+    assert_gt_zero( wavelengthIn );
+    assert_gt_zero( referenceTime.size() );
+    assert_gt_zero( signals.size() ) ;
+    assert_equal( referenceTime.size(), signals.size() );
+    
     auto i = 0u;
-    using algorithm::for_each;
-
     using algorithm::generate;
     generate( measurements, [&referenceTime, &signals, &i]() noexcept
     {
-      auto const melissa = Detector_measurement{ referenceTime[i], signals[i]};
+      auto const melissa = Detector_measurement{ referenceTime[i], signals[i] };
       ++i;
       return melissa;
     } );
   };
   
-  auto size( void ) const noexcept -> size_t { return measurements.size(); };
+  auto size( void )
+  const noexcept -> size_t
+  {
+    return measurements.size();
+  };
   
 };
 
@@ -82,9 +94,9 @@ periodic_time_distribution( units::quantity< units::si::frequency > const & freq
                             size_t const count )
 noexcept -> std::vector< units::quantity< units::si::time > >
 {
-  assert( cycles > 0) ;
-  assert( count > 0 ) ;
-  assert( frequency.value() > 0 ) ;
+  assert_gt_zero( cycles ) ;
+  assert_gt_zero( count ) ;
+  assert_gt_zero( frequency ) ;
 
   using units::quantity;
   using units::si::dimensionless;
@@ -113,14 +125,20 @@ noexcept -> std::vector< units::quantity< units::si::time > >
 }
 
 inline
-auto normalizedDetectorMeasurements(  Detector_measurements first,
-  Detector_measurements second, units::quantity< units::si::dimensionless > gCoeff )
-  noexcept  ->  std::pair< std::vector< units::quantity< units::si::time > > ,
-  std::vector< units::quantity< units::si::one_over_temperature > > >
+auto normalizedDetectorMeasurements(  Detector_measurements const & first,
+                                      Detector_measurements const & second,
+  units::quantity< units::si::dimensionless > const & gCoeff )
+noexcept  ->  std::pair< std::vector< units::quantity< units::si::time > > ,
+std::vector< units::quantity< units::si::one_over_temperature > > >
 {
+  assert_gt_zero( first.size() ) ;
+  assert_gt_zero( second.size() );
+  assert_gt_zero( gCoeff ) ;
+
   using std::vector;
   using std::make_pair;
   using units::quantity;
+  using units::si::time;
   using units::si::one_over_temperature;
   using thermal::pyrometer::twoColor::signalRatio;
   using thermal::pyrometer::twoColor::calibratedSignalRatio;
@@ -131,7 +149,7 @@ auto normalizedDetectorMeasurements(  Detector_measurements first,
   auto normalizedSRs = vector< quantity<one_over_temperature> >( count ) ;
   
   auto i = 0u;
-  auto const normalizeSR_generator = [&]() noexcept
+  auto const normalizeSR_generator = [&first, &second, &gCoeff, &i]() noexcept
   {
     auto const SR = signalRatio(  first.measurements[i].signal,
                                   second.measurements[i].signal ) ;
@@ -140,13 +158,13 @@ auto normalizedDetectorMeasurements(  Detector_measurements first,
     
     return normalizedSignalRatio( gSR , first.wavelength , second.wavelength ) ;
   } ;
-  
   generate( normalizedSRs, normalizeSR_generator ) ;
 
   i = 0;
-  auto times = std::vector< units::quantity<units::si::time> >{count};
-  generate( times, [&first, &i]() noexcept {
-    auto val = first.measurements[i].reference_time;
+  auto times = vector< quantity< time > >{ count };
+  generate( times, [&first, &i]() noexcept
+  {
+    auto const val = first.measurements[i].reference_time;
     ++i;
     return val ;
   } );
@@ -189,40 +207,50 @@ measurementFactory( filesystem::directory const & dir,
   units::quantity< units::si::wavelength> const & detector_wavelength )
 noexcept -> Detector_measurements
 {
+  assert( !filename.empty() );
+  assert_gt_zero( signal_DC_raw );
+  assert_ge_zero( signal_background );
+  assert_gt_zero( frequency );
+  assert_gt_zero( cycles );
+  assert_gt_zero( detector_wavelength );
+
   using namespace units::si;
 
   auto const transient_DetectorSignal = get_signal_from_scope_file( dir, filename  );
 
-  auto const counts = transient_DetectorSignal.size();
-
   auto const steady_DetectorSignal = signal_DC_raw - signal_background ;
 
   auto const total_detectorSignal = steady_DetectorSignal + transient_DetectorSignal;
+
+  auto const counts = transient_DetectorSignal.size();
 
   auto const referenceTime = periodic_time_distribution( frequency, cycles, counts ) ;
     
   return Detector_measurements{ detector_wavelength, referenceTime, total_detectorSignal };
 };
 
-  using std::for_each;
-  using std::begin;
-  using std::end;
-  using std::generate;
-  using std::transform;
-  using std::vector;
-  using std::log10;
+
   
+  
+auto run( filesystem::directory const & dir ) noexcept -> void
+{
   using std::cout;
-  using std::endl;
 
   using units::quantity;
-  using namespace units::si;
   using units::si::time;
+  using units::si::micrometers;
   using units::si::wavelength;
-  using units::si::constants::C2_wien;
+  using units::si::volts;
+  using units::si::electric_potential;
+  using units::si::dimensionless;
+  using units::si::frequency;
+  using units::si::kelvin;
+  using units::si::one_over_temperature;
+  using units::si::hertz;
+  using units::si::temperature;
+  using units::si::plane_angle;
+  using units::si::radians;
   
-  using thermal::analysis::initializePopTeawithExperimentalEmission;
-  using thermal::analysis::Poptea;
   using thermal::pyrometer::twoColor::signalRatio;
   using thermal::pyrometer::twoColor::calibratedSignalRatio;
   using thermal::pyrometer::twoColor::normalizedSignalRatio;
@@ -230,70 +258,97 @@ noexcept -> Detector_measurements
   using math::functions::PeriodicData;
   using math::functions::PeriodicProperties;
   using math::curveFit::cosine;
-  using algorithm::generate;
 
-  
-auto run( filesystem::directory const & dir ) noexcept -> void
-{
-    using math::curveFit::cosine;
-
+  //// get my tree
+  using tools::interface::getTreefromFile;
+  using tools::interface::getItem;
 
   calculateCalibrationCoefficients( dir ) ;
+
+
+  auto const filename = "twoColorPyro.xml";
+  auto const fullpath = dir.abs( filename );
+  auto const pt = getTreefromFile( fullpath ) ;
+  auto const conjunto = std::string{"temperature_measurement."};
+  auto const settings_branch = pt.get_child( conjunto + "settings" );
   
-    auto const signalBackground = quantity<electric_potential> ( 3.403  * volts ) ;
-    auto const signalDC1_raw = quantity<electric_potential>(  3.63  * volts );
-    auto const signalDC2_raw = quantity<electric_potential>(  3.59  * volts );
-
-    
-    auto const gCoeff = quantity< dimensionless >( 1.305 ) ; /*graphite at 400F*/
-    auto const wavelength1 = quantity< wavelength >( 3.837130694 * micrometers ) ;
-    auto const wavelength2 = quantity< wavelength >( 4.837130694 * micrometers ) ;
-    auto const temperoralFrequency = quantity< frequency >( 2.82843 * hertz ) ;
-    auto const cycles = 6;
-    auto const filename_1 = "graphite_400F_jan28_v2_5.4_2.82843_10";
-    auto const filename_2 = "graphite_400F_jan28_v2_4.4_2.82843_4";
-
-  {
-    auto const measurements_1 =
-      measurementFactory( dir, filename_1, signalDC1_raw, signalBackground,
-                          temperoralFrequency, cycles, wavelength1 ) ;
-    auto const measurements_2 =
-      measurementFactory( dir, filename_2, signalDC2_raw, signalBackground,
-                          temperoralFrequency, cycles, wavelength2 ) ;
-    
-    auto const normalizedSRs =
-    normalizedDetectorMeasurements( measurements_1, measurements_2, gCoeff );
-
-
-    auto const myPeriodicData = PeriodicData< one_over_temperature >( normalizedSRs ) ;
-    
-    auto const initialConditions =
-    PeriodicProperties<one_over_temperature>{
-      myPeriodicData.initialEstimateOffset(),
-      myPeriodicData.initialEstimateAmplitude(),
-      temperoralFrequency, quantity<plane_angle>{ 0 * radians }
-    } ;
-
-    auto const fittedCosine = cosine( normalizedSRs, initialConditions );
-
-    auto const myFittedAmplitude = fittedCosine.get_amplitude() ;
-    auto const myFittedOffset = fittedCosine.get_offset() ;
-    auto const myFittedPhase = fittedCosine.get_phase() ;
+  auto const signalBackground_value  = settings_branch.get<double>( "signal_background" );
+  auto const signalBackground = quantity<electric_potential> ( signalBackground_value  * volts ) ;
   
-    auto const steadyTemperature = quantity<dimensionless>{1} / myFittedOffset ;
-    auto const transientTemperature = myFittedAmplitude * steadyTemperature * steadyTemperature ;
+  auto const signalDC1_raw_value  = settings_branch.get<double>( "signal_DC_1" );
+  auto const signalDC1_raw = quantity<electric_potential> ( signalDC1_raw_value  * volts ) ;
+  
+  auto const signalDC2_raw_value  = settings_branch.get<double>( "signal_DC_2" );
+  auto const signalDC2_raw = quantity<electric_potential> ( signalDC2_raw_value  * volts ) ;
 
-    
-    cout << "\n" << units::engineering_prefix;
-    cout << "stage temperature\t\t" <<  quantity< units::si::temperature >( 477 * kelvin ) << endl;
-    cout << "signal frequency\t\t" << temperoralFrequency << endl << endl;
-    cout << "detector wavelength\t\t" << wavelength1 << endl;
-    cout << "detector wavelength\t\t" << wavelength2 << endl << endl;
-    cout << "steady temperature\t\t" << steadyTemperature << endl;
-    cout << "transient tempearture\t" << transientTemperature << endl;
-    cout << "phase tempearture\t" << myFittedPhase << endl;
-    
-  }
+  auto const gCoeff_value  = settings_branch.get<double>( "calibration_coefficient" );
+  auto const gCoeff = quantity<dimensionless> ( gCoeff_value ) ;
+
+  auto const wavelength1_value  = settings_branch.get<double>( "wavelength1_nominal" );
+  auto const wavelength1_nom = quantity<wavelength> ( wavelength1_value  * micrometers ) ;
+  
+  auto const wavelength2_value  = settings_branch.get<double>( "wavelength2_nominal" );
+  auto const wavelength2_nom = quantity<wavelength> ( wavelength2_value  * micrometers ) ;
+
+  auto const wavelength_offset_value  = settings_branch.get<double>( "wavelenth_offset" );
+  auto const wavelength_offset = quantity<wavelength> ( wavelength_offset_value  * micrometers ) ;
+  
+
+  auto const frequency_value  = settings_branch.get<double>( "frequency" );
+  auto const temperoralFrequency = quantity<frequency> ( frequency_value  * hertz ) ;
+  
+  auto const cycles  = settings_branch.get<size_t>( "count" );
+
+  auto const filename_1  = settings_branch.get<std::string>( "file1" );
+  auto const filename_2  = settings_branch.get<std::string>( "file2" );
+  
+  
+  auto const wavelength1 = wavelength1_nom + wavelength_offset ;
+  auto const wavelength2 = wavelength2_nom + wavelength_offset ;
+  
+  auto const measurements_1 =
+    measurementFactory( dir, filename_1, signalDC1_raw, signalBackground,
+                        temperoralFrequency, cycles, wavelength1 ) ;
+  
+  auto const measurements_2 =
+    measurementFactory( dir, filename_2, signalDC2_raw, signalBackground,
+                        temperoralFrequency, cycles, wavelength2 ) ;
+  
+  auto const normalizedSRs =
+  normalizedDetectorMeasurements( measurements_1, measurements_2, gCoeff );
+
+
+  auto const myPeriodicData = PeriodicData< one_over_temperature >( normalizedSRs ) ;
+  
+  auto const initialConditions =
+  PeriodicProperties<one_over_temperature>{
+    myPeriodicData.initialEstimateOffset(),
+    myPeriodicData.initialEstimateAmplitude(),
+    temperoralFrequency, quantity<plane_angle>{ 0 * radians }
+  } ;
+
+  auto const fittedCosine = cosine( normalizedSRs, initialConditions );
+
+  auto const myFittedAmplitude = fittedCosine.get_amplitude() ;
+  auto const myFittedOffset = fittedCosine.get_offset() ;
+  auto const myFittedPhase = fittedCosine.get_phase() ;
+
+  auto const steadyTemperature = quantity<dimensionless>{1} / myFittedOffset ;
+  
+  using units::pow;
+  auto const transientTemperature = myFittedAmplitude * pow<2>( steadyTemperature );
+
+  
+  cout << "\n" << units::engineering_prefix;
+  cout << "stage temperature\t\t" <<  quantity< temperature >( 477 * kelvin ) << "\n";
+  cout << "signal frequency\t\t" << temperoralFrequency << "\n" << "\n";
+  cout << "detector wavelength\t\t" << wavelength1 << "\n";
+  cout << "detector wavelength\t\t" << wavelength2 << "\n" << "\n";
+  cout << "steady temperature\t\t" << steadyTemperature << "\n";
+  cout << "transient tempearture\t" << transientTemperature << "\n";
+  cout << "phase tempearture\t" << myFittedPhase << "\n";
+  
+  
   
 } //function
 
