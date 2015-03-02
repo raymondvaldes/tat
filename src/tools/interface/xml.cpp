@@ -24,42 +24,57 @@ License
 \*----------------------------------------------------------------------------*/
 #include <iostream>
 
+#include "assert/assertExtensions.h"
 #include "tools/interface/xml.h"
 #include "boost/property_tree/ptree.hpp"
 
 namespace tools{
+
 namespace interface{
 
-boost::property_tree::ptree getTreefromFile( const std::string &absPath ) noexcept
+auto getTreefromFile( std::string const & absPath ) noexcept
+-> boost::property_tree::ptree
 {
-  boost::property_tree::ptree tree;
+  assert_gt_zero( absPath.size() );
+
+  using std::cerr;
+  using boost::property_tree::read_xml;
+  using boost::property_tree::ptree;
+  using std::exception;
+  
+  ptree tree;
 
   try
   {
-    boost::property_tree::read_xml( absPath, tree );
+    read_xml( absPath, tree );
   }
-  catch (std::exception& e)
+  catch ( exception& e )
   {
-    using std::cerr;
+  
     cerr << "file " << absPath << " not found! See --help\n";
     cerr << e.what() << "\n\n";
-    exit(-2) ;
+    throw ;
   }
 
   return tree;
 }
 
-boost::property_tree::ptree getBranch( const std::string &trunk,
-                                       const std::string &branch,
-                                       const boost::property_tree::ptree &pt )
+auto getBranch( std::string const & trunk,
+                std::string const & branch,
+                boost::property_tree::ptree const & pt )
+-> boost::property_tree::ptree
 {
-  const std::string branchName = trunk + "." + branch ;
+  assert_gt_zero( trunk.size() );
+  assert_gt_zero( branch.size() );
+  assert( !pt.empty() );
 
-  boost::property_tree::ptree output;
-  output = pt.get_child( branchName ) ;
+  auto const branchName = trunk + "." + branch ;
+
+  auto const output = pt.get_child( branchName ) ;
   return output ;
 }
 
 
+} // namespace interface
 
-}}
+} // namespace tools
