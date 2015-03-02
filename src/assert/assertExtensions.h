@@ -11,7 +11,7 @@
 
 #include <cmath>
 #include <cassert>
-
+#include "units.h"
 /*
 assert()
 assert_close()
@@ -47,8 +47,18 @@ inline auto assert_gt_zero( Type const a ) {
 }
 
 template < typename Type >
+inline auto assert_gt_zero( units::quantity<Type> const & a ) {
+  assert( a.value() > 0 ) ;
+}
+
+template < typename Type >
 inline auto assert_ge_zero( Type const a ) {
   assert( a  >= 0. ) ;
+}
+
+template < typename Type >
+inline auto assert_ge_zero( units::quantity<Type> const & a ) {
+  assert( a.value() >= 0 ) ;
 }
 
 template < typename Type >
@@ -90,6 +100,9 @@ template < typename Type >
 inline auto assert_bitwise_equal( Type const a , Type const b ) {
   assert( !(a ^ b) ) ;
 }
+
+
+
 
 
 /*
