@@ -95,7 +95,7 @@ Poptea::loadConfig( const Kernal &coreSystem_,
   return poptea ;
 }
 
-Poptea Poptea::loadConfigfromFile( const class filesystem::directory &dir) noexcept
+Poptea Poptea::loadConfigfromFile( const filesystem::directory &dir) noexcept
 {
   using boost::property_tree::ptree;
 
