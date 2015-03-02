@@ -22,21 +22,21 @@ using std::string;
 using investigations::main_app;
 using algorithm::vector::string2charPtr;
 
-
 BOOST_AUTO_TEST_SUITE( investigations )
 
 BOOST_AUTO_TEST_SUITE( twoColorPyrometery )
 
-
 BOOST_AUTO_TEST_CASE( startup ) {
   
-  vector<string> myArguments = {
+  auto const myArguments = vector<string>
+  {
     "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
     "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color",
-    "--sample",         "graphite_400F_jan28_v2_wav",
+    "--sample",         "graphiteDevelop",
     "--investigation",  "twoColorPyrometery"
-       };
-  vector<char const *> vec2 = string2charPtr(myArguments);
+  };
+  
+  vector<char const *> vec2 = string2charPtr( myArguments );
 
   main_app( vec2.size() , vec2.data() );
 }
