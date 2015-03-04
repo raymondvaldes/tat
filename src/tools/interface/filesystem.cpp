@@ -161,7 +161,9 @@ std::string directory::abs( const std::string &relativePath) const noexcept
 {
   BOOST_ASSERT( !relativePath.empty() ) ;
 
-  return workingDirectory + "/" + relativePath;
+  auto const fullPath = workingDirectory + "/" + relativePath;
+
+  return fullPath;
 }
 
 directory directory::parent_path() const noexcept {
