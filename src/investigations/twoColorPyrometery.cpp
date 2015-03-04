@@ -338,6 +338,7 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   using units::pow;
   auto const transientTemperature = myFittedAmplitude * pow<2>( steadyTemperature );
 
+  //cout << "steady tempertaure (straight) " << steadyTemperature_straight << "\n";
   
   cout << "\n" << units::engineering_prefix;
   cout << "stage temperature\t\t" <<  quantity< temperature >( 477 * kelvin ) << "\n";
