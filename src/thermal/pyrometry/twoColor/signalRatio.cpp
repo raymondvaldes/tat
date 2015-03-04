@@ -21,10 +21,13 @@ auto signalRatio(
   units::quantity<units::si::electric_potential> const & second
 ) noexcept -> units::quantity< units::si::dimensionless >
 {
+  assert( first.value() / second.value() > 0.01 ) ;
   assert( first.value() > 0 ) ;
   assert( second.value() > 0 ) ;
   
-  return second / first ;
+  auto const SR = second / first;
+  
+  return SR ;
 }
 
   
