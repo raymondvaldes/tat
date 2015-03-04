@@ -65,8 +65,6 @@ struct Detector_measurements{
     : wavelength( wavelengthIn), measurements( signals.size() )
   {
     assert_gt_zero( wavelengthIn );
-    assert_gt_zero( referenceTime.size() );
-    assert_gt_zero( signals.size() ) ;
     assert_equal( referenceTime.size(), signals.size() );
     
     auto i = 0u;
