@@ -11,6 +11,7 @@
 
 #include <boost/range/algorithm.hpp>
 #include <boost/range/numeric.hpp>
+#include <boost/algorithm/cxx11/any_of.hpp>
 
 /*The ones commented out are the ones that I am need to review. */
 
@@ -50,6 +51,8 @@ namespace algorithm {
   
   
 ///////////////////////////////////// Non-mutating algorithms
+  using boost::algorithm::any_of;
+
 //adjacent_find
 //binary_search
   using boost::count;
