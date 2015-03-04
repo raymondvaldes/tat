@@ -79,8 +79,8 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 
     auto const wavelengthColumn = 1;
 
-    auto const emmissionColumnVerification = 2;
-    auto const emissionTemperatureVerification =  204.5 * celsius::degrees() ;
+  //  auto const emmissionColumnVerification = 2;
+ //   auto const emissionTemperatureVerification =  204.5 * celsius::degrees() ;
   
     auto const delta_lambda = quantity< wavelength >( 0.3 * micrometers ) ;
     auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
@@ -133,26 +133,26 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 //      auto const c14 = evaluateRawData( 14, 1100 * celsius::degrees(), myPathNew );
 //      auto const c15 = evaluateRawData( 15, 1200 * celsius::degrees(), myPathNew );
     
-      auto i = 0;
-      std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
-      {
-        std::cout <<  c2[i].second.value() << "\t" <<
-                      c3[i].second.value() << "\t" <<
-                      c4[i].second.value() << "\t" <<
-                      c5[i].second.value() << "\t" <<
-                      c6[i].second.value() << "\t" <<
-                      c7[i].second.value() << "\t" <<
-                      c8[i].second.value() << "\t" <<
-                      c9[i].second.value() << "\t" <<
-                      c10[i].second.value() << "\t" <<
-                      c11[i].second.value() << "\t" <<
-                      c12[i].second.value() << "\t" <<
-                      c13[i].second.value() << "\t" ;
-//                      c14[i].second.value() << "\t" <<
-//                      c15[i].second.value() ;
-                      std::cout << "\n";
-                ++i;
-      } );
+//      auto i = 0;
+//      std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
+//      {
+//        std::cout <<  c2[i].second.value() << "\t" <<
+//                      c3[i].second.value() << "\t" <<
+//                      c4[i].second.value() << "\t" <<
+//                      c5[i].second.value() << "\t" <<
+//                      c6[i].second.value() << "\t" <<
+//                      c7[i].second.value() << "\t" <<
+//                      c8[i].second.value() << "\t" <<
+//                      c9[i].second.value() << "\t" <<
+//                      c10[i].second.value() << "\t" <<
+//                      c11[i].second.value() << "\t" <<
+//                      c12[i].second.value() << "\t" <<
+//                      c13[i].second.value() << "\t" ;
+////                      c14[i].second.value() << "\t" <<
+////                      c15[i].second.value() ;
+//                      std::cout << "\n";
+//                ++i;
+//      } );
   }
 
   
