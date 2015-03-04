@@ -46,8 +46,6 @@ int main_app( const int argc, const char *argv[ ] ) noexcept
   if( runArgs.run_analysis() ) {
   
     auto const exeTimer = executeAnalysis( runArgs ) ;
-    
-   // cout <<"\n\n\n"<< exeTimer << "\n" ;
   }
 
   return 0 ;
