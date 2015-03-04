@@ -75,6 +75,7 @@ struct Detector_measurements{
       ++i;
       return melissa;
     } );
+    
   };
   
   auto size( void )
@@ -82,6 +83,30 @@ struct Detector_measurements{
   {
     return measurements.size();
   };
+  
+  auto referenceTimes( void )
+  const noexcept-> std::vector< units::quantity<units::si::time> >
+  {
+    using std::vector;
+    using units::quantity;
+    using units::si::time;
+    using algorithm::generate;
+    
+    auto const count = size();
+    
+    auto const myMeasurements = measurements;
+    auto times = vector< quantity< time > >{ count };
+    auto i = 0;
+
+    generate( times, [ &myMeasurements, &i]() noexcept
+    {
+      auto const time = myMeasurements[i].reference_time;
+      ++i;
+      return time ;
+    } );
+  
+    return times;
+  }
   
 };
 
