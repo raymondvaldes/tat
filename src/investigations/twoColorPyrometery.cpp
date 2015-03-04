@@ -204,21 +204,10 @@ std::vector< units::quantity< units::si::one_over_temperature > > >
   auto i = 0u;
   auto const normalizeSR_generator = [&first, &second, &gCoeff, &i]() noexcept
   {
-    auto const SR = signalRatio(  first.measurements[i].signal,
-                                  second.measurements[i].signal ) ;
-    auto const gSR = calibratedSignalRatio( SR, gCoeff ) ;
+    auto const val =  normalizedSignalRatio_from_measurement(
+      first.wavelength, first.measurements[i].signal ,
+      second.wavelength, second.measurements[i].signal,  gCoeff  ) ;
     i++;
-    
-    return normalizedSignalRatio( gSR , first.wavelength , second.wavelength ) ;
-  } ;
-  generate( normalizedSRs, normalizeSR_generator ) ;
-
-  i = 0;
-  auto times = vector< quantity< time > >{ count };
-  generate( times, [&first, &i]() noexcept
-  {
-    auto const val = first.measurements[i].reference_time;
-    ++i;
     return val ;
   } );
 
