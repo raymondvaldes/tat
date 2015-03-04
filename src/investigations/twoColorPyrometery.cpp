@@ -185,7 +185,7 @@ inline auto get_signal_from_scope_file( filesystem::directory const & dir,
   using units::si::millivolts;
   using algorithm::vector::stringToQuantity;
 
-  auto const fileName_string = dir.abs( inputFileName + ".dat"  );
+  auto const fileName_string = dir.abs( inputFileName ) ;
   auto const myData = columnData{ fileName_string } ;
   
   auto const raw_signal_column = 3 ;
