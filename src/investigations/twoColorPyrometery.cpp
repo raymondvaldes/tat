@@ -209,7 +209,11 @@ std::vector< units::quantity< units::si::one_over_temperature > > >
       second.wavelength, second.measurements[i].signal,  gCoeff  ) ;
     i++;
     return val ;
-  } );
+  } ;
+  
+  generate( normalizedSRs, normalizeSR_generator ) ;
+
+  auto const times = first.referenceTimes();
 
   return make_pair( times, normalizedSRs ) ;
 }
