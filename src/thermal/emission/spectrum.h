@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <vector>
+#include "algorithm/algorithm.h"
 #include "units.h"
 #include "thermal/emission/signal.h"
 
@@ -41,17 +42,14 @@ public:
     units::quantity< units::absolute <units::si::temperature > > const & sourceTemperatureIn )
   noexcept : sourceTemperature( sourceTemperatureIn ), signals( inputSignals )
   {
-    using std::is_sorted;
-    using std::sort;
-    using std::begin;
-    using std::end;
+    using algorithm::sort;
+    using algorithm::is_sorted;
     
-    auto const fail = !is_sorted( begin( signals ), end( signals ) ) ;
+    auto const is_not_sorted = !is_sorted( signals ) ;
     
-    if( fail ) {
-      sort( begin( signals ) , end( signals ) );
+    if( is_not_sorted ) {
+      sort( signals );
     }
-
   } ;
   
 
