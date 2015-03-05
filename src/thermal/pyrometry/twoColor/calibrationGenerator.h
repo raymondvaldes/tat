@@ -35,12 +35,10 @@ private:
     using std::pair;
     using std::vector;
     using std::make_pair;
-    using std::begin;
-    using std::end;
-    using std::for_each;
     
     using units::quantity;
     using units::si::wavelength;
+    using algorithm::for_each;
     
     auto lambdaPairs =
       vector< pair< quantity< wavelength >, quantity< wavelength > > >(0);
@@ -58,7 +56,7 @@ private:
       }
     };
     
-    for_each( begin(spectrum), end(spectrum), push_back_lambdaPair );
+    for_each( spectrum, push_back_lambdaPair );
 
     lambdaPairs.shrink_to_fit();
     
@@ -103,13 +101,9 @@ private:
                             emission::Signal<T> > > const & signalPairs )
    const noexcept -> std::vector< units::quantity< units::si::dimensionless> >
    {
-      using std::pair;
       using std::vector;
       using std::make_pair;
-      using std::begin;
-      using std::end;
-      using std::for_each;
-     
+      using algorithm::for_each;
       using units::quantity;
       using units::si::dimensionless;
      
@@ -118,7 +112,7 @@ private:
       auto coefficients = vector< quantity< dimensionless> >() ;
       coefficients.reserve( N_pairs );
      
-      for_each( begin( signalPairs ), end( signalPairs ),
+      for_each( signalPairs,
       [&](auto const &signalPair)
       {
         using thermal::pyrometry::twoColor::calibrationCoefficient;
@@ -156,11 +150,9 @@ private:
     using units::si::wavelength;
     using units::quantity;
     using units::si::dimensionless;
-    using std::for_each;
     using std::make_pair;
-    using std::begin;
-    using std::end;
-    
+    using algorithm::for_each;
+
     auto size = coefficients.size();
     auto calibrationData = vector< pair<
       pair<  quantity<wavelength>, quantity<wavelength> > ,
@@ -169,10 +161,9 @@ private:
     calibrationData.reserve( size );
     
     auto i = 0;
-    for_each( begin( coefficients ), end( coefficients ),
+    for_each( coefficients,
     [&]( auto const& coefficient )
     {
-
       auto calibrationPoint = make_pair( lambdaPairs[i], coefficients[i] ) ;
       calibrationData.push_back( calibrationPoint ) ;
       ++i;
