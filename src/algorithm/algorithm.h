@@ -12,6 +12,7 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/range/numeric.hpp>
 #include <boost/algorithm/cxx11/any_of.hpp>
+#include <boost/algorithm/cxx11/is_sorted.hpp>
 
 /*The ones commented out are the ones that I am need to review. */
 
@@ -52,6 +53,7 @@ namespace algorithm {
   
 ///////////////////////////////////// Non-mutating algorithms
   using boost::algorithm::any_of;
+  using boost::algorithm::is_sorted;
 
 //adjacent_find
 //binary_search
