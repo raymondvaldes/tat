@@ -18,6 +18,7 @@
 
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio.h"
 #include "thermal/pyrometry/twoColor/calibratedSignalRatio.h"
+#include "thermal/pyrometry/twoColor/temperatureSteady.h"
 #include "thermal/pyrometry/twoColor/signalRatio.h"
 #include "math/functions/periodicData.h"
 #include "math/curveFit/cosine.h"
@@ -36,7 +37,6 @@ namespace investigations{
 
 namespace twoColorPyrometery{
   
-
 struct Detector_measurement {
 
   units::quantity< units::si::time > reference_time;
@@ -125,20 +125,22 @@ noexcept -> std::vector< units::quantity< units::si::time > >
   using units::si::dimensionless;
   using units::si::time;
   using units::si::seconds;
+  using algorithm::generate;
   
   using std::vector;
-  using std::generate;
   using std::begin;
   using std::end;
 
   auto const period = quantity< dimensionless >( cycles  ) / frequency;
-  auto const increment = period / quantity<dimensionless>(count);
+  auto const increment = period / quantity<dimensionless>(count - 1 );
   auto const starting_time = 0 * seconds ;
   
   auto time_distribution = vector< quantity< time > >( count, starting_time );
   
   auto scratch = quantity< time > ( starting_time ) ;
-  generate( begin( time_distribution ) + 1 , end( time_distribution ), [&]()
+  const auto skip_first_step = begin( time_distribution ) + 1 ;
+  
+  generate( skip_first_step , end( time_distribution ), [&]() noexcept
   {
     scratch += increment;
     return scratch;
@@ -176,13 +178,14 @@ auto normalizedSignalRatio_from_measurement(
   return normalizedSR ;
 }
   
-
 inline
 auto normalizedDetectorMeasurements(  Detector_measurements const & first,
                                       Detector_measurements const & second,
   units::quantity< units::si::dimensionless > const & gCoeff )
-noexcept  ->  std::pair< std::vector< units::quantity< units::si::time > > ,
-std::vector< units::quantity< units::si::one_over_temperature > > >
+noexcept  ->
+std::pair<
+  std::vector< units::quantity< units::si::time > > ,
+  std::vector< units::quantity< units::si::one_over_temperature > > >
 {
   assert_gt_zero( first.size() ) ;
   assert_gt_zero( second.size() );
@@ -311,8 +314,8 @@ auto run( filesystem::directory const & dir ) noexcept -> void
 
   calculateCalibrationCoefficients( dir ) ;
 
-
   auto const filename = "twoColorPyro.xml";
+  
   auto const fullpath = dir.abs( filename );
   auto const pt = getTreefromFile( fullpath ) ;
   auto const conjunto = std::string{"temperature_measurement."};
@@ -349,6 +352,22 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   auto const filename_2  = settings_branch.get<std::string>( "file2" );
   
   
+  using thermal::pyrometer::twoColor::temperatureSteady;
+  using thermal::pyrometer::twoColor::signalRatio;
+  using std::make_pair;
+  auto const signalDC1 = signalDC1_raw - signalBackground ;
+  auto const signalDC2 = signalDC2_raw - signalBackground ;
+  auto const wavelengthCorrected1 = wavelength1_nom + wavelength_offset;
+  auto const wavelengthCorrected2 = wavelength2_nom + wavelength_offset;
+  
+  auto const SR = signalRatio( signalDC1, signalDC2 );
+
+
+  auto const steadyTemperature_straight =
+  temperatureSteady(
+    gCoeff , SR, make_pair(wavelengthCorrected1, wavelengthCorrected2) ) ;
+
+  
   auto const wavelength1 = wavelength1_nom + wavelength_offset ;
   auto const wavelength2 = wavelength2_nom + wavelength_offset ;
   
@@ -363,14 +382,13 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   auto const normalizedSRs =
   normalizedDetectorMeasurements( measurements_1, measurements_2, gCoeff );
 
-
   auto const myPeriodicData = PeriodicData< one_over_temperature >( normalizedSRs ) ;
   
   auto const initialConditions =
   PeriodicProperties<one_over_temperature>{
     myPeriodicData.initialEstimateOffset(),
     myPeriodicData.initialEstimateAmplitude(),
-    temperoralFrequency, quantity<plane_angle>{ 0 * radians }
+    temperoralFrequency, quantity<plane_angle>{ -1.6 * radians }
   } ;
 
   auto const fittedCosine = cosine( normalizedSRs, initialConditions );
@@ -384,18 +402,26 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   using units::pow;
   auto const transientTemperature = myFittedAmplitude * pow<2>( steadyTemperature );
 
-  //cout << "steady tempertaure (straight) " << steadyTemperature_straight << "\n";
+  using algorithm::for_each;
+  auto i = 0u;
+  for_each( normalizedSRs.first , [&]( auto const & time )
+  {
+    cout << time << "\t"<< fittedCosine.evaluate( time ) << "\t" <<  normalizedSRs.second[i]  << "\n";
+    i++;
+  } ) ;
+  
   
   cout << "\n" << units::engineering_prefix;
-  cout << "stage temperature\t\t" <<  quantity< temperature >( 477 * kelvin ) << "\n";
+  cout << dir.pwd() << "\n";
+  cout << "stage temperature\t\t" <<  quantity< temperature >( 473.15 * kelvin ) << "\n";
   cout << "signal frequency\t\t" << temperoralFrequency << "\n" << "\n";
   cout << "detector wavelength\t\t" << wavelength1 << "\n";
   cout << "detector wavelength\t\t" << wavelength2 << "\n" << "\n";
-  cout << "steady temperature\t\t" << steadyTemperature << "\n";
-  cout << "transient tempearture\t" << transientTemperature << "\n";
+  cout << "steady temperature (DC) " << steadyTemperature_straight << "\n";
+
+  cout << "steady temperature (total Signal)\t\t" << steadyTemperature << "\n";
+  cout << "transient temperature(total Signal)\t" << transientTemperature << "\n";
   cout << "phase tempearture\t" << myFittedPhase << "\n";
-  
-  
   
 } //function
 

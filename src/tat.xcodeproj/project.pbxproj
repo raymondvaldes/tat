@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB06EDAB1A71C6B500F9FDBD /* temperatureMeasurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */; };
+		AB06EDAB1A71C6B500F9FDBD /* temperatureSteady.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB06EDAA1A71C6B500F9FDBD /* temperatureSteady.cpp */; };
 		AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BA1A97C7B600EEA759 /* valid.h */; };
 		AB0C51BD1A97FDF400EEA759 /* calibrationGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */; };
 		AB0DFE01195242AA007DF69B /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFDFF195242AA007DF69B /* split.cpp */; };
@@ -42,8 +42,6 @@
 		AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */; };
 		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
-		AB8F0CAB1A8581FE0091196B /* gCoefficient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8F0CA91A8581FE0091196B /* gCoefficient.cpp */; };
-		AB8F0CAC1A8581FE0091196B /* gCoefficient.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CAA1A8581FE0091196B /* gCoefficient.h */; };
 		AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CAD1A858D1C0091196B /* spline-quantity.h */; };
 		AB8F0CB21A8592F70091196B /* quantityTodouble.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CB01A8592F70091196B /* quantityTodouble.h */; };
 		AB932DF51A6DC0E700ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF41A6DC0E700ECF117 /* sine.h */; };
@@ -235,7 +233,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperatureMeasurement.cpp; path = pyrometry/twoColor/temperatureMeasurement.cpp; sourceTree = "<group>"; };
+		AB06EDAA1A71C6B500F9FDBD /* temperatureSteady.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperatureSteady.cpp; path = pyrometry/twoColor/temperatureSteady.cpp; sourceTree = "<group>"; };
 		AB0C51BA1A97C7B600EEA759 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = matrixAnalysis/valid.h; sourceTree = "<group>"; };
 		AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibrationGenerator.h; path = pyrometry/twoColor/calibrationGenerator.h; sourceTree = "<group>"; };
 		AB0DFDFF195242AA007DF69B /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = split.cpp; path = algorithm/string/split.cpp; sourceTree = "<group>"; };
@@ -269,7 +267,7 @@
 		AB71908219DF2C73008FC395 /* base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = base.h; path = units/systems/si/base.h; sourceTree = "<group>"; };
 		AB71A3751AA1157A003AAC84 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = units/si/vector.h; sourceTree = "<group>"; };
 		AB71A3771AA1307B003AAC84 /* repeatElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = repeatElements.h; path = algorithm/vector/repeatElements.h; sourceTree = "<group>"; };
-		AB71BD6319DE40B800C7F280 /* temperatureMeasurement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = temperatureMeasurement.h; path = pyrometry/twoColor/temperatureMeasurement.h; sourceTree = "<group>"; };
+		AB71BD6319DE40B800C7F280 /* temperatureSteady.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = temperatureSteady.h; path = pyrometry/twoColor/temperatureSteady.h; sourceTree = "<group>"; };
 		AB7EAD011A57261F00AB7E11 /* columnData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = columnData.h; path = import/columnData.h; sourceTree = "<group>"; };
 		AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resetInputBeginning.h; path = algorithm/stream/resetInputBeginning.h; sourceTree = "<group>"; };
 		AB7FBD921A9FE65E00FF714D /* prandtl_number.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prandtl_number.h; path = thermalfluids/dimensionless/prandtl_number.h; sourceTree = "<group>"; };
@@ -280,8 +278,6 @@
 		AB8AA4421A5C6CEF0065E7F8 /* is_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = is_open.h; path = algorithm/stream/is_open.h; sourceTree = "<group>"; };
 		AB8AA4441A5DF13F0065E7F8 /* trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trim.h; path = algorithm/string/trim.h; sourceTree = "<group>"; };
 		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
-		AB8F0CA91A8581FE0091196B /* gCoefficient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gCoefficient.cpp; path = pyrometry/twoColor/gCoefficient.cpp; sourceTree = "<group>"; };
-		AB8F0CAA1A8581FE0091196B /* gCoefficient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gCoefficient.h; path = pyrometry/twoColor/gCoefficient.h; sourceTree = "<group>"; };
 		AB8F0CAD1A858D1C0091196B /* spline-quantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spline-quantity.h"; sourceTree = "<group>"; };
 		AB8F0CB01A8592F70091196B /* quantityTodouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quantityTodouble.h; path = algorithm/vector/quantityTodouble.h; sourceTree = "<group>"; };
 		AB932DF41A6DC0E700ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = functions/sine.h; sourceTree = "<group>"; };
@@ -1337,16 +1333,14 @@
 			isa = PBXGroup;
 			children = (
 				ABF5D65B19DB40DD00A70476 /* calibrationCoefficient.h */,
-				AB71BD6319DE40B800C7F280 /* temperatureMeasurement.h */,
-				AB06EDAA1A71C6B500F9FDBD /* temperatureMeasurement.cpp */,
+				AB71BD6319DE40B800C7F280 /* temperatureSteady.h */,
+				AB06EDAA1A71C6B500F9FDBD /* temperatureSteady.cpp */,
 				AB6087651A69A4E6009B1E85 /* normalizedSignalRatio.h */,
 				AB6087661A69A6B9009B1E85 /* normalizedSignalRatio.cpp */,
 				AB60876D1A69B02B009B1E85 /* calibratedSignalRatio.cpp */,
 				AB60876E1A69B02B009B1E85 /* calibratedSignalRatio.h */,
 				AB6087711A69B9FB009B1E85 /* signalRatio.cpp */,
 				AB6087721A69B9FB009B1E85 /* signalRatio.h */,
-				AB8F0CA91A8581FE0091196B /* gCoefficient.cpp */,
-				AB8F0CAA1A8581FE0091196B /* gCoefficient.h */,
 				AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */,
 			);
 			name = twoColor;
@@ -1471,7 +1465,6 @@
 				ABEF4EFA1948D4A500B44AD5 /* Numerical_PhaseOfEmission.h in Headers */,
 				ABEF4EC51948D4A500B44AD5 /* thermalsweepoptimizer.hpp in Headers */,
 				ABEF4EF21948D4A500B44AD5 /* Tss_ana.h in Headers */,
-				AB8F0CAC1A8581FE0091196B /* gCoefficient.h in Headers */,
 				AB564F071A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h in Headers */,
 				AB0C51BD1A97FDF400EEA759 /* calibrationGenerator.h in Headers */,
 				ABEF4EF41948D4A500B44AD5 /* heat2DAna.hpp in Headers */,
@@ -1579,7 +1572,7 @@
 				ABEF4EFF1948D4A500B44AD5 /* xml.cpp in Sources */,
 				ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */,
 				ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */,
-				AB06EDAB1A71C6B500F9FDBD /* temperatureMeasurement.cpp in Sources */,
+				AB06EDAB1A71C6B500F9FDBD /* temperatureSteady.cpp in Sources */,
 				ABFC9E671A94372A00F124F1 /* stringToDouble.cpp in Sources */,
 				ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */,
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,
@@ -1597,7 +1590,6 @@
 				ABEF4EFB1948D4A500B44AD5 /* exportfile.cpp in Sources */,
 				ABEF4E9B1948D4A500B44AD5 /* tma.cpp in Sources */,
 				ABEF4ECC1948D4A500B44AD5 /* lthermal.cpp in Sources */,
-				AB8F0CAB1A8581FE0091196B /* gCoefficient.cpp in Sources */,
 				ABEF4ED51948D4A500B44AD5 /* emission.cpp in Sources */,
 				AB6087671A69A6B9009B1E85 /* normalizedSignalRatio.cpp in Sources */,
 				ABEF4ED91948D4A500B44AD5 /* phase99.cpp in Sources */,

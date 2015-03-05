@@ -79,17 +79,11 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 
     auto const wavelengthColumn = 1;
 
-  //  auto const emmissionColumnVerification = 2;
- //   auto const emissionTemperatureVerification =  204.5 * celsius::degrees() ;
-  
-    auto const delta_lambda = quantity< wavelength >( 0.3 * micrometers ) ;
+    auto const delta_lambda = quantity< wavelength >( 1.0 * micrometers ) ;
     auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
- //   auto const wavelength_offset = quantity< wavelength >( 0 * micrometers );
 
-  
-    auto const myParentPath = dir.parent_path() ;
-    auto const myPathNew = myParentPath.pwd() + "/calibration/" + "blackBody_updated.txt";
-    auto const myPathVerification = myParentPath.pwd() + "/calibration/" + "blackBody_updated.txt";
+      auto const myParentPath = dir.parent_path() ;
+    auto const myPathNew = myParentPath.pwd() + "/calibration/" + "graphite_1.txt";
 
     auto const evaluateRawData = [&]( auto const emmissionColumn,
                                       auto const emissionTemperature,
@@ -112,6 +106,8 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
       auto const emission_spectrum = Spectrum<electric_potential>( signals, emissionTemperature ) ;
       auto const cGenerator = calibrationGenerator<electric_potential>( emission_spectrum );
       auto const coefficients = cGenerator.coefficientsAt( delta_lambda );
+      
+      
       return coefficients;
     };
   
@@ -119,24 +115,24 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 
     {
       auto const c2 = evaluateRawData( 2, 200 * celsius::degrees(), myPathNew );
-      auto const c3 = evaluateRawData( 3, 250 * celsius::degrees(), myPathNew );
-      auto const c4 = evaluateRawData( 4, 300 * celsius::degrees(), myPathNew );
-      auto const c5 = evaluateRawData( 5, 350 * celsius::degrees(), myPathNew );
-      auto const c6 = evaluateRawData( 6, 400 * celsius::degrees(), myPathNew );
-      auto const c7 = evaluateRawData( 7, 450 * celsius::degrees(), myPathNew );
-      auto const c8 = evaluateRawData( 8, 500 * celsius::degrees(), myPathNew );
-      auto const c9 = evaluateRawData( 9, 600 * celsius::degrees(), myPathNew );
-      auto const c10 = evaluateRawData( 10, 700 * celsius::degrees(), myPathNew );
-      auto const c11 = evaluateRawData( 11, 800 * celsius::degrees(), myPathNew );
-      auto const c12 = evaluateRawData( 12, 900 * celsius::degrees(), myPathNew );
-      auto const c13 = evaluateRawData( 13, 1000 * celsius::degrees(), myPathNew );
+//      auto const c3 = evaluateRawData( 3, 250 * celsius::degrees(), myPathNew );
+//      auto const c4 = evaluateRawData( 4, 300 * celsius::degrees(), myPathNew );
+//      auto const c5 = evaluateRawData( 5, 350 * celsius::degrees(), myPathNew );
+//      auto const c6 = evaluateRawData( 6, 400 * celsius::degrees(), myPathNew );
+//      auto const c7 = evaluateRawData( 7, 450 * celsius::degrees(), myPathNew );
+//      auto const c8 = evaluateRawData( 8, 500 * celsius::degrees(), myPathNew );
+//      auto const c9 = evaluateRawData( 9, 600 * celsius::degrees(), myPathNew );
+//      auto const c10 = evaluateRawData( 10, 700 * celsius::degrees(), myPathNew );
+//      auto const c11 = evaluateRawData( 11, 800 * celsius::degrees(), myPathNew );
+//      auto const c12 = evaluateRawData( 12, 900 * celsius::degrees(), myPathNew );
+//      auto const c13 = evaluateRawData( 13, 1000 * celsius::degrees(), myPathNew );
 //      auto const c14 = evaluateRawData( 14, 1100 * celsius::degrees(), myPathNew );
 //      auto const c15 = evaluateRawData( 15, 1200 * celsius::degrees(), myPathNew );
     
-//      auto i = 0;
-//      std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
-//      {
-//        std::cout <<  c2[i].second.value() << "\t" <<
+      auto i = 0;
+      std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
+      {
+        std::cout <<  c2[i].second.value() << "\t" ;
 //                      c3[i].second.value() << "\t" <<
 //                      c4[i].second.value() << "\t" <<
 //                      c5[i].second.value() << "\t" <<
@@ -148,13 +144,12 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 //                      c11[i].second.value() << "\t" <<
 //                      c12[i].second.value() << "\t" <<
 //                      c13[i].second.value() << "\t" ;
-////                      c14[i].second.value() << "\t" <<
-////                      c15[i].second.value() ;
-//                      std::cout << "\n";
-//                ++i;
-//      } );
+//                      c14[i].second.value() << "\t" <<
+//                      c15[i].second.value() ;
+                      std::cout << "\n";
+                ++i;
+      } );
   }
-
   
 //      std::cout << "\n\n\n";
 //    {
