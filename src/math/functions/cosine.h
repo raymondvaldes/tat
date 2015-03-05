@@ -18,7 +18,7 @@ namespace functions {
 template< typename T >
 class Cosine: public Periodic<T>
 {
-private:
+public:
   auto evaluate( const units::quantity<units::si::time> time )
   const noexcept
   -> units::quantity<T>
