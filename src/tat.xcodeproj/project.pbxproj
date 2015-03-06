@@ -95,6 +95,8 @@
 		ABEB14B21AAA557900204B36 /* analytical.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B01AAA557900204B36 /* analytical.h */; };
 		ABEB14B61AAA622600204B36 /* slab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14B41AAA622600204B36 /* slab.cpp */; };
 		ABEB14B71AAA622600204B36 /* slab.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B51AAA622600204B36 /* slab.h */; };
+		ABEB14BA1AAA686500204B36 /* temperature_prediction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14B81AAA686500204B36 /* temperature_prediction.cpp */; };
+		ABEB14BB1AAA686500204B36 /* temperature_prediction.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B91AAA686500204B36 /* temperature_prediction.h */; };
 		ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5219C737C000882E01 /* forward_difference.h */; };
 		ABEBCE5819C737E500882E01 /* central_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5619C737E500882E01 /* central_difference.h */; };
 		ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DCC1948D4A500B44AD5 /* execute.cpp */; };
@@ -354,6 +356,8 @@
 		ABEB14B01AAA557900204B36 /* analytical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = analytical.h; path = differential/waveEquation/analytical.h; sourceTree = "<group>"; };
 		ABEB14B41AAA622600204B36 /* slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slab.cpp; path = slab/slab.cpp; sourceTree = "<group>"; };
 		ABEB14B51AAA622600204B36 /* slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slab.h; path = slab/slab.h; sourceTree = "<group>"; };
+		ABEB14B81AAA686500204B36 /* temperature_prediction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature_prediction.cpp; path = twoColorPyrometery/temperature_prediction.cpp; sourceTree = "<group>"; };
+		ABEB14B91AAA686500204B36 /* temperature_prediction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature_prediction.h; path = twoColorPyrometery/temperature_prediction.h; sourceTree = "<group>"; };
 		ABEBCE5219C737C000882E01 /* forward_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forward_difference.h; path = numericalAnalysis/differentiation/firstDerivative/forward_difference.h; sourceTree = "<group>"; };
 		ABEBCE5619C737E500882E01 /* central_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = central_difference.h; path = numericalAnalysis/differentiation/firstDerivative/central_difference.h; sourceTree = "<group>"; };
 		ABEF4D971948D02600B44AD5 /* libtatlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtatlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -830,6 +834,8 @@
 			children = (
 				ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */,
 				ABFC2CFA1A439F1D004C00AD /* twoColorPyrometery.h */,
+				ABEB14B81AAA686500204B36 /* temperature_prediction.cpp */,
+				ABEB14B91AAA686500204B36 /* temperature_prediction.h */,
 				ABFC9E611A9424C500F124F1 /* calculateCalibrationCoefficients.cpp */,
 				ABFC9E621A9424C500F124F1 /* calculateCalibrationCoefficients.h */,
 			);
@@ -1610,6 +1616,7 @@
 				ABB54FC619C22C7E0056823E /* add.h in Headers */,
 				ABEF4EAA1948D4A500B44AD5 /* TBCsystem.h in Headers */,
 				AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */,
+				ABEB14BB1AAA686500204B36 /* temperature_prediction.h in Headers */,
 				ABA48C511A79A7670025666F /* assertExtensions.h in Headers */,
 				ABEF4EC71948D4A500B44AD5 /* construct.hpp in Headers */,
 				ABF5D66119DB49FD00A70476 /* signal.h in Headers */,
@@ -1754,6 +1761,7 @@
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
+				ABEB14BA1AAA686500204B36 /* temperature_prediction.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
 				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
 				ABEF4EF51948D4A500B44AD5 /* Iheat.cpp in Sources */,
