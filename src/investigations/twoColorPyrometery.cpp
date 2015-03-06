@@ -33,219 +33,17 @@
 #include "algorithm/vector/repeatElements.h"
 #include "tools/interface/xml.h"
 
+#include "thermal/equipment/detector/measurement.h"
+#include "thermal/equipment/detector/measurements.h"
+#include "math/construct/periodic_time_distribution.h"
+#include "thermal/pyrometry/twoColor/normalizedSignalRatio_from_measurement.h"
+#include "thermal/pyrometry/twoColor/normalizedDetectorMeasurements.h"
+#include "gTBC/gMeasure/get_signal_from_scope_file.h"
+
 namespace investigations{
 
 namespace twoColorPyrometery{
   
-struct Detector_measurement {
-
-  units::quantity< units::si::time > reference_time;
-  units::quantity< units::si::electric_potential > signal;
-  
-  Detector_measurement(){};
-  
-  Detector_measurement( units::quantity< units::si::time > const & timestamp_In,
-                        units::quantity< units::si::electric_potential > const & signal_In )
-  : reference_time( timestamp_In ), signal( signal_In )
-  {
-    assert_ge_zero( timestamp_In );
-    assert_gt_zero( signal_In );
-  };
-};
-
-struct Detector_measurements{
-
-  units::quantity<units::si::wavelength> wavelength;
-  std::vector< Detector_measurement > measurements;
-  
-  Detector_measurements(
-    units::quantity<units::si::wavelength> const & wavelengthIn,
-    std::vector< units::quantity< units::si::time> > referenceTime,
-    std::vector< units::quantity< units::si::electric_potential > > const & signals )
-    : wavelength( wavelengthIn), measurements( signals.size() )
-  {
-    assert_gt_zero( wavelengthIn );
-    assert_equal( referenceTime.size(), signals.size() );
-    
-    auto i = 0u;
-    using algorithm::generate;
-    generate( measurements, [&referenceTime, &signals, &i]() noexcept
-    {
-      auto const melissa = Detector_measurement{ referenceTime[i], signals[i] };
-      ++i;
-      return melissa;
-    } );
-    
-  };
-  
-  auto size( void )
-  const noexcept -> size_t
-  {
-    return measurements.size();
-  };
-  
-  auto referenceTimes( void )
-  const noexcept-> std::vector< units::quantity<units::si::time> >
-  {
-    using std::vector;
-    using units::quantity;
-    using units::si::time;
-    using algorithm::generate;
-    
-    auto const count = size();
-    
-    auto const myMeasurements = measurements;
-    auto times = vector< quantity< time > >{ count };
-    auto i = 0;
-
-    generate( times, [ &myMeasurements, &i]() noexcept
-    {
-      auto const time = myMeasurements[i].reference_time;
-      ++i;
-      return time ;
-    } );
-  
-    return times;
-  }
-  
-};
-
-
-inline auto
-periodic_time_distribution( units::quantity< units::si::frequency > const & frequency,
-                            size_t const cycles,
-                            size_t const count )
-noexcept -> std::vector< units::quantity< units::si::time > >
-{
-  assert_gt_zero( cycles ) ;
-  assert_gt_zero( count ) ;
-  assert_gt_zero( frequency ) ;
-
-  using units::quantity;
-  using units::si::dimensionless;
-  using units::si::time;
-  using units::si::seconds;
-  using algorithm::generate;
-  
-  using std::vector;
-  using std::begin;
-  using std::end;
-
-  auto const period = quantity< dimensionless >( cycles  ) / frequency;
-  auto const increment = period / quantity<dimensionless>(count - 1 );
-  auto const starting_time = 0 * seconds ;
-  
-  auto time_distribution = vector< quantity< time > >( count, starting_time );
-  
-  auto scratch = quantity< time > ( starting_time ) ;
-  const auto skip_first_step = begin( time_distribution ) + 1 ;
-  
-  generate( skip_first_step , end( time_distribution ), [&]() noexcept
-  {
-    scratch += increment;
-    return scratch;
-  } ) ;
-  
-  return time_distribution;
-}
-
-inline
-auto normalizedSignalRatio_from_measurement(
-  units::quantity<units::si::wavelength> const & first_w,
-  units::quantity<units::si::electric_potential> const & first_signal,
-  units::quantity<units::si::wavelength> const & second_w,
-  units::quantity<units::si::electric_potential> const &  second_signal,
-  units::quantity< units::si::dimensionless > const & gCoeff )
-  noexcept -> units::quantity< units::si::one_over_temperature >
-{
-  assert_gt_zero(first_w);
-  assert_gt_zero(second_w);
-  assert_lt(first_w, second_w);
-  
-  assert_gt_zero(first_signal);
-  assert_gt_zero(second_signal);
-  assert_gt_zero(gCoeff);
-
-  using thermal::pyrometer::twoColor::signalRatio;
-  using thermal::pyrometer::twoColor::calibratedSignalRatio;
-  using thermal::pyrometer::twoColor::normalizedSignalRatio;
-
-  auto const SR = signalRatio(  first_signal , second_signal ) ;
-  auto const gSR = calibratedSignalRatio( SR, gCoeff ) ;
-  
-  auto const normalizedSR = normalizedSignalRatio( gSR,first_w,second_w);
-  
-  return normalizedSR ;
-}
-  
-inline
-auto normalizedDetectorMeasurements(  Detector_measurements const & first,
-                                      Detector_measurements const & second,
-  units::quantity< units::si::dimensionless > const & gCoeff )
-noexcept  ->
-std::pair<
-  std::vector< units::quantity< units::si::time > > ,
-  std::vector< units::quantity< units::si::one_over_temperature > > >
-{
-  assert_gt_zero( first.size() ) ;
-  assert_gt_zero( second.size() );
-  assert_gt_zero( gCoeff ) ;
-
-  using std::vector;
-  using std::make_pair;
-  using units::quantity;
-  using units::si::time;
-  using units::si::one_over_temperature;
-  using thermal::pyrometer::twoColor::signalRatio;
-  using thermal::pyrometer::twoColor::calibratedSignalRatio;
-  using thermal::pyrometer::twoColor::normalizedSignalRatio;
-  using algorithm::generate;
-  
-  auto const count = first.size();
-  auto normalizedSRs = vector< quantity<one_over_temperature> >( count ) ;
-  
-  auto i = 0u;
-  auto const normalizeSR_generator = [&first, &second, &gCoeff, &i]() noexcept
-  {
-    auto const val =  normalizedSignalRatio_from_measurement(
-      first.wavelength, first.measurements[i].signal ,
-      second.wavelength, second.measurements[i].signal,  gCoeff  ) ;
-    i++;
-    return val ;
-  } ;
-  
-  generate( normalizedSRs, normalizeSR_generator ) ;
-
-  auto const times = first.referenceTimes();
-
-  return make_pair( times, normalizedSRs ) ;
-}
-
-
-inline auto get_signal_from_scope_file( filesystem::directory const & dir,
-                                        std::string const & inputFileName )
--> std::vector< units::quantity<units::si::electric_potential >>
-{
-  assert( !inputFileName.empty() );
-
-  using tools::interface::import::columnData;
-  using units::quantity;
-  using units::si::electric_potential;
-  using units::si::millivolts;
-  using algorithm::vector::stringToQuantity;
-
-  auto const fileName_string = dir.abs( inputFileName ) ;
-  auto const myData = columnData{ fileName_string } ;
-  
-  auto const raw_signal_column = 3 ;
-  auto const list_strings = myData.getColumn( raw_signal_column ) ;
-  
-  auto const raw_detector_signals =
-  stringToQuantity< electric_potential >( list_strings, millivolts  ) ;
-  
-  return raw_detector_signals;
-}
-
 inline auto
 measurementFactory( filesystem::directory const & dir,
   std::string const& filename,
@@ -254,7 +52,7 @@ measurementFactory( filesystem::directory const & dir,
   units::quantity< units::si::frequency > const & frequency,
   size_t const cycles,
   units::quantity< units::si::wavelength> const & detector_wavelength )
-noexcept -> Detector_measurements
+noexcept -> thermal::equipment::detector::Measurements
 {
   assert( !filename.empty() );
   assert_gt_zero( signal_DC_raw );
@@ -264,7 +62,10 @@ noexcept -> Detector_measurements
   assert_gt_zero( detector_wavelength );
 
   using namespace units::si;
-
+  using math::construct::periodic_time_distribution;
+  using thermal::equipment::detector::Measurements;
+  using gTBC::gMeasure::get_signal_from_scope_file;
+  
   auto const transient_DetectorSignal = get_signal_from_scope_file( dir, filename  );
 
   auto const steady_DetectorSignal = signal_DC_raw - signal_background ;
@@ -274,13 +75,11 @@ noexcept -> Detector_measurements
   auto const counts = transient_DetectorSignal.size();
 
   auto const referenceTime = periodic_time_distribution( frequency, cycles, counts ) ;
-    
-  return Detector_measurements{ detector_wavelength, referenceTime, total_detectorSignal };
+  
+  return Measurements{ detector_wavelength, referenceTime, total_detectorSignal };
 };
 
 
-  
-  
 auto run( filesystem::directory const & dir ) noexcept -> void
 {
   using std::cout;
@@ -351,10 +150,12 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   auto const filename_1  = settings_branch.get<std::string>( "file1" );
   auto const filename_2  = settings_branch.get<std::string>( "file2" );
   
-  
+
   using thermal::pyrometer::twoColor::temperatureSteady;
   using thermal::pyrometer::twoColor::signalRatio;
+  using thermal::pyrometry::twoColor::normalizedDetectorMeasurements;
   using std::make_pair;
+  
   auto const signalDC1 = signalDC1_raw - signalBackground ;
   auto const signalDC2 = signalDC2_raw - signalBackground ;
   auto const wavelengthCorrected1 = wavelength1_nom + wavelength_offset;

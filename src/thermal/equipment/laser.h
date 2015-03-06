@@ -29,8 +29,8 @@
 #include <iostream>
 
 namespace thermal{
-namespace equipment{
 
+namespace equipment{
     
 class Laser
 {
@@ -57,6 +57,8 @@ public:
 };
   
   
-}}
+} // namespace equipment
+
+} // namespace thermal
 
 #endif /* defined(__tat__laser__) */

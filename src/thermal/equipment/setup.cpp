@@ -27,9 +27,10 @@
 #include "tools/interface/xml.h"
 
 namespace thermal{
-  namespace equipment{
 
-setup::setup( Laser laser_, Detector detector_) noexcept
+namespace equipment{
+
+setup::setup( Laser laser_, detector::Detector detector_) noexcept
 : laser(laser_), detector(detector_)
 {
   q_surface = 0;
@@ -48,7 +49,7 @@ setup setup::loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept
     //initialize detector
   auto const detector_rad = getItem<double>( pt, "Detector.radius" );
   auto const detector_lam = getItem<double>( pt, "Detector.lambda" );
-  const Detector Emissiondetector( detector_lam, detector_rad );
+  const detector::Detector Emissiondetector( detector_lam, detector_rad );
   
     //initialize experimental setup object
   const setup expSetup( CO2Laser, Emissiondetector );
@@ -56,5 +57,6 @@ setup setup::loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept
   return expSetup;
 }
     
-  }
-}
+} // namespace equipment
+
+} // namespace thermal

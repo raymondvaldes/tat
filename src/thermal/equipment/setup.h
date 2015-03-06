@@ -30,21 +30,25 @@
 #include <boost/property_tree/ptree.hpp>
 
 #include "thermal/equipment/laser.h"
-#include "thermal/equipment/detector.h"
+#include "thermal/equipment/detector/detector.h"
 
-namespace thermal{namespace equipment{
+namespace thermal{
+
+namespace equipment{
   
 class setup
 {
 public:
   Laser laser;
-  Detector detector;
+  detector::Detector detector;
   double q_surface;
   
-  explicit setup( Laser laser_,  Detector detector_) noexcept;
+  explicit setup( Laser laser_,  detector::Detector detector_) noexcept;
   static setup loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
 };
 
-}}
+} // namespace equipment
+
+} // namespace thermal
   
 #endif /* defined(__tat__setup__) */

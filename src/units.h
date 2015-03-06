@@ -23,7 +23,6 @@
 #include "units/operators.h"
 #include "units/scale.h"
 
-
 #include "units/si/si.h"
 #include "units/cmath.h"
 
