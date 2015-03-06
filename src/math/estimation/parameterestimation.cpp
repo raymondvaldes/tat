@@ -69,20 +69,10 @@ double unknown::bestfitIntervalSpread( void ) const noexcept
 }
 
 
-//void unknown::Initialauto(void)
-//{
-//  initialGuess = math::average(constraint.lower, constraint.upper);
-//}
-
 void unknown::Initialset(const double initial) noexcept
 {
   initialGuess = initial;
 }
-
-//void unknown::reset( void )
-//{
-//  initialGuess = math::x_ini( constraint.lower, constraint.upper ) ;
-//}
 
 double unknown::initialVal(void) const noexcept
 {

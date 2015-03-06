@@ -31,6 +31,7 @@
 		AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */ = {isa = PBXBuildFile; fileRef = AB60876E1A69B02B009B1E85 /* calibratedSignalRatio.h */; };
 		AB6087731A69B9FB009B1E85 /* signalRatio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6087711A69B9FB009B1E85 /* signalRatio.cpp */; };
 		AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */ = {isa = PBXBuildFile; fileRef = AB6087721A69B9FB009B1E85 /* signalRatio.h */; };
+		AB6367601AA941AC00AC8390 /* sum.h in Headers */ = {isa = PBXBuildFile; fileRef = AB63675F1AA941AC00AC8390 /* sum.h */; };
 		AB6981A819CB638300940843 /* apply_to_all.h in Headers */ = {isa = PBXBuildFile; fileRef = AB6981A619CB638300940843 /* apply_to_all.h */; };
 		AB71A3761AA1157A003AAC84 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = AB71A3751AA1157A003AAC84 /* vector.h */; };
 		AB71A3781AA1307B003AAC84 /* repeatElements.h in Headers */ = {isa = PBXBuildFile; fileRef = AB71A3771AA1307B003AAC84 /* repeatElements.h */; };
@@ -259,6 +260,7 @@
 		AB6087711A69B9FB009B1E85 /* signalRatio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = signalRatio.cpp; path = pyrometry/twoColor/signalRatio.cpp; sourceTree = "<group>"; };
 		AB6087721A69B9FB009B1E85 /* signalRatio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = signalRatio.h; path = pyrometry/twoColor/signalRatio.h; sourceTree = "<group>"; };
 		AB6087761A69E53F009B1E85 /* periodic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = periodic.h; path = functions/periodic.h; sourceTree = "<group>"; };
+		AB63675F1AA941AC00AC8390 /* sum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sum.h; path = algorithm/vector/sum.h; sourceTree = "<group>"; };
 		AB6981A619CB638300940843 /* apply_to_all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apply_to_all.h; path = numericalAnalysis/ublas/apply_to_all.h; sourceTree = "<group>"; };
 		AB71907E19DF0B1B008FC395 /* codata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = codata.h; path = units/si/constants/codata.h; sourceTree = "<group>"; };
 		AB71907F19DF1354008FC395 /* thermal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = thermal.h; path = units/si/constants/thermal.h; sourceTree = "<group>"; };
@@ -894,6 +896,7 @@
 				ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */,
 				AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */,
 				AB71A3771AA1307B003AAC84 /* repeatElements.h */,
+				AB63675F1AA941AC00AC8390 /* sum.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -1433,6 +1436,7 @@
 				ABEF4ED41948D4A500B44AD5 /* temperature.h in Headers */,
 				ABEF4EEA1948D4A500B44AD5 /* numerical_2011.h in Headers */,
 				ABEF4E921948D4A500B44AD5 /* utils.hpp in Headers */,
+				AB6367601AA941AC00AC8390 /* sum.h in Headers */,
 				ABEF4EAD1948D4A500B44AD5 /* basedata.hpp in Headers */,
 				ABA48C4C1A78717F0025666F /* wrap2pi.h in Headers */,
 				ABEF4EB51948D4A500B44AD5 /* lmdiff_poptea_help.hpp in Headers */,

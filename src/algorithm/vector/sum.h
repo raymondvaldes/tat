@@ -22,7 +22,6 @@ template < typename T >
 auto sum( std::vector<T> const & input )
 noexcept -> T
 {
-  using algorithm::accumulate;
   using std::begin;
   using std::end;
   
@@ -48,7 +47,6 @@ template<T>
 auto residuals_to_value( std::vector<T> const & container , T const & value )
 noexcept -> std::vector<T>
 {
-  using algorithm::transform;
   using std::begin;
   
   transform( input, begin( container ), []( auto const & element )
@@ -64,7 +62,6 @@ template<T>
 auto residuals_to_average( std::vector<T> const & container )
 noexcept -> std::vector<T>
 {
-  using algorithm::transform;
   using std::begin;
   
   auto const avg = average( container ) ;
@@ -78,28 +75,29 @@ noexcept -> std::vector<T>
   return
 }
 
+
+
 template < typename T >
 auto standard_deviation_sample( std::vector<T> const & input )
 noexcept -> T
 {
+  using std::sqrt;
+  using units::sqrt;
+  
   auto const avg = average( input );
   auto const N = input.size();
   
-  auto residuals = std::vector<T>();
+  auto const residuals = residuals_to_average( input ) ;
+  auto const square_residuals =
+    transform( input, input.begin, []( auto const & e){ return e * e; });
   
-  
-  
-  for_each( input, []( auto& value ) -> noexcept
-  {
-    auto const residual = value - avg ;
-    auto const square_residual = residual * residual;
-    residuals.push_back( value - avg )  ;
-  } );
+  auto const averageSquares = average( square_residuals );
+  auto const root_average_square = sqrt( averageSquares );
 
-  return average;
+  return root_average_square;
 }
 
-//    auto const count = quantity< dimensionless >( dataVector.size() );
+
   
 } // namespace vector
 

@@ -83,7 +83,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
 
       auto const myParentPath = dir.parent_path() ;
-    auto const myPathNew = myParentPath.pwd() + "/calibration/" + "graphite_1.txt";
+    auto const myPathNew = myParentPath.pwd() + "/calibration/" + "graphite_4_6_5_6.txt";
 
     auto const evaluateRawData = [&]( auto const emmissionColumn,
                                       auto const emissionTemperature,
@@ -115,13 +115,13 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 
     {
       auto const c2 = evaluateRawData( 2, 200 * celsius::degrees(), myPathNew );
-//      auto const c3 = evaluateRawData( 3, 250 * celsius::degrees(), myPathNew );
-//      auto const c4 = evaluateRawData( 4, 300 * celsius::degrees(), myPathNew );
-//      auto const c5 = evaluateRawData( 5, 350 * celsius::degrees(), myPathNew );
-//      auto const c6 = evaluateRawData( 6, 400 * celsius::degrees(), myPathNew );
-//      auto const c7 = evaluateRawData( 7, 450 * celsius::degrees(), myPathNew );
-//      auto const c8 = evaluateRawData( 8, 500 * celsius::degrees(), myPathNew );
-//      auto const c9 = evaluateRawData( 9, 600 * celsius::degrees(), myPathNew );
+      auto const c3 = evaluateRawData( 3, 225 * celsius::degrees(), myPathNew );
+      auto const c4 = evaluateRawData( 4, 250 * celsius::degrees(), myPathNew );
+      auto const c5 = evaluateRawData( 5, 275 * celsius::degrees(), myPathNew );
+      auto const c6 = evaluateRawData( 6, 300 * celsius::degrees(), myPathNew );
+      auto const c7 = evaluateRawData( 7, 325 * celsius::degrees(), myPathNew );
+      auto const c8 = evaluateRawData( 8, 350 * celsius::degrees(), myPathNew );
+      auto const c9 = evaluateRawData( 9, 375 * celsius::degrees(), myPathNew );
 //      auto const c10 = evaluateRawData( 10, 700 * celsius::degrees(), myPathNew );
 //      auto const c11 = evaluateRawData( 11, 800 * celsius::degrees(), myPathNew );
 //      auto const c12 = evaluateRawData( 12, 900 * celsius::degrees(), myPathNew );
@@ -132,14 +132,14 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
       auto i = 0;
       std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
       {
-        std::cout <<  c2[i].second.value() << "\t" ;
-//                      c3[i].second.value() << "\t" <<
-//                      c4[i].second.value() << "\t" <<
-//                      c5[i].second.value() << "\t" <<
-//                      c6[i].second.value() << "\t" <<
-//                      c7[i].second.value() << "\t" <<
-//                      c8[i].second.value() << "\t" <<
-//                      c9[i].second.value() << "\t" <<
+        std::cout <<  c2[i].second.value() << "\t" <<
+                      c3[i].second.value() << "\t" <<
+                      c4[i].second.value() << "\t" <<
+                      c5[i].second.value() << "\t" <<
+                      c6[i].second.value() << "\t" <<
+                      c7[i].second.value() << "\t" <<
+                      c8[i].second.value() << "\t" <<
+                      c9[i].second.value() << "\t" ;
 //                      c10[i].second.value() << "\t" <<
 //                      c11[i].second.value() << "\t" <<
 //                      c12[i].second.value() << "\t" <<
