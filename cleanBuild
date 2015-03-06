@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo 'deleting build files ..........'
-rm /home/$USER/code/tat/build/release/*.o
-
-echo 'cleanup complete'
-

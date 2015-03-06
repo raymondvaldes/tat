@@ -1,9 +1,0 @@
-
-exe_location="usr/bin/tat
-buildpath="/""
-
-if [ -e "${exe_location}"  ] then
- echo 'link established' 
-else
- sudo ln -s ${exe_location} ${buildpath}/tat 
-fi
