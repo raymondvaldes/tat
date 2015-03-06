@@ -41,9 +41,7 @@ boost::property_tree::ptree getBranch( const std::string &trunk,
 template<class T>
 T getItem( const boost::property_tree::ptree &branch, const std::string &item )
 {
-  T output = T(); // Call default CTOR for T
-  output = branch.get< T > ( item ) ;
-
+  auto const output = branch.get< T > ( item ) ;
   return output;
 }
 

@@ -58,9 +58,9 @@ std::complex<double> Tac1D_ana( const double z, const double R0,
                                 const double R1, const double epsilon,
                                 const double Lam, const double Lthrm) noexcept;
 
-void temperature_1D( const sensible::TBCsystem  TBCsystem,
-                     const thermal::define::model thermalsys,
-                     const thermal::equipment::setup expSetup,
+void temperature_1D( const sensible::TBCsystem  & TBCsystem,
+                     const thermal::define::model & thermalsys,
+                     const thermal::equipment::setup & expSetup,
                      const double omega1,
                      thermal::define::Temperature Tprofile) noexcept;
 

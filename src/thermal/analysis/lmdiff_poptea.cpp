@@ -238,7 +238,7 @@ void LMA::ThermalProp_Analysis(double *x, double *fvec) noexcept
 
 }}
 
-void printPEstimates( const sensible::TBCsystem  TBCSystem,
+void printPEstimates( const sensible::TBCsystem & TBCSystem,
                       math::estimation::unknownList list ) noexcept
 {
   using std::cout;

@@ -102,7 +102,7 @@ public:
 }}
 
 
-void printPEstimates( const sensible::TBCsystem TBCSystem,
+void printPEstimates( const sensible::TBCsystem & TBCSystem,
                       math::estimation::unknownList list ) noexcept;
 
 #endif // LMDIFF_POPTEA_HPP

@@ -40,9 +40,9 @@ License
 using sensible::property;
 using thermal::define::Temperature;
 
-void temperature_1D( const sensible::TBCsystem  TBCsystem,
-                     const thermal::define::model thermalsys,
-                     const thermal::equipment::setup expSetup,
+void temperature_1D( const sensible::TBCsystem & TBCsystem,
+                     const thermal::define::model & thermalsys,
+                     const thermal::equipment::setup & expSetup,
                      const double omega1,
                      thermal::define::Temperature Tprofile) noexcept
 {

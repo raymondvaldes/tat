@@ -30,7 +30,7 @@ namespace thermal {
 namespace analysis{
 
 void scaleDiag( double *diag, math::estimation::unknownList List,
-                const sensible::TBCsystem TBCsystem, const int mode ) noexcept
+                const sensible::TBCsystem & TBCsystem, const int mode ) noexcept
 {
   BOOST_ASSERT( diag != nullptr ) ;
 

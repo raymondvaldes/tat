@@ -27,31 +27,7 @@ auto neumann_and_direchlet_BC(
   units::quantity< units::si::thermal_diffusivity > alpha,
   units::quantity< units::si::frequency > f
 )
-noexcept -> double
-{
-  using math::differential::waveEquation::analytical_solution_10;
-
-  assert( x.value() > 0 );
-  
-
-//  auto const A_non =
-//  auto const omega_non =
-//  auto const kappa =
-
-//  auto const s_x = analytical_solution_10( x,  )
-
-
-  return 0;
-
-
-
-//auto analytical_solution_10(
-//  double const x,
-//  std::complex<double> const Kappa,
-//  double const A,
-//  double const L_b )
-//noexcept -> std::complex<double>
-//};
+noexcept -> double ;
   
 } // namespace slab
   

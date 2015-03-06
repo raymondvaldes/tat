@@ -32,7 +32,7 @@ namespace sensible{
   using boost::property_tree::ptree;
   
   
-layer::layer( const property kthermal_, const property psithermal_,
+layer::layer( const property & kthermal_, const property & psithermal_,
               const double depth_, const double lambda_ ) noexcept
 : kthermal( kthermal_ ),
   psithermal( psithermal_ ),

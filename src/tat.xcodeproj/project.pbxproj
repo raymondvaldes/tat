@@ -97,6 +97,8 @@
 		ABEB14B71AAA622600204B36 /* slab.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B51AAA622600204B36 /* slab.h */; };
 		ABEB14BA1AAA686500204B36 /* temperature_prediction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14B81AAA686500204B36 /* temperature_prediction.cpp */; };
 		ABEB14BB1AAA686500204B36 /* temperature_prediction.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B91AAA686500204B36 /* temperature_prediction.h */; };
+		ABEB14BE1AAA6C4200204B36 /* phase_fitting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14BC1AAA6C4200204B36 /* phase_fitting.cpp */; };
+		ABEB14BF1AAA6C4200204B36 /* phase_fitting.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14BD1AAA6C4200204B36 /* phase_fitting.h */; };
 		ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5219C737C000882E01 /* forward_difference.h */; };
 		ABEBCE5819C737E500882E01 /* central_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5619C737E500882E01 /* central_difference.h */; };
 		ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DCC1948D4A500B44AD5 /* execute.cpp */; };
@@ -358,6 +360,8 @@
 		ABEB14B51AAA622600204B36 /* slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slab.h; path = slab/slab.h; sourceTree = "<group>"; };
 		ABEB14B81AAA686500204B36 /* temperature_prediction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature_prediction.cpp; path = twoColorPyrometery/temperature_prediction.cpp; sourceTree = "<group>"; };
 		ABEB14B91AAA686500204B36 /* temperature_prediction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature_prediction.h; path = twoColorPyrometery/temperature_prediction.h; sourceTree = "<group>"; };
+		ABEB14BC1AAA6C4200204B36 /* phase_fitting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_fitting.cpp; path = twoColorPyrometery/phase_fitting.cpp; sourceTree = "<group>"; };
+		ABEB14BD1AAA6C4200204B36 /* phase_fitting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_fitting.h; path = twoColorPyrometery/phase_fitting.h; sourceTree = "<group>"; };
 		ABEBCE5219C737C000882E01 /* forward_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forward_difference.h; path = numericalAnalysis/differentiation/firstDerivative/forward_difference.h; sourceTree = "<group>"; };
 		ABEBCE5619C737E500882E01 /* central_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = central_difference.h; path = numericalAnalysis/differentiation/firstDerivative/central_difference.h; sourceTree = "<group>"; };
 		ABEF4D971948D02600B44AD5 /* libtatlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtatlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -829,7 +833,7 @@
 			name = taylor_uncertainty;
 			sourceTree = "<group>";
 		};
-		AB81C4581A6040E40076BF03 /* twoColorPyrometery */ = {
+		AB81C4581A6040E40076BF03 /* twoColorPyrometery (active ) */ = {
 			isa = PBXGroup;
 			children = (
 				ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */,
@@ -838,8 +842,10 @@
 				ABEB14B91AAA686500204B36 /* temperature_prediction.h */,
 				ABFC9E611A9424C500F124F1 /* calculateCalibrationCoefficients.cpp */,
 				ABFC9E621A9424C500F124F1 /* calculateCalibrationCoefficients.h */,
+				ABEB14BD1AAA6C4200204B36 /* phase_fitting.h */,
+				ABEB14BC1AAA6C4200204B36 /* phase_fitting.cpp */,
 			);
-			name = twoColorPyrometery;
+			name = "twoColorPyrometery (active )";
 			sourceTree = "<group>";
 		};
 		AB81C4591A6041020076BF03 /* num_method2014 */ = {
@@ -1055,7 +1061,7 @@
 			children = (
 				AB115F1B1A771C37001BB75A /* main-app */,
 				AB81C4591A6041020076BF03 /* num_method2014 */,
-				AB81C4581A6040E40076BF03 /* twoColorPyrometery */,
+				AB81C4581A6040E40076BF03 /* twoColorPyrometery (active ) */,
 				AB81C4571A6040DD0076BF03 /* taylor_uncertainty */,
 				AB81C4541A6040BD0076BF03 /* sensitivityvaldes2013 */,
 			);
@@ -1494,6 +1500,7 @@
 				AB8AA4381A5C68650065E7F8 /* getline.h in Headers */,
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
+				ABEB14BF1AAA6C4200204B36 /* phase_fitting.h in Headers */,
 				ABEF4EB11948D4A500B44AD5 /* kernal.hpp in Headers */,
 				AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */,
 				ABA48C3A1A78553C0025666F /* cmath.h in Headers */,
@@ -1755,6 +1762,7 @@
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
+				ABEB14BE1AAA6C4200204B36 /* phase_fitting.cpp in Sources */,
 				ABEF4ED31948D4A500B44AD5 /* temperature.cpp in Sources */,
 				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
 				ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */,

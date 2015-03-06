@@ -80,7 +80,7 @@ public:
 
 //  printer
   std::string prettyPrint( const sensible::layer &coating,
-                           const std::vector<double> nominalEmission ) noexcept ;
+                           const std::vector<double> & nominalEmission ) noexcept ;
   std::string prettyPrint( const sensible::layer &coating ) noexcept;
   std::string prettyPrint( void ) noexcept;
 

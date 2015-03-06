@@ -48,8 +48,8 @@ public:
   double thermalDiffusivity(void) const noexcept;
   double thermalEffusivity(void) const noexcept;
 
-  explicit layer( const property kthermal_,
-                  const property psithermal_,
+  explicit layer( const property & kthermal_,
+                  const property & psithermal_,
                   const double depth_, const double lambda_) noexcept;
   ~layer(void) noexcept;
   static layer loadConfigfromXMLTree( const boost::property_tree::ptree pt ) noexcept;

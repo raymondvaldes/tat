@@ -136,7 +136,7 @@ std::string ThermalData::prettyPrint( void ) noexcept
 
 
 std::string ThermalData::prettyPrint( const sensible::layer &coating,
-                                    const std::vector<double> nominalEmission ) noexcept
+                                    const std::vector<double> &nominalEmission ) noexcept
 {
   std::ostringstream output;
 
