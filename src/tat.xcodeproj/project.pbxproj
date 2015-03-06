@@ -91,6 +91,10 @@
 		ABDCB54019C934B30044553C /* inversion.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDCB53E19C934B30044553C /* inversion.h */; };
 		ABE169031948EA8D00C1E409 /* libgsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE169011948EA8D00C1E409 /* libgsl.a */; };
 		ABE169041948EA8D00C1E409 /* libgslcblas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE169021948EA8D00C1E409 /* libgslcblas.a */; };
+		ABEB14B11AAA557900204B36 /* analytical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14AF1AAA557900204B36 /* analytical.cpp */; };
+		ABEB14B21AAA557900204B36 /* analytical.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B01AAA557900204B36 /* analytical.h */; };
+		ABEB14B61AAA622600204B36 /* slab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14B41AAA622600204B36 /* slab.cpp */; };
+		ABEB14B71AAA622600204B36 /* slab.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B51AAA622600204B36 /* slab.h */; };
 		ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5219C737C000882E01 /* forward_difference.h */; };
 		ABEBCE5819C737E500882E01 /* central_difference.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEBCE5619C737E500882E01 /* central_difference.h */; };
 		ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEF4DCC1948D4A500B44AD5 /* execute.cpp */; };
@@ -346,6 +350,10 @@
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<absolute>"; };
 		ABE169011948EA8D00C1E409 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = /usr/local/Cellar/gsl/1.16/lib/libgsl.a; sourceTree = "<absolute>"; };
 		ABE169021948EA8D00C1E409 /* libgslcblas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgslcblas.a; path = /usr/local/Cellar/gsl/1.16/lib/libgslcblas.a; sourceTree = "<absolute>"; };
+		ABEB14AF1AAA557900204B36 /* analytical.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = analytical.cpp; path = differential/waveEquation/analytical.cpp; sourceTree = "<group>"; };
+		ABEB14B01AAA557900204B36 /* analytical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = analytical.h; path = differential/waveEquation/analytical.h; sourceTree = "<group>"; };
+		ABEB14B41AAA622600204B36 /* slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slab.cpp; path = slab/slab.cpp; sourceTree = "<group>"; };
+		ABEB14B51AAA622600204B36 /* slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slab.h; path = slab/slab.h; sourceTree = "<group>"; };
 		ABEBCE5219C737C000882E01 /* forward_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forward_difference.h; path = numericalAnalysis/differentiation/firstDerivative/forward_difference.h; sourceTree = "<group>"; };
 		ABEBCE5619C737E500882E01 /* central_difference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = central_difference.h; path = numericalAnalysis/differentiation/firstDerivative/central_difference.h; sourceTree = "<group>"; };
 		ABEF4D971948D02600B44AD5 /* libtatlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtatlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -975,6 +983,32 @@
 			name = matrix;
 			sourceTree = "<group>";
 		};
+		ABEB14AD1AAA551500204B36 /* differential */ = {
+			isa = PBXGroup;
+			children = (
+				ABEB14AE1AAA553100204B36 /* waveEquation */,
+			);
+			name = differential;
+			sourceTree = "<group>";
+		};
+		ABEB14AE1AAA553100204B36 /* waveEquation */ = {
+			isa = PBXGroup;
+			children = (
+				ABEB14AF1AAA557900204B36 /* analytical.cpp */,
+				ABEB14B01AAA557900204B36 /* analytical.h */,
+			);
+			name = waveEquation;
+			sourceTree = "<group>";
+		};
+		ABEB14B31AAA620900204B36 /* slab */ = {
+			isa = PBXGroup;
+			children = (
+				ABEB14B41AAA622600204B36 /* slab.cpp */,
+				ABEB14B51AAA622600204B36 /* slab.h */,
+			);
+			name = slab;
+			sourceTree = "<group>";
+		};
 		ABEBCE4F19C7364D00882E01 /* numericalAnalysis */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,6 +1059,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				ABEB14AD1AAA551500204B36 /* differential */,
 				AB553C47195DCFE300E2B7D1 /* random */,
 				AB0C51B91A97C79500EEA759 /* matrixAnalysis */,
 				ABA48C341A7843CE0025666F /* construct */,
@@ -1254,6 +1289,7 @@
 		ABEF4E481948D4A500B44AD5 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				ABEB14B31AAA620900204B36 /* slab */,
 				ABEF4E491948D4A500B44AD5 /* labels.cpp */,
 				ABEF4E4A1948D4A500B44AD5 /* labels.h */,
 				ABEF4E4B1948D4A500B44AD5 /* one_dim */,
@@ -1444,6 +1480,7 @@
 			files = (
 				AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */,
 				ABEF4F001948D4A500B44AD5 /* xml.h in Headers */,
+				ABEB14B21AAA557900204B36 /* analytical.h in Headers */,
 				ABEF4EE01948D4A500B44AD5 /* setup.h in Headers */,
 				ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */,
 				ABEF4EDA1948D4A500B44AD5 /* phase99.hpp in Headers */,
@@ -1521,6 +1558,7 @@
 				ABEF4EF81948D4A500B44AD5 /* tau_0.h in Headers */,
 				ABF5D65D19DB40DD00A70476 /* calibrationCoefficient.h in Headers */,
 				ABEF4EC11948D4A500B44AD5 /* temp_ss.h in Headers */,
+				ABEB14B71AAA622600204B36 /* slab.h in Headers */,
 				AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */,
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
 				ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */,
@@ -1702,8 +1740,10 @@
 				ABEF4F011948D4A500B44AD5 /* programoptions.cpp in Sources */,
 				ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */,
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
+				ABEB14B11AAA557900204B36 /* analytical.cpp in Sources */,
 				ABEF4EB01948D4A500B44AD5 /* kernal.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
+				ABEB14B61AAA622600204B36 /* slab.cpp in Sources */,
 				ABFC9E631A9424C500F124F1 /* calculateCalibrationCoefficients.cpp in Sources */,
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
