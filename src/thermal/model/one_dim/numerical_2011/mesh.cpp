@@ -169,7 +169,7 @@ void Mesh::minimizer(double *variable, double *constants,
 
   }
   variable[0]+=fraction;
-  temp_to_minimize[best_minimum_element+1]= beta2_func(variable,constants);
+ // temp_to_minimize[best_minimum_element+1]= beta2_func(variable,constants);
   variable[0]-=fraction;
 
   return;

@@ -156,10 +156,10 @@ LMA::paramter_estimation( int *info, int *nfev ) noexcept
 
   //Transform outputs
   j=0;
-  for( unknown& unknown : unknownParameters->vectorUnknowns )
+  for( unknown& param : unknownParameters->vectorUnknowns )
   {
-    x[j] = x_limiter2( x[j], unknown.lowerBound(), unknown.upperBound() );
-    unknown.bestfitset(x[j]);
+    x[j] = x_limiter2( x[j], param.lowerBound(), param.upperBound() );
+    param.bestfitset(x[j]);
     j++;
   }
 

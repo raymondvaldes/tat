@@ -60,8 +60,8 @@ std::vector<double>
 
 
 std::pair<double, double>
-CRfromSweepLimits( const std::pair<double, double> inner_bounds,
-                   const std::pair<double, double> limits ) noexcept;
+CRfromSweepLimits( const std::pair<double, double>  & inner_bounds,
+                   const std::pair<double, double>  & limits ) noexcept;
 
 std::pair<double, double>
 random_CR_from_limits( const Interval myInterval ) noexcept;
@@ -86,13 +86,13 @@ x_limits_from_cenDec( const double cen, const double dec ) noexcept;
 
 std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
-                                const std::pair<double, double> limits ) noexcept;
+                                const std::pair<double, double> & limits ) noexcept;
 
 std::pair<double, double> xCenterlog10( const double lmin, const double lmax ) noexcept;
 
 
 bool checkLimits( const double center, const double range ) noexcept;
-bool checkLimits( const std::pair<double, double> CRpair ) noexcept;
+bool checkLimits( const std::pair<double, double> & CRpair ) noexcept;
 
 
 bool within_tolerance( const double x1, const double x2, const double tol ) noexcept;

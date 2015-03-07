@@ -754,7 +754,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev ) noexcept
   double *wa3 = new double[n];
   double *wa4 = new double[m];
   double *fjac = new double[m*n];
-  double *wa5 = new double[m*n];
   int *ipvt = new int[n];
   double *diag = new double[n]();
 
@@ -809,7 +808,6 @@ void ThermalSweepOptimizer::optimizer( int *info, int *nfev ) noexcept
   delete [] wa2;
   delete [] wa3;
   delete [] wa4;
-  delete [] wa5;
   delete [] ipvt;
   delete [] fvec;
   delete [] fjac;
@@ -839,11 +837,11 @@ void ThermalSweepOptimizer::ThermalProp_Analysis( double *x, double *fvec ) noex
   {
     double error = 0 ;
 
-    for ( unknown& unknown: (*unknownParameters)() )
+    for ( unknown& param: (*unknownParameters)() )
     {
-      if ( myParam.getName() == unknown.label() )
+      if ( myParam.getName() == param.label() )
       {
-        error = unknown.bestfitIntervalSpread();
+        error = param.bestfitIntervalSpread();
       }
     }
     currentState.meanParameterError += error ;

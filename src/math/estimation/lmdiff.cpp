@@ -139,7 +139,7 @@ for( int i = 0 ; i < n ; ++i ) {
 
 
 int i;
-double agiant, floatn,s1,s2,s3,xabs,x1max,x3max;
+double agiant, floatn,s1,s2,s3,x1max,x3max;
 double ans, temp;
 static double rdwarf = 3.834e-20;
 static double rgiant = 1.304e19;
@@ -156,7 +156,7 @@ agiant = rgiant/floatn;
 
 for( i=0; i<n; i++ )
 {
-xabs = fabs(x[i]);
+double xabs = fabs(x[i]);
 if( (xabs > rdwarf) && (xabs < agiant) )
   {
 /*
@@ -1104,7 +1104,7 @@ inline void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
       **********
 */
     int i,j,ij;
-    double eps,h,temp;
+    double eps,temp;
     static double zero = 0;
     extern double MACHEP;
 
@@ -1118,6 +1118,7 @@ inline void fdjac2(void (*fcn)(int, int, double *, double *, int *,double **),
 
     for( j=0; j<n; j++ )
     {
+        auto h = double{0};
         temp = x[j];
         h = eps * fabs(temp);
         if(h == zero)
@@ -1238,7 +1239,7 @@ BOOST_ASSERT( wa != nullptr ) ;
 using namespace math::estimation;
 
 int i,j,ij;
-double eps,h,temp;
+double eps,temp;
 static double zero = 0.0;
 extern double MACHEP;
 
@@ -1252,6 +1253,7 @@ ij = 0;
 
 for( j=0; j<n; j++ )
   {
+  auto h = double{0};
   temp = x[j];
   h = eps * fabs(temp);
   if(h == zero)

@@ -41,9 +41,6 @@ std::vector< directory > ls( const std::string &path_in ) noexcept
   path p ( path_in );
   std::vector< directory > output;
 
-  size_t dir_count = 0;
-  size_t file_count = 0;
-  size_t other_count = 0;
 
   if (!exists(p))
   {
@@ -61,18 +58,15 @@ std::vector< directory > ls( const std::string &path_in ) noexcept
       {
         if( is_directory( dir_itr->status() ) )
         {
-          ++dir_count;
           const boost::filesystem::path temp_dir( dir_itr->path() ) ;
           const directory mytemp ( temp_dir.string() ) ;
           output.push_back( mytemp ) ;
         }
         else if ( is_regular_file( dir_itr->status() ) )
         {
-          ++file_count;
         }
         else
         {
-          ++other_count;
         }
       }
       catch (const boost::filesystem::filesystem_error& ex)

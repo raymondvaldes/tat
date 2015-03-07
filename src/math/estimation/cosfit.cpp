@@ -41,14 +41,6 @@ void cosfit( const double *dependent, const std::vector<double> &independent,
   constexpr size_t N = 3; // number  of constants to be fitted
   const size_t P = Nend-1;
   //number of datapoints to be used in the fitting process
-  constexpr double ftol = 1.e-10;
-  constexpr double xtol = 1.e-10;
-  constexpr double gtol = 1.e-10;
-  constexpr int maxfev = 1e8;
-  constexpr double epsfcn = 1.e-12;
-  constexpr double factor = 1;
-  constexpr int mode = 1;
-  constexpr int nprint = 0;
 
 ///Transform input into offset, amplitude, phase
   /*
@@ -112,6 +104,15 @@ void cosfit( const double *dependent, const std::vector<double> &independent,
           variables[1][g] =   newindependent[g];
       }
       variables[2][0]=0;
+
+      constexpr double ftol = 1.e-10;
+      constexpr double xtol = 1.e-10;
+      constexpr double gtol = 1.e-10;
+      constexpr int maxfev = 1e8;
+      constexpr double epsfcn = 1.e-12;
+      constexpr double factor = 1;
+      constexpr int mode = 1;
+      constexpr int nprint = 0;
 
       lmdif( &cosfcn1, static_cast<int>(P), N, x, fvec, variables, ftol, xtol,
              gtol, maxfev, epsfcn, diag, mode, factor, nprint, &info, &nfev,

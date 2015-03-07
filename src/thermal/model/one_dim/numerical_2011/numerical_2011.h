@@ -55,7 +55,7 @@ private:
 
     explicit matrixArrays( const size_t length ) noexcept
       : A1(length), A2(length), A3(length), b(length), Temperature(length),
-      B1(length), B2(length), B3(length), M2(length){}
+      B1(length), B2(length), B3(length), B4(0), M2(length){}
   };
 
 

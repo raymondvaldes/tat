@@ -262,8 +262,8 @@ double xspread( const double xmin, const double xnominal, const double xmax) noe
 
 
 std::pair<double, double>
-CRfromSweepLimits( const std::pair<double, double> inner_bounds,
-                   const std::pair<double, double> outer_bounds ) noexcept
+CRfromSweepLimits( const std::pair<double, double> & inner_bounds,
+                   const std::pair<double, double> & outer_bounds ) noexcept
 {
   BOOST_ASSERT( outer_bounds.first > 0 ) ;
   BOOST_ASSERT( inner_bounds.first  <= inner_bounds.second ) ;
@@ -290,7 +290,7 @@ CRfromSweepLimits( const std::pair<double, double> inner_bounds,
   return output;
 }
 
-bool checkLimits( const std::pair<double, double> CRpair ) noexcept {
+bool checkLimits( const std::pair<double, double> & CRpair ) noexcept {
   return checkLimits( CRpair.first, CRpair.second ) ;
 }
 
@@ -336,7 +336,7 @@ random_CR_from_limits( const Interval myInterval ) noexcept
 
 std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
-                       const std::pair<double, double> limits ) noexcept
+                       const std::pair<double, double> & limits ) noexcept
 {
   using math::valFROMpercentileLog10;
   
