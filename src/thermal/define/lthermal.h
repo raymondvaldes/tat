@@ -26,7 +26,10 @@
 #ifndef __tat__thermalpenetration__
 #define __tat__thermalpenetration__
 
-#include <iostream>
+#include <cassert>
+
+#include "units.h"
+#include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal{
 
@@ -44,10 +47,48 @@ noexcept -> double ;
 auto
 lthermal_omeg( const double diff, const double omega, const double L_c )
 noexcept -> double ;
-    
+
+
+inline auto
+thermal_penetration(
+  units::quantity<units::si::thermal_diffusivity> const alpha,
+  units::quantity<units::si::angular_frequency> const omega,
+  units::quantity<units::si::length> const L )
+noexcept -> units::quantity< units::si::dimensionless >
+{
+  assert( alpha.value() > 0 ) ;
+  assert( omega.value() > 0 ) ;
+  assert( L.value() > 0 ) ;
+  
+  using units::sqrt;
+  using units::si::radians;
+  
+  auto const thermalPenetration = sqrt( ( alpha  / omega ) * radians ) / L  ;
+  
+  return thermalPenetration ;
 }
 
+inline auto
+thermal_penetration(
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::frequency > const & frequency,
+  units::quantity< units::si::length > const & L )
+noexcept -> units::quantity< units::si::dimensionless >
+{
+  assert( alpha.value() > 0 );
+  assert( frequency.value() > 0 );
+  assert( L.value() > 0 ) ;
+
+  using physics::classical_mechanics::frequency_to_angularFrequency ;
+  
+  auto const omega = frequency_to_angularFrequency( frequency ) ;
+  
+  return thermal_penetration( alpha, omega, L );
 }
+    
+} // namespace define
+
+} // namespace thermal
 
 
 #endif /* defined(__tat__thermalpenetration__) */
