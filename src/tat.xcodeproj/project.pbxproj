@@ -91,7 +91,6 @@
 		ABDCB54019C934B30044553C /* inversion.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDCB53E19C934B30044553C /* inversion.h */; };
 		ABE169031948EA8D00C1E409 /* libgsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE169011948EA8D00C1E409 /* libgsl.a */; };
 		ABE169041948EA8D00C1E409 /* libgslcblas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE169021948EA8D00C1E409 /* libgslcblas.a */; };
-		ABEB14B11AAA557900204B36 /* analytical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14AF1AAA557900204B36 /* analytical.cpp */; };
 		ABEB14B21AAA557900204B36 /* analytical.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B01AAA557900204B36 /* analytical.h */; };
 		ABEB14B61AAA622600204B36 /* slab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABEB14B41AAA622600204B36 /* slab.cpp */; };
 		ABEB14B71AAA622600204B36 /* slab.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB14B51AAA622600204B36 /* slab.h */; };
@@ -354,7 +353,6 @@
 		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<absolute>"; };
 		ABE169011948EA8D00C1E409 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = /usr/local/Cellar/gsl/1.16/lib/libgsl.a; sourceTree = "<absolute>"; };
 		ABE169021948EA8D00C1E409 /* libgslcblas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgslcblas.a; path = /usr/local/Cellar/gsl/1.16/lib/libgslcblas.a; sourceTree = "<absolute>"; };
-		ABEB14AF1AAA557900204B36 /* analytical.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = analytical.cpp; path = differential/waveEquation/analytical.cpp; sourceTree = "<group>"; };
 		ABEB14B01AAA557900204B36 /* analytical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = analytical.h; path = differential/waveEquation/analytical.h; sourceTree = "<group>"; };
 		ABEB14B41AAA622600204B36 /* slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slab.cpp; path = slab/slab.cpp; sourceTree = "<group>"; };
 		ABEB14B51AAA622600204B36 /* slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slab.h; path = slab/slab.h; sourceTree = "<group>"; };
@@ -1006,7 +1004,6 @@
 		ABEB14AE1AAA553100204B36 /* waveEquation */ = {
 			isa = PBXGroup;
 			children = (
-				ABEB14AF1AAA557900204B36 /* analytical.cpp */,
 				ABEB14B01AAA557900204B36 /* analytical.h */,
 			);
 			name = waveEquation;
@@ -1754,7 +1751,6 @@
 				ABEF4F011948D4A500B44AD5 /* programoptions.cpp in Sources */,
 				ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */,
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
-				ABEB14B11AAA557900204B36 /* analytical.cpp in Sources */,
 				ABEF4EB01948D4A500B44AD5 /* kernal.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
 				ABEB14B61AAA622600204B36 /* slab.cpp in Sources */,

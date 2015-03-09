@@ -141,9 +141,6 @@ void cosfit( const double *dependent, const std::vector<double> &independent,
   return;
 }
 
-
-
-
 void cosfcn1( int P, int /*N*/, double *x, double *fvec, int */*iflag*/,
               double **variables ) noexcept
 {  // function to be fitted:
