@@ -35,18 +35,18 @@ double lthermal( const double L_coat, const double k_c, const double psi_c,
   return lthermal_omeg( diff, omega, L_coat );
 }
 
-double lthermal_freq( const double diff, const double freq,  const double L_c ) noexcept
+double lthermal_freq( const double diffusivity, const double frequency,  const double L ) noexcept
 {
-  const double omega = 2 * M_PI * freq ;
-  return lthermal_omeg( diff, omega, L_c ) ;
+  const double omega = 2 * M_PI * frequency ;
+  return lthermal_omeg( diffusivity, omega, L ) ;
 }
 
-double lthermal_omeg( const double diff, const double omega, const double L_c ) noexcept
+double lthermal_omeg( const double diffusivity, const double angular_omega, const double L ) noexcept
 {
   using std::sqrt;
-  return sqrt( diff / omega ) / L_c ;
+  return sqrt( diffusivity / angular_omega ) / L ;
 }
 
 
     
-  }}
+}}
