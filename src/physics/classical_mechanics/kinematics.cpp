@@ -22,14 +22,19 @@
  Thermal Analysis Toolbox.  If not, see <http://www.gnu.org/licenses/>.
  
 \*----------------------------------------------------------------------------*/
+
 #include <cmath>
-#include "kinematics.h"
 #include <boost/assert.hpp>
 
+#include "kinematics.h"
+
 namespace physics{
+
 namespace classical_mechanics{
 
-double period_to_angularFrequency( const double period ) noexcept
+auto
+period_to_angularFrequency( const double period )
+noexcept -> double
 {
   const bool pass = period > 0 ;
   BOOST_ASSERT( pass ) ;
@@ -38,14 +43,28 @@ double period_to_angularFrequency( const double period ) noexcept
   return angularFrequency ;
 }
 
-double angularFrequency_to_period( const double angularFrequency ) noexcept
+auto
+angularFrequency_to_period( const double angularFrequency )
+noexcept -> double
 {
   const bool pass = angularFrequency > 0 ;
   BOOST_ASSERT( pass ) ;
-
 
   const double period = 2 * M_PI / angularFrequency;
   return period;
 }
 
-}}
+auto
+frequency_to_angularFrequency(
+  units::quantity< units::si::frequency > const & frequency )
+noexcept -> units::quantity< units::si::angular_frequency >
+{
+  using units::si::radians;
+  assert( frequency.value() > 0 );
+  
+  return 2. * M_PI * radians * frequency;
+}
+
+} // namespace classical_mechanics
+
+} // namespace physics

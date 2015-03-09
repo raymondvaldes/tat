@@ -26,15 +26,24 @@
 #ifndef __tat__kinematics__
 #define __tat__kinematics__
 
-#include <iostream>
+#include "units.h"
 
 namespace physics{
+
 namespace classical_mechanics{
 
 double period_to_angularFrequency( const double period ) noexcept;
+
 double angularFrequency_to_period( const double angularFrequency ) noexcept;
 
-}}
+auto
+frequency_to_angularFrequency(
+  units::quantity< units::si::frequency > const &  frequency )
+noexcept -> units::quantity< units::si::angular_frequency >;
+
+} // namespace classical_mechanics
+
+} // physics
 
 
 #endif /* defined(__tat__kinematics__) */
