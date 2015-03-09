@@ -10,6 +10,7 @@
 
 #include "investigations/twoColorPyrometery/phase_fitting.h"
 #include "thermal/model/slab/slab.h"
+#include "thermal/define/lthermal.h"
 #include "units.h"
 
 namespace investigations {
@@ -51,6 +52,8 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   neumann_and_direchlet_BC( x, I_transient, k, characteristic_length, alpha, f );
   
 
+  using thermal::define::thermal_penetration;
+  thermal_penetration( alpha, f, characteristic_length ) ;
 
 }
   
