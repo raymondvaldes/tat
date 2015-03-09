@@ -28,20 +28,35 @@
 namespace thermal{
   namespace define{
 
-double lthermal( const double L_coat, const double k_c, const double psi_c,
-                const double omega ) noexcept
+auto
+lthermal(
+  const double L_coat,
+  const double k_c,
+  const double psi_c,
+  const double omega )
+noexcept -> double
 {
   const double diff = k_c / psi_c ;
   return lthermal_omeg( diff, omega, L_coat );
 }
 
-double lthermal_freq( const double diffusivity, const double frequency,  const double L ) noexcept
+auto
+lthermal_freq(
+  const double diffusivity,
+  const double frequency,
+  const double L )
+noexcept -> double
 {
   const double omega = 2 * M_PI * frequency ;
   return lthermal_omeg( diffusivity, omega, L ) ;
 }
 
-double lthermal_omeg( const double diffusivity, const double angular_omega, const double L ) noexcept
+auto
+lthermal_omeg(
+  const double diffusivity,
+  const double angular_omega,
+  const double L )
+noexcept -> double
 {
   using std::sqrt;
   return sqrt( diffusivity / angular_omega ) / L ;

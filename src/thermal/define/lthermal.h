@@ -29,13 +29,25 @@
 #include <iostream>
 
 namespace thermal{
-  namespace define{
 
-double lthermal( const double L_coat, const double k_c, const double psi_c,
-                const double omega ) noexcept;
+namespace define{
 
-double lthermal_freq( const double diff, const double freq,  const double L_c ) noexcept;
-double lthermal_omeg( const double diff, const double omega, const double L_c ) noexcept;
+auto
+lthermal( const double L_coat, const double k_c, const double psi_c,
+          const double omega )
+noexcept -> double ;
+
+auto
+lthermal_freq( const double diff, const double freq,  const double L_c )
+noexcept -> double ;
+
+auto
+lthermal_omeg( const double diff, const double omega, const double L_c )
+noexcept -> double ;
     
-  }}
+}
+
+}
+
+
 #endif /* defined(__tat__thermalpenetration__) */
