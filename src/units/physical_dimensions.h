@@ -32,6 +32,9 @@ namespace units {
   typedef boost::units::mass_dimension  mass_dimension;
   typedef boost::units::mass_base_dimension mass_base_dimension;
   
+  typedef boost::units::plane_angle_dimension plane_angle_dimension;
+  typedef boost::units::plane_angle_base_dimension plane_angle_base_dimension;
+  
   typedef boost::units::solid_angle_dimension solid_angle_dimension;
   typedef boost::units::solid_angle_base_dimension solid_angle_base_dimension;
 
@@ -39,10 +42,8 @@ namespace units {
   typedef boost::units::amount_base_dimension amount_base_dimension;
   
   typedef boost::units::power_dimension power_dimension;
- // typedef boost::units::power_base_dimension power_base_dimension;
 
   typedef boost::units::energy_dimension energy_dimension;
- // typedef boost::units::energy_base_dimension energy_base_dimension;
   
   typedef boost::units::velocity_dimension velocity_dimension;
   
@@ -73,6 +74,10 @@ namespace units {
                               time_base_dimension, -3,
                               temperature_base_dimension, -1>::type
                               thermal_conductivity_dimension;
+
+  typedef derived_dimension<  mass_base_dimension,1,
+                              time_base_dimension, -3>::type
+                              heat_flux_dimension;
                               
   typedef derived_dimension<  length_base_dimension, 2,
                               time_base_dimension, -1>::type
