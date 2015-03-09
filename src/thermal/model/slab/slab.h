@@ -21,13 +21,13 @@ namespace slab {
 
 auto neumann_and_direchlet_BC(
   units::quantity< units::si::length> x ,
-  units::quantity< units::si::electric_potential > I_transient,
+  units::quantity< units::si::heat_flux > I_transient,
   units::quantity< units::si::thermal_conductivity > k,
   units::quantity< units::si::length > characteristic_length,
   units::quantity< units::si::thermal_diffusivity > alpha,
   units::quantity< units::si::frequency > f
 )
-noexcept -> double ;
+noexcept -> double;
   
 } // namespace slab
   
