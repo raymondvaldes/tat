@@ -29,23 +29,26 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   using units::si::thermal_diffusivity;
   using units::si::thermal_diffusivity_units;
   using units::si::hertz;
+  using units::si::second;
   using units::si::heat_flux;
   using units::si::frequency;
+  using units::si::kelvin;
+  using units::si::meter;
   
   auto const x = quantity< length >( 273 * micrometers );
   
   auto const I_transient = quantity< heat_flux >( 260 * watts / square_meter );
   
-  auto const k = quantity< thermal_conductivity >( 10.7  * thermal_conductivity_units );
+  auto const k = quantity< thermal_conductivity >( 10.7  * watts / ( meter * kelvin ) );
   
-  auto const c_length = quantity< length >(1200 * micrometers );
+  auto const characteristic_length = quantity< length >(1200 * micrometers );
   
-  auto const alpha = quantity<thermal_diffusivity>(23 * thermal_diffusivity_units);
+  auto const alpha = quantity<thermal_diffusivity>(23 * square_meter / second);
   
   auto const f = quantity< frequency >( 23 * hertz );
   
   using thermal::model::slab::neumann_and_direchlet_BC;
-  neumann_and_direchlet_BC( x, I_transient, k, c_length, alpha, f ) ;
+  neumann_and_direchlet_BC( x, I_transient, k, characteristic_length, alpha, f );
   
 
 
