@@ -64,6 +64,9 @@ typedef boost::units::si::wavenumber          wavenumber;
 typedef boost::units::si::conductivity        electrical_conductivity;
 
 /// Add dimensions to the SI system
+  using heat_flux =
+    unit< heat_flux_dimension , si::system>;
+  
   using thermal_conductivity =
     unit< thermal_conductivity_dimension , si::system>;
   
@@ -168,7 +171,12 @@ static auto const kilovolts = kilo * volts;
 static auto const megavolts = mega * volts;
 static auto const gigavolts = giga * volts;
 
+
+using boost::units::si::square_meter;
+
+
 // nameless units
+auto static const thermal_conductivity_units = watts / ( meter * kelvin ) ;
 auto static const thermal_diffusivity_units = meter * meter / second ;
 auto static const kinematic_viscosity_units = meter * meter / second ;
 auto static const volumetric_thermal_expansion_coefficient_units = meter / kelvin / meter ;
