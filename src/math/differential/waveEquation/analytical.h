@@ -53,7 +53,6 @@ noexcept -> Y
   auto const kx = Kappa * x;
   auto const kL = Kappa * L_b;
 
-
   auto const s_x = ( A / Kappa ) * ( sinh( kx ) - tanh( kL ) * cosh( kx ) ) ;
   
   return s_x;

@@ -27,7 +27,10 @@ auto neumann_and_direchlet_BC(
 )
 noexcept -> double
 {
-  using math::differential::waveEquation::analytical_solution_10;
+  // eq:  T''(x) + (K^2) T(x) == 0
+  // BC:  T'(0)   == - I_t * cos ( w t ) / k
+  // BC:  T(L_b)  == 0
+
 
   assert( x.value() > 0 ) ;
   assert( I_transient.value() > 0 ) ;
@@ -36,22 +39,25 @@ noexcept -> double
   assert( alpha.value() > 0 ) ;
   assert( f.value() > 0 ) ;
 
+  using std::complex;
+
   using units::pow;
   using units::sqrt;
-  using units::si::radians;
-  using std::complex;
   using units::quantity;
+  using units::si::radians;
   using units::si::dimensionless;
+  using math::differential::waveEquation::analytical_solution_10;
+
+  auto const static i_imag = complex< double >( 0, 1 ) ;
   
   auto const L = characteristic_length;
   auto const Io = I_transient;
   
   auto const w = M_2_PI * f;
+  auto const w_non = w * pow< 2 >( L ) / alpha ;
   
-  auto const A_non = quantity<dimensionless>(1) ;
-  auto const w_non = w * pow<2>( L ) / alpha ;
-  
-  auto const i_imag = complex< double >( 0, 1 ) ;
+  auto const A_non = quantity< dimensionless >( 1 ) ;
+
   auto const i_non = quantity< dimensionless, complex<double> >( i_imag ) ;
   
   auto const Kappa = sqrt( i_non * w_non ) ;
@@ -61,7 +67,11 @@ noexcept -> double
 
   auto const s_x = analytical_solution_10( x_non, Kappa, A_non, L_b ) ;
 
-  return 0;
+
+
+
+  auto const T_x = double{2};
+  return T_x;
 }
 
   
