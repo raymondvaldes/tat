@@ -327,7 +327,7 @@ noexcept -> units::quantity< units::si::temperature, std::complex<double > >
   auto const theta_complex =
     neumann_and_direchlet_BC( x , w , characteristic_length, alpha ) ;
 
-  auto const deltaT = I_t * characteristic_length / k ;
+  auto const deltaT = ( I_t * characteristic_length ) / k ;
   
   auto const temperature_dimensional = theta_complex * deltaT ;
   
