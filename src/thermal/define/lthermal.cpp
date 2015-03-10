@@ -24,6 +24,7 @@
 \*----------------------------------------------------------------------------*/
 #include <cmath>
 #include "thermal/define/lthermal.h"
+#include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal{
   namespace define{
@@ -60,6 +61,76 @@ noexcept -> double
 {
   using std::sqrt;
   return sqrt( diffusivity / angular_omega ) / L ;
+}
+
+auto
+thermal_penetration(
+  units::quantity<units::si::thermal_diffusivity> const alpha,
+  units::quantity<units::si::angular_frequency> const omega,
+  units::quantity<units::si::length> const L )
+noexcept -> units::quantity< units::si::dimensionless >
+{
+  assert( alpha.value() > 0 ) ;
+  assert( omega.value() > 0 ) ;
+  assert( L.value() > 0 ) ;
+  
+  using units::sqrt;
+  using units::si::radians;
+  
+  auto const thermalPenetration = sqrt( ( alpha  / omega ) * radians ) / L  ;
+  
+  return thermalPenetration ;
+}
+
+auto
+thermal_penetration(
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::frequency > const & frequency,
+  units::quantity< units::si::length > const & L )
+noexcept -> units::quantity< units::si::dimensionless >
+{
+  assert( alpha.value() > 0 );
+  assert( frequency.value() > 0 );
+  assert( L.value() > 0 ) ;
+
+  using physics::classical_mechanics::frequency_to_angularFrequency ;
+  
+  auto const omega = frequency_to_angularFrequency( frequency ) ;
+  
+  return thermal_penetration( alpha, omega, L );
+}
+
+auto
+angularFrequency_from_thermalPenetration(
+  units::quantity< units::si::dimensionless > const & lthermal,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L )
+noexcept -> units::quantity< units::si::angular_frequency >
+{
+  using units::pow;
+  using units::si::radians;
+  
+  auto const omega = alpha / pow< 2 >(  lthermal * L ) ;
+  return omega * radians;
+}
+
+auto
+frequency_from_thermalPenetration(
+  units::quantity< units::si::dimensionless > const & lthermal,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L )
+noexcept -> units::quantity< units::si::frequency >
+{
+  using units::pow;
+  using units::si::radians;
+  using physics::classical_mechanics::angularFrequency_to_frequency;
+  
+  auto const omega =
+    angularFrequency_from_thermalPenetration( lthermal, alpha, L ) ;
+  
+  auto const frequency = angularFrequency_to_frequency( omega ) ;
+  
+  return frequency;
 }
 
 

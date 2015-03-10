@@ -29,7 +29,6 @@
 #include <cassert>
 
 #include "units.h"
-#include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal{
 
@@ -49,43 +48,35 @@ lthermal_omeg( const double diff, const double omega, const double L_c )
 noexcept -> double ;
 
 
-inline auto
+auto
 thermal_penetration(
   units::quantity<units::si::thermal_diffusivity> const alpha,
   units::quantity<units::si::angular_frequency> const omega,
   units::quantity<units::si::length> const L )
-noexcept -> units::quantity< units::si::dimensionless >
-{
-  assert( alpha.value() > 0 ) ;
-  assert( omega.value() > 0 ) ;
-  assert( L.value() > 0 ) ;
-  
-  using units::sqrt;
-  using units::si::radians;
-  
-  auto const thermalPenetration = sqrt( ( alpha  / omega ) * radians ) / L  ;
-  
-  return thermalPenetration ;
-}
+noexcept -> units::quantity< units::si::dimensionless >;
 
-inline auto
+auto
 thermal_penetration(
   units::quantity< units::si::thermal_diffusivity > const & alpha,
   units::quantity< units::si::frequency > const & frequency,
   units::quantity< units::si::length > const & L )
-noexcept -> units::quantity< units::si::dimensionless >
-{
-  assert( alpha.value() > 0 );
-  assert( frequency.value() > 0 );
-  assert( L.value() > 0 ) ;
-
-  using physics::classical_mechanics::frequency_to_angularFrequency ;
+noexcept -> units::quantity< units::si::dimensionless >;
   
-  auto const omega = frequency_to_angularFrequency( frequency ) ;
+auto
+angularFrequency_from_thermalPenetration(
+  units::quantity< units::si::dimensionless > const & lthermal,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L )
+noexcept -> units::quantity< units::si::angular_frequency >;
   
-  return thermal_penetration( alpha, omega, L );
-}
-    
+auto
+frequency_from_thermalPenetration(
+  units::quantity< units::si::dimensionless > const & lthermal,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L )
+noexcept -> units::quantity< units::si::frequency >;
+  
+  
 } // namespace define
 
 } // namespace thermal
