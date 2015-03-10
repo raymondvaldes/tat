@@ -67,6 +67,36 @@ namespace units {
 /// custom cmath stuff
   using boost::units::dimensionless_quantity;
 
+template< class Y , class Z >
+auto
+arg( quantity< Y, std::complex< Z > > const & myComplex )
+noexcept -> quantity< units::si::plane_angle, Z >
+{
+  using std::atan2;
+  using units::si::radians;
+  auto const x = myComplex.value();
+
+  auto const phase = atan2( x.imag(), x.real() );
+  auto const phase_dimensioned = phase * radians;
+
+  return phase_dimensioned;
+}
+
+template< class Y , class Z >
+auto
+abs( quantity< Y, std::complex< Z > > const & myComplex )
+noexcept -> quantity< Y, Z >
+{
+  using std::hypot;
+  
+  auto const x = myComplex.value();
+
+  auto const abs_value = hypot( x.imag(), x.real() );
+  auto const abs_dimensioned = quantity< Y, Z >::from_value( abs_value ) ;
+
+  return abs_dimensioned;
+}
+
 
 template<class Y>
 typename dimensionless_quantity<si::system,Y>::type
