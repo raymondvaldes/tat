@@ -11,12 +11,90 @@
 #include "thermal/model/slab/slab.h"
 #include "thermal/define/lthermal.h"
 #include "physics/classical_mechanics/kinematics.h"
+#include "thermal/define/volumetricHeatCapacity.h"
+#include "thermal/define/diffusivity.h"
+#include "thermal/define/conductivity.h"
 
 namespace thermal {
 
 namespace model {
 
 namespace slab {
+
+
+Slab::Slab(
+  units::quantity< units::si::length > const & characteristic_length_in,
+  units::quantity< units::si::thermal_diffusivity > const & alpha_in,
+  units::quantity< units::si::thermal_conductivity > const & k_in
+)
+  : characteristic_length( characteristic_length_in ),
+    alpha( alpha_in ),
+    k( k_in ),
+    rhoCp( thermal::define::volumetricHeatCapacity( alpha, k )  )
+{
+  assert( characteristic_length_in.value() > 0 ) ;
+  assert( alpha_in.value() != 0 ) ;
+  assert( k_in.value() != 0 ) ;
+  assert( rhoCp.value() != 0 ) ;
+};
+
+auto Slab::get_conductivity( void ) const
+-> units::quantity< units::si::thermal_conductivity >
+{
+  return k;
+}
+
+auto Slab::get_volumetric_heatCapacity( void ) const
+-> units::quantity< units::si::volumetric_heat_capacity>
+{
+  return rhoCp;
+}
+
+auto Slab::get_diffusivity( void ) const
+-> units::quantity< units::si::thermal_diffusivity >
+{
+  using thermal::define::diffusivity;
+  auto const alpha_here = diffusivity( k, rhoCp );
+  return alpha_here;
+}
+
+auto Slab::set_conductivity
+(
+  units::quantity< units::si::thermal_conductivity > const & k_in
+) -> void
+{
+  k = k_in;
+}
+
+auto Slab::set_volumetric_heatCapacity
+(
+  units::quantity< units::si::volumetric_heat_capacity> const & rhoCp_in
+) -> void
+{
+  rhoCp = rhoCp_in;
+}
+
+auto Slab::set_diffusivity_update_k
+(
+  units::quantity< units::si::thermal_diffusivity > const & alpha_in
+) -> void
+{
+  using thermal::define::conductivity;
+  auto const updated_k = conductivity( rhoCp,  alpha_in ) ;
+  set_conductivity( updated_k );
+}
+
+auto Slab::set_diffusivity_update_rhoCp
+(
+  units::quantity< units::si::thermal_diffusivity > const & alpha_in
+) -> void
+{
+  using thermal::define::volumetricHeatCapacity;
+  auto const updated_rhoCp = volumetricHeatCapacity(alpha_in, k) ;
+  
+  set_volumetric_heatCapacity( updated_rhoCp );
+}
+
 
 auto
 surface_temperature_amplitudes
@@ -47,7 +125,7 @@ noexcept -> std::vector < units::quantity< units::si::temperature > >
 {
   using thermal::define::angularFrequencies_from_thermalPenetrations;
   
-  auto const alpha = slab.alpha;
+  auto const alpha = slab.get_diffusivity();
   auto const L = slab.characteristic_length;
   
   auto const omegas =
@@ -109,20 +187,19 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >
 {
   using thermal::define::angularFrequencies_from_thermalPenetrations;
   
-  auto const alpha = slab.alpha;
+  auto const alpha = slab.get_diffusivity();
   auto const L = slab.characteristic_length;
   
   auto const omegas =
     angularFrequencies_from_thermalPenetrations( lthermals, alpha, L ) ;
 
-  auto const phases = surface_temperature_phases( omegas, I_t, slab ) ;
+  auto const phases = surface_temperature_phases( omegas, slab ) ;
   
   return phases;
 }
@@ -131,7 +208,6 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >
@@ -140,7 +216,7 @@ noexcept -> std::vector < units::quantity< units::si::plane_angle > >
   
   auto const omegas = angularFrequencies_from_frequencies( frequencies ) ;
 
-  auto const phases = surface_temperature_phases( omegas, I_t, slab ) ;
+  auto const phases = surface_temperature_phases( omegas, slab ) ;
   
   return phases;
 }
@@ -150,7 +226,6 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >
@@ -165,9 +240,9 @@ noexcept -> std::vector < units::quantity< units::si::plane_angle > >
   auto phases = vector< quantity< plane_angle > >{count};
   
   transform( omegas, begin( phases )  ,
-  [&I_t, &slab]( auto const omega ) noexcept
+  [ &slab ]( auto const omega ) noexcept
   {
-    auto const phase = surface_temperature_phase( omega , I_t, slab ) ;
+    auto const phase = surface_temperature_phase( omega , slab ) ;
     return phase;
   } );
 
@@ -179,20 +254,20 @@ auto
 surface_temperature_phase
 (
   units::quantity< units::si::angular_frequency > const w,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
   assert( w.value() != 0 );
-  assert( I_t.value() != 0 );
-  using units::arg;
   
-  auto const Tsurface = complex_surface_temperature( w, I_t, slab ) ;
+  using units::quantity;
+  using units::si::length;
+
+  auto const x_surface = quantity< length >::from_value( 0 );
+
+  auto const phase = temperature_phase( x_surface, w, slab ) ;
   
-  auto const phase = arg( Tsurface ) ;
-  
-  return phase;
+  return phase ;
 }
 
 auto
@@ -241,7 +316,7 @@ noexcept ->  units::quantity< units::si::temperature >
   auto const temperature_dimensional = complex_temperature( x, w, I_t, slab );
   
   auto const L = slab.characteristic_length;
-  auto const alpha = slab.alpha;
+  auto const alpha = slab.get_diffusivity();
   
   auto const w_non = nondimensional_omega( w, L, alpha ) ;
   auto const t_non = nondimensional_time( t, L , alpha ) ;
@@ -282,22 +357,22 @@ temperature_phase
 (
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::angular_frequency > const w,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
-  assert( x.value() > 0 ) ;
+  assert( x.value() >= 0 ) ;
   assert( w.value() != 0 ) ;
-  assert( I_t.value() != 0 ) ;
 
   using units::quantity;
-  using units::si::length;
-  
-  auto const T_cmplx = complex_temperature( x, w, I_t, slab ) ;
-  
+  using units::si::heat_flux;
   using units::arg;
-  auto const phase =arg( T_cmplx ) ;
+  
+  auto const I_dummy = quantity< heat_flux >::from_value(1);
+  
+  auto const T_cmplx = complex_temperature( x, w, I_dummy, slab ) ;
+  
+  auto const phase = arg( T_cmplx ) ;
   
   return phase;
 }
@@ -346,7 +421,7 @@ noexcept -> units::quantity< units::si::temperature, std::complex<double > >
   using units::si::temperature;
 
   auto const characteristic_length = slab.characteristic_length;
-  auto const alpha = slab.alpha;
+  auto const alpha = slab.get_diffusivity();
   auto const k = slab.k;
 
   auto const theta_complex =

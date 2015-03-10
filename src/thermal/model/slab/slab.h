@@ -25,20 +25,45 @@ namespace slab {
 
 struct Slab
 {
+private:
+  units::quantity< units::si::thermal_diffusivity > alpha; //DEPENDENT
+
+
+public:
   units::quantity< units::si::length > characteristic_length;
-  units::quantity< units::si::thermal_diffusivity > alpha;
   units::quantity< units::si::thermal_conductivity > k;
+  units::quantity< units::si::volumetric_heat_capacity> rhoCp;
 
   Slab(
     units::quantity< units::si::length > const & characteristic_length_in,
     units::quantity< units::si::thermal_diffusivity > const & alpha_in,
     units::quantity< units::si::thermal_conductivity > const & k_in
-  ) :characteristic_length(characteristic_length_in), alpha(alpha_in), k(k_in)
-  {
-    assert( characteristic_length_in.value() > 0 ) ;
-    assert( alpha_in.value() > 0 ) ;
-    assert( k_in.value() > 0 ) ;
-  };
+  );
+  
+  auto get_conductivity( void ) const
+  -> units::quantity< units::si::thermal_conductivity > ;
+  
+  auto get_volumetric_heatCapacity( void ) const
+  -> units::quantity< units::si::volumetric_heat_capacity>;
+  
+  auto get_diffusivity(void ) const
+  -> units::quantity< units::si::thermal_diffusivity >;
+
+  auto set_diffusivity_update_k (
+    units::quantity< units::si::thermal_diffusivity > const & alpha_in
+  ) -> void;
+  
+  auto set_diffusivity_update_rhoCp (
+  units::quantity< units::si::thermal_diffusivity > const & alpha_in
+  ) -> void;
+  
+  auto set_conductivity(
+    units::quantity< units::si::thermal_conductivity > const & k_in
+  ) -> void;
+  
+  auto set_volumetric_heatCapacity(
+    units::quantity< units::si::volumetric_heat_capacity> const & rhoCp_in
+  ) -> void;
 };
 
 
@@ -47,7 +72,6 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >;
@@ -56,7 +80,6 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >;
@@ -65,7 +88,6 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >;
@@ -101,7 +123,6 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >;
@@ -139,7 +160,6 @@ auto
 surface_temperature_phase
 (
   units::quantity< units::si::angular_frequency > const w,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::plane_angle >;
@@ -167,7 +187,6 @@ temperature_phase
 (
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::angular_frequency > const w,
-  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::plane_angle >;
