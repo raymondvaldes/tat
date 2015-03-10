@@ -104,6 +104,64 @@ noexcept -> units::quantity< units::si::dimensionless >
 }
 
 auto
+thermalPenetrations_from_frequencies
+(
+  std::vector< units::quantity< units::si::frequency > > const & frequencies,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L
+)
+noexcept -> std::vector< units::quantity< units::si::dimensionless > >
+{
+  using std::vector;
+  using units::si::dimensionless;
+  using units::quantity;
+  using algorithm::transform;
+  using std::begin;
+
+  auto const count = frequencies.size();
+  auto lthermals = vector< quantity< dimensionless > >{ count } ;
+  
+  transform( frequencies, begin( lthermals ) ,
+  [ &alpha, &L ]( auto const & freq ) noexcept
+  {
+    auto const lthermal = thermal_penetration( alpha, freq , L ) ;
+    return lthermal;
+  } );
+  
+  return lthermals;
+}
+
+auto
+thermalPenetrations_from_angularFrequencies
+(
+  std::vector< units::quantity< units::si::angular_frequency > > const & angularFrequencies,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L
+)
+noexcept -> std::vector< units::quantity< units::si::dimensionless > >
+{
+  using std::vector;
+  using units::si::dimensionless;
+  using units::quantity;
+  using algorithm::transform;
+  using std::begin;
+
+  auto const count = angularFrequencies.size();
+  auto lthermals = vector< quantity< dimensionless > >{ count } ;
+  
+  transform( angularFrequencies, begin( lthermals ) ,
+  [ &alpha, &L ]( auto const & angularFrequency ) noexcept
+  {
+    auto const lthermal =
+      thermal_penetration( alpha, angularFrequency , L ) ;
+    return lthermal;
+  } );
+  
+  return lthermals;
+}
+
+
+auto
 angularFrequencies_from_thermalPenetrations
 (
   std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
@@ -164,6 +222,8 @@ noexcept -> units::quantity< units::si::frequency >
   
   return frequency;
 }
+
+
 
 
     
