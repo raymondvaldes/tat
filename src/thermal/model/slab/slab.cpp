@@ -184,6 +184,8 @@ surface_temperature_phase
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
+  assert( w.value() != 0 );
+  assert( I_t.value() != 0 );
   using units::arg;
   
   auto const Tsurface = complex_surface_temperature( w, I_t, slab ) ;
@@ -201,6 +203,9 @@ exponentialModulator_nondimensional
 )
 -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
+  assert( omega_non.value() != 0 ) ;
+  assert( time_non.value() != 0 ) ;
+
   using std::complex;
   using units::exp;
   using units::quantity;
@@ -226,6 +231,11 @@ real_transient_temperature
 )
 noexcept ->  units::quantity< units::si::temperature >
 {
+  assert( x.value() > 0 ) ;
+  assert( t.value() != 0 ) ;
+  assert( w.value() != 0 ) ;
+  assert( I_t.value() != 0 ) ;
+
   using units::real;
 
   auto const temperature_dimensional = complex_temperature( x, w, I_t, slab );
@@ -252,6 +262,9 @@ complex_surface_temperature
 )
 noexcept -> units::quantity< units::si::temperature, std::complex<double > >
 {
+  assert( w.value() != 0 ) ;
+  assert( I_t.value() != 0 );
+
   using units::quantity;
   using units::si::length;
 
@@ -274,6 +287,10 @@ temperature_phase
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
+  assert( x.value() > 0 ) ;
+  assert( w.value() != 0 ) ;
+  assert( I_t.value() != 0 ) ;
+
   using units::quantity;
   using units::si::length;
   
@@ -295,6 +312,10 @@ temperature_amplitude
 )
 noexcept -> units::quantity< units::si::temperature >
 {
+  assert( x.value() > 0 ) ;
+  assert( w.value() != 0 ) ;
+  assert( I_t.value() != 0 ) ;
+
   using units::quantity;
   using units::si::length;
   
@@ -317,6 +338,10 @@ complex_temperature
 )
 noexcept -> units::quantity< units::si::temperature, std::complex<double > >
 {
+  assert( x.value() >= 0 ) ;
+  assert( w.value() != 0 ) ;
+  assert( I_t.value() > 0 ) ;
+
   using units::quantity;
   using units::si::temperature;
 
@@ -342,6 +367,10 @@ auto nondimensional_time
 )
 noexcept -> units::quantity< units::si::dimensionless>
 {
+  assert( time.value() != 0 ) ;
+  assert( L.value() > 0 ) ;
+  assert( alpha.value() != 0 ) ;
+
   using units::pow;
   
   auto const t_non = ( time * alpha )  / pow< 2 >( L );
@@ -357,6 +386,10 @@ auto nondimensional_omega
 )
 noexcept -> units::quantity< units::si::dimensionless>
 {
+  assert( w.value() != 0 ) ;
+  assert( L.value() > 0 ) ;
+  assert( alpha.value() != 0 ) ;
+
   using units::si::radians;
   using units::pow;
   
@@ -377,9 +410,9 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
   // BC:  T'(0)   == - 1
   // BC:  T(1)  == 0
 
-  assert( x.value() > 0 ) ;
+  assert( x.value() >= 0 ) ;
   assert( characteristic_length.value() > 0 ) ;
-  assert( alpha.value() > 0 ) ;
+  assert( alpha.value() != 0 ) ;
   assert( w.value() != 0 ) ;
 
   using std::complex;

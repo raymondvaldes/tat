@@ -34,8 +34,11 @@ struct Slab
     units::quantity< units::si::thermal_diffusivity > const & alpha_in,
     units::quantity< units::si::thermal_conductivity > const & k_in
   ) :characteristic_length(characteristic_length_in), alpha(alpha_in), k(k_in)
-  {};
-  
+  {
+    assert( characteristic_length_in.value() > 0 ) ;
+    assert( alpha_in.value() > 0 ) ;
+    assert( k_in.value() > 0 ) ;
+  };
 };
 
 
