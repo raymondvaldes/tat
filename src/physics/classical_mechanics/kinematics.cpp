@@ -24,6 +24,7 @@
 \*----------------------------------------------------------------------------*/
 
 #include <cmath>
+#include <vector>
 #include <boost/assert.hpp>
 
 #include "kinematics.h"
@@ -54,18 +55,6 @@ noexcept -> double
   return period;
 }
 
-auto
-frequency_to_angularFrequency(
-  units::quantity< units::si::frequency > const & frequency )
-noexcept -> units::quantity< units::si::angular_frequency >
-{
-  using units::si::radians;
-  assert( frequency.value() != 0 );
-  
-  auto const omega = 2. * M_PI * radians * frequency ;
-  
-  return omega;
-}
 
 auto
 angularFrequency_to_frequency(
@@ -80,6 +69,74 @@ noexcept -> units::quantity< units::si::frequency >
 
   return frequency;
 }
+
+auto
+frequency_to_angularFrequency(
+  units::quantity< units::si::frequency > const & frequency )
+noexcept -> units::quantity< units::si::angular_frequency >
+{
+  using units::si::radians;
+  assert( frequency.value() != 0 );
+  
+  auto const omega = 2. * M_PI * radians * frequency ;
+  
+  return omega;
+}
+
+
+auto
+angularFrequencies_from_frequencies
+(
+  std::vector< units::quantity< units::si::frequency > > const & frequencies
+)
+noexcept -> std::vector < units::quantity< units::si::angular_frequency > >
+{
+  using std::vector;
+  using std::begin;
+  using units::quantity;
+  using units::si::angular_frequency;
+  using algorithm::transform;
+  
+  auto const count = frequencies.size();
+  auto angularFrequencies = vector< quantity< angular_frequency > >{ count };
+  
+  transform( frequencies, begin( angularFrequencies )  ,
+  []( auto const frequency ) noexcept
+  {
+    auto const angularFrequency = frequency_to_angularFrequency( frequency ) ;
+    return angularFrequency;
+  } );
+
+  return angularFrequencies;
+}
+
+auto
+frequencies_from_angularFrequencies
+(
+  std::vector< units::quantity< units::si::angular_frequency > > const & angularFrequencies
+)
+noexcept -> std::vector < units::quantity< units::si::frequency > >
+{
+  using std::vector;
+  using std::begin;
+  using units::quantity;
+  using units::si::frequency;
+  using algorithm::transform;
+  
+  auto const count = angularFrequencies.size();
+  auto frequencies = vector< quantity< frequency > >{ count };
+  
+  transform( angularFrequencies, begin( frequencies )  ,
+  []( auto const angularFrequency ) noexcept
+  {
+    auto const freq = angularFrequency_to_frequency( angularFrequency ) ;
+    return freq;
+  } );
+
+  return frequencies;
+}
+
+
 
 } // namespace classical_mechanics
 

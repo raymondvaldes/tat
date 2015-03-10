@@ -26,6 +26,7 @@
 #ifndef __tat__kinematics__
 #define __tat__kinematics__
 
+#include <vector>
 #include "units.h"
 
 namespace physics{
@@ -45,6 +46,20 @@ auto
 angularFrequency_to_frequency(
   units::quantity< units::si::angular_frequency > const &  frequency )
 noexcept -> units::quantity< units::si::frequency >;
+
+auto
+angularFrequencies_from_frequencies
+(
+  std::vector< units::quantity< units::si::frequency > > const & frequencies
+)
+noexcept -> std::vector < units::quantity< units::si::angular_frequency > >;
+
+auto
+frequencies_from_angularFrequencies
+(
+  std::vector< units::quantity< units::si::angular_frequency > > const & angularFrequencies
+)
+noexcept -> std::vector < units::quantity< units::si::frequency > >;
 
 } // namespace classical_mechanics
 
