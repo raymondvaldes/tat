@@ -60,9 +60,25 @@ frequency_to_angularFrequency(
 noexcept -> units::quantity< units::si::angular_frequency >
 {
   using units::si::radians;
-  assert( frequency.value() > 0 );
+  assert( frequency.value() != 0 );
   
-  return 2. * M_PI * radians * frequency;
+  auto const omega = 2. * M_PI * radians * frequency ;
+  
+  return omega;
+}
+
+auto
+angularFrequency_to_frequency(
+  units::quantity< units::si::angular_frequency > const &  omega )
+noexcept -> units::quantity< units::si::frequency >
+{
+  assert( omega.value() != 0 ) ;
+
+  using units::si::radians;
+
+  auto const frequency = omega / ( 2 * M_PI * radians ) ;
+
+  return frequency;
 }
 
 } // namespace classical_mechanics

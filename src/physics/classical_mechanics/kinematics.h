@@ -41,6 +41,11 @@ frequency_to_angularFrequency(
   units::quantity< units::si::frequency > const &  frequency )
 noexcept -> units::quantity< units::si::angular_frequency >;
 
+auto
+angularFrequency_to_frequency(
+  units::quantity< units::si::angular_frequency > const &  frequency )
+noexcept -> units::quantity< units::si::frequency >;
+
 } // namespace classical_mechanics
 
 } // physics
