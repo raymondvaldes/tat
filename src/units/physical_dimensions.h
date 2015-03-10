@@ -76,6 +76,12 @@ namespace units {
                               thermal_conductivity_dimension;
 
   typedef derived_dimension<  mass_base_dimension,1,
+                              length_base_dimension, -1,
+                              time_base_dimension, -2,
+                              temperature_base_dimension, -1>::type
+                              volumetric_heat_capacity_dimension;
+
+  typedef derived_dimension<  mass_base_dimension,1,
                               time_base_dimension, -3>::type
                               heat_flux_dimension;
                               

@@ -75,6 +75,9 @@ typedef boost::units::si::conductivity        electrical_conductivity;
   
   using volumetric_thermal_expansion_coefficient =
     unit< volumetric_thermal_expansion_coefficient_dimension, si::system > ;
+  
+  using volumetric_heat_capacity =
+    unit< volumetric_heat_capacity_dimension, si::system > ;
 
   using Archimedes_number = dimensionless;
   using Bingham_number = dimensionless;
@@ -173,7 +176,6 @@ static auto const gigavolts = giga * volts;
 
 
 using boost::units::si::square_meter;
-
 
 // nameless units
 auto static const thermal_conductivity_units = watts / ( meter * kelvin ) ;
