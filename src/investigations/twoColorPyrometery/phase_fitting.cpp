@@ -43,7 +43,7 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   
   auto const k = quantity< thermal_conductivity >( 10.7  * watts / ( meter * kelvin ) );
   
-  auto const characteristic_length = quantity< length >(1200 * micrometers );
+  auto const characteristic_length = quantity< length >( 1420 * micrometers );
   
   auto const alpha = quantity<thermal_diffusivity>(23 * square_meter / second);
   
@@ -59,8 +59,8 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   using thermal::model::slab::Slab;
   auto mySlab = Slab{ characteristic_length, alpha, k };
 
-  using thermal::model::slab::temperature_phase;
-  temperature_phase(x, w, I_transient, mySlab );
+  using thermal::model::slab::surface_temperature_phase;
+  surface_temperature_phase( w, I_transient, mySlab ) ;
 
 
 

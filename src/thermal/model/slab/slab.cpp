@@ -9,6 +9,8 @@
 #include <complex>
 
 #include "thermal/model/slab/slab.h"
+#include "thermal/define/lthermal.h"
+#include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal {
 
@@ -17,10 +19,78 @@ namespace model {
 namespace slab {
 
 auto
+surface_temperature_amplitudes
+(
+  std::vector< units::quantity< units::si::frequency > > const & frequencies,
+  units::quantity< units::si::heat_flux > const I_t,
+  Slab const & slab
+)
+noexcept -> std::vector < units::quantity< units::si::temperature > >
+{
+  using physics::classical_mechanics::angularFrequencies_from_frequencies;
+  
+  auto const omegas = angularFrequencies_from_frequencies( frequencies ) ;
+
+  auto const amplitudes = surface_temperature_amplitudes( omegas, I_t, slab ) ;
+  
+  return amplitudes;
+}
+
+auto
+surface_temperature_amplitudes
+(
+  std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
+  units::quantity< units::si::heat_flux > const I_t,
+  Slab const & slab
+)
+noexcept -> std::vector < units::quantity< units::si::temperature > >
+{
+  using thermal::define::angularFrequencies_from_thermalPenetrations;
+  
+  auto const alpha = slab.alpha;
+  auto const L = slab.characteristic_length;
+  
+  auto const omegas =
+    angularFrequencies_from_thermalPenetrations( lthermals, alpha, L ) ;
+
+  auto const amplitudes = surface_temperature_amplitudes( omegas, I_t, slab ) ;
+  
+  return amplitudes;
+}
+
+auto
+surface_temperature_amplitudes
+(
+  std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
+  units::quantity< units::si::heat_flux > const I_t,
+  Slab const & slab
+)
+noexcept -> std::vector < units::quantity< units::si::temperature > >
+{
+  using std::vector;
+  using std::begin;
+  using units::quantity;
+  using units::si::temperature;
+  using algorithm::transform;
+  
+  auto const count = omegas.size();
+  auto amplitudes = vector< quantity< temperature > >{ count };
+  
+  transform( omegas, begin( amplitudes ) ,
+  [&I_t, &slab]( auto const omega ) noexcept
+  {
+    auto const phase = surface_temperature_amplitude( omega , I_t, slab ) ;
+    return phase;
+  } );
+
+  return amplitudes;
+}
+
+auto
 surface_temperature_amplitude
 (
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::heat_flux > I_t,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::temperature >
@@ -34,11 +104,82 @@ noexcept -> units::quantity< units::si::temperature >
   return amplitude ;
 }
 
+
+auto
+surface_temperature_phases
+(
+  std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
+  units::quantity< units::si::heat_flux > const I_t,
+  Slab const & slab
+)
+noexcept -> std::vector < units::quantity< units::si::plane_angle > >
+{
+  using thermal::define::angularFrequencies_from_thermalPenetrations;
+  
+  auto const alpha = slab.alpha;
+  auto const L = slab.characteristic_length;
+  
+  auto const omegas =
+    angularFrequencies_from_thermalPenetrations( lthermals, alpha, L ) ;
+
+  auto const phases = surface_temperature_phases( omegas, I_t, slab ) ;
+  
+  return phases;
+}
+
+auto
+surface_temperature_phases
+(
+  std::vector< units::quantity< units::si::frequency > > const & frequencies,
+  units::quantity< units::si::heat_flux > const I_t,
+  Slab const & slab
+)
+noexcept -> std::vector < units::quantity< units::si::plane_angle > >
+{
+  using physics::classical_mechanics::angularFrequencies_from_frequencies;
+  
+  auto const omegas = angularFrequencies_from_frequencies( frequencies ) ;
+
+  auto const phases = surface_temperature_phases( omegas, I_t, slab ) ;
+  
+  return phases;
+}
+
+
+auto
+surface_temperature_phases
+(
+  std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
+  units::quantity< units::si::heat_flux > const I_t,
+  Slab const & slab
+)
+noexcept -> std::vector < units::quantity< units::si::plane_angle > >
+{
+  using std::vector;
+  using std::begin;
+  using units::quantity;
+  using units::si::plane_angle;
+  using algorithm::transform;
+  
+  auto const count = omegas.size();
+  auto phases = vector< quantity< plane_angle > >{count};
+  
+  transform( omegas, begin( phases )  ,
+  [&I_t, &slab]( auto const omega ) noexcept
+  {
+    auto const phase = surface_temperature_phase( omega , I_t, slab ) ;
+    return phase;
+  } );
+
+  return phases;
+}
+
+
 auto
 surface_temperature_phase
 (
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::heat_flux > I_t,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::plane_angle >
@@ -55,8 +196,8 @@ noexcept -> units::quantity< units::si::plane_angle >
 auto
 exponentialModulator_nondimensional
 (
-  units::quantity<units::si::dimensionless > const & omega_non,
-  units::quantity<units::si::dimensionless > const & time_non
+  units::quantity<units::si::dimensionless > const omega_non,
+  units::quantity<units::si::dimensionless > const time_non
 )
 -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
@@ -77,10 +218,10 @@ exponentialModulator_nondimensional
 auto
 real_transient_temperature
 (
-  units::quantity< units::si::length > x ,
-  units::quantity< units::si::time > t,
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::heat_flux > I_t,
+  units::quantity< units::si::length > const x ,
+  units::quantity< units::si::time > const t,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept ->  units::quantity< units::si::temperature >
@@ -105,8 +246,8 @@ noexcept ->  units::quantity< units::si::temperature >
 auto
 complex_surface_temperature
 (
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::heat_flux > I_t,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::temperature, std::complex<double > >
@@ -126,9 +267,9 @@ noexcept -> units::quantity< units::si::temperature, std::complex<double > >
 auto
 temperature_phase
 (
-  units::quantity< units::si::length> x ,
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::heat_flux > I_t,
+  units::quantity< units::si::length> const x ,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::plane_angle >
@@ -147,9 +288,9 @@ noexcept -> units::quantity< units::si::plane_angle >
 auto
 temperature_amplitude
 (
-  units::quantity< units::si::length> x ,
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::heat_flux > I_t,
+  units::quantity< units::si::length> const x ,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::temperature >
@@ -169,9 +310,9 @@ noexcept -> units::quantity< units::si::temperature >
 auto
 complex_temperature
 (
-  units::quantity< units::si::length> x ,
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::heat_flux > I_t,
+  units::quantity< units::si::length> const x ,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::heat_flux > const I_t,
   Slab const & slab
 )
 noexcept -> units::quantity< units::si::temperature, std::complex<double > >
@@ -195,9 +336,9 @@ noexcept -> units::quantity< units::si::temperature, std::complex<double > >
 
 auto nondimensional_time
 (
-  units::quantity< units::si::time > time,
-  units::quantity< units::si::length > L,
-  units::quantity< units::si::thermal_diffusivity > alpha
+  units::quantity< units::si::time > const time,
+  units::quantity< units::si::length > const L,
+  units::quantity< units::si::thermal_diffusivity > const alpha
 )
 noexcept -> units::quantity< units::si::dimensionless>
 {
@@ -210,9 +351,9 @@ noexcept -> units::quantity< units::si::dimensionless>
 
 auto nondimensional_omega
 (
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::length > L,
-  units::quantity< units::si::thermal_diffusivity > alpha
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::length > const L,
+  units::quantity< units::si::thermal_diffusivity > const alpha
 )
 noexcept -> units::quantity< units::si::dimensionless>
 {
@@ -225,10 +366,10 @@ noexcept -> units::quantity< units::si::dimensionless>
 }
  
 auto neumann_and_direchlet_BC(
-  units::quantity< units::si::length> x ,
-  units::quantity< units::si::angular_frequency > w,
-  units::quantity< units::si::length > characteristic_length,
-  units::quantity< units::si::thermal_diffusivity > alpha
+  units::quantity< units::si::length> const x ,
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::length > const characteristic_length,
+  units::quantity< units::si::thermal_diffusivity > const alpha
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
@@ -268,7 +409,6 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
   return s_x;
 }
 
-  
 } // namespace slab
   
 } // namespace model
