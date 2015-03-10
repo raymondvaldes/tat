@@ -11,6 +11,7 @@
 #include "investigations/twoColorPyrometery/phase_fitting.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/define/lthermal.h"
+#include "physics/classical_mechanics/kinematics.h"
 #include "units.h"
 
 namespace investigations {
@@ -48,12 +49,17 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   
   auto const f = quantity< frequency >( 23 * hertz );
   
-  using thermal::model::slab::neumann_and_direchlet_BC;
-  neumann_and_direchlet_BC( x, I_transient, k, characteristic_length, alpha, f );
-  
+  using physics::classical_mechanics::frequency_to_angularFrequency;
+  auto const w = frequency_to_angularFrequency( f ) ;
 
   using thermal::define::thermal_penetration;
-  thermal_penetration( alpha, f, characteristic_length ) ;
+  auto const l = thermal_penetration( alpha, w, characteristic_length ) ;
+
+
+  using thermal::model::slab::temperature_phase;
+  temperature_phase(x, w, characteristic_length, alpha, I_transient, k );
+
+
 
 }
   
