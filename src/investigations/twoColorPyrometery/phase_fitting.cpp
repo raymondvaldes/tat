@@ -56,8 +56,11 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   auto const l = thermal_penetration( alpha, w, characteristic_length ) ;
 
 
+  using thermal::model::slab::Slab;
+  auto mySlab = Slab{ characteristic_length, alpha, k };
+
   using thermal::model::slab::temperature_phase;
-  temperature_phase(x, w, characteristic_length, alpha, I_transient, k );
+  temperature_phase(x, w, I_transient, mySlab );
 
 
 
