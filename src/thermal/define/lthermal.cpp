@@ -224,9 +224,6 @@ noexcept -> units::quantity< units::si::frequency >
 }
 
 
-
-
-    
 } // namespace define
 
 } // namespace thermal
