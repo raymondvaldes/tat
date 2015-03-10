@@ -97,6 +97,34 @@ noexcept -> quantity< Y, Z >
   return abs_dimensioned;
 }
 
+template< class Y , class Z >
+auto
+imag( quantity< Y, std::complex< Z > > const & myComplex )
+noexcept -> quantity< Y, Z >
+{
+  using std::hypot;
+  
+  auto const x = myComplex.value();
+
+  auto const imag_dimensioned = quantity< Y, Z >::from_value( x.imag() ) ;
+
+  return imag_dimensioned;
+}
+
+template< class Y , class Z >
+auto
+real( quantity< Y, std::complex< Z > > const & myComplex )
+noexcept -> quantity< Y, Z >
+{
+  using std::hypot;
+  
+  auto const x = myComplex.value();
+
+  auto const real_dimensioned = quantity< Y, Z >::from_value( x.real() ) ;
+
+  return real_dimensioned;
+}
+
 
 template<class Y>
 typename dimensionless_quantity<si::system,Y>::type
