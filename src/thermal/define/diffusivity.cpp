@@ -26,12 +26,26 @@
 #include "thermal/define/diffusivity.h"
 
 namespace thermal{
-  namespace define{
+
+namespace define{
 
 double diffusivity( const double k, const double rhoCp ) noexcept
 {
   return k / rhoCp ;
 }
 
+auto diffusivity
+(
+  units::quantity< units::si::volumetric_heat_capacity > const & rhoCp,
+  units::quantity< units::si::thermal_conductivity> const & k
+)
+noexcept -> units::quantity< units::si::thermal_diffusivity >
+{
+  auto const alpha = k / rhoCp;
+  return alpha;
+}
+
     
-}}
+} // namesapce define
+
+} // namespace thermal
