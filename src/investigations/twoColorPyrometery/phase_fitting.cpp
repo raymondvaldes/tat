@@ -62,7 +62,33 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   using thermal::model::slab::surface_temperature_phase;
   surface_temperature_phase( w, I_transient, mySlab ) ;
 
+  
 
+
+/*
+  Right now I have the ability to use get a vector of phases from a vector
+  of frequencies.  Now to implement a parameter estimation algorithm that
+  modifies the slab parameters until it minimizes the difference in phases.
+  
+  Fitting phases
+  --------------
+  Inputs:
+  - Initial slab
+  - experimental phases
+  
+  - predicted alpha ( only parameter that is possible to extract,
+                      keep everything else constant )
+  - predicted phases
+ 
+  Fitting amplitudes
+  ------------------
+  Inputs:
+  - Initial slab
+  - experimental amplitudes
+  - predicted I_transient ( only parameter that is possible to extract 
+                            assuming k is already known )
+  - predicted phases
+*/
 
 }
   
