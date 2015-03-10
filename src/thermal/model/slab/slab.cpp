@@ -28,15 +28,34 @@ Slab::Slab(
   units::quantity< units::si::thermal_conductivity > const & k_in
 )
   : characteristic_length( characteristic_length_in ),
-    alpha( alpha_in ),
     k( k_in ),
-    rhoCp( thermal::define::volumetricHeatCapacity( alpha, k )  )
+    rhoCp( thermal::define::volumetricHeatCapacity( alpha_in, k )  )
 {
   assert( characteristic_length_in.value() > 0 ) ;
   assert( alpha_in.value() != 0 ) ;
   assert( k_in.value() != 0 ) ;
   assert( rhoCp.value() != 0 ) ;
 };
+
+
+Slab::Slab(
+  units::quantity< units::si::length > const & characteristic_length_in,
+  units::quantity< units::si::thermal_diffusivity > const & alpha_in,
+  units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+) :Slab(
+    characteristic_length_in,
+    alpha_in,
+    thermal::define::conductivity( rhoCp_in, alpha_in) ) {}
+
+Slab::Slab(
+  units::quantity< units::si::length > const & characteristic_length_in,
+  units::quantity< units::si::thermal_conductivity > const & k_in,
+  units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+) :Slab(
+    characteristic_length_in,
+    thermal::define::diffusivity( k_in , rhoCp_in ),
+    k_in ) {}
+  
 
 auto Slab::get_conductivity( void ) const
 -> units::quantity< units::si::thermal_conductivity >
@@ -74,7 +93,7 @@ auto Slab::set_volumetric_heatCapacity
   rhoCp = rhoCp_in;
 }
 
-auto Slab::set_diffusivity_update_k
+auto Slab::set_diffusivity_update_k_hold_rhoCp
 (
   units::quantity< units::si::thermal_diffusivity > const & alpha_in
 ) -> void
@@ -84,7 +103,7 @@ auto Slab::set_diffusivity_update_k
   set_conductivity( updated_k );
 }
 
-auto Slab::set_diffusivity_update_rhoCp
+auto Slab::set_diffusivity_update_rhoCp_hold_k
 (
   units::quantity< units::si::thermal_diffusivity > const & alpha_in
 ) -> void

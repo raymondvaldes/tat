@@ -26,8 +26,6 @@ namespace slab {
 struct Slab
 {
 private:
-  units::quantity< units::si::thermal_diffusivity > alpha; //DEPENDENT
-
 
 public:
   units::quantity< units::si::length > characteristic_length;
@@ -40,6 +38,18 @@ public:
     units::quantity< units::si::thermal_conductivity > const & k_in
   );
   
+  Slab(
+    units::quantity< units::si::length > const & characteristic_length_in,
+    units::quantity< units::si::thermal_diffusivity > const & alpha_in,
+    units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+  );
+  
+  Slab(
+    units::quantity< units::si::length > const & characteristic_length_in,
+    units::quantity< units::si::thermal_conductivity > const & k_in,
+    units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+  );
+  
   auto get_conductivity( void ) const
   -> units::quantity< units::si::thermal_conductivity > ;
   
@@ -49,11 +59,11 @@ public:
   auto get_diffusivity(void ) const
   -> units::quantity< units::si::thermal_diffusivity >;
 
-  auto set_diffusivity_update_k (
+  auto set_diffusivity_update_k_hold_rhoCp (
     units::quantity< units::si::thermal_diffusivity > const & alpha_in
   ) -> void;
   
-  auto set_diffusivity_update_rhoCp (
+  auto set_diffusivity_update_rhoCp_hold_k (
   units::quantity< units::si::thermal_diffusivity > const & alpha_in
   ) -> void;
   
