@@ -27,6 +27,7 @@
 #define __tat__thermalpenetration__
 
 #include <cassert>
+#include <vector>
 
 #include "units.h"
 
@@ -68,6 +69,15 @@ angularFrequency_from_thermalPenetration(
   units::quantity< units::si::thermal_diffusivity > const & alpha,
   units::quantity< units::si::length > const & L )
 noexcept -> units::quantity< units::si::angular_frequency >;
+  
+auto
+angularFrequencies_from_thermalPenetrations
+(
+  std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L 
+)
+noexcept -> std::vector< units::quantity< units::si::angular_frequency > >;
   
 auto
 frequency_from_thermalPenetration(

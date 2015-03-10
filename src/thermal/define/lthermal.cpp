@@ -23,11 +23,14 @@
  
 \*----------------------------------------------------------------------------*/
 #include <cmath>
+
+#include "algorithm/algorithm.h"
 #include "thermal/define/lthermal.h"
 #include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal{
-  namespace define{
+
+namespace define{
 
 auto
 lthermal(
@@ -101,6 +104,35 @@ noexcept -> units::quantity< units::si::dimensionless >
 }
 
 auto
+angularFrequencies_from_thermalPenetrations
+(
+  std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L
+)
+noexcept -> std::vector< units::quantity< units::si::angular_frequency > >
+{
+  using std::vector;
+  using units::si::angular_frequency;
+  using units::quantity;
+  using algorithm::transform;
+  using std::begin;
+
+  auto const count = lthermals.size();
+  auto angularFrequencies = vector< quantity< angular_frequency > >{ count } ;
+  
+  transform( lthermals, begin( angularFrequencies ) ,
+  [ &alpha, &L ]( auto const & lthermal ) noexcept
+  {
+    auto const angularFrequency =
+      angularFrequency_from_thermalPenetration( lthermal , alpha, L ) ;
+    return angularFrequency;
+  } );
+  
+  return angularFrequencies;
+}
+
+auto
 angularFrequency_from_thermalPenetration(
   units::quantity< units::si::dimensionless > const & lthermal,
   units::quantity< units::si::thermal_diffusivity > const & alpha,
@@ -135,4 +167,6 @@ noexcept -> units::quantity< units::si::frequency >
 
 
     
-}}
+} // namespace define
+
+} // namespace thermal
