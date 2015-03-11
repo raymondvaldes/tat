@@ -176,6 +176,7 @@ static auto const gigavolts = giga * volts;
 
 
 using boost::units::si::square_meter;
+static auto const square_millimeters = millimeters * millimeters ;
 
 // nameless units
 auto static const thermal_conductivity_units = watts / ( meter * kelvin ) ;
