@@ -13,6 +13,8 @@
 #include <cassert>
 #include <algorithm>
 #include <cstdio>
+
+#include "algorithm/algorithm.h"
 #include "units/si/si.h"
 
 namespace math {
@@ -21,7 +23,7 @@ namespace construct {
 
 
 template <class T>
-auto range( const T start, const T end, const size_t points ) noexcept
+auto uniform_range( T const start, T const end, size_t const points ) noexcept
 {
   assert( start < end );
   using std::generate;
@@ -32,7 +34,6 @@ auto range( const T start, const T end, const size_t points ) noexcept
   auto const span = end - start ;
   
   auto const increment = span / units::quantity<dimensionless>( points - 1 ) ;
-  
   
   auto running_value = start ;
   
@@ -49,17 +50,61 @@ auto range( const T start, const T end, const size_t points ) noexcept
 }
 
 template <class T>
-auto range_from_0( const T end, const size_t points ) noexcept
+auto range_from_0( T const end, size_t const points ) noexcept
 {
   
-  auto const start = T::from_value(0) ;
+  auto const start = T::from_value( 0 ) ;
   
   return range( start, end , points ) ;
 }
 
+template <class T>
+auto range_1og10( T const start, T const end, size_t const points )
+{
+  //Creates a finite uniform distribution from lmin to lmax in log10space
 
-
+  using std::log10;
+  using std::pow;
+  using std::vector;
   
+  auto output = vector< T >( points ) ;
+
+  if( points > 2 )
+  {
+    auto const start_val = start.value();
+    auto const start1 = log10( start_val ) + 1 ;
+  
+    auto const end_val = end.value();
+    auto const end1   = log10( end_val ) + 1 ;
+    
+    auto const increments = ( end1 - start1 ) / ( points - 1 ) ;
+    
+    double rangeI = start1 ;
+
+    using algorithm::generate;
+    generate( output , [&]()
+    {
+      auto const ith_value = pow( 10, rangeI - 1 );
+      rangeI += increments ;
+      return T::from_value( ith_value );
+    } );
+    
+    auto const final_value = end_val;
+    output[points-1] = T::from_value( final_value ) ;
+  }
+  else if( points == 1 )
+  {
+    output[0] = start ;
+  }
+  else if(points == 2)
+  {
+    output[0] = start ;
+    output[1] = end ;
+  }
+
+  return output;
+}
+
 } // namespace construct
 
   
