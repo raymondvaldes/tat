@@ -65,6 +65,11 @@ public:
   
   auto parent_path( void ) const noexcept
   -> directory;
+
+  auto path( void) const noexcept -> filesystem::path ;
+  
+  auto filePath( std::string const &  filename ) const noexcept -> filesystem::path ;
+  
   
   auto working_directory_string( void ) const noexcept
   -> std::string;

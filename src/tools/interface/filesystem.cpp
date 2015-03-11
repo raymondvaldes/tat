@@ -161,7 +161,23 @@ directory directory::parent_path() const noexcept {
    return directory( parentPath.string() ) ;
 }
 
+path directory::path() const noexcept {
 
+  auto const myPath = myDirectory;
+ 
+  return myPath ;
+}
+
+auto
+directory::filePath( std::string const &  filename ) const
+noexcept -> filesystem::path
+{
+  auto const filePath_string = abs( filename ) ;
+
+  auto const myfilePath = filesystem::path( filePath_string ) ;
+  
+  return myfilePath;
+}
 
 std::vector<directory> directory::ls() const noexcept
 {
