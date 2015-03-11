@@ -11,6 +11,7 @@
 #include "investigations/twoColorPyrometery/calculateCalibrationCoefficients.h"
 #include "investigations/twoColorPyrometery/temperature_prediction.h"
 #include "investigations/twoColorPyrometery/phase_fitting.h"
+#include "investigations/twoColorPyrometery/importExperimentalData.h"
 
 namespace investigations{
 
@@ -23,6 +24,8 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   temperature_prediction( dir ) ;
   
   phase_fitting( dir ) ;
+  
+  importExperimentalData( dir ) ;
 }
 
 } //namespace twoColorPyrometry
