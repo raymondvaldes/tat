@@ -8,18 +8,39 @@
 
 #include "gTBC/gMeasure/is_scope_file.h"
 
+#include "gTBC/gMeasure/read_scope_file.h"
+#include "algorithm/string/split.h"
+
+using algorithm::string::split;
+
 namespace gTBC {
 
 namespace gMeasure {
 
 auto
-is_scopeFile
+is_scope_file
 (
-  filesystem::directory const & dir,
-  std::string const & filename
-) -> bool
+  filesystem::path const & path
+)
+noexcept -> bool
 {
-  return false;
+  auto const file = path.filename() ;
+  
+  auto const fileExtension = file.extension() ;
+  
+  auto const correct_extension = fileExtension == ".dat";
+
+  auto const fileName = file.stem() ;
+  
+  auto const tokens = split( fileName.string(), "_" );
+
+  auto const ith_token = tokens.size();
+  
+  auto const is_file = ith_token > 3 ;
+  
+  auto const valid_name = is_file && correct_extension;
+  
+  return valid_name;
 }
 
 

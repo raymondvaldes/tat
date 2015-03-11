@@ -20,9 +20,9 @@ namespace gMeasure {
 auto
 is_scope_file
 (
-  filesystem::directory const & dir,
-  std::string const & filename
-) noexcept -> bool;
+  filesystem::path const & path
+)
+noexcept -> bool;
 
 
 } // namespace gMeasure
