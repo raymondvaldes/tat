@@ -190,6 +190,24 @@ noexcept -> std::vector< units::quantity< units::si::angular_frequency > >
   return angularFrequencies;
 }
 
+
+auto
+frequencies_from_thermalPenetrations(
+  std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L )
+noexcept -> std::vector< units::quantity< units::si::frequency > >
+{
+  using physics::classical_mechanics::frequencies_from_angularFrequencies;
+  
+  auto const omegas =
+  angularFrequencies_from_thermalPenetrations( lthermals, alpha, L ) ;
+  
+  auto const frequencies = frequencies_from_angularFrequencies( omegas ) ;
+  
+  return frequencies;
+}
+
 auto
 angularFrequency_from_thermalPenetration(
   units::quantity< units::si::dimensionless > const & lthermal,

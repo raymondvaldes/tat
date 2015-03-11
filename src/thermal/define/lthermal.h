@@ -88,6 +88,12 @@ thermalPenetrations_from_angularFrequencies
 )
 noexcept -> std::vector< units::quantity< units::si::dimensionless > >;
   
+auto
+frequencies_from_thermalPenetrations(
+  std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
+  units::quantity< units::si::thermal_diffusivity > const & alpha,
+  units::quantity< units::si::length > const & L )
+noexcept -> std::vector< units::quantity< units::si::frequency > >;
   
 auto
 angularFrequencies_from_thermalPenetrations
