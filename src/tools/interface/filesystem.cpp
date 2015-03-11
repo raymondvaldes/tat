@@ -62,12 +62,6 @@ std::vector< directory > ls( const std::string &path_in ) noexcept
           const directory mytemp ( temp_dir.string() ) ;
           output.push_back( mytemp ) ;
         }
-        else if ( is_regular_file( dir_itr->status() ) )
-        {
-        }
-        else
-        {
-        }
       }
       catch (const boost::filesystem::filesystem_error& ex)
       {
@@ -171,7 +165,7 @@ directory directory::parent_path() const noexcept {
 
 std::vector<directory> directory::ls() const noexcept
 {
-  return ::filesystem::ls( pwd() ) ;
+  return filesystem::ls( pwd() ) ;
 }
 
 
