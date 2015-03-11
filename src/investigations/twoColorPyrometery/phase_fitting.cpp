@@ -83,33 +83,24 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   auto const experimental_phases =
     addNoise( initial_phases, std_error_percent, std_error_scale );
   
-  auto const alpha_initial = quantity<thermal_diffusivity >(.2 * square_millimeters / second);
+  auto const alpha_initial = quantity<thermal_diffusivity >( 5 * square_millimeters / second);
   auto mySlab_off = Slab{ characteristic_length,alpha_initial , k };
 
   for( size_t i = 0 ; i < experimental_phases.size() ; ++i )
     std::cout << initial_phases[i].value() << "\t" << experimental_phases[i].value() << "\n" ;
 
-
+ 
   using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases;
   auto const myFittedSlab =
     diffusivity_from_phases( omegas, experimental_phases, mySlab_off );
 
   std::cout << myFittedSlab.get_diffusivity() << "\t" ;
 
-/*
-Write a function that inputs two points and the number of points and it 
-creates a range.
 
-Write a function that inputs two points and a delta and it gives you a
-uniform distribution.
-
-*/
 
 /*
-  Right now I have the ability to use get a vector of phases from a vector
-  of frequencies.  Now to implement a parameter estimation algorithm that
-  modifies the slab parameters until it minimizes the difference in phases.
-  
+  Parameter Estimation algorithm complete....
+ 
   Fitting phases
   --------------
   Inputs:
@@ -128,6 +119,8 @@ uniform distribution.
   - predicted I_transient ( only parameter that is possible to extract 
                             assuming k is already known )
   - predicted phases
+  
+  FItting amplitude is good because it gives me what I_transient is....
 */
 
 }
