@@ -31,11 +31,19 @@
 #include <string>
 
 namespace algorithm{
+
 namespace string{
 
-  std::vector<std::string> split( const std::string& strs,
-                                  const std::string& splitter  ) noexcept;
-}}
+auto split
+(
+  const std::string & strs,
+  const std::string & splitter
+)
+noexcept -> std::vector<std::string>;
+  
+} // namespace string
+
+} // namespace algorithm
 
 
 
