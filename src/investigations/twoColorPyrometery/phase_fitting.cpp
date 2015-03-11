@@ -13,7 +13,7 @@
 #include "thermal/define/lthermal.h"
 #include "physics/classical_mechanics/kinematics.h"
 #include "thermal/analysis/bulkSpeciman/temperature/conductivity_from_phases.h"
-
+#include "math/random/random.h"
 #include "math/construct/range.h"
 #include "units.h"
 
@@ -40,6 +40,8 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   using units::si::frequency;
   using units::si::kelvin;
   using units::si::meter;
+  using units::si::radians;
+  using units::si::plane_angle;
   using units::si::square_millimeters;
   
 //  auto const x = quantity< length >( 273 * micrometers );
@@ -49,7 +51,7 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   
   auto const characteristic_length = quantity< length >( 1420 * micrometers );
 
-  auto const alpha = quantity<thermal_diffusivity>(5 * square_millimeters / second);
+  auto const alpha = quantity<thermal_diffusivity>( 5 * square_millimeters / second );
   
   using physics::classical_mechanics::frequency_to_angularFrequency;
 
@@ -75,14 +77,24 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   using thermal::model::slab::surface_temperature_phases;
   auto const initial_phases = surface_temperature_phases( frequencies, mySlab );
   
-  for( auto const & val : initial_phases )
-    std::cout << val << "\n";
+  using math::addNoise;
+  auto const std_error_percent = quantity<dimensionless>( 0.01 ) ;
+  auto const std_error_scale = quantity< plane_angle >( M_PI_2 * radians );
+  auto const experimental_phases =
+    addNoise( initial_phases, std_error_percent, std_error_scale );
   
-  
-  using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases;
-//  auto const myFittedSlab =
-//    diffusivity_from_phases( omegas, experimentalPhases, mySlab );
+  auto const alpha_initial = quantity<thermal_diffusivity >(.2 * square_millimeters / second);
+  auto mySlab_off = Slab{ characteristic_length,alpha_initial , k };
 
+  for( size_t i = 0 ; i < experimental_phases.size() ; ++i )
+    std::cout << initial_phases[i].value() << "\t" << experimental_phases[i].value() << "\n" ;
+
+
+  using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases;
+  auto const myFittedSlab =
+    diffusivity_from_phases( omegas, experimental_phases, mySlab_off );
+
+  std::cout << myFittedSlab.get_diffusivity() << "\t" ;
 
 /*
 Write a function that inputs two points and the number of points and it 
