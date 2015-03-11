@@ -439,14 +439,13 @@ noexcept -> units::quantity< units::si::temperature, std::complex<double > >
   using units::quantity;
   using units::si::temperature;
 
-  auto const characteristic_length = slab.characteristic_length;
+  auto const L = slab.characteristic_length;
   auto const alpha = slab.get_diffusivity();
   auto const k = slab.k;
 
-  auto const theta_complex =
-    neumann_and_direchlet_BC( x , w , characteristic_length, alpha ) ;
+  auto const theta_complex = neumann_and_direchlet_BC( x , w , L, alpha ) ;
 
-  auto const deltaT = ( I_t * characteristic_length ) / k ;
+  auto const deltaT = ( I_t * L ) / k ;
   
   auto const temperature_dimensional = theta_complex * deltaT ;
   
@@ -518,7 +517,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 
   auto const i_imag = complex< double >( 0, 1 ) ;
   
-  auto const L = characteristic_length;
+  auto const L = characteristic_length ;
     
   auto const w_non = nondimensional_omega( w, L, alpha ) ;
   auto const i_non = quantity< dimensionless, complex< double > >( i_imag ) ;
