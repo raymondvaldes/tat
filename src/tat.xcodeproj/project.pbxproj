@@ -574,7 +574,6 @@
 		AB0DFDFD19524268007DF69B /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
-				ABA0B7361A9D30B400F000DA /* container */,
 				ABA0B7311A9D002F00F000DA /* valarray */,
 				AB7EAD131A58C3B400AB7E11 /* stream */,
 				ABB54FBA19C2215D0056823E /* vector */,
@@ -943,13 +942,6 @@
 				ABA0B7341A9D006F00F000DA /* valarray_to_vector.h */,
 			);
 			name = valarray;
-			sourceTree = "<group>";
-		};
-		ABA0B7361A9D30B400F000DA /* container */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = container;
 			sourceTree = "<group>";
 		};
 		ABA2BD3B1A48BA21004F3C6E /* linked-libraries */ = {
