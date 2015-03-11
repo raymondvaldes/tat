@@ -21,9 +21,9 @@ namespace gMeasure {
 auto
 read_scope_file
 (
-  filesystem::directory const & dir,
-  std::string const & filename
-) noexcept -> ScopeFile ;
+  filesystem::path const & file
+)
+noexcept -> ScopeFile ;
 
 
 #endif /* defined(__tat__read_scope_file__) */
