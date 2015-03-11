@@ -29,12 +29,17 @@ License
 #include <string>
 #include <boost/filesystem/path.hpp>
 
-#include "tools/interface/filesystem.hpp"
-
 namespace filesystem
 {
 
-void makeDir( std::string const & rootPath, std::string const & newDirectory ) noexcept;
+  using boost::filesystem::path;
+
+
+void makeDir
+(
+  std::string const & rootPath,
+  std::string const & newDirectory
+) noexcept;
 
 class directory {
 
