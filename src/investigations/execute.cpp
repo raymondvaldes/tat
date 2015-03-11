@@ -31,9 +31,10 @@
 #include "investigations/taylor_uncertainty.h"
 #include "investigations/twoColorPyrometery.h"
 
+#include "algorithm/algorithm.h"
 #include "tools/interface/filesystem.hpp"
 
-using std::for_each;
+using algorithm::for_each;
 
 namespace investigations {
 
@@ -64,19 +65,21 @@ void execute( const std::string& mydirectory, const std::string& sampleName,
   
   auto const directory_of_samples = directory{ mydirectory } ;
   
-  auto const runCurrentDirectory =
+  auto const directory_is_sample =
   directory_of_samples.working_directory_starts_with( sampleName ) ;
   
-  if( runCurrentDirectory ) {
+  if( directory_is_sample )
+  {
     run_investigation( directory_of_samples ) ;
   }
-  else {
+  else
+  {
     auto const paths = directory_of_samples.ls() ;
     
-    for_each( paths.begin(), paths.end(), [&]( auto const & pathElement )
+    for_each( paths , [&]( auto const & path )
     {
-      if( pathElement.working_directory_starts_with( sampleName ) ) {
-        run_investigation( pathElement ) ;
+      if( path.working_directory_starts_with( sampleName ) ) {
+        run_investigation( path ) ;
       }
     });
   }
