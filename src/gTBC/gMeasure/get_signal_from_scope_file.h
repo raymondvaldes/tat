@@ -9,7 +9,9 @@
 #ifndef __tat__get_signal_from_scope_file__
 #define __tat__get_signal_from_scope_file__
 
+#include <vector>
 #include <string>
+
 #include "tools/interface/filesystem.hpp"
 #include "tools/interface/import/columnData.h"
 #include "units.h"

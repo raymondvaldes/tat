@@ -18,7 +18,7 @@ namespace gTBC {
 namespace gMeasure {
 
 auto get_signal_from_scope_file( filesystem::directory const & dir,
-                                        std::string const & inputFileName )
+                                  std::string const & inputFileName )
 -> std::vector< units::quantity<units::si::electric_potential >>
 {
   assert( !inputFileName.empty() );
