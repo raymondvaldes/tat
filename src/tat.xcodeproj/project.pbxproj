@@ -18,6 +18,9 @@
 		AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = AB26A3DB19C12073000685DF /* gum_uncertainty.h */; };
 		AB3ED3C21AAF6E9B00845151 /* conductivity_from_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3ED3C01AAF6E9B00845151 /* conductivity_from_phases.cpp */; };
 		AB3ED3C31AAF6E9B00845151 /* conductivity_from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB3ED3C11AAF6E9B00845151 /* conductivity_from_phases.h */; };
+		AB3ED3C61AAF931200845151 /* volumetricHeatCapacity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3ED3C51AAF931200845151 /* volumetricHeatCapacity.cpp */; };
+		AB3ED3C91AAF93D100845151 /* conductivity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB3ED3C71AAF93D100845151 /* conductivity.cpp */; };
+		AB3ED3CA1AAF93D100845151 /* conductivity.h in Headers */ = {isa = PBXBuildFile; fileRef = AB3ED3C81AAF93D100845151 /* conductivity.h */; };
 		AB44BD5D1AAA398700E0710E /* measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB44BD5B1AAA398700E0710E /* measurement.cpp */; };
 		AB44BD5E1AAA398700E0710E /* measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = AB44BD5C1AAA398700E0710E /* measurement.h */; };
 		AB44BD611AAA399800E0710E /* measurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB44BD5F1AAA399800E0710E /* measurements.cpp */; };
@@ -266,6 +269,10 @@
 		AB26A3DB19C12073000685DF /* gum_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gum_uncertainty.h; sourceTree = "<group>"; };
 		AB3ED3C01AAF6E9B00845151 /* conductivity_from_phases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = conductivity_from_phases.cpp; path = bulkSpeciman/temperature/conductivity_from_phases.cpp; sourceTree = "<group>"; };
 		AB3ED3C11AAF6E9B00845151 /* conductivity_from_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = conductivity_from_phases.h; path = bulkSpeciman/temperature/conductivity_from_phases.h; sourceTree = "<group>"; };
+		AB3ED3C41AAF923F00845151 /* volumetricHeatCapacity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = volumetricHeatCapacity.h; sourceTree = "<group>"; };
+		AB3ED3C51AAF931200845151 /* volumetricHeatCapacity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = volumetricHeatCapacity.cpp; sourceTree = "<group>"; };
+		AB3ED3C71AAF93D100845151 /* conductivity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = conductivity.cpp; sourceTree = "<group>"; };
+		AB3ED3C81AAF93D100845151 /* conductivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conductivity.h; sourceTree = "<group>"; };
 		AB44BD5B1AAA398700E0710E /* measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = measurement.cpp; path = detector/measurement.cpp; sourceTree = "<group>"; };
 		AB44BD5C1AAA398700E0710E /* measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = measurement.h; path = detector/measurement.h; sourceTree = "<group>"; };
 		AB44BD5F1AAA399800E0710E /* measurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = measurements.cpp; path = detector/measurements.cpp; sourceTree = "<group>"; };
@@ -1284,6 +1291,10 @@
 				ABEF4E351948D4A500B44AD5 /* omega.h */,
 				ABEF4E361948D4A500B44AD5 /* temperature.cpp */,
 				ABEF4E371948D4A500B44AD5 /* temperature.h */,
+				AB3ED3C41AAF923F00845151 /* volumetricHeatCapacity.h */,
+				AB3ED3C51AAF931200845151 /* volumetricHeatCapacity.cpp */,
+				AB3ED3C71AAF93D100845151 /* conductivity.cpp */,
+				AB3ED3C81AAF93D100845151 /* conductivity.h */,
 			);
 			path = define;
 			sourceTree = "<group>";
@@ -1576,6 +1587,7 @@
 				AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */,
 				ABEF4ECF1948D4A500B44AD5 /* model.hpp in Headers */,
 				ABEF4EE81948D4A500B44AD5 /* mesh.hpp in Headers */,
+				AB3ED3CA1AAF93D100845151 /* conductivity.h in Headers */,
 				ABEF4F051948D4A500B44AD5 /* tools.hpp in Headers */,
 				ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */,
 				ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */,
@@ -1753,6 +1765,7 @@
 				ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */,
 				ABEF4E831948D4A500B44AD5 /* spline_cplx.cpp in Sources */,
 				AB44BD611AAA399800E0710E /* measurements.cpp in Sources */,
+				AB3ED3C91AAF93D100845151 /* conductivity.cpp in Sources */,
 				ABEF4E951948D4A500B44AD5 /* simpsons_3_8.cpp in Sources */,
 				ABEF4F031948D4A500B44AD5 /* timing.cpp in Sources */,
 				ABEF4EBE1948D4A500B44AD5 /* temp_cmplx.cpp in Sources */,
@@ -1802,6 +1815,7 @@
 				ABEF4EDF1948D4A500B44AD5 /* setup.cpp in Sources */,
 				ABEF4EAE1948D4A500B44AD5 /* cmplx_combination.cpp in Sources */,
 				ABEF4E891948D4A500B44AD5 /* cosfit.cpp in Sources */,
+				AB3ED3C61AAF931200845151 /* volumetricHeatCapacity.cpp in Sources */,
 				ABEF4EE91948D4A500B44AD5 /* numerical_2011.cpp in Sources */,
 				ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */,
 				ABEF4E911948D4A500B44AD5 /* utils.cpp in Sources */,
