@@ -56,6 +56,10 @@
 		AB7996DA1AB0F01D0022015B /* importExperimentalData.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996D91AB0F01D0022015B /* importExperimentalData.h */; };
 		AB7996DC1AB0F0C10022015B /* importExperimentalData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7996DB1AB0F0C10022015B /* importExperimentalData.cpp */; };
 		AB7996DE1AB0F1C40022015B /* scopeFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7996DD1AB0F1C40022015B /* scopeFile.cpp */; };
+		AB7996E11AB0F6190022015B /* read_scope_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7996DF1AB0F6190022015B /* read_scope_file.cpp */; };
+		AB7996E21AB0F6190022015B /* read_scope_file.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996E01AB0F6190022015B /* read_scope_file.h */; };
+		AB7996E51AB0F6B90022015B /* is_scope_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7996E31AB0F6B90022015B /* is_scope_file.cpp */; };
+		AB7996E61AB0F6B90022015B /* is_scope_file.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996E41AB0F6B90022015B /* is_scope_file.h */; };
 		AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD011A57261F00AB7E11 /* columnData.h */; };
 		AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */; };
 		AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7FBD921A9FE65E00FF714D /* prandtl_number.h */; };
@@ -320,6 +324,10 @@
 		AB7996D91AB0F01D0022015B /* importExperimentalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = importExperimentalData.h; path = twoColorPyrometery/importExperimentalData.h; sourceTree = "<group>"; };
 		AB7996DB1AB0F0C10022015B /* importExperimentalData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = importExperimentalData.cpp; path = twoColorPyrometery/importExperimentalData.cpp; sourceTree = "<group>"; };
 		AB7996DD1AB0F1C40022015B /* scopeFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scopeFile.cpp; path = gTBC/gMeasure/scopeFile.cpp; sourceTree = "<group>"; };
+		AB7996DF1AB0F6190022015B /* read_scope_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = read_scope_file.cpp; path = gTBC/gMeasure/read_scope_file.cpp; sourceTree = "<group>"; };
+		AB7996E01AB0F6190022015B /* read_scope_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = read_scope_file.h; path = gTBC/gMeasure/read_scope_file.h; sourceTree = "<group>"; };
+		AB7996E31AB0F6B90022015B /* is_scope_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = is_scope_file.cpp; path = gTBC/gMeasure/is_scope_file.cpp; sourceTree = "<group>"; };
+		AB7996E41AB0F6B90022015B /* is_scope_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = is_scope_file.h; path = gTBC/gMeasure/is_scope_file.h; sourceTree = "<group>"; };
 		AB7EAD011A57261F00AB7E11 /* columnData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = columnData.h; path = import/columnData.h; sourceTree = "<group>"; };
 		AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resetInputBeginning.h; path = algorithm/stream/resetInputBeginning.h; sourceTree = "<group>"; };
 		AB7FBD921A9FE65E00FF714D /* prandtl_number.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prandtl_number.h; path = thermalfluids/dimensionless/prandtl_number.h; sourceTree = "<group>"; };
@@ -656,6 +664,10 @@
 				AB44BD721AAA49C600E0710E /* get_signal_from_scope_file.h */,
 				AB7996D71AB0EDA50022015B /* scopeFile.h */,
 				AB7996DD1AB0F1C40022015B /* scopeFile.cpp */,
+				AB7996DF1AB0F6190022015B /* read_scope_file.cpp */,
+				AB7996E01AB0F6190022015B /* read_scope_file.h */,
+				AB7996E31AB0F6B90022015B /* is_scope_file.cpp */,
+				AB7996E41AB0F6B90022015B /* is_scope_file.h */,
 			);
 			name = gMeasure;
 			sourceTree = "<group>";
@@ -1572,6 +1584,7 @@
 				AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */,
 				ABA58A181A67257400573ED8 /* units.h in Headers */,
 				AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */,
+				AB7996E21AB0F6190022015B /* read_scope_file.h in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
@@ -1618,6 +1631,7 @@
 				ABEF4EC11948D4A500B44AD5 /* temp_ss.h in Headers */,
 				ABEB14B71AAA622600204B36 /* slab.h in Headers */,
 				AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */,
+				AB7996E61AB0F6B90022015B /* is_scope_file.h in Headers */,
 				AB7996D81AB0EDA50022015B /* scopeFile.h in Headers */,
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
 				ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */,
@@ -1735,6 +1749,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB7996E51AB0F6B90022015B /* is_scope_file.cpp in Sources */,
 				ABEF4EEB1948D4A500B44AD5 /* Numerical_Setup.cpp in Sources */,
 				AB8AA4341A5B60710065E7F8 /* columnData.cpp in Sources */,
 				ABEF4EFF1948D4A500B44AD5 /* xml.cpp in Sources */,
@@ -1807,6 +1822,7 @@
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
 				ABEB14B61AAA622600204B36 /* slab.cpp in Sources */,
 				ABFC9E631A9424C500F124F1 /* calculateCalibrationCoefficients.cpp in Sources */,
+				AB7996E11AB0F6190022015B /* read_scope_file.cpp in Sources */,
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
