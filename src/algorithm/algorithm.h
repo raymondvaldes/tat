@@ -13,6 +13,7 @@
 #include <boost/range/numeric.hpp>
 #include <boost/algorithm/cxx11/any_of.hpp>
 #include <boost/algorithm/cxx11/is_sorted.hpp>
+#include <boost/algorithm/cxx11/find_if_not.hpp>
 
 
 /*The ones commented out are the ones that I am need to review. */
@@ -48,13 +49,30 @@ namespace algorithm {
   //using stable_sort;
   //using boost::swap_ranges;
   using boost::transform;
-  //using unique;
-  //using unique_copy;
+  
+  template < class T, class BinaryPredicate >
+  auto unique( T const & sorted_list,  BinaryPredicate const & p ) -> T
+  {
+    using std::unique;
+    using std::begin;
+    using std::end;
+
+    auto uniqueList = sorted_list;
+    
+    auto last = unique( begin( uniqueList ) , end( uniqueList ) , p );
+    
+    uniqueList.erase( last , end( uniqueList ) ) ;
+    
+    return uniqueList;
+  }
+  
+  using boost::unique_copy;
   
   
 ///////////////////////////////////// Non-mutating algorithms
   using boost::algorithm::any_of;
   using boost::algorithm::is_sorted;
+  using boost::algorithm::find_if_not;
 
 //adjacent_find
 //binary_search
