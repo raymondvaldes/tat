@@ -11,6 +11,7 @@
 #include "gTBC/gMeasure/get_signal_from_scope_file.h"
 #include "gTBC/gMeasure/read_scope_file.h"
 #include "gTBC/gMeasure/is_scope_file.h"
+#include "gTBC/gMeasure/scopeFiles_from_datafiles.h"
 
 namespace investigations {
 
@@ -23,9 +24,10 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   auto const filePath = dir.filePath( "CrWO6_200F_feb26_4.6_2_0.dat" );
   
   using gTBC::gMeasure::read_scope_file;
-  read_scope_file( filePath ) ;
+  using gTBC::gMeasure::scopeFiles_from_datafiles;
   
-
+  auto const getDataFiles = dir.ls_files( ".dat" );
+  auto const scopeFiles = scopeFiles_from_datafiles( getDataFiles ) ;
 }
   
 } // namespace twoColorPyrometery
