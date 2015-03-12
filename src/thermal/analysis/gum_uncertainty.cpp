@@ -205,7 +205,6 @@ uMatrix Taylor_uncertainty::jacobianY( void ) noexcept
 vector< enum thermal::model::labels::Name >
 Taylor_uncertainty::get_list_knowns( void ) noexcept
 {
-  using std::sort;
   const thermal::model::labels myLabel;
 
   const EnumList myParameterList = myLabel.getEnumList();
