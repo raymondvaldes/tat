@@ -25,9 +25,10 @@ read_scope_file
 )
 noexcept -> ScopeFile ;
 
-
-#endif /* defined(__tat__read_scope_file__) */
-
 } // namespace gMeasure
   
 } // namespace gTBC
+
+
+#endif /* defined(__tat__read_scope_file__) */
+

@@ -57,6 +57,7 @@ noexcept -> ScopeFile
     label += "_" + tokens[i];
 
   auto const scopeFile = ScopeFile( label, lambda, modulation_frequency, id_number, path ) ;
+
   return scopeFile;
 }
 
