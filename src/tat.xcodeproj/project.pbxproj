@@ -50,7 +50,6 @@
 		AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */ = {isa = PBXBuildFile; fileRef = AB6087721A69B9FB009B1E85 /* signalRatio.h */; };
 		AB6367601AA941AC00AC8390 /* sum.h in Headers */ = {isa = PBXBuildFile; fileRef = AB63675F1AA941AC00AC8390 /* sum.h */; };
 		AB6981A819CB638300940843 /* apply_to_all.h in Headers */ = {isa = PBXBuildFile; fileRef = AB6981A619CB638300940843 /* apply_to_all.h */; };
-		AB71A3761AA1157A003AAC84 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = AB71A3751AA1157A003AAC84 /* vector.h */; };
 		AB71A3781AA1307B003AAC84 /* repeatElements.h in Headers */ = {isa = PBXBuildFile; fileRef = AB71A3771AA1307B003AAC84 /* repeatElements.h */; };
 		AB7996D81AB0EDA50022015B /* scopeFile.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996D71AB0EDA50022015B /* scopeFile.h */; };
 		AB7996DA1AB0F01D0022015B /* importExperimentalData.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996D91AB0F01D0022015B /* importExperimentalData.h */; };
@@ -62,6 +61,7 @@
 		AB7996E61AB0F6B90022015B /* is_scope_file.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996E41AB0F6B90022015B /* is_scope_file.h */; };
 		AB7996E91AB10F350022015B /* scopeFiles_from_datafiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7996E71AB10F350022015B /* scopeFiles_from_datafiles.cpp */; };
 		AB7996EA1AB10F350022015B /* scopeFiles_from_datafiles.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996E81AB10F350022015B /* scopeFiles_from_datafiles.h */; };
+		AB7996EC1AB11C4B0022015B /* operator_overloads.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996EB1AB11C4B0022015B /* operator_overloads.h */; };
 		AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD011A57261F00AB7E11 /* columnData.h */; };
 		AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */; };
 		AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7FBD921A9FE65E00FF714D /* prandtl_number.h */; };
@@ -319,7 +319,6 @@
 		AB71908019DF29D5008FC395 /* prefixes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = prefixes.h; path = units/si/prefixes.h; sourceTree = "<group>"; };
 		AB71908119DF2BAB008FC395 /* operators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = operators.h; path = units/operators.h; sourceTree = "<group>"; };
 		AB71908219DF2C73008FC395 /* base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = base.h; path = units/systems/si/base.h; sourceTree = "<group>"; };
-		AB71A3751AA1157A003AAC84 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = units/si/vector.h; sourceTree = "<group>"; };
 		AB71A3771AA1307B003AAC84 /* repeatElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = repeatElements.h; path = algorithm/vector/repeatElements.h; sourceTree = "<group>"; };
 		AB71BD6319DE40B800C7F280 /* temperatureSteady.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = temperatureSteady.h; path = pyrometry/twoColor/temperatureSteady.h; sourceTree = "<group>"; };
 		AB7996D71AB0EDA50022015B /* scopeFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scopeFile.h; path = gTBC/gMeasure/scopeFile.h; sourceTree = "<group>"; };
@@ -332,6 +331,7 @@
 		AB7996E41AB0F6B90022015B /* is_scope_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = is_scope_file.h; path = gTBC/gMeasure/is_scope_file.h; sourceTree = "<group>"; };
 		AB7996E71AB10F350022015B /* scopeFiles_from_datafiles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scopeFiles_from_datafiles.cpp; path = gTBC/gMeasure/scopeFiles_from_datafiles.cpp; sourceTree = "<group>"; };
 		AB7996E81AB10F350022015B /* scopeFiles_from_datafiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scopeFiles_from_datafiles.h; path = gTBC/gMeasure/scopeFiles_from_datafiles.h; sourceTree = "<group>"; };
+		AB7996EB1AB11C4B0022015B /* operator_overloads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = operator_overloads.h; path = algorithm/vector/operator_overloads.h; sourceTree = "<group>"; };
 		AB7EAD011A57261F00AB7E11 /* columnData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = columnData.h; path = import/columnData.h; sourceTree = "<group>"; };
 		AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resetInputBeginning.h; path = algorithm/stream/resetInputBeginning.h; sourceTree = "<group>"; };
 		AB7FBD921A9FE65E00FF714D /* prandtl_number.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prandtl_number.h; path = thermalfluids/dimensionless/prandtl_number.h; sourceTree = "<group>"; };
@@ -1022,6 +1022,7 @@
 				AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */,
 				AB71A3771AA1307B003AAC84 /* repeatElements.h */,
 				AB63675F1AA941AC00AC8390 /* sum.h */,
+				AB7996EB1AB11C4B0022015B /* operator_overloads.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -1530,7 +1531,6 @@
 				ABF5D66A19DB65AB00A70476 /* extension.h */,
 				AB71908019DF29D5008FC395 /* prefixes.h */,
 				AB71908219DF2C73008FC395 /* base.h */,
-				AB71A3751AA1157A003AAC84 /* vector.h */,
 			);
 			name = si;
 			sourceTree = "<group>";
@@ -1554,6 +1554,7 @@
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
 				ABEB14BF1AAA6C4200204B36 /* phase_fitting.h in Headers */,
 				ABEF4EB11948D4A500B44AD5 /* kernal.hpp in Headers */,
+				AB7996EC1AB11C4B0022015B /* operator_overloads.h in Headers */,
 				AB3ED3C31AAF6E9B00845151 /* conductivity_from_phases.h in Headers */,
 				AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */,
 				ABA48C3A1A78553C0025666F /* cmath.h in Headers */,
@@ -1634,7 +1635,6 @@
 				AB7996D81AB0EDA50022015B /* scopeFile.h in Headers */,
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
 				ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */,
-				AB71A3761AA1157A003AAC84 /* vector.h in Headers */,
 				ABEF4E9C1948D4A500B44AD5 /* tma.h in Headers */,
 				ABEF4E8C1948D4A500B44AD5 /* lmdiff.hpp in Headers */,
 				ABEF4ECD1948D4A500B44AD5 /* lthermal.h in Headers */,

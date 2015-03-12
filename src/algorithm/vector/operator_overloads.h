@@ -1,22 +1,16 @@
 //
-//  vector.h
+//  operator_overloads.h
 //  tat
 //
-//  Created by Raymond Valdes_New on 2/27/15.
+//  Created by Raymond Valdes_New on 3/11/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef tat_vector_h
-#define tat_vector_h
+#ifndef tat_operator_overloads_h
+#define tat_operator_overloads_h
 
 #include <vector>
-#include "units/quantity.h"
-#include "units/si/predefined.h"
 #include "algorithm/algorithm.h"
-
-namespace units {
-
-namespace si {
 
 template< typename T >
 auto
@@ -25,12 +19,12 @@ operator+ ( std::vector< T > const & list, T const & scalar) noexcept
 {
   using algorithm::transform;
   
-  auto const add_elements = [&scalar]( auto const & val ) noexcept {
+  auto const add_scalar = [&scalar]( auto const & val ) noexcept {
     return val + scalar;
   } ;
   
   auto lhs = list;
-  transform( lhs, lhs.begin(), add_elements ) ;
+  transform( lhs, lhs.begin(), add_scalar ) ;
 
   return lhs;
 }
@@ -85,8 +79,5 @@ operator-= ( std::vector< T > const & list ,  T const & scalar) noexcept
   return list + scalar;
 }
 
-} // namespace si
-  
-} // namespace units
 
 #endif

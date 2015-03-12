@@ -12,6 +12,7 @@
 #include "thermal/pyrometry/twoColor/calibratedSignalRatio.h"
 #include "thermal/pyrometry/twoColor/signalRatio.h"
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio_from_measurement.h"
+#include "algorithm/algorithm.h"
 
 namespace thermal {
 

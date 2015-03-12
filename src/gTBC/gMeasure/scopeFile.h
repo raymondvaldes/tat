@@ -13,11 +13,15 @@
 #include <cstddef>
 
 #include "tools/interface/filesystem.hpp"
+#include "thermal/equipment/detector/Measurements.h"
 #include "units.h"
 
 namespace gTBC {
 
 namespace gMeasure {
+
+
+
 
 struct ScopeFile
 {
@@ -30,6 +34,8 @@ struct ScopeFile
   size_t id_number;
   
   filesystem::path path;
+
+  size_t cycles;
   
   ScopeFile
   (
@@ -38,7 +44,14 @@ struct ScopeFile
     units::quantity< units::si::frequency > const & laser_modulation_frequency_,
     size_t const & id_number_,
     filesystem::path const & path_
-  );
+  ) ;
+  
+  auto readMeasurements
+  (
+    units::quantity<units::si::electric_potential> const & steady_DetectorSignal
+  )
+  const noexcept -> thermal::equipment::detector::Measurements ;
+  
 };
   
 } // namespace gMeasure

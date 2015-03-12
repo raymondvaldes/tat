@@ -23,6 +23,9 @@ namespace gMeasure {
 auto get_signal_from_scope_file(  filesystem::directory const & dir,
                                   std::string const & inputFileName )
 -> std::vector< units::quantity<units::si::electric_potential >>;
+
+auto get_signal_from_scope_file(  filesystem::path const & path )
+-> std::vector< units::quantity<units::si::electric_potential >>;
   
 } // namespace gMeasure
   

@@ -8,7 +8,10 @@
 
 #include <cassert>
 
+#include "math/construct/periodic_time_distribution.h"
 #include "gTBC/gMeasure/scopeFile.h"
+#include "gTBC/gMeasure/get_signal_from_scope_file.h"
+#include "algorithm/vector/operator_overloads.h"
 
 namespace gTBC {
 
@@ -26,7 +29,8 @@ ScopeFile::ScopeFile
   monochorometer_lambda( monochorometer_lambda_ ),
   laser_modulation_frequency( laser_modulation_frequency_ ),
   id_number( id_number_ ),
-  path( path_ )
+  path( path_ ),
+  cycles( 6 )
 {
   assert( laser_modulation_frequency_.value() > 0 ) ;
   assert( monochorometer_lambda_.value() > 0 ) ;
@@ -34,6 +38,37 @@ ScopeFile::ScopeFile
   assert( path_.has_filename() ) ;
   assert( path.has_extension() ) ;
 }
+  
+  
+auto
+ScopeFile::readMeasurements
+(
+  units::quantity<units::si::electric_potential, double > const & steady_DetectorSignal
+)
+const noexcept -> thermal::equipment::detector::Measurements
+{
+  using thermal::equipment::detector::Measurements;
+  using math::construct::periodic_time_distribution;
+  
+  auto const transient_DetectorSignal =
+  get_signal_from_scope_file( path );
+
+  auto const total_detectorSignal = steady_DetectorSignal + transient_DetectorSignal;
+
+  auto const counts = transient_DetectorSignal.size();
+
+  auto const referenceTime =
+  periodic_time_distribution( laser_modulation_frequency, cycles, counts ) ;
+  
+  auto const detectorMeasurements =
+  Measurements{ monochorometer_lambda, referenceTime, total_detectorSignal };
+  
+  return detectorMeasurements;
+}
+  
+  
+  
+
   
 } // namespace gMeasure
   

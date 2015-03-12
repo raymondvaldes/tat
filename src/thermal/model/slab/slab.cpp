@@ -14,6 +14,7 @@
 #include "thermal/define/volumetricHeatCapacity.h"
 #include "thermal/define/diffusivity.h"
 #include "thermal/define/conductivity.h"
+#include "algorithm/algorithm.h"
 
 namespace thermal {
 

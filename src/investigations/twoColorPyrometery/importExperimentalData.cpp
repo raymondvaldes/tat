@@ -28,6 +28,9 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   
   auto const getDataFiles = dir.ls_files( ".dat" );
   auto const scopeFiles = scopeFiles_from_datafiles( getDataFiles ) ;
+  
+  
+  
 }
   
 } // namespace twoColorPyrometery

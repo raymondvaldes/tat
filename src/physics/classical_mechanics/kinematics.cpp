@@ -27,7 +27,8 @@
 #include <vector>
 #include <boost/assert.hpp>
 
-#include "kinematics.h"
+#include "physics/classical_mechanics/kinematics.h"
+#include "algorithm/algorithm.h"
 
 namespace physics{
 

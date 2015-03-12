@@ -26,6 +26,8 @@
 #include "assert/assertExtensions.h"
 #include "units.h"
 
+#include "algorithm/vector/operator_overloads.h"
+
 
 namespace investigations {
 
