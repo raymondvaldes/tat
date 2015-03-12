@@ -63,6 +63,9 @@ public:
   auto ls( void ) const noexcept
   -> std::vector<directory>;
   
+  auto ls_files( std::string const & extension  ) const noexcept
+  -> std::vector< filesystem::path >;
+  
   auto parent_path( void ) const noexcept
   -> directory;
 

@@ -28,6 +28,7 @@ License
 #include "tools/interface/filesystem.hpp"
 #include "algorithm/string/starts_with.h"
 #include "algorithm/string/split.h"
+#include "algorithm/algorithm.h"
 
 namespace filesystem
 {
@@ -77,6 +78,48 @@ std::vector< directory > ls( const std::string &path_in ) noexcept
   return output;
 }
 
+std::vector< filesystem::path > ls_files( const std::string &path_in ) noexcept;
+
+std::vector< filesystem::path > ls_files( const std::string &path_in ) noexcept
+{
+  using namespace boost::filesystem;
+  path p ( path_in );
+  std::vector< filesystem::path > output;
+
+
+  if (!exists(p))
+  {
+    std::cout << "\nNot found: " << path_in << std::endl;
+    return output;
+  }
+
+  if( is_directory( p ) )
+  {
+    directory_iterator end_iter;
+
+    for ( directory_iterator dir_itr(p) ;  dir_itr != end_iter; ++dir_itr )
+    {
+      try
+      {
+        if( is_regular_file(dir_itr->status() ) )
+        {
+          const boost::filesystem::path temp_file( dir_itr->path() ) ;
+          output.push_back( temp_file ) ;
+        }
+      }
+      catch (const boost::filesystem::filesystem_error& ex)
+      {
+        std::cerr << ex.what() << "\n";
+      }
+    }
+  }
+  else // must be a file
+  {
+    std::cout << "\nFound: " << p << "\n";
+  }
+
+  return output;
+}
 
 void makeDir( const std::string &rootPath, const std::string &newDirectory ) noexcept
 {
@@ -182,6 +225,26 @@ noexcept -> filesystem::path
 std::vector<directory> directory::ls() const noexcept
 {
   return filesystem::ls( pwd() ) ;
+}
+
+std::vector< filesystem::path >
+directory::ls_files( std::string const & valid_extension ) const noexcept
+{
+  auto const allFiles = filesystem::ls_files( pwd() );
+  
+  using std::vector;
+  using algorithm::for_each;
+  
+  auto files_with_extension = vector< filesystem::path >();
+  
+  for_each( allFiles, [&]( auto const & file )
+  {
+    if( file.extension() == valid_extension ) {
+      files_with_extension.push_back( file );
+    }
+  });
+
+  return files_with_extension ;
 }
 
 
