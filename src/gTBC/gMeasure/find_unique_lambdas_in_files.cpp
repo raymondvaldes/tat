@@ -9,10 +9,9 @@
 #include <cassert>
 #include <cmath>
 #include <iterator>
+#include <algorithm>
 
 #include "gTBC/gMeasure/find_unique_lambdas_in_files.h"
-#include "gTBC/gMeasure/sort_files_by_lambda.h"
-#include "gTBC/gMeasure/unique_files_by_lambda.h"
 #include "algorithm/algorithm.h"
 
 namespace gTBC {
@@ -22,6 +21,8 @@ namespace gMeasure {
 using std::vector;
 
 using algorithm::for_each;
+using algorithm::sort;
+using algorithm::unique;
 
 using units::quantity;
 using units::si::wavelength;
@@ -35,11 +36,10 @@ noexcept -> std::vector< units::quantity< units::si::wavelength > >
 {
   assert( !scope_files.empty() );
 
-  auto const sorted_files = sort_files_by_lambda( scope_files );
-  auto const unique_files = unique_files_by_lambda( sorted_files );
+  auto const sorted_files = sort( scope_files, sort_lambda_predicate ) ;
+  auto const unique_files = unique( sorted_files, unique_lambda_predicate );
   
-  auto out =
-    vector< quantity< wavelength > >();
+  auto out = vector< quantity< wavelength > >();
   
   for_each( unique_files, [&out]( const auto & file )
   {

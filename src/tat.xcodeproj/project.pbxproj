@@ -62,6 +62,8 @@
 		AB7996E91AB10F350022015B /* scopeFiles_from_datafiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7996E71AB10F350022015B /* scopeFiles_from_datafiles.cpp */; };
 		AB7996EA1AB10F350022015B /* scopeFiles_from_datafiles.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996E81AB10F350022015B /* scopeFiles_from_datafiles.h */; };
 		AB7996EC1AB11C4B0022015B /* operator_overloads.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7996EB1AB11C4B0022015B /* operator_overloads.h */; };
+		AB7A693E1AB2465400249A6E /* Unique_scope_measurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7A693C1AB2465400249A6E /* Unique_scope_measurements.cpp */; };
+		AB7A693F1AB2465400249A6E /* Unique_scope_measurements.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7A693D1AB2465400249A6E /* Unique_scope_measurements.h */; };
 		AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD011A57261F00AB7E11 /* columnData.h */; };
 		AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */; };
 		AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7FBD921A9FE65E00FF714D /* prandtl_number.h */; };
@@ -265,6 +267,8 @@
 		ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */; };
 		ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */; };
 		ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E711A96B53900F124F1 /* spectrum.h */; };
+		ABFD19991AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */; };
+		ABFD199A1AB1FE7600D865C7 /* find_unique_lambdas_in_files.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFD19981AB1FE7600D865C7 /* find_unique_lambdas_in_files.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -332,6 +336,8 @@
 		AB7996E71AB10F350022015B /* scopeFiles_from_datafiles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scopeFiles_from_datafiles.cpp; path = gTBC/gMeasure/scopeFiles_from_datafiles.cpp; sourceTree = "<group>"; };
 		AB7996E81AB10F350022015B /* scopeFiles_from_datafiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scopeFiles_from_datafiles.h; path = gTBC/gMeasure/scopeFiles_from_datafiles.h; sourceTree = "<group>"; };
 		AB7996EB1AB11C4B0022015B /* operator_overloads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = operator_overloads.h; path = algorithm/vector/operator_overloads.h; sourceTree = "<group>"; };
+		AB7A693C1AB2465400249A6E /* Unique_scope_measurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Unique_scope_measurements.cpp; path = gTBC/gMeasure/Unique_scope_measurements.cpp; sourceTree = "<group>"; };
+		AB7A693D1AB2465400249A6E /* Unique_scope_measurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Unique_scope_measurements.h; path = gTBC/gMeasure/Unique_scope_measurements.h; sourceTree = "<group>"; };
 		AB7EAD011A57261F00AB7E11 /* columnData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = columnData.h; path = import/columnData.h; sourceTree = "<group>"; };
 		AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resetInputBeginning.h; path = algorithm/stream/resetInputBeginning.h; sourceTree = "<group>"; };
 		AB7FBD921A9FE65E00FF714D /* prandtl_number.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prandtl_number.h; path = thermalfluids/dimensionless/prandtl_number.h; sourceTree = "<group>"; };
@@ -549,6 +555,8 @@
 		ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = doubleToQuantity.h; path = algorithm/vector/doubleToQuantity.h; sourceTree = "<group>"; };
 		ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringToQuantity.h; path = algorithm/vector/stringToQuantity.h; sourceTree = "<group>"; };
 		ABFC9E711A96B53900F124F1 /* spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spectrum.h; sourceTree = "<group>"; };
+		ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = find_unique_lambdas_in_files.cpp; path = gTBC/gMeasure/find_unique_lambdas_in_files.cpp; sourceTree = "<group>"; };
+		ABFD19981AB1FE7600D865C7 /* find_unique_lambdas_in_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = find_unique_lambdas_in_files.h; path = gTBC/gMeasure/find_unique_lambdas_in_files.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -663,16 +671,20 @@
 		AB44BD701AAA49A400E0710E /* gMeasure */ = {
 			isa = PBXGroup;
 			children = (
+				ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */,
+				ABFD19981AB1FE7600D865C7 /* find_unique_lambdas_in_files.h */,
 				AB44BD711AAA49C600E0710E /* get_signal_from_scope_file.cpp */,
 				AB44BD721AAA49C600E0710E /* get_signal_from_scope_file.h */,
-				AB7996D71AB0EDA50022015B /* scopeFile.h */,
-				AB7996DD1AB0F1C40022015B /* scopeFile.cpp */,
-				AB7996DF1AB0F6190022015B /* read_scope_file.cpp */,
-				AB7996E01AB0F6190022015B /* read_scope_file.h */,
 				AB7996E31AB0F6B90022015B /* is_scope_file.cpp */,
 				AB7996E41AB0F6B90022015B /* is_scope_file.h */,
+				AB7996DF1AB0F6190022015B /* read_scope_file.cpp */,
+				AB7996E01AB0F6190022015B /* read_scope_file.h */,
+				AB7996DD1AB0F1C40022015B /* scopeFile.cpp */,
+				AB7996D71AB0EDA50022015B /* scopeFile.h */,
 				AB7996E71AB10F350022015B /* scopeFiles_from_datafiles.cpp */,
 				AB7996E81AB10F350022015B /* scopeFiles_from_datafiles.h */,
+				AB7A693C1AB2465400249A6E /* Unique_scope_measurements.cpp */,
+				AB7A693D1AB2465400249A6E /* Unique_scope_measurements.h */,
 			);
 			name = gMeasure;
 			sourceTree = "<group>";
@@ -1560,6 +1572,7 @@
 				ABA48C3A1A78553C0025666F /* cmath.h in Headers */,
 				ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */,
 				ABB54FBF19C221920056823E /* subtract.h in Headers */,
+				ABFD199A1AB1FE7600D865C7 /* find_unique_lambdas_in_files.h in Headers */,
 				ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */,
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
@@ -1606,6 +1619,7 @@
 				AB6367601AA941AC00AC8390 /* sum.h in Headers */,
 				AB44BD6E1AAA46E700E0710E /* normalizedDetectorMeasurements.h in Headers */,
 				ABEF4EAD1948D4A500B44AD5 /* basedata.hpp in Headers */,
+				AB7A693F1AB2465400249A6E /* Unique_scope_measurements.h in Headers */,
 				ABA48C4C1A78717F0025666F /* wrap2pi.h in Headers */,
 				ABEF4EB51948D4A500B44AD5 /* lmdiff_poptea_help.hpp in Headers */,
 				ABEF4EBD1948D4A500B44AD5 /* poptea_initialize.h in Headers */,
@@ -1774,6 +1788,7 @@
 				ABEF4EFB1948D4A500B44AD5 /* exportfile.cpp in Sources */,
 				ABEF4E9B1948D4A500B44AD5 /* tma.cpp in Sources */,
 				ABEF4ECC1948D4A500B44AD5 /* lthermal.cpp in Sources */,
+				AB7A693E1AB2465400249A6E /* Unique_scope_measurements.cpp in Sources */,
 				ABEF4ED51948D4A500B44AD5 /* emission.cpp in Sources */,
 				AB6087671A69A6B9009B1E85 /* normalizedSignalRatio.cpp in Sources */,
 				ABEF4ED91948D4A500B44AD5 /* phase99.cpp in Sources */,
@@ -1799,6 +1814,7 @@
 				ABEF4EBE1948D4A500B44AD5 /* temp_cmplx.cpp in Sources */,
 				ABEF4EDB1948D4A500B44AD5 /* detector.cpp in Sources */,
 				AB6087731A69B9FB009B1E85 /* signalRatio.cpp in Sources */,
+				ABFD19991AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp in Sources */,
 				ABEF4EFD1948D4A500B44AD5 /* filesystem.cpp in Sources */,
 				AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */,
 				ABEF4ED71948D4A500B44AD5 /* noise.cpp in Sources */,

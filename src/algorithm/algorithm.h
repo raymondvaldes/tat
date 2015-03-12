@@ -44,10 +44,36 @@ namespace algorithm {
   using boost::reverse_copy;
   //using rotate;
   //using rotate_copy;
-  using boost::sort;
   //using stable_partition;
   //using stable_sort;
   //using boost::swap_ranges;
+
+  template < class T >
+  auto sort ( T const & list ) noexcept -> T
+  {
+    using std::sort;
+    using std::begin;
+    using std::end;
+    
+    auto list_to_sort = list;
+    sort( begin(list_to_sort), end(list_to_sort) ) ;
+    
+    return list_to_sort;
+  }
+  
+  template < class T, class BinaryPredicate >
+  auto sort ( T const & list, BinaryPredicate const & p ) noexcept -> T
+  {
+    using std::sort;
+    using std::begin;
+    using std::end;
+    
+    auto list_to_sort = list;
+    sort( begin( list_to_sort ), end( list_to_sort ), p ) ;
+    
+    return list_to_sort;
+  }
+  
   using boost::transform;
   
   template < class T, class BinaryPredicate >

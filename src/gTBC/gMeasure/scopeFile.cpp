@@ -39,6 +39,15 @@ ScopeFile::ScopeFile
   assert( path.has_extension() ) ;
 }
   
+auto
+ScopeFile::read_transient_signal( void )
+const noexcept -> std::vector< units::quantity<units::si::electric_potential >>
+{
+  auto const transient_DetectorSignal =
+  get_signal_from_scope_file( path );
+  
+  return transient_DetectorSignal;
+}
   
 auto
 ScopeFile::readMeasurements
@@ -50,8 +59,7 @@ const noexcept -> thermal::equipment::detector::Measurements
   using thermal::equipment::detector::Measurements;
   using math::construct::periodic_time_distribution;
   
-  auto const transient_DetectorSignal =
-  get_signal_from_scope_file( path );
+  auto const transient_DetectorSignal = read_transient_signal();
 
   auto const total_detectorSignal = steady_DetectorSignal + transient_DetectorSignal;
 

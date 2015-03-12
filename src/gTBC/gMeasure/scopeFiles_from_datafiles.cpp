@@ -25,7 +25,7 @@ noexcept -> std::vector< ScopeFile >
 {
   auto scopeFiles = vector< ScopeFile >();
 
-  for_each( data_paths , [&]( auto const & data_path ) noexcept
+  for_each( data_paths , [&scopeFiles]( auto const & data_path ) noexcept
   {
     if( is_scope_file( data_path ) )
     {

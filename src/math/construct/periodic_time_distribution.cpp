@@ -8,6 +8,7 @@
 
 #include "math/construct/periodic_time_distribution.h"
 #include "assert/assertExtensions.h"
+#include "algorithm/algorithm.h"
 
 namespace math {
 

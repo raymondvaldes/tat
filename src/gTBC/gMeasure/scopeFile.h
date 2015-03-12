@@ -11,6 +11,7 @@
 
 #include <string>
 #include <cstddef>
+#include <cmath>
 
 #include "tools/interface/filesystem.hpp"
 #include "thermal/equipment/detector/Measurements.h"
@@ -19,9 +20,6 @@
 namespace gTBC {
 
 namespace gMeasure {
-
-
-
 
 struct ScopeFile
 {
@@ -52,7 +50,57 @@ struct ScopeFile
   )
   const noexcept -> thermal::equipment::detector::Measurements ;
   
+  auto read_transient_signal( void )
+  const noexcept ->
+  std::vector< units::quantity<units::si::electric_potential >>;
+  
 };
+
+
+auto const sort_lambda_predicate = [](auto const & a, auto const & b)
+{
+  return a.monochorometer_lambda.value() < b.monochorometer_lambda.value() ;
+} ;
+
+auto const sort_label_predicate = [](auto const & a, auto const & b)
+{
+  return a.label < b.label ;
+} ;
+
+auto const sort_frequency_predicate = [](auto const & a, auto const & b)
+{
+  return a.laser_modulation_frequency.value() < b.laser_modulation_frequency.value() ;
+} ;
+
+
+auto const unique_lambda_predicate = []( auto const & a, auto const & b )
+{
+  using std::abs;
+  auto const lhs = a.monochorometer_lambda.value() ;
+  auto const rhs = b.monochorometer_lambda.value() ;
+  auto const tolerance = 1e-10;
+  auto const not_unique = abs( lhs - rhs ) < tolerance ;
+  return not_unique ;
+};
+
+auto const unique_label_predicate = []( auto const & a, auto const & b )
+{
+  auto const not_unique = a.label == b.label ;
+  return not_unique ;
+};
+
+auto const unique_frequency_predicate = []( auto const & a, auto const & b )
+{
+  auto const lhs = a.laser_modulation_frequency.value() ;
+  auto const rhs = b.laser_modulation_frequency.value() ;
+  auto const tolerance = 1e-10;
+  auto const not_unique = abs( lhs - rhs ) < tolerance ;
+  return not_unique ;
+};
+  
+
+
+
   
 } // namespace gMeasure
   
