@@ -16,6 +16,7 @@
 #include "gTBC/gMeasure/find_unique_measurements.h"
 #include "gTBC/gMeasure/find_unique_frequencies_in_files.h"
 #include "gTBC/gMeasure/get_pair_measurements_at_frequency.h"
+#include "gTBC/gMeasure/unique_measurement_pair.h"
 
 #include "algorithm/algorithm.h"
 
@@ -36,6 +37,7 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   using gTBC::gMeasure::find_unique_measurements;
   using gTBC::gMeasure::find_unique_frequencies_in_files;
   using gTBC::gMeasure::get_pair_measurements_at_frequency;
+  using gTBC::gMeasure::unique_measurement_pairs;
 
   auto const getDataFiles = dir.ls_files( ".dat" );
   auto const scopeFiles = scopeFiles_from_datafiles( getDataFiles ) ;
@@ -55,12 +57,11 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   // now that i have my unique measurements, i need to be able to
   // cycle through all the frequencies and get my two lambdas.
 
-  for_each( unique_frequencies.second, [&]( auto const & freq ) noexcept
-  {
-    get_pair_measurements_at_frequency( unique_measurements, freq ) ;
-  });
+  auto const measurements_frequency_pair =
+  unique_measurement_pairs( unique_measurements, unique_frequencies.second );
   
   
+
   
   //auto const parsedFiles =
   

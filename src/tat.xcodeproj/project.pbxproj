@@ -85,6 +85,8 @@
 		AB8F0CB21A8592F70091196B /* quantityTodouble.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CB01A8592F70091196B /* quantityTodouble.h */; };
 		AB90AA4E1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */; };
 		AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */ = {isa = PBXBuildFile; fileRef = AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */; };
+		AB90AA521AB2930A00F2535D /* unique_measurement_pair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB90AA501AB2930A00F2535D /* unique_measurement_pair.cpp */; };
+		AB90AA531AB2930A00F2535D /* unique_measurement_pair.h in Headers */ = {isa = PBXBuildFile; fileRef = AB90AA511AB2930A00F2535D /* unique_measurement_pair.h */; };
 		AB932DF51A6DC0E700ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF41A6DC0E700ECF117 /* sine.h */; };
 		AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DFB1A6DC2BB00ECF117 /* cosine.h */; };
 		ABA0B7331A9D005C00F000DA /* vector_to_valarray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA0B7321A9D005C00F000DA /* vector_to_valarray.h */; };
@@ -372,6 +374,8 @@
 		AB8F0CB01A8592F70091196B /* quantityTodouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quantityTodouble.h; path = algorithm/vector/quantityTodouble.h; sourceTree = "<group>"; };
 		AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = get_pair_measurements_at_frequency.cpp; path = gTBC/gMeasure/get_pair_measurements_at_frequency.cpp; sourceTree = "<group>"; };
 		AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = get_pair_measurements_at_frequency.h; path = gTBC/gMeasure/get_pair_measurements_at_frequency.h; sourceTree = "<group>"; };
+		AB90AA501AB2930A00F2535D /* unique_measurement_pair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unique_measurement_pair.cpp; path = gTBC/gMeasure/unique_measurement_pair.cpp; sourceTree = "<group>"; };
+		AB90AA511AB2930A00F2535D /* unique_measurement_pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unique_measurement_pair.h; path = gTBC/gMeasure/unique_measurement_pair.h; sourceTree = "<group>"; };
 		AB932DF41A6DC0E700ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = functions/sine.h; sourceTree = "<group>"; };
 		AB932DF61A6DC0F400ECF117 /* cosine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = functions/cosine.h; sourceTree = "<group>"; };
 		AB932DFB1A6DC2BB00ECF117 /* cosine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = curveFit/cosine.h; sourceTree = "<group>"; };
@@ -717,6 +721,8 @@
 				AB7A694D1AB266C500249A6E /* find_all_files_with.h */,
 				AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */,
 				AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */,
+				AB90AA501AB2930A00F2535D /* unique_measurement_pair.cpp */,
+				AB90AA511AB2930A00F2535D /* unique_measurement_pair.h */,
 			);
 			name = gMeasure;
 			sourceTree = "<group>";
@@ -1613,6 +1619,7 @@
 				ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */,
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
+				AB90AA531AB2930A00F2535D /* unique_measurement_pair.h in Headers */,
 				ABEF4EF61948D4A500B44AD5 /* Iheat.h in Headers */,
 				AB44BD6A1AAA43B100E0710E /* normalizedSignalRatio_from_measurement.h in Headers */,
 				AB71A3781AA1307B003AAC84 /* repeatElements.h in Headers */,
@@ -1808,6 +1815,7 @@
 				ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */,
 				ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */,
 				AB06EDAB1A71C6B500F9FDBD /* temperatureSteady.cpp in Sources */,
+				AB90AA521AB2930A00F2535D /* unique_measurement_pair.cpp in Sources */,
 				ABFC9E671A94372A00F124F1 /* stringToDouble.cpp in Sources */,
 				ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */,
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,

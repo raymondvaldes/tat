@@ -25,9 +25,8 @@ auto get_pair_measurements_at_frequency
 (
   std::vector< Unique_scope_measurement > const & unique_measurements,
   units::quantity<units::si::frequency> const & frequency
-) -> void
-////noexcept -> std::pair<  thermal::equipment::detector::Measurements,
-////                        thermal::equipment::detector::Measurements >
+)
+noexcept -> std::pair<  Unique_scope_measurement, Unique_scope_measurement >
 {
 
   auto temp = vector<Unique_scope_measurement>();
@@ -39,18 +38,15 @@ auto get_pair_measurements_at_frequency
     
     if( current_frequency )
     {
-        temp.push_back( measurement );
+      temp.push_back( measurement );
     }
   
   } );
 
-  
-
-//  assert( temp.size() == 2 );
-//  const auto output = make_pair( temp.front() , temp.back() );
-//  return output;
+  assert( temp.size() == 2 );
+  const auto output = make_pair( temp.front() , temp.back() );
+  return output;
 }
-
   
 } // gMeasure
   
