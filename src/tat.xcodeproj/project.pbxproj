@@ -83,6 +83,8 @@
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
 		AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CAD1A858D1C0091196B /* spline-quantity.h */; };
 		AB8F0CB21A8592F70091196B /* quantityTodouble.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CB01A8592F70091196B /* quantityTodouble.h */; };
+		AB90AA4E1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */; };
+		AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */ = {isa = PBXBuildFile; fileRef = AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */; };
 		AB932DF51A6DC0E700ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF41A6DC0E700ECF117 /* sine.h */; };
 		AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DFB1A6DC2BB00ECF117 /* cosine.h */; };
 		ABA0B7331A9D005C00F000DA /* vector_to_valarray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA0B7321A9D005C00F000DA /* vector_to_valarray.h */; };
@@ -368,6 +370,8 @@
 		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
 		AB8F0CAD1A858D1C0091196B /* spline-quantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spline-quantity.h"; sourceTree = "<group>"; };
 		AB8F0CB01A8592F70091196B /* quantityTodouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quantityTodouble.h; path = algorithm/vector/quantityTodouble.h; sourceTree = "<group>"; };
+		AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = get_pair_measurements_at_frequency.cpp; path = gTBC/gMeasure/get_pair_measurements_at_frequency.cpp; sourceTree = "<group>"; };
+		AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = get_pair_measurements_at_frequency.h; path = gTBC/gMeasure/get_pair_measurements_at_frequency.h; sourceTree = "<group>"; };
 		AB932DF41A6DC0E700ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = functions/sine.h; sourceTree = "<group>"; };
 		AB932DF61A6DC0F400ECF117 /* cosine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = functions/cosine.h; sourceTree = "<group>"; };
 		AB932DFB1A6DC2BB00ECF117 /* cosine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = curveFit/cosine.h; sourceTree = "<group>"; };
@@ -711,6 +715,8 @@
 				AB7A69491AB253F800249A6E /* find_unique_measurements.h */,
 				AB7A694C1AB266C500249A6E /* find_all_files_with.cpp */,
 				AB7A694D1AB266C500249A6E /* find_all_files_with.h */,
+				AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */,
+				AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */,
 			);
 			name = gMeasure;
 			sourceTree = "<group>";
@@ -1581,6 +1587,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */,
 				AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */,
 				ABEF4F001948D4A500B44AD5 /* xml.h in Headers */,
 				ABEB14B21AAA557900204B36 /* analytical.h in Headers */,
@@ -1892,6 +1899,7 @@
 				ABEF4EB21948D4A500B44AD5 /* lmdiff_poptea.cpp in Sources */,
 				AB44BD691AAA43B100E0710E /* normalizedSignalRatio_from_measurement.cpp in Sources */,
 				ABB54FD119C35E300056823E /* ifzero.cpp in Sources */,
+				AB90AA4E1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp in Sources */,
 				ABEF4E871948D4A500B44AD5 /* constrained.cpp in Sources */,
 				ABEF4EDF1948D4A500B44AD5 /* setup.cpp in Sources */,
 				ABEF4EAE1948D4A500B44AD5 /* cmplx_combination.cpp in Sources */,

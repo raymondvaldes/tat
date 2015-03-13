@@ -33,17 +33,25 @@ struct Unique_scope_measurement
   units::quantity< units::si::frequency > laser_modulation_frequency;
   
   size_t size;
-  
+    
   size_t cycles;
   
   Unique_scope_measurement
   (
-    std::vector< ScopeFile > scopeFiles_
+    std::vector< ScopeFile > const & scopeFiles_
   ) ;
+
+  auto
+  transient_signal_average( void ) const
+  noexcept -> std::vector< units::quantity<units::si::electric_potential >>;
   
-  auto export_signal_averaged_measurement( void ) -> void ;
+  auto signal_averaged_measurement
+(
+  units::quantity< units::si::electric_potential, double > const & DC_Signal,
+  units::quantity< units::si::wavelength > const & offset
+)
+  const noexcept -> thermal::equipment::detector::Measurements;
   
-  auto signal_averaged_measurement( void ) -> void;
 };
 
 } // namespace gMeasure

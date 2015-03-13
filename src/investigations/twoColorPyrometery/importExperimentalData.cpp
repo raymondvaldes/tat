@@ -14,13 +14,17 @@
 #include "gTBC/gMeasure/scopeFiles_from_datafiles.h"
 #include "gTBC/gMeasure/find_unique_lambdas_in_files.h"
 #include "gTBC/gMeasure/find_unique_measurements.h"
+#include "gTBC/gMeasure/find_unique_frequencies_in_files.h"
+#include "gTBC/gMeasure/get_pair_measurements_at_frequency.h"
+
+#include "algorithm/algorithm.h"
 
 namespace investigations {
 
 namespace twoColorPyrometery {
 
 
-
+using algorithm::for_each;
 
 auto importExperimentalData( filesystem::directory const & dir ) -> void
 {
@@ -30,26 +34,31 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   using gTBC::gMeasure::sort_frequency_predicate;
   using gTBC::gMeasure::sort_lambda_predicate;
   using gTBC::gMeasure::find_unique_measurements;
-  
+  using gTBC::gMeasure::find_unique_frequencies_in_files;
+  using gTBC::gMeasure::get_pair_measurements_at_frequency;
+
   auto const getDataFiles = dir.ls_files( ".dat" );
   auto const scopeFiles = scopeFiles_from_datafiles( getDataFiles ) ;
-  /// I have the files and the meta data
-  /// group the files into signal average them, print out the signal average
-  /// I need to identifiy them by having the same label, attributes,
-  /// the data from those needs to be put into N different vectors and then
-  /// averaged and exported back out in the same format call
-  /// (label_attributes_signal_averaged.dat)
   
   auto const unique_lambdas = find_unique_lambdas_in_files( scopeFiles ) ;
   assert( unique_lambdas.first.size() == 2 ) ;
+  
+  auto const unique_frequencies = find_unique_frequencies_in_files( scopeFiles ) ;
 
   // At this point I have looked into my "case" directory and the I have pull
   // out all the files and file meta deta from there.  I haven't yet read
   // the info the files because i am just operating at the filename level.
   
   auto const unique_measurements = find_unique_measurements( scopeFiles ) ;
+  
+  //for each frequency i need to get the two measurements and do my analysis
+  // now that i have my unique measurements, i need to be able to
+  // cycle through all the frequencies and get my two lambdas.
 
-
+  for_each( unique_frequencies.second, [&]( auto const & freq ) noexcept
+  {
+    get_pair_measurements_at_frequency( unique_measurements, freq ) ;
+  });
   
   
   

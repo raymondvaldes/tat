@@ -52,7 +52,7 @@ const noexcept -> std::vector< units::quantity<units::si::electric_potential >>
 auto
 ScopeFile::readMeasurements
 (
-  units::quantity<units::si::electric_potential, double > const & steady_DetectorSignal
+  units::quantity<units::si::electric_potential, double > const & DC_Signal
 )
 const noexcept -> thermal::equipment::detector::Measurements
 {
@@ -61,7 +61,7 @@ const noexcept -> thermal::equipment::detector::Measurements
   
   auto const transient_DetectorSignal = read_transient_signal();
 
-  auto const total_detectorSignal = steady_DetectorSignal + transient_DetectorSignal;
+  auto const total_detectorSignal = DC_Signal + transient_DetectorSignal;
 
   auto const counts = transient_DetectorSignal.size();
 
