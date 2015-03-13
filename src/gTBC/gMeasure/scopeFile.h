@@ -91,6 +91,7 @@ auto const unique_label_predicate = []( auto const & a, auto const & b )
 
 auto const unique_frequency_predicate = []( auto const & a, auto const & b )
 {
+  using std::abs;
   auto const lhs = a.laser_modulation_frequency.value() ;
   auto const rhs = b.laser_modulation_frequency.value() ;
   auto const tolerance = 1e-10;

@@ -55,7 +55,7 @@ auto range_from_0( T const end, size_t const points ) noexcept
   
   auto const start = T::from_value( 0 ) ;
   
-  return range( start, end , points ) ;
+  return uniform_range( start, end , points ) ;
 }
 
 template <class T>

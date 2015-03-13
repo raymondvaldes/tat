@@ -1,5 +1,5 @@
 //
-//  find_unique_lambdas_in_files.cpp
+//  find_unique_frequencies_in_files.cpp
 //  tat
 //
 //  Created by Raymond Valdes_New on 3/12/15.
@@ -9,7 +9,7 @@
 #include <cassert>
 #include <algorithm>
 
-#include "gTBC/gMeasure/find_unique_lambdas_in_files.h"
+#include "gTBC/gMeasure/find_unique_frequencies_in_files.h"
 #include "algorithm/algorithm.h"
 
 namespace gTBC {
@@ -23,27 +23,27 @@ using algorithm::sort;
 using algorithm::unique;
 
 using units::quantity;
-using units::si::wavelength;
-using std::make_pair;
+using units::si::frequency;
 
 auto
-find_unique_lambdas_in_files
+find_unique_frequencies_in_files
 (
   std::vector< ScopeFile > const & scope_files
 )
-noexcept -> std::pair< std::vector< ScopeFile >,
-  std::vector< units::quantity< units::si::wavelength > > >
+noexcept ->
+ std::pair< std::vector< ScopeFile >,
+ std::vector< units::quantity< units::si::frequency > > >
 {
   assert( !scope_files.empty() );
 
-  auto const sorted_files = sort( scope_files, sort_lambda_predicate ) ;
-  auto const unique_files = unique( sorted_files, unique_lambda_predicate );
+  auto const sorted_files = sort( scope_files, sort_frequency_predicate ) ;
+  auto const unique_files = unique( sorted_files, unique_frequency_predicate );
   
-  auto out = vector< quantity< wavelength > >();
+  auto out = vector< quantity< frequency > >();
   
   for_each( unique_files, [&out]( const auto & file )
   {
-    out.push_back( file.monochorometer_lambda );
+    out.push_back( file.laser_modulation_frequency );
   } ) ;
 
   return make_pair( unique_files, out );

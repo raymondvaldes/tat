@@ -13,6 +13,7 @@
 #include "gTBC/gMeasure/is_scope_file.h"
 #include "gTBC/gMeasure/scopeFiles_from_datafiles.h"
 #include "gTBC/gMeasure/find_unique_lambdas_in_files.h"
+#include "gTBC/gMeasure/find_unique_measurements.h"
 
 namespace investigations {
 
@@ -28,6 +29,7 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   using gTBC::gMeasure::sort_label_predicate  ;
   using gTBC::gMeasure::sort_frequency_predicate;
   using gTBC::gMeasure::sort_lambda_predicate;
+  using gTBC::gMeasure::find_unique_measurements;
   
   auto const getDataFiles = dir.ls_files( ".dat" );
   auto const scopeFiles = scopeFiles_from_datafiles( getDataFiles ) ;
@@ -38,20 +40,16 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   /// averaged and exported back out in the same format call
   /// (label_attributes_signal_averaged.dat)
   
-  
-
-
-  
-  
-  
-  
   auto const unique_lambdas = find_unique_lambdas_in_files( scopeFiles ) ;
-  assert( unique_lambdas.size() == 2 ) ;
-
+  assert( unique_lambdas.first.size() == 2 ) ;
 
   // At this point I have looked into my "case" directory and the I have pull
   // out all the files and file meta deta from there.  I haven't yet read
   // the info the files because i am just operating at the filename level.
+  
+  auto const unique_measurements = find_unique_measurements( scopeFiles ) ;
+
+
   
   
   
