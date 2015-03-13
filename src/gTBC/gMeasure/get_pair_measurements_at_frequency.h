@@ -11,7 +11,6 @@
 
 #include <utility>
 #include "units.h"
-#include "thermal/equipment/detector/Measurements.h"
 #include "gTBC/gMeasure/Unique_scope_measurement.h"
 
 

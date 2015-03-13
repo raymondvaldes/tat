@@ -45,7 +45,10 @@ noexcept -> std::pair< std::vector< ScopeFile >,
   {
     out.push_back( file.monochorometer_lambda );
   } ) ;
-
+  
+  
+  assert( unique_files.size() == 2 ) ;
+  
   return make_pair( unique_files, out );
 }
 

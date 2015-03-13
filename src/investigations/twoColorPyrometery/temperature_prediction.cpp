@@ -72,6 +72,7 @@ noexcept -> thermal::equipment::detector::Measurements
 auto temperature_prediction( filesystem::directory const & dir ) -> void
 {
   using std::cout;
+  using std::string;
 
   using units::quantity;
   using units::si::time;
@@ -106,11 +107,17 @@ auto temperature_prediction( filesystem::directory const & dir ) -> void
   
   auto const fullpath = dir.abs( filename );
   auto const pt = getTreefromFile( fullpath ) ;
-  auto const conjunto = std::string{"temperature_measurement."};
+  auto const conjunto = string{"temperature_measurement."};
   auto const settings_branch = pt.get_child( conjunto + "settings" );
   
   auto const signalBackground_value  = settings_branch.get<double>( "signal_background" );
   auto const signalBackground = quantity<electric_potential> ( signalBackground_value  * volts ) ;
+
+  auto const wavelength1_value  = settings_branch.get<double>( "wavelength1_nominal" );
+  auto const wavelength1_nom = quantity<wavelength> ( wavelength1_value  * micrometers ) ;
+  
+  auto const wavelength2_value  = settings_branch.get<double>( "wavelength2_nominal" );
+  auto const wavelength2_nom = quantity<wavelength> ( wavelength2_value  * micrometers ) ;
   
   auto const signalDC1_raw_value  = settings_branch.get<double>( "signal_DC_1" );
   auto const signalDC1_raw = quantity<electric_potential> ( signalDC1_raw_value  * volts ) ;
@@ -118,19 +125,18 @@ auto temperature_prediction( filesystem::directory const & dir ) -> void
   auto const signalDC2_raw_value  = settings_branch.get<double>( "signal_DC_2" );
   auto const signalDC2_raw = quantity<electric_potential> ( signalDC2_raw_value  * volts ) ;
 
+  auto const wavelength_offset_value  = settings_branch.get<double>( "wavelenth_offset" );
+  auto const wavelength_offset = quantity<wavelength> ( wavelength_offset_value  * micrometers ) ;
+
   auto const gCoeff_value  = settings_branch.get<double>( "calibration_coefficient" );
   auto const gCoeff = quantity<dimensionless> ( gCoeff_value ) ;
 
-  auto const wavelength1_value  = settings_branch.get<double>( "wavelength1_nominal" );
-  auto const wavelength1_nom = quantity<wavelength> ( wavelength1_value  * micrometers ) ;
-  
-  auto const wavelength2_value  = settings_branch.get<double>( "wavelength2_nominal" );
-  auto const wavelength2_nom = quantity<wavelength> ( wavelength2_value  * micrometers ) ;
 
-  auto const wavelength_offset_value  = settings_branch.get<double>( "wavelenth_offset" );
-  auto const wavelength_offset = quantity<wavelength> ( wavelength_offset_value  * micrometers ) ;
-  
 
+
+
+
+  
   auto const frequency_value  = settings_branch.get<double>( "frequency" );
   auto const temperoralFrequency = quantity<frequency> ( frequency_value  * hertz ) ;
   
@@ -185,10 +191,9 @@ auto temperature_prediction( filesystem::directory const & dir ) -> void
 
   auto const myFittedAmplitude = fittedCosine.get_amplitude() ;
   auto const myFittedOffset = fittedCosine.get_offset() ;
-  auto const myFittedPhase = fittedCosine.get_phase() ;
-
-  auto const steadyTemperature = quantity<dimensionless>{1} / myFittedOffset ;
   
+  auto const myFittedPhase = fittedCosine.get_phase() ;
+  auto const steadyTemperature = quantity<dimensionless>{1} / myFittedOffset ;
   auto const transientTemperature = myFittedAmplitude * pow<2>( steadyTemperature );
 
   auto i = 0u;

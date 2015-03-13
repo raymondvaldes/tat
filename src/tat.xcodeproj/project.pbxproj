@@ -87,6 +87,8 @@
 		AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */ = {isa = PBXBuildFile; fileRef = AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */; };
 		AB90AA521AB2930A00F2535D /* unique_measurement_pair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB90AA501AB2930A00F2535D /* unique_measurement_pair.cpp */; };
 		AB90AA531AB2930A00F2535D /* unique_measurement_pair.h in Headers */ = {isa = PBXBuildFile; fileRef = AB90AA511AB2930A00F2535D /* unique_measurement_pair.h */; };
+		AB90AA561AB298BB00F2535D /* total_calibrated_emission_pairs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB90AA541AB298BB00F2535D /* total_calibrated_emission_pairs.cpp */; };
+		AB90AA571AB298BB00F2535D /* total_calibrated_emission_pairs.h in Headers */ = {isa = PBXBuildFile; fileRef = AB90AA551AB298BB00F2535D /* total_calibrated_emission_pairs.h */; };
 		AB932DF51A6DC0E700ECF117 /* sine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DF41A6DC0E700ECF117 /* sine.h */; };
 		AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */ = {isa = PBXBuildFile; fileRef = AB932DFB1A6DC2BB00ECF117 /* cosine.h */; };
 		ABA0B7331A9D005C00F000DA /* vector_to_valarray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA0B7321A9D005C00F000DA /* vector_to_valarray.h */; };
@@ -376,6 +378,8 @@
 		AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = get_pair_measurements_at_frequency.h; path = gTBC/gMeasure/get_pair_measurements_at_frequency.h; sourceTree = "<group>"; };
 		AB90AA501AB2930A00F2535D /* unique_measurement_pair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unique_measurement_pair.cpp; path = gTBC/gMeasure/unique_measurement_pair.cpp; sourceTree = "<group>"; };
 		AB90AA511AB2930A00F2535D /* unique_measurement_pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unique_measurement_pair.h; path = gTBC/gMeasure/unique_measurement_pair.h; sourceTree = "<group>"; };
+		AB90AA541AB298BB00F2535D /* total_calibrated_emission_pairs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = total_calibrated_emission_pairs.cpp; path = gTBC/gMeasure/total_calibrated_emission_pairs.cpp; sourceTree = "<group>"; };
+		AB90AA551AB298BB00F2535D /* total_calibrated_emission_pairs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = total_calibrated_emission_pairs.h; path = gTBC/gMeasure/total_calibrated_emission_pairs.h; sourceTree = "<group>"; };
 		AB932DF41A6DC0E700ECF117 /* sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sine.h; path = functions/sine.h; sourceTree = "<group>"; };
 		AB932DF61A6DC0F400ECF117 /* cosine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = functions/cosine.h; sourceTree = "<group>"; };
 		AB932DFB1A6DC2BB00ECF117 /* cosine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cosine.h; path = curveFit/cosine.h; sourceTree = "<group>"; };
@@ -723,6 +727,8 @@
 				AB90AA4D1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h */,
 				AB90AA501AB2930A00F2535D /* unique_measurement_pair.cpp */,
 				AB90AA511AB2930A00F2535D /* unique_measurement_pair.h */,
+				AB90AA541AB298BB00F2535D /* total_calibrated_emission_pairs.cpp */,
+				AB90AA551AB298BB00F2535D /* total_calibrated_emission_pairs.h */,
 			);
 			name = gMeasure;
 			sourceTree = "<group>";
@@ -1730,6 +1736,7 @@
 				AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */,
 				ABEF4ED01948D4A500B44AD5 /* model_type.h in Headers */,
 				ABEF4E7A1948D4A500B44AD5 /* num_method2014.h in Headers */,
+				AB90AA571AB298BB00F2535D /* total_calibrated_emission_pairs.h in Headers */,
 				AB6981A819CB638300940843 /* apply_to_all.h in Headers */,
 				ABAA413C1A9D519F0091C3BD /* sum.h in Headers */,
 				ABEF4EE41948D4A500B44AD5 /* labels.h in Headers */,
@@ -1864,6 +1871,7 @@
 				ABEF4EDB1948D4A500B44AD5 /* detector.cpp in Sources */,
 				AB6087731A69B9FB009B1E85 /* signalRatio.cpp in Sources */,
 				ABFD19991AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp in Sources */,
+				AB90AA561AB298BB00F2535D /* total_calibrated_emission_pairs.cpp in Sources */,
 				ABEF4EFD1948D4A500B44AD5 /* filesystem.cpp in Sources */,
 				AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */,
 				ABEF4ED71948D4A500B44AD5 /* noise.cpp in Sources */,

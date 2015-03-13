@@ -17,6 +17,7 @@
 #include "gTBC/gMeasure/find_unique_frequencies_in_files.h"
 #include "gTBC/gMeasure/get_pair_measurements_at_frequency.h"
 #include "gTBC/gMeasure/unique_measurement_pair.h"
+#include "gTBC/gMeasure/total_calibrated_emission_pairs.h"
 
 #include "algorithm/algorithm.h"
 
@@ -24,28 +25,19 @@ namespace investigations {
 
 namespace twoColorPyrometery {
 
-
-using algorithm::for_each;
-
 auto importExperimentalData( filesystem::directory const & dir ) -> void
 {
-  using gTBC::gMeasure::read_scope_file;
   using gTBC::gMeasure::scopeFiles_from_datafiles;
-  using gTBC::gMeasure::sort_label_predicate  ;
-  using gTBC::gMeasure::sort_frequency_predicate;
-  using gTBC::gMeasure::sort_lambda_predicate;
   using gTBC::gMeasure::find_unique_measurements;
-  using gTBC::gMeasure::find_unique_frequencies_in_files;
-  using gTBC::gMeasure::get_pair_measurements_at_frequency;
   using gTBC::gMeasure::unique_measurement_pairs;
+  using gTBC::gMeasure::total_calibrated_emission_pairs;
 
   auto const getDataFiles = dir.ls_files( ".dat" );
   auto const scopeFiles = scopeFiles_from_datafiles( getDataFiles ) ;
   
-  auto const unique_lambdas = find_unique_lambdas_in_files( scopeFiles ) ;
-  assert( unique_lambdas.first.size() == 2 ) ;
+  auto const lambdas = find_unique_lambdas_in_files( scopeFiles ) ;
   
-  auto const unique_frequencies = find_unique_frequencies_in_files( scopeFiles ) ;
+  auto const frequencies = find_unique_frequencies_in_files( scopeFiles ) ;
 
   // At this point I have looked into my "case" directory and the I have pull
   // out all the files and file meta deta from there.  I haven't yet read
@@ -58,17 +50,14 @@ auto importExperimentalData( filesystem::directory const & dir ) -> void
   // cycle through all the frequencies and get my two lambdas.
 
   auto const measurements_frequency_pair =
-  unique_measurement_pairs( unique_measurements, unique_frequencies.second );
+  unique_measurement_pairs( unique_measurements, frequencies.second );
   
-  
-
-  
-  //auto const parsedFiles =
-  
-//  auto const scopeFiles_at_lambda1 = parsedFiles.first;
-//  auto const scopeFiles_at_lambda2 = parsedFiles.second;
-
-  //Nice, now that everything is split
+//  auto const calibrated_emission_pairs =
+//  total_calibrated_emission_pairs( measurements_frequency_pair,
+//    make_pair(),
+//    make_pair(),
+//    wavelength_offset
+//  );
 
 
   //What I want to do

@@ -18,7 +18,7 @@ namespace detector {
 
 Measurements::Measurements(
   units::quantity<units::si::wavelength> const & wavelengthIn,
-  std::vector< units::quantity< units::si::time> > referenceTime,
+  std::vector< units::quantity< units::si::time> > const & referenceTime,
   std::vector< units::quantity< units::si::electric_potential > > const & signals )
   : wavelength( wavelengthIn), measurements( signals.size() )
 {

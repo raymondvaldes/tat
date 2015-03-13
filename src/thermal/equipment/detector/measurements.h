@@ -25,10 +25,12 @@ struct Measurements{
   units::quantity<units::si::wavelength> wavelength;
   std::vector< Measurement > measurements;
   
-  Measurements(
-    units::quantity<units::si::wavelength> const & wavelengthIn,
-    std::vector< units::quantity< units::si::time> > referenceTime,
-    std::vector< units::quantity< units::si::electric_potential > > const & signals );
+  Measurements
+  (
+    units::quantity< units::si::wavelength > const & wavelengthIn,
+    std::vector< units::quantity< units::si::time > > const & referenceTime,
+    std::vector< units::quantity< units::si::electric_potential > > const & signals
+  );
   
   auto size( void ) const noexcept -> size_t;
   
