@@ -37,6 +37,8 @@ struct transient_analysis_results{
 
   math::functions::Cosine< units::si::one_over_temperature >
   fitted_cosine_function;
+  
+  units::quantity< units::si::angular_frequency > laser_modulation_w;
 
   transient_analysis_results
   (
@@ -55,12 +57,16 @@ struct transient_analysis_results{
     normalized_SRs_,
 
     math::functions::Cosine< units::si::one_over_temperature > const &
-    fitted_cosine_function_
+    fitted_cosine_function_,
+   
+    units::quantity< units::si::angular_frequency > const & laser_modulation_w_
+
   )  : steady_temperature( steady_temperature_ ),
       transient_temperature_phase( transient_temperature_phase_ ),
       transient_temperature_amplitude( transient_temperature_amplitude_ ),
       normalized_SRs( normalized_SRs_ ),
-      fitted_cosine_function( fitted_cosine_function_ )
+      fitted_cosine_function( fitted_cosine_function_ ),
+      laser_modulation_w( laser_modulation_w_ )
   {};
 };
 
@@ -69,7 +75,7 @@ auto transient_analysis
   thermal::equipment::detector::Measurements const & measurements_1,
   thermal::equipment::detector::Measurements const & measurements_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::frequency > const & laser_modulation
+  units::quantity< units::si::angular_frequency > const & laser_modulation
 )
 noexcept -> transient_analysis_results;
   

@@ -40,7 +40,7 @@ auto transient_analysis
   thermal::equipment::detector::Measurements const & measurements_1,
   thermal::equipment::detector::Measurements const & measurements_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::frequency > const & laser_modulation
+  units::quantity< units::si::angular_frequency > const & laser_modulation
 )
 noexcept -> transient_analysis_results
 {
@@ -54,7 +54,8 @@ noexcept -> transient_analysis_results
   PeriodicProperties<one_over_temperature>{
     myPeriodicData.initialEstimateOffset(),
     myPeriodicData.initialEstimateAmplitude(),
-    laser_modulation, quantity<plane_angle>{ -1.6 * radians }
+    laser_modulation,
+    quantity<plane_angle>{ -1.6 * radians }
   } ;
 
   auto const fitted_cosine_function =
@@ -77,7 +78,8 @@ noexcept -> transient_analysis_results
     transient_temperature_phase,
     transient_temperature_amplitude,
     normalized_SRs,
-    fitted_cosine_function
+    fitted_cosine_function,
+    laser_modulation
   );
 
   return output;

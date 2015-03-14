@@ -12,7 +12,9 @@
 #include <vector>
 #include <utility>
 
+#include "thermal/pyrometry/twoColor/transient_analysis.h"
 #include "thermal/equipment/detector/measurements.h"
+#include "gTBC/gMeasure/import_twoColor_scope_files.h"
 #include "units.h"
 
 namespace thermal {
@@ -23,9 +25,16 @@ namespace twoColor {
 
 struct transient_analysis_sweep_results
 {
-  transient_analysis_sweep_results(void){};
-};
+  std::vector< transient_analysis_results > transient_results;
 
+  transient_analysis_sweep_results(
+    std::vector< transient_analysis_results > const & transient_results_
+  );
+  
+  auto phases_omega(void) const -> void;
+//  std::pair<  std::vector< units::quantity< units::si::angular_frequency>  >,
+//            std::vector< units::si::plane_angle > >;
+};
 
 
 auto transient_analysis_sweep
@@ -40,6 +49,13 @@ auto transient_analysis_sweep
   units::quantity< units::si::dimensionless > const & gCoeff
 )
 noexcept -> transient_analysis_sweep_results;
+
+auto transient_analysis_sweep
+(
+  gTBC::gMeasure::processed_scope_data const & gCoeff
+)
+noexcept -> transient_analysis_sweep_results;
+
   
 } // namespace twoColor
   

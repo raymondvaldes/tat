@@ -83,6 +83,18 @@ diffusivity_from_phases
   return fittedSpeciman;
 }
 
+auto
+diffusivity_from_phases
+(
+  std::pair< std::vector< units::quantity< units::si::angular_frequency > >,
+  std::vector< units::quantity< units::si::plane_angle > > > const & observations,
+  thermal::model::slab::Slab const & slab_initial
+)
+-> thermal::model::slab::Slab
+{
+  return diffusivity_from_phases( observations.first, observations.second, slab_initial );
+}
+
 } // namespace temperature
 
 } // namespace bulkSpeciman

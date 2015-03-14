@@ -52,12 +52,14 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   auto const characteristic_length = quantity< length >( 1420 * micrometers );
 
   auto const alpha = quantity<thermal_diffusivity>( 5 * square_millimeters / second );
+
+  using thermal::model::slab::Slab;
+  auto mySlab = Slab{ characteristic_length, alpha, k };
   
   using physics::classical_mechanics::frequency_to_angularFrequency;
 
 
-  using thermal::model::slab::Slab;
-  auto mySlab = Slab{ characteristic_length, alpha, k };
+
 
   using math::construct::range_1og10;
   auto const lmin = quantity< dimensionless >( 0.02 );
