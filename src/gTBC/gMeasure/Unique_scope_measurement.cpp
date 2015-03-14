@@ -91,7 +91,7 @@ auto
 Unique_scope_measurement::signal_averaged_measurement
 (
   units::quantity< units::si::electric_potential, double > const & DC_Signal,
-  units::quantity< units::si::wavelength > const & offset
+  units::quantity< units::si::wavelength > const & offset_monochrometer
 )
 const noexcept -> thermal::equipment::detector::Measurements
 {
@@ -107,7 +107,7 @@ const noexcept -> thermal::equipment::detector::Measurements
   auto const referenceTime =
   periodic_time_distribution( laser_modulation_frequency, cycles, counts ) ;
   
-  auto const true_lambda = monochorometer_lambda + offset;
+  auto const true_lambda = monochorometer_lambda + offset_monochrometer;
   
   auto const detectorMeasurements =
   Measurements{ true_lambda, referenceTime, total_detectorSignal };

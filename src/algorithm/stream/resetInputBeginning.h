@@ -13,8 +13,9 @@
 #include <iostream>
 
 namespace algorithm {
+
 namespace stream {
-  
+
 inline void clear( std::istream& inputStream) noexcept {
   inputStream.clear();
 }
@@ -28,6 +29,8 @@ inline void resetStreamToBeginnging( std::istream& inputStream ) noexcept{
   seekBeginning_of_file(inputStream);
 }
 
-}}
+} // namespace stream
+
+} // namesapce algorithm
 
 #endif /* defined(__tat__resetToBeginging__) */

@@ -50,8 +50,8 @@ private:
     vector<double> Temperature;
     vector<double> B1, B2, B3;
 
-    const size_t M2;
     double B4;
+    const size_t M2;
 
     explicit matrixArrays( const size_t length ) noexcept
       : A1(length), A2(length), A3(length), b(length), Temperature(length),

@@ -6,21 +6,19 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#include <iostream>
 #include "algorithm/stream/resetInputBeginning.h"
 
 namespace algorithm {
+
 namespace stream {
 
-
-std::istream resetToBeginnging( const std::istream& inputStream ) noexcept {
-
-
-
+void resetToBeginnging( std::istream& inputStream ) noexcept
+{
   inputStream.clear();
   inputStream.seekg( 0, std::ios::beg ) ;
-
-  return inputStream;
 }
 
-  
-}}
+} // namespace stream
+
+} // namespace algorithm

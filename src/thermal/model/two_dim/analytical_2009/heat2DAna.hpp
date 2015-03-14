@@ -51,12 +51,9 @@ public:
   void testing( void ) const noexcept;
 
 private:
-  const double R0, R1, lambda, It, csub, asub, gamma, beam;
+  const double R0, R1, lambda, It, asub, gamma, beam;
   const double k_coat, L, psi_coat, ccoat, lambda_Sub;
   const class numericalModel::Mesh mesh;
-
-  const double epsabs = 1e-4;
-  const double epsrel = 1e-4;
 
   ///nullspace
   const double nuStart = 0;

@@ -14,7 +14,7 @@
 #include <vector>       // std::vector
 #include <cassert>      // assert
 
-#include "algorithm.h"
+#include "algorithm/algorithm.h"
 #include "units.h"  // units::quantity
 
 namespace math {

@@ -44,7 +44,7 @@ public:
   
   explicit temperatureScale( const double tolerance_,const double referance_,
                              const double base_, const double rear_) noexcept;
-  static struct temperatureScale
+  static temperatureScale
   loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept;
   ~temperatureScale( void ) noexcept;
 };

@@ -112,7 +112,7 @@ template< typename T >
 auto cosine(  std::pair< std::vector< units::quantity<units::si::time> >,
               std::vector< units::quantity< T > > > const & input,
               functions::PeriodicProperties< T > const & initialConditions)
-noexcept -> functions::Cosine<T>
+noexcept -> functions::Cosine< T >
 {
   return cosine( input.first, input.second, initialConditions );
 }

@@ -22,7 +22,7 @@ namespace detector {
 
 struct Measurements{
 
-  units::quantity<units::si::wavelength> wavelength;
+  units::quantity<units::si::wavelength> wavelength; //of detector
   std::vector< Measurement > measurements;
   
   Measurements

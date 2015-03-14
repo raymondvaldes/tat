@@ -24,7 +24,7 @@
 \*----------------------------------------------------------------------------*/
 
 #include "numerical_2011.h"
-#include "thermal/model/utilities/heat generation/Iheat.h"
+#include "thermal/model/utilities/heat_generation/Iheat.h"
 #include "thermal/model/utilities/nondimensional/tau_0.h"
 #include "thermal/model/one_dim/Tss_ana.h"
 #include "thermal/define/lthermal.h"

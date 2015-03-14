@@ -11,21 +11,24 @@
 #include "investigations/twoColorPyrometery/calculateCalibrationCoefficients.h"
 #include "investigations/twoColorPyrometery/temperature_prediction.h"
 #include "investigations/twoColorPyrometery/phase_fitting.h"
-#include "investigations/twoColorPyrometery/importExperimentalData.h"
+
+#include "gTBC/gMeasure/import_twoColor_scope_files.h"
 
 namespace investigations{
 
 namespace twoColorPyrometery{
 
-auto run( filesystem::directory const & dir ) noexcept -> void
+using gTBC::gMeasure::import_twoColor_scope_files;
+
+auto run( filesystem::directory const & dir )  -> void
 {
+ // temperature_prediction( dir ) ;  //prototyping function
+//  phase_fitting( dir ) ;  // prototyping function
+  
   calculateCalibrationCoefficients( dir ) ;
   
-  temperature_prediction( dir ) ;
+  auto const scope_data = import_twoColor_scope_files( dir ) ;
   
-  phase_fitting( dir ) ;
-  
-  importExperimentalData( dir ) ;
 }
 
 } //namespace twoColorPyrometry

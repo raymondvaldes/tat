@@ -44,7 +44,7 @@ private:
     bounds( void ) noexcept;
     bounds( const double lower_, const double  upper_ ) noexcept;
   };
-  struct labels name;
+  labels name;
   const struct bounds constraint;
   double initialGuess;
   double bestfitval;

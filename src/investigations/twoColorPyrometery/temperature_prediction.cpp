@@ -27,6 +27,7 @@
 #include "units.h"
 
 #include "algorithm/vector/operator_overloads.h"
+#include "thermal/pyrometry/twoColor/pyrometery_settings_file.h"
 
 
 namespace investigations {
@@ -75,81 +76,42 @@ auto temperature_prediction( filesystem::directory const & dir ) -> void
   using std::string;
 
   using units::quantity;
-  using units::si::time;
-  using units::si::micrometers;
-  using units::si::wavelength;
-  using units::si::volts;
-  using units::si::electric_potential;
   using units::si::dimensionless;
-  using units::si::frequency;
   using units::si::kelvin;
   using units::si::one_over_temperature;
-  using units::si::hertz;
   using units::si::temperature;
   using units::si::plane_angle;
   using units::si::radians;
   using units::pow;
-  using algorithm::for_each;
   
-  using thermal::pyrometer::twoColor::signalRatio;
-  using thermal::pyrometer::twoColor::calibratedSignalRatio;
-  using thermal::pyrometer::twoColor::normalizedSignalRatio;
+  using algorithm::for_each;
   
   using math::functions::PeriodicData;
   using math::functions::PeriodicProperties;
   using math::curveFit::cosine;
-
-  //// get my tree
-  using tools::interface::getTreefromFile;
-  using tools::interface::getItem;
-
-  auto const filename = "twoColorPyro.xml";
-  
-  auto const fullpath = dir.abs( filename );
-  auto const pt = getTreefromFile( fullpath ) ;
-  auto const conjunto = string{"temperature_measurement."};
-  auto const settings_branch = pt.get_child( conjunto + "settings" );
-  
-  auto const signalBackground_value  = settings_branch.get<double>( "signal_background" );
-  auto const signalBackground = quantity<electric_potential> ( signalBackground_value  * volts ) ;
-
-  auto const wavelength1_value  = settings_branch.get<double>( "wavelength1_nominal" );
-  auto const wavelength1_nom = quantity<wavelength> ( wavelength1_value  * micrometers ) ;
-  
-  auto const wavelength2_value  = settings_branch.get<double>( "wavelength2_nominal" );
-  auto const wavelength2_nom = quantity<wavelength> ( wavelength2_value  * micrometers ) ;
-  
-  auto const signalDC1_raw_value  = settings_branch.get<double>( "signal_DC_1" );
-  auto const signalDC1_raw = quantity<electric_potential> ( signalDC1_raw_value  * volts ) ;
-  
-  auto const signalDC2_raw_value  = settings_branch.get<double>( "signal_DC_2" );
-  auto const signalDC2_raw = quantity<electric_potential> ( signalDC2_raw_value  * volts ) ;
-
-  auto const wavelength_offset_value  = settings_branch.get<double>( "wavelenth_offset" );
-  auto const wavelength_offset = quantity<wavelength> ( wavelength_offset_value  * micrometers ) ;
-
-  auto const gCoeff_value  = settings_branch.get<double>( "calibration_coefficient" );
-  auto const gCoeff = quantity<dimensionless> ( gCoeff_value ) ;
-
-
-
-
-
-
-  
-  auto const frequency_value  = settings_branch.get<double>( "frequency" );
-  auto const temperoralFrequency = quantity<frequency> ( frequency_value  * hertz ) ;
-  
-  auto const cycles  = settings_branch.get<size_t>( "count" );
-
-  auto const filename_1  = settings_branch.get<std::string>( "file1" );
-  auto const filename_2  = settings_branch.get<std::string>( "file2" );
-  
-
+  using thermal::pyrometry::twoColor::pyrometery_settings_file;
   using thermal::pyrometer::twoColor::temperatureSteady;
   using thermal::pyrometer::twoColor::signalRatio;
   using thermal::pyrometry::twoColor::normalizedDetectorMeasurements;
   using std::make_pair;
+
+  auto const filename = "twoColorPyro.xml";
+  auto const system_path = filesystem::path( dir.abs( filename ) );
+  auto const import = pyrometery_settings_file( system_path );
+
+  auto const signalBackground = import.signalBackground;
+  auto const wavelength1_nom = import.signal_DC_1.first ;
+  auto const signalDC1_raw = import.signal_DC_1.second ;
+  
+  auto const wavelength2_nom = import.signal_DC_2.first ;
+  auto const signalDC2_raw = import.signal_DC_2.second ;
+  auto const wavelength_offset = import.wavelength_offset ;
+  auto const gCoeff = import.gCoeff ;
+  auto const temperoralFrequency = import.temperoralFrequency ;
+
+  auto const cycles  = import.cycles;
+  auto const filename_1  = import.filename_1;
+  auto const filename_2  = import.filename_2;
   
   auto const signalDC1 = signalDC1_raw - signalBackground ;
   auto const signalDC2 = signalDC2_raw - signalBackground ;
@@ -174,6 +136,8 @@ auto temperature_prediction( filesystem::directory const & dir ) -> void
   auto const measurements_2 =
     measurementFactory( dir, filename_2, signalDC2_raw, signalBackground,
                         temperoralFrequency, cycles, wavelength2 ) ;
+  
+  
   
   auto const normalizedSRs =
   normalizedDetectorMeasurements( measurements_1, measurements_2, gCoeff );

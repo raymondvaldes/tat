@@ -7,6 +7,8 @@
 //
 
 #include <algorithm>
+#include <string>
+#include <iterator>
 
 #include "algorithm/vector/doubleToString.h"
 

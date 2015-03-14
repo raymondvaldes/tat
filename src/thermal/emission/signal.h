@@ -9,10 +9,7 @@
 #ifndef __tat__signal__
 #define __tat__signal__
 
-
-#include <iostream>
-
-#include "units/si/si.h"
+#include "units.h"
 
 namespace thermal {
 

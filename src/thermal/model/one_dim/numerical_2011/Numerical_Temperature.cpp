@@ -33,7 +33,7 @@ License
 #include "thermal/equipment/setup.h"
 #include "sensible/property.h"
 #include "math/solvers/tma.h"
-#include "thermal/model/utilities/heat generation/Iheat.h"
+#include "thermal/model/utilities/heat_generation/Iheat.h"
 #include "thermal/model/utilities/nondimensional/tau_0.h"
 #include "thermal/model/one_dim/Tss_ana.h"
 

@@ -21,6 +21,7 @@
 
 
 namespace thermal {
+
 namespace analysis {
 
 class Taylor_uncertainty: private baseData
@@ -28,7 +29,6 @@ class Taylor_uncertainty: private baseData
   private:
   baseData SavedState;
   
-  const double tolDif = 0.01;
   const double dh = 1e-8;
   const double fullVal = 1;
   size_t N_unknowns;

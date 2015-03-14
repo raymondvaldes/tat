@@ -36,7 +36,7 @@ tolerance(tolerance_), referance(referance_), base(base_), rear(rear_)
 
 temperatureScale::~temperatureScale( void ) noexcept { }
 
-struct temperatureScale temperatureScale::
+temperatureScale temperatureScale::
 loadConfigfromXML( const boost::property_tree::ptree pt ) noexcept
 {
     //initialize parameter estimation settings
