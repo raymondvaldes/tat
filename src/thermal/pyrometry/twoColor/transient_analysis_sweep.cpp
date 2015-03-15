@@ -34,9 +34,10 @@ transient_analysis_sweep_results::transient_analysis_sweep_results
 ): transient_results( transient_results_ ) {}
 
 
-auto transient_analysis_sweep_results::phases_omega(void) const -> void
-//std::pair<  std::vector< units::quantity< units::si::angular_frequency>  >,
-//            std::vector< units::si::plane_angle > >
+auto transient_analysis_sweep_results::phases_omega(void) const -> 
+  std::pair<
+    std::vector< units::quantity< units::si::angular_frequency>>,
+    std::vector< units::quantity< units::si::plane_angle      >> >
 {
   auto omegas = vector< quantity< angular_frequency >>();
   auto phases = vector< quantity< plane_angle >>();
@@ -51,7 +52,7 @@ auto transient_analysis_sweep_results::phases_omega(void) const -> void
   
   std::cout << output.first[0] << "\t" << output.second[0] << "\n";
   std::cout << output.first[1] << "\t" << output.second[1] << "\n";
-//  return output;
+  return output;
 }
 
 auto transient_analysis_sweep

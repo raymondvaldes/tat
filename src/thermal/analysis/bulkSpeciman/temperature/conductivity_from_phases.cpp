@@ -54,7 +54,6 @@ diffusivity_from_phases
   using math::estimation::settings;
   using thermal::model::slab::surface_temperature_phases;
   
-
   auto const numberPoints2Fit = omegas.size();
 
   auto const minimizationEquation =
@@ -71,7 +70,10 @@ diffusivity_from_phases
     } ;
 
     auto i = 0;
-    generate( fvec, fvec + numberPoints2Fit , [&](){ return residual(i++); } ) ;
+    generate( fvec, fvec + numberPoints2Fit , [&]() noexcept
+    {
+      return residual(i++);
+    } ) ;
   };
 
   auto const myDiffusivity = slab_initial.get_diffusivity();

@@ -33,6 +33,19 @@ using units::si::hertz;
 
 using std::make_pair;
 
+auto
+pyrometery_settings_file
+(
+  filesystem::directory const & dir,
+  std::string const & filename
+)
+-> Measurement_settings
+{
+  auto const system_path = filesystem::path( dir.abs( filename ) );
+
+  return pyrometery_settings_file( system_path ) ;
+}
+
 auto pyrometery_settings_file( filesystem::path const & fullpath ) -> Measurement_settings
 {
   //// get my tree

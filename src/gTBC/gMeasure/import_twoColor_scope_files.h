@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <utility>
+#include <string>
 
 #include "thermal/equipment/detector/measurements.h"
 #include "tools/interface/filesystem.hpp"
@@ -44,7 +45,12 @@ struct processed_scope_data{
 
 };
 
-auto import_twoColor_scope_files( filesystem::directory const & dir )
+auto
+import_twoColor_scope_files
+(
+  filesystem::directory const & dir,
+  std::string const & filename
+)
 -> processed_scope_data;
 
 } // namespace gMeasure

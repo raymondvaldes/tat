@@ -80,6 +80,14 @@ auto pyrometery_settings_file
 )
 -> Measurement_settings;
 
+auto
+pyrometery_settings_file
+(
+  filesystem::directory const & dir,
+  std::string const & filename
+)
+-> Measurement_settings;
+
 } // namespace twoColor
   
 } // namespace pyrometry

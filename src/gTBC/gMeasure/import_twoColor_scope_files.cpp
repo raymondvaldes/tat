@@ -38,7 +38,11 @@ processed_scope_data::processed_scope_data
   measurements( measurements_ ),
   gCoefficient( gCoefficient_ ) {}
 
-auto import_twoColor_scope_files( filesystem::directory const & dir )
+auto import_twoColor_scope_files
+(
+  filesystem::directory const & dir,
+  std::string const & filename
+)
 -> processed_scope_data
 {
   auto const getDataFiles = dir.ls_files( ".dat" );
@@ -53,7 +57,6 @@ auto import_twoColor_scope_files( filesystem::directory const & dir )
   auto const measurements_frequency_pairs =
   unique_measurement_pairs( unique_measurements, frequencies.second );
   
-  auto const filename = "twoColorPyro.xml";
   auto const system_path = filesystem::path( dir.abs( filename ) );
   auto const import = pyrometery_settings_file( system_path );
   

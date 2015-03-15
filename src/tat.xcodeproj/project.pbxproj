@@ -121,6 +121,8 @@
 		ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */; };
 		ABB54FD119C35E300056823E /* ifzero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FCF19C35E300056823E /* ifzero.cpp */; };
 		ABB54FD219C35E300056823E /* ifzero.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FD019C35E300056823E /* ifzero.h */; };
+		ABC5B1BD1AB55D1600A6D33C /* import_slab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */; };
+		ABC5B1BE1AB55D1600A6D33C /* import_slab.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC5B1BC1AB55D1600A6D33C /* import_slab.h */; };
 		ABC5C3B91A8532C300EC4897 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */; };
 		ABC5C3BB1A8532D800EC4897 /* libboost_program_options-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC5C3BA1A8532D800EC4897 /* libboost_program_options-mt.a */; };
 		ABC5C3BD1A8532EF00EC4897 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC5C3BC1A8532EF00EC4897 /* libboost_system-mt.a */; };
@@ -420,6 +422,8 @@
 		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
 		ABB54FCF19C35E300056823E /* ifzero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifzero.cpp; path = algorithm/vector/ifzero.cpp; sourceTree = "<group>"; };
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
+		ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = import_slab.cpp; path = slab/import_slab.cpp; sourceTree = "<group>"; };
+		ABC5B1BC1AB55D1600A6D33C /* import_slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = import_slab.h; path = slab/import_slab.h; sourceTree = "<group>"; };
 		ABC5B8A11A6F05E500D893C9 /* periodicData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = periodicData.h; path = functions/periodicData.h; sourceTree = "<group>"; };
 		ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.57.0/lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
 		ABC5C3BA1A8532D800EC4897 /* libboost_program_options-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_program_options-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.57.0/lib/libboost_program_options-mt.a"; sourceTree = "<group>"; };
@@ -1134,6 +1138,8 @@
 			children = (
 				ABEB14B41AAA622600204B36 /* slab.cpp */,
 				ABEB14B51AAA622600204B36 /* slab.h */,
+				ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */,
+				ABC5B1BC1AB55D1600A6D33C /* import_slab.h */,
 			);
 			name = slab;
 			sourceTree = "<group>";
@@ -1634,6 +1640,7 @@
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
 				ABEB14BF1AAA6C4200204B36 /* phase_fitting.h in Headers */,
 				ABEF4EB11948D4A500B44AD5 /* kernal.hpp in Headers */,
+				ABC5B1BE1AB55D1600A6D33C /* import_slab.h in Headers */,
 				AB7996EC1AB11C4B0022015B /* operator_overloads.h in Headers */,
 				AB3ED3C31AAF6E9B00845151 /* conductivity_from_phases.h in Headers */,
 				AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */,
@@ -1898,6 +1905,7 @@
 				ABFD19991AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp in Sources */,
 				AB90AA561AB298BB00F2535D /* total_calibrated_emission_pairs.cpp in Sources */,
 				ABEF4EFD1948D4A500B44AD5 /* filesystem.cpp in Sources */,
+				ABC5B1BD1AB55D1600A6D33C /* import_slab.cpp in Sources */,
 				AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */,
 				ABEF4ED71948D4A500B44AD5 /* noise.cpp in Sources */,
 				ABEF4E811948D4A500B44AD5 /* spline.cpp in Sources */,

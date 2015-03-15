@@ -31,9 +31,10 @@ struct transient_analysis_sweep_results
     std::vector< transient_analysis_results > const & transient_results_
   );
   
-  auto phases_omega(void) const -> void;
-//  std::pair<  std::vector< units::quantity< units::si::angular_frequency>  >,
-//            std::vector< units::si::plane_angle > >;
+  auto phases_omega(void) const -> 
+  std::pair<
+    std::vector< units::quantity< units::si::angular_frequency>>,
+    std::vector< units::quantity< units::si::plane_angle      >> >;
 };
 
 

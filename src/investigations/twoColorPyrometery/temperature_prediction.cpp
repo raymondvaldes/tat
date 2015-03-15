@@ -95,9 +95,7 @@ auto temperature_prediction( filesystem::directory const & dir ) -> void
   using thermal::pyrometry::twoColor::normalizedDetectorMeasurements;
   using std::make_pair;
 
-  auto const filename = "twoColorPyro.xml";
-  auto const system_path = filesystem::path( dir.abs( filename ) );
-  auto const import = pyrometery_settings_file( system_path );
+  auto const import = pyrometery_settings_file( dir, "twoColorPyro.xml" );
 
   auto const signalBackground = import.signalBackground;
   auto const wavelength1_nom = import.signal_DC_1.first ;

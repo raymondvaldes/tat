@@ -29,10 +29,9 @@ License
 #include <string>
 #include <boost/filesystem/path.hpp>
 
-namespace filesystem
-{
+namespace filesystem {
 
-  using boost::filesystem::path;
+using boost::filesystem::path;
 
 
 void makeDir
