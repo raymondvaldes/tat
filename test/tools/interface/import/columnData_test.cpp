@@ -85,7 +85,6 @@ BOOST_AUTO_TEST_CASE( getDataFile ) {
   
 }
 
-
 BOOST_AUTO_TEST_CASE( getElement ) {
 
   auto const myInput =

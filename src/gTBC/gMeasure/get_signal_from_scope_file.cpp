@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+
+
 #include "gTBC/gMeasure/get_signal_from_scope_file.h"
 
-#include <cassert>
 
 #include "algorithm/vector/stringToQuantity.h"
 
@@ -51,9 +52,20 @@ auto get_signal_from_scope_file(  filesystem::path const & path )
   
   auto const raw_signal_column = 3 ;
   auto const list_strings = myData.getColumn( raw_signal_column ) ;
+
+  auto const count = list_strings.size();
+  if( count != 2049 )
+  {
+    std::cout << list_strings.size() << "\t";
+    std::cout << fileName_string <<"\n";
+    throw;
+  }
+  assert( 2049 ==  list_strings.size() );
+
   
   auto const raw_detector_signals =
   stringToQuantity< electric_potential >( list_strings, millivolts  ) ;
+  
   
   return raw_detector_signals;
 }

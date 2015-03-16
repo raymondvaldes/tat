@@ -57,8 +57,7 @@ auto import_twoColor_scope_files
   auto const measurements_frequency_pairs =
   unique_measurement_pairs( unique_measurements, frequencies.second );
   
-  auto const system_path = filesystem::path( dir.abs( filename ) );
-  auto const import = pyrometery_settings_file( system_path );
+  auto const import = pyrometery_settings_file( dir.abs( filename ) );
   
   auto signal_DC_1 = import.signal_DC_1 ;
   auto signal_DC_2 = import.signal_DC_2 ;

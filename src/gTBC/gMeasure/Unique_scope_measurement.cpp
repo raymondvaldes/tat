@@ -5,14 +5,19 @@
 //  Created by Raymond Valdes_New on 3/12/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
+
+#include <iostream>
 #include <valarray>
 #include <cmath>
+
 #include "gTBC/gMeasure/Unique_scope_measurement.h"
 #include "algorithm/algorithm.h"
-#include "algorithm/valarray/valarray_to_vector.h"
-#include "algorithm/valarray/vector_to_valarray.h"
+
 #include "math/construct/periodic_time_distribution.h"
 #include "algorithm/vector/operator_overloads.h"
+
+#include "statistics/signal_processing/sum.h"
+#include "statistics/signal_processing/average.h"
 
 
 namespace gTBC {
@@ -59,30 +64,23 @@ auto
 Unique_scope_measurement::transient_signal_average( void )
 const noexcept -> std::vector< units::quantity<units::si::electric_potential >>
 {
-  using std::valarray;
   using std::for_each;
-  using alogorithm::valarray::valarray_to_vector;
-  using alogorithm::valarray::vector_to_valarray;
-  using algorithm::transform;
   using units::quantity;
-  using units::si::dimensionless;
   using units::si::electric_potential;
   using std::begin;
   
-  auto run = valarray< quantity<electric_potential> >(
-    quantity<electric_potential>::from_value(0), size );
+
+  using std::vector;
+  auto signals = vector < vector < quantity < electric_potential > > >();
   
   for_each( scopeFiles , [&]( auto const & scope_file )
   {
     auto const current = scope_file.read_transient_signal();
-    run += vector_to_valarray( current );
+    signals.push_back( current );
   });
   
-  auto run_vector = valarray_to_vector( run );
-  
-  transform( run_vector , begin(run_vector) ,[&]( auto const & val ) {
-    return val / quantity<dimensionless>( scopeFiles.size() ) ;
-  });
+   auto const run_vector = statistics::signal_processing::average( signals );
+  assert( 2049 ==  run_vector.size() );
 
   return run_vector;
 }
@@ -99,10 +97,10 @@ const noexcept -> thermal::equipment::detector::Measurements
   using math::construct::periodic_time_distribution;
   
   auto const transient_DetectorSignal = transient_signal_average();
+  assert( counts ==  transient_DetectorSignal.size() );
 
   auto const total_detectorSignal = DC_Signal + transient_DetectorSignal;
-
-  auto const counts = transient_DetectorSignal.size();
+  assert( counts ==  total_detectorSignal.size() );
 
   auto const referenceTime =
   periodic_time_distribution( laser_modulation_frequency, cycles, counts ) ;

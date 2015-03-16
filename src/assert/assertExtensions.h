@@ -11,6 +11,8 @@
 
 #include <cmath>
 #include <cassert>
+#include <vector>
+#include <algorithm>
 #include "units.h"
 /*
 assert()
@@ -39,6 +41,24 @@ inline auto assert_small( Type const a, Type const tol ) {
 template < typename Type >
 inline auto assert_gt( Type const a, Type const b ) {
   assert( a  > b ) ;
+}
+
+template < typename Type >
+inline auto assert_ge_zero( std::vector< units::quantity<Type> > const & a ) {
+  using std::for_each;
+
+  for_each( a.begin(), a.end(), []( auto const & value ){
+    assert( value.value()  >= 0 ) ;
+  } );
+}
+
+template < typename Type >
+inline auto assert_gt_zero( std::vector< units::quantity<Type> > const & a ) {
+  using std::for_each;
+
+  for_each( a.begin(), a.end(), []( auto const & value ){
+    assert( value.value()  > 0 ) ;
+  } );
 }
 
 template < typename Type >

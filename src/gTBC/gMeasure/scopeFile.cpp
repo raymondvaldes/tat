@@ -46,6 +46,8 @@ const noexcept -> std::vector< units::quantity<units::si::electric_potential >>
   auto const transient_DetectorSignal =
   get_signal_from_scope_file( path );
   
+  assert( 2049 ==  transient_DetectorSignal.size() );
+  
   return transient_DetectorSignal;
 }
   

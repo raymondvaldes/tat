@@ -18,6 +18,7 @@
 #include "thermal/model/slab/import_slab.h"
 
 #include "units.h"
+#include "plot/gnuplot.h"
 
 namespace investigations{
 
@@ -43,6 +44,8 @@ auto run( filesystem::directory const & dir )  -> void
   auto const myFittedSlab = diffusivity_from_phases( phases , initial_slab );
   
   std::cout << myFittedSlab.get_diffusivity();
+  
+  plot::hello_world();
 }
 
 } //namespace twoColorPyrometry

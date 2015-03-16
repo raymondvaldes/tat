@@ -36,6 +36,8 @@ struct Unique_scope_measurement
     
   size_t cycles;
   
+  size_t counts = 2049;
+  
   Unique_scope_measurement
   (
     std::vector< ScopeFile > const & scopeFiles_

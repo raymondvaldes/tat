@@ -30,6 +30,9 @@ std::pair<
 {
   assert_gt_zero( first.size() ) ;
   assert_gt_zero( second.size() );
+  
+ // assert_ge(  );
+  
   assert_gt_zero( gCoeff ) ;
 
   using std::vector;

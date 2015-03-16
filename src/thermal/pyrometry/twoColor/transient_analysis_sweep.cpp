@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "assert/assertExtensions.h"
 #include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
 #include "physics/classical_mechanics/kinematics.h"
 #include "algorithm/algorithm.h"
@@ -68,6 +69,12 @@ auto transient_analysis_sweep
 )
 noexcept -> transient_analysis_sweep_results
 {
+  assert_gt_zero( laser_modulation_frequencies );
+  
+  assert( gCoeff.value() > 0 );
+
+
+
   std::vector< transient_analysis_results > results;
   auto const omegas =
   angularFrequencies_from_frequencies( laser_modulation_frequencies );

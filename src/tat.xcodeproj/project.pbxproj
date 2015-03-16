@@ -40,6 +40,9 @@
 		AB44BD731AAA49C600E0710E /* get_signal_from_scope_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB44BD711AAA49C600E0710E /* get_signal_from_scope_file.cpp */; };
 		AB44BD741AAA49C600E0710E /* get_signal_from_scope_file.h in Headers */ = {isa = PBXBuildFile; fileRef = AB44BD721AAA49C600E0710E /* get_signal_from_scope_file.h */; };
 		AB44D7D51A77140E000BF19F /* algorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = AB44D7D41A77140E000BF19F /* algorithm.h */; };
+		AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */; };
+		AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A051AB65EE7008FD7DC /* gnuplot.h */; };
+		AB521A081AB660C5008FD7DC /* libboost_iostreams-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */; };
 		AB553C4F195DE60100E2B7D1 /* interval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C4D195DE60100E2B7D1 /* interval.cpp */; };
 		AB553C50195DE60100E2B7D1 /* interval.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C4E195DE60100E2B7D1 /* interval.h */; };
 		AB553C53195DF13200E2B7D1 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB553C51195DF13200E2B7D1 /* random.cpp */; };
@@ -85,6 +88,9 @@
 		AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43A1A5C688F0065E7F8 /* validateOpenStream.h */; };
 		AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA43E1A5C68AB0065E7F8 /* eof.h */; };
 		AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8AA4441A5DF13F0065E7F8 /* trim.h */; };
+		AB8B58171AB7505F0055615C /* average.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8B58161AB7505F0055615C /* average.h */; };
+		AB8B581A1AB752A30055615C /* sum.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8B58191AB752A30055615C /* sum.h */; };
+		AB8B581C1AB759620055615C /* divide_each_element.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8B581B1AB759620055615C /* divide_each_element.h */; };
 		AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CAD1A858D1C0091196B /* spline-quantity.h */; };
 		AB8F0CB21A8592F70091196B /* quantityTodouble.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8F0CB01A8592F70091196B /* quantityTodouble.h */; };
 		AB90AA4E1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */; };
@@ -329,6 +335,9 @@
 		AB44BD711AAA49C600E0710E /* get_signal_from_scope_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = get_signal_from_scope_file.cpp; path = gTBC/gMeasure/get_signal_from_scope_file.cpp; sourceTree = "<group>"; };
 		AB44BD721AAA49C600E0710E /* get_signal_from_scope_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = get_signal_from_scope_file.h; path = gTBC/gMeasure/get_signal_from_scope_file.h; sourceTree = "<group>"; };
 		AB44D7D41A77140E000BF19F /* algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = algorithm.h; path = algorithm/algorithm.h; sourceTree = "<group>"; };
+		AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "gnuplot-iostream.h"; path = "plot/gnuplot-iostream.h"; sourceTree = "<group>"; };
+		AB521A051AB65EE7008FD7DC /* gnuplot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gnuplot.h; path = plot/gnuplot.h; sourceTree = "<group>"; };
+		AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_iostreams-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.a"; sourceTree = "<group>"; };
 		AB553C4D195DE60100E2B7D1 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = geometry/interval.cpp; sourceTree = "<group>"; };
 		AB553C4E195DE60100E2B7D1 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = geometry/interval.h; sourceTree = "<group>"; };
 		AB553C51195DF13200E2B7D1 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = random/random.cpp; sourceTree = "<group>"; };
@@ -384,6 +393,9 @@
 		AB8AA4421A5C6CEF0065E7F8 /* is_open.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = is_open.h; path = algorithm/stream/is_open.h; sourceTree = "<group>"; };
 		AB8AA4441A5DF13F0065E7F8 /* trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trim.h; path = algorithm/string/trim.h; sourceTree = "<group>"; };
 		AB8AA4471A5E20480065E7F8 /* trim_all.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = trim_all.h; path = algorithm/string/trim_all.h; sourceTree = "<group>"; };
+		AB8B58161AB7505F0055615C /* average.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = average.h; path = statistics/signal_processing/average.h; sourceTree = SOURCE_ROOT; };
+		AB8B58191AB752A30055615C /* sum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sum.h; path = statistics/signal_processing/sum.h; sourceTree = SOURCE_ROOT; };
+		AB8B581B1AB759620055615C /* divide_each_element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = divide_each_element.h; path = statistics/signal_processing/divide_each_element.h; sourceTree = SOURCE_ROOT; };
 		AB8F0CAD1A858D1C0091196B /* spline-quantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spline-quantity.h"; sourceTree = "<group>"; };
 		AB8F0CB01A8592F70091196B /* quantityTodouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quantityTodouble.h; path = algorithm/vector/quantityTodouble.h; sourceTree = "<group>"; };
 		AB90AA4C1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = get_pair_measurements_at_frequency.cpp; path = gTBC/gMeasure/get_pair_measurements_at_frequency.cpp; sourceTree = "<group>"; };
@@ -425,17 +437,14 @@
 		ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = import_slab.cpp; path = slab/import_slab.cpp; sourceTree = "<group>"; };
 		ABC5B1BC1AB55D1600A6D33C /* import_slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = import_slab.h; path = slab/import_slab.h; sourceTree = "<group>"; };
 		ABC5B8A11A6F05E500D893C9 /* periodicData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = periodicData.h; path = functions/periodicData.h; sourceTree = "<group>"; };
-		ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.57.0/lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
-		ABC5C3BA1A8532D800EC4897 /* libboost_program_options-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_program_options-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.57.0/lib/libboost_program_options-mt.a"; sourceTree = "<group>"; };
-		ABC5C3BC1A8532EF00EC4897 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.57.0/lib/libboost_system-mt.a"; sourceTree = "<group>"; };
+		ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_filesystem-mt.a"; sourceTree = "<absolute>"; };
+		ABC5C3BA1A8532D800EC4897 /* libboost_program_options-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_program_options-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_program_options-mt.a"; sourceTree = "<absolute>"; };
+		ABC5C3BC1A8532EF00EC4897 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_system-mt.a"; sourceTree = "<absolute>"; };
 		ABC648621A65B5EB008FA721 /* main-app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "main-app.cpp"; sourceTree = "<group>"; };
 		ABC648631A65B5EB008FA721 /* main-app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "main-app.h"; sourceTree = "<group>"; };
 		ABC648661A65B891008FA721 /* vector2cstringArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vector2cstringArray.cpp; path = algorithm/vector/vector2cstringArray.cpp; sourceTree = "<group>"; };
 		ABC648671A65B891008FA721 /* vector2cstringArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2cstringArray.h; path = algorithm/vector/vector2cstringArray.h; sourceTree = "<group>"; };
 		ABDCB53E19C934B30044553C /* inversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inversion.h; path = numericalAnalysis/matrixs/inversion.h; sourceTree = "<group>"; };
-		ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_filesystem.a; sourceTree = "<absolute>"; };
-		ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_program_options.a; sourceTree = "<absolute>"; };
-		ABE168FD1948EA3B00C1E409 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = /usr/local/Cellar/boost/1.55.0_2/lib/libboost_system.a; sourceTree = "<absolute>"; };
 		ABE169011948EA8D00C1E409 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = /usr/local/Cellar/gsl/1.16/lib/libgsl.a; sourceTree = "<absolute>"; };
 		ABE169021948EA8D00C1E409 /* libgslcblas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgslcblas.a; path = /usr/local/Cellar/gsl/1.16/lib/libgslcblas.a; sourceTree = "<absolute>"; };
 		ABEB14B01AAA557900204B36 /* analytical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = analytical.h; path = differential/waveEquation/analytical.h; sourceTree = "<group>"; };
@@ -610,6 +619,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB521A081AB660C5008FD7DC /* libboost_iostreams-mt.a in Frameworks */,
 				ABC5C3BD1A8532EF00EC4897 /* libboost_system-mt.a in Frameworks */,
 				ABC5C3BB1A8532D800EC4897 /* libboost_program_options-mt.a in Frameworks */,
 				ABC5C3B91A8532C300EC4897 /* libboost_filesystem-mt.a in Frameworks */,
@@ -668,9 +678,7 @@
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
-				ABC5C3BC1A8532EF00EC4897 /* libboost_system-mt.a */,
-				ABC5C3BA1A8532D800EC4897 /* libboost_program_options-mt.a */,
-				ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */,
+				AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */,
 				AB932DF21A6DB76E00ECF117 /* source */,
 				ABA2BD3B1A48BA21004F3C6E /* linked-libraries */,
 			);
@@ -751,9 +759,19 @@
 			name = gMeasure;
 			sourceTree = "<group>";
 		};
+		AB521A041AB65E9E008FD7DC /* plot */ = {
+			isa = PBXGroup;
+			children = (
+				AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */,
+				AB521A051AB65EE7008FD7DC /* gnuplot.h */,
+			);
+			name = plot;
+			sourceTree = "<group>";
+		};
 		AB553C46195DCF6D00E2B7D1 /* statistics */ = {
 			isa = PBXGroup;
 			children = (
+				AB8B58181AB752860055615C /* signal_processing */,
 				ABAA413B1A9D519F0091C3BD /* sum.h */,
 			);
 			name = statistics;
@@ -984,23 +1002,34 @@
 			name = num_method2014;
 			sourceTree = "<group>";
 		};
+		AB8B58181AB752860055615C /* signal_processing */ = {
+			isa = PBXGroup;
+			children = (
+				AB8B58161AB7505F0055615C /* average.h */,
+				AB8B58191AB752A30055615C /* sum.h */,
+				AB8B581B1AB759620055615C /* divide_each_element.h */,
+			);
+			name = signal_processing;
+			sourceTree = "<group>";
+		};
 		AB932DF21A6DB76E00ECF117 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				AB44BD6F1AAA490000E0710E /* gTBC */,
-				AB7FBD891A9FA64800FF714D /* thermalfluids */,
-				AB553C46195DCF6D00E2B7D1 /* statistics */,
-				ABA48C4D1A79A74A0025666F /* assert */,
-				ABA58A171A67257400573ED8 /* units.h */,
-				ABA58A191A67487D00573ED8 /* filesystem */,
-				ABF5D66319DB607700A70476 /* units */,
+				AB521A041AB65E9E008FD7DC /* plot */,
 				AB0DFDFD19524268007DF69B /* algorithm */,
-				ABEF4DFC1948D4A500B44AD5 /* physics */,
+				ABA48C4D1A79A74A0025666F /* assert */,
+				ABA58A191A67487D00573ED8 /* filesystem */,
+				AB44BD6F1AAA490000E0710E /* gTBC */,
 				ABEF4DCB1948D4A500B44AD5 /* investigations */,
 				ABEF4DD21948D4A500B44AD5 /* math */,
+				ABEF4DFC1948D4A500B44AD5 /* physics */,
 				ABEF4E001948D4A500B44AD5 /* sensible */,
+				AB553C46195DCF6D00E2B7D1 /* statistics */,
 				ABEF4E0B1948D4A500B44AD5 /* thermal */,
+				AB7FBD891A9FA64800FF714D /* thermalfluids */,
 				ABEF4E6A1948D4A500B44AD5 /* tools */,
+				ABF5D66319DB607700A70476 /* units */,
+				ABA58A171A67257400573ED8 /* units.h */,
 			);
 			name = source;
 			sourceTree = "<group>";
@@ -1025,12 +1054,12 @@
 		ABA2BD3B1A48BA21004F3C6E /* linked-libraries */ = {
 			isa = PBXGroup;
 			children = (
+				ABC5C3BC1A8532EF00EC4897 /* libboost_system-mt.a */,
+				ABC5C3BA1A8532D800EC4897 /* libboost_program_options-mt.a */,
+				ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */,
 				ABEF4D971948D02600B44AD5 /* libtatlib.a */,
 				ABE169011948EA8D00C1E409 /* libgsl.a */,
 				ABE169021948EA8D00C1E409 /* libgslcblas.a */,
-				ABE168FB1948EA3B00C1E409 /* libboost_filesystem.a */,
-				ABE168FC1948EA3B00C1E409 /* libboost_program_options.a */,
-				ABE168FD1948EA3B00C1E409 /* libboost_system.a */,
 			);
 			name = "linked-libraries";
 			sourceTree = "<group>";
@@ -1658,6 +1687,7 @@
 				ABEF4EC91948D4A500B44AD5 /* diffusivity.h in Headers */,
 				ABEF4EA81948D4A500B44AD5 /* radiativeSysProp.h in Headers */,
 				ABEBCE5819C737E500882E01 /* central_difference.h in Headers */,
+				AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */,
 				AB0DFE02195242AA007DF69B /* split.h in Headers */,
 				AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */,
 				ABFC2CFC1A439F1D004C00AD /* twoColorPyrometery.h in Headers */,
@@ -1680,6 +1710,7 @@
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
 				AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */,
 				ABA48C381A7843F90025666F /* range.h in Headers */,
+				AB8B581C1AB759620055615C /* divide_each_element.h in Headers */,
 				ABB4474519DB386A009EC35F /* constants.h in Headers */,
 				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
 				ABEF4EBF1948D4A500B44AD5 /* temp_cmplx.h in Headers */,
@@ -1697,6 +1728,7 @@
 				ABEF4EAD1948D4A500B44AD5 /* basedata.hpp in Headers */,
 				AB7A693F1AB2465400249A6E /* Unique_scope_measurement.h in Headers */,
 				ABA48C4C1A78717F0025666F /* wrap2pi.h in Headers */,
+				AB8B58171AB7505F0055615C /* average.h in Headers */,
 				ABEF4EB51948D4A500B44AD5 /* lmdiff_poptea_help.hpp in Headers */,
 				ABEF4EBD1948D4A500B44AD5 /* poptea_initialize.h in Headers */,
 				AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */,
@@ -1721,6 +1753,7 @@
 				ABF5D65D19DB40DD00A70476 /* calibrationCoefficient.h in Headers */,
 				ABEF4EC11948D4A500B44AD5 /* temp_ss.h in Headers */,
 				ABEB14B71AAA622600204B36 /* slab.h in Headers */,
+				AB8B581A1AB752A30055615C /* sum.h in Headers */,
 				AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */,
 				AB7996E61AB0F6B90022015B /* is_scope_file.h in Headers */,
 				AB7996D81AB0EDA50022015B /* scopeFile.h in Headers */,
@@ -1751,6 +1784,7 @@
 				ABEF4EFC1948D4A500B44AD5 /* exportfile.hpp in Headers */,
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
 				ABEF4EDC1948D4A500B44AD5 /* detector.h in Headers */,
+				AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */,
 				ABEF4ED61948D4A500B44AD5 /* emission.hpp in Headers */,
 				ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */,
 				ABEF4EFE1948D4A500B44AD5 /* filesystem.hpp in Headers */,
@@ -2184,7 +2218,6 @@
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/opt/boost/include,
-					/usr/local/Cellar/boost/1.55.0_2/lib,
 					/usr/local/lib/,
 					/usr/local/Cellar/gsl/1.16/lib,
 					/usr/local/Cellar/boost/1.57.0/lib,
@@ -2242,7 +2275,6 @@
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/opt/boost/include,
-					/usr/local/Cellar/boost/1.55.0_2/lib,
 					/usr/local/lib/,
 					/usr/local/Cellar/gsl/1.16/lib,
 					/usr/local/Cellar/boost/1.57.0/lib,

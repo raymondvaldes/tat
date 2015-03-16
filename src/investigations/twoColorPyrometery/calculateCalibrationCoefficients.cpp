@@ -107,7 +107,6 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
       auto const cGenerator = calibrationGenerator<electric_potential>( emission_spectrum );
       auto const coefficients = cGenerator.coefficientsAt( delta_lambda );
       
-      
       return coefficients;
     };
   
