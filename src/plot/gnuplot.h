@@ -16,22 +16,6 @@
 
 namespace plot {
 
-
-inline auto xySimple
-(
-  std::vector<std::pair<double, double> > const & xy_pts_A,
-  filesystem::path const & output_file
-) -> void
-{
-	Gnuplot gp("/usr/local/bin/gnuplot");
-
-  gp << "set term png"  << "\n";
-  
-  gp << "set output " << output_file.string() << "\n";
-
-  gp << "plot" << gp.file1d( xy_pts_A ) << "\n";
-}
-
 inline auto hello_world( void ) -> void
 {
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");

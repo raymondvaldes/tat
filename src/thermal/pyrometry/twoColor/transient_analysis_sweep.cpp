@@ -50,9 +50,6 @@ auto transient_analysis_sweep_results::phases_omega(void) const ->
   });
 
   auto const output = make_pair( omegas, phases );
-  
-  std::cout << output.first[0] << "\t" << output.second[0] << "\n";
-  std::cout << output.first[1] << "\t" << output.second[1] << "\n";
   return output;
 }
 

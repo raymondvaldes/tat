@@ -21,6 +21,21 @@ namespace bulkSpeciman {
 
 namespace temperature {
 
+
+fitting_result::fitting_result
+(
+  thermal::model::slab::Slab const & initial_slab_,
+  thermal::model::slab::Slab const & fitted_slab_,
+
+  std::vector< units::quantity< units::si::plane_angle > > const & experimenta_phases_,
+  std::vector< units::quantity< units::si::plane_angle > > const & bestFit_phases_
+)
+: initial_slab( initial_slab_ ),
+  fitted_slab( fitted_slab_ ),
+  experimenta_phases( experimenta_phases_ ),
+  bestFit_phases( bestFit_phases_ )
+{}
+
 inline auto updateSlab
 (
   const double* x ,
@@ -47,7 +62,7 @@ diffusivity_from_phases
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const & slab_initial
 )
--> thermal::model::slab::Slab
+-> fitting_result
 {
   using std::vector;
   using std::generate;
@@ -64,7 +79,7 @@ diffusivity_from_phases
     
     auto const predictions = surface_temperature_phases( omegas, slabCurrent ) ;
     
-    auto const residual = [ & ]( const int i )
+    auto const residual = [ & ]( const int i ) noexcept
     {
       return ( predictions[i]  -  observations[i] ).value() ;
     } ;
@@ -80,9 +95,14 @@ diffusivity_from_phases
   auto unknownParameters = vector<double>{ myDiffusivity.value() } ;
   lmdif( minimizationEquation, numberPoints2Fit, unknownParameters, settings{});
 
-  auto const fittedSpeciman = updateSlab( unknownParameters.data(), slab_initial  );
+  auto const fitted_slab = updateSlab( unknownParameters.data(), slab_initial  );
+  auto const fitted_observations = surface_temperature_phases( omegas, fitted_slab ) ;
 
-  return fittedSpeciman;
+
+  auto const results =
+  fitting_result( slab_initial, fitted_slab, observations ,fitted_observations);
+
+  return results;
 }
 
 auto
@@ -92,7 +112,7 @@ diffusivity_from_phases
   std::vector< units::quantity< units::si::plane_angle > > > const & observations,
   thermal::model::slab::Slab const & slab_initial
 )
--> thermal::model::slab::Slab
+-> fitting_result
 {
   return diffusivity_from_phases( observations.first, observations.second, slab_initial );
 }
