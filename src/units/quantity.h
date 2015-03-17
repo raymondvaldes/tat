@@ -28,19 +28,19 @@ template<class Dim,class System, class Enable = void>
   using boost::units::no_prefix;
 
 
-template<class Unit, class Y = double >
-class quantity_with_uncertainty: public quantity< Unit, Y>
-{
-private:
-  typedef quantity<Unit,Y>      this_type;
-  typedef Y                     value_type;
-  typedef Unit                  unit_type;
-  
-  this_type uncertainty_value;
-  
-public:
-  using quantity< Unit, Y>::quantity;
-};
+//template<class Unit, class Y = double >
+//class quantity_with_uncertainty: public quantity< Unit, Y>
+//{
+//private:
+//  typedef quantity<Unit,Y>      this_type;
+//  typedef Y                     value_type;
+//  typedef Unit                  unit_type;
+//  
+//  this_type uncertainty_value;
+//  
+//public:
+//  using quantity< Unit, Y>::quantity;
+//};
 
 
 

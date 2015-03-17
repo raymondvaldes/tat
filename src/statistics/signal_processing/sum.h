@@ -46,6 +46,19 @@ noexcept -> std::vector< units::quantity< T > >
   return summation;
 }
 
+template< typename T >
+auto sum( std::vector< units::quantity< T > > const & list ) noexcept
+-> units::quantity<T>
+{
+  using algorithm::accumulate;
+  using units::quantity;
+  
+  auto const initial = quantity<T>::from_value(0) ;
+  auto const total = accumulate( list,  initial ) ;
+  
+  return total;
+}
+
 } // namespace signal_processing
   
 } // namespace statistics

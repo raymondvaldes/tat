@@ -22,25 +22,43 @@ namespace signal_processing {
 #include "units.h"
 
 template< typename T >
+
 auto residuals_square( std::vector< units::quantity<T> > const & signals )
--> std::vector< units::quantity<T> >
 {
-  auto const mean = average( signals );
-  auto residuals = signals;
-  
+  using std::vector;
+  using units::quantity;
   using algorithm::transform;
   
-  transform( signals, residuals, [&mean]( auto const & signal );
+  auto const mean = average( signals );
+  
+  typedef typename units::power_typeof_helper< units::quantity<T> , units::static_rational<2> >::type unit2;
+  
+  auto const empty = units::power_typeof_helper< units::quantity<T> , units::static_rational<2> >::value( 0 ) ;
+  auto const count = signals.size();
+  auto residuals = std::vector< unit2 >( count , empty );
+  
+  transform( signals.begin(), signals.end(), residuals.begin(),
+  [ &mean ]( auto const signal ) noexcept
   {
     return units::pow< 2 >( signal  - mean );
-  } );
+  } ) ;
+  
+  // BUG TODO FIX
+//  auto const residuals = signals ;
 
   return residuals;
 }
   
+//template<long N,class Y>
+//inline typename power_typeof_helper<Y,static_rational<N> >::type
+//pow(const Y& x)
+//{
+//    return power_typeof_helper<Y,static_rational<N> >::value(x);
+//}
+  
+  
 } // namespace signal_processing
   
 } // namespace statistics
-
 
 #endif

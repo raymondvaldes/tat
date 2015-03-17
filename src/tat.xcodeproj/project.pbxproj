@@ -437,6 +437,7 @@
 		ABB09B791AB78EB3005D6BB5 /* residuals_square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residuals_square.h; path = statistics/signal_processing/residuals_square.h; sourceTree = SOURCE_ROOT; };
 		ABB09B7C1AB79F6C005D6BB5 /* variance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = variance.h; path = statistics/signal_processing/corrected_sample/variance.h; sourceTree = SOURCE_ROOT; };
 		ABB09B7E1AB79FDE005D6BB5 /* standard_deviation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = standard_deviation.h; path = statistics/signal_processing/corrected_sample/standard_deviation.h; sourceTree = SOURCE_ROOT; };
+		ABB09B801AB7B1EB005D6BB5 /* static_rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = static_rational.h; path = units/static_rational.h; sourceTree = "<group>"; };
 		ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planckWienApprox.cpp; path = blackBody/planckWienApprox.cpp; sourceTree = "<group>"; };
 		ABB4473F19DB37BF009EC35F /* planckWienApprox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = planckWienApprox.h; path = blackBody/planckWienApprox.h; sourceTree = "<group>"; };
 		ABB4474319DB386A009EC35F /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = blackBody/constants.h; sourceTree = "<group>"; };
@@ -1664,6 +1665,7 @@
 				ABF5D66919DB61E900A70476 /* quantity.h */,
 				AB71908119DF2BAB008FC395 /* operators.h */,
 				ABA48C391A78553C0025666F /* cmath.h */,
+				ABB09B801AB7B1EB005D6BB5 /* static_rational.h */,
 			);
 			name = units;
 			sourceTree = "<group>";

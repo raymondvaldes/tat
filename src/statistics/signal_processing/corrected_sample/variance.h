@@ -22,7 +22,6 @@ namespace corrected_sample  {
 
 template< typename T >
 auto unbiased_variance( std::vector< units::quantity<T> > const & signals )
--> units::quantity<T>
 {
   using units::quantity;
   using units::si::dimensionless;

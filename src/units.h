@@ -20,6 +20,7 @@
 #include "units/quantity.h"
 #include "units/physical_dimensions.h"
 #include "units/operators.h"
+#include "units/static_rational.h"
 #include "units/scale.h"
 
 #include "units/si/si.h"

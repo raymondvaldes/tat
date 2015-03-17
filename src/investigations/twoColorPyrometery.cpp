@@ -44,8 +44,8 @@ auto run( filesystem::directory const & dir )  -> void
 
   auto const bestFit_results = diffusivity_from_phases( phases , initial_slab );
  
-  std::cout << bestFit_results.fitted_slab.get_diffusivity();
-  
+  std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
+
   for( size_t i = 0; i < bestFit_results.bestFit_phases.size(); ++i )
   {
     std::cout <<  bestFit_results.experimenta_phases[i] << "\t" << bestFit_results.bestFit_phases[i] << "\n";

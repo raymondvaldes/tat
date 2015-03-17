@@ -26,7 +26,7 @@ auto standard_deviation( std::vector< units::quantity<T> > const & signals )
 {
   using units::sqrt;
 
-  auto const myVariance = variance( signals );
+  auto const myVariance = unbiased_variance( signals );
   auto const myStandard_deviation = sqrt( myVariance ) ;
 
   return myStandard_deviation;

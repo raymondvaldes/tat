@@ -23,7 +23,6 @@ namespace signal_processing {
 
 template< typename T >
 auto sum_residuals_square( std::vector< units::quantity<T> > const & signals )
--> units::quantity<T>
 {
   assert( signals.size() > 0 );
   

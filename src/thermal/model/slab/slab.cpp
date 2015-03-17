@@ -524,7 +524,6 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
   auto const i_non = quantity< dimensionless, complex< double > >( i_imag ) ;
   auto const Kappa = sqrt( i_non * w_non ) ;
   
-  
   auto const A_non = quantity< dimensionless >( -1 ) ;
   
   auto const x_non = x / L ;

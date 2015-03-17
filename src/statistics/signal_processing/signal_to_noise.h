@@ -18,7 +18,7 @@
 
 namespace statistics {
 
-namespace signal_to_noise {
+namespace signal_processing {
 
 template< typename T >
 auto
@@ -34,11 +34,10 @@ signal_to_noise( std::vector< units::quantity< T > > const & signals )
 
   auto const SNR = mean / std_deviation;
 
-  return SNR
+  return SNR;
 }
 
-  
-} // namespace signal_to_noise
+} // namespace signal_processing
   
 } // namespace statistics
 

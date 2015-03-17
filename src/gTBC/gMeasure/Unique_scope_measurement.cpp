@@ -18,6 +18,7 @@
 
 #include "statistics/signal_processing/sum.h"
 #include "statistics/signal_processing/average.h"
+#include "statistics/signal_processing/signal_to_noise.h"
 
 
 namespace gTBC {
@@ -65,23 +66,26 @@ Unique_scope_measurement::transient_signal_average( void )
 const noexcept -> std::vector< units::quantity<units::si::electric_potential >>
 {
   using std::for_each;
+  using algorithm::for_each;
   using units::quantity;
   using units::si::electric_potential;
   using std::begin;
-  
-
   using std::vector;
+
+  using statistics::signal_processing::signal_to_noise;
+
   auto signals = vector < vector < quantity < electric_potential > > >();
   
-  for_each( scopeFiles , [&]( auto const & scope_file )
+  for_each( scopeFiles , [&]( auto const & scope_file ) noexcept
   {
     auto const current = scope_file.read_transient_signal();
+    
     signals.push_back( current );
-  });
+  } );
   
-   auto const run_vector = statistics::signal_processing::average( signals );
+  auto const run_vector = statistics::signal_processing::average( signals );
   assert( 2049 ==  run_vector.size() );
-
+  
   return run_vector;
 }
   
