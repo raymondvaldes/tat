@@ -43,19 +43,9 @@ auto residuals_square( std::vector< units::quantity<T> > const & signals )
     return units::pow< 2 >( signal  - mean );
   } ) ;
   
-  // BUG TODO FIX
-//  auto const residuals = signals ;
 
   return residuals;
 }
-  
-//template<long N,class Y>
-//inline typename power_typeof_helper<Y,static_rational<N> >::type
-//pow(const Y& x)
-//{
-//    return power_typeof_helper<Y,static_rational<N> >::value(x);
-//}
-  
   
 } // namespace signal_processing
   

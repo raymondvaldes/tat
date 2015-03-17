@@ -98,14 +98,14 @@ namespace import {
     auto nRows = size_t(0);
     auto nElements = size_t(0);
     
-    auto const recordDataFromLine = [&]( auto& myLine )
+    auto const recordDataFromLine = [&]( auto& myLine ) noexcept
     {
         using algorithm::string::trim_fill_copy;
         using algorithm::string::split;
         
         nRows++;
-        auto myLineTrimmed = trim_fill_copy( myLine, "\t") ;
-        auto myRowElements = split( myLineTrimmed, "\t" ) ;
+        auto const myLineTrimmed = trim_fill_copy( myLine, "\t") ;
+        auto const myRowElements = split( myLineTrimmed, "\t" ) ;
         
         rows.push_back( myRowElements );
 
@@ -113,7 +113,7 @@ namespace import {
         nColumns = myRowElements.size();
     };
 
-    auto const recordDataFromStream = [&]()
+    auto const recordDataFromStream = [&]() noexcept
     {
       using algorithm::stream::getline;
       auto const currentLine = getline( cleanFileStream ) ;

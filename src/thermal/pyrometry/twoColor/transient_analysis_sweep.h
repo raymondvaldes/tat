@@ -26,15 +26,26 @@ namespace twoColor {
 struct transient_analysis_sweep_results
 {
   std::vector< transient_analysis_results > transient_results;
+  std::vector< units::quantity< units::si::frequency> > laser_modulation_freq;
 
   transient_analysis_sweep_results(
-    std::vector< transient_analysis_results > const & transient_results_
+    std::vector< transient_analysis_results > const & transient_results_,
+    std::vector< units::quantity< units::si::frequency> > const & laser_modulation_freq_
   );
-  
+
   auto phases_omega(void) const -> 
   std::pair<
     std::vector< units::quantity< units::si::angular_frequency>>,
     std::vector< units::quantity< units::si::plane_angle      >> >;
+  
+  auto surface_temperature_phases( void ) const
+  -> std::vector< units::quantity< units::si::plane_angle > >;
+  
+  auto surface_temperature_amplitudes( void ) const
+  -> std::vector< units::quantity< units::si::temperature > >;
+  
+  auto surface_steady_temperature( void ) const
+  -> std::vector< units::quantity< units::si::temperature > >;
 };
 
 

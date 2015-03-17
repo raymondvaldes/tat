@@ -31,8 +31,8 @@ BOOST_AUTO_TEST_CASE( startup ) {
   auto const myArguments = vector<string>
   {
     "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
-    "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color/CrW06",
-    "--sample",         "200F_feb26_graphite",
+    "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color/graphite",
+    "--sample",         "527",
     "--investigation",  "twoColorPyrometery"
   };
   

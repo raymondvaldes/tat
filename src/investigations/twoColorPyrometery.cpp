@@ -48,7 +48,12 @@ auto run( filesystem::directory const & dir )  -> void
 
   for( size_t i = 0; i < bestFit_results.bestFit_phases.size(); ++i )
   {
-    std::cout <<  bestFit_results.experimenta_phases[i] << "\t" << bestFit_results.bestFit_phases[i] << "\n";
+    std::cout
+    << twoColor_data.laser_modulation_freq[i]
+    << "\t" << twoColor_data.surface_steady_temperature()[i]
+    << "\t" << phases.first[i]
+    << "\t" << bestFit_results.experimenta_phases[i]
+    << "\t" << bestFit_results.bestFit_phases[i] << "\n";
   }
   
   
