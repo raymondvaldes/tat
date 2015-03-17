@@ -9,6 +9,7 @@
 #include <iostream>
 #include "assert/assertExtensions.h"
 #include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
+#include "thermal/define/lthermal.h"
 #include "physics/classical_mechanics/kinematics.h"
 #include "algorithm/algorithm.h"
 
@@ -76,8 +77,6 @@ const -> std::vector< units::quantity< units::si::temperature > >
 }
 
 
-
-
 auto transient_analysis_sweep_results::phases_omega(void) const -> 
   std::pair<
     std::vector< units::quantity< units::si::angular_frequency>>,
@@ -126,6 +125,7 @@ noexcept -> transient_analysis_sweep_results
     results.push_back( result );
     ++i;
   } );
+  
 
   auto const output =
   transient_analysis_sweep_results( results, laser_modulation_frequencies );

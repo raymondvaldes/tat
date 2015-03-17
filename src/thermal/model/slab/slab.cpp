@@ -502,7 +502,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
   // eq:  T''(x) + ( ( sqrt( i * w ) )^2 ) T(x) == 0
   // BC:  T'(0)   == - 1
-  // BC:  T(1)  == 0
+  // BC:  T(L)  == 0
 
   assert( x.value() >= 0 ) ;
   assert( characteristic_length.value() > 0 ) ;

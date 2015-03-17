@@ -18,6 +18,14 @@
 #include "thermal/model/slab/import_slab.h"
 
 #include "units.h"
+//#include "statistics/coefficient_of_determination.h"
+//#include "statistics/signal_processing/residuals_square.h"
+
+//#include "statistics/signal_processing/sum_residuals_square.h"
+
+//#include "statistics/sum_of_squares/total.h"
+//#include "statistics/sum_of_squares/residuals.h"
+
 #include "plot/gnuplot.h"
 
 namespace investigations{
@@ -68,9 +76,10 @@ auto run( filesystem::directory const & dir )  -> void
   // minimum threshold for the R^2 of the fit
   
   // The signal averaging failed - need to check this by calculating the signal
-  // to noise ratio before and after signal averaging
+  // to noise ratio before and after signal averaging There was an error
+  // here and it has been fixed!
   
-//  plot::hello_world();
+  plot::simple_XY( twoColor_data.laser_modulation_freq, bestFit_results.experimenta_phases);
 }
 
 } //namespace twoColorPyrometry

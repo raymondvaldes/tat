@@ -12,14 +12,16 @@
 #include <vector>
 #include <cassert>
 #include <algorithm>
+#include <cmath>
+
 #include "math/functions/cosine.h"
 #include "math/estimation/lmdiff.hpp"
 #include "math/functions/wrap2pi.h"
+#include "math/coordinate_system/wrap_to_negPi_posPi.h"
 
 namespace math {
 
 namespace curveFit {
-
 
 struct propertiesToFit{
   const bool offset;
@@ -33,6 +35,21 @@ struct propertiesToFit{
   noexcept
   : offset(offsetIn), amplitude( amplitudeIn ),
     phase( phaseIn ), frequency( frequencyIn ) {}
+
+};
+
+template< typename T >
+struct cosine_fitting{
+
+  functions::Cosine<T> fitted_cosine;
+  units::quantity< units::si::dimensionless > R_square;
+  
+  
+  cosine_fitting
+  (
+    functions::Cosine<T> const & fitted_cosine_,
+    units::quantity< units::si::dimensionless > R_square_
+  );
 
 };
   
@@ -69,11 +86,14 @@ noexcept -> functions::Cosine<T>
     
     updatedProperties.offset = quantity< T >::from_value( x[0] ) ;
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
+
+
+    using math::coordinate_system::wrap_to_negPi_posPi;
     
-    auto const phase_angle = x[2] * units::si::radians;
+    auto const angle = x[2] * units::si::radians;
+    auto const phase_angle = wrap_to_negPi_posPi( angle )  ;
+    
     updatedProperties.phase = phase_angle ;
-    
-    updatedProperties.phase = wrap2pi( phase_angle ) ;
 
     return Cosine<T>( updatedProperties ) ;
   };

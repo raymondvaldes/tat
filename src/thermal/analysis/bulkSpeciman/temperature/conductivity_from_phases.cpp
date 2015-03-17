@@ -9,6 +9,7 @@
 #include <iterator>
 
 #include "thermal/analysis/bulkSpeciman/temperature/conductivity_from_phases.h"
+#include "thermal/define/lthermal.h"
 #include "math/estimation/lmdiff.hpp"
 #include "math/estimation/settings.h"
 #include "algorithm/algorithm.h"
@@ -21,17 +22,19 @@ namespace bulkSpeciman {
 
 namespace temperature {
 
-
 fitting_result::fitting_result
 (
   thermal::model::slab::Slab const & initial_slab_,
   thermal::model::slab::Slab const & fitted_slab_,
+ 
+//  std::vector< units::quantity< units::si::dimensionless > > thermal_penetrations_,
 
   std::vector< units::quantity< units::si::plane_angle > > const & experimenta_phases_,
   std::vector< units::quantity< units::si::plane_angle > > const & bestFit_phases_
 )
 : initial_slab( initial_slab_ ),
   fitted_slab( fitted_slab_ ),
+ // thermal_penetrations( thermal_penetrations_ ),
   experimenta_phases( experimenta_phases_ ),
   bestFit_phases( bestFit_phases_ )
 {}
@@ -99,8 +102,21 @@ diffusivity_from_phases
   auto const fitted_observations = surface_temperature_phases( omegas, fitted_slab ) ;
 
 
-  auto const results =
-  fitting_result( slab_initial, fitted_slab, observations ,fitted_observations);
+  
+//  using thermal::define::thermalPenetrations_from_angularFrequencies;
+//  auto const thermal_penetrations =
+//  thermalPenetrations_from_angularFrequencies(
+//    omegas,
+//    fitted_slab.get_diffusivity() ,
+//    fitted_slab.characteristic_length
+//  ) ;
+
+  auto const results =  fitting_result
+  (
+    slab_initial, fitted_slab,
+ //   thermal_penetrations,
+    observations ,fitted_observations
+  );
 
   return results;
 }

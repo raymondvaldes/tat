@@ -43,7 +43,7 @@ struct InternalperiodicProperties {
   
 } ;
 
-BOOST_FIXTURE_TEST_SUITE( cosine_fitting, InternalperiodicProperties )
+BOOST_FIXTURE_TEST_SUITE( cosine_fitting_test, InternalperiodicProperties )
 
 
 BOOST_AUTO_TEST_CASE( cosine_fit_test )

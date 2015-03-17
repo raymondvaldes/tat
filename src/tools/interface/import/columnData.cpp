@@ -104,9 +104,10 @@ namespace import {
         using algorithm::string::split;
         
         nRows++;
-        auto const myLineTrimmed = trim_fill_copy( myLine, "\t") ;
-        auto const myRowElements = split( myLineTrimmed, "\t" ) ;
-        
+    //    auto const myLineTrimmed = trim_fill_copy( myLine, "\t") ;
+     //   auto const myRowElements = split( myLineTrimmed, "\t" ) ;
+        auto const myRowElements = split( myLine, "\t" ) ;
+
         rows.push_back( myRowElements );
 
         nElements += myRowElements.size();

@@ -26,20 +26,26 @@ namespace temperature {
 struct fitting_result{
   thermal::model::slab::Slab initial_slab;
   thermal::model::slab::Slab fitted_slab;
+  //  std::vector< units::quantity< units::si::dimensionless > > thermal_penetrations;
 
   std::vector< units::quantity< units::si::plane_angle > > experimenta_phases;
   std::vector< units::quantity< units::si::plane_angle > > bestFit_phases;
   
+
   fitting_result
   (
     thermal::model::slab::Slab const & initial_slab_,
     thermal::model::slab::Slab const & fitted_slab_,
+   
+   // std::vector< units::quantity< units::si::dimensionless > > thermal_penetrations_,
 
     std::vector< units::quantity< units::si::plane_angle > > const & experimenta_phases_,
     std::vector< units::quantity< units::si::plane_angle > > const & bestFit_phases_
   );
 
 };
+
+
 
 auto
 diffusivity_from_phases

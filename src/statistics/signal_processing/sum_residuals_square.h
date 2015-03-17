@@ -33,6 +33,23 @@ auto sum_residuals_square( std::vector< units::quantity<T> > const & signals )
   return summation;
 }
   
+template< typename T >
+auto sum_residuals_square
+(
+  std::vector< units::quantity<T> > const & signals,
+  std::vector< units::quantity<T> > const & signals_predicted
+)
+{
+  assert( signals.size() > 0 );
+  
+  auto const residuals_square_list =
+  residuals_square( signals, signals_predicted );
+  
+  auto const summation = sum( residuals_square_list ) ;
+
+  return summation;
+}
+  
 } // namespace signal_processing
   
 } // namespace statistics

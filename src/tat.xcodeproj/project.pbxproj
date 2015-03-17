@@ -124,6 +124,11 @@
 		ABB09B7A1AB78EB3005D6BB5 /* residuals_square.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B791AB78EB3005D6BB5 /* residuals_square.h */; };
 		ABB09B7D1AB79F6C005D6BB5 /* variance.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B7C1AB79F6C005D6BB5 /* variance.h */; };
 		ABB09B7F1AB79FDE005D6BB5 /* standard_deviation.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B7E1AB79FDE005D6BB5 /* standard_deviation.h */; };
+		ABB09B841AB7CBB7005D6BB5 /* total.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B831AB7CBB7005D6BB5 /* total.h */; };
+		ABB09B861AB7CC8A005D6BB5 /* residuals.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B851AB7CC8A005D6BB5 /* residuals.h */; };
+		ABB09B881AB7CE8B005D6BB5 /* coefficient_of_determination.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B871AB7CE8B005D6BB5 /* coefficient_of_determination.h */; };
+		ABB09B8B1AB89CCF005D6BB5 /* wrap_to_negPi_posPi.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B8A1AB89CCF005D6BB5 /* wrap_to_negPi_posPi.h */; };
+		ABB09B8D1AB89E72005D6BB5 /* wrap_to_0_2Pi.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB09B8C1AB89E72005D6BB5 /* wrap_to_0_2Pi.h */; };
 		ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */; };
 		ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB4473F19DB37BF009EC35F /* planckWienApprox.h */; };
 		ABB4474519DB386A009EC35F /* constants.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB4474319DB386A009EC35F /* constants.h */; };
@@ -343,7 +348,7 @@
 		AB44D7D41A77140E000BF19F /* algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = algorithm.h; path = algorithm/algorithm.h; sourceTree = "<group>"; };
 		AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "gnuplot-iostream.h"; path = "plot/gnuplot-iostream.h"; sourceTree = "<group>"; };
 		AB521A051AB65EE7008FD7DC /* gnuplot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gnuplot.h; path = plot/gnuplot.h; sourceTree = "<group>"; };
-		AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_iostreams-mt.a"; path = "../../../../../usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.a"; sourceTree = "<group>"; };
+		AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_iostreams-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.a"; sourceTree = "<absolute>"; };
 		AB553C4D195DE60100E2B7D1 /* interval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interval.cpp; path = geometry/interval.cpp; sourceTree = "<group>"; };
 		AB553C4E195DE60100E2B7D1 /* interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interval.h; path = geometry/interval.h; sourceTree = "<group>"; };
 		AB553C51195DF13200E2B7D1 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random.cpp; path = random/random.cpp; sourceTree = "<group>"; };
@@ -438,6 +443,11 @@
 		ABB09B7C1AB79F6C005D6BB5 /* variance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = variance.h; path = statistics/signal_processing/corrected_sample/variance.h; sourceTree = SOURCE_ROOT; };
 		ABB09B7E1AB79FDE005D6BB5 /* standard_deviation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = standard_deviation.h; path = statistics/signal_processing/corrected_sample/standard_deviation.h; sourceTree = SOURCE_ROOT; };
 		ABB09B801AB7B1EB005D6BB5 /* static_rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = static_rational.h; path = units/static_rational.h; sourceTree = "<group>"; };
+		ABB09B831AB7CBB7005D6BB5 /* total.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = total.h; path = statistics/sum_of_squares/total.h; sourceTree = SOURCE_ROOT; };
+		ABB09B851AB7CC8A005D6BB5 /* residuals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residuals.h; path = statistics/sum_of_squares/residuals.h; sourceTree = SOURCE_ROOT; };
+		ABB09B871AB7CE8B005D6BB5 /* coefficient_of_determination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coefficient_of_determination.h; path = statistics/coefficient_of_determination.h; sourceTree = SOURCE_ROOT; };
+		ABB09B8A1AB89CCF005D6BB5 /* wrap_to_negPi_posPi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrap_to_negPi_posPi.h; path = coordinate_system/wrap_to_negPi_posPi.h; sourceTree = "<group>"; };
+		ABB09B8C1AB89E72005D6BB5 /* wrap_to_0_2Pi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrap_to_0_2Pi.h; path = coordinate_system/wrap_to_0_2Pi.h; sourceTree = "<group>"; };
 		ABB4473E19DB37BF009EC35F /* planckWienApprox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planckWienApprox.cpp; path = blackBody/planckWienApprox.cpp; sourceTree = "<group>"; };
 		ABB4473F19DB37BF009EC35F /* planckWienApprox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = planckWienApprox.h; path = blackBody/planckWienApprox.h; sourceTree = "<group>"; };
 		ABB4474319DB386A009EC35F /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = blackBody/constants.h; sourceTree = "<group>"; };
@@ -691,7 +701,6 @@
 		AB37106818653C7D000092C5 = {
 			isa = PBXGroup;
 			children = (
-				AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */,
 				AB932DF21A6DB76E00ECF117 /* source */,
 				ABA2BD3B1A48BA21004F3C6E /* linked-libraries */,
 			);
@@ -784,6 +793,7 @@
 		AB553C46195DCF6D00E2B7D1 /* statistics */ = {
 			isa = PBXGroup;
 			children = (
+				ABB09B821AB7CB8F005D6BB5 /* sum_of_squares */,
 				AB8B58181AB752860055615C /* signal_processing */,
 				ABAA413B1A9D519F0091C3BD /* sum.h */,
 			);
@@ -1072,6 +1082,7 @@
 		ABA2BD3B1A48BA21004F3C6E /* linked-libraries */ = {
 			isa = PBXGroup;
 			children = (
+				AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */,
 				ABC5C3BC1A8532EF00EC4897 /* libboost_system-mt.a */,
 				ABC5C3BA1A8532D800EC4897 /* libboost_program_options-mt.a */,
 				ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */,
@@ -1124,6 +1135,25 @@
 				ABB09B7E1AB79FDE005D6BB5 /* standard_deviation.h */,
 			);
 			name = corrected_sample;
+			sourceTree = "<group>";
+		};
+		ABB09B821AB7CB8F005D6BB5 /* sum_of_squares */ = {
+			isa = PBXGroup;
+			children = (
+				ABB09B871AB7CE8B005D6BB5 /* coefficient_of_determination.h */,
+				ABB09B831AB7CBB7005D6BB5 /* total.h */,
+				ABB09B851AB7CC8A005D6BB5 /* residuals.h */,
+			);
+			name = sum_of_squares;
+			sourceTree = "<group>";
+		};
+		ABB09B891AB89C82005D6BB5 /* coordinate_system */ = {
+			isa = PBXGroup;
+			children = (
+				ABB09B8A1AB89CCF005D6BB5 /* wrap_to_negPi_posPi.h */,
+				ABB09B8C1AB89E72005D6BB5 /* wrap_to_0_2Pi.h */,
+			);
+			name = coordinate_system;
 			sourceTree = "<group>";
 		};
 		ABB4473D19DB365E009EC35F /* blackBody */ = {
@@ -1258,6 +1288,7 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				ABB09B891AB89C82005D6BB5 /* coordinate_system */,
 				ABEB14AD1AAA551500204B36 /* differential */,
 				AB553C47195DCFE300E2B7D1 /* random */,
 				AB0C51B91A97C79500EEA759 /* matrixAnalysis */,
@@ -1708,6 +1739,7 @@
 				ABC5B1BE1AB55D1600A6D33C /* import_slab.h in Headers */,
 				AB7996EC1AB11C4B0022015B /* operator_overloads.h in Headers */,
 				AB3ED3C31AAF6E9B00845151 /* conductivity_from_phases.h in Headers */,
+				ABB09B8B1AB89CCF005D6BB5 /* wrap_to_negPi_posPi.h in Headers */,
 				AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */,
 				ABA48C3A1A78553C0025666F /* cmath.h in Headers */,
 				ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */,
@@ -1734,6 +1766,7 @@
 				AB8F0CB21A8592F70091196B /* quantityTodouble.h in Headers */,
 				AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */,
 				ABB54FD219C35E300056823E /* ifzero.h in Headers */,
+				ABB09B861AB7CC8A005D6BB5 /* residuals.h in Headers */,
 				AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */,
 				AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */,
 				AB2BA4791AB3DA78008AF545 /* import_twoColor_scope_files.h in Headers */,
@@ -1789,6 +1822,7 @@
 				ABEF4EA61948D4A500B44AD5 /* property.h in Headers */,
 				ABEF4EF81948D4A500B44AD5 /* tau_0.h in Headers */,
 				ABB09B781AB78CF7005D6BB5 /* sum_residuals_square.h in Headers */,
+				ABB09B841AB7CBB7005D6BB5 /* total.h in Headers */,
 				ABF5D65D19DB40DD00A70476 /* calibrationCoefficient.h in Headers */,
 				ABEF4EC11948D4A500B44AD5 /* temp_ss.h in Headers */,
 				ABEB14B71AAA622600204B36 /* slab.h in Headers */,
@@ -1831,6 +1865,7 @@
 				ABEF4EFE1948D4A500B44AD5 /* filesystem.hpp in Headers */,
 				ABEF4EAF1948D4A500B44AD5 /* cmplx_combination.h in Headers */,
 				AB0DFE0619524382007DF69B /* starts_with.h in Headers */,
+				ABB09B881AB7CE8B005D6BB5 /* coefficient_of_determination.h in Headers */,
 				ABEF4EB71948D4A500B44AD5 /* methods.hpp in Headers */,
 				ABFC9E6C1A94420300F124F1 /* doubleToString.h in Headers */,
 				ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */,
@@ -1841,6 +1876,7 @@
 				ABEF4E7A1948D4A500B44AD5 /* num_method2014.h in Headers */,
 				AB90AA571AB298BB00F2535D /* total_calibrated_emission_pairs.h in Headers */,
 				AB6981A819CB638300940843 /* apply_to_all.h in Headers */,
+				ABB09B8D1AB89E72005D6BB5 /* wrap_to_0_2Pi.h in Headers */,
 				ABAA413C1A9D519F0091C3BD /* sum.h in Headers */,
 				ABA95D1D1AB3AA0600AD4F9F /* transient_analysis.h in Headers */,
 				ABEF4EE41948D4A500B44AD5 /* labels.h in Headers */,

@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE( startup ) {
   {
     "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
     "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color/graphite",
-    "--sample",         "527",
+    "--sample",         "527F_March5_wav_low",
     "--investigation",  "twoColorPyrometery"
   };
   
