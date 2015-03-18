@@ -11,6 +11,7 @@
 #include "math/functions/periodicData.h"
 #include "math/functions/PeriodicProperties.h"
 #include "math/curveFit/cosine.h"
+#include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal {
 
@@ -31,6 +32,7 @@ using math::functions::PeriodicData;
 using math::functions::PeriodicProperties;
 using math::curveFit::cosine;
 using math::functions::Cosine;
+using physics::classical_mechanics::frequency_to_angularFrequency;
 
 using std::pair;
 using std::vector;
@@ -40,11 +42,12 @@ auto transient_analysis
   thermal::equipment::detector::Measurements const & measurements_1,
   thermal::equipment::detector::Measurements const & measurements_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::angular_frequency > const & laser_modulation,
-  units::quantity< units::si::plane_angle > const & laser_phase,
-  units::quantity< units::si::plane_angle> const & cosine_phase )
+  units::quantity< units::si::frequency > const & laser_frequency,
+  units::quantity< units::si::plane_angle > const & laser_phase )
 noexcept -> transient_analysis_results
 {
+  auto const omega = frequency_to_angularFrequency( laser_frequency );
+  
   auto const normalized_SRs =
   normalizedDetectorMeasurements( measurements_1, measurements_2, gCoeff );
 
@@ -55,7 +58,7 @@ noexcept -> transient_analysis_results
   PeriodicProperties<one_over_temperature>{
     myPeriodicData.initialEstimateOffset(),
     myPeriodicData.initialEstimateAmplitude(),
-    laser_modulation,
+    omega,
     quantity<plane_angle>{ -1.6 * radians }
   } ;
 
@@ -81,7 +84,7 @@ noexcept -> transient_analysis_results
     transient_temperature_amplitude,
     normalized_SRs,
     fitted_cosine_function,
-    laser_modulation
+    omega
   );
 
   return output;

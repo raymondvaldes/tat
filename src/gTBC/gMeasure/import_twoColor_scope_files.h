@@ -23,8 +23,10 @@ namespace gMeasure {
 
 struct processed_scope_data{
 
-  std::vector< units::quantity< units::si::frequency > > laser_modulation_freq;
-
+std::vector<
+  std::pair<  units::quantity< units::si::frequency   > ,
+              units::quantity< units::si::plane_angle > > > laser_modulations;
+  
   std::vector<
   std::pair<  thermal::equipment::detector::Measurements,
               thermal::equipment::detector::Measurements > > measurements;
@@ -33,8 +35,9 @@ struct processed_scope_data{
   
   processed_scope_data
   (
-    std::vector< units::quantity< units::si::frequency > >
-    const & laser_modulation_freq_,
+    std::vector<
+  std::pair<  units::quantity< units::si::frequency   > ,
+              units::quantity< units::si::plane_angle > > > const & laser_modulations_,
 
     std::vector<  std::pair<  thermal::equipment::detector::Measurements,
                             thermal::equipment::detector::Measurements > >

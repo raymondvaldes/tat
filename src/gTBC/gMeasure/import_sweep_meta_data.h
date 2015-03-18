@@ -9,6 +9,7 @@
 #ifndef __tat__import_sweep_meta_data__
 #define __tat__import_sweep_meta_data__
 
+#include <vector>
 #include "tools/interface/filesystem.hpp"
 #include "units.h"
 
@@ -69,9 +70,28 @@ struct meta_measurement_description{
 
 };
 
+struct meta_measurement_descriptions{
+
+private:
+  std::vector< meta_measurement_description > meta_datas;
+
+public:
+  meta_measurement_descriptions
+  (
+    std::vector< meta_measurement_description > meta_datas_
+  ): meta_datas( meta_datas_ ){};
+  
+  auto meta_laser_modulations(void) const
+  noexcept -> std::vector<
+  std::pair<  units::quantity< units::si::frequency   > ,
+              units::quantity< units::si::plane_angle > > >;
+
+};
+
+
 auto
 import_sweep_meta_data( filesystem::path const & path )
-noexcept -> std::vector< meta_measurement_description >;
+noexcept -> meta_measurement_descriptions;
 
   
 } // namespace gMeasure

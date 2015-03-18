@@ -21,13 +21,16 @@ namespace gMeasure {
 
 using std::vector;
 using std::string;
+using std::pair;
 using std::iota;
+using std::make_pair;
 using algorithm::for_each;
 using algorithm::vector::reserve;
 
 using algorithm::iota;
 using tools::interface::import::columnData;
 
+using units::quantity;
 using units::string_to_quantity;
 using units::si::frequency;
 using units::si::hertz;
@@ -125,22 +128,22 @@ noexcept -> meta_measurement_description
     string_to_quantity< dimensionless, double >( row[9] );
   
     auto const laser_pulse_width =
-    string_to_quantity< dimensionless, double >( row[9] );
+    string_to_quantity< dimensionless, double >( row[10] );
   
     auto const reference_argument  =
-    string_to_quantity< plane_angle >( row[6], radians );
+    string_to_quantity< plane_angle >( row[11], radians );
   
     auto const reference_argument_um =
-    string_to_quantity< plane_angle >( row[7], radians );
+    string_to_quantity< plane_angle >( row[12], radians );
     
     auto const samples =
-    string_to_quantity< dimensionless, size_t >( row[8] );
+    string_to_quantity< dimensionless, size_t >( row[13] );
   
     auto const measurement_time =
-    string_to_quantity< time >( row[9], seconds );
+    string_to_quantity< time >( row[14], seconds );
   
     auto const signal_steady_offset_grnd =
-    string_to_quantity< electric_potential >( row[9], volts );
+    string_to_quantity< electric_potential >( row[15], volts );
   
 
     auto const meta_description = meta_measurement_description
@@ -173,7 +176,7 @@ noexcept -> meta_measurement_description
 
 auto
 import_sweep_meta_data( filesystem::path const & path )
-noexcept -> std::vector< meta_measurement_description >
+noexcept -> meta_measurement_descriptions
 {
   auto const data = columnData( path.string(), { "*","#" } );
 
@@ -196,7 +199,25 @@ noexcept -> std::vector< meta_measurement_description >
     descriptions.push_back( meta_description );
   } );
   
-  return descriptions;
+  auto const output = meta_measurement_descriptions( descriptions );
+  return output;
+}
+
+auto meta_measurement_descriptions::meta_laser_modulations(void) const
+noexcept -> std::vector <
+  std::pair<  units::quantity< units::si::frequency   > ,
+              units::quantity< units::si::plane_angle > > >
+{
+  auto results = vector< pair< quantity< frequency > , quantity< plane_angle >>>();
+
+  for_each( meta_datas, [&results]( auto const & meta_data )
+  {
+    auto const laser_info = make_pair(  meta_data.laser_modulation_frequency,
+                                        meta_data.reference_argument ) ;
+    results.push_back( laser_info ) ;
+  } ) ;
+
+  return results;
 }
   
 } // namespace gMeasure

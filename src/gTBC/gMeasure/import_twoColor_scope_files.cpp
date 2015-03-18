@@ -26,8 +26,10 @@ using thermal::pyrometry::twoColor::pyrometery_settings_file;
 
 processed_scope_data::processed_scope_data
 (
-  std::vector< units::quantity< units::si::frequency > >
-  const & laser_modulation_freq_,
+  std::vector<
+  std::pair<  units::quantity< units::si::frequency   > ,
+              units::quantity< units::si::plane_angle > > >
+              const & laser_modulations_,
 
   std::vector<  std::pair<  thermal::equipment::detector::Measurements,
                           thermal::equipment::detector::Measurements > >
@@ -35,7 +37,7 @@ processed_scope_data::processed_scope_data
 
   units::quantity< units::si::dimensionless > const & gCoefficient_
 )
-: laser_modulation_freq( laser_modulation_freq_ ),
+: laser_modulations( laser_modulations_ ),
   measurements( measurements_ ),
   gCoefficient( gCoefficient_ ) {}
 
@@ -78,11 +80,16 @@ auto import_twoColor_scope_files
   
   auto const get_meta_files = dir.ls_files( ".tbd" );
   assert( get_meta_files.size() == 1 ) ;
-  import_sweep_meta_data( get_meta_files.front() );
+  
+  auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
+  auto laser_modulations = meta_data.meta_laser_modulations();
   
   
-  auto const out =
-  processed_scope_data( frequencies.second, calibrated_emission_pairs, gCoeff );
+  
+  
+  assert( laser_modulations.size() == calibrated_emission_pairs.size() );
+  auto const out =  processed_scope_data(
+  laser_modulations , calibrated_emission_pairs, gCoeff );
   
   return  out;
 }

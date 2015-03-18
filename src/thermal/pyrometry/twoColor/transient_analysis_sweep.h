@@ -29,8 +29,7 @@ struct transient_analysis_sweep_results
   std::vector< units::quantity< units::si::frequency> > laser_modulation_freq;
 
   transient_analysis_sweep_results(
-    std::vector< transient_analysis_results > const & transient_results_,
-    std::vector< units::quantity< units::si::frequency> > const & laser_modulation_freq_
+    std::vector< transient_analysis_results > const & transient_results_
   );
 
   auto phases_omega(void) const -> 
@@ -51,8 +50,9 @@ struct transient_analysis_sweep_results
 
 auto transient_analysis_sweep
 (
-  std::vector< units::quantity< units::si::frequency> > const &
-  laser_modulation_freq,
+  std::vector<
+  std::pair<  units::quantity< units::si::frequency   > ,
+              units::quantity< units::si::plane_angle > > > laser_modulations,
  
   std::vector< std::pair<
     thermal::equipment::detector::Measurements,

@@ -10,9 +10,8 @@
 #include "assert/assertExtensions.h"
 #include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
 #include "thermal/define/lthermal.h"
-#include "physics/classical_mechanics/kinematics.h"
 #include "algorithm/algorithm.h"
-#include "gTBC/gMeasure/
+
 namespace thermal {
 
 namespace pyrometry {
@@ -28,16 +27,13 @@ using units::si::plane_angle;
 using std::vector;
 using std::pair;
 using std::make_pair;
-using physics::classical_mechanics::angularFrequencies_from_frequencies;
 
 
 transient_analysis_sweep_results::transient_analysis_sweep_results
 (
-  std::vector< transient_analysis_results > const & transient_results_,
-  std::vector< units::quantity< units::si::frequency> > const & laser_modulation_freq_
+  std::vector< transient_analysis_results > const & transient_results_
 )
-: transient_results( transient_results_ ),
-  laser_modulation_freq(laser_modulation_freq_)
+: transient_results( transient_results_ )
 {}
 
 auto transient_analysis_sweep_results::surface_temperature_phases( void )
@@ -97,9 +93,10 @@ auto transient_analysis_sweep_results::phases_omega(void) const ->
 
 auto transient_analysis_sweep
 (
-  std::vector< units::quantity< units::si::frequency> > const &
-  laser_modulation_frequencies,
- 
+  std::vector<
+  std::pair<  units::quantity< units::si::frequency   > ,
+              units::quantity< units::si::plane_angle > > > laser_modulations,
+
   std::vector< std::pair<
     thermal::equipment::detector::Measurements,
     thermal::equipment::detector::Measurements > > const & sweep,
@@ -108,29 +105,25 @@ auto transient_analysis_sweep
 )
 noexcept -> transient_analysis_sweep_results
 {
-  assert_gt_zero( laser_modulation_frequencies );
   assert( gCoeff.value() > 0 );
-
+  assert( laser_modulations.size() == sweep.size() );
   vector< transient_analysis_results > results;
-  auto const omegas =
-  angularFrequencies_from_frequencies( laser_modulation_frequencies );
-
-  
 
   size_t i = 0;
-  for_each( omegas , [&]( auto const & omega ) noexcept
+  for_each( laser_modulations , [&]( auto const & laser_modulation ) noexcept
   {
     auto const m_1 = sweep[i].first;
     auto const m_2 = sweep[i].second;
-    auto const laser_phase = quantity< plane_angle >::from_value(0);
-    auto const result = transient_analysis( m_1, m_2, gCoeff, omega, laser_phase );
+    auto const frequency =  laser_modulation.first;
+    auto const laser_phase = laser_modulation.second;
+    auto const result =
+    transient_analysis( m_1, m_2, gCoeff, frequency, laser_phase ) ;
+    
     results.push_back( result );
     ++i;
   } );
-  
 
-  auto const output =
-  transient_analysis_sweep_results( results, laser_modulation_frequencies );
+  auto const output = transient_analysis_sweep_results( results );
 
   return output;
 }
@@ -142,7 +135,7 @@ auto transient_analysis_sweep
 noexcept -> transient_analysis_sweep_results
 {
   return transient_analysis_sweep(
-    p.laser_modulation_freq,
+    p.laser_modulations,
     p.measurements,
     p.gCoefficient
   );
