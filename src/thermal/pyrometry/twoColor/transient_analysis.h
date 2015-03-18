@@ -75,7 +75,10 @@ auto transient_analysis
   thermal::equipment::detector::Measurements const & measurements_1,
   thermal::equipment::detector::Measurements const & measurements_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::angular_frequency > const & laser_modulation
+  units::quantity< units::si::angular_frequency > const & laser_modulation,
+  units::quantity< units::si::plane_angle > const & laser_phase,
+  units::quantity< units::si::plane_angle> const & cosine_phase =
+  units::quantity< units::si::plane_angle>::from_value(0)
 )
 noexcept -> transient_analysis_results;
   

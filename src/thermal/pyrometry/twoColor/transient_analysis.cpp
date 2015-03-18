@@ -40,8 +40,9 @@ auto transient_analysis
   thermal::equipment::detector::Measurements const & measurements_1,
   thermal::equipment::detector::Measurements const & measurements_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::angular_frequency > const & laser_modulation
-)
+  units::quantity< units::si::angular_frequency > const & laser_modulation,
+  units::quantity< units::si::plane_angle > const & laser_phase,
+  units::quantity< units::si::plane_angle> const & cosine_phase )
 noexcept -> transient_analysis_results
 {
   auto const normalized_SRs =
@@ -59,19 +60,13 @@ noexcept -> transient_analysis_results
   } ;
 
   auto const fitted_cosine_function =
-  cosine( normalized_SRs, initialConditions );
+  cosine( normalized_SRs, initialConditions, laser_phase );
 
   auto const myFittedAmplitude = fitted_cosine_function.get_amplitude() ;
   auto const myFittedOffset = fitted_cosine_function.get_offset() ;
   
-  auto const T_phase = fitted_cosine_function.get_phase() ;
-  
-  // HACK hack fix this todo
-  auto  transient_temperature_phase = T_phase ;
-  if( laser_modulation.value() / ( 2 * M_PI  ) > 100. )
-    transient_temperature_phase -= 1.55 * radians;
-    /// HACK hack fix todo
-  
+  auto  const transient_temperature_phase = fitted_cosine_function.get_phase() ;
+    
   auto const steady_temperature =
   quantity<temperature>(quantity<dimensionless>{1} / myFittedOffset) ;
   

@@ -58,8 +58,8 @@ template< typename T >
 auto cosine( const std::vector< units::quantity< units::si::time > > &inputTime,
              const std::vector< units::quantity< T > > &inputSignal,
              const functions::PeriodicProperties< T > &initialConditions,
-             const propertiesToFit fittingGuide =
-             propertiesToFit{true, true, true, false} )
+             const units::quantity< units::si::plane_angle> & cosine_phase =
+             units::quantity< units::si::plane_angle>::from_value(0) )
 noexcept -> functions::Cosine<T>
 {
     using std::generate;
@@ -78,7 +78,7 @@ noexcept -> functions::Cosine<T>
     assert( inputTime.size() == inputSignal.size() ) ;
   }
 
-  auto const CosineFactory = [  ]
+  auto const CosineFactory = [ &cosine_phase  ]
   ( const double*x, const functions::PeriodicProperties< T > &input )
   noexcept
   {
@@ -87,11 +87,9 @@ noexcept -> functions::Cosine<T>
     updatedProperties.offset = quantity< T >::from_value( x[0] ) ;
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
 
-
     using math::coordinate_system::wrap_to_negPi_posPi;
-    
     auto const angle = x[2] * units::si::radians;
-    auto const phase_angle = wrap_to_negPi_posPi( angle )  ;
+    auto const phase_angle = wrap_to_negPi_posPi( angle ) + cosine_phase  ;
     
     updatedProperties.phase = phase_angle ;
 
@@ -129,12 +127,17 @@ noexcept -> functions::Cosine<T>
 
 
 template< typename T >
-auto cosine(  std::pair< std::vector< units::quantity<units::si::time> >,
-              std::vector< units::quantity< T > > > const & input,
-              functions::PeriodicProperties< T > const & initialConditions)
+auto cosine(  std::pair<
+                std::vector< units::quantity<units::si::time> >,
+                std::vector< units::quantity< T > >
+              > const & input,
+              functions::PeriodicProperties< T > const & initialConditions,
+              const units::quantity< units::si::plane_angle> & cosine_phase =
+              units::quantity< units::si::plane_angle>::from_value(0)
+              )
 noexcept -> functions::Cosine< T >
 {
-  return cosine( input.first, input.second, initialConditions );
+  return cosine( input.first, input.second, initialConditions, cosine_phase );
 }
 
 } // namespace curveFit

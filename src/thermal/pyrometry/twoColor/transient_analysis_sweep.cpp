@@ -12,7 +12,7 @@
 #include "thermal/define/lthermal.h"
 #include "physics/classical_mechanics/kinematics.h"
 #include "algorithm/algorithm.h"
-
+#include "gTBC/gMeasure/
 namespace thermal {
 
 namespace pyrometry {
@@ -109,19 +109,21 @@ auto transient_analysis_sweep
 noexcept -> transient_analysis_sweep_results
 {
   assert_gt_zero( laser_modulation_frequencies );
-  
   assert( gCoeff.value() > 0 );
 
   vector< transient_analysis_results > results;
   auto const omegas =
   angularFrequencies_from_frequencies( laser_modulation_frequencies );
 
+  
+
   size_t i = 0;
   for_each( omegas , [&]( auto const & omega ) noexcept
   {
     auto const m_1 = sweep[i].first;
     auto const m_2 = sweep[i].second;
-    auto const result = transient_analysis( m_1, m_2, gCoeff, omega );
+    auto const laser_phase = quantity< plane_angle >::from_value(0);
+    auto const result = transient_analysis( m_1, m_2, gCoeff, omega, laser_phase );
     results.push_back( result );
     ++i;
   } );

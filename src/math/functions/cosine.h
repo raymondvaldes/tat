@@ -24,7 +24,8 @@ public:
   -> units::quantity<T>
   {
     using std::cos;
-  
+    using units::cos;
+    
     auto const angle = this->omega * time + this->phase ;
     return this->offset + this->amplitude * cos( angle.value() ) ;
   }
