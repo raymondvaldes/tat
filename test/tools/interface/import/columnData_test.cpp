@@ -22,19 +22,19 @@ BOOST_AUTO_TEST_SUITE( import )
   using tools::interface::import::columnData;
 
 
-BOOST_AUTO_TEST_CASE( constructor ) {
-
-  BOOST_CHECK_NO_THROW( columnData(
-  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt" ) ) ;
-  
-  BOOST_CHECK_THROW( columnData( "mydummy.txt" ) , std::invalid_argument ) ;
-  
-  BOOST_CHECK_THROW(
-    columnData(
-    "/Users/raymondvaldes/code/tat/test/tools/interface/import/data_badForm.txt"
-    ) , std::invalid_argument ) ;
-  
-}
+//BOOST_AUTO_TEST_CASE( constructor ) {
+//
+//  BOOST_CHECK_NO_THROW( columnData(
+//  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt" ) ) ;
+//  
+//  BOOST_CHECK_THROW( columnData( "mydummy.txt" ) , std::invalid_argument ) ;
+//  
+//  BOOST_CHECK_THROW(
+//    columnData(
+//    "/Users/raymondvaldes/code/tat/test/tools/interface/import/data_badForm.txt"
+//    ) , std::invalid_argument ) ;
+//  
+//}
 
 BOOST_AUTO_TEST_CASE( getRow ) {
   typedef std::vector<std::string> vector_strings;

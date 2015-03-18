@@ -13,6 +13,7 @@
 #include <stdexcept>
 
 namespace algorithm {
+
 namespace stream {
 
   auto validation = [](auto const& stream )-> void
@@ -35,6 +36,8 @@ namespace stream {
     validation(stream);
   }
 
-}}
+} // namespace stream
+
+} // namespace algorithm
 
 #endif /* defined(__tat__validateOpenStream__) */

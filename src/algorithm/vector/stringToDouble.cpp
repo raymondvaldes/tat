@@ -14,7 +14,8 @@ namespace algorithm {
 
 namespace vector {
 
-auto stringToDouble( std::vector<std::string> const &  input ) noexcept -> std::vector<double>
+auto stringToDouble( std::vector<std::string> const &  input )
+noexcept -> std::vector<double>
 {
   using std::string;
   using std::transform;

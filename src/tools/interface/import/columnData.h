@@ -14,11 +14,27 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <tuple>
 
 
 namespace tools {
+
 namespace interface {
+
 namespace import {
+
+struct dimensions{
+
+  size_t rows;
+  size_t columns;
+  size_t elements;
+  
+  dimensions(
+    size_t const rows_,
+    size_t const columns_,
+    size_t const elements_
+  );
+};
 
 class columnData{
 
@@ -26,7 +42,8 @@ private:
   
   mutable std::ifstream my_ifstream ;
   mutable std::stringstream cleanFileStream ;
-  std::string IgnoreCharacter ;
+//  std::string IgnoreCharacter ;
+  std::vector< std::string > IngoreCharacters;
   
   mutable std::vector < std::vector<std::string> > rows;
   mutable std::vector < std::vector<std::string> > columns;
@@ -40,10 +57,10 @@ private:
   auto verifyDataIntegrity(void) noexcept
     -> bool;
   
-  auto clearDataVectors(void) noexcept
+  auto clearDataVectors(void) 
     -> void;
   
-  auto processData( void )
+  auto processData( void ) 
     -> void;
   
   auto validateAndProcess(void)
@@ -55,7 +72,7 @@ public:
   explicit columnData( std::string const & filePathIn );
   
   explicit columnData( std::string const & filePathIn,
-                       std::string const & ignoreCharacterIn );
+                       std::vector<std::string> const & ignoreCharactersIn );
 
   auto getColumn( size_t const columnNumber ) const noexcept
     -> std::vector<std::string>;
@@ -66,12 +83,14 @@ public:
   auto getElement( size_t const rowNumber, size_t const columnNumber ) const noexcept
     -> std::string;
   
-  auto size(void) const noexcept -> size_t;
-};
+  auto size(void) const noexcept -> dimensions;
+  };
 
+} // namespace tools
 
+} // namespace interface
 
-}}}
+} // namespace import
 
 
 

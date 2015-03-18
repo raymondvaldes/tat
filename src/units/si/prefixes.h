@@ -12,6 +12,7 @@
 #include <boost/units/systems/si/prefixes.hpp>
 
 namespace units {
+
 namespace si {
 
   using boost::units::si::yocto;
@@ -37,7 +38,10 @@ namespace si {
   using boost::units::si::exa;
   using boost::units::si::zetta;
   using boost::units::si::yotta;
-}}
+
+} // namespace si
+
+} // namespace units
 
 
 

@@ -26,4 +26,6 @@
 #include "units/si/si.h"
 #include "units/cmath.h"
 
+#include "units/conversions.h"
+
 #endif

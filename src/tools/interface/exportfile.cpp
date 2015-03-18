@@ -28,9 +28,8 @@ License
 
 #include "tools/interface/exportfile.hpp"
 
-
-
 namespace tools{
+
 namespace interface{
 
 void exportfile( const std::string &fullpath, const std::string &input ) noexcept
@@ -41,5 +40,6 @@ void exportfile( const std::string &fullpath, const std::string &input ) noexcep
   myfile.close() ;
 }
 
+} // namespace tools
 
-}}
+} // namespace interface

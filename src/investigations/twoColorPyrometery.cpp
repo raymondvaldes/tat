@@ -18,13 +18,6 @@
 #include "thermal/model/slab/import_slab.h"
 
 #include "units.h"
-//#include "statistics/coefficient_of_determination.h"
-//#include "statistics/signal_processing/residuals_square.h"
-
-//#include "statistics/signal_processing/sum_residuals_square.h"
-
-//#include "statistics/sum_of_squares/total.h"
-//#include "statistics/sum_of_squares/residuals.h"
 
 #include "plot/gnuplot.h"
 
@@ -33,6 +26,7 @@ namespace investigations{
 namespace twoColorPyrometery{
 
 using gTBC::gMeasure::import_twoColor_scope_files ;
+
 using thermal::pyrometry::twoColor::transient_analysis_sweep ;
 using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases ;
 using thermal::model::slab::import ;
@@ -46,6 +40,7 @@ auto run( filesystem::directory const & dir )  -> void
 
   auto const scope_data = import_twoColor_scope_files( dir,"twoColorPyro.xml" );
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
+  
   auto const phases = twoColor_data.phases_omega();
     
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;
@@ -79,7 +74,7 @@ auto run( filesystem::directory const & dir )  -> void
   // to noise ratio before and after signal averaging There was an error
   // here and it has been fixed!
   
-  plot::simple_XY( twoColor_data.laser_modulation_freq, bestFit_results.experimenta_phases);
+  plot::simple_XY( twoColor_data.laser_modulation_freq, phases.second);
 }
 
 } //namespace twoColorPyrometry

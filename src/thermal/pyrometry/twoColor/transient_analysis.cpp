@@ -64,7 +64,14 @@ noexcept -> transient_analysis_results
   auto const myFittedAmplitude = fitted_cosine_function.get_amplitude() ;
   auto const myFittedOffset = fitted_cosine_function.get_offset() ;
   
-  auto const transient_temperature_phase = fitted_cosine_function.get_phase() ;
+  auto const T_phase = fitted_cosine_function.get_phase() ;
+  
+  // HACK hack fix this todo
+  auto  transient_temperature_phase = T_phase ;
+  if( laser_modulation.value() / ( 2 * M_PI  ) > 100. )
+    transient_temperature_phase -= 1.55 * radians;
+    /// HACK hack fix todo
+  
   auto const steady_temperature =
   quantity<temperature>(quantity<dimensionless>{1} / myFittedOffset) ;
   

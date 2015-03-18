@@ -32,7 +32,7 @@ find_unique_lambdas_in_files
   std::vector< ScopeFile > const & scope_files
 )
 noexcept -> std::pair< std::vector< ScopeFile >,
-  std::vector< units::quantity< units::si::wavelength > > >
+std::vector< units::quantity< units::si::wavelength > > >
 {
   assert( !scope_files.empty() );
 
@@ -44,8 +44,7 @@ noexcept -> std::pair< std::vector< ScopeFile >,
   for_each( unique_files, [&out]( const auto & file )
   {
     out.push_back( file.monochorometer_lambda );
-  } ) ;
-  
+  } ) ;  
   
   assert( unique_files.size() == 2 ) ;
   

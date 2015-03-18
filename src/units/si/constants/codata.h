@@ -9,7 +9,6 @@
 #ifndef tat_codata_h
 #define tat_codata_h
 
-
 #include <boost/units/systems/si/codata/universal_constants.hpp>
 #include <boost/units/systems/si/codata/typedefs.hpp>
 
@@ -17,16 +16,15 @@
 #include "units/quantity.h"
 
 namespace units {
-namespace si {
-namespace constants {
-namespace codata {
-    
+    namespace si {
+        namespace constants {
+            namespace codata {
 
-  
 using boost::units::si::constants::codata::epsilon_0;
-  
 
-
-}}}}
+            }   // namespace codata
+        }   // namespace constants
+    }   // namespace si
+}   // namesapce units
 
 #endif

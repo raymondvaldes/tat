@@ -10,6 +10,7 @@
 #define tat_cmath_h
 
 #include <complex>
+#include <cmath>
 
 #include <boost/units/cmath.hpp>
 #include <boost/units/dimensionless_quantity.hpp>

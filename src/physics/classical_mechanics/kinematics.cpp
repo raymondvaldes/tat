@@ -30,6 +30,8 @@
 #include "physics/classical_mechanics/kinematics.h"
 #include "algorithm/algorithm.h"
 
+#include "units.h"
+
 namespace physics{
 
 namespace classical_mechanics{
@@ -136,8 +138,6 @@ noexcept -> std::vector < units::quantity< units::si::frequency > >
 
   return frequencies;
 }
-
-
 
 } // namespace classical_mechanics
 

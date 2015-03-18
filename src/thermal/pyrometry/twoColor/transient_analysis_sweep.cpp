@@ -112,7 +112,7 @@ noexcept -> transient_analysis_sweep_results
   
   assert( gCoeff.value() > 0 );
 
-  std::vector< transient_analysis_results > results;
+  vector< transient_analysis_results > results;
   auto const omegas =
   angularFrequencies_from_frequencies( laser_modulation_frequencies );
 

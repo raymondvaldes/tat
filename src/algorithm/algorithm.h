@@ -14,11 +14,15 @@
 #include <boost/algorithm/cxx11/any_of.hpp>
 #include <boost/algorithm/cxx11/is_sorted.hpp>
 #include <boost/algorithm/cxx11/find_if_not.hpp>
+#include <boost/algorithm/cxx11/none_of.hpp>
+#include <boost/range/algorithm_ext/iota.hpp>
 
 
 /*The ones commented out are the ones that I am need to review. */
 
 namespace algorithm {
+
+  using boost::range::iota;
 
 ///////////////////////////////////// Mutating algorithms
   using boost::copy;
@@ -92,13 +96,11 @@ namespace algorithm {
     return uniqueList;
   }
   
-
-  
   using boost::unique_copy;
-  
   
 ///////////////////////////////////// Non-mutating algorithms
   using boost::algorithm::any_of;
+  using boost::algorithm::none_of;
   using boost::algorithm::is_sorted;
   using boost::algorithm::find_if_not;
 

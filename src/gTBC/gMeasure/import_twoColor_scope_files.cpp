@@ -7,6 +7,7 @@
 //
 
 #include "gTBC/gMeasure/import_twoColor_scope_files.h"
+#include "gTBC/gMeasure/import_sweep_meta_data.h"
 
 #include "gTBC/gMeasure/scopeFiles_from_datafiles.h"
 #include "gTBC/gMeasure/find_unique_measurements.h"
@@ -74,6 +75,11 @@ auto import_twoColor_scope_files
     signal_DC_2,
     wavelength_offset
   );
+  
+  auto const get_meta_files = dir.ls_files( ".tbd" );
+  assert( get_meta_files.size() == 1 ) ;
+  import_sweep_meta_data( get_meta_files.front() );
+  
   
   auto const out =
   processed_scope_data( frequencies.second, calibrated_emission_pairs, gCoeff );

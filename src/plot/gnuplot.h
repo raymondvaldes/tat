@@ -38,7 +38,6 @@ inline auto simple_XY
   auto const xy_pts = make_pair( x_pts, y_pts );
   
   gp << " set logscale x" << std::endl;
-
 	gp << "plot" << gp.file1d( xy_pts ) << std::endl;
 }
 
