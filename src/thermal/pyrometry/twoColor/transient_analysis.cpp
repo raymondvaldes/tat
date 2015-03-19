@@ -71,7 +71,7 @@ noexcept -> transient_analysis_results
   auto  const transient_temperature_phase = fitted_cosine_function.get_phase() ;
     
   auto const steady_temperature =
-  quantity<temperature>(quantity<dimensionless>{1} / myFittedOffset) ;
+  quantity<temperature>( quantity<dimensionless>{1} / myFittedOffset ) ;
   
   auto const transient_temperature_amplitude =
   myFittedAmplitude * pow<2>( steady_temperature );

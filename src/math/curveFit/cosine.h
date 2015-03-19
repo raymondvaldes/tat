@@ -12,12 +12,14 @@
 #include <vector>
 #include <cassert>
 #include <algorithm>
+#include <iostream>
 #include <cmath>
 
 #include "math/functions/cosine.h"
 #include "math/estimation/lmdiff.hpp"
 #include "math/functions/wrap2pi.h"
 #include "math/coordinate_system/wrap_to_negPi_posPi.h"
+#include "units.h"
 
 namespace math {
 
@@ -71,6 +73,7 @@ noexcept -> functions::Cosine<T>
     using functions::Cosine;
     using math::estimation::settings;
     using math::functions::wrap2pi;
+    using units::si::radians;
   
   {
     assert( !inputTime.empty() ) ;
@@ -79,7 +82,7 @@ noexcept -> functions::Cosine<T>
   }
 
   auto const CosineFactory = [ &cosine_phase  ]
-  ( const double*x, const functions::PeriodicProperties< T > &input )
+  ( const double*x, const functions::PeriodicProperties< T > input )
   noexcept
   {
     auto updatedProperties = input ;
@@ -88,8 +91,9 @@ noexcept -> functions::Cosine<T>
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
 
     using math::coordinate_system::wrap_to_negPi_posPi;
-    auto const angle = x[2] * units::si::radians;
-    auto const phase_angle = wrap_to_negPi_posPi( angle ) + cosine_phase  ;
+    auto const angle = x[2] * radians; // cosine_phase;
+    auto const phase_angle = wrap_to_negPi_posPi( angle )    ;
+ //   std::cout << phase_angle << "\t" << cosine_phase << "\n";
     
     updatedProperties.phase = phase_angle ;
 
@@ -98,8 +102,7 @@ noexcept -> functions::Cosine<T>
 
   auto const minimizationEquation =
   [ &inputTime, &inputSignal, &initialConditions, &CosineFactory ]
-  ( const double *x, double *fvec )
-  noexcept
+  ( const double *x, double *fvec ) noexcept
   {
     auto const myCosineFunction = CosineFactory( x, initialConditions );
     
@@ -110,7 +113,6 @@ noexcept -> functions::Cosine<T>
 
     auto i = 0;
     generate( fvec, fvec + inputTime.size() , [&](){ return residual(i++); } ) ;
-    
   };
 
   auto unknownParameters = vector<double>{

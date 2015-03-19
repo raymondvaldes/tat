@@ -13,6 +13,8 @@
 #include "math/estimation/lmdiff.hpp"
 #include "math/estimation/settings.h"
 #include "algorithm/algorithm.h"
+#include "physics/classical_mechanics/kinematics.h"
+#include "units.h"
 
 namespace thermal {
 
@@ -24,13 +26,16 @@ namespace temperature {
 
 fitting_result::fitting_result
 (
+  std::vector< units::quantity<units::si::frequency> > const & frequencies_,
+
   thermal::model::slab::Slab const & initial_slab_,
   thermal::model::slab::Slab const & fitted_slab_,
  
   std::vector< units::quantity< units::si::plane_angle > > const & experimenta_phases_,
   std::vector< units::quantity< units::si::plane_angle > > const & bestFit_phases_
 )
-: initial_slab( initial_slab_ ),
+: frequencies( frequencies_ ),
+  initial_slab( initial_slab_ ),
   fitted_slab( fitted_slab_ ),
   experimenta_phases( experimenta_phases_ ),
   bestFit_phases( bestFit_phases_ )
@@ -50,7 +55,7 @@ inline auto updateSlab
   auto const fittedDiffusivity =
   quantity< thermal_diffusivity >::from_value( x[0] ) ;
   
-  auto const fitted_length = quantity< length >::from_value( x[1] ) ;
+  auto const fitted_length = mySlab.characteristic_length ;
 
   auto const fittedSpeciman =
   Slab( fitted_length , fittedDiffusivity , mySlab.rhoCp ) ;
@@ -102,8 +107,13 @@ diffusivity_from_phases
   auto const fitted_slab = updateSlab( unknownParameters.data(), slab_initial  );
   auto const fitted_observations = surface_temperature_phases( omegas, fitted_slab ) ;
 
+
+  auto const frequencies =
+  physics::classical_mechanics::frequencies_from_angularFrequencies(omegas);
+  
   auto const results =  fitting_result
   (
+    frequencies,
     slab_initial, fitted_slab,
     observations ,fitted_observations
   );

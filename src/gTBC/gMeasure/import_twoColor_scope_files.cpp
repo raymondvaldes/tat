@@ -16,6 +16,7 @@
 #include "gTBC/gMeasure/find_unique_lambdas_in_files.h"
 #include "gTBC/gMeasure/find_unique_frequencies_in_files.h"
 
+#include "algorithm/algorithm.h"
 #include "thermal/pyrometry/twoColor/pyrometery_settings_file.h"
 
 namespace gTBC {
@@ -23,7 +24,7 @@ namespace gTBC {
 namespace gMeasure {
 
 using thermal::pyrometry::twoColor::pyrometery_settings_file;
-
+using algorithm::unique;
 processed_scope_data::processed_scope_data
 (
   std::vector<
@@ -82,10 +83,13 @@ auto import_twoColor_scope_files
   assert( get_meta_files.size() == 1 ) ;
   
   auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
-  auto laser_modulations = meta_data.meta_laser_modulations();
+  auto const laser_modulations_all = meta_data.meta_laser_modulations();
   
-  
-  
+  auto const laser_modulations =
+  unique( laser_modulations_all, []( auto const &a, auto const &b )
+  {
+    return a.first == b.first;
+  });
   
   assert( laser_modulations.size() == calibrated_emission_pairs.size() );
   auto const out =  processed_scope_data(

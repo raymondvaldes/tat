@@ -26,6 +26,7 @@ noexcept -> std::vector< double >
   using std::transform;
   using std::begin;
   using std::end;
+  assert( input.size() > 0 );
 
   vector<double> output( input.size() ) ;
 

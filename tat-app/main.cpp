@@ -27,6 +27,5 @@ License
 
 int main( const int argc, const char *argv[ ] ) noexcept
 {
-
   return investigations::main_app( argc, argv);
 }

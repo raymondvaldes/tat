@@ -114,10 +114,10 @@ noexcept -> transient_analysis_sweep_results
   {
     auto const m_1 = sweep[i].first;
     auto const m_2 = sweep[i].second;
-    auto const frequency =  laser_modulation.first;
+    auto const laser_frequency =  laser_modulation.first;
     auto const laser_phase = laser_modulation.second;
     auto const result =
-    transient_analysis( m_1, m_2, gCoeff, frequency, laser_phase ) ;
+    transient_analysis( m_1, m_2, gCoeff, laser_frequency, laser_phase ) ;
     
     results.push_back( result );
     ++i;
