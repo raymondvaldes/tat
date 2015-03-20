@@ -37,9 +37,9 @@ namespace algorithm {
   //using partition;
   using boost::random_shuffle;
   using boost::remove;
-  //using remove_copy;
-  //using remove_copy_if;
-  //using remove_if;
+  using boost::remove_copy;
+  using boost::remove_copy_if;
+  using boost::remove_if;
   using boost::replace;
   //using replace_copy;
   //using replace_copy_if;

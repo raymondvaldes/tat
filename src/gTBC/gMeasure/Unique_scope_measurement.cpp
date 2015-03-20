@@ -75,12 +75,12 @@ const noexcept -> std::vector< units::quantity<units::si::electric_potential >>
   using statistics::signal_processing::signal_to_noise;
 
   auto signals = vector < vector < quantity < electric_potential > > >();
+  signals.reserve( scopeFiles.size( ) ) ;
   
   for_each( scopeFiles , [&]( auto const & scope_file ) noexcept
   {
     auto const current = scope_file.read_transient_signal();
-    
-    signals.push_back( current );
+    signals.emplace_back( current );
   } );
   
   auto const run_vector = statistics::signal_processing::average( signals );

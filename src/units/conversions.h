@@ -36,6 +36,14 @@ auto string_to_quantity( std::string const input )
 
   return myQuantity;
 }
+
+template< typename UnitType >
+auto quantity_to_string( quantity<UnitType> const input )
+{
+  auto const myDouble = input.value();
+  auto const mString =  std::to_string( myDouble );
+  return mString;
+}
   
   
 } // namespace units

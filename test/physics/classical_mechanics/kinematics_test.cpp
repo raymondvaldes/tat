@@ -31,7 +31,6 @@ public:
   const rotational_rate true3 = rotational_rate( 1, 6.2831853071795864 ) ;
 
   const double tol = 1e-12;
-  
 };
 
 typedef rotational_data::rotational_rate rate;

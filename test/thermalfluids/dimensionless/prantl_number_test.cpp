@@ -34,10 +34,12 @@ BOOST_AUTO_TEST_CASE( prantl_Number )
   using units::si::kinematic_viscosity_units;
   
   auto const
-  nu = quantity< kinematic_viscosity >( 1.004 * 10e-6 * kinematic_viscosity_units );
+  nu = quantity< kinematic_viscosity >
+  ( 1.004 * 10e-6 * kinematic_viscosity_units );
   
   auto const
-  alpha = quantity< thermal_diffusivity >( 0.143 * 10e-6 * thermal_diffusivity_units );
+  alpha = quantity< thermal_diffusivity >
+  ( 0.143 * 10e-6 * thermal_diffusivity_units );
 
 
   BOOST_VERIFY( nu / alpha == Prandtl_number(nu, alpha ) ) ;

@@ -9,32 +9,15 @@
 #ifndef __tat__validateOpenStream__
 #define __tat__validateOpenStream__
 
-#include "algorithm/stream/is_open.h"
-#include <stdexcept>
+#include <fstream>
 
 namespace algorithm {
 
 namespace stream {
 
-  auto validation = [](auto const& stream )-> void
-  {
-    const bool throwException = is_closed( stream ) ;
-    
-    if( throwException ) {
-      using std::invalid_argument;
-      throw invalid_argument( "no file found" ) ;
-    }
-  };
+auto validateOpenFile( std::ifstream const & stream ) -> void ;
 
-  inline auto validateOpenFile( const std::ifstream& stream ) -> void
-  {
-    validation(stream);
-  }
-
-  inline auto validateOpenFile( const std::ofstream& stream ) -> void
-  {
-    validation(stream);
-  }
+auto validateOpenFile( std::ofstream const & stream ) -> void ;
 
 } // namespace stream
 

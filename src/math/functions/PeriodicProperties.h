@@ -61,6 +61,12 @@ public:
   {
     return phase;
   };
+  
+  auto shift_phase( units::quantity< units::si::plane_angle> shift)
+  noexcept -> void
+  {
+    phase += shift;
+  };
 
   auto get_offset() const
   noexcept -> units::quantity<T>

@@ -5,6 +5,7 @@
 //  Created by Raymond Valdes_New on 3/13/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
+#include <iostream>
 
 #include "gTBC/gMeasure/import_twoColor_scope_files.h"
 #include "gTBC/gMeasure/import_sweep_meta_data.h"
@@ -18,10 +19,14 @@
 
 #include "algorithm/algorithm.h"
 #include "thermal/pyrometry/twoColor/pyrometery_settings_file.h"
+#include <cmath>
+
 
 namespace gTBC {
 
 namespace gMeasure {
+
+using algorithm::remove_if;
 
 using thermal::pyrometry::twoColor::pyrometery_settings_file;
 using algorithm::unique;
@@ -45,7 +50,8 @@ processed_scope_data::processed_scope_data
 auto import_twoColor_scope_files
 (
   filesystem::directory const & dir,
-  std::string const & filename
+  std::string const & filename,
+  units::quantity< units::si::dimensionless> gCoeff
 )
 -> processed_scope_data
 {
@@ -70,7 +76,6 @@ auto import_twoColor_scope_files
   signal_DC_2.second -= signalBackground; // remove the background noise
   
   auto const wavelength_offset = import.wavelength_offset ;
-  auto const gCoeff = import.gCoeff ;
   
   auto const calibrated_emission_pairs =
   total_calibrated_emission_pairs( measurements_frequency_pairs,
@@ -85,11 +90,28 @@ auto import_twoColor_scope_files
   auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
   auto const laser_modulations_all = meta_data.meta_laser_modulations();
   
-  auto const laser_modulations =
+  auto laser_modulations =
   unique( laser_modulations_all, []( auto const &a, auto const &b )
   {
     return a.first == b.first;
   });
+  
+  using algorithm::any_of;
+  using algorithm::remove_if;
+  using std::abs;
+  
+  auto const new_end = remove_if( laser_modulations, [&frequencies] ( auto const a )
+  {
+    auto const meta_frequency = a.first;
+    
+    auto const is_meta_freq_in_measurement_group =
+    any_of( frequencies.second, [ &meta_frequency ]( auto const b )
+    {
+      return (abs( b.value() - meta_frequency.value() ) < 1e-3) ;
+    } ) ;
+    return !is_meta_freq_in_measurement_group;
+  } );
+  laser_modulations.erase(new_end, laser_modulations.end());
   
   assert( laser_modulations.size() == calibrated_emission_pairs.size() );
   auto const out =  processed_scope_data(

@@ -37,7 +37,6 @@ noexcept -> std::vector< double >
   
   return output;
 }
-
   
 } // namespace vector
   

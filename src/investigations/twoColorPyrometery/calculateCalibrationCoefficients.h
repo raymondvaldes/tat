@@ -16,7 +16,8 @@ namespace investigations {
 
 namespace twoColorPyrometery {
 
-auto calculateCalibrationCoefficients( filesystem::directory const & dir ) -> void ;
+auto calculateCalibrationCoefficients( filesystem::directory const & dir )
+-> units::quantity< units::si::dimensionless > ;
   
 } // namespace twoColorPyrometery
   

@@ -20,6 +20,7 @@
 #include "units.h"
 
 #include "plot/gnuplot.h"
+#include "investigations/twoColorPyrometery/plot/phase_exp_model.h"
 
 namespace investigations{
 
@@ -31,39 +32,37 @@ using thermal::pyrometry::twoColor::transient_analysis_sweep ;
 using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases ;
 using thermal::model::slab::import ;
 
-auto run( filesystem::directory const & dir )  -> void
+auto run( filesystem::directory const & dir ) -> void
 {
-  calculateCalibrationCoefficients( dir ) ;
+  auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
 
-  auto const scope_data = import_twoColor_scope_files( dir,"twoColorPyro.xml" );
+  auto const scope_data = import_twoColor_scope_files( dir,"twoColorPyro.xml" , gCoeff );
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
+  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
+  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
+
   
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;
   auto const bestFit_results =
   diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab );
- 
- 
-  std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
-  for( size_t i = 0; i < bestFit_results.bestFit_phases.size(); ++i )
-  {
+  
+//  for( size_t i = 0; i < bestFit_results.bestFit_phases.size(); ++i )
+//  {
 //    std::cout
 //    << bestFit_results.frequencies[i]
 //    << "\t" << twoColor_data.surface_steady_temperature()[i]
 //    << "\t" << bestFit_results.experimenta_phases[i]
 //    << "\t" << bestFit_results.bestFit_phases[i] << "\n";
-  }
+//  }
   
-  ///List of things that could be wrong!
-  // Boundary conditions are not properly specified for my equation
-  
-  // the theoretical equation yields a phase that is off by pi and this may
-  // be giving incorrect results
-  
-  // the experimental phase and amplitude is incorrectly reported due to
-  // poor fitting of a cosine wave - verify that teh fit is good by having a
-  // minimum threshold for the R^2 of the fit
-  
- // plot::simple_XY( bestFit_results.frequencies, bestFit_results.experimenta_phases);
+  std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
+
+  plot::phase_exp_model
+  (
+    bestFit_results.frequencies,
+    bestFit_results.experimenta_phases,
+    bestFit_results.bestFit_phases
+  );
 }
 
 } //namespace twoColorPyrometry

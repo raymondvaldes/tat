@@ -25,6 +25,7 @@
 
 #include <algorithm>
 #include <boost/filesystem.hpp>
+
 #include "investigations/execute.h"
 #include "investigations/num_method2014.h"
 #include "investigations/sensitivityvaldes2013.hpp"
@@ -38,8 +39,12 @@ using algorithm::for_each;
 
 namespace investigations {
 
-void execute( const std::string& mydirectory, const std::string& sampleName,
-              const std::string& investigationName ) noexcept
+void execute
+(
+  const std::string& mydirectory,
+  const std::string& sampleName,
+  const std::string& investigationName
+) noexcept
 {
   using filesystem::directory;
   auto const run_investigation = [ & ] ( const directory& active ) -> void

@@ -12,6 +12,7 @@
 #include <vector>
 #include <cmath>
 #include <utility>
+#include <cassert>
 
 #include "tools/interface/filesystem.hpp"
 #include "gnuplot-iostream.h"
@@ -28,6 +29,9 @@ inline auto simple_XY
   std::vector< units::quantity< T_y > > const & Y
 ) noexcept
 {
+  assert( X.size() == Y.size() ) ;
+  assert( X.size() > 0 ) ;
+
   using std::make_pair;
   using algorithm::vector::quantityTodouble;
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");

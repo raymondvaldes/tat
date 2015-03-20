@@ -24,7 +24,7 @@ namespace bulkSpeciman {
 namespace temperature {
 
 struct fitting_result{
-  std::vector< units::quantity<units::si::frequency> > const & frequencies;
+  std::vector< units::quantity<units::si::frequency> > frequencies;
 
   thermal::model::slab::Slab initial_slab;
   thermal::model::slab::Slab fitted_slab;
@@ -34,12 +34,11 @@ struct fitting_result{
 
   fitting_result
   (
-    std::vector< units::quantity<units::si::frequency> > const & frequencies_,
-    thermal::model::slab::Slab const & initial_slab_,
-    thermal::model::slab::Slab const & fitted_slab_,
-   
-    std::vector< units::quantity< units::si::plane_angle > > const & experimenta_phases_,
-    std::vector< units::quantity< units::si::plane_angle > > const & bestFit_phases_
+    std::vector< units::quantity<units::si::frequency> > const  frequencies_,
+    thermal::model::slab::Slab const initial_slab_,
+    thermal::model::slab::Slab const fitted_slab_,
+    std::vector< units::quantity< units::si::plane_angle > > const experimenta_phases_,
+    std::vector< units::quantity< units::si::plane_angle > > const bestFit_phases_
   );
 
 };

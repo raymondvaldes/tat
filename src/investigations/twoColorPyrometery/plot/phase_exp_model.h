@@ -1,0 +1,34 @@
+//
+//  phase_exp_model.h
+//  tat
+//
+//  Created by Raymond Valdes_New on 3/19/15.
+//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
+//
+
+#ifndef __tat__phase_exp_model__
+#define __tat__phase_exp_model__
+
+#include <vector>
+#include "units.h"
+
+namespace investigations {
+
+namespace twoColorPyrometery {
+
+namespace plot{
+
+auto phase_exp_model
+(
+  std::vector< units::quantity< units::si::frequency > > const & X,
+  std::vector< units::quantity< units::si::plane_angle > > const & Y1,
+  std::vector< units::quantity< units::si::plane_angle > > const & Y2
+) noexcept -> void;
+
+} // namespace plot
+  
+} // namespace twoColorPyrometery
+  
+} // namespace investigations
+
+#endif /* defined(__tat__phase_exp_model__) */

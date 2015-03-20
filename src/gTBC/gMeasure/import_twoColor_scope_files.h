@@ -52,7 +52,9 @@ auto
 import_twoColor_scope_files
 (
   filesystem::directory const & dir,
-  std::string const & filename
+  std::string const & filename,
+  units::quantity< units::si::dimensionless> gCoeff
+
 )
 -> processed_scope_data;
 

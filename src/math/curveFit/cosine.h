@@ -91,10 +91,9 @@ noexcept -> functions::Cosine<T>
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
 
     using math::coordinate_system::wrap_to_negPi_posPi;
-    auto const angle = x[2] * radians; // cosine_phase;
+    auto const angle = x[2] * radians ;
     auto const phase_angle = wrap_to_negPi_posPi( angle )    ;
- //   std::cout << phase_angle << "\t" << cosine_phase << "\n";
-    
+        
     updatedProperties.phase = phase_angle ;
 
     return Cosine<T>( updatedProperties ) ;
@@ -124,6 +123,9 @@ noexcept -> functions::Cosine<T>
   
   lmdif( minimizationEquation, numberPoints2Fit, unknownParameters, settings{});
 
+
+  // this is to offset back the fitted phase by the phase of the curve
+  unknownParameters[2] -= cosine_phase.value() ;
   return CosineFactory( unknownParameters.data(), initialConditions ) ;
 };
 

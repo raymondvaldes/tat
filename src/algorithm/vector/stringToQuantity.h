@@ -29,7 +29,6 @@ noexcept -> std::vector< units::quantity< UnitType > >
   return quantities;
 }
 
-  
 } // namespace vector
   
 } // namespace algorithm

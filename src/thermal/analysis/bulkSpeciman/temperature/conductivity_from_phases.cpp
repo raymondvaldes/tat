@@ -5,8 +5,9 @@
 //  Created by Raymond Valdes_New on 3/10/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
-
+#include <iostream>
 #include <iterator>
+#include <cassert>
 
 #include "thermal/analysis/bulkSpeciman/temperature/conductivity_from_phases.h"
 #include "thermal/define/lthermal.h"
@@ -26,20 +27,24 @@ namespace temperature {
 
 fitting_result::fitting_result
 (
-  std::vector< units::quantity<units::si::frequency> > const & frequencies_,
+  std::vector< units::quantity<units::si::frequency> > const  frequencies_,
 
-  thermal::model::slab::Slab const & initial_slab_,
-  thermal::model::slab::Slab const & fitted_slab_,
+  thermal::model::slab::Slab const initial_slab_,
+  thermal::model::slab::Slab const fitted_slab_,
  
-  std::vector< units::quantity< units::si::plane_angle > > const & experimenta_phases_,
-  std::vector< units::quantity< units::si::plane_angle > > const & bestFit_phases_
+  std::vector< units::quantity< units::si::plane_angle > > const experimenta_phases_,
+  std::vector< units::quantity< units::si::plane_angle > > const bestFit_phases_
 )
 : frequencies( frequencies_ ),
   initial_slab( initial_slab_ ),
   fitted_slab( fitted_slab_ ),
   experimenta_phases( experimenta_phases_ ),
   bestFit_phases( bestFit_phases_ )
-{}
+{
+  assert( frequencies.size() > 0 );
+  assert( experimenta_phases.size() > 0 );
+  assert( bestFit_phases.size() > 0 );
+}
 
 inline auto updateSlab
 (
@@ -101,21 +106,23 @@ diffusivity_from_phases
 
   auto const myDiffusivity = slab_initial.get_diffusivity();
   auto const myL = slab_initial.characteristic_length;
-  auto unknownParameters = vector<double>{ myDiffusivity.value(), myL.value() } ;
+  auto unknownParameters = vector<double>{ myDiffusivity.value() } ;
   lmdif( minimizationEquation, numberPoints2Fit, unknownParameters, settings{});
 
-  auto const fitted_slab = updateSlab( unknownParameters.data(), slab_initial  );
-  auto const fitted_observations = surface_temperature_phases( omegas, fitted_slab ) ;
+  auto const model_slab = updateSlab( unknownParameters.data(), slab_initial );
+  auto const model_observations = surface_temperature_phases( omegas, model_slab ) ;
 
 
-  auto const frequencies =
-  physics::classical_mechanics::frequencies_from_angularFrequencies(omegas);
+  using physics::classical_mechanics::frequencies_from_angularFrequencies;
+  auto const frequencies = frequencies_from_angularFrequencies(omegas);
+  assert( frequencies.size() > 0 );
+
   
   auto const results =  fitting_result
   (
     frequencies,
-    slab_initial, fitted_slab,
-    observations ,fitted_observations
+    slab_initial, model_slab,
+    observations ,model_observations
   );
 
   return results;
@@ -124,13 +131,20 @@ diffusivity_from_phases
 auto
 diffusivity_from_phases
 (
-  std::pair< std::vector< units::quantity< units::si::angular_frequency > >,
-  std::vector< units::quantity< units::si::plane_angle > > > const & observations,
+  std::pair<
+    std::vector< units::quantity< units::si::angular_frequency > >,
+    std::vector< units::quantity< units::si::plane_angle > >
+  > const & observations,
   thermal::model::slab::Slab const & slab_initial
 )
 -> fitting_result
 {
-  return diffusivity_from_phases( observations.first, observations.second, slab_initial );
+  auto const results = diffusivity_from_phases(
+  observations.first, observations.second, slab_initial ) ;
+
+
+
+  return results ;
 }
 
 } // namespace temperature

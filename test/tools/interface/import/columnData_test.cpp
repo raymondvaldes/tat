@@ -16,30 +16,33 @@
 
 
 BOOST_AUTO_TEST_SUITE( tools )
+
 BOOST_AUTO_TEST_SUITE( interface )
+
 BOOST_AUTO_TEST_SUITE( import )
 
   using tools::interface::import::columnData;
 
 
-//BOOST_AUTO_TEST_CASE( constructor ) {
-//
-//  BOOST_CHECK_NO_THROW( columnData(
-//  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt" ) ) ;
-//  
-//  BOOST_CHECK_THROW( columnData( "mydummy.txt" ) , std::invalid_argument ) ;
-//  
-//  BOOST_CHECK_THROW(
-//    columnData(
-//    "/Users/raymondvaldes/code/tat/test/tools/interface/import/data_badForm.txt"
-//    ) , std::invalid_argument ) ;
-//  
-//}
+BOOST_AUTO_TEST_CASE( constructor ) {
+
+  BOOST_CHECK_NO_THROW( columnData(
+  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt" ) ) ;
+  
+  BOOST_CHECK_THROW( columnData( "mydummy.txt" ) , std::invalid_argument ) ;
+  
+  BOOST_CHECK_THROW(
+    columnData(
+    "/Users/raymondvaldes/code/tat/test/tools/interface/import/data_badForm.txt"
+    ) , std::invalid_argument ) ;
+  
+}
 
 BOOST_AUTO_TEST_CASE( getRow ) {
   typedef std::vector<std::string> vector_strings;
 
-  auto const myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
+  auto const myInput =
+  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
   columnData myData( myInput ) ;
 
   auto const firstRow = myData.getRow( 1 ) ;
@@ -61,7 +64,8 @@ BOOST_AUTO_TEST_CASE( getRow ) {
 BOOST_AUTO_TEST_CASE( getColumn ) {
   typedef std::vector<std::string> vector_strings;
 
-  auto const myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
+  auto const myInput =
+  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
   columnData myData( myInput ) ;
 
   auto const extractedColumn = myData.getColumn( 2 ) ;
@@ -76,13 +80,12 @@ BOOST_AUTO_TEST_CASE( getColumn ) {
 
 BOOST_AUTO_TEST_CASE( getDataFile ) {
   typedef std::vector<std::string> vector_strings;
-  auto const myInput = "/Users/raymondvaldes/code/tat/test/tools/interface/import/graphite_400F_4.4_2.82843_0.dat";
+  auto const myInput =
+  "/Users/raymondvaldes/code/tat/test/tools/interface/import/graphite_400F_4.4_2.82843_0.dat";
   
   columnData myData( myInput ) ;
 
   auto const extractedColumn = myData.getColumn( 1 ) ;
-  
-  
 }
 
 BOOST_AUTO_TEST_CASE( getElement ) {
@@ -101,6 +104,8 @@ BOOST_AUTO_TEST_CASE( getElement ) {
   BOOST_CHECK( pass_2 ) ;
 }
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END() // import
+
+BOOST_AUTO_TEST_SUITE_END() // interface
+
+BOOST_AUTO_TEST_SUITE_END() // tools

@@ -15,7 +15,7 @@
 #include "thermal/pyrometry/twoColor/calibrationGenerator.h"
 #include "algorithm/vector/stringToQuantity.h"
 #include "algorithm/vector/fill_with_list_values_as_constructor_arg.h"
-
+#include "statistics/signal_processing/average.h"
 #include <algorithm> 
 #include <valarray>
 
@@ -57,7 +57,7 @@ noexcept-> std::vector< units::quantity< units::si::wavelength > >
 }
 
 auto calculateCalibrationCoefficients( filesystem::directory const & dir )
--> void
+-> units::quantity< units::si::dimensionless >
 {
   get_file_and_Import_Data();
     using algorithm::vector::fill_with_list_values_as_constructor_arg;
@@ -67,6 +67,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     using units::si::volts;
     using units::si::electric_potential;
     using units::si::wavelength;
+    using units::si::dimensionless;
     namespace celsius = units::celsius;
   
     using algorithm::vector::stringToQuantity;
@@ -112,7 +113,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
   
 
 
-    {
+  
       auto const c2 = evaluateRawData( 2, 200 * celsius::degrees(), myPathNew );
       auto const c3 = evaluateRawData( 3, 225 * celsius::degrees(), myPathNew );
       auto const c4 = evaluateRawData( 4, 250 * celsius::degrees(), myPathNew );
@@ -128,27 +129,36 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 //      auto const c14 = evaluateRawData( 14, 1100 * celsius::degrees(), myPathNew );
 //      auto const c15 = evaluateRawData( 15, 1200 * celsius::degrees(), myPathNew );
     
-      auto i = 0;
-      std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
-      {
-        std::cout <<  c2[i].second.value() << "\t" <<
-                      c3[i].second.value() << "\t" <<
-                      c4[i].second.value() << "\t" <<
-                      c5[i].second.value() << "\t" <<
-                      c6[i].second.value() << "\t" <<
-                      c7[i].second.value() << "\t" <<
-                      c8[i].second.value() << "\t" <<
-                      c9[i].second.value() << "\t" ;
-//                      c10[i].second.value() << "\t" <<
-//                      c11[i].second.value() << "\t" <<
-//                      c12[i].second.value() << "\t" <<
-//                      c13[i].second.value() << "\t" ;
-//                      c14[i].second.value() << "\t" <<
-//                      c15[i].second.value() ;
-                      std::cout << "\n";
-                ++i;
-      } );
-  }
+//      auto i = 0;
+//      std::for_each( c2.begin(), c2.end(), [&]( auto const & val )
+//      {
+//        std::cout <<  c2[i].second.value() << "\t" <<
+//                      c3[i].second.value() << "\t" <<
+//                      c4[i].second.value() << "\t" <<
+//                      c5[i].second.value() << "\t" <<
+//                      c6[i].second.value() << "\t" <<
+//                      c7[i].second.value() << "\t" <<
+//                      c8[i].second.value() << "\t" <<
+//                      c9[i].second.value() << "\t" ;
+////                      c10[i].second.value() << "\t" <<
+////                      c11[i].second.value() << "\t" <<
+////                      c12[i].second.value() << "\t" <<
+////                      c13[i].second.value() << "\t" ;
+////                      c14[i].second.value() << "\t" <<
+////                      c15[i].second.value() ;
+//                      std::cout << "\n";
+//                ++i;
+//      } );
+
+
+    const vector< quantity< dimensionless > > gCoefficients {
+    c2[0].second, c3[0].second, c4[0].second,
+    c5[0].second, c6[0].second, c7[0].second,
+    c8[0].second, c9[0].second };
+  
+    using statistics::signal_processing::average;
+    auto const g_average = average( gCoefficients );
+    return g_average;
   
 //      std::cout << "\n\n\n";
 //    {
