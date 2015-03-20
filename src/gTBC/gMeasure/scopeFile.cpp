@@ -37,6 +37,7 @@ ScopeFile::ScopeFile
   assert( !label_.empty() ) ;
   assert( path_.has_filename() ) ;
   assert( path.has_extension() ) ;
+  assert( cycles > 0 );
 }
   
 auto

@@ -20,9 +20,22 @@ namespace pyrometry {
 
 namespace twoColor {
 
-auto normalizedDetectorMeasurements(  thermal::equipment::detector::Measurements const & first,
-                                      thermal::equipment::detector::Measurements const & second,
-  units::quantity< units::si::dimensionless > const & gCoeff )
+using std::vector;
+using std::make_pair;
+using units::quantity;
+using units::si::time;
+using units::si::one_over_temperature;
+using thermal::pyrometer::twoColor::signalRatio;
+using thermal::pyrometer::twoColor::calibratedSignalRatio;
+using thermal::pyrometer::twoColor::normalizedSignalRatio;
+using algorithm::generate;
+
+auto normalizedDetectorMeasurements
+(
+  thermal::equipment::detector::Measurements const & first,
+  thermal::equipment::detector::Measurements const & second,
+  units::quantity< units::si::dimensionless > const & gCoeff
+)
 noexcept  ->
 std::pair<
   std::vector< units::quantity< units::si::time > > ,
@@ -34,16 +47,6 @@ std::pair<
  // assert_ge(  );
   
   assert_gt_zero( gCoeff ) ;
-
-  using std::vector;
-  using std::make_pair;
-  using units::quantity;
-  using units::si::time;
-  using units::si::one_over_temperature;
-  using thermal::pyrometer::twoColor::signalRatio;
-  using thermal::pyrometer::twoColor::calibratedSignalRatio;
-  using thermal::pyrometer::twoColor::normalizedSignalRatio;
-  using algorithm::generate;
   
   auto const count = first.size();
   auto normalizedSRs = vector< quantity<one_over_temperature> >( count ) ;

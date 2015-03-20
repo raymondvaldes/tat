@@ -31,7 +31,7 @@ Measurements::Measurements(
   std::vector< units::quantity< units::si::electric_potential > > const & signals )
   : wavelength( wavelengthIn), measurements( signals.size() )
 {
-  assert_gt_zero( wavelengthIn );
+  assert( wavelengthIn.value() > 0 );
   assert_equal( referenceTime.size(), signals.size() );
   
   size_t i = 0u;
@@ -92,8 +92,11 @@ auto Measurements::plot_measurements( void ) const noexcept -> void
   gp << "set xlabel 'time (s)'" << "\n";
   gp << "set ylabel 'detector (V)'" << "\n";
   
-  auto const x_pts = quantityTodouble( referenceTimes() );
-  auto const y1_pts = quantityTodouble( signals_electical_potential() );
+  auto const x_vec = referenceTimes();
+  auto const y_vec = signals_electical_potential();
+  
+  auto const x_pts = quantityTodouble( x_vec );
+  auto const y1_pts = quantityTodouble( y_vec );
   
   auto const xy1_pts = make_pair( x_pts, y1_pts );
 

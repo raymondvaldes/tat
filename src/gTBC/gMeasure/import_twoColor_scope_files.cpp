@@ -101,9 +101,9 @@ auto import_twoColor_scope_files
   auto const signalBackground = import.signalBackground;
   auto const wavelength_offset = import.wavelength_offset ;
   
-  auto const first_unique = unique_measurements.front();
-  auto const transient_measurements_from_unique = first_unique.transient_measurements( wavelength_offset );
-  transient_measurements_from_unique.front().plot_measurements(); 
+//  auto const first_unique = unique_measurements.front();
+//  auto const transient_measurements_from_unique = first_unique.transient_measurements( wavelength_offset );
+//  transient_measurements_from_unique.front().plot_measurements();
 
 
   auto const calibrated_emission_pairs =

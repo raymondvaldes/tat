@@ -23,6 +23,8 @@
 #include "investigations/twoColorPyrometery/plot/phase_exp_model.h"
 #include "investigations/twoColorPyrometery/plot/steady_surface_temperature.h"
 #include "investigations/twoColorPyrometery/plot/transient_surface_amplitudes.h"
+#include "investigations/twoColorPyrometery/plot/wave_signals.h"
+
 namespace investigations{
 
 namespace twoColorPyrometery{
@@ -39,6 +41,9 @@ auto run( filesystem::directory const & dir ) -> void
   std::cout << gCoeff << "\n";
   
   auto const scope_data = import_twoColor_scope_files( dir,"twoColorPyro.xml" , gCoeff );
+  plot::wave_signals( scope_data.measurements.front()  );
+  plot::wave_signals( scope_data.measurements.back()  );
+
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
   
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;

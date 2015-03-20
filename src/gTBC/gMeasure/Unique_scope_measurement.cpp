@@ -103,13 +103,15 @@ const noexcept -> std::vector< thermal::equipment::detector::Measurements >
 
   auto const lambda1 = monochorometer_lambda + offset;
 
-  transform( signals, all_measurements.begin(), [ &times, &lambda1 ]
+  for_each( signals, [ &times, &lambda1, &all_measurements ]
   ( auto const & signal ) noexcept
   {
-    return Measurements( lambda1, times, signal ) ;
-  } );
+    auto const val = Measurements( lambda1, times, signal );
+    
+  //  val.plot_measurements();
+    all_measurements.emplace_back( val );
+  } ) ;
   
-  all_measurements.front().plot_measurements();
   
   assert( signals.size() == all_measurements.size() );
   

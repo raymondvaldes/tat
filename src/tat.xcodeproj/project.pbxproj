@@ -50,6 +50,9 @@
 		AB4E53BC1ABBD54200E7BA8D /* steady_surface_temperature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53BA1ABBD54200E7BA8D /* steady_surface_temperature.h */; };
 		AB4E53BF1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53BD1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp */; };
 		AB4E53C01ABBD92C00E7BA8D /* transient_surface_amplitudes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53BE1ABBD92C00E7BA8D /* transient_surface_amplitudes.h */; };
+		AB4E53C71ABCB8B200E7BA8D /* wave_signals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53C51ABCB8B200E7BA8D /* wave_signals.cpp */; };
+		AB4E53C81ABCB8B200E7BA8D /* wave_signals.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53C61ABCB8B200E7BA8D /* wave_signals.h */; };
+		AB4E53CA1ABCC59800E7BA8D /* ratio.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53C91ABCC59800E7BA8D /* ratio.h */; };
 		AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */; };
 		AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A051AB65EE7008FD7DC /* gnuplot.h */; };
 		AB521A081AB660C5008FD7DC /* libboost_iostreams-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */; };
@@ -370,6 +373,9 @@
 		AB4E53BA1ABBD54200E7BA8D /* steady_surface_temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = steady_surface_temperature.h; path = twoColorPyrometery/plot/steady_surface_temperature.h; sourceTree = "<group>"; };
 		AB4E53BD1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = transient_surface_amplitudes.cpp; path = twoColorPyrometery/plot/transient_surface_amplitudes.cpp; sourceTree = "<group>"; };
 		AB4E53BE1ABBD92C00E7BA8D /* transient_surface_amplitudes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transient_surface_amplitudes.h; path = twoColorPyrometery/plot/transient_surface_amplitudes.h; sourceTree = "<group>"; };
+		AB4E53C51ABCB8B200E7BA8D /* wave_signals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wave_signals.cpp; path = twoColorPyrometery/plot/wave_signals.cpp; sourceTree = "<group>"; };
+		AB4E53C61ABCB8B200E7BA8D /* wave_signals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wave_signals.h; path = twoColorPyrometery/plot/wave_signals.h; sourceTree = "<group>"; };
+		AB4E53C91ABCC59800E7BA8D /* ratio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ratio.h; path = algorithm/vector/ratio.h; sourceTree = "<group>"; };
 		AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "gnuplot-iostream.h"; path = "plot/gnuplot-iostream.h"; sourceTree = "<group>"; };
 		AB521A051AB65EE7008FD7DC /* gnuplot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gnuplot.h; path = plot/gnuplot.h; sourceTree = "<group>"; };
 		AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_iostreams-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.a"; sourceTree = "<absolute>"; };
@@ -822,6 +828,8 @@
 				AB4E53BA1ABBD54200E7BA8D /* steady_surface_temperature.h */,
 				AB4E53BD1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp */,
 				AB4E53BE1ABBD92C00E7BA8D /* transient_surface_amplitudes.h */,
+				AB4E53C51ABCB8B200E7BA8D /* wave_signals.cpp */,
+				AB4E53C61ABCB8B200E7BA8D /* wave_signals.h */,
 			);
 			name = plot;
 			sourceTree = "<group>";
@@ -1239,6 +1247,7 @@
 				AB7996EB1AB11C4B0022015B /* operator_overloads.h */,
 				AB7A69501AB267EA00249A6E /* find_all.h */,
 				AB7AD88A1ABA0C4000478726 /* reserve.h */,
+				AB4E53C91ABCC59800E7BA8D /* ratio.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -1777,6 +1786,7 @@
 				AB4E53B61ABB9E1B00E7BA8D /* normalized_SR_exp_model.h in Headers */,
 				AB7A69511AB267EA00249A6E /* find_all.h in Headers */,
 				ABEF4EE01948D4A500B44AD5 /* setup.h in Headers */,
+				AB4E53C81ABCB8B200E7BA8D /* wave_signals.h in Headers */,
 				ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */,
 				ABEF4EDA1948D4A500B44AD5 /* phase99.hpp in Headers */,
 				AB7A69471AB24F3E00249A6E /* find_unique_frequencies_in_files.h in Headers */,
@@ -1822,6 +1832,7 @@
 				AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */,
 				AB2BA4791AB3DA78008AF545 /* import_twoColor_scope_files.h in Headers */,
 				ABA58A181A67257400573ED8 /* units.h in Headers */,
+				AB4E53CA1ABCC59800E7BA8D /* ratio.h in Headers */,
 				AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */,
 				AB7996E21AB0F6190022015B /* read_scope_file.h in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
@@ -2134,6 +2145,7 @@
 				ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */,
 				ABEF4E911948D4A500B44AD5 /* utils.cpp in Sources */,
 				AB7996E91AB10F350022015B /* scopeFiles_from_datafiles.cpp in Sources */,
+				AB4E53C71ABCB8B200E7BA8D /* wave_signals.cpp in Sources */,
 				ABEF4EF91948D4A500B44AD5 /* Numerical_PhaseOfEmission.cpp in Sources */,
 				ABEF4EE51948D4A500B44AD5 /* analytical_2005.cpp in Sources */,
 				AB7A694E1AB266C500249A6E /* find_all_files_with.cpp in Sources */,

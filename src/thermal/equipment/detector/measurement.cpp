@@ -21,7 +21,6 @@ Measurement::Measurement(
 : reference_time( timestamp_In ), signal( signal_In )
 {
   assert_ge_zero( timestamp_In );
-  assert_gt_zero( signal_In );
 };
 
 } // namespace detector
