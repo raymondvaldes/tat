@@ -50,3 +50,4 @@ auto transient_surface_amplitudes(
 } // namespace twoColorPyrometery
   
 } // namespace investigations
+

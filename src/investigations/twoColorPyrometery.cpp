@@ -36,7 +36,8 @@ using thermal::model::slab::import ;
 auto run( filesystem::directory const & dir ) -> void
 {
   auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
-
+  std::cout << gCoeff << "\n";
+  
   auto const scope_data = import_twoColor_scope_files( dir,"twoColorPyro.xml" , gCoeff );
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
   
@@ -46,10 +47,13 @@ auto run( filesystem::directory const & dir ) -> void
   
   
   std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
-  
-  
-  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
-  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
+ 
+  plot::phase_exp_model
+  (
+    bestFit_results.frequencies,
+    bestFit_results.experimenta_phases,
+    bestFit_results.bestFit_phases
+  );
   
   plot::transient_surface_amplitudes(
       bestFit_results.frequencies ,
@@ -60,12 +64,9 @@ auto run( filesystem::directory const & dir ) -> void
     bestFit_results.frequencies ,
     twoColor_data.surface_steady_temperature());
   
-  plot::phase_exp_model
-  (
-    bestFit_results.frequencies,
-    bestFit_results.experimenta_phases,
-    bestFit_results.bestFit_phases
-  );
+  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
+  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
+
 }
 
 } //namespace twoColorPyrometry

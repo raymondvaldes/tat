@@ -25,8 +25,17 @@ namespace gTBC {
 
 namespace gMeasure {
 
+using algorithm::transform;
 using algorithm::for_each;
-
+using std::for_each;
+using units::quantity;
+using units::si::electric_potential;
+using std::begin;
+using std::vector;
+using statistics::signal_processing::signal_to_noise;
+using thermal::equipment::detector::Measurements;
+using math::construct::periodic_time_distribution;
+  
 Unique_scope_measurement::Unique_scope_measurement
 (
   std::vector< ScopeFile > const & scopeFiles_
@@ -59,56 +68,80 @@ Unique_scope_measurement::Unique_scope_measurement
   } );
 }
 
+auto Unique_scope_measurement::reference_time( void ) const noexcept
+-> std::vector< units::quantity< units::si::time > >
+{
+  return periodic_time_distribution( laser_modulation_frequency, cycles,counts);
+}
 
+auto Unique_scope_measurement::voltages( void ) const noexcept
+-> std::vector< std::vector< units::quantity<units::si::electric_potential > > >
+{
+  auto signals = vector < vector < quantity < electric_potential > > >( );
+  signals.reserve( scopeFiles.size( ) ) ;
+  
+  for_each( scopeFiles , [&]( auto const & scope_file ) noexcept
+  {
+    signals.emplace_back( scope_file.read_transient_signal() );
+  } );
+  
+  return signals;
+}
+
+auto
+Unique_scope_measurement::transient_measurements
+(
+  units::quantity< units::si::wavelength > const offset
+)
+const noexcept -> std::vector< thermal::equipment::detector::Measurements >
+{
+  auto const times = reference_time();
+  auto const signals = voltages();
+
+  auto all_measurements = vector< Measurements >();
+  all_measurements.reserve( signals.size() );
+
+  auto const lambda1 = monochorometer_lambda + offset;
+
+  transform( signals, all_measurements.begin(), [ &times, &lambda1 ]
+  ( auto const & signal ) noexcept
+  {
+    return Measurements( lambda1, times, signal ) ;
+  } );
+  
+  all_measurements.front().plot_measurements();
+  
+  assert( signals.size() == all_measurements.size() );
+  
+  return all_measurements;
+}
   
 auto
 Unique_scope_measurement::transient_signal_average( void )
 const noexcept -> std::vector< units::quantity<units::si::electric_potential >>
 {
-  using std::for_each;
-  using algorithm::for_each;
-  using units::quantity;
-  using units::si::electric_potential;
-  using std::begin;
-  using std::vector;
-
-  using statistics::signal_processing::signal_to_noise;
-
-  auto signals = vector < vector < quantity < electric_potential > > >();
-  signals.reserve( scopeFiles.size( ) ) ;
-  
-  for_each( scopeFiles , [&]( auto const & scope_file ) noexcept
-  {
-    auto const current = scope_file.read_transient_signal();
-    signals.emplace_back( current );
-  } );
-  
+  auto signals = voltages();
   auto const run_vector = statistics::signal_processing::average( signals );
-  assert( 2049 ==  run_vector.size() );
   
+  assert( 2049 ==  run_vector.size() );
   return run_vector;
 }
   
 auto
 Unique_scope_measurement::signal_averaged_measurement
 (
-  units::quantity< units::si::electric_potential, double > const & DC_Signal,
-  units::quantity< units::si::wavelength > const & offset_monochrometer
+  units::quantity< units::si::electric_potential, double > const DC_Signal,
+  units::quantity< units::si::wavelength > const offset_monochrometer
 )
 const noexcept -> thermal::equipment::detector::Measurements
 {
-  using thermal::equipment::detector::Measurements;
-  using math::construct::periodic_time_distribution;
-  
   auto const transient_DetectorSignal = transient_signal_average();
   assert( counts ==  transient_DetectorSignal.size() );
 
   auto const total_detectorSignal = DC_Signal + transient_DetectorSignal;
   assert( counts ==  total_detectorSignal.size() );
 
-  auto const referenceTime =
-  periodic_time_distribution( laser_modulation_frequency, cycles, counts ) ;
-  
+  auto const referenceTime = reference_time();
   auto const true_lambda = monochorometer_lambda + offset_monochrometer;
   
   auto const detectorMeasurements =

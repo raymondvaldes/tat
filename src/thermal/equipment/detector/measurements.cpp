@@ -9,12 +9,21 @@
 #include "thermal/equipment/detector/measurements.h"
 #include "algorithm/algorithm.h"
 #include "assert/assertExtensions.h"
+#include "plot/gnuplot.h"
 
 namespace thermal {
 
 namespace equipment {
 
 namespace detector {
+
+using std::vector;
+using units::quantity;
+using units::si::time;
+using units::si::electric_potential;
+using algorithm::generate;
+using algorithm::transform;
+using algorithm::vector::quantityTodouble;
 
 Measurements::Measurements(
   units::quantity<units::si::wavelength> const & wavelengthIn,
@@ -25,8 +34,7 @@ Measurements::Measurements(
   assert_gt_zero( wavelengthIn );
   assert_equal( referenceTime.size(), signals.size() );
   
-  auto i = 0u;
-  using algorithm::generate;
+  size_t i = 0u;
   generate( measurements, [&referenceTime, &signals, &i]() noexcept
   {
     auto const melissa = Measurement{ referenceTime[i], signals[i] };
@@ -45,11 +53,6 @@ const noexcept -> size_t
 auto Measurements::referenceTimes( void )
 const noexcept-> std::vector< units::quantity<units::si::time> >
 {
-  using std::vector;
-  using units::quantity;
-  using units::si::time;
-  using algorithm::generate;
-  
   auto const count = size();
   
   auto const myMeasurements = measurements;
@@ -64,6 +67,39 @@ const noexcept-> std::vector< units::quantity<units::si::time> >
   } );
 
   return times;
+}
+
+auto Measurements::signals_electical_potential( void )
+const noexcept-> std::vector< units::quantity<units::si::electric_potential> >
+{
+  auto const count = size();
+  
+  auto const myMeasurements = measurements;
+  auto signals = vector< quantity< electric_potential > >{ count };
+
+  transform( myMeasurements, signals.begin(), []( auto const measurement ){
+    auto const signal = measurement.signal;
+    return signal ;
+  } );
+  
+  return signals;
+}
+
+auto Measurements::plot_measurements( void ) const noexcept -> void
+{
+	Gnuplot gp("/usr/local/bin/gnuplot --persist");
+  
+  gp << "set xlabel 'time (s)'" << "\n";
+  gp << "set ylabel 'detector (V)'" << "\n";
+  
+  auto const x_pts = quantityTodouble( referenceTimes() );
+  auto const y1_pts = quantityTodouble( signals_electical_potential() );
+  
+  auto const xy1_pts = make_pair( x_pts, y1_pts );
+
+  gp << "plot"
+  << gp.file1d( xy1_pts ) << "with points title 'thermal detector measurements',"
+  << std::endl;
 }
   
 } // namespace detector

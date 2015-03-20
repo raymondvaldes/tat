@@ -24,6 +24,18 @@ namespace gMeasure {
 
 struct Unique_scope_measurement
 {
+private:
+  auto reference_time( void ) const noexcept
+  -> std::vector< units::quantity< units::si::time > >;
+  
+  auto voltages( void ) const noexcept
+  -> std::vector< std::vector< units::quantity<units::si::electric_potential > > >;
+
+  size_t cycles;
+  
+  size_t counts = 2049;
+  
+public:
   std::vector< ScopeFile > scopeFiles;
   
   std::string label;
@@ -33,25 +45,27 @@ struct Unique_scope_measurement
   units::quantity< units::si::frequency > laser_modulation_frequency;
   
   size_t size;
-    
-  size_t cycles;
-  
-  size_t counts = 2049;
   
   Unique_scope_measurement
   (
     std::vector< ScopeFile > const & scopeFiles_
   ) ;
 
+  auto transient_measurements
+  (
+    units::quantity< units::si::wavelength > const offset
+  )
+  const noexcept -> std::vector<thermal::equipment::detector::Measurements>;
+
   auto
   transient_signal_average( void ) const
   noexcept -> std::vector< units::quantity<units::si::electric_potential >>;
   
   auto signal_averaged_measurement
-(
-  units::quantity< units::si::electric_potential, double > const & DC_Signal,
-  units::quantity< units::si::wavelength > const & offset
-)
+  (
+    units::quantity< units::si::electric_potential, double > const DC_Signal,
+    units::quantity< units::si::wavelength > const offset
+  )
   const noexcept -> thermal::equipment::detector::Measurements;
   
 };

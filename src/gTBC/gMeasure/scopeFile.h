@@ -50,6 +50,7 @@ struct ScopeFile
   )
   const noexcept -> thermal::equipment::detector::Measurements ;
   
+  
   auto read_transient_signal( void )
   const noexcept ->
   std::vector< units::quantity<units::si::electric_potential >>;

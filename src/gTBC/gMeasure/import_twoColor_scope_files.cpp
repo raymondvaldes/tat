@@ -66,7 +66,9 @@ auto import_twoColor_scope_files
   auto const frequencies = find_unique_frequencies_in_files( scopeFiles ) ;
   
   auto const unique_measurements = find_unique_measurements( scopeFiles ) ;
+  
 
+  
   auto const measurements_frequency_pairs =
   unique_measurement_pairs( unique_measurements, frequencies.second );
   
@@ -99,6 +101,11 @@ auto import_twoColor_scope_files
   auto const signalBackground = import.signalBackground;
   auto const wavelength_offset = import.wavelength_offset ;
   
+  auto const first_unique = unique_measurements.front();
+  auto const transient_measurements_from_unique = first_unique.transient_measurements( wavelength_offset );
+  transient_measurements_from_unique.front().plot_measurements(); 
+
+
   auto const calibrated_emission_pairs =
   total_calibrated_emission_pairs(
     measurements_frequency_pairs,
@@ -117,7 +124,6 @@ auto import_twoColor_scope_files
   });
   
 
-  
   auto const new_end = remove_if( laser_modulations, [&frequencies] ( auto const a )
   {
     auto const meta_frequency = a.first;

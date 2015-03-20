@@ -24,7 +24,7 @@ namespace signal_processing {
 
 template< typename T >
 auto average( std::vector< std::vector< units::quantity< T > > > const & signals )
-noexcept -> std::vector< units::quantity<T> >
+noexcept -> std::vector< units::quantity< T > >
 {
   using algorithm::for_each;
   

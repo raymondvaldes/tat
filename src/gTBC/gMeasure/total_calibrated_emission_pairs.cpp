@@ -25,12 +25,6 @@ auto total_calibrated_emission_pairs
   std::vector<
   std::pair<  Unique_scope_measurement,
               Unique_scope_measurement > > const & unique_measurement_pairs,
- 
-//  std::pair<  units::quantity< units::si::wavelength>,
-//              units::quantity< units::si::electric_potential > > const & lambda1,
-// 
-//  std::pair<  units::quantity< units::si::wavelength>,
-//              units::quantity< units::si::electric_potential > > const & lambda2,
 
   units::quantity< units::si::electric_potential >  const & signal_background,
   units::quantity< units::si::wavelength > const & offset,

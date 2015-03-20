@@ -37,6 +37,10 @@ struct Measurements{
   auto referenceTimes( void )
   const noexcept-> std::vector< units::quantity<units::si::time> >;
   
+  auto signals_electical_potential( void )
+  const noexcept-> std::vector< units::quantity<units::si::electric_potential> >;
+  
+  auto plot_measurements( void ) const noexcept -> void;
 };
 
 } // namespace detector
