@@ -31,14 +31,22 @@ auto total_calibrated_emission_pairs
  
   std::pair<  units::quantity< units::si::wavelength>,
               units::quantity< units::si::electric_potential > > const & lambda2,
- 
-  units::quantity< units::si::wavelength > const & offset
+
+  units::quantity< units::si::electric_potential >  const & signal_background,
+  units::quantity< units::si::wavelength > const & offset,
+  std::vector < frequency_detector_ground > const & detector_grnds
 )
 noexcept -> std::vector<
               std::pair<  thermal::equipment::detector::Measurements,
                           thermal::equipment::detector::Measurements > >
 {
   assert( lambda1.first.value() < lambda2.second.value() );
+//  
+//  auto signal_DC_1 = import.signal_DC_1 ;
+//  auto signal_DC_2 = import.signal_DC_2 ;
+//  auto const signalBackground = import.signalBackground;
+//  signal_DC_1.second -= signalBackground; // remove the background noise
+//  signal_DC_2.second -= signalBackground; // remove the background noise  
   
   auto detector_pairs = vector< pair< Measurements, Measurements > >();
   

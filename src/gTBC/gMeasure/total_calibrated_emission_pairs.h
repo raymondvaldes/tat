@@ -12,6 +12,7 @@
 #include <utility>
 #include <vector>
 
+#include "gTBC/gMeasure/import_sweep_meta_data.h"
 #include "gTBC/gMeasure/Unique_scope_measurement.h"
 #include "thermal/equipment/detector/Measurements.h"
 #include "units.h"
@@ -29,7 +30,9 @@ auto total_calibrated_emission_pairs
               units::quantity< units::si::electric_potential > > const & lambda1,
   std::pair<  units::quantity< units::si::wavelength>,
               units::quantity< units::si::electric_potential > > const & lambda2,
-  units::quantity< units::si::wavelength > const & offset
+  units::quantity< units::si::electric_potential >  const & signal_background, 
+  units::quantity< units::si::wavelength > const & offset,
+  std::vector < frequency_detector_ground > const & detector_grnds
 )
 noexcept -> std::vector< std::pair< thermal::equipment::detector::Measurements,
                                     thermal::equipment::detector::Measurements > >;

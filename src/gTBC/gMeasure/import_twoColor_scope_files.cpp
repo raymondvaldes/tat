@@ -27,9 +27,12 @@ namespace gTBC {
 namespace gMeasure {
 
 using algorithm::remove_if;
-
+using algorithm::any_of;
+using algorithm::remove_if;
+using std::abs;
 using thermal::pyrometry::twoColor::pyrometery_settings_file;
 using algorithm::unique;
+
 processed_scope_data::processed_scope_data
 (
   std::vector<
@@ -69,6 +72,30 @@ auto import_twoColor_scope_files
   
   auto const import = pyrometery_settings_file( dir.abs( filename ) );
   
+  auto const get_meta_files = dir.ls_files( ".tbd" );
+  assert( get_meta_files.size() == 1 ) ;
+  
+  auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
+  
+  
+  auto signal_grnds = meta_data.meta_detector_grnds();
+  
+  auto const end_of_gnd = remove_if( signal_grnds, [&frequencies] ( auto const a )
+  {
+    auto const meta_frequency = a.laser_frequency;
+    
+    auto const is_meta_freq_in_measurement_group =
+    any_of( frequencies.second, [ &meta_frequency ]( auto const b )
+    {
+      return (abs( b.value() - meta_frequency.value() ) < 1e-3) ;
+    } ) ;
+    return !is_meta_freq_in_measurement_group;
+  } );
+  signal_grnds.erase( end_of_gnd, signal_grnds.end() );
+  
+  assert( signal_grnds.size() == frequencies.second.size() );
+  
+  
   auto signal_DC_1 = import.signal_DC_1 ;
   auto signal_DC_2 = import.signal_DC_2 ;
   auto const signalBackground = import.signalBackground;
@@ -78,16 +105,16 @@ auto import_twoColor_scope_files
   auto const wavelength_offset = import.wavelength_offset ;
   
   auto const calibrated_emission_pairs =
-  total_calibrated_emission_pairs( measurements_frequency_pairs,
+  total_calibrated_emission_pairs(
+    measurements_frequency_pairs,
     signal_DC_1,
     signal_DC_2,
-    wavelength_offset
+    signalBackground,
+    wavelength_offset,
+    signal_grnds
   );
   
-  auto const get_meta_files = dir.ls_files( ".tbd" );
-  assert( get_meta_files.size() == 1 ) ;
-  
-  auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
+
   auto const laser_modulations_all = meta_data.meta_laser_modulations();
   
   auto laser_modulations =
@@ -96,9 +123,7 @@ auto import_twoColor_scope_files
     return a.first == b.first;
   });
   
-  using algorithm::any_of;
-  using algorithm::remove_if;
-  using std::abs;
+
   
   auto const new_end = remove_if( laser_modulations, [&frequencies] ( auto const a )
   {

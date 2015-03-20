@@ -17,6 +17,29 @@ namespace gTBC {
 
 namespace gMeasure {
 
+struct frequency_detector_ground{
+
+  units::quantity< units::si::frequency > laser_frequency;
+  
+  std::pair<  units::quantity< units::si::wavelength >,
+              units::quantity< units::si::electric_potential > > lambda1_grnd;
+  
+  std::pair<  units::quantity< units::si::wavelength >,
+              units::quantity< units::si::electric_potential > > lambda2_grnd;
+  
+  frequency_detector_ground(
+    units::quantity< units::si::frequency > const laser_frequency_,
+    std::pair<  units::quantity< units::si::wavelength >,
+              units::quantity< units::si::electric_potential > >
+              const lambda1_grnd_,
+    std::pair<  units::quantity< units::si::wavelength >,
+              units::quantity< units::si::electric_potential > >
+              const lambda2_grnd_
+    ): laser_frequency( laser_frequency_ ),
+      lambda1_grnd( lambda1_grnd_ ),
+      lambda2_grnd( lambda2_grnd_ )  {};
+};
+
 struct meta_measurement_description{
 
   units::quantity< units::si::frequency>  laser_modulation_frequency;
@@ -85,6 +108,10 @@ public:
   noexcept -> std::vector<
   std::pair<  units::quantity< units::si::frequency   > ,
               units::quantity< units::si::plane_angle > > >;
+  
+  auto meta_detector_grnds(void) const
+  noexcept -> std::vector < frequency_detector_ground > ;
+
 
 };
 

@@ -14,6 +14,7 @@
 #include "algorithm/algorithm.h"
 #include "algorithm/vector/stringToQuantity.h"
 #include "algorithm/vector/reserve.h"
+#include "math/utilities/even.h"
 
 namespace gTBC {
 
@@ -220,7 +221,40 @@ noexcept -> std::vector <
   return results;
 }
 
+auto meta_measurement_descriptions::meta_detector_grnds(void) const
+noexcept -> std::vector < frequency_detector_ground >
+{
+  using math::utilities::is_even;
+  
+  auto const n_measurements = meta_datas.size();
+  assert( is_even( n_measurements ) );
+  
+  auto results = vector< frequency_detector_ground >();
+  results.reserve( meta_datas.size() / 2 ) ;
+  
+  for( size_t i = 0 ; i < meta_datas.size() ; ++i )
+  {
+    if( is_even(i+1) && i > 0 )
+    {
+      auto const f1 = meta_datas[i-1].laser_modulation_frequency;
+      auto const f2 = meta_datas[i].laser_modulation_frequency;
+      
+      assert( std::abs( f1.value() - f2.value() )  < 10e-4 ) ;
+      
+      auto const lamb1 = make_pair( meta_datas[i-1].monochrometer_wavelength,
+                                    meta_datas[i-1].signal_steady_offset_grnd );
+      auto const lamb2 = make_pair( meta_datas[i].monochrometer_wavelength,
+                                    meta_datas[i].signal_steady_offset_grnd );
+      
+      auto const freq_det_grnd = f1 ;
+      
+      
+      results.emplace_back( freq_det_grnd, lamb1, lamb2 ) ;
+    }
+  }
 
+  return results;
+}
 
   
 } // namespace gMeasure

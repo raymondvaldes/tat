@@ -45,6 +45,7 @@
 		AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */; };
 		AB4E53B51ABB9E1B00E7BA8D /* normalized_SR_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53B31ABB9E1B00E7BA8D /* normalized_SR_exp_model.cpp */; };
 		AB4E53B61ABB9E1B00E7BA8D /* normalized_SR_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B41ABB9E1B00E7BA8D /* normalized_SR_exp_model.h */; };
+		AB4E53B81ABBC68C00E7BA8D /* even.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B71ABBC68C00E7BA8D /* even.h */; };
 		AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */; };
 		AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A051AB65EE7008FD7DC /* gnuplot.h */; };
 		AB521A081AB660C5008FD7DC /* libboost_iostreams-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */; };
@@ -360,6 +361,7 @@
 		AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_exp_model.h; path = twoColorPyrometery/plot/phase_exp_model.h; sourceTree = "<group>"; };
 		AB4E53B31ABB9E1B00E7BA8D /* normalized_SR_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = normalized_SR_exp_model.cpp; path = twoColorPyrometery/plot/normalized_SR_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B41ABB9E1B00E7BA8D /* normalized_SR_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = normalized_SR_exp_model.h; path = twoColorPyrometery/plot/normalized_SR_exp_model.h; sourceTree = "<group>"; };
+		AB4E53B71ABBC68C00E7BA8D /* even.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = even.h; path = utilities/even.h; sourceTree = "<group>"; };
 		AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "gnuplot-iostream.h"; path = "plot/gnuplot-iostream.h"; sourceTree = "<group>"; };
 		AB521A051AB65EE7008FD7DC /* gnuplot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gnuplot.h; path = plot/gnuplot.h; sourceTree = "<group>"; };
 		AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_iostreams-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.a"; sourceTree = "<absolute>"; };
@@ -854,6 +856,7 @@
 			isa = PBXGroup;
 			children = (
 				AB553C57195DF3FB00E2B7D1 /* equalto.h */,
+				AB4E53B71ABBC68C00E7BA8D /* even.h */,
 			);
 			name = utilities;
 			sourceTree = "<group>";
@@ -1322,20 +1325,20 @@
 		ABEF4DD21948D4A500B44AD5 /* math */ = {
 			isa = PBXGroup;
 			children = (
-				ABB09B891AB89C82005D6BB5 /* coordinate_system */,
-				ABEB14AD1AAA551500204B36 /* differential */,
-				AB553C47195DCFE300E2B7D1 /* random */,
-				AB0C51B91A97C79500EEA759 /* matrixAnalysis */,
-				ABA48C341A7843CE0025666F /* construct */,
-				AB932DF31A6DBAC700ECF117 /* curveFIt */,
-				AB6087751A69E4D0009B1E85 /* functions */,
-				ABEBCE4F19C7364D00882E01 /* numericalAnalysis */,
-				AB553C55195DF3A700E2B7D1 /* utilities */,
-				AB553C48195DE30F00E2B7D1 /* geometry */,
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
+				ABA48C341A7843CE0025666F /* construct */,
+				ABB09B891AB89C82005D6BB5 /* coordinate_system */,
+				AB932DF31A6DBAC700ECF117 /* curveFIt */,
+				ABEB14AD1AAA551500204B36 /* differential */,
 				ABEF4DDE1948D4A500B44AD5 /* estimation */,
+				AB6087751A69E4D0009B1E85 /* functions */,
+				AB553C48195DE30F00E2B7D1 /* geometry */,
+				AB0C51B91A97C79500EEA759 /* matrixAnalysis */,
+				ABEBCE4F19C7364D00882E01 /* numericalAnalysis */,
 				ABEF4DEB1948D4A500B44AD5 /* numIntegration */,
+				AB553C47195DCFE300E2B7D1 /* random */,
 				ABEF4DF31948D4A500B44AD5 /* solvers */,
+				AB553C55195DF3A700E2B7D1 /* utilities */,
 			);
 			path = math;
 			sourceTree = "<group>";
@@ -1932,6 +1935,7 @@
 				AB8AA4461A5DF13F0065E7F8 /* trim.h in Headers */,
 				ABEB14BB1AAA686500204B36 /* temperature_prediction.h in Headers */,
 				ABA48C511A79A7670025666F /* assertExtensions.h in Headers */,
+				AB4E53B81ABBC68C00E7BA8D /* even.h in Headers */,
 				ABEF4EC71948D4A500B44AD5 /* construct.hpp in Headers */,
 				ABF5D66119DB49FD00A70476 /* signal.h in Headers */,
 				ABEF4E801948D4A500B44AD5 /* complex.h in Headers */,
