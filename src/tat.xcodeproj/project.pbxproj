@@ -46,6 +46,10 @@
 		AB4E53B51ABB9E1B00E7BA8D /* normalized_SR_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53B31ABB9E1B00E7BA8D /* normalized_SR_exp_model.cpp */; };
 		AB4E53B61ABB9E1B00E7BA8D /* normalized_SR_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B41ABB9E1B00E7BA8D /* normalized_SR_exp_model.h */; };
 		AB4E53B81ABBC68C00E7BA8D /* even.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B71ABBC68C00E7BA8D /* even.h */; };
+		AB4E53BB1ABBD54200E7BA8D /* steady_surface_temperature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53B91ABBD54200E7BA8D /* steady_surface_temperature.cpp */; };
+		AB4E53BC1ABBD54200E7BA8D /* steady_surface_temperature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53BA1ABBD54200E7BA8D /* steady_surface_temperature.h */; };
+		AB4E53BF1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53BD1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp */; };
+		AB4E53C01ABBD92C00E7BA8D /* transient_surface_amplitudes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53BE1ABBD92C00E7BA8D /* transient_surface_amplitudes.h */; };
 		AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */; };
 		AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A051AB65EE7008FD7DC /* gnuplot.h */; };
 		AB521A081AB660C5008FD7DC /* libboost_iostreams-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */; };
@@ -362,6 +366,10 @@
 		AB4E53B31ABB9E1B00E7BA8D /* normalized_SR_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = normalized_SR_exp_model.cpp; path = twoColorPyrometery/plot/normalized_SR_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B41ABB9E1B00E7BA8D /* normalized_SR_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = normalized_SR_exp_model.h; path = twoColorPyrometery/plot/normalized_SR_exp_model.h; sourceTree = "<group>"; };
 		AB4E53B71ABBC68C00E7BA8D /* even.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = even.h; path = utilities/even.h; sourceTree = "<group>"; };
+		AB4E53B91ABBD54200E7BA8D /* steady_surface_temperature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = steady_surface_temperature.cpp; path = twoColorPyrometery/plot/steady_surface_temperature.cpp; sourceTree = "<group>"; };
+		AB4E53BA1ABBD54200E7BA8D /* steady_surface_temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = steady_surface_temperature.h; path = twoColorPyrometery/plot/steady_surface_temperature.h; sourceTree = "<group>"; };
+		AB4E53BD1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = transient_surface_amplitudes.cpp; path = twoColorPyrometery/plot/transient_surface_amplitudes.cpp; sourceTree = "<group>"; };
+		AB4E53BE1ABBD92C00E7BA8D /* transient_surface_amplitudes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transient_surface_amplitudes.h; path = twoColorPyrometery/plot/transient_surface_amplitudes.h; sourceTree = "<group>"; };
 		AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "gnuplot-iostream.h"; path = "plot/gnuplot-iostream.h"; sourceTree = "<group>"; };
 		AB521A051AB65EE7008FD7DC /* gnuplot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gnuplot.h; path = plot/gnuplot.h; sourceTree = "<group>"; };
 		AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_iostreams-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.a"; sourceTree = "<absolute>"; };
@@ -810,6 +818,10 @@
 				AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */,
 				AB4E53B31ABB9E1B00E7BA8D /* normalized_SR_exp_model.cpp */,
 				AB4E53B41ABB9E1B00E7BA8D /* normalized_SR_exp_model.h */,
+				AB4E53B91ABBD54200E7BA8D /* steady_surface_temperature.cpp */,
+				AB4E53BA1ABBD54200E7BA8D /* steady_surface_temperature.h */,
+				AB4E53BD1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp */,
+				AB4E53BE1ABBD92C00E7BA8D /* transient_surface_amplitudes.h */,
 			);
 			name = plot;
 			sourceTree = "<group>";
@@ -1855,6 +1867,7 @@
 				ABEF4E861948D4A500B44AD5 /* bisection.hpp in Headers */,
 				AB44D7D51A77140E000BF19F /* algorithm.h in Headers */,
 				ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */,
+				AB4E53BC1ABBD54200E7BA8D /* steady_surface_temperature.h in Headers */,
 				ABEF4EEE1948D4A500B44AD5 /* Numerical_Temperature.h in Headers */,
 				ABEF4F021948D4A500B44AD5 /* programoptions.hpp in Headers */,
 				AB7996EA1AB10F350022015B /* scopeFiles_from_datafiles.h in Headers */,
@@ -1891,6 +1904,7 @@
 				ABEF4EDE1948D4A500B44AD5 /* laser.h in Headers */,
 				ABB09B7A1AB78EB3005D6BB5 /* residuals_square.h in Headers */,
 				ABDCB54019C934B30044553C /* inversion.h in Headers */,
+				AB4E53C01ABBD92C00E7BA8D /* transient_surface_amplitudes.h in Headers */,
 				AB44BD741AAA49C600E0710E /* get_signal_from_scope_file.h in Headers */,
 				AB2BA4711AB3CC45008AF545 /* Iheat.h in Headers */,
 				ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */,
@@ -2026,6 +2040,7 @@
 				ABEF4E9F1948D4A500B44AD5 /* utility.cpp in Sources */,
 				ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */,
 				AB44BD731AAA49C600E0710E /* get_signal_from_scope_file.cpp in Sources */,
+				AB4E53BB1ABBD54200E7BA8D /* steady_surface_temperature.cpp in Sources */,
 				ABEF4E791948D4A500B44AD5 /* num_method2014.cpp in Sources */,
 				AB90AA5A1AB2A54500F2535D /* pyrometery_settings_file.cpp in Sources */,
 				AB7A69461AB24F3E00249A6E /* find_unique_frequencies_in_files.cpp in Sources */,
@@ -2105,6 +2120,7 @@
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,
 				ABEF4EB21948D4A500B44AD5 /* lmdiff_poptea.cpp in Sources */,
+				AB4E53BF1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp in Sources */,
 				AB44BD691AAA43B100E0710E /* normalizedSignalRatio_from_measurement.cpp in Sources */,
 				ABB54FD119C35E300056823E /* ifzero.cpp in Sources */,
 				AB90AA4E1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp in Sources */,

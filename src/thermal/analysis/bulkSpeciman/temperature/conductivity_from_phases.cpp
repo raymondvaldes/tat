@@ -142,8 +142,6 @@ diffusivity_from_phases
   auto const results = diffusivity_from_phases(
   observations.first, observations.second, slab_initial ) ;
 
-
-
   return results ;
 }
 

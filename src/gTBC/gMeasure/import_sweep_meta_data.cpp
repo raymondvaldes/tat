@@ -143,9 +143,10 @@ noexcept -> meta_measurement_description
     auto const measurement_time =
     string_to_quantity< time >( row[14], seconds );
   
-    auto const signal_steady_offset_grnd =
-    string_to_quantity< electric_potential >( row[15], volts );
+    auto const steady_signal_double = -std::stod( row[15] );
   
+    auto const signal_steady_offset_grnd =
+    units::quantity< electric_potential >( steady_signal_double * volts);
 
     auto const meta_description = meta_measurement_description
     (

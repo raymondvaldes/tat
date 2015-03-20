@@ -26,11 +26,11 @@ auto total_calibrated_emission_pairs
   std::pair<  Unique_scope_measurement,
               Unique_scope_measurement > > const & unique_measurement_pairs,
  
-  std::pair<  units::quantity< units::si::wavelength>,
-              units::quantity< units::si::electric_potential > > const & lambda1,
- 
-  std::pair<  units::quantity< units::si::wavelength>,
-              units::quantity< units::si::electric_potential > > const & lambda2,
+//  std::pair<  units::quantity< units::si::wavelength>,
+//              units::quantity< units::si::electric_potential > > const & lambda1,
+// 
+//  std::pair<  units::quantity< units::si::wavelength>,
+//              units::quantity< units::si::electric_potential > > const & lambda2,
 
   units::quantity< units::si::electric_potential >  const & signal_background,
   units::quantity< units::si::wavelength > const & offset,
@@ -40,31 +40,40 @@ noexcept -> std::vector<
               std::pair<  thermal::equipment::detector::Measurements,
                           thermal::equipment::detector::Measurements > >
 {
-  assert( lambda1.first.value() < lambda2.second.value() );
-//  
-//  auto signal_DC_1 = import.signal_DC_1 ;
-//  auto signal_DC_2 = import.signal_DC_2 ;
-//  auto const signalBackground = import.signalBackground;
-//  signal_DC_1.second -= signalBackground; // remove the background noise
-//  signal_DC_2.second -= signalBackground; // remove the background noise  
+  assert( unique_measurement_pairs.size() == detector_grnds.size() );
   
   auto detector_pairs = vector< pair< Measurements, Measurements > >();
   
+  size_t i = 0;
   for_each( unique_measurement_pairs, [&]( auto const & u )
   {
-    auto const DC_offset_1 = lambda1.second;
+    auto const lambda1 = detector_grnds[i].lambda1_grnd.first;
+    auto const lambda2 = detector_grnds[i].lambda2_grnd.first;
+  
+    assert( lambda1.value() < lambda2.value() );
+    
+    auto const DC_signal_1 = detector_grnds[i].lambda1_grnd.second ;
+    auto const DC_signal_2 = detector_grnds[i].lambda2_grnd.second ;
+    
+    auto const background = signal_background;
+    
+    auto const DC_offset_1 = DC_signal_1 - background;
+    auto const DC_offset_2 = DC_signal_2 - background;
+  
+    assert( DC_offset_1.value() > 0 );
+    assert( DC_offset_2.value() > 0 ) ;
+  
     auto const first = u.first.signal_averaged_measurement( DC_offset_1 , offset );
-
-    auto const DC_offset_2 = lambda2.second;
     auto const second = u.second.signal_averaged_measurement( DC_offset_2 , offset );
   
     detector_pairs.push_back( make_pair( first, second ) ) ;
+    
+    ++i;
   } );
   
   return detector_pairs;
 }
 
-  
 } // namespace gMeasure
   
 } // namespace gTBC

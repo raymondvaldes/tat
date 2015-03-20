@@ -21,7 +21,8 @@
 
 #include "plot/gnuplot.h"
 #include "investigations/twoColorPyrometery/plot/phase_exp_model.h"
-
+#include "investigations/twoColorPyrometery/plot/steady_surface_temperature.h"
+#include "investigations/twoColorPyrometery/plot/transient_surface_amplitudes.h"
 namespace investigations{
 
 namespace twoColorPyrometery{
@@ -38,25 +39,27 @@ auto run( filesystem::directory const & dir ) -> void
 
   auto const scope_data = import_twoColor_scope_files( dir,"twoColorPyro.xml" , gCoeff );
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
-  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
-  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
-
   
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;
   auto const bestFit_results =
   diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab );
   
-//  for( size_t i = 0; i < bestFit_results.bestFit_phases.size(); ++i )
-//  {
-//    std::cout
-//    << bestFit_results.frequencies[i]
-//    << "\t" << twoColor_data.surface_steady_temperature()[i]
-//    << "\t" << bestFit_results.experimenta_phases[i]
-//    << "\t" << bestFit_results.bestFit_phases[i] << "\n";
-//  }
   
   std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
-
+  
+  
+  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
+  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
+  
+  plot::transient_surface_amplitudes(
+      bestFit_results.frequencies ,
+      twoColor_data.surface_temperature_amplitudes()
+  );
+  
+  plot::steady_surface_temperature(
+    bestFit_results.frequencies ,
+    twoColor_data.surface_steady_temperature());
+  
   plot::phase_exp_model
   (
     bestFit_results.frequencies,

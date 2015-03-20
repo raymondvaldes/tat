@@ -70,7 +70,6 @@ auto import_twoColor_scope_files
   auto const measurements_frequency_pairs =
   unique_measurement_pairs( unique_measurements, frequencies.second );
   
-  auto const import = pyrometery_settings_file( dir.abs( filename ) );
   
   auto const get_meta_files = dir.ls_files( ".tbd" );
   assert( get_meta_files.size() == 1 ) ;
@@ -96,19 +95,13 @@ auto import_twoColor_scope_files
   assert( signal_grnds.size() == frequencies.second.size() );
   
   
-  auto signal_DC_1 = import.signal_DC_1 ;
-  auto signal_DC_2 = import.signal_DC_2 ;
+  auto const import = pyrometery_settings_file( dir.abs( filename ) );
   auto const signalBackground = import.signalBackground;
-  signal_DC_1.second -= signalBackground; // remove the background noise
-  signal_DC_2.second -= signalBackground; // remove the background noise
-  
   auto const wavelength_offset = import.wavelength_offset ;
   
   auto const calibrated_emission_pairs =
   total_calibrated_emission_pairs(
     measurements_frequency_pairs,
-    signal_DC_1,
-    signal_DC_2,
     signalBackground,
     wavelength_offset,
     signal_grnds
