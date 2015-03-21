@@ -15,6 +15,8 @@
 #include <boost/units/cmath.hpp>
 #include <boost/units/dimensionless_quantity.hpp>
 #include "units/physical_dimensions.h"
+#include "math/functions/trigonometric/csc.h"
+#include "math/functions/trigonometric/sec.h"
 
 namespace units {
 
@@ -196,12 +198,64 @@ tanh(const quantity< si::dimensionless, Y > & theta )
     return tanh( theta.value() );
 }
 
-/// tan of theta in other angular units 
+/// tanh of theta in other angular units
 template<class System,class Y>
 typename dimensionless_quantity<System,Y>::type 
 tanh(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
 {
     return tanh( quantity<si::plane_angle,Y>(theta) );
+}
+
+/// csc of theta in radians
+template<class Y>
+typename dimensionless_quantity<si::system,Y>::type 
+csc(const quantity<si::plane_angle,Y> & theta )
+{
+    using math::functions::trigonometric::csc;
+    return csc( theta.value() );
+}
+
+/// csc of theta in dimensionless
+template<class Y>
+typename dimensionless_quantity<si::system,Y>::type 
+csc(const quantity< si::dimensionless, Y > & theta )
+{
+    using math::functions::trigonometric::csc;
+    return csc( theta.value() );
+}
+
+/// csc of theta in other angular units
+template<class System,class Y>
+typename dimensionless_quantity<System,Y>::type 
+csc(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
+{
+    return csc( quantity<si::plane_angle,Y>(theta) );
+}
+
+/// sec of theta in radians
+template<class Y>
+typename dimensionless_quantity<si::system,Y>::type 
+sec(const quantity<si::plane_angle,Y> & theta )
+{
+    using math::functions::trigonometric::sec;
+    return sec( theta.value() );
+}
+
+/// sec of theta in dimensionless
+template<class Y>
+typename dimensionless_quantity<si::system,Y>::type 
+sec(const quantity< si::dimensionless, Y > & theta )
+{
+    using math::functions::trigonometric::sec;
+    return sec( theta.value() );
+}
+
+/// sec of theta in other angular units
+template<class System,class Y>
+typename dimensionless_quantity<System,Y>::type 
+sec(const quantity<unit<plane_angle_dimension,System>,Y>& theta)
+{
+    return sec( quantity<si::plane_angle,Y>(theta) );
 }
   
   

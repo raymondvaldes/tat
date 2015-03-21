@@ -53,6 +53,8 @@
 		AB4E53C71ABCB8B200E7BA8D /* wave_signals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53C51ABCB8B200E7BA8D /* wave_signals.cpp */; };
 		AB4E53C81ABCB8B200E7BA8D /* wave_signals.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53C61ABCB8B200E7BA8D /* wave_signals.h */; };
 		AB4E53CA1ABCC59800E7BA8D /* ratio.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53C91ABCC59800E7BA8D /* ratio.h */; };
+		AB4E53CD1ABCDDC400E7BA8D /* csc.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53CC1ABCDDC400E7BA8D /* csc.h */; };
+		AB4E53CF1ABCDEB600E7BA8D /* sec.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53CE1ABCDEB600E7BA8D /* sec.h */; };
 		AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */; };
 		AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */ = {isa = PBXBuildFile; fileRef = AB521A051AB65EE7008FD7DC /* gnuplot.h */; };
 		AB521A081AB660C5008FD7DC /* libboost_iostreams-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */; };
@@ -376,6 +378,8 @@
 		AB4E53C51ABCB8B200E7BA8D /* wave_signals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wave_signals.cpp; path = twoColorPyrometery/plot/wave_signals.cpp; sourceTree = "<group>"; };
 		AB4E53C61ABCB8B200E7BA8D /* wave_signals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wave_signals.h; path = twoColorPyrometery/plot/wave_signals.h; sourceTree = "<group>"; };
 		AB4E53C91ABCC59800E7BA8D /* ratio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ratio.h; path = algorithm/vector/ratio.h; sourceTree = "<group>"; };
+		AB4E53CC1ABCDDC400E7BA8D /* csc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = csc.h; path = functions/trigonometric/csc.h; sourceTree = "<group>"; };
+		AB4E53CE1ABCDEB600E7BA8D /* sec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sec.h; path = functions/trigonometric/sec.h; sourceTree = "<group>"; };
 		AB521A021AB65E74008FD7DC /* gnuplot-iostream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "gnuplot-iostream.h"; path = "plot/gnuplot-iostream.h"; sourceTree = "<group>"; };
 		AB521A051AB65EE7008FD7DC /* gnuplot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gnuplot.h; path = plot/gnuplot.h; sourceTree = "<group>"; };
 		AB521A071AB660C5008FD7DC /* libboost_iostreams-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_iostreams-mt.a"; path = "/usr/local/Cellar/boost/1.57.0/lib/libboost_iostreams-mt.a"; sourceTree = "<absolute>"; };
@@ -834,6 +838,15 @@
 			name = plot;
 			sourceTree = "<group>";
 		};
+		AB4E53CB1ABCDDA400E7BA8D /* trigonometric */ = {
+			isa = PBXGroup;
+			children = (
+				AB4E53CC1ABCDDC400E7BA8D /* csc.h */,
+				AB4E53CE1ABCDEB600E7BA8D /* sec.h */,
+			);
+			name = trigonometric;
+			sourceTree = "<group>";
+		};
 		AB521A041AB65E9E008FD7DC /* plot */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +905,7 @@
 		AB6087751A69E4D0009B1E85 /* functions */ = {
 			isa = PBXGroup;
 			children = (
+				AB4E53CB1ABCDDA400E7BA8D /* trigonometric */,
 				AB932E001A6DDBEE00ECF117 /* PeriodicProperties.h */,
 				AB6087761A69E53F009B1E85 /* periodic.h */,
 				AB932DF41A6DC0E700ECF117 /* sine.h */,
@@ -1806,6 +1820,7 @@
 				ABEF4E941948D4A500B44AD5 /* gslfunc.hpp in Headers */,
 				ABB54FBF19C221920056823E /* subtract.h in Headers */,
 				ABFD199A1AB1FE7600D865C7 /* find_unique_lambdas_in_files.h in Headers */,
+				AB4E53CF1ABCDEB600E7BA8D /* sec.h in Headers */,
 				ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */,
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
@@ -1883,6 +1898,7 @@
 				ABEF4F021948D4A500B44AD5 /* programoptions.hpp in Headers */,
 				AB7996EA1AB10F350022015B /* scopeFiles_from_datafiles.h in Headers */,
 				ABFC9E641A9424C500F124F1 /* calculateCalibrationCoefficients.h in Headers */,
+				AB4E53CD1ABCDDC400E7BA8D /* csc.h in Headers */,
 				ABEF4E7C1948D4A500B44AD5 /* sensitivityvaldes2013.hpp in Headers */,
 				ABEF4EA61948D4A500B44AD5 /* property.h in Headers */,
 				ABEF4EF81948D4A500B44AD5 /* tau_0.h in Headers */,

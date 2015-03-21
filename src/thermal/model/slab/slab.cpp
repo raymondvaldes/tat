@@ -23,6 +23,7 @@ namespace model {
 namespace slab {
 
 
+
 Slab::Slab(
   units::quantity< units::si::length > const & characteristic_length_in,
   units::quantity< units::si::thermal_diffusivity > const & alpha_in,
@@ -121,7 +122,8 @@ surface_temperature_amplitudes
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition 
 )
 noexcept -> std::vector < units::quantity< units::si::temperature > >
 {
@@ -129,7 +131,8 @@ noexcept -> std::vector < units::quantity< units::si::temperature > >
   
   auto const omegas = angularFrequencies_from_frequencies( frequencies ) ;
 
-  auto const amplitudes = surface_temperature_amplitudes( omegas, I_t, slab ) ;
+  auto const amplitudes =
+  surface_temperature_amplitudes( omegas, I_t, slab, boundary_condition ) ;
   
   return amplitudes;
 }
@@ -139,7 +142,8 @@ surface_temperature_amplitudes
 (
   std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> std::vector < units::quantity< units::si::temperature > >
 {
@@ -149,9 +153,10 @@ noexcept -> std::vector < units::quantity< units::si::temperature > >
   auto const L = slab.characteristic_length;
   
   auto const omegas =
-    angularFrequencies_from_thermalPenetrations( lthermals, alpha, L ) ;
+  angularFrequencies_from_thermalPenetrations( lthermals, alpha, L ) ;
 
-  auto const amplitudes = surface_temperature_amplitudes( omegas, I_t, slab ) ;
+  auto const amplitudes =
+  surface_temperature_amplitudes( omegas, I_t, slab, boundary_condition ) ;
   
   return amplitudes;
 }
@@ -161,7 +166,8 @@ surface_temperature_amplitudes
 (
   std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const BC
 )
 noexcept -> std::vector < units::quantity< units::si::temperature > >
 {
@@ -175,9 +181,10 @@ noexcept -> std::vector < units::quantity< units::si::temperature > >
   auto amplitudes = vector< quantity< temperature > >{ count };
   
   transform( omegas, begin( amplitudes ) ,
-  [&I_t, &slab]( auto const omega ) noexcept
+  [&I_t, &slab, &BC]( auto const omega ) noexcept
   {
-    auto const phase = surface_temperature_amplitude( omega , I_t, slab ) ;
+    auto const phase =
+    surface_temperature_amplitude( omega , I_t, slab, BC ) ;
     return phase;
   } );
 
@@ -189,13 +196,15 @@ surface_temperature_amplitude
 (
   units::quantity< units::si::angular_frequency > const w,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> units::quantity< units::si::temperature >
 {
   using units::abs;
   
-  auto const Tsurface = complex_surface_temperature( w, I_t, slab ) ;
+  auto const Tsurface =
+  complex_surface_temperature( w, I_t, slab, boundary_condition ) ;
   
   auto const amplitude = abs( Tsurface ) ;
   
@@ -207,7 +216,8 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::dimensionless > > const & lthermals,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >
 {
@@ -219,7 +229,8 @@ noexcept -> std::vector < units::quantity< units::si::plane_angle > >
   auto const omegas =
     angularFrequencies_from_thermalPenetrations( lthermals, alpha, L ) ;
 
-  auto const phases = surface_temperature_phases( omegas, slab ) ;
+  auto const phases =
+  surface_temperature_phases( omegas, slab, boundary_condition ) ;
   
   return phases;
 }
@@ -228,7 +239,8 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >
 {
@@ -236,7 +248,8 @@ noexcept -> std::vector < units::quantity< units::si::plane_angle > >
   
   auto const omegas = angularFrequencies_from_frequencies( frequencies ) ;
 
-  auto const phases = surface_temperature_phases( omegas, slab ) ;
+  auto const phases =
+  surface_temperature_phases( omegas, slab, boundary_condition ) ;
   
   return phases;
 }
@@ -246,7 +259,8 @@ auto
 surface_temperature_phases
 (
   std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const BC
 )
 noexcept -> std::vector < units::quantity< units::si::plane_angle > >
 {
@@ -260,9 +274,9 @@ noexcept -> std::vector < units::quantity< units::si::plane_angle > >
   auto phases = vector< quantity< plane_angle > >{count};
   
   transform( omegas, begin( phases )  ,
-  [ &slab ]( auto const omega ) noexcept
+  [ &slab, &BC ]( auto const omega ) noexcept
   {
-    auto const phase = surface_temperature_phase( omega , slab ) ;
+    auto const phase = surface_temperature_phase( omega , slab, BC ) ;
     return phase;
   } );
 
@@ -274,7 +288,8 @@ auto
 surface_temperature_phase
 (
   units::quantity< units::si::angular_frequency > const w,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
@@ -285,7 +300,8 @@ noexcept -> units::quantity< units::si::plane_angle >
 
   auto const x_surface = quantity< length >::from_value( 0 );
 
-  auto const phase = temperature_phase( x_surface, w, slab ) ;
+  auto const phase =
+  temperature_phase( x_surface, w, slab, boundary_condition ) ;
   
   return phase ;
 }
@@ -322,7 +338,9 @@ real_transient_temperature
   units::quantity< units::si::time > const t,
   units::quantity< units::si::angular_frequency > const w,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
+ 
 )
 noexcept ->  units::quantity< units::si::temperature >
 {
@@ -333,7 +351,8 @@ noexcept ->  units::quantity< units::si::temperature >
 
   using units::real;
 
-  auto const temperature_dimensional = complex_temperature( x, w, I_t, slab );
+  auto const temperature_dimensional =
+  complex_temperature( x, w, I_t, slab, boundary_condition );
   
   auto const L = slab.characteristic_length;
   auto const alpha = slab.get_diffusivity();
@@ -353,7 +372,9 @@ complex_surface_temperature
 (
   units::quantity< units::si::angular_frequency > const w,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
+ 
 )
 noexcept -> units::quantity< units::si::temperature, std::complex<double > >
 {
@@ -366,7 +387,7 @@ noexcept -> units::quantity< units::si::temperature, std::complex<double > >
   auto const x_surface = quantity< length >::from_value( 0 );
   
   auto const temperature_dimensional =
-    complex_temperature( x_surface, w, I_t, slab );
+  complex_temperature( x_surface, w, I_t, slab, boundary_condition );
 
   return temperature_dimensional;
 }
@@ -377,7 +398,8 @@ temperature_phase
 (
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::angular_frequency > const w,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
@@ -390,7 +412,8 @@ noexcept -> units::quantity< units::si::plane_angle >
   
   auto const I_dummy = quantity< heat_flux >::from_value(1);
   
-  auto const T_cmplx = complex_temperature( x, w, I_dummy, slab ) ;
+  auto const T_cmplx =
+  complex_temperature( x, w, I_dummy, slab, boundary_condition ) ;
   
   using units::si::radians;
   auto const phase = arg( T_cmplx ) - M_PI_2 * radians ;
@@ -404,7 +427,8 @@ temperature_amplitude
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::angular_frequency > const w,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> units::quantity< units::si::temperature >
 {
@@ -415,7 +439,8 @@ noexcept -> units::quantity< units::si::temperature >
   using units::quantity;
   using units::si::length;
   
-  auto const T_cmplx = complex_temperature( x, w, I_t, slab ) ;
+  auto const T_cmplx =
+  complex_temperature( x, w, I_t, slab, boundary_condition ) ;
   
   using units::abs;
   auto const amplitude = abs( T_cmplx ) ;
@@ -430,7 +455,8 @@ complex_temperature
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::angular_frequency > const w,
   units::quantity< units::si::heat_flux > const I_t,
-  Slab const & slab
+  Slab const & slab,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> units::quantity< units::si::temperature, std::complex<double > >
 {
@@ -445,7 +471,8 @@ noexcept -> units::quantity< units::si::temperature, std::complex<double > >
   auto const alpha = slab.get_diffusivity();
   auto const k = slab.k;
 
-  auto const theta_complex = neumann_and_direchlet_BC( x , w , L, alpha ) ;
+  auto const theta_complex =
+  neumann_and_direchlet_BC( x , w , L, alpha, boundary_condition ) ;
 
   auto const deltaT = ( I_t * L ) / k ;
   
@@ -493,11 +520,44 @@ noexcept -> units::quantity< units::si::dimensionless>
   return w_non;
 }
  
+auto evaluate_based_on_bc
+(
+  units::quantity< units::si::dimensionless, double> const x_non ,
+  units::quantity< units::si::dimensionless, std::complex< double > > const Kappa ,
+  enum back_boundary_condition const boundary_condition
+)
+-> units::quantity< units::si::dimensionless, std::complex< double > >
+{
+  using math::differential::waveEquation::analytical_solution_10;
+  using math::differential::waveEquation::analytical_solution_00;
+  
+  auto s_x_value = std::complex<double>();
+  
+
+  switch ( boundary_condition )
+  {
+    case back_boundary_condition::adiabatic:
+      s_x_value = analytical_solution_00( x_non.value(), Kappa.value() );
+      break;
+    case back_boundary_condition::T_base:
+      s_x_value = analytical_solution_10( x_non.value(), Kappa.value() );
+      break;
+    default:
+      throw;
+  }
+  
+  auto const s_x =
+  units::quantity< units::si::dimensionless, std::complex<double>>( s_x_value );
+  return s_x;
+}
+ 
+ 
 auto neumann_and_direchlet_BC(
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::angular_frequency > const w,
   units::quantity< units::si::length > const characteristic_length,
-  units::quantity< units::si::thermal_diffusivity > const alpha
+  units::quantity< units::si::thermal_diffusivity > const alpha,
+  enum back_boundary_condition const boundary_condition
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
@@ -515,7 +575,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
   using units::sqrt;
   using units::quantity;
   using units::si::dimensionless;
-  using math::differential::waveEquation::analytical_solution_10;
+
 
   auto const i_imag = complex< double >( 0, 1 ) ;
   
@@ -525,16 +585,14 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
   auto const i_non = quantity< dimensionless, complex< double > >( i_imag ) ;
   auto const Kappa = sqrt( i_non * w_non ) ;
   
-  auto const A_non = quantity< dimensionless >( -1 ) ;
-  
   auto const x_non = x / L ;
   
-  auto const L_b =  quantity< dimensionless >( 1 ) ;
-
-  auto const s_x = analytical_solution_10( x_non, Kappa, A_non, L_b ) ;
+  auto const s_x = evaluate_based_on_bc( x_non, Kappa,  boundary_condition );
 
   return s_x;
 }
+
+
 
 } // namespace slab
   

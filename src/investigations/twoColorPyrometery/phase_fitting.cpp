@@ -43,23 +43,18 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   using units::si::radians;
   using units::si::plane_angle;
   using units::si::square_millimeters;
-  
-//  auto const x = quantity< length >( 273 * micrometers );
-//  auto const I_transient = quantity< heat_flux >( 260 * watts / square_meter );
+  using thermal::model::slab::surface_temperature_phases;
+  using thermal::model::slab::Slab;
+  using physics::classical_mechanics::frequency_to_angularFrequency;
   
   auto const k = quantity< thermal_conductivity >( 120.1  * watts / ( meter * kelvin ) );
   
   auto const characteristic_length = quantity< length >( 1420 * micrometers );
 
   auto const alpha = quantity<thermal_diffusivity>( 5 * square_millimeters / second );
-
-  using thermal::model::slab::Slab;
+  
   auto mySlab = Slab{ characteristic_length, alpha, k };
   
-  using physics::classical_mechanics::frequency_to_angularFrequency;
-
-
-
 
   using math::construct::range_1og10;
   auto const lmin = quantity< dimensionless >( 0.02 );
@@ -76,8 +71,9 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
   auto const frequencies =
   frequencies_from_thermalPenetrations( lthermals, alpha, characteristic_length  );
   
-  using thermal::model::slab::surface_temperature_phases;
-  auto const initial_phases = surface_temperature_phases( frequencies, mySlab );
+
+  auto const BC = thermal::model::slab::back_boundary_condition::T_base;
+  auto const initial_phases = surface_temperature_phases( frequencies, mySlab, BC );
   
   using math::addNoise;
   auto const std_error_percent = quantity<dimensionless>( 0.01 ) ;
@@ -94,7 +90,7 @@ auto phase_fitting( filesystem::directory const & dir ) -> void
  
   using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases;
   auto const myFittedSlab =
-    diffusivity_from_phases( omegas, experimental_phases, mySlab_off );
+    diffusivity_from_phases( omegas, experimental_phases, mySlab_off, BC );
 
   
   std::cout << myFittedSlab.fitted_slab.get_diffusivity() << "\t" ;

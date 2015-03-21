@@ -73,7 +73,8 @@ diffusivity_from_phases
 (
   std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
-  thermal::model::slab::Slab const & slab_initial
+  thermal::model::slab::Slab const & slab_initial,
+  enum thermal::model::slab::back_boundary_condition const BC
 )
 -> fitting_result
 {
@@ -85,12 +86,12 @@ diffusivity_from_phases
   auto const numberPoints2Fit = omegas.size();
 
   auto const minimizationEquation =
-  [ &omegas, &observations, &slab_initial, &numberPoints2Fit ]
+  [ &omegas, &observations, &slab_initial, &numberPoints2Fit, &BC ]
   ( const double *x, double *fvec ) noexcept
   {
     auto const slabCurrent = updateSlab( x, slab_initial );
     
-    auto const predictions = surface_temperature_phases( omegas, slabCurrent ) ;
+    auto const predictions = surface_temperature_phases( omegas, slabCurrent, BC ) ;
     
     auto const residual = [ & ]( const int i ) noexcept
     {
@@ -110,7 +111,7 @@ diffusivity_from_phases
   lmdif( minimizationEquation, numberPoints2Fit, unknownParameters, settings{});
 
   auto const model_slab = updateSlab( unknownParameters.data(), slab_initial );
-  auto const model_observations = surface_temperature_phases( omegas, model_slab ) ;
+  auto const model_observations = surface_temperature_phases( omegas, model_slab, BC ) ;
 
 
   using physics::classical_mechanics::frequencies_from_angularFrequencies;
@@ -135,12 +136,14 @@ diffusivity_from_phases
     std::vector< units::quantity< units::si::angular_frequency > >,
     std::vector< units::quantity< units::si::plane_angle > >
   > const & observations,
-  thermal::model::slab::Slab const & slab_initial
+  thermal::model::slab::Slab const & slab_initial,
+  enum thermal::model::slab::back_boundary_condition const BC
+ 
 )
 -> fitting_result
 {
   auto const results = diffusivity_from_phases(
-  observations.first, observations.second, slab_initial ) ;
+  observations.first, observations.second, slab_initial, BC ) ;
 
   return results ;
 }

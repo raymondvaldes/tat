@@ -16,6 +16,7 @@
 #include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
 #include "thermal/analysis/bulkSpeciman/temperature/conductivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
+#include "thermal/model/slab/slab.h"
 
 #include "units.h"
 
@@ -47,8 +48,10 @@ auto run( filesystem::directory const & dir ) -> void
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
   
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;
+  
+  auto const BC = thermal::model::slab::back_boundary_condition::T_base;
   auto const bestFit_results =
-  diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab );
+  diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab , BC);
   
   
   std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";

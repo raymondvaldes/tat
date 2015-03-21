@@ -10,6 +10,9 @@
 #define __tat__analytical__
 
 #include <cmath>
+#include "math/functions/trigonometric/csc.h"
+#include "math/functions/trigonometric/sec.h"
+
 #include "units.h"
 
 namespace math {
@@ -22,38 +25,47 @@ template< typename T, typename Y >
 auto analytical_solution_00( T const x, Y const Kappa )
 noexcept -> Y
 {
+  //
   // eq:  s''(x) + (K^2) s(x) == 0
-  // BC:  s(0) == 0
-  // BC:  s(1) == 1
+  // BC:  s'(0) == -1
+  // BC:  s'(1) == 0
 
-  using std::sin;
-  auto const s_x = sin( Kappa * x ) / sin( Kappa ) ;
+  using std::cos;
+  using math::functions::trigonometric::csc;
+  using std::sqrt;
+
+  using units::cos;
+  using units::csc;
+  using units::sqrt;
+  
+  auto const sqrt_k = sqrt( Kappa );
+  auto const s_x = -( cos( sqrt_k * ( x - 1 ) ) * csc( sqrt_k ) ) / sqrt_k;
+
   return s_x;
 }
   
 template< typename T, typename Y >
 auto analytical_solution_10(
   T const x,
-  Y const Kappa,
-  T const A,
-  T const L_b )
+  Y const Kappa
+)
+  
 noexcept -> Y
 {
   // eq:  s''(x) + (K^2) s(x) == 0
-  // BC:  s'(0) == A
-  // BC:  s(L_b)  == 0
+  // BC:  s'(0) == -1
+  // BC:  s(1)  == 0
 
-  using std::cosh;
-  using std::sinh;
-  using std::tanh;
-  using units::sinh;
-  using units::tanh;
-  using units::cosh;
+  using std::sin;
+  using math::functions::trigonometric::sec;
+  using std::sqrt;
   
-  auto const kx = Kappa * x;
-  auto const kL = Kappa * L_b;
-
-  auto const s_x = ( A / Kappa ) * ( sinh( kx ) - tanh( kL ) * cosh( kx ) ) ;
+  using units::sin;
+  using units::sec;
+  using units::sqrt;
+  
+  auto const sqrt_k = sqrt( Kappa );
+  auto const s_x = (-sec( sqrt_k ) * sin( sqrt_k * ( x - 1 ) ) ) / sqrt_k ;
   
   return s_x;
 }

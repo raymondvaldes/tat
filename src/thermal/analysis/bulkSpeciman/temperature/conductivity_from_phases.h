@@ -49,7 +49,8 @@ diffusivity_from_phases
 (
   std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
-  thermal::model::slab::Slab const & slab_initial
+  thermal::model::slab::Slab const & slab_initial,
+  enum thermal::model::slab::back_boundary_condition const BC
 )
 -> fitting_result;
 
@@ -58,7 +59,8 @@ diffusivity_from_phases
 (
   std::pair< std::vector< units::quantity< units::si::angular_frequency > >,
   std::vector< units::quantity< units::si::plane_angle > > > const & observations,
-  thermal::model::slab::Slab const & slab_initial
+  thermal::model::slab::Slab const & slab_initial,
+  enum thermal::model::slab::back_boundary_condition const BC 
 )
 -> fitting_result;
 
