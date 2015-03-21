@@ -28,7 +28,7 @@ noexcept -> Y
   //
   // eq:  s''(x) + (K^2) s(x) == 0
   // BC:  s'(0) == -1
-  // BC:  s'(1) == 0
+  // BC:  s'(1) == 0 (adiabatic)
 
   using std::cos;
   using math::functions::trigonometric::csc;
@@ -36,10 +36,8 @@ noexcept -> Y
 
   using units::cos;
   using units::csc;
-  using units::sqrt;
   
-  auto const sqrt_k = sqrt( Kappa );
-  auto const s_x = -( cos( sqrt_k * ( x - 1 ) ) * csc( sqrt_k ) ) / sqrt_k;
+  auto const s_x = - cos( Kappa - Kappa * x  )  * csc( Kappa )  / Kappa;
 
   return s_x;
 }
@@ -54,7 +52,7 @@ noexcept -> Y
 {
   // eq:  s''(x) + (K^2) s(x) == 0
   // BC:  s'(0) == -1
-  // BC:  s(1)  == 0
+  // BC:  s(1)  == 0 ( constant surface temperature )
 
   using std::sin;
   using math::functions::trigonometric::sec;
@@ -64,9 +62,7 @@ noexcept -> Y
   using units::sec;
   using units::sqrt;
   
-  auto const sqrt_k = sqrt( Kappa );
-  auto const s_x = (-sec( sqrt_k ) * sin( sqrt_k * ( x - 1 ) ) ) / sqrt_k ;
-  
+  auto const s_x = sec( Kappa ) * sin( Kappa  - Kappa * x ) / Kappa ;
   return s_x;
 }
   

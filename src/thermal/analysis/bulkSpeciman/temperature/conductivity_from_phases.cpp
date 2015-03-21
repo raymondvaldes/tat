@@ -15,6 +15,8 @@
 #include "math/estimation/settings.h"
 #include "algorithm/algorithm.h"
 #include "physics/classical_mechanics/kinematics.h"
+#include "plot/gnuplot.h"
+#include "investigations/twoColorPyrometery/plot/phase_exp_model.h"
 #include "units.h"
 
 namespace thermal {
@@ -83,15 +85,22 @@ diffusivity_from_phases
   using math::estimation::settings;
   using thermal::model::slab::surface_temperature_phases;
   
+  using physics::classical_mechanics::frequencies_from_angularFrequencies;
+  auto const frequencies = frequencies_from_angularFrequencies(omegas);
+  assert( frequencies.size() > 0 );
+  
+  
   auto const numberPoints2Fit = omegas.size();
 
   auto const minimizationEquation =
-  [ &omegas, &observations, &slab_initial, &numberPoints2Fit, &BC ]
+  [ &omegas, &observations, &slab_initial, &numberPoints2Fit, &BC, &frequencies]
   ( const double *x, double *fvec ) noexcept
   {
     auto const slabCurrent = updateSlab( x, slab_initial );
-    
     auto const predictions = surface_temperature_phases( omegas, slabCurrent, BC ) ;
+    
+    //std::cout << slabCurrent.get_diffusivity() << "\n";
+    //investigations::twoColorPyrometery::plot::phase_exp_model( frequencies, observations, predictions );
     
     auto const residual = [ & ]( const int i ) noexcept
     {
@@ -114,9 +123,6 @@ diffusivity_from_phases
   auto const model_observations = surface_temperature_phases( omegas, model_slab, BC ) ;
 
 
-  using physics::classical_mechanics::frequencies_from_angularFrequencies;
-  auto const frequencies = frequencies_from_angularFrequencies(omegas);
-  assert( frequencies.size() > 0 );
 
   
   auto const results =  fitting_result

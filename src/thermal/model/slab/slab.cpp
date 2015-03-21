@@ -416,7 +416,7 @@ noexcept -> units::quantity< units::si::plane_angle >
   complex_temperature( x, w, I_dummy, slab, boundary_condition ) ;
   
   using units::si::radians;
-  auto const phase = arg( T_cmplx ) - M_PI_2 * radians ;
+  auto const phase = -arg( T_cmplx ) - M_PI_2 * radians ;
   
   return phase;
 }
