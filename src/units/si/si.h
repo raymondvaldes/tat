@@ -15,7 +15,7 @@
 
 namespace units {
 
-namespace si{
+inline namespace si{
 
   template< class T>
   constexpr auto

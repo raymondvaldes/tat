@@ -36,7 +36,7 @@ namespace fahrenheit {
 } // namespace fahrenheit
 
 
-namespace si {
+inline namespace si {
 
 //Dimensions
 using length        = boost::units::si::length;

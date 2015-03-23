@@ -13,7 +13,7 @@
 
 namespace units {
 
-namespace si{
+inline namespace si{
   
 typedef boost::units::si::system system;
     

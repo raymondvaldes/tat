@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cmath>
+#include <utility>
 
 #include "math/functions/cosine.h"
 #include "math/estimation/lmdiff.hpp"
@@ -57,13 +58,18 @@ struct cosine_fitting{
   
 
 template< typename T >
-auto cosine( const std::vector< units::quantity< units::si::time > > &inputTime,
-             const std::vector< units::quantity< T > > &inputSignal,
-             const functions::PeriodicProperties< T > &initialConditions,
-             const units::quantity< units::si::plane_angle> & cosine_phase =
-             units::quantity< units::si::plane_angle>::from_value(0) )
-noexcept -> functions::Cosine<T>
+auto cosine(
+  std::pair<  std::vector< units::quantity<units::si::time> >,
+              std::vector< units::quantity< T > >
+  > const & input,
+  functions::PeriodicProperties< T > const & initialConditions,
+  units::quantity< units::si::plane_angle> const cosine_phase =
+  units::quantity< units::si::plane_angle>::from_value(0)
+)
+noexcept -> functions::Cosine< T >
 {
+  auto const inputTime = input.first;
+  auto const inputSignal = input.second;
     using std::generate;
     using std::vector;
     using std::function;
@@ -82,10 +88,10 @@ noexcept -> functions::Cosine<T>
   }
 
   auto const CosineFactory = [ &cosine_phase  ]
-  ( const double*x, const functions::PeriodicProperties< T > input )
+  ( const double*x, const functions::PeriodicProperties< T > p_input )
   noexcept
   {
-    auto updatedProperties = input ;
+    auto updatedProperties = p_input ;
     
     updatedProperties.offset = quantity< T >::from_value( x[0] ) ;
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
@@ -126,23 +132,7 @@ noexcept -> functions::Cosine<T>
 
   // this is to offset back the fitted phase by the phase of the curve
   unknownParameters[2] -= cosine_phase.value() ;
-  return CosineFactory( unknownParameters.data(), initialConditions ) ;
-};
-
-
-template< typename T >
-auto cosine(  std::pair<
-                std::vector< units::quantity<units::si::time> >,
-                std::vector< units::quantity< T > >
-              > const & input,
-              functions::PeriodicProperties< T > const & initialConditions,
-              const units::quantity< units::si::plane_angle> & cosine_phase =
-              units::quantity< units::si::plane_angle>::from_value(0)
-              )
-noexcept -> functions::Cosine< T >
-{
-  return cosine( input.first, input.second, initialConditions, cosine_phase );
-}
+  return CosineFactory( unknownParameters.data(), initialConditions ) ;}
 
 } // namespace curveFit
 

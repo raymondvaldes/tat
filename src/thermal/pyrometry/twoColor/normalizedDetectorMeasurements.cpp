@@ -29,6 +29,7 @@ using thermal::pyrometer::twoColor::signalRatio;
 using thermal::pyrometer::twoColor::calibratedSignalRatio;
 using thermal::pyrometer::twoColor::normalizedSignalRatio;
 using algorithm::generate;
+    using thermal::pyrometry::twoColor::normalizedSignalRatio_from_measurement;
 
 auto normalizedDetectorMeasurements
 (
@@ -43,9 +44,6 @@ std::pair<
 {
   assert_gt_zero( first.size() ) ;
   assert_gt_zero( second.size() );
-  
- // assert_ge(  );
-  
   assert_gt_zero( gCoeff ) ;
   
   auto const count = first.size();
@@ -54,7 +52,6 @@ std::pair<
   auto i = 0u;
   auto const normalizeSR_generator = [&first, &second, &gCoeff, &i]() noexcept
   {
-    using thermal::pyrometry::twoColor::normalizedSignalRatio_from_measurement;
     auto const val =  normalizedSignalRatio_from_measurement(
       first.wavelength, first.measurements[i].signal ,
       second.wavelength, second.measurements[i].signal,  gCoeff  ) ;

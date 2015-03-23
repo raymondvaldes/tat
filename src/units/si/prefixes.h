@@ -13,7 +13,7 @@
 
 namespace units {
 
-namespace si {
+inline namespace si {
 
   using boost::units::si::yocto;
   using boost::units::si::zepto;

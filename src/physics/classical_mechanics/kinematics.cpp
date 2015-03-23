@@ -26,6 +26,7 @@
 #include <cmath>
 #include <vector>
 #include <boost/assert.hpp>
+#include <iostream>
 
 #include "physics/classical_mechanics/kinematics.h"
 #include "algorithm/algorithm.h"
@@ -138,6 +139,57 @@ noexcept -> std::vector < units::quantity< units::si::frequency > >
 
   return frequencies;
 }
+
+auto
+get_period_from_frequency ( units::quantity< units::si::frequency > const freq )
+noexcept -> units::quantity< units::si::time >
+{
+  using namespace units;
+  return  quantity<dimensionless>(1) / freq;
+}
+
+auto
+get_period_from_angularFrequency
+(
+  units::quantity< units::si::angular_frequency > const  omega
+)
+noexcept -> units::quantity< units::si::time >
+{
+  auto const freq = angularFrequency_to_frequency( omega );
+  auto const period = get_period_from_frequency( freq );
+  return period;
+}
+
+
+auto
+get_delta_time_from_phase
+(
+  units::quantity< units::si::plane_angle > const phase,
+  units::quantity< units::si::frequency > const f
+)
+noexcept -> units::quantity< units::si::time >
+{
+  auto const omega = frequency_to_angularFrequency( f );
+  return get_delta_time_from_phase( phase, omega );
+}
+
+auto
+get_delta_time_from_phase
+(
+  units::quantity< units::si::plane_angle > const phase,
+  units::quantity< units::si::angular_frequency > const omega
+)
+noexcept -> units::quantity< units::si::time >
+{
+  using namespace units;
+  
+  auto const period_of_signal = get_period_from_angularFrequency( omega );
+  auto const phase_ratio = phase / quantity< plane_angle >( 2 * M_PI * radians);
+  auto const delta_time = phase_ratio * period_of_signal ;
+  
+  return delta_time;
+}
+
 
 } // namespace classical_mechanics
 

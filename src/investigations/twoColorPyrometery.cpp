@@ -41,7 +41,7 @@ auto run( filesystem::directory const & dir ) -> void
   auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
   std::cout << gCoeff << "\n";
   
-  auto const scope_data = import_twoColor_scope_files( dir,"twoColorPyro.xml" , gCoeff );
+  auto const scope_data = import_twoColor_scope_files( dir, "twoColorPyro.xml" , gCoeff );
   plot::wave_signals( scope_data.measurements.front()  );
   plot::wave_signals( scope_data.measurements.back()  );
 

@@ -12,6 +12,7 @@
 #include <cassert>
 #include <vector>
 #include <functional>
+#include <initializer_list>
 
 #include "algorithm/algorithm.h"
 #include "units.h"
@@ -54,6 +55,18 @@ auto sum( std::vector< units::quantity< T > > const & list ) noexcept
   using units::quantity;
   
   auto const initial = quantity<T>::from_value(0) ;
+  auto const total = accumulate( list,  initial ) ;
+  
+  return total;
+}
+
+template< typename T >
+auto sum( std::initializer_list< units::quantity< T > > const list )
+{
+  using algorithm::accumulate;
+  using units::quantity;
+
+  auto const initial = quantity<T>::from_value( 0 );
   auto const total = accumulate( list,  initial ) ;
   
   return total;

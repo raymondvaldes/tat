@@ -71,7 +71,9 @@ Unique_scope_measurement::Unique_scope_measurement
 auto Unique_scope_measurement::reference_time( void ) const noexcept
 -> std::vector< units::quantity< units::si::time > >
 {
-  return periodic_time_distribution( laser_modulation_frequency, cycles,counts);
+  auto const times =
+  periodic_time_distribution( laser_modulation_frequency, cycles, counts ) ;
+  return times;
 }
 
 auto Unique_scope_measurement::voltages( void ) const noexcept

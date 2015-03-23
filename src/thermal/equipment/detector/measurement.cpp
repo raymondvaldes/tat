@@ -20,7 +20,6 @@ Measurement::Measurement(
   units::quantity< units::si::electric_potential > const & signal_In )
 : reference_time( timestamp_In ), signal( signal_In )
 {
-  assert_ge_zero( timestamp_In );
 };
 
 } // namespace detector

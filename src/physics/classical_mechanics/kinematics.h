@@ -61,6 +61,33 @@ frequencies_from_angularFrequencies
 )
 noexcept -> std::vector < units::quantity< units::si::frequency > >;
 
+auto
+get_period_from_frequency ( units::quantity< units::si::frequency > const freq )
+noexcept -> units::quantity< units::si::time >;
+
+auto
+get_period_from_angularFrequency
+(
+  units::quantity< units::si::angular_frequency > const  omega
+)
+noexcept -> units::quantity< units::si::time >;
+
+auto
+get_delta_time_from_phase
+(
+  units::quantity< units::si::plane_angle > const phase,
+  units::quantity< units::si::frequency > const f
+)
+noexcept -> units::quantity< units::si::time >;
+
+auto
+get_delta_time_from_phase
+(
+  units::quantity< units::si::plane_angle > const phase,
+  units::quantity< units::si::angular_frequency > const omega
+)
+noexcept -> units::quantity< units::si::time >;
+
 } // namespace classical_mechanics
 
 } // physics

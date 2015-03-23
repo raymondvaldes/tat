@@ -20,14 +20,15 @@ namespace equipment {
 
 namespace detector {
 
-struct Measurements{
+class Measurements{
 
-  units::quantity<units::si::wavelength> wavelength; //of detector
+public:
   std::vector< Measurement > measurements;
+  units::quantity<units::si::wavelength> wavelength; //of detector
   
   Measurements
   (
-    units::quantity< units::si::wavelength > const & wavelengthIn,
+    units::quantity< units::si::wavelength > const wavelengthIn,
     std::vector< units::quantity< units::si::time > > const & referenceTime,
     std::vector< units::quantity< units::si::electric_potential > > const & signals
   );
@@ -37,10 +38,15 @@ struct Measurements{
   auto referenceTimes( void )
   const noexcept-> std::vector< units::quantity<units::si::time> >;
   
+  auto delta_time( void )
+  const noexcept -> units::quantity< units::si::time >;
+  
   auto signals_electical_potential( void )
   const noexcept-> std::vector< units::quantity<units::si::electric_potential> >;
   
   auto plot_measurements( void ) const noexcept -> void;
+
+  
 };
 
 } // namespace detector

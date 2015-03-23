@@ -31,6 +31,9 @@ private:
   auto voltages( void ) const noexcept
   -> std::vector< std::vector< units::quantity<units::si::electric_potential > > >;
 
+  auto shift_phase( units::quantity< units::si::plane_angle > const phase )
+  noexcept -> void;
+
   size_t cycles;
   
   size_t counts = 2049;

@@ -26,7 +26,7 @@ using algorithm::transform;
 using algorithm::vector::quantityTodouble;
 
 Measurements::Measurements(
-  units::quantity<units::si::wavelength> const & wavelengthIn,
+  units::quantity<units::si::wavelength> const wavelengthIn,
   std::vector< units::quantity< units::si::time> > const & referenceTime,
   std::vector< units::quantity< units::si::electric_potential > > const & signals )
   : wavelength( wavelengthIn), measurements( signals.size() )
@@ -43,6 +43,14 @@ Measurements::Measurements(
   } );
   
 };
+
+auto Measurements::delta_time( void )
+const noexcept -> units::quantity< units::si::time >
+{
+  auto const time_ref_0 = measurements[0].reference_time;
+  auto const time_ref_1 = measurements[1].reference_time;
+  return time_ref_1 - time_ref_0;
+}
 
 auto Measurements::size( void )
 const noexcept -> size_t

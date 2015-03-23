@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <utility>
 
 #include "algorithm/algorithm.h"
 #include "math/curveFit/cosine.h"
@@ -71,7 +72,7 @@ BOOST_AUTO_TEST_CASE( cosine_fit_test )
   
   using namespace math::curveFit;
   auto const f_cosine =
-  curveFit::cosine( myTime, myVectVolts, initialConditions, phase_offset );
+  curveFit::cosine( std::make_pair(myTime, myVectVolts), initialConditions, phase_offset );
 
   
   BOOST_CHECK_CLOSE_FRACTION( omega.value(), f_cosine.omega.value(), tol );

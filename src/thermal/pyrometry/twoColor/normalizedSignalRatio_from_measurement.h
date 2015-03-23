@@ -18,11 +18,11 @@ namespace pyrometry {
 namespace twoColor {
 
 auto normalizedSignalRatio_from_measurement(
-  units::quantity<units::si::wavelength> const & first_w,
-  units::quantity<units::si::electric_potential> const & first_signal,
-  units::quantity<units::si::wavelength> const & second_w,
-  units::quantity<units::si::electric_potential> const &  second_signal,
-  units::quantity< units::si::dimensionless > const & gCoeff )
+  units::quantity<units::si::wavelength> const first_w,
+  units::quantity<units::si::electric_potential> const first_signal,
+  units::quantity<units::si::wavelength> const second_w,
+  units::quantity<units::si::electric_potential> const second_signal,
+  units::quantity< units::si::dimensionless > const gCoeff )
   noexcept -> units::quantity< units::si::one_over_temperature >;
   
 } // namespace twoColor

@@ -16,8 +16,10 @@
 #include "units/quantity.h"
 
 namespace units {
-namespace si {
-namespace constants {
+
+inline namespace si {
+
+inline namespace constants {
 
 BOOST_UNITS_PHYSICAL_CONSTANT(  C1_wien ,
                                 quantity<power_over_area>,
@@ -34,7 +36,11 @@ BOOST_UNITS_PHYSICAL_CONSTANT(  PI_radians ,
                                 M_PI *  radians,
                                 0.0 * radians ) ;
 
-}}}
+} // namesapce constants
+
+} // namespace si
+
+} // namespace units
 
 
 #endif

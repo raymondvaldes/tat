@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#include <utility>
 #include <cmath>
+
 #include "gTBC/gMeasure/total_calibrated_emission_pairs.h"
+#include "thermal/equipment/detector/compensate_for_phase_difference.h"
 #include "algorithm/algorithm.h"
 
 namespace gTBC {
@@ -17,6 +20,7 @@ namespace gMeasure {
 using std::vector;
 using std::pair;
 using thermal::equipment::detector::Measurements;
+using thermal::equipment::detector::compensate_for_phase_difference;
 using algorithm::for_each;
 using std::make_pair;
 
@@ -35,6 +39,7 @@ noexcept -> std::vector<
                           thermal::equipment::detector::Measurements > >
 {
   assert( unique_measurement_pairs.size() == detector_grnds.size() );
+  assert( signal_background.value() > 0 );
   
   auto detector_pairs = vector< pair< Measurements, Measurements > >();
   
@@ -51,16 +56,25 @@ noexcept -> std::vector<
     
     auto const background = signal_background;
     
-    auto const DC_offset_1 = DC_signal_1 - background;
-    auto const DC_offset_2 = DC_signal_2 - background;
+    auto const DC_1 = DC_signal_1 - background;
+    auto const DC_2 = DC_signal_2 - background;
   
-    assert( DC_offset_1.value() > 0 );
-    assert( DC_offset_2.value() > 0 ) ;
+    assert( DC_1.value() > 0 );
+    assert( DC_2.value() > 0 ) ;
   
-    auto const first = u.first.signal_averaged_measurement( DC_offset_1 , offset );
-    auto const second = u.second.signal_averaged_measurement( DC_offset_2 , offset );
-  
-    detector_pairs.push_back( make_pair( first, second ) ) ;
+    auto const first = u.first.signal_averaged_measurement( DC_1 , offset );
+    auto const second = u.second.signal_averaged_measurement( DC_2 , offset );
+    auto const m = make_pair( first, second );
+    // I need to be able to send in both of these files and output a std::pair<>
+    // that has the time information fixed!!!!
+    auto const f1 = u.first.laser_modulation_frequency;
+    auto const f2 = u.second.laser_modulation_frequency;
+    assert( f1 == f2 );
+    
+    auto const measurements_at_two_colors =
+    compensate_for_phase_difference( m , f1 );
+    
+    detector_pairs.push_back( measurements_at_two_colors ) ;
     
     ++i;
   } );

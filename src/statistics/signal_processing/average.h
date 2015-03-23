@@ -11,9 +11,9 @@
 
 #include <cassert>
 #include <vector>
+#include <initializer_list>
 
 #include "algorithm/algorithm.h"
-//#include "statistics/sum.h"
 #include "statistics/signal_processing/sum.h"
 #include "statistics/signal_processing/divide_each_element.h"
 #include "units.h"
@@ -59,6 +59,19 @@ noexcept -> units::quantity<T>
   auto const mean = sums / count ;
 
   return mean;
+}
+
+template< typename T >
+auto average( std::initializer_list< units::quantity< T > > const & list )
+{
+  using namespace units;
+  
+  auto const sum_of_list = sum( list );
+  auto const count = quantity< dimensionless >( list.size() );
+  
+  auto const average_value = sum_of_list / count;
+  
+  return average_value;
 }
 
 } // namespace signal_processing

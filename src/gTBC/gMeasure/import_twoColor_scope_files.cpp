@@ -67,8 +67,6 @@ auto import_twoColor_scope_files
   
   auto const unique_measurements = find_unique_measurements( scopeFiles ) ;
   
-
-  
   auto const measurements_frequency_pairs =
   unique_measurement_pairs( unique_measurements, frequencies.second );
   
@@ -77,7 +75,6 @@ auto import_twoColor_scope_files
   assert( get_meta_files.size() == 1 ) ;
   
   auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
-  
   
   auto signal_grnds = meta_data.meta_detector_grnds();
   

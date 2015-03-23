@@ -14,6 +14,10 @@
 #include "thermal/pyrometry/twoColor/calibratedSignalRatio.h"
 #include "thermal/pyrometry/twoColor/signalRatio.h"
 
+using thermal::pyrometer::twoColor::signalRatio;
+using thermal::pyrometer::twoColor::calibratedSignalRatio;
+using thermal::pyrometer::twoColor::normalizedSignalRatio;
+
 namespace thermal {
 
 namespace pyrometry {
@@ -21,11 +25,11 @@ namespace pyrometry {
 namespace twoColor {
 
 auto normalizedSignalRatio_from_measurement(
-  units::quantity<units::si::wavelength> const & first_w,
-  units::quantity<units::si::electric_potential> const & first_signal,
-  units::quantity<units::si::wavelength> const & second_w,
-  units::quantity<units::si::electric_potential> const &  second_signal,
-  units::quantity< units::si::dimensionless > const & gCoeff )
+  units::quantity<units::si::wavelength> const first_w,
+  units::quantity<units::si::electric_potential> const first_signal,
+  units::quantity<units::si::wavelength> const second_w,
+  units::quantity<units::si::electric_potential> const  second_signal,
+  units::quantity< units::si::dimensionless > const gCoeff )
   noexcept -> units::quantity< units::si::one_over_temperature >
 {
   assert_gt_zero(first_w);
@@ -36,15 +40,11 @@ auto normalizedSignalRatio_from_measurement(
   assert_gt_zero(second_signal);
   assert_gt_zero(gCoeff);
 
-  using thermal::pyrometer::twoColor::signalRatio;
-  using thermal::pyrometer::twoColor::calibratedSignalRatio;
-  using thermal::pyrometer::twoColor::normalizedSignalRatio;
-
   auto const SR = signalRatio(  first_signal , second_signal ) ;
   
   auto const gSR = calibratedSignalRatio( SR, gCoeff ) ;
   
-  auto const normalizedSR = normalizedSignalRatio( gSR,first_w,second_w);
+  auto const normalizedSR = normalizedSignalRatio( gSR, first_w, second_w );
   
   return normalizedSR ;
 }

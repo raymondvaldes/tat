@@ -89,7 +89,6 @@ diffusivity_from_phases
   auto const frequencies = frequencies_from_angularFrequencies(omegas);
   assert( frequencies.size() > 0 );
   
-  
   auto const numberPoints2Fit = omegas.size();
 
   auto const minimizationEquation =

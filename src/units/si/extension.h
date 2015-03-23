@@ -23,7 +23,7 @@
 
 namespace units {
 
-namespace si {
+inline namespace si {
 
 typedef divide_typeof_helper<power,solid_angle>::type power_over_solid_angle;
 
