@@ -55,22 +55,22 @@ auto compensate_for_phase_difference
   average( { first.phase, second.phase } );
   
   auto const delta_time = get_delta_time_from_phase( phase_error, freq );
-  auto const time_error = delta_time / quantity<dimensionless>( 2. );
+  auto const time_error = delta_time / quantity<dimensionless>{ 2. };
   
   //Recreate measurement vector by sampling at new times from the fitted.
   auto const count = m.first.size();
   auto const times = m.first.referenceTimes();
   
-  auto times_1 = std::vector< quantity< si::time > >();
+  auto times_1 = std::vector< quantity< si::time > >{};
   times_1.reserve( count ) ;
   
-  auto times_2 = std::vector< quantity< si::time > >();
+  auto times_2 = std::vector< quantity< si::time > >{};
   times_2.reserve( count ) ;
-  
-  auto signal_1 = std::vector< quantity< electric_potential> >();
+
+  auto signal_1 = std::vector< quantity< electric_potential> >{};
   signal_1.reserve( count );
   
-  auto signal_2 = std::vector< quantity< electric_potential> >();
+  auto signal_2 = std::vector< quantity< electric_potential> >{};
   signal_2.reserve( count );
   
   for_each( times, [&]( auto const time ) noexcept

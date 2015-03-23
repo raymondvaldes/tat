@@ -160,6 +160,8 @@
 		ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */; };
 		ABB54FD119C35E300056823E /* ifzero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB54FCF19C35E300056823E /* ifzero.cpp */; };
 		ABB54FD219C35E300056823E /* ifzero.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FD019C35E300056823E /* ifzero.h */; };
+		ABC010D31AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC010D11AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp */; };
+		ABC010D41AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC010D21AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h */; };
 		ABC5B1BD1AB55D1600A6D33C /* import_slab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */; };
 		ABC5B1BE1AB55D1600A6D33C /* import_slab.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC5B1BC1AB55D1600A6D33C /* import_slab.h */; };
 		ABC5C3B91A8532C300EC4897 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC5C3B81A8532C300EC4897 /* libboost_filesystem-mt.a */; };
@@ -503,6 +505,8 @@
 		ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdVector2ublasVector.h; path = algorithm/vector/stdVector2ublasVector.h; sourceTree = "<group>"; };
 		ABB54FCF19C35E300056823E /* ifzero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifzero.cpp; path = algorithm/vector/ifzero.cpp; sourceTree = "<group>"; };
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
+		ABC010D11AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = remove_grnd_if_not_in_scope_files.cpp; path = gTBC/gMeasure/remove_grnd_if_not_in_scope_files.cpp; sourceTree = "<group>"; };
+		ABC010D21AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = remove_grnd_if_not_in_scope_files.h; path = gTBC/gMeasure/remove_grnd_if_not_in_scope_files.h; sourceTree = "<group>"; };
 		ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = import_slab.cpp; path = slab/import_slab.cpp; sourceTree = "<group>"; };
 		ABC5B1BC1AB55D1600A6D33C /* import_slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = import_slab.h; path = slab/import_slab.h; sourceTree = "<group>"; };
 		ABC5B8A11A6F05E500D893C9 /* periodicData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = periodicData.h; path = functions/periodicData.h; sourceTree = "<group>"; };
@@ -831,6 +835,8 @@
 				AB2BA4771AB3DA78008AF545 /* import_twoColor_scope_files.h */,
 				ABDCC4C71AB9EF2300187DD1 /* import_sweep_meta_data.cpp */,
 				ABDCC4C81AB9EF2300187DD1 /* import_sweep_meta_data.h */,
+				ABC010D11AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp */,
+				ABC010D21AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h */,
 			);
 			name = gMeasure;
 			sourceTree = "<group>";
@@ -1874,6 +1880,7 @@
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
 				AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */,
 				ABA48C381A7843F90025666F /* range.h in Headers */,
+				ABC010D41AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h in Headers */,
 				AB8B581C1AB759620055615C /* divide_each_element.h in Headers */,
 				ABB4474519DB386A009EC35F /* constants.h in Headers */,
 				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
@@ -2065,6 +2072,7 @@
 				AB8AA4341A5B60710065E7F8 /* columnData.cpp in Sources */,
 				ABEF4EFF1948D4A500B44AD5 /* xml.cpp in Sources */,
 				ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */,
+				ABC010D31AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp in Sources */,
 				ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */,
 				AB2BA4701AB3CC45008AF545 /* Iheat.cpp in Sources */,
 				AB06EDAB1A71C6B500F9FDBD /* temperatureSteady.cpp in Sources */,

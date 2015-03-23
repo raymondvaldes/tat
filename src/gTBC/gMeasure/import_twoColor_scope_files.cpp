@@ -16,22 +16,24 @@
 #include "gTBC/gMeasure/total_calibrated_emission_pairs.h"
 #include "gTBC/gMeasure/find_unique_lambdas_in_files.h"
 #include "gTBC/gMeasure/find_unique_frequencies_in_files.h"
+#include "gTBC/gMeasure/remove_grnd_if_not_in_scope_files.h"
 
 #include "algorithm/algorithm.h"
 #include "thermal/pyrometry/twoColor/pyrometery_settings_file.h"
 #include <cmath>
 
+using std::vector;
+using std::abs;
+using thermal::pyrometry::twoColor::pyrometery_settings_file;
+using algorithm::unique;
+using algorithm::remove_if;
+using algorithm::any_of;
+using algorithm::for_each;
+using algorithm::transform;
 
 namespace gTBC {
 
 namespace gMeasure {
-
-using algorithm::remove_if;
-using algorithm::any_of;
-using algorithm::remove_if;
-using std::abs;
-using thermal::pyrometry::twoColor::pyrometery_settings_file;
-using algorithm::unique;
 
 processed_scope_data::processed_scope_data
 (
@@ -76,31 +78,21 @@ auto import_twoColor_scope_files
   
   auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
   
-  auto signal_grnds = meta_data.meta_detector_grnds();
-  
-  auto const end_of_gnd = remove_if( signal_grnds, [&frequencies] ( auto const a )
-  {
-    auto const meta_frequency = a.laser_frequency;
-    
-    auto const is_meta_freq_in_measurement_group =
-    any_of( frequencies.second, [ &meta_frequency ]( auto const b )
-    {
-      return (abs( b.value() - meta_frequency.value() ) < 1e-3) ;
-    } ) ;
-    return !is_meta_freq_in_measurement_group;
-  } );
-  signal_grnds.erase( end_of_gnd, signal_grnds.end() );
-  
-  assert( signal_grnds.size() == frequencies.second.size() );
-  
   
   auto const import = pyrometery_settings_file( dir.abs( filename ) );
   auto const signalBackground = import.signalBackground;
   auto const wavelength_offset = import.wavelength_offset ;
   
-//  auto const first_unique = unique_measurements.front();
-//  auto const transient_measurements_from_unique = first_unique.transient_measurements( wavelength_offset );
-//  transient_measurements_from_unique.front().plot_measurements();
+  auto signal_grnds = vector< frequency_detector_ground >();
+  signal_grnds.reserve( frequencies.second.size() ) ;
+  auto const lambda1_grnd = import.signal_DC_1 ;
+  auto const lambda2_grnd = import.signal_DC_2 ;
+  
+  for_each( frequencies.second, [&signal_grnds, &lambda1_grnd, &lambda2_grnd ]
+  ( auto const& freq )
+  {
+    signal_grnds.push_back( {freq, lambda1_grnd, lambda2_grnd} );
+  });
 
 
   auto const calibrated_emission_pairs =
