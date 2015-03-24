@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE( startup ) {
   {
     "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
     "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color/CrW06",
-    "--sample",         "5",
+    "--sample",         "3",
     "--investigation",  "twoColorPyrometery"
   };
   

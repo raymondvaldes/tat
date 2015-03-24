@@ -59,7 +59,7 @@ noexcept -> std::vector<
     auto const DC_1 = DC_signal_1 - background;
     auto const DC_2 = DC_signal_2 - background;
   
-    assert( DC_1.value() > 0 );
+    assert( DC_1.value() > 0 ) ;
     assert( DC_2.value() > 0 ) ;
   
     auto const first = u.first.signal_averaged_measurement( DC_1 , offset );

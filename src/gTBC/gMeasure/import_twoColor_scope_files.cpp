@@ -77,8 +77,9 @@ auto import_twoColor_scope_files
   assert( get_meta_files.size() == 1 ) ;
   
   auto const meta_data = import_sweep_meta_data( get_meta_files.front() );
-  
-  
+//  auto signal_grnds = meta_data.meta_detector_grnds();
+//  signal_grnds = remove_grnd_if_not_in_scope_files(signal_grnds, frequencies.second);
+ 
   auto const import = pyrometery_settings_file( dir.abs( filename ) );
   auto const signalBackground = import.signalBackground;
   auto const wavelength_offset = import.wavelength_offset ;
@@ -89,11 +90,10 @@ auto import_twoColor_scope_files
   auto const lambda2_grnd = import.signal_DC_2 ;
   
   for_each( frequencies.second, [&signal_grnds, &lambda1_grnd, &lambda2_grnd ]
-  ( auto const& freq )
+  ( auto const& freq ) noexcept
   {
     signal_grnds.push_back( {freq, lambda1_grnd, lambda2_grnd} );
   });
-
 
   auto const calibrated_emission_pairs =
   total_calibrated_emission_pairs(
