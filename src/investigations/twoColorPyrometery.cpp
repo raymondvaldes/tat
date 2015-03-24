@@ -35,6 +35,7 @@ using gTBC::gMeasure::import_twoColor_scope_files ;
 using thermal::pyrometry::twoColor::transient_analysis_sweep ;
 using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases ;
 using thermal::model::slab::import ;
+using algorithm::for_each;
 
 auto run( filesystem::directory const & dir ) -> void
 {
@@ -52,7 +53,6 @@ auto run( filesystem::directory const & dir ) -> void
   auto const BC = thermal::model::slab::back_boundary_condition::T_base;
   auto const bestFit_results =
   diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab , BC);
-  
   
   std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
  
@@ -74,7 +74,6 @@ auto run( filesystem::directory const & dir ) -> void
   
   twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
   twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
-
 }
 
 } //namespace twoColorPyrometry

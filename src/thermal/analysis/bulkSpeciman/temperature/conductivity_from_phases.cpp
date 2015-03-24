@@ -48,6 +48,16 @@ fitting_result::fitting_result
   assert( bestFit_phases.size() > 0 );
 }
 
+inline auto updateRear( const double * x )
+noexcept -> std::pair< units::quantity< units::si::dimensionless >,
+            units::quantity<units::si::plane_angle> >
+{
+  using namespace units;
+  auto const temperature = quantity<dimensionless>( x[1] );
+  auto const phase = quantity<plane_angle>::from_value(x[2] ) ;
+  return std::make_pair( temperature, phase );
+}
+
 inline auto updateSlab
 (
   const double* x ,
@@ -76,14 +86,14 @@ diffusivity_from_phases
   std::vector< units::quantity< units::si::angular_frequency > > const & omegas,
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const & slab_initial,
-  enum thermal::model::slab::back_boundary_condition const BC
-)
+  enum thermal::model::slab::back_boundary_condition const BC )
 -> fitting_result
 {
   using std::vector;
   using std::generate;
   using math::estimation::settings;
   using thermal::model::slab::surface_temperature_phases;
+  using namespace units;
   
   using physics::classical_mechanics::frequencies_from_angularFrequencies;
   auto const frequencies = frequencies_from_angularFrequencies(omegas);
@@ -96,7 +106,13 @@ diffusivity_from_phases
   ( const double *x, double *fvec ) noexcept
   {
     auto const slabCurrent = updateSlab( x, slab_initial );
-    auto const predictions = surface_temperature_phases( omegas, slabCurrent, BC ) ;
+    
+    auto rear_bc = std::pair< quantity<dimensionless>, quantity<plane_angle> >();
+    if( BC == thermal::model::slab::back_boundary_condition::T_unknown ) {
+      rear_bc = updateRear( x );
+    std::cout << rear_bc.first << "\t" << rear_bc.second << "\n" ;
+    }
+    auto const predictions = surface_temperature_phases( omegas, slabCurrent, BC, rear_bc ) ;
     
     //std::cout << slabCurrent.get_diffusivity() << "\n";
     //investigations::twoColorPyrometery::plot::phase_exp_model( frequencies, observations, predictions );
@@ -114,16 +130,21 @@ diffusivity_from_phases
   };
 
   auto const myDiffusivity = slab_initial.get_diffusivity();
-  auto const myL = slab_initial.characteristic_length;
+  //auto const myL = slab_initial.characteristic_length;
   auto unknownParameters = vector<double>{ myDiffusivity.value() } ;
+  
+  if( BC == thermal::model::slab::back_boundary_condition::T_unknown )
+  {
+    unknownParameters.push_back(1);
+    unknownParameters.push_back(0);
+  }
+  
   lmdif( minimizationEquation, numberPoints2Fit, unknownParameters, settings{});
 
   auto const model_slab = updateSlab( unknownParameters.data(), slab_initial );
   auto const model_observations = surface_temperature_phases( omegas, model_slab, BC ) ;
 
 
-
-  
   auto const results =  fitting_result
   (
     frequencies,

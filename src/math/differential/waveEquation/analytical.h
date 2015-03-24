@@ -47,7 +47,6 @@ auto analytical_solution_10(
   T const x,
   Y const Kappa
 )
-  
 noexcept -> Y
 {
   // eq:  s''(x) + (K^2) s(x) == 0
@@ -63,6 +62,39 @@ noexcept -> Y
   using units::sqrt;
   
   auto const s_x = sec( Kappa ) * sin( Kappa  - Kappa * x ) / Kappa ;
+  return s_x;
+}
+  
+template< typename T, typename Y >
+auto analytical_solution_11(
+  T const x,
+  Y const Kappa,
+  T const T0,
+  T const phi
+)
+noexcept -> Y
+{
+  // eq:  s''(x) + (K^2) s(x) == 0
+  // BC:  s'(0) == -1
+  // BC:  s(1)  == T0 * Exp[-phi] ( unknown surface temperature )
+
+  using std::sin;
+  using math::functions::trigonometric::sec;
+  using std::sqrt;
+  using std::exp;
+  
+  using units::exp;
+  using units::sin;
+  using units::sec;
+  using units::sqrt;
+  
+  auto const Kappa_x = Kappa * x;
+  
+  auto
+  s_x = exp( -phi ) * T0 * cos( Kappa_x ) + ( sin( Kappa  - Kappa_x ) / Kappa ) ;
+  s_x *= sec( Kappa );
+
+  
   return s_x;
 }
   
