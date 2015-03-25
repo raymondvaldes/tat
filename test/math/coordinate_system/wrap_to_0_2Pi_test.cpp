@@ -26,14 +26,12 @@ BOOST_AUTO_TEST_CASE( wrap_to_0_2Pi_test )
 {
   auto const Pi = quantity< plane_angle >(  M_PI * radians );
   auto const threePi = quantity< plane_angle >( 3 * M_PI * radians );
+  auto const neg_threePi = quantity< plane_angle >( 3 * M_PI * radians );
   
   BOOST_CHECK_CLOSE( Pi.value(), wrap_to_0_2Pi(threePi).value(), 1e10-10);
+  BOOST_CHECK_CLOSE( Pi.value(), wrap_to_0_2Pi(neg_threePi).value(), 1e10-10);
+
 }
 
-
-
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-
-
-
