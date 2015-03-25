@@ -20,12 +20,12 @@ auto angular_frequency
 (
   units::quantity< units::si::angular_frequency > const omega,
   units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_diffusivity > alpha_1
+  units::quantity< units::si::thermal_diffusivity > const alpha_1
 )
 noexcept -> units::quantity< units::si::dimensionless >
 {
   auto const reference =
-  quantity< si::angular_frequency >( alpha_1 * radians /  (L * L) ) ;
+  quantity< si::angular_frequency >( ( alpha_1 / pow<2>( L ) ) * radians ) ;
   auto const w_non = model::dimensionless::angular_frequency(omega, reference );
   
   return w_non;
