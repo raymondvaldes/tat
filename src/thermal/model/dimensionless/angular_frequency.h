@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__angular_frequency__
-#define __tat__angular_frequency__
+#ifndef __tat_thermal_model_dimensionless_angular_frequency__
+#define __tat_thermal_model_dimensionless_angular_frequency__
 
 #include "units.h"
 
@@ -17,7 +17,11 @@ namespace model {
 
 namespace dimensionless {
 
-
+auto angular_frequency
+(
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::angular_frequency > const reference
+) -> units::quantity< units::si::dimensionless >;
   
 } // namespace dimensionless
   
@@ -25,4 +29,4 @@ namespace dimensionless {
 
 } // namespace thermal
 
-#endif /* defined(__tat__angular_frequency__) */
+#endif /* defined(__tat_thermal_model_dimensionless_angular_frequency__) */

@@ -1,32 +1,29 @@
 //
-//  length.h
+//  length.cpp
 //  tat
 //
 //  Created by Raymond Valdes on 3/24/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
-
-#ifndef __tat_thermal_model_dimensionless_length__
-#define __tat_thermal_model_dimensionless_length__
-
-#include "units.h"
+#include "thermal/model/dimensionless/length.h"
+#include "thermal/model/two_Layer/dimensionless/length.h"
 
 namespace thermal {
-
 namespace model {
-
+namespace twoLayer {
 namespace dimensionless {
 
 auto length
 (
   units::quantity< units::si::length > const x,
-  units::quantity< units::si::length > const reference
+  units::quantity< units::si::length > const L
 )
-noexcept -> units::quantity< units::si::dimensionless >;
-  
-} // namespace dimensionless
-  
-} // namespace model
+noexcept -> units::quantity< units::si::dimensionless >
+{
+  return model::dimensionless::length( x, L ) ;
+}
 
+} // namespace dimensionless
+} // namespace twoLayer
+} // namespace model
 } // namespace thermal
-#endif /* defined(__tat_thermal_model_dimensionless_length__) */

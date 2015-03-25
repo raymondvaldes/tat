@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "time.h"
+#include "thermal/model/dimensionless/time_nd.h"
 
 namespace thermal {
 
@@ -14,7 +14,15 @@ namespace model {
 
 namespace dimensionless {
 
-
+auto time
+(
+  units::quantity< units::si::time > const t,
+  units::quantity< units::si::time > const reference
+)
+noexcept -> units::quantity< units::si::dimensionless >
+{
+  return t / reference;
+}
   
 } // namespace dimensionless
   

@@ -1,31 +1,29 @@
 //
-//  length.cpp
+//  a.cpp
 //  tat
 //
 //  Created by Raymond Valdes on 3/24/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/dimensionless/length.h"
+#include "thermal/model/two_layer/dimensionless/a.h"
 
 namespace thermal {
-
 namespace model {
-
+namespace twoLayer {
 namespace dimensionless {
 
-auto length
+auto a
 (
-  units::quantity< units::si::length > const x,
-  units::quantity< units::si::length > const reference
+  units::quantity< units::si::thermal_diffusivity > const alpha_1,
+  units::quantity< units::si::thermal_diffusivity > const alpha_2
 )
 noexcept -> units::quantity< units::si::dimensionless >
 {
-  return x / reference;
+  return alpha_2 / alpha_1;
 }
 
 } // namespace dimensionless
-  
+} // namespace twoLayer
 } // namespace model
-
 } // namespace thermal

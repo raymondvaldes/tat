@@ -6,27 +6,26 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_thermal_model_dimensionless_length__
-#define __tat_thermal_model_dimensionless_length__
+#ifndef __tat_thermal_model_twoLayer_dimensionless_length__
+#define __tat_thermal_model_twoLayer_dimensionless_length__
 
 #include "units.h"
 
 namespace thermal {
-
 namespace model {
-
+namespace twoLayer {
 namespace dimensionless {
 
 auto length
 (
   units::quantity< units::si::length > const x,
-  units::quantity< units::si::length > const reference
+  units::quantity< units::si::length > const L
 )
 noexcept -> units::quantity< units::si::dimensionless >;
-  
-} // namespace dimensionless
-  
-} // namespace model
 
+} // namespace dimensionless
+} // namespace twoLayer
+} // namespace model
 } // namespace thermal
-#endif /* defined(__tat_thermal_model_dimensionless_length__) */
+
+#endif /* defined(__tat_thermal_model_twoLayer_dimensionless_length__) */

@@ -14,7 +14,14 @@ namespace model {
 
 namespace dimensionless {
 
-
+auto angular_frequency
+(
+  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::angular_frequency > const reference
+) -> units::quantity< units::si::dimensionless >
+{
+  return w / reference;
+}
   
 } // namespace dimensionless
   

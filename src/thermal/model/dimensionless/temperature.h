@@ -17,7 +17,13 @@ namespace model {
 
 namespace dimensionless {
 
-
+auto temperature
+(
+  units::quantity< units::si::temperature > const T,
+  units::quantity< units::si::temperature > const offset,
+  units::quantity< units::si::temperature > const reference
+)
+noexcept -> units::quantity< units::si::dimensionless >;
   
 } // namespace dimensionless
   
