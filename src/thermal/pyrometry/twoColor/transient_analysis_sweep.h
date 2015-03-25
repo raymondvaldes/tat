@@ -37,6 +37,11 @@ struct transient_analysis_sweep_results
     std::vector< units::quantity< units::si::angular_frequency>>,
     std::vector< units::quantity< units::si::plane_angle      >> >;
   
+  auto phases_frequency(void) const ->
+  std::pair<
+    std::vector< units::quantity< units::si::frequency        >>,
+    std::vector< units::quantity< units::si::plane_angle      >> >;
+  
   auto surface_temperature_phases( void ) const
   -> std::vector< units::quantity< units::si::plane_angle > >;
   

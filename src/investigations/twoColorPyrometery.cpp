@@ -27,6 +27,7 @@
 #include "investigations/twoColorPyrometery/plot/wave_signals.h"
 
 #include "thermal/model/two_layer/complex/surface_phases.h"
+#include "thermal/analysis/two_layer_speciman/diffusivity_from_phases.h"
 
 namespace investigations{
 
@@ -36,6 +37,7 @@ using gTBC::gMeasure::import_twoColor_scope_files ;
 
 using thermal::pyrometry::twoColor::transient_analysis_sweep ;
 using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases ;
+using thermal::analysis::two_layer_speciman::diffusivity_from_phases;
 using thermal::model::slab::import ;
 using algorithm::for_each;
 
@@ -51,10 +53,15 @@ auto run( filesystem::directory const & dir ) -> void
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
   
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;
+  auto const substrate_slab = import( dir, "substrate_slab.xml" ) ;
+
   
-  auto const BC = thermal::model::slab::back_boundary_condition::T_base;
+  //auto const BC = thermal::model::slab::back_boundary_condition::T_base;
+//  auto const bestFit_results =
+//  diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab , BC);
+  
   auto const bestFit_results =
-  diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab , BC);
+  diffusivity_from_phases( twoColor_data.phases_frequency() , initial_slab, substrate_slab ) ;
   
   std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
  

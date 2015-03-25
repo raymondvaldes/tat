@@ -66,6 +66,24 @@ fitting_result::fitting_result
   assert( bestFit_phases.size() > 0 );
 }
 
+auto
+diffusivity_from_phases
+(
+  std::pair<
+    std::vector< units::quantity< units::si::frequency > >,
+    std::vector< units::quantity< units::si::plane_angle > >
+  > const & observations,
+  thermal::model::slab::Slab const & slab_initial,
+  thermal::model::slab::Slab const & slab_substrate
+)
+-> fitting_result
+{
+  auto const results = diffusivity_from_phases(
+  observations.first, observations.second, slab_initial, slab_substrate ) ;
+
+  return results ;
+}
+
 auto diffusivity_from_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,

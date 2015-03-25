@@ -50,6 +50,18 @@ auto diffusivity_from_phases
   thermal::model::slab::Slab const & slab_substrate
 ) noexcept -> fitting_result;
 
+auto
+diffusivity_from_phases
+(
+  std::pair<
+    std::vector< units::quantity< units::si::frequency > >,
+    std::vector< units::quantity< units::si::plane_angle > >
+  > const & observations,
+  thermal::model::slab::Slab const & slab_initial,
+  thermal::model::slab::Slab const & slab_substrate
+)
+-> fitting_result;
+
 } // namespace two_layer_speciman
 } // namespace analysis
 } // namespace thermal

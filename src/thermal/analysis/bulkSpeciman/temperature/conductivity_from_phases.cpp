@@ -164,7 +164,6 @@ diffusivity_from_phases
   > const & observations,
   thermal::model::slab::Slab const & slab_initial,
   enum thermal::model::slab::back_boundary_condition const BC
- 
 )
 -> fitting_result
 {

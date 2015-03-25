@@ -11,6 +11,7 @@
 #include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
 #include "thermal/define/lthermal.h"
 #include "algorithm/algorithm.h"
+#include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal {
 
@@ -88,6 +89,27 @@ auto transient_analysis_sweep_results::phases_omega(void) const ->
   });
 
   auto const output = make_pair( omegas, phases );
+  return output;
+}
+
+auto transient_analysis_sweep_results::phases_frequency(void) const ->
+std::pair<
+  std::vector< units::quantity< units::si::frequency        >>,
+  std::vector< units::quantity< units::si::plane_angle      >> >
+{
+  auto frequencies = vector< quantity< frequency >>();
+  auto phases = vector< quantity< plane_angle >>();
+  
+  using physics::classical_mechanics::angularFrequency_to_frequency;
+
+  for_each( transient_results , [&](auto const& u) noexcept
+  {
+    auto const f = angularFrequency_to_frequency( u.laser_modulation_w );
+    frequencies.push_back( f );
+    phases.push_back( u.transient_temperature_phase );
+  });
+
+  auto const output = make_pair( frequencies, phases );
   return output;
 }
 
