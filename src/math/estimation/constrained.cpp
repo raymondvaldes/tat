@@ -40,7 +40,9 @@ namespace estimation{
 
 double x_limiter1( const double xi ) noexcept
 {
-  return exp(xi) ;
+  auto const output = double(exp( xi ));
+  assert( output > 0 );
+  return output ;
 }
 
 double x_limiter2( const double xi, const double x_min, const double x_max ) noexcept
@@ -106,16 +108,6 @@ vector<double> x_to_kspace_unity( const double* x, const size_t n ) noexcept {
   for( size_t i = 0 ; i < n ; ++i ) {
     x_output[i] = kx_limiter2( x[i], start, finish ) ;
   }
-  
-//  using std::transform;
-//  using std::begin;
-//  using std::end;
-//  transform( x, x + n, x_output, []( auto const& x_ith )
-//    {
-//      return kx_limiter2( x_ith, start, finish );
-//    } );
-  
-  
   return x_output;
 }
 
