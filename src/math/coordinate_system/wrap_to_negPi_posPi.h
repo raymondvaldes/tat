@@ -21,10 +21,9 @@ namespace coordinate_system {
 inline
 auto wrap_to_negPi_posPi( units::quantity< units::si::plane_angle > const angle )
 {
-  using units::quantity;
-  using units::si::plane_angle;
-  using units::si::radians;
-  using units::fmod;
+  using namespace units;
+  using std::isfinite;
+  assert( isfinite( angle.value() )  ) ;
   
   auto const Pi = quantity<plane_angle>( M_PI * radians );
   auto const twoPi = quantity<plane_angle>( 2 * M_PI * radians );
