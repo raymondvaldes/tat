@@ -34,7 +34,6 @@ auto wrap_to_negPi_posPi( units::quantity< units::si::plane_angle > const angle 
   auto x = fmod( myAngle + Pi, twoPi );
   if( x.value() < 0 ) {
     x += twoPi;
-    
   }
   
   auto const wrapped_value = x - Pi;
