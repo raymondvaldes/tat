@@ -31,14 +31,17 @@ auto temperature
 (
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::frequency > const f,
-  units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_diffusivity > const alpha_1,
-  units::quantity< units::si::thermal_diffusivity > const alpha_2,
-  units::quantity< units::si::thermal_conductivity > const k_1,
-  units::quantity< units::si::thermal_conductivity > const k_2
+  slab::Slab const & first_layer,
+  slab::Slab const & second_layer
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
+  auto const L = first_layer.characteristic_length;
+  auto const alpha_1 = first_layer.get_diffusivity();
+  auto const alpha_2 = second_layer.get_diffusivity();
+  auto const k_1 = first_layer.get_conductivity();
+  auto const k_2 = second_layer.get_conductivity();
+
   auto const w = frequency_to_angularFrequency( f );
   auto const x_non = dimensionless::length( x, L );
   auto const w_non = dimensionless::angular_frequency( w, L, alpha_1 ) ;

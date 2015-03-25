@@ -22,15 +22,12 @@ auto phase
 (
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::frequency > const f,
-  units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_diffusivity > const alpha_1,
-  units::quantity< units::si::thermal_diffusivity > const alpha_2,
-  units::quantity< units::si::thermal_conductivity > const k_1,
-  units::quantity< units::si::thermal_conductivity > const k_2
+  slab::Slab const & first_layer,
+  slab::Slab const & second_layer
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
-  auto const temp = complex::temperature( x, f, L, alpha_1, alpha_2, k_1, k_2 );
+  auto const temp = complex::temperature( x, f, first_layer, second_layer );
   auto const phase = -arg( temp ) - M_PI_2 * radians ;
 
   return phase;

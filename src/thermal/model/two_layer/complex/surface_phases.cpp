@@ -23,11 +23,8 @@ using algorithm::transform;
 auto surface_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & freqs,
-  units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_diffusivity > const alpha_1,
-  units::quantity< units::si::thermal_diffusivity > const alpha_2,
-  units::quantity< units::si::thermal_conductivity > const k_1,
-  units::quantity< units::si::thermal_conductivity > const k_2
+  slab::Slab const & first_layer,
+  slab::Slab const & second_layer
 )
 noexcept -> std::vector< units::quantity< units::si::plane_angle > >
 {
@@ -35,7 +32,7 @@ noexcept -> std::vector< units::quantity< units::si::plane_angle > >
   
   transform( freqs, phases.begin(), [&]( auto const & f ) noexcept
   {
-    auto const phase = surface_phase( f, L, alpha_1, alpha_2, k_1, k_2 );
+    auto const phase = surface_phase( f, first_layer, second_layer );
     return phase;
   } );
   return phases;

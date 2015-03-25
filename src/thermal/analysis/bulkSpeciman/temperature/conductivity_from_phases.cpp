@@ -54,7 +54,7 @@ noexcept -> std::pair< units::quantity< units::si::dimensionless >,
 {
   using namespace units;
   auto const temperature = quantity<dimensionless>( x[1] );
-  auto const phase = quantity<plane_angle>::from_value(x[2] ) ;
+  auto const phase = quantity<plane_angle>::from_value( x[2] ) ;
   return std::make_pair( temperature, phase );
 }
 
