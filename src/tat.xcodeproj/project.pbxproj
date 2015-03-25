@@ -14,6 +14,12 @@
 		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
 		AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFE0319524382007DF69B /* starts_with.cpp */; };
 		AB0DFE0619524382007DF69B /* starts_with.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE0419524382007DF69B /* starts_with.h */; };
+		AB0E72C11AC23BD800750B3F /* phase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0E72BF1AC23BD800750B3F /* phase.cpp */; };
+		AB0E72C21AC23BD800750B3F /* phase.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0E72C01AC23BD800750B3F /* phase.h */; };
+		AB0E72C51AC23DA900750B3F /* surface_phase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0E72C31AC23DA900750B3F /* surface_phase.cpp */; };
+		AB0E72C61AC23DA900750B3F /* surface_phase.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0E72C41AC23DA900750B3F /* surface_phase.h */; };
+		AB0E72C91AC23E8C00750B3F /* surface_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0E72C71AC23E8C00750B3F /* surface_phases.cpp */; };
+		AB0E72CA1AC23E8C00750B3F /* surface_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0E72C81AC23E8C00750B3F /* surface_phases.h */; };
 		AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB26A3DA19C12073000685DF /* gum_uncertainty.cpp */; };
 		AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = AB26A3DB19C12073000685DF /* gum_uncertainty.h */; };
 		AB2BA4701AB3CC45008AF545 /* Iheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB2BA46E1AB3CC45008AF545 /* Iheat.cpp */; };
@@ -370,6 +376,12 @@
 		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
 		AB0DFE0319524382007DF69B /* starts_with.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = starts_with.cpp; path = algorithm/string/starts_with.cpp; sourceTree = "<group>"; };
 		AB0DFE0419524382007DF69B /* starts_with.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = starts_with.h; path = algorithm/string/starts_with.h; sourceTree = "<group>"; };
+		AB0E72BF1AC23BD800750B3F /* phase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase.cpp; path = two_layer/complex/phase.cpp; sourceTree = "<group>"; };
+		AB0E72C01AC23BD800750B3F /* phase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase.h; path = two_layer/complex/phase.h; sourceTree = "<group>"; };
+		AB0E72C31AC23DA900750B3F /* surface_phase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_phase.cpp; path = two_layer/complex/surface_phase.cpp; sourceTree = "<group>"; };
+		AB0E72C41AC23DA900750B3F /* surface_phase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_phase.h; path = two_layer/complex/surface_phase.h; sourceTree = "<group>"; };
+		AB0E72C71AC23E8C00750B3F /* surface_phases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_phases.cpp; path = two_layer/complex/surface_phases.cpp; sourceTree = "<group>"; };
+		AB0E72C81AC23E8C00750B3F /* surface_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_phases.h; path = two_layer/complex/surface_phases.h; sourceTree = "<group>"; };
 		AB26A3DA19C12073000685DF /* gum_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gum_uncertainty.cpp; sourceTree = "<group>"; };
 		AB26A3DB19C12073000685DF /* gum_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gum_uncertainty.h; sourceTree = "<group>"; };
 		AB2BA46E1AB3CC45008AF545 /* Iheat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Iheat.cpp; path = thermal/model/utilities/heat_generation/Iheat.cpp; sourceTree = SOURCE_ROOT; };
@@ -1261,6 +1273,12 @@
 				AB9383CF1AC2248500F2D2DD /* temperature.h */,
 				AB33E74A1AC231A800A0FF53 /* surface_temperature.cpp */,
 				AB33E74B1AC231A800A0FF53 /* surface_temperature.h */,
+				AB0E72BF1AC23BD800750B3F /* phase.cpp */,
+				AB0E72C01AC23BD800750B3F /* phase.h */,
+				AB0E72C31AC23DA900750B3F /* surface_phase.cpp */,
+				AB0E72C41AC23DA900750B3F /* surface_phase.h */,
+				AB0E72C71AC23E8C00750B3F /* surface_phases.cpp */,
+				AB0E72C81AC23E8C00750B3F /* surface_phases.h */,
 			);
 			name = complex;
 			sourceTree = "<group>";
@@ -1963,6 +1981,7 @@
 				ABEF4EC91948D4A500B44AD5 /* diffusivity.h in Headers */,
 				ABEF4EA81948D4A500B44AD5 /* radiativeSysProp.h in Headers */,
 				AB9383BC1AC1C65900F2D2DD /* angular_frequency.h in Headers */,
+				AB0E72C21AC23BD800750B3F /* phase.h in Headers */,
 				ABEBCE5819C737E500882E01 /* central_difference.h in Headers */,
 				AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */,
 				AB0DFE02195242AA007DF69B /* split.h in Headers */,
@@ -1982,6 +2001,7 @@
 				AB9383D11AC2248500F2D2DD /* temperature.h in Headers */,
 				AB8AA4401A5C68AB0065E7F8 /* eof.h in Headers */,
 				AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */,
+				AB0E72CA1AC23E8C00750B3F /* surface_phases.h in Headers */,
 				AB2BA4791AB3DA78008AF545 /* import_twoColor_scope_files.h in Headers */,
 				ABA58A181A67257400573ED8 /* units.h in Headers */,
 				AB4E53CA1ABCC59800E7BA8D /* ratio.h in Headers */,
@@ -2078,6 +2098,7 @@
 				AB4E53C01ABBD92C00E7BA8D /* transient_surface_amplitudes.h in Headers */,
 				AB44BD741AAA49C600E0710E /* get_signal_from_scope_file.h in Headers */,
 				AB2BA4711AB3CC45008AF545 /* Iheat.h in Headers */,
+				AB0E72C61AC23DA900750B3F /* surface_phase.h in Headers */,
 				ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */,
 				AB90AA5B1AB2A54500F2535D /* pyrometery_settings_file.h in Headers */,
 				AB44BD661AAA421700E0710E /* periodic_time_distribution.h in Headers */,
@@ -2202,6 +2223,7 @@
 				ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */,
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,
 				ABC648641A65B5EB008FA721 /* main-app.cpp in Sources */,
+				AB0E72C51AC23DA900750B3F /* surface_phase.cpp in Sources */,
 				AB5FDFDF1A6EE7F50017CEBB /* settings.cpp in Sources */,
 				ABEF4EB41948D4A500B44AD5 /* lmdiff_poptea_help.cpp in Sources */,
 				ABEF4ECA1948D4A500B44AD5 /* effusivity.cpp in Sources */,
@@ -2216,6 +2238,7 @@
 				ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */,
 				AB9383E01AC22E4500F2D2DD /* time_nd.cpp in Sources */,
 				AB44BD731AAA49C600E0710E /* get_signal_from_scope_file.cpp in Sources */,
+				AB0E72C91AC23E8C00750B3F /* surface_phases.cpp in Sources */,
 				AB4E53BB1ABBD54200E7BA8D /* steady_surface_temperature.cpp in Sources */,
 				ABEF4E791948D4A500B44AD5 /* num_method2014.cpp in Sources */,
 				AB90AA5A1AB2A54500F2535D /* pyrometery_settings_file.cpp in Sources */,
@@ -2293,6 +2316,7 @@
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
 				ABEB14BE1AAA6C4200204B36 /* phase_fitting.cpp in Sources */,
 				ABEF4ED31948D4A500B44AD5 /* temperature.cpp in Sources */,
+				AB0E72C11AC23BD800750B3F /* phase.cpp in Sources */,
 				AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */,
 				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
 				ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */,

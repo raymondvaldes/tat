@@ -8,6 +8,7 @@
 
 #include <complex>
 #include "thermal/model/two_layer/complex/temperature.h"
+#include "physics/classical_mechanics/kinematics.h"
 
 #include "math/differential/waveEquation/two_layer_system.h"
 #include "thermal/model/two_layer/dimensionless/Kappa.h"
@@ -19,6 +20,7 @@
 using math::differential::waveEquation::two_layer_system;
 using std::complex;
 using namespace units;
+using physics::classical_mechanics::frequency_to_angularFrequency;
 
 namespace thermal {
 namespace model {
@@ -28,7 +30,7 @@ namespace complex {
 auto temperature
 (
   units::quantity< units::si::length> const x ,
-  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::frequency > const f,
   units::quantity< units::si::length > const L,
   units::quantity< units::si::thermal_diffusivity > const alpha_1,
   units::quantity< units::si::thermal_diffusivity > const alpha_2,
@@ -37,6 +39,7 @@ auto temperature
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
+  auto const w = frequency_to_angularFrequency( f );
   auto const x_non = dimensionless::length( x, L );
   auto const w_non = dimensionless::angular_frequency( w, L, alpha_1 ) ;
   auto const Kappa = dimensionless::Kappa( w_non ) ;

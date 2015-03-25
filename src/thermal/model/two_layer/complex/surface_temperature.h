@@ -18,7 +18,7 @@ namespace complex {
 
 auto surface_temperature
 (
-  units::quantity< units::si::angular_frequency > const w,
+  units::quantity< units::si::frequency > const f,
   units::quantity< units::si::length > const L,
   units::quantity< units::si::thermal_diffusivity > const alpha_1,
   units::quantity< units::si::thermal_diffusivity > const alpha_2,

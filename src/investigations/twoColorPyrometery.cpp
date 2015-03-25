@@ -26,6 +26,8 @@
 #include "investigations/twoColorPyrometery/plot/transient_surface_amplitudes.h"
 #include "investigations/twoColorPyrometery/plot/wave_signals.h"
 
+#include "thermal/model/two_layer/complex/surface_phases.h"
+
 namespace investigations{
 
 namespace twoColorPyrometery{
