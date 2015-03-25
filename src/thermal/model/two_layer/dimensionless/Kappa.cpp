@@ -7,9 +7,11 @@
 //
 
 #include "thermal/model/two_layer/dimensionless/Kappa.h"
+#include <iostream>
 
 using std::complex;
 using namespace units;
+using namespace std::literals;
 
 namespace thermal {
 
@@ -22,8 +24,7 @@ namespace dimensionless {
 auto Kappa( units::quantity< units::si::dimensionless > const omega )
 noexcept -> units::quantity< units::si::dimensionless, complex< double > >
 {
-  auto const i_imag = complex< double >( 0, 1 ) ;
-  auto const i_non = quantity< si::dimensionless, complex< double > >( i_imag ) ;
+  auto const i_non = quantity< si::dimensionless, complex< double > >( 1.i ) ;
   auto const k = sqrt( i_non * omega ) ;
 
   return k;
