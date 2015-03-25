@@ -8,6 +8,7 @@
 
 #include "thermal/model/two_layer/dimensionless/angular_frequency.h"
 #include "thermal/model/dimensionless/angular_frequency.h"
+
 using namespace units;
 
 namespace thermal {
@@ -23,7 +24,8 @@ auto angular_frequency
 )
 noexcept -> units::quantity< units::si::dimensionless >
 {
-  auto const reference = quantity< si::angular_frequency >( alpha_1 /  L*L );
+  auto const reference =
+  quantity< si::angular_frequency >( alpha_1 * radians /  (L * L) ) ;
   auto const w_non = model::dimensionless::angular_frequency(omega, reference );
   
   return w_non;

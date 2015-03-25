@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_thermal_model_two_layer_angular_frequency__
-#define __tat_thermal_model_two_layer_angular_frequency__
+#ifndef __tat_thermal_model_two_layer_dimensionless_angular_frequency__
+#define __tat_thermal_model_two_layer_dimensionless_angular_frequency__
 
 #include "units.h"
 
@@ -29,4 +29,4 @@ noexcept -> units::quantity< units::si::dimensionless >;
 } // namespace model
 } // namespace thermal
 
-#endif /* defined(__tat_thermal_model_two_layer_angular_frequency__) */
+#endif /* defined(__tat_thermal_model_two_layer_dimensionless_angular_frequency__) */

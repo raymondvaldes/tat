@@ -34,11 +34,9 @@ auto surface_solution
   using units::sinh;
   using units::cosh;
   
-  auto const kx = k * x;
-  
-  auto
-  s  = a * cosh( k - kx ) + b * sinh( k - kx ) ;
-  s /= b * k * cosh( k ) + a * k * sinh( k );
+  auto const
+  s  =     a * cosh( k ) +     b * sinh( k )
+     / b * k * cosh( k ) + a * k * sinh( k );
   
   return s;
 }
@@ -46,6 +44,7 @@ auto surface_solution
 template< typename T, typename Y >
 auto first_layer_solution
 (
+  T const x,
   Y const k,
   T const a,
   T const b
@@ -55,10 +54,12 @@ auto first_layer_solution
   using std::cosh;
   using units::sinh;
   using units::cosh;
-  
-  auto
-  s  = a * cosh( k ) + b * sinh( k ) ;
-  s /= b * k * cosh( k ) + a * k * sinh( k );
+
+  auto const kx = k * x;
+
+  auto const
+  s  =     a * cosh( k - kx ) + b * sinh( k - kx )
+    /  b * k * cosh( k )      + a * k * sinh( k );
   
   return s;
 }
@@ -67,7 +68,7 @@ template< typename T, typename Y >
 auto second_layer_solution
 (
   T const x,
-  Y const Kappa,
+  Y const k,
   T const a,
   T const b
 ) noexcept -> Y
@@ -82,21 +83,21 @@ auto second_layer_solution
   
   auto const kx = k * x;
   
-  auto
-  s  = a * exp( ( k - kx ) / a ) ;
-  s /= k * ( b * cosh( k ) + a * sinh( k ) ) ;
+  auto const
+  s   = a * exp( ( k - kx ) / a )  
+      / k * ( b * cosh( k ) + a * sinh( k ) ) ;
   
   return s;
 }
   
-template< typename T, typename Y >
+template< typename D, typename C >
 auto two_layer_system
 (
-  T const x,
-  Y const k,
-  T const a,
-  T const b
-) noexcept -> Y
+  D const x,
+  C const k,
+  D const a,
+  D const b
+) noexcept -> C
   // transient heat condution with periodic formulation (complex combination)
   // eq:     s1''(x) - (k^2) s1(x) == 0
   // eq: a * s2''(x) - (k^2) s2(x) == 0
@@ -106,9 +107,9 @@ auto two_layer_system
   // BC:  s2'( 1 ) == b * s2'( 1 )  //ex. heat flux continuity
   // BC:  s2( Inf )  == 0           //ex. temperature goes to 0
 {
-  auto s_x = T();
+  auto s_x = C();
 
-  if( x == 0){
+  if( x == 0 ){
     s_x = surface_solution( k, a, b ) ;
   }
   else if( 0 < x <= 1 )  {
@@ -117,7 +118,6 @@ auto two_layer_system
   else if( x > 1 )  {
     s_x = second_layer_solution( x, k, a, b );
   }
-  
   return s_x;
 }
   
