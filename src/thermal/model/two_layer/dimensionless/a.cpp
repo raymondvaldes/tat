@@ -20,7 +20,8 @@ auto a
 )
 noexcept -> units::quantity< units::si::dimensionless >
 {
-  return alpha_2 / alpha_1;
+  using units::sqrt;
+  return sqrt( alpha_2 / alpha_1 );
 }
 
 } // namespace dimensionless
