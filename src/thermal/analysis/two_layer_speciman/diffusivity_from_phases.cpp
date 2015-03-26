@@ -5,8 +5,10 @@
 //  Created by Raymond Valdes on 3/24/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
-
+#include <iostream>
 #include "thermal/analysis/two_layer_speciman/diffusivity_from_phases.h"
+#include "thermal/model/two_layer/complex/surface_phase.h"
+#include "math/estimation/constrained.hpp"
 
 #include "thermal/model/two_layer/complex/surface_phases.h"
 #include "math/estimation/settings.h"
@@ -24,21 +26,30 @@ using math::estimation::settings;
 using thermal::model::slab::Slab;
 using model::twoLayer::complex::surface_phases;
 using namespace units;
+using math::estimation::x_limiter1;
+using math::estimation::kx_limiter1;
+
 
 inline auto updateSlab
 (
-  const double* x ,
+  const double * x ,
   thermal::model::slab::Slab const & mySlab
 ) noexcept -> thermal::model::slab::Slab
 {
-
+  auto const real_diff = x_limiter1( x[0] );
+  assert( real_diff > 0 );
   auto const fittedDiffusivity =
-  quantity< thermal_diffusivity >::from_value( x[0] ) ;
+  quantity< thermal_diffusivity >::from_value( real_diff ) ;
+  
+  auto const real_k = x_limiter1( x[1] );
+  assert( real_k > 0 );
+  auto const fitted_conductivity =
+  quantity< thermal_conductivity >::from_value(  real_k ) ;
   
   auto const fitted_length = mySlab.characteristic_length ;
-
+  
   auto const fittedSpeciman =
-  Slab( fitted_length , fittedDiffusivity , mySlab.rhoCp ) ;
+  Slab( fitted_length , fittedDiffusivity , fitted_conductivity ) ;
   
   return fittedSpeciman ;
 }
@@ -79,7 +90,7 @@ diffusivity_from_phases
 -> fitting_result
 {
   auto const results = diffusivity_from_phases(
-  observations.first, observations.second, slab_initial, slab_substrate ) ;
+    observations.first, observations.second, slab_initial, slab_substrate ) ;
 
   return results ;
 }
@@ -92,6 +103,34 @@ auto diffusivity_from_phases
   thermal::model::slab::Slab const & slab_substrate
 ) noexcept -> fitting_result
 {
+  std::cout << slab_initial.k << "\t" <<slab_substrate.k << "\n";
+  std::cout << slab_initial.get_diffusivity() << "\t" <<slab_substrate.get_diffusivity()  << "\n";
+  std::cout << "a =\t" <<
+  units::sqrt( slab_substrate.get_diffusivity() / slab_initial.get_diffusivity() ) << "\n";
+  
+  std::cout << "b = \t"<< slab_substrate.k / slab_initial.k << "\n";
+  
+  auto const fmin = quantity<frequency>( 1 * hertz );
+  auto const f1 = quantity<frequency>( 2 * hertz );
+  auto const f2 = quantity<frequency>( 4 * hertz );
+  auto const f3 = quantity<frequency>( 8 * hertz );
+  auto const f4 = quantity<frequency>( 16 * hertz );
+  auto const fmax = quantity<frequency>( 90 * hertz );
+  
+  std::cout << thermal::model::twoLayer::complex::surface_phase( fmin, slab_initial , slab_substrate ) << "\n";
+  std::cout << thermal::model::twoLayer::complex::surface_phase( f1, slab_initial , slab_substrate ) << "\n";
+  std::cout << thermal::model::twoLayer::complex::surface_phase( f2, slab_initial , slab_substrate ) << "\n";
+  std::cout << thermal::model::twoLayer::complex::surface_phase( f3, slab_initial , slab_substrate ) << "\n";
+  std::cout << thermal::model::twoLayer::complex::surface_phase( f4, slab_initial , slab_substrate ) << "\n";
+  std::cout << thermal::model::twoLayer::complex::surface_phase( fmax, slab_initial , slab_substrate ) << "\n";
+
+
+//  throw(9);
+
+
+
+
+
   assert( frequencies.size() > 0 );
   
   auto const numberPoints2Fit = frequencies.size();
@@ -104,7 +143,7 @@ auto diffusivity_from_phases
     auto const predictions =
     surface_phases( frequencies, slabCurrent, slab_substrate) ;
     
-    //std::cout << slabCurrent.get_diffusivity() << "\n";
+    std::cout << slabCurrent.get_diffusivity() <<"\t"<< slabCurrent.k << "\n";
     //investigations::twoColorPyrometery::plot::phase_exp_model( frequencies, observations, predictions );
     
     auto const residual = [ & ]( const int i ) noexcept {
@@ -117,14 +156,20 @@ auto diffusivity_from_phases
     } ) ;
   };
 
-  auto const myDiffusivity = slab_initial.get_diffusivity();
-  auto unknownParameters = vector<double>{ myDiffusivity.value() } ;
+  auto const myDiffusivity = slab_initial.get_diffusivity() ;
+  auto const myConductivity = slab_initial.k ;
   
-  lmdif( minimizationEquation, numberPoints2Fit, unknownParameters, settings{});
+  auto unknownParameters = vector<double>
+  {
+    kx_limiter1( myDiffusivity.value() )
+  , kx_limiter1( myConductivity.value() )
+  };
+  
+  lmdif(  minimizationEquation, numberPoints2Fit,
+          unknownParameters,  settings{} );
 
   auto const model_slab = updateSlab( unknownParameters.data(), slab_initial );
   auto const model_observations = surface_phases( frequencies, model_slab, slab_substrate ) ;
-
 
   auto const results =  fitting_result
   (

@@ -10,6 +10,7 @@
 #define tat_two_layer_system_h
 
 #include <cmath>
+#include <complex>
 #include "math/functions/trigonometric/csc.h"
 #include "math/functions/trigonometric/sec.h"
 
@@ -29,14 +30,13 @@ auto surface_solution
   T const b
 ) noexcept -> Y
 {
-  using std::sinh;
-  using std::cosh;
-  using units::sinh;
-  using units::cosh;
+  using std::tanh;
+  using units::tanh;
   
-  auto const
-  s  =     a * cosh( k ) +     b * sinh( k )
-     / b * k * cosh( k ) + a * k * sinh( k );
+  auto const numerator    = a + b * tanh( k ) ;
+  auto const denominator  = b * k + a * k * tanh( k ) ;
+  
+  auto const s  = numerator / denominator;
   
   return s;
 }
@@ -52,14 +52,18 @@ auto first_layer_solution
 {
   using std::sinh;
   using std::cosh;
+  using std::tanh;
   using units::sinh;
   using units::cosh;
-
+  using units::tanh;
+  
   auto const kx = k * x;
 
-  auto const
-  s  =     a * cosh( k - kx ) + b * sinh( k - kx )
-    /  b * k * cosh( k )      + a * k * sinh( k );
+  auto
+  s  =    cosh( kx )  * ( a + b * tanh( k ) );
+  s  /=  ( k * b + k * a * tanh( k ) );
+  
+  s -= sinh( kx ) / k ;
   
   return s;
 }
@@ -108,8 +112,12 @@ auto two_layer_system
   // BC:  s2( Inf )  == 0           //ex. temperature goes to 0
 {
   auto s_x = C();
+  
+  using units::abs;
+  using std::abs;
+  auto const at_surface = abs( x - 0 ) < 1e-6;
 
-  if( x == 0 ){
+  if( at_surface ){
     s_x = surface_solution( k, a, b ) ;
   }
   else if( 0 < x <= 1 )  {
@@ -118,6 +126,7 @@ auto two_layer_system
   else if( x > 1 )  {
     s_x = second_layer_solution( x, k, a, b );
   }
+  
   return s_x;
 }
   

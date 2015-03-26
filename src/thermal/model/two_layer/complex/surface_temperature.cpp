@@ -25,7 +25,8 @@ auto surface_temperature
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
   auto const x = quantity<si::length>::from_value(0);
-  return temperature( x, f, first_layer, second_layer );
+  auto const surface_temp = temperature( x, f, first_layer, second_layer );
+  return surface_temp;
 }
 
 } // namespace complex

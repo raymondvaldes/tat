@@ -7,7 +7,7 @@
 //
 #include <iostream>
 #include <cassert>
-
+#include "investigations/twoColorPyrometery.h"
 #include "investigations/twoColorPyrometery/calculateCalibrationCoefficients.h"
 #include "investigations/twoColorPyrometery/temperature_prediction.h"
 #include "investigations/twoColorPyrometery/phase_fitting.h"
@@ -61,7 +61,8 @@ auto run( filesystem::directory const & dir ) -> void
 //  diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab , BC);
   
   auto const bestFit_results =
-  diffusivity_from_phases( twoColor_data.phases_frequency() , initial_slab, substrate_slab ) ;
+  diffusivity_from_phases(
+  twoColor_data.phases_frequency() , initial_slab, substrate_slab ) ;
   
   std::cout << bestFit_results.fitted_slab.get_diffusivity() << "\n";
  

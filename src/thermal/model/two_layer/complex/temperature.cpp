@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#include <iostream>
 #include <complex>
+#include <cmath>
 #include "thermal/model/two_layer/complex/temperature.h"
 #include "physics/classical_mechanics/kinematics.h"
 
@@ -41,16 +43,31 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
   auto const alpha_2 = second_layer.get_diffusivity();
   auto const k_1 = first_layer.get_conductivity();
   auto const k_2 = second_layer.get_conductivity();
+  
+  assert( L.value() > 0  );
+  assert( alpha_1.value() > 0 );
+  assert( alpha_2.value() > 0 );
+  assert( k_1.value() > 0 );
+  assert( k_2.value() > 0 );
 
   auto const w = frequency_to_angularFrequency( f );
   auto const x_non = dimensionless::length( x, L );
   auto const w_non = dimensionless::angular_frequency( w, L, alpha_1 ) ;
   auto const Kappa = dimensionless::Kappa( w_non ) ;
+  assert( w.value() > 0 );
+  assert( x_non.value() >= 0 );
+  assert( w_non.value() > 0 );
   
   auto const a = dimensionless::a( alpha_1, alpha_2 ) ;
   auto const b = dimensionless::b( k_1, k_2 ) ;
   
   auto const T_solution = two_layer_system( x_non, Kappa, a, b );
+ // std::cout << T_solution << "\n";
+  
+  using std::isfinite;
+  assert( isfinite( T_solution.value().real() )  ) ;
+  assert( isfinite( T_solution.value().imag() )  ) ;
+  
   return T_solution;
 }
 

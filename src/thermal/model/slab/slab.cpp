@@ -33,10 +33,12 @@ Slab::Slab(
     k( k_in ),
     rhoCp( thermal::define::volumetricHeatCapacity( alpha_in, k )  )
 {
+  assert( alpha_in.value() > 0 ) ;
+  assert( k_in.value() > 0 ) ;
+  assert( rhoCp.value() > 0 ) ;
+
   assert( characteristic_length_in.value() > 0 ) ;
-  assert( alpha_in.value() != 0 ) ;
-  assert( k_in.value() != 0 ) ;
-  assert( rhoCp.value() != 0 ) ;
+
 };
 
 
@@ -426,16 +428,13 @@ noexcept -> units::quantity< units::si::plane_angle >
   assert( x.value() >= 0 ) ;
   assert( w.value() != 0 ) ;
 
-  using units::quantity;
-  using units::si::heat_flux;
-  using units::arg;
+  using namespace units;
   
   auto const I_dummy = quantity< heat_flux >::from_value(1);
   
   auto const T_cmplx =
   complex_temperature( x, w, I_dummy, slab, boundary_condition, rear ) ;
   
-  using units::si::radians;
   auto const phase = -arg( T_cmplx ) - M_PI_2 * radians ;
   
   return phase;
