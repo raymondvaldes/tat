@@ -23,11 +23,12 @@ auto phase
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::frequency > const f,
   slab::Slab const & first_layer,
-  slab::Slab const & second_layer
+  slab::Slab const & second_layer,
+  units::quantity< units::si::dimensionless > const R_non
 )
 noexcept -> units::quantity< units::si::plane_angle >
 {
-  auto const temp = complex::temperature( x, f, first_layer, second_layer );
+  auto const temp = complex::temperature( x, f, first_layer, second_layer, R_non );
   auto const phase = -arg( temp ) - M_PI_2 * radians ;
 
   return phase;

@@ -110,13 +110,13 @@ noexcept -> transient_analysis_results
     myPeriodicData.initialEstimateOffset(),
     myPeriodicData.initialEstimateAmplitude(),
     omega,
-    quantity<plane_angle>{ -1.6 * radians }
+    quantity<plane_angle>{ -M_PI/2* radians }
   } ;
 
   auto const fitted_cosine_function =
   cosine( normalized_SRs, initialConditions, laser_phase );
 
-  auto const myFittedAmplitude = fitted_cosine_function.get_amplitude() ;
+  auto const myFittedAmplitude = abs(fitted_cosine_function.get_amplitude()) ;
   auto const myFittedOffset = fitted_cosine_function.get_offset() ;
   
   auto  const transient_temperature_phase = fitted_cosine_function.get_phase() ;

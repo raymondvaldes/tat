@@ -12,7 +12,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-
 #include "investigations/main-app.h"
 #include "algorithm/vector/vector2cstringArray.h"
 
@@ -26,20 +25,20 @@ BOOST_AUTO_TEST_SUITE( investigations )
 
 BOOST_AUTO_TEST_SUITE( twoColorPyrometery )
 
-BOOST_AUTO_TEST_CASE( startup ) {
-  
-  auto const myArguments = vector<string>
-  {
-    "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
-    "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color/CrW06",
-    "--sample",         "3",
-    "--investigation",  "twoColorPyrometery"
-  };
-  
-  vector<char const *> vec2 = string2charPtr( myArguments );
-
-  main_app( vec2.size() , vec2.data() );
-}
+//BOOST_AUTO_TEST_CASE( startup ) {
+//  
+//  auto const myArguments = vector<string>
+//  {
+//    "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
+//    "--run",            "/Users/raymondvaldes/Dropbox/investigations/2color/CrW06",
+//    "--sample",         "3",
+//    "--investigation",  "twoColorPyrometery"
+//  };
+//  
+//  vector<char const *> vec2 = string2charPtr( myArguments );
+//
+//  main_app( vec2.size() , vec2.data() );
+//}
 
 BOOST_AUTO_TEST_SUITE_END() // twColorPyrometery
 

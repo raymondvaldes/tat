@@ -116,20 +116,16 @@ auto diffusivity_from_phases
   auto const f3 = quantity<frequency>( 8 * hertz );
   auto const f4 = quantity<frequency>( 16 * hertz );
   auto const fmax = quantity<frequency>( 90 * hertz );
-  
-  std::cout << thermal::model::twoLayer::complex::surface_phase( fmin, slab_initial , slab_substrate ) << "\n";
-  std::cout << thermal::model::twoLayer::complex::surface_phase( f1, slab_initial , slab_substrate ) << "\n";
-  std::cout << thermal::model::twoLayer::complex::surface_phase( f2, slab_initial , slab_substrate ) << "\n";
-  std::cout << thermal::model::twoLayer::complex::surface_phase( f3, slab_initial , slab_substrate ) << "\n";
-  std::cout << thermal::model::twoLayer::complex::surface_phase( f4, slab_initial , slab_substrate ) << "\n";
-  std::cout << thermal::model::twoLayer::complex::surface_phase( fmax, slab_initial , slab_substrate ) << "\n";
+//  
+//  std::cout << thermal::model::twoLayer::complex::surface_phase( fmin, slab_initial , slab_substrate ) << "\n";
+//  std::cout << thermal::model::twoLayer::complex::surface_phase( f1, slab_initial , slab_substrate ) << "\n";
+//  std::cout << thermal::model::twoLayer::complex::surface_phase( f2, slab_initial , slab_substrate ) << "\n";
+//  std::cout << thermal::model::twoLayer::complex::surface_phase( f3, slab_initial , slab_substrate ) << "\n";
+//  std::cout << thermal::model::twoLayer::complex::surface_phase( f4, slab_initial , slab_substrate ) << "\n";
+//  std::cout << thermal::model::twoLayer::complex::surface_phase( fmax, slab_initial , slab_substrate ) << "\n";
 
 
 //  throw(9);
-
-
-
-
 
   assert( frequencies.size() > 0 );
   
@@ -140,10 +136,11 @@ auto diffusivity_from_phases
   {
     auto const slabCurrent = updateSlab( x, slab_initial );
     
+    auto const R_non = quantity<dimensionless>( x_limiter1(x[2]) );
     auto const predictions =
-    surface_phases( frequencies, slabCurrent, slab_substrate) ;
+    surface_phases( frequencies, slabCurrent, slab_substrate, R_non ) ;
     
-    std::cout << slabCurrent.get_diffusivity() <<"\t"<< slabCurrent.k << "\n";
+    std::cout << slabCurrent.get_diffusivity() <<"\t"<< slabCurrent.k << "\t"<< R_non <<  "\n";
     //investigations::twoColorPyrometery::plot::phase_exp_model( frequencies, observations, predictions );
     
     auto const residual = [ & ]( const int i ) noexcept {
@@ -163,13 +160,16 @@ auto diffusivity_from_phases
   {
     kx_limiter1( myDiffusivity.value() )
   , kx_limiter1( myConductivity.value() )
+  , kx_limiter1( 0.5 )
   };
   
   lmdif(  minimizationEquation, numberPoints2Fit,
           unknownParameters,  settings{} );
 
+  auto const R_non = quantity<dimensionless>( x_limiter1( unknownParameters[2] ) );
   auto const model_slab = updateSlab( unknownParameters.data(), slab_initial );
-  auto const model_observations = surface_phases( frequencies, model_slab, slab_substrate ) ;
+  auto const model_observations =
+  surface_phases( frequencies, model_slab, slab_substrate, R_non ) ;
 
   auto const results =  fitting_result
   (

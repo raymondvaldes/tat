@@ -22,7 +22,8 @@ auto surface_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & freqs,
   slab::Slab const & first_layer,
-  slab::Slab const & second_layer
+  slab::Slab const & second_layer,
+  units::quantity< units::si::dimensionless > const R_non
 )
 noexcept -> std::vector< units::quantity< units::si::plane_angle > >;
 

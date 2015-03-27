@@ -24,7 +24,8 @@ auto surface_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & freqs,
   slab::Slab const & first_layer,
-  slab::Slab const & second_layer
+  slab::Slab const & second_layer,
+  units::quantity< units::si::dimensionless > const R_non
 )
 noexcept -> std::vector< units::quantity< units::si::plane_angle > >
 {
@@ -32,7 +33,7 @@ noexcept -> std::vector< units::quantity< units::si::plane_angle > >
   
   transform( freqs, phases.begin(), [&]( auto const & f ) noexcept
   {
-    auto const phase = surface_phase( f, first_layer, second_layer );
+    auto const phase = surface_phase( f, first_layer, second_layer, R_non ) ;
     return phase;
   } );
   return phases;

@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "math/functions/cosine.h"
+#include "math/estimation/constrained.hpp"
 #include "math/estimation/lmdiff.hpp"
 #include "math/functions/wrap2pi.h"
 #include "math/coordinate_system/wrap_to_negPi_posPi.h"
@@ -25,6 +26,18 @@
 namespace math {
 
 namespace curveFit {
+
+using std::generate;
+using std::vector;
+using std::function;
+using namespace units;
+
+using functions::PeriodicProperties;
+using functions::Cosine;
+using math::estimation::settings;
+using math::functions::wrap2pi;
+using math::estimation::x_limiter1;
+using math::estimation::kx_limiter1;
 
 struct propertiesToFit{
   const bool offset;
@@ -70,17 +83,7 @@ noexcept -> functions::Cosine< T >
 {
   auto const inputTime = input.first;
   auto const inputSignal = input.second;
-    using std::generate;
-    using std::vector;
-    using std::function;
-    using units::quantity;
-    using units::si::plane_angle;
-    using functions::PeriodicProperties;
-    using functions::Cosine;
-    using math::estimation::settings;
-    using math::functions::wrap2pi;
-    using units::si::radians;
-  
+
   {
     assert( !inputTime.empty() ) ;
     assert( !inputSignal.empty() ) ;
@@ -94,6 +97,7 @@ noexcept -> functions::Cosine< T >
     auto updatedProperties = p_input ;
     
     updatedProperties.offset = quantity< T >::from_value( x[0] ) ;
+    
     updatedProperties.amplitude = quantity< T >::from_value( x[1] ) ;
 
     using math::coordinate_system::wrap_to_negPi_posPi;
@@ -122,7 +126,7 @@ noexcept -> functions::Cosine< T >
 
   auto unknownParameters = vector<double>{
     initialConditions.offset.value(),
-    initialConditions.amplitude.value(),
+    initialConditions.amplitude.value() ,
     initialConditions.phase.value() } ;
  
   auto const numberPoints2Fit =  inputTime.size() ;

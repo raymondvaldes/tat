@@ -34,7 +34,8 @@ auto temperature
   units::quantity< units::si::length> const x ,
   units::quantity< units::si::frequency > const f,
   slab::Slab const & first_layer,
-  slab::Slab const & second_layer
+  slab::Slab const & second_layer,
+  units::quantity< units::si::dimensionless > const R_non
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
@@ -61,7 +62,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
   auto const a = dimensionless::a( alpha_1, alpha_2 ) ;
   auto const b = dimensionless::b( k_1, k_2 ) ;
   
-  auto const T_solution = two_layer_system( x_non, Kappa, a, b );
+  auto const T_solution = two_layer_system( x_non, Kappa, a, b , R_non );
  // std::cout << T_solution << "\n";
   
   using std::isfinite;

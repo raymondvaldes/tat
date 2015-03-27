@@ -54,9 +54,8 @@ auto run( filesystem::directory const & dir ) -> void
   
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;
   auto const substrate_slab = import( dir, "substrate_slab.xml" ) ;
-
   
-  //auto const BC = thermal::model::slab::back_boundary_condition::T_base;
+//  auto const BC = thermal::model::slab::back_boundary_condition::T_unknown;
 //  auto const bestFit_results =
 //  diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab , BC);
   

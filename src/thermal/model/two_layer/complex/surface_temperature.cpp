@@ -20,12 +20,13 @@ auto surface_temperature
 (
   units::quantity< units::si::frequency > const f,
   slab::Slab const & first_layer,
-  slab::Slab const & second_layer
+  slab::Slab const & second_layer,
+  units::quantity< units::si::dimensionless > const R_non
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
   auto const x = quantity<si::length>::from_value(0);
-  auto const surface_temp = temperature( x, f, first_layer, second_layer );
+  auto const surface_temp = temperature( x, f, first_layer, second_layer, R_non );
   return surface_temp;
 }
 
