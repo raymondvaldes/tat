@@ -74,6 +74,18 @@ auto average( std::initializer_list< units::quantity< T > > const & list )
   return average_value;
 }
 
+template< typename T >
+auto average( std::initializer_list< T > const & list )
+{
+  
+  auto const sum_of_list = sum( list );
+  auto const count = list.size() ;
+  
+  auto const average_value = sum_of_list / count;
+  
+  return average_value;
+}
+
 } // namespace signal_processing
   
 } // namespace statistics
