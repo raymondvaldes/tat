@@ -22,13 +22,13 @@ namespace complexT{
 
 auto h_system
 (
-  units::quantity< units::si::dimensionless > const z,
+  units::quantity< units::si::dimensionless, double > const z,
   dimensionless::HeatingProperties const hp,
   dimensionless::ThermalProperties const tp
 ) noexcept -> std::function<
   units::quantity< units::si::dimensionless, std::complex<double> >
-  ( units::quantity< units::si::dimensionless > const,
-    units::quantity< units::si::dimensionless > const)>;
+  ( units::quantity< units::si::dimensionless, double > const,
+    units::quantity< units::si::dimensionless, double > const)>;
 
 } // namespace complexT
 } // namespace tbc2009

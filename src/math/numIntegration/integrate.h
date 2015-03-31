@@ -9,36 +9,20 @@
 #ifndef __tat_math_numIntegration_integrate__
 #define __tat_math_numIntegration_integrate__
 
-#include "units.h"
 #include "algorithm/algorithm.h"
-#include "statistics/signal_processing/average.h"
+
 #include <vector>
 #include <cassert>
-#include <boost/numeric/odeint/config.hpp>
 #include <boost/numeric/odeint.hpp>
-#include <boost/numeric/odeint/stepper/stepper_categories.hpp>
-#include <iterator>
+
+#include "statistics/signal_processing/average.h"
+
 
 namespace math{
 namespace numIntegration{
 
 using statistics::signal_processing::average;
 using algorithm::for_each;
-
-/* The rhs of x' = f(x) */
-
-///The function type takes all by const except the state_type is taken by
-// reference and this is used to modify.
-template< typename type >
-void harmonic_oscillator
-(
-  std::vector< type > const & y ,
-  std::vector< type > & dydx ,
-  type const x
-)
-{
-    dydx[0] = y[0] * x ;
-}
 
 //[ integrate_observer
 template< typename type >
@@ -77,7 +61,11 @@ auto integrate
 )
 noexcept -> decltype( f_x0.front() * dx_intial_step )
 {
-  using namespace boost::numeric::odeint;
+  using boost::numeric::odeint::runge_kutta_dopri5;
+  using boost::numeric::odeint::controlled_runge_kutta;
+  using boost::numeric::odeint::dense_output_runge_kutta;
+  using boost::numeric::odeint::integrate_adaptive;
+
   using std::vector;
   assert( !f_x0.empty() );
 
@@ -87,29 +75,23 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
   //[ state_initialization
   auto y = f_x0;
   //]
-
-  // create stepper (use the RK-4 because of it's controlled steps
-//  using boost::numeric::odeint::runge_kutta4;
-//  using boost::numeric::odeint::make_dense_output;
-//  typedef runge_kutta4<state_type> stepper_type;
-//  
   
-  auto const tol_relative = 1E-9;
   auto const tol_absolute = 1E-9;
+  auto const tol_relative = 1E-9;
   
   typedef runge_kutta_dopri5< state_type > dopri5_type;
   typedef controlled_runge_kutta< dopri5_type > controlled_dopri5_type;
   typedef dense_output_runge_kutta< controlled_dopri5_type > dense_output_dopri5_type;
-  dense_output_dopri5_type dopri5 = make_controlled( 1E-9 , 1E-9 , dopri5_type() );
+  
+  auto stepper = make_controlled( tol_absolute , tol_relative , dopri5_type() );
 
 
   auto y_vec = vector< state_type >() ;
   auto x_points = vector< type >() ;
 
   //This function integrates dy/dx from x0 to x1
-  auto const n_steps = integrate_adaptive(
-    dopri5,
-    func , y , x0 , x1 , dx_intial_step,
+  integrate_adaptive(
+    stepper, func , y , x0 , x1 , dx_intial_step,
     push_back_state_and_time< type >( y_vec, x_points) );
 
 //  decltype( f_x0.front() * x0 ) area;
@@ -140,5 +122,9 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
 
 } // namespace numIntegration
 } // namespace math
+
+
+
+
 
 #endif /* defined(__tat__integrate__) */

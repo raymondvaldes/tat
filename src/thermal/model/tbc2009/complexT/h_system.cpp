@@ -19,20 +19,20 @@ namespace complexT{
 
 auto h_system
 (
-  units::quantity< units::si::dimensionless > const z,
+  units::quantity< units::si::dimensionless, double > const z,
   dimensionless::HeatingProperties const hp,
   dimensionless::ThermalProperties const tp
 ) noexcept -> std::function<
   units::quantity< units::si::dimensionless, std::complex<double> >
-  ( units::quantity< units::si::dimensionless > const,
-    units::quantity< units::si::dimensionless > const)>
+  ( units::quantity< units::si::dimensionless, double > const,
+    units::quantity< units::si::dimensionless, double > const )>
 {
   assert( z >= 0 );
 
   auto h =
   std::function< units::quantity< units::si::dimensionless, std::complex<double> >
-  ( units::quantity< units::si::dimensionless > const,
-    units::quantity< units::si::dimensionless > const)>();
+  ( units::quantity< units::si::dimensionless, double > const,
+    units::quantity< units::si::dimensionless, double > const)>();
 
   auto const in_coating = z > 0 && z <= 1;
   auto const in_substrate = z > 1 ;

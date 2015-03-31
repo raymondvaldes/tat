@@ -75,6 +75,14 @@
 		AB553C54195DF13200E2B7D1 /* random.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C52195DF13200E2B7D1 /* random.h */; };
 		AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */ = {isa = PBXBuildFile; fileRef = AB553C57195DF3FB00E2B7D1 /* equalto.h */; };
 		AB564F071A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h in Headers */ = {isa = PBXBuildFile; fileRef = AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */; };
+		AB5E9D2F1ACA1ACA003319FA /* phase_amplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5E9D2E1ACA1ACA003319FA /* phase_amplitude.h */; };
+		AB5E9D311ACA1BBF003319FA /* phase_amplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5E9D301ACA1BBF003319FA /* phase_amplitude.cpp */; };
+		AB5E9D341ACA1E66003319FA /* phases_amplitudes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5E9D321ACA1E66003319FA /* phases_amplitudes.cpp */; };
+		AB5E9D351ACA1E66003319FA /* phases_amplitudes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5E9D331ACA1E66003319FA /* phases_amplitudes.h */; };
+		AB5E9D381ACA2701003319FA /* surface_phase_amplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5E9D361ACA2701003319FA /* surface_phase_amplitude.cpp */; };
+		AB5E9D391ACA2701003319FA /* surface_phase_amplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5E9D371ACA2701003319FA /* surface_phase_amplitude.h */; };
+		AB5E9D3C1ACA27CA003319FA /* average_surface_phase_amplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5E9D3A1ACA27CA003319FA /* average_surface_phase_amplitude.cpp */; };
+		AB5E9D3D1ACA27CA003319FA /* average_surface_phase_amplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5E9D3B1ACA27CA003319FA /* average_surface_phase_amplitude.h */; };
 		AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5FDFDA1A6EE30F0017CEBB /* bimap.h */; };
 		AB5FDFDD1A6EE7BF0017CEBB /* settings.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5FDFDC1A6EE7BF0017CEBB /* settings.h */; };
 		AB5FDFDF1A6EE7F50017CEBB /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB5FDFDE1A6EE7F50017CEBB /* settings.cpp */; };
@@ -482,6 +490,14 @@
 		AB553C52195DF13200E2B7D1 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = random.h; path = random/random.h; sourceTree = "<group>"; };
 		AB553C57195DF3FB00E2B7D1 /* equalto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = equalto.h; path = utilities/equalto.h; sourceTree = "<group>"; };
 		AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fill_with_list_values_as_constructor_arg.h; path = algorithm/vector/fill_with_list_values_as_constructor_arg.h; sourceTree = "<group>"; };
+		AB5E9D2E1ACA1ACA003319FA /* phase_amplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_amplitude.h; path = tbc2009/complexT/phase_amplitude.h; sourceTree = "<group>"; };
+		AB5E9D301ACA1BBF003319FA /* phase_amplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_amplitude.cpp; path = tbc2009/complexT/phase_amplitude.cpp; sourceTree = "<group>"; };
+		AB5E9D321ACA1E66003319FA /* phases_amplitudes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phases_amplitudes.cpp; path = tbc2009/complexT/phases_amplitudes.cpp; sourceTree = "<group>"; };
+		AB5E9D331ACA1E66003319FA /* phases_amplitudes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phases_amplitudes.h; path = tbc2009/complexT/phases_amplitudes.h; sourceTree = "<group>"; };
+		AB5E9D361ACA2701003319FA /* surface_phase_amplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_phase_amplitude.cpp; path = tbc2009/complexT/surface_phase_amplitude.cpp; sourceTree = "<group>"; };
+		AB5E9D371ACA2701003319FA /* surface_phase_amplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_phase_amplitude.h; path = tbc2009/complexT/surface_phase_amplitude.h; sourceTree = "<group>"; };
+		AB5E9D3A1ACA27CA003319FA /* average_surface_phase_amplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = average_surface_phase_amplitude.cpp; path = tbc2009/complexT/average_surface_phase_amplitude.cpp; sourceTree = "<group>"; };
+		AB5E9D3B1ACA27CA003319FA /* average_surface_phase_amplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = average_surface_phase_amplitude.h; path = tbc2009/complexT/average_surface_phase_amplitude.h; sourceTree = "<group>"; };
 		AB5FDFDA1A6EE30F0017CEBB /* bimap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bimap.h; path = bimap/bimap.h; sourceTree = "<group>"; };
 		AB5FDFDC1A6EE7BF0017CEBB /* settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
 		AB5FDFDE1A6EE7F50017CEBB /* settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
@@ -1323,6 +1339,14 @@
 				AB841CA41AC5CDD8000CE81D /* temperature.h */,
 				AB841CAE1AC5EFBC000CE81D /* h_system.h */,
 				AB480BC01AC5FB910039C1A8 /* h_system.cpp */,
+				AB5E9D2E1ACA1ACA003319FA /* phase_amplitude.h */,
+				AB5E9D301ACA1BBF003319FA /* phase_amplitude.cpp */,
+				AB5E9D321ACA1E66003319FA /* phases_amplitudes.cpp */,
+				AB5E9D331ACA1E66003319FA /* phases_amplitudes.h */,
+				AB5E9D361ACA2701003319FA /* surface_phase_amplitude.cpp */,
+				AB5E9D371ACA2701003319FA /* surface_phase_amplitude.h */,
+				AB5E9D3A1ACA27CA003319FA /* average_surface_phase_amplitude.cpp */,
+				AB5E9D3B1ACA27CA003319FA /* average_surface_phase_amplitude.h */,
 			);
 			name = complexT;
 			sourceTree = "<group>";
@@ -2137,6 +2161,7 @@
 			files = (
 				AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */,
 				AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */,
+				AB5E9D391ACA2701003319FA /* surface_phase_amplitude.h in Headers */,
 				ABEF4F001948D4A500B44AD5 /* xml.h in Headers */,
 				ABEB14B21AAA557900204B36 /* analytical.h in Headers */,
 				AB4E53B61ABB9E1B00E7BA8D /* normalized_SR_exp_model.h in Headers */,
@@ -2153,6 +2178,7 @@
 				AB841C881AC4F81D000CE81D /* hat.h in Headers */,
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				AB9383C81AC1C78A00F2D2DD /* time_nd.h in Headers */,
+				AB5E9D351ACA1E66003319FA /* phases_amplitudes.h in Headers */,
 				ABB4474119DB37BF009EC35F /* planckWienApprox.h in Headers */,
 				ABAD55A01ABF6AF200D1B9A6 /* get_initial_conditions.h in Headers */,
 				AB841C3D1AC4DB53000CE81D /* J2.h in Headers */,
@@ -2176,6 +2202,7 @@
 				AB90AA531AB2930A00F2535D /* unique_measurement_pair.h in Headers */,
 				AB841C5D1AC4E4D4000CE81D /* c.h in Headers */,
 				AB44BD6A1AAA43B100E0710E /* normalizedSignalRatio_from_measurement.h in Headers */,
+				AB5E9D2F1ACA1ACA003319FA /* phase_amplitude.h in Headers */,
 				AB841C411AC4DB62000CE81D /* J0.h in Headers */,
 				AB9383D91AC22B7E00F2D2DD /* angular_frequency.h in Headers */,
 				AB71A3781AA1307B003AAC84 /* repeatElements.h in Headers */,
@@ -2286,6 +2313,7 @@
 				AB7996D81AB0EDA50022015B /* scopeFile.h in Headers */,
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
 				AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */,
+				AB5E9D3D1ACA27CA003319FA /* average_surface_phase_amplitude.h in Headers */,
 				ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */,
 				ABEF4E9C1948D4A500B44AD5 /* tma.h in Headers */,
 				ABEF4E8C1948D4A500B44AD5 /* lmdiff.hpp in Headers */,
@@ -2464,6 +2492,7 @@
 				AB4E53BB1ABBD54200E7BA8D /* steady_surface_temperature.cpp in Sources */,
 				ABEF4E791948D4A500B44AD5 /* num_method2014.cpp in Sources */,
 				AB480BC11AC5FB910039C1A8 /* h_system.cpp in Sources */,
+				AB5E9D341ACA1E66003319FA /* phases_amplitudes.cpp in Sources */,
 				AB90AA5A1AB2A54500F2535D /* pyrometery_settings_file.cpp in Sources */,
 				AB9383E41AC22F8700F2D2DD /* a.cpp in Sources */,
 				AB7A69461AB24F3E00249A6E /* find_unique_frequencies_in_files.cpp in Sources */,
@@ -2547,14 +2576,17 @@
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
 				ABEB14BE1AAA6C4200204B36 /* phase_fitting.cpp in Sources */,
+				AB5E9D311ACA1BBF003319FA /* phase_amplitude.cpp in Sources */,
 				ABEF4ED31948D4A500B44AD5 /* temperature.cpp in Sources */,
 				AB841CAB1AC5D292000CE81D /* inverseHankel.cpp in Sources */,
 				AB0E72C11AC23BD800750B3F /* phase.cpp in Sources */,
 				AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */,
 				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
 				ABA58A1C1A67489E00573ED8 /* path.cpp in Sources */,
+				AB5E9D381ACA2701003319FA /* surface_phase_amplitude.cpp in Sources */,
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
+				AB5E9D3C1ACA27CA003319FA /* average_surface_phase_amplitude.cpp in Sources */,
 				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
 				ABEB14BA1AAA686500204B36 /* temperature_prediction.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
@@ -2655,7 +2687,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -2741,7 +2773,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -2806,7 +2838,7 @@
 				GCC_UNROLL_LOOPS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
@@ -2866,7 +2898,7 @@
 				GCC_UNROLL_LOOPS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_LABEL = YES;

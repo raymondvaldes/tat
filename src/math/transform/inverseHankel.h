@@ -20,15 +20,11 @@ namespace transform {
 
 struct iHankelSettings{
   
-  units::quantity< units::si::dimensionless > nu_start;
   units::quantity< units::si::dimensionless > nu_end;
-  size_t nu_points = 50;
   
 explicit iHankelSettings
 (
-  units::quantity< units::si::dimensionless > const nu_start = 0.,
-  units::quantity< units::si::dimensionless > const nu_end = 7.,
-  size_t const nu_points = 50
+  units::quantity< units::si::dimensionless, double > const nu_end = 20.
 ) noexcept;
 
 };

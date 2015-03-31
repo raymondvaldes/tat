@@ -20,8 +20,8 @@ using math::transform::iHankelSettings;
 
 auto temperature
 (
-  units::quantity< units::si::dimensionless > const z,
-  units::quantity< units::si::dimensionless > const r,
+  units::quantity< units::si::dimensionless, double > const z,
+  units::quantity< units::si::dimensionless, double > const r,
   dimensionless::HeatingProperties const hp,
   dimensionless::ThermalProperties const tp
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >
@@ -30,9 +30,7 @@ auto temperature
   assert( r >= 0 );
   
   auto const h = h_system( z, hp, tp );
-  
   auto const T = inverseHankel( h , z, r ) ;
-  
   
   return T;
 }

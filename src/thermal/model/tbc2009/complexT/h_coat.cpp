@@ -28,6 +28,10 @@ auto h_coat
   dimensionless::ThermalProperties const tp
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >
 {
+  auto const cmplx = []( auto const x, auto const y ){
+    return quantity< si::dimensionless, complex<double> >
+    ( complex<double>( x, y ) ); };
+
   auto const l = hp.l;
   auto const Lambda = hp.Lambda;
   auto const R0 = hp.R0;
@@ -43,8 +47,8 @@ auto h_coat
   auto const F = F_tilde( nu_tilde, nu_hat, gamma, l ) ;
   auto const H = H_tilde(nu, z, F , nu_hat, nu_tilde, hp, gamma );
   
-  auto const one = quantity< si::dimensionless, complex<double> >( complex<double>( 1., 0. ) );
-  auto const two = quantity< si::dimensionless, complex<double> >( complex<double>( 2., 0. ) );
+  auto const one = cmplx( 1. , 0. );
+  auto const two = cmplx( 2. , 0. );
 
   auto const c1 = l * exp( - pow<2>( nu )/4 ) ;
   auto const c2 = two * nu_tilde * ( pow<2>( nu_tilde * Lambda / l ) - one );

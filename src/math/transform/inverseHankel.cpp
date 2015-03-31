@@ -8,34 +8,40 @@
 
 #include "inverseHankel.h"
 #include "algorithm/algorithm.h"
+#include "math/special_functions/bessel.h"
+#include "math/numIntegration/integrate.h"
+#include "units.h"
 
 namespace math {
 
 namespace transform {
 
+using std::complex;
+using std::vector;
+using math::special_functions::bessel_j;
+using namespace units;
+
 iHankelSettings::iHankelSettings
 (
-  units::quantity< units::si::dimensionless > const nu_start_,
-  units::quantity< units::si::dimensionless > const nu_end_,
-  size_t const nu_points_
-) noexcept
-: nu_start( nu_start_ ), nu_end( nu_end_ ),nu_points(  nu_points_ )
+  units::quantity< units::si::dimensionless > const nu_end_ ) noexcept
+: nu_end( nu_end_ )
 {};
-
 
 auto
 inverseHankel
 (
   std::function<
   units::quantity< units::si::dimensionless, std::complex<double> >
-  ( units::quantity< units::si::dimensionless > const,
-    units::quantity< units::si::dimensionless > const)> const & h,
-  units::quantity< units::si::dimensionless > const z,
-  units::quantity< units::si::dimensionless > const r,
+  ( units::quantity< units::si::dimensionless, double > const,
+    units::quantity< units::si::dimensionless, double > const)> const & h,
+  units::quantity< units::si::dimensionless, double > const z,
+  units::quantity< units::si::dimensionless, double > const r,
   iHankelSettings const & settings 
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
 {
+  assert( r.value() >= 0 );
+  assert( z.value() >= 0 );
 //The inverse hankel involves doing an integration over nu space
 // basically i can first evaluate the complex values over the integration
 // space and then i can split those into the real and imag values.
@@ -48,44 +54,55 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   Int[f(x),a,b] = Int[u(x)+i*v[x],a,b] = Int[u(x),a,b] + i * Int[v[x],a,b]
   */
   
-//  funcComplex = new std::complex<double>[nuSize] ;
-//  funcComplexR = new std::complex<double>[nuSize * mesh.Rend] ;
-//  funcComplexZ = new std::complex<double>[nuSize * mesh.M2] ;
-//  nuSpace = new double[nuSize] ;
-//
-//  funcReal = new double[nuSize] ;
-//  funcImag = new double[nuSize] ;
-//
-//  math::range( nuSpace, nuStart, nuEnd, nuSize ) ;
+  // integration domain
+  auto const x0 = double(0) ;
+  auto const x1 = settings.nu_end.value() ;
+  auto const dx_intial_step = double( 0.1 );
+  auto const f_x0 = vector< double > ( { 0 } );
   
-//
-//  for(size_t i = 0; i < nuSize ;  ++i)
-//  {
-//      const double nu = nuSpace[i];
-//      funcComplex[i] = (this->*hfunc)(nu, ltherm, z);
-//      funcComplex[i] *= gsl_sf_bessel_J0( nu * r ) * nu;
-//
-//      funcReal[i] = funcComplex[i].real();
-//      funcImag[i] = funcComplex[i].imag();
-//  }
+  auto const J0 = []( auto const & x ) noexcept { return bessel_j(0, x );};
+  
+  auto const hankel_function = [&]( double const & nu ) noexcept {
+    
+    auto const h_out = h( nu, z ).value() * J0( nu * r ).value() * nu;
+    return h_out;
+  };
 
-//  ///Integrate each one independently
-//  const size_t xlow =  0;
-//  const size_t xhigh = nuSize-1;
-//
-//  const double
-//  sumReal = math::numIntegration::simpson_3_8(funcReal, nuSpace, xlow, xhigh);
-//
-//  const double
-//  sumImag = math::numIntegration::simpson_3_8(funcImag, nuSpace, xlow, xhigh);
-//
-//  ///Cleanup
-//  const std::complex<double> sum (sumReal, sumImag);
-//  return sum;
+  // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
+  auto const func_real = [ &h, &z, &r, &hankel_function ]
+  (
+    vector< double > const & y,
+    vector< double > & dy,  // thing integrate
+    double const nu
+  ) noexcept -> void
+  {
+    auto const eval = hankel_function( nu ) ;
+    dy[0] = eval.real(); ;
+  };
 
+  auto const area_real =
+  math::numIntegration::integrate( func_real, f_x0, x0, x1, dx_intial_step );
+  
+  
+  auto const func_imag = [ &h, &z, &r, &hankel_function ]
+  (
+    vector< double > const & y,
+    vector< double > & dy,
+    double const nu
+  ) noexcept -> void
+  {
+    auto const eval = hankel_function( nu ) ;
+    dy[0] = eval.imag(); ;
+  };
+  
+  auto const area_imag =
+  math::numIntegration::integrate( func_imag, f_x0, x0, x1, dx_intial_step );
+  
 
+  auto const area = complex<double>( area_real, area_imag );
+  auto const area_quantity = quantity< dimensionless, complex<double> >( area );
 
-  return units::quantity< units::si::dimensionless, std::complex<double>>();
+  return area_quantity;
 }
 
 } // namespace transform
