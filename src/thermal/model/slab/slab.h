@@ -52,6 +52,7 @@ public:
     units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
   );
   
+  // getters
   auto get_conductivity( void ) const
   -> units::quantity< units::si::thermal_conductivity > ;
   
@@ -60,7 +61,21 @@ public:
   
   auto get_diffusivity(void ) const
   -> units::quantity< units::si::thermal_diffusivity >;
+  
+  auto get_effusivity( void ) const
+  -> units::quantity< units::si::thermal_effusivity >;
 
+
+  // setters
+  auto set_effusivity_update_k_hold_rhoCp (
+    units::quantity< units::si::thermal_effusivity > const & e
+  ) -> void;
+  
+  auto set_effusivity_update_rhoCp_hold_k (
+  units::quantity< units::si::thermal_effusivity > const & e
+  ) -> void;
+
+  
   auto set_diffusivity_update_k_hold_rhoCp (
     units::quantity< units::si::thermal_diffusivity > const & alpha_in
   ) -> void;

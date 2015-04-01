@@ -28,7 +28,8 @@ auto H_tilde
   units::quantity< units::si::dimensionless, std::complex<double> > const nu_tilde,
  
   dimensionless::HeatingProperties const hp,
-  units::quantity< units::si::dimensionless > const gamma
+  units::quantity< units::si::dimensionless > const gamma,
+  units::quantity< units::si::dimensionless > const l 
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >;
 
 } // namespace complexT

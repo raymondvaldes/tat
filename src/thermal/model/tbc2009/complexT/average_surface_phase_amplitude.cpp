@@ -26,7 +26,8 @@ auto average_surface_phase_amplitude
 (
   units::quantity< units::si::dimensionless > const view_radius,
   dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::ThermalProperties const tp,
+  units::quantity< units::si::dimensionless > const l
 ) noexcept -> std::pair<
   units::quantity< units::si::plane_angle >,
   units::quantity< units::si::dimensionless> >
@@ -39,13 +40,13 @@ auto average_surface_phase_amplitude
   
   auto const phase = [&]( double const & r ) noexcept -> double {
     auto const r_dim = quantity<si::dimensionless>( r );
-    auto const phase_dim = surface_phase_amplitude( r_dim , hp, tp );
+    auto const phase_dim = surface_phase_amplitude( r_dim , hp, tp, l );
     return phase_dim.first.value();
   };
 
   auto const amplitude = [&]( double const & r ) noexcept -> double {
     auto const r_dim = quantity<si::dimensionless>( r );
-    auto const a_dim = surface_phase_amplitude( r_dim , hp, tp );
+    auto const a_dim = surface_phase_amplitude( r_dim , hp, tp, l );
     return a_dim.second.value();
   };
 

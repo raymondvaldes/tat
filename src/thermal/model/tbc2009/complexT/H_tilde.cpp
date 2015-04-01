@@ -25,10 +25,10 @@ auto H_tilde
   units::quantity< units::si::dimensionless, std::complex<double> > const nu_tilde,
  
   dimensionless::HeatingProperties const hp,
-  units::quantity< units::si::dimensionless > const gamma
+  units::quantity< units::si::dimensionless > const gamma,
+  units::quantity< units::si::dimensionless > const l 
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >
 {
-  auto const l = hp.l;
   auto const Lambda = hp.Lambda;
   auto const R0 = hp.R0;
   auto const R1 = hp.R1;

@@ -23,7 +23,8 @@ auto surface_phase_amplitude
 (
   units::quantity< units::si::dimensionless > const r, 
   dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::ThermalProperties const tp,
+  units::quantity< units::si::dimensionless > const l 
 ) noexcept -> std::pair<
   units::quantity< units::si::plane_angle >,
   units::quantity< units::si::dimensionless> >;

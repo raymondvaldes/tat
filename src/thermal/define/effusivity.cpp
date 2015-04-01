@@ -27,14 +27,26 @@
 #include "thermal/define/effusivity.hpp"
 
 namespace thermal{
-  namespace define{
+namespace define{
+
+using namespace units;
 
 double effusivity( const double k, const double rhoCp ) noexcept
 {
   using std::sqrt;
   return sqrt( k * rhoCp ) ;
 }
-    
-  }
-}
 
+auto effusivity
+(
+  units::quantity< units::si::thermal_conductivity > const k,
+  units::quantity< units::si::volumetric_heat_capacity > const rhoCp
+)
+noexcept -> units::quantity< units::si::thermal_effusivity >
+{
+  auto const e = sqrt( k * rhoCp ) ;
+  return e;
+}
+    
+} // namespace define
+} // namespace thermal

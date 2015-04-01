@@ -24,6 +24,15 @@ auto a
   return sqrt( alpha_z / alpha_z_coat );
 }
 
+auto alphaCoat_from_a
+(
+  units::quantity< units::si::dimensionless > const a,
+  units::quantity< units::si::thermal_diffusivity > const alpha_sub
+) noexcept -> units::quantity< units::si::thermal_diffusivity >
+{
+  return alpha_sub / pow<2>(a) ;
+}
+
 } // namespace dimensionless
 } // namespace tbc2009
 } // namespace model

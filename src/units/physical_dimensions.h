@@ -88,7 +88,8 @@ namespace units {
   typedef derived_dimension<  length_base_dimension, 2,
                               time_base_dimension, -1>::type
                               thermal_diffusivity_dimension;
-  
+
+
   typedef derived_dimension<  temperature_base_dimension, -1 >::type
                               volumetric_thermal_expansion_coefficient_dimension;
 

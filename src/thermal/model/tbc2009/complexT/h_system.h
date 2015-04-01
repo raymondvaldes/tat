@@ -24,7 +24,8 @@ auto h_system
 (
   units::quantity< units::si::dimensionless, double > const z,
   dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::ThermalProperties const tp,
+  units::quantity< units::si::dimensionless > const l 
 ) noexcept -> std::function<
   units::quantity< units::si::dimensionless, std::complex<double> >
   ( units::quantity< units::si::dimensionless, double > const,

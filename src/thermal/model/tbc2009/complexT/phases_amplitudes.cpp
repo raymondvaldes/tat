@@ -17,24 +17,25 @@ namespace complexT {
 
 using std::pair;
 using std::vector;
-using std::transform;
+using algorithm::transform;
 using namespace units;
 
 auto phases_amplitudes
 (
   units::quantity< units::si::dimensionless > const z,
   units::quantity< units::si::dimensionless > const r, 
-  std::vector< dimensionless::HeatingProperties > const & hps,
-  dimensionless::ThermalProperties const tp
+  dimensionless::HeatingProperties const hp,
+  dimensionless::ThermalProperties const tp,
+  std::vector< units::quantity< units::si::dimensionless > > const ls
 ) noexcept -> std::vector< std::pair<
   units::quantity< units::si::plane_angle >,
   units::quantity< units::si::dimensionless> > >
 {
   auto info = vector< pair< quantity< plane_angle >,
-                            quantity< si::dimensionless > > >( hps.size() );
-  transform( hps.begin(), hps.end() , info.begin(), [&]( auto const & hp) noexcept
+                            quantity< si::dimensionless > > >( ls.size() );
+  transform( ls , info.begin(), [&]( auto const & l) noexcept
   {
-    return phase_amplitude( z, r, hp, tp );
+    return phase_amplitude( z, r, hp, tp, l );
   } ) ;
 
   return info;

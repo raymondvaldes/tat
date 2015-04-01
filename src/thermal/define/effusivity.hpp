@@ -26,12 +26,21 @@
 #ifndef __tat__effusivity__
 #define __tat__effusivity__
 
-#include <iostream>
+#include "units.h"
 
 namespace thermal{
-  namespace define{
+namespace define{
 
 double effusivity( const double k, const double rhoCp ) noexcept;
 
-  }}
+auto effusivity
+(
+  units::quantity< units::si::thermal_conductivity > const k,
+  units::quantity< units::si::volumetric_heat_capacity > const rhoCp
+)
+noexcept -> units::quantity< units::si::thermal_effusivity >;
+
+} // namespace define
+} // namespace thermal
+
 #endif /* defined(__tat__effusivity__) */

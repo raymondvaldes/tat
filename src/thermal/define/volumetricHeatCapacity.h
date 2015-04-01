@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef tat_volumetricHeatCapacity_h
-#define tat_volumetricHeatCapacity_h
+#ifndef tat_thermal_model_volumetricHeatCapacity_h
+#define tat_thermal_model_volumetricHeatCapacity_h
 
 #include "units.h"
 
@@ -17,8 +17,15 @@ namespace define {
 
 auto volumetricHeatCapacity
 (
-  units::quantity< units::si::thermal_diffusivity > const & alpha,
-  units::quantity< units::si::thermal_conductivity> const & k
+  units::quantity< units::si::thermal_diffusivity > const alpha,
+  units::quantity< units::si::thermal_conductivity> const k
+)
+noexcept -> units::quantity< units::si::volumetric_heat_capacity >;
+
+auto volumetricHeatCapacity
+(
+  units::quantity< units::si::thermal_effusivity > const e,
+  units::quantity< units::si::thermal_conductivity> const k
 )
 noexcept -> units::quantity< units::si::volumetric_heat_capacity >;
 

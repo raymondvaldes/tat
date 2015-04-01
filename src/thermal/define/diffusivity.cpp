@@ -36,8 +36,8 @@ double diffusivity( const double k, const double rhoCp ) noexcept
 
 auto diffusivity
 (
-  units::quantity< units::si::thermal_conductivity> const & k,
-  units::quantity< units::si::volumetric_heat_capacity > const & rhoCp
+  units::quantity< units::si::thermal_conductivity> const k,
+  units::quantity< units::si::volumetric_heat_capacity > const rhoCp
 )
 noexcept -> units::quantity< units::si::thermal_diffusivity >
 {

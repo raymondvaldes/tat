@@ -24,8 +24,9 @@ auto phases_amplitudes
 (
   units::quantity< units::si::dimensionless > const z,
   units::quantity< units::si::dimensionless > const r, 
-  std::vector< dimensionless::HeatingProperties > const & hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::HeatingProperties const hp,
+  dimensionless::ThermalProperties const tp,
+  std::vector< units::quantity< units::si::dimensionless > > const ls
 ) noexcept -> std::vector< std::pair<
   units::quantity< units::si::plane_angle >,
   units::quantity< units::si::dimensionless> > >;

@@ -19,8 +19,6 @@
 #include "units/quantity.h"
 
 
-
-
 namespace units {
 
 namespace celsius {
@@ -78,6 +76,7 @@ typedef boost::units::si::conductivity        electrical_conductivity;
   
   using volumetric_heat_capacity =
     unit< volumetric_heat_capacity_dimension, si::system > ;
+  
 
   using Archimedes_number = dimensionless;
   using Bingham_number = dimensionless;

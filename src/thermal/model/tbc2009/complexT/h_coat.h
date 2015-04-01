@@ -24,7 +24,8 @@ auto h_coat
   units::quantity< units::si::dimensionless > const nu,
   units::quantity< units::si::dimensionless > const z,
   dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::ThermalProperties const tp,
+  units::quantity< units::si::dimensionless > const l 
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >;
 
 } // namespace complexT

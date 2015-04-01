@@ -22,12 +22,13 @@ auto phase_amplitude
   units::quantity< units::si::dimensionless > const z,
   units::quantity< units::si::dimensionless > const r, 
   dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::ThermalProperties const tp,
+  units::quantity< units::si::dimensionless > const l
 ) noexcept -> std::pair<
   units::quantity< units::si::plane_angle >,
   units::quantity< units::si::dimensionless> >
 {
-  auto const T_complex = temperature( z, r, hp, tp );
+  auto const T_complex = temperature( z, r, hp, tp, l );
   return make_pair( arg(T_complex), abs( T_complex ) );
 }
   

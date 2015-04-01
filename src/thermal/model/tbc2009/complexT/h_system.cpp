@@ -21,7 +21,8 @@ auto h_system
 (
   units::quantity< units::si::dimensionless, double > const z,
   dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::ThermalProperties const tp,
+  units::quantity< units::si::dimensionless > const l
 ) noexcept -> std::function<
   units::quantity< units::si::dimensionless, std::complex<double> >
   ( units::quantity< units::si::dimensionless, double > const,
@@ -37,14 +38,16 @@ auto h_system
   auto const in_coating = z > 0 && z <= 1;
   auto const in_substrate = z > 1 ;
   
-  if( in_coating )  {
-    h = [ hp, tp ]( auto const nu_ , auto const z_ ) noexcept {
-        return h_coat( nu_, z_, hp, tp );
+  if( in_coating )
+  {
+    h = [ hp, tp, l ]( auto const nu_ , auto const z_ ) noexcept {
+        return h_coat( nu_, z_, hp, tp, l );
     };
   }
-  else if( in_substrate ) {
-    h = [ hp, tp ]( auto const nu_ , auto const z_ ) noexcept {
-      return h_sub( nu_, z_, hp, tp );
+  else if( in_substrate )
+  {
+    h = [ hp, tp, l ]( auto const nu_ , auto const z_ ) noexcept {
+      return h_sub( nu_, z_, hp, tp, l );
     };
   }
   

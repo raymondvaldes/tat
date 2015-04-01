@@ -47,6 +47,17 @@ typedef divide_typeof_helper< length , dimensionless >::type wavelength;
 
 
 
+typedef
+multiply_typeof_helper< thermal_conductivity,
+                        volumetric_heat_capacity>::type thermal_effusivity_pow2;
+
+
+typedef root_typeof_helper<
+  thermal_effusivity_pow2,
+  static_rational<2> >::type thermal_effusivity;
+
+
+
 } // namespace si
 
 } // namespace units

@@ -13,6 +13,8 @@
 #include "physics/classical_mechanics/kinematics.h"
 #include "thermal/define/volumetricHeatCapacity.h"
 #include "thermal/define/diffusivity.h"
+#include "thermal/define/effusivity.hpp"
+
 #include "thermal/define/conductivity.h"
 #include "algorithm/algorithm.h"
 
@@ -81,6 +83,14 @@ auto Slab::get_diffusivity( void ) const
   return alpha_here;
 }
 
+auto Slab::get_effusivity( void ) const
+-> units::quantity< units::si::thermal_effusivity >
+{
+  using thermal::define::effusivity;
+  auto const e = effusivity( k , rhoCp );
+  return e;
+}
+
 auto Slab::set_conductivity
 (
   units::quantity< units::si::thermal_conductivity > const & k_in
@@ -95,6 +105,25 @@ auto Slab::set_volumetric_heatCapacity
 ) -> void
 {
   rhoCp = rhoCp_in;
+}
+
+auto Slab::set_effusivity_update_k_hold_rhoCp (
+  units::quantity< units::si::thermal_effusivity > const & e
+) -> void
+{
+  using thermal::define::conductivity;
+  auto const updated_k = conductivity( rhoCp,  e ) ;
+  set_conductivity( updated_k );
+}
+
+auto Slab::set_effusivity_update_rhoCp_hold_k (
+units::quantity< units::si::thermal_effusivity > const & e
+) -> void
+{
+  using thermal::define::volumetricHeatCapacity;
+  auto const updated_rhoCp = volumetricHeatCapacity( e, k ) ;
+  
+  set_volumetric_heatCapacity( updated_rhoCp );
 }
 
 auto Slab::set_diffusivity_update_k_hold_rhoCp

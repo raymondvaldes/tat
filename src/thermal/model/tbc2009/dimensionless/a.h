@@ -22,6 +22,14 @@ auto a
   units::quantity< units::si::thermal_diffusivity > const alpha_z_coat
 ) noexcept -> units::quantity< units::si::dimensionless >;
 
+auto alphaCoat_from_a
+(
+  units::quantity< units::si::dimensionless > const a,
+  units::quantity< units::si::thermal_diffusivity > const alpha_sub
+) noexcept -> units::quantity< units::si::thermal_diffusivity >;
+
+
+
 } // namespace dimensionless
 } // namespace tbc2009
 } // namespace model

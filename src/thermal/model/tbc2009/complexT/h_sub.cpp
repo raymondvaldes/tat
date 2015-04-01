@@ -23,13 +23,13 @@ auto h_sub
   units::quantity< units::si::dimensionless > const nu,
   units::quantity< units::si::dimensionless > const z,
   dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp
+  dimensionless::ThermalProperties const tp,
+  units::quantity< units::si::dimensionless > const l
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >
 {
   auto const interface = quantity<si::dimensionless>(1.);
-  auto const hcoat = h_coat(nu, interface , hp, tp );
+  auto const hcoat = h_coat(nu, interface , hp, tp, l );
   
-  auto const l = hp.l;
   auto const b = hp.b;
   auto const a_sub = tp.a_sub;
   auto const nu_hat = nu::hat( nu, a_sub, l, b );

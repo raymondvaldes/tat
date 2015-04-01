@@ -15,17 +15,16 @@ namespace dimensionless {
 
 HeatingProperties::HeatingProperties
 (
-  units::quantity< units::si::dimensionless > const l_,
   units::quantity< units::si::dimensionless > const Lambda_,
   units::quantity< units::si::dimensionless > const R0_,
   units::quantity< units::si::dimensionless > const R1_,
   units::quantity< units::si::dimensionless > const b_
 ) noexcept
-: l( l_ ), Lambda( Lambda_ ), R0( R0_ ), R1( R1_ ), b( b_ )
+:
+//l( l_ ),
+ Lambda( Lambda_ ), R0( R0_ ), R1( R1_ ), b( b_ )
 {};
 
-
-  
 } // namespace dimensionless
 } // namespace tbc2009
 } // namespace model

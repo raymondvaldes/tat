@@ -18,14 +18,12 @@ namespace dimensionless{
 
 struct HeatingProperties
 {
-  units::quantity< units::si::dimensionless > l;
   units::quantity< units::si::dimensionless > Lambda;
   units::quantity< units::si::dimensionless > R0;
   units::quantity< units::si::dimensionless > R1;
   units::quantity< units::si::dimensionless > b;
   
   explicit HeatingProperties(
-  units::quantity< units::si::dimensionless > const l_,
   units::quantity< units::si::dimensionless > const Lambda_,
   units::quantity< units::si::dimensionless > const R0_,
   units::quantity< units::si::dimensionless > const R1_,
