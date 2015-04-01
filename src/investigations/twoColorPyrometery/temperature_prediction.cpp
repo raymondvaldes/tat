@@ -23,7 +23,6 @@
 #include "thermal/equipment/detector/measurements.h"
 #include "gTBC/gMeasure/get_signal_from_scope_file.h"
 #include "tools/interface/xml.h"
-#include "assert/assertExtensions.h"
 #include "units.h"
 
 #include "algorithm/vector/operator_overloads.h"
@@ -45,11 +44,11 @@ measurementFactory( filesystem::directory const & dir,
 noexcept -> thermal::equipment::detector::Measurements
 {
   assert( !filename.empty() );
-  assert_gt_zero( signal_DC_raw );
-  assert_ge_zero( signal_background );
-  assert_gt_zero( frequency );
-  assert_gt_zero( cycles );
-  assert_gt_zero( detector_wavelength );
+  assert( signal_DC_raw.value() > 0 );
+  assert( signal_background.value() >= 0  );
+  assert( frequency.value() > 0  );
+  assert( cycles > 0  );
+  assert( detector_wavelength.value() > 0  );
 
   using namespace units::si;
   using math::construct::periodic_time_distribution;

@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "assert/assertExtensions.h"
-
+#include <cassert>
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio_from_measurement.h"
 
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio.h"
@@ -32,13 +31,13 @@ auto normalizedSignalRatio_from_measurement(
   units::quantity< units::si::dimensionless > const gCoeff )
   noexcept -> units::quantity< units::si::one_over_temperature >
 {
-  assert_gt_zero(first_w);
-  assert_gt_zero(second_w);
-  assert_lt(first_w, second_w);
+  assert( first_w.value() > 0 );
+  assert( second_w.value() > 0 );
+  assert( first_w.value() <  second_w.value() );
   
-  assert_gt_zero(first_signal);
-  assert_gt_zero(second_signal);
-  assert_gt_zero(gCoeff);
+  assert( first_signal.value() > 0 );
+  assert( second_signal.value() > 0 );
+  assert( gCoeff.value() > 0 );
 
   auto const SR = signalRatio(  first_signal , second_signal ) ;
   

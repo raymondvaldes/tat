@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-#include "assert/assertExtensions.h"
 #include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
 #include "thermal/define/lthermal.h"
 #include "algorithm/algorithm.h"
@@ -18,13 +17,9 @@ namespace thermal {
 namespace pyrometry {
 
 namespace twoColor {
-/* angular_velocity */
+
 using algorithm::for_each;
-using units::quantity;
-using units::si::frequency;
-using units::si::temperature;
-using units::si::angular_frequency;
-using units::si::plane_angle;
+using namespace units;
 using std::vector;
 using std::pair;
 using std::make_pair;
@@ -51,7 +46,7 @@ const -> std::vector< units::quantity< units::si::plane_angle > >
 auto transient_analysis_sweep_results::surface_steady_temperature( void )
 const -> std::vector< units::quantity< units::si::temperature > >
 {
-  auto steady_temperatures = vector< quantity<temperature> >();
+  auto steady_temperatures = vector< quantity< si::temperature > >();
   for_each(transient_results , [&steady_temperatures]( auto const & at_each_frequency)
   {
     steady_temperatures.push_back( at_each_frequency.steady_temperature);
@@ -64,7 +59,7 @@ const -> std::vector< units::quantity< units::si::temperature > >
 auto transient_analysis_sweep_results::surface_temperature_amplitudes( void )
 const -> std::vector< units::quantity< units::si::temperature > >
 {
-  auto surface_temperatures = vector< quantity<temperature> >();
+  auto surface_temperatures = vector< quantity< si::temperature > >();
   for_each( transient_results , [&surface_temperatures]
   ( auto const & at_each_frequency)
   {

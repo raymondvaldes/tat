@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#include <cassert>
+
 #include "thermal/equipment/detector/measurements.h"
 #include "algorithm/algorithm.h"
-#include "assert/assertExtensions.h"
 #include "plot/gnuplot.h"
 
 namespace thermal {
@@ -32,7 +33,7 @@ Measurements::Measurements(
   : wavelength( wavelengthIn), measurements( signals.size() )
 {
   assert( wavelengthIn.value() > 0 );
-  assert_equal( referenceTime.size(), signals.size() );
+  assert( referenceTime.size() == signals.size() );
   
   size_t i = 0u;
   generate( measurements, [&referenceTime, &signals, &i]() noexcept

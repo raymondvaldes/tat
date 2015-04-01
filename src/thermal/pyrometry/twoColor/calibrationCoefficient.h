@@ -9,7 +9,6 @@
 #ifndef __tat__calibrationCoefficient__
 #define __tat__calibrationCoefficient__
 #include <utility>
-#include "assert/assertExtensions.h"
 
 #include "units.h"
 #include "units/si/si.h"

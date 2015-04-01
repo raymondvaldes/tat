@@ -7,7 +7,6 @@
 //
 
 #include "thermal/pyrometry/twoColor/normalizedDetectorMeasurements.h"
-#include "assert/assertExtensions.h"
 #include "thermal/pyrometry/twoColor/normalizedSignalRatio.h"
 #include "thermal/pyrometry/twoColor/calibratedSignalRatio.h"
 #include "thermal/pyrometry/twoColor/signalRatio.h"
@@ -42,9 +41,9 @@ std::pair<
   std::vector< units::quantity< units::si::time > > ,
   std::vector< units::quantity< units::si::one_over_temperature > > >
 {
-  assert_gt_zero( first.size() ) ;
-  assert_gt_zero( second.size() );
-  assert_gt_zero( gCoeff ) ;
+  assert( first.size() > 0 ) ;
+  assert( second.size() > 0  );
+  assert( gCoeff.value() > 0 ) ;
   
   auto const count = first.size();
   auto normalizedSRs = vector< quantity<one_over_temperature> >( count ) ;

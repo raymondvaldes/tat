@@ -7,7 +7,6 @@
 //
 
 #include "thermal/equipment/detector/measurement.h"
-#include "assert/assertExtensions.h"
 
 namespace thermal {
 

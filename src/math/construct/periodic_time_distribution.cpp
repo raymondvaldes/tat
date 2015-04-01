@@ -7,7 +7,6 @@
 //
 
 #include "math/construct/periodic_time_distribution.h"
-#include "assert/assertExtensions.h"
 #include "algorithm/algorithm.h"
 
 namespace math {
@@ -20,9 +19,9 @@ periodic_time_distribution( units::quantity< units::si::frequency > const & freq
                             size_t const count )
 noexcept -> std::vector< units::quantity< units::si::time > >
 {
-  assert_gt_zero( cycles ) ;
-  assert_gt_zero( count ) ;
-  assert_gt_zero( frequency ) ;
+  assert( cycles > 0 );
+  assert( count > 0 );
+  assert( frequency.value() > 0 );
 
   using units::quantity;
   using units::si::dimensionless;

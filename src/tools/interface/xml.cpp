@@ -7,7 +7,7 @@
 \*----------------------------------------------------------------------------*/
 #include <iostream>
 
-#include "assert/assertExtensions.h"
+#include <cassert>
 #include "tools/interface/xml.h"
 #include "boost/property_tree/ptree.hpp"
 
@@ -18,7 +18,7 @@ namespace interface{
 auto getTreefromFile( std::string const & absPath ) noexcept
 -> boost::property_tree::ptree
 {
-  assert_gt_zero( absPath.size() );
+  assert( absPath.size() > 0 );
 
   using std::cerr;
   using boost::property_tree::read_xml;
@@ -46,9 +46,9 @@ auto getBranch( std::string const & trunk,
                 std::string const & branch,
                 boost::property_tree::ptree const & pt )
 -> boost::property_tree::ptree
-{
-  assert_gt_zero( trunk.size() );
-  assert_gt_zero( branch.size() );
+{  
+  assert( trunk.size() > 0 );
+  assert( branch.size() > 0 );
   assert( !pt.empty() );
 
   auto const branchName = trunk + "." + branch ;
