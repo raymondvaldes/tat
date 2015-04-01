@@ -30,10 +30,10 @@ namespace thermal{
 namespace define{
 
 using namespace units;
+using std::sqrt;
 
 double effusivity( const double k, const double rhoCp ) noexcept
 {
-  using std::sqrt;
   return sqrt( k * rhoCp ) ;
 }
 
