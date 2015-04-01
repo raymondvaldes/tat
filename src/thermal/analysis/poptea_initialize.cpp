@@ -42,20 +42,10 @@ initializePopTeawithExperimentalEmission( const filesystem::directory &dir )
   using units::si::electric_potential;
   
   Poptea poptea = initializePopTeawithNominalEmission( dir );
-  
-  
-
-
-  
   return poptea;
 }
 
 
-
-
-
-
-  
 Poptea
 initializePopTeaAndLoadSimuEmission( const filesystem::directory &dir ) noexcept
 {

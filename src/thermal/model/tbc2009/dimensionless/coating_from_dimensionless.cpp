@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "coating_from_dimensionless.h"
+#include "thermal/model/tbc2009/dimensionless/coating_from_dimensionless.h"
 #include "thermal/model/tbc2009/dimensionless/a.h"
 #include "thermal/model/tbc2009/dimensionless/gamma.h"
 #include "thermal/define/conductivity.h"
@@ -29,9 +29,12 @@ auto coating_from_dimensionless
 ) noexcept -> slab::Slab
 {
   auto const alpha_sub = substrate.get_diffusivity();
+  auto const a = tp.a_sub;
+  auto const gamma = tp.gamma;
 
-  auto const alpha_coat = alphaCoat_from_a( tp.a_sub, alpha_sub );
-  auto const e_coat = eCoat_from_gamma( tp.gamma, substrate.get_effusivity() );
+  auto const alpha_coat = alphaCoat_from_a( a, alpha_sub );
+  auto const e_sub = substrate.get_effusivity();
+  auto const e_coat = eCoat_from_gamma( gamma, e_sub );
   auto const k_coat = conductivity( e_coat, alpha_coat ) ;
 
   return slab::Slab( L_coat, alpha_coat, k_coat );

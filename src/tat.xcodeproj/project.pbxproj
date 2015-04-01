@@ -96,8 +96,6 @@
 		AB6367601AA941AC00AC8390 /* sum.h in Headers */ = {isa = PBXBuildFile; fileRef = AB63675F1AA941AC00AC8390 /* sum.h */; };
 		AB6981A819CB638300940843 /* apply_to_all.h in Headers */ = {isa = PBXBuildFile; fileRef = AB6981A619CB638300940843 /* apply_to_all.h */; };
 		AB71A3781AA1307B003AAC84 /* repeatElements.h in Headers */ = {isa = PBXBuildFile; fileRef = AB71A3771AA1307B003AAC84 /* repeatElements.h */; };
-		AB76C57C1ACB3D8D00C4E502 /* from_phases.h in Sources */ = {isa = PBXBuildFile; fileRef = AB76C57A1ACB3D8D00C4E502 /* from_phases.h */; };
-		AB76C57D1ACB3D8D00C4E502 /* from_phases.cpp in Headers */ = {isa = PBXBuildFile; fileRef = AB76C57B1ACB3D8D00C4E502 /* from_phases.cpp */; };
 		AB76C5841ACB4C8300C4E502 /* coating_from_dimensionless.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB76C5821ACB4C8300C4E502 /* coating_from_dimensionless.cpp */; };
 		AB76C5851ACB4C8300C4E502 /* coating_from_dimensionless.h in Headers */ = {isa = PBXBuildFile; fileRef = AB76C5831ACB4C8300C4E502 /* coating_from_dimensionless.h */; };
 		AB76C5881ACB501700C4E502 /* gamma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB76C5861ACB501700C4E502 /* gamma.cpp */; };
@@ -126,6 +124,8 @@
 		AB7AD88D1ABA168B00478726 /* conversions.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7AD88C1ABA168B00478726 /* conversions.h */; };
 		AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD011A57261F00AB7E11 /* columnData.h */; };
 		AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */; };
+		AB7F19851ACC65870086E8F8 /* from_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB76C57B1ACB3D8D00C4E502 /* from_phases.cpp */; };
+		AB7F19861ACC65A10086E8F8 /* from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB76C57A1ACB3D8D00C4E502 /* from_phases.h */; };
 		AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7FBD921A9FE65E00FF714D /* prandtl_number.h */; };
 		AB841C381AC4DB47000CE81D /* J1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB841C361AC4DB47000CE81D /* J1.cpp */; };
 		AB841C391AC4DB47000CE81D /* J1.h in Headers */ = {isa = PBXBuildFile; fileRef = AB841C371AC4DB47000CE81D /* J1.h */; };
@@ -2188,6 +2188,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB7F19861ACC65A10086E8F8 /* from_phases.h in Headers */,
 				AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */,
 				AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */,
 				AB5E9D391ACA2701003319FA /* surface_phase_amplitude.h in Headers */,
@@ -2324,7 +2325,6 @@
 				ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */,
 				AB4E53BC1ABBD54200E7BA8D /* steady_surface_temperature.h in Headers */,
 				ABEF4EEE1948D4A500B44AD5 /* Numerical_Temperature.h in Headers */,
-				AB76C57D1ACB3D8D00C4E502 /* from_phases.cpp in Headers */,
 				ABEF4F021948D4A500B44AD5 /* programoptions.hpp in Headers */,
 				AB7996EA1AB10F350022015B /* scopeFiles_from_datafiles.h in Headers */,
 				ABFC9E641A9424C500F124F1 /* calculateCalibrationCoefficients.h in Headers */,
@@ -2486,6 +2486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB7F19851ACC65870086E8F8 /* from_phases.cpp in Sources */,
 				ABAD559D1ABF554500D1B9A6 /* fitted_measurements.cpp in Sources */,
 				AB7996E51AB0F6B90022015B /* is_scope_file.cpp in Sources */,
 				ABEF4EEB1948D4A500B44AD5 /* Numerical_Setup.cpp in Sources */,
@@ -2522,7 +2523,6 @@
 				AB44BD731AAA49C600E0710E /* get_signal_from_scope_file.cpp in Sources */,
 				AB0E72C91AC23E8C00750B3F /* surface_phases.cpp in Sources */,
 				AB4E53BB1ABBD54200E7BA8D /* steady_surface_temperature.cpp in Sources */,
-				AB76C57C1ACB3D8D00C4E502 /* from_phases.h in Sources */,
 				ABEF4E791948D4A500B44AD5 /* num_method2014.cpp in Sources */,
 				AB480BC11AC5FB910039C1A8 /* h_system.cpp in Sources */,
 				AB5E9D341ACA1E66003319FA /* phases_amplitudes.cpp in Sources */,
