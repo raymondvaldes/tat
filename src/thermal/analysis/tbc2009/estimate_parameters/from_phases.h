@@ -49,7 +49,7 @@ struct Best_fit{
 
 };
 
-auto estimate_parameters_from_phases
+auto from_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
@@ -61,23 +61,17 @@ auto estimate_parameters_from_phases
 ) noexcept -> Best_fit;
 
 
+auto from_phases
+(
+  std::pair<
+  std::vector< units::quantity< units::si::frequency > > ,
+  std::vector< units::quantity< units::si::plane_angle > > > const & o,
+  thermal::model::slab::Slab const slab_initial,
+  thermal::model::slab::Slab const slab_substrate,
 
-////
-//
-//average_surface_phases_amplitudes
-//(
-//  units::quantity< units::si::dimensionless > const view_radius,
-//  std::vector< units::quantity< units::si::frequency > > const frequencies,
-//  units::quantity< units::si::dimensionless > const Lambda,
-//  units::quantity< units::si::dimensionless > const R0,
-//  units::quantity< units::si::dimensionless > const R1,
-//  units::quantity< units::si::dimensionless > const b,
-//  dimensionless::ThermalProperties const tp,
-//  units::quantity< units::si::length > const L,
-//  units::quantity< units::si::thermal_diffusivity > const alpha_substrate
-//)
-
-
+  model::tbc2009::dimensionless::HeatingProperties const hp_initial,
+  units::quantity< units::si::length > const detector_view_radius
+) noexcept -> Best_fit;
 
 } // namespace estimate_parameters
 } // namespace tbc2009

@@ -21,6 +21,7 @@
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
 #include "math/estimation/lmdiff.hpp"
+#include "algorithm/vector/split_vector_of_pairs.h"
 
 namespace thermal {
 namespace analysis {
@@ -61,7 +62,7 @@ Best_fit::Best_fit
   model_phases( model_phases_ )
 {}
 
-auto estimate_parameters_from_phases
+auto from_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
@@ -168,6 +169,26 @@ auto estimate_parameters_from_phases
   
   return result;
 }
+
+auto from_phases
+(
+  std::pair<
+  std::vector< units::quantity< units::si::frequency > > ,
+  std::vector< units::quantity< units::si::plane_angle > > > const & o,
+  thermal::model::slab::Slab const slab_initial,
+  thermal::model::slab::Slab const slab_substrate,
+  model::tbc2009::dimensionless::HeatingProperties const hp_initial,
+  units::quantity< units::si::length > const detector_view_radius
+) noexcept -> Best_fit
+{
+  assert( o.first.size() == o.second.size() );
+  assert( o.first.size() > 0);
+
+  return from_phases(
+    o.first, o.second ,
+    slab_initial, slab_substrate, hp_initial, detector_view_radius );
+}
+
 
 } // namespace estimate_parameters
 } // namespace tbc2009

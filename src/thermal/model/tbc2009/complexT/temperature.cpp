@@ -27,10 +27,13 @@ auto temperature
   units::quantity< units::si::dimensionless > const l 
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >
 {
-  assert( z >= 0 );
-  assert( r >= 0 );
+  assert( z.value() >= 0 );
+  assert( r.value() >= 0 );
   
   auto const h = h_system( z, hp, tp, l );
+  
+  
+  
   auto const T = inverseHankel( h , z, r ) ;
   
   return T;

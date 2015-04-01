@@ -45,6 +45,8 @@ struct Measurement_settings{
   std::string filename_1;
   
   std::string filename_2;
+  
+  units::quantity< units::si::length > detector_view_radius;
 
   Measurement_settings
   (
@@ -60,7 +62,8 @@ struct Measurement_settings{
   units::quantity< units::si::frequency > const & temperoralFrequency_,
   size_t const & cycles_,
   std::string const & filename_1_,
-  std::string const & filename_2_
+  std::string const & filename_2_,
+  units::quantity< units::si::length > const detector_view_radius_
   )
   : signal_DC_1( signal_DC_1_ ),
     signal_DC_2( signal_DC_2_ ),
@@ -70,7 +73,8 @@ struct Measurement_settings{
     temperoralFrequency( temperoralFrequency_ ),
     cycles ( cycles_ ),
     filename_1 ( filename_1_ ),
-    filename_2 ( filename_2_ )
+    filename_2 ( filename_2_ ),
+    detector_view_radius( detector_view_radius_ )
   {};
 };
 

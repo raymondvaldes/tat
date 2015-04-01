@@ -32,6 +32,8 @@ std::vector<
               thermal::equipment::detector::Measurements > > measurements;
   
   units::quantity< units::si::dimensionless > gCoefficient;
+  units::quantity< units::si::length > detector_view_radius;
+  
   
   processed_scope_data
   (
@@ -43,7 +45,8 @@ std::vector<
                             thermal::equipment::detector::Measurements > >
     const & measurements_,
   
-    units::quantity< units::si::dimensionless > const & gCoefficient_
+    units::quantity< units::si::dimensionless > const gCoefficient_,
+    units::quantity< units::si::length > const detector_view_radius_
   );
 
 };

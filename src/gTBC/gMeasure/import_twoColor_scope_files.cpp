@@ -46,11 +46,13 @@ processed_scope_data::processed_scope_data
                           thermal::equipment::detector::Measurements > >
   const & measurements_,
 
-  units::quantity< units::si::dimensionless > const & gCoefficient_
+  units::quantity< units::si::dimensionless > const gCoefficient_,
+  units::quantity< units::si::length > const detector_view_radius_
 )
 : laser_modulations( laser_modulations_ ),
   measurements( measurements_ ),
-  gCoefficient( gCoefficient_ ) {}
+  gCoefficient( gCoefficient_ ),
+  detector_view_radius( detector_view_radius_ ) {}
 
 auto import_twoColor_scope_files
 (
@@ -81,6 +83,7 @@ auto import_twoColor_scope_files
 //  signal_grnds = remove_grnd_if_not_in_scope_files(signal_grnds, frequencies.second);
  
   auto const import = pyrometery_settings_file( dir.abs( filename ) );
+  auto const detector_view_r = import.detector_view_radius;
   auto const signalBackground = import.signalBackground;
   auto const wavelength_offset = import.wavelength_offset ;
   
@@ -128,7 +131,7 @@ auto import_twoColor_scope_files
   
   assert( laser_modulations.size() == calibrated_emission_pairs.size() );
   auto const out =  processed_scope_data(
-  laser_modulations , calibrated_emission_pairs, gCoeff );
+  laser_modulations , calibrated_emission_pairs, gCoeff, detector_view_r );
   
   return  out;
 }

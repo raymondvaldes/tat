@@ -76,8 +76,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
     double const nu
   ) noexcept -> void
   {
-    auto const eval = hankel_function( nu ) ;
-    dy[0] = eval.real(); ;
+    dy[0] = hankel_function( nu ).real(); ;
   };
 
   auto const area_real =

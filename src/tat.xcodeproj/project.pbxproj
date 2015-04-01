@@ -128,6 +128,9 @@
 		AB7F19861ACC65A10086E8F8 /* from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB76C57A1ACB3D8D00C4E502 /* from_phases.h */; };
 		AB7F198D1ACC97E00086E8F8 /* average_surface_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7F198B1ACC97E00086E8F8 /* average_surface_phases.cpp */; };
 		AB7F198E1ACC97E00086E8F8 /* average_surface_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7F198C1ACC97E00086E8F8 /* average_surface_phases.h */; };
+		AB7F19921ACCA06D0086E8F8 /* split_vector_of_pairs.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7F19911ACCA06D0086E8F8 /* split_vector_of_pairs.h */; };
+		AB7F19941ACCB1300086E8F8 /* import_heating_properties.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7F19931ACCB1300086E8F8 /* import_heating_properties.h */; };
+		AB7F19961ACCB14B0086E8F8 /* import_heating_properties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7F19951ACCB14B0086E8F8 /* import_heating_properties.cpp */; };
 		AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7FBD921A9FE65E00FF714D /* prandtl_number.h */; };
 		AB841C381AC4DB47000CE81D /* J1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB841C361AC4DB47000CE81D /* J1.cpp */; };
 		AB841C391AC4DB47000CE81D /* J1.h in Headers */ = {isa = PBXBuildFile; fileRef = AB841C371AC4DB47000CE81D /* J1.h */; };
@@ -560,6 +563,9 @@
 		AB7EAD101A58C39500AB7E11 /* resetInputBeginning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resetInputBeginning.h; path = algorithm/stream/resetInputBeginning.h; sourceTree = "<group>"; };
 		AB7F198B1ACC97E00086E8F8 /* average_surface_phases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = average_surface_phases.cpp; path = tbc2009/average_surface_phases.cpp; sourceTree = "<group>"; };
 		AB7F198C1ACC97E00086E8F8 /* average_surface_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = average_surface_phases.h; path = tbc2009/average_surface_phases.h; sourceTree = "<group>"; };
+		AB7F19911ACCA06D0086E8F8 /* split_vector_of_pairs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split_vector_of_pairs.h; path = algorithm/vector/split_vector_of_pairs.h; sourceTree = "<group>"; };
+		AB7F19931ACCB1300086E8F8 /* import_heating_properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = import_heating_properties.h; path = tbc2009/dimensionless/import_heating_properties.h; sourceTree = "<group>"; };
+		AB7F19951ACCB14B0086E8F8 /* import_heating_properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = import_heating_properties.cpp; path = tbc2009/dimensionless/import_heating_properties.cpp; sourceTree = "<group>"; };
 		AB7FBD921A9FE65E00FF714D /* prandtl_number.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prandtl_number.h; path = thermalfluids/dimensionless/prandtl_number.h; sourceTree = "<group>"; };
 		AB841C361AC4DB47000CE81D /* J1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = J1.cpp; path = tbc2009/complexT/radiosity/J1.cpp; sourceTree = "<group>"; };
 		AB841C371AC4DB47000CE81D /* J1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = J1.h; path = tbc2009/complexT/radiosity/J1.h; sourceTree = "<group>"; };
@@ -901,6 +907,7 @@
 		AB0DFDFD19524268007DF69B /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
+				AB7F198F1ACCA0210086E8F8 /* pair */,
 				ABA0B7311A9D002F00F000DA /* valarray */,
 				AB7EAD131A58C3B400AB7E11 /* stream */,
 				ABB54FBA19C2215D0056823E /* vector */,
@@ -1202,6 +1209,13 @@
 			name = stream;
 			sourceTree = "<group>";
 		};
+		AB7F198F1ACCA0210086E8F8 /* pair */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = pair;
+			sourceTree = "<group>";
+		};
 		AB7FBD891A9FA64800FF714D /* thermalfluids */ = {
 			isa = PBXGroup;
 			children = (
@@ -1361,6 +1375,8 @@
 				AB76C5831ACB4C8300C4E502 /* coating_from_dimensionless.h */,
 				AB76C5861ACB501700C4E502 /* gamma.cpp */,
 				AB76C5871ACB501700C4E502 /* gamma.h */,
+				AB7F19931ACCB1300086E8F8 /* import_heating_properties.h */,
+				AB7F19951ACCB14B0086E8F8 /* import_heating_properties.cpp */,
 			);
 			name = dimensionless;
 			sourceTree = "<group>";
@@ -1646,6 +1662,7 @@
 				AB7A69501AB267EA00249A6E /* find_all.h */,
 				AB7AD88A1ABA0C4000478726 /* reserve.h */,
 				AB4E53C91ABCC59800E7BA8D /* ratio.h */,
+				AB7F19911ACCA06D0086E8F8 /* split_vector_of_pairs.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -2283,6 +2300,7 @@
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
+				AB7F19941ACCB1300086E8F8 /* import_heating_properties.h in Headers */,
 				AB932DF51A6DC0E700ECF117 /* sine.h in Headers */,
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
 				AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */,
@@ -2360,6 +2378,7 @@
 				ABEF4ECD1948D4A500B44AD5 /* lthermal.h in Headers */,
 				ABEF4EFA1948D4A500B44AD5 /* Numerical_PhaseOfEmission.h in Headers */,
 				AB841CA21AC5C8A7000CE81D /* h_sub.h in Headers */,
+				AB7F19921ACCA06D0086E8F8 /* split_vector_of_pairs.h in Headers */,
 				AB44BD621AAA399800E0710E /* measurements.h in Headers */,
 				ABEF4EC51948D4A500B44AD5 /* thermalsweepoptimizer.hpp in Headers */,
 				AB841CAC1AC5D292000CE81D /* inverseHankel.h in Headers */,
@@ -2635,6 +2654,7 @@
 				ABEB14BA1AAA686500204B36 /* temperature_prediction.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
 				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
+				AB7F19961ACCB14B0086E8F8 /* import_heating_properties.cpp in Sources */,
 				AB7A69421AB24F1B00249A6E /* find_unique_labels_in_files.cpp in Sources */,
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,

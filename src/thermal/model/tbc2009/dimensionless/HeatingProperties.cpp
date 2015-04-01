@@ -21,7 +21,6 @@ HeatingProperties::HeatingProperties
   units::quantity< units::si::dimensionless > const b_
 ) noexcept
 :
-//l( l_ ),
  Lambda( Lambda_ ), R0( R0_ ), R1( R1_ ), b( b_ )
 {};
 

@@ -21,17 +21,7 @@ using std::make_pair;
 
 using tools::interface::getTreefromFile;
 using tools::interface::getItem;
-using units::quantity;
-using units::si::electric_potential;
-using units::si::wavelength;
-using units::si::micrometers;
-using units::si::microvolts;
-using units::si::volts;
-using units::si::dimensionless;
-using units::si::frequency;
-using units::si::hertz;
-
-using std::make_pair;
+using namespace units;
 
 auto
 pyrometery_settings_file
@@ -87,8 +77,11 @@ auto pyrometery_settings_file( filesystem::path const & fullpath ) -> Measuremen
 
   auto const wavelength_offset_value  = settings_branch.get<double>( "wavelenth_offset" );
   auto const wavelength_offset = quantity<wavelength> ( wavelength_offset_value  * micrometers ) ;
+  auto const detector_view_radius_val = settings_branch.get<double>("detector_view_radius");
   
-  
+  auto const detector_view_radius =
+  quantity<length> ( detector_view_radius_val  * millimeters ) ;
+
   auto const output = Measurement_settings(
     signal_DC_1,
     signal_DC_2,
@@ -98,7 +91,8 @@ auto pyrometery_settings_file( filesystem::path const & fullpath ) -> Measuremen
     temperoralFrequency,
     cycles,
     filename_1,
-    filename_2  );
+    filename_2,
+    detector_view_radius  );
   
   return output;
 }
