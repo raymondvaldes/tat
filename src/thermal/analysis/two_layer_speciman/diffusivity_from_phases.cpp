@@ -9,10 +9,11 @@
 #include "thermal/analysis/two_layer_speciman/diffusivity_from_phases.h"
 #include "thermal/model/two_layer/complex/surface_phase.h"
 #include "math/estimation/constrained.hpp"
-
-#include "thermal/model/two_layer/complex/surface_phases.h"
 #include "math/estimation/settings.h"
 #include "math/estimation/lmdiff.hpp"
+
+#include "thermal/model/two_layer/complex/surface_phases.h"
+
 #include "algorithm/algorithm.h"
 
 namespace thermal {
@@ -110,23 +111,6 @@ auto diffusivity_from_phases
   
   std::cout << "b = \t"<< slab_substrate.k / slab_initial.k << "\n";
   
-  auto const fmin = quantity<frequency>( 1 * hertz );
-  auto const f1 = quantity<frequency>( 2 * hertz );
-  auto const f2 = quantity<frequency>( 4 * hertz );
-  auto const f3 = quantity<frequency>( 8 * hertz );
-  auto const f4 = quantity<frequency>( 16 * hertz );
-  auto const fmax = quantity<frequency>( 90 * hertz );
-//  
-//  std::cout << thermal::model::twoLayer::complex::surface_phase( fmin, slab_initial , slab_substrate ) << "\n";
-//  std::cout << thermal::model::twoLayer::complex::surface_phase( f1, slab_initial , slab_substrate ) << "\n";
-//  std::cout << thermal::model::twoLayer::complex::surface_phase( f2, slab_initial , slab_substrate ) << "\n";
-//  std::cout << thermal::model::twoLayer::complex::surface_phase( f3, slab_initial , slab_substrate ) << "\n";
-//  std::cout << thermal::model::twoLayer::complex::surface_phase( f4, slab_initial , slab_substrate ) << "\n";
-//  std::cout << thermal::model::twoLayer::complex::surface_phase( fmax, slab_initial , slab_substrate ) << "\n";
-
-
-//  throw(9);
-
   assert( frequencies.size() > 0 );
   
   auto const numberPoints2Fit = frequencies.size();

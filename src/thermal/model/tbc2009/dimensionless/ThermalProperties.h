@@ -26,7 +26,7 @@ struct ThermalProperties
   (
     units::quantity< units::si::dimensionless > gamma_,
     units::quantity< units::si::dimensionless > a_sub_,
-    units::quantity< units::si::dimensionless > c_coat_
+    units::quantity< units::si::dimensionless > c_coat_ = 1
   ) noexcept;
 };
   

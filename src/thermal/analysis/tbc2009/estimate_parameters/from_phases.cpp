@@ -6,17 +6,39 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/analysis/tbc2009/estimate_parameters/from_phases.h"
+#include <utility>
+#include <tuple>
+#include <algorithm>
+
+#include "thermal/model/tbc2009/average_surface_phases.h"
 #include "thermal/model/tbc2009/dimensionless/coating_from_dimensionless.h"
+#include "thermal/model/tbc2009/dimensionless/a.h"
+#include "thermal/model/tbc2009/dimensionless/b.h"
+#include "thermal/model/tbc2009/dimensionless/gamma.h"
+#include "thermal/analysis/tbc2009/estimate_parameters/from_phases.h"
 #include "thermal/define/lthermal.h"
+
+#include "math/estimation/constrained.hpp"
+#include "math/estimation/settings.h"
+#include "math/estimation/lmdiff.hpp"
 
 namespace thermal {
 namespace analysis {
 namespace tbc2009 {
 namespace estimate_parameters{
 
-using model::tbc2009::dimensionless::coating_from_dimensionless;
+using namespace units;
+using namespace model::tbc2009;
+using dimensionless::ThermalProperties;
+using dimensionless::coating_from_dimensionless;
 using thermal::define::thermalPenetrations_from_frequencies;
+using std::vector;
+using math::estimation::x_limiter1;
+using math::estimation::kx_limiter1;
+using math::estimation::settings;
+using std::generate;
+using std::make_tuple;
+using std::get;
 
 Best_fit::Best_fit
 (
@@ -26,8 +48,8 @@ Best_fit::Best_fit
   model::tbc2009::dimensionless::HeatingProperties const hp_,
   model::tbc2009::dimensionless::ThermalProperties const tp_,
  
-  std::vector< units::quantity<units::si::frequency> > const  frequencies_,
-  std::vector< units::quantity< units::si::plane_angle > > const model_phases_
+  std::vector< units::quantity<units::si::frequency> > const & frequencies_,
+  std::vector< units::quantity< units::si::plane_angle > > const & model_phases_
 ) noexcept :
   view_radius( view_radius_ * L_coat_ ),
   hp( hp_ ),
@@ -38,6 +60,114 @@ Best_fit::Best_fit
         frequencies_, coating_slab.get_diffusivity() , L_coat_ ) ),
   model_phases( model_phases_ )
 {}
+
+auto estimate_parameters_from_phases
+(
+  std::vector< units::quantity< units::si::frequency > > const & frequencies,
+  std::vector< units::quantity< units::si::plane_angle > > const & observations,
+  thermal::model::slab::Slab const slab_initial,
+  thermal::model::slab::Slab const substrate,
+
+  model::tbc2009::dimensionless::HeatingProperties const hp_initial,
+  units::quantity< units::si::length > const detector_view_radius
+) noexcept -> Best_fit
+{
+  //establish preconditions
+  assert( frequencies.size() > 0 );
+  assert( frequencies.size() == observations.size() ) ;
+  assert( detector_view_radius.value() > 0 ) ;
+
+  // establish nondimensional fitting parameters
+  auto const L_coat = slab_initial.characteristic_length;
+  auto const alpha_coat = slab_initial.get_diffusivity();
+  auto const alpha_sub = substrate.get_diffusivity();
+  auto const a_sub_i = dimensionless::a( alpha_sub, alpha_coat ) ;
+  
+  auto const e_coat = slab_initial.get_effusivity();
+  auto const e_sub = slab_initial.get_effusivity();
+  auto const gamma_i = dimensionless::gamma( e_coat, e_sub ) ;
+  auto const b_i = hp_initial.b ;
+  auto const b2_i = dimensionless::b( detector_view_radius, L_coat );
+
+  // establish parameters to fit with initial values
+  auto model_parameters = vector< double >
+  {
+    kx_limiter1( a_sub_i.value() ) ,  // diffusivity ratio
+    kx_limiter1( gamma_i.value() ) ,  // effusivity ratio
+    kx_limiter1( b_i.value() ) ,      // beam radius
+    kx_limiter1( b2_i.value() )      // detector radius
+  //  kx_limiter1( R0.value() ) ,     // surface reflectivity
+  //  kx_limiter1( R1.value() ) ,     // interface reflectivity
+  //  kx_limiter1( Lambda.value() ) , // optical penetration
+  };
+  
+  // parameter estimation algorithm
+  auto const number_of_points_to_Fit = frequencies.size();
+  
+  auto const update_system_properties = [ &hp_initial ] ( const double * x )
+  noexcept
+  {
+    auto const a_sub = quantity<si::dimensionless>( x_limiter1( x[0] ) );
+    auto const gamma =  quantity<si::dimensionless>( x_limiter1( x[1] ) );
+    auto const b =  quantity<si::dimensionless>( x_limiter1( x[2] ) );  //  beam radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter1( x[3] ) ); //  detector radius
+    
+    auto const Lambda = hp_initial.Lambda; // quantity<si::dimensionless>(x_limiter1(x[4]))
+    auto const R0 = hp_initial.R0;  // quantity<si::dimensionless>(x_limiter1(x[5]))
+    auto const R1 = hp_initial.R1;  // quantity<si::dimensionless>(x_limiter1(x[6]))
+
+    auto const tp = dimensionless::ThermalProperties( gamma, a_sub );
+    auto const hp = dimensionless::HeatingProperties( Lambda, R0, R1 , b);
+
+    auto const updated_elements = make_tuple( b2, hp, tp ) ;
+    return updated_elements ;
+  };
+
+  auto const make_model_predictions =
+  [ &frequencies, &L_coat, &substrate, &update_system_properties ]
+  ( const double * x ) noexcept
+  {
+    auto const t = update_system_properties( x );
+    auto const b2 = get< 0 >(t);
+    auto const hp = get< 1 >(t);
+    auto const tp = get< 2 >(t);
+    
+    auto const predictions =
+    average_surface_phases(
+      b2, frequencies, hp, tp, L_coat, substrate.get_diffusivity() );
+    return predictions;
+  };
+
+  auto const minimization_equation =
+  [ & ] ( const double *x, double *fvec ) noexcept
+  {
+    auto const predictions = make_model_predictions( x );
+    
+    auto const residual = [ & ]( const int i ) noexcept {
+      return ( predictions[i]  -  observations[i] ).value() ;
+    } ;
+
+    auto i = 0;
+    generate( fvec, fvec + number_of_points_to_Fit , [&]() noexcept {
+      return residual( i++ );
+    } ) ;
+  };
+
+  lmdif( minimization_equation, number_of_points_to_Fit,
+        model_parameters,  settings{} );
+
+  auto const x = model_parameters.data();
+  auto const t = update_system_properties( x );
+  auto const b2 = get< 0 >(t);
+  auto const hp = get< 1 >(t);
+  auto const tp = get< 2 >(t);
+  auto const model_predictions = make_model_predictions( x );
+
+  auto const result =
+  Best_fit( L_coat, b2, substrate, hp, tp, frequencies, model_predictions );
+  
+  return result;
+}
 
 } // namespace estimate_parameters
 } // namespace tbc2009

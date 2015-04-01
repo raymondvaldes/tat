@@ -43,8 +43,8 @@ struct Best_fit{
     thermal::model::slab::Slab const substrate_slab_,
     model::tbc2009::dimensionless::HeatingProperties const hp_,
     model::tbc2009::dimensionless::ThermalProperties const tp_,
-    std::vector< units::quantity<units::si::frequency> > const  frequencies_,
-    std::vector< units::quantity< units::si::plane_angle > > const model_phases_
+    std::vector< units::quantity<units::si::frequency> > const & frequencies_,
+    std::vector< units::quantity< units::si::plane_angle > > const & model_phases_
   ) noexcept ;
 
 };
@@ -53,8 +53,11 @@ auto estimate_parameters_from_phases
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
-  thermal::model::slab::Slab const & slab_initial,
-  thermal::model::slab::Slab const & slab_substrate
+  thermal::model::slab::Slab const slab_initial,
+  thermal::model::slab::Slab const slab_substrate,
+
+  model::tbc2009::dimensionless::HeatingProperties const hp_initial,
+  units::quantity< units::si::length > const detector_view_radius
 ) noexcept -> Best_fit;
 
 
