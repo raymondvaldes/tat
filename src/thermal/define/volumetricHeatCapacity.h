@@ -1,10 +1,10 @@
-//
-//  volumetricHeatCapacity.h
-//  tat
-//
-//  Created by Raymond Valdes_New on 3/10/15.
-//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
-//
+/*----------------------------------------------------------------------------*\
+ ========                 |
+    || 	   T Thermal      | TAT: Thermal Analysis Toolbox
+    ||  	 A Analysis     |
+    || 	   T Toolbox    	| Copyright (C) 2013 Raymond Valdes
+    ||   	  	          	|
+\*----------------------------------------------------------------------------*/
 
 #ifndef tat_thermal_model_volumetricHeatCapacity_h
 #define tat_thermal_model_volumetricHeatCapacity_h

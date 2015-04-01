@@ -1,11 +1,12 @@
-//
-//  volumetricHeatCapacity.cpp
-//  tat
-//
-//  Created by Raymond Valdes_New on 3/10/15.
-//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
-//
+/*----------------------------------------------------------------------------*\
+ ========                 |
+    || 	   T Thermal      | TAT: Thermal Analysis Toolbox
+    ||  	 A Analysis     |
+    || 	   T Toolbox    	| Copyright (C) 2013 Raymond Valdes
+    ||   	  	          	|
+\*----------------------------------------------------------------------------*/
 
+#include <cassert>
 #include "thermal/define/volumetricHeatCapacity.h"
 
 namespace thermal{
@@ -20,6 +21,8 @@ auto volumetricHeatCapacity
 )
 noexcept -> units::quantity< units::si::volumetric_heat_capacity >
 {
+  assert( alpha.value() > 0 );
+  assert( k.value() > 0 );
   // alpha = k / rhoCp
 
   auto const rhoCp = k / alpha ;
@@ -33,6 +36,8 @@ auto volumetricHeatCapacity
 )
 noexcept -> units::quantity< units::si::volumetric_heat_capacity >
 {
+  assert( e.value() > 0 );
+  assert( k.value() > 0 );
   // e = sqrt( k * rhoCp )
   
   auto const rhoCp = pow<2>( e ) / k;

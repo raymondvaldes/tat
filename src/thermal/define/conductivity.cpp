@@ -1,11 +1,12 @@
-//
-//  conductivity.cpp
-//  tat
-//
-//  Created by Raymond Valdes_New on 3/10/15.
-//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
-//
+/*----------------------------------------------------------------------------*\
+ ========                 |
+    || 	   T Thermal      | TAT: Thermal Analysis Toolbox
+    ||  	 A Analysis     |
+    || 	   T Toolbox    	| Copyright (C) 2013 Raymond Valdes
+    ||   	  	          	|
+\*----------------------------------------------------------------------------*/
 
+#include <cassert>
 #include "thermal/define/conductivity.h"
 
 namespace thermal{
@@ -20,6 +21,9 @@ auto conductivity
 )
 noexcept -> units::quantity< units::si::thermal_conductivity >
 {
+  assert( rhoCp.value() > 0 );
+  assert( alpha.value() > 0 );
+
   // alpha = k / rhoCp
 
   auto const k = alpha * rhoCp ;
@@ -33,6 +37,8 @@ auto conductivity
 )
 noexcept -> units::quantity< units::si::thermal_conductivity >
 {
+  assert( rhoCp.value() > 0 );
+  assert( e.value() > 0 );
   // e = sqrt( k * rhoCp )
 
   auto const k = pow<2>( e ) / rhoCp ;
@@ -46,6 +52,9 @@ auto conductivity
 )
 noexcept -> units::quantity< units::si::thermal_conductivity >
 {
+  assert( e.value() > 0 );
+  assert( alpha.value() > 0 );
+
   return e * sqrt( alpha );
 }
   

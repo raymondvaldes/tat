@@ -28,6 +28,8 @@ License
 
 namespace thermal{
 namespace define{
+
+using string = std::string;
   
 construct::construct( const enum HeatX myHeat,
                       const enum EmissionX myEmission ) noexcept
@@ -36,7 +38,6 @@ construct::construct( const enum HeatX myHeat,
 
 construct construct::loadConfigfromXML( const boost::property_tree::ptree pt) noexcept
 {
-  using std::string;
 
   typedef boost::bimap < enum EmissionX , string > emission_bimap;
   static const emission_bimap EmissionXMap =
