@@ -11,9 +11,7 @@
 
 namespace investigations{
 
-
 int main_app( const int argc, const char *argv[ ] ) noexcept;
-
 
 }
 

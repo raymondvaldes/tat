@@ -131,6 +131,7 @@
 		AB7F19921ACCA06D0086E8F8 /* split_vector_of_pairs.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7F19911ACCA06D0086E8F8 /* split_vector_of_pairs.h */; };
 		AB7F19941ACCB1300086E8F8 /* import_heating_properties.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7F19931ACCB1300086E8F8 /* import_heating_properties.h */; };
 		AB7F19961ACCB14B0086E8F8 /* import_heating_properties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB7F19951ACCB14B0086E8F8 /* import_heating_properties.cpp */; };
+		AB7F199A1ACCBBDC0086E8F8 /* si_literals.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7F19991ACCBBDC0086E8F8 /* si_literals.h */; };
 		AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */ = {isa = PBXBuildFile; fileRef = AB7FBD921A9FE65E00FF714D /* prandtl_number.h */; };
 		AB841C381AC4DB47000CE81D /* J1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB841C361AC4DB47000CE81D /* J1.cpp */; };
 		AB841C391AC4DB47000CE81D /* J1.h in Headers */ = {isa = PBXBuildFile; fileRef = AB841C371AC4DB47000CE81D /* J1.h */; };
@@ -566,6 +567,7 @@
 		AB7F19911ACCA06D0086E8F8 /* split_vector_of_pairs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split_vector_of_pairs.h; path = algorithm/vector/split_vector_of_pairs.h; sourceTree = "<group>"; };
 		AB7F19931ACCB1300086E8F8 /* import_heating_properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = import_heating_properties.h; path = tbc2009/dimensionless/import_heating_properties.h; sourceTree = "<group>"; };
 		AB7F19951ACCB14B0086E8F8 /* import_heating_properties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = import_heating_properties.cpp; path = tbc2009/dimensionless/import_heating_properties.cpp; sourceTree = "<group>"; };
+		AB7F19991ACCBBDC0086E8F8 /* si_literals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = si_literals.h; path = units/si/si_literals.h; sourceTree = "<group>"; };
 		AB7FBD921A9FE65E00FF714D /* prandtl_number.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prandtl_number.h; path = thermalfluids/dimensionless/prandtl_number.h; sourceTree = "<group>"; };
 		AB841C361AC4DB47000CE81D /* J1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = J1.cpp; path = tbc2009/complexT/radiosity/J1.cpp; sourceTree = "<group>"; };
 		AB841C371AC4DB47000CE81D /* J1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = J1.h; path = tbc2009/complexT/radiosity/J1.h; sourceTree = "<group>"; };
@@ -2192,6 +2194,7 @@
 				ABF5D66A19DB65AB00A70476 /* extension.h */,
 				AB71908019DF29D5008FC395 /* prefixes.h */,
 				AB71908219DF2C73008FC395 /* base.h */,
+				AB7F19991ACCBBDC0086E8F8 /* si_literals.h */,
 			);
 			name = si;
 			sourceTree = "<group>";
@@ -2321,6 +2324,7 @@
 				AB841C921AC5B62F000CE81D /* HeatingProperties.h in Headers */,
 				ABEF4E921948D4A500B44AD5 /* utils.hpp in Headers */,
 				ABFC80721AC629B90059E9D7 /* bessel.h in Headers */,
+				AB7F199A1ACCBBDC0086E8F8 /* si_literals.h in Headers */,
 				AB6367601AA941AC00AC8390 /* sum.h in Headers */,
 				AB44BD6E1AAA46E700E0710E /* normalizedDetectorMeasurements.h in Headers */,
 				ABEF4EAD1948D4A500B44AD5 /* basedata.hpp in Headers */,
@@ -2729,7 +2733,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2819,7 +2823,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_SHORT_ENUMS = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -2892,7 +2896,7 @@
 				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2956,7 +2960,7 @@
 				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_UNROLL_LOOPS = NO;
