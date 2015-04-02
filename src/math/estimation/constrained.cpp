@@ -28,6 +28,7 @@ double x_limiter1( const double xi ) noexcept
   return output ;
 }
 
+
 double x_limiter2( const double xi, const double x_min, const double x_max ) noexcept
 {
   // converts value from k-space to x_space. In k-space the parameter is free
@@ -48,11 +49,12 @@ double x_limiter2( const double xi, const double x_min, const double x_max ) noe
   /// Must build in some type of tolerance to ensure that xi is never >= the
   /// constraints. This causes errors when I'm transforming back and forth.
 
-  BOOST_ASSERT_MSG( x < x_max , "\nerror!! in x_limiter2");
-  BOOST_ASSERT_MSG( x > x_min , "\nerror!! in x_limiter2");
+  assert( x < x_max ) ;
+  assert( x > x_min ) ;
 
   return x ;
 }
+
 
 double kx_limiter1( const double ki ) noexcept {
     //converts value to k-space

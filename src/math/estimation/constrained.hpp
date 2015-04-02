@@ -41,7 +41,22 @@ std::vector<double> x_to_kspace_unity( const double* x, const size_t n ) noexcep
 
 std::vector<double> kspace_to_x_unity( const double* x, const size_t n ) noexcept;
 
-}}
+template< typename T >
+auto x_to_k_constrained_from_0_to_1( T const x ) noexcept -> T
+{
+  assert( x >= 0 );
+  assert( x <= 1 );
+  return kx_limiter2( x, 0, 1 );
+}
+
+template< typename T >
+auto k_to_x_constrained_from_0_to_1( T const k ) noexcept -> T
+{
+  return x_limiter2( k, 0, 1 );
+}
+
+} // namespace estimation
+} // namespace math
 
 
 #endif // CONSTRAINED_HPP
