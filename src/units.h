@@ -16,6 +16,7 @@
 #include "units/si/predefined.h"
 #include "units/si/extension.h"
 #include "units/si/constants/thermal.h"
+#include "units/si/si_literals.h"
 
 #include "units/quantity.h"
 #include "units/physical_dimensions.h"
