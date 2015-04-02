@@ -13,8 +13,12 @@
 #include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal{
-
 namespace define{
+
+  using std::vector;
+    using namespace units;
+  using algorithm::transform;
+  using std::begin;
 
 auto
 lthermal(
@@ -60,10 +64,7 @@ noexcept -> units::quantity< units::si::dimensionless >
   assert( alpha.value() > 0 ) ;
   assert( omega.value() > 0 ) ;
   assert( L.value() > 0 ) ;
-  
-  using units::sqrt;
-  using units::si::radians;
-  
+
   auto const thermalPenetration = sqrt( ( alpha  / omega ) * radians ) / L  ;
   
   return thermalPenetration ;
@@ -91,22 +92,16 @@ auto
 thermalPenetrations_from_frequencies
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
-  units::quantity< units::si::thermal_diffusivity > const & alpha,
-  units::quantity< units::si::length > const & L
+  units::quantity< units::si::thermal_diffusivity > const alpha,
+  units::quantity< units::si::length > const L
 )
 noexcept -> std::vector< units::quantity< units::si::dimensionless > >
 {
-  using std::vector;
-  using units::si::dimensionless;
-  using units::quantity;
-  using algorithm::transform;
-  using std::begin;
-
   auto const count = frequencies.size();
   auto lthermals = vector< quantity< dimensionless > >{ count } ;
   
-  transform( frequencies, begin( lthermals ) ,
-  [ &alpha, &L ]( auto const & freq ) noexcept
+  transform( frequencies, begin( lthermals ) , [ &alpha, &L ]
+  ( auto const freq ) noexcept
   {
     auto const lthermal = thermal_penetration( alpha, freq , L ) ;
     return lthermal;
@@ -125,8 +120,6 @@ thermalPenetrations_from_angularFrequencies
 noexcept -> std::vector< units::quantity< units::si::dimensionless > >
 {
   using std::vector;
-  using units::si::dimensionless;
-  using units::quantity;
   using algorithm::transform;
   using std::begin;
 
@@ -155,8 +148,6 @@ angularFrequencies_from_thermalPenetrations
 noexcept -> std::vector< units::quantity< units::si::angular_frequency > >
 {
   using std::vector;
-  using units::si::angular_frequency;
-  using units::quantity;
   using algorithm::transform;
   using std::begin;
 
@@ -199,8 +190,6 @@ angularFrequency_from_thermalPenetration(
   units::quantity< units::si::length > const & L )
 noexcept -> units::quantity< units::si::angular_frequency >
 {
-  using units::pow;
-  using units::si::radians;
   
   auto const omega = alpha / pow< 2 >(  lthermal * L ) ;
   return omega * radians;
@@ -213,8 +202,6 @@ frequency_from_thermalPenetration(
   units::quantity< units::si::length > const & L )
 noexcept -> units::quantity< units::si::frequency >
 {
-  using units::pow;
-  using units::si::radians;
   using physics::classical_mechanics::angularFrequency_to_frequency;
   
   auto const omega =

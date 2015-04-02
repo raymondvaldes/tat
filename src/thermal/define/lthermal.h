@@ -57,8 +57,8 @@ auto
 thermalPenetrations_from_frequencies
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
-  units::quantity< units::si::thermal_diffusivity > const & alpha,
-  units::quantity< units::si::length > const & L
+  units::quantity< units::si::thermal_diffusivity > const alpha,
+  units::quantity< units::si::length > const L
 )
 noexcept -> std::vector< units::quantity< units::si::dimensionless > >;
 
