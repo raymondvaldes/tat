@@ -43,8 +43,8 @@ struct Best_fit{
     thermal::model::slab::Slab const substrate_slab_,
     model::tbc2009::dimensionless::HeatingProperties const hp_,
     model::tbc2009::dimensionless::ThermalProperties const tp_,
-    std::vector< units::quantity<units::si::frequency> > const & frequencies_,
-    std::vector< units::quantity< units::si::plane_angle > > const & model_phases_
+    std::vector< units::quantity<units::si::frequency> > const frequencies_,
+    std::vector< units::quantity< units::si::plane_angle > > const model_phases_
   ) noexcept ;
 
 };
