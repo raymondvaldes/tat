@@ -8,6 +8,7 @@
 
 #include "phase_amplitude.h"
 #include "temperature.h"
+#include "math/coordinate_system/wrap_to_negPi_posPi.h"
 
 namespace thermal {
 namespace model {
@@ -16,6 +17,7 @@ namespace complexT {
 
 using std::make_pair;
 using namespace units;
+using math::coordinate_system::wrap_to_negPi_posPi;
 
 auto phase_amplitude
 (
@@ -29,7 +31,12 @@ auto phase_amplitude
   units::quantity< units::si::dimensionless> >
 {
   auto const T_complex = temperature( z, r, hp, tp, l );
-  return make_pair( arg(T_complex), abs( T_complex ) );
+  
+  auto const phase = arg( T_complex ) - M_PI_2 * radians ;
+
+  auto const phase_wrapper = wrap_to_negPi_posPi( phase );
+
+  return make_pair( phase_wrapper , abs( T_complex ) );
 }
   
 } // complexT
