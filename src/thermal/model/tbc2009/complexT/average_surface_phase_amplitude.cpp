@@ -68,7 +68,7 @@ auto average_surface_phase_amplitude
     double const r
   ) noexcept -> void
   {
-    dy[0] = amplitude( r ) * r;
+    dy[0] = amplitude( r ) * r; 
   };
 
   auto const area_phase =

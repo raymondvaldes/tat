@@ -31,9 +31,6 @@ auto temperature
   assert( r.value() >= 0 );
   
   auto const h = h_system( z, hp, tp, l );
-  
-  
-  
   auto const T = inverseHankel( h , z, r ) ;
   
   return T;

@@ -7,7 +7,7 @@
 //
 
 #include "h_system.h"
-
+#include <cassert>
 #include "thermal/model/tbc2009/complexT/h_sub.h"
 #include "thermal/model/tbc2009/complexT/h_coat.h"
 
@@ -35,7 +35,7 @@ auto h_system
   ( units::quantity< units::si::dimensionless, double > const,
     units::quantity< units::si::dimensionless, double > const)>();
 
-  auto const in_coating = z > 0 && z <= 1;
+  auto const in_coating = z >= 0 && z <= 1;
   auto const in_substrate = z > 1 ;
   
   if( in_coating )
@@ -50,6 +50,12 @@ auto h_system
       return h_sub( nu_, z_, hp, tp, l );
     };
   }
+  else
+  {
+    throw 1;
+  }
+  
+  assert( !in_coating || !in_substrate  );
   
   return h;
 }
