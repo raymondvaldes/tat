@@ -29,8 +29,6 @@ noexcept -> double;
   // 1/(A) * Int[ Int[ ( f * r ), dphi, phi_1, phi_2 ] , dr, r1, r2 ]
 
   // A = pi * b^2
-  
-  
 
 } // namespace mean_value
 } // namespace calculus

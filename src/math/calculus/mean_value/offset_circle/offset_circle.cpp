@@ -62,7 +62,7 @@ noexcept -> double
     ( vector< double > const & y, vector< double > & dy, double const r )
     noexcept -> void
     {
-      dy[0] = arc_length(r) ;
+      dy[0] = arc_length( r ) ;
     };
     
     auto const ini = vector< double > ( { 0 } );

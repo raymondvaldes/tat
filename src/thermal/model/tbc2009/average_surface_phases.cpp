@@ -39,7 +39,7 @@ average_surface_phases
   {
     auto const phase = phase_amplitude_pair.first;
     return phase;
-  });
+  } ) ;
   
   return phases;
 }
