@@ -217,6 +217,20 @@
 		AB9383E51AC22F8700F2D2DD /* a.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9383E31AC22F8700F2D2DD /* a.h */; };
 		AB9383E81AC22F9300F2D2DD /* b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9383E61AC22F9300F2D2DD /* b.cpp */; };
 		AB9383E91AC22F9300F2D2DD /* b.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9383E71AC22F9300F2D2DD /* b.h */; };
+		AB9A3F9C1ACDFB860004882F /* function.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3F9B1ACDFB860004882F /* function.h */; };
+		AB9A3F9E1ACDFECA0004882F /* circle.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3F9D1ACDFECA0004882F /* circle.h */; };
+		AB9A3FA01ACE00330004882F /* offset_circle.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3F9F1ACE00330004882F /* offset_circle.h */; };
+		AB9A3FA31ACE01810004882F /* circle.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3FA21ACE01810004882F /* circle.h */; };
+		AB9A3FA51ACE03290004882F /* circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9A3FA41ACE03290004882F /* circle.cpp */; };
+		AB9A3FAC1ACE09B50004882F /* if_intersect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9A3FAA1ACE09B50004882F /* if_intersect.cpp */; };
+		AB9A3FAD1ACE09B50004882F /* if_intersect.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3FAB1ACE09B50004882F /* if_intersect.h */; };
+		AB9A3FB01ACE0A270004882F /* angles_of_intersection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9A3FAE1ACE0A270004882F /* angles_of_intersection.cpp */; };
+		AB9A3FB11ACE0A270004882F /* angles_of_intersection.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3FAF1ACE0A270004882F /* angles_of_intersection.h */; };
+		AB9A3FB91ACF0EED0004882F /* points_of_intersection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9A3FB71ACF0EED0004882F /* points_of_intersection.cpp */; };
+		AB9A3FBA1ACF0EED0004882F /* points_of_intersection.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3FB81ACF0EED0004882F /* points_of_intersection.h */; };
+		AB9A3FBF1ACF14BA0004882F /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9A3FBD1ACF14BA0004882F /* point.cpp */; };
+		AB9A3FC01ACF14BA0004882F /* point.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3FBE1ACF14BA0004882F /* point.h */; };
+		AB9A3FC21ACF2CA90004882F /* offset_circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9A3FC11ACF2CA90004882F /* offset_circle.cpp */; };
 		ABA0B7331A9D005C00F000DA /* vector_to_valarray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA0B7321A9D005C00F000DA /* vector_to_valarray.h */; };
 		ABA0B7351A9D006F00F000DA /* valarray_to_vector.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA0B7341A9D006F00F000DA /* valarray_to_vector.h */; };
 		ABA48C381A7843F90025666F /* range.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48C361A7843F90025666F /* range.h */; };
@@ -657,6 +671,20 @@
 		AB9383E31AC22F8700F2D2DD /* a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = a.h; path = two_layer/dimensionless/a.h; sourceTree = "<group>"; };
 		AB9383E61AC22F9300F2D2DD /* b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = b.cpp; path = two_layer/dimensionless/b.cpp; sourceTree = "<group>"; };
 		AB9383E71AC22F9300F2D2DD /* b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = b.h; path = two_layer/dimensionless/b.h; sourceTree = "<group>"; };
+		AB9A3F9B1ACDFB860004882F /* function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = function.h; path = calculus/mean_value/function/function.h; sourceTree = "<group>"; };
+		AB9A3F9D1ACDFECA0004882F /* circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circle.h; path = calculus/mean_value/circle/circle.h; sourceTree = "<group>"; };
+		AB9A3F9F1ACE00330004882F /* offset_circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = offset_circle.h; path = calculus/mean_value/offset_circle/offset_circle.h; sourceTree = "<group>"; };
+		AB9A3FA21ACE01810004882F /* circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circle.h; path = geometry/circle.h; sourceTree = "<group>"; };
+		AB9A3FA41ACE03290004882F /* circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = circle.cpp; path = geometry/circle.cpp; sourceTree = "<group>"; };
+		AB9A3FAA1ACE09B50004882F /* if_intersect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = if_intersect.cpp; path = geometry/intersect/two_circles/if_intersect.cpp; sourceTree = "<group>"; };
+		AB9A3FAB1ACE09B50004882F /* if_intersect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = if_intersect.h; path = geometry/intersect/two_circles/if_intersect.h; sourceTree = "<group>"; };
+		AB9A3FAE1ACE0A270004882F /* angles_of_intersection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = angles_of_intersection.cpp; path = geometry/intersect/two_circles/angles_of_intersection.cpp; sourceTree = "<group>"; };
+		AB9A3FAF1ACE0A270004882F /* angles_of_intersection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = angles_of_intersection.h; path = geometry/intersect/two_circles/angles_of_intersection.h; sourceTree = "<group>"; };
+		AB9A3FB71ACF0EED0004882F /* points_of_intersection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = points_of_intersection.cpp; path = geometry/intersect/two_circles/points_of_intersection.cpp; sourceTree = "<group>"; };
+		AB9A3FB81ACF0EED0004882F /* points_of_intersection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = points_of_intersection.h; path = geometry/intersect/two_circles/points_of_intersection.h; sourceTree = "<group>"; };
+		AB9A3FBD1ACF14BA0004882F /* point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = point.cpp; path = geometry/point/point.cpp; sourceTree = "<group>"; };
+		AB9A3FBE1ACF14BA0004882F /* point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point.h; path = geometry/point/point.h; sourceTree = "<group>"; };
+		AB9A3FC11ACF2CA90004882F /* offset_circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = offset_circle.cpp; path = calculus/mean_value/offset_circle/offset_circle.cpp; sourceTree = "<group>"; };
 		ABA0B7321A9D005C00F000DA /* vector_to_valarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector_to_valarray.h; path = algorithm/valarray/vector_to_valarray.h; sourceTree = "<group>"; };
 		ABA0B7341A9D006F00F000DA /* valarray_to_vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valarray_to_vector.h; path = algorithm/valarray/valarray_to_vector.h; sourceTree = "<group>"; };
 		ABA48C361A7843F90025666F /* range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = range.h; path = construct/range.h; sourceTree = "<group>"; };
@@ -1101,6 +1129,9 @@
 		AB553C48195DE30F00E2B7D1 /* geometry */ = {
 			isa = PBXGroup;
 			children = (
+				AB9A3FBC1ACF14A70004882F /* point */,
+				AB9A3FA61ACE07530004882F /* intersect */,
+				AB9A3FA11ACE01740004882F /* area */,
 				AB553C4D195DE60100E2B7D1 /* interval.cpp */,
 				AB553C4E195DE60100E2B7D1 /* interval.h */,
 			);
@@ -1550,6 +1581,88 @@
 			name = complex;
 			sourceTree = "<group>";
 		};
+		AB9A3F961ACDFB0A0004882F /* calculus */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3F971ACDFB140004882F /* mean_value */,
+			);
+			name = calculus;
+			sourceTree = "<group>";
+		};
+		AB9A3F971ACDFB140004882F /* mean_value */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3F9A1ACDFB430004882F /* offset_circle */,
+				AB9A3F991ACDFB340004882F /* circle */,
+				AB9A3F981ACDFB200004882F /* function */,
+			);
+			name = mean_value;
+			sourceTree = "<group>";
+		};
+		AB9A3F981ACDFB200004882F /* function */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3F9B1ACDFB860004882F /* function.h */,
+			);
+			name = function;
+			sourceTree = "<group>";
+		};
+		AB9A3F991ACDFB340004882F /* circle */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3F9D1ACDFECA0004882F /* circle.h */,
+			);
+			name = circle;
+			sourceTree = "<group>";
+		};
+		AB9A3F9A1ACDFB430004882F /* offset_circle */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3F9F1ACE00330004882F /* offset_circle.h */,
+				AB9A3FC11ACF2CA90004882F /* offset_circle.cpp */,
+			);
+			name = offset_circle;
+			sourceTree = "<group>";
+		};
+		AB9A3FA11ACE01740004882F /* area */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3FA21ACE01810004882F /* circle.h */,
+				AB9A3FA41ACE03290004882F /* circle.cpp */,
+			);
+			name = area;
+			sourceTree = "<group>";
+		};
+		AB9A3FA61ACE07530004882F /* intersect */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3FA91ACE098D0004882F /* two_circles */,
+			);
+			name = intersect;
+			sourceTree = "<group>";
+		};
+		AB9A3FA91ACE098D0004882F /* two_circles */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3FAA1ACE09B50004882F /* if_intersect.cpp */,
+				AB9A3FAB1ACE09B50004882F /* if_intersect.h */,
+				AB9A3FAE1ACE0A270004882F /* angles_of_intersection.cpp */,
+				AB9A3FAF1ACE0A270004882F /* angles_of_intersection.h */,
+				AB9A3FB71ACF0EED0004882F /* points_of_intersection.cpp */,
+				AB9A3FB81ACF0EED0004882F /* points_of_intersection.h */,
+			);
+			name = two_circles;
+			sourceTree = "<group>";
+		};
+		AB9A3FBC1ACF14A70004882F /* point */ = {
+			isa = PBXGroup;
+			children = (
+				AB9A3FBD1ACF14BA0004882F /* point.cpp */,
+				AB9A3FBE1ACF14BA0004882F /* point.h */,
+			);
+			name = point;
+			sourceTree = "<group>";
+		};
 		ABA0B7311A9D002F00F000DA /* valarray */ = {
 			isa = PBXGroup;
 			children = (
@@ -1765,6 +1878,7 @@
 			isa = PBXGroup;
 			children = (
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
+				AB9A3F961ACDFB0A0004882F /* calculus */,
 				ABA48C341A7843CE0025666F /* construct */,
 				ABB09B891AB89C82005D6BB5 /* coordinate_system */,
 				AB932DF31A6DBAC700ECF117 /* curveFIt */,
@@ -2221,6 +2335,7 @@
 				AB7F198E1ACC97E00086E8F8 /* average_surface_phases.h in Headers */,
 				ABEF4F001948D4A500B44AD5 /* xml.h in Headers */,
 				ABEB14B21AAA557900204B36 /* analytical.h in Headers */,
+				AB9A3FBA1ACF0EED0004882F /* points_of_intersection.h in Headers */,
 				AB4E53B61ABB9E1B00E7BA8D /* normalized_SR_exp_model.h in Headers */,
 				AB7A69511AB267EA00249A6E /* find_all.h in Headers */,
 				ABEF4EE01948D4A500B44AD5 /* setup.h in Headers */,
@@ -2275,6 +2390,7 @@
 				ABEBCE5819C737E500882E01 /* central_difference.h in Headers */,
 				AB521A031AB65E74008FD7DC /* gnuplot-iostream.h in Headers */,
 				AB0DFE02195242AA007DF69B /* split.h in Headers */,
+				AB9A3FB11ACE0A270004882F /* angles_of_intersection.h in Headers */,
 				AB8611D61ABE58FC00E1ECF0 /* compensate_for_phase_difference.h in Headers */,
 				AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */,
 				AB9383E11AC22E4500F2D2DD /* time_nd.h in Headers */,
@@ -2318,6 +2434,7 @@
 				ABEF4EA21948D4A500B44AD5 /* kinematics.h in Headers */,
 				ABEF4E781948D4A500B44AD5 /* execute.h in Headers */,
 				ABEF4F041948D4A500B44AD5 /* timing.h in Headers */,
+				AB9A3FC01ACF14BA0004882F /* point.h in Headers */,
 				ABEF4ED41948D4A500B44AD5 /* temperature.h in Headers */,
 				ABEF4EEA1948D4A500B44AD5 /* numerical_2011.h in Headers */,
 				AB7A694B1AB253F800249A6E /* find_unique_measurements.h in Headers */,
@@ -2375,6 +2492,8 @@
 				AB7996D81AB0EDA50022015B /* scopeFile.h in Headers */,
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
 				AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */,
+				AB9A3FAD1ACE09B50004882F /* if_intersect.h in Headers */,
+				AB9A3F9E1ACDFECA0004882F /* circle.h in Headers */,
 				AB5E9D3D1ACA27CA003319FA /* average_surface_phase_amplitude.h in Headers */,
 				ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */,
 				ABEF4E9C1948D4A500B44AD5 /* tma.h in Headers */,
@@ -2414,12 +2533,14 @@
 				ABB09B7F1AB79FDE005D6BB5 /* standard_deviation.h in Headers */,
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
 				AB841C8C1AC4FA5B000CE81D /* F_tilde.h in Headers */,
+				AB9A3FA01ACE00330004882F /* offset_circle.h in Headers */,
 				ABEF4EDC1948D4A500B44AD5 /* detector.h in Headers */,
 				AB841CA61AC5CDD8000CE81D /* temperature.h in Headers */,
 				AB841C551AC4E4B0000CE81D /* b.h in Headers */,
 				AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */,
 				ABEF4ED61948D4A500B44AD5 /* emission.hpp in Headers */,
 				ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */,
+				AB9A3FA31ACE01810004882F /* circle.h in Headers */,
 				ABEF4EFE1948D4A500B44AD5 /* filesystem.hpp in Headers */,
 				ABEF4EAF1948D4A500B44AD5 /* cmplx_combination.h in Headers */,
 				AB0DFE0619524382007DF69B /* starts_with.h in Headers */,
@@ -2428,6 +2549,7 @@
 				ABFC9E6C1A94420300F124F1 /* doubleToString.h in Headers */,
 				ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */,
 				ABEF4ED81948D4A500B44AD5 /* noise.hpp in Headers */,
+				AB9A3F9C1ACDFB860004882F /* function.h in Headers */,
 				ABF5D66819DB60BD00A70476 /* predefined.h in Headers */,
 				AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */,
 				ABEF4ED01948D4A500B44AD5 /* model_type.h in Headers */,
@@ -2545,6 +2667,7 @@
 				AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */,
 				AB2BA4781AB3DA78008AF545 /* import_twoColor_scope_files.cpp in Sources */,
 				AB841C961AC5B9CF000CE81D /* HeatingProperties.cpp in Sources */,
+				AB9A3FA51ACE03290004882F /* circle.cpp in Sources */,
 				ABEF4E931948D4A500B44AD5 /* gslfunc.cpp in Sources */,
 				ABEF4E9F1948D4A500B44AD5 /* utility.cpp in Sources */,
 				ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */,
@@ -2556,6 +2679,7 @@
 				ABEF4E791948D4A500B44AD5 /* num_method2014.cpp in Sources */,
 				AB480BC11AC5FB910039C1A8 /* h_system.cpp in Sources */,
 				AB5E9D341ACA1E66003319FA /* phases_amplitudes.cpp in Sources */,
+				AB9A3FB01ACE0A270004882F /* angles_of_intersection.cpp in Sources */,
 				AB90AA5A1AB2A54500F2535D /* pyrometery_settings_file.cpp in Sources */,
 				AB9383E41AC22F8700F2D2DD /* a.cpp in Sources */,
 				AB7A69461AB24F3E00249A6E /* find_unique_frequencies_in_files.cpp in Sources */,
@@ -2566,6 +2690,7 @@
 				AB7A693E1AB2465400249A6E /* Unique_scope_measurement.cpp in Sources */,
 				ABEF4ED51948D4A500B44AD5 /* emission.cpp in Sources */,
 				AB33E74C1AC231A800A0FF53 /* surface_temperature.cpp in Sources */,
+				AB9A3FC21ACF2CA90004882F /* offset_circle.cpp in Sources */,
 				AB841C5C1AC4E4D4000CE81D /* c.cpp in Sources */,
 				AB6087671A69A6B9009B1E85 /* normalizedSignalRatio.cpp in Sources */,
 				AB841C831AC4F80E000CE81D /* tilde.cpp in Sources */,
@@ -2606,6 +2731,7 @@
 				AB841C401AC4DB62000CE81D /* J0.cpp in Sources */,
 				ABC5B1BD1AB55D1600A6D33C /* import_slab.cpp in Sources */,
 				AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */,
+				AB9A3FB91ACF0EED0004882F /* points_of_intersection.cpp in Sources */,
 				AB5E9D401ACA3163003319FA /* average_surface_phases_amplitudes.cpp in Sources */,
 				AB841C3C1AC4DB53000CE81D /* J2.cpp in Sources */,
 				ABEF4ED71948D4A500B44AD5 /* noise.cpp in Sources */,
@@ -2629,6 +2755,7 @@
 				AB2BA4741AB3D3D9008AF545 /* transient_analysis_sweep.cpp in Sources */,
 				ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */,
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
+				AB9A3FAC1ACE09B50004882F /* if_intersect.cpp in Sources */,
 				ABEF4EB01948D4A500B44AD5 /* kernal.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
 				ABEB14B61AAA622600204B36 /* slab.cpp in Sources */,
@@ -2652,6 +2779,7 @@
 				AB5E9D381ACA2701003319FA /* surface_phase_amplitude.cpp in Sources */,
 				AB76C5881ACB501700C4E502 /* gamma.cpp in Sources */,
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
+				AB9A3FBF1ACF14BA0004882F /* point.cpp in Sources */,
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				AB5E9D3C1ACA27CA003319FA /* average_surface_phase_amplitude.cpp in Sources */,
 				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
@@ -2733,7 +2861,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2896,7 +3024,7 @@
 				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
