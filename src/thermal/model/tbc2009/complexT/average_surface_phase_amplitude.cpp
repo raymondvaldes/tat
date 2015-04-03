@@ -35,7 +35,7 @@ auto average_surface_phase_amplitude
   // integration domain
   auto const r0 = double(0) ;
   auto const r1 = view_radius.value() ;
-  auto const dr_intial_step = double( 0.01 );
+  auto const dr_i_step = double( 0.01 );
   auto const f_r0 = vector< double > ( { 0 } );
   
   auto const phase = [&]( double const & r ) noexcept -> double {
@@ -68,20 +68,20 @@ auto average_surface_phase_amplitude
     double const r
   ) noexcept -> void
   {
-    dy[0] = amplitude( r ) * r; 
+    dy[0] = amplitude( r ) * r;
   };
 
   auto const area_phase =
-  math::numIntegration::integrate( func_phase, f_r0, r0, r1, dr_intial_step );
+  math::numIntegration::integrate( func_phase, f_r0, r0, r1, dr_i_step );
 
   auto const area_amplitude =
-  math::numIntegration::integrate( func_amplitude, f_r0, r0, r1, dr_intial_step );
+  math::numIntegration::integrate( func_amplitude, f_r0, r0, r1, dr_i_step );
   
-  auto const average_phase = ( 2. / pow( r1, 2) ) * area_phase ;
-  auto const average_aplitude = ( 2. / pow( r1, 2) ) * area_amplitude ;
+  auto const average_phase = ( 2. / pow( r1, 2 ) ) * area_phase ;
+  auto const average_amplitude = ( 2. / pow( r1, 2 ) ) * area_amplitude ;
 
   return make_pair( quantity<plane_angle>::from_value( average_phase),
-                    quantity<si::dimensionless >( average_aplitude ) ) ;
+                    quantity<si::dimensionless >( average_amplitude ) ) ;
 }
   
 } // complexT
