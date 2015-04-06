@@ -57,8 +57,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   // integration domain
   auto const x0 = double(0) ;
   auto const x1 = settings.nu_end.value() ;
-  auto const dx_intial_step = double( 0.1 );
-  auto const f_x0 = vector< double > ( { 0 } );
+  auto const dx_intial_step = double( 0.05 );
   
   auto const J0 = []( auto const & x ) noexcept { return bessel_j(0, x );};
   
@@ -70,32 +69,25 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
 
   // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
   auto const func_real = [ &h, &z, &r, &hankel_function ]
-  (
-    vector< double > const & y,
-    vector< double > & dy,  // thing integrate
-    double const nu
-  ) noexcept -> void
+  ( vector< double > const & y, vector< double > & dy, double const nu )
+  noexcept -> void
   {
     dy[0] = hankel_function( nu ).real(); ;
   };
 
   auto const area_real =
-  math::numIntegration::integrate( func_real, f_x0, x0, x1, dx_intial_step );
-  
+  math::numIntegration::integrate( func_real, { 0 }, x0, x1, dx_intial_step );
   
   auto const func_imag = [ &h, &z, &r, &hankel_function ]
-  (
-    vector< double > const & y,
-    vector< double > & dy,
-    double const nu
-  ) noexcept -> void
+  ( vector< double > const & y, vector< double > & dy, double const nu )
+  noexcept -> void
   {
     auto const eval = hankel_function( nu ) ;
     dy[0] = eval.imag(); ;
   };
   
   auto const area_imag =
-  math::numIntegration::integrate( func_imag, f_x0, x0, x1, dx_intial_step );
+  math::numIntegration::integrate( func_imag, { 0 }, x0, x1, dx_intial_step );
   
 
   auto const area = complex<double>( area_real, area_imag );

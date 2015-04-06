@@ -31,9 +31,13 @@
 #include "thermal/analysis/tbc2009/estimate_parameters/from_phases.h"
 #include "thermal/model/tbc2009/dimensionless/import_heating_properties.h"
 
+#include "thermal/analysis/tbc2009/detector_offset/estimate_parameters/from_phases/from_phases.h"
+
 namespace investigations{
 
 namespace twoColorPyrometery{
+
+using namespace thermal::analysis::tbc2009;
 
 using gTBC::gMeasure::import_twoColor_scope_files ;
 
@@ -52,8 +56,8 @@ auto run( filesystem::directory const & dir ) -> void
   std::cout << gCoeff << "\n";
   
   auto const scope_data = import_twoColor_scope_files( dir, "twoColorPyro.xml" , gCoeff );
-  plot::wave_signals( scope_data.measurements.front()  );
-  plot::wave_signals( scope_data.measurements.back()  );
+//  plot::wave_signals( scope_data.measurements.front()  );
+//  plot::wave_signals( scope_data.measurements.back()  );
 
   auto const twoColor_data = transient_analysis_sweep( scope_data ) ;
   
@@ -61,11 +65,11 @@ auto run( filesystem::directory const & dir ) -> void
   auto const substrate_slab = import( dir, "substrate_slab.xml" ) ;
   
   // (SLAB MODEL)
-//  auto const BC = thermal::model::slab::back_boundary_condition::T_unknown;
+//  auto const BC = thermal::model::slab::back_boundary_condition::T_base;
 //  auto const bestFit_results =
 //  diffusivity_from_phases( twoColor_data.phases_omega() , initial_slab , BC);
   
-  //( TWO-SLAB model (surface heating)
+//  //( TWO-SLAB model (surface heating)
 //  auto const bestFit_results =
 //  diffusivity_from_phases(
 //  twoColor_data.phases_frequency() , initial_slab, substrate_slab ) ;
@@ -104,6 +108,17 @@ auto run( filesystem::directory const & dir ) -> void
     hp_initial,
     scope_data.detector_view_radius
   ) ;
+
+//  auto const bestFit_results =
+//  tbc2009::detector_offset::estimate_parameters::from_phases
+//  (
+//    experimental_phases,
+//    initial_slab,
+//    substrate_slab,
+//    hp_initial,
+//    scope_data.detector_view_radius,
+//    units::quantity< units::si::length >( .01 * units::si::millimeters )
+//  ) ;
   
   std::cout << bestFit_results.coating_slab.get_diffusivity() << "\n";
  
@@ -113,15 +128,15 @@ auto run( filesystem::directory const & dir ) -> void
     experimental_phases.second,
     bestFit_results.model_phases
   );
-  
-  plot::transient_surface_amplitudes(
-      bestFit_results.frequencies ,
-      twoColor_data.surface_temperature_amplitudes()
-  );
-  
-  plot::steady_surface_temperature(
-    bestFit_results.frequencies ,
-    twoColor_data.surface_steady_temperature());
+//
+//  plot::transient_surface_amplitudes(
+//      bestFit_results.frequencies ,
+//      twoColor_data.surface_temperature_amplitudes()
+//  );
+//  
+//  plot::steady_surface_temperature(
+//    bestFit_results.frequencies ,
+//    twoColor_data.surface_steady_temperature());
   
   twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
   twoColor_data.transient_results.front().plot_normalized_SR_exp_model();

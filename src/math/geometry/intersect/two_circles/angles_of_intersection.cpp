@@ -5,7 +5,7 @@
 //  Created by Raymond Valdes on 4/2/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
-
+#include <iostream>
 #include "math/geometry/intersect/two_circles/angles_of_intersection.h"
 #include "math/geometry/intersect/two_circles/if_intersect.h"
 #include "math/geometry/intersect/two_circles/points_of_intersection.h"
@@ -31,7 +31,7 @@ auto angles_of_intersection
 )  -> std::pair< units::quantity< units::si::plane_angle>,
                 units::quantity< units::si::plane_angle> >
 {
-  assert( r > 0 * meter );
+  assert( r >= 0 * meter );
   assert( offset > 0 * meter );
   assert( radius > 0 * meter );
 
@@ -70,8 +70,8 @@ auto angles_of_intersection
     angles = make_pair( -M_PI * radians, M_PI * radians );
   }
   
-  assert( angles.first < 0 * radians );
-  assert( angles.second > 0 * radians );
+  assert( angles.first <= 0 * radians );
+  assert( angles.second >= 0 * radians );
   
   return angles;
 }

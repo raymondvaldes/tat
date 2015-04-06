@@ -52,8 +52,8 @@ Best_fit::Best_fit
   units::quantity< units::si::length > const L_coat_,
   units::quantity< units::si::dimensionless > const view_radius_,
   thermal::model::slab::Slab const substrate_slab,
-  model::tbc2009::dimensionless::HeatingProperties const hp_,
-  model::tbc2009::dimensionless::ThermalProperties const tp_,
+  model::tbc2009::dimensionless::HeatingProperties const & hp_,
+  model::tbc2009::dimensionless::ThermalProperties const & tp_,
  
   std::vector< units::quantity<units::si::frequency> > const frequencies_,
   std::vector< units::quantity< units::si::plane_angle > > const model_phases_
@@ -75,7 +75,7 @@ auto from_phases
   thermal::model::slab::Slab const slab_initial,
   thermal::model::slab::Slab const substrate,
 
-  model::tbc2009::dimensionless::HeatingProperties const hp_initial,
+  model::tbc2009::dimensionless::HeatingProperties const & hp_initial,
   units::quantity< units::si::length > const detector_view_radius
 ) noexcept -> Best_fit
 {
@@ -104,8 +104,8 @@ auto from_phases
     kx_limiter1( b_i.value() ) ,      // beam radius
     kx_limiter1( b2_i.value() ),      // detector radius
     x_to_k_constrained_from_0_to_1( hp_initial.Lambda.value() ),  // optical penetration
-    x_to_k_constrained_from_0_to_1( hp_initial.R0.value() ) ,     // surface reflectivity
-    x_to_k_constrained_from_0_to_1( hp_initial.R1.value() )      // interface reflectivity
+//    x_to_k_constrained_from_0_to_1( hp_initial.R0.value() ) ,     // surface reflectivity
+//    x_to_k_constrained_from_0_to_1( hp_initial.R1.value() )      // interface reflectivity
   };
   
   // parameter estimation algorithm
@@ -123,11 +123,11 @@ auto from_phases
     auto const Lambda =
     quantity<si::dimensionless>( k_to_x_constrained_from_0_to_1( x[4] ) );
     
-    auto const R0 =
-    quantity<si::dimensionless>( k_to_x_constrained_from_0_to_1( x[5] ) );
+    auto const R0 =hp_initial.R0;
+  //  quantity<si::dimensionless>( k_to_x_constrained_from_0_to_1( x[5] ) );
     
-    auto const R1 =
-    quantity<si::dimensionless>( k_to_x_constrained_from_0_to_1( x[6] ) );
+    auto const R1 = hp_initial.R1;
+  //  quantity<si::dimensionless>( k_to_x_constrained_from_0_to_1( x[6] ) );
     
     std::cout << a_sub << "\t" << gamma << "\t" << b << "\t" << b2 << "\t" << Lambda <<"\t";
     std::cout << R0 << "\t" << R1 << "\n";
@@ -173,7 +173,7 @@ auto from_phases
   };
 
   auto lmdif_settings = settings{};
-  lmdif_settings.factor = 10;
+  lmdif_settings.factor = 1.;
 
   lmdif(  minimization_equation, number_of_points_to_Fit,
           model_parameters, lmdif_settings );
@@ -196,10 +196,10 @@ auto from_phases
   std::pair<
   std::vector< units::quantity< units::si::frequency > > ,
   std::vector< units::quantity< units::si::plane_angle > > > const & o,
-  thermal::model::slab::Slab const slab_initial,
-  thermal::model::slab::Slab const slab_substrate,
-  model::tbc2009::dimensionless::HeatingProperties const hp_initial,
-  units::quantity< units::si::length > const detector_view_radius
+  thermal::model::slab::Slab const & slab_initial,
+  thermal::model::slab::Slab const & slab_substrate,
+  model::tbc2009::dimensionless::HeatingProperties const & hp_initial,
+  units::quantity< units::si::length > const & detector_view_radius
 ) noexcept -> Best_fit
 {
   assert( o.first.size() == o.second.size() );

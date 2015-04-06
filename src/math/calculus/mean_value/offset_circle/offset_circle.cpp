@@ -34,28 +34,44 @@ auto offset_circle
 )
 noexcept -> double
 {
+  assert( offset > 0 * meters ) ;
+  assert( radius > 0 * meters ) ;
+
   auto const arc_length = [ &f, offset, radius ]( double const r ) noexcept
   {
+    assert( r > 0 );
     auto const R = quantity< si::length>::from_value( r );
+    assert( R > 0 * meters );
+    
     auto const phi = angles_of_intersection( R, offset, radius );
     auto const phi_1 = phi.first.value();
     auto const phi_2 = phi.second.value();
   
-    auto const func = [&f]
-    ( vector< double > const & y, vector< double > & dy, double const r )
+    auto const dy_const = f( quantity< length >::from_value( r ) ) * r;
+  
+    auto const func = [&f, r, dy_const]
+    ( vector< double > const & y, vector< double > & dy, double const theta )
     noexcept -> void
     {
-      dy[0] = f( quantity< length >::from_value( r ) ) * r ;
+      assert( r > 0  );
+      dy[0] = dy_const ;
     };
     auto const ini = vector< double > ( { 0 } );
     
-    return integrate( func, ini, phi_1 , phi_2, ( (phi_2 - phi_1) / 100 ) );
+    assert( phi_1 <= 0 );
+    assert( phi_2 >= 0 );
+    
+    return integrate( func, ini, phi_1 , phi_2, ( (phi_2 - phi_1) / 10. ) );
   };
   
 
   auto const integrate_dr = [ &f, offset, radius, &arc_length ]() noexcept
   {
-    auto const r1 = ( offset - radius ).value();
+    auto r1 = 1e-8;
+    if( ( offset - radius ) > 0 * meters ) {
+      r1 = ( offset - radius ).value();
+    }
+    
     auto const r2 = ( offset + radius ).value();
     
     auto const func = [ &arc_length ]
@@ -64,10 +80,8 @@ noexcept -> double
     {
       dy[0] = arc_length( r ) ;
     };
-    
-    auto const ini = vector< double > ( { 0 } );
-    
-    return integrate( func, ini , r1 , r2, ( ( r2 - r1 ) / 100 ) );
+        
+    return integrate( func, { 0 } , r1 , r2, ( ( r2 - r1 ) / 10. ) );
   };
 
   auto const area = circle_from_radius( radius );

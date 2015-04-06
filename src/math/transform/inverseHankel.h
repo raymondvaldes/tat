@@ -24,7 +24,7 @@ struct iHankelSettings{
   
 explicit iHankelSettings
 (
-  units::quantity< units::si::dimensionless, double > const nu_end = 20.
+  units::quantity< units::si::dimensionless, double > const nu_end = 50.
 ) noexcept;
 
 };
