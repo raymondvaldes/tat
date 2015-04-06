@@ -16,6 +16,7 @@ namespace tbc2009 {
 namespace complexT{
 
 using math::transform::inverseHankel;
+using math::transform::inverseHankel_complex;
 using math::transform::iHankelSettings;
 
 auto temperature

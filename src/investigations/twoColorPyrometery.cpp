@@ -121,13 +121,14 @@ auto run( filesystem::directory const & dir ) -> void
 //  ) ;
   
   std::cout << bestFit_results.coating_slab.get_diffusivity() << "\n";
- 
-  plot::phase_exp_model
-  (
-    experimental_phases.first,
-    experimental_phases.second,
-    bestFit_results.model_phases
-  );
+  std::cout << bestFit_results.coating_slab.get_conductivity() << "\n";
+// 
+//  plot::phase_exp_model
+//  (
+//    experimental_phases.first,
+//    experimental_phases.second,
+//    bestFit_results.model_phases
+//  );
 //
 //  plot::transient_surface_amplitudes(
 //      bestFit_results.frequencies ,
@@ -137,9 +138,9 @@ auto run( filesystem::directory const & dir ) -> void
 //  plot::steady_surface_temperature(
 //    bestFit_results.frequencies ,
 //    twoColor_data.surface_steady_temperature());
-  
-  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
-  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
+//  
+//  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
+//  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
 }
 
 } //namespace twoColorPyrometry

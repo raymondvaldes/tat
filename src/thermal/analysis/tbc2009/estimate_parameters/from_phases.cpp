@@ -91,7 +91,7 @@ auto from_phases
   auto const a_sub_i = dimensionless::a( alpha_sub, alpha_coat ) ;
   
   auto const e_coat = slab_initial.get_effusivity();
-  auto const e_sub = slab_initial.get_effusivity();
+  auto const e_sub = substrate.get_effusivity();
   auto const gamma_i = dimensionless::gamma( e_coat, e_sub ) ;
   auto const b_i = hp_initial.b ;
   auto const b2_i = dimensionless::b( detector_view_radius, L_coat );

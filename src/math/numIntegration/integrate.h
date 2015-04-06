@@ -54,7 +54,7 @@ template< typename func_type, typename type >
 auto integrate
 (
   func_type const & func  ,
-  std::vector< type > const f_x0,
+  std::vector< type > f_x0,
   type const x0,
   type const x1,
   type const dx_intial_step
@@ -71,10 +71,6 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
 
   /* The type of container used to hold the state vector */
   using state_type = vector< type  > ;
-
-  //[ state_initialization
-  auto y = f_x0;
-  //]
   
   auto const tol_absolute = 1E-9;
   auto const tol_relative = 1E-9;
@@ -85,37 +81,13 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
   
   auto stepper = make_controlled( tol_absolute , tol_relative , dopri5_type() );
 
-
   auto y_vec = vector< state_type >() ;
   auto x_points = vector< type >() ;
 
   //This function integrates dy/dx from x0 to x1
   integrate_adaptive(
-    stepper, func , y , x0 , x1 , dx_intial_step,
+    stepper, func , f_x0 , x0 , x1 , dx_intial_step,
     push_back_state_and_time< type >( y_vec, x_points) );
-
-//  decltype( f_x0.front() * x0 ) area;
-//  using std::next;
-//  using std::begin;
-//  using std::end;
-//  
-//  auto i = size_t(1);
-//  for_each( next( begin( y_vec ) ) , end( y_vec ) ,
-//  [ & ]( auto const & y_state ) noexcept
-//  {
-//    auto const y = y_vec[ i ].front()  ;
-//    auto const y_ = y_vec[ i - 1 ].front() ;
-//
-//    auto const dx_i = x_points[ i ] - x_points[ i-1 ];
-//    auto const y_i =  ( y +  y_ ) / 2. ;
-//    
-//    auto const dA = y_i * dx_i;
-//    area += dA ;
-//    
-//    std::cout << "( " << dx_i << " , " << y_i << " )\t" << dA <<"\t"<< area <<  "\t";
-//    std::cout << "( " << x_points[ i ] << " , " << y << " )\n" ;
-//    ++i;
-//  } ) ;
 
   return y_vec.back().front() - y_vec.front().front();
 }

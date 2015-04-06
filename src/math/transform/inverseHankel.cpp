@@ -74,9 +74,11 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   {
     dy[0] = hankel_function( nu ).real(); ;
   };
+  
+  auto r1 = vector< double >( {0} );
 
   auto const area_real =
-  math::numIntegration::integrate( func_real, { 0 }, x0, x1, dx_intial_step );
+  math::numIntegration::integrate( func_real, r1, x0, x1, dx_intial_step );
   
   auto const func_imag = [ &h, &z, &r, &hankel_function ]
   ( vector< double > const & y, vector< double > & dy, double const nu )
@@ -86,9 +88,12 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
     dy[0] = eval.imag(); ;
   };
   
+    auto r2 = vector< double >( {0} );
+
   auto const area_imag =
-  math::numIntegration::integrate( func_imag, { 0 }, x0, x1, dx_intial_step );
+  math::numIntegration::integrate( func_imag, r2, x0, x1, dx_intial_step );
   
+  std::cout << r1.front() << "\t" << area_imag << "\n";
 
   auto const area = complex<double>( area_real, area_imag );
   auto const area_quantity = quantity< dimensionless, complex<double> >( area );
@@ -96,6 +101,67 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   return area_quantity;
 }
 
-} // namespace transform
+
+auto
+inverseHankel_complex
+(
+  std::function<
+  units::quantity< units::si::dimensionless, std::complex<double> >
+  ( units::quantity< units::si::dimensionless, double > const,
+    units::quantity< units::si::dimensionless, double > const)> const & h,
+  units::quantity< units::si::dimensionless, double > const z,
+  units::quantity< units::si::dimensionless, double > const r,
+  iHankelSettings const & settings 
+)
+noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
+{
+  assert( r.value() >= 0 );
+  assert( z.value() >= 0 );
+//The inverse hankel involves doing an integration over nu space
+// basically i can first evaluate the complex values over the integration
+// space and then i can split those into the real and imag values.
+// integrate through each one individually.
+
+  /*
+  The definite integral of a complex integrand is the sum if the
+  intregral of real and complex parts.
+
+  Int[f(x),a,b] = Int[u(x)+i*v[x],a,b] = Int[u(x),a,b] + i * Int[v[x],a,b]
+  */
   
+  // integration domain
+  auto const x0 = double(0) ;
+  auto const x1 = settings.nu_end.value() ;
+  auto const dx_intial_step = double( 0.05 );
+  
+  auto const J0 = []( auto const & x ) noexcept { return bessel_j(0, x );};
+  
+  auto const hankel_function = [&]( double const & nu ) noexcept {
+    
+    auto const h_out = h( nu, z ).value() * J0( nu * r ).value() * nu;
+    return h_out;
+  };
+
+  // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
+  auto const func = [ &h, &z, &r, &hankel_function ]
+  ( vector< double > const & y, vector< double > & dy, double const nu )
+  noexcept -> void
+  {
+    auto const hFunc = hankel_function( nu );
+    dy[0] = hFunc.real();
+    dy[1] = hFunc.imag();
+  };
+
+  auto result = vector< double >( {0,0} );
+
+  math::numIntegration::integrate( func, result, x0, x1, dx_intial_step );
+  std::cout <<result[0] << "\t" << result[1] << "\n";
+
+  auto const area = complex<double>( result[0], result[1] );
+  auto const area_quantity = quantity< dimensionless, complex<double> >( area );
+
+  return area_quantity;
+}
+
+} // namespace transform
 } // namespace math

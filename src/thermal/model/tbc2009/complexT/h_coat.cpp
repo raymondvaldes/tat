@@ -45,7 +45,7 @@ auto h_coat
   auto const nu_tilde = nu::tilde( nu, c_coat, l, b ) ;
 
   auto const F = F_tilde( nu_tilde, nu_hat, gamma, l ) ;
-  auto const H = H_tilde(nu, z, F , nu_hat, nu_tilde, hp, gamma, l );
+  auto const H = H_tilde( nu, z, F , nu_hat, nu_tilde, hp, gamma, l );
   
   auto const one = cmplx( 1. , 0. );
   auto const two = cmplx( 2. , 0. );
