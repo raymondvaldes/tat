@@ -23,9 +23,9 @@ auto
 average_surface_phases_amplitudes
 (
   units::quantity< units::si::dimensionless > const view_radius,
-  std::vector< units::quantity< units::si::frequency > > const frequencies,
-  dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp,
+  std::vector< units::quantity< units::si::frequency > > const & frequencies,
+  dimensionless::HeatingProperties const & hp,
+  dimensionless::ThermalProperties const & tp,
   units::quantity< units::si::length > const L,
   units::quantity< units::si::thermal_diffusivity > const alpha_substrate 
 ) noexcept -> std::vector< std::pair<

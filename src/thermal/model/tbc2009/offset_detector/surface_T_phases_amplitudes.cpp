@@ -11,12 +11,15 @@
 #include "algorithm/algorithm.h"
 #include "thermal/model/tbc2009/dimensionless/thermal_penetration.h"
 #include "thermal/model/tbc2009/complexT/offset_detector/average_surface_phase_amplitude.h"
+#include "thermal/model/tbc2009/average_surface_phases_amplitudes.h"
+#include "thermal/model/tbc2009/dimensionless/coating_diffusivity_from_a.h"
 
 namespace thermal {
 namespace model {
 namespace tbc2009 {
 namespace offset_detector {
 
+using dimensionless::coating_diffusivity_from_a;
 using complexT::offset_detector::average_surface_phase_amplitude;
 using namespace units;
 using std::vector;
@@ -27,21 +30,26 @@ auto
 surface_T_phases_amplitudes
 (
   std::vector< units::quantity< units::si::frequency > > const frequencies,
-  dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp,
+  dimensionless::HeatingProperties const & hp,
+  dimensionless::ThermalProperties const & tp,
   units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_diffusivity > const alpha_substrate,
+  units::quantity< units::si::thermal_diffusivity > const alpha_sub,
   units::quantity< units::si::dimensionless > const offset,
   units::quantity< units::si::dimensionless > const view_radius
 ) noexcept -> std::vector< std::pair<
   units::quantity< units::si::plane_angle >,
   units::quantity< units::si::dimensionless> > >
 {
+  assert( offset > 0 );
+  assert( view_radius > 0 );
+  assert( L > 0 * meters );
+  assert( !frequencies.empty() );
+
   auto results =
   vector< pair< quantity< plane_angle >,
                 quantity< si::dimensionless > > >( frequencies.size()  );
   
-  auto const alpha_coat = pow<2>( tp.a_sub ) * alpha_substrate;
+  auto const alpha_coat = coating_diffusivity_from_a( tp.a_sub , alpha_sub );
 
   transform( frequencies, results.begin(), [&]( auto const f ) noexcept
   {
@@ -50,9 +58,6 @@ surface_T_phases_amplitudes
   } );
 
   return results;
-
-
-
 }
 
 } // namespace offset_detector

@@ -22,8 +22,8 @@ namespace offset_detector {
 
 auto average_surface_phase_amplitude
 (
-  dimensionless::HeatingProperties const hp,
-  dimensionless::ThermalProperties const tp,
+  dimensionless::HeatingProperties const & hp,
+  dimensionless::ThermalProperties const & tp,
   units::quantity< units::si::dimensionless > const l,
   units::quantity< units::si::dimensionless > const offset,
   units::quantity< units::si::dimensionless > const view_radius

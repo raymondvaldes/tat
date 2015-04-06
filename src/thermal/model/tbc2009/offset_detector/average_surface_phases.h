@@ -1,13 +1,13 @@
 //
-//  surface_T_phases_amplitudes.h
+//  average_surface_phases.h
 //  tat
 //
 //  Created by Raymond Valdes on 4/3/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_thermal_model_tbc2009_offset_surface_T_phases_amplitudes__
-#define __tat_thermal_model_tbc2009_offset_surface_T_phases_amplitudes__
+#ifndef __tat_thermal_model_tbc2009_offsetDetector_average_surface_phases__
+#define __tat_thermal_model_tbc2009_offsetDetector_average_surface_phases__
 
 #include "units.h"
 #include <utility>
@@ -21,7 +21,7 @@ namespace tbc2009 {
 namespace offset_detector {
 
 auto
-surface_T_phases_amplitudes
+average_surface_phases
 (
   std::vector< units::quantity< units::si::frequency > > const frequencies,
   dimensionless::HeatingProperties const & hp,
@@ -30,13 +30,12 @@ surface_T_phases_amplitudes
   units::quantity< units::si::thermal_diffusivity > const alpha_substrate,
   units::quantity< units::si::dimensionless > const offset,
   units::quantity< units::si::dimensionless > const view_radius
-) noexcept -> std::vector< std::pair<
-  units::quantity< units::si::plane_angle >,
-  units::quantity< units::si::dimensionless> > >;
+) noexcept -> std::vector< units::quantity< units::si::plane_angle >  >;
+
 
 } // namespace offset_detector
 } // namespace tbc2009
 } // namespace model
 } // namespace thermal
 
-#endif /* defined() */
+#endif /* defined(__tat__average_surface_phases__) */
