@@ -99,37 +99,37 @@ auto run( filesystem::directory const & dir ) -> void
   auto const hp_initial = dimensionless::import_heating_properties( dir, "initial_heating_properties.xml" );
   auto const experimental_phases = twoColor_data.phases_frequency();
 
-  auto const bestFit_results =
-  tbc2009::estimate_parameters::from_phases
-  (
-    experimental_phases,
-    initial_slab,
-    substrate_slab,
-    hp_initial,
-    scope_data.detector_view_radius
-  ) ;
-
 //  auto const bestFit_results =
-//  tbc2009::detector_offset::estimate_parameters::from_phases
+//  tbc2009::estimate_parameters::from_phases
 //  (
 //    experimental_phases,
 //    initial_slab,
 //    substrate_slab,
 //    hp_initial,
-//    scope_data.detector_view_radius,
-//    units::quantity< units::si::length >( .01 * units::si::millimeters )
+//    scope_data.detector_view_radius
 //  ) ;
+
+  auto const bestFit_results =
+  tbc2009::detector_offset::estimate_parameters::from_phases
+  (
+    experimental_phases,
+    initial_slab,
+    substrate_slab,
+    hp_initial,
+    scope_data.detector_view_radius,
+    units::quantity< units::si::length >( .01 * units::si::millimeters )
+  ) ;
   
   std::cout << bestFit_results.coating_slab.get_diffusivity() << "\n";
   std::cout << bestFit_results.coating_slab.get_conductivity() << "\n";
-// 
-//  plot::phase_exp_model
-//  (
-//    experimental_phases.first,
-//    experimental_phases.second,
-//    bestFit_results.model_phases
-//  );
-//
+ 
+  plot::phase_exp_model
+  (
+    experimental_phases.first,
+    experimental_phases.second,
+    bestFit_results.model_phases
+  );
+
 //  plot::transient_surface_amplitudes(
 //      bestFit_results.frequencies ,
 //      twoColor_data.surface_temperature_amplitudes()

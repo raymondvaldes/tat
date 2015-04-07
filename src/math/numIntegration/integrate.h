@@ -54,7 +54,7 @@ template< typename func_type, typename type >
 auto integrate
 (
   func_type const & func  ,
-  std::vector< type > f_x0,
+  std::vector< type > &f_x0,
   type const x0,
   type const x1,
   type const dx_intial_step
@@ -72,8 +72,8 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
   /* The type of container used to hold the state vector */
   using state_type = vector< type  > ;
   
-  auto const tol_absolute = 1E-9;
-  auto const tol_relative = 1E-9;
+  auto const tol_absolute = 1E-10;
+  auto const tol_relative = 1E-10;
   
   typedef runge_kutta_dopri5< state_type > dopri5_type;
   typedef controlled_runge_kutta< dopri5_type > controlled_dopri5_type;

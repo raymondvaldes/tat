@@ -56,12 +56,13 @@ noexcept -> double
       assert( r > 0  );
       dy[0] = dy_const ;
     };
-    auto const ini = vector< double > ( { 0 } );
+    auto ini = vector< double > ( { 0 } );
     
     assert( phi_1 <= 0 );
     assert( phi_2 >= 0 );
     
-    return integrate( func, ini, phi_1 , phi_2, ( (phi_2 - phi_1) / 10. ) );
+    auto const dr_i_step = double( 0.005 );
+    return integrate( func, ini, phi_1 , phi_2, dr_i_step );
   };
   
 
@@ -80,8 +81,10 @@ noexcept -> double
     {
       dy[0] = arc_length( r ) ;
     };
-        
-    return integrate( func, { 0 } , r1 , r2, ( ( r2 - r1 ) / 10. ) );
+    auto ini = vector< double > ( { 0 } );
+
+      auto const dr_i_step = double( 0.005 );
+    return integrate( func, ini , r1 , r2, dr_i_step );
   };
 
   auto const area = circle_from_radius( radius );

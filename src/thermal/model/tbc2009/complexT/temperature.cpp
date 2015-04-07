@@ -15,7 +15,6 @@ namespace model {
 namespace tbc2009 {
 namespace complexT{
 
-using math::transform::inverseHankel;
 using math::transform::inverseHankel_complex;
 using math::transform::iHankelSettings;
 
@@ -32,7 +31,7 @@ auto temperature
   assert( r.value() >= 0 );
   
   auto const h = h_system( z, hp, tp, l );
-  auto const T = inverseHankel( h , z, r ) ;
+  auto const T = inverseHankel_complex( h , z, r ) ;
   
   return T;
 }
