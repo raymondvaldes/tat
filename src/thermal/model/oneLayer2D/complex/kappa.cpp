@@ -25,9 +25,17 @@ auto kappa
   units::quantity< units::si::dimensionless > const l
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >
 {
+  assert( nu >= 0 ) ;
+  assert( b > 0 ) ;
+  assert( l > 0 ) ;
+  
   auto const i_non = quantity< si::dimensionless, complex<double > >( 0. + 1i );
+  auto const k = sqrt( pow<2>( nu ) + i_non * pow<2>( b / l ) ) ;
 
-  return sqrt( pow<2>( nu ) + i_non * pow<2>( b / l ) )  ;
+  assert( isnormal( k.value().real() ) ) ;
+  assert( isnormal( k.value().imag() ) ) ;
+
+  return  k;
 }
 
 

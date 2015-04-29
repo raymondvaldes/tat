@@ -24,6 +24,11 @@ auto h
   units::quantity< units::si::dimensionless, double > const b
 ) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >
 {
+  assert( nu >= 0) ;
+  assert( z >= 0 ) ;
+  assert( l > 0) ;
+  assert( b > 0 ) ;
+
   auto const inv = []( auto const e ) noexcept { return quantity<si::dimensionless>(1.) / e ; } ;
   auto const csch = [&inv]( auto const e ) noexcept { return inv(sinh(e)); } ;
 
@@ -35,6 +40,9 @@ auto h
   exp( -pow<2>(nu)/ four ) * cosh( k * ( inv(b) - z ) ) * csch( k * inv(b) )
   / ( two * k ) ;
  
+  assert( isnormal( h_eval.value().real() ) ) ;
+  assert( isnormal( h_eval.value().imag() ) ) ;
+
   return h_eval;
 }
 

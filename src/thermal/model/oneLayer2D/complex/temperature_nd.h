@@ -2,12 +2,12 @@
 //  temperature.h
 //  tat
 //
-//  Created by Raymond Valdes on 4/29/15.
+//  Created by Raymond Valdes on 4/23/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_thermal_model_oneLayer2D_complex_temperature___
-#define __tat_thermal_model_oneLayer2D_complex_temperature___
+#ifndef __tat_thermal_model_oneLayer2D_complex_temperature_nd__
+#define __tat_thermal_model_oneLayer2D_complex_temperature_nd__
 
 #include "units.h"
 #include <complex>
@@ -17,16 +17,13 @@ namespace model {
 namespace oneLayer2D {
 namespace complex{
 
-auto temperature
+auto temperature_nd
 (
   units::quantity< units::si::dimensionless > const z,
   units::quantity< units::si::dimensionless > const r,
   units::quantity< units::si::dimensionless > const b,
-  units::quantity< units::si::dimensionless > const l,
-  units::quantity< units::si::heat_flux > const I,
-  units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_conductivity > const k
-) noexcept -> units::quantity< units::si::temperature, std::complex<double> >;
+  units::quantity< units::si::dimensionless > const l
+) noexcept -> units::quantity< units::si::dimensionless, std::complex<double> >;
 
 } // namespace complex
 } // namespace oneLayer2D
