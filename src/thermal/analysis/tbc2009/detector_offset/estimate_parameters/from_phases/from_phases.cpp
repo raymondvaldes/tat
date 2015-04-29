@@ -184,7 +184,7 @@ auto from_phases
   };
 
   auto lmdif_settings = settings{};
-  lmdif_settings.factor = 10;
+  lmdif_settings.factor = 1;
 
   lmdif(  minimization_equation, number_of_points_to_Fit,
           model_parameters, lmdif_settings );

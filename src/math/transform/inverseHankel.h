@@ -33,14 +33,12 @@ auto
 inverseHankel
 (
   std::function<
-  units::quantity< units::si::dimensionless, std::complex<double> >
-  ( units::quantity< units::si::dimensionless > const,
-    units::quantity< units::si::dimensionless > const)> const & h,
-  units::quantity< units::si::dimensionless > const z,
+  units::quantity< units::si::dimensionless >
+  ( units::quantity< units::si::dimensionless > const )> const & h,
   units::quantity< units::si::dimensionless > const r,
   iHankelSettings const & settings = iHankelSettings{ /* default! */}
 )
-noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>;
+noexcept -> units::quantity< units::si::dimensionless>;
 
 auto
 inverseHankel_complex

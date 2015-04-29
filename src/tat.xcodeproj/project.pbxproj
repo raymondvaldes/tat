@@ -283,6 +283,16 @@
 		ABC648651A65B5EB008FA721 /* main-app.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC648631A65B5EB008FA721 /* main-app.h */; };
 		ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC648661A65B891008FA721 /* vector2cstringArray.cpp */; };
 		ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC648671A65B891008FA721 /* vector2cstringArray.h */; };
+		ABDA1CB01AE9BD6500121C97 /* temperature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CAE1AE9BD6500121C97 /* temperature.cpp */; };
+		ABDA1CB11AE9BD6500121C97 /* temperature.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CAF1AE9BD6500121C97 /* temperature.h */; };
+		ABDA1CB41AE9BF2400121C97 /* b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CB21AE9BF2400121C97 /* b.cpp */; };
+		ABDA1CB51AE9BF2400121C97 /* b.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CB31AE9BF2400121C97 /* b.h */; };
+		ABDA1CB81AE9BF3700121C97 /* thermal_penetration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CB61AE9BF3700121C97 /* thermal_penetration.cpp */; };
+		ABDA1CB91AE9BF3700121C97 /* thermal_penetration.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CB71AE9BF3700121C97 /* thermal_penetration.h */; };
+		ABDA1CBC1AE9C2D900121C97 /* kappa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CBA1AE9C2D900121C97 /* kappa.cpp */; };
+		ABDA1CBD1AE9C2D900121C97 /* kappa.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CBB1AE9C2D900121C97 /* kappa.h */; };
+		ABDA1CC01AE9C4C200121C97 /* h.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CBE1AE9C4C200121C97 /* h.cpp */; };
+		ABDA1CC11AE9C4C200121C97 /* h.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CBF1AE9C4C200121C97 /* h.h */; };
 		ABDC7E031AD38C9B0048986B /* from_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDC7E011AD38C9B0048986B /* from_phases.cpp */; };
 		ABDC7E041AD38C9B0048986B /* from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDC7E021AD38C9B0048986B /* from_phases.h */; };
 		ABDC7E081AD38D320048986B /* average_surface_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDC7E061AD38D320048986B /* average_surface_phases.cpp */; };
@@ -749,6 +759,16 @@
 		ABC648631A65B5EB008FA721 /* main-app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "main-app.h"; sourceTree = "<group>"; };
 		ABC648661A65B891008FA721 /* vector2cstringArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vector2cstringArray.cpp; path = algorithm/vector/vector2cstringArray.cpp; sourceTree = "<group>"; };
 		ABC648671A65B891008FA721 /* vector2cstringArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2cstringArray.h; path = algorithm/vector/vector2cstringArray.h; sourceTree = "<group>"; };
+		ABDA1CAE1AE9BD6500121C97 /* temperature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature.cpp; path = oneLayer2D/complex/temperature.cpp; sourceTree = "<group>"; };
+		ABDA1CAF1AE9BD6500121C97 /* temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature.h; path = oneLayer2D/complex/temperature.h; sourceTree = "<group>"; };
+		ABDA1CB21AE9BF2400121C97 /* b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = b.cpp; path = oneLayer2D/dimensionless/b.cpp; sourceTree = "<group>"; };
+		ABDA1CB31AE9BF2400121C97 /* b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = b.h; path = oneLayer2D/dimensionless/b.h; sourceTree = "<group>"; };
+		ABDA1CB61AE9BF3700121C97 /* thermal_penetration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thermal_penetration.cpp; path = oneLayer2D/dimensionless/thermal_penetration.cpp; sourceTree = "<group>"; };
+		ABDA1CB71AE9BF3700121C97 /* thermal_penetration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thermal_penetration.h; path = oneLayer2D/dimensionless/thermal_penetration.h; sourceTree = "<group>"; };
+		ABDA1CBA1AE9C2D900121C97 /* kappa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kappa.cpp; path = oneLayer2D/complex/kappa.cpp; sourceTree = "<group>"; };
+		ABDA1CBB1AE9C2D900121C97 /* kappa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kappa.h; path = oneLayer2D/complex/kappa.h; sourceTree = "<group>"; };
+		ABDA1CBE1AE9C4C200121C97 /* h.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h.cpp; path = oneLayer2D/complex/h.cpp; sourceTree = "<group>"; };
+		ABDA1CBF1AE9C4C200121C97 /* h.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h.h; path = oneLayer2D/complex/h.h; sourceTree = "<group>"; };
 		ABDC7E011AD38C9B0048986B /* from_phases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = from_phases.cpp; path = tbc2009/detector_offset/estimate_parameters/from_phases/from_phases.cpp; sourceTree = "<group>"; };
 		ABDC7E021AD38C9B0048986B /* from_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = from_phases.h; path = tbc2009/detector_offset/estimate_parameters/from_phases/from_phases.h; sourceTree = "<group>"; };
 		ABDC7E061AD38D320048986B /* average_surface_phases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = average_surface_phases.cpp; path = tbc2009/offset_detector/average_surface_phases.cpp; sourceTree = "<group>"; };
@@ -1836,6 +1856,39 @@
 			name = programoptions;
 			sourceTree = "<group>";
 		};
+		ABDA1CAB1AE9BCE700121C97 /* oneLayer2D */ = {
+			isa = PBXGroup;
+			children = (
+				ABDA1CAD1AE9BD1600121C97 /* dimensionless */,
+				ABDA1CAC1AE9BD1000121C97 /* complex */,
+			);
+			name = oneLayer2D;
+			sourceTree = "<group>";
+		};
+		ABDA1CAC1AE9BD1000121C97 /* complex */ = {
+			isa = PBXGroup;
+			children = (
+				ABDA1CAE1AE9BD6500121C97 /* temperature.cpp */,
+				ABDA1CAF1AE9BD6500121C97 /* temperature.h */,
+				ABDA1CBA1AE9C2D900121C97 /* kappa.cpp */,
+				ABDA1CBB1AE9C2D900121C97 /* kappa.h */,
+				ABDA1CBE1AE9C4C200121C97 /* h.cpp */,
+				ABDA1CBF1AE9C4C200121C97 /* h.h */,
+			);
+			name = complex;
+			sourceTree = "<group>";
+		};
+		ABDA1CAD1AE9BD1600121C97 /* dimensionless */ = {
+			isa = PBXGroup;
+			children = (
+				ABDA1CB21AE9BF2400121C97 /* b.cpp */,
+				ABDA1CB31AE9BF2400121C97 /* b.h */,
+				ABDA1CB61AE9BF3700121C97 /* thermal_penetration.cpp */,
+				ABDA1CB71AE9BF3700121C97 /* thermal_penetration.h */,
+			);
+			name = dimensionless;
+			sourceTree = "<group>";
+		};
 		ABDC7E051AD38CA70048986B /* detector_offset */ = {
 			isa = PBXGroup;
 			children = (
@@ -2177,6 +2230,7 @@
 				ABEF4E491948D4A500B44AD5 /* labels.cpp */,
 				ABEF4E4A1948D4A500B44AD5 /* labels.h */,
 				ABEF4E4B1948D4A500B44AD5 /* one_dim */,
+				ABDA1CAB1AE9BCE700121C97 /* oneLayer2D */,
 				ABEB14B31AAA620900204B36 /* slab */,
 				AB841C321AC4DAA3000CE81D /* tbc2009 */,
 				ABEF4E5C1948D4A500B44AD5 /* two_dim */,
@@ -2382,6 +2436,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABDA1CC11AE9C4C200121C97 /* h.h in Headers */,
 				AB7F19861ACC65A10086E8F8 /* from_phases.h in Headers */,
 				AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */,
 				AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */,
@@ -2402,6 +2457,7 @@
 				ABEF4EC31948D4A500B44AD5 /* thermalData.hpp in Headers */,
 				AB8AA4381A5C68650065E7F8 /* getline.h in Headers */,
 				AB841C881AC4F81D000CE81D /* hat.h in Headers */,
+				ABDA1CB11AE9BD6500121C97 /* temperature.h in Headers */,
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				AB9383C81AC1C78A00F2D2DD /* time_nd.h in Headers */,
 				AB5E9D351ACA1E66003319FA /* phases_amplitudes.h in Headers */,
@@ -2468,6 +2524,7 @@
 				ABA58A181A67257400573ED8 /* units.h in Headers */,
 				AB4E53CA1ABCC59800E7BA8D /* ratio.h in Headers */,
 				AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */,
+				ABDA1CB51AE9BF2400121C97 /* b.h in Headers */,
 				AB7996E21AB0F6190022015B /* read_scope_file.h in Headers */,
 				AB9383E51AC22F8700F2D2DD /* a.h in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
@@ -2498,6 +2555,7 @@
 				ABFC80721AC629B90059E9D7 /* bessel.h in Headers */,
 				AB7F199A1ACCBBDC0086E8F8 /* si_literals.h in Headers */,
 				AB6367601AA941AC00AC8390 /* sum.h in Headers */,
+				ABDA1CB91AE9BF3700121C97 /* thermal_penetration.h in Headers */,
 				AB44BD6E1AAA46E700E0710E /* normalizedDetectorMeasurements.h in Headers */,
 				ABEF4EAD1948D4A500B44AD5 /* basedata.hpp in Headers */,
 				ABB09B731AB787AB005D6BB5 /* signal_to_noise.h in Headers */,
@@ -2625,6 +2683,7 @@
 				ABEF4EBB1948D4A500B44AD5 /* poptea.hpp in Headers */,
 				AB44BD5E1AAA398700E0710E /* measurement.h in Headers */,
 				AB9A3FCC1ACF32AA0004882F /* average_surface_phase_amplitude.h in Headers */,
+				ABDA1CBD1AE9C2D900121C97 /* kappa.h in Headers */,
 				ABEF4EEC1948D4A500B44AD5 /* Numerical_Setup.h in Headers */,
 				ABC648651A65B5EB008FA721 /* main-app.h in Headers */,
 				ABB54FC619C22C7E0056823E /* add.h in Headers */,
@@ -2701,6 +2760,7 @@
 				ABAD559D1ABF554500D1B9A6 /* fitted_measurements.cpp in Sources */,
 				AB7996E51AB0F6B90022015B /* is_scope_file.cpp in Sources */,
 				ABEF4EEB1948D4A500B44AD5 /* Numerical_Setup.cpp in Sources */,
+				ABDA1CB41AE9BF2400121C97 /* b.cpp in Sources */,
 				AB8AA4341A5B60710065E7F8 /* columnData.cpp in Sources */,
 				ABEF4EFF1948D4A500B44AD5 /* xml.cpp in Sources */,
 				ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */,
@@ -2824,6 +2884,7 @@
 				ABFC9E631A9424C500F124F1 /* calculateCalibrationCoefficients.cpp in Sources */,
 				AB7996E11AB0F6190022015B /* read_scope_file.cpp in Sources */,
 				ABDC7E0C1AD38D550048986B /* coating_diffusivity_from_a.cpp in Sources */,
+				ABDA1CC01AE9C4C200121C97 /* h.cpp in Sources */,
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				AB9383C31AC1C77900F2D2DD /* temperature.cpp in Sources */,
 				AB9383DC1AC22DB000F2D2DD /* length.cpp in Sources */,
@@ -2855,12 +2916,15 @@
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,
 				ABEF4EB21948D4A500B44AD5 /* lmdiff_poptea.cpp in Sources */,
 				AB4E53BF1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp in Sources */,
+				ABDA1CBC1AE9C2D900121C97 /* kappa.cpp in Sources */,
 				AB44BD691AAA43B100E0710E /* normalizedSignalRatio_from_measurement.cpp in Sources */,
 				AB841C381AC4DB47000CE81D /* J1.cpp in Sources */,
+				ABDA1CB01AE9BD6500121C97 /* temperature.cpp in Sources */,
 				ABB54FD119C35E300056823E /* ifzero.cpp in Sources */,
 				ABDC7E031AD38C9B0048986B /* from_phases.cpp in Sources */,
 				AB90AA4E1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp in Sources */,
 				ABEF4E871948D4A500B44AD5 /* constrained.cpp in Sources */,
+				ABDA1CB81AE9BF3700121C97 /* thermal_penetration.cpp in Sources */,
 				AB841C8F1AC4FD0A000CE81D /* H_tilde.cpp in Sources */,
 				ABEF4EDF1948D4A500B44AD5 /* setup.cpp in Sources */,
 				AB841C8B1AC4FA5B000CE81D /* F_tilde.cpp in Sources */,
@@ -2916,7 +2980,7 @@
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				GCC_C_LANGUAGE_STANDARD = c11;
@@ -3005,7 +3069,7 @@
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3081,7 +3145,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
@@ -3145,7 +3209,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;

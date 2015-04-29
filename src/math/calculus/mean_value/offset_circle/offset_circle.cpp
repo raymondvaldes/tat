@@ -37,36 +37,7 @@ noexcept -> double
   assert( offset > 0 * meters ) ;
   assert( radius > 0 * meters ) ;
 
-  auto const arc_length = [ &f, offset, radius ]( double const r ) noexcept
-  {
-    assert( r > 0 );
-    auto const R = quantity< si::length>::from_value( r );
-    assert( R > 0 * meters );
-    
-    auto const phi = angles_of_intersection( R, offset, radius );
-    auto const phi_1 = phi.first.value();
-    auto const phi_2 = phi.second.value();
-  
-    auto const dy_const = f( quantity< length >::from_value( r ) ) * r;
-  
-    auto const func = [&f, r, dy_const]
-    ( vector< double > const & y, vector< double > & dy, double const theta )
-    noexcept -> void
-    {
-      assert( r > 0  );
-      dy[0] = dy_const ;
-    };
-    auto ini = vector< double > ( { 0 } );
-    
-    assert( phi_1 <= 0 );
-    assert( phi_2 >= 0 );
-    
-    auto const dr_i_step = double( 0.005 );
-    return integrate( func, ini, phi_1 , phi_2, dr_i_step );
-  };
-  
-
-  auto const integrate_dr = [ &f, offset, radius, &arc_length ]() noexcept
+  auto const integrate_dr = [ &f, offset, radius ]() noexcept
   {
     auto r1 = 1e-8;
     if( ( offset - radius ) > 0 * meters ) {
@@ -75,15 +46,21 @@ noexcept -> double
     
     auto const r2 = ( offset + radius ).value();
     
-    auto const func = [ &arc_length ]
+    auto const func = [ & ]
     ( vector< double > const & y, vector< double > & dy, double const r )
     noexcept -> void
     {
-      dy[0] = arc_length( r ) ;
+      auto const R = quantity< si::length>::from_value( r );
+    
+      auto const phi = angles_of_intersection( R, offset, radius );
+      auto const phi_1 = phi.first.value();
+      auto const phi_2 = phi.second.value();
+
+      dy[0] = f( quantity< length >::from_value( r ) ) * r * (  phi_2 -  phi_1 ) ;
     };
     auto ini = vector< double > ( { 0 } );
 
-      auto const dr_i_step = double( 0.005 );
+      auto const dr_i_step = (r2 - r1) / 200.;
     return integrate( func, ini , r1 , r2, dr_i_step );
   };
 

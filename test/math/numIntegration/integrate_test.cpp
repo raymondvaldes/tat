@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE( integrate_test_2 )
   auto const dx_intial_step = double( 0.1 );
 
   // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
-  auto const f_x0 = vector< double > ( { 0 } );
+  auto f_x0 = vector< double > ( { 0 } );
   auto const func = []
   (
     vector< double > const & y,

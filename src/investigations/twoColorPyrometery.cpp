@@ -109,26 +109,26 @@ auto run( filesystem::directory const & dir ) -> void
 //    scope_data.detector_view_radius
 //  ) ;
 
-  auto const bestFit_results =
-  tbc2009::detector_offset::estimate_parameters::from_phases
-  (
-    experimental_phases,
-    initial_slab,
-    substrate_slab,
-    hp_initial,
-    scope_data.detector_view_radius,
-    units::quantity< units::si::length >( .01 * units::si::millimeters )
-  ) ;
+//  auto const bestFit_results =
+//  tbc2009::detector_offset::estimate_parameters::from_phases
+//  (
+//    experimental_phases,
+//    initial_slab,
+//    substrate_slab,
+//    hp_initial,
+//    scope_data.detector_view_radius,
+//    units::quantity< units::si::length >( .5 * units::si::millimeters )
+//  ) ;
   
-  std::cout << bestFit_results.coating_slab.get_diffusivity() << "\n";
-  std::cout << bestFit_results.coating_slab.get_conductivity() << "\n";
- 
-  plot::phase_exp_model
-  (
-    experimental_phases.first,
-    experimental_phases.second,
-    bestFit_results.model_phases
-  );
+//  std::cout << bestFit_results.coating_slab.get_diffusivity() << "\n";
+//  std::cout << bestFit_results.coating_slab.get_conductivity() << "\n";
+// 
+//  plot::phase_exp_model
+//  (
+//    experimental_phases.first,
+//    experimental_phases.second,
+//    bestFit_results.model_phases
+//  );
 
 //  plot::transient_surface_amplitudes(
 //      bestFit_results.frequencies ,

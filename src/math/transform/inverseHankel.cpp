@@ -11,6 +11,7 @@
 #include "math/special_functions/bessel.h"
 #include "math/numIntegration/integrate.h"
 #include "units.h"
+#include <cmath>
 
 namespace math {
 
@@ -20,6 +21,7 @@ using std::complex;
 using std::vector;
 using math::special_functions::bessel_j;
 using namespace units;
+using std::isnormal;
 
 iHankelSettings::iHankelSettings
 (
@@ -27,7 +29,46 @@ iHankelSettings::iHankelSettings
 : nu_end( nu_end_ )
 {};
 
+auto
+inverseHankel
+(
+  std::function<
+  units::quantity< units::si::dimensionless >
+  ( units::quantity< units::si::dimensionless > const )> const & h,
+  units::quantity< units::si::dimensionless > const r,
+  iHankelSettings const & settings
+)
+noexcept -> units::quantity< units::si::dimensionless>
+{
+  assert( r.value() >= 0 );
+  
+  auto const x0 = double(0) ;
+  auto const x1 = settings.nu_end.value() ;
+  auto const dx_intial_step = double( 0.001 );
+  
+  auto const J0 = []( auto const x ) noexcept { return bessel_j( 0, x ); };
+  
+  auto const f = [&]( double const & nu ) noexcept {
+    
+    auto const h_out = ( h( nu ) * J0( nu * r ) ).value() * nu;
+    return h_out;
+  };
 
+  // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
+  auto const func = [ &h, &r, &f ]
+  ( vector< double > const & y, vector< double > & dy, double const nu )
+  noexcept -> void
+  {
+    dy[0] = f( nu );
+  };
+
+  auto result = vector< double >( {0} );
+
+  math::numIntegration::integrate( func, result, x0, x1, dx_intial_step );
+
+  auto const area = quantity< dimensionless, double >( result[0] );
+  return area;
+}
 
 auto
 inverseHankel_complex
@@ -85,6 +126,9 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
 
   auto const area = complex<double>( result[0], result[1] );
   auto const area_quantity = quantity< dimensionless, complex<double> >( area );
+
+  assert( isnormal( area_quantity.value().real() ) );
+  assert( isnormal( area_quantity.value().imag() ) );
 
   return area_quantity;
 }
