@@ -11,6 +11,7 @@
 
 #include "math/numIntegration/integrate.h"
 #include <cmath>
+#include <vector>
 
 namespace math{
 namespace calculus{
@@ -20,18 +21,19 @@ template< typename Func >
 auto circle
 (
   Func const & f,
-  double const R
+  double const R,
   double const dr_i_step = R / 100.
 )
 noexcept -> double
 {
   using math::numIntegration::integrate;
   using std::pow;
+  using std::vector
   
   // find the mean value of a function from a to b.
   // mean_value = 2/(R^2) * Int[ ( f * r ) dr, 0, R ]
 
-  auto const func = []
+  auto const func = [&f]
   (
     vector< double > const & y,
     vector< double > & dr,

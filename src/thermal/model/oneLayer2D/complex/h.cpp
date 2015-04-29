@@ -37,7 +37,7 @@ auto h
   auto const four = quantity<si::dimensionless>( 4 );
   
   auto const h_eval =
-  exp( -pow<2>(nu)/ four ) * cosh( k * ( inv(b) - z ) ) * csch( k * inv(b) )
+  exp( -pow<2>( nu )/ four ) * cosh( k * ( inv(b) - z ) ) * csch( k * inv(b) )
   / ( two * k ) ;
  
   assert( isnormal( h_eval.value().real() ) ) ;

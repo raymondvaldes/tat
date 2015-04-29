@@ -22,19 +22,18 @@ auto temperature
   units::quantity< units::si::dimensionless > const r,
   units::quantity< units::si::dimensionless > const b,
   units::quantity< units::si::dimensionless > const l,
-  units::quantity< units::si::heat_flux > const I,
-  units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_conductivity > const k
+  units::quantity< units::si::temperature > const deltaT
 ) noexcept -> units::quantity< units::si::temperature, std::complex<double> >
 {
   assert( z >= 0 ) ;
   assert( r >= 0 ) ;
   assert( b > 0 ) ;
   assert( l > 0 ) ;
+  assert( deltaT > 0 * kelvin ) ;
   
   auto const theta = temperature_nd( z, r, b, l ) ;
 
-  auto const T =  ( I * L / k) * theta;
+  auto const T =  deltaT * theta;
   
   assert( isnormal( T.value().real() )  );
   assert( isnormal( T.value().imag() )  );

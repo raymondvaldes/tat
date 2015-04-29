@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef tat_algorithm_h
-#define tat_algorithm_h
+#ifndef tat_algorithm_algorithm_h
+#define tat_algorithm_algorithm_h
 
 #include <boost/range/algorithm.hpp>
 #include <boost/range/numeric.hpp>
