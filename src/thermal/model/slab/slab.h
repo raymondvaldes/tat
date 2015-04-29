@@ -35,21 +35,21 @@ public:
   units::quantity< units::si::volumetric_heat_capacity> rhoCp;
 
   Slab(
-    units::quantity< units::si::length > const & characteristic_length_in,
-    units::quantity< units::si::thermal_diffusivity > const & alpha_in,
-    units::quantity< units::si::thermal_conductivity > const & k_in
+    units::quantity< units::si::length > const characteristic_length_in,
+    units::quantity< units::si::thermal_diffusivity > const alpha_in,
+    units::quantity< units::si::thermal_conductivity > const k_in
   );
   
   Slab(
-    units::quantity< units::si::length > const & characteristic_length_in,
-    units::quantity< units::si::thermal_diffusivity > const & alpha_in,
-    units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+    units::quantity< units::si::length > const characteristic_length_in,
+    units::quantity< units::si::thermal_diffusivity > const alpha_in,
+    units::quantity< units::si::volumetric_heat_capacity > const rhoCp_in
   );
   
   Slab(
-    units::quantity< units::si::length > const & characteristic_length_in,
-    units::quantity< units::si::thermal_conductivity > const & k_in,
-    units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+    units::quantity< units::si::length > const characteristic_length_in,
+    units::quantity< units::si::thermal_conductivity > const k_in,
+    units::quantity< units::si::volumetric_heat_capacity > const rhoCp_in
   );
   
   // getters

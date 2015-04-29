@@ -16,8 +16,6 @@
 namespace math{
 namespace complex{
 
-using namespace units;
-
 template< typename T >
 struct properties{
 
@@ -39,7 +37,6 @@ struct properties{
   }
 
 };
-
 
 }
 }

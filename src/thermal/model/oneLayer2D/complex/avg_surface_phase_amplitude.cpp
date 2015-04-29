@@ -20,7 +20,6 @@ using math::complex::properties;
 
 auto avg_surface_phase_amplitude
 (
-  units::quantity< units::si::dimensionless > const r,
   units::quantity< units::si::dimensionless > const b,
   units::quantity< units::si::dimensionless > const l,
   units::quantity< units::si::temperature > const deltaT,

@@ -12,13 +12,11 @@
 #include "tools/interface/filesystem.hpp"
 
 namespace investigations{
-
 namespace twoColorPyrometery{
   
 auto run( filesystem::directory const & dir ) -> void ;
   
 } // namespace twoColorPyrometery
-
 } // namespace investigations
 
 #endif /* defined(__tat___colorPyrometery__) */

@@ -27,9 +27,9 @@ namespace slab {
 
 
 Slab::Slab(
-  units::quantity< units::si::length > const & characteristic_length_in,
-  units::quantity< units::si::thermal_diffusivity > const & alpha_in,
-  units::quantity< units::si::thermal_conductivity > const & k_in
+  units::quantity< units::si::length > const characteristic_length_in,
+  units::quantity< units::si::thermal_diffusivity > const alpha_in,
+  units::quantity< units::si::thermal_conductivity > const k_in
 )
   : characteristic_length( characteristic_length_in ),
     k( k_in ),
@@ -45,18 +45,18 @@ Slab::Slab(
 
 
 Slab::Slab(
-  units::quantity< units::si::length > const & characteristic_length_in,
-  units::quantity< units::si::thermal_diffusivity > const & alpha_in,
-  units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+  units::quantity< units::si::length > const characteristic_length_in,
+  units::quantity< units::si::thermal_diffusivity > const alpha_in,
+  units::quantity< units::si::volumetric_heat_capacity > const rhoCp_in
 ) :Slab(
     characteristic_length_in,
     alpha_in,
     thermal::define::conductivity( rhoCp_in, alpha_in) ) {}
 
 Slab::Slab(
-  units::quantity< units::si::length > const & characteristic_length_in,
-  units::quantity< units::si::thermal_conductivity > const & k_in,
-  units::quantity< units::si::volumetric_heat_capacity > const & rhoCp_in
+  units::quantity< units::si::length > const characteristic_length_in,
+  units::quantity< units::si::thermal_conductivity > const k_in,
+  units::quantity< units::si::volumetric_heat_capacity > const rhoCp_in
 ) :Slab(
     characteristic_length_in,
     thermal::define::diffusivity( k_in , rhoCp_in ),
