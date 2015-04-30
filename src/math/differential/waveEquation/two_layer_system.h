@@ -143,7 +143,8 @@ auto surface_solution_with_resistance
   using std::cosh;
   using units::sinh;
   using units::cosh;
-  auto const coth = []( auto const e ) noexcept { return cosh(e)/sinh(e); } ;
+  using units::coth;
+  //auto const coth = []( auto const e ) noexcept { return cosh(e)/sinh(e); } ;
 
   auto const bRk = b * R * k;
   
@@ -168,7 +169,8 @@ auto first_layer_solution_with_resistance
   using std::cosh;
   using units::sinh;
   using units::cosh;
-  auto const coth = []( auto const e ) noexcept { return cosh(e)/sinh(e); } ;
+  using units::coth;
+  //auto const coth = []( auto const e ) noexcept { return cosh(e)/sinh(e); } ;
 
   auto const kx = k * x;
   auto const bRk = b * R * k;

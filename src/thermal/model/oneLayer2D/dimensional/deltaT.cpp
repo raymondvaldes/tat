@@ -28,7 +28,7 @@ auto deltaT
   
   auto const dT = I * L / k ;
   
-  assert( isnormal( dT ) );
+  assert( isfinite( dT ) );
   return dT;
 }
 

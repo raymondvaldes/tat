@@ -17,6 +17,7 @@
 #include "units/physical_dimensions.h"
 #include "math/functions/trigonometric/csc.h"
 #include "math/functions/trigonometric/sec.h"
+#include "math/functions/trigonometric/coth.h"
 
 namespace units {
 
@@ -179,6 +180,36 @@ cosh( const quantity<unit<plane_angle_dimension,System>,Y>& theta )
 {
     return cosh( quantity<si::plane_angle,Y>(theta) );
 }
+
+
+
+/// coth of theta in radians
+template<class Y>
+typename dimensionless_quantity<si::system,Y>::type 
+coth(const quantity<si::plane_angle,Y> & theta )
+{
+  using math::functions::trigonometric::coth;
+  return coth( theta.value() ) ;
+}
+
+/// coth of theta in dimensionless
+template<class Y>
+typename dimensionless_quantity<si::system,Y>::type
+coth(const quantity< si::dimensionless, Y > & theta )
+{
+  using math::functions::trigonometric::coth;
+  return coth( theta.value() ) ;
+}
+
+/// cos of theta in other angular units 
+template<class System,class Y>
+typename dimensionless_quantity<System,Y>::type 
+coth( const quantity<unit<plane_angle_dimension,System>,Y>& theta )
+{
+  return coth( quantity<si::plane_angle,Y>(theta) );
+}
+
+
 
 /// tanh of theta in radians
 template<class Y>

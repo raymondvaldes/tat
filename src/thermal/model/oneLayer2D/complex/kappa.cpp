@@ -32,8 +32,8 @@ auto kappa
   auto const i_non = quantity< si::dimensionless, complex<double > >( 0. + 1i );
   auto const k = sqrt( pow<2>( nu ) + i_non * pow<2>( b / l ) ) ;
 
-  assert( isnormal( k.value().real() ) ) ;
-  assert( isnormal( k.value().imag() ) ) ;
+  assert( isfinite( k.value().real() ) ) ;
+  assert( isfinite( k.value().imag() ) ) ;
 
   return  k;
 }

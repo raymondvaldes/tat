@@ -32,7 +32,7 @@ struct properties{
     phase( phase_),
     amplitude( amplitude_ )
   {
-    assert( isnormal( phase ) );
+    assert( isfinite( phase ) );
     assert( amplitude.value() > 0 );
   }
 

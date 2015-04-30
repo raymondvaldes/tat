@@ -35,8 +35,8 @@ auto temperature
 
   auto const T =  deltaT * theta;
   
-  assert( isnormal( T.value().real() )  );
-  assert( isnormal( T.value().imag() )  );
+  assert( isfinite( T.value().real() )  );
+  assert( isfinite( T.value().imag() )  );
 
   return T;
 }

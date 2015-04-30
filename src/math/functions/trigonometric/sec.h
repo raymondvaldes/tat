@@ -38,7 +38,7 @@ auto sec( T const a ) noexcept
   return 1 / cos( a );
 }
 
-}
+} // namespace trigonometric
   
 } // namespace functions
 

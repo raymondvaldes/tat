@@ -104,8 +104,8 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   
   auto const J0 = []( auto const & x ) noexcept { return bessel_j( 0, x ); };
   
-  auto const hankel_function = [&]( double const & nu ) noexcept {
-    
+  auto const hankel_function = [&]( double const & nu ) noexcept
+  {
     auto const h_out = h( nu, z ).value() * J0( nu * r ).value() * nu;
     return h_out;
   };
@@ -127,8 +127,8 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   auto const area = complex<double>( result[0], result[1] );
   auto const area_quantity = quantity< dimensionless, complex<double> >( area );
 
-  assert( isnormal( area_quantity.value().real() ) );
-  assert( isnormal( area_quantity.value().imag() ) );
+  assert( isfinite( area_quantity.value().real() ) );
+  assert( isfinite( area_quantity.value().imag() ) );
 
   return area_quantity;
 }
