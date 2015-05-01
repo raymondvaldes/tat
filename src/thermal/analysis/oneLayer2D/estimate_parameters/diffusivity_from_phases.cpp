@@ -30,7 +30,10 @@ using namespace units;
 using thermal::define::thermalPenetrations_from_frequencies;
 using std::vector;
 using math::estimation::x_limiter1;
+using math::estimation::x_limiter2;
 using math::estimation::kx_limiter1;
+using math::estimation::kx_limiter2;
+
 using math::estimation::x_to_k_constrained_from_0_to_1;
 using math::estimation::k_to_x_constrained_from_0_to_1;
 using thermal::model::oneLayer2D::dimensionless::b;
@@ -43,13 +46,13 @@ using math::complex::extract_phases_from_properties;
 
 Best_fit::Best_fit
 (
-  thermal::model::slab::Slab const & slab_,
+  thermal::model::slab::Slab const slab_,
 
   units::quantity< units::si::dimensionless > const view_radius_nd,
   units::quantity< units::si::dimensionless> const b,
  
-  std::vector< units::quantity<units::si::frequency> > const & frequencies_,
-  std::vector< units::quantity< units::si::plane_angle > > const & model_phases_
+  std::vector< units::quantity<units::si::frequency> > const frequencies_,
+  std::vector< units::quantity< units::si::plane_angle > > const model_phases_
 ) noexcept :
   bulk_slab( slab_ ),
   view_radius( view_radius_nd * bulk_slab.characteristic_length ),
@@ -82,7 +85,7 @@ auto diffusivity_from_phases
   auto const alpha = slab_initial.get_diffusivity();
   auto const k = slab_initial.get_conductivity();
   
-  auto const b_i = b( beam_radius, L );
+  auto const b1 = b( beam_radius, L );
   auto const b2_i = b( detector_view_radius, L );
   auto const deltaT = quantity< si::temperature > ( 1.0 * kelvin );
 
@@ -91,8 +94,9 @@ auto diffusivity_from_phases
   auto model_parameters = vector< double >
   {
     kx_limiter1( alpha.value() ) ,  // diffusivity ratio
-    kx_limiter1( b_i.value() ) ,      // beam radius
-    kx_limiter1( b2_i.value() ),      // detector radius
+    //kx_limiter1( b2_i.value() ),      // detector radius
+    kx_limiter2(  b2_i.value(), 0, 4.0 ),
+    kx_limiter1( b1.value() )       // beam radius
   };
   
   // parameter estimation algorithm
@@ -102,23 +106,23 @@ auto diffusivity_from_phases
   noexcept
   {
     auto const alpha = quantity<si::thermal_diffusivity>::from_value( x_limiter1( x[0] ) );
-    auto const b1 =  quantity<si::dimensionless>( x_limiter1( x[1] ) );  //  beam radius
-    auto const b2 =  quantity<si::dimensionless>( x_limiter1( x[2] ) ); //  detector radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 4.0 ) ); //  detector radius
+    auto const b1 =  quantity<si::dimensionless>( x_limiter1( x[2] ) );  //  beam radius
 
-    //std::cout << alpha << "\t" << b << "\t" << b2 << "\n";
-    auto const updated_elements = make_tuple( alpha, b1, b2 ) ;
+    std::cout << alpha << "\t" << b2 << "\t" << b1 << "\n" ;
+    auto const updated_elements = make_tuple( alpha, b2, b1 ) ;
     return updated_elements ;
   };
 
   auto const make_model_predictions =
-  [ &frequencies, &L, &update_system_properties, &deltaT ]
+  [ &frequencies, &L, &update_system_properties, &deltaT]
   ( const double * x ) noexcept
   {
     auto const t = update_system_properties( x );
     
     auto const alpha = get< 0 >(t);
-    auto const b1 = get< 1 >(t);
-    auto const b2 = get< 2 >(t);
+    auto const b2 = get< 1 >(t);
+    auto const b1 = get< 2 >(t);
     
     auto const predictions =
     avg_surface_phases_amplitudes( b1, deltaT, b2, frequencies, L, alpha );
@@ -142,7 +146,7 @@ auto diffusivity_from_phases
   };
 
   auto lmdif_settings = settings{};
-  lmdif_settings.factor = 1.;
+  lmdif_settings.factor = .1;
 
   lmdif(  minimization_equation, number_of_points_to_Fit,
           model_parameters, lmdif_settings );
@@ -150,15 +154,15 @@ auto diffusivity_from_phases
   auto const x = model_parameters.data();
   auto const t = update_system_properties( x );
   auto const alpha_fit = get< 0 >(t);
-  auto const b = get< 1 >(t);
-  auto const b2 = get< 2 >(t);
+  auto const b2 = get< 1 >(t);
+  auto const b1_fit = get< 2 >(t);
   
   auto const model_predictions = make_model_predictions( x );
   auto const phases = extract_phases_from_properties( model_predictions  ) ;
   auto const fitted_slab = thermal::model::slab::Slab( L , alpha_fit , k ) ;
   
   auto const result =
-  Best_fit( fitted_slab, b2, b, frequencies, phases );
+  Best_fit( fitted_slab, b2, b1_fit, frequencies, phases );
   
   return result;
 }

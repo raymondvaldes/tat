@@ -36,12 +36,12 @@ auto phase_amplitude
 
   auto const T_complex = temperature( z, r, b, l, deltaT );
   
-  auto const phase = arg( T_complex ) - M_PI_2 * radians ;
+  auto const phase = -arg( T_complex ) ;
   auto const amplitude = abs( T_complex );
 
-  auto const phase_wrapper = wrap_to_negPi_posPi( phase );
+ // auto const phase = wrap_to_negPi_posPi( phase );
 
-  return properties< si::temperature >( phase_wrapper , amplitude );
+  return properties< si::temperature >( phase , amplitude );
 }
 
 } // namespace complex

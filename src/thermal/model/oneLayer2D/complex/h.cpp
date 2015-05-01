@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#include <iostream>
 #include "thermal/model/oneLayer2D/complex/h.h"
 #include "thermal/model/oneLayer2D/complex/kappa.h"
 
@@ -30,15 +31,26 @@ auto h
   assert( b > 0 ) ;
 
   auto const inv = []( auto const e ) noexcept { return quantity<si::dimensionless>(1.) / e ; } ;
-  auto const csch = [&inv]( auto const e ) noexcept { return inv(sinh(e)); } ;
-
+  
   auto const k = kappa( nu, b, l );
   auto const two = quantity<si::dimensionless>( 2 );
   auto const four = quantity<si::dimensionless>( 4 );
   
-  auto const h_eval =
+  auto const denominator = sinh( k * inv(b) );
+  
+  
+  auto h_eval =
   exp( -pow<2>( nu )/ four ) * cosh( k * ( inv(b) - z ) ) * csch( k * inv(b) )
   / ( two * k ) ;
+  
+  auto const is_overflow =
+  isinf( denominator.value().real() ) || isinf( denominator.value().imag() );
+
+  if( is_overflow ) {
+    h_eval = quantity< si::dimensionless, std::complex< double > >(
+      std::complex< double >( 0 , 0 ) );
+    std::cout <<cosh( k * ( inv(b) - z ) ) << "\t" <<csch( k * inv(b) ) << "\n";
+  }
  
   assert( isfinite( h_eval.value().real() ) ) ;
   assert( isfinite( h_eval.value().imag() ) ) ;

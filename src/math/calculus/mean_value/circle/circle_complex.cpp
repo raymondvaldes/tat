@@ -46,7 +46,7 @@ noexcept -> std::pair<double, double>
   auto f_0= vector< double > ( { 0, 0 } );
   auto const r0 = double(0) ;
   auto const r1 = R ;
-\
+
   integrate( func, f_0, r0 , r1, dr_i_step );
   
   auto const mean_first  =  ( 2. * f_0[0] ) / ( pow( R , 2 ) ) ;

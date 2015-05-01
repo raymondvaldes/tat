@@ -11,6 +11,7 @@
 
 #include "units.h"
 #include <functional>
+#include <utility>
 
 namespace math{
 namespace calculus{
@@ -23,6 +24,14 @@ auto offset_circle
   units::quantity< units::si::length > const radius
 )
 noexcept -> double;
+
+auto offset_circle
+(
+  std::function< std::pair<double, double>( units::quantity< units::si::length > )> const & f,
+  units::quantity< units::si::length > const offset,
+  units::quantity< units::si::length > const radius
+)
+noexcept -> std::pair<double, double> ;
 
   // find the mean value of a function from a to b.
   // mean_value =

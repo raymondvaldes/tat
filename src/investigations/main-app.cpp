@@ -33,7 +33,7 @@ inline auto executeAnalysis( const MainArguments& runArgs ) noexcept
     runArgs.run_directory(),
     runArgs.run_samples(),
     runArgs.run_investigationName()
-    ) ;
+  ) ;
 
   return globalStopWatch.readoutLoud();
 }

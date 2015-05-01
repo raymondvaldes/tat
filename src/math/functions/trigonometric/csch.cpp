@@ -1,52 +1,41 @@
 //
-//  coth.cpp
+//  csch.cpp
 //  tat
 //
 //  Created by Raymond Valdes on 4/30/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include <iostream>
 #include <cmath>
 #include <complex>
 #include <cassert>
 
-#include "math/functions/trigonometric/coth.h"
+#include "math/functions/trigonometric/csch.h"
 
-using std::cosh;
-using std::sinh;
-using std::isinf;
+using std::complex;
 
 namespace math{
 namespace functions {
 namespace trigonometric{
 
-/// coth of theta in double
-auto coth( double const a ) noexcept -> double
+auto csch( double const a ) noexcept -> double
 {
-  auto const coshv = cosh( a );
+  assert( a > 0 );
+  
   auto const sinhv = sinh( a );
-  auto ratio = coshv / sinhv;
-
-  if( isinf(coshv) && isinf(sinhv) ){
-   ratio = 1.0;
-  }
+  auto ratio = 1.0 / sinhv;
   
   assert( isfinite( ratio ) );
   
   return ratio;
 }
 
-auto coth( std::complex<double> const a ) noexcept -> std::complex<double>
+auto csch( std::complex<double> const a ) noexcept -> std::complex<double>
 {
-  if( a.real() > 15 ) {
-    return std::complex<double>(1.0, 0);
-  }
- 
-  auto const coshv = cosh( a );
+  assert( a.real() > 0 || a.imag() > 0 ) ;
+
   auto const sinhv = sinh( a );
-  auto ratio = coshv / sinhv;
-  
+  auto ratio =  complex<double>(1.0, 0.0) / sinhv;
   
   assert( isfinite( ratio.real() ) );
   assert( isfinite( ratio.imag() ) );

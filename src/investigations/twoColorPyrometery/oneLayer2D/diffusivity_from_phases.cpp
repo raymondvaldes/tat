@@ -39,16 +39,16 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
     32 * hertz,
     45.255 * hertz,
     64 * hertz,
-    90.51 * hertz,
-    128 * hertz,
-    181.019 * hertz,
-    256 * hertz,
-    362.039 * hertz,
-    512 * hertz,
-    724.077 * hertz,
-    1024 * hertz,
-    1448.155 * hertz,
-    2048 * hertz
+    90.51 * hertz
+ //   128 * hertz,
+ //   181.019 * hertz,
+ //   256 * hertz,
+ //   362.039 * hertz,
+ //   512 * hertz,
+ //   724.077 * hertz,
+ //   1024 * hertz,
+ //   1448.155 * hertz,
+ //   2048 * hertz
   });
   
   auto const phases = vector< quantity< plane_angle > >({
@@ -64,20 +64,20 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
     0.808 * radians,
     0.7215 * radians,
     0.665 * radians,
-    0.6465 * radians,
-    0.65 * radians,
-    0.6495 * radians,
-    0.639 * radians,
-    0.623 * radians,
-    0.5975 * radians,
-    0.5755 * radians,
-    0.549 * radians,
-    0.525 * radians,
-    0.491 * radians
+    0.6465 * radians
+ //   0.65 * radians,
+ //   0.6495 * radians,
+//    0.639 * radians,
+//    0.623 * radians,
+//    0.5975 * radians,
+//    0.5755 * radians,
+//    0.549 * radians,
+//    0.525 * radians,
+ //   0.491 * radians
   });
   
-  auto const beam_radius = quantity< length >( 2.1 * millimeters );
-  auto const detector_view_radius = quantity< length>( 2.0 * millimeters  ) ;
+  auto const beam_radius = quantity< length >( 2.11362 * millimeters );
+  auto const detector_view_radius = quantity< length>( 0.8 * millimeters  ) ;
 
   auto const bestFit_results =
   thermal::analysis::oneLayer2D::estimate_parameters::diffusivity_from_phases(

@@ -39,7 +39,7 @@ auto avg_surface_phase_amplitude
   };
 
   auto const view_radius_d = double( view_radius.value() );
-  auto const dr = double( 0.005 );
+  auto const dr = double( 0.001 );
   auto const mean = circle_complex( f_r, view_radius_d, dr );
   
   auto const mean_phase = quantity< plane_angle >::from_value( mean.first );

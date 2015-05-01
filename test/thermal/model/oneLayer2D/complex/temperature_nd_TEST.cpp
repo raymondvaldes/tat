@@ -18,9 +18,23 @@ BOOST_AUTO_TEST_SUITE( model )
 BOOST_AUTO_TEST_SUITE( oneLayer2D )
 BOOST_AUTO_TEST_SUITE( complex )
 
+using thermal::model::oneLayer2D::complex::temperature;
+using namespace units;
 
 BOOST_AUTO_TEST_CASE( complex_temperature_test )
 {
+
+  auto const z = 0.01_nd;
+  auto const r = 0.01_nd;
+  auto const b = 0.5_nd;
+  auto const l = .2_nd;
+  auto const dT = 1.0*kelvin;
+  
+  auto const t0 = temperature( 0.0_nd,  1.0_nd, b, l, dT);
+  auto const t1 = temperature( 0.01_nd, 0.1_nd, b, l, dT);
+  auto const t2 = temperature( 0.1_nd,  0.01_nd, b, l, dT);
+  auto const t3 = temperature( 1.0_nd,  0.0_nd, b, l, dT);
+
 //  using std::sqrt;
 //  using thermal::model::tbc2009::complexT::h_system;
 //  using thermal::model::tbc2009::dimensionless::HeatingProperties;

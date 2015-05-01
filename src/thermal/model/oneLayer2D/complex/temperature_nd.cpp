@@ -43,13 +43,13 @@ auto temperature_nd
   if( at_surface )
   {
     h_sys = [ b, l, z ]( auto const nu_ , auto const z_ ) noexcept {
-        return h_surface( nu_, b, l );
+        return h_surface( nu_, l, b );
     };
   }
   else if( in_layer )
   {
     h_sys = [ b, l, z ]( auto const nu_ , auto const z_ ) noexcept {
-      return h( nu_, z_, b, l );
+      return h( nu_, z_, l, b );
     };
   }
   else
@@ -58,8 +58,10 @@ auto temperature_nd
   }
   
   
+  auto settings = iHankelSettings();
+  settings.nu_end = 100;
 
-  auto const T = inverseHankel_complex( h_sys , z, r ) ;
+  auto const T = inverseHankel_complex( h_sys , z, r, settings ) ;
   
   assert( isfinite( T.value().real() ) );
   assert( isfinite( T.value().imag() ) );

@@ -33,6 +33,7 @@
 
 #include "thermal/analysis/tbc2009/detector_offset/estimate_parameters/from_phases/from_phases.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/diffusivity_from_phases.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/predicted_sweep.h"
 
 namespace investigations{
 
@@ -54,6 +55,7 @@ using namespace thermal::model::tbc2009;
 auto run( filesystem::directory const & dir ) -> void
 {
   oneLayer2D::diffusivity_from_phases(dir);
+//  oneLayer2D::predicted_sweep(dir);
 
 
 //  auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
