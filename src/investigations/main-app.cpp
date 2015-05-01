@@ -17,7 +17,6 @@
 #include "tools/timing.h"
 #include "investigations/execute.h"
 
-
 namespace investigations{
 
 using std::cout;
@@ -40,16 +39,12 @@ inline auto executeAnalysis( const MainArguments& runArgs ) noexcept
 
 int main_app( const int argc, const char *argv[ ] ) noexcept
 {
-
   auto const runArgs = MainArguments{ argc, argv };
 
   if( runArgs.run_analysis() ) {
-  
     auto const exeTimer = executeAnalysis( runArgs ) ;
   }
-
   return 0 ;
 }
-
 
 }

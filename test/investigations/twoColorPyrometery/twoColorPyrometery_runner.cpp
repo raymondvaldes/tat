@@ -25,21 +25,21 @@ BOOST_AUTO_TEST_SUITE( investigations )
 
 BOOST_AUTO_TEST_SUITE( twoColorPyrometery )
 
-BOOST_AUTO_TEST_CASE( startup ) {
-  
-  auto const myArguments = vector<string>
-  {
-    "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
-    "--run",
-    "/Users/raymondvaldes/Dropbox/investigations/2color/poco_graphite/25mm",
-    "--sample",         "adiabatic_april28_wav",
-    "--investigation",  "twoColorPyrometery"
-  };
-  
-  vector<char const *> vec2 = string2charPtr( myArguments );
-
-  main_app( vec2.size() , vec2.data() );
-}
+//BOOST_AUTO_TEST_CASE( startup ) {
+//  
+//  auto const myArguments = vector<string>
+//  {
+//    "/tmp/tat-app.dst/Users/raymondvaldes/usr/bin/tat-app",
+//    "--run",
+//    "/Users/raymondvaldes/Dropbox/investigations/2color/poco_graphite/25mm",
+//    "--sample",         "adiabatic_april28_wav",
+//    "--investigation",  "twoColorPyrometery"
+//  };
+//  
+//  vector<char const *> vec2 = string2charPtr( myArguments );
+//
+//  main_app( vec2.size() , vec2.data() );
+//}
 
 BOOST_AUTO_TEST_SUITE_END() // twColorPyrometery
 

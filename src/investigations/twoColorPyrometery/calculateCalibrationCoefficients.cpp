@@ -17,6 +17,7 @@
 #include "algorithm/vector/fill_with_list_values_as_constructor_arg.h"
 #include "statistics/signal_processing/average.h"
 #include <algorithm> 
+#include "algorithm/algorithm.h"
 #include <valarray>
 
 namespace investigations {
@@ -59,6 +60,7 @@ noexcept-> std::vector< units::quantity< units::si::wavelength > >
 auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 -> units::quantity< units::si::dimensionless >
 {
+
   get_file_and_Import_Data();
     using algorithm::vector::fill_with_list_values_as_constructor_arg;
     using units::quantity;
@@ -77,6 +79,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     using thermal::emission::Spectrum;
     using std::for_each;
     using std::vector;
+    using algorithm::for_each;
 
     auto const wavelengthColumn = 1;
 
@@ -114,14 +117,15 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 
 
   
-      auto const c2 = evaluateRawData( 2, 200 * celsius::degrees(), myPathNew );
-      auto const c3 = evaluateRawData( 3, 225 * celsius::degrees(), myPathNew );
-      auto const c4 = evaluateRawData( 4, 250 * celsius::degrees(), myPathNew );
-      auto const c5 = evaluateRawData( 5, 275 * celsius::degrees(), myPathNew );
-      auto const c6 = evaluateRawData( 6, 300 * celsius::degrees(), myPathNew );
-      auto const c7 = evaluateRawData( 7, 325 * celsius::degrees(), myPathNew );
-      auto const c8 = evaluateRawData( 8, 350 * celsius::degrees(), myPathNew );
-      auto const c9 = evaluateRawData( 9, 375 * celsius::degrees(), myPathNew );
+      auto const c2 = evaluateRawData( 2, 431 * celsius::degrees(), myPathNew );
+      auto const c3 = evaluateRawData( 3, 518 * celsius::degrees(), myPathNew );
+      auto const c4 = evaluateRawData( 4, 610 * celsius::degrees(), myPathNew );
+      auto const c5 = evaluateRawData( 5, 470.9 * celsius::degrees(), myPathNew );
+
+     // auto const c6 = evaluateRawData( 6, 470.0 * celsius::degrees(), myPathNew );
+     // auto const c7 = evaluateRawData( 7, 321.2 * celsius::degrees(), myPathNew );
+//      auto const c8 = evaluateRawData( 8, 350 * celsius::degrees(), myPathNew );
+//      auto const c9 = evaluateRawData( 9, 375 * celsius::degrees(), myPathNew );
 //      auto const c10 = evaluateRawData( 10, 700 * celsius::degrees(), myPathNew );
 //      auto const c11 = evaluateRawData( 11, 800 * celsius::degrees(), myPathNew );
 //      auto const c12 = evaluateRawData( 12, 900 * celsius::degrees(), myPathNew );
@@ -152,9 +156,18 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 
 
     const vector< quantity< dimensionless > > gCoefficients {
-    c2[0].second, c3[0].second, c4[0].second,
-    c5[0].second, c6[0].second, c7[0].second,
-    c8[0].second, c9[0].second };
+    c2[0].second, c3[0].second, c4[0].second, c5[0].second
+//    c5[0].second,
+//      c6[0].second,
+//      c7[0].second,
+   // c8[0].second, c9[0].second
+    };
+  
+    for_each( gCoefficients, []( auto const & g )
+    {
+      std::cout << g <<"\n";
+    } );
+  
   
     using statistics::signal_processing::average;
     auto const g_average = average( gCoefficients );

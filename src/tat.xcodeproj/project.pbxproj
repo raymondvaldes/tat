@@ -72,6 +72,10 @@
 		AB4871B41AF31F9200DFD3C1 /* diffusivity_from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4871B21AF31F9200DFD3C1 /* diffusivity_from_phases.h */; };
 		AB4871B91AF323CF00DFD3C1 /* diffusivity_from_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4871B71AF323CF00DFD3C1 /* diffusivity_from_phases.cpp */; };
 		AB4871BA1AF323CF00DFD3C1 /* diffusivity_from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4871B81AF323CF00DFD3C1 /* diffusivity_from_phases.h */; };
+		AB4871BF1AF414B700DFD3C1 /* surface_radial_profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4871BD1AF414B700DFD3C1 /* surface_radial_profile.cpp */; };
+		AB4871C01AF414B700DFD3C1 /* surface_radial_profile.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4871BE1AF414B700DFD3C1 /* surface_radial_profile.h */; };
+		AB4871C31AF4196F00DFD3C1 /* surface_radial_profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4871C11AF4196F00DFD3C1 /* surface_radial_profile.cpp */; };
+		AB4871C41AF4196F00DFD3C1 /* surface_radial_profile.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4871C21AF4196F00DFD3C1 /* surface_radial_profile.h */; };
 		AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */; };
 		AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */; };
 		AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */; };
@@ -583,6 +587,10 @@
 		AB4871B21AF31F9200DFD3C1 /* diffusivity_from_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffusivity_from_phases.h; path = oneLayer2D/estimate_parameters/fit_all/diffusivity_from_phases.h; sourceTree = "<group>"; };
 		AB4871B71AF323CF00DFD3C1 /* diffusivity_from_phases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = diffusivity_from_phases.cpp; path = twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.cpp; sourceTree = "<group>"; };
 		AB4871B81AF323CF00DFD3C1 /* diffusivity_from_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffusivity_from_phases.h; path = twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.h; sourceTree = "<group>"; };
+		AB4871BD1AF414B700DFD3C1 /* surface_radial_profile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_radial_profile.cpp; path = oneLayer2D/phase_amplitude/surface_radial_profile.cpp; sourceTree = "<group>"; };
+		AB4871BE1AF414B700DFD3C1 /* surface_radial_profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_radial_profile.h; path = oneLayer2D/phase_amplitude/surface_radial_profile.h; sourceTree = "<group>"; };
+		AB4871C11AF4196F00DFD3C1 /* surface_radial_profile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_radial_profile.cpp; path = twoColorPyrometery/oneLayer2D/temp_sweep/surface_radial_profile.cpp; sourceTree = "<group>"; };
+		AB4871C21AF4196F00DFD3C1 /* surface_radial_profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_radial_profile.h; path = twoColorPyrometery/oneLayer2D/temp_sweep/surface_radial_profile.h; sourceTree = "<group>"; };
 		AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = validateOpenStream.cpp; path = algorithm/stream/validateOpenStream.cpp; sourceTree = "<group>"; };
 		AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_exp_model.cpp; path = twoColorPyrometery/plot/phase_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_exp_model.h; path = twoColorPyrometery/plot/phase_exp_model.h; sourceTree = "<group>"; };
@@ -1281,6 +1289,24 @@
 			name = fit_all_but_laser;
 			sourceTree = "<group>";
 		};
+		AB4871BB1AF4141C00DFD3C1 /* temp_sweep */ = {
+			isa = PBXGroup;
+			children = (
+				AB4871C11AF4196F00DFD3C1 /* surface_radial_profile.cpp */,
+				AB4871C21AF4196F00DFD3C1 /* surface_radial_profile.h */,
+			);
+			name = temp_sweep;
+			sourceTree = "<group>";
+		};
+		AB4871BC1AF4148100DFD3C1 /* phase_amplitude */ = {
+			isa = PBXGroup;
+			children = (
+				AB4871BD1AF414B700DFD3C1 /* surface_radial_profile.cpp */,
+				AB4871BE1AF414B700DFD3C1 /* surface_radial_profile.h */,
+			);
+			name = phase_amplitude;
+			sourceTree = "<group>";
+		};
 		AB4E53AE1ABB903F00E7BA8D /* plot */ = {
 			isa = PBXGroup;
 			children = (
@@ -1547,6 +1573,7 @@
 		AB80FB4E1AF1A36100F88B04 /* oneLayer2D */ = {
 			isa = PBXGroup;
 			children = (
+				AB4871BB1AF4141C00DFD3C1 /* temp_sweep */,
 				AB4871B61AF323B400DFD3C1 /* fit_all_but_laser */,
 				AB4871A11AF31D3F00DFD3C1 /* fit_all */,
 				AB48719C1AF3166D00DFD3C1 /* offset_detector */,
@@ -2050,6 +2077,7 @@
 		ABDA1CAB1AE9BCE700121C97 /* oneLayer2D */ = {
 			isa = PBXGroup;
 			children = (
+				AB4871BC1AF4148100DFD3C1 /* phase_amplitude */,
 				AB48718C1AF3017300DFD3C1 /* offset_detector */,
 				ABFB163B1AF156760093BF5B /* dimensional */,
 				ABDA1CAD1AE9BD1600121C97 /* dimensionless */,
@@ -2735,7 +2763,9 @@
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
 				AB90AA531AB2930A00F2535D /* unique_measurement_pair.h in Headers */,
+				AB4871C01AF414B700DFD3C1 /* surface_radial_profile.h in Headers */,
 				AB841C5D1AC4E4D4000CE81D /* c.h in Headers */,
+				AB4871C41AF4196F00DFD3C1 /* surface_radial_profile.h in Headers */,
 				AB44BD6A1AAA43B100E0710E /* normalizedSignalRatio_from_measurement.h in Headers */,
 				AB5E9D2F1ACA1ACA003319FA /* phase_amplitude.h in Headers */,
 				AB841C411AC4DB62000CE81D /* J0.h in Headers */,
@@ -3167,6 +3197,7 @@
 				ABFB163E1AF156890093BF5B /* deltaT.cpp in Sources */,
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
 				AB9A3FAC1ACE09B50004882F /* if_intersect.cpp in Sources */,
+				AB4871C31AF4196F00DFD3C1 /* surface_radial_profile.cpp in Sources */,
 				ABEF4EB01948D4A500B44AD5 /* kernal.cpp in Sources */,
 				ABFB16421AF158E50093BF5B /* phase_amplitude.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
@@ -3212,6 +3243,7 @@
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,
 				ABEF4EB21948D4A500B44AD5 /* lmdiff_poptea.cpp in Sources */,
+				AB4871BF1AF414B700DFD3C1 /* surface_radial_profile.cpp in Sources */,
 				AB4E53BF1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp in Sources */,
 				ABDA1CBC1AE9C2D900121C97 /* kappa.cpp in Sources */,
 				AB44BD691AAA43B100E0710E /* normalizedSignalRatio_from_measurement.cpp in Sources */,
@@ -3287,7 +3319,7 @@
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3450,7 +3482,7 @@
 				FRAMEWORK_SEARCH_PATHS = /usr/local/opt/boost/include;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",

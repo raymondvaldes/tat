@@ -32,7 +32,7 @@ auto extract_phases_from_properties( std::vector< properties<T> > const & ps )
   return phases;
 }
 
-}
-}
+} // namespace complex
+} // namespace math
 
 #endif

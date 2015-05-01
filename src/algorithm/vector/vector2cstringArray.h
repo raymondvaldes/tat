@@ -12,8 +12,9 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <algorithm>
 
-#include "algorithm/algorithm.h"
+//#include "algorithm/algorithm.h"
 
 namespace algorithm {
 
@@ -23,12 +24,11 @@ inline auto string2charPtr( std::vector<std::string> const & input ) noexcept
   -> std::vector<char const *>
 {
   using std::vector;
-  using algorithm::transform;
+  using std::transform;
   using std::begin;
   
-  auto const empty = input.empty();
   auto const count = input.size();
-  assert( !empty );
+  assert( !input.empty() );
   
   auto const string2c_str = []( auto const& aString )
   {
@@ -37,7 +37,7 @@ inline auto string2charPtr( std::vector<std::string> const & input ) noexcept
 
   auto output = vector< char const *>( count );
   
-  transform(  input, begin( output ), string2c_str ) ;
+  transform(  input.begin(), input.end(), begin( output ), string2c_str ) ;
 
   return output;
 }

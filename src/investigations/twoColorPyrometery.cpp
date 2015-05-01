@@ -39,7 +39,7 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/predicted_sweep.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/offset_detector/diffusivity_from_phases.h"
-
+#include "investigations/twoColorPyrometery/oneLayer2D/temp_sweep/surface_radial_profile.h"
 namespace investigations{
 
 namespace twoColorPyrometery{
@@ -64,12 +64,12 @@ auto run( filesystem::directory const & dir ) -> void
  // oneLayer2D::fit_all::diffusivity_from_phases(dir);
  
  //  oneLayer2D::fit_all_but_laser::diffusivity_from_phases(dir);
-  oneLayer2D::predicted_sweep(dir);
-
-
-//  auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
-//  std::cout << gCoeff << "\n";
-//  
+//  oneLayer2D::predicted_sweep(dir);
+  oneLayer2D::temp_sweep::surface_radial_profile( dir );
+  auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
+  std::cout << gCoeff << "\n";
+  
+  
 //  auto const scope_data = import_twoColor_scope_files( dir, "twoColorPyro.xml" , gCoeff );
 ////  plot::wave_signals( scope_data.measurements.front()  );
 ////  plot::wave_signals( scope_data.measurements.back()  );

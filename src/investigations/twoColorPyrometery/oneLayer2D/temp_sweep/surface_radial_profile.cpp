@@ -1,0 +1,66 @@
+//
+//  surface_radial_profile.cpp
+//  tat
+//
+//  Created by Raymond Valdes on 5/1/15.
+//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
+//
+
+#include "investigations/twoColorPyrometery/oneLayer2D/temp_sweep/surface_radial_profile.h"
+
+#include <iostream>
+#include "thermal/model/oneLayer2D/phase_amplitude/surface_radial_profile.h"
+#include "thermal/model/oneLayer2D/dimensionless/b.h"
+#include "algorithm/algorithm.h"
+#include "math/construct/range.h"
+#include "plot/gnuplot.h"
+#include "math/complex/extract_phases_from_properties.h"
+
+using thermal::model::oneLayer2D::phase_amplitude::surface_radial_profile;
+using thermal::model::oneLayer2D::dimensionless::b;
+using std::vector;
+using algorithm::for_each;
+using math::construct::range_1og10;
+using namespace units;
+using math::complex::extract_phases_from_properties;
+
+namespace investigations{
+namespace twoColorPyrometery{
+namespace oneLayer2D{
+namespace temp_sweep{
+
+auto surface_radial_profile( filesystem::directory const & dir ) -> void
+{
+
+  auto const beam_radius = quantity<length>( 2.1 * millimeters);
+  auto const deltaT = quantity<si::temperature>( 1. * kelvin );
+  
+  auto const L = quantity<length>( 661. * micrometers);
+  auto const alpha = quantity< thermal_diffusivity>( 22.0 * square_millimeters / second );
+  auto const f = quantity< si::frequency >( 2.0 * hertz );
+  
+  auto const radial_positions =
+  range_1og10< quantity< si::dimensionless>>(.1, 3, 40);
+  
+  auto const b_laser = b( beam_radius, L );
+  auto const ps = thermal::model::oneLayer2D::phase_amplitude::surface_radial_profile(
+      b_laser, deltaT, radial_positions, L, alpha, f
+    );
+  
+  auto i = size_t(0);
+  for_each( ps, [&radial_positions, &i]( auto& p ){
+    std::cout << radial_positions[i] << "\t" <<  p.amplitude << "\t" << p.phase << "\n";
+    ++i;
+  });
+  
+  auto const phases = extract_phases_from_properties( ps );
+  
+  
+  plot::simple_XY(radial_positions, phases );
+
+}
+
+} // namespace temp_sweep
+} // namespace oneLayer2D
+} // namespace twoColorPyrometery
+} // namespace investigations
