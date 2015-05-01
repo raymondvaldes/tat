@@ -2,12 +2,12 @@
 //  diffusivity_from_phases.h
 //  tat
 //
-//  Created by Raymond Valdes on 4/30/15.
+//  Created by Raymond Valdes on 4/29/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_investigations_twoColorPyrometery_oneLayer2D__diffusivity_from_phases__1
-#define __tat_investigations_twoColorPyrometery_oneLayer2D__diffusivity_from_phases__1
+#ifndef __tat_investigations_twoColorPyrometery_oneLayer2D_fit_all_diffusivity_from_phases__
+#define __tat_investigations_twoColorPyrometery_oneLayer2D_fit_all_diffusivity_from_phases__
 
 #include "tools/interface/filesystem.hpp"
 

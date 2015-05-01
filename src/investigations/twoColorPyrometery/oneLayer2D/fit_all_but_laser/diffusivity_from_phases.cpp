@@ -2,25 +2,25 @@
 //  diffusivity_from_phases.cpp
 //  tat
 //
-//  Created by Raymond Valdes on 4/30/15.
+//  Created by Raymond Valdes on 4/29/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "investigations/twoColorPyrometery/oneLayer2D/diffusivity_from_phases.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.h"
 #include "units.h"
 
-#include "thermal/analysis/oneLayer2D/estimate_parameters/diffusivity_from_phases.h"
+#include "thermal/analysis/oneLayer2D/estimate_parameters/fit_all_but_laser/diffusivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
 
 using namespace units;
 using thermal::model::slab::import ;
-using thermal::analysis::oneLayer2D::estimate_parameters::diffusivity_from_phases;
+using thermal::analysis::oneLayer2D::estimate_parameters::fit_all_but_laser::diffusivity_from_phases;
 using std::vector;
 
 namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
-namespace fit_all{
+namespace fit_all_but_laser{
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 {
@@ -39,8 +39,8 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
     22.627 * hertz,
     32 * hertz,
     45.255 * hertz,
-    64 * hertz,
-    90.51 * hertz
+//    64 * hertz,
+//    90.51 * hertz
  //   128 * hertz,
  //   181.019 * hertz,
  //   256 * hertz,
@@ -53,19 +53,19 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   });
   
   auto const phases = vector< quantity< plane_angle > >({
-    0.9879 * radians,
-    1.0455 * radians,
-    1.085 * radians,
-    1.1055 * radians,
-    1.1105 * radians,
-    1.106 * radians,
-    1.064 * radians,
-    1.0025 * radians,
-    0.912 * radians,
-    0.808 * radians,
-    0.7215 * radians,
-    0.665 * radians,
-    0.6465 * radians
+    0.975120667 * radians,
+    1.034716667 * radians,
+    1.079263333 * radians,
+    1.105916667 * radians,
+    1.114323333 * radians,
+    1.105973333 * radians,
+    1.061003333 * radians,
+    0.993261 * radians,
+    0.902343 * radians,
+    0.806916333 * radians,
+    0.734095333 * radians,
+ //   0.668 * radians,
+  //  0.6465 * radians
  //   0.65 * radians,
  //   0.6495 * radians,
 //    0.639 * radians,
@@ -78,10 +78,10 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   });
   
   auto const beam_radius = quantity< length >( 2.11362 * millimeters );
-  auto const detector_view_radius = quantity< length>( 0.8 * millimeters  ) ;
+  auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ;
 
   auto const bestFit_results =
-  thermal::analysis::oneLayer2D::estimate_parameters::diffusivity_from_phases(
+  thermal::analysis::oneLayer2D::estimate_parameters::fit_all_but_laser::diffusivity_from_phases(
     frequencies, phases , initial_slab, beam_radius, detector_view_radius ) ;
 }
 

@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_investigations_twoColorPyrometery_oneLayer2D__diffusivity_from_phases__1
-#define __tat_investigations_twoColorPyrometery_oneLayer2D__diffusivity_from_phases__1
+#ifndef __tat_investigations_twoColor_oneLayer2D_offset_detector_diffusivity_from_phases__
+#define __tat_investigations_twoColor_oneLayer2D_offset_detector_diffusivity_from_phases__
 
 #include "tools/interface/filesystem.hpp"
 
 namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
-namespace fit_all{
+namespace offset_detector{
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void ;
 

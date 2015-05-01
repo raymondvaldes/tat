@@ -2,19 +2,19 @@
 //  diffusivity_from_phases.cpp
 //  tat
 //
-//  Created by Raymond Valdes on 4/30/15.
+//  Created by Raymond Valdes on 4/29/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "investigations/twoColorPyrometery/oneLayer2D/diffusivity_from_phases.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/fit_all/diffusivity_from_phases.h"
 #include "units.h"
 
-#include "thermal/analysis/oneLayer2D/estimate_parameters/diffusivity_from_phases.h"
+#include "thermal/analysis/oneLayer2D/estimate_parameters/fit_all/diffusivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
 
 using namespace units;
 using thermal::model::slab::import ;
-using thermal::analysis::oneLayer2D::estimate_parameters::diffusivity_from_phases;
+using thermal::analysis::oneLayer2D::estimate_parameters::fit_all::diffusivity_from_phases;
 using std::vector;
 
 namespace investigations{
@@ -81,7 +81,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   auto const detector_view_radius = quantity< length>( 0.8 * millimeters  ) ;
 
   auto const bestFit_results =
-  thermal::analysis::oneLayer2D::estimate_parameters::diffusivity_from_phases(
+  thermal::analysis::oneLayer2D::estimate_parameters::fit_all::diffusivity_from_phases(
     frequencies, phases , initial_slab, beam_radius, detector_view_radius ) ;
 }
 

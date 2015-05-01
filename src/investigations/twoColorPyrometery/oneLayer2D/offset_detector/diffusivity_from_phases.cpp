@@ -6,21 +6,21 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "investigations/twoColorPyrometery/oneLayer2D/diffusivity_from_phases.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/offset_detector/diffusivity_from_phases.h"
 #include "units.h"
 
-#include "thermal/analysis/oneLayer2D/estimate_parameters/diffusivity_from_phases.h"
+#include "thermal/analysis/oneLayer2D/offset_detector/estimate_parameters/diffusivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
 
 using namespace units;
 using thermal::model::slab::import ;
-using thermal::analysis::oneLayer2D::estimate_parameters::diffusivity_from_phases;
+using thermal::analysis::oneLayer2D::offset_detector::estimate_parameters::diffusivity_from_phases;
 using std::vector;
 
 namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
-namespace fit_all{
+namespace offset_detector{
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 {
@@ -79,10 +79,11 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   
   auto const beam_radius = quantity< length >( 2.11362 * millimeters );
   auto const detector_view_radius = quantity< length>( 0.8 * millimeters  ) ;
+  auto const detector_offset = quantity<length>( 0.01 * millimeters );
 
   auto const bestFit_results =
-  thermal::analysis::oneLayer2D::estimate_parameters::diffusivity_from_phases(
-    frequencies, phases , initial_slab, beam_radius, detector_view_radius ) ;
+  thermal::analysis::oneLayer2D::offset_detector::estimate_parameters::diffusivity_from_phases(
+    frequencies, phases , initial_slab, beam_radius, detector_view_radius, detector_offset ) ;
 }
 
 } // namespace

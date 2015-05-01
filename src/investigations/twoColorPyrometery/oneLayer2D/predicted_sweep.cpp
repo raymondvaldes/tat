@@ -63,8 +63,8 @@ auto predicted_sweep( filesystem::directory const & dir ) -> void
   auto const L = initial_slab.characteristic_length;
 
   auto const beam_radius = quantity< length >( 2.11362 * millimeters );
-  auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ;
-  auto const alpha = quantity<thermal_diffusivity>(22.35 * square_millimeters / second);
+  auto const detector_view_radius = quantity< length>( .734 * millimeters  ) ;
+  auto const alpha = quantity<thermal_diffusivity>(22.0 * square_millimeters / second);
 
   //(diffusivity shifts the curve left and right)
   //view

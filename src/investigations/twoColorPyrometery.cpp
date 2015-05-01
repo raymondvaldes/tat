@@ -28,12 +28,17 @@
 
 #include "thermal/model/two_layer/complex/surface_phases.h"
 #include "thermal/analysis/two_layer_speciman/diffusivity_from_phases.h"
+
 #include "thermal/analysis/tbc2009/estimate_parameters/from_phases.h"
 #include "thermal/model/tbc2009/dimensionless/import_heating_properties.h"
-
 #include "thermal/analysis/tbc2009/detector_offset/estimate_parameters/from_phases/from_phases.h"
+
+
 #include "investigations/twoColorPyrometery/oneLayer2D/diffusivity_from_phases.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/fit_all/diffusivity_from_phases.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/predicted_sweep.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/offset_detector/diffusivity_from_phases.h"
 
 namespace investigations{
 
@@ -52,10 +57,14 @@ using thermal::analysis::tbc2009::estimate_parameters::from_phases;
 using namespace thermal::analysis;
 using namespace thermal::model::tbc2009;
 
+
 auto run( filesystem::directory const & dir ) -> void
 {
-  oneLayer2D::diffusivity_from_phases(dir);
-//  oneLayer2D::predicted_sweep(dir);
+//  oneLayer2D::offset_detector::diffusivity_from_phases(dir); (must debug)
+ // oneLayer2D::fit_all::diffusivity_from_phases(dir);
+ 
+ //  oneLayer2D::fit_all_but_laser::diffusivity_from_phases(dir);
+  oneLayer2D::predicted_sweep(dir);
 
 
 //  auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
