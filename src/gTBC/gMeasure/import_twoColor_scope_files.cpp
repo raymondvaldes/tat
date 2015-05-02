@@ -107,7 +107,7 @@ auto import_twoColor_scope_files
   );
   
 
-  auto const laser_modulations_all = meta_data.meta_laser_modulations();
+  auto const laser_modulations_all = meta_data.laser_phases();
   
   auto laser_modulations =
   unique( laser_modulations_all, []( auto const &a, auto const &b )

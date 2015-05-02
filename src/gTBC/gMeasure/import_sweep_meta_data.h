@@ -14,7 +14,6 @@
 #include "units.h"
 
 namespace gTBC {
-
 namespace gMeasure {
 
 struct frequency_detector_ground{
@@ -104,14 +103,44 @@ public:
     std::vector< meta_measurement_description > meta_datas_
   ): meta_datas( meta_datas_ ){};
   
-  auto meta_laser_modulations(void) const
+  auto laser_phases(void) const
   noexcept -> std::vector<
   std::pair<  units::quantity< units::si::frequency   > ,
               units::quantity< units::si::plane_angle > > >;
   
-  auto meta_detector_grnds(void) const
+  auto laser_frequencies( void ) const
+  noexcept -> std::vector< units::quantity< units::si::frequency > >;
+  
+  auto detector_grounds(void) const
   noexcept -> std::vector < frequency_detector_ground > ;
 
+  auto measurement_amplitudes_1( void )
+  noexcept-> std::vector< units::quantity< units::si::electric_potential > >;
+  
+  auto measurement_amplitudes_2( void )
+  noexcept-> std::vector< units::quantity< units::si::electric_potential > >;
+  
+  auto measurement_amplitudes_average( void )
+  noexcept-> std::vector< units::quantity< units::si::electric_potential > >;
+
+  auto measurement_phases_1( void )
+  noexcept-> std::vector< units::quantity< units::si::electric_potential > >;
+  
+  auto measurement_phases_2( void )
+  noexcept-> std::vector< units::quantity< units::si::electric_potential > >;
+  
+  auto measurement_phases_average( void )
+  noexcept-> std::vector< units::quantity< units::si::electric_potential > >;
+
+  auto detector_wavelengths( void )
+  noexcept -> std::pair<  units::quantity< units::si::wavelength >,
+                          units::quantity< units::si::wavelength > >;
+  
+  auto is_twoColor_measurement( void ) noexcept -> bool;
+  
+  auto modulator_settings( void ) noexcept -> std::pair<
+    units::quantity< units::si::dimensionless>,
+    units::quantity< units::si::dimensionless> >;
 
 };
 
@@ -120,9 +149,7 @@ auto
 import_sweep_meta_data( filesystem::path const & path )
 noexcept -> meta_measurement_descriptions;
 
-  
 } // namespace gMeasure
-  
 } // namespace gTBC
 
 #endif /* defined(__tat__import_sweep_meta_data__) */

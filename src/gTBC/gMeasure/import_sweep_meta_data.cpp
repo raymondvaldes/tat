@@ -17,8 +17,8 @@
 #include "math/utilities/even.h"
 
 namespace gTBC {
-
 namespace gMeasure {
+
 
 using std::vector;
 using std::string;
@@ -205,7 +205,7 @@ noexcept -> meta_measurement_descriptions
   return output;
 }
 
-auto meta_measurement_descriptions::meta_laser_modulations(void) const
+auto meta_measurement_descriptions::laser_phases(void) const
 noexcept -> std::vector <
   std::pair<  units::quantity< units::si::frequency   > ,
               units::quantity< units::si::plane_angle > > >
@@ -222,7 +222,7 @@ noexcept -> std::vector <
   return results;
 }
 
-auto meta_measurement_descriptions::meta_detector_grnds(void) const
+auto meta_measurement_descriptions::detector_grounds(void) const
 noexcept -> std::vector < frequency_detector_ground >
 {
   using math::utilities::is_even;
@@ -257,7 +257,5 @@ noexcept -> std::vector < frequency_detector_ground >
   return results;
 }
 
-  
 } // namespace gMeasure
-  
 } // namespace gTBC

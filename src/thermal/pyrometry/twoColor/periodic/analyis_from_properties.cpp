@@ -50,10 +50,6 @@ noexcept -> transient_analysis_results
   return results;
 }
 
-
-
-
-
 } // namespace periodic  
 } // namespace twoColor
 } // namespace pyrometry
