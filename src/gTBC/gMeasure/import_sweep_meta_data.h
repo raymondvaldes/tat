@@ -141,7 +141,6 @@ public:
   auto modulator_settings( void ) noexcept -> std::pair<
     units::quantity< units::si::dimensionless>,
     units::quantity< units::si::dimensionless> >;
-
 };
 
 

@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/pyrometry/twoColor/periodic/analyis_from_properties.h"
+#include <cassert>
+#include "thermal/pyrometry/twoColor/periodic/analysis_from_properties.h"
+
 #include "thermal/equipment/detector/simulate_measurements/periodic_cosine.h"
 #include "math/functions/PeriodicProperties.h"
 #include "thermal/pyrometry/twoColor/periodic/transient_analysis.h"
@@ -30,6 +32,11 @@ auto analysis_from_properties
 )
 noexcept -> transient_analysis_results
 {
+  assert( detector_wavelength_1 > 0 * meters );
+  assert( detector_wavelength_2 > detector_wavelength_1 );
+  assert( gCoeff > 0 );
+  assert( laser_frequency > 0 * hertz );
+
   auto const points = size_t( 500 );
   auto const laser_phase = quantity< plane_angle >::from_value( 0 );
 

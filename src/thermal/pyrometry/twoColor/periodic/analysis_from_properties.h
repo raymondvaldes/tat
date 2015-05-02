@@ -28,7 +28,6 @@ auto analysis_from_properties
 )
 noexcept -> transient_analysis_results;
 
-
 } // namespace periodic  
 } // namespace twoColor
 } // namespace pyrometry
