@@ -7,23 +7,21 @@
 //
 
 #include <iostream>
-#include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
+#include "thermal/pyrometry/twoColor/periodic/transient_analysis_sweep.h"
 #include "thermal/define/lthermal.h"
 #include "algorithm/algorithm.h"
 #include "physics/classical_mechanics/kinematics.h"
 
 namespace thermal {
-
 namespace pyrometry {
-
 namespace twoColor {
+namespace periodic {
 
 using algorithm::for_each;
 using namespace units;
 using std::vector;
 using std::pair;
 using std::make_pair;
-
 
 transient_analysis_sweep_results::transient_analysis_sweep_results
 (
@@ -158,8 +156,7 @@ noexcept -> transient_analysis_sweep_results
   );
 }
   
+} // namespace periodic
 } // namespace twoColor
-  
-} // namespace pyrometry
-  
+} // namespace napyrometryme
 } // namespace thermal

@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include "investigations/twoColorPyrometery/oneLayer2D/predicted_sweep.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/frequency_sweep/avg_phases_at_surface.h"
 #include "thermal/model/slab/import_slab.h"
 #include "thermal/model/oneLayer2D/avg_surface_phases_amplitudes.h"
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
@@ -27,8 +27,9 @@ using std::vector;
 namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
+namespace frequency_sweep{
 
-auto predicted_sweep( filesystem::directory const & dir ) -> void
+auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
 {
   auto const initial_slab = import( dir, "initial_slab.xml" ) ;
   
@@ -76,12 +77,11 @@ auto predicted_sweep( filesystem::directory const & dir ) -> void
   auto const predictions =
     avg_surface_phases_amplitudes( b1, deltaT, b2, frequencies, L, alpha );
   auto const phases = extract_phases_from_properties( predictions  ) ;
-
   
   plot::simple_XY(frequencies, phases);
 }
 
-
+} // namespace
 } // namespace
 } // namespace
 } // namespace

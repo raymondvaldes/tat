@@ -12,16 +12,15 @@
 #include <vector>
 #include <utility>
 
-#include "thermal/pyrometry/twoColor/transient_analysis.h"
+#include "thermal/pyrometry/twoColor/periodic/transient_analysis.h"
 #include "thermal/equipment/detector/measurements.h"
 #include "gTBC/gMeasure/import_twoColor_scope_files.h"
 #include "units.h"
 
 namespace thermal {
-
 namespace pyrometry {
-
 namespace twoColor {
+namespace periodic {
 
 struct transient_analysis_sweep_results
 {
@@ -73,11 +72,9 @@ auto transient_analysis_sweep
 )
 noexcept -> transient_analysis_sweep_results;
 
-  
+} // namespace periodic  
 } // namespace twoColor
-  
 } // namespace pyrometry
-  
 } // namespace thermal
 
 #endif /* defined(__tat__transient_analysis_sweep__) */

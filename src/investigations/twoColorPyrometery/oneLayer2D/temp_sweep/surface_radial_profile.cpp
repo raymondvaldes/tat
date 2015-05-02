@@ -15,6 +15,7 @@
 #include "math/construct/range.h"
 #include "plot/gnuplot.h"
 #include "math/complex/extract_phases_from_properties.h"
+#include "math/complex/extract_amplitudes_from_properties.h"
 
 using thermal::model::oneLayer2D::phase_amplitude::surface_radial_profile;
 using thermal::model::oneLayer2D::dimensionless::b;
@@ -23,6 +24,7 @@ using algorithm::for_each;
 using math::construct::range_1og10;
 using namespace units;
 using math::complex::extract_phases_from_properties;
+using math::complex::extract_amplitudes_from_properties;
 
 namespace investigations{
 namespace twoColorPyrometery{
@@ -33,14 +35,14 @@ auto surface_radial_profile( filesystem::directory const & dir ) -> void
 {
 
   auto const beam_radius = quantity<length>( 2.1 * millimeters);
-  auto const deltaT = quantity<si::temperature>( 1. * kelvin );
+  auto const deltaT = quantity<si::temperature>( 1.0 * kelvin );
   
   auto const L = quantity<length>( 661. * micrometers);
   auto const alpha = quantity< thermal_diffusivity>( 22.0 * square_millimeters / second );
-  auto const f = quantity< si::frequency >( 2.0 * hertz );
+  auto const f = quantity< si::frequency >( 100 * hertz );
   
   auto const radial_positions =
-  range_1og10< quantity< si::dimensionless>>(.1, 3, 40);
+  range_1og10< quantity< si::dimensionless>>(.01, 3, 40);
   
   auto const b_laser = b( beam_radius, L );
   auto const ps = thermal::model::oneLayer2D::phase_amplitude::surface_radial_profile(
@@ -54,9 +56,11 @@ auto surface_radial_profile( filesystem::directory const & dir ) -> void
   });
   
   auto const phases = extract_phases_from_properties( ps );
+  auto const amplitudes = extract_amplitudes_from_properties(ps);
   
   
   plot::simple_XY(radial_positions, phases );
+  plot::simple_XY(radial_positions, amplitudes );
 
 }
 

@@ -6,17 +6,19 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_investigations_twoColor_oneLayer2D_predicted_sweep__
-#define __tat_investigations_twoColor_oneLayer2D_predicted_sweep__
+#ifndef __tat_investigations_twoColor_oneLayer2D_frequency_sweep_predicted_sweep__
+#define __tat_investigations_twoColor_oneLayer2D_frequency_sweep_predicted_sweep__
 
 #include "tools/interface/filesystem.hpp"
 
 namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
+namespace frequency_sweep{
 
-auto predicted_sweep( filesystem::directory const & dir ) -> void ;
+auto avg_phases_at_surface( filesystem::directory const & dir ) -> void ;
 
+} // namespace
 } // namespace
 } // namespace
 } // namespace

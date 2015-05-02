@@ -9,7 +9,7 @@
 #include <cassert>
 #include <utility>
 
-#include "thermal/pyrometry/twoColor/transient_analysis.h"
+#include "thermal/pyrometry/twoColor/periodic/transient_analysis.h"
 #include "thermal/pyrometry/twoColor/normalizedDetectorMeasurements.h"
 #include "math/functions/periodicData.h"
 #include "math/functions/PeriodicProperties.h"
@@ -17,13 +17,12 @@
 #include "physics/classical_mechanics/kinematics.h"
 
 #include "tools/interface/filesystem.hpp"
-#include "gnuplot-iostream.h"
 #include "algorithm/vector/quantityTodouble.h"
+
 namespace thermal {
-
 namespace pyrometry {
-
 namespace twoColor {
+namespace periodic {
 
 using units::quantity;
 using units::si::radians;
@@ -44,48 +43,6 @@ using std::pair;
 using std::vector;
 using std::make_pair;
 using algorithm::vector::quantityTodouble;
-
-auto transient_analysis_results::plot_normalized_SR_exp_model( void )
-const noexcept -> void
-{
-  
-	Gnuplot gp("/usr/local/bin/gnuplot --persist");
-  
-  gp << "set xlabel 'time (s)'" << "\n";
-  gp << "set ylabel 'normalized signal ratio (1/K)'" << "\n";
-  
-  auto const x_pts = quantityTodouble( normalized_SRs.first );
-  
-  auto const y1_pts = quantityTodouble( normalized_SRs.second );
-  auto const xy1_pts = make_pair( x_pts, y1_pts );
-  
-  auto shifted_cosine = fitted_cosine_function;
-  shifted_cosine.shift_phase( laser_modulation_phase );
-  auto const y2 = shifted_cosine.evaluate( normalized_SRs.first );
-  auto const y2_pts = quantityTodouble( y2 );
-  auto const xy2_pts = make_pair( x_pts, y2_pts );
-  
-  
-  using units::quantity_to_string;
-  gp  << "set label \"T_{steady} ="    << steady_temperature.value()
-      << "[K] \" at 2,0.001739" << "\n";
-  
-  gp  << "set label \"T_{phase} ="     << transient_temperature_phase.value()
-      << "[K] \" at 2,0.001738" << "\n";
-  
-  gp  << "set label \"T_{transient} =" << transient_temperature_amplitude.value()
-      << "[K] \" at 2,0.001737" << "\n";
-  
-  gp  << "set label \"frequency =" << laser_modulation_w.value() / (2*M_PI)
-      << "[hz]\" at 2,0.001736" << "\n";
-
-  
-  gp << "plot"
-  << gp.file1d( xy1_pts ) << "with points title 'experimental SR_{norm}',"
-  << gp.file1d( xy2_pts ) << "with lines title 'best-fit SR_{norm}'" << std::endl;
-  
-  // add labels
-}
 
 
 auto transient_analysis
@@ -142,9 +99,7 @@ noexcept -> transient_analysis_results
   return output;
 }
 
-  
+} // namespace periodic
 } // namespace twoColor
-  
 } // namespace napyrometryme
-  
 } // namespace thermal

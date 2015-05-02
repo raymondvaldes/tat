@@ -51,6 +51,18 @@ noexcept -> std::vector< units::quantity< units::si::time > >
   return time_distribution;
 }
 
+auto
+periodic_time_distribution( units::quantity< units::si::frequency > const & frequency,
+                            size_t const count )
+noexcept -> std::vector< units::quantity< units::si::time > >
+{
+  assert( count > 0 );
+  assert( frequency.value() > 0 );
+
+  auto const cycles = size_t(1);
+  auto const time_distribution = periodic_time_distribution( frequency, cycles, count);
+  return time_distribution;
+}
   
 } // namespace construct
   

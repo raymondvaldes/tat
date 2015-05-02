@@ -25,6 +25,14 @@ periodic_time_distribution
   size_t const count
 )
 noexcept -> std::vector< units::quantity< units::si::time > >;
+
+auto
+periodic_time_distribution
+(
+  units::quantity< units::si::frequency > const & frequency,
+  size_t const count
+)
+noexcept -> std::vector< units::quantity< units::si::time > >;
   
 } // namespace construct
   

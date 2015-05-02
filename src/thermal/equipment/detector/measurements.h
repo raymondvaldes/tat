@@ -46,7 +46,6 @@ public:
   
   auto plot_measurements( void ) const noexcept -> void;
 
-  
 };
 
 } // namespace detector

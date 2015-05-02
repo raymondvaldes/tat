@@ -23,13 +23,13 @@ auto extract_amplitudes_from_properties( std::vector< properties<T> > const & ps
   using std::vector;
   using algorithm::transform;
   
-  auto phases = vector< quantity< plane_angle > >( ps.size());
+  auto amplitudes = vector< quantity< T > >( ps.size());
 
-  transform( ps, phases.begin(), []( auto const p ) noexcept {
+  transform( ps, amplitudes.begin(), []( auto const & p ) noexcept {
     return p.amplitude ;
   } );
 
-  return phases;
+  return amplitudes;
 }
 
 } // namespace complex

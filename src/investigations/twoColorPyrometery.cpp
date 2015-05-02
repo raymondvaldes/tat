@@ -13,7 +13,7 @@
 #include "investigations/twoColorPyrometery/phase_fitting.h"
 
 #include "gTBC/gMeasure/import_twoColor_scope_files.h"
-#include "thermal/pyrometry/twoColor/transient_analysis_sweep.h"
+#include "thermal/pyrometry/twoColor/periodic/transient_analysis_sweep.h"
 #include "thermal/analysis/bulkSpeciman/temperature/conductivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
 #include "thermal/model/slab/slab.h"
@@ -37,9 +37,11 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/diffusivity_from_phases.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/fit_all/diffusivity_from_phases.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.h"
-#include "investigations/twoColorPyrometery/oneLayer2D/predicted_sweep.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/frequency_sweep/avg_phases_at_surface.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/offset_detector/diffusivity_from_phases.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/temp_sweep/surface_radial_profile.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/frequency_sweep/surface_phases_at_radial_position.h"
+
 namespace investigations{
 
 namespace twoColorPyrometery{
@@ -48,7 +50,7 @@ using namespace thermal::analysis::tbc2009;
 
 using gTBC::gMeasure::import_twoColor_scope_files ;
 
-using thermal::pyrometry::twoColor::transient_analysis_sweep ;
+using thermal::pyrometry::twoColor::periodic::transient_analysis_sweep ;
 using thermal::analysis::bulkSpeciman::temperature::diffusivity_from_phases ;
 using thermal::analysis::two_layer_speciman::diffusivity_from_phases;
 using thermal::model::slab::import ;
@@ -64,8 +66,9 @@ auto run( filesystem::directory const & dir ) -> void
  // oneLayer2D::fit_all::diffusivity_from_phases(dir);
  
  //  oneLayer2D::fit_all_but_laser::diffusivity_from_phases(dir);
-//  oneLayer2D::predicted_sweep(dir);
-  oneLayer2D::temp_sweep::surface_radial_profile( dir );
+//  oneLayer2D::frequency_sweep::avg_phases_at_surface(dir);
+//  oneLayer2D::temp_sweep::surface_radial_profile( dir );
+  oneLayer2D::frequency_sweep::surface_phases_at_radial_position(dir);
   auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
   std::cout << gCoeff << "\n";
   
