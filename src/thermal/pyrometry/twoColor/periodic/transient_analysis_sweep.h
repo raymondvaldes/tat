@@ -15,42 +15,13 @@
 #include "thermal/pyrometry/twoColor/periodic/transient_analysis.h"
 #include "thermal/equipment/detector/measurements.h"
 #include "gTBC/gMeasure/import_twoColor_scope_files.h"
+#include "thermal/pyrometry/twoColor/periodic/transient_analysis_sweep_results.h"
 #include "units.h"
 
 namespace thermal {
 namespace pyrometry {
 namespace twoColor {
 namespace periodic {
-
-struct transient_analysis_sweep_results
-{
-  std::vector< transient_analysis_results > transient_results;
-  std::vector< units::quantity< units::si::frequency> > laser_modulation_freq;
-
-  transient_analysis_sweep_results(
-    std::vector< transient_analysis_results > const & transient_results_
-  );
-
-  auto phases_omega(void) const -> 
-  std::pair<
-    std::vector< units::quantity< units::si::angular_frequency>>,
-    std::vector< units::quantity< units::si::plane_angle      >> >;
-  
-  auto phases_frequency(void) const ->
-  std::pair<
-    std::vector< units::quantity< units::si::frequency        >>,
-    std::vector< units::quantity< units::si::plane_angle      >> >;
-  
-  auto surface_temperature_phases( void ) const
-  -> std::vector< units::quantity< units::si::plane_angle > >;
-  
-  auto surface_temperature_amplitudes( void ) const
-  -> std::vector< units::quantity< units::si::temperature > >;
-  
-  auto surface_steady_temperature( void ) const
-  -> std::vector< units::quantity< units::si::temperature > >;
-};
-
 
 auto transient_analysis_sweep
 (

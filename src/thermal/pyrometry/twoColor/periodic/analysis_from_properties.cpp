@@ -23,12 +23,15 @@ namespace periodic {
 
 auto analysis_from_properties
 (
-  math::functions::PeriodicProperties< units::si::electric_potential > const & properties_1,
+  math::functions::PeriodicProperties< units::si::electric_potential >
+  const & properties_1,
   units::quantity<units::si::wavelength> const detector_wavelength_1,
-  math::functions::PeriodicProperties< units::si::electric_potential > const & properties_2,
+  math::functions::PeriodicProperties< units::si::electric_potential >
+  const & properties_2,
   units::quantity<units::si::wavelength> const detector_wavelength_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::frequency > const & laser_frequency
+  units::quantity< units::si::frequency > const & laser_frequency,
+  units::quantity< units::si::plane_angle> const laser_phase
 )
 noexcept -> transient_analysis_results
 {
@@ -38,7 +41,6 @@ noexcept -> transient_analysis_results
   assert( laser_frequency > 0 * hertz );
 
   auto const points = size_t( 500 );
-  auto const laser_phase = quantity< plane_angle >::from_value( 0 );
 
   auto const measurements_1 =
     periodic_cosine( properties_1, detector_wavelength_1, points);

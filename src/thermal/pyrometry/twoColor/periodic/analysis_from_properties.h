@@ -24,7 +24,8 @@ auto analysis_from_properties
   math::functions::PeriodicProperties< units::si::electric_potential > const & properties_2,
   units::quantity<units::si::wavelength> const detector_wavelength_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::frequency > const & laser_frequency
+  units::quantity< units::si::frequency > const & laser_frequency,
+  units::quantity< units::si::plane_angle> const laser_phase 
 )
 noexcept -> transient_analysis_results;
 

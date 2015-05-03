@@ -92,6 +92,8 @@
 		AB4871EA1AF5828C00DFD3C1 /* extract_frequency.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4871E81AF5828C00DFD3C1 /* extract_frequency.h */; };
 		AB4871EE1AF58A7300DFD3C1 /* analysis_from_properties_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4871EC1AF58A7300DFD3C1 /* analysis_from_properties_sweep.cpp */; };
 		AB4871EF1AF58A7300DFD3C1 /* analysis_from_properties_sweep.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4871ED1AF58A7300DFD3C1 /* analysis_from_properties_sweep.h */; };
+		AB4871F21AF58CBF00DFD3C1 /* transient_analysis_sweep_results.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4871F01AF58CBF00DFD3C1 /* transient_analysis_sweep_results.cpp */; };
+		AB4871F31AF58CBF00DFD3C1 /* transient_analysis_sweep_results.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4871F11AF58CBF00DFD3C1 /* transient_analysis_sweep_results.h */; };
 		AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */; };
 		AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */; };
 		AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */; };
@@ -623,6 +625,8 @@
 		AB4871E81AF5828C00DFD3C1 /* extract_frequency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = extract_frequency.h; path = gTBC/gMeasure/gTBD/extract_frequency.h; sourceTree = "<group>"; };
 		AB4871EC1AF58A7300DFD3C1 /* analysis_from_properties_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = analysis_from_properties_sweep.cpp; sourceTree = "<group>"; };
 		AB4871ED1AF58A7300DFD3C1 /* analysis_from_properties_sweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analysis_from_properties_sweep.h; sourceTree = "<group>"; };
+		AB4871F01AF58CBF00DFD3C1 /* transient_analysis_sweep_results.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transient_analysis_sweep_results.cpp; sourceTree = "<group>"; };
+		AB4871F11AF58CBF00DFD3C1 /* transient_analysis_sweep_results.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transient_analysis_sweep_results.h; sourceTree = "<group>"; };
 		AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = validateOpenStream.cpp; path = algorithm/stream/validateOpenStream.cpp; sourceTree = "<group>"; };
 		AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_exp_model.cpp; path = twoColorPyrometery/plot/phase_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_exp_model.h; path = twoColorPyrometery/plot/phase_exp_model.h; sourceTree = "<group>"; };
@@ -1395,6 +1399,8 @@
 				AB4871E31AF57A7E00DFD3C1 /* results.h */,
 				AB4871EC1AF58A7300DFD3C1 /* analysis_from_properties_sweep.cpp */,
 				AB4871ED1AF58A7300DFD3C1 /* analysis_from_properties_sweep.h */,
+				AB4871F01AF58CBF00DFD3C1 /* transient_analysis_sweep_results.cpp */,
+				AB4871F11AF58CBF00DFD3C1 /* transient_analysis_sweep_results.h */,
 			);
 			name = periodic;
 			path = /Users/raymondvaldes/code/tat/src/thermal/pyrometry/twoColor/periodic;
@@ -2967,6 +2973,7 @@
 				AB3ED3CA1AAF93D100845151 /* conductivity.h in Headers */,
 				AB2BA4751AB3D3D9008AF545 /* transient_analysis_sweep.h in Headers */,
 				ABEF4F051948D4A500B44AD5 /* tools.hpp in Headers */,
+				AB4871F31AF58CBF00DFD3C1 /* transient_analysis_sweep_results.h in Headers */,
 				ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */,
 				ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */,
 				AB8AA43C1A5C688F0065E7F8 /* validateOpenStream.h in Headers */,
@@ -3346,6 +3353,7 @@
 				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
 				ABEB14BA1AAA686500204B36 /* temperature_prediction.cpp in Sources */,
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
+				AB4871F21AF58CBF00DFD3C1 /* transient_analysis_sweep_results.cpp in Sources */,
 				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
 				AB7F19961ACCB14B0086E8F8 /* import_heating_properties.cpp in Sources */,
 				AB7A69421AB24F1B00249A6E /* find_unique_labels_in_files.cpp in Sources */,
