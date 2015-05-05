@@ -38,7 +38,7 @@ auto surface_phases_at_radial_position( filesystem::directory const & dir ) -> v
   auto const deltaT = quantity<si::temperature>( 1.0 * kelvin );
   
   auto const alpha = quantity< thermal_diffusivity>( 22 * square_millimeters / second );
-  auto const radial_position = quantity<dimensionless>( .5 );
+  auto const radial_position = quantity<dimensionless>( 1.0 );
   
   //( The radial position influences the shape of the profile,
   //  but not the "intensity" of it ).

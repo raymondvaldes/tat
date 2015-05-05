@@ -44,8 +44,11 @@ struct transient_analysis_sweep_results
   auto surface_temperature_amplitudes( void ) const
   -> std::vector< units::quantity< units::si::temperature > >;
   
-  auto surface_steady_temperature( void ) const
+  auto surface_steady_temperatures( void ) const
   -> std::vector< units::quantity< units::si::temperature > >;
+
+  auto surface_steady_temperature( void ) const
+  -> units::quantity< units::si::temperature >;
 };
 
 } // namespace periodic

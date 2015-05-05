@@ -20,6 +20,9 @@
 #include "algorithm/algorithm.h"
 #include <valarray>
 
+#include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
+#include "thermal/pyrometry/twoColor/calibrate_wavelengths.h"
+
 namespace investigations {
 
 namespace twoColorPyrometery {
@@ -28,34 +31,8 @@ inline void get_file_and_Import_Data(void){};
 inline void calculate_calibration_coefficients(void){};
 inline void output_Vectors_With_calibration_Coefficients(void){};
 
-inline auto
-calibrate_wavelength( units::quantity<units::si::wavelength> const & raw,
-                      units::quantity<units::si::wavelength> const & offset )
-noexcept-> units::quantity<units::si::wavelength>
-{
-  return raw + offset;
-}
-
-inline auto
-calibrate_wavelengths(
-  std::vector< units::quantity< units::si::wavelength > > const & raw,
-  units::quantity<units::si::wavelength> const & offset )
-noexcept-> std::vector< units::quantity< units::si::wavelength > >
-{
-  auto wavelengths = raw;
-  
-  using std::generate;
-  using std::begin;
-  using std::end;
-  
-  transform( begin( wavelengths ), end( wavelengths ), begin( wavelengths ),
-  [&]( auto const & wavelength )
-  {
-    return calibrate_wavelength( wavelength, offset );
-  } );
-
-  return wavelengths;
-}
+using thermal::pyrometry::twoColor::calibrate_wavelength;
+using thermal::pyrometry::twoColor::calibrate_wavelengths;
 
 auto calculateCalibrationCoefficients( filesystem::directory const & dir )
 -> units::quantity< units::si::dimensionless >

@@ -41,6 +41,7 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/offset_detector/diffusivity_from_phases.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/temp_sweep/surface_radial_profile.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/frequency_sweep/surface_phases_at_radial_position.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/amplitude_analysis/amplitudes_from_experiment.h"
 
 namespace investigations{
 
@@ -68,9 +69,9 @@ auto run( filesystem::directory const & dir ) -> void
  //  oneLayer2D::fit_all_but_laser::diffusivity_from_phases(dir);
 //  oneLayer2D::frequency_sweep::avg_phases_at_surface(dir);
 //  oneLayer2D::temp_sweep::surface_radial_profile( dir );
-  oneLayer2D::frequency_sweep::surface_phases_at_radial_position(dir);
-  auto const gCoeff = calculateCalibrationCoefficients( dir ) ;
-  std::cout << gCoeff << "\n";
+ // oneLayer2D::frequency_sweep::surface_phases_at_radial_position(dir);
+//  calculateCalibrationCoefficients( dir ) ;
+//  oneLayer2D::amplitude_analysis::amplitudes_from_experiment(dir);
   
   
 //  auto const scope_data = import_twoColor_scope_files( dir, "twoColorPyro.xml" , gCoeff );
@@ -107,7 +108,7 @@ auto run( filesystem::directory const & dir ) -> void
 ////  
 ////  plot::steady_surface_temperature(
 ////    bestFit_results.frequencies ,
-////    twoColor_data.surface_steady_temperature());
+////    twoColor_data.surface_steady_temperatures());
 ////  
 ////  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
 ////  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();
@@ -155,7 +156,7 @@ auto run( filesystem::directory const & dir ) -> void
 ////  
 ////  plot::steady_surface_temperature(
 ////    bestFit_results.frequencies ,
-////    twoColor_data.surface_steady_temperature());
+////    twoColor_data.surface_steady_temperatures());
 ////  
 ////  twoColor_data.transient_results.back().plot_normalized_SR_exp_model();
 ////  twoColor_data.transient_results.front().plot_normalized_SR_exp_model();

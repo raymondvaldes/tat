@@ -9,12 +9,8 @@
 #ifndef __tat__detector__
 #define __tat__detector__
 
-#include <iostream>
-
 namespace thermal{
-
 namespace equipment{
-
 namespace detector{
 
 class Detector
@@ -33,9 +29,7 @@ public:
 };
 
 } // namespace detector
-  
 } // namespace equipment
-
 } // namespace thermal
 
 #endif /* defined(__tat__detector__) */

@@ -25,11 +25,14 @@ namespace units {
 
 inline namespace si {
 
+typedef multiply_typeof_helper< power , area >::type power_area;
+
+typedef divide_typeof_helper< power , area >::type power_over_area;
+
 typedef divide_typeof_helper<power,solid_angle>::type power_over_solid_angle;
 
 typedef multiply_typeof_helper<power_over_solid_angle, temperature> thermal_emission;
 
-typedef divide_typeof_helper< power , area >::type power_over_area;
 
 typedef divide_typeof_helper< length , time >::type length_over_time;
 
@@ -41,6 +44,7 @@ typedef divide_typeof_helper< dimensionless, temperature>::type one_over_tempera
 
 typedef divide_typeof_helper< pressure, time >::type pressure_over_time;
 
+typedef divide_typeof_helper< power_over_area, length >::type heat_flux_over_length;
 
 ///custom dimensions
 typedef divide_typeof_helper< length , dimensionless >::type wavelength;

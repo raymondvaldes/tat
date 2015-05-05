@@ -22,9 +22,9 @@ inline namespace si {
 inline namespace constants {
 
 BOOST_UNITS_PHYSICAL_CONSTANT(  C1_wien ,
-                                quantity<power_over_area>,
-                                3.7418 * 10e8 * watts/  meter  /  meter ,
-                                0.0 * watts / meter / meter ) ;
+                                quantity<power_area>,
+                                3.7418 * 1e-16 * watts * meter * meter ,
+                                0.0 * watts * meter * meter ) ;
   
 BOOST_UNITS_PHYSICAL_CONSTANT(  C2_wien ,
                                 quantity<length_temperature>,

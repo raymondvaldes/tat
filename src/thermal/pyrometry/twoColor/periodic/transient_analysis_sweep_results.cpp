@@ -10,12 +10,14 @@
 #include "thermal/define/lthermal.h"
 #include "algorithm/algorithm.h"
 #include "physics/classical_mechanics/kinematics.h"
+#include "statistics/signal_processing/average.h"
 
 using algorithm::for_each;
 using namespace units;
 using std::vector;
 using std::pair;
 using std::make_pair;
+using statistics::signal_processing::average;
 
 namespace thermal {
 namespace pyrometry {
@@ -40,7 +42,7 @@ const -> std::vector< units::quantity< units::si::plane_angle > >
   return phases;
 }
 
-auto transient_analysis_sweep_results::surface_steady_temperature( void )
+auto transient_analysis_sweep_results::surface_steady_temperatures( void )
 const -> std::vector< units::quantity< units::si::temperature > >
 {
   auto steady_temperatures = vector< quantity< si::temperature > >();
@@ -55,11 +57,13 @@ auto transient_analysis_sweep_results::surface_temperature_amplitudes( void )
 const -> std::vector< units::quantity< units::si::temperature > >
 {
   auto surface_temperatures = vector< quantity< si::temperature > >();
+  
   for_each( transient_results , [&surface_temperatures]
   ( auto const & at_each_frequency)
   {
     surface_temperatures.push_back( at_each_frequency.transient_temperature_amplitude);
   });
+  
   return surface_temperatures;
 }
 
@@ -80,6 +84,16 @@ auto transient_analysis_sweep_results::phases_omega(void) const ->
 
   auto const output = make_pair( omegas, phases );
   return output;
+}
+
+auto transient_analysis_sweep_results::surface_steady_temperature( void ) const
+-> units::quantity< units::si::temperature >
+{
+  auto const temperatures = surface_steady_temperatures();
+  
+  auto const average_temperature = average( temperatures );
+  
+  return average_temperature;
 }
 
 auto transient_analysis_sweep_results::phases_frequency(void) const ->

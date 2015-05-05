@@ -39,7 +39,7 @@ auto surface_radial_profile( filesystem::directory const & dir ) -> void
   
   auto const L = quantity<length>( 661. * micrometers);
   auto const alpha = quantity< thermal_diffusivity>( 22.0 * square_millimeters / second );
-  auto const f = quantity< si::frequency >( 100 * hertz );
+  auto const f = quantity< si::frequency >( 1000 * hertz );
   
   auto const radial_positions =
   range_1og10< quantity< si::dimensionless>>(.01, 3, 40);
