@@ -45,6 +45,7 @@ using thermal::model::oneLayer2D::average::weighted_avg_surface_phases_amplitude
 using math::estimation::settings;
 using std::generate;
 using std::make_tuple;
+using std::tie;
 using std::get;
 using math::complex::extract_phases_from_properties;
 
@@ -68,7 +69,10 @@ Best_fit::Best_fit
         slab_.get_diffusivity() ,
         slab_.characteristic_length ) ),
   model_phases( model_phases_ )
-{}
+{
+
+
+}
 
 auto diffusivity_from_phases
 (
@@ -167,7 +171,7 @@ auto diffusivity_from_phases
   auto const fitted_slab = thermal::model::slab::Slab( L , alpha_fit , k ) ;
   
   
-  for_each( phases, []( auto const p) { std::cout << p << "\n";} );
+  //for_each( phases, []( auto const p) { std::cout << p << "\n";} );
   
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phases );

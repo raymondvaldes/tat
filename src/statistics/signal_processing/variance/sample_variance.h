@@ -1,0 +1,46 @@
+//
+//  sample_variance.h
+//  tat
+//
+//  Created by Raymond Valdes on 5/6/15.
+//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
+//
+
+#ifndef __tat_statistics_signal_processing_variance_sample_variance__
+#define __tat_statistics_signal_processing_variance_sample_variance__
+
+#include <vector>
+#include <cassert>
+
+#include "units.h"
+#include "statistics/signal_processing/sum_residuals_square.h"
+
+namespace statistics {
+namespace signal_processing {
+
+template< typename T >
+auto sample_variance
+(
+  std::vector< units::quantity< T > > const & observations,
+  std::vector< units::quantity< T > > const & model
+)
+{
+  assert( observations.size() == model.size() );
+  assert( !observations.empty() );
+  
+  using namespace units;
+  
+  auto const SS_residuals = sum_residuals_square( observations, model );
+  auto const count = quantity< dimensionless >( observations.size() );
+  
+  auto const v = SS_residuals / count ;
+
+  return v;
+}
+
+
+
+
+}
+}
+#endif /* defined(__tat__sample_variance__) */

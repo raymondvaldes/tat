@@ -111,6 +111,9 @@
 		AB4872241AF8461B00DFD3C1 /* diffusivity_from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872221AF8461B00DFD3C1 /* diffusivity_from_phases.h */; };
 		AB4872291AF8568D00DFD3C1 /* circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4872271AF8568D00DFD3C1 /* circle.cpp */; };
 		AB48722A1AF8568D00DFD3C1 /* circle.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872281AF8568D00DFD3C1 /* circle.h */; };
+		AB4872301AFA7EF200DFD3C1 /* sample_variance.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48722E1AFA7EF200DFD3C1 /* sample_variance.h */; };
+		AB4872391AFA889100DFD3C1 /* residual.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872381AFA889100DFD3C1 /* residual.h */; };
+		AB48723B1AFA8B6A00DFD3C1 /* residual_square.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */; };
 		AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */; };
 		AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */; };
 		AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */; };
@@ -661,6 +664,9 @@
 		AB4872221AF8461B00DFD3C1 /* diffusivity_from_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffusivity_from_phases.h; path = oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/diffusivity_from_phases.h; sourceTree = "<group>"; };
 		AB4872271AF8568D00DFD3C1 /* circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = circle.cpp; path = calculus/weighted_mean_value/circle.cpp; sourceTree = "<group>"; };
 		AB4872281AF8568D00DFD3C1 /* circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circle.h; path = calculus/weighted_mean_value/circle.h; sourceTree = "<group>"; };
+		AB48722E1AFA7EF200DFD3C1 /* sample_variance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sample_variance.h; path = statistics/signal_processing/variance/sample_variance.h; sourceTree = SOURCE_ROOT; };
+		AB4872381AFA889100DFD3C1 /* residual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residual.h; path = statistics/signal_processing/residuals/residual.h; sourceTree = SOURCE_ROOT; };
+		AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residual_square.h; path = statistics/signal_processing/residuals/residual_square.h; sourceTree = SOURCE_ROOT; };
 		AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = validateOpenStream.cpp; path = algorithm/stream/validateOpenStream.cpp; sourceTree = "<group>"; };
 		AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_exp_model.cpp; path = twoColorPyrometery/plot/phase_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_exp_model.h; path = twoColorPyrometery/plot/phase_exp_model.h; sourceTree = "<group>"; };
@@ -1573,6 +1579,25 @@
 			name = circle;
 			sourceTree = "<group>";
 		};
+		AB48722C1AFA7ED200DFD3C1 /* variance */ = {
+			isa = PBXGroup;
+			children = (
+				AB48722E1AFA7EF200DFD3C1 /* sample_variance.h */,
+			);
+			name = variance;
+			sourceTree = "<group>";
+		};
+		AB4872371AFA881200DFD3C1 /* residuals */ = {
+			isa = PBXGroup;
+			children = (
+				ABB09B771AB78CF7005D6BB5 /* sum_residuals_square.h */,
+				ABB09B791AB78EB3005D6BB5 /* residuals_square.h */,
+				AB4872381AFA889100DFD3C1 /* residual.h */,
+				AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */,
+			);
+			name = residuals;
+			sourceTree = "<group>";
+		};
 		AB4E53AE1ABB903F00E7BA8D /* plot */ = {
 			isa = PBXGroup;
 			children = (
@@ -1997,14 +2022,14 @@
 		AB8B58181AB752860055615C /* signal_processing */ = {
 			isa = PBXGroup;
 			children = (
+				AB4872371AFA881200DFD3C1 /* residuals */,
+				AB48722C1AFA7ED200DFD3C1 /* variance */,
 				ABB09B7B1AB79F29005D6BB5 /* corrected_sample */,
 				ABB09B741AB788A6005D6BB5 /* standard_deviation */,
 				AB8B58161AB7505F0055615C /* average.h */,
 				AB8B58191AB752A30055615C /* sum.h */,
 				AB8B581B1AB759620055615C /* divide_each_element.h */,
 				ABB09B721AB787AB005D6BB5 /* signal_to_noise.h */,
-				ABB09B771AB78CF7005D6BB5 /* sum_residuals_square.h */,
-				ABB09B791AB78EB3005D6BB5 /* residuals_square.h */,
 			);
 			name = signal_processing;
 			sourceTree = "<group>";
@@ -3073,6 +3098,7 @@
 				ABFB164B1AF159590093BF5B /* surface_phases_amplitudes.h in Headers */,
 				AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */,
 				ABDA1CB51AE9BF2400121C97 /* b.h in Headers */,
+				AB4872391AFA889100DFD3C1 /* residual.h in Headers */,
 				AB7996E21AB0F6190022015B /* read_scope_file.h in Headers */,
 				AB9383E51AC22F8700F2D2DD /* a.h in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
@@ -3214,6 +3240,7 @@
 				ABB54FCC19C2781C0056823E /* stdVector2ublasVector.h in Headers */,
 				ABEF4EFC1948D4A500B44AD5 /* exportfile.hpp in Headers */,
 				ABB09B7F1AB79FDE005D6BB5 /* standard_deviation.h in Headers */,
+				AB48723B1AFA8B6A00DFD3C1 /* residual_square.h in Headers */,
 				AB4871FC1AF708A900DFD3C1 /* calibrate_wavelengths.h in Headers */,
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
 				AB4872091AF800D700DFD3C1 /* planks_law.h in Headers */,
@@ -3242,6 +3269,7 @@
 				AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */,
 				AB48722A1AF8568D00DFD3C1 /* circle.h in Headers */,
 				ABEF4ED01948D4A500B44AD5 /* model_type.h in Headers */,
+				AB4872301AFA7EF200DFD3C1 /* sample_variance.h in Headers */,
 				ABEF4E7A1948D4A500B44AD5 /* num_method2014.h in Headers */,
 				AB90AA571AB298BB00F2535D /* total_calibrated_emission_pairs.h in Headers */,
 				AB6981A819CB638300940843 /* apply_to_all.h in Headers */,

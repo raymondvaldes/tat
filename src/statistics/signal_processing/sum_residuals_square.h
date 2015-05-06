@@ -1,57 +1,60 @@
+////
+////  sum_residuals_square.h
+////  tat
+////
+////  Created by Raymond Valdes_New on 3/16/15.
+////  Copyright (c) 2015 Raymond Valdes. All rights reserved.
+////
 //
-//  sum_residuals_square.h
-//  tat
+//#ifndef tat_statistics_signal_processing_sum_residuals_square_h
+//#define tat_statistics_signal_processing_sum_residuals_square_h
 //
-//  Created by Raymond Valdes_New on 3/16/15.
-//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
+//#include <vector>
+//#include <cassert>
+//#include <cmath>
 //
-
-#ifndef tat_sum_residuals_square_h
-#define tat_sum_residuals_square_h
-
-#include <vector>
-#include <cassert>
-
-#include "statistics/signal_processing/residuals_square.h"
-#include "statistics/sum.h"
-
-#include "units.h"
-
-namespace statistics {
-
-namespace signal_processing {
-
-template< typename T >
-auto sum_residuals_square( std::vector< units::quantity<T> > const & signals )
-{
-  assert( signals.size() > 0 );
-  
-  auto const residuals_square_list = residuals_square( signals );
-  
-  auto const summation = sum( residuals_square_list ) ;
-
-  return summation;
-}
-  
-template< typename T >
-auto sum_residuals_square
-(
-  std::vector< units::quantity<T> > const & signals,
-  std::vector< units::quantity<T> > const & signals_predicted
-)
-{
-  assert( signals.size() > 0 );
-  
-  auto const residuals_square_list =
-  residuals_square( signals, signals_predicted );
-  
-  auto const summation = sum( residuals_square_list ) ;
-
-  return summation;
-}
-  
-} // namespace signal_processing
-  
-} // namespace statistics
-
-#endif
+//#include "statistics/signal_processing/residuals_square.h"
+//#include "units.h"
+//#include "algorithm/algorithm.h"
+//
+////namespace statistics {
+////namespace signal_processing {
+////
+////template< typename T >
+////auto sum_residuals_square
+////(
+////  std::vector< units::quantity<T> > const & observations /* observations*/,
+////  std::vector< units::quantity<T> > const & model /*model*/
+////)
+////{
+//////  using algorithm::for_each;
+//////  using std::isfinite;
+//////  
+//////  assert( observations.size() == model.size() ) ;
+//////  assert( !observations.empty() );
+//////  for_each( model , []( auto const e ){ assert( isfinite( e ) ); } );
+//////  for_each( observations , []( auto const e ){ assert( isfinite( e ) ); } );
+////
+////  
+//////  auto const residuals_square_list = residuals_square( observations, model );
+//////  auto const summation = sum( residuals_square_list ) ;
+////
+////  //return summation;
+////}
+////
+//////template< typename T >
+//////auto sum_residuals_square( std::vector< units::quantity<T> > const & signals )
+//////{
+//////  assert( signals.size() > 0 );
+//////  
+//////  auto const residuals_square_list = residuals_square( signals );
+//////  
+//////  auto const summation = sum( residuals_square_list ) ;
+//////
+//////  return summation;
+//////}
+////
+////} // namespace signal_processing
+////} // namespace statistics
+//
+//#endif

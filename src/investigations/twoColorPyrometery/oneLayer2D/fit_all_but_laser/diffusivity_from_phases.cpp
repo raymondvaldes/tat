@@ -5,24 +5,14 @@
 //  Created by Raymond Valdes on 4/29/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
-
 #include "investigations/twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.h"
 #include "units.h"
-
 #include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
-
-#include "thermal/analysis/oneLayer2D/estimate_parameters/fit_all_but_laser/diffusivity_from_phases.h"
 #include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/diffusivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
 
 using namespace units;
 using thermal::model::slab::import ;
-using thermal::analysis::oneLayer2D::estimate_parameters::fit_all_but_laser::diffusivity_from_phases;
-using thermal::analysis::oneLayer2D::estimate_parameters::fit_all_but_laser::diffusivity_from_phases;
-
-using thermal::analysis::oneLayer2D::estimate_parameters::weighted_average::fit_all_but_laser::diffusivity_from_phases;
-
-
 using std::vector;
 using thermal::pyrometry::twoColor::calibrate_wavelength;
 
@@ -30,6 +20,9 @@ namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace fit_all_but_laser{
+
+using thermal::analysis::oneLayer2D::estimate_parameters::weighted_average::fit_all_but_laser::diffusivity_from_phases;
+
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 {
@@ -39,9 +32,9 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   
   auto const nominal_wavelength = quantity< si::wavelength >( 4.6 * micrometers );
   auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
-  auto const lambda_1 = quantity<wavelength>( 4.6*micrometers );
-  auto const lambda_2 = quantity<wavelength>( 5.6*micrometers );
-  auto const lambda_avg = quantity<wavelength>( 5.1*micrometers );
+  auto const lambda_1 = quantity<wavelength>( 4.6 * micrometers );
+  auto const lambda_2 = quantity<wavelength>( 5.6 * micrometers );
+  auto const lambda_avg = quantity<wavelength>( 5.1 * micrometers );
   auto const detector_wavelength_1 =
     calibrate_wavelength( lambda_1, wavelength_offset );
   
@@ -104,11 +97,12 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   });
   
   auto const beam_radius = quantity< length >( 2.11362 * millimeters );
-  auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ;
+  auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ; // initial value
 
-  auto const bestFit_results =
-  thermal::analysis::oneLayer2D::estimate_parameters::weighted_average::fit_all_but_laser::diffusivity_from_phases(
-    frequencies, phases , initial_slab, beam_radius, detector_view_radius, steady_state_temperature, detector_wavelength_avg) ;
+
+  auto const bestFit_results = diffusivity_from_phases(
+    frequencies, phases , initial_slab, beam_radius, detector_view_radius,
+    steady_state_temperature, detector_wavelength_avg) ;
 }
 
 } // namespace

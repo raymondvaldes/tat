@@ -6,26 +6,27 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef tat_sum_h
-#define tat_sum_h
+#ifndef tat_statistics_signal_processing_sum_h
+#define tat_statistics_signal_processing_sum_h
 
 #include <vector>
 #include "algorithm/algorithm.h"
 
 #include "units.h"
 
-//template< T >
-//auto sum( std::vector< units::quantity< T > > const & list ) noexcept
-//-> units::quantity<T>
-//{
-//  using algorithm::accumulate;
-//  using units::quantity;
-//  
-//  auto const initial = quantity<T>::from_value(0) ;
-//  auto const total = accumulate( list,  initial ) ;
-//  
-//  return total;
-//}
+template< typename T >
+auto sum( std::vector< units::quantity< T > > const & list )
+{
+  assert( !list.empty() );
+  
+  using algorithm::accumulate;
+  using namespace units;
+  
+  auto const initial = quantity<T>::from_value(0) ;
+  auto const total = accumulate( list,  initial ) ;
+  
+  return total;
+}
 
 //template< Element >
 //auto sum( std::vector<Element> const & list ) noexcept
