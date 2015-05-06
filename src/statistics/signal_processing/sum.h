@@ -48,26 +48,25 @@ noexcept -> std::vector< units::quantity< T > >
 }
 
 template< typename T >
-auto sum( std::vector< units::quantity< T > > const & list ) noexcept
--> units::quantity<T>
+auto sum( std::vector< T > const & list ) noexcept
 {
   using algorithm::accumulate;
-  using units::quantity;
   
-  auto const initial = quantity<T>::from_value(0) ;
-  auto const total = accumulate( list,  initial ) ;
+  auto const initial = list.front();
+  auto const total = accumulate( list.begin()+1, list.end(),  initial ) ;
   
   return total;
 }
 
 template< typename T >
-auto sum( std::initializer_list< units::quantity< T > > const list )
+auto sum( std::initializer_list< T > const & list ) noexcept
 {
-  using algorithm::accumulate;
-  using units::quantity;
+  using std::accumulate;
+  using std::begin;
+  using std::end;
 
-  auto const initial = quantity<T>::from_value( 0 );
-  auto const total = accumulate( list,  initial ) ;
+  auto const initial = *begin(list);
+  auto const total = accumulate( begin(list)+1, end(list),  initial ) ;
   
   return total;
 }

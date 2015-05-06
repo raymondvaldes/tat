@@ -114,6 +114,7 @@
 		AB4872301AFA7EF200DFD3C1 /* sample_variance.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48722E1AFA7EF200DFD3C1 /* sample_variance.h */; };
 		AB4872391AFA889100DFD3C1 /* residual.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872381AFA889100DFD3C1 /* residual.h */; };
 		AB48723B1AFA8B6A00DFD3C1 /* residual_square.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */; };
+		AB48724A1AFAB54000DFD3C1 /* operator_overloads.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872491AFAB54000DFD3C1 /* operator_overloads.h */; };
 		AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */; };
 		AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */; };
 		AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */; };
@@ -315,7 +316,6 @@
 		ABA58A1D1A67489E00573ED8 /* path.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA58A1B1A67489E00573ED8 /* path.h */; };
 		ABA95D1C1AB3AA0600AD4F9F /* transient_analysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABA95D1A1AB3AA0600AD4F9F /* transient_analysis.cpp */; };
 		ABA95D1D1AB3AA0600AD4F9F /* transient_analysis.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA95D1B1AB3AA0600AD4F9F /* transient_analysis.h */; };
-		ABAA413C1A9D519F0091C3BD /* sum.h in Headers */ = {isa = PBXBuildFile; fileRef = ABAA413B1A9D519F0091C3BD /* sum.h */; };
 		ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */; };
 		ABABEABB19C0FF52006D3B28 /* taylor_uncertainty.h in Headers */ = {isa = PBXBuildFile; fileRef = ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */; };
 		ABAD559D1ABF554500D1B9A6 /* fitted_measurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABAD559B1ABF554500D1B9A6 /* fitted_measurements.cpp */; };
@@ -667,6 +667,7 @@
 		AB48722E1AFA7EF200DFD3C1 /* sample_variance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sample_variance.h; path = statistics/signal_processing/variance/sample_variance.h; sourceTree = SOURCE_ROOT; };
 		AB4872381AFA889100DFD3C1 /* residual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residual.h; path = statistics/signal_processing/residuals/residual.h; sourceTree = SOURCE_ROOT; };
 		AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residual_square.h; path = statistics/signal_processing/residuals/residual_square.h; sourceTree = SOURCE_ROOT; };
+		AB4872491AFAB54000DFD3C1 /* operator_overloads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = operator_overloads.h; path = units/operator_overloads.h; sourceTree = "<group>"; };
 		AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = validateOpenStream.cpp; path = algorithm/stream/validateOpenStream.cpp; sourceTree = "<group>"; };
 		AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_exp_model.cpp; path = twoColorPyrometery/plot/phase_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_exp_model.h; path = twoColorPyrometery/plot/phase_exp_model.h; sourceTree = "<group>"; };
@@ -880,7 +881,6 @@
 		ABA58A1B1A67489E00573ED8 /* path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = path.h; path = filesystem/path.h; sourceTree = "<group>"; };
 		ABA95D1A1AB3AA0600AD4F9F /* transient_analysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = transient_analysis.cpp; path = /Users/raymondvaldes/code/tat/src/thermal/pyrometry/twoColor/periodic/transient_analysis.cpp; sourceTree = "<absolute>"; };
 		ABA95D1B1AB3AA0600AD4F9F /* transient_analysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transient_analysis.h; path = /Users/raymondvaldes/code/tat/src/thermal/pyrometry/twoColor/periodic/transient_analysis.h; sourceTree = "<absolute>"; };
-		ABAA413B1A9D519F0091C3BD /* sum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sum.h; path = ../statistics/sum.h; sourceTree = "<group>"; };
 		ABABEAB819C0FF52006D3B28 /* taylor_uncertainty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = taylor_uncertainty.cpp; sourceTree = "<group>"; };
 		ABABEAB919C0FF52006D3B28 /* taylor_uncertainty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = taylor_uncertainty.h; sourceTree = "<group>"; };
 		ABAD559B1ABF554500D1B9A6 /* fitted_measurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fitted_measurements.cpp; path = detector/fitted_measurements.cpp; sourceTree = "<group>"; };
@@ -1642,7 +1642,6 @@
 			children = (
 				ABB09B821AB7CB8F005D6BB5 /* sum_of_squares */,
 				AB8B58181AB752860055615C /* signal_processing */,
-				ABAA413B1A9D519F0091C3BD /* sum.h */,
 			);
 			name = statistics;
 			path = math;
@@ -2925,6 +2924,7 @@
 				ABA48C391A78553C0025666F /* cmath.h */,
 				ABB09B801AB7B1EB005D6BB5 /* static_rational.h */,
 				AB7AD88C1ABA168B00478726 /* conversions.h */,
+				AB4872491AFAB54000DFD3C1 /* operator_overloads.h */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -3111,6 +3111,7 @@
 				ABA48C381A7843F90025666F /* range.h in Headers */,
 				ABC010D41AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h in Headers */,
 				AB8B581C1AB759620055615C /* divide_each_element.h in Headers */,
+				AB48724A1AFAB54000DFD3C1 /* operator_overloads.h in Headers */,
 				ABB4474519DB386A009EC35F /* constants.h in Headers */,
 				AB26A3DD19C12073000685DF /* gum_uncertainty.h in Headers */,
 				ABEF4EBF1948D4A500B44AD5 /* temp_cmplx.h in Headers */,
@@ -3276,7 +3277,6 @@
 				ABB09B8D1AB89E72005D6BB5 /* wrap_to_0_2Pi.h in Headers */,
 				ABFB16551AF15AAB0093BF5B /* properties.h in Headers */,
 				AB4872121AF81AFC00DFD3C1 /* spot_view.h in Headers */,
-				ABAA413C1A9D519F0091C3BD /* sum.h in Headers */,
 				AB4872171AF8389900DFD3C1 /* weighted_avg_surface_phases_amplitudes.h in Headers */,
 				ABA95D1D1AB3AA0600AD4F9F /* transient_analysis.h in Headers */,
 				ABDCC4CA1AB9EF2300187DD1 /* import_sweep_meta_data.h in Headers */,

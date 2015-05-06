@@ -28,5 +28,6 @@
 #include "units/cmath.h"
 
 #include "units/conversions.h"
+#include "units/operator_overloads.h"
 
 #endif

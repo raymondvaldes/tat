@@ -37,7 +37,6 @@ BOOST_AUTO_TEST_CASE( sum_test_initializer_list )
   auto const a = quantity< plane_angle >( 1 * radians ) ;
   auto const b = quantity< plane_angle >( 2 * radians ) ;
   auto const c = quantity< plane_angle >( 3 * radians ) ;
-//  auto const list = vector< quantity< plane_angle> >( {a, b , c} );
 
   auto const summation = sum( {a,b,c} );
   

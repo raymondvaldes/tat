@@ -39,7 +39,6 @@ template< typename T >
 auto residual_square( T const observation, T const model ) noexcept
 {
   using std::isfinite;
-  using namespace units;
   using std::pow;
   
   assert( isfinite( observation ) );
