@@ -35,13 +35,16 @@ struct Best_fit{
   // model predictions
   std::vector< units::quantity< units::si::plane_angle > > model_phases;
 
+  double phase_goodness_of_fit;
+
   explicit Best_fit
   (
     thermal::model::slab::Slab const slab_,
     units::quantity< units::si::dimensionless > const view_radius_nd,
     units::quantity< units::si::dimensionless> const b,
     std::vector< units::quantity<units::si::frequency> > const frequencies_,
-    std::vector< units::quantity< units::si::plane_angle > > const model_phases_
+    std::vector< units::quantity<units::si::plane_angle > > const model_phases_,
+    double const phase_goodness_of_fit_
   ) noexcept ;
 
 };

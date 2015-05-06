@@ -19,6 +19,8 @@
 #include "math/estimation/settings.h"
 #include "math/estimation/lmdiff.hpp"
 
+#include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
+
 #include "math/complex/extract_phases_from_properties.h"
 
 namespace thermal{
@@ -48,6 +50,7 @@ using std::make_tuple;
 using std::tie;
 using std::get;
 using math::complex::extract_phases_from_properties;
+using statistics::uncertainty_analysis::goodness_of_fit;
 
 Best_fit::Best_fit
 (
@@ -57,7 +60,8 @@ Best_fit::Best_fit
   units::quantity< units::si::dimensionless> const b,
  
   std::vector< units::quantity<units::si::frequency> > const frequencies_,
-  std::vector< units::quantity< units::si::plane_angle > > const model_phases_
+  std::vector< units::quantity< units::si::plane_angle > > const model_phases_,
+  double phase_goodness_of_fit_
 ) noexcept :
   bulk_slab( slab_ ),
   view_radius( view_radius_nd * bulk_slab.characteristic_length ),
@@ -68,10 +72,11 @@ Best_fit::Best_fit
         frequencies_,
         slab_.get_diffusivity() ,
         slab_.characteristic_length ) ),
-  model_phases( model_phases_ )
+  model_phases( model_phases_ ),
+  phase_goodness_of_fit( phase_goodness_of_fit_ )
 {
-
-
+  assert( phase_goodness_of_fit > 0 );
+  assert( !frequencies.empty() );
 }
 
 auto diffusivity_from_phases
@@ -114,7 +119,7 @@ auto diffusivity_from_phases
   noexcept
   {
     auto const alpha = quantity<si::thermal_diffusivity>::from_value( x_limiter1( x[0] ) );
-    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 4.0 ) ); //  detector radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 5.0 ) ); //  detector radius
 
     std::cout << alpha << "\t" << b2 << "\t" << b1 << "\n" ;
     auto const updated_elements = make_tuple( alpha, b2, b1 ) ;
@@ -167,14 +172,15 @@ auto diffusivity_from_phases
   auto const b2 = get< 1 >(t);
   
   auto const model_predictions = make_model_predictions( x );
-  auto const phases = extract_phases_from_properties( model_predictions  ) ;
+  auto const phase_predictions = extract_phases_from_properties( model_predictions  ) ;
   auto const fitted_slab = thermal::model::slab::Slab( L , alpha_fit , k ) ;
+  auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
   
   //for_each( phases, []( auto const p) { std::cout << p << "\n";} );
   
   auto const result =
-  Best_fit( fitted_slab, b2, b1, frequencies, phases );
+  Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );
   
   return result;
 }

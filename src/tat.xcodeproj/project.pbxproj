@@ -115,6 +115,7 @@
 		AB4872391AFA889100DFD3C1 /* residual.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872381AFA889100DFD3C1 /* residual.h */; };
 		AB48723B1AFA8B6A00DFD3C1 /* residual_square.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */; };
 		AB48724A1AFAB54000DFD3C1 /* operator_overloads.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872491AFAB54000DFD3C1 /* operator_overloads.h */; };
+		AB48724E1AFAC6C700DFD3C1 /* goodness_of_fit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48724D1AFAC6C700DFD3C1 /* goodness_of_fit.h */; };
 		AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */; };
 		AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */; };
 		AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */; };
@@ -668,6 +669,7 @@
 		AB4872381AFA889100DFD3C1 /* residual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residual.h; path = statistics/signal_processing/residuals/residual.h; sourceTree = SOURCE_ROOT; };
 		AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residual_square.h; path = statistics/signal_processing/residuals/residual_square.h; sourceTree = SOURCE_ROOT; };
 		AB4872491AFAB54000DFD3C1 /* operator_overloads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = operator_overloads.h; path = units/operator_overloads.h; sourceTree = "<group>"; };
+		AB48724D1AFAC6C700DFD3C1 /* goodness_of_fit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = goodness_of_fit.h; path = statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h; sourceTree = SOURCE_ROOT; };
 		AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = validateOpenStream.cpp; path = algorithm/stream/validateOpenStream.cpp; sourceTree = "<group>"; };
 		AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_exp_model.cpp; path = twoColorPyrometery/plot/phase_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_exp_model.h; path = twoColorPyrometery/plot/phase_exp_model.h; sourceTree = "<group>"; };
@@ -1598,6 +1600,22 @@
 			name = residuals;
 			sourceTree = "<group>";
 		};
+		AB48724B1AFAC68800DFD3C1 /* uncertainty_analysis */ = {
+			isa = PBXGroup;
+			children = (
+				AB48724C1AFAC69000DFD3C1 /* goodness_of_fit */,
+			);
+			name = uncertainty_analysis;
+			sourceTree = "<group>";
+		};
+		AB48724C1AFAC69000DFD3C1 /* goodness_of_fit */ = {
+			isa = PBXGroup;
+			children = (
+				AB48724D1AFAC6C700DFD3C1 /* goodness_of_fit.h */,
+			);
+			name = goodness_of_fit;
+			sourceTree = "<group>";
+		};
 		AB4E53AE1ABB903F00E7BA8D /* plot */ = {
 			isa = PBXGroup;
 			children = (
@@ -1640,6 +1658,7 @@
 		AB553C46195DCF6D00E2B7D1 /* statistics */ = {
 			isa = PBXGroup;
 			children = (
+				AB48724B1AFAC68800DFD3C1 /* uncertainty_analysis */,
 				ABB09B821AB7CB8F005D6BB5 /* sum_of_squares */,
 				AB8B58181AB752860055615C /* signal_processing */,
 			);
@@ -3050,6 +3069,7 @@
 				AB4871C01AF414B700DFD3C1 /* surface_radial_profile.h in Headers */,
 				AB841C5D1AC4E4D4000CE81D /* c.h in Headers */,
 				AB4871C41AF4196F00DFD3C1 /* surface_radial_profile.h in Headers */,
+				AB48724E1AFAC6C700DFD3C1 /* goodness_of_fit.h in Headers */,
 				AB44BD6A1AAA43B100E0710E /* normalizedSignalRatio_from_measurement.h in Headers */,
 				AB5E9D2F1ACA1ACA003319FA /* phase_amplitude.h in Headers */,
 				AB841C411AC4DB62000CE81D /* J0.h in Headers */,
