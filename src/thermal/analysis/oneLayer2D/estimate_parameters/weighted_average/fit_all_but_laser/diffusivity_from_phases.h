@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_thermal_analysis_oneLayer2D_estimate_parameters_weighted_average_fit_all_but_laser_diffusivity_from_phases__
-#define __tat_thermal_analysis_oneLayer2D_estimate_parameters_weighted_average_fit_all_but_laser_diffusivity_from_phases__
+#ifndef __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_diff_from_phass__
+#define __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_diff_from_phass__
 
 
 #include "units.h"
@@ -46,7 +46,7 @@ struct Best_fit{
     std::vector< units::quantity<units::si::plane_angle > > const model_phases_,
     double const phase_goodness_of_fit_
   ) noexcept ;
-
+  
 };
 
 auto diffusivity_from_phases

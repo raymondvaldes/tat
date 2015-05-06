@@ -110,6 +110,4 @@ double solve::returnSolnTolerance(void) const noexcept
   return solnTolerance;
 }
 
-solve::~solve(void) noexcept{}
-
 }

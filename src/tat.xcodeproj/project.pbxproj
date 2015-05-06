@@ -116,6 +116,8 @@
 		AB48723B1AFA8B6A00DFD3C1 /* residual_square.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */; };
 		AB48724A1AFAB54000DFD3C1 /* operator_overloads.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4872491AFAB54000DFD3C1 /* operator_overloads.h */; };
 		AB48724E1AFAC6C700DFD3C1 /* goodness_of_fit.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48724D1AFAC6C700DFD3C1 /* goodness_of_fit.h */; };
+		AB4872501AFACCD300DFD3C1 /* uncertainty_analysis.h in Headers */ = {isa = PBXBuildFile; fileRef = AB48724F1AFACCD300DFD3C1 /* uncertainty_analysis.h */; };
+		AB4872521AFACD0B00DFD3C1 /* uncertainty_analysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4872511AFACD0B00DFD3C1 /* uncertainty_analysis.cpp */; };
 		AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */; };
 		AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */; };
 		AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */ = {isa = PBXBuildFile; fileRef = AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */; };
@@ -670,6 +672,8 @@
 		AB48723A1AFA8B6A00DFD3C1 /* residual_square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = residual_square.h; path = statistics/signal_processing/residuals/residual_square.h; sourceTree = SOURCE_ROOT; };
 		AB4872491AFAB54000DFD3C1 /* operator_overloads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = operator_overloads.h; path = units/operator_overloads.h; sourceTree = "<group>"; };
 		AB48724D1AFAC6C700DFD3C1 /* goodness_of_fit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = goodness_of_fit.h; path = statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h; sourceTree = SOURCE_ROOT; };
+		AB48724F1AFACCD300DFD3C1 /* uncertainty_analysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uncertainty_analysis.h; path = oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/uncertainty_analysis.h; sourceTree = "<group>"; };
+		AB4872511AFACD0B00DFD3C1 /* uncertainty_analysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uncertainty_analysis.cpp; path = oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/uncertainty_analysis.cpp; sourceTree = "<group>"; };
 		AB4E53AC1ABB4A2D00E7BA8D /* validateOpenStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = validateOpenStream.cpp; path = algorithm/stream/validateOpenStream.cpp; sourceTree = "<group>"; };
 		AB4E53AF1ABB908400E7BA8D /* phase_exp_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_exp_model.cpp; path = twoColorPyrometery/plot/phase_exp_model.cpp; sourceTree = "<group>"; };
 		AB4E53B01ABB908400E7BA8D /* phase_exp_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_exp_model.h; path = twoColorPyrometery/plot/phase_exp_model.h; sourceTree = "<group>"; };
@@ -1537,6 +1541,10 @@
 		AB48721F1AF845F400DFD3C1 /* weighted_average */ = {
 			isa = PBXGroup;
 			children = (
+				AB48724F1AFACCD300DFD3C1 /* uncertainty_analysis.h */,
+				AB4872511AFACD0B00DFD3C1 /* uncertainty_analysis.cpp */,
+				AB4872541AFAD85A00DFD3C1 /* fit_all_but_detectorRadius */,
+				AB4872531AFAD85100DFD3C1 /* fit_all_but_diffusivity */,
 				AB4872201AF845FA00DFD3C1 /* fit_all_but_laser */,
 			);
 			name = weighted_average;
@@ -1614,6 +1622,20 @@
 				AB48724D1AFAC6C700DFD3C1 /* goodness_of_fit.h */,
 			);
 			name = goodness_of_fit;
+			sourceTree = "<group>";
+		};
+		AB4872531AFAD85100DFD3C1 /* fit_all_but_diffusivity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = fit_all_but_diffusivity;
+			sourceTree = "<group>";
+		};
+		AB4872541AFAD85A00DFD3C1 /* fit_all_but_detectorRadius */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = fit_all_but_detectorRadius;
 			sourceTree = "<group>";
 		};
 		AB4E53AE1ABB903F00E7BA8D /* plot */ = {
@@ -3215,6 +3237,7 @@
 				AB4871B01AF31F8500DFD3C1 /* diffusivity_from_phases.h in Headers */,
 				AB7996D81AB0EDA50022015B /* scopeFile.h in Headers */,
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
+				AB4872501AFACCD300DFD3C1 /* uncertainty_analysis.h in Headers */,
 				AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */,
 				AB9A3FAD1ACE09B50004882F /* if_intersect.h in Headers */,
 				AB9A3F9E1ACDFECA0004882F /* circle.h in Headers */,
@@ -3607,6 +3630,7 @@
 				ABEF4E911948D4A500B44AD5 /* utils.cpp in Sources */,
 				AB7996E91AB10F350022015B /* scopeFiles_from_datafiles.cpp in Sources */,
 				AB4E53C71ABCB8B200E7BA8D /* wave_signals.cpp in Sources */,
+				AB4872521AFACD0B00DFD3C1 /* uncertainty_analysis.cpp in Sources */,
 				AB9383C71AC1C78A00F2D2DD /* time_nd.cpp in Sources */,
 				ABEF4EF91948D4A500B44AD5 /* Numerical_PhaseOfEmission.cpp in Sources */,
 				AB841C9D1AC5BE30000CE81D /* h_coat.cpp in Sources */,

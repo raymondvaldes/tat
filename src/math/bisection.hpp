@@ -48,6 +48,7 @@ private:
   const double phi;
   const double min;
   const double max;
+  
   double bestGuess;
   double solnTolerance;
   double myRootFunc(const double x) const noexcept;
@@ -56,7 +57,6 @@ private:
 public:
   solve( std::function<double(double)> myF_ , const double phi_,
          const double min_, const double max_) noexcept;
-  ~solve(void) noexcept;
 
   bool pass;
   double returnSoln(void) const noexcept;
