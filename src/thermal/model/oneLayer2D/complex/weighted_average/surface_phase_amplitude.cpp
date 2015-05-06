@@ -35,20 +35,15 @@ auto surface_phase_amplitude
 {
   auto const f_r =
   [ &b, &l, &deltaT ]
-  ( double const r ) noexcept -> std::pair< double, double >
+  ( double const r ) noexcept -> math::complex::properties< units::si::temperature >
   {
     auto const r_dim = quantity<si::dimensionless>( r );
     auto const p = complex::surface_phase_amplitude( r_dim, b, l, deltaT );
-    return make_pair( p.phase.value(), p.amplitude.value() ) ;
+    return p ;
   };
 
-  auto const view_radius_d = double( view_radius.value() );
-  auto const dr = double( 0.001 );
-  auto const mean = circle_complex( f_r, view_radius_d, dr );
-  
-  auto const mean_phase = quantity< plane_angle >::from_value( mean.first );
-  auto const mean_amplitude = quantity< si::temperature >::from_value( mean.second );
-  return properties< si::temperature >( mean_phase, mean_amplitude );
+  auto const mean = spot_view_2( f_r, T_steady_state, detector_wavelength, view_radius );
+  return mean;
 }
 
 } // namespace weighted_average

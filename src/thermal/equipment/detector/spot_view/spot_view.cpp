@@ -9,12 +9,12 @@
 #include "thermal/equipment/detector/spot_view/spot_view.h"
 
 #include "thermal/emission/planks_law/planks_law.h" 
-#include "math/calculus/mean_value/circle/circle_complex.h"
+#include "math/calculus/weighted_mean_value/circle.h"
 
 using namespace units;
 using std::make_pair;
 using std::pair;
-using math::calculus::mean_value::circle_complex;
+using math::calculus::weighted_mean_value::circle_complex;
 using thermal::emission::monochromatic_blackbody_emissive_power::planks_law;
 using math::complex::properties;
 
@@ -39,24 +39,32 @@ noexcept -> math::complex::properties< units::si::temperature >
   auto const T_ss = reference_temperature;
   auto const E_steadyState = planks_law( reference_temperature, lambda );
   
-  auto const weighted_function = [&]( double const r )
+  auto const w =
+  [&phase_amplitude_field, &lambda, &T_ss, &E_steadyState]
+  ( double const r) noexcept
+  {
+    auto const eval = phase_amplitude_field( r );
+    auto const amplitude = eval.amplitude;
+
+    auto const T = T_ss + amplitude ;
+    auto const E_trans = planks_law( T, lambda );
+
+    auto const weight = ( E_trans / E_steadyState ) - 1.0 ;
+    return weight;
+  };
+  
+  auto const f = [&]( double const r )
   noexcept -> std::pair< double, double >
   {
     auto const eval = phase_amplitude_field( r );
     auto const amplitude = eval.amplitude;
     auto const phase = eval.phase;
     
-    auto const T = T_ss + amplitude ;
-    auto const E_trans = planks_law( T, lambda );
-
-    auto const weight = ( E_trans / E_steadyState ) - 1.0 ;
-    
-    auto const phase_weighted = phase * weight;
-    auto const amplitude_weighted = amplitude * weight;
-    return make_pair( phase_weighted.value() , amplitude_weighted.value() );
+    return make_pair( phase.value() , amplitude.value() );
   };
   
-  auto const mean_values = circle_complex( weighted_function, R, dr_i_step );
+  auto const mean_values = circle_complex( f, w, R, dr_i_step );
+
 
   auto const mean_phase =
     quantity< si::plane_angle >::from_value( mean_values.first );

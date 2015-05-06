@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__import_slab__
-#define __tat__import_slab__
+#ifndef __tat_model_slab_import_slab__
+#define __tat_model_slab_import_slab__
 
 #include <string>
 

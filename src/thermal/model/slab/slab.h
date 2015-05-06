@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__slab__
-#define __tat__slab__
+#ifndef __tat_thermal_model_slab_slab__
+#define __tat_thermal_model_slab_slab__
 
 #include <vector>
 #include <cassert>
@@ -17,9 +17,7 @@
 #include "units.h"
 
 namespace thermal {
-
 namespace model {
-
 namespace slab {
 
 
@@ -340,9 +338,7 @@ auto nondimensional_x
 ) -> units::quantity< units::si::dimensionless >;
   
 } // namespace slab
-  
 } // namespace model
-  
 } // namespace thermal
 
 #endif /* defined(__tat__slab__) */

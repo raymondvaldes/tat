@@ -97,8 +97,12 @@ thermalPenetrations_from_frequencies
 )
 noexcept -> std::vector< units::quantity< units::si::dimensionless > >
 {
+  assert( !frequencies.empty() );
+  assert( alpha.value() > 0  );
+  assert( L > 0 * meters );
+  
   auto const count = frequencies.size();
-  auto lthermals = vector< quantity< dimensionless > >{ count } ;
+  auto lthermals = vector< quantity< dimensionless > >( count ) ;
   
   transform( frequencies, begin( lthermals ) , [ &alpha, &L ]
   ( auto const freq ) noexcept

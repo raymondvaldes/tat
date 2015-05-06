@@ -5,8 +5,8 @@
     || 	   T Toolbox    	| Copyright (C) 2013 Raymond Valdes
     ||   	  	          	|
 \*----------------------------------------------------------------------------*/
-#ifndef FILESYSTEM_HPP_INCLUDED
-#define FILESYSTEM_HPP_INCLUDED
+#ifndef tools_interface_FILESYSTEM_HPP_INCLUDED
+#define tools_interface_FILESYSTEM_HPP_INCLUDED
 
 #include <vector>
 #include <string>

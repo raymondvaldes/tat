@@ -2,32 +2,35 @@
 //  diffusivity_from_phases.cpp
 //  tat
 //
-//  Created by Raymond Valdes on 4/29/15.
+//  Created by Raymond Valdes on 5/4/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include <algorithm>
+#include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/diffusivity_from_phases.h"
+#include "algorithm.h"
 #include <iostream>
 #include <tuple>
 
-#include "diffusivity_from_phases.h"
-#include "thermal/analysis/tbc2009/estimate_parameters/from_phases.h"
 #include "thermal/define/lthermal.h"
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/avg_surface_phases_amplitudes.h"
+#include "thermal/model/oneLayer2D/average/weighted_avg_surface_phases_amplitudes.h"
+
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
 #include "math/estimation/lmdiff.hpp"
+
 #include "math/complex/extract_phases_from_properties.h"
 
-namespace thermal {
+namespace thermal{
 namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
+namespace weighted_average{
 namespace fit_all_but_laser{
 
 using namespace units;
 
+using algorithm::for_each;
 using thermal::define::thermalPenetrations_from_frequencies;
 using std::vector;
 using math::estimation::x_limiter1;
@@ -38,7 +41,7 @@ using math::estimation::kx_limiter2;
 using math::estimation::x_to_k_constrained_from_0_to_1;
 using math::estimation::k_to_x_constrained_from_0_to_1;
 using thermal::model::oneLayer2D::dimensionless::b;
-using thermal::model::oneLayer2D::avg_surface_phases_amplitudes;
+using thermal::model::oneLayer2D::average::weighted_avg_surface_phases_amplitudes;
 using math::estimation::settings;
 using std::generate;
 using std::make_tuple;
@@ -61,16 +64,11 @@ Best_fit::Best_fit
 
   frequencies( frequencies_ ),
   ls( thermalPenetrations_from_frequencies(
-        frequencies,
-        bulk_slab.get_diffusivity() ,
-        bulk_slab.characteristic_length ) ),
+        frequencies_,
+        slab_.get_diffusivity() ,
+        slab_.characteristic_length ) ),
   model_phases( model_phases_ )
-{
-  assert( !frequencies.empty() );
-  assert( b > 0 );
-  assert( view_radius_nd > 0 );
-  assert( frequencies.size() == model_phases.size() );
-}
+{}
 
 auto diffusivity_from_phases
 (
@@ -78,7 +76,9 @@ auto diffusivity_from_phases
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const slab_initial,
   units::quantity< units::si::length> const beam_radius,
-  units::quantity< units::si::length > const detector_view_radius
+  units::quantity< units::si::length > const detector_view_radius,
+  units::quantity< units::si::temperature> const steady_state_temperature,
+  units::quantity< units::si::wavelength> const detector_wavelength
 ) noexcept -> Best_fit
 {
   //establish preconditions
@@ -100,7 +100,7 @@ auto diffusivity_from_phases
   auto model_parameters = vector< double >
   {
     kx_limiter1( alpha.value() ) ,  // diffusivity ratio
-    kx_limiter2(  b2_i.value(), 0, 4.0 )
+    kx_limiter2(  b2_i.value(), 0, 5.0 )
   };
   
   // parameter estimation algorithm
@@ -118,7 +118,8 @@ auto diffusivity_from_phases
   };
 
   auto const make_model_predictions =
-  [ &frequencies, &L, &update_system_properties, &deltaT, &b1]
+  [ &frequencies, &L, &update_system_properties, &deltaT, &b1,
+    &steady_state_temperature, &detector_wavelength]
   ( const double * x ) noexcept
   {
     auto const t = update_system_properties( x );
@@ -127,7 +128,10 @@ auto diffusivity_from_phases
     auto const b2 = get< 1 >(t);
     
     auto const predictions =
-    avg_surface_phases_amplitudes( b1, deltaT, b2, frequencies, L, alpha );
+    weighted_avg_surface_phases_amplitudes(
+      b1, deltaT, b2, frequencies, L, alpha,
+      steady_state_temperature,
+      detector_wavelength );
     
     return predictions;
   };
@@ -162,12 +166,16 @@ auto diffusivity_from_phases
   auto const phases = extract_phases_from_properties( model_predictions  ) ;
   auto const fitted_slab = thermal::model::slab::Slab( L , alpha_fit , k ) ;
   
+  
+  for_each( phases, []( auto const p) { std::cout << p << "\n";} );
+  
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phases );
   
   return result;
 }
 
+} // namespace
 } // namespace fit_all_but_laser
 } // namespace estimate_parameters
 } // namespace oneLayer2D
