@@ -17,7 +17,7 @@ namespace thermal{
 namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
-namespace weighted_average{
+namespace phase_analysis{
 
 struct Best_fit{
   // system properties
@@ -48,7 +48,7 @@ struct Best_fit{
   
 };
 
-} // namespace weighted_average
+} // namespace phase_analysis
 } // namespace estimate_parameters
 } // namespace oneLayer2D
 } // namespace analysis

@@ -5,10 +5,10 @@
 //  Created by Raymond Valdes on 4/29/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
-#include "investigations/twoColorPyrometery/oneLayer2D/fit_all_but_laser/diffusivity_from_phases.h"
+#include "investigations/twoColorPyrometery/oneLayer2D/phase_analysis/fit_all_but_laser/diffusivity_from_phases.h"
 #include "units.h"
 #include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
-#include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/diffusivity_from_phases.h"
+#include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_laser/diffusivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
 
 using namespace units;
@@ -19,9 +19,10 @@ using thermal::pyrometry::twoColor::calibrate_wavelength;
 namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
+namespace phase_analysis{
 namespace fit_all_but_laser{
 
-using thermal::analysis::oneLayer2D::estimate_parameters::weighted_average::fit_all_but_laser::diffusivity_from_phases;
+using thermal::analysis::oneLayer2D::estimate_parameters::phase_analysis::fit_all_but_laser::diffusivity_from_phases;
 
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
@@ -104,6 +105,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
     steady_state_temperature, detector_wavelength_avg) ;
 }
 
+} // namespace
 } // namespace
 } // namespace
 } // namespace

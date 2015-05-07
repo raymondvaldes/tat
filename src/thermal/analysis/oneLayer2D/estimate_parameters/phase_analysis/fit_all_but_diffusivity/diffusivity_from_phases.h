@@ -12,13 +12,13 @@
 
 #include "units.h"
 #include "thermal/model/slab/slab.h"
-#include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/Best_fit.h"
+#include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
 
 namespace thermal{
 namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
-namespace weighted_average{
+namespace phase_analysis{
 namespace fit_all_but_diffusivity{
 
 auto diffusivity_from_phases
@@ -33,7 +33,7 @@ auto diffusivity_from_phases
 ) noexcept -> Best_fit;
 
 } // namespace fit_all_but_diffusivty
-} // namespace weighted_average
+} // namespace phase_analysis
 } // namespace estimate_parameters
 } // namespace oneLayer2D
 } // namespace analysis

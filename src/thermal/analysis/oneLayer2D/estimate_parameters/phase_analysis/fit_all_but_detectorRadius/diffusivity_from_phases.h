@@ -6,20 +6,20 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_diff_from_phass__
-#define __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_diff_from_phass__
+#ifndef __tat_ther_anais_oneer2D_estimfit_all_but_detectorRadius_
+#define __tat_ther_anais_oneer2D_estimfit_all_but_detectorRadius_
 
 
 #include "units.h"
 #include "thermal/model/slab/slab.h"
-#include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/Best_fit.h"
+#include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
 
 namespace thermal{
 namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
-namespace weighted_average{
-namespace fit_all_but_laser{
+namespace phase_analysis{
+namespace fit_all_but_detectorRadius{
 
 auto diffusivity_from_phases
 (
@@ -32,8 +32,8 @@ auto diffusivity_from_phases
   units::quantity< units::si::wavelength> const detector_wavelength
 ) noexcept -> Best_fit;
 
-} // namespace fit_all_but_laser
-} // namespace weighted_average
+} // namespace fit_all_but_detectorRadius
+} // namespace phase_analysis
 } // namespace estimate_parameters
 } // namespace oneLayer2D
 } // namespace analysis

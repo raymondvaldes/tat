@@ -7,7 +7,7 @@
 //
 #include <cassert>
 
-#include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/Best_fit.h"
+#include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
 #include "thermal/define/lthermal.h"
 
 using thermal::define::thermalPenetrations_from_frequencies;
@@ -16,7 +16,7 @@ namespace thermal{
 namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
-namespace weighted_average{
+namespace phase_analysis{
 
 Best_fit::Best_fit
 (
@@ -45,7 +45,7 @@ Best_fit::Best_fit
   assert( !frequencies.empty() );
 }
 
-} // namespace weighted_average
+} // namespace phase_analysis
 } // namespace estimate_parameters
 } // namespace oneLayer2D
 } // namespace analysis

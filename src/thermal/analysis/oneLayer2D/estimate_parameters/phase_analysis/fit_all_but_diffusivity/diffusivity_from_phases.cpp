@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/diffusivity_from_phases.h"
+#include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_diffusivity/diffusivity_from_phases.h"
 #include "algorithm/algorithm.h"
 #include <iostream>
 #include <tuple>
@@ -26,8 +26,8 @@ namespace thermal{
 namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
-namespace weighted_average{
-namespace fit_all_but_laser{
+namespace phase_analysis{
+namespace fit_all_but_diffusivity{
 
 using namespace units;
 
@@ -71,7 +71,7 @@ auto diffusivity_from_phases
   auto const alpha = slab_initial.get_diffusivity();
   auto const k = slab_initial.get_conductivity();
   
-  auto const b1 = b( beam_radius, L );
+  auto const b1_i = b( beam_radius, L );
   auto const b2_i = b( detector_view_radius, L );
   auto const deltaT = quantity< si::temperature > ( 1.0 * kelvin );
 
@@ -79,32 +79,32 @@ auto diffusivity_from_phases
   // establish parameters to fit with initial values
   auto model_parameters = vector< double >
   {
-    kx_limiter1( alpha.value() ) ,  // diffusivity ratio
+    kx_limiter2(  b1_i.value(), 0, 5.0 ),
     kx_limiter2(  b2_i.value(), 0, 5.0 )
   };
   
   // parameter estimation algorithm
   auto const number_of_points_to_Fit = frequencies.size();
   
-  auto const update_system_properties = [&b1] ( const double * x )
+  auto const update_system_properties = [&alpha] ( const double * x )
   noexcept
   {
-    auto const alpha = quantity<si::thermal_diffusivity>::from_value( x_limiter1( x[0] ) );
+    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[0], 0.0, 5.0 ) ); //  beam radius
     auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 5.0 ) ); //  detector radius
 
     std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
-    auto const updated_elements = make_tuple( alpha, b2 ) ;
+    auto const updated_elements = make_tuple( b1, b2 ) ;
     return updated_elements ;
   };
 
   auto const make_model_predictions =
-  [ &frequencies, &L, &update_system_properties, &deltaT, &b1,
-    &steady_state_temperature, &detector_wavelength]
+  [ &frequencies, &L, &update_system_properties, &deltaT,
+    &steady_state_temperature, &detector_wavelength, &alpha]
   ( const double * x ) noexcept
   {
     auto const t = update_system_properties( x );
     
-    auto const alpha = get< 0 >(t);
+    auto const b1 = get< 0 >(t);
     auto const b2 = get< 1 >(t);
     
     auto const predictions =
@@ -139,7 +139,8 @@ auto diffusivity_from_phases
 
   auto const x = model_parameters.data();
   auto const t = update_system_properties( x );
-  auto const alpha_fit = get< 0 >(t);
+  auto const alpha_fit = alpha;
+  auto const b1 = get< 0 >(t);
   auto const b2 = get< 1 >(t);
   
   auto const model_predictions = make_model_predictions( x );
@@ -148,14 +149,16 @@ auto diffusivity_from_phases
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
   
+  //for_each( phases, []( auto const p) { std::cout << p << "\n";} );
+  
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );
   
   return result;
 }
 
+} // namespace
 } // namespace fit_all_but_laser
-} // namespace weighted_average
 } // namespace estimate_parameters
 } // namespace oneLayer2D
 } // namespace analysis
