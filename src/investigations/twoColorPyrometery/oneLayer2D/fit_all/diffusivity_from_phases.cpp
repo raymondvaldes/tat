@@ -7,15 +7,17 @@
 //
 
 #include "investigations/twoColorPyrometery/oneLayer2D/fit_all/diffusivity_from_phases.h"
+
+#include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/fit_all/diffusivity_from_phases.h"
+#include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
+#include "thermal/model/slab/import_slab.h"
 #include "units.h"
 
-#include "thermal/analysis/oneLayer2D/estimate_parameters/fit_all/diffusivity_from_phases.h"
-#include "thermal/model/slab/import_slab.h"
-
 using namespace units;
-using thermal::model::slab::import ;
-using thermal::analysis::oneLayer2D::estimate_parameters::fit_all::diffusivity_from_phases;
 using std::vector;
+using thermal::model::slab::import ;
+using thermal::analysis::oneLayer2D::estimate_parameters::weighted_average::fit_all::diffusivity_from_phases;
+using thermal::pyrometry::twoColor::calibrate_wavelength;
 
 namespace investigations{
 namespace twoColorPyrometery{
@@ -24,8 +26,23 @@ namespace fit_all{
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 {
- // auto const gCoeff = 1.23_nd;
-  auto const initial_slab = import( dir, "initial_slab.xml" ) ;
+  auto const initial_slab = thermal::model::slab::import( dir, "initial_slab.xml" ) ;
+  auto const steady_state_temperature = quantity<si::temperature>( 781.14 * kelvin );
+  
+  auto const nominal_wavelength = quantity< si::wavelength >( 4.6 * micrometers );
+  auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
+  auto const lambda_1 = quantity<wavelength>( 4.6 * micrometers );
+  auto const lambda_2 = quantity<wavelength>( 5.6 * micrometers );
+  auto const lambda_avg = quantity<wavelength>( 5.1 * micrometers );
+  
+  auto const detector_wavelength_1 =
+    calibrate_wavelength( lambda_1, wavelength_offset );
+  
+  auto const detector_wavelength_2 =
+    calibrate_wavelength( lambda_2, wavelength_offset );  
+
+  auto const detector_wavelength_avg =
+    calibrate_wavelength( lambda_avg, wavelength_offset );
   
   auto const frequencies = vector< quantity< frequency > >({
     1.414 * hertz,
@@ -39,50 +56,51 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
     22.627 * hertz,
     32 * hertz,
     45.255 * hertz,
-    64 * hertz,
-    90.51 * hertz
- //   128 * hertz,
- //   181.019 * hertz,
- //   256 * hertz,
- //   362.039 * hertz,
- //   512 * hertz,
- //   724.077 * hertz,
- //   1024 * hertz,
- //   1448.155 * hertz,
- //   2048 * hertz
+//    64 * hertz,
+//    90.51 * hertz,
+//    128 * hertz,
+//    181.019 * hertz,
+//    256 * hertz,
+//    362.039 * hertz,
+//    512 * hertz,
+//    724.077 * hertz,
+//    1024 * hertz,
+//    1448.155 * hertz,
+//    2048 * hertz
   });
-  
+
   auto const phases = vector< quantity< plane_angle > >({
-    0.9879 * radians,
-    1.0455 * radians,
-    1.085 * radians,
-    1.1055 * radians,
-    1.1105 * radians,
-    1.106 * radians,
-    1.064 * radians,
-    1.0025 * radians,
-    0.912 * radians,
-    0.808 * radians,
-    0.7215 * radians,
-    0.665 * radians,
-    0.6465 * radians
- //   0.65 * radians,
- //   0.6495 * radians,
+    0.96987525 * radians,
+    1.030075 * radians,
+    1.076665 * radians,
+    1.1059025 * radians,
+    1.11566 * radians,
+    1.1053475 * radians,
+    1.0592525 * radians,
+    0.98896025 * radians,
+    0.89821 * radians,
+    0.80698475 * radians,
+    0.7405715 * radians,
+//    0.668 * radians,
+//    0.6465 * radians,
+//    0.65 * radians,
+//    0.6495 * radians,
 //    0.639 * radians,
 //    0.623 * radians,
 //    0.5975 * radians,
 //    0.5755 * radians,
 //    0.549 * radians,
 //    0.525 * radians,
- //   0.491 * radians
+//    0.491 * radians
   });
   
   auto const beam_radius = quantity< length >( 2.11362 * millimeters );
-  auto const detector_view_radius = quantity< length>( 0.8 * millimeters  ) ;
+  auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ; // initial value
 
   auto const bestFit_results =
-  thermal::analysis::oneLayer2D::estimate_parameters::fit_all::diffusivity_from_phases(
-    frequencies, phases , initial_slab, beam_radius, detector_view_radius ) ;
+  thermal::analysis::oneLayer2D::estimate_parameters::weighted_average::fit_all::diffusivity_from_phases(
+    frequencies, phases , initial_slab, beam_radius, detector_view_radius,
+    steady_state_temperature, detector_wavelength_avg) ;
 }
 
 } // namespace

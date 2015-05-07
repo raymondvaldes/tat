@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__conductivity_from_phases__
-#define __tat__conductivity_from_phases__
+#ifndef __tat_thermal_analysis_bulk_temp_conductivity_from_phases_9885_
+#define __tat_thermal_analysis_bulk_temp_conductivity_from_phases_9885_
 
 #include <vector>
 #include <utility>

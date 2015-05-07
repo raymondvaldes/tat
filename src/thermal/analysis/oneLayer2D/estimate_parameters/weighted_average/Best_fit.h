@@ -1,14 +1,15 @@
 //
-//  diffusivity_from_phases.h
+//  Best_fit.h
 //  tat
 //
-//  Created by Raymond Valdes on 4/29/15.
+//  Created by Raymond Valdes on 5/6/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_TA_oneLayer2_estimate_parameters_fit_all_diffusivity_from_phases__
-#define __tat_TA_oneLayer2_estimate_parameters_fit_all_diffusivity_from_phases__
+#ifndef __tat_thermal_analysis_oneL2D_estte_paramrs_weighted_average_Bes9629__
+#define __tat_thermal_analysis_oneL2D_estte_paramrs_weighted_average_Bes9629__
 
+#include <vector>
 #include "units.h"
 #include "thermal/model/slab/slab.h"
 
@@ -16,7 +17,7 @@ namespace thermal{
 namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
-namespace fit_all{
+namespace weighted_average{
 
 struct Best_fit{
   // system properties
@@ -33,30 +34,25 @@ struct Best_fit{
   // model predictions
   std::vector< units::quantity< units::si::plane_angle > > model_phases;
 
+  double phase_goodness_of_fit;
+
   explicit Best_fit
   (
     thermal::model::slab::Slab const slab_,
     units::quantity< units::si::dimensionless > const view_radius_nd,
     units::quantity< units::si::dimensionless> const b,
     std::vector< units::quantity<units::si::frequency> > const frequencies_,
-    std::vector< units::quantity< units::si::plane_angle > > const model_phases_
+    std::vector< units::quantity<units::si::plane_angle > > const model_phases_,
+    double const phase_goodness_of_fit_
   ) noexcept ;
-
+  
 };
 
-auto diffusivity_from_phases
-(
-  std::vector< units::quantity< units::si::frequency > > const & frequencies,
-  std::vector< units::quantity< units::si::plane_angle > > const & observations,
-  thermal::model::slab::Slab const slab_initial,
-  units::quantity< units::si::length> const beam_radius,
-  units::quantity< units::si::length > const detector_view_radius
-) noexcept -> Best_fit;
-
-} // namespace fit_all
+} // namespace weighted_average
 } // namespace estimate_parameters
 } // namespace oneLayer2D
 } // namespace analysis
 } // namespace thermal
 
-#endif /* defined(__tat__diffusivity_from_phases__) */
+
+#endif /* defined(__tat__Best_fit__) */

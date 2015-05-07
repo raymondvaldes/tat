@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_diff_from_phass__
-#define __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_diff_from_phass__
+#ifndef __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_all__9897
+#define __tat_ther_anais_oneer2D_estimarameters_wehted_av_fit_all__9897
 
 
 #include "units.h"
@@ -19,7 +19,7 @@ namespace analysis {
 namespace oneLayer2D {
 namespace estimate_parameters{
 namespace weighted_average{
-namespace fit_all_but_laser{
+namespace fit_all{
 
 auto diffusivity_from_phases
 (
@@ -30,7 +30,8 @@ auto diffusivity_from_phases
   units::quantity< units::si::length > const detector_view_radius,
   units::quantity< units::si::temperature> const steady_state_temperature,
   units::quantity< units::si::wavelength> const detector_wavelength
-) noexcept -> Best_fit;
+)
+noexcept -> Best_fit;
 
 } // namespace fit_all_but_laser
 } // namespace weighted_average

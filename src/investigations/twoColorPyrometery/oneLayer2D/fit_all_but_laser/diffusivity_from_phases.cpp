@@ -26,7 +26,6 @@ using thermal::analysis::oneLayer2D::estimate_parameters::weighted_average::fit_
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 {
- // auto const gCoeff = 1.23_nd;
   auto const initial_slab = thermal::model::slab::import( dir, "initial_slab.xml" ) ;
   auto const steady_state_temperature = quantity<si::temperature>( 781.14 * kelvin );
   

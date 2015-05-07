@@ -7,11 +7,10 @@
 //
 
 #include "thermal/analysis/oneLayer2D/estimate_parameters/weighted_average/fit_all_but_laser/diffusivity_from_phases.h"
-#include "algorithm.h"
+#include "algorithm/algorithm.h"
 #include <iostream>
 #include <tuple>
 
-#include "thermal/define/lthermal.h"
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
 #include "thermal/model/oneLayer2D/average/weighted_avg_surface_phases_amplitudes.h"
 
@@ -33,7 +32,6 @@ namespace fit_all_but_laser{
 using namespace units;
 
 using algorithm::for_each;
-using thermal::define::thermalPenetrations_from_frequencies;
 using std::vector;
 using math::estimation::x_limiter1;
 using math::estimation::x_limiter2;
@@ -51,33 +49,6 @@ using std::tie;
 using std::get;
 using math::complex::extract_phases_from_properties;
 using statistics::uncertainty_analysis::goodness_of_fit;
-
-Best_fit::Best_fit
-(
-  thermal::model::slab::Slab const slab_,
-
-  units::quantity< units::si::dimensionless > const view_radius_nd,
-  units::quantity< units::si::dimensionless> const b,
- 
-  std::vector< units::quantity<units::si::frequency> > const frequencies_,
-  std::vector< units::quantity< units::si::plane_angle > > const model_phases_,
-  double phase_goodness_of_fit_
-) noexcept :
-  bulk_slab( slab_ ),
-  view_radius( view_radius_nd * bulk_slab.characteristic_length ),
-  beam_radius( b * bulk_slab.characteristic_length ),
-
-  frequencies( frequencies_ ),
-  ls( thermalPenetrations_from_frequencies(
-        frequencies_,
-        slab_.get_diffusivity() ,
-        slab_.characteristic_length ) ),
-  model_phases( model_phases_ ),
-  phase_goodness_of_fit( phase_goodness_of_fit_ )
-{
-  assert( phase_goodness_of_fit > 0 );
-  assert( !frequencies.empty() );
-}
 
 auto diffusivity_from_phases
 (
@@ -121,8 +92,8 @@ auto diffusivity_from_phases
     auto const alpha = quantity<si::thermal_diffusivity>::from_value( x_limiter1( x[0] ) );
     auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 5.0 ) ); //  detector radius
 
-    std::cout << alpha << "\t" << b2 << "\t" << b1 << "\n" ;
-    auto const updated_elements = make_tuple( alpha, b2, b1 ) ;
+    std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
+    auto const updated_elements = make_tuple( alpha, b2 ) ;
     return updated_elements ;
   };
 
@@ -177,16 +148,14 @@ auto diffusivity_from_phases
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
   
-  //for_each( phases, []( auto const p) { std::cout << p << "\n";} );
-  
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );
   
   return result;
 }
 
-} // namespace
 } // namespace fit_all_but_laser
+} // namespace weighted_average
 } // namespace estimate_parameters
 } // namespace oneLayer2D
 } // namespace analysis

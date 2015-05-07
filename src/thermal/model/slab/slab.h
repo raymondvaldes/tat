@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat_thermal_model_slab_slab__
-#define __tat_thermal_model_slab_slab__
+#ifndef __tat_thermal_model_slab_slab_9342_
+#define __tat_thermal_model_slab_slab_9342_
 
 #include <vector>
 #include <cassert>
