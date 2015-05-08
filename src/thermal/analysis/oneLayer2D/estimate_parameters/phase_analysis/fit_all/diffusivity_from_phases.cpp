@@ -76,31 +76,32 @@ auto diffusivity_from_phases
   auto const b1_i = b( beam_radius, L );
   auto const b2_i = b( detector_view_radius, L );
   auto const deltaT = quantity< si::temperature > ( 1.0 * kelvin );
-
+  auto const alpha_scale = alpha.value();
 
   // establish parameters to fit with initial values
   auto model_parameters = vector< double >
   {
-    kx_limiter1( alpha.value() ) ,  // diffusivity ratio
-    kx_limiter2(  b1_i.value(), 0, 5.0 ),
-    kx_limiter2(  b2_i.value(), 0, 5.0 )
+    kx_limiter1( 1.0 ) ,  // diffusivity ratio
+    kx_limiter2(  b1_i.value(), 0.05, 10. ),
+    kx_limiter2(  b2_i.value(), 0.05, 2. )
   };
   
   // parameter estimation algorithm
-  auto const number_of_points_to_Fit = frequencies.size();
-  
-  auto const update_system_properties = [] ( const double * x )
+  auto const update_system_properties = [&alpha_scale] ( const double * x )
   noexcept
   {
-    auto const alpha = quantity<si::thermal_diffusivity>::from_value( x_limiter1( x[0] ) );
-    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 5.0 ) ); //  detector radius
-    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[2], 0.0, 5.0 ) ); //  detector radius
+    auto const alpha_value = x_limiter1( x[0] ) ;
+    auto const alpha = quantity<si::thermal_diffusivity>::from_value(
+     alpha_value * alpha_scale  );
+    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.05, 10. ) ); //  detector radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[2], 0.05, 2. ) ); //  detector radius
 
-
+  
     std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
     auto const updated_elements = make_tuple( alpha, b1, b2 ) ;
     return updated_elements ;
   };
+
 
   auto const make_model_predictions =
   [ &frequencies, &L, &update_system_properties, &deltaT,
@@ -121,6 +122,7 @@ auto diffusivity_from_phases
     
     return predictions;
   };
+  auto const number_of_points_to_Fit = frequencies.size();
 
   auto const minimization_equation =
   [ & ] ( const double *x, double *fvec ) noexcept
@@ -138,7 +140,9 @@ auto diffusivity_from_phases
   };
 
   auto lmdif_settings = settings{};
-  lmdif_settings.factor = 10;
+  lmdif_settings.factor = 10;   // initial step size
+  lmdif_settings.xtol = .001;   // tolerance between x-iterates
+  lmdif_settings.epsfcn = 1e-4; // tolerance of phase function
 
   lmdif(  minimization_equation, number_of_points_to_Fit,
           model_parameters, lmdif_settings );
@@ -156,7 +160,7 @@ auto diffusivity_from_phases
   
   
   //for_each( phases, []( auto const p) { std::cout << p << "\n";} );
-  
+
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );
   

@@ -79,8 +79,8 @@ auto diffusivity_from_phases
   // establish parameters to fit with initial values
   auto model_parameters = vector< double >
   {
-    kx_limiter2(  b1_i.value(), 0, 5.0 ),
-    kx_limiter2(  b2_i.value(), 0, 5.0 )
+    kx_limiter2(  b1_i.value(), 0.05, 10. ),
+    kx_limiter2(  b2_i.value(), 0.05, 2. )
   };
   
   // parameter estimation algorithm
@@ -89,8 +89,8 @@ auto diffusivity_from_phases
   auto const update_system_properties = [&alpha] ( const double * x )
   noexcept
   {
-    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[0], 0.0, 5.0 ) ); //  beam radius
-    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 5.0 ) ); //  detector radius
+    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[0], 0.05, 10. ) ); //  beam radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.05, 2. ) ); //  detector radius
 
     std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
     auto const updated_elements = make_tuple( b1, b2 ) ;
@@ -132,7 +132,9 @@ auto diffusivity_from_phases
   };
 
   auto lmdif_settings = settings{};
-  lmdif_settings.factor = 10;
+  lmdif_settings.factor = 10;   // initial step size
+  lmdif_settings.xtol = .001;   // tolerance between x-iterates
+  lmdif_settings.epsfcn = 1e-4; // tolerance of phase function
 
   lmdif(  minimization_equation, number_of_points_to_Fit,
           model_parameters, lmdif_settings );

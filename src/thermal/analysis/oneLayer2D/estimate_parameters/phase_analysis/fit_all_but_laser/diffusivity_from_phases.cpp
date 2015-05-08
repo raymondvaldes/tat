@@ -74,23 +74,27 @@ auto diffusivity_from_phases
   auto const b1 = b( beam_radius, L );
   auto const b2_i = b( detector_view_radius, L );
   auto const deltaT = quantity< si::temperature > ( 1.0 * kelvin );
+  auto const alpha_scale = alpha.value();
 
 
   // establish parameters to fit with initial values
   auto model_parameters = vector< double >
   {
-    kx_limiter1( alpha.value() ) ,  // diffusivity ratio
-    kx_limiter2(  b2_i.value(), 0, 5.0 )
+    kx_limiter1( 1.0 ) ,  // diffusivity ratio
+    kx_limiter2(  b2_i.value(), 0.05, 2. )
   };
   
   // parameter estimation algorithm
   auto const number_of_points_to_Fit = frequencies.size();
   
-  auto const update_system_properties = [&b1] ( const double * x )
+  auto const update_system_properties = [&b1, &alpha_scale] ( const double * x )
   noexcept
   {
-    auto const alpha = quantity<si::thermal_diffusivity>::from_value( x_limiter1( x[0] ) );
-    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.0, 5.0 ) ); //  detector radius
+    auto const alpha_value = x_limiter1( x[0] ) ;
+    auto const alpha = quantity<si::thermal_diffusivity>::from_value(
+     alpha_value * alpha_scale  );
+    
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.05, 2. ) ); //  detector radius
 
     std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
     auto const updated_elements = make_tuple( alpha, b2 ) ;
@@ -132,7 +136,9 @@ auto diffusivity_from_phases
   };
 
   auto lmdif_settings = settings{};
-  lmdif_settings.factor = 10;
+  lmdif_settings.factor = 10;   // initial step size
+  lmdif_settings.xtol = .001;   // tolerance between x-iterates
+  lmdif_settings.epsfcn = 1e-4; // tolerance of phase function
 
   lmdif(  minimization_equation, number_of_points_to_Fit,
           model_parameters, lmdif_settings );

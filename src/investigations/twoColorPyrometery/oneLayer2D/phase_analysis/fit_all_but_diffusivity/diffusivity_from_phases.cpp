@@ -56,7 +56,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
     16 * hertz,
     22.627 * hertz,
     32 * hertz,
-    45.255 * hertz,
+//    45.255 * hertz,
 //    64 * hertz,
 //    90.51 * hertz,
 //    128 * hertz,
@@ -70,9 +70,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 //    2048 * hertz
   });
 
-
-
-  auto const phases = vector< quantity< plane_angle > >({
+  auto const phases = vector< quantity< plane_angle > >( {
     0.96987525 * radians,
     1.030075 * radians,
     1.076665 * radians,
@@ -83,7 +81,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
     0.98896025 * radians,
     0.89821 * radians,
     0.80698475 * radians,
-    0.7405715 * radians,
+//    0.7405715 * radians,
 //    0.668 * radians,
 //    0.6465 * radians,
 //    0.65 * radians,
@@ -95,7 +93,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 //    0.549 * radians,
 //    0.525 * radians,
 //    0.491 * radians
-  });
+  } );
   
   auto const beam_radius = quantity< length >( 2.11362 * millimeters );
   auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ; // initial value

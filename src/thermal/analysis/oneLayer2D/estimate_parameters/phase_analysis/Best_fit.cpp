@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 #include <cassert>
+#include <iostream>
 
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
 #include "thermal/define/lthermal.h"
@@ -30,8 +31,8 @@ Best_fit::Best_fit
   double phase_goodness_of_fit_
 ) noexcept :
   bulk_slab( slab_ ),
-  view_radius( view_radius_nd * bulk_slab.characteristic_length ),
-  beam_radius( b * bulk_slab.characteristic_length ),
+  view_radius( view_radius_nd * slab_.characteristic_length ),
+  beam_radius( b * slab_.characteristic_length ),
 
   frequencies( frequencies_ ),
   ls( thermalPenetrations_from_frequencies(
@@ -43,6 +44,8 @@ Best_fit::Best_fit
 {
   assert( phase_goodness_of_fit > 0 );
   assert( !frequencies.empty() );
+  
+
 }
 
 } // namespace phase_analysis

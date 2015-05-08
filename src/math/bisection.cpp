@@ -52,10 +52,15 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
                 const double min_, const double max_) noexcept
   : myF(myF_), phi(phi_), min(min_), max(max_)
 {
-  constexpr double tol  = 0.0001;
+  assert( min < max ) ;
+  assert( phi > 0);
+  
+  auto const tol = phi / 1000;
+///  constexpr double tol  = 0.0001;
   using std::abs;
+  auto const is_converged = abs( ( min - max ) / max ) < tol ;
 
-  if( abs( ( min - max ) / max ) < tol )
+  if( is_converged )
   {
     bestGuess = math::average( min, max ) ;
     solnTolerance = tol;
@@ -63,7 +68,6 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
   }
   else
   {
-    BOOST_ASSERT(min < max) ;
     try
     {
       BisectMethod();
@@ -80,15 +84,22 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
 void solve::BisectMethod(void) noexcept
 {
   using std::placeholders::_1;
+  using std::pair;
   const std::function<double(double)>
       myFuncReduced = std::bind( &solve::myRootFunc, this , _1 );
 
-  namespace BMT =  boost::math::tools;
-  constexpr size_t digitsBitsofPrecision = 64; //same as double
-  const BMT::eps_tolerance<double> tol = digitsBitsofPrecision;
 
-  const std::pair<double, double> result =
-      BMT::bisect( myFuncReduced, min, max, tol, maxInt ) ;
+  //This termination condition has been added to reduce the numer of iterations
+  // necessary for convergence.
+  auto const TerminationCondition = []( double min, double max){
+    std::cout << std::abs(min - max) / math::average( min, max ) << "\n";
+    
+    return std::abs(min - max) / math::average( min, max ) <= 0.001;
+  };
+
+  
+  const pair<double, double> result =
+      boost::math::tools::bisect( myFuncReduced, min, max, TerminationCondition, maxInt ) ;
 
   //output
   solnTolerance = std::abs( result.first - result.second ) ;
