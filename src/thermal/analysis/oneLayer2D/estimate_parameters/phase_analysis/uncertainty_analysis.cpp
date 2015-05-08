@@ -79,7 +79,7 @@ auto uncertainty_analysis(
     };
 
     auto const detectorR_best_fit = (best_fit.view_radius / L ).value()  ;
-    auto const lowerbound = 0.051 ;
+    auto const lowerbound = 0.0501 ;
     auto const upperbound = 1.9 ;
 
     auto const ojb_ub = solve( gFunc, target, detectorR_best_fit, upperbound ) ;
