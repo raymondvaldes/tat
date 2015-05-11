@@ -35,6 +35,18 @@ struct properties{
     assert( isfinite( phase ) );
     assert( amplitude.value() > 0 );
   }
+  
+  auto complex_value() const
+  {
+    auto const phase_value = phase.value();
+    auto const amplitude_value = amplitude.value();
+   
+    using std::exp;
+    auto const i = std::complex<double>( 0.0 , 1.0 );
+    
+    auto const cv = amplitude_value * exp( i * phase_value );
+    return cv;
+  }
 
 };
 

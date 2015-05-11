@@ -100,7 +100,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   // integration domain
   auto const x0 = double(0) ;
   auto const x1 = settings.nu_end.value() ;
-  auto const dx_intial_step = double( 0.01 );
+  auto const dx_intial_step = double( 0.001 );
   
   auto const J0 = []( auto const & x ) noexcept { return bessel_j( 0, x ); };
   

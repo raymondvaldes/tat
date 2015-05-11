@@ -47,6 +47,55 @@ auto uncertainty_analysis(
   detector_wavelength );
   auto const target = best_fit.phase_goodness_of_fit;
   
+  //uncertainty in diffusivity
+  /// uncertainty in diffusivity
+  {
+    auto const gFunc =[&best_fit, &steady_state_temperature,
+      &detector_wavelength, &beam_radius, &detector_view_radius]
+    ( double const x ) noexcept -> double
+    {
+      // updated best-fit slab with perturbed parameter
+      auto updated_slab = best_fit.bulk_slab;
+      auto const updated_thermal_diffusivity =
+      quantity<thermal_diffusivity>::from_value( x );
+      updated_slab.set_diffusivity_update_rhoCp_hold_k(updated_thermal_diffusivity);
+      
+      // update observations to use the original model best-fit
+      auto const observations = best_fit.model_phases;
+      auto const frequencies = best_fit.frequencies;
+      
+     // auto const beam_radius = beam_radius;
+     // auto const detector_view_radius = detector_view_radius;
+            
+      auto const alternative_best_fit =
+      fit_all_but_diffusivity::diffusivity_from_phases( frequencies, observations,
+        updated_slab, beam_radius, detector_view_radius, steady_state_temperature,
+        detector_wavelength );
+      
+      auto const error = alternative_best_fit.phase_goodness_of_fit ;
+      return error;
+    };
+
+
+    auto const diffusivity_best_fit =best_fit.bulk_slab.get_diffusivity().value();
+    auto const lowerbound = diffusivity_best_fit / 1.2 ;
+    auto const upperbound = diffusivity_best_fit / .5 ;
+
+    auto const ojb_ub = solve( gFunc, target, diffusivity_best_fit, upperbound ) ;
+    double soln_ub = ojb_ub.returnSoln();
+    double soln_ub_pass = ojb_ub.pass;
+    
+    std::cout << soln_ub << "\t" << soln_ub_pass << "\n";
+    
+    auto const obj_lb = solve( gFunc, target, lowerbound, diffusivity_best_fit ) ;
+    double soln_lb = obj_lb.returnSoln();
+    double soln_lb_pass = obj_lb.pass;
+    
+    std::cout << soln_lb << "\t" << diffusivity_best_fit <<"\t" << soln_ub << "\n";
+    std::cout << soln_ub_pass << "\t" << soln_lb_pass << "\n";
+
+  // uncertainty bounds 2.229 to 2.402
+  }
   
   /// uncertainty in detector_radius
   {
@@ -145,55 +194,7 @@ auto uncertainty_analysis(
     std::cout << soln_ub_pass << "\t" << soln_lb_pass << "\n";
   }
 
-  //uncertainty in diffusivity
-  /// uncertainty in diffusivity
-  {
-    auto const gFunc =[&best_fit, &steady_state_temperature,
-      &detector_wavelength, &beam_radius, &detector_view_radius]
-    ( double const x ) noexcept -> double
-    {
-      // updated best-fit slab with perturbed parameter
-      auto updated_slab = best_fit.bulk_slab;
-      auto const updated_thermal_diffusivity =
-      quantity<thermal_diffusivity>::from_value( x );
-      updated_slab.set_diffusivity_update_rhoCp_hold_k(updated_thermal_diffusivity);
-      
-      // update observations to use the original model best-fit
-      auto const observations = best_fit.model_phases;
-      auto const frequencies = best_fit.frequencies;
-      
-     // auto const beam_radius = beam_radius;
-     // auto const detector_view_radius = detector_view_radius;
-            
-      auto const alternative_best_fit =
-      fit_all_but_diffusivity::diffusivity_from_phases( frequencies, observations,
-        updated_slab, beam_radius, detector_view_radius, steady_state_temperature,
-        detector_wavelength );
-      
-      auto const error = alternative_best_fit.phase_goodness_of_fit ;
-      return error;
-    };
 
-
-    auto const diffusivity_best_fit =best_fit.bulk_slab.get_diffusivity().value();
-    auto const lowerbound = diffusivity_best_fit / 1.2 ;
-    auto const upperbound = diffusivity_best_fit / .5 ;
-
-    auto const ojb_ub = solve( gFunc, target, diffusivity_best_fit, upperbound ) ;
-    double soln_ub = ojb_ub.returnSoln();
-    double soln_ub_pass = ojb_ub.pass;
-    
-    std::cout << soln_ub << "\t" << soln_ub_pass << "\n";
-    
-    auto const obj_lb = solve( gFunc, target, lowerbound, diffusivity_best_fit ) ;
-    double soln_lb = obj_lb.returnSoln();
-    double soln_lb_pass = obj_lb.pass;
-    
-    std::cout << soln_lb << "\t" << diffusivity_best_fit <<"\t" << soln_ub << "\n";
-    std::cout << soln_ub_pass << "\t" << soln_lb_pass << "\n";
-
-  // uncertainty bounds 2.229 to 2.402
-  }
 
 }
 

@@ -152,6 +152,8 @@ auto diffusivity_from_phases
   auto const phase_predictions = extract_phases_from_properties( model_predictions  ) ;
   auto const fitted_slab = thermal::model::slab::Slab( L , alpha_fit , k ) ;
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
+
+  for_each( phase_predictions, []( auto const p) { std::cout << p << "\n";} );
   
   
   auto const result =

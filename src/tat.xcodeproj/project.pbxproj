@@ -355,6 +355,10 @@
 		ABC648651A65B5EB008FA721 /* main-app.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC648631A65B5EB008FA721 /* main-app.h */; };
 		ABC648681A65B891008FA721 /* vector2cstringArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC648661A65B891008FA721 /* vector2cstringArray.cpp */; };
 		ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC648671A65B891008FA721 /* vector2cstringArray.h */; };
+		ABD5AE971AFD6D000068FC76 /* complex_temperature_check.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD5AE951AFD6D000068FC76 /* complex_temperature_check.cpp */; };
+		ABD5AE981AFD6D000068FC76 /* complex_temperature_check.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD5AE961AFD6D000068FC76 /* complex_temperature_check.h */; };
+		ABD5AE9C1B010A360068FC76 /* detector_emission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD5AE9A1B010A360068FC76 /* detector_emission.cpp */; };
+		ABD5AE9D1B010A360068FC76 /* detector_emission.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD5AE9B1B010A360068FC76 /* detector_emission.h */; };
 		ABDA1CB01AE9BD6500121C97 /* temperature_nd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CAE1AE9BD6500121C97 /* temperature_nd.cpp */; };
 		ABDA1CB11AE9BD6500121C97 /* temperature_nd.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CAF1AE9BD6500121C97 /* temperature_nd.h */; };
 		ABDA1CB41AE9BF2400121C97 /* b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CB21AE9BF2400121C97 /* b.cpp */; };
@@ -929,6 +933,10 @@
 		ABC648631A65B5EB008FA721 /* main-app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "main-app.h"; sourceTree = "<group>"; };
 		ABC648661A65B891008FA721 /* vector2cstringArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vector2cstringArray.cpp; path = algorithm/vector/vector2cstringArray.cpp; sourceTree = "<group>"; };
 		ABC648671A65B891008FA721 /* vector2cstringArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2cstringArray.h; path = algorithm/vector/vector2cstringArray.h; sourceTree = "<group>"; };
+		ABD5AE951AFD6D000068FC76 /* complex_temperature_check.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = complex_temperature_check.cpp; path = twoColorPyrometery/oneLayer2D/complex_temperature_check/complex_temperature_check.cpp; sourceTree = "<group>"; };
+		ABD5AE961AFD6D000068FC76 /* complex_temperature_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_temperature_check.h; path = twoColorPyrometery/oneLayer2D/complex_temperature_check/complex_temperature_check.h; sourceTree = "<group>"; };
+		ABD5AE9A1B010A360068FC76 /* detector_emission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = detector_emission.cpp; path = oneLayer2D/complex/detector_emission/detector_emission.cpp; sourceTree = "<group>"; };
+		ABD5AE9B1B010A360068FC76 /* detector_emission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = detector_emission.h; path = oneLayer2D/complex/detector_emission/detector_emission.h; sourceTree = "<group>"; };
 		ABDA1CAE1AE9BD6500121C97 /* temperature_nd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature_nd.cpp; path = oneLayer2D/complex/temperature_nd.cpp; sourceTree = "<group>"; };
 		ABDA1CAF1AE9BD6500121C97 /* temperature_nd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature_nd.h; path = oneLayer2D/complex/temperature_nd.h; sourceTree = "<group>"; };
 		ABDA1CB21AE9BF2400121C97 /* b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = b.cpp; path = oneLayer2D/dimensionless/b.cpp; sourceTree = "<group>"; };
@@ -1387,12 +1395,8 @@
 		AB4871CE1AF5521800DFD3C1 /* phase_analysis */ = {
 			isa = PBXGroup;
 			children = (
-				AB4872681AFBC17100DFD3C1 /* fit_all_but_diffusivity */,
-				AB4872671AFBC16400DFD3C1 /* fit_all_but_detectorRadius */,
-				AB4871B61AF323B400DFD3C1 /* fit_all_but_laser */,
-				AB4871A11AF31D3F00DFD3C1 /* fit_all */,
-				ABE390E61AFBDC450063E789 /* uncertainty_analysis.cpp */,
-				ABE390E71AFBDC450063E789 /* uncertainty_analysis.h */,
+				ABD5AE931AFD4B960068FC76 /* fit_a_b2 */,
+				ABD5AE921AFD4B850068FC76 /* fit_a_b1_B2 */,
 			);
 			name = phase_analysis;
 			sourceTree = "<group>";
@@ -1957,6 +1961,7 @@
 		AB80FB4E1AF1A36100F88B04 /* oneLayer2D */ = {
 			isa = PBXGroup;
 			children = (
+				ABD5AE941AFD6CD20068FC76 /* complex_temperature_check */,
 				AB4872691AFBC58900DFD3C1 /* steady_state_temperature */,
 				AB4871CF1AF554B500DFD3C1 /* amplitude_analysis */,
 				AB4871CE1AF5521800DFD3C1 /* phase_analysis */,
@@ -2452,6 +2457,44 @@
 			name = programoptions;
 			sourceTree = "<group>";
 		};
+		ABD5AE921AFD4B850068FC76 /* fit_a_b1_B2 */ = {
+			isa = PBXGroup;
+			children = (
+				AB4872681AFBC17100DFD3C1 /* fit_all_but_diffusivity */,
+				AB4872671AFBC16400DFD3C1 /* fit_all_but_detectorRadius */,
+				AB4871B61AF323B400DFD3C1 /* fit_all_but_laser */,
+				AB4871A11AF31D3F00DFD3C1 /* fit_all */,
+				ABE390E61AFBDC450063E789 /* uncertainty_analysis.cpp */,
+				ABE390E71AFBDC450063E789 /* uncertainty_analysis.h */,
+			);
+			name = fit_a_b1_B2;
+			sourceTree = "<group>";
+		};
+		ABD5AE931AFD4B960068FC76 /* fit_a_b2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = fit_a_b2;
+			sourceTree = "<group>";
+		};
+		ABD5AE941AFD6CD20068FC76 /* complex_temperature_check */ = {
+			isa = PBXGroup;
+			children = (
+				ABD5AE951AFD6D000068FC76 /* complex_temperature_check.cpp */,
+				ABD5AE961AFD6D000068FC76 /* complex_temperature_check.h */,
+			);
+			name = complex_temperature_check;
+			sourceTree = "<group>";
+		};
+		ABD5AE991B010A0B0068FC76 /* detector_emission */ = {
+			isa = PBXGroup;
+			children = (
+				ABD5AE9A1B010A360068FC76 /* detector_emission.cpp */,
+				ABD5AE9B1B010A360068FC76 /* detector_emission.h */,
+			);
+			name = detector_emission;
+			sourceTree = "<group>";
+		};
 		ABDA1CAB1AE9BCE700121C97 /* oneLayer2D */ = {
 			isa = PBXGroup;
 			children = (
@@ -2468,6 +2511,7 @@
 		ABDA1CAC1AE9BD1000121C97 /* complex */ = {
 			isa = PBXGroup;
 			children = (
+				ABD5AE991B010A0B0068FC76 /* detector_emission */,
 				AB4872191AF838C900DFD3C1 /* weighted_average */,
 				AB4872181AF838BA00DFD3C1 /* average */,
 				AB80FB531AF1B34300F88B04 /* h_surface.cpp */,
@@ -3226,6 +3270,7 @@
 				AB80FB4D1AF1993C00F88B04 /* extract_amplitudes_from_properties.h in Headers */,
 				ABFB163F1AF156890093BF5B /* deltaT.h in Headers */,
 				ABEF4EB51948D4A500B44AD5 /* lmdiff_poptea_help.hpp in Headers */,
+				ABD5AE9D1B010A360068FC76 /* detector_emission.h in Headers */,
 				ABEF4EBD1948D4A500B44AD5 /* poptea_initialize.h in Headers */,
 				AB9383E91AC22F9300F2D2DD /* b.h in Headers */,
 				AB841C651AC4E50D000CE81D /* thermal_penetration.h in Headers */,
@@ -3382,6 +3427,7 @@
 				ABEB14BB1AAA686500204B36 /* temperature_prediction.h in Headers */,
 				AB4E53B81ABBC68C00E7BA8D /* even.h in Headers */,
 				ABEF4EC71948D4A500B44AD5 /* construct.hpp in Headers */,
+				ABD5AE981AFD6D000068FC76 /* complex_temperature_check.h in Headers */,
 				AB4872021AF7121200DFD3C1 /* print.h in Headers */,
 				AB33E74D1AC231A800A0FF53 /* surface_temperature.h in Headers */,
 				ABF5D66119DB49FD00A70476 /* signal.h in Headers */,
@@ -3490,6 +3536,7 @@
 				AB9383E01AC22E4500F2D2DD /* time_nd.cpp in Sources */,
 				AB841C9A1AC5B9F0000CE81D /* ThermalProperties.cpp in Sources */,
 				ABFB16461AF158F90093BF5B /* phases_amplitudes.cpp in Sources */,
+				ABD5AE971AFD6D000068FC76 /* complex_temperature_check.cpp in Sources */,
 				AB44BD731AAA49C600E0710E /* get_signal_from_scope_file.cpp in Sources */,
 				AB4872081AF800D700DFD3C1 /* planks_law.cpp in Sources */,
 				AB0E72C91AC23E8C00750B3F /* surface_phases.cpp in Sources */,
@@ -3608,6 +3655,7 @@
 				AB9383DC1AC22DB000F2D2DD /* length.cpp in Sources */,
 				AB4872111AF81AFC00DFD3C1 /* spot_view.cpp in Sources */,
 				ABEF4EA31948D4A500B44AD5 /* layer.cpp in Sources */,
+				ABD5AE9C1B010A360068FC76 /* detector_emission.cpp in Sources */,
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
 				AB7F198D1ACC97E00086E8F8 /* average_surface_phases.cpp in Sources */,
 				AB4871931AF308DD00DFD3C1 /* average_surface_phases_amplitudes.cpp in Sources */,

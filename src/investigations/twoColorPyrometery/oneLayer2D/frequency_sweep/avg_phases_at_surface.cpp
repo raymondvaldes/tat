@@ -44,31 +44,28 @@ auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
     16 * hertz,
     22.627 * hertz,
     32 * hertz,
-    45.255 * hertz,
-    64 * hertz,
-    90.51 * hertz,
-    128 * hertz,
-    181.019 * hertz,
-    256 * hertz,
-    362.039 * hertz,
-    512 * hertz,
-    724.077 * hertz,
-    1024 * hertz,
-    1448.155 * hertz,
-    2048 * hertz
+//    45.255 * hertz,
+//    64 * hertz,
+//    90.51 * hertz,
+//    128 * hertz,
+//    181.019 * hertz,
+//    256 * hertz,
+//    362.039 * hertz,
+//    512 * hertz,
+//    724.077 * hertz,
+//    1024 * hertz,
+//    1448.155 * hertz,
+//    2048 * hertz
   });
-  
-
   
   // establish nondimensional fitting parameters
   auto const L = initial_slab.characteristic_length;
 
-  auto const beam_radius = quantity< length >( 2.11362 * millimeters );
-  auto const detector_view_radius = quantity< length>( .734 * millimeters  ) ;
-  auto const alpha = quantity<thermal_diffusivity>(22.0 * square_millimeters / second);
+  auto const beam_radius = quantity< length >( 3.025 * millimeters );
+  auto const detector_view_radius = quantity< length>( .0377 * millimeters  ) ;
+  auto const alpha = quantity<thermal_diffusivity>(24.02 * square_millimeters / second);
 
   //(diffusivity shifts the curve left and right)
-  //view
   
   auto const b1 = b( beam_radius, L );
   auto const b2 = b( detector_view_radius, L );

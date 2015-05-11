@@ -70,16 +70,17 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   });
 
   auto const phases = vector< quantity< plane_angle > >( {
-    0.96987525 * radians,
-    1.030075 * radians,
-    1.076665 * radians,
-    1.1059025 * radians,
-    1.11566 * radians,
-    1.1053475 * radians,
-    1.0592525 * radians,
-    0.98896025 * radians,
-    0.89821 * radians,
-    0.80698475 * radians,
+
+1.001* radians,
+1.064* radians,
+1.096* radians,
+1.121* radians,
+1.124* radians,
+1.12* radians,
+1.077* radians,
+1.008* radians,
+0.918* radians,
+0.809* radians,
 //    0.7405715 * radians,
 //    0.668 * radians,
 //    0.6465 * radians,

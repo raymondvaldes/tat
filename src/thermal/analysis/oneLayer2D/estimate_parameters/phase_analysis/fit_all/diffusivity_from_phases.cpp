@@ -159,7 +159,7 @@ auto diffusivity_from_phases
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
   
-  //for_each( phases, []( auto const p) { std::cout << p << "\n";} );
+  for_each( phase_predictions, []( auto const p) { std::cout << p << "\n";} );
 
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );

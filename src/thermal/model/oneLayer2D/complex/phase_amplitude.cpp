@@ -39,8 +39,6 @@ auto phase_amplitude
   auto const phase = -arg( T_complex ) ;
   auto const amplitude = abs( T_complex );
 
- // auto const phase = wrap_to_negPi_posPi( phase );
-
   return properties< si::temperature >( phase , amplitude );
 }
 

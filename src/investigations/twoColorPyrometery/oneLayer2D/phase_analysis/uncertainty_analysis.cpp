@@ -70,16 +70,16 @@ auto uncertainty_analysis( filesystem::directory const & dir ) noexcept -> void
   });
 
   auto const phases = vector< quantity< plane_angle > >( {
-    0.96987525 * radians,
-    1.030075 * radians,
-    1.076665 * radians,
-    1.1059025 * radians,
-    1.11566 * radians,
-    1.1053475 * radians,
-    1.0592525 * radians,
-    0.98896025 * radians,
-    0.89821 * radians,
-    0.80698475 * radians,
+  0.9879 * radians,
+  1.0455 * radians,
+  1.085 * radians,
+  1.1055 * radians,
+  1.1105 * radians,
+  1.106 * radians,
+  1.064 * radians,
+  1.0025 * radians,
+  0.912 * radians,
+  0.808 * radians,
 //    0.7405715 * radians,
 //    0.668 * radians,
 //    0.6465 * radians,
@@ -99,7 +99,7 @@ auto uncertainty_analysis( filesystem::directory const & dir ) noexcept -> void
 
   thermal::analysis::oneLayer2D::estimate_parameters::phase_analysis::uncertainty_analysis(
     frequencies, phases , initial_slab, beam_radius, detector_view_radius,
-    steady_state_temperature, detector_wavelength_avg );
+    steady_state_temperature, detector_wavelength_1 );
 
 }
 

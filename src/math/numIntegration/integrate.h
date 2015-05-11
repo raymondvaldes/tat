@@ -14,7 +14,7 @@
 #include <vector>
 #include <cassert>
 #include <boost/numeric/odeint.hpp>
-
+#include <iostream>
 #include "statistics/signal_processing/average.h"
 
 
@@ -72,8 +72,8 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
   /* The type of container used to hold the state vector */
   using state_type = vector< type  > ;
   
-  auto const tol_absolute = 1E-10;
-  auto const tol_relative = 1E-10;
+  auto const tol_absolute = 1E-12;
+  auto const tol_relative = 1E-12;
   
   typedef runge_kutta_dopri5< state_type > dopri5_type;
   typedef controlled_runge_kutta< dopri5_type > controlled_dopri5_type;
@@ -89,14 +89,16 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
     stepper, func , f_x0 , x0 , x1 , dx_intial_step,
     push_back_state_and_time< type >( y_vec, x_points) );
 
+//  auto i = 0u;
+//  for_each( x_points, [&y_vec, &i]( auto const x ){
+//    std::cout << x << "\t" << y_vec[i][0] << "\n";
+//    ++i;
+//  } ) ;
+
   return y_vec.back().front() - y_vec.front().front();
 }
 
 } // namespace numIntegration
 } // namespace math
-
-
-
-
 
 #endif /* defined(__tat__integrate__) */
