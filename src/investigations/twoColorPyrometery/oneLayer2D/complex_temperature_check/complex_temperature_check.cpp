@@ -41,7 +41,7 @@ noexcept -> void
     calibrate_wavelength( lambda_1, wavelength_offset );
   
   auto const alpha = quantity<si::thermal_diffusivity >( 22.0 * square_millimeters/second );
-  auto const radius_heating = quantity<si::length>( 2.1 * millimeters);
+  auto const radius_heating = quantity<si::length>( 2.11 * millimeters);
   auto const L = quantity<si::length>( .661 * millimeters );
   auto const f = quantity<si::frequency>( 10. * hertz );
   
@@ -53,21 +53,21 @@ noexcept -> void
   auto const l = thermal_penetration( alpha, f, L );
   
   auto const point_eval = surface_phase_amplitude( r, b, l, deltaT );
-  std::cout << "center point:  " <<point_eval.phase << "\n";
  
   
-  auto const r_e  = quantity< si::length >( 3.5 * millimeters ) ;
+  auto const r_e  = quantity< si::length >( 2.1 * millimeters ) ;
   auto const view_radius = r_e / radius_heating;
-  auto const detector_eval =
-  detector_emission(b, l, deltaT, view_radius, T_steady_state, detector_wavelength_1);
-  std::cout << "detector area: " << arg( detector_eval ) << " rad" << "\n";
-  
+//  auto const detector_eval =
+//  detector_emission( b, l, deltaT, view_radius, T_steady_state, detector_wavelength_1 );
 
   auto settings = iHankelSettings();
-  settings.nu_end = 70.0;
+  settings.nu_end = 7.0;
   auto const detector_fast = temperature_nd( b, l, view_radius, settings );
-  std::cout << "detector-fast: " << -arg(detector_fast ) << "\n";
   
+  std::cout << "\n";
+  std::cout << "center point:  " <<point_eval.phase << "\n";
+ // std::cout << "detector area: " << arg( detector_eval ) << " rad" << "\n";
+  std::cout << "detector-fast: " << -arg(detector_fast ) << "\n";
 }
 
 } // namespace

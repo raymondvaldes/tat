@@ -41,7 +41,7 @@ auto temperature_nd
   auto const z = quantity<si::dimensionless>::from_value( 0. );
   auto const x0 = double(0) ;
   auto const x1 = settings.nu_end.value() ;
-  auto const dx_intial_step = double( 0.001 );
+  auto const dx_intial_step = double( 0.01 );
   
   auto const J1 = []( auto const & x ) noexcept { return bessel_j( 1, x ); };
   
@@ -49,9 +49,15 @@ auto temperature_nd
         return h_surface( nu_, l, b );
     };
   
+  std::cout << "\n";
+  std::cout << "nu" <<"\t"<< "h( nu, z=0 )" <<"\t"<< "J1( nu * r_e )" << "\n";
+
   auto const fast_hankel_function = [&]( double const & nu ) noexcept
   {
     auto const h_out =  h( nu, z ).value() * J1( nu * r_e ).value() ;
+
+std::cout << nu <<"\t"<< h( nu, z ).value() <<"\t"<< J1( nu * r_e ).value() << "\n";
+
     return h_out;
   };
 
