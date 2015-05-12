@@ -33,7 +33,7 @@ namespace temp_sweep{
 
 auto surface_radial_profile( filesystem::directory const & dir ) -> void
 {
-
+  auto const disk_radius = quantity< length >( 4.75 * millimeters );
   auto const beam_radius = quantity<length>( 2.1 * millimeters);
   auto const deltaT = quantity<si::temperature>( 1.0 * kelvin );
   
@@ -42,7 +42,7 @@ auto surface_radial_profile( filesystem::directory const & dir ) -> void
   auto const f = quantity< si::frequency >( 1000 * hertz );
   
   auto const radial_positions =
-  range_1og10< quantity< si::dimensionless>>(.01, 3, 40);
+  range_1og10< quantity< si::dimensionless>>(.01, disk_radius/beam_radius , 40);
   
   auto const b_laser = b( beam_radius, L );
   auto const ps = thermal::model::oneLayer2D::phase_amplitude::surface_radial_profile(
@@ -50,8 +50,9 @@ auto surface_radial_profile( filesystem::directory const & dir ) -> void
     );
   
   auto i = size_t(0);
-  for_each( ps, [&radial_positions, &i]( auto& p ){
-    std::cout << radial_positions[i] << "\t" <<  p.amplitude << "\t" << p.phase << "\n";
+  auto const p_ref = ps[0].amplitude;
+  for_each( ps, [&radial_positions, &i, &p_ref]( auto& p ){
+    std::cout << radial_positions[i] << "\t" <<  p.amplitude/p_ref << "\t" << p.phase << "\n";
     ++i;
   });
   

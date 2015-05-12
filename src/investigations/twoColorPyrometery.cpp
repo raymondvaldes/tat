@@ -35,14 +35,13 @@ auto run( filesystem::directory const & dir ) noexcept -> void
   oneLayer2D::complex_temperature_check::complex_temperature_check( dir );
 
   
- 
- 
- 
+
   // sweeps and profiles
+  //oneLayer2D::temp_sweep::surface_radial_profile( dir );
+  
  // oneLayer2D::frequency_sweep::avg_phases_at_surface(dir); (NEEDS TO BE FIXED)
 
 //  oneLayer2D::amplitude_analysis::amplitudes_from_experiment(dir);
-//  oneLayer2D::temp_sweep::surface_radial_profile( dir );
 //  oneLayer2D::frequency_sweep::surface_phases_at_radial_position(dir);
 }
 

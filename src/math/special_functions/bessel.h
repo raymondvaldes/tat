@@ -28,8 +28,6 @@ auto bessel_j( size_t const v, units::quantity< T > const x ) noexcept
   using namespace boost::math::policies;
   typedef policy<digits10<15> > pol;
   
-  
-
   auto const j = cyl_bessel_j( v, x.value(), pol() ) ;
   auto const j_dim = quantity< T >::from_value( j );
 

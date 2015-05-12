@@ -14,6 +14,8 @@
 #include "thermal/define/lthermal.h"
 #include "thermal/model/oneLayer2D/complex/detector_emission/detector_emission.h"
 #include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
+#include "thermal/model/oneLayer2D/complex/reverseIntegration/tempeature_nd.h"
+#include "math/transform/inverseHankel.h" //hankel settings
 
 namespace investigations{
 namespace twoColorPyrometery{
@@ -25,11 +27,19 @@ using thermal::define::thermal_penetration;
 using thermal::model::oneLayer2D::complex::detector_emission;
 using thermal::model::oneLayer2D::complex::surface_phase_amplitude;
 using thermal::pyrometry::twoColor::calibrate_wavelength;
-
+using thermal::model::oneLayer2D::complex::reverseIntegration::temperature_nd;
+using math::transform::iHankelSettings;
+  
 auto complex_temperature_check( filesystem::directory const & dir  )
 noexcept -> void
 {
-
+  std::cout << "\n";
+  auto const T_steady_state = quantity<si::temperature>( 781.14 * kelvin );
+  auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
+  auto const lambda_1 = quantity< wavelength >( 4.6 * micrometers );
+  auto const detector_wavelength_1 =
+    calibrate_wavelength( lambda_1, wavelength_offset );
+  
   auto const alpha = quantity<si::thermal_diffusivity >( 22.0 * square_millimeters/second );
   auto const radius_heating = quantity<si::length>( 2.1 * millimeters);
   auto const L = quantity<si::length>( .661 * millimeters );
@@ -43,23 +53,21 @@ noexcept -> void
   auto const l = thermal_penetration( alpha, f, L );
   
   auto const point_eval = surface_phase_amplitude( r, b, l, deltaT );
-  std::cout << point_eval.phase << "\n";
+  std::cout << "center point:  " <<point_eval.phase << "\n";
  
-  auto const T_steady_state = quantity<si::temperature>( 781.14 * kelvin );
   
-  
-  auto const r_e  = quantity< si::length >( 2.1 * millimeters ) ;
-  
-  auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
-  auto const lambda_1 = quantity< wavelength >( 4.6 * micrometers );
-  auto const detector_wavelength_1 =
-    calibrate_wavelength( lambda_1, wavelength_offset );
-  
+  auto const r_e  = quantity< si::length >( 3.5 * millimeters ) ;
   auto const view_radius = r_e / radius_heating;
   auto const detector_eval =
   detector_emission(b, l, deltaT, view_radius, T_steady_state, detector_wavelength_1);
+  std::cout << "detector area: " << arg( detector_eval ) << " rad" << "\n";
+  
 
-  std::cout << std::arg( detector_eval ) << "\n";
+  auto settings = iHankelSettings();
+  settings.nu_end = 70.0;
+  auto const detector_fast = temperature_nd( b, l, view_radius, settings );
+  std::cout << "detector-fast: " << -arg(detector_fast ) << "\n";
+  
 }
 
 } // namespace

@@ -70,7 +70,7 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
   assert( !f_x0.empty() );
 
   /* The type of container used to hold the state vector */
-  using state_type = vector< type  > ;
+  using state_type = vector< type > ;
   
   auto const tol_absolute = 1E-12;
   auto const tol_relative = 1E-12;
