@@ -12,7 +12,6 @@
 #include <tuple>
 
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/average/weighted_avg_surface_phases_amplitudes.h"
 
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
@@ -21,6 +20,8 @@
 #include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
 
 #include "math/complex/extract_phases_from_properties.h"
+#include "thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h"
+using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
 
 namespace thermal{
 namespace analysis {
@@ -41,7 +42,6 @@ using math::estimation::kx_limiter2;
 using math::estimation::x_to_k_constrained_from_0_to_1;
 using math::estimation::k_to_x_constrained_from_0_to_1;
 using thermal::model::oneLayer2D::dimensionless::b;
-using thermal::model::oneLayer2D::average::weighted_avg_surface_phases_amplitudes;
 using math::estimation::settings;
 using std::generate;
 using std::make_tuple;
@@ -56,9 +56,7 @@ auto diffusivity_from_phases
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const slab_initial,
   units::quantity< units::si::length> const beam_radius,
-  units::quantity< units::si::length > const detector_view_radius,
-  units::quantity< units::si::temperature> const steady_state_temperature,
-  units::quantity< units::si::wavelength> const detector_wavelength
+  units::quantity< units::si::length > const detector_view_radius
 ) noexcept -> Best_fit
 {
   //establish preconditions
@@ -81,7 +79,7 @@ auto diffusivity_from_phases
   auto model_parameters = vector< double >
   {
     kx_limiter1( 1.0 ) ,  // diffusivity ratio
-    kx_limiter2(  b2_i.value(), 0.05, 2. )
+    kx_limiter2(  b2_i.value(), 0.01, 30. )
   };
   
   // parameter estimation algorithm
@@ -94,7 +92,7 @@ auto diffusivity_from_phases
     auto const alpha = quantity<si::thermal_diffusivity>::from_value(
      alpha_value * alpha_scale  );
     
-    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.05, 2. ) ); //  detector radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.01, 30. ) ); //  detector radius
 
     std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
     auto const updated_elements = make_tuple( alpha, b2 ) ;
@@ -102,8 +100,7 @@ auto diffusivity_from_phases
   };
 
   auto const make_model_predictions =
-  [ &frequencies, &L, &update_system_properties, &deltaT, &b1,
-    &steady_state_temperature, &detector_wavelength]
+  [ &frequencies, &L, &update_system_properties, &deltaT, &b1 ]
   ( const double * x ) noexcept
   {
     auto const t = update_system_properties( x );
@@ -112,10 +109,7 @@ auto diffusivity_from_phases
     auto const b2 = get< 1 >(t);
     
     auto const predictions =
-    weighted_avg_surface_phases_amplitudes(
-      b1, deltaT, b2, frequencies, L, alpha,
-      steady_state_temperature,
-      detector_wavelength );
+    frequency_sweep( b1, deltaT, b2, frequencies, L, alpha );
     
     return predictions;
   };
@@ -136,9 +130,9 @@ auto diffusivity_from_phases
   };
 
   auto lmdif_settings = settings{};
-  lmdif_settings.factor = 10;   // initial step size
-  lmdif_settings.xtol = .001;   // tolerance between x-iterates
-  lmdif_settings.epsfcn = 1e-4; // tolerance of phase function
+  lmdif_settings.factor = 1;   // initial step size
+  lmdif_settings.xtol = .0001;   // tolerance between x-iterates
+  lmdif_settings.epsfcn = 1e-5; // tolerance of phase function
 
   lmdif(  minimization_equation, number_of_points_to_Fit,
           model_parameters, lmdif_settings );
@@ -153,7 +147,7 @@ auto diffusivity_from_phases
   auto const fitted_slab = thermal::model::slab::Slab( L , alpha_fit , k ) ;
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
 
-  for_each( phase_predictions, []( auto const p) { std::cout << p << "\n";} );
+  //for_each( phase_predictions, []( auto const p) { std::cout << p << "\n";} );
   
   
   auto const result =

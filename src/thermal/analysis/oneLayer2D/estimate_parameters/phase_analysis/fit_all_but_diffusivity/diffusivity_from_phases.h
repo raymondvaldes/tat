@@ -27,9 +27,7 @@ auto diffusivity_from_phases
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const slab_initial,
   units::quantity< units::si::length> const beam_radius,
-  units::quantity< units::si::length > const detector_view_radius,
-  units::quantity< units::si::temperature> const steady_state_temperature,
-  units::quantity< units::si::wavelength> const detector_wavelength
+  units::quantity< units::si::length > const detector_view_radius
 ) noexcept -> Best_fit;
 
 } // namespace fit_all_but_diffusivty

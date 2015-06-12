@@ -17,7 +17,7 @@
 #include "math/complex/extract_phases_from_properties.h"
 #include "math/complex/extract_amplitudes_from_properties.h"
 
-using thermal::model::oneLayer2D::phase_amplitude::surface_radial_profile;
+using thermal::model::oneLayer2D::complex::temperature::surface_radial_profile;
 using thermal::model::oneLayer2D::dimensionless::b;
 using std::vector;
 using algorithm::for_each;
@@ -31,21 +31,21 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace temp_sweep{
 
-auto surface_radial_profile( filesystem::directory const & dir ) -> void
+auto surface_radial_profile( filesystem::directory const & ) -> void
 {
-  auto const disk_radius = quantity< length >( 4.75 * millimeters );
-  auto const beam_radius = quantity<length>( 2.1 * millimeters);
+  auto const beam_radius = quantity<length>( 1.2 * millimeters);
   auto const deltaT = quantity<si::temperature>( 1.0 * kelvin );
   
-  auto const L = quantity<length>( 661. * micrometers);
-  auto const alpha = quantity< thermal_diffusivity>( 22.0 * square_millimeters / second );
-  auto const f = quantity< si::frequency >( 1000 * hertz );
+  auto const L = quantity<length>( 0.65 * millimeters   );
+  auto const alpha = quantity< thermal_diffusivity>( 35.0 * square_millimeters / second );
+  auto const f = quantity< si::frequency >( 2000 * hertz );
   
   auto const radial_positions =
-  range_1og10< quantity< si::dimensionless>>(.01, disk_radius/beam_radius , 40);
+  range_1og10< quantity< si::dimensionless>>( .01, 2.0 , 50 );
   
   auto const b_laser = b( beam_radius, L );
-  auto const ps = thermal::model::oneLayer2D::phase_amplitude::surface_radial_profile(
+  auto const ps =
+  thermal::model::oneLayer2D::complex::temperature::surface_radial_profile(
       b_laser, deltaT, radial_positions, L, alpha, f
     );
   

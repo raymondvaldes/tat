@@ -161,8 +161,7 @@ private:
     calibrationData.reserve( size );
     
     auto i = 0;
-    for_each( coefficients,
-    [&]( auto const& coefficient )
+    for_each( coefficients, [&]( auto const& )
     {
       auto calibrationPoint = make_pair( lambdaPairs[i], coefficients[i] ) ;
       calibrationData.push_back( calibrationPoint ) ;

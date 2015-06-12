@@ -16,7 +16,7 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace complex_temperature_check{
 
-auto complex_temperature_check( filesystem::directory const & dir  )
+auto complex_temperature_check(filesystem::directory const &)
 noexcept -> void;
 
 }

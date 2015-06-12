@@ -30,7 +30,7 @@ Measurements::Measurements(
   units::quantity<units::si::wavelength> const wavelengthIn,
   std::vector< units::quantity< units::si::time> > const & referenceTime,
   std::vector< units::quantity< units::si::electric_potential > > const & signals )
-  : wavelength( wavelengthIn), measurements( signals.size() )
+  : measurements( signals.size() ), wavelength( wavelengthIn )
 {
   assert( wavelengthIn.value() > 0 );
   assert( referenceTime.size() == signals.size() );

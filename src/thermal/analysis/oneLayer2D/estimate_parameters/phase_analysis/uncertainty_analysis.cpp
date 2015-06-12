@@ -30,28 +30,22 @@ auto uncertainty_analysis(
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const slab_initial,
   units::quantity< units::si::length> const beam_radius,
-  units::quantity< units::si::length > const detector_view_radius,
-  units::quantity< units::si::temperature> const steady_state_temperature,
-  units::quantity< units::si::wavelength> const detector_wavelength
+  units::quantity< units::si::length > const detector_view_radius
 ) noexcept -> void
 {
   assert( beam_radius > 0 * meters);
   assert( detector_view_radius > 0 * meters);
-  assert( steady_state_temperature > 280.*kelvin );
-  assert( detector_wavelength > 0 * meters );
   assert( frequencies.size() == observations.size() );
   assert( !frequencies.empty() );
   
-  auto const best_fit = fit_all::diffusivity_from_phases( frequencies, observations,
-  slab_initial, beam_radius, detector_view_radius, steady_state_temperature,
-  detector_wavelength );
+  auto const best_fit = fit_all::fit( frequencies, observations,
+  slab_initial, beam_radius, detector_view_radius );
   auto const target = best_fit.phase_goodness_of_fit;
   
   //uncertainty in diffusivity
   /// uncertainty in diffusivity
   {
-    auto const gFunc =[&best_fit, &steady_state_temperature,
-      &detector_wavelength, &beam_radius, &detector_view_radius]
+    auto const gFunc =[&best_fit, &beam_radius, &detector_view_radius]
     ( double const x ) noexcept -> double
     {
       // updated best-fit slab with perturbed parameter
@@ -69,8 +63,7 @@ auto uncertainty_analysis(
             
       auto const alternative_best_fit =
       fit_all_but_diffusivity::diffusivity_from_phases( frequencies, observations,
-        updated_slab, beam_radius, detector_view_radius, steady_state_temperature,
-        detector_wavelength );
+        updated_slab, beam_radius, detector_view_radius );
       
       auto const error = alternative_best_fit.phase_goodness_of_fit ;
       return error;
@@ -101,8 +94,7 @@ auto uncertainty_analysis(
   {
     auto const L = best_fit.bulk_slab.characteristic_length;
   
-    auto const gFunc =[&best_fit, &steady_state_temperature,
-      &detector_wavelength, &beam_radius, &detector_view_radius, &slab_initial]
+    auto const gFunc =[&best_fit, &beam_radius, &detector_view_radius, &slab_initial]
     ( double const x ) noexcept -> double
     {
       auto slab = best_fit.bulk_slab;
@@ -120,8 +112,7 @@ auto uncertainty_analysis(
       
       auto const alternative_best_fit =
       fit_all_but_detectorRadius::diffusivity_from_phases( frequencies, observations,
-        slab, beam_radius, updated_detectorRadius, steady_state_temperature,
-        detector_wavelength );
+        slab, beam_radius, updated_detectorRadius );
       
       auto const error = alternative_best_fit.phase_goodness_of_fit ;
       return error;
@@ -151,8 +142,7 @@ auto uncertainty_analysis(
   {
     auto const L = best_fit.bulk_slab.characteristic_length;
   
-    auto const gFunc =[&best_fit, &steady_state_temperature,
-      &detector_wavelength, &beam_radius, &detector_view_radius, &slab_initial, &L]
+    auto const gFunc =[&best_fit, &beam_radius, &detector_view_radius, &slab_initial, &L]
     ( double const x ) noexcept -> double
     {
       auto slab = best_fit.bulk_slab;
@@ -169,8 +159,7 @@ auto uncertainty_analysis(
       
       auto const alternative_best_fit =
       fit_all_but_laser::diffusivity_from_phases( frequencies, observations,
-        slab, updated_beam_radius, detector_view_radius, steady_state_temperature,
-        detector_wavelength );
+        slab, updated_beam_radius, detector_view_radius );
       
       auto const error = alternative_best_fit.phase_goodness_of_fit ;
       return error;

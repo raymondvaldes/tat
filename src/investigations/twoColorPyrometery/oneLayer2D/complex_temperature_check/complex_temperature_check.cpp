@@ -9,28 +9,34 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/complex_temperature_check/complex_temperature_check.h"
 
 #include <iostream>
+
 #include "units.h"
-#include "thermal/model/oneLayer2D/complex/surface_phase_amplitude.h"
+using namespace units;
+
 #include "thermal/define/lthermal.h"
-#include "thermal/model/oneLayer2D/complex/detector_emission/detector_emission.h"
+using thermal::define::thermal_penetration;
+
+#include "thermal/model/oneLayer2D/complex/surface_phase_amplitude.h"
+using thermal::model::oneLayer2D::complex::surface_phase_amplitude;
+
+#include "thermal/model/oneLayer2D/thermal_emission/measurement.h"
+using thermal::model::oneLayer2D::thermal_emission::measurement;
+
+#include "thermal/model/oneLayer2D/thermal_emission/fast_measurement.h"
+using thermal::model::oneLayer2D::thermal_emission::fast_measurement;
+
 #include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
-#include "thermal/model/oneLayer2D/complex/reverseIntegration/tempeature_nd.h"
-#include "math/transform/inverseHankel.h" //hankel settings
+using thermal::pyrometry::twoColor::calibrate_wavelength;
+
+#include "math/transform/inverseHankel.h"
+using math::transform::iHankelSettings;
 
 namespace investigations{
 namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace complex_temperature_check{
-
-using namespace units;
-using thermal::define::thermal_penetration;
-using thermal::model::oneLayer2D::complex::detector_emission;
-using thermal::model::oneLayer2D::complex::surface_phase_amplitude;
-using thermal::pyrometry::twoColor::calibrate_wavelength;
-using thermal::model::oneLayer2D::complex::reverseIntegration::temperature_nd;
-using math::transform::iHankelSettings;
   
-auto complex_temperature_check( filesystem::directory const & dir  )
+auto complex_temperature_check( filesystem::directory const & )
 noexcept -> void
 {
   std::cout << "\n";
@@ -57,17 +63,17 @@ noexcept -> void
   
   auto const r_e  = quantity< si::length >( 2.1 * millimeters ) ;
   auto const view_radius = r_e / radius_heating;
-//  auto const detector_eval =
-//  detector_emission( b, l, deltaT, view_radius, T_steady_state, detector_wavelength_1 );
+  auto const detector_eval =
+  measurement( b, l, deltaT, view_radius, T_steady_state, detector_wavelength_1 );
 
   auto settings = iHankelSettings();
   settings.nu_end = 7.0;
-  auto const detector_fast = temperature_nd( b, l, view_radius, settings );
+  auto const detector_fast = fast_measurement( b, l, view_radius, settings );
   
   std::cout << "\n";
   std::cout << "center point:  " <<point_eval.phase << "\n";
- // std::cout << "detector area: " << arg( detector_eval ) << " rad" << "\n";
-  std::cout << "detector-fast: " << -arg(detector_fast ) << "\n";
+  std::cout << "detector area: " << detector_eval.phase << "\n";
+  std::cout << "detector-fast: " << detector_fast.phase << "\n";
 }
 
 } // namespace

@@ -12,16 +12,17 @@
 
 #include "algorithm/algorithm.h"
 
+namespace thermal {
+namespace model {
+namespace oneLayer2D {
+namespace complex{
+namespace temperature{
+
 using namespace units;
 using math::complex::properties;
 using namespace units;
 using std::vector;
 using algorithm::transform;
-
-namespace thermal {
-namespace model {
-namespace oneLayer2D {
-namespace phase_amplitude{
 
 auto surface_frequency_profile(
   units::quantity< units::si::dimensionless > const b,
@@ -40,7 +41,7 @@ auto surface_frequency_profile(
   assert( radial_position > 0 );
   
   auto results =
-  vector< properties< units::si::temperature > >( frequencies.size()  );
+  vector< properties< si::temperature > >( frequencies.size()  );
   
   transform( frequencies, results.begin(), [&]( auto const f ) noexcept
   {
@@ -53,7 +54,8 @@ auto surface_frequency_profile(
   return results;
 }
 
-} // namespace phase_amplitude
+} // namespace temperature
+} // namespace complex
 } // namespace oneLayer2D
 } // namespace model
 } // namespace thermal

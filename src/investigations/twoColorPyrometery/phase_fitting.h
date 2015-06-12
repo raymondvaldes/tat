@@ -15,7 +15,7 @@ namespace investigations {
 
 namespace twoColorPyrometery {
 
-auto phase_fitting( filesystem::directory const & dir ) -> void ;
+auto phase_fitting(filesystem::directory const &) -> void ;
   
 } // namespace twoColorPyrometery
   

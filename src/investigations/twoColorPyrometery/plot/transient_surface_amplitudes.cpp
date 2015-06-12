@@ -11,12 +11,10 @@
 #include <utility>
 #include <iostream>
 #include "algorithm/vector/quantityTodouble.h"
-#include "gnuplot-iostream.h"
+#include "plot/gnuplot-iostream.h"
 
 namespace investigations {
-
 namespace twoColorPyrometery {
-
 namespace plot {
 
 using std::make_pair;
@@ -46,8 +44,5 @@ auto transient_surface_amplitudes(
 }
   
 } // namespace plot
-
 } // namespace twoColorPyrometery
-  
 } // namespace investigations
-

@@ -12,7 +12,7 @@
 #include "algorithm/vector/quantityTodouble.h"
 #include "algorithm/vector/ratio.h"
 
-#include "gnuplot-iostream.h"
+#include "plot/gnuplot-iostream.h"
 
 namespace investigations {
 

@@ -14,7 +14,6 @@
 #include "units.h"
 
 namespace math {
-
 namespace special_functions {
 
 template< typename T >

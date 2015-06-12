@@ -8,10 +8,12 @@
 
 #include "inverseHankel.h"
 #include "algorithm/algorithm.h"
-#include "math/special_functions/bessel.h"
 #include "math/numIntegration/integrate.h"
 #include "units.h"
 #include <cmath>
+
+#include "math/special_functions/bessel_j/J0.h"
+using math::special_functions::bessel::J0;
 
 namespace math {
 
@@ -45,8 +47,6 @@ noexcept -> units::quantity< units::si::dimensionless>
   auto const x0 = double(0) ;
   auto const x1 = settings.nu_end.value() ;
   auto const dx_intial_step = double( 0.001 );
-  
-  auto const J0 = []( auto const x ) noexcept { return bessel_j( 0, x ); };
   
   auto const f = [&]( double const & nu ) noexcept {
     
@@ -101,9 +101,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
   auto const x0 = double(0) ;
   auto const x1 = settings.nu_end.value() ;
   auto const dx_intial_step = double( 0.001 );
-  
-  auto const J0 = []( auto const & x ) noexcept { return bessel_j( 0, x ); };
-  
+    
   auto const hankel_function = [&]( double const & nu ) noexcept
   {
     auto const h_out = h( nu, z ).value() * J0( nu * r ).value() * nu;

@@ -10,11 +10,10 @@
 #define __tat__signal__
 
 #include "units.h"
+#include "thermal/emission/signal.h"
 
 namespace thermal {
-
 namespace emission {
-  
   
 template< typename signalType >
 class Signal{
@@ -90,8 +89,7 @@ bool operator== ( Signal<signalType> const & first, Signal<signalType> const & s
     return ( first.getElectromagneticWavelength() == second.getElectromagneticWavelength() );
 }
 
-}
-
-}
+} // namespace  emission
+} // namespace  thermal
 
 #endif /* defined(__tat__signal__) */

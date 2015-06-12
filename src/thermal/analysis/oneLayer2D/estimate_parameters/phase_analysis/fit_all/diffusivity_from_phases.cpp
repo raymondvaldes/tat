@@ -1,4 +1,4 @@
-//
+
 //  diffusivity_from_phases.cpp
 //  tat
 //
@@ -7,20 +7,19 @@
 //
 
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all/diffusivity_from_phases.h"
-#include "algorithm/algorithm.h"
 
+#include "algorithm/algorithm.h"
 #include <iostream>
 #include <tuple>
 
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/average/weighted_avg_surface_phases_amplitudes.h"
+#include "thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h"
+using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
 
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
 #include "math/estimation/lmdiff.hpp"
-
 #include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
-
 #include "math/complex/extract_phases_from_properties.h"
 
 namespace thermal{
@@ -44,7 +43,6 @@ using math::estimation::settings;
 
 
 using thermal::model::oneLayer2D::dimensionless::b;
-using thermal::model::oneLayer2D::average::weighted_avg_surface_phases_amplitudes;
 using std::generate;
 using std::make_tuple;
 using std::tie;
@@ -52,15 +50,13 @@ using std::get;
 using math::complex::extract_phases_from_properties;
 using statistics::uncertainty_analysis::goodness_of_fit;
 
-auto diffusivity_from_phases
+auto fit
 (
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const slab_initial,
   units::quantity< units::si::length> const beam_radius,
-  units::quantity< units::si::length > const detector_view_radius,
-  units::quantity< units::si::temperature> const steady_state_temperature,
-  units::quantity< units::si::wavelength> const detector_wavelength
+  units::quantity< units::si::length > const detector_view_radius
 ) noexcept -> Best_fit
 {
   //establish preconditions
@@ -82,8 +78,8 @@ auto diffusivity_from_phases
   auto model_parameters = vector< double >
   {
     kx_limiter1( 1.0 ) ,  // diffusivity ratio
-    kx_limiter2(  b1_i.value(), 0.05, 10. ),
-    kx_limiter2(  b2_i.value(), 0.05, 2. )
+    kx_limiter2(  b1_i.value(), 0.05, 20. ),
+    kx_limiter2(  b2_i.value(), 0.01, 20. )
   };
   
   // parameter estimation algorithm
@@ -93,8 +89,8 @@ auto diffusivity_from_phases
     auto const alpha_value = x_limiter1( x[0] ) ;
     auto const alpha = quantity<si::thermal_diffusivity>::from_value(
      alpha_value * alpha_scale  );
-    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.05, 10. ) ); //  detector radius
-    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[2], 0.05, 2. ) ); //  detector radius
+    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.05, 20. ) ); //  detector radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[2], 0.01, 20. ) ); //  detector radius
 
   
     std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
@@ -104,8 +100,7 @@ auto diffusivity_from_phases
 
 
   auto const make_model_predictions =
-  [ &frequencies, &L, &update_system_properties, &deltaT,
-    &steady_state_temperature, &detector_wavelength]
+  [ &frequencies, &L, &update_system_properties, &deltaT ]
   ( const double * x ) noexcept
   {
     auto const t = update_system_properties( x );
@@ -115,10 +110,8 @@ auto diffusivity_from_phases
     auto const b2 = get< 2 >(t);
 
     auto const predictions =
-    weighted_avg_surface_phases_amplitudes(
-      b1, deltaT, b2, frequencies, L, alpha,
-      steady_state_temperature,
-      detector_wavelength );
+    frequency_sweep(
+      b1, deltaT, b2, frequencies, L, alpha ) ;
     
     return predictions;
   };
@@ -159,7 +152,7 @@ auto diffusivity_from_phases
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
   
-  for_each( phase_predictions, []( auto const p) { std::cout << p << "\n";} );
+  //for_each( phase_predictions, []( auto const p) { std::cout << p << "\n";} );
 
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );

@@ -16,10 +16,11 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace frequency_sweep{
 
-auto surface_phases_at_radial_position( filesystem::directory const & dir ) -> void ;
+auto surface_phases_at_radial_position(filesystem::directory const &) -> void ;
 
 } // namespace frequency_sweep
 } // namespace oneLayer2D
 } // namespace twoColorPyrometery
 } // namespace investigations
+
 #endif /* defined(__tat__surface_at_radial_position__) */

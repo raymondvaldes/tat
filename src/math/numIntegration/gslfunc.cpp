@@ -33,7 +33,7 @@ namespace numIntegration{
 
 double fintegrate(double x, void *p) noexcept
 {
-  mySpline &params = *reinterpret_cast<struct mySpline *>(p);
+  mySpline &params = *reinterpret_cast<class mySpline *>(p);
   return params.eval(x);
 }
 

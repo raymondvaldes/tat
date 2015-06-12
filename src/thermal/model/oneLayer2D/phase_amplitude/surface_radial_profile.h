@@ -17,7 +17,8 @@
 namespace thermal {
 namespace model {
 namespace oneLayer2D {
-namespace phase_amplitude{
+namespace complex{
+namespace temperature{
 
 auto surface_radial_profile(
   units::quantity< units::si::dimensionless > const b,
@@ -28,7 +29,8 @@ auto surface_radial_profile(
   units::quantity< units::si::frequency > const f
 ) noexcept -> std::vector< math::complex::properties< units::si::temperature >>;
 
-} // namespace phase_amplitude
+} // namespace temperature
+} // namespace complex
 } // namespace oneLayer2D
 } // namespace model
 } // namespace thermal

@@ -28,23 +28,8 @@ using thermal::analysis::oneLayer2D::estimate_parameters::phase_analysis::fit_al
 
 auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 {
-  auto const initial_slab = thermal::model::slab::import( dir, "initial_slab.xml" ) ;
-  auto const steady_state_temperature = quantity<si::temperature>( 781.14 * kelvin );
-  
-  auto const nominal_wavelength = quantity< si::wavelength >( 4.6 * micrometers );
-  auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
-  auto const lambda_1 = quantity<wavelength>( 4.6 * micrometers );
-  auto const lambda_2 = quantity<wavelength>( 5.6 * micrometers );
-  auto const lambda_avg = quantity<wavelength>( 5.1 * micrometers );
-  auto const detector_wavelength_1 =
-    calibrate_wavelength( lambda_1, wavelength_offset );
-  
-  auto const detector_wavelength_2 =
-    calibrate_wavelength( lambda_2, wavelength_offset );  
+  auto const initial_slab = thermal::model::slab::import( dir, "initial_slab.xml" ) ;  
 
-  auto const detector_wavelength_avg =
-    calibrate_wavelength( lambda_avg, wavelength_offset );
-  
   auto const frequencies = vector< quantity< frequency > >({
     1.414 * hertz,
     2 * hertz,
@@ -99,8 +84,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ; // initial value
 
   auto const bestFit_results = diffusivity_from_phases(
-    frequencies, phases , initial_slab, beam_radius, detector_view_radius,
-    steady_state_temperature, detector_wavelength_avg) ;
+    frequencies, phases , initial_slab, beam_radius, detector_view_radius) ;
 }
 
 } // namespace

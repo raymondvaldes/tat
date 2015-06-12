@@ -26,12 +26,14 @@ auto find_all
 )
 noexcept -> std::vector< T >
 {
-  auto const searchElement = std::vector< Y >( {element} ) ;
+  using std::vector;
+
+  auto const searchElement = vector< Y >( {element} ) ;
 
   auto const first = find_first_of( list, searchElement , p ) ;
   auto const last = find_end( list, searchElement , p ) ;
   
-  auto const all_found = std::vector<T>( first , last+1 ) ;
+  auto const all_found = vector<T>( first , last+1 ) ;
   return all_found;
 }
 

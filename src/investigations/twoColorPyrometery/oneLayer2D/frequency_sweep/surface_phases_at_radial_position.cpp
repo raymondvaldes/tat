@@ -17,7 +17,7 @@
 #include "math/complex/extract_phases_from_properties.h"
 #include "math/complex/extract_amplitudes_from_properties.h"
 
-using thermal::model::oneLayer2D::phase_amplitude::surface_frequency_profile;
+
 using thermal::model::oneLayer2D::dimensionless::b;
 using std::vector;
 using algorithm::for_each;
@@ -31,7 +31,7 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace frequency_sweep{
 
-auto surface_phases_at_radial_position( filesystem::directory const & dir ) -> void
+auto surface_phases_at_radial_position( filesystem::directory const & ) -> void
 {
   auto const L = quantity<length>( 661. * micrometers);
   auto const beam_radius = quantity<length>( 2.1 * millimeters);
@@ -49,7 +49,7 @@ auto surface_phases_at_radial_position( filesystem::directory const & dir ) -> v
   range_1og10< quantity< si::frequency > >( 1. * hertz, 2000. * hertz, 30 );
   
   auto const b_laser = b( beam_radius, L );
-  auto const ps = surface_frequency_profile(
+  auto const ps = thermal::model::oneLayer2D::complex::temperature::surface_frequency_profile(
       b_laser, deltaT, frequencies, L, alpha, radial_position
     );
   

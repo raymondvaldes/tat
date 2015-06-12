@@ -40,12 +40,12 @@ Unique_scope_measurement::Unique_scope_measurement
 (
   std::vector< ScopeFile > const & scopeFiles_
 )
-: scopeFiles( scopeFiles_) ,
+: cycles( scopeFiles_.front().cycles ),
+  scopeFiles( scopeFiles_) ,
   label( scopeFiles_.front().label ),
   monochorometer_lambda( scopeFiles_.front().monochorometer_lambda ),
   laser_modulation_frequency( scopeFiles_.front().laser_modulation_frequency ),
-  size( scopeFiles_.size() ),
-  cycles( scopeFiles_.front().cycles )
+  size( scopeFiles_.size() )
 {
   assert( laser_modulation_frequency.value() > 0 ) ;
   assert( monochorometer_lambda.value() > 0 ) ;

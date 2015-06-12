@@ -22,7 +22,7 @@ auto thermal_penetration
   units::quantity< units::si::thermal_diffusivity> const alpha
 ) noexcept -> units::quantity< units::si::dimensionless >
 {
-  auto const l =  thermal::define::thermal_penetration( alpha, f, L) ;
+  auto const l = thermal::define::thermal_penetration( alpha, f, L) ;
   return l;
 }
 

@@ -12,7 +12,9 @@
 #include <tuple>
 
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/average/weighted_avg_surface_phases_amplitudes.h"
+
+#include "thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h"
+using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
 
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
@@ -41,7 +43,6 @@ using math::estimation::kx_limiter2;
 using math::estimation::x_to_k_constrained_from_0_to_1;
 using math::estimation::k_to_x_constrained_from_0_to_1;
 using thermal::model::oneLayer2D::dimensionless::b;
-using thermal::model::oneLayer2D::average::weighted_avg_surface_phases_amplitudes;
 using math::estimation::settings;
 using std::generate;
 using std::make_tuple;
@@ -56,9 +57,7 @@ auto diffusivity_from_phases
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const slab_initial,
   units::quantity< units::si::length> const beam_radius,
-  units::quantity< units::si::length > const detector_view_radius,
-  units::quantity< units::si::temperature> const steady_state_temperature,
-  units::quantity< units::si::wavelength> const detector_wavelength
+  units::quantity< units::si::length > const detector_view_radius
 ) noexcept -> Best_fit
 {
   //establish preconditions
@@ -102,8 +101,7 @@ auto diffusivity_from_phases
   };
 
   auto const make_model_predictions =
-  [ &frequencies, &L, &update_system_properties, &deltaT, &b2,
-    &steady_state_temperature, &detector_wavelength]
+  [ &frequencies, &L, &update_system_properties, &deltaT, &b2]
   ( const double * x ) noexcept
   {
     auto const t = update_system_properties( x );
@@ -112,10 +110,8 @@ auto diffusivity_from_phases
     auto const b1 = get< 1 >(t);
     
     auto const predictions =
-    weighted_avg_surface_phases_amplitudes(
-      b1, deltaT, b2, frequencies, L, alpha,
-      steady_state_temperature,
-      detector_wavelength );
+    frequency_sweep(
+      b1, deltaT, b2, frequencies, L, alpha );
     
     return predictions;
   };

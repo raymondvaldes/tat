@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-#include "algorithm.h"
+#include "algorithm/algorithm.h"
 #include "units.h"
 
 namespace cout {

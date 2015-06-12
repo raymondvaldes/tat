@@ -17,10 +17,10 @@ namespace sensible{
   
 layer::layer( const property & kthermal_, const property & psithermal_,
               const double depth_, const double lambda_ ) noexcept
-: kthermal( kthermal_ ),
-  psithermal( psithermal_ ),
-  depth( depth_ ),
-  Lambda( lambda_ )
+: depth( depth_ ),
+  Lambda( lambda_ ),
+  kthermal( kthermal_ ),
+  psithermal( psithermal_ )
 {
   BOOST_ASSERT( depth_ > 0 ) ;
   BOOST_ASSERT( lambda_ >= 0 ) ;

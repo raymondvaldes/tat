@@ -20,8 +20,7 @@ namespace ublas{
 template<class OP, class E>
 BOOST_UBLAS_INLINE
 typename boost::numeric::ublas::vector_unary_traits<E, OP>::result_type
-apply_to_all ( const boost::numeric::ublas::vector_expression<E> &e,
-               const OP& op = OP() ) noexcept
+apply_to_all ( const boost::numeric::ublas::vector_expression<E> &e ) noexcept
 {
     typedef typename boost::numeric::ublas::vector_unary_traits<E, OP>::expression_type expression_type;
     return expression_type (e ());

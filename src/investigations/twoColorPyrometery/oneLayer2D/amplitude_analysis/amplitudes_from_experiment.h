@@ -16,7 +16,7 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace amplitude_analysis{
 
-auto amplitudes_from_experiment( filesystem::directory const & dir ) -> void ;
+auto amplitudes_from_experiment(filesystem::directory const &) -> void ;
 
 } // namespace
 } // namespace

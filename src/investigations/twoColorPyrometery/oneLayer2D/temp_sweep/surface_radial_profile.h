@@ -17,7 +17,7 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace temp_sweep{
 
-auto surface_radial_profile( filesystem::directory const & dir ) -> void ;
+auto surface_radial_profile(filesystem::directory const &) -> void ;
 
 } // namespace temp_sweep
 } // namespace oneLayer2D

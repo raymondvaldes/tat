@@ -35,7 +35,7 @@ noexcept -> std::vector< element_type >
 
   auto i = 0u;
   auto const push_back_each_element =
-    [&elements, &A, &B, &i]( auto const & a )
+    [&elements, &A, &B, &i]( auto const & )
   {
     auto const element = element_type( A[i], B[i] );
     elements.push_back( element );

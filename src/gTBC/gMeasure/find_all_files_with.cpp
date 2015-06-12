@@ -27,7 +27,7 @@ auto find_all_files_with_label
 noexcept ->  std::vector< ScopeFile >
 {
   auto const search_for_label =
-  [&label]( auto const & scope_file, auto const & dummy ){
+  [&label]( auto const & scope_file, auto const &  ){
     auto const sameLabel = scope_file.label == label;
     return sameLabel;
   };
@@ -47,7 +47,7 @@ auto find_all_files_with_lambda
 noexcept ->  std::vector< ScopeFile >
 {
   auto const search_for_label =
-  [&lambda]( auto const & scope_file, auto const & dummy ){
+  [&lambda]( auto const & scope_file, auto const &  ){
     return scope_file.monochorometer_lambda == lambda;
   };
   
@@ -66,7 +66,7 @@ auto find_all_files_with_frequency
 noexcept -> std::vector< ScopeFile >
 {
   auto const search_for_label =
-  [&frequency]( auto const & scope_file, auto const & dummy )
+  [&frequency]( auto const & scope_file, auto const &  )
   {
     using std::abs;
     auto const lhs = scope_file.laser_modulation_frequency.value() ;

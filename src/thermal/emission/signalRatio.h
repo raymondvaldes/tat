@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__signalRatio__
-#define __tat__signalRatio__
+#ifndef __tat__signalRatio_1341234534_
+#define __tat__signalRatio_1341234534_
 
 #include <cassert>
 

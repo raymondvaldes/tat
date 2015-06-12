@@ -10,9 +10,7 @@
 #include <vector>
 #include <iostream>
 
-
 #include "investigations/main-app.h"
-
 #include "tools/programoptions/programoptions.hpp"
 #include "tools/timing.h"
 #include "investigations/execute.h"
@@ -42,7 +40,7 @@ int main_app( const int argc, const char *argv[ ] ) noexcept
   auto const runArgs = MainArguments{ argc, argv };
 
   if( runArgs.run_analysis() ) {
-    auto const exeTimer = executeAnalysis( runArgs ) ;
+    executeAnalysis( runArgs ) ;
   }
   return 0 ;
 }

@@ -53,7 +53,7 @@ inline void vector3DSetup(std::vector< std::vector< std::vector< double > > > &V
 
 HeatModel2DAna::HeatModel2DAna( const double R0_, const double R1_,
                                 const double lambda_, const double It_,
-                                const double csub_, const double asub_,
+                                const double , const double asub_,
                                 const double gamma_, const double beam_,
                                 const double k_coat_, const double L_,
                                 const double psi_coat_, const double ccoat_,

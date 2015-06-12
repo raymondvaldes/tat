@@ -12,16 +12,16 @@
 
 #include "algorithm/algorithm.h"
 
-using namespace units;
+namespace thermal {
+namespace model {
+namespace oneLayer2D {
+namespace complex{
+namespace temperature{
+
 using math::complex::properties;
 using namespace units;
 using std::vector;
 using algorithm::transform;
-
-namespace thermal {
-namespace model {
-namespace oneLayer2D {
-namespace phase_amplitude{
 
 auto surface_radial_profile(
   units::quantity< units::si::dimensionless > const b,
@@ -32,7 +32,7 @@ auto surface_radial_profile(
   units::quantity< units::si::frequency > const f
 ) noexcept -> std::vector< math::complex::properties< units::si::temperature >>
 {
-  assert( b > 0) ;
+  assert( b > 0 ) ;
   assert( deltaT > 0 * kelvin ) ;
   assert( !radial_positions.empty() );
   assert( L > 0 * meters ) ;
@@ -53,6 +53,7 @@ auto surface_radial_profile(
 
 }
 
+} // namespace temperature
 } // namespace phase_amplitude
 } // namespace oneLayer2D
 } // namespace model

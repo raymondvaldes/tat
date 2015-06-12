@@ -8,6 +8,7 @@
 #include <cassert>
 #include <iostream>
 
+#include "plot/gnuplot.h"
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
 #include "thermal/define/lthermal.h"
 
@@ -46,6 +47,13 @@ Best_fit::Best_fit
   assert( !frequencies.empty() );
   
 
+}
+
+void Best_fit::plot_model_phases_against(
+std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
+) const
+{
+  plot::simple_x_y1_y2( frequencies, model_phases, exp_phases );
 }
 
 } // namespace phase_analysis

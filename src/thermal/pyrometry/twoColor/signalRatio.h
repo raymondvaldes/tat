@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__signalRatio__
-#define __tat__signalRatio__
+#ifndef __tat__signalRatio_134234314345_
+#define __tat__signalRatio_134234314345_
 
 #include "units.h"
 

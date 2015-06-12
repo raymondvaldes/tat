@@ -9,7 +9,7 @@
 #include "phase_exp_model.h"
 
 #include "tools/interface/filesystem.hpp"
-#include "gnuplot-iostream.h"
+#include "plot/gnuplot-iostream.h"
 #include "algorithm/vector/quantityTodouble.h"
 
 namespace investigations {

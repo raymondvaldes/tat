@@ -7,7 +7,7 @@
 //
 
 #include "thermal/pyrometry/twoColor/periodic/results.h"
-#include "gnuplot-iostream.h"
+#include "plot/gnuplot-iostream.h"
 #include "algorithm/vector/quantityTodouble.h"
 
 using algorithm::vector::quantityTodouble;

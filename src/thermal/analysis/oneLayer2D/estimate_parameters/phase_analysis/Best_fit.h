@@ -46,6 +46,9 @@ struct Best_fit{
     double const phase_goodness_of_fit_
   ) noexcept ;
   
+  void plot_model_phases_against(
+    std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
+  ) const;
 };
 
 } // namespace phase_analysis

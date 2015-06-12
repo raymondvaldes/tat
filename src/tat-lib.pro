@@ -10,6 +10,7 @@ TARGET = tat-lib
 TEMPLATE = lib
 CONFIG += staticlib
 CONFIG += c++14
+CONFIG += object_parallel_to_source
 
 QMAKE_CXXFLAGS += -std=c++14
 QMAKE_CXXFLAGS += -march=native
@@ -23,7 +24,6 @@ SOURCES += \
     algorithm/vector/ifzero.cpp \
     algorithm/vector/stdVector2ublasVector.cpp \
     algorithm/vector/stringToDouble.cpp \
-    algorithm/vector/vector2cstringArray.cpp \
     filesystem/path.cpp \
     gTBC/gMeasure/find_all_files_with.cpp \
     gTBC/gMeasure/find_unique_frequencies_in_files.cpp \
@@ -39,16 +39,6 @@ SOURCES += \
     gTBC/gMeasure/total_calibrated_emission_pairs.cpp \
     gTBC/gMeasure/unique_measurement_pair.cpp \
     gTBC/gMeasure/Unique_scope_measurement.cpp \
-    investigations/twoColorPyrometery/calculateCalibrationCoefficients.cpp \
-    investigations/twoColorPyrometery/importExperimentalData.cpp \
-    investigations/twoColorPyrometery/phase_fitting.cpp \
-    investigations/twoColorPyrometery/temperature_prediction.cpp \
-    investigations/execute.cpp \
-    investigations/main-app.cpp \
-    investigations/num_method2014.cpp \
-    investigations/sensitivityvaldes2013.cpp \
-    investigations/taylor_uncertainty.cpp \
-    investigations/twoColorPyrometery.cpp \
     math/algorithms/combinations.cpp \
     math/algorithms/complex.cpp \
     math/algorithms/spline.cpp \
@@ -102,7 +92,6 @@ SOURCES += \
     thermal/emission/emission.cpp \
     thermal/emission/noise.cpp \
     thermal/emission/phase99.cpp \
-    thermal/emission/signalRatio.cpp \
     thermal/equipment/detector/detector.cpp \
     thermal/equipment/detector/measurement.cpp \
     thermal/equipment/detector/measurements.cpp \
@@ -127,14 +116,116 @@ SOURCES += \
     thermal/pyrometry/twoColor/pyrometery_settings_file.cpp \
     thermal/pyrometry/twoColor/signalRatio.cpp \
     thermal/pyrometry/twoColor/temperatureSteady.cpp \
-    thermal/pyrometry/twoColor/transient_analysis.cpp \
     thermal/simulations/Numerical_PhaseOfEmission.cpp \
     tools/interface/import/columnData.cpp \
     tools/interface/exportfile.cpp \
     tools/interface/filesystem.cpp \
     tools/interface/xml.cpp \
     tools/programoptions/programoptions.cpp \
-    tools/timing.cpp
+    tools/timing.cpp \
+    algorithm/stream/validateOpenStream.cpp \
+    gTBC/gMeasure/gTBD/extract_frequency.cpp \
+    gTBC/gMeasure/import_sweep_meta_data.cpp \
+    gTBC/gMeasure/import_twoColor_scope_files.cpp \
+    gTBC/gMeasure/remove_grnd_if_not_in_scope_files.cpp \
+    math/calculus/mean_value/circle/circle_complex.cpp \
+    math/calculus/mean_value/offset_circle/offset_circle.cpp \
+    math/calculus/weighted_mean_value/circle.cpp \
+    math/functions/trigonometric/coth.cpp \
+    math/functions/trigonometric/csch.cpp \
+    math/geometry/intersect/two_circles/angles_of_intersection.cpp \
+    math/geometry/intersect/two_circles/if_intersect.cpp \
+    math/geometry/intersect/two_circles/points_of_intersection.cpp \
+    math/geometry/point/point.cpp \
+    math/geometry/circle.cpp \
+    math/transform/inverseHankel.cpp \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all/diffusivity_from_phases.cpp \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_detectorRadius/diffusivity_from_phases.cpp \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_diffusivity/diffusivity_from_phases.cpp \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_laser/diffusivity_from_phases.cpp \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.cpp \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/uncertainty_analysis.cpp \
+    thermal/analysis/tbc2009/detector_offset/estimate_parameters/from_phases/from_phases.cpp \
+    thermal/analysis/tbc2009/estimate_parameters/from_phases.cpp \
+    thermal/analysis/two_layer_speciman/diffusivity_from_phases.cpp \
+    thermal/emission/planks_law/planks_law.cpp \
+    thermal/equipment/detector/simulate_measurements/periodic_cosine.cpp \
+    thermal/equipment/detector/spot_view/spot_view.cpp \
+    thermal/equipment/detector/compensate_for_phase_difference.cpp \
+    thermal/equipment/detector/fitted_measurements.cpp \
+    thermal/model/dimensionless/angular_frequency.cpp \
+    thermal/model/dimensionless/length.cpp \
+    thermal/model/dimensionless/temperature.cpp \
+    thermal/model/dimensionless/time_nd.cpp \
+    thermal/model/oneLayer2D/complex/h.cpp \
+    thermal/model/oneLayer2D/complex/h_surface.cpp \
+    thermal/model/oneLayer2D/complex/kappa.cpp \
+    thermal/model/oneLayer2D/complex/phase_amplitude.cpp \
+    thermal/model/oneLayer2D/complex/phases_amplitudes.cpp \
+    thermal/model/oneLayer2D/complex/surface_phase_amplitude.cpp \
+    thermal/model/oneLayer2D/complex/surface_phases_amplitudes.cpp \
+    thermal/model/oneLayer2D/complex/temperature.cpp \
+    thermal/model/oneLayer2D/complex/temperature_nd.cpp \
+    thermal/model/oneLayer2D/dimensional/deltaT.cpp \
+    thermal/model/oneLayer2D/dimensionless/b.cpp \
+    thermal/model/oneLayer2D/dimensionless/thermal_penetration.cpp \
+    thermal/model/oneLayer2D/phase_amplitude/surface_frequency_profile.cpp \
+    thermal/model/oneLayer2D/phase_amplitude/surface_radial_profile.cpp \
+    thermal/model/oneLayer2D/thermal_emission/fast_measurement.cpp \
+    thermal/model/oneLayer2D/thermal_emission/frequency_sweep.cpp \
+    thermal/model/oneLayer2D/thermal_emission/measurement.cpp \
+    thermal/model/slab/import_slab.cpp \
+    thermal/model/tbc2009/complexT/nu/hat.cpp \
+    thermal/model/tbc2009/complexT/nu/tilde.cpp \
+    thermal/model/tbc2009/complexT/offset_detector/average_surface_phase_amplitude.cpp \
+    thermal/model/tbc2009/complexT/radiosity/J0.cpp \
+    thermal/model/tbc2009/complexT/radiosity/J1.cpp \
+    thermal/model/tbc2009/complexT/radiosity/J2.cpp \
+    thermal/model/tbc2009/complexT/average_surface_phase_amplitude.cpp \
+    thermal/model/tbc2009/complexT/F_tilde.cpp \
+    thermal/model/tbc2009/complexT/h_coat.cpp \
+    thermal/model/tbc2009/complexT/h_sub.cpp \
+    thermal/model/tbc2009/complexT/h_system.cpp \
+    thermal/model/tbc2009/complexT/H_tilde.cpp \
+    thermal/model/tbc2009/complexT/phase_amplitude.cpp \
+    thermal/model/tbc2009/complexT/phases_amplitudes.cpp \
+    thermal/model/tbc2009/complexT/surface_phase_amplitude.cpp \
+    thermal/model/tbc2009/complexT/temperature.cpp \
+    thermal/model/tbc2009/dimensionless/a.cpp \
+    thermal/model/tbc2009/dimensionless/b.cpp \
+    thermal/model/tbc2009/dimensionless/c.cpp \
+    thermal/model/tbc2009/dimensionless/coating_diffusivity_from_a.cpp \
+    thermal/model/tbc2009/dimensionless/coating_from_dimensionless.cpp \
+    thermal/model/tbc2009/dimensionless/gamma.cpp \
+    thermal/model/tbc2009/dimensionless/HeatingProperties.cpp \
+    thermal/model/tbc2009/dimensionless/import_heating_properties.cpp \
+    thermal/model/tbc2009/dimensionless/Lambda.cpp \
+    thermal/model/tbc2009/dimensionless/temperature.cpp \
+    thermal/model/tbc2009/dimensionless/thermal_penetration.cpp \
+    thermal/model/tbc2009/dimensionless/ThermalProperties.cpp \
+    thermal/model/tbc2009/offset_detector/average_surface_phases.cpp \
+    thermal/model/tbc2009/offset_detector/surface_T_phases_amplitudes.cpp \
+    thermal/model/tbc2009/average_surface_phases.cpp \
+    thermal/model/tbc2009/average_surface_phases_amplitudes.cpp \
+    thermal/model/two_layer/complex/phase.cpp \
+    thermal/model/two_layer/complex/surface_phase.cpp \
+    thermal/model/two_layer/complex/surface_phases.cpp \
+    thermal/model/two_layer/complex/surface_temperature.cpp \
+    thermal/model/two_layer/complex/temperature.cpp \
+    thermal/model/two_layer/dimensionless/a.cpp \
+    thermal/model/two_layer/dimensionless/angular_frequency.cpp \
+    thermal/model/two_layer/dimensionless/b.cpp \
+    thermal/model/two_layer/dimensionless/Kappa.cpp \
+    thermal/model/two_layer/dimensionless/length.cpp \
+    thermal/model/two_layer/dimensionless/time_nd.cpp \
+    thermal/pyrometry/twoColor/periodic/analysis_from_properties.cpp \
+    thermal/pyrometry/twoColor/periodic/analysis_from_properties_sweep.cpp \
+    thermal/pyrometry/twoColor/periodic/results.cpp \
+    thermal/pyrometry/twoColor/periodic/transient_analysis.cpp \
+    thermal/pyrometry/twoColor/periodic/transient_analysis_sweep.cpp \
+    thermal/pyrometry/twoColor/periodic/transient_analysis_sweep_results.cpp \
+    thermal/pyrometry/twoColor/calibrate_wavelength.cpp \
+    thermal/pyrometry/twoColor/calibrate_wavelengths.cpp
 
 HEADERS += \
     algorithm/stream/eof.h \
@@ -180,16 +271,6 @@ HEADERS += \
     gTBC/gMeasure/total_calibrated_emission_pairs.h \
     gTBC/gMeasure/unique_measurement_pair.h \
     gTBC/gMeasure/Unique_scope_measurement.h \
-    investigations/twoColorPyrometery/calculateCalibrationCoefficients.h \
-    investigations/twoColorPyrometery/importExperimentalData.h \
-    investigations/twoColorPyrometery/phase_fitting.h \
-    investigations/twoColorPyrometery/temperature_prediction.h \
-    investigations/execute.h \
-    investigations/main-app.h \
-    investigations/num_method2014.h \
-    investigations/sensitivityvaldes2013.hpp \
-    investigations/taylor_uncertainty.h \
-    investigations/twoColorPyrometery.h \
     math/algorithms/combinations.hpp \
     math/algorithms/complex.h \
     math/algorithms/spline-quantity.h \
@@ -292,7 +373,6 @@ HEADERS += \
     thermal/pyrometry/twoColor/pyrometery_settings_file.h \
     thermal/pyrometry/twoColor/signalRatio.h \
     thermal/pyrometry/twoColor/temperatureSteady.h \
-    thermal/pyrometry/twoColor/transient_analysis.h \
     thermal/simulations/Numerical_PhaseOfEmission.h \
     thermalfluids/dimensionless/prandtl_number.h \
     tools/bimap/bimap.h \
@@ -315,7 +395,152 @@ HEADERS += \
     units/physical_dimensions.h \
     units/quantity.h \
     units/scale.h \
-    units.h
+    units.h \
+    units/conversions.h \
+    units/operator_overloads.h \
+    units/static_rational.h \
+    units/si/si_literals.h \
+    algorithm/vector/ratio.h \
+    algorithm/vector/reserve.h \
+    algorithm/vector/split_vector_of_pairs.h \
+    cout/vector/print.h \
+    gTBC/gMeasure/gTBD/extract_frequency.h \
+    gTBC/gMeasure/import_sweep_meta_data.h \
+    gTBC/gMeasure/import_twoColor_scope_files.h \
+    gTBC/gMeasure/remove_grnd_if_not_in_scope_files.h \
+    math/calculus/mean_value/circle/circle.h \
+    math/calculus/mean_value/circle/circle_complex.h \
+    math/calculus/mean_value/function/function.h \
+    math/calculus/mean_value/offset_circle/offset_circle.h \
+    math/calculus/weighted_mean_value/circle.h \
+    math/complex/extract_amplitudes_from_properties.h \
+    math/complex/extract_phases_from_properties.h \
+    math/complex/properties.h \
+    math/coordinate_system/wrap_to_0_2Pi.h \
+    math/coordinate_system/wrap_to_negPi_posPi.h \
+    math/curveFit/get_initial_conditions.h \
+    math/differential/waveEquation/two_layer_system.h \
+    math/functions/trigonometric/coth.h \
+    math/functions/trigonometric/csc.h \
+    math/functions/trigonometric/csch.h \
+    math/functions/trigonometric/sec.h \
+    math/geometry/intersect/two_circles/angles_of_intersection.h \
+    math/geometry/intersect/two_circles/if_intersect.h \
+    math/geometry/intersect/two_circles/points_of_intersection.h \
+    math/geometry/point/point.h \
+    math/geometry/circle.h \
+    math/numIntegration/integrate.h \
+    math/special_functions/bessel_j/J0.h \
+    math/special_functions/bessel_j/J1.h \
+    math/special_functions/bessel.h \
+    math/transform/inverseHankel.h \
+    math/utilities/even.h \
+    plot/gnuplot-iostream.h \
+    plot/gnuplot.h \
+    statistics/signal_processing/corrected_sample/standard_deviation.h \
+    statistics/signal_processing/corrected_sample/variance.h \
+    statistics/signal_processing/residuals/residual.h \
+    statistics/signal_processing/residuals/residual_square.h \
+    statistics/signal_processing/standard_deviation/sample.h \
+    statistics/signal_processing/variance/sample_variance.h \
+    statistics/signal_processing/average.h \
+    statistics/signal_processing/divide_each_element.h \
+    statistics/signal_processing/residuals_square.h \
+    statistics/signal_processing/signal_to_noise.h \
+    statistics/signal_processing/sum.h \
+    statistics/signal_processing/sum_residuals_square.h \
+    statistics/sum_of_squares/residuals.h \
+    statistics/sum_of_squares/total.h \
+    statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h \
+    statistics/coefficient_of_determination.h \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all/diffusivity_from_phases.h \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_detectorRadius/diffusivity_from_phases.h \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_diffusivity/diffusivity_from_phases.h \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_laser/diffusivity_from_phases.h \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h \
+    thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/uncertainty_analysis.h \
+    thermal/analysis/tbc2009/detector_offset/estimate_parameters/from_phases/from_phases.h \
+    thermal/analysis/tbc2009/estimate_parameters/from_phases.h \
+    thermal/analysis/two_layer_speciman/diffusivity_from_phases.h \
+    thermal/emission/planks_law/planks_law.h \
+    thermal/equipment/detector/simulate_measurements/periodic_cosine.h \
+    thermal/equipment/detector/spot_view/spot_view.h \
+    thermal/equipment/detector/compensate_for_phase_difference.h \
+    thermal/equipment/detector/fitted_measurements.h \
+    thermal/model/dimensionless/angular_frequency.h \
+    thermal/model/dimensionless/length.h \
+    thermal/model/dimensionless/temperature.h \
+    thermal/model/dimensionless/time_nd.h \
+    thermal/model/oneLayer2D/complex/h.h \
+    thermal/model/oneLayer2D/complex/h_surface.h \
+    thermal/model/oneLayer2D/complex/kappa.h \
+    thermal/model/oneLayer2D/complex/phase_amplitude.h \
+    thermal/model/oneLayer2D/complex/phases_amplitudes.h \
+    thermal/model/oneLayer2D/complex/surface_phase_amplitude.h \
+    thermal/model/oneLayer2D/complex/surface_phases_amplitudes.h \
+    thermal/model/oneLayer2D/complex/temperature.h \
+    thermal/model/oneLayer2D/complex/temperature_nd.h \
+    thermal/model/oneLayer2D/dimensional/deltaT.h \
+    thermal/model/oneLayer2D/dimensionless/b.h \
+    thermal/model/oneLayer2D/dimensionless/thermal_penetration.h \
+    thermal/model/oneLayer2D/phase_amplitude/surface_frequency_profile.h \
+    thermal/model/oneLayer2D/phase_amplitude/surface_radial_profile.h \
+    thermal/model/oneLayer2D/thermal_emission/fast_measurement.h \
+    thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h \
+    thermal/model/oneLayer2D/thermal_emission/measurement.h \
+    thermal/model/slab/import_slab.h \
+    thermal/model/tbc2009/complexT/nu/hat.h \
+    thermal/model/tbc2009/complexT/nu/tilde.h \
+    thermal/model/tbc2009/complexT/offset_detector/average_surface_phase_amplitude.h \
+    thermal/model/tbc2009/complexT/radiosity/J0.h \
+    thermal/model/tbc2009/complexT/radiosity/J1.h \
+    thermal/model/tbc2009/complexT/radiosity/J2.h \
+    thermal/model/tbc2009/complexT/average_surface_phase_amplitude.h \
+    thermal/model/tbc2009/complexT/F_tilde.h \
+    thermal/model/tbc2009/complexT/h_coat.h \
+    thermal/model/tbc2009/complexT/h_sub.h \
+    thermal/model/tbc2009/complexT/h_system.h \
+    thermal/model/tbc2009/complexT/H_tilde.h \
+    thermal/model/tbc2009/complexT/phase_amplitude.h \
+    thermal/model/tbc2009/complexT/phases_amplitudes.h \
+    thermal/model/tbc2009/complexT/surface_phase_amplitude.h \
+    thermal/model/tbc2009/complexT/temperature.h \
+    thermal/model/tbc2009/dimensionless/a.h \
+    thermal/model/tbc2009/dimensionless/b.h \
+    thermal/model/tbc2009/dimensionless/c.h \
+    thermal/model/tbc2009/dimensionless/coating_diffusivity_from_a.h \
+    thermal/model/tbc2009/dimensionless/coating_from_dimensionless.h \
+    thermal/model/tbc2009/dimensionless/gamma.h \
+    thermal/model/tbc2009/dimensionless/HeatingProperties.h \
+    thermal/model/tbc2009/dimensionless/import_heating_properties.h \
+    thermal/model/tbc2009/dimensionless/Lambda.h \
+    thermal/model/tbc2009/dimensionless/temperature.h \
+    thermal/model/tbc2009/dimensionless/thermal_penetration.h \
+    thermal/model/tbc2009/dimensionless/ThermalProperties.h \
+    thermal/model/tbc2009/offset_detector/average_surface_phases.h \
+    thermal/model/tbc2009/offset_detector/surface_T_phases_amplitudes.h \
+    thermal/model/tbc2009/average_surface_phases.h \
+    thermal/model/tbc2009/average_surface_phases_amplitudes.h \
+    thermal/model/two_layer/complex/phase.h \
+    thermal/model/two_layer/complex/surface_phase.h \
+    thermal/model/two_layer/complex/surface_phases.h \
+    thermal/model/two_layer/complex/surface_temperature.h \
+    thermal/model/two_layer/complex/temperature.h \
+    thermal/model/two_layer/dimensionless/a.h \
+    thermal/model/two_layer/dimensionless/angular_frequency.h \
+    thermal/model/two_layer/dimensionless/b.h \
+    thermal/model/two_layer/dimensionless/Kappa.h \
+    thermal/model/two_layer/dimensionless/length.h \
+    thermal/model/two_layer/dimensionless/time_nd.h \
+    thermal/pyrometry/twoColor/periodic/analysis_from_properties.h \
+    thermal/pyrometry/twoColor/periodic/analysis_from_properties_sweep.h \
+    thermal/pyrometry/twoColor/periodic/results.h \
+    thermal/pyrometry/twoColor/periodic/transient_analysis.h \
+    thermal/pyrometry/twoColor/periodic/transient_analysis_sweep.h \
+    thermal/pyrometry/twoColor/periodic/transient_analysis_sweep_results.h \
+    thermal/pyrometry/twoColor/calibrate_wavelength.h \
+    thermal/pyrometry/twoColor/calibrate_wavelengths.h
+
 unix {
     target.path = /usr/lib
     INSTALLS += target
@@ -327,3 +552,6 @@ QMAKE_CXXFLAGS += -isystem /usr/local/include
 unix|win32: LIBS += -lboost_program_options
 unix|win32: LIBS += -lboost_filesystem
 unix|win32: LIBS += -lboost_system
+
+DISTFILES += \
+    tat.xcodeproj
