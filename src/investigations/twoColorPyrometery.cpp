@@ -29,10 +29,9 @@ namespace twoColorPyrometery{
 
 auto run( filesystem::directory const & dir ) noexcept -> void
 {
-
-//  oneLayer2D::phase_analysis::fit_all_but_laser::diffusivity_from_phases(dir);
- // oneLayer2D::phase_analysis::fit_a_offset::fit_all::fit(dir);
-oneLayer2D::phase_analysis::fit_all::diffusivity_from_phases(dir);
+  oneLayer2D::phase_analysis::fit_all_but_laser::diffusivity_from_phases(dir);
+//  oneLayer2D::phase_analysis::fit_a_offset::fit_all::fit(dir);
+//oneLayer2D::phase_analysis::fit_all::diffusivity_from_phases(dir);
  
  // oneLayer2D::phase_analysis::fit_all_but_diffusivity::diffusivity_from_phases(dir);
  // oneLayer2D::phase_analysis::fit_all_but_detectorRadius::diffusivity_from_phases(dir);

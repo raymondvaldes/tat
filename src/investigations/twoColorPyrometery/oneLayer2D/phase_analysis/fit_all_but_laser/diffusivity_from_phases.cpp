@@ -31,9 +31,9 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   initial_slab.characteristic_length = quantity< si::length >(0.651 * millimeters);
   
   auto const frequencies = vector< quantity< frequency > >({
-    1.414 * hertz,
-    2 * hertz,
-    2.828 * hertz,
+//    1.414 * hertz,
+//    2 * hertz,
+//    2.828 * hertz,
     4 * hertz,
     5.657 * hertz,
     8 * hertz,
@@ -261,32 +261,34 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
 //0.680 * radians  //  2000 Hz
 //  } );
   
+  //T=168 F (no filter)
   auto const experimental_phases = vector< quantity< plane_angle > >( {
-.845* radians, // 1.414 Hz
-.887 * radians, // 2.0 Hz
-.923 * radians, //  2.828 Hz
-.952 * radians, //  4.0   Hz
-.984 * radians, //  5.657 Hz
-//
-.996 * radians, //  8     Hz
-.994 * radians, //  11.314  Hz
-.968 * radians, //  16.0    Hz
-.930 * radians, //  22.627  Hz
-.873 * radians, //  32.0    Hz
+//.746 * radians, // 1.414 Hz
+//.800 * radians, // 2.0 Hz
+//.854 * radians, //  2.828 Hz
+.884 * radians, //  4.0   Hz
+.920 * radians, //  5.657 Hz
 
-.810 * radians, //  45.255  Hz
-.756 * radians, //  64.0    Hz
-.699 * radians, //  90.510  Hz
+.953 * radians, //  8     Hz
+.972 * radians, //  11.314  Hz
+.970 * radians, //  16.0    Hz
+.953 * radians, //  22.627  Hz
+.917 * radians, //  32.0    Hz
 
-.685 * radians,  // 128      Hz
-.689 * radians,   // 181.019  Hz
-.704 * radians, // 256      Hz
-.711 * radians, // 362.039  Hz
-.710 * radians, // 512      Hz
-.705 * radians,  // 724.077
-.702 * radians,  // 1024
-.699 * radians,  //
-.700 * radians  //  2000 Hz
+.863 * radians, //  45.255  Hz
+.795 * radians, //  64.0    Hz
+.731 * radians, //  90.510  Hz
+
+.691 * radians,  // 128      Hz
+.673 * radians,   // 181.019  Hz
+.678 * radians, // 256      Hz
+
+.689 * radians, // 362.039  Hz
+.692 * radians, // 512      Hz
+.687 * radians,  // 724.077
+.677 * radians,  // 1024
+.675 * radians,  // 1448 Hz
+.672 * radians  //  2048 Hz
   } );
   
   auto const beam_radius = quantity< length >( 1.54 * millimeters );
