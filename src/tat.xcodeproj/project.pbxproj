@@ -303,6 +303,10 @@
 		AB9383E51AC22F8700F2D2DD /* a.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9383E31AC22F8700F2D2DD /* a.h */; };
 		AB9383E81AC22F9300F2D2DD /* b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB9383E61AC22F9300F2D2DD /* b.cpp */; };
 		AB9383E91AC22F9300F2D2DD /* b.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9383E71AC22F9300F2D2DD /* b.h */; };
+		AB98B97F1B9657CF00BC8B5E /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB98B97D1B9657CF00BC8B5E /* fit.cpp */; };
+		AB98B9801B9657CF00BC8B5E /* fit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB98B97E1B9657CF00BC8B5E /* fit.hpp */; };
+		AB98B9891B96602500BC8B5E /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB98B9871B96602500BC8B5E /* fit.cpp */; };
+		AB98B98A1B96602500BC8B5E /* fit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB98B9881B96602500BC8B5E /* fit.hpp */; };
 		AB9A3F9C1ACDFB860004882F /* function.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3F9B1ACDFB860004882F /* function.h */; };
 		AB9A3F9E1ACDFECA0004882F /* circle.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3F9D1ACDFECA0004882F /* circle.h */; };
 		AB9A3FA01ACE00330004882F /* offset_circle.h in Headers */ = {isa = PBXBuildFile; fileRef = AB9A3F9F1ACE00330004882F /* offset_circle.h */; };
@@ -894,6 +898,10 @@
 		AB9383E31AC22F8700F2D2DD /* a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = a.h; path = two_layer/dimensionless/a.h; sourceTree = "<group>"; };
 		AB9383E61AC22F9300F2D2DD /* b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = b.cpp; path = two_layer/dimensionless/b.cpp; sourceTree = "<group>"; };
 		AB9383E71AC22F9300F2D2DD /* b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = b.h; path = two_layer/dimensionless/b.h; sourceTree = "<group>"; };
+		AB98B97D1B9657CF00BC8B5E /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = fit_a_b1_b2_RC/fit_all/fit.cpp; sourceTree = "<group>"; };
+		AB98B97E1B9657CF00BC8B5E /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit.hpp; path = fit_a_b1_b2_RC/fit_all/fit.hpp; sourceTree = "<group>"; };
+		AB98B9871B96602500BC8B5E /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_RC/fit_all/fit.cpp; sourceTree = "<group>"; };
+		AB98B9881B96602500BC8B5E /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit.hpp; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_RC/fit_all/fit.hpp; sourceTree = "<group>"; };
 		AB9A3F9B1ACDFB860004882F /* function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = function.h; path = calculus/mean_value/function/function.h; sourceTree = "<group>"; };
 		AB9A3F9D1ACDFECA0004882F /* circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circle.h; path = calculus/mean_value/circle/circle.h; sourceTree = "<group>"; };
 		AB9A3F9F1ACE00330004882F /* offset_circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = offset_circle.h; path = calculus/mean_value/offset_circle/offset_circle.h; sourceTree = "<group>"; };
@@ -1450,6 +1458,7 @@
 		AB4871CE1AF5521800DFD3C1 /* phase_analysis */ = {
 			isa = PBXGroup;
 			children = (
+				AB98B9811B965B4000BC8B5E /* fit_a_b1_b2_RC */,
 				AB6333B71B8D0B8300418F6B /* fit_a_b1_b2_b3 */,
 				ABD5AE931AFD4B960068FC76 /* fit_a_offset */,
 				ABD5AE921AFD4B850068FC76 /* fit_a_b1_B2 */,
@@ -1554,14 +1563,13 @@
 		AB48721F1AF845F400DFD3C1 /* phase_analysis */ = {
 			isa = PBXGroup;
 			children = (
+				AB98B97B1B96571F00BC8B5E /* fit_a_b1_b2_RC */,
 				AB6333C11B8E221900418F6B /* fit_diffisuvity_view_radius_beam */,
 				AB6333941B8CF7AD00418F6B /* Best_fit.cpp */,
 				AB6333951B8CF7AD00418F6B /* Best_fit.h */,
 				AB0D6D5F1B8CE5C10044DA61 /* fit_diffusivity_offset_view_radius_beam */,
 				ABCC65D91B1FC03D001FFD47 /* fit_diffusivity_offset */,
 				ABE390EA1AFBFBB60063E789 /* uncertainty_analysis */,
-				AB4872511AFACD0B00DFD3C1 /* uncertainty_analysis.cpp */,
-				AB48724F1AFACCD300DFD3C1 /* uncertainty_analysis.h */,
 			);
 			name = phase_analysis;
 			path = oneLayer2D/estimate_parameters/phase_analysis;
@@ -2317,6 +2325,40 @@
 			name = complex;
 			sourceTree = "<group>";
 		};
+		AB98B97B1B96571F00BC8B5E /* fit_a_b1_b2_RC */ = {
+			isa = PBXGroup;
+			children = (
+				AB98B97C1B96579C00BC8B5E /* fit_all */,
+			);
+			name = fit_a_b1_b2_RC;
+			sourceTree = "<group>";
+		};
+		AB98B97C1B96579C00BC8B5E /* fit_all */ = {
+			isa = PBXGroup;
+			children = (
+				AB98B97D1B9657CF00BC8B5E /* fit.cpp */,
+				AB98B97E1B9657CF00BC8B5E /* fit.hpp */,
+			);
+			name = fit_all;
+			sourceTree = "<group>";
+		};
+		AB98B9811B965B4000BC8B5E /* fit_a_b1_b2_RC */ = {
+			isa = PBXGroup;
+			children = (
+				AB98B9821B965B4C00BC8B5E /* fit_all */,
+			);
+			name = fit_a_b1_b2_RC;
+			sourceTree = "<group>";
+		};
+		AB98B9821B965B4C00BC8B5E /* fit_all */ = {
+			isa = PBXGroup;
+			children = (
+				AB98B9871B96602500BC8B5E /* fit.cpp */,
+				AB98B9881B96602500BC8B5E /* fit.hpp */,
+			);
+			name = fit_all;
+			sourceTree = "<group>";
+		};
 		AB9A3F961ACDFB0A0004882F /* calculus */ = {
 			isa = PBXGroup;
 			children = (
@@ -2725,6 +2767,8 @@
 		ABE390EA1AFBFBB60063E789 /* uncertainty_analysis */ = {
 			isa = PBXGroup;
 			children = (
+				AB4872511AFACD0B00DFD3C1 /* uncertainty_analysis.cpp */,
+				AB48724F1AFACCD300DFD3C1 /* uncertainty_analysis.h */,
 			);
 			name = uncertainty_analysis;
 			sourceTree = "<group>";
@@ -3298,6 +3342,7 @@
 				AB7A69471AB24F3E00249A6E /* find_unique_frequencies_in_files.h in Headers */,
 				ABFB165F1AF1726B0093BF5B /* circle_complex.h in Headers */,
 				AB7A69431AB24F1B00249A6E /* find_unique_labels_in_files.h in Headers */,
+				AB98B9801B9657CF00BC8B5E /* fit.hpp in Headers */,
 				ABFC80801AC67D190059E9D7 /* integrate.h in Headers */,
 				ABEF4EC31948D4A500B44AD5 /* thermalData.hpp in Headers */,
 				AB8AA4381A5C68650065E7F8 /* getline.h in Headers */,
@@ -3394,6 +3439,7 @@
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
 				AB7F19941ACCB1300086E8F8 /* import_heating_properties.h in Headers */,
 				AB932DF51A6DC0E700ECF117 /* sine.h in Headers */,
+				AB98B98A1B96602500BC8B5E /* fit.hpp in Headers */,
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
 				AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */,
 				ABA48C381A7843F90025666F /* range.h in Headers */,
@@ -3801,6 +3847,7 @@
 				AB553C4F195DE60100E2B7D1 /* interval.cpp in Sources */,
 				AB4871FB1AF708A900DFD3C1 /* calibrate_wavelengths.cpp in Sources */,
 				ABEF4EB61948D4A500B44AD5 /* methods.cpp in Sources */,
+				AB98B97F1B9657CF00BC8B5E /* fit.cpp in Sources */,
 				ABCC65E41B1FC3AE001FFD47 /* frequency_sweep.cpp in Sources */,
 				ABEF4EBA1948D4A500B44AD5 /* poptea.cpp in Sources */,
 				AB841C681AC4EA66000CE81D /* temperature.cpp in Sources */,
@@ -3860,6 +3907,7 @@
 				ABEF4EA71948D4A500B44AD5 /* radiativeSysProp.cpp in Sources */,
 				AB0DFE01195242AA007DF69B /* split.cpp in Sources */,
 				AB7F19961ACCB14B0086E8F8 /* import_heating_properties.cpp in Sources */,
+				AB98B9891B96602500BC8B5E /* fit.cpp in Sources */,
 				AB7A69421AB24F1B00249A6E /* find_unique_labels_in_files.cpp in Sources */,
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,

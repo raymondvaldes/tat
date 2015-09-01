@@ -7,6 +7,7 @@
 //
 
 #include "fit.hpp"
+
 #include <cassert>
 #include <iostream>
 #include <tuple>
