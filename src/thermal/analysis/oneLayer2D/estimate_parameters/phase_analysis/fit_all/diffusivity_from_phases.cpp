@@ -77,22 +77,24 @@ auto fit
   // establish parameters to fit with initial values
   auto const b2min = 0.0001;
   auto const b2max = 20.;
+  auto const b1min = 0.005;
+  auto const b1max = 20.;
 
   auto model_parameters = vector< double >
   {
     kx_limiter1( 1.0 ) ,  // diffusivity ratio
-    kx_limiter2(  b1_i.value(), 0.005, 20. ),
+    kx_limiter2(  b1_i.value(), b1min, b1max ),
     kx_limiter2(  b2_i.value(), b2min, b2max )
   };
   
   // parameter estimation algorithm
-  auto const update_system_properties = [&alpha_scale, b2min, b2max, &L] ( const double * x )
+  auto const update_system_properties = [&alpha_scale, b2min, b2max, b1min, b1max, &L] ( const double * x )
   noexcept
   {
     auto const alpha_value = x_limiter1( x[0] ) ;
     auto const alpha = quantity<si::thermal_diffusivity>::from_value(
      alpha_value * alpha_scale  );
-    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.005, 20. ) ); //  detector radius
+    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], b1min, b1max ) ); //  laser radius
     auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[2], b2min, b2max ) ); //  detector radius
 
   
