@@ -33,150 +33,265 @@ auto fit( filesystem::directory const & dir ) -> void
 //    1.414 * hertz,
 //    2 * hertz,
 //    2.828 * hertz,
-    4 * hertz,
-    5.657 * hertz,
-    8 * hertz,
+//    4 * hertz,
+//    5.657 * hertz,
+//    8 * hertz,
     11.314 * hertz,
     16 * hertz,
     22.627 * hertz,
+
     32 * hertz,
     
-//    45.255 * hertz,
-//    64 * hertz,
-//    90.51 * hertz,
-
-//    128 * hertz,
-//    181.019 * hertz,
-//    256 * hertz,
-//    362.039 * hertz,
-//    
-//    512 * hertz,
-//    724.077 * hertz,
-//    1024 * hertz,
+    45.255 * hertz,
+    64 * hertz,
+    90.51 * hertz,
+//
+    128 * hertz,
+    181.019 * hertz,
+    256 * hertz,
+    362.039 * hertz,
+    
+    512 * hertz,
+    724.077 * hertz,
+    1024 * hertz,
 //    1448.155 * hertz,
 //    2048 * hertz
   });
 
-////  //may 22
-//  auto const experimental_phases = vector< quantity< plane_angle > >( {
-//0.673 * radians, // 1.414 Hz
-//0.733 * radians, // 2.0 Hz
-//0.791 * radians, //  2.828 Hz
-//0.846 * radians, //  4.0   Hz
-//0.897 * radians, //  5.657 Hz
-//
-//0.944 * radians, //  8     Hz
-//0.970 * radians, //  11.314  Hz
-//0.984 * radians, //  16.0    Hz
-//0.968 * radians, //  22.627  Hz
-//0.934 * radians, //  32.0    Hz
-//
-//0.874 * radians, //  45.255  Hz
-//0.797 * radians, //  64.0    Hz
-//0.739 * radians, //  90.510  Hz
-//
-//0.688 * radians,  // 128      Hz
-//0.674 * radians,   // 181.019  Hz
-//0.682 * radians, // 256      Hz
-//0.692 * radians, // 362.039  Hz
-//0.695 * radians, // 512      Hz
-//0.691 * radians,  //
-//0.687 * radians,  //
-//0.682 * radians,  //
-//0.680 * radians  //  2000 Hz
-//  } );
 
-////  june2
-//  auto const experimental_phases = vector< quantity< plane_angle > >( {
-//.634 * radians, // 1.414 Hz
-//.681 * radians, // 2.0 Hz
-//.734 * radians, //  2.828 Hz
-//.786 * radians, //  4.0   Hz
-//.836 * radians, //  5.657 Hz
-//
-//.883 * radians, //  8     Hz
-//.906 * radians, //  11.314  Hz
-//.934 * radians, //  16.0    Hz
-//.936 * radians, //  22.627  Hz
-//.901 * radians, //  32.0    Hz
-//
-//.871 * radians, //  45.255  Hz
-//.795 * radians, //  64.0    Hz
-//.743 * radians, //  90.510  Hz
-//
-//.713 * radians,  // 128      Hz
-//.702 * radians,   // 181.019  Hz
-//.713 * radians, // 256      Hz
-//.728 * radians, // 362.039  Hz
-//.737 * radians, // 512      Hz
-//.738 * radians,  //
-//.739 * radians,  //
-//.744 * radians,  //
-//.752 * radians  //  2000 Hz
-//  } );
-  
-//  auto const experimental_phases = vector< quantity< plane_angle > >( {
-//.757 * radians, // 1.414 Hz
-//.812 * radians, // 2.0 Hz
-//.862 * radians, //  2.828 Hz
-//.904 * radians, //  4.0   Hz
-//.937 * radians, //  5.657 Hz
-//
-//.968 * radians, //  8     Hz
-//.974 * radians, //  11.314  Hz
-//.966 * radians, //  16.0    Hz
-//.949 *  radians, //  22.627  Hz
-//.895 * radians, //  32.0    Hz
-//
-//.831 * radians, //  45.255  Hz
-//.763 * radians, //  64.0    Hz
-//.714 * radians, //  90.510  Hz
-//
-////.710 * radians,  // 128      Hz
-////.729 * radians,   // 181.019  Hz
-////.742 * radians, // 256      Hz
-////.747 * radians, // 362.039  Hz
-////.750 * radians, // 512      Hz
-////.755 * radians,  //
-////.756 * radians,  //
-////.758 * radians,  //
-////.765 * radians  //  2000 Hz
-//  } );
-  
-  //T=168 F (no filter)
-  auto const experimental_phases = vector< quantity< plane_angle > >( {
-//.746 * radians, // 1.414 Hz
-//.800 * radians, // 2.0 Hz
-//.854 * radians, //  2.828 Hz
-.884 * radians, //  4.0   Hz
-.920 * radians, //  5.657 Hz
+  //T = 58 deg C
+// Sample H
+auto const L = quantity< length > ( .62 * millimeters  );// sample F
+auto const experimental_phases = vector< quantity< plane_angle > >( {
 
-.953 * radians, //  8     Hz
-.972 * radians, //  11.314  Hz
-.970 * radians, //  16.0    Hz
-.953 * radians, //  22.627  Hz
-.917 * radians, //  32.0    Hz
+//0.638 * radians, //  1 Hz
+//0.645 * radians, //  1.414     Hz
+//0.647 * radians, //  2  Hz
+//0.632 * radians, //  2.828    Hz
+//0.626 * radians, //  4  Hz
 
-//.863 * radians, //  45.255  Hz
-//.795 * radians, //  64.0    Hz
-//.731 * radians, //  90.510  Hz
+//0.607 * radians, //  5.657 Hz
+//0.603 * radians, //  8     Hz
+1.017 * radians, //  11.314  Hz
+1.001 * radians, //  16.0    Hz
+0.968 * radians, //  22.627  Hz
+0.909 * radians, //  32.0    Hz
 
-//.691 * radians,  // 128      Hz
-//.673 * radians,   // 181.019  Hz
-//.678 * radians, // 256      Hz
+0.844 * radians, //  45.255  Hz
+0.780 * radians, //  64.0    Hz
+0.743 * radians, //  90.510  Hz
+
+0.740 * radians,  // 128      Hz
+0.754 * radians,   // 181.019  Hz
+0.771 * radians, // 256      Hz
+
+0.781 * radians, // 362.039  Hz
+0.785 * radians, // 512      Hz
+
+0.787 * radians,  // 724.077
+0.792 * radians,  // 1024
+//0.794 * radians,  // 1448 Hz
+//0.802 * radians,  //  2048 Hz
+//0.78539816339 * radians, // 2896.3  Hz
 //
-//.689 * radians, // 362.039  Hz
-//.692 * radians, // 512      Hz
-//.687 * radians,  // 724.077
-//.677 * radians,  // 1024
-//.675 * radians,  // 1448 Hz
-//.672 * radians  //  2048 Hz
+//0.78539816339 * radians, // 4096      Hz
+//0.78539816339 * radians,  // 5792.6
+//0.78539816339 * radians,  // 8192
+//0.78539816339 * radians,  // 11585 Hz
   } );
   
-  slab_initial.characteristic_length = quantity< si::length >(.65 * millimeters);
+  
+//T = 58 deg C
+//// Sample C
+//auto const L = quantity< length > ( 1.614 * millimeters  );// sample F
+//auto const experimental_phases = vector< quantity< plane_angle > >( {
+//
+////0.638 * radians, //  1 Hz
+////0.645 * radians, //  1.414     Hz
+////0.647 * radians, //  2  Hz
+////0.632 * radians, //  2.828    Hz
+////0.626 * radians, //  4  Hz
+//
+////0.607 * radians, //  5.657 Hz
+////0.603 * radians, //  8     Hz
+//0.613 * radians, //  11.314  Hz
+//0.633 * radians, //  16.0    Hz
+//0.664 * radians, //  22.627  Hz
+//0.696 * radians, //  32.0    Hz
+//
+//0.718 * radians, //  45.255  Hz
+//0.736 * radians, //  64.0    Hz
+//0.749 * radians, //  90.510  Hz
+//
+//0.760 * radians,  // 128      Hz
+//0.768 * radians,   // 181.019  Hz
+//0.774 * radians, // 256      Hz
+//
+//0.778 * radians, // 362.039  Hz
+//0.782 * radians, // 512      Hz
+//
+//0.785 * radians,  // 724.077
+//0.790 * radians,  // 1024
+////0.794 * radians,  // 1448 Hz
+////0.802 * radians,  //  2048 Hz
+////0.78539816339 * radians, // 2896.3  Hz
+////
+////0.78539816339 * radians, // 4096      Hz
+////0.78539816339 * radians,  // 5792.6
+////0.78539816339 * radians,  // 8192
+////0.78539816339 * radians,  // 11585 Hz
+//  } );
 
-  auto const beam_radius = quantity< length >( 1.54 * millimeters );
-  auto const detector_offset = quantity< length >( .3 * millimeters  ) ; // initial value
+////// Sample D
+//auto const L = quantity< length > ( 10.13 * millimeters  ); //sample D
+//auto const experimental_phases = vector< quantity< plane_angle > >( {
+//
+////0.638 * radians, //  1 Hz
+////0.645 * radians, //  1.414     Hz
+////0.647 * radians, //  2  Hz
+////0.632 * radians, //  2.828    Hz
+////0.626 * radians, //  4  Hz
+//
+////0.607 * radians, //  5.657 Hz
+////0.603 * radians, //  8     Hz
+//0.611 * radians, //  11.314  Hz
+//0.641 * radians, //  16.0    Hz
+//0.669 * radians, //  22.627  Hz
+//0.693 * radians, //  32.0    Hz
+//
+//0.714 * radians, //  45.255  Hz
+//0.728 * radians, //  64.0    Hz
+//0.744 * radians, //  90.510  Hz
+//
+//0.755 * radians,  // 128      Hz
+//0.761 * radians,   // 181.019  Hz
+//0.767 * radians, // 256      Hz
+//
+//0.770 * radians, // 362.039  Hz
+//0.773 * radians, // 512      Hz
+//
+//0.774 * radians,  // 724.077
+//0.778 * radians,  // 1024
+////0.782 * radians,  // 1448 Hz
+////0.789 * radians,  //  2048 Hz
+////0.800 * radians, // 2896.3  Hz
+////
+////0.816 * radians, // 4096      Hz
+////.842 * radians,  // 5792.6
+////.877 * radians,  // 8192
+////0.928 * radians,  // 11585 Hz
+//  } );
+  
+//// fits well in 8-64 Hz range.  AVgs = 1000, StoN 45 (run 4) June 21
+//  auto const experimental_phases = vector< quantity< plane_angle > >( {
+////.808 * radians, // 1.414 Hz
+////.856 * radians, // 2.0 Hz
+////.904 * radians, //  2.828 Hz
+////.949 * radians, //  4.0   Hz
+////.980 * radians, //  5.657 Hz
+//
+//1.019 * radians, //  8     Hz
+//1.050 * radians, //  11.314  Hz
+//1.064 * radians, //  16.0    Hz
+//1.058 * radians, //  22.627  Hz
+//1.008 * radians, //  32.0    Hz
+//
+//.947 * radians, //  45.255  Hz
+//.860 * radians, //  64.0    Hz
+//.771 * radians, //  90.510  Hz
+////
+////.729 * radians,  // 128      Hz
+////.687 * radians,   // 181.019  Hz
+////.684 * radians, // 256      Hz
+////
+////.694 * radians, // 362.039  Hz
+////.703 * radians, // 512      Hz
+////.704 * radians,  // 724.077
+////.700 * radians,  // 1024
+////.696 * radians,  // 1448 Hz
+////.704 * radians  //  2048 Hz
+//  } );
+  
+//////T = 58 deg C
+//// day two without aperture
+//// Sample E
+//auto const L = quantity< length > ( 0.8 * millimeters  );// sample E
+//auto const experimental_phases = vector< quantity< plane_angle > >( {
+//
+//.895 * radians, //  2.0  Hz
+//.937 * radians, //  2.828    Hz
+//.977 * radians, // 4.0  Hz
+//1.001 * radians, //  5.657 Hz
+//
+//1.008 * radians, //  8     Hz
+//.994 * radians, //  11.314  Hz
+//.955 * radians, //  16.0    Hz
+//.889 * radians, //  22.627  Hz
+//.824 * radians, //  32.0    Hz
+//
+//.771 * radians, //  45.255  Hz
+//.738 * radians, //  64.0    Hz
+//.736 * radians, //  90.510  Hz
+//
+//(.756 - .00133) * radians,  // 128      Hz
+//(.772 - .0024) * radians,   // 181.019  Hz
+//(.779 - .0026) * radians, // 256      Hz
+//
+//(.782 - .0036) * radians, // 362.039  Hz
+//(.783 - .0051) * radians, // 512      Hz
+//
+//(0.785 - .0073) * radians,  // 724.077
+//(0.788 - .0103) * radians,  // 1024
+////
+////.792 * radians,  // 1448 Hz
+////.798 * radians  //  2048 Hz
+//  } );
+ 
+////T = 58 deg C
+//// Sample F
+//auto const L = quantity< length > ( 1.2 * millimeters  );// sample F
+//auto const experimental_phases = vector< quantity< plane_angle > >( {
+//
+////0.821 * radians, //  5.657 Hz
+////0.794 * radians, //  8     Hz
+////0.757 * radians, //  11.314  Hz
+////0.722 * radians, //  16.0    Hz
+//0.700 * radians, //  22.627  Hz
+//0.698 * radians, //  32.0    Hz
+//
+//0.716 * radians, //  45.255  Hz
+//0.739 * radians, //  64.0    Hz
+//0.756 * radians, //  90.510  Hz
+//
+//0.771 * radians,  // 128      Hz
+//0.775 * radians,   // 181.019  Hz
+//
+////corrected
+//0.778 * radians, // 256      Hz
+//0.780 * radians, // 362.039  Hz
+//0.7815 * radians, // 512      Hz
+//0.7835 * radians,  // 724.077
+//.7845 * radians,  // 1024
+//
+////original
+////0.779 * radians, // 256      Hz
+////0.782 * radians, // 362.039  Hz
+////0.784 * radians, // 512      Hz
+////0.787 * radians,  // 724.077
+////0.791 * radians,  // 1024
+//
+////0.775 * radians,  // 1448 Hz
+////0.775 * radians  //  2048 Hz
+//  } );
+//  
+  
+  auto const alpha = quantity<thermal_diffusivity>( 40 * square_millimeters / second);
+  
+  slab_initial.characteristic_length = L;
+  slab_initial.set_diffusivity_update_k_hold_rhoCp( alpha );
+
+  auto const beam_radius = quantity< length >( 2.0 * millimeters );
+  auto const detector_offset = quantity< length >( .2 * millimeters  ) ; // initial value
 
   auto const bestFit_results = thermal::analysis::oneLayer2D::estimate_parameters::phase_analysis::fit_diffusivity_offset::fit_all::fit(
     frequencies, experimental_phases , slab_initial, beam_radius,

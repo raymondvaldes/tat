@@ -27,13 +27,13 @@ BOOST_AUTO_TEST_SUITE( import )
 BOOST_AUTO_TEST_CASE( constructor ) {
 
   BOOST_CHECK_NO_THROW( columnData(
-  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt" ) ) ;
+  "/Users/raymondvaldes/Dropbox/code/tat/test/tools/interface/import/data.txt" ) ) ;
   
   BOOST_CHECK_THROW( columnData( "mydummy.txt" ) , std::invalid_argument ) ;
   
   BOOST_CHECK_THROW(
     columnData(
-    "/Users/raymondvaldes/code/tat/test/tools/interface/import/data_badForm.txt"
+    "/Users/raymondvaldes/Dropbox/code/tat/test/tools/interface/import/data_badForm.txt"
     ) , std::invalid_argument ) ;
   
 }
@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE( getRow ) {
   typedef std::vector<std::string> vector_strings;
 
   auto const myInput =
-  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
+  "/Users/raymondvaldes/Dropbox/code/tat/test/tools/interface/import/data.txt";
   columnData myData( myInput ) ;
 
   auto const firstRow = myData.getRow( 1 ) ;
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE( getColumn ) {
   typedef std::vector<std::string> vector_strings;
 
   auto const myInput =
-  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
+  "/Users/raymondvaldes/Dropbox/code/tat/test/tools/interface/import/data.txt";
   columnData myData( myInput ) ;
 
   auto const extractedColumn = myData.getColumn( 2 ) ;
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE( getColumn ) {
 BOOST_AUTO_TEST_CASE( getDataFile ) {
   typedef std::vector<std::string> vector_strings;
   auto const myInput =
-  "/Users/raymondvaldes/code/tat/test/tools/interface/import/graphite_400F_4.4_2.82843_0.dat";
+  "/Users/raymondvaldes/Dropbox/code/tat/test/tools/interface/import/graphite_400F_4.4_2.82843_0.dat";
   
   columnData myData( myInput ) ;
 
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE( getDataFile ) {
 BOOST_AUTO_TEST_CASE( getElement ) {
 
   auto const myInput =
-  "/Users/raymondvaldes/code/tat/test/tools/interface/import/data.txt";
+  "/Users/raymondvaldes/Dropbox/code/tat/test/tools/interface/import/data.txt";
   columnData myData( myInput ) ;
   
   auto const pullFirst = myData.getElement( 1 , 1 ) ;

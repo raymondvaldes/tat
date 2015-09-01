@@ -25,6 +25,7 @@ using math::construct::range_1og10;
 using namespace units;
 using math::complex::extract_phases_from_properties;
 using math::complex::extract_amplitudes_from_properties;
+using std::cout;
 
 namespace investigations{
 namespace twoColorPyrometery{
@@ -33,15 +34,16 @@ namespace temp_sweep{
 
 auto surface_radial_profile( filesystem::directory const & ) -> void
 {
-  auto const beam_radius = quantity<length>( 1.2 * millimeters);
+  auto const beam_radius = quantity<length>( 2.0 * millimeters);
   auto const deltaT = quantity<si::temperature>( 1.0 * kelvin );
   
-  auto const L = quantity<length>( 0.65 * millimeters   );
-  auto const alpha = quantity< thermal_diffusivity>( 35.0 * square_millimeters / second );
-  auto const f = quantity< si::frequency >( 2000 * hertz );
+  auto const L = quantity<length>( .1 * millimeters   );
+  auto const alpha = quantity< thermal_diffusivity>( 70 * square_millimeters / second );
+  
+  auto const f = quantity< si::frequency >( 10 * hertz );
   
   auto const radial_positions =
-  range_1og10< quantity< si::dimensionless>>( .01, 2.0 , 50 );
+  range_1og10< quantity< si::dimensionless> >( .01, 10 , 200 );
   
   auto const b_laser = b( beam_radius, L );
   auto const ps =
@@ -52,15 +54,15 @@ auto surface_radial_profile( filesystem::directory const & ) -> void
   auto i = size_t(0);
   auto const p_ref = ps[0].amplitude;
   for_each( ps, [&radial_positions, &i, &p_ref]( auto& p ){
-    std::cout << radial_positions[i] << "\t" <<  p.amplitude/p_ref << "\t" << p.phase << "\n";
+    cout << radial_positions[i] << "\t" <<  p.amplitude/p_ref << "\t" << p.phase << "\n";
     ++i;
   });
   
-  auto const phases = extract_phases_from_properties( ps );
+//  auto const phases = extract_phases_from_properties( ps );
   auto const amplitudes = extract_amplitudes_from_properties(ps);
   
   
-  plot::simple_XY(radial_positions, phases );
+//  plot::simple_XY(radial_positions, phases );
   plot::simple_XY(radial_positions, amplitudes );
 
 }

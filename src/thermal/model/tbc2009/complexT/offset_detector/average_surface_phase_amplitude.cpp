@@ -54,6 +54,7 @@ auto average_surface_phase_amplitude
   quantity< plane_angle >::from_value( mean_value::offset_circle( T_phase, a, b ) );
 
 
+///DO  NOT DELETE CODE!!
 //  auto const T_amplitude =
 //  [ hp, tp, l ]( quantity< length > const r ) noexcept -> double
 //  {

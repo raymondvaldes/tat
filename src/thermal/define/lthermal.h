@@ -94,6 +94,12 @@ frequency_from_thermalPenetration(
   units::quantity< units::si::length > const & L )
 noexcept -> units::quantity< units::si::frequency >;
   
+auto
+thermal_penetration_dimensional(
+  units::quantity< units::si::thermal_diffusivity > const alpha,
+  units::quantity< units::si::angular_frequency > const omega
+)
+noexcept -> units::quantity< units::si::length >;
   
 } // namespace define
 

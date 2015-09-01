@@ -8,18 +8,17 @@
 
 #include "investigations/twoColorPyrometery/oneLayer2D/frequency_sweep/surface_phases_with_beam_diameter.h"
 
-#include "thermal/model/slab/import_slab.h"
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
 #include "units.h"
 #include "math/complex/extract_phases_from_properties.h"
 #include "plot/gnuplot.h"
+#include "cout/vector/print.h"
 
 #include "thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h"
 using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
 
 using namespace units;
-using thermal::model::slab::import ;
-
+using cout::vector::print;
 using thermal::model::oneLayer2D::dimensionless::b;
 using math::complex::extract_phases_from_properties;
 using plot::simple_XY;
@@ -34,9 +33,7 @@ auto surface_phases_with_beam_diameter( filesystem::directory const & dir ) -> v
 {
   auto const deltaT = quantity< si::temperature > ( 1.0 * kelvin );
 
-  auto const initial_slab = import( dir, "initial_slab.xml" ) ;
   auto const frequencies = vector< quantity< frequency > >({
-    1.414 * hertz,
     2 * hertz,
     2.828 * hertz,
     4 * hertz,
@@ -57,16 +54,21 @@ auto surface_phases_with_beam_diameter( filesystem::directory const & dir ) -> v
     724.077 * hertz,
     1024 * hertz,
     1448.155 * hertz,
-    2048 * hertz
+    2048 * hertz,
+    2896.31 * hertz,
+    4096 * hertz,
+    5792.62 * hertz,
+    8192 * hertz,
+    11585.25 * hertz
   });
   
   // establish nondimensional fitting parameters
-  auto const L = initial_slab.characteristic_length;
+  auto const L = quantity< length > ( 5 * millimeters  );
 
-  auto const beam_radius = quantity< length >( 1.54 * millimeters );
+  auto const beam_radius = quantity< length >( 2.0 * millimeters );
   
-  auto const detector_view_radius = quantity< length>( .0001 * millimeters  ) ;
-  auto const alpha = quantity<thermal_diffusivity>(30 * square_millimeters / second);
+  auto const detector_view_radius = quantity< length >( 0.5 * millimeters  ) ;
+  auto const alpha = quantity<thermal_diffusivity>( 70 * square_millimeters / second);
 
   //(diffusivity shifts the curve left and right)
   
@@ -78,6 +80,9 @@ auto surface_phases_with_beam_diameter( filesystem::directory const & dir ) -> v
     b1, deltaT, b2, frequencies, L, alpha );
     
   auto const phases = extract_phases_from_properties( predictions  ) ;
+  
+  
+  print( phases );
   
   plot::simple_XY(frequencies, phases);
 }

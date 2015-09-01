@@ -33,12 +33,13 @@ namespace frequency_sweep{
 
 auto surface_phases_at_radial_position( filesystem::directory const & ) -> void
 {
-  auto const L = quantity<length>( 661. * micrometers);
-  auto const beam_radius = quantity<length>( 2.1 * millimeters);
   auto const deltaT = quantity<si::temperature>( 1.0 * kelvin );
   
-  auto const alpha = quantity< thermal_diffusivity>( 22 * square_millimeters / second );
-  auto const radial_position = quantity<dimensionless>( 1.0 );
+  auto const radial_position = quantity<dimensionless>( 0.2 );
+  auto const L = quantity< si::length> ( .8 * millimeters );
+  auto const beam_radius = quantity< length >( 2.0 * millimeters );
+  auto const alpha = quantity<thermal_diffusivity>(40 * square_millimeters / second);
+  
   
   //( The radial position influences the shape of the profile,
   //  but not the "intensity" of it ).
@@ -46,7 +47,7 @@ auto surface_phases_at_radial_position( filesystem::directory const & ) -> void
   // Use the radial position to fit the phase curve
   
   auto const frequencies =
-  range_1og10< quantity< si::frequency > >( 1. * hertz, 2000. * hertz, 30 );
+  range_1og10< quantity< si::frequency > >( 1. * hertz, 10000 * hertz, 30 );
   
   auto const b_laser = b( beam_radius, L );
   auto const ps = thermal::model::oneLayer2D::complex::temperature::surface_frequency_profile(
@@ -63,7 +64,7 @@ auto surface_phases_at_radial_position( filesystem::directory const & ) -> void
   auto const amplitudes = extract_amplitudes_from_properties(ps);
   
   plot::simple_XY( frequencies, phases );
-  plot::simple_XY( frequencies, amplitudes );
+ // plot::simple_XY( frequencies, amplitudes );
 }
 
 } // namespace frequency_sweep

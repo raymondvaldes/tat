@@ -174,6 +174,10 @@ static auto const megavolts = mega * volts;
 static auto const gigavolts = giga * volts;
 
 
+  
+//BOOST_UNITS_STATIC_CONSTANT( millimeters, length );
+
+
 using boost::units::si::square_meter;
 static auto const square_millimeters = millimeters * millimeters ;
 

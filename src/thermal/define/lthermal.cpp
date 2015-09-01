@@ -55,6 +55,21 @@ noexcept -> double
 }
 
 auto
+thermal_penetration_dimensional(
+  units::quantity<units::si::thermal_diffusivity> const alpha,
+  units::quantity<units::si::angular_frequency> const omega
+)
+noexcept -> units::quantity< units::si::length >
+{
+  assert( alpha.value() > 0 ) ;
+  assert( omega.value() > 0 ) ;
+
+  auto const thermalPenetration = sqrt( ( alpha  / omega ) * radians )  ;
+  
+  return thermalPenetration ;
+}
+
+auto
 thermal_penetration(
   units::quantity<units::si::thermal_diffusivity> const alpha,
   units::quantity<units::si::angular_frequency> const omega,

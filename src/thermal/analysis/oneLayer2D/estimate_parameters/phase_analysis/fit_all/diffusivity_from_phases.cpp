@@ -75,25 +75,28 @@ auto fit
   auto const alpha_scale = alpha.value();
 
   // establish parameters to fit with initial values
+  auto const b2min = 0.0001;
+  auto const b2max = 20.;
+
   auto model_parameters = vector< double >
   {
     kx_limiter1( 1.0 ) ,  // diffusivity ratio
-    kx_limiter2(  b1_i.value(), 0.05, 20. ),
-    kx_limiter2(  b2_i.value(), 0.01, 20. )
+    kx_limiter2(  b1_i.value(), 0.005, 20. ),
+    kx_limiter2(  b2_i.value(), b2min, b2max )
   };
   
   // parameter estimation algorithm
-  auto const update_system_properties = [&alpha_scale] ( const double * x )
+  auto const update_system_properties = [&alpha_scale, b2min, b2max, &L] ( const double * x )
   noexcept
   {
     auto const alpha_value = x_limiter1( x[0] ) ;
     auto const alpha = quantity<si::thermal_diffusivity>::from_value(
      alpha_value * alpha_scale  );
-    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.05, 20. ) ); //  detector radius
-    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[2], 0.01, 20. ) ); //  detector radius
+    auto const b1 =  quantity<si::dimensionless>( x_limiter2( x[1], 0.005, 20. ) ); //  detector radius
+    auto const b2 =  quantity<si::dimensionless>( x_limiter2( x[2], b2min, b2max ) ); //  detector radius
 
   
-    std::cout << alpha << "\t" << b1 << "\t" << b2 << "\n" ;
+    std::cout << alpha << "\t" << b1 *L<< "\t" << b2*L << "\n" ;
     auto const updated_elements = make_tuple( alpha, b1, b2 ) ;
     return updated_elements ;
   };
@@ -156,6 +159,8 @@ auto fit
 
   auto const result =
   Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );
+  
+  std::cout << "\n" << result.phase_goodness_of_fit  << "\n";
   
  return result;
 }
