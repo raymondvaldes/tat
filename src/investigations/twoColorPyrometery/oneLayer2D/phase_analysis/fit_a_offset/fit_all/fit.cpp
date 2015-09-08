@@ -31,11 +31,11 @@ auto fit( filesystem::directory const & dir ) -> void
   
   auto const frequencies = vector< quantity< frequency > >({
 //    1.414 * hertz,
-//    2 * hertz,
-//    2.828 * hertz,
-//    4 * hertz,
-//    5.657 * hertz,
-//    8 * hertz,
+    2 * hertz,
+    2.828 * hertz,
+    4 * hertz,
+    5.657 * hertz,
+    8 * hertz,
     11.314 * hertz,
     16 * hertz,
     22.627 * hertz,
@@ -52,54 +52,97 @@ auto fit( filesystem::directory const & dir ) -> void
     362.039 * hertz,
     
     512 * hertz,
-    724.077 * hertz,
-    1024 * hertz,
+//    724.077 * hertz,
+//    1024 * hertz,
 //    1448.155 * hertz,
 //    2048 * hertz
   });
 
 
-  //T = 58 deg C
-// Sample H
-auto const L = quantity< length > ( .62 * millimeters  );// sample F
+//T = 78 deg C
+// Sample F
+auto const L = quantity< length > ( 0.8 * millimeters  );// sample E
 auto const experimental_phases = vector< quantity< plane_angle > >( {
 
-//0.638 * radians, //  1 Hz
-//0.645 * radians, //  1.414     Hz
-//0.647 * radians, //  2  Hz
-//0.632 * radians, //  2.828    Hz
-//0.626 * radians, //  4  Hz
+//1.138 * radians, //  1  Hz
+//1.186 * radians, //  1.414  Hz
+1.222 * radians, //  2.0  Hz
+1.251 * radians, //  2.828    Hz
+1.262 * radians, // 4.0  Hz
+1.254 * radians, //  5.657 Hz
 
-//0.607 * radians, //  5.657 Hz
-//0.603 * radians, //  8     Hz
-1.017 * radians, //  11.314  Hz
-1.001 * radians, //  16.0    Hz
-0.968 * radians, //  22.627  Hz
-0.909 * radians, //  32.0    Hz
+1.221 * radians, //  8     Hz
+1.166 * radians, //  11.314  Hz
+1.078 * radians, //  16.0    Hz
+0.974 * radians, //  22.627  Hz
+0.873 * radians, //  32.0    Hz
 
-0.844 * radians, //  45.255  Hz
-0.780 * radians, //  64.0    Hz
-0.743 * radians, //  90.510  Hz
+0.796 * radians, //  45.255  Hz
+0.756 * radians, //  64.0    Hz
+0.750 * radians, //  90.510  Hz
 
-0.740 * radians,  // 128      Hz
-0.754 * radians,   // 181.019  Hz
-0.771 * radians, // 256      Hz
+0.770 * radians,  // 128      Hz
+0.783 * radians,   // 181.019  Hz
+0.787 * radians, // 256      Hz
 
-0.781 * radians, // 362.039  Hz
-0.785 * radians, // 512      Hz
+0.786 * radians, // 362.039  Hz
+0.787 * radians, // 512      Hz
 
-0.787 * radians,  // 724.077
-0.792 * radians,  // 1024
-//0.794 * radians,  // 1448 Hz
-//0.802 * radians,  //  2048 Hz
-//0.78539816339 * radians, // 2896.3  Hz
+//0.787 * radians,  // 724.077
+//0.789 * radians,  // 1024
+//0.796 * radians,  // 1448 Hz
+//0.801 * radians,  //  2048 Hz
+//0.811 * radians, // 2896.3  Hz
 //
-//0.78539816339 * radians, // 4096      Hz
-//0.78539816339 * radians,  // 5792.6
-//0.78539816339 * radians,  // 8192
-//0.78539816339 * radians,  // 11585 Hz
+//0.825 * radians, // 4096      Hz
+//0.847 * radians,  // 5792.6
+//0.873 * radians,  // 8192
+//0.912 * radians,  // 11585 Hz
   } );
-  
+
+
+
+//  //T = 58 deg C
+//// Sample H
+//auto const L = quantity< length > ( .62 * millimeters  );// sample F
+//auto const experimental_phases = vector< quantity< plane_angle > >( {
+//
+////0.638 * radians, //  1 Hz
+////0.645 * radians, //  1.414     Hz
+////0.647 * radians, //  2  Hz
+////0.632 * radians, //  2.828    Hz
+////0.626 * radians, //  4  Hz
+//
+////0.607 * radians, //  5.657 Hz
+////0.603 * radians, //  8     Hz
+//1.017 * radians, //  11.314  Hz
+//1.001 * radians, //  16.0    Hz
+//0.968 * radians, //  22.627  Hz
+//0.909 * radians, //  32.0    Hz
+//
+//0.844 * radians, //  45.255  Hz
+//0.780 * radians, //  64.0    Hz
+//0.743 * radians, //  90.510  Hz
+//
+//0.740 * radians,  // 128      Hz
+//0.754 * radians,   // 181.019  Hz
+//0.771 * radians, // 256      Hz
+//
+//0.781 * radians, // 362.039  Hz
+//0.785 * radians, // 512      Hz
+//
+//0.787 * radians,  // 724.077
+//0.792 * radians,  // 1024
+////0.794 * radians,  // 1448 Hz
+////0.802 * radians,  //  2048 Hz
+////0.78539816339 * radians, // 2896.3  Hz
+////
+////0.78539816339 * radians, // 4096      Hz
+////0.78539816339 * radians,  // 5792.6
+////0.78539816339 * radians,  // 8192
+////0.78539816339 * radians,  // 11585 Hz
+//  } );
+//  
   
 //T = 58 deg C
 //// Sample C
@@ -285,12 +328,12 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
 //  } );
 //  
   
-  auto const alpha = quantity<thermal_diffusivity>( 40 * square_millimeters / second);
+  auto const alpha = quantity<thermal_diffusivity>( 50 * square_millimeters / second);
   
   slab_initial.characteristic_length = L;
   slab_initial.set_diffusivity_update_k_hold_rhoCp( alpha );
 
-  auto const beam_radius = quantity< length >( 2.0 * millimeters );
+  auto const beam_radius = quantity< length >( 4.0 * millimeters );
   auto const detector_offset = quantity< length >( .2 * millimeters  ) ; // initial value
 
   auto const bestFit_results = thermal::analysis::oneLayer2D::estimate_parameters::phase_analysis::fit_diffusivity_offset::fit_all::fit(

@@ -38,12 +38,12 @@ BOOST_AUTO_TEST_CASE( offset_measurmement_test_case )
 
 
   auto const center_r0 = quantity<  si::dimensionless >( 0.0 );
-  auto const center = point_measurement( b1_beamRadius, l_thermal, dT , center_r0 )
+  auto const center = point_measurement( b1_beamRadius, l_thermal, dT , center_r0 );
 
 //  auto const center_view = fast_measurement( r, hp, tp , l ) ;
 //  auto const offset_view = fast_measurement( r, hp, tp , l ) ;
 
-  std::cout << center.phase << "\n";
+//  std::cout << center.phase << "\n";
   
   
 }

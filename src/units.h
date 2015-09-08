@@ -29,5 +29,7 @@
 
 #include "units/conversions.h"
 #include "units/operator_overloads.h"
+#include "units/io/prefix.hpp"
+#include "units/cout/use_engineering_prefix.hpp"
 
 #endif

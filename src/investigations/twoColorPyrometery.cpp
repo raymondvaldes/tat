@@ -27,12 +27,17 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_offset/fit_all/fit.h"
 #include "investigations/twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_b3/fit_all/fit.hpp"
 #include "investigations/twoColorPyrometery/oneLayer2D/calculators/thermal_penetration/lthermal_at_frequency.hpp"
+#include "investigations/twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_RC/fit_all/fit.hpp"
 
 namespace investigations{
 namespace twoColorPyrometery{
 
+using namespace units;
+
 auto run( filesystem::directory const & dir ) noexcept -> void
 {
+  use_engineering_prefix();
+
 //  oneLayer2D::phase_analysis::fit_all_but_laser::diffusivity_from_phases(dir);
 
 
@@ -40,6 +45,8 @@ auto run( filesystem::directory const & dir ) noexcept -> void
 //    oneLayer2D::phase_analysis::fit_all::diffusivity_from_phases(dir);
 
 //    oneLayer2D::phase_analysis::fit_a_b1_b2_b3::fit_all::fit( dir ) ;
+
+    oneLayer2D::phase_analysis::fit_a_b1_b2_RC::fit_all::fit( dir ) ;
   
   
  

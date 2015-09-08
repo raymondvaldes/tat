@@ -12,17 +12,17 @@
 #include "math/estimation/constrained.hpp"
 #include "math/utilities/equalto.h"
 
-using std::vector;
+namespace math{
+namespace estimation{
 
+using std::vector;
 using std::abs;
 using std::exp;
 using std::log;
 
-namespace math{
-namespace estimation{
-
 double x_limiter1( const double xi ) noexcept
 {
+  assert(  xi > -800. ) ;
   auto const output = double(exp( xi ));
   assert( output > 0 );
   return output ;

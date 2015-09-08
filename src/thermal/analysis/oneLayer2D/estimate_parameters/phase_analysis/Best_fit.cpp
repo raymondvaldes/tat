@@ -64,11 +64,39 @@ Best_fit::Best_fit
   view_radius_offset = view_radius_offset_input * slab_.characteristic_length ;
 }
 
+Best_fit::Best_fit
+(
+  thermal::model::slab::Slab const slab_,
+  units::quantity< units::si::dimensionless > const view_radius_nd,
+  units::quantity< units::si::dimensionless> const b,
+  std::vector< units::quantity<units::si::frequency> > const frequencies_,
+  std::vector< units::quantity<units::si::plane_angle > > const model_phases_,
+  double const phase_goodness_of_fit_,
+  std::vector< units::quantity<units::si::plane_angle > > const observations_
+) noexcept :
+  Best_fit( slab_, view_radius_nd, b, frequencies_, model_phases_, phase_goodness_of_fit_ )
+{
+  observations = observations_ ;
+  
+}
+
 void Best_fit::plot_model_phases_against(
 std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
 ) const
 {
   plot::simple_x_y1_y2( frequencies, model_phases, exp_phases );
+}
+
+void Best_fit::plot_model_phases_against_observations( void ) const
+{
+  assert( !frequencies.empty() );
+  assert( !model_phases.empty() );
+  assert( !observations.empty() );
+
+  assert( frequencies.size() == observations.size() ) ;
+  assert( frequencies.size() == model_phases.size() ) ;
+
+  plot::simple_x_y1_y2( frequencies, model_phases, observations );
 }
 
 } // namespace phase_analysis

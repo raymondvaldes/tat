@@ -6,40 +6,39 @@
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__add__
-#define __tat__add__
+#ifndef __tat__add__234123
+#define __tat__add__234123
 
 #include <vector>
-#include <functional>   // std::plus
 
 #include "algorithm/algorithm.h"
 
 namespace algorithm {
-
 namespace vector{
 
 template< typename T >
-decltype( auto )
-add( const std::vector<T>& firstvec, const std::vector<T>& secondvec)
+auto add( std::vector< T > const & firstvec, std::vector<T> const & secondvec )
 noexcept
 {
   using std::vector;
-  using std::plus;
-  using std::transform;
+  using std::begin;
   
   auto const vectorSize = firstvec.size();
   BOOST_ASSERT( vectorSize > 0 ) ;
   BOOST_ASSERT( vectorSize == secondvec.size() );
   
-  vector<T> result( vectorSize ) ;
+  auto result = vector< T >( vectorSize ) ;
   
-  algorithm::transform( firstvec,  secondvec, result.begin(), plus<double>());
+  algorithm::transform( firstvec,  secondvec, begin( result ), []
+  ( auto const a, auto const b ) noexcept
+  {
+    return a + b ;
+  } );
 
   return result;
 }
 
 } // namespace vector
-
 } // namespace algorithm
 
 

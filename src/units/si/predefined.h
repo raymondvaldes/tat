@@ -12,12 +12,13 @@
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/temperature/celsius.hpp>
 #include <boost/units/systems/temperature/fahrenheit.hpp>
+#include <boost/units/systems/si/resistance.hpp>
+#include <boost/units/systems/si/capacitance.hpp>
 
 #include "units/physical_dimensions.h"
 #include "units/systems/si/base.h"
 #include "units/si/prefixes.h"
 #include "units/quantity.h"
-
 
 namespace units {
 
@@ -43,6 +44,11 @@ using mass          = boost::units::si::mass;
 using kinematic_viscosity = boost::units::si::kinematic_viscosity;
 using dynamic_viscosity = boost::units::si::dynamic_viscosity;
 using acceleration = boost::units::si::acceleration;
+using electrical_resistance = boost::units::si::resistance;
+using electrical_capacitance = boost::units::si::capacitance;
+
+//using ohms = boost::units::si::ohms;
+//using fareds = boost::units::si::fareds;
 
 typedef boost::units::si::temperature         temperature;
 typedef boost::units::si::power               power;
@@ -61,6 +67,7 @@ typedef boost::units::si::pressure            pressure;
 typedef boost::units::si::wavenumber          wavenumber;
 typedef boost::units::si::conductivity        electrical_conductivity;
 
+
 /// Add dimensions to the SI system
   using heat_flux =
     unit< heat_flux_dimension , si::system>;
@@ -77,6 +84,8 @@ typedef boost::units::si::conductivity        electrical_conductivity;
   using volumetric_heat_capacity =
     unit< volumetric_heat_capacity_dimension, si::system > ;
   
+  using electrical_time_constant =
+    unit< electrical_time_constant_dimension, si::system > ;
 
   using Archimedes_number = dimensionless;
   using Bingham_number = dimensionless;
@@ -155,6 +164,12 @@ using boost::units::si::watt;
 using boost::units::si::volts;
 using boost::units::si::kelvin;
 
+using boost::units::si::farad;
+using boost::units::si::farads;
+
+using boost::units::si::ohm;
+using boost::units::si::ohms;
+
 using namespace boost::units::celsius;
 using namespace boost::units::fahrenheit;
 
@@ -173,6 +188,8 @@ static auto const kilovolts = kilo * volts;
 static auto const megavolts = mega * volts;
 static auto const gigavolts = giga * volts;
 
+static auto const picofarad = pico * farad;
+static auto const picofarads = pico * farads;
 
   
 //BOOST_UNITS_STATIC_CONSTANT( millimeters, length );

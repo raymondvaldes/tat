@@ -9,14 +9,17 @@
 #ifndef tat_physical_dimensions_h
 #define tat_physical_dimensions_h
 
+#include <iostream>
 #include <boost/units/operators.hpp>
 #include <boost/units/physical_dimensions.hpp>
 #include <boost/type.hpp>
 #include <boost/units/dimensionless_unit.hpp>
 #include <boost/units/derived_dimension.hpp>
 
+
 //namespace that holds units
 namespace units {
+
 
 // dimensions that already exist in the boost units library
 
@@ -67,8 +70,12 @@ namespace units {
 // dimensions that I need are not yet defined
   using boost::units::derived_dimension;
 
-
 /// derived dimensions:
+
+  typedef derived_dimension<  time_base_dimension, 1>::type
+                              electrical_time_constant_dimension;
+
+
   typedef derived_dimension<  mass_base_dimension,1,
                               length_base_dimension, 1,
                               time_base_dimension, -3,
@@ -153,7 +160,6 @@ namespace units {
   
   
 
-  
   
   
 } // namespace units

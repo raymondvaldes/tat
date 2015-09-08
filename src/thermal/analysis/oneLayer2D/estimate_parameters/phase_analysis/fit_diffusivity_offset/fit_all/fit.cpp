@@ -152,10 +152,10 @@ noexcept -> Best_fit
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
   
-  auto const b2 = quantity<si::dimensionless>(0.999); //why am i setting the view radius to be 1???
+  auto const b2_dummmy = quantity<si::dimensionless>(0.999); //why am i setting the view radius to be 1???
   
   auto const result =
-  Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions, phase_goodness_of_fit );
+  Best_fit( fitted_slab, b2_dummmy, b1, frequencies, phase_predictions, phase_goodness_of_fit );
   
   std::cout << "\n" << result.phase_goodness_of_fit << "\n";
   

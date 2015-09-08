@@ -82,10 +82,10 @@ auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
   });
   
   // establish nondimensional fitting parameters (specimen-e)
-  auto const L = quantity< si::length > ( 1.614 * millimeters );
-  auto const beam_radius = quantity< length >( 2.087 * millimeters );
-  auto const detector_view_radius = quantity< length >( .096 * millimeters  ) ;
-  auto const alpha = quantity<thermal_diffusivity >( 39.72 * square_millimeters / second );
+  auto const L = quantity< si::length > ( 0.8 * millimeters );
+  auto const beam_radius = quantity< length >( 4.0 * millimeters );
+  auto const detector_view_radius = quantity< length >( 0.05 * millimeters  ) ;
+  auto const alpha = quantity<thermal_diffusivity >( 40 * square_millimeters / second );
   
   // establish nondimensional fitting parameters (specimen-e)
 //  auto const L = quantity< si::length> ( 1.2 * millimeters );
@@ -102,7 +102,7 @@ auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
 //  // establish nondimensional fitting parameters (specimen-h)
 //  auto const L = quantity< si::length> ( .8 * millimeters );
 //  auto const beam_radius = quantity< length >( 2.112 * millimeters );
-//  auto const detector_view_radius = quantity< length>( 0.122 * millimeters  ) ;
+//  auto const detector_view_radius = quantity< length >( 0.122 * millimeters  ) ;
 //  auto const alpha = quantity<thermal_diffusivity>( 36.72 * square_millimeters / second);
 
 
@@ -118,7 +118,7 @@ auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
   auto const phases = extract_phases_from_properties( predictions  ) ;
   
   print_table_values( frequencies, phases );
-//  plot::simple_XY(frequencies, phases);
+  plot::simple_XY(frequencies, phases);
 }
 
 } // namespace

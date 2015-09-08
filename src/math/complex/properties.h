@@ -47,10 +47,9 @@ struct properties{
     auto const cv = amplitude_value * exp( i * phase_value );
     return cv;
   }
-
 };
 
-}
-}
+} // namespace complex
+} // namespace math
 
 #endif /* defined(__tat__properties__) */
