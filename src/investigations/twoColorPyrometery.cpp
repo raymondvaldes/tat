@@ -28,6 +28,7 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_b3/fit_all/fit.hpp"
 #include "investigations/twoColorPyrometery/oneLayer2D/calculators/thermal_penetration/lthermal_at_frequency.hpp"
 #include "investigations/twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_RC/fit_all/fit.hpp"
+#include "investigations/twoColorPyrometery/calculators/steady_state_temperature.hpp"
 
 namespace investigations{
 namespace twoColorPyrometery{
@@ -46,7 +47,7 @@ auto run( filesystem::directory const & dir ) noexcept -> void
 
 //    oneLayer2D::phase_analysis::fit_a_b1_b2_b3::fit_all::fit( dir ) ;
 
-    oneLayer2D::phase_analysis::fit_a_b1_b2_RC::fit_all::fit( dir ) ;
+//    oneLayer2D::phase_analysis::fit_a_b1_b2_RC::fit_all::fit( dir ) ; //start here!
   
   
  
@@ -62,16 +63,17 @@ auto run( filesystem::directory const & dir ) noexcept -> void
 //  oneLayer2D::frequency_sweep::surface_phases_with_beam_diameter(dir);
 //  oneLayer2D::temp_sweep::surface_radial_profile( dir );
 
-  oneLayer2D::frequency_sweep::avg_phases_at_surface(dir);
+//  oneLayer2D::frequency_sweep::avg_phases_at_surface(dir);
 
 //
 //  oneLayer2D::amplitude_analysis::amplitudes_from_experiment(dir);
 //  oneLayer2D::frequency_sweep::surface_phases_at_radial_position(dir);
 
 
-
 //calculators
 //  oneLayer2D::calculators::thermal_penetration::lthermal_at_frequency(dir);
+  calculators::steady_state_temperature();
+
 }
 
 } //namespace twoColorPyrometry

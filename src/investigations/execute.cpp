@@ -14,6 +14,7 @@
 #include "investigations/sensitivityvaldes2013.hpp"
 #include "investigations/taylor_uncertainty.h"
 #include "investigations/twoColorPyrometery.h"
+#include "investigations/bulkDiffusivityMeasurements2015/run.hpp"
 
 #include "algorithm/algorithm.h"
 #include "tools/interface/filesystem.hpp"
@@ -44,6 +45,10 @@ void execute
     else if( investigationName == "twoColorPyrometery" ) {
       twoColorPyrometery::run( active ) ;
     }
+    else if( investigationName == "bulkDiffusivityMeasurements2015" ){
+      bulkDiffusivityMeasurements2015::run( active ) ;
+    }
+    
     else {
       using std::cout;
       cout << "No investigation selected.\n" ;

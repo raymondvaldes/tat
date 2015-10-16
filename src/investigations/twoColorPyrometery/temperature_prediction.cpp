@@ -148,7 +148,9 @@ auto temperature_prediction( filesystem::directory const & dir ) -> void
     temperoralFrequency, quantity<plane_angle>{ -1.6 * radians }
   } ;
 
-  auto const fittedCosine = cosine( normalizedSRs, initialConditions );
+  auto const fit_cosine = cosine( normalizedSRs, initialConditions );
+  auto const fittedCosine = fit_cosine.fitted_cosine;
+  
 
   auto const myFittedAmplitude = fittedCosine.get_amplitude() ;
   auto const myFittedOffset = fittedCosine.get_offset() ;

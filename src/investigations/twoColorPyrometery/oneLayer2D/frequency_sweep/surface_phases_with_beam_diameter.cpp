@@ -29,7 +29,7 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace frequency_sweep{
 
-auto surface_phases_with_beam_diameter( filesystem::directory const & dir ) -> void
+auto surface_phases_with_beam_diameter( filesystem::directory const & /*dir*/ ) -> void
 {
   auto const deltaT = quantity< si::temperature > ( 1.0 * kelvin );
 

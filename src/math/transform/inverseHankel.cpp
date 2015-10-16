@@ -56,7 +56,7 @@ noexcept -> units::quantity< units::si::dimensionless>
 
   // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
   auto const func = [ &h, &r, &f ]
-  ( vector< double > const & y, vector< double > & dy, double const nu )
+  ( vector< double > const & /*y*/, vector< double > & dy, double const nu )
   noexcept -> void
   {
     dy[0] = f( nu );
@@ -110,7 +110,7 @@ noexcept -> units::quantity< units::si::dimensionless, std::complex<double>>
 
   // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
   auto const func = [ &h, &z, &r, &hankel_function ]
-  ( vector< double > const & y, vector< double > & dy, double const nu )
+  ( vector< double > const & /*y*/, vector< double > & dy, double const nu )
   noexcept -> void
   {
     auto const hFunc = hankel_function( nu );

@@ -7,10 +7,13 @@
 //
 
 #include "math/estimation/settings.h"
+#include <cassert>
+#include "statistics/signal_processing/abs.h"
 
 namespace math{
-
 namespace estimation{
+
+using statistics::signal_processing::abs;
 
 settings
 settings::loadConfigfromXML(const boost::property_tree::ptree pt) noexcept
@@ -35,11 +38,66 @@ settings::loadConfigfromXML(const boost::property_tree::ptree pt) noexcept
                        const double epsfcn_,
                        const double factor_,
                        const size_t mode_ ,
-                       const size_t nprint_) noexcept
+                       const size_t nprint_,
+                     std::vector<double> const diag_
+      ) noexcept
     :ftol(ftol_), xtol(xtol_), gtol(gtol_), maxfev(maxfev_), epsfcn(epsfcn_),
-      factor(factor_), mode(mode_), nprint(nprint_){}
+      factor(factor_), mode(mode_), nprint(nprint_), diag( diag_ )
+  
+    {}
 
+auto settings::enable_scale_parameters( std::vector<double> const diag_ )
+noexcept -> void
+{
+  auto const diag_abs = abs( diag_ );
+
+  diag = diag_abs;
+
+  assert( !diag.empty() );
+  for( auto const s : diag ) {
+    assert( s > 0 );
+  }
+
+  mode = 2 ;
+}
+
+auto settings::set_relative_sum_square_error( double const ftol_ )
+noexcept -> void
+{
+  ftol = ftol_;
+}
+
+auto settings::set_relative_parameter_error( double const xtol_ )
+noexcept -> void
+{
+  xtol = xtol_;
+}
+
+auto settings::set_orthogonality_between_fvec_jacobian( double const gtol_ )
+noexcept -> void
+{
+  gtol = gtol_;
+}
+
+auto settings::set_maximum_iterations( size_t const maxfev_ )
+noexcept -> void
+{
+  maxfev = maxfev_;
+}
+
+auto settings::set_error_of_fcn( double const epsfcn_ )
+noexcept -> void
+{
+  epsfcn = epsfcn_;
+}
+
+auto settings::set_initial_set_bound_factor( double const factor_ )
+noexcept -> void
+{
+  assert( factor_ >= 0.0999 ) ;
+  assert( factor_ <= 100.001 );
+  factor = factor_;
+}
 
 } //namespace estimation
-
 } //namespace math

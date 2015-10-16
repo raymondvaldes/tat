@@ -11,7 +11,7 @@
 
 #include "units.h"
 #include "math/functions/cosine.h"
-
+#include "filesystem/path.h"
 
 namespace thermal {
 namespace pyrometry {
@@ -69,7 +69,14 @@ struct transient_analysis_results{
       laser_modulation_phase( laser_modulation_phase_ )
   {} ;
   
-  auto plot_normalized_SR_exp_model( void )
+  
+  auto plot_normalized_SR( filesystem::path const & print_file = filesystem::path("") )
+  const noexcept -> void;
+
+  auto plot_twoColor_measurements( filesystem::path const & print_file = filesystem::path("") )
+  const noexcept -> void;
+  
+  auto plot_normalized_SR_exp_model( filesystem::path const & print_file = filesystem::path("") )
   const noexcept -> void;
 };
 

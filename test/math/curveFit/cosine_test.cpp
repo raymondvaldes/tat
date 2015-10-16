@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE( cosine_fit_test )
   auto const points = 101;
   
   auto const myTime = range_from_0( period, points );
-  auto const phase_offset = quantity<plane_angle>( -M_PI_2 * radians );
+  auto const phase_offset = quantity<plane_angle>( 0 * radians );
  
   auto myVectVolts = vector< quantity< electric_potential > >( points );
   
@@ -71,9 +71,10 @@ BOOST_AUTO_TEST_CASE( cosine_fit_test )
   ( offset_initial, amplitude_initial, omega, phase_initial );
   
   using namespace math::curveFit;
-  auto const f_cosine =
+  auto const fitted_cosine =
   curveFit::cosine( std::make_pair(myTime, myVectVolts), initialConditions, phase_offset );
 
+  auto const f_cosine = fitted_cosine.fitted_cosine;
   
   BOOST_CHECK_CLOSE_FRACTION( omega.value(), f_cosine.omega.value(), tol );
   BOOST_CHECK_CLOSE_FRACTION( amplitude.value(),f_cosine.amplitude.value(),tol);

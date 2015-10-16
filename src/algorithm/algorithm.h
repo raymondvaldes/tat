@@ -51,6 +51,18 @@ namespace algorithm {
   //using stable_partition;
   //using stable_sort;
   //using boost::swap_ranges;
+  
+//  template< class T >
+//  auto remove_if( T const& list ) noexcept -> T
+//  {
+//    
+//  
+//  
+//  
+//  
+//  
+//  
+//  }
 
   template < class T >
   auto sort ( T const & list ) noexcept -> T

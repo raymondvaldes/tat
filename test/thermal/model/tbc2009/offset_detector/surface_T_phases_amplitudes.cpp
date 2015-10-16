@@ -52,11 +52,11 @@ BOOST_AUTO_TEST_CASE( phase_amplitude_test )
   auto const r = 0.2_nd;
   auto const l = 0.25_nd;
   
-  auto const eval_0_centered =
-  thermal::model::tbc2009::complexT::average_surface_phase_amplitude( r, hp, tp , l ) ;
-
-  auto const eval_0_offset = average_surface_phase_amplitude( hp, tp, l, 1._nd, r );
-  
+//  auto const eval_0_centered =
+//  thermal::model::tbc2009::complexT::average_surface_phase_amplitude( r, hp, tp , l ) ;
+//
+//  auto const eval_0_offset = average_surface_phase_amplitude( hp, tp, l, 1._nd, r );
+//  
   // very interesting, the if there is 2d spreading due to a small beam diameter
   // then it is very likely that any offset of the detector and the laser
   // will lead to significant differences than a centered detector model!!

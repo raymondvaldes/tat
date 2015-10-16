@@ -11,6 +11,8 @@
 #include "plot/gnuplot.h"
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
 #include "thermal/define/lthermal.h"
+#include "units.h"
+
 
 using thermal::define::thermalPenetrations_from_frequencies;
 
@@ -41,7 +43,12 @@ Best_fit::Best_fit
         slab_.get_diffusivity() ,
         slab_.characteristic_length ) ),
   model_phases( model_phases_ ),
-  phase_goodness_of_fit( phase_goodness_of_fit_ )
+  phase_goodness_of_fit( phase_goodness_of_fit_ ),
+  optics(
+    beam_radius,
+    units::quantity< units::si::heat_flux>(100000. * units::si::watt/ units::si::square_meter),
+    view_radius
+  )
 {
   assert( phase_goodness_of_fit > 0 );
   assert( !frequencies.empty() );
@@ -74,14 +81,19 @@ Best_fit::Best_fit
   double const phase_goodness_of_fit_,
   std::vector< units::quantity<units::si::plane_angle > > const observations_
 ) noexcept :
-  Best_fit( slab_, view_radius_nd, b, frequencies_, model_phases_, phase_goodness_of_fit_ )
+  Best_fit( slab_,
+      view_radius_nd,
+      b,
+      frequencies_,
+      model_phases_,
+      phase_goodness_of_fit_ )
 {
   observations = observations_ ;
   
 }
 
 void Best_fit::plot_model_phases_against(
-std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
+  std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
 ) const
 {
   plot::simple_x_y1_y2( frequencies, model_phases, exp_phases );

@@ -138,7 +138,7 @@ auto fit
       model_predictions( model_predictions_ ),
       experimental_bias( experimental_bias_ ),
       calibrated_observations( algorithm::vector::add( observations, experimental_bias ) )
-//      calibrated_observations(observations )
+//      calibrated_observations(observations )  //enable this to ignore RC filter
     {};
   };
 
@@ -222,6 +222,25 @@ auto fit
   std::cout << "\n" << result.phase_goodness_of_fit  << "\n";
   
  return result;
+}
+
+auto fit
+(
+  thermal::experimental::observations::Slab const & initial_slab,
+  units::quantity< units::si::length > const detector_view_radius
+)
+noexcept -> Best_fit
+{
+  auto const frequencies = initial_slab.frequencies;
+  auto const observations = initial_slab.phases;
+  auto const slab_initial = initial_slab.disk;
+  auto const beam_radius = initial_slab.beam_radius;
+
+  auto const best_fit = fit(  frequencies, observations,
+                              slab_initial, beam_radius,
+                              detector_view_radius ) ;
+  
+  return best_fit;
 }
 
 } // namespace fit_all

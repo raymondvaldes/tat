@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__transient_analysis__
-#define __tat__transient_analysis__
+#ifndef __tat__transient_analysis_13452346562346_
+#define __tat__transient_analysis_13452346562346_
 
 #include <vector>
 #include <utility>
@@ -26,9 +26,9 @@ auto transient_analysis
 (
   thermal::equipment::detector::Measurements const & measurements_1,
   thermal::equipment::detector::Measurements const & measurements_2,
-  units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::frequency > const & laser_frequency,
-  units::quantity< units::si::plane_angle > const & laser_phase
+  units::quantity< units::si::dimensionless > const gCoeff,
+  units::quantity< units::si::frequency > const laser_frequency,
+  units::quantity< units::si::plane_angle > const laser_phase
 )
 noexcept -> transient_analysis_results;
 

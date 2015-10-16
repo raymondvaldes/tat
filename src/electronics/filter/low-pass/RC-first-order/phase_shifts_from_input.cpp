@@ -9,7 +9,7 @@
 #include "phase_shifts_from_input.hpp"
 #include "phase_shift_from_input.hpp"
 
-#include "algorithm.h"
+#include "algorithm/algorithm.h"
 
 namespace electronics{
 namespace filter{

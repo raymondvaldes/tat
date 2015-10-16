@@ -23,10 +23,7 @@ noexcept -> std::vector< units::quantity< units::si::time > >
   assert( count > 0 );
   assert( frequency.value() > 0 );
 
-  using units::quantity;
-  using units::si::dimensionless;
-  using units::si::time;
-  using units::si::seconds;
+  using namespace units;
   using algorithm::generate;
   
   using std::vector;
@@ -37,9 +34,9 @@ noexcept -> std::vector< units::quantity< units::si::time > >
   auto const increment = period / quantity<dimensionless>(count - 1 );
   auto const starting_time = 0 * seconds ;
   
-  auto time_distribution = vector< quantity< time > >( count, starting_time );
+  auto time_distribution = vector< quantity< si::time > >( count, starting_time );
   
-  auto scratch = quantity< time > ( starting_time ) ;
+  auto scratch = quantity< si::time > ( starting_time ) ;
   const auto skip_first_step = begin( time_distribution ) + 1 ;
   
   generate( skip_first_step , end( time_distribution ), [&]() noexcept

@@ -49,6 +49,13 @@ struct transient_analysis_sweep_results
 
   auto surface_steady_temperature( void ) const
   -> units::quantity< units::si::temperature >;
+
+
+  //printers
+  auto print_temperature_amplitudes( filesystem::path const &  print_directory ) const noexcept -> void;
+  auto print_temperature_phases( filesystem::path const & print_directory ) const noexcept -> void;
+  auto print_twoColor_fittings( filesystem::path const & print_directory ) const noexcept -> void;
+
 };
 
 } // namespace periodic

@@ -52,6 +52,7 @@ BOOST_FIXTURE_TEST_SUITE( periodic, periodicProperties)
 
 
 
+
 BOOST_AUTO_TEST_CASE( sine_function ) {
 
   using math::functions::Sine;
@@ -71,6 +72,8 @@ BOOST_AUTO_TEST_CASE( sine_function ) {
   
 
 }
+
+
 
 BOOST_AUTO_TEST_CASE( cosine_function ) {
 

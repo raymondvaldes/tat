@@ -76,8 +76,8 @@ noexcept -> decltype( f_x0.front() * dx_intial_step )
   auto const tol_relative = 1E-12;
   
   typedef runge_kutta_dopri5< state_type > dopri5_type;
-  typedef controlled_runge_kutta< dopri5_type > controlled_dopri5_type;
-  typedef dense_output_runge_kutta< controlled_dopri5_type > dense_output_dopri5_type;
+  //typedef controlled_runge_kutta< dopri5_type > controlled_dopri5_type;
+  //typedef dense_output_runge_kutta< controlled_dopri5_type > dense_output_dopri5_type;
   
   auto stepper = make_controlled( tol_absolute , tol_relative , dopri5_type() );
 

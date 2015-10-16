@@ -35,24 +35,7 @@ namespace gTBC {
 
 namespace gMeasure {
 
-processed_scope_data::processed_scope_data
-(
-  std::vector<
-  std::pair<  units::quantity< units::si::frequency   > ,
-              units::quantity< units::si::plane_angle > > >
-              const & laser_modulations_,
 
-  std::vector<  std::pair<  thermal::equipment::detector::Measurements,
-                          thermal::equipment::detector::Measurements > >
-  const & measurements_,
-
-  units::quantity< units::si::dimensionless > const gCoefficient_,
-  units::quantity< units::si::length > const detector_view_radius_
-)
-: laser_modulations( laser_modulations_ ),
-  measurements( measurements_ ),
-  gCoefficient( gCoefficient_ ),
-  detector_view_radius( detector_view_radius_ ) {}
 
 auto import_twoColor_scope_files
 (
@@ -87,7 +70,7 @@ auto import_twoColor_scope_files
   auto const signalBackground = import.signalBackground;
   auto const wavelength_offset = import.wavelength_offset ;
   
-  auto signal_grnds = vector< frequency_detector_ground >();
+  auto signal_grnds = vector< Frequency_detector_ground >();
   signal_grnds.reserve( frequencies.second.size() ) ;
   auto const lambda1_grnd = import.signal_DC_1 ;
   auto const lambda2_grnd = import.signal_DC_2 ;
@@ -137,5 +120,4 @@ auto import_twoColor_scope_files
 }
   
 } // namespace gMeasure
-  
 } // namespace gTBC

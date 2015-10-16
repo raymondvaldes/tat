@@ -12,13 +12,12 @@
 #include <utility>
 #include <vector>
 
-#include "gTBC/gMeasure/import_sweep_meta_data.h"
+#include "gTBC/gMeasure/gTBD/frequency_detector_ground.hpp"
 #include "gTBC/gMeasure/Unique_scope_measurement.h"
 #include "thermal/equipment/detector/Measurements.h"
 #include "units.h"
 
 namespace gTBC {
-  
 namespace gMeasure {
 
 auto total_calibrated_emission_pairs
@@ -28,19 +27,12 @@ auto total_calibrated_emission_pairs
               Unique_scope_measurement > > const & unique_measurements,
   units::quantity< units::si::electric_potential >  const & signal_background, 
   units::quantity< units::si::wavelength > const & offset,
-  std::vector < frequency_detector_ground > const & detector_grnds
+  std::vector < Frequency_detector_ground > const & detector_grnds
 )
 noexcept -> std::vector< std::pair< thermal::equipment::detector::Measurements,
                                     thermal::equipment::detector::Measurements > >;
 
-  
-  //  std::pair< lambda1, DC_offset >,
-//  std::pair< lambda2, DC_offset >,
-//  wavelength_offset
-  
-  
 } // namespace gMeasure
-  
 } // namespace gTBC
 
 #endif /* defined(__tat__total_calibrated_emission_pairs__) */

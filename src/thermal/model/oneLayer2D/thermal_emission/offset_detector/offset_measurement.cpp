@@ -44,7 +44,7 @@ auto offset_measurement
   units::quantity< units::si::dimensionless > const b2_viewRadius ,
   units::quantity< units::si::dimensionless > const b3_view_offset,
   units::quantity< units::si::temperature > deltaT,
-  math::transform::iHankelSettings const & settings
+  math::transform::iHankelSettings const & /*settings*/
 )
 noexcept -> math::complex::properties< units::si::temperature >
 {

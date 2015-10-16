@@ -20,7 +20,7 @@ using std::cout;
 using investigations::main_app;
 using algorithm::vector::string2charPtr;
 
-int main( const int argc, const char *argv[ ] )
+int main( const int /*argc*/, const char *argv[ ] )
 {
   auto const myArguments = vector<string>
   {
@@ -28,7 +28,8 @@ int main( const int argc, const char *argv[ ] )
     "--run",
     "/Users/raymondvaldes/Dropbox/investigations/2color/poco_graphite/25mm",
     "--sample",         "adiabatic_april28_wav",
-    "--investigation",  "twoColorPyrometery"
+//    "--investigation",  "twoColorPyrometery"
+    "--investigation",  "bulkDiffusivityMeasurements2015"
   };
   
   vector<char const *> vec2 = string2charPtr( myArguments );

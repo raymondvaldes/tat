@@ -28,7 +28,7 @@ noexcept -> units::quantity< units::si::one_over_temperature >
   assert( first.value() > 0 );
   assert( second.value() > 0 );
   assert( first < second ) ;
-
+  
   auto const
   result =
     ( log( SignalRatio ) - 5 * log( first / second ) )

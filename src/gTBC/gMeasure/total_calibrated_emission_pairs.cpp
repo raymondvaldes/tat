@@ -32,7 +32,7 @@ auto total_calibrated_emission_pairs
 
   units::quantity< units::si::electric_potential >  const & signal_background,
   units::quantity< units::si::wavelength > const & offset,
-  std::vector < frequency_detector_ground > const & detector_grnds
+  std::vector < Frequency_detector_ground > const & detector_grnds
 )
 noexcept -> std::vector<
               std::pair<  thermal::equipment::detector::Measurements,

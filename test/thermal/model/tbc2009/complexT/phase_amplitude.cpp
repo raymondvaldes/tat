@@ -49,12 +49,12 @@ BOOST_AUTO_TEST_CASE( phase_amplitude_test )
   auto const z = 0.1_nd;
   auto const r = 0.2_nd;
   
-  auto const eval_0 = phase_amplitude( z, 1.0_nd, hp, tp, l ) ;
-  auto const eval_1 = phase_amplitude( z, 2.2_nd, hp, tp, l ) ;
-  auto const eval_2 = phase_amplitude( z, 3.4_nd, hp, tp, l ) ;
-  auto const eval_3 = phase_amplitude( z, 4.6_nd, hp, tp, l ) ;
-
-//  assert( eval_0.first.value() ==  0 ) ;
+//  auto const eval_0 = phase_amplitude( z, 1.0_nd, hp, tp, l ) ;
+//  auto const eval_1 = phase_amplitude( z, 2.2_nd, hp, tp, l ) ;
+//  auto const eval_2 = phase_amplitude( z, 3.4_nd, hp, tp, l ) ;
+//  auto const eval_3 = phase_amplitude( z, 4.6_nd, hp, tp, l ) ;
+//
+////  assert( eval_0.first.value() ==  0 ) ;
 //  assert( eval_1.first.value() ==  0 ) ;
 //  assert( eval_2.first.value() ==  0 ) ;
 //  assert( eval_3.first.value() ==  0 ) ;

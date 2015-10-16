@@ -12,7 +12,8 @@
 #include "algorithm/algorithm.h"
 #include "thermal/model/oneLayer2D/dimensionless/thermal_penetration.h"
 #include "thermal/model/oneLayer2D/thermal_emission/fast_measurement.h"
-
+#include "thermal/model/oneLayer2D/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/dimensional/deltaT.h"
 
 namespace thermal {
 namespace model {
@@ -28,7 +29,7 @@ auto
 frequency_sweep
 (
   units::quantity< units::si::dimensionless > const b ,
-  units::quantity< units::si::temperature > const deltaT ,
+  units::quantity< units::si::temperature > const /*deltaT*/ ,
   units::quantity< units::si::dimensionless > const r_e ,
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   units::quantity< units::si::length > const L,
@@ -53,6 +54,50 @@ noexcept -> std::vector< math::complex::properties< units::si::temperature > >
   } );
 
   return results;
+}
+
+auto
+frequency_sweep
+(
+  slab::Slab const & slab,
+  Optics const & optics,
+  equipment::laser::Modulation_frequencies const & frequencies
+)
+noexcept -> thermal::model::complex::Temperatures
+{
+  assert( !frequencies.empty() );
+  
+  using thermal::model::complex::Temperatures;
+  using algorithm::transform;
+  
+  auto const k = slab.get_conductivity();
+  auto const L = slab.characteristic_length;
+  auto const I = optics.laser_power;
+  
+  auto const deltaT = dimensional::deltaT( I , L, k ) ;
+  
+  auto const b = dimensionless::b( optics.laser_radius, L );
+  auto const r_e = dimensionless::b( optics.view_radius, L );
+  auto const alpha = slab.get_diffusivity();
+
+  auto const temperature_properties =
+  frequency_sweep( b, deltaT, r_e, frequencies, L, alpha );
+  
+  assert( temperature_properties.size() == frequencies.size() );
+  
+  auto complex_temperatures = std::vector< complex::Temperature >( frequencies.size() );
+//  complex_temperatures.reserve( frequencies.size() );
+  
+  transform( temperature_properties, complex_temperatures.begin(),
+  []( auto const & e) noexcept
+  {
+    return complex::Temperature( e );
+  } );
+  
+  auto const temperatures = complex::Temperatures( complex_temperatures );
+  
+  assert( frequencies.size() == temperatures.size() );
+  return temperatures;
 }
 
 } // namespace thermal_emission

@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "thermal/pyrometry/twoColor/periodic/transient_analysis_sweep_results.h"
+#include "gTBC/gMeasure/Processed_tbd_files.hpp"
 
 namespace thermal {
 namespace pyrometry {
@@ -27,6 +28,13 @@ auto analysis_from_properties_sweep
   units::quantity<units::si::wavelength> const detector_wavelength_2,
   units::quantity< units::si::dimensionless > const & gCoeff,
   std::vector< units::quantity< units::si::frequency > > const & laser_frequency
+)
+noexcept -> transient_analysis_sweep_results;
+
+auto analysis_from_properties_sweep
+(
+  gTBC::gMeasure::Processed_tbd_files const processed_files,
+  units::quantity< units::si::dimensionless > const gCoeff
 )
 noexcept -> transient_analysis_sweep_results;
 

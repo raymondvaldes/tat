@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>default_frequencies.txt</file>
+        <file>default_image.svg</file>
+    </qresource>
+</RCC>

@@ -42,7 +42,7 @@ auto average_surface_phase_amplitude
   // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
   auto const func = [ &]
   (
-    vector< double > const & yphase,
+    vector< double > const & /*yphase*/,
     vector< double > & dy,  // thing integrate
     double const r
   ) noexcept -> void

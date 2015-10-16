@@ -13,6 +13,8 @@
 
 #include "thermal/equipment/detector/measurement.h"
 #include "units.h"
+#include "filesystem/path.h"
+
 
 namespace thermal {
 
@@ -44,9 +46,20 @@ public:
   auto signals_electical_potential( void )
   const noexcept-> std::vector< units::quantity<units::si::electric_potential> >;
   
-  auto plot_measurements( void ) const noexcept -> void;
+  auto plot_measurements( filesystem::path const & print_file = filesystem::path("") ) const noexcept -> void;
+  auto print_table_measurements_values( void ) const noexcept -> void;
 
 };
+
+auto transient_sinusoidal_measurements_factory
+(
+  units::quantity< units::si::wavelength > const detector_wavelength,
+  units::quantity< units::si::frequency > const periodic_frequency,
+  units::quantity< units::si::plane_angle > const phase,
+  units::quantity< units::si::electric_potential > const amplitude
+) noexcept -> Measurements;
+
+
 
 } // namespace detector
 

@@ -9,7 +9,6 @@
 #include "math/estimation/lmdiff.hpp"
 
 namespace math{
-
 namespace estimation{
 
 #ifndef __USEWXLOG__
@@ -2446,9 +2445,9 @@ if(nprint > 0)
 }
 
 
-void lmdif( std::function < void ( double*, double* ) > fcn,
+auto lmdif( std::function < void ( double*, double* ) > fcn,
             const size_t dataPoints, std::vector<double>& initialConditions,
-            const settings &Settings) noexcept
+            const settings &Settings) noexcept -> int
 {
   int m = dataPoints ;
   int n = initialConditions.size();
@@ -2471,6 +2470,19 @@ void lmdif( std::function < void ( double*, double* ) > fcn,
   vector<int> ipvt(n);
   vector<double> diag(n);
   
+  if( diag.empty() ){
+    diag = vector<double>(n);
+  }
+  else
+  {
+    assert( diag.size() == size_t(n) );
+    for( auto const s : Settings.diag ) {
+      assert( s > 0 );
+    }
+    diag = Settings.diag;
+  }
+  
+  
   lmdif( fcn , m, n, initialConditions.data(), fvec.data(), Settings.ftol,
          Settings.xtol,
          Settings.gtol,
@@ -2480,10 +2492,8 @@ void lmdif( std::function < void ( double*, double* ) > fcn,
          &info, &nfev, fjac.data(), ldfjac,
          ipvt.data(), qtf.data(), wa1.data(), wa2.data(), wa3.data(),
          wa4.data() ) ;
-  
-         
+  return info;
 }
 
 } // namespace estimation
-
 } // namespace math

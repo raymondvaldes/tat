@@ -48,7 +48,7 @@ noexcept -> double
     auto const r2 = ( offset + radius ).value();
     
     auto const func = [ & ]
-    ( vector< double > const & y, vector< double > & dy, double const r )
+    ( vector< double > const & /*y*/, vector< double > & dy, double const r )
     noexcept -> void
     {
       auto const R = quantity< si::length>::from_value( r );
@@ -95,7 +95,7 @@ noexcept -> std::pair<double, double>
     auto const r2 = ( offset + radius ).value();
     
     auto const func = [ & ]
-    ( vector< double > const & y, vector< double > & dy, double const r )
+    ( vector< double > const & /*y*/, vector< double > & dy, double const r )
     noexcept -> void
     {
       auto const R = quantity< si::length>::from_value( r );

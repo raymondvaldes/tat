@@ -8,7 +8,7 @@
 
 #include <cassert>
 #include <utility>
-
+#include <iostream>
 #include "thermal/pyrometry/twoColor/periodic/transient_analysis.h"
 #include "thermal/pyrometry/twoColor/normalizedDetectorMeasurements.h"
 #include "math/functions/periodicData.h"
@@ -24,14 +24,7 @@ namespace pyrometry {
 namespace twoColor {
 namespace periodic {
 
-using units::quantity;
-using units::si::radians;
-using units::si::one_over_temperature;
-using units::si::temperature;
-using units::si::plane_angle;
-using units::si::time;
-using units::si::dimensionless;
-using units::pow;
+using namespace units;
 
 using math::functions::PeriodicData;
 using math::functions::PeriodicProperties;
@@ -49,12 +42,17 @@ auto transient_analysis
 (
   thermal::equipment::detector::Measurements const & measurements_1,
   thermal::equipment::detector::Measurements const & measurements_2,
-  units::quantity< units::si::dimensionless > const & gCoeff,
-  units::quantity< units::si::frequency > const & laser_frequency,
-  units::quantity< units::si::plane_angle > const & laser_phase )
+  units::quantity< units::si::dimensionless > const  gCoeff,
+  units::quantity< units::si::frequency > const laser_frequency,
+  units::quantity< units::si::plane_angle > const laser_phase )
 noexcept -> transient_analysis_results
 {
-  auto const omega = frequency_to_angularFrequency( laser_frequency );
+  assert( laser_frequency > 0 * units::si::hertz );
+  assert( gCoeff  > 0 );
+  assert( measurements_1.size() == measurements_2.size() );
+  assert( measurements_1.wavelength < measurements_2.wavelength );
+  assert( measurements_1.size() > 0 );
+  assert( measurements_2.size() > 0 );
   
   auto const normalized_SRs =
   normalizedDetectorMeasurements( measurements_1, measurements_2, gCoeff );
@@ -64,25 +62,30 @@ noexcept -> transient_analysis_results
   
   auto const initialConditions =
   PeriodicProperties<one_over_temperature>{
-    myPeriodicData.initialEstimateOffset(),
+    myPeriodicData.initialEstimateOffset() ,
     myPeriodicData.initialEstimateAmplitude(),
-    omega,
-    quantity<plane_angle>{ -M_PI/2* radians }
+    laser_frequency,
+    quantity<plane_angle>{ M_PI/4 * radians }
   } ;
+  
 
-  auto const fitted_cosine_function =
+  auto const fit_cosine =
   cosine( normalized_SRs, initialConditions, laser_phase );
 
-  auto const myFittedAmplitude = abs(fitted_cosine_function.get_amplitude()) ;
+  auto const fitted_cosine_function = fit_cosine.fitted_cosine;
+
+  auto const myFittedAmplitude = abs( fitted_cosine_function.get_amplitude() );
   auto const myFittedOffset = fitted_cosine_function.get_offset() ;
   
   auto  const transient_temperature_phase = fitted_cosine_function.get_phase() ;
-    
+  
   auto const steady_temperature =
-  quantity<temperature>( quantity<dimensionless>{1} / myFittedOffset ) ;
+  quantity<si::temperature>( quantity<dimensionless>{1} / myFittedOffset ) ;
   
   auto const transient_temperature_amplitude =
   myFittedAmplitude * pow<2>( steady_temperature );
+
+  auto const omega = frequency_to_angularFrequency( laser_frequency );
 
   auto const output =
   transient_analysis_results
@@ -95,6 +98,7 @@ noexcept -> transient_analysis_results
     omega,
     laser_phase
   );
+
 
   return output;
 }

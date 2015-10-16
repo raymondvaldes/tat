@@ -47,7 +47,7 @@ noexcept -> math::complex::properties< units::si::temperature >
   
   // given integrate f(x) from a to b.  Must satisfy F(a) = 0;
   auto const func = [ & ]
-  ( vector< double > const & y, vector< double > & dy, double const nu )
+  ( vector< double > const & /*y*/, vector< double > & dy, double const nu )
   noexcept -> void
   {
     auto const hFunc = h( nu ).value() * J1( nu * r_e ).value();

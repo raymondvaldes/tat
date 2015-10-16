@@ -12,8 +12,11 @@
 #include <vector>
 
 #include "units.h"
-#include "math/transform/inverseHankel.h"
 #include "math/complex/properties.h"
+#include "thermal/model/slab/slab.h"
+#include "thermal/model/optics/optics.h"
+#include "thermal/equipment/laser/modulation_frequencies.h"
+#include "thermal/model/complex/temperatures.h"
 
 namespace thermal {
 namespace model {
@@ -31,6 +34,17 @@ frequency_sweep
   units::quantity< units::si::thermal_diffusivity > const alpha
 )
 noexcept -> std::vector< math::complex::properties< units::si::temperature > > ;
+
+
+auto
+frequency_sweep
+(
+  slab::Slab const & slab,
+  Optics const & optics,
+  equipment::laser::Modulation_frequencies const & frequencies
+)
+noexcept -> thermal::model::complex::Temperatures ;
+
 
 } // namespace thermal_emission
 } // namespace oneLayer2D

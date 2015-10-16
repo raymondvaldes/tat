@@ -13,9 +13,7 @@
 #include "units.h"
 
 namespace thermal{
-
 namespace pyrometer{
-
 namespace twoColor{
 
 auto temperatureSteady(
@@ -27,9 +25,7 @@ auto temperatureSteady(
   noexcept -> units::quantity< units::si::temperature>;
   
 } // namespace twoColor
-
 } // namespace pyrometer
-
 } // namespace thermal
 
 #endif

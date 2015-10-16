@@ -25,6 +25,9 @@ auto periodic_cosine(
   size_t points
 ) noexcept -> Measurements
 {
+  assert( detector_wavelength.value() > 0  );
+  assert( points > 0 );
+
   auto const frequency = properties.get_temporalFrequency();
   
   // times is simply a vector that of equally spaced times from 0->period

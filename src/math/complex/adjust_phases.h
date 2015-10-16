@@ -12,7 +12,7 @@
 #include "math/complex/adjust_phase.h"
 #include <vector>
 #include "units.h"
-#include "algorithm.h"
+#include "algorithm/algorithm.h"
 
 namespace math{
 namespace complex{

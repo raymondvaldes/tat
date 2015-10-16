@@ -10,8 +10,8 @@
 #define __tat__remove_grnd_if_not_in_scope_files__
 
 #include <vector>
-#include "gTBC/gMeasure/import_sweep_meta_data.h"
 #include "units.h"
+#include "gTBC/gMeasure/gTBD/frequency_detector_ground.hpp"
 
 namespace gTBC {
 
@@ -19,10 +19,10 @@ namespace gMeasure {
 
 auto remove_grnd_if_not_in_scope_files
 (
-  std::vector < frequency_detector_ground > const signal_grnds_,
+  std::vector < Frequency_detector_ground > const signal_grnds_,
   std::vector< units::quantity< units::si::frequency > > frequencies
 )
-noexcept -> std::vector < frequency_detector_ground >;
+noexcept -> std::vector < Frequency_detector_ground >;
   
 } // namespace gMeasure
   

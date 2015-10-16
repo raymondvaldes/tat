@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <iomanip>
 
 #include "algorithm/algorithm.h"
 #include "units.h"
@@ -42,9 +43,9 @@ auto print_table(
   using algorithm::for_each ;
   using std::cout ;
   assert( first_list.size() == second_list.size() );
-  
+
   auto i = 0u;
-  for_each( first_list, [&]( auto const & e ) noexcept
+  for_each( first_list, [&]( auto const & /*e*/ ) noexcept
   {
     cout << first_list[i] << "\t" << second_list[i] << "\n";
     ++i;
@@ -54,7 +55,8 @@ auto print_table(
 template< typename T , typename F >
 auto print_table_values(
   std::vector< units::quantity<T> > const & first_list,
-  std::vector< units::quantity<F> > const & second_list
+  std::vector< units::quantity<F> > const & second_list,
+  size_t precision = 6
 ) noexcept
 {
   using namespace units ;
@@ -62,8 +64,10 @@ auto print_table_values(
   using std::cout ;
   assert( first_list.size() == second_list.size() );
   
+  std::cout << std::setprecision( precision );
+  
   auto i = 0u;
-  for_each( first_list, [&]( auto const & e ) noexcept
+  for_each( first_list, [&]( auto const & /*e*/ ) noexcept
   {
     cout << first_list[i].value() << "\t" << second_list[i].value() << "\n";
     ++i;

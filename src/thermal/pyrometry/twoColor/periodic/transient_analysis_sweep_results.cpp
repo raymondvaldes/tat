@@ -10,6 +10,8 @@
 #include "thermal/define/lthermal.h"
 #include "algorithm/algorithm.h"
 #include "physics/classical_mechanics/kinematics.h"
+#include "thermal/pyrometry/twoColor/periodic/plot/phases.hpp"
+#include "thermal/pyrometry/twoColor/periodic/plot/amplitudes.hpp"
 #include "statistics/signal_processing/average.h"
 
 using algorithm::for_each;
@@ -18,6 +20,7 @@ using std::vector;
 using std::pair;
 using std::make_pair;
 using statistics::signal_processing::average;
+using filesystem::is_directory;
 
 namespace thermal {
 namespace pyrometry {
@@ -116,6 +119,54 @@ std::pair<
   auto const output = make_pair( frequencies, phases );
   return output;
 }
+
+
+  //printers
+auto transient_analysis_sweep_results::print_temperature_amplitudes(
+  filesystem::path const & print_directory
+) const noexcept -> void
+{
+  assert( is_directory( print_directory ) );
+
+  auto const a = phases_frequency();
+  auto const frequencies = a.first;
+  auto const amplitudes = surface_temperature_amplitudes();
+
+  
+  plot::amplitudes_to_file_log_linear(
+    frequencies,
+    amplitudes,
+    print_directory, "amplitudes" );
+
+  plot::amplitudes_to_file_log_log(
+    frequencies,
+    amplitudes,
+    print_directory, "amplitudes" );
+  
+
+}
+
+auto transient_analysis_sweep_results::print_temperature_phases(
+  filesystem::path const & print_directory ) const noexcept -> void
+{
+  assert( is_directory( print_directory ) );
+
+  auto const a = phases_frequency();
+  auto const frequencies = a.first;
+  auto const phases = a.second;
+  
+  plot::phases_to_file( frequencies, phases, print_directory, "phases" );
+
+  
+}
+
+auto transient_analysis_sweep_results::print_twoColor_fittings(
+  filesystem::path const & print_directory ) const noexcept -> void
+{
+
+}
+
+
 
 } // namespace periodic
 } // namespace twoColor

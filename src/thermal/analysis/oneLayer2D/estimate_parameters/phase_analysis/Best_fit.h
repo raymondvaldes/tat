@@ -12,6 +12,7 @@
 #include <vector>
 #include "units.h"
 #include "thermal/model/slab/slab.h"
+#include "thermal/model/optics/optics.h"
 
 namespace thermal{
 namespace analysis {
@@ -38,6 +39,9 @@ struct Best_fit{
   units::quantity< units::si::length > view_radius_offset;
 
   std::vector< units::quantity<units::si::plane_angle > > observations;
+  
+  // optical parameter (holds the best-fit)
+  thermal::model::Optics optics;
   
 
   explicit Best_fit

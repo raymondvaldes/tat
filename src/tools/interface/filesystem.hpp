@@ -11,17 +11,18 @@
 #include <vector>
 #include <string>
 #include <boost/filesystem/path.hpp>
+#include "filesystem/path.h"
 
 namespace filesystem {
 
 using boost::filesystem::path;
 
 
-void makeDir
+auto makeDir
 (
   std::string const & rootPath,
   std::string const & newDirectory
-) noexcept;
+) noexcept -> filesystem::path ;
 
 class directory {
 

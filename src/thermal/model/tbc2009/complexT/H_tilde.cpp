@@ -18,7 +18,7 @@ using std::complex;
 
 auto H_tilde
 (
-  units::quantity< units::si::dimensionless > const nu,
+  units::quantity< units::si::dimensionless > const /*nu*/,
   units::quantity< units::si::dimensionless > const z,
   units::quantity< units::si::dimensionless, std::complex<double> > const F,
   units::quantity< units::si::dimensionless, std::complex<double> > const nu_hat,

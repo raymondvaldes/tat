@@ -35,7 +35,7 @@ noexcept -> std::pair<double, double>
 
   auto const func = [&f, &weighting_function]
   (
-    vector< double > const & y,
+    vector< double > const & /*y*/,
     vector< double > & dr,
     double const r
   ) noexcept -> void

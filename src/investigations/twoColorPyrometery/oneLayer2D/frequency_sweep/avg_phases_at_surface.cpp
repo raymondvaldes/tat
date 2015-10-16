@@ -34,21 +34,19 @@ namespace twoColorPyrometery{
 namespace oneLayer2D{
 namespace frequency_sweep{
 
-auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
+auto avg_phases_at_surface( filesystem::directory const & /*dir*/ ) -> void
 {
   auto const deltaT = quantity< si::temperature > ( 1.0 * kelvin );
 
   auto const frequencies = vector< quantity< frequency > >({
-  
-//    .01414 * hertz,
-//    .05414 * hertz,
-//    .10 * hertz,
-//    .1414 * hertz,
-//
-//    .2 * hertz,
-//    .4 * hertz,
-//    .8 * hertz,
-  
+    .088 * hertz,
+    .125 * hertz,
+    .177 * hertz,
+    .250 * hertz,
+    .354 * hertz,
+    .500 * hertz,
+    .707 * hertz,
+    
     1.0 * hertz,
     1.414 * hertz,
     2 * hertz,
@@ -80,12 +78,18 @@ auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
     11585.536 * hertz
     
   });
-  
+
   // establish nondimensional fitting parameters (specimen-e)
-  auto const L = quantity< si::length > ( 0.8 * millimeters );
-  auto const beam_radius = quantity< length >( 4.0 * millimeters );
-  auto const detector_view_radius = quantity< length >( 0.05 * millimeters  ) ;
-  auto const alpha = quantity<thermal_diffusivity >( 40 * square_millimeters / second );
+  auto const L = quantity< si::length > ( 3.175 * millimeters );
+  auto const beam_radius = quantity< length >( 4.4 * millimeters );
+  auto const detector_view_radius = quantity< length >( 0.1 * millimeters  ) ;
+  auto const alpha = quantity<thermal_diffusivity >( 98 * square_millimeters / second );
+  
+//  // establish nondimensional fitting parameters (specimen-e)
+//  auto const L = quantity< si::length > ( 0.8 * millimeters );
+//  auto const beam_radius = quantity< length >( 4.0 * millimeters );
+//  auto const detector_view_radius = quantity< length >( 0.05 * millimeters  ) ;
+//  auto const alpha = quantity<thermal_diffusivity >( 40 * square_millimeters / second );
   
   // establish nondimensional fitting parameters (specimen-e)
 //  auto const L = quantity< si::length> ( 1.2 * millimeters );
@@ -118,7 +122,7 @@ auto avg_phases_at_surface( filesystem::directory const & dir ) -> void
   auto const phases = extract_phases_from_properties( predictions  ) ;
   
   print_table_values( frequencies, phases );
-  plot::simple_XY(frequencies, phases);
+//  plot::simple_XY(frequencies, phases);
 }
 
 } // namespace

@@ -17,8 +17,8 @@ using namespace units;
 
 auto thermal_penetration
 (
-  units::quantity< units::si::frequency > const f,
-  units::quantity< units::si::thermal_diffusivity> const alpha
+  units::quantity< units::si::frequency > const /*f*/,
+  units::quantity< units::si::thermal_diffusivity> const /*alpha*/
 ) noexcept -> units::quantity< units::si::length >
 {
   return 9999 * meters;

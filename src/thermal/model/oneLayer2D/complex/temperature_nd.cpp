@@ -42,7 +42,7 @@ auto temperature_nd
   
   if( at_surface )
   {
-    h_sys = [ b, l, z ]( auto const nu_ , auto const z_ ) noexcept {
+    h_sys = [ b, l, z ]( auto const nu_ , auto const /*z_*/ ) noexcept {
         return h_surface( nu_, l, b );
     };
   }

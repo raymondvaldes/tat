@@ -1709,8 +1709,13 @@ public:
 	// NOTE: empty filename makes temporary file
 	template <typename T, typename OrganizationMode>
 	std::string file(const T &arg, std::string filename, OrganizationMode) {
+  
 		if(filename.empty()) filename = make_tmpfile();
-		std::fstream tmp_stream(filename.c_str(), std::fstream::out);
+	
+    std::fstream tmp_stream(filename.c_str(), std::fstream::out);
+    
+    tmp_stream << std::setprecision(18);
+    
 		top_level_array_sender(tmp_stream, arg, OrganizationMode(), ModeText());
 		tmp_stream.close();
 
@@ -1774,6 +1779,7 @@ public:
 	template <typename T> Gnuplot &sendBinary2d         (const T &arg) { return sendBinary(arg, Mode2D      ()); }
 	template <typename T> Gnuplot &sendBinary1d_colmajor(const T &arg) { return sendBinary(arg, Mode1DUnwrap()); }
 	template <typename T> Gnuplot &sendBinary2d_colmajor(const T &arg) { return sendBinary(arg, Mode2DUnwrap()); }
+
 
 	template <typename T> std::string file1d         (const T &arg, const std::string &filename="") { return file(arg, filename, Mode1D      ()); }
 	template <typename T> std::string file2d         (const T &arg, const std::string &filename="") { return file(arg, filename, Mode2D      ()); }

@@ -104,7 +104,8 @@ std::vector< filesystem::path > ls_files( const std::string &path_in ) noexcept
   return output;
 }
 
-void makeDir( const std::string &rootPath, const std::string &newDirectory ) noexcept
+auto makeDir( const std::string &rootPath, const std::string &newDirectory )
+noexcept -> filesystem::path
 {
   assert( !rootPath.empty()  );
   assert( !newDirectory.empty() );
@@ -119,7 +120,7 @@ void makeDir( const std::string &rootPath, const std::string &newDirectory ) noe
     std::cerr << fullpath;
   }
   
-  return;
+  return directory;
 }
 
 

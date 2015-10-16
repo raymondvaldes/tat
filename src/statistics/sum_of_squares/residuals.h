@@ -12,17 +12,16 @@
 #include <vector>
 
 #include "units.h"
-#include "statistics/signal_processing/residuals_square"
+#include "statistics/signal_processing/sum_residuals_square.h"
 
 namespace statistics {
-
 namespace sum_of_squares {
 
 template< typename T>
 auto residuals
 (
-  std::vector< units::quantity< T > > const & values,
-  std::vector< units::quantity< T > > const & predicted
+  std::vector< T > const & values,
+  std::vector< T > const & predicted
 )
 {
   using statistics::signal_processing::sum_residuals_square;
@@ -31,7 +30,6 @@ auto residuals
 }
   
 } // namespace sum_of_squares
-  
 } // namespace statistics
 
 #endif

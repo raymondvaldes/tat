@@ -43,13 +43,14 @@ std::pair<
 {
   assert( first.size() > 0 ) ;
   assert( second.size() > 0  );
+  assert( first.size() == second.size() );
   assert( gCoeff.value() > 0 ) ;
   
   auto const count = first.size();
   auto normalizedSRs = vector< quantity<one_over_temperature> >( count ) ;
   
   auto i = 0u;
-  auto const normalizeSR_generator = [&first, &second, &gCoeff, &i]() noexcept
+  auto normalizeSR_generator = [&first, &second, &gCoeff, &i]() noexcept
   {
     auto const val =  normalizedSignalRatio_from_measurement(
       first.wavelength, first.measurements[i].signal ,

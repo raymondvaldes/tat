@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__calibrationCoefficient__
-#define __tat__calibrationCoefficient__
+#ifndef __tat__calibrationCoefficient_093014_
+#define __tat__calibrationCoefficient_093014_
 #include <utility>
 
 #include "units.h"
@@ -17,12 +17,8 @@
 #include "thermal/emission/signalRatio.h"
 
 namespace thermal {
-
 namespace pyrometry {
-
 namespace twoColor {
-
-
 
 template< class signalType >
 auto calibrationCoefficient(
@@ -70,14 +66,8 @@ auto calibrationCoefficient(
   return calibrationCoefficient( first, second, Temp_Abs );
 }
 
-
-
-
-
 } // namespace twoColor
-
 } // namespace pyrometry
-
 } // namespace thermal
 
 #endif /* defined(__tat__calibrationCoefficient__) */

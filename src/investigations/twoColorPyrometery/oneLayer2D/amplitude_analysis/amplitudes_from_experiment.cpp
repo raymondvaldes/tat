@@ -39,8 +39,8 @@ auto amplitudes_from_experiment( filesystem::directory const & ) -> void
   auto const DC_2 = 3.601*volts - DC_background;
   
   auto const wavelength_offset = quantity< wavelength >( -.5743693 * micrometers );
-  auto const lambda_1 = quantity<wavelength>( 4.6*micrometers );
-  auto const lambda_2 = quantity<wavelength>( 5.6*micrometers );
+  auto const lambda_1 = quantity<wavelength>( 4.6 * micrometers );
+  auto const lambda_2 = quantity<wavelength>( 5.6 * micrometers );
   
   auto const detector_wavelength_1 =
     calibrate_wavelength( lambda_1, wavelength_offset );

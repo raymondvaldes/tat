@@ -12,6 +12,7 @@
 #include "units.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
+#include "thermal/experimental/observations/slab/slab.hpp"
 
 namespace thermal{
 namespace analysis {
@@ -27,6 +28,14 @@ auto fit
   std::vector< units::quantity< units::si::plane_angle > > const & observations,
   thermal::model::slab::Slab const slab_initial,
   units::quantity< units::si::length> const beam_radius,
+  units::quantity< units::si::length > const detector_view_radius
+)
+noexcept -> Best_fit;
+
+
+auto fit
+(
+  thermal::experimental::observations::Slab const & initial_slab,
   units::quantity< units::si::length > const detector_view_radius
 )
 noexcept -> Best_fit;

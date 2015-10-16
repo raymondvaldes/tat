@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__transient_analysis_sweep__
-#define __tat__transient_analysis_sweep__
+#ifndef __tat__transient_analysis_sweep_2346244572434562_
+#define __tat__transient_analysis_sweep_2346244572434562_
 
 #include <vector>
 #include <utility>

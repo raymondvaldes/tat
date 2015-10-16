@@ -35,14 +35,14 @@ auto measurement
   units::quantity< units::si::dimensionless > const l,
   units::quantity< units::si::temperature > const deltaT,
   units::quantity< units::si::dimensionless> const view_radius,
-  units::quantity< units::si::temperature> const T_steady_state,
-  units::quantity< units::si::wavelength> const detector_wavelength
+  units::quantity< units::si::temperature> const /*T_steady_state*/,
+  units::quantity< units::si::wavelength> const /*detector_wavelength*/
 )
 noexcept -> math::complex::properties< units::si::temperature >
 {
   auto const func = [&]
   (
-    vector< double > const & y,
+    vector< double > const & /*y*/,
     vector< double > & dr,
     double const r
   ) noexcept -> void

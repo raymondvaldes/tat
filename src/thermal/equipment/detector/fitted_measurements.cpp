@@ -48,9 +48,9 @@ noexcept -> math::functions::Cosine< units::si::electric_potential >
   auto const initial = get_initial_conditions( data, omega );
   
   auto const cosine_phase = quantity< plane_angle >( 0 * radians) ;
-  auto const fitted_cosine_function = cosine( data, initial, cosine_phase );
+  auto const fit_cosine = cosine( data, initial, cosine_phase );
 
-  return fitted_cosine_function;
+  return fit_cosine.fitted_cosine;
 }
 
 } // namespace detector

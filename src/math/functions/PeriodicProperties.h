@@ -14,7 +14,6 @@
 #include "units.h"
 
 namespace math {
-  
 namespace functions {
  
 template< typename T >
@@ -53,7 +52,7 @@ public:
   auto get_temporalFrequency() const
   noexcept -> units::quantity< units::si::frequency>
   {
-    return omega / ( units::si::radians );
+    return omega / ( 2 * M_PI * units::si::radians );
   };
 
   auto get_phase() const
@@ -101,7 +100,7 @@ public:
     const units::quantity<units::si::plane_angle> phaseIn )
   noexcept
     : PeriodicProperties( offsetIn, amplitudeIn,
-      2 * M_PI * units::si::radians * temperoralFrequency, phaseIn)
+      2. * M_PI * units::si::radians * temperoralFrequency, phaseIn)
     {};
 
 
@@ -109,7 +108,6 @@ public:
 };
 
 } // namespace functions
-
 } // namespace math
 
 #endif
