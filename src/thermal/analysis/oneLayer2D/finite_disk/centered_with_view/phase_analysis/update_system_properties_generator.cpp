@@ -72,7 +72,7 @@ auto update_system_properties_generator(
 
   
   auto const update_system_properties =
-  [ scaling_factors, slab_initial, optics_initial, size]
+  [ scaling_factors, &slab_initial, &optics_initial, size]
   ( const double * x ) noexcept
   {
     auto parameter_values = Map_parameter_values();
