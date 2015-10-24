@@ -26,8 +26,7 @@ namespace phase_analysis{
 
 auto theoretical_modeling(
   equipment::laser::Modulation_frequencies const & frequencies,
-  emission::Phases const & experimental_phases,
-//    model::complex::Temperatures const & experimental_phases,
+  model::complex::Temperatures const & temperatures,
 
   std::function< std::tuple<
     model::slab::Slab,

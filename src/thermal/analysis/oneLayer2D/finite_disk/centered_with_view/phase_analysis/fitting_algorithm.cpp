@@ -12,6 +12,7 @@
 #include "thermal/analysis/oneLayer2D/phase_analysis/make_minimization_equation.hpp"
 #include "math/estimation/lmdiff.hpp"
 #include "thermal/model/complex/temperatures.h"
+#include <gsl.h>
 
 namespace thermal { 
 namespace analysis { 
@@ -39,10 +40,10 @@ auto fitting_algorithm
 )
 noexcept -> estimate_parameters::phase_analysis::Best_fit
 {
-  auto const exp_phases = temperatures.phases();
+  Expects( !temperatures.empty() );
 
   auto const model_predictions_generator =
-  theoretical_modeling( frequencies, exp_phases, model_evaluate );
+  theoretical_modeling( frequencies, temperatures, model_evaluate );
 
   auto const min_equation = minimization_equation( model_predictions_generator );
   

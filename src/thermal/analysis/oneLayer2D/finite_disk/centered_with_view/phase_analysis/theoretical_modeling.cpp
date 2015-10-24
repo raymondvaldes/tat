@@ -24,8 +24,7 @@ using model::oneLayer2D::finite_disk::disk::emission::centered_detector_with_vie
 
 auto theoretical_modeling(
   equipment::laser::Modulation_frequencies const & frequencies,
-  emission::Phases const & experimental_phases,
-  
+  model::complex::Temperatures const & temperatures,
   std::function< std::tuple<
     model::slab::Slab,
     model::Optics >
@@ -33,10 +32,10 @@ auto theoretical_modeling(
   
 ) noexcept -> std::function< Theoretical_results( const double *x  ) >
 {
-//  auto const experimental_phases = experimental_temperatures.phases()
+  auto const experimental_phases = temperatures.phases();
 
   auto const func =
-  [&frequencies, &model_updater, &experimental_phases]
+  [frequencies, &model_updater, experimental_phases]
   ( const double *x ) noexcept
   {
     auto const t = model_updater( x );
