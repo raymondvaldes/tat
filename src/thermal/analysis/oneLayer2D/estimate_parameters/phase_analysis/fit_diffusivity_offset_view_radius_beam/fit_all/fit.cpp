@@ -168,11 +168,18 @@ noexcept -> Best_fit
   auto const fitted_slab = thermal::model::slab::Slab( L , alpha_fit , k ) ;
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
-  auto const fitted_detector_offset = quantity< si::dimensionless >( b3 ) ;
+//  auto const fitted_detector_offset = quantity< si::dimensionless >( b3 ) ;
   
-  auto const result =
-  Best_fit( fitted_slab, b2, b1, frequencies, phase_predictions,
-  phase_goodness_of_fit, fitted_detector_offset );
+  auto const l_r = thermal::equipment::laser::Beam_radius(b1 * L );
+  auto const l_i = thermal::equipment::laser::Beam_intensity::from_value(42);
+  auto const d_r = thermal::equipment::detector::View_radius(b2 * L);
+  auto const l_m = thermal::equipment::laser::Modulation_depth::from_value(42);
+  
+  auto const optics_fitted =
+  thermal::model::Optics( l_r, l_i, d_r, l_m );
+  
+  auto const result = Best_fit(
+    fitted_slab, optics_fitted, phase_goodness_of_fit );
   
  return result;
   
