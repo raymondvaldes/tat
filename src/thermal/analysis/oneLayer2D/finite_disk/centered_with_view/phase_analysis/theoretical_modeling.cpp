@@ -47,7 +47,7 @@ auto theoretical_modeling(
 ) noexcept -> std::function< Theoretical_modeling( const double *x  ) >
 {
   auto const func =
-  [frequencies, model_updater, experimental_phases]
+  [&frequencies, &model_updater, &experimental_phases]
   ( const double *x ) noexcept
   {
     auto const t = model_updater( x );
