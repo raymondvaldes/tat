@@ -8,9 +8,11 @@
 
 #include "thermal/define/diffusivity.h"
 #include <cassert>
+#include "units.h"
+
+using namespace units;
 
 namespace thermal{
-
 namespace define{
 
 double diffusivity( const double k, const double rhoCp ) noexcept
@@ -25,14 +27,17 @@ auto diffusivity
 )
 noexcept -> units::quantity< units::si::thermal_diffusivity >
 {
-  assert( k.value() > 0 );
-  assert( rhoCp.value() > 0 );
+  assert( k.value() > 0  && isnormal(k) );
+  assert( rhoCp.value() > 0 && isnormal(rhoCp) );
+  
+  // alpha = k / rhoCp
   
   auto const alpha = k / rhoCp;
+  
+  assert( alpha.value() > 0 && isnormal(alpha) );
   return alpha;
 }
 
     
 } // namesapce define
-
 } // namespace thermal
