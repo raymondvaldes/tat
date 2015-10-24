@@ -133,25 +133,7 @@ BOOST_AUTO_TEST_CASE( fit_all )
   
   auto const best_fit = fit_a_s_re_RC( frequencies, phases, slab_initial, optics );
 
-  std::cout << "\n" << best_fit.phase_goodness_of_fit  << "\n";
-
-//  using thermal::model::oneLayer2D::generator::Disk;
-//
-//  auto const slab_bf = best_fit.bulk_slab;
-//  auto const optics_bf = best_fit.optics;
-//  auto const model = Disk(
-//    thermal::model::oneLayer2D::Conduction_model::finite_disk,
-//    thermal::model::oneLayer2D::Detector_model::center_point,
-//    slab_bf,
-//    optics_bf );
-//
-//  auto const model_complex_temperatures = model.evaluate( frequencies );
-//
-//  auto const model_phases = model_complex_temperatures.phases();
-//  auto const experimental_phases = phases;
-//  
-//  thermal::plot::phase::model_vs_experiment_phases(
-//        frequencies, model_phases, experimental_phases );
+  BOOST_CHECK_CLOSE_FRACTION( 7.41395e-5, best_fit.phase_goodness_of_fit, 1e-5);
 }
 
 
