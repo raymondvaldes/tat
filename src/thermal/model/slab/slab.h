@@ -61,7 +61,6 @@ public:
   // getters
   auto radius() const noexcept -> Radius;
   auto thickness() const noexcept -> Thickness;
-  
   auto thermal_conductivity() const noexcept -> Thermal_conductivity;
   auto volumetric_heatCapacity() const noexcept -> Volumetric_heat_capacity;
   auto thermal_diffusivity() const noexcept -> Thermal_diffusivity;

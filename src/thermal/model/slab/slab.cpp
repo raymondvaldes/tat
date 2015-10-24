@@ -7,6 +7,7 @@
 //
 
 #include <complex>
+#include <cmath>
 
 #include "thermal/model/slab/slab.h"
 
@@ -21,7 +22,7 @@ namespace thermal { namespace model { namespace slab{
   using thermal::define::volumetricHeatCapacity;
   using thermal::define::effusivity;
   using thermal::define::diffusivity;
-
+  using std::isnormal;
 
 Slab::Slab(
   Thickness const L,
@@ -35,12 +36,12 @@ Slab::Slab(
     rhoCp( volumetricHeatCapacity( alpha, k )  ),
     R( R )
 {
-  assert( alpha.value() > 0 ) ;
-  assert( k_in.value() > 0 ) ;
-  assert( rhoCp.value() > 0 ) ;
+  assert( alpha.value() > 0  && isnormal( alpha.value() ) ) ;
+  assert( k_in.value() > 0 && isnormal( k_in.value() )) ;
+  assert( rhoCp.value() > 0 && isnormal( rhoCp.value() ) ) ;
 
-  assert( L.value() > 0 ) ;
-  assert( R.value() > 0 );
+  assert( L.value() > 0 && isnormal( L.value() )) ;
+  assert( R.value() > 0 && isnormal( R.value() )) ;
 };
 
 
