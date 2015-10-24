@@ -29,7 +29,7 @@ noexcept -> estimate_parameters::phase_analysis::Best_fit
 {
   // parameter estimation algorithm
   auto const model =
-  update_system_properties_generator( slab_initial, optics_initial, parameters);
+  update_system_properties_generator( slab_initial, optics_initial,parameters );
   
   auto m_parameters = model.first;
   auto m_evaluate = model.second;

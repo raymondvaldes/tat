@@ -9,15 +9,7 @@
 #ifndef update_system_properties_generator_hpp_102315
 #define update_system_properties_generator_hpp_102315
 
-
-#include <functional>
-#include <utility>
-#include <vector>
-
-#include "thermal/model/slab/slab.h"
-#include "thermal/model/optics/optics.h"
-#include "electronics/filter/low-pass/RC-first-order/time_constant.h"
-#include "thermal/model/oneLayer2D/finite_disk/parameter_list.hpp"
+#include "thermal/analysis/oneLayer2D/update_system_properties_generator.hpp"
 
 namespace thermal {
 namespace analysis { 
@@ -26,19 +18,7 @@ namespace finite_disk {
 namespace centered_with_view {
 namespace phase_analysis{
 
-auto update_system_properties_generator(
-  model::slab::Slab const & slab_initial,
-  model::Optics const & optics_initial,
-  model::oneLayer2D::finite_disk::Parameters const & unknown_parameters
-)
- noexcept ->
-  std::pair< std::vector<double> ,
-    std::function<
-    std::tuple<
-      model::slab::Slab,
-      model::Optics  >( const double * x )  >
-      >;
-
+using thermal::analysis::oneLayer2D::update_system_properties_generator;
 
 } } } } } }
 
