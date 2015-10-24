@@ -9,7 +9,7 @@
 #include "fitting_algorithm.hpp"
 #include "theoretical_modeling.hpp"
 #include "make_minimization_equation.hpp"
-
+#include "thermal/analysis/oneLayer2D/phase_analysis/make_minimization_equation.hpp"
 #include "math/estimation/lmdiff.hpp"
 
 
@@ -24,6 +24,7 @@ using math::estimation::lmdif;
 using math::estimation::settings;
 using std::get;
 using estimate_parameters::phase_analysis::Best_fit;
+using thermal::analysis::oneLayer2D::phase_analysis::minimization_equation;
 
 auto fitting_algorithm
 (
