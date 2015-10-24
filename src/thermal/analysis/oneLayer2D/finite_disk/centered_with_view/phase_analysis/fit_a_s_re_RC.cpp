@@ -8,11 +8,7 @@
 
 #include "fit_a_s_re_RC.hpp"
 #include <gsl.h>
-
-#include "fitting_algorithm.hpp"
-#include "thermal/model/oneLayer2D/finite_disk/parameter_list.hpp"
-#include "update_system_properties_generator.hpp"
-#include "update_disk_optics.hpp"
+#include "fit.hpp"
 
 namespace thermal { 
 namespace analysis { 
@@ -42,17 +38,9 @@ noexcept -> estimate_parameters::phase_analysis::Best_fit
     thermal::model::oneLayer2D::finite_disk::Parameter::rc_filter
   });
   
-  // parameter estimation algorithm
-  auto const model =
-  update_system_properties_generator( slab_initial, optics_initial, parameters);
-  
-  auto m_parameters = model.first;
-  auto m_evaluate = model.second;
-  
   auto const result =
-  fitting_algorithm( frequencies, exp_phases, m_parameters , m_evaluate  );
-
- return result;
+  fit( frequencies, exp_phases, slab_initial, optics_initial, parameters);
+  return result;
 }
 
 } } } } } }
