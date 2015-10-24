@@ -30,7 +30,7 @@ Slab::Slab(
   Thermal_conductivity const k_in,
   Radius const R
 
-)
+) noexcept
   : L( L ),
     k( k_in ),
     rhoCp( volumetricHeatCapacity( alpha, k )  ),
@@ -50,7 +50,7 @@ Slab::Slab(
   Thermal_diffusivity const alpha_in,
   Volumetric_heat_capacity const rhoCp_in,
   Radius const R
-) :Slab(
+) noexcept :Slab(
     L,
     alpha_in,
     conductivity( rhoCp_in, alpha_in) ,
@@ -61,7 +61,7 @@ Slab::Slab(
   Thermal_conductivity const k_in,
   Volumetric_heat_capacity const rhoCp_in,
   Radius const R
-) :Slab(
+) noexcept :Slab(
     L,
     diffusivity( k_in , rhoCp_in ),
     k_in, R ) {}

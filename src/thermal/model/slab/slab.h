@@ -41,22 +41,21 @@ public:
     Thermal_diffusivity const alpha_in,
     Thermal_conductivity const k_in,
     Radius const R = Radius( 25.0 * units::si::millimeters )
-  );
+  ) noexcept ;
   
   Slab(
     Thickness const L,
     Thermal_diffusivity const alpha_in,
     Volumetric_heat_capacity const rhoCp_in,
     Radius const R = Radius( 25.0 * units::si::millimeters)
-    
-  );
+  ) noexcept ;
   
   Slab(
     Thickness const L,
     Thermal_conductivity const k_in,
     Volumetric_heat_capacity const rhoCp_in,
     Radius const R = Radius( 25.0 * units::si::millimeters )
-  );
+  ) noexcept ;
   
   // getters
   auto radius() const noexcept -> Radius;
