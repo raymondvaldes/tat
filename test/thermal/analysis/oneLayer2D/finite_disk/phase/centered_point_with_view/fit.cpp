@@ -13,18 +13,19 @@
 #include "units.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/experimental/observations/slab/slab.hpp"
-#include "thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.hpp"
+#include "thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit.hpp"
 
 #include "thermal/model/optics/optics.h"
 #include "thermal/plot/phase/model_vs_experiment_phases.hpp"
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
 #include "thermal/model/oneLayer2D/model_selection.h"
+#include "thermal/model/oneLayer2D/finite_disk/parameter_list.hpp"
 
 using std::vector;
 using namespace units;
 using thermal::experimental::observations::Slab;
 using thermal::model::Optics;
-using thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::fit_a_s_re_RC;
+using thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::fit;
 
 
 BOOST_AUTO_TEST_SUITE( thermal )
@@ -130,8 +131,15 @@ BOOST_AUTO_TEST_CASE( fit_all )
   
   auto const optics = Optics( laser_radius, laser_intensity, view_radius, m  );
 
+  using thermal::model::oneLayer2D::finite_disk::Parameters;
+  auto const parameters = Parameters({
+    thermal::model::oneLayer2D::finite_disk::Parameter::thermal_diffusivity,
+    thermal::model::oneLayer2D::finite_disk::Parameter::specimen_radius,
+    thermal::model::oneLayer2D::finite_disk::Parameter::detector_radius,
+    thermal::model::oneLayer2D::finite_disk::Parameter::rc_filter
+  });  
   
-  auto const best_fit = fit_a_s_re_RC( frequencies, phases, slab_initial, optics );
+  auto const best_fit = fit( frequencies, phases, slab_initial, optics, parameters );
 
   BOOST_CHECK_CLOSE_FRACTION( 7.41395e-5, best_fit.phase_goodness_of_fit, 1e-5);
 }

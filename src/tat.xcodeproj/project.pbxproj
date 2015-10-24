@@ -736,30 +736,6 @@
 		ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E711A96B53900F124F1 /* spectrum.h */; };
 		ABFD19991AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */; };
 		ABFD199A1AB1FE7600D865C7 /* find_unique_lambdas_in_files.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFD19981AB1FE7600D865C7 /* find_unique_lambdas_in_files.h */; };
-		ABFF67F01BDA8FAA00CF32B0 /* fit_a_b_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67D81BDA8FAA00CF32B0 /* fit_a_b_RC.cpp */; };
-		ABFF67F11BDA8FAA00CF32B0 /* fit_a_b_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67D91BDA8FAA00CF32B0 /* fit_a_b_RC.hpp */; };
-		ABFF67F21BDA8FAA00CF32B0 /* fit_a_b_s_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67DA1BDA8FAA00CF32B0 /* fit_a_b_s_RC.cpp */; };
-		ABFF67F31BDA8FAA00CF32B0 /* fit_a_b_s_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67DB1BDA8FAA00CF32B0 /* fit_a_b_s_RC.hpp */; };
-		ABFF67F41BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67DC1BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.cpp */; };
-		ABFF67F51BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67DD1BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.hpp */; };
-		ABFF67F61BDA8FAA00CF32B0 /* fit_a_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67DE1BDA8FAA00CF32B0 /* fit_a_RC.cpp */; };
-		ABFF67F71BDA8FAA00CF32B0 /* fit_a_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67DF1BDA8FAA00CF32B0 /* fit_a_RC.hpp */; };
-		ABFF67F81BDA8FAA00CF32B0 /* fit_a_s_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67E01BDA8FAA00CF32B0 /* fit_a_s_RC.cpp */; };
-		ABFF67F91BDA8FAA00CF32B0 /* fit_a_s_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67E11BDA8FAA00CF32B0 /* fit_a_s_RC.hpp */; };
-		ABFF67FA1BDA8FAA00CF32B0 /* fit_a_s_re_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67E21BDA8FAA00CF32B0 /* fit_a_s_re_RC.cpp */; };
-		ABFF67FB1BDA8FAA00CF32B0 /* fit_a_s_re_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67E31BDA8FAA00CF32B0 /* fit_a_s_re_RC.hpp */; };
-		ABFF67FC1BDA8FAA00CF32B0 /* fit_b_re_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67E41BDA8FAA00CF32B0 /* fit_b_re_RC.cpp */; };
-		ABFF67FD1BDA8FAA00CF32B0 /* fit_b_re_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67E51BDA8FAA00CF32B0 /* fit_b_re_RC.hpp */; };
-		ABFF67FE1BDA8FAA00CF32B0 /* fit_b_s_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67E61BDA8FAA00CF32B0 /* fit_b_s_RC.cpp */; };
-		ABFF67FF1BDA8FAA00CF32B0 /* fit_b_s_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67E71BDA8FAA00CF32B0 /* fit_b_s_RC.hpp */; };
-		ABFF68001BDA8FAA00CF32B0 /* fit_b_s_re_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67E81BDA8FAA00CF32B0 /* fit_b_s_re_RC.cpp */; };
-		ABFF68011BDA8FAA00CF32B0 /* fit_b_s_re_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67E91BDA8FAA00CF32B0 /* fit_b_s_re_RC.hpp */; };
-		ABFF68021BDA8FAA00CF32B0 /* fit_re_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67EA1BDA8FAA00CF32B0 /* fit_re_RC.cpp */; };
-		ABFF68031BDA8FAA00CF32B0 /* fit_re_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67EB1BDA8FAA00CF32B0 /* fit_re_RC.hpp */; };
-		ABFF68041BDA8FAA00CF32B0 /* fit_s_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67EC1BDA8FAA00CF32B0 /* fit_s_RC.cpp */; };
-		ABFF68051BDA8FAA00CF32B0 /* fit_s_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67ED1BDA8FAA00CF32B0 /* fit_s_RC.hpp */; };
-		ABFF68061BDA8FAA00CF32B0 /* fit_s_re_RC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF67EE1BDA8FAA00CF32B0 /* fit_s_re_RC.cpp */; };
-		ABFF68071BDA8FAA00CF32B0 /* fit_s_re_RC.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF67EF1BDA8FAA00CF32B0 /* fit_s_re_RC.hpp */; };
 		ABFF680A1BDA94EC00CF32B0 /* fitting_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF68081BDA94EC00CF32B0 /* fitting_algorithm.cpp */; };
 		ABFF680B1BDA94EC00CF32B0 /* fitting_algorithm.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABFF68091BDA94EC00CF32B0 /* fitting_algorithm.hpp */; };
 		ABFF68161BDA9D6C00CF32B0 /* make_minimization_equation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFF68141BDA9D6C00CF32B0 /* make_minimization_equation.cpp */; };
@@ -1540,30 +1516,6 @@
 		ABFC9E711A96B53900F124F1 /* spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spectrum.h; sourceTree = "<group>"; };
 		ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = find_unique_lambdas_in_files.cpp; path = gTBC/gMeasure/find_unique_lambdas_in_files.cpp; sourceTree = "<group>"; };
 		ABFD19981AB1FE7600D865C7 /* find_unique_lambdas_in_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = find_unique_lambdas_in_files.h; path = gTBC/gMeasure/find_unique_lambdas_in_files.h; sourceTree = "<group>"; };
-		ABFF67D81BDA8FAA00CF32B0 /* fit_a_b_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_a_b_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_b_RC.cpp; sourceTree = "<group>"; };
-		ABFF67D91BDA8FAA00CF32B0 /* fit_a_b_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_a_b_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_b_RC.hpp; sourceTree = "<group>"; };
-		ABFF67DA1BDA8FAA00CF32B0 /* fit_a_b_s_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_a_b_s_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_b_s_RC.cpp; sourceTree = "<group>"; };
-		ABFF67DB1BDA8FAA00CF32B0 /* fit_a_b_s_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_a_b_s_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_b_s_RC.hpp; sourceTree = "<group>"; };
-		ABFF67DC1BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_a_b_s_re_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_b_s_re_RC.cpp; sourceTree = "<group>"; };
-		ABFF67DD1BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_a_b_s_re_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_b_s_re_RC.hpp; sourceTree = "<group>"; };
-		ABFF67DE1BDA8FAA00CF32B0 /* fit_a_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_a_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_RC.cpp; sourceTree = "<group>"; };
-		ABFF67DF1BDA8FAA00CF32B0 /* fit_a_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_a_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_RC.hpp; sourceTree = "<group>"; };
-		ABFF67E01BDA8FAA00CF32B0 /* fit_a_s_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_a_s_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_RC.cpp; sourceTree = "<group>"; };
-		ABFF67E11BDA8FAA00CF32B0 /* fit_a_s_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_a_s_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_RC.hpp; sourceTree = "<group>"; };
-		ABFF67E21BDA8FAA00CF32B0 /* fit_a_s_re_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_a_s_re_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp; sourceTree = "<group>"; };
-		ABFF67E31BDA8FAA00CF32B0 /* fit_a_s_re_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_a_s_re_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.hpp; sourceTree = "<group>"; };
-		ABFF67E41BDA8FAA00CF32B0 /* fit_b_re_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_b_re_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_b_re_RC.cpp; sourceTree = "<group>"; };
-		ABFF67E51BDA8FAA00CF32B0 /* fit_b_re_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_b_re_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_b_re_RC.hpp; sourceTree = "<group>"; };
-		ABFF67E61BDA8FAA00CF32B0 /* fit_b_s_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_b_s_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_b_s_RC.cpp; sourceTree = "<group>"; };
-		ABFF67E71BDA8FAA00CF32B0 /* fit_b_s_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_b_s_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_b_s_RC.hpp; sourceTree = "<group>"; };
-		ABFF67E81BDA8FAA00CF32B0 /* fit_b_s_re_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_b_s_re_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_b_s_re_RC.cpp; sourceTree = "<group>"; };
-		ABFF67E91BDA8FAA00CF32B0 /* fit_b_s_re_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_b_s_re_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_b_s_re_RC.hpp; sourceTree = "<group>"; };
-		ABFF67EA1BDA8FAA00CF32B0 /* fit_re_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_re_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_re_RC.cpp; sourceTree = "<group>"; };
-		ABFF67EB1BDA8FAA00CF32B0 /* fit_re_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_re_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_re_RC.hpp; sourceTree = "<group>"; };
-		ABFF67EC1BDA8FAA00CF32B0 /* fit_s_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_s_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_s_RC.cpp; sourceTree = "<group>"; };
-		ABFF67ED1BDA8FAA00CF32B0 /* fit_s_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_s_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_s_RC.hpp; sourceTree = "<group>"; };
-		ABFF67EE1BDA8FAA00CF32B0 /* fit_s_re_RC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit_s_re_RC.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_s_re_RC.cpp; sourceTree = "<group>"; };
-		ABFF67EF1BDA8FAA00CF32B0 /* fit_s_re_RC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit_s_re_RC.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_s_re_RC.hpp; sourceTree = "<group>"; };
 		ABFF68081BDA94EC00CF32B0 /* fitting_algorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fitting_algorithm.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fitting_algorithm.cpp; sourceTree = "<group>"; };
 		ABFF68091BDA94EC00CF32B0 /* fitting_algorithm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fitting_algorithm.hpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/fitting_algorithm.hpp; sourceTree = "<group>"; };
 		ABFF68141BDA9D6C00CF32B0 /* make_minimization_equation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = make_minimization_equation.cpp; path = oneLayer2D/finite_disk/centered_with_view/phase_analysis/make_minimization_equation.cpp; sourceTree = "<group>"; };
@@ -4363,30 +4315,6 @@
 		ABFF67D71BDA8F6B00CF32B0 /* phase_analysis */ = {
 			isa = PBXGroup;
 			children = (
-				ABFF67D81BDA8FAA00CF32B0 /* fit_a_b_RC.cpp */,
-				ABFF67D91BDA8FAA00CF32B0 /* fit_a_b_RC.hpp */,
-				ABFF67DA1BDA8FAA00CF32B0 /* fit_a_b_s_RC.cpp */,
-				ABFF67DB1BDA8FAA00CF32B0 /* fit_a_b_s_RC.hpp */,
-				ABFF67DC1BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.cpp */,
-				ABFF67DD1BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.hpp */,
-				ABFF67DE1BDA8FAA00CF32B0 /* fit_a_RC.cpp */,
-				ABFF67DF1BDA8FAA00CF32B0 /* fit_a_RC.hpp */,
-				ABFF67E01BDA8FAA00CF32B0 /* fit_a_s_RC.cpp */,
-				ABFF67E11BDA8FAA00CF32B0 /* fit_a_s_RC.hpp */,
-				ABFF67E21BDA8FAA00CF32B0 /* fit_a_s_re_RC.cpp */,
-				ABFF67E31BDA8FAA00CF32B0 /* fit_a_s_re_RC.hpp */,
-				ABFF67E41BDA8FAA00CF32B0 /* fit_b_re_RC.cpp */,
-				ABFF67E51BDA8FAA00CF32B0 /* fit_b_re_RC.hpp */,
-				ABFF67E61BDA8FAA00CF32B0 /* fit_b_s_RC.cpp */,
-				ABFF67E71BDA8FAA00CF32B0 /* fit_b_s_RC.hpp */,
-				ABFF67E81BDA8FAA00CF32B0 /* fit_b_s_re_RC.cpp */,
-				ABFF67E91BDA8FAA00CF32B0 /* fit_b_s_re_RC.hpp */,
-				ABFF67EA1BDA8FAA00CF32B0 /* fit_re_RC.cpp */,
-				ABFF67EB1BDA8FAA00CF32B0 /* fit_re_RC.hpp */,
-				ABFF67EC1BDA8FAA00CF32B0 /* fit_s_RC.cpp */,
-				ABFF67ED1BDA8FAA00CF32B0 /* fit_s_RC.hpp */,
-				ABFF67EE1BDA8FAA00CF32B0 /* fit_s_re_RC.cpp */,
-				ABFF67EF1BDA8FAA00CF32B0 /* fit_s_re_RC.hpp */,
 				ABFF68081BDA94EC00CF32B0 /* fitting_algorithm.cpp */,
 				ABFF68091BDA94EC00CF32B0 /* fitting_algorithm.hpp */,
 				ABFF68141BDA9D6C00CF32B0 /* make_minimization_equation.cpp */,
@@ -4492,7 +4420,6 @@
 				AB4871C01AF414B700DFD3C1 /* surface_radial_profile.h in Headers */,
 				AB841C5D1AC4E4D4000CE81D /* c.h in Headers */,
 				AB4871C41AF4196F00DFD3C1 /* surface_radial_profile.h in Headers */,
-				ABFF67FD1BDA8FAA00CF32B0 /* fit_b_re_RC.hpp in Headers */,
 				AB48724E1AFAC6C700DFD3C1 /* goodness_of_fit.h in Headers */,
 				AB44BD6A1AAA43B100E0710E /* normalizedSignalRatio_from_measurement.h in Headers */,
 				AB5E9D2F1ACA1ACA003319FA /* phase_amplitude.h in Headers */,
@@ -4502,7 +4429,6 @@
 				ABCC53931BA1148E00CAB0E0 /* steady_state_temperature.hpp in Headers */,
 				AB71A3781AA1307B003AAC84 /* repeatElements.h in Headers */,
 				ABE390E51AFBD7910063E789 /* diffusivity_from_phases.h in Headers */,
-				ABFF68071BDA8FAA00CF32B0 /* fit_s_re_RC.hpp in Headers */,
 				ABF7B4D21BD1CC5800038AB0 /* radius.hpp in Headers */,
 				AB4871C91AF53E5B00DFD3C1 /* surface_phases_at_radial_position.h in Headers */,
 				AB841C691AC4EA66000CE81D /* temperature.h in Headers */,
@@ -4538,7 +4464,6 @@
 				AB841C391AC4DB47000CE81D /* J1.h in Headers */,
 				AB6B55AC1BD46D5C007E0A4D /* complex_lambda.h in Headers */,
 				AB370B6E1BCDDBA600C14109 /* process_twoColor_TBD_meta_data.hpp in Headers */,
-				ABFF68031BDA8FAA00CF32B0 /* fit_re_RC.hpp in Headers */,
 				ABE937E91BC5F0C1002C3417 /* temperature.h in Headers */,
 				ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */,
 				ABCC537C1B9F937F00CAB0E0 /* frequency_sweep.hpp in Headers */,
@@ -4565,9 +4490,7 @@
 				AB7996E21AB0F6190022015B /* read_scope_file.h in Headers */,
 				AB9383E51AC22F8700F2D2DD /* a.h in Headers */,
 				ABF7B4891BCF474B00038AB0 /* infinite_disk.hpp in Headers */,
-				ABFF67F51BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.hpp in Headers */,
 				ABF7B4BF1BD1BEEF00038AB0 /* thermal_conductivity.h in Headers */,
-				ABFF67FB1BDA8FAA00CF32B0 /* fit_a_s_re_RC.hpp in Headers */,
 				ABEF4E7E1948D4A500B44AD5 /* combinations.hpp in Headers */,
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
@@ -4599,14 +4522,11 @@
 				ABEF4E781948D4A500B44AD5 /* execute.h in Headers */,
 				ABEF4F041948D4A500B44AD5 /* timing.h in Headers */,
 				ABF7B49B1BD011FC00038AB0 /* temperature.h in Headers */,
-				ABFF68011BDA8FAA00CF32B0 /* fit_b_s_re_RC.hpp in Headers */,
 				AB9A3FC01ACF14BA0004882F /* point.h in Headers */,
 				ABEF4ED41948D4A500B44AD5 /* temperature.h in Headers */,
-				ABFF67F71BDA8FAA00CF32B0 /* fit_a_RC.hpp in Headers */,
 				ABEF4EEA1948D4A500B44AD5 /* numerical_2011.h in Headers */,
 				AB7A694B1AB253F800249A6E /* find_unique_measurements.h in Headers */,
 				AB48725E1AFAE4E700DFD3C1 /* diffusivity_from_phases.h in Headers */,
-				ABFF67F91BDA8FAA00CF32B0 /* fit_a_s_RC.hpp in Headers */,
 				ABDC7E041AD38C9B0048986B /* from_phases.h in Headers */,
 				AB841C921AC5B62F000CE81D /* HeatingProperties.h in Headers */,
 				ABEF4E921948D4A500B44AD5 /* utils.hpp in Headers */,
@@ -4640,7 +4560,6 @@
 				AB7EAD121A58C39500AB7E11 /* resetInputBeginning.h in Headers */,
 				ABEF4ECF1948D4A500B44AD5 /* model.hpp in Headers */,
 				ABEF4EE81948D4A500B44AD5 /* mesh.hpp in Headers */,
-				ABFF67FF1BDA8FAA00CF32B0 /* fit_b_s_RC.hpp in Headers */,
 				AB3ED3CA1AAF93D100845151 /* conductivity.h in Headers */,
 				AB6B55B21BD4781E007E0A4D /* c_coefficient.h in Headers */,
 				ABEF4F051948D4A500B44AD5 /* tools.hpp in Headers */,
@@ -4658,7 +4577,6 @@
 				AB80FB4B1AF1992C00F88B04 /* extract_phases_from_properties.h in Headers */,
 				AB0E72CF1AC277B400750B3F /* diffusivity_from_phases.h in Headers */,
 				AB370B601BCDC09700C14109 /* meta_measurement_descriptions.hpp in Headers */,
-				ABFF67F31BDA8FAA00CF32B0 /* fit_a_b_s_RC.hpp in Headers */,
 				ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */,
 				AB4E53BC1ABBD54200E7BA8D /* steady_surface_temperature.h in Headers */,
 				ABEF4EEE1948D4A500B44AD5 /* Numerical_Temperature.h in Headers */,
@@ -4680,7 +4598,6 @@
 				ABEF4EF81948D4A500B44AD5 /* tau_0.h in Headers */,
 				ABB09B781AB78CF7005D6BB5 /* sum_residuals_square.h in Headers */,
 				ABDC7E091AD38D320048986B /* average_surface_phases.h in Headers */,
-				ABFF68051BDA8FAA00CF32B0 /* fit_s_RC.hpp in Headers */,
 				AB6333BC1B8D0BC300418F6B /* fit.hpp in Headers */,
 				ABB09B841AB7CBB7005D6BB5 /* total.h in Headers */,
 				ABF5D65D19DB40DD00A70476 /* calibrationCoefficient.h in Headers */,
@@ -4728,7 +4645,6 @@
 				ABEF4E961948D4A500B44AD5 /* simpsons_3_8.hpp in Headers */,
 				AB7A694F1AB266C500249A6E /* find_all_files_with.h in Headers */,
 				AB370B791BCF171100C14109 /* phase.h in Headers */,
-				ABFF67F11BDA8FAA00CF32B0 /* fit_a_b_RC.hpp in Headers */,
 				ABEF4E821948D4A500B44AD5 /* spline.h in Headers */,
 				ABA0B7351A9D006F00F000DA /* valarray_to_vector.h in Headers */,
 				AB4871BA1AF323CF00DFD3C1 /* diffusivity_from_phases.h in Headers */,
@@ -4960,7 +4876,6 @@
 				AB4871871AF2AFC300DFD3C1 /* avg_phases_at_surface.cpp in Sources */,
 				ABC648641A65B5EB008FA721 /* main-app.cpp in Sources */,
 				AB0E72C51AC23DA900750B3F /* surface_phase.cpp in Sources */,
-				ABFF67FE1BDA8FAA00CF32B0 /* fit_b_s_RC.cpp in Sources */,
 				AB5FDFDF1A6EE7F50017CEBB /* settings.cpp in Sources */,
 				AB0D6D681B8CF2210044DA61 /* frequency_sweep.cpp in Sources */,
 				ABEF4EB41948D4A500B44AD5 /* lmdiff_poptea_help.cpp in Sources */,
@@ -4969,7 +4884,6 @@
 				ABEF4EE71948D4A500B44AD5 /* mesh.cpp in Sources */,
 				ABB5FACF1B921671004855FE /* thermal_penetration.cpp in Sources */,
 				ABEF4EC61948D4A500B44AD5 /* construct.cpp in Sources */,
-				ABFF67F41BDA8FAA00CF32B0 /* fit_a_b_s_re_RC.cpp in Sources */,
 				AB3ED3C21AAF6E9B00845151 /* conductivity_from_phases.cpp in Sources */,
 				AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */,
 				AB2BA4781AB3DA78008AF545 /* import_twoColor_scope_files.cpp in Sources */,
@@ -4989,7 +4903,6 @@
 				AB4872081AF800D700DFD3C1 /* planks_law.cpp in Sources */,
 				AB0E72C91AC23E8C00750B3F /* surface_phases.cpp in Sources */,
 				AB4871F61AF7071400DFD3C1 /* calibrate_wavelength.cpp in Sources */,
-				ABFF67FC1BDA8FAA00CF32B0 /* fit_b_re_RC.cpp in Sources */,
 				ABF7B4C71BD1C0DB00038AB0 /* biot.cpp in Sources */,
 				AB9A3FCB1ACF32AA0004882F /* average_surface_phase_amplitude.cpp in Sources */,
 				AB4872651AFAE50300DFD3C1 /* diffusivity_from_phases.cpp in Sources */,
@@ -5015,7 +4928,6 @@
 				AB4BEA871B72EB37006F71AE /* surface_non_dimensional.cpp in Sources */,
 				ABF7B4881BCF474B00038AB0 /* infinite_disk.cpp in Sources */,
 				ABB0733E1BD80F0700AFCEF8 /* fit.cpp in Sources */,
-				ABFF67FA1BDA8FAA00CF32B0 /* fit_a_s_re_RC.cpp in Sources */,
 				AB33E74C1AC231A800A0FF53 /* surface_temperature.cpp in Sources */,
 				AB6333A41B8CF9D400418F6B /* analysis_from_properties_sweep.cpp in Sources */,
 				ABF7B49F1BD013CF00038AB0 /* temperature.cpp in Sources */,
@@ -5024,7 +4936,6 @@
 				AB841C5C1AC4E4D4000CE81D /* c.cpp in Sources */,
 				AB6087671A69A6B9009B1E85 /* normalizedSignalRatio.cpp in Sources */,
 				AB841C831AC4F80E000CE81D /* tilde.cpp in Sources */,
-				ABFF67F01BDA8FAA00CF32B0 /* fit_a_b_RC.cpp in Sources */,
 				ABEF4ED91948D4A500B44AD5 /* phase99.cpp in Sources */,
 				AB9383D81AC22B7E00F2D2DD /* angular_frequency.cpp in Sources */,
 				AB841C641AC4E50D000CE81D /* thermal_penetration.cpp in Sources */,
@@ -5090,7 +5001,6 @@
 				AB841C3C1AC4DB53000CE81D /* J2.cpp in Sources */,
 				ABEF4ED71948D4A500B44AD5 /* noise.cpp in Sources */,
 				AB6B55B01BD4739E007E0A4D /* complex_lambda.cpp in Sources */,
-				ABFF68021BDA8FAA00CF32B0 /* fit_re_RC.cpp in Sources */,
 				AB0E72CE1AC277B400750B3F /* diffusivity_from_phases.cpp in Sources */,
 				AB841C541AC4E4B0000CE81D /* b.cpp in Sources */,
 				AB6B55BB1BD4843E007E0A4D /* view_radius.cpp in Sources */,
@@ -5117,7 +5027,6 @@
 				ABEF4EDD1948D4A500B44AD5 /* laser.cpp in Sources */,
 				ABEF4F011948D4A500B44AD5 /* programoptions.cpp in Sources */,
 				ABF7B4D11BD1CC5800038AB0 /* radius.cpp in Sources */,
-				ABFF68061BDA8FAA00CF32B0 /* fit_s_re_RC.cpp in Sources */,
 				ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */,
 				ABFB163E1AF156890093BF5B /* deltaT.cpp in Sources */,
 				AB6333BB1B8D0BC300418F6B /* fit.cpp in Sources */,
@@ -5164,9 +5073,7 @@
 				AB4871831AF29C8900DFD3C1 /* csch.cpp in Sources */,
 				AB6333AC1B8CF9D400418F6B /* transient_analysis_sweep.cpp in Sources */,
 				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
-				ABFF68001BDA8FAA00CF32B0 /* fit_b_s_re_RC.cpp in Sources */,
 				AB5E9D381ACA2701003319FA /* surface_phase_amplitude.cpp in Sources */,
-				ABFF67F81BDA8FAA00CF32B0 /* fit_a_s_RC.cpp in Sources */,
 				AB76C5881ACB501700C4E502 /* gamma.cpp in Sources */,
 				ABEF4EC01948D4A500B44AD5 /* temp_ss.cpp in Sources */,
 				AB9A3FBF1ACF14BA0004882F /* point.cpp in Sources */,
@@ -5193,8 +5100,6 @@
 				ABDA1CBC1AE9C2D900121C97 /* kappa.cpp in Sources */,
 				ABF7B4A11BD013DB00038AB0 /* temperatures.cpp in Sources */,
 				ABFF681A1BDA9FD100CF32B0 /* theoretical_modeling.cpp in Sources */,
-				ABFF67F61BDA8FAA00CF32B0 /* fit_a_RC.cpp in Sources */,
-				ABFF68041BDA8FAA00CF32B0 /* fit_s_RC.cpp in Sources */,
 				AB44BD691AAA43B100E0710E /* normalizedSignalRatio_from_measurement.cpp in Sources */,
 				AB2797391B96881100E7BB2B /* phase_shift_from_input.cpp in Sources */,
 				AB841C381AC4DB47000CE81D /* J1.cpp in Sources */,
@@ -5220,7 +5125,6 @@
 				AB7996DE1AB0F1C40022015B /* scopeFile.cpp in Sources */,
 				ABB4474019DB37BF009EC35F /* planckWienApprox.cpp in Sources */,
 				AB4871C81AF53E5B00DFD3C1 /* surface_phases_at_radial_position.cpp in Sources */,
-				ABFF67F21BDA8FAA00CF32B0 /* fit_a_b_s_RC.cpp in Sources */,
 				AB4871D71AF56C0A00DFD3C1 /* periodic_cosine.cpp in Sources */,
 				ABEF4E911948D4A500B44AD5 /* utils.cpp in Sources */,
 				AB7996E91AB10F350022015B /* scopeFiles_from_datafiles.cpp in Sources */,
