@@ -7,6 +7,7 @@
 \*----------------------------------------------------------------------------*/
 
 #include <cassert>
+#include <cmath>
 #include "thermal/define/conductivity.h"
 
 namespace thermal{
@@ -21,8 +22,8 @@ auto conductivity
 )
 noexcept -> units::quantity< units::si::thermal_conductivity >
 {
-  assert( rhoCp.value() > 0 );
-  assert( alpha.value() > 0 );
+  assert( rhoCp.value() > 0  && isnormal(rhoCp) );
+  assert( alpha.value() > 0 && isnormal(alpha) );
 
   // alpha = k / rhoCp
 
@@ -37,8 +38,8 @@ auto conductivity
 )
 noexcept -> units::quantity< units::si::thermal_conductivity >
 {
-  assert( rhoCp.value() > 0 );
-  assert( e.value() > 0 );
+  assert( rhoCp.value() > 0 && isnormal( rhoCp ) );
+  assert( e.value() > 0 && isnormal( e ) ) ;
   // e = sqrt( k * rhoCp )
 
   auto const k = pow<2>( e ) / rhoCp ;
@@ -52,8 +53,8 @@ auto conductivity
 )
 noexcept -> units::quantity< units::si::thermal_conductivity >
 {
-  assert( e.value() > 0 );
-  assert( alpha.value() > 0 );
+  assert( e.value() > 0 && isnormal( e )   );
+  assert( alpha.value() > 0 && isnormal( alpha ) );
 
   return e * sqrt( alpha );
 }
