@@ -23,6 +23,7 @@ namespace thermal { namespace model { namespace slab{
   using thermal::define::effusivity;
   using thermal::define::diffusivity;
   using std::isnormal;
+  using namespace units;
 
 Slab::Slab(
   Thickness const L,
@@ -103,55 +104,75 @@ auto Slab::volumetric_heatCapacity() const noexcept -> Volumetric_heat_capacity
 
 auto Slab::thermal_diffusivity() const noexcept -> Thermal_diffusivity
 {
-  auto const alpha_here = diffusivity( k, rhoCp );
-  return alpha_here;
+  auto const alpha = diffusivity( k, rhoCp );
+  
+  assert( alpha.value() > 0  && isfinite(alpha) );
+  return alpha;
 }
 
 auto Slab::thermal_effusivity() const noexcept -> Thermal_effusivity
 {
   auto const e = effusivity( k , rhoCp );
+
+  assert( e.value() > 0  && isfinite(e) );
   return e;
 }
 
-auto Slab::set_conductivity ( Thermal_conductivity const k_in ) noexcept -> void
+auto Slab::set_conductivity ( Thermal_conductivity const k ) noexcept -> void
 {
-  k = k_in;
+  assert( k.value() > 0  && isfinite( k ) );
+  this->k = k;
 }
 
 auto Slab::set_volumetric_heatCapacity
-( Volumetric_heat_capacity const rhoCp_in ) noexcept -> void
+( Volumetric_heat_capacity const rhoCp ) noexcept -> void
 {
-  rhoCp = rhoCp_in;
+  assert( rhoCp.value() > 0  && isfinite( rhoCp ) );
+  this->rhoCp = rhoCp;
 }
 
 auto Slab::set_effusivity_update_k_hold_rhoCp
 ( Thermal_effusivity const e ) noexcept -> void
 {
-  auto const updated_k = conductivity( rhoCp,  e ) ;
-  set_conductivity( updated_k );
+  assert( e.value() > 0  && isfinite( e ) );
+
+  auto const k = conductivity( rhoCp,  e ) ;
+  set_conductivity( k );
+
+  assert( this->k.value() > 0  && isfinite( this->k ) );
 }
 
 auto Slab::set_effusivity_update_rhoCp_hold_k
 ( Thermal_effusivity const e ) noexcept -> void
 {
-  auto const updated_rhoCp = volumetricHeatCapacity( e, k ) ;
-  
-  set_volumetric_heatCapacity( updated_rhoCp );
+  assert( e.value() > 0  && isfinite( e ) );
+
+  auto const rhoCp = volumetricHeatCapacity( e, k ) ;
+  set_volumetric_heatCapacity( rhoCp );
+
+  assert( this->rhoCp.value() > 0  && isfinite( this->rhoCp ) );
 }
 
 auto Slab::set_diffusivity_update_k_hold_rhoCp
-( Thermal_diffusivity const alpha_in ) noexcept -> void
+( Thermal_diffusivity const alpha ) noexcept -> void
 {
-  auto const updated_k = conductivity( rhoCp,  alpha_in ) ;
-  set_conductivity( updated_k );
+  assert( alpha.value() > 0  && isfinite( alpha ) );
+
+  auto const k = conductivity( rhoCp,  alpha ) ;
+  set_conductivity( k );
+
+  assert( this->k.value() > 0  && isfinite( this->k ) );
 }
 
 auto Slab::set_diffusivity_update_rhoCp_hold_k
-( Thermal_diffusivity const alpha_in ) noexcept -> void
+( Thermal_diffusivity const alpha ) noexcept -> void
 {
-  auto const updated_rhoCp = volumetricHeatCapacity(alpha_in, k) ;
+  assert( alpha.value() > 0  && isfinite( alpha ) );
+
+  auto const rhoCp = volumetricHeatCapacity( alpha, k ) ;
+  set_volumetric_heatCapacity( rhoCp );
   
-  set_volumetric_heatCapacity( updated_rhoCp );
+  assert( this->rhoCp.value() > 0  && isfinite( this->rhoCp ) );
 }
 
 } } } // thermal::model::slab
