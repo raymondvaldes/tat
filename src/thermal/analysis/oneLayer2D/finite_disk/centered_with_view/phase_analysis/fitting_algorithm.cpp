@@ -11,7 +11,6 @@
 #include "make_minimization_equation.hpp"
 
 #include "math/estimation/lmdiff.hpp"
-#include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
 
 
 namespace thermal { 
@@ -21,7 +20,6 @@ namespace finite_disk {
 namespace centered_with_view {
 namespace phase_analysis{
 
-using statistics::uncertainty_analysis::goodness_of_fit;
 using math::estimation::lmdif;
 using math::estimation::settings;
 using std::get;
@@ -55,18 +53,15 @@ noexcept -> estimate_parameters::phase_analysis::Best_fit
 
   ////// prepare output
   auto const x = model_parameters.data();
-  auto const t = model_evaluate( x );
+  auto const theoretical_modeling = model_predictions_generator( x );
 
+
+  auto const t = model_evaluate( x );
   auto const slab_fit = get< 0 >(t);
   auto const optics_fit = get< 1 >(t);
-
-  auto const theoretical_modeling = model_predictions_generator( x );
-  auto const phase_predictions = theoretical_modeling.model_predictions.phases();
-  auto const calibrated_observations = theoretical_modeling.calibrated_observations;
-  auto const phase_goodness_of_fit = goodness_of_fit( calibrated_observations , phase_predictions );
-
+  
   auto const result = Best_fit(
-    slab_fit, optics_fit, phase_goodness_of_fit );
+    slab_fit, optics_fit, theoretical_modeling.phase_goodness_of_fit() );
   
   return result;
 }
