@@ -38,7 +38,7 @@ auto Temperatures::phases() const noexcept -> Phases
 {
   auto out = complex::Phases( size() );
   
-  transform( values, out.begin(), []( auto const & a ) noexcept {
+  transform( values, out.begin(), []( auto const a ) noexcept {
     return a.phase(); }
   );
 
