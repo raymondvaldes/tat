@@ -9,8 +9,6 @@
 #ifndef use_engineering_prefix_cpp
 #define use_engineering_prefix_cpp
 
-#include <iostream>
-
 #include "units/io/prefix.hpp"
 
 namespace units{

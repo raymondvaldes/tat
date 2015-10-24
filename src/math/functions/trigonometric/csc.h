@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef tat_csc_h
-#define tat_csc_h
+#ifndef tat_csc_h_math_functions
+#define tat_csc_h_math_functions
 
 #include <cmath>
 #include <complex>

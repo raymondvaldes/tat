@@ -91,7 +91,12 @@ namespace units {
   typedef derived_dimension<  mass_base_dimension,1,
                               time_base_dimension, -3>::type
                               heat_flux_dimension;
-                              
+  
+  typedef derived_dimension<  mass_base_dimension,1,
+                              time_base_dimension, -3,
+                              temperature_base_dimension, -1>::type
+                              heat_transfer_coefficient_dimension;
+  
   typedef derived_dimension<  length_base_dimension, 2,
                               time_base_dimension, -1>::type
                               thermal_diffusivity_dimension;

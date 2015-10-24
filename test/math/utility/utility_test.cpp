@@ -9,9 +9,7 @@
 //#include <boost/test/included/unit_test.hpp>
 
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
-
 #include "math/utility.hpp"
 
 #include <ratio>
@@ -20,7 +18,6 @@
 #include <algorithm>
 #include <functional>
 #include <cmath>
-#include <istream>
 
 BOOST_AUTO_TEST_SUITE( math )
 BOOST_AUTO_TEST_SUITE( utility )

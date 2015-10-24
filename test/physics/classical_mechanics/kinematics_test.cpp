@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
 
-#define BOOST_TEST_NO_LIB
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
+
+
 #include "physics/classical_mechanics/kinematics.h"
 using physics::classical_mechanics::period_to_angularFrequency;
 using physics::classical_mechanics::angularFrequency_to_period;

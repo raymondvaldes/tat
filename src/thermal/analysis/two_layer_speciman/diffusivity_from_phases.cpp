@@ -47,7 +47,7 @@ inline auto updateSlab
   auto const fitted_conductivity =
   quantity< thermal_conductivity >::from_value(  real_k ) ;
   
-  auto const fitted_length = mySlab.characteristic_length ;
+  auto const fitted_length = mySlab.thickness()  ;
   
   auto const fittedSpeciman =
   Slab( fitted_length , fittedDiffusivity , fitted_conductivity ) ;
@@ -104,12 +104,12 @@ auto diffusivity_from_phases
   thermal::model::slab::Slab const & slab_substrate
 ) noexcept -> fitting_result
 {
-  std::cout << slab_initial.k << "\t" <<slab_substrate.k << "\n";
-  std::cout << slab_initial.get_diffusivity() << "\t" <<slab_substrate.get_diffusivity()  << "\n";
+  std::cout << slab_initial.thermal_conductivity() << "\t" <<slab_substrate.thermal_conductivity() << "\n";
+  std::cout << slab_initial.thermal_diffusivity() << "\t" <<slab_substrate.thermal_diffusivity()  << "\n";
   std::cout << "a =\t" <<
-  units::sqrt( slab_substrate.get_diffusivity() / slab_initial.get_diffusivity() ) << "\n";
+  units::sqrt( slab_substrate.thermal_diffusivity() / slab_initial.thermal_diffusivity() ) << "\n";
   
-  std::cout << "b = \t"<< slab_substrate.k / slab_initial.k << "\n";
+  std::cout << "b = \t"<< slab_substrate.thermal_conductivity() / slab_initial.thermal_conductivity() << "\n";
   
   assert( frequencies.size() > 0 );
   
@@ -124,7 +124,7 @@ auto diffusivity_from_phases
     auto const predictions =
     surface_phases( frequencies, slabCurrent, slab_substrate, R_non ) ;
     
-    std::cout << slabCurrent.get_diffusivity() <<"\t"<< slabCurrent.k << "\t"<< R_non <<  "\n";
+    std::cout << slabCurrent.thermal_diffusivity() <<"\t"<< slabCurrent.thermal_conductivity() << "\t"<< R_non <<  "\n";
     //investigations::twoColorPyrometery::plot::phase_exp_model( frequencies, observations, predictions );
     
     auto const residual = [ & ]( const int i ) noexcept {
@@ -137,8 +137,8 @@ auto diffusivity_from_phases
     } ) ;
   };
 
-  auto const myDiffusivity = slab_initial.get_diffusivity() ;
-  auto const myConductivity = slab_initial.k ;
+  auto const myDiffusivity = slab_initial.thermal_diffusivity() ;
+  auto const myConductivity = slab_initial.thermal_conductivity() ;
   
   auto unknownParameters = vector<double>
   {

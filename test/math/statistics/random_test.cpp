@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Raymond Valdes. All rights reserved.
 //
 
-#define BOOST_TEST_NO_LIB
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
+
+
 #include "math/random/random.h"
 #include "math/utility.hpp"
 

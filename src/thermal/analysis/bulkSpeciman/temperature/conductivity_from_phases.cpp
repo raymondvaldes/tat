@@ -18,6 +18,8 @@
 #include "plot/gnuplot.h"
 #include "investigations/twoColorPyrometery/plot/phase_exp_model.h"
 #include "units.h"
+#include "thermal/model/slab/slab_1d_model.hpp"
+
 
 namespace thermal {
 
@@ -72,10 +74,10 @@ inline auto updateSlab
   auto const fittedDiffusivity =
   quantity< thermal_diffusivity >::from_value( x[0] ) ;
   
-  auto const fitted_length = mySlab.characteristic_length ;
+  auto const fitted_length = mySlab.thickness() ;
 
   auto const fittedSpeciman =
-  Slab( fitted_length , fittedDiffusivity , mySlab.rhoCp ) ;
+  Slab( fitted_length , fittedDiffusivity , mySlab.volumetric_heatCapacity() ) ;
   
   return fittedSpeciman ;
 }
@@ -129,7 +131,7 @@ diffusivity_from_phases
     } ) ;
   };
 
-  auto const myDiffusivity = slab_initial.get_diffusivity();
+  auto const myDiffusivity = slab_initial.thermal_diffusivity();
   //auto const myL = slab_initial.characteristic_length;
   auto unknownParameters = vector<double>{ myDiffusivity.value() } ;
   

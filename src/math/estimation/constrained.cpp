@@ -19,13 +19,25 @@ using std::vector;
 using std::abs;
 using std::exp;
 using std::log;
+using std::isnormal;
 
 double x_limiter1( const double xi ) noexcept
 {
-  assert(  xi > -800. ) ;
-  auto const output = double(exp( xi ));
-  assert( output > 0 );
-  return output ;
+  auto out = double(0);
+  if( xi  < -100 )
+  {
+    out = double(1e-20);
+  }
+  else if( xi > 100 ) {
+    out = double(1e20);
+  }
+  else {
+    out = double(exp(xi));
+  }
+  
+  assert( isnormal( out ) );
+
+  return out ;
 }
 
 
@@ -59,6 +71,9 @@ double x_limiter2( const double xi, const double x_min, const double x_max ) noe
 double kx_limiter1( const double ki ) noexcept {
     //converts value to k-space
   BOOST_ASSERT(ki > 0);
+  auto const x = log(ki);
+  
+  assert( isfinite(x) );
   return log(ki);
 }
 

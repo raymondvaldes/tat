@@ -65,9 +65,9 @@ noexcept -> Best_fit
   assert( detector_offset > 0 * meters ) ;
 
   // establish nondimensional fitting parameters
-  auto const L = slab_initial.characteristic_length;
-  auto const alpha = slab_initial.get_diffusivity();
-  auto const k = slab_initial.get_conductivity();
+  auto const L = slab_initial.thickness();
+  auto const alpha = slab_initial.thermal_diffusivity();
+  auto const k = slab_initial.thermal_conductivity();
   
   auto const b1_i = b( beam_radius, L );
   auto const r_offset_i = b( detector_offset, beam_radius );

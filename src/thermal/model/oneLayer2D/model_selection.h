@@ -25,6 +25,16 @@ enum class Detector_model {
   offset_with_view
 };
 
+struct Parameter_selection {
+  bool beam_radius = false;
+  bool thermal_conductivity = false;
+  bool thermal_diffusivity = false;
+  bool specimen_radius = false;
+  bool detector_offset = false;
+  bool detector_view_radius = false;
+};
+
+
 } // namespace oneLayer2D
 } // namespace model
 } // namespace thermal

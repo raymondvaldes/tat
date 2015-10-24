@@ -7,8 +7,8 @@
 //
 
 
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
 
 #include "statistics/signal_processing/residuals/residual_square.h"
 #include "units.h"

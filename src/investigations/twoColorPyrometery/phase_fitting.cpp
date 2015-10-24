@@ -93,7 +93,7 @@ auto phase_fitting( filesystem::directory const & ) -> void
     diffusivity_from_phases( omegas, experimental_phases, mySlab_off, BC );
 
   
-  std::cout << myFittedSlab.fitted_slab.get_diffusivity() << "\t" ;
+  std::cout << myFittedSlab.fitted_slab.thermal_diffusivity() << "\t" ;
 
 
 

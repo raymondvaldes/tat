@@ -69,7 +69,7 @@ auto uncertainty_analysis(
     };
 
 
-    auto const diffusivity_best_fit =best_fit.bulk_slab.get_diffusivity().value();
+    auto const diffusivity_best_fit =best_fit.bulk_slab.thermal_diffusivity().value();
     auto const lowerbound = diffusivity_best_fit / 1.2 ;
     auto const upperbound = diffusivity_best_fit / .5 ;
 
@@ -91,16 +91,16 @@ auto uncertainty_analysis(
   
   /// uncertainty in detector_radius
   {
-    auto const L = best_fit.bulk_slab.characteristic_length;
+    auto const L = best_fit.bulk_slab.thickness();
   
     auto const gFunc =[&best_fit, &beam_radius, &detector_view_radius, &slab_initial]
     ( double const x ) noexcept -> double
     {
       auto slab = best_fit.bulk_slab;
-      slab.set_diffusivity_update_rhoCp_hold_k( slab_initial.get_diffusivity());
+      slab.set_diffusivity_update_rhoCp_hold_k( slab_initial.thermal_diffusivity());
       
       // updated best-fit slab with perturbed parameter
-      auto const L = slab.characteristic_length;
+      auto const L = slab.thickness();
       auto const updated_detectorRadius =
       quantity<si::dimensionless>::from_value( x ) * L;
       
@@ -139,13 +139,13 @@ auto uncertainty_analysis(
   
   /// uncertainty in laser_beam
   {
-    auto const L = best_fit.bulk_slab.characteristic_length;
+    auto const L = best_fit.bulk_slab.thickness();
   
     auto const gFunc =[&best_fit, &beam_radius, &detector_view_radius, &slab_initial, &L]
     ( double const x ) noexcept -> double
     {
       auto slab = best_fit.bulk_slab;
-      slab.set_diffusivity_update_rhoCp_hold_k( slab_initial.get_diffusivity());
+      slab.set_diffusivity_update_rhoCp_hold_k( slab_initial.thermal_diffusivity());
       
       // updated best-fit slab with perturbed parameter
       auto const updated_beam_radius =

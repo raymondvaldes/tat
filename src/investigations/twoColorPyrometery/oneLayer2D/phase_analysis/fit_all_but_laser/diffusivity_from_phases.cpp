@@ -100,7 +100,7 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
   } );
 
   
-  initial_slab.characteristic_length = L ;
+  initial_slab.set_thickness(L) ;
 
   auto const beam_radius = quantity< length >( 4.4 * millimeters );
   auto const detector_view_radius = quantity< length>( 0.15 * millimeters  ) ; // initial value

@@ -9,19 +9,22 @@
 #include <cassert>
 
 #include "thermal/equipment/detector/judsonTeledyneInSB/is_valid_signal.hpp"
-#include "qt_utilities/load_file_path_from_dialog.h"
+#include "load_file_path_from_dialog.h"
 #include "thermal/pyrometry/twoColor/calibration/coefficient_is_valid.hpp"
 #include "phase_analysis.h"
 #include "amplitude_analysis.h"
 #include "thermal/equipment/laser/is_valid_frequency.h"
 
-#include "thermal/model/oneLayer2D/generator/infinite_disk.hpp"
+#include "thermal/model/oneLayer2D/generator/disk.hpp"
 #include "thermal/plot/phase/model_vs_experiment_phases.hpp"
 
 using namespace units;
 using std::string;
 using std::to_string;
 using thermal::equipment::detector::judsonTeledyneInSB::is_valid_signal;
+using thermal::model::oneLayer2D::Conduction_model;
+using thermal::model::oneLayer2D::Detector_model;
+using thermal::model::Optics;
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -29,7 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
   working_directory(std::string(
    "/Users/raymondvaldes/Dropbox/investigations/2color/august/poco_graphite/edm-3/phase2") ),
   print_directory( working_directory ),
-  set_phase( thermal::pyrometry::twoColor::Set_phase::lambda_2 )
+  set_phase( thermal::pyrometry::twoColor::Set_phase::lambda_2 ),
+  conduction_model( Conduction_model::finite_disk ),
+  detector_model( Detector_model::center_with_view )
 {
   ui->setupUi(this);
 
@@ -42,6 +47,14 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->comboBox_for_phase->addItem("Lambda 1", 1);
   ui->comboBox_for_phase->addItem("Lambda 2", 2);
   ui->comboBox_for_phase->setCurrentIndex( 2 );
+
+
+  on_comboBox_currentIndexChanged(1);
+  on_comboBox_detector_model_selection_currentIndexChanged(1);
+  auto const a = identify_parameters_to_fit();
+
+ // on_comboBox_currentIndexChanged(1);
+ // on_comboBox_detector_model_selection_currentIndexChanged(1);
 
 }
 
@@ -417,6 +430,8 @@ void MainWindow::on_run_amplitude_analysis_clicked()
   analysis.print_temperature_phases( print_directory );
 
   display_steady_state_temperature( surface_temperature_steady );
+
+  std::cout << surface_temperature_steady << "\n";
 }
 
 auto MainWindow::check_if_optics_are_ready() noexcept -> bool
@@ -426,9 +441,13 @@ auto MainWindow::check_if_optics_are_ready() noexcept -> bool
 
   auto const b_value = ui->lineEdit_beam_radius->text().toDouble();
   auto const b_det_value = ui->lineEdit_detector_view_radius->text().toDouble();
+  auto const p_value = ui->lineEdit_laser_intensity->text().toDouble();
+  auto const m_value = ui->lineEdit_modulation_depth_m->text().toDouble();
 
   auto const all_parameters_are_valid =
       is_valid( b_value ) &&
+      is_valid( p_value ) &&
+      is_valid( m_value ) &&
       is_valid( b_det_value );
 
 
@@ -436,13 +455,17 @@ auto MainWindow::check_if_optics_are_ready() noexcept -> bool
     ui->optics_ready_button->setEnabled( true );
     ui->optics_ready_button->setDown(true);
 
-    this->beam_radius = quantity< length >( b_value * millimeters );
-    this->detector_radius = quantity< length >( b_det_value * millimeters );
+    auto const beam_radius = quantity< length >( b_value * millimeters );
+    auto const view_radius = quantity< length >( b_det_value * millimeters );
+    auto const m = quantity< si::dimensionless>(m_value);
+    auto const laser_intensity =
+        quantity< si::heat_flux>( p_value * si::watts / si::square_meter );
+
+    this->optics = Optics( beam_radius, laser_intensity, view_radius, m);
   }
   else {
     ui->optics_ready_button->setEnabled( false );
-    this->beam_radius = quantity<si::length>();
-    this->detector_radius = quantity<si::length>();
+    this->optics = optional<Optics>();
   }
 
   return all_parameters_are_valid;
@@ -459,23 +482,26 @@ auto MainWindow::check_if_ready_to_create_initial_slab() noexcept -> bool
   auto const L_value = ui->lineEdit_slab_thickness->text().toDouble();
   auto const diff_value = ui->lineEdit_thermal_diffusivity->text().toDouble();
   auto const k_value = ui->lineEdit_thermal_conductivity->text().toDouble();
+  auto const R_value = ui->lineEdit_radius_input->text().toDouble();
 
   auto const all_parameters_are_valid =
       is_valid( L_value ) &&
       is_valid( diff_value )&&
-      is_valid( k_value );
+      is_valid( k_value ) &&
+      is_valid( R_value );
 
   if( all_parameters_are_valid ) {
     ui->prepare_initial_slab_button->setEnabled( true );
     ui->prepare_initial_slab_button->setDown(true);
 
+    auto const R = quantity< length > ( R_value * millimeters  );
     auto const L = quantity< length > ( L_value * millimeters  );
     auto const diffusivity =
         quantity<thermal_diffusivity>( diff_value *square_millimeters / second);
     auto const conductivity =
       quantity< thermal_conductivity >( k_value * watts / meter / si::kelvin );
 
-    this->initial_slab = Slab( L, diffusivity, conductivity ) ;
+    this->initial_slab = Slab( L, diffusivity, conductivity, R ) ;
   }
   else {
     ui->prepare_initial_slab_button->setEnabled( false );
@@ -489,46 +515,83 @@ auto MainWindow::check_if_ready_to_create_initial_slab() noexcept -> bool
 
 void MainWindow::on_run_phase_analysis_clicked()
 {
+  using namespace thermal::analysis::oneLayer2D::estimate_parameters;
+  auto best_fit = optional< phase_analysis::Best_fit>();
 
-   auto const filtered_meta_data =
-       meta_data_2->
-       filter_using_cutoff_frequencies( modulation_cutoff_frequencies );
+  auto const filtered_meta_data =
+      meta_data_2->
+      filter_using_cutoff_frequencies( modulation_cutoff_frequencies );
+
+  auto const parameters_to_fit = identify_parameters_to_fit();
+
+  if( conduction_model == Conduction_model::infinite_disk &&
+      detector_model == Detector_model::center_with_view )
+  {
+    best_fit = gui_analysis::phase_anaysis(
+          *initial_slab, *optics,
+      filtered_meta_data.laser_frequencies(),
+      filtered_meta_data.measurement_phases()
+    );
+  }
 
 
-    auto const best_fit = gui_analysis::phase_anaysis(
-      *initial_slab,
+  else if( conduction_model == Conduction_model::finite_disk &&
+      detector_model == Detector_model::center_with_view )
+  {
+    best_fit = gui_analysis::phase_anaysis_finite_disk(
+          *initial_slab, *optics,
       filtered_meta_data.laser_frequencies(),
       filtered_meta_data.measurement_phases(),
-      beam_radius,
-      detector_radius
+      parameters_to_fit
     );
+  }
 
-    auto const detector_model =
-        thermal::model::oneLayer2D::Detector_model::center_with_view ;
-    auto const slab = best_fit.bulk_slab;
-    auto const optics = best_fit.optics;
-    auto const model =
-        thermal::model::oneLayer2D::generator::Infinite_disk( detector_model, slab, optics );
+  else if( conduction_model == Conduction_model::finite_disk &&
+      detector_model == Detector_model::center_point )
+  {
+    best_fit = gui_analysis::phase_anaysis_finite_disk_centered_point(
+      *initial_slab, *optics,
+      filtered_meta_data.laser_frequencies(),
+      filtered_meta_data.measurement_phases()    );
+  }
 
-    auto const frequencies = meta_data_2->laser_frequencies();
-    auto const model_complex_temperatures = model.evaluate( frequencies );
 
-    assert( model_complex_temperatures.size() == frequencies.size() ) ;
+  if( best_fit ) {
+  using thermal::model::oneLayer2D::generator::Disk;
 
-    auto const model_phases = model_complex_temperatures.phases();
 
-    assert( !model_phases.empty() );
+  auto const slab = best_fit->bulk_slab;
+  auto const optics = best_fit->optics;
+  auto const model = Disk( conduction_model, detector_model, slab, optics );
 
-    auto const experimental_phases = meta_data_2->measurement_phases();
+  auto const frequencies = meta_data_2->laser_frequencies();
+  auto const model_complex_temperatures = model.evaluate( frequencies );
 
-    assert( !experimental_phases.empty() );
-    assert( model_phases.size() == experimental_phases.size() );
+  assert( model_complex_temperatures.size() == frequencies.size() ) ;
 
-    assert( model_phases.size() == frequencies.size() );
-    assert( experimental_phases.size() == frequencies.size() );
+  auto const model_phases = model_complex_temperatures.phases();
 
-    thermal::plot::phase::model_vs_experiment_phases(
-          frequencies, model_phases, experimental_phases );
+  assert( !model_phases.empty() );
+
+  auto const experimental_phases = meta_data_2->measurement_phases();
+
+  assert( !experimental_phases.empty() );
+  assert( model_phases.size() == experimental_phases.size() );
+
+  assert( model_phases.size() == frequencies.size() );
+  assert( experimental_phases.size() == frequencies.size() );
+
+  thermal::plot::phase::model_vs_experiment_phases(
+        frequencies, model_phases, experimental_phases );
+  }
+  else {
+    add_to_text_logger( std::string("No fitting algorithm available.") );
+  }
+}
+
+void MainWindow::on_lineEdit_radius_input_editingFinished()
+{
+  check_if_ready_to_plot();
 }
 
 void MainWindow::on_lineEdit_slab_thickness_editingFinished()
@@ -620,7 +683,130 @@ void MainWindow::on_cutoff_frequency_upper_bound_editingFinished()
   }
 }
 
-void MainWindow::on_tabWidget_settings_currentChanged(int index)
+
+auto MainWindow::identify_parameters_to_fit()
+noexcept -> thermal::model::oneLayer2D::Parameter_selection
 {
-//    std::cout
+  //put this in xcode library
+  using thermal::model::oneLayer2D::Parameter_selection;
+
+  auto parameter_to_fit = Parameter_selection();
+  if( ui->checkBox_estimate_beam_radius->isChecked() )  {
+     parameter_to_fit.beam_radius = true;
+  }
+  if( ui->checkBox_estimate_thermal_conductivity->isChecked() )  {
+     parameter_to_fit.thermal_conductivity = true;
+  }
+
+  if( ui->checkBox_estimate_thermal_diffusivity->isChecked() )  {
+     parameter_to_fit.thermal_diffusivity = true;
+  }
+
+  if( ui->checkBox_estimate_specimen_radius->isChecked() )  {
+     parameter_to_fit.specimen_radius = true;
+  }
+
+  if( ui->checkBox_estimate_detector_offset->isChecked() )  {
+     parameter_to_fit.detector_offset = true;
+  }
+
+  if( ui->checkBox_estimate_view_radius->isChecked() )  {
+     parameter_to_fit.detector_view_radius = true;
+  }
+
+  return parameter_to_fit;
+}
+
+
+
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+  switch( index )
+  {
+    case 0: {
+        conduction_model = Conduction_model::infinite_disk;
+        ui->checkBox_estimate_beam_radius->setEnabled(true);
+        ui->checkBox_estimate_thermal_conductivity->setEnabled(false);
+        ui->checkBox_estimate_thermal_diffusivity->setEnabled(false);
+        ui->checkBox_estimate_specimen_radius->setEnabled(false);
+
+        ui->checkBox_estimate_beam_radius->setChecked(true);
+        ui->checkBox_estimate_thermal_conductivity->setChecked(false);
+        ui->checkBox_estimate_thermal_diffusivity->setChecked(true);
+        ui->checkBox_estimate_specimen_radius->setChecked(false);
+        break;
+      }
+    case 1:
+      conduction_model = Conduction_model::finite_disk;
+        ui->checkBox_estimate_beam_radius->setEnabled(true);
+        ui->checkBox_estimate_thermal_conductivity->setEnabled(false);
+        ui->checkBox_estimate_thermal_diffusivity->setEnabled(false);
+        ui->checkBox_estimate_specimen_radius->setEnabled(true);
+
+        ui->checkBox_estimate_beam_radius->setChecked(true);
+        ui->checkBox_estimate_thermal_conductivity->setChecked(false);
+        ui->checkBox_estimate_thermal_diffusivity->setChecked(true);
+        ui->checkBox_estimate_specimen_radius->setChecked(true);
+
+      break;
+  }
+}
+
+void MainWindow::on_comboBox_detector_model_selection_currentIndexChanged(int index)
+{
+  switch( index )
+  {
+    case 0: {
+        detector_model = Detector_model::center_point;
+
+        ui->checkBox_estimate_detector_offset->setEnabled(false);
+        ui->checkBox_estimate_detector_offset->setChecked(false);
+
+        ui->checkBox_estimate_view_radius->setEnabled(false);
+        ui->checkBox_estimate_view_radius->setChecked(false);
+
+        break;
+      }
+    case 1: {
+        detector_model = Detector_model::center_with_view;
+
+        ui->checkBox_estimate_detector_offset->setEnabled(false);
+        ui->checkBox_estimate_detector_offset->setChecked(false);
+
+
+        ui->checkBox_estimate_view_radius->setEnabled(true);
+        ui->checkBox_estimate_view_radius->setChecked(true);
+        break;
+      }
+    case 2: {
+        detector_model = Detector_model::offset_point;
+
+        ui->checkBox_estimate_detector_offset->setEnabled(true);
+        ui->checkBox_estimate_detector_offset->setChecked(true);
+
+        ui->checkBox_estimate_view_radius->setEnabled(false);
+        ui->checkBox_estimate_view_radius->setChecked(false);
+
+        break;
+     }
+    case 3: {
+        detector_model = Detector_model::offset_with_view;
+
+        ui->checkBox_estimate_detector_offset->setEnabled(true);
+        ui->checkBox_estimate_detector_offset->setChecked(true);
+
+        ui->checkBox_estimate_view_radius->setEnabled(true);
+        ui->checkBox_estimate_view_radius->setChecked(true);
+
+        break;
+      }
+  }
+}
+
+void MainWindow::on_tabWidget_settings_tabBarClicked(int index)
+{
+   if( index == 3 ) {
+      ui->ready_model_button->setDown(true);
+   }
 }

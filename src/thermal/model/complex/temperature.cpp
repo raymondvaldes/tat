@@ -12,14 +12,22 @@ namespace thermal{
 namespace model{
 namespace complex{
 
+using namespace units;
 
 Temperature::Temperature
 (
   math::complex::properties< units::si::temperature > const & value
-): value( value )
+) noexcept: value( value )
 {
 
 }
+
+Temperature::Temperature
+(
+  Phase const phase,
+  Amplitude const amplitude
+) noexcept: value( math::complex::properties< si::temperature >(phase, amplitude) )
+{}
 
 auto Temperature::phase() const noexcept -> Phase
 {
@@ -33,6 +41,7 @@ auto Temperature::amplitude() const noexcept -> Amplitude
   auto const a = value.amplitude;
   return a;
 }
+
 
 
 } // namespace complex

@@ -72,6 +72,9 @@ typedef boost::units::si::conductivity        electrical_conductivity;
   using heat_flux =
     unit< heat_flux_dimension , si::system>;
   
+  using heat_transfer_coefficient =
+    unit< heat_transfer_coefficient_dimension , si::system>;
+  
   using thermal_conductivity =
     unit< thermal_conductivity_dimension , si::system>;
   

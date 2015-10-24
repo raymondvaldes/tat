@@ -66,9 +66,9 @@ auto diffusivity_from_phases
   assert( detector_view_radius.value() > 0 ) ;
 
   // establish nondimensional fitting parameters
-  auto const L = slab_initial.characteristic_length;
-  auto const alpha = slab_initial.get_diffusivity();
-  auto const k = slab_initial.get_conductivity();
+  auto const L = slab_initial.thickness() ;
+  auto const alpha = slab_initial.thermal_diffusivity();
+  auto const k = slab_initial.thermal_conductivity();
   
   auto const b1_i = b( beam_radius, L );
   auto const b2_i = b( detector_view_radius, L );

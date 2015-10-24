@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tat-tdd/tat-tdd/tat-tdd/main.cpp"
-            timestampString = "442529845.222126"
+            timestampString = "466830299.732734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24">
+            startingLineNumber = "23"
+            endingLineNumber = "23">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -77,20 +77,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/cout/vector/print.h"
-            timestampString = "465856921.462116"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "src/investigations/twoColorPyrometery.cpp"
             timestampString = "462733679.020704"
             startingColumnNumber = "9223372036854775807"
@@ -120,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test/electronics/filter/low_pass/RC_first_order/phase_shift_from_input_test.cpp"
-            timestampString = "462919993.572061"
+            timestampString = "466828134.655948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "BOOST_AUTO_TEST_CASE( phases_from_input_test )"
             landmarkType = "7">
          </BreakpointContent>
@@ -136,27 +122,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test/electronics/filter/low_pass/RC_first_order/phase_shift_from_input_test.cpp"
-            timestampString = "462920279.788061"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "BOOST_AUTO_TEST_CASE( phases_from_input_test )"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "test/electronics/filter/low_pass/RC_first_order/phase_shift_from_input_test.cpp"
-            timestampString = "462920727.799131"
+            timestampString = "466828134.655948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
             endingLineNumber = "53"
+            landmarkName = "BOOST_AUTO_TEST_CASE( phases_from_input_test )"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "test/electronics/filter/low_pass/RC_first_order/phase_shift_from_input_test.cpp"
+            timestampString = "466828134.655948"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "BOOST_AUTO_TEST_CASE( phases_from_input_test )"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,11 +224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.cpp"
-            timestampString = "466630546.65237"
+            timestampString = "467150656.069303"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "Best_fit( slab_, view_radius_nd, b, frequencies_, model_phases_, phase_goodness_of_fit_ )"
             landmarkType = "7">
             <Locations>
@@ -418,11 +404,979 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/thermal/model/complex/temperature.cpp"
-            timestampString = "466621513.02579"
+            timestampString = "466966476.523833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26">
+            startingLineNumber = "34"
+            endingLineNumber = "34">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/disk/dimensionless/thickness.hpp"
+            timestampString = "466734067.13567"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "test/statistics/residual_analysis/residual_square_test.cpp"
+            timestampString = "466830158.697438"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/statistics/signal_processing/residuals/residual_square.h"
+            timestampString = "466830174.359802"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/emission/centered_detector_with_view/frequency_sweep.cpp"
+            timestampString = "467003750.339954"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/cout/vector/print.h"
+            timestampString = "467002053.01959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467136517.806904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467136517.806904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467136517.806904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467136517.806904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467136517.806904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467082481.64795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467078396.27755"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467082481.64795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467082481.64795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467082481.64795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467082481.64795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "Yes"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467136517.806904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  <ActionContent
+                     message = "@solver.maxInt@"
+                     conveyanceType = "0">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "test/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/complex_lambda_test.cpp"
+            timestampString = "467137275.451564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "BOOST_AUTO_TEST_CASE( complex_lambda_test_matlab )"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "test/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/complex_lambda_test.cpp"
+            timestampString = "467137625.554703"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "BOOST_AUTO_TEST_CASE( complex_lambda_test_matlab )"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.cpp"
+            timestampString = "467137728.873294"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467335804.414972"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "186">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::~$_0()"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467335804.415421"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::$_0($_0 const&amp;)"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467335804.415777"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::$_0($_0 const&amp;)"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467335804.41611"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::$_0($_0&amp;&amp;)"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467335804.416439"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::$_0($_0&amp;&amp;)"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467335804.416757"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::~$_0()"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467335804.417095"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/map_parameter_values.cpp"
+            timestampString = "467335574.840975"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::operator()(double const*) const"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467336030.233108"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "1234">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::operator()(double const*) const"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467336030.233601"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "1249">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::operator()(double const*) const"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467336343.983494"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "1234">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::update_system_properties_generator(thermal::model::slab::Slab const&amp;, thermal::model::Optics const&amp;, std::__1::vector&lt;thermal::model::oneLayer2D::finite_disk::Parameter, std::__1::allocator&lt;thermal::model::oneLayer2D::finite_disk::Parameter&gt; &gt; const&amp;)::$_0::operator()(double const*) const"
+                  moduleName = "libtatlib.a"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/raymondvaldes/Dropbox/code/tat/src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/update_system_properties_generator.cpp"
+                  timestampString = "467336343.984099"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "1249">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fitting_algorithm.cpp"
+            timestampString = "467336116.814821"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/update_disk_optics.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/theoretical_modeling.cpp"
+            timestampString = "467336482.237299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/make_minimization_equation.cpp"
+            timestampString = "467336709.128895"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/make_minimization_equation.cpp"
+            timestampString = "467336703.154036"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/update_disk_optics.cpp"
+            timestampString = "467337313.874171"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/model/oneLayer2D/finite_disk/update_disk_optics.cpp"
+            timestampString = "467337313.874171"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467340641.264184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363112.033472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363098.585271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/thermal/analysis/oneLayer2D/finite_disk/centered_with_view/phase_analysis/fit_a_s_re_RC.cpp"
+            timestampString = "467363338.278112"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

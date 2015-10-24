@@ -12,7 +12,6 @@
 #include "thermal/model/oneLayer2D/model_selection.h"
 #include "thermal/equipment/laser/modulation_frequency.h"
 #include "thermal/equipment/laser/modulation_frequencies.h"
-#include "thermal/model/complex/temperature.h"
 #include "thermal/model/complex/temperatures.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/model/optics/optics.h"

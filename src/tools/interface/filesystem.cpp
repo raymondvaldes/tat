@@ -142,7 +142,7 @@ std::string directory::working_directory_string() const noexcept {
   
   using algorithm::string::split;
   
-  const string& delimiter = "/";
+  const string delimiter = "/";
   auto const folders =  split( pwd(), delimiter  ) ;
   
   auto const last = folders.back();

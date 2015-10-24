@@ -16,7 +16,6 @@ int main(int argc, const char * argv[]) noexcept
   {
     auto tatTest = string("/tmp/tat-test.dst/usr/local/bin/tat-test");
     tatTest += " --log_level=warning";
-    tatTest += " --color_output";
     tatTest += " --show_progress=yes";
     tatTest += " --build_info";
     system( tatTest.data() );

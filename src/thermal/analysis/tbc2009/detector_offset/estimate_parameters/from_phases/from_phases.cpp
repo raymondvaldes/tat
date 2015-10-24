@@ -67,7 +67,7 @@ Best_fit::Best_fit
   coating_slab( coating_from_dimensionless( L_coat_, tp, substrate_slab ) ),
   frequencies( frequencies_ ),
   ls( thermalPenetrations_from_frequencies(
-        frequencies, coating_slab.get_diffusivity() , L_coat_ ) ),
+        frequencies, coating_slab.thermal_diffusivity() , L_coat_ ) ),
   model_phases( model_phases_ ), detector_offset( detector_offset_ )
 {}
 
@@ -89,13 +89,13 @@ auto from_phases
   assert( detector_view_radius.value() > 0 ) ;
 
   // establish nondimensional fitting parameters
-  auto const L_coat = slab_initial.characteristic_length;
-  auto const alpha_coat = slab_initial.get_diffusivity();
-  auto const alpha_sub = substrate.get_diffusivity();
+  auto const L_coat = slab_initial.thickness();
+  auto const alpha_coat = slab_initial.thermal_diffusivity();
+  auto const alpha_sub = substrate.thermal_diffusivity();
   auto const a_sub_i = dimensionless::a( alpha_sub, alpha_coat ) ;
   
-  auto const e_coat = slab_initial.get_effusivity();
-  auto const e_sub = slab_initial.get_effusivity();
+  auto const e_coat = slab_initial.thermal_effusivity();
+  auto const e_sub = slab_initial.thermal_effusivity();
   auto const gamma_i = dimensionless::gamma( e_coat, e_sub ) ;
   auto const b_i = hp_initial.b ;
   auto const b2_i = dimensionless::b( detector_view_radius, L_coat );
@@ -163,7 +163,7 @@ auto from_phases
     
     auto const predictions =
     model::tbc2009::offset_detector::average_surface_phases(
-    frequencies, hp, tp, L_coat, substrate.get_diffusivity(), b3_offset, b2 );
+    frequencies, hp, tp, L_coat, substrate.thermal_diffusivity(), b3_offset, b2 );
     
     return predictions;
   };

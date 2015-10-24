@@ -7,11 +7,10 @@
 //
 
 
-#define BOOST_TEST_NO_LIB
 
-#include <iostream>
-
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
+
 #include <cmath>
 #include "thermal/model/tbc2009/complexT/h_system.h"
 #include "thermal/model/tbc2009/dimensionless/HeatingProperties.h"

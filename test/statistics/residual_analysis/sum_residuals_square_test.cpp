@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
 #include <vector>
 
 #include "statistics/signal_processing/sum_residuals_square.h"

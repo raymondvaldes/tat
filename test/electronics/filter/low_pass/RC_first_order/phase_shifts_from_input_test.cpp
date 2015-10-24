@@ -7,8 +7,8 @@
 //
 
 
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
 
 #include "units.h"
 #include "electronics/filter/low-pass/RC-first-order/phase_shift_from_input.hpp"

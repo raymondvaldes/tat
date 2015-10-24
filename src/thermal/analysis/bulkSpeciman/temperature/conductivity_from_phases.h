@@ -13,6 +13,7 @@
 #include <utility>
 
 #include "thermal/model/slab/slab.h"
+#include "thermal/model/slab/slab_1d_model.hpp"
 #include "units.h"
 
 namespace thermal {

@@ -7,10 +7,9 @@
 //
 
 
-#define BOOST_TEST_NO_LIB
-
-#include <iostream>
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
+
 #include "thermal/model/oneLayer2D/thermal_emission/point_measurement.h"
 #include "thermal/model/oneLayer2D/thermal_emission/fast_measurement.h"
 #include "thermal/model/oneLayer2D/thermal_emission/offset_detector/offset_measurement.hpp"

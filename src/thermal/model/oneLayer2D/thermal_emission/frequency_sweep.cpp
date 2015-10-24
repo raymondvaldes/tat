@@ -70,15 +70,15 @@ noexcept -> thermal::model::complex::Temperatures
   using thermal::model::complex::Temperatures;
   using algorithm::transform;
   
-  auto const k = slab.get_conductivity();
-  auto const L = slab.characteristic_length;
-  auto const I = optics.laser_power;
+  auto const k = slab.thermal_conductivity();
+  auto const L = slab.thickness() ;
+  auto const I = optics.laser_intensity;
   
   auto const deltaT = dimensional::deltaT( I , L, k ) ;
   
   auto const b = dimensionless::b( optics.laser_radius, L );
   auto const r_e = dimensionless::b( optics.view_radius, L );
-  auto const alpha = slab.get_diffusivity();
+  auto const alpha = slab.thermal_diffusivity();
 
   auto const temperature_properties =
   frequency_sweep( b, deltaT, r_e, frequencies, L, alpha );
@@ -86,7 +86,6 @@ noexcept -> thermal::model::complex::Temperatures
   assert( temperature_properties.size() == frequencies.size() );
   
   auto complex_temperatures = std::vector< complex::Temperature >( frequencies.size() );
-//  complex_temperatures.reserve( frequencies.size() );
   
   transform( temperature_properties, complex_temperatures.begin(),
   []( auto const & e) noexcept

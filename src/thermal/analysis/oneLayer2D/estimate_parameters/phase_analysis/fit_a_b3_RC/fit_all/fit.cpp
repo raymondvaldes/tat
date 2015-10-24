@@ -20,9 +20,9 @@ using thermal::model::oneLayer2D::thermal_emission::offset_point::frequency_swee
 #include "math/estimation/settings.h"
 #include "math/estimation/lmdiff.hpp"
 #include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
-#include "math/complex/extract_phases_from_properties.h"
 #include "electronics/filter/low-pass/RC-first-order/phase_shifts_from_input.hpp"
-
+#include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
+#include "math/complex/extract_phases_from_properties.h"
 #include "math/complex/adjust_phase.h"
 #include "math/complex/adjust_phases.h"
 #include "algorithm/vector/add.h"
@@ -74,9 +74,9 @@ noexcept -> Best_fit
   
 
   // establish nondimensional fitting parameters
-  auto const L = slab_initial.characteristic_length;
-  auto const alpha = slab_initial.get_diffusivity();
-  auto const k = slab_initial.get_conductivity();
+  auto const L = slab_initial.thickness() ;
+  auto const alpha = slab_initial.thermal_diffusivity();
+  auto const k = slab_initial.thermal_conductivity();
   
   auto const b1_i = b( beam_radius, L );
   auto const b3_i = b( detector_offset_point, L );
@@ -147,7 +147,8 @@ noexcept -> Best_fit
   {
     //check preconditions
     assert( x[0] > -800 );
-    assert( x[3] > -800 );
+    assert( x[1] > -800 );
+    assert( x[2] > -800 );
     
     auto const t = update_system_properties( x );
     

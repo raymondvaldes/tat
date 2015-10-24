@@ -35,8 +35,8 @@ auto phase_shifts_from_input(
   });
 
   //
-  auto const number_of_values = ac_frequencies.size();
-  auto phase_shifts = vector< quantity< si::plane_angle > >( number_of_values );
+  auto const size = ac_frequencies.size();
+  auto phase_shifts = vector< quantity< si::plane_angle > >( size );
   
   transform( ac_frequencies, begin( phase_shifts ) ,
     [ tau ]( auto const ac_frequncy ) noexcept

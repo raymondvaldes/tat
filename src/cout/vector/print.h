@@ -17,8 +17,7 @@
 #include "algorithm/algorithm.h"
 #include "units.h"
 
-namespace cout {
-namespace vector {
+namespace cout { namespace vector {
 
 template< typename T >
 auto print( std::vector< T > const & list ) noexcept
@@ -74,6 +73,5 @@ auto print_table_values(
   } ) ;
 }
   
-} // namespace vector
-} // namespace cout
+} } // namespace
 #endif /* defined(__tat__print__) */

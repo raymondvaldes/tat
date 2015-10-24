@@ -24,15 +24,6 @@ Temperatures::Temperatures( std::vector< Temperature > const & values )
 
 }
 
-
-//Temperatures::Temperatures(
-//    std::vector< math::complex::properties< units::si::temperature > > const & values
-//) : values( generate() )
-//{
-//
-//
-//}
-
 auto Temperatures::size() const noexcept -> size_t
 {
   return values.size();

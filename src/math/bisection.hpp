@@ -53,10 +53,25 @@ private:
   double solnTolerance;
   double myRootFunc(const double x) const noexcept;
   void BisectMethod(void) noexcept;
+  void toms748(
+    double const f_a,
+    double const f_b,
+    double const tol
+  
+  )noexcept;
 
 public:
   solve( std::function<double(double)> myF_ , const double phi_,
          const double min_, const double max_) noexcept;
+  
+  solve(
+    std::function<double(double)> myF_,
+    const double min_,
+    const double max_,
+    double const f_a,
+    double const f_b,
+    double const tol
+  ) noexcept;
 
   bool pass;
   double returnSoln(void) const noexcept;

@@ -5,9 +5,8 @@
 //  Created by Raymond Valdes on 4/3/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
-#define BOOST_TEST_NO_LIB
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
 
 #include "math/geometry/intersect/two_circles/points_of_intersection.h"
 using math::geometry::intersect::two_circles::points_of_intersection;

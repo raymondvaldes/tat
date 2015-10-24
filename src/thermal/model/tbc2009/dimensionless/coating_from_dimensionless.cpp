@@ -28,12 +28,12 @@ auto coating_from_dimensionless
   slab::Slab substrate
 ) noexcept -> slab::Slab
 {
-  auto const alpha_sub = substrate.get_diffusivity();
+  auto const alpha_sub = substrate.thermal_diffusivity();
   auto const a = tp.a_sub;
   auto const gamma = tp.gamma;
 
   auto const alpha_coat = alphaCoat_from_a( a, alpha_sub );
-  auto const e_sub = substrate.get_effusivity();
+  auto const e_sub = substrate.thermal_effusivity();
   auto const e_coat = eCoat_from_gamma( gamma, e_sub );
   auto const k_coat = conductivity( e_coat, alpha_coat ) ;
 

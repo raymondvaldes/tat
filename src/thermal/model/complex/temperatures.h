@@ -27,15 +27,11 @@ class Temperatures{
   Temperatures(
     std::vector< Temperature > const & values
   );
-  
-//  Temperatures(
-//    std::vector< math::complex::properties< units::si::temperature > > const & values
-//  );  
+  Temperatures(){};
 
   auto phases() const noexcept -> Phases;
   auto amplitudes() const noexcept -> Amplitudes;
   auto size() const noexcept -> size_t;
-
 };
 
 } // namespace complex

@@ -6,17 +6,16 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#define BOOST_TEST_NO_LIB
+#define BOOST_TEST_DYN_LINK
+#include <boost/test/unit_test.hpp>
 
 #include <algorithm>
-#include <iostream>
 #include <utility>
 
 #include "algorithm/algorithm.h"
 #include "math/curveFit/cosine.h"
 #include "math/construct/range.h"
-#include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
+
 
 using algorithm::generate;
 using algorithm::transform;

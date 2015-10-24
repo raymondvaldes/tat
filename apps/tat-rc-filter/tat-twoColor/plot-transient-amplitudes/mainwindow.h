@@ -17,6 +17,8 @@
 #include "thermal/equipment/laser/modulation_frequency.h"
 #include "thermal/equipment/laser/modulation_cutoff_frequencies.h"
 #include "thermal/experimental/observations/slab/slab.hpp"
+#include "thermal/model/optics/optics.h"
+#include "thermal/model/oneLayer2D/model_selection.h"
 
 namespace Ui {
   class MainWindow;
@@ -73,7 +75,13 @@ private slots:
 
   void on_cutoff_frequency_upper_bound_editingFinished();
 
-  void on_tabWidget_settings_currentChanged(int index);
+  void on_comboBox_currentIndexChanged(int index);
+
+  void on_comboBox_detector_model_selection_currentIndexChanged(int index);
+
+  void on_lineEdit_radius_input_editingFinished();
+
+  void on_tabWidget_settings_tabBarClicked(int index);
 
 private:
   Ui::MainWindow *ui;
@@ -95,12 +103,13 @@ private:
   optional< gTBC::gMeasure::meta_measurement_descriptions> meta_data_1;
   optional< gTBC::gMeasure::meta_measurement_descriptions> meta_data_2;
   optional< thermal::model::slab::Slab> initial_slab;
-
-
-  units::quantity< units::si::length > beam_radius;
-  units::quantity< units::si::length > detector_radius;
+  optional< thermal::model::Optics> optics;
 
   thermal::equipment::laser::Modulation_cutoff_frequencies modulation_cutoff_frequencies;
+
+  thermal::model::oneLayer2D::Conduction_model conduction_model;
+  thermal::model::oneLayer2D::Detector_model detector_model;
+
 
   void set_working_directory( filesystem::path const directory_path );
 
@@ -108,7 +117,6 @@ private:
        units::quantity< units::si::temperature > const temperature
   ) noexcept -> void;
 
-  void addToLoggerWindow( QString const line );
   void check_if_ready_to_plot();
   void set_pushButton();
   void disable_analysis();
@@ -128,8 +136,10 @@ private:
   auto check_if_ready_to_create_initial_slab() noexcept -> bool;
   auto check_if_optics_are_ready() noexcept -> bool;
   auto check_if_pyrometry_ready() -> bool;
-
+  auto identify_parameters_to_fit()
+  noexcept -> thermal::model::oneLayer2D::Parameter_selection;
 
 };
+
 
 #endif // MAINWINDOW_H

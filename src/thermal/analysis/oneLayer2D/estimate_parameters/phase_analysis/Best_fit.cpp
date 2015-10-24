@@ -22,6 +22,19 @@ namespace oneLayer2D {
 namespace estimate_parameters{
 namespace phase_analysis{
 
+
+Best_fit::Best_fit
+(
+  thermal::model::slab::Slab const slab,
+  thermal::model::Optics const optics,
+  double const phase_goodness_of_fit
+) noexcept :
+  bulk_slab(slab),
+  optics( optics ),
+  phase_goodness_of_fit( phase_goodness_of_fit)
+{}
+
+
 Best_fit::Best_fit
 (
   thermal::model::slab::Slab const slab_,
@@ -34,20 +47,20 @@ Best_fit::Best_fit
   double phase_goodness_of_fit_
 ) noexcept :
   bulk_slab( slab_ ),
-  view_radius( view_radius_nd * slab_.characteristic_length ),
-  beam_radius( b * slab_.characteristic_length ),
+  view_radius( view_radius_nd * slab_.thickness()  ),
+  beam_radius( b * slab_.thickness() ),
 
   frequencies( frequencies_ ),
   ls( thermalPenetrations_from_frequencies(
         frequencies_,
-        slab_.get_diffusivity() ,
-        slab_.characteristic_length ) ),
+        slab_.thermal_diffusivity() ,
+        slab_.thickness()  ) ),
   model_phases( model_phases_ ),
   phase_goodness_of_fit( phase_goodness_of_fit_ ),
   optics(
     beam_radius,
     units::quantity< units::si::heat_flux>(100000. * units::si::watt/ units::si::square_meter),
-    view_radius
+    view_radius, 1
   )
 {
   assert( phase_goodness_of_fit > 0 );
@@ -68,7 +81,7 @@ Best_fit::Best_fit
 ) noexcept :
   Best_fit( slab_, view_radius_nd, b, frequencies_, model_phases_, phase_goodness_of_fit_ )
 {
-  view_radius_offset = view_radius_offset_input * slab_.characteristic_length ;
+  view_radius_offset = view_radius_offset_input * slab_.thickness()  ;
 }
 
 Best_fit::Best_fit

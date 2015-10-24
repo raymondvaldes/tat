@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef tat_cmath_h
-#define tat_cmath_h
+#ifndef tat_cmath_h_12715
+#define tat_cmath_h_12715
 
 #include <complex>
 #include <cmath>
@@ -15,6 +15,7 @@
 #include <boost/units/cmath.hpp>
 #include <boost/units/dimensionless_quantity.hpp>
 #include "units/physical_dimensions.h"
+
 #include "math/functions/trigonometric/csc.h"
 #include "math/functions/trigonometric/sec.h"
 #include "math/functions/trigonometric/coth.h"

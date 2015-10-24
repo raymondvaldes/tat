@@ -11,7 +11,6 @@
 
 #include <boost/units/io.hpp>
 
-
 namespace units{
 
   using boost::units::binary_prefix;

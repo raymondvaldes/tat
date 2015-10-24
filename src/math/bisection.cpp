@@ -81,6 +81,72 @@ solve::solve( std::function<double(double)> myF_ , const double phi_,
   }
 }
 
+solve::solve(
+  std::function<double(double)> myF_,
+  const double min_,
+  const double max_,
+  double const f_a,
+  double const f_b,
+  double const tol
+) noexcept
+  : myF(myF_), phi(0), min(min_), max(max_)
+{
+  assert( min < max ) ;
+  assert( f_a * f_b <= 0 );
+  
+  using std::abs;
+  auto const is_converged = abs( ( min - max ) / max ) < tol ;
+
+  if( is_converged )
+  {
+    bestGuess = math::average( min, max ) ;
+    solnTolerance = tol;
+    pass = true ;
+  }
+  else
+  {
+    try
+    {
+      toms748( f_a, f_b, tol );
+      pass = true ;
+    }
+    catch ( std::exception const&  ex )
+    {
+      bestGuess = min;
+      pass = false ;
+    }
+  }
+}
+
+void solve::toms748(
+  double const f_a,
+  double const f_b,
+  double const tol
+) noexcept
+{
+  using std::placeholders::_1;
+  using std::pair;
+  const std::function<double(double)>
+      myFuncReduced = std::bind( &solve::myRootFunc, this , _1 );
+
+
+  //This termination condition has been added to reduce the numer of iterations
+  // necessary for convergence.
+  auto const TerminationCondition = [tol]( auto const  min, auto const max) noexcept {
+    
+    return ( std::abs(min - max) / math::average( min, max ) ) <= tol;
+  };
+
+  
+  const pair<double, double> result =
+      boost::math::tools::toms748_solve( myFuncReduced, min, max, f_a, f_b, TerminationCondition, maxInt ) ;
+
+  //output
+  solnTolerance = std::abs( result.first - result.second ) ;
+  bestGuess = math::average( result.first , result.second ) ;
+}
+
+
 void solve::BisectMethod(void) noexcept
 {
   using std::placeholders::_1;
@@ -92,7 +158,7 @@ void solve::BisectMethod(void) noexcept
   //This termination condition has been added to reduce the numer of iterations
   // necessary for convergence.
   auto const TerminationCondition = []( double min, double max){
-    std::cout << std::abs(min - max) / math::average( min, max ) << "\n";
+//    std::cout << std::abs(min - max) / math::average( min, max ) << "\n";
     
     return std::abs(min - max) / math::average( min, max ) <= 0.001;
   };

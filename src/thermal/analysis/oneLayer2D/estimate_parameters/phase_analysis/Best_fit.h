@@ -77,6 +77,14 @@ struct Best_fit{
     std::vector< units::quantity<units::si::plane_angle > > const observations_
   ) noexcept ;
   
+
+  explicit Best_fit
+  (
+    thermal::model::slab::Slab const slab,
+    thermal::model::Optics const optics,
+    double const phase_goodness_of_fit
+  ) noexcept ;
+  
   void plot_model_phases_against(
     std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
   ) const;

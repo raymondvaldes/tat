@@ -15,7 +15,7 @@ namespace thermal{
 namespace equipment{
 namespace laser{
 
-using Beam_power = units::quantity< units::si::heat_flux >;
+using Beam_power = units::quantity< units::si::power >;
 
 } // namespace laser
 } // namespace equipment

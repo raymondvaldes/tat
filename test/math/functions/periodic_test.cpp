@@ -6,16 +6,15 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#define BOOST_TEST_DYN_LINK
+#include <boost/test/unit_test.hpp>
+
 #include "math/functions/periodic.h"
 #include "math/functions/sine.h"
 #include "math/functions/cosine.h"
 #include "math/functions/PeriodicProperties.h"
 
 #include "units.h"
-
-#define BOOST_TEST_NO_LIB
-#include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
 
 BOOST_AUTO_TEST_SUITE( math )
 BOOST_AUTO_TEST_SUITE( functions )

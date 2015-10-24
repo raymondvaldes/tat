@@ -7,9 +7,11 @@
 //
 
 
-#include "statistics/sum_of_squares/residuals.h"
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
+
+#include "statistics/sum_of_squares/residuals.h"
+
 #include <vector>
 
 #include "units.h"
@@ -29,7 +31,7 @@ BOOST_AUTO_TEST_CASE( test_1 )
   
   auto const ss_residuals = statistics::sum_of_squares::residuals( a, b );
   
-//  BOOST_CHECK_CLOSE_FRACTION( ss_residuals , 0 , 1);
+  BOOST_CHECK_CLOSE_FRACTION( ss_residuals , 0 , .01);
 
 }
 

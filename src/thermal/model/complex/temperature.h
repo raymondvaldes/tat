@@ -26,8 +26,16 @@ class Temperature{
   public:
   
   Temperature
-  ( math::complex::properties< units::si::temperature > const & value );
-  Temperature (){};
+  ( math::complex::properties< units::si::temperature > const & value )
+  noexcept;
+  
+  Temperature
+  (
+    Phase const phase,
+    Amplitude const amplitude
+  ) noexcept;
+
+  Temperature () noexcept {};
   
   auto phase() const noexcept -> Phase ;
   auto amplitude() const noexcept -> Amplitude;

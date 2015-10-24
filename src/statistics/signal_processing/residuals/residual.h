@@ -16,14 +16,14 @@ namespace statistics{
 namespace signal_processing{
 
 template< typename T >
-auto residual( T const observation, T const model ) noexcept
+auto residual( T const model, T const observation  ) noexcept
 {
   using std::isfinite;
   
   assert( isfinite( observation ) );
   assert( isfinite( model ) );
   
-  auto const residual_value = observation - model;
+  auto const residual_value = model - observation ;
   
   return residual_value;
 }

@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
+#define BOOST_TEST_DYN_LINK
+#include <boost/test/unit_test.hpp>
 
 #include <cmath>
 
-#include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
 
 #include "math/special_functions/bessel.h"
 #include "units.h"

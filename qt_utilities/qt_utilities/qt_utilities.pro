@@ -22,7 +22,10 @@ QMAKE_CXXFLAGS += -stdlib=libc++
 INCLUDEPATH += /Users/raymondvaldes/Dropbox/code/tat/src
 macx: LIBS += -L/tmp/tat.dst/usr/local/bin -ltatlib
 
-QMAKE_CXXFLAGS += -isystem /usr/local/Cellar/boost/1.58.0/include
+
+QMAKE_CXXFLAGS += -isystem /usr/local/include
+macx: LIBS += -L/usr/local/lib -lboost_system
+macx: LIBS += -L/usr/local/lib -lboost_filesystem
 
 
 ## source

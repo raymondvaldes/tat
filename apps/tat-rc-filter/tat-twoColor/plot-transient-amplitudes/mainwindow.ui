@@ -105,6 +105,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_13">
          <item>
           <widget class="QTabWidget" name="tabWidget_settings">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -112,7 +115,7 @@
             </sizepolicy>
            </property>
            <property name="currentIndex">
-            <number>3</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tab_3">
             <attribute name="title">
@@ -455,73 +458,244 @@ Measurements</string>
               </item>
              </layout>
             </widget>
-            <zorder>gridLayoutWidget_7</zorder>
-            <zorder>gridLayoutWidget_6</zorder>
-            <zorder>label_steady_state_Detector_measurements</zorder>
            </widget>
            <widget class="QWidget" name="tab_6">
             <attribute name="title">
              <string>Specimen</string>
             </attribute>
-            <widget class="QWidget" name="gridLayoutWidget">
+            <widget class="QWidget" name="horizontalLayoutWidget">
              <property name="geometry">
               <rect>
-               <x>10</x>
+               <x>0</x>
                <y>10</y>
-               <width>311</width>
-               <height>111</height>
+               <width>521</width>
+               <height>161</height>
               </rect>
              </property>
-             <layout class="QGridLayout" name="gridLayout">
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="lineEdit_thermal_diffusivity"/>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_9">
-                <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;thermal diffusivity&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QGroupBox" name="groupBox_3">
+                <property name="title">
+                 <string>geometric</string>
                 </property>
+                <widget class="QWidget" name="gridLayoutWidget_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>30</y>
+                   <width>141</width>
+                   <height>81</height>
+                  </rect>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_12">
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="label_14">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>[mm]</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_2">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>thickness</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="lineEdit_slab_thickness"/>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_15">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>radius</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLineEdit" name="lineEdit_radius_input">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLabel" name="label_16">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>[mm]</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
                </widget>
               </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>thickness</string>
+              <item>
+               <widget class="QGroupBox" name="groupBox_4">
+                <property name="title">
+                 <string>thermalphysical</string>
                 </property>
+                <widget class="QWidget" name="gridLayoutWidget_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>30</y>
+                   <width>141</width>
+                   <height>101</height>
+                  </rect>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_13">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_9">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>thermal
+diffusivity</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="lineEdit_thermal_diffusivity"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="label_17">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[mm&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt;/s]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_11">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>thermal
+conductivity</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLineEdit" name="lineEdit_thermal_conductivity"/>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLabel" name="label_18">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>[W/mK]</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
                </widget>
               </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="label_14">
-                <property name="text">
-                 <string>[mm]</string>
+              <item>
+               <widget class="QGroupBox" name="groupBox_5">
+                <property name="title">
+                 <string>Boundary Conditions</string>
                 </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_17">
-                <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[mm&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt;/s]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="lineEdit_slab_thickness"/>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_11">
-                <property name="text">
-                 <string>thermal conductivity</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLineEdit" name="lineEdit_thermal_conductivity"/>
-              </item>
-              <item row="2" column="2">
-               <widget class="QLabel" name="label_18">
-                <property name="text">
-                 <string>[W/mK]</string>
-                </property>
+                <widget class="QWidget" name="gridLayoutWidget">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>29</y>
+                   <width>141</width>
+                   <height>101</height>
+                  </rect>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_14">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_20">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Biot, 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_23">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Biot, 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="lineEdit_2"/>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLineEdit" name="lineEdit_3"/>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="label_24">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>[n.d.]</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLabel" name="label_28">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>[n.d]</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
                </widget>
               </item>
              </layout>
@@ -558,14 +732,31 @@ Measurements</string>
                 <x>10</x>
                 <y>30</y>
                 <width>201</width>
-                <height>91</height>
+                <height>96</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_10">
+               <item row="1" column="2">
+                <widget class="QLabel" name="label_27">
+                 <property name="text">
+                  <string>[W]</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_laser_intensity"/>
+               </item>
                <item row="0" column="2">
                 <widget class="QLabel" name="label_25">
                  <property name="text">
                   <string>[mm]</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>power</string>
                  </property>
                 </widget>
                </item>
@@ -579,20 +770,21 @@ Measurements</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_8">
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_29">
                  <property name="text">
-                  <string>power</string>
+                  <string>modulation
+depth</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="lineEdit_detector_view_radius_2"/>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="lineEdit_modulation_depth_m"/>
                </item>
-               <item row="1" column="2">
-                <widget class="QLabel" name="label_27">
+               <item row="2" column="2">
+                <widget class="QLabel" name="label_30">
                  <property name="text">
-                  <string>[W]</string>
+                  <string>[n.d.]</string>
                  </property>
                 </widget>
                </item>
@@ -651,7 +843,7 @@ Measurements</string>
               <rect>
                <x>9</x>
                <y>9</y>
-               <width>451</width>
+               <width>511</width>
                <height>231</height>
               </rect>
              </property>
@@ -660,6 +852,9 @@ Measurements</string>
                <widget class="QComboBox" name="comboBox">
                 <property name="enabled">
                  <bool>true</bool>
+                </property>
+                <property name="currentIndex">
+                 <number>1</number>
                 </property>
                 <item>
                  <property name="text">
@@ -691,7 +886,7 @@ Parameters</string>
               <item row="1" column="1">
                <widget class="QComboBox" name="comboBox_detector_model_selection">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="editable">
                  <bool>false</bool>
@@ -709,16 +904,6 @@ Parameters</string>
                   <string>Center with view</string>
                  </property>
                 </item>
-                <item>
-                 <property name="text">
-                  <string>Offset point</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Offset with view</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item row="0" column="0">
@@ -733,16 +918,37 @@ Parameters</string>
               </item>
               <item row="2" column="1">
                <layout class="QGridLayout" name="gridLayout_5">
-                <item row="1" column="0">
-                 <widget class="QCheckBox" name="checkBox_estimate_beam_radius">
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="checkBox_estimate_view_radius">
                   <property name="enabled">
                    <bool>false</bool>
                   </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
                   <property name="text">
-                   <string>Beam radius</string>
+                   <string>Detector
+View radius</string>
                   </property>
                   <property name="checked">
                    <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QCheckBox" name="checkBox_estimate_specimen_radius">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Specimen radius</string>
                   </property>
                  </widget>
                 </item>
@@ -750,6 +956,11 @@ Parameters</string>
                  <widget class="QCheckBox" name="checkBox_estimate_thermal_diffusivity">
                   <property name="enabled">
                    <bool>false</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                   </font>
                   </property>
                   <property name="text">
                    <string>Thermal Diffusivity</string>
@@ -762,26 +973,52 @@ Parameters</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QCheckBox" name="checkBox_estimate_view_radius">
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
-                  <property name="text">
-                   <string>View radius</string>
-                  </property>
-                  <property name="checked">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
+                <item row="1" column="0">
                  <widget class="QCheckBox" name="checkBox_estimate_thermal_conductivity">
                   <property name="enabled">
                    <bool>false</bool>
                   </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
                   <property name="text">
                    <string>Thermal Conductivity</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="checkBox_estimate_detector_offset">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Detector
+offset</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QCheckBox" name="checkBox_estimate_beam_radius">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Beam radius</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -929,7 +1166,7 @@ Parameters</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="optics_ready_button_2">
+          <widget class="QPushButton" name="ready_model_button">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -1008,7 +1245,7 @@ Parameters</string>
       <rect>
        <x>570</x>
        <y>10</y>
-       <width>241</width>
+       <width>407</width>
        <height>481</height>
       </rect>
      </property>
@@ -1048,36 +1285,37 @@ Parameters</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>run_amplitude_analysis</tabstop>
+  <tabstop>textBrowser</tabstop>
+  <tabstop>pushButton_load_TBD_files</tabstop>
+  <tabstop>tabWidget_settings</tabstop>
+  <tabstop>radioButton_fixAmpCorrection</tabstop>
+  <tabstop>comboBox_for_phase</tabstop>
+  <tabstop>gCoefficient_textbox</tabstop>
+  <tabstop>filter_1_dc_total</tabstop>
+  <tabstop>filter_1_dc_background</tabstop>
+  <tabstop>filter_2_dc_total</tabstop>
+  <tabstop>filter_2_dc_background</tabstop>
+  <tabstop>lineEdit_slab_thickness</tabstop>
+  <tabstop>lineEdit_radius_input</tabstop>
+  <tabstop>lineEdit_thermal_diffusivity</tabstop>
+  <tabstop>lineEdit_thermal_conductivity</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>lineEdit_beam_radius</tabstop>
+  <tabstop>lineEdit_laser_intensity</tabstop>
+  <tabstop>lineEdit_detector_view_radius</tabstop>
   <tabstop>comboBox</tabstop>
   <tabstop>comboBox_detector_model_selection</tabstop>
   <tabstop>checkBox_estimate_thermal_diffusivity</tabstop>
   <tabstop>checkBox_estimate_view_radius</tabstop>
-  <tabstop>checkBox_estimate_beam_radius</tabstop>
-  <tabstop>checkBox_estimate_thermal_conductivity</tabstop>
   <tabstop>cutoff_frequency_lower_bound</tabstop>
   <tabstop>cutoff_frequency_upper_bound</tabstop>
   <tabstop>pyrometry_ready_button</tabstop>
   <tabstop>prepare_initial_slab_button</tabstop>
   <tabstop>optics_ready_button</tabstop>
-  <tabstop>optics_ready_button_2</tabstop>
+  <tabstop>ready_model_button</tabstop>
   <tabstop>run_phase_analysis</tabstop>
-  <tabstop>run_amplitude_analysis</tabstop>
-  <tabstop>lineEdit_beam_radius</tabstop>
-  <tabstop>comboBox_for_phase</tabstop>
-  <tabstop>pushButton_load_TBD_files</tabstop>
-  <tabstop>radioButton_fixAmpCorrection</tabstop>
-  <tabstop>filter_2_dc_background</tabstop>
-  <tabstop>lineEdit_detector_view_radius</tabstop>
-  <tabstop>tabWidget_settings</tabstop>
-  <tabstop>lineEdit_thermal_diffusivity</tabstop>
-  <tabstop>gCoefficient_textbox</tabstop>
-  <tabstop>lineEdit_thermal_conductivity</tabstop>
-  <tabstop>filter_2_dc_total</tabstop>
-  <tabstop>lineEdit_slab_thickness</tabstop>
-  <tabstop>filter_1_dc_background</tabstop>
-  <tabstop>lineEdit_detector_view_radius_2</tabstop>
-  <tabstop>textBrowser</tabstop>
-  <tabstop>filter_1_dc_total</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -818,7 +818,7 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
   auto const detector_view_radius = quantity< length>( .25 * millimeters  ) ;
   auto const alpha = quantity<thermal_diffusivity>( 50 * square_millimeters / second);
   
-  initial_slab.characteristic_length = L;
+  initial_slab.set_thickness(L);
   initial_slab.set_diffusivity_update_k_hold_rhoCp( alpha );
 
 

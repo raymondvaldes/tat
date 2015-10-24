@@ -6,11 +6,11 @@
 //  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
-#define BOOST_TEST_NO_LIB
+#define BOOST_TEST_DYN_LINK
+#include <boost/test/unit_test.hpp>
 
 #include <iostream>
 
-#include <boost/test/unit_test.hpp>
 #include "thermal/equipment/detector/simulate_measurements/periodic_cosine.h"
 #include "math/functions/PeriodicProperties.h"
 #include "units.h"

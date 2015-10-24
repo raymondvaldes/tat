@@ -14,8 +14,6 @@
 #include <cassert>
 #include <algorithm>
 
-//#include "algorithm/algorithm.h"
-
 namespace algorithm {
 
 namespace vector {

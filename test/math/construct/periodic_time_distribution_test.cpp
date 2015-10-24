@@ -6,9 +6,9 @@
 //  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
-#include <iostream>
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include <boost/test/execution_monitor.hpp>
+
 #include "units.h"
 #include "math/construct/periodic_time_distribution.h"
 #include "cout/vector/print.h"

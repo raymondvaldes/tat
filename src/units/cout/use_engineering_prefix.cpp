@@ -7,6 +7,7 @@
 //
 
 #include "use_engineering_prefix.hpp"
+#include <iostream>
 
 namespace units{
 

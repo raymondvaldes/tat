@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#define BOOST_TEST_NO_LIB
 
+#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
+
 #include <string>
 #include <stdexcept>
 #include <vector>

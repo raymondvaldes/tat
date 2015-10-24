@@ -39,11 +39,11 @@ auto temperature
 )
 noexcept -> units::quantity< units::si::dimensionless, std::complex< double > >
 {
-  auto const L = first_layer.characteristic_length;
-  auto const alpha_1 = first_layer.get_diffusivity();
-  auto const alpha_2 = second_layer.get_diffusivity();
-  auto const k_1 = first_layer.get_conductivity();
-  auto const k_2 = second_layer.get_conductivity();
+  auto const L = first_layer.thickness() ;
+  auto const alpha_1 = first_layer.thermal_diffusivity();
+  auto const alpha_2 = second_layer.thermal_diffusivity();
+  auto const k_1 = first_layer.thermal_conductivity();
+  auto const k_2 = second_layer.thermal_conductivity();
   
   assert( L.value() > 0  );
   assert( alpha_1.value() > 0 );
