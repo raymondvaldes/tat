@@ -32,7 +32,9 @@ class Temperatures{
   auto phases() const noexcept -> Phases;
   auto amplitudes() const noexcept -> Amplitudes;
   auto size() const noexcept -> size_t;
+  auto empty() const noexcept -> bool;
 };
+
 
 } // namespace complex
 } // namespace model

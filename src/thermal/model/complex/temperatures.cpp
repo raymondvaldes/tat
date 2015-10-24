@@ -29,6 +29,11 @@ auto Temperatures::size() const noexcept -> size_t
   return values.size();
 }
 
+auto Temperatures::empty() const noexcept -> bool
+{
+  return values.empty();
+}
+
 auto Temperatures::phases() const noexcept -> Phases
 {
   auto out = complex::Phases( size() );
