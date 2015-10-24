@@ -27,7 +27,7 @@ auto minimization_equation
 noexcept -> std::function< void( const double *, double * ) >
 {
 
-  auto const objective_function = [ model_predictions ]
+  auto const objective_function = [ &model_predictions ]
   ( const double *x, double *fvec ) noexcept
   {
     auto const theoreticalModeling = model_predictions( x ) ;
