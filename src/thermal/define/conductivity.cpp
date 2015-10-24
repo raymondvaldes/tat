@@ -26,6 +26,7 @@ noexcept -> units::quantity< units::si::thermal_conductivity >
   assert( alpha.value() > 0 && isnormal(alpha) );
 
   // alpha = k / rhoCp
+  // k = alpha * rhoCp
 
   auto const k = alpha * rhoCp ;
   
@@ -43,6 +44,8 @@ noexcept -> units::quantity< units::si::thermal_conductivity >
   assert( rhoCp.value() > 0 && isnormal( rhoCp ) );
   assert( e.value() > 0 && isnormal( e ) ) ;
   // e = sqrt( k * rhoCp )
+  // e^2 = k * rhoCp
+  // k = e^2 / rhoCp
 
   auto const k = pow<2>( e ) / rhoCp ;
 
