@@ -36,21 +36,21 @@ public:
   Biot_number Bi1 = 0.001;
   Biot_number Bi2 = 0.001;
   
-  Slab(
+  explicit Slab(
     Thickness const L,
     Thermal_diffusivity const alpha_in,
     Thermal_conductivity const k_in,
     Radius const R = Radius( 25.0 * units::si::millimeters )
   ) noexcept ;
   
-  Slab(
+  explicit Slab(
     Thickness const L,
     Thermal_diffusivity const alpha_in,
     Volumetric_heat_capacity const rhoCp_in,
     Radius const R = Radius( 25.0 * units::si::millimeters)
   ) noexcept ;
   
-  Slab(
+  explicit Slab(
     Thickness const L,
     Thermal_conductivity const k_in,
     Volumetric_heat_capacity const rhoCp_in,
