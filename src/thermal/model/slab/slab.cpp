@@ -19,22 +19,23 @@ namespace thermal { namespace model { namespace slab{
 
   using thermal::define::conductivity;
   using thermal::define::volumetricHeatCapacity;
-  using thermal::define::volumetricHeatCapacity;
+  using thermal::define::effusivity;
+  using thermal::define::diffusivity;
 
 
 Slab::Slab(
   Thickness const L,
-  Thermal_diffusivity const alpha_in,
+  Thermal_diffusivity const alpha,
   Thermal_conductivity const k_in,
   Radius const R
 
 )
   : L( L ),
     k( k_in ),
-    rhoCp( thermal::define::volumetricHeatCapacity( alpha_in, k )  ),
+    rhoCp( volumetricHeatCapacity( alpha, k )  ),
     R( R )
 {
-  assert( alpha_in.value() > 0 ) ;
+  assert( alpha.value() > 0 ) ;
   assert( k_in.value() > 0 ) ;
   assert( rhoCp.value() > 0 ) ;
 
@@ -51,7 +52,7 @@ Slab::Slab(
 ) :Slab(
     L,
     alpha_in,
-    thermal::define::conductivity( rhoCp_in, alpha_in) ,
+    conductivity( rhoCp_in, alpha_in) ,
     R ) {}
 
 Slab::Slab(
@@ -61,75 +62,76 @@ Slab::Slab(
   Radius const R
 ) :Slab(
     L,
-    thermal::define::diffusivity( k_in , rhoCp_in ),
+    diffusivity( k_in , rhoCp_in ),
     k_in, R ) {}
   
 
-auto Slab::radius() const -> Radius
+auto Slab::radius() const noexcept -> Radius
 {
   return R;
 }
   
-auto Slab::thickness() const -> Thickness
+auto Slab::thickness() const noexcept -> Thickness
 {
   return L;
 }
 
-auto Slab::set_thickness( Thickness const L ) -> void
+
+
+
+auto Slab::set_thickness( Thickness const L ) noexcept -> void
 {
   this->L = L;
 }
 
-auto Slab::set_radius( Radius const R ) -> void
+auto Slab::set_radius( Radius const R ) noexcept -> void
 {
   this->R = R;
 }
 
 
-auto Slab::thermal_conductivity() const -> Thermal_conductivity
+auto Slab::thermal_conductivity() const noexcept-> Thermal_conductivity
 {
   return k;
 }
 
-auto Slab::volumetric_heatCapacity() const -> Volumetric_heat_capacity
+auto Slab::volumetric_heatCapacity() const noexcept -> Volumetric_heat_capacity
 {
   return rhoCp;
 }
 
-auto Slab::thermal_diffusivity() const -> Thermal_diffusivity
+auto Slab::thermal_diffusivity() const noexcept -> Thermal_diffusivity
 {
-  using thermal::define::diffusivity;
   auto const alpha_here = diffusivity( k, rhoCp );
   return alpha_here;
 }
 
-auto Slab::thermal_effusivity() const -> Thermal_effusivity
+auto Slab::thermal_effusivity() const noexcept -> Thermal_effusivity
 {
-  using thermal::define::effusivity;
   auto const e = effusivity( k , rhoCp );
   return e;
 }
 
-auto Slab::set_conductivity ( Thermal_conductivity const k_in ) -> void
+auto Slab::set_conductivity ( Thermal_conductivity const k_in ) noexcept -> void
 {
   k = k_in;
 }
 
 auto Slab::set_volumetric_heatCapacity
-( Volumetric_heat_capacity const rhoCp_in ) -> void
+( Volumetric_heat_capacity const rhoCp_in ) noexcept -> void
 {
   rhoCp = rhoCp_in;
 }
 
 auto Slab::set_effusivity_update_k_hold_rhoCp
-( Thermal_effusivity const e ) -> void
+( Thermal_effusivity const e ) noexcept -> void
 {
   auto const updated_k = conductivity( rhoCp,  e ) ;
   set_conductivity( updated_k );
 }
 
 auto Slab::set_effusivity_update_rhoCp_hold_k
-( Thermal_effusivity const e ) -> void
+( Thermal_effusivity const e ) noexcept -> void
 {
   auto const updated_rhoCp = volumetricHeatCapacity( e, k ) ;
   
@@ -137,14 +139,14 @@ auto Slab::set_effusivity_update_rhoCp_hold_k
 }
 
 auto Slab::set_diffusivity_update_k_hold_rhoCp
-( Thermal_diffusivity const alpha_in ) -> void
+( Thermal_diffusivity const alpha_in ) noexcept -> void
 {
   auto const updated_k = conductivity( rhoCp,  alpha_in ) ;
   set_conductivity( updated_k );
 }
 
 auto Slab::set_diffusivity_update_rhoCp_hold_k
-( Thermal_diffusivity const alpha_in ) -> void
+( Thermal_diffusivity const alpha_in ) noexcept -> void
 {
   auto const updated_rhoCp = volumetricHeatCapacity(alpha_in, k) ;
   

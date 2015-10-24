@@ -59,35 +59,35 @@ public:
   );
   
   // getters
-  auto radius() const -> Radius;
-  auto thickness() const -> Thickness;
+  auto radius() const noexcept -> Radius;
+  auto thickness() const noexcept -> Thickness;
   
-  auto thermal_conductivity() const -> Thermal_conductivity;
-  auto volumetric_heatCapacity() const -> Volumetric_heat_capacity;
-  auto thermal_diffusivity() const -> Thermal_diffusivity;
-  auto thermal_effusivity() const -> Thermal_effusivity;
+  auto thermal_conductivity() const noexcept -> Thermal_conductivity;
+  auto volumetric_heatCapacity() const noexcept -> Volumetric_heat_capacity;
+  auto thermal_diffusivity() const noexcept -> Thermal_diffusivity;
+  auto thermal_effusivity() const noexcept -> Thermal_effusivity;
 
 
   // setters
-  auto set_thickness( Thickness const L ) -> void;
-  auto set_radius( Radius const R ) -> void;
+  auto set_thickness( Thickness const L ) noexcept -> void;
+  auto set_radius( Radius const R ) noexcept -> void;
   
   auto set_effusivity_update_k_hold_rhoCp ( Thermal_effusivity const e )
-  -> void;
+  noexcept -> void;
   
   auto set_effusivity_update_rhoCp_hold_k ( Thermal_effusivity const e )
-  -> void;
+  noexcept -> void;
   
   auto set_diffusivity_update_k_hold_rhoCp ( Thermal_diffusivity const alpha )
-  -> void;
+  noexcept -> void;
   
   auto set_diffusivity_update_rhoCp_hold_k ( Thermal_diffusivity const alpha )
-  -> void;
+  noexcept -> void;
   
-  auto set_conductivity( Thermal_conductivity const k ) -> void;
+  auto set_conductivity( Thermal_conductivity const k ) noexcept -> void;
   
   auto set_volumetric_heatCapacity( Volumetric_heat_capacity const rhoCp_in )
-  -> void;
+  noexcept -> void;
 };
 
 }}}
