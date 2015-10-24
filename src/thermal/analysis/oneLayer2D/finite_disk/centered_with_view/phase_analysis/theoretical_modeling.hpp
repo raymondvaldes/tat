@@ -35,6 +35,9 @@ struct Theoretical_modeling {
     model::complex::Temperatures const & model_predictions_,
     emission::Phases const & experimental_bias_
   );
+  
+  auto phase_goodness_of_fit() const noexcept -> double;
+  
 };
 
 auto theoretical_modeling(
