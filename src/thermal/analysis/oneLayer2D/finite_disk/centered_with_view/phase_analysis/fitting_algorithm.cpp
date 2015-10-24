@@ -11,7 +11,7 @@
 #include "make_minimization_equation.hpp"
 #include "thermal/analysis/oneLayer2D/phase_analysis/make_minimization_equation.hpp"
 #include "math/estimation/lmdiff.hpp"
-
+#include "thermal/model/complex/temperatures.h"
 
 namespace thermal { 
 namespace analysis { 
@@ -29,7 +29,7 @@ using thermal::analysis::oneLayer2D::phase_analysis::minimization_equation;
 auto fitting_algorithm
 (
   equipment::laser::Modulation_frequencies const & frequencies,
-  emission::Phases const & exp_phases,
+  model::complex::Temperatures const & temperatures,
   std::vector<double> & model_parameters,
   std::function<
   std::tuple<
@@ -39,6 +39,8 @@ auto fitting_algorithm
 )
 noexcept -> estimate_parameters::phase_analysis::Best_fit
 {
+  auto const exp_phases = temperatures.phases();
+
   auto const model_predictions_generator =
   theoretical_modeling( frequencies, exp_phases, model_evaluate );
 

@@ -30,7 +30,7 @@ namespace phase_analysis{
 auto fitting_algorithm
 (
   equipment::laser::Modulation_frequencies const & frequencies,
-  emission::Phases const & exp_phases,
+  model::complex::Temperatures const & temperatures,
   std::vector<double> & model_parameters,
   std::function<
   std::tuple<

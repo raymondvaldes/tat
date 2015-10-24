@@ -15,6 +15,7 @@
 #include "thermal/equipment/laser/modulation_frequencies.h"
 #include "thermal/emission/phases.h"
 #include "thermal/model/oneLayer2D/finite_disk/parameter_list.hpp"
+#include "thermal/model/complex/temperatures.h"
 
 namespace thermal { 
 namespace analysis { 
@@ -26,7 +27,7 @@ namespace phase_analysis{
 auto fit
 (
   equipment::laser::Modulation_frequencies const & frequencies,
-  emission::Phases const & exp_phases,
+  model::complex::Temperatures const & temperatures,
   model::slab::Slab const & slab_initial,
   model::Optics const & optics_initial,
   model::oneLayer2D::finite_disk::Parameters const & parameters

@@ -20,13 +20,14 @@
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
 #include "thermal/model/oneLayer2D/model_selection.h"
 #include "thermal/model/oneLayer2D/finite_disk/parameter_list.hpp"
+#include "thermal/model/complex/temperatures_factory_dummy_amplitudes.hpp"
 
 using std::vector;
 using namespace units;
 using thermal::experimental::observations::Slab;
 using thermal::model::Optics;
 using thermal::analysis::oneLayer2D::finite_disk::centered_with_view::phase_analysis::fit;
-
+using thermal::model::complex::temperature_factory_dummy_amplitudes;
 
 BOOST_AUTO_TEST_SUITE( thermal )
 BOOST_AUTO_TEST_SUITE( analysis )
@@ -139,7 +140,9 @@ BOOST_AUTO_TEST_CASE( fit_all )
     thermal::model::oneLayer2D::finite_disk::Parameter::rc_filter
   });  
   
-  auto const best_fit = fit( frequencies, phases, slab_initial, optics, parameters );
+//  auto const temperatures = 
+  auto const temperatures = temperature_factory_dummy_amplitudes( phases );
+  auto const best_fit = fit( frequencies, temperatures, slab_initial, optics, parameters );
 
   BOOST_CHECK_CLOSE_FRACTION( 7.41395e-5, best_fit.phase_goodness_of_fit, 1e-5);
 }
