@@ -36,16 +36,16 @@ auto fitting_algorithm
   std::tuple<
     model::slab::Slab,
     model::Optics >
-  ( const double * x)> const & model_evaluate
+  ( const double * x)> const & system_updater
 )
 noexcept -> estimate_parameters::phase_analysis::Best_fit
 {
   Expects( !temperatures.empty() );
 
-  auto const model_predictions_generator =
-  theoretical_modeling( frequencies, temperatures, model_evaluate );
+  auto const predictions_generator =
+  theoretical_modeling( frequencies, temperatures, system_updater );
 
-  auto const min_equation = minimization_equation( model_predictions_generator );
+  auto const min_equation = minimization_equation( predictions_generator );
   
   auto lmdif_settings = settings{};
   lmdif_settings.factor = 50.0 ;   // initial step size
@@ -57,10 +57,10 @@ noexcept -> estimate_parameters::phase_analysis::Best_fit
 
   ////// prepare output
   auto const x = model_parameters.data();
-  auto const theoretical_modeling = model_predictions_generator( x );
+  auto const theoretical_modeling = predictions_generator( x );
 
 
-  auto const t = model_evaluate( x );
+  auto const t = system_updater( x );
   auto const slab_fit = get< 0 >(t);
   auto const optics_fit = get< 1 >(t);
   

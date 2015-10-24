@@ -65,17 +65,7 @@ struct Best_fit{
     double const phase_goodness_of_fit_,
     units::quantity< units::si::dimensionless > const view_radius_offset_input
   ) noexcept ;  
-  
-  explicit Best_fit
-  (
-    thermal::model::slab::Slab const slab_,
-    units::quantity< units::si::dimensionless > const view_radius_nd,
-    units::quantity< units::si::dimensionless> const b,
-    std::vector< units::quantity<units::si::frequency> > const frequencies_,
-    std::vector< units::quantity<units::si::plane_angle > > const model_phases_,
-    double const phase_goodness_of_fit_,
-    std::vector< units::quantity<units::si::plane_angle > > const observations_
-  ) noexcept ;
+
   
 
   explicit Best_fit
@@ -90,6 +80,8 @@ struct Best_fit{
   ) const;
   
   void plot_model_phases_against_observations( void ) const ;
+  
+  auto phase_goodness_of_fit_function() const -> double;
   
 };
 

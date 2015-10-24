@@ -9,6 +9,7 @@
 #include "fit.hpp"
 #include "fitting_algorithm.hpp"
 #include "thermal/analysis/oneLayer2D/update_system_properties_generator.hpp"
+#include <gsl.h>
 
 namespace thermal { 
 namespace analysis { 
@@ -27,6 +28,9 @@ auto fit
 )
 noexcept -> estimate_parameters::phase_analysis::Best_fit
 {
+  Expects( frequencies.size() == temperatures.size() );
+  Expects( !parameters.empty() );
+  
   // parameter estimation algorithm
   auto const model =
   update_system_properties_generator( slab_initial, optics_initial,parameters );

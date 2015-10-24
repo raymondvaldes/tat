@@ -10,6 +10,7 @@
 
 #include "plot/gnuplot.h"
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
+#include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
 #include "thermal/define/lthermal.h"
 #include "units.h"
 
@@ -84,27 +85,6 @@ Best_fit::Best_fit
   view_radius_offset = view_radius_offset_input * slab_.thickness()  ;
 }
 
-Best_fit::Best_fit
-(
-  thermal::model::slab::Slab const slab_,
-  units::quantity< units::si::dimensionless > const view_radius_nd,
-  units::quantity< units::si::dimensionless> const b,
-  std::vector< units::quantity<units::si::frequency> > const frequencies_,
-  std::vector< units::quantity<units::si::plane_angle > > const model_phases_,
-  double const phase_goodness_of_fit_,
-  std::vector< units::quantity<units::si::plane_angle > > const observations_
-) noexcept :
-  Best_fit( slab_,
-      view_radius_nd,
-      b,
-      frequencies_,
-      model_phases_,
-      phase_goodness_of_fit_ )
-{
-  observations = observations_ ;
-  
-}
-
 void Best_fit::plot_model_phases_against(
   std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
 ) const
@@ -123,6 +103,19 @@ void Best_fit::plot_model_phases_against_observations( void ) const
 
   plot::simple_x_y1_y2( frequencies, model_phases, observations );
 }
+
+auto Best_fit::phase_goodness_of_fit_function() const -> double
+{
+//  auto const predictions = model_predictions.phases();
+//  auto const gf = goodness_of_fit( calibrated_observations , predictions );
+
+  auto const gf = 42;
+  return gf;
+}
+
+
+
+
 
 } // namespace phase_analysis
 } // namespace estimate_parameters

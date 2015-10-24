@@ -74,13 +74,13 @@ auto update_system_properties_generator(
     auto const slab_updated = update.first;
     auto const optics_updated = update.second;
     
-
+    ///DELETE THIS
     auto const alpha = slab_updated.thermal_diffusivity();
     auto const R = slab_updated.radius();
     auto const Re = optics_updated.view_radius;
     auto const RC_time_constant = optics_updated.filter_constant;
     std::cout <<  alpha << "\t" << R << "\t" << Re << "\t" << RC_time_constant <<  "\n" ;
-    
+    //DELETE THIS
     
     return make_tuple( slab_updated, optics_updated ) ;
     

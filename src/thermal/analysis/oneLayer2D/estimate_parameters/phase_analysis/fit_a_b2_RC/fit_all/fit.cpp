@@ -212,12 +212,17 @@ noexcept -> Best_fit
   auto const calibrated_observations = model_predictions.calibrated_observations;
   auto const phase_goodness_of_fit = goodness_of_fit( calibrated_observations , phase_predictions );
   
+  auto const l_r = thermal::equipment::laser::Beam_radius(b1 * L );
+  auto const l_i = thermal::equipment::laser::Beam_intensity::from_value(42);
+  auto const d_r = thermal::equipment::detector::View_radius(b2 * L);
+  auto const l_m = thermal::equipment::laser::Modulation_depth::from_value(42);
+  
+  auto const optics_fitted =
+  thermal::model::Optics( l_r, l_i, d_r, l_m );
   
   auto const result = Best_fit(
-    fitted_slab, b2, b1, frequencies,
-    phase_predictions, phase_goodness_of_fit,
-    calibrated_observations
-  );
+    fitted_slab, optics_fitted, phase_goodness_of_fit );
+  
   
   std::cout << "\n" << result.phase_goodness_of_fit  << "\n";
   
