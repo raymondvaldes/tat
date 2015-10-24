@@ -28,6 +28,8 @@ noexcept -> units::quantity< units::si::thermal_conductivity >
   // alpha = k / rhoCp
 
   auto const k = alpha * rhoCp ;
+  
+  assert( k.value() > 0 && isnormal( k ) );
   return k;
 }
 
@@ -43,6 +45,8 @@ noexcept -> units::quantity< units::si::thermal_conductivity >
   // e = sqrt( k * rhoCp )
 
   auto const k = pow<2>( e ) / rhoCp ;
+
+  assert( k.value() > 0 && isnormal( k ) );
   return k;
 }
   
@@ -53,10 +57,23 @@ auto conductivity
 )
 noexcept -> units::quantity< units::si::thermal_conductivity >
 {
+  // alpha = k / rhoCp
+  // e = sqrt( k * rhoCp )
+  // e = sqrt( k * (k / alpha) )
+  // e = sqrt( k^2 / alpha )
+  // e^2 = k^2 / alpha
+  // k^2 = e^2 * alpha
+  // k = sqrt( e^2 * alpha )
+  // k = e * sqrt( alpha )
+  
   assert( e.value() > 0 && isnormal( e )   );
   assert( alpha.value() > 0 && isnormal( alpha ) );
 
-  return e * sqrt( alpha );
+  auto const k = e * sqrt( alpha );
+  
+  assert( k.value() > 0 && isnormal( k ) );
+  return k;
+
 }
   
 } // namespace define
