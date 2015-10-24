@@ -32,10 +32,9 @@ auto theoretical_modeling(
   
 ) noexcept -> std::function< Theoretical_results( const double *x  ) >
 {
-  auto const experimental_phases = temperatures.phases();
 
   auto const func =
-  [frequencies, &model_updater, experimental_phases]
+  [frequencies, &model_updater, temperatures]
   ( const double *x ) noexcept
   {
     auto const t = model_updater( x );
@@ -48,7 +47,7 @@ auto theoretical_modeling(
     phase_shifts_from_input( frequencies, optics.filter_constant );
     
     auto const output =
-    Theoretical_results( experimental_phases, modeling, phase_bias );
+    Theoretical_results( temperatures, modeling, phase_bias );
   
     return output;
   };

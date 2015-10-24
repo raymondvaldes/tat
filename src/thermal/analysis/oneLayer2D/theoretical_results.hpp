@@ -22,13 +22,13 @@ namespace analysis{
 namespace oneLayer2D {
 
 struct Theoretical_results {
-  emission::Phases observations;
+  model::complex::Temperatures observations;
   model::complex::Temperatures model_predictions;
   emission::Phases experimental_bias;
   emission::Phases calibrated_observations;
   
   Theoretical_results(
-    emission::Phases const & observations_,
+    model::complex::Temperatures const & observations_,
     model::complex::Temperatures const & model_predictions_,
     emission::Phases const & experimental_bias_
   );
