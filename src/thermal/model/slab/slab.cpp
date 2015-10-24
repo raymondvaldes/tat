@@ -8,6 +8,7 @@
 
 #include <complex>
 #include <cmath>
+#include <gsl.h>
 
 #include "thermal/model/slab/slab.h"
 
@@ -156,23 +157,25 @@ auto Slab::set_effusivity_update_rhoCp_hold_k
 auto Slab::set_diffusivity_update_k_hold_rhoCp
 ( Thermal_diffusivity const alpha ) noexcept -> void
 {
-  assert( alpha.value() > 0  && isfinite( alpha ) );
-
+  Expects( alpha.value() > 0  && isfinite( alpha ) );
+  
   auto const k = conductivity( rhoCp,  alpha ) ;
   set_conductivity( k );
-
-  assert( this->k.value() > 0  && isfinite( this->k ) );
+  
+  Ensures( abs(thermal_diffusivity() - alpha ).value() < 1e-14 );
+  Ensures( this->k.value() > 0  && isfinite( this->k )  );
 }
 
 auto Slab::set_diffusivity_update_rhoCp_hold_k
 ( Thermal_diffusivity const alpha ) noexcept -> void
 {
-  assert( alpha.value() > 0  && isfinite( alpha ) );
+  Expects( alpha.value() > 0  && isfinite( alpha ) );
 
   auto const rhoCp = volumetricHeatCapacity( alpha, k ) ;
   set_volumetric_heatCapacity( rhoCp );
   
-  assert( this->rhoCp.value() > 0  && isfinite( this->rhoCp ) );
+  Ensures( abs(thermal_diffusivity() - alpha ).value() < 1e-14 );
+  Ensures( this->rhoCp.value() > 0  && isfinite( this->rhoCp ) );
 }
 
 } } } // thermal::model::slab
