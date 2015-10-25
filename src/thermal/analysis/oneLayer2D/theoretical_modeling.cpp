@@ -2,24 +2,21 @@
 //  theoretical_modeling.cpp
 //  tat
 //
-//  Created by Raymond Valdes on 10/23/15.
+//  Created by Raymond Valdes on 10/24/15.
 //  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
 #include "theoretical_modeling.hpp"
+
 #include "electronics/filter/low-pass/RC-first-order/phase_shifts_from_input.hpp"
-#include "thermal/model/oneLayer2D/finite_disk/emission/centered_detector_with_view/frequency_sweep.hpp"
+
 
 namespace thermal {
 namespace analysis { 
-namespace oneLayer2D { 
-namespace finite_disk { 
-namespace centered_with_view {
-namespace phase_analysis{
+namespace oneLayer2D {
 
 using std::get;
 using electronics::filter::low_pass::RC_first_order::phase_shifts_from_input;
-using model::oneLayer2D::finite_disk::disk::emission::centered_detector_with_view::frequency_sweep;
 
 
 auto theoretical_modeling(
@@ -28,13 +25,20 @@ auto theoretical_modeling(
   std::function< std::tuple<
     model::slab::Slab,
     model::Optics >
-    ( const double * x ) > const & model_updater
-  
+    ( const double * x ) > const & model_updater,
+
+  std::function<
+    thermal::model::complex::Temperatures(
+      model::slab::Slab const &,
+      model::Optics const &,
+      equipment::laser::Modulation_frequencies const &
+      )  > const & frequency_sweep
+
 ) noexcept -> std::function< Theoretical_results( const double *x  ) >
 {
 
   auto const func =
-  [frequencies, &model_updater, temperatures]
+  [frequencies, &model_updater, temperatures, frequency_sweep]
   ( const double *x ) noexcept
   {
     auto const t = model_updater( x );
@@ -47,7 +51,7 @@ auto theoretical_modeling(
     phase_shifts_from_input( frequencies, optics.filter_constant );
     
     auto const output =
-    Theoretical_results( temperatures, modeling, phase_bias );
+    Theoretical_results( frequencies, temperatures, modeling, phase_bias );
   
     return output;
   };
@@ -55,4 +59,4 @@ auto theoretical_modeling(
   return func;
 }
 
-} } } } } }
+} } }
