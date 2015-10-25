@@ -11,6 +11,8 @@
 #include "algorithm/algorithm.h"
 #include "thermal/model/oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h"
 #include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/point_measurement.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensional/deltaT.h"
 
 namespace thermal {
 namespace model {
@@ -22,6 +24,7 @@ using namespace units;
 using std::vector;
 using math::complex::properties;
 using algorithm::transform;
+
 
 auto
 frequency_sweep
@@ -54,6 +57,49 @@ noexcept -> std::vector< math::complex::properties< units::si::temperature > >
   
   return results;
 }
+
+auto
+frequency_sweeper
+(
+  slab::Slab const & slab,
+  Optics const & optics,
+  equipment::laser::Modulation_frequencies const & frequencies
+)
+noexcept -> thermal::model::complex::Temperatures
+{
+  assert( !frequencies.empty() );
+  
+  using thermal::model::complex::Temperatures;
+  using algorithm::transform;
+  
+  auto const k = slab.thermal_conductivity();
+  auto const L = slab.thickness() ;
+  auto const I = optics.laser_intensity;
+  
+  auto const deltaT = dimensional::deltaT( I , L, k ) ;
+  
+  auto const b = dimensionless::b( optics.laser_radius, L );
+  auto const alpha = slab.thermal_diffusivity();
+
+  auto const temperature_properties =
+  frequency_sweep( b, deltaT, frequencies, L, alpha );
+  
+  assert( temperature_properties.size() == frequencies.size() );
+  
+  auto complex_temperatures = std::vector< complex::Temperature >( frequencies.size() );
+  
+  transform( temperature_properties, complex_temperatures.begin(),
+  []( auto const & e) noexcept
+  {
+    return complex::Temperature( e );
+  } );
+  
+  auto const temperatures = complex::Temperatures( complex_temperatures );
+  
+  assert( frequencies.size() == temperatures.size() );
+  return temperatures;
+}
+
 
 } // namespace centered_point
 } // namespace thermal_emission

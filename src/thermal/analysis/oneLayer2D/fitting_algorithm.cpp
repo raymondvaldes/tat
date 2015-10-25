@@ -2,37 +2,29 @@
 //  fitting_algorithm.cpp
 //  tat
 //
-//  Created by Raymond Valdes on 10/23/15.
+//  Created by Raymond Valdes on 10/25/15.
 //  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
+#include <gsl.h>
+
 #include "fitting_algorithm.hpp"
-#include "make_minimization_equation.hpp"
-#include "thermal/analysis/oneLayer2D/theoretical_modeling.hpp"
-#include "thermal/analysis/oneLayer2D/phase_analysis/make_minimization_equation.hpp"
+#include "theoretical_modeling.hpp"
 #include "math/estimation/lmdiff.hpp"
 #include "thermal/model/complex/temperatures.h"
-#include <gsl.h>
 #include "thermal/model/oneLayer2D/model_selection.h"
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
-#include "thermal/model/oneLayer2D/finite_disk/emission/centered_detector_with_view/frequency_sweep.hpp"
 
-namespace thermal {
-namespace analysis { 
-namespace oneLayer2D { 
-namespace finite_disk { 
-namespace centered_with_view {
-namespace phase_analysis{
+namespace thermal{
+namespace analysis{
+namespace oneLayer2D{
 
 using math::estimation::lmdif;
 using math::estimation::settings;
 using std::get;
-using thermal::analysis::oneLayer2D::phase_analysis::minimization_equation;
 using thermal::model::oneLayer2D::Detector_model;
 using thermal::model::oneLayer2D::Conduction_model;
 using thermal::model::oneLayer2D::generator::Disk;
-using thermal::model::oneLayer2D::finite_disk::disk::emission::centered_detector_with_view::frequency_sweep;
-
 
 auto const detector_model = Detector_model::center_with_view;
 auto const conduction_model = Conduction_model::finite_disk;
@@ -41,16 +33,33 @@ auto fitting_algorithm
 (
   equipment::laser::Modulation_frequencies const & frequencies,
   model::complex::Temperatures const & temperatures,
-  std::vector<double> & model_parameters,
+ 
+  std::pair< std::vector<double> ,
+    std::function<
+    std::tuple<
+      model::slab::Slab,
+      model::Optics  >( const double * x )  >
+      > const & system,
+
   std::function<
-  std::tuple<
-    model::slab::Slab,
-    model::Optics >
-  ( const double * x)> const & system_updater
+    model::complex::Temperatures(
+        model::slab::Slab const &,
+        model::Optics const &,
+        equipment::laser::Modulation_frequencies const & )
+  > const & frequency_sweep,
+ 
+  std::function<
+    std::function< void( const double *, double * ) >(
+      std::function< Theoretical_results( const double *  ) > const &)
+  >
+  const & minimization_equation
 )
 noexcept -> Best_fit
 {
   Expects( !temperatures.empty() );
+  
+  auto model_parameters = system.first;
+  auto const system_updater = system.second;
 
   auto const predictions_generator =
   theoretical_modeling( frequencies, temperatures, system_updater, frequency_sweep );
@@ -81,6 +90,7 @@ noexcept -> Best_fit
   return result;
 }
 
-} } } } } }
 
-
+} // namespace oneLayer2D
+} // namespace analysis
+} // namespace thermal

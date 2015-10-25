@@ -16,13 +16,11 @@
 #include "thermal/define/lthermal.h"
 #include "units.h"
 
-
 using thermal::define::thermalPenetrations_from_frequencies;
 
 namespace thermal{
 namespace analysis{
 namespace oneLayer2D {
-
 
 Best_fit::Best_fit
 (
@@ -30,7 +28,7 @@ Best_fit::Best_fit
   Theoretical_results const & final_fit
 ) noexcept :
   engine( disk ) ,
-  slab( disk.get_disk() ),
+  slab( disk.get_slab() ),
   optics( disk.get_optics() ),
   final_fit( final_fit )
 {}
@@ -71,5 +69,3 @@ auto Best_fit::phase_goodness_of_fit_function() const -> double
 }
 
 }}}
-
-

@@ -2,7 +2,7 @@
 //  update_disk_optics.cpp
 //  tat
 //
-//  Created by Raymond Valdes on 10/23/15.
+//  Created by Raymond Valdes on 10/25/15.
 //  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
@@ -10,10 +10,9 @@
 #include "algorithm/algorithm.h"
 #include <utility>
 
-namespace thermal { 
-namespace model {
-namespace oneLayer2D { 
-namespace finite_disk {
+namespace thermal{
+namespace model{
+namespace oneLayer2D{
 
 using algorithm::for_each;
 using std::make_pair;
@@ -70,6 +69,4 @@ auto update_disk_optics
   return make_pair( d, o );
 }
 
-
-} } } }
-
+}}}

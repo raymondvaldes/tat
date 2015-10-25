@@ -14,8 +14,8 @@
 #include <cmath>
 
 #include "math/estimation/constrained.hpp"
-#include "thermal/model/oneLayer2D/finite_disk/map_parameter_values.hpp"
-#include "thermal/model/oneLayer2D/finite_disk/update_disk_optics.hpp"
+#include "thermal/model/oneLayer2D/map_parameter_values.hpp"
+#include "thermal/model/oneLayer2D/update_disk_optics.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -28,14 +28,14 @@ using std::make_tuple;
 using std::make_pair;
 using namespace units;
 
-using thermal::model::oneLayer2D::finite_disk::map_parameter_values;
-using thermal::model::oneLayer2D::finite_disk::update_disk_optics;
-using thermal::model::oneLayer2D::finite_disk::Map_parameter_values;
+using thermal::model::oneLayer2D::map_parameter_values;
+using thermal::model::oneLayer2D::update_disk_optics;
+using thermal::model::oneLayer2D::Map_parameter_values;
 
 auto update_system_properties_generator(
   model::slab::Slab const & slab_initial,
   model::Optics const & optics_initial,
-  model::oneLayer2D::finite_disk::Parameters const & unknown_parameters
+  model::oneLayer2D::Parameters const & unknown_parameters
 )
  noexcept ->
   std::pair< std::vector<double> ,

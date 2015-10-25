@@ -8,7 +8,7 @@
 
 #include "infinite_disk.hpp"
 #include <cassert>
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.h"
 
 namespace thermal{
 namespace model{
@@ -35,9 +35,9 @@ const -> thermal::model::complex::Temperatures
 {
   assert( !modulation_frequencies.empty() );
   assert( detector_model == Detector_model::center_with_view );
-  
+
   auto const out =
-    thermal_emission::frequency_sweep(slab, optics, modulation_frequencies);
+    thermal_emission::centered_with_view::frequency_sweeper(slab, optics, modulation_frequencies);
 
   assert( out.size() == modulation_frequencies.size() );
   return out;

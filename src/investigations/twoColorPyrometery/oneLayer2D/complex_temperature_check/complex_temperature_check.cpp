@@ -19,11 +19,11 @@ using thermal::define::thermal_penetration;
 #include "thermal/model/oneLayer2D/infinite_disk/complex/surface_phase_amplitude.h"
 using thermal::model::oneLayer2D::complex::surface_phase_amplitude;
 
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/measurement.h"
-using thermal::model::oneLayer2D::thermal_emission::measurement;
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/measurement.h"
+using thermal::model::oneLayer2D::thermal_emission::centered_with_view::measurement;
 
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/fast_measurement.h"
-using thermal::model::oneLayer2D::thermal_emission::fast_measurement;
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/fast_measurement.h"
+using thermal::model::oneLayer2D::thermal_emission::centered_with_view::fast_measurement;
 
 #include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
 using thermal::pyrometry::twoColor::calibrate_wavelength;

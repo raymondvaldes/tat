@@ -16,6 +16,7 @@
 #include "electronics/filter/low-pass/RC-first-order/time_constant.h"
 #include "electronics/filter/low-pass/RC-first-order/resistance.h"
 #include "electronics/filter/low-pass/RC-first-order/capacitance.h"
+#include "thermal/equipment/detector/offset.h"
 
 namespace thermal{
 namespace model{
@@ -27,7 +28,8 @@ struct Optics{
   equipment::detector::View_radius view_radius;
   equipment::laser::Modulation_depth laser_modulation;
   electronics::filter::low_pass::RC_first_order::Time_constant filter_constant;
-
+  equipment::detector::Offset detector_offset;
+  
   Optics(
     equipment::laser::Beam_radius const & laser_radius,
     equipment::laser::Beam_intensity  const & laser_intensity,

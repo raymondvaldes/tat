@@ -1,23 +1,23 @@
 //
-//  scale_parameters.hpp
+//  map_parameter_values.hpp
 //  tat
 //
-//  Created by Raymond Valdes on 10/23/15.
+//  Created by Raymond Valdes on 10/25/15.
 //  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef scale_parameters_hpp_102315
-#define scale_parameters_hpp_102315
+#ifndef map_parameter_values_hpp_102515
+#define map_parameter_values_hpp_102515
 
 #include "parameter_list.hpp"
 #include <map>
-#include "disk.hpp"
-#include "optics.hpp"
+#include "disk.h"
+#include "thermal/model/optics/optics.h"
 
-namespace thermal { 
-namespace model {
-namespace oneLayer2D { 
-namespace finite_disk {
+namespace thermal{
+namespace model{
+namespace oneLayer2D{
+
 
 using Map_parameter_values = std::map< Parameter, double >;
 
@@ -29,8 +29,6 @@ auto map_parameter_values
 )
 noexcept -> Map_parameter_values;
 
+}}}
 
-} } } }
-
-
-#endif /* scale_parameters_hpp */
+#endif /* map_parameter_values_hpp */

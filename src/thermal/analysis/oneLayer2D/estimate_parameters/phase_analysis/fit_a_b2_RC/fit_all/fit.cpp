@@ -13,8 +13,8 @@
 #include <tuple>
 
 #include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
-using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.h"
+using thermal::model::oneLayer2D::thermal_emission::centered_with_view::frequency_sweep;
 #include "thermal/model/oneLayer2D/model_selection.h"
 
 #include "math/estimation/constrained.hpp"

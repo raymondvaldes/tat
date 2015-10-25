@@ -21,8 +21,8 @@
 #include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"
 
 #include "math/complex/extract_phases_from_properties.h"
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
-using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.h"
+using thermal::model::oneLayer2D::thermal_emission::centered_with_view::frequency_sweep;
 
 namespace thermal{
 namespace analysis {

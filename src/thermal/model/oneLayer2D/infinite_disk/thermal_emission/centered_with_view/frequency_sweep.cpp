@@ -2,15 +2,16 @@
 //  frequency_sweep.cpp
 //  tat
 //
-//  Created by Raymond Valdes on 8/25/15.
-//  Copyright © 2015 Raymond Valdes. All rights reserved.
+//  Created by Raymond Valdes on 5/13/15.
+//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "frequency_sweep.hpp"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.h"
 #include <cassert>
+
 #include "algorithm/algorithm.h"
 #include "thermal/model/oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h"
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/offset_measurement.hpp"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/fast_measurement.h"
 #include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
 #include "thermal/model/oneLayer2D/infinite_disk/dimensional/deltaT.h"
 
@@ -18,7 +19,7 @@ namespace thermal {
 namespace model {
 namespace oneLayer2D {
 namespace thermal_emission {
-namespace offset_detector{
+namespace centered_with_view{
 
 using namespace units;
 using std::vector;
@@ -28,21 +29,19 @@ using algorithm::transform;
 auto
 frequency_sweep
 (
-  units::quantity< units::si::dimensionless > const b1_beamRadius ,
-  units::quantity< units::si::temperature > const deltaT ,
-  units::quantity< units::si::dimensionless > const b2_viewRadius ,
+  units::quantity< units::si::dimensionless > const b ,
+  units::quantity< units::si::temperature > const /*deltaT*/ ,
+  units::quantity< units::si::dimensionless > const r_e ,
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_diffusivity > const alpha,
-  units::quantity< units::si::dimensionless > const b3_view_offset
+  units::quantity< units::si::thermal_diffusivity > const alpha
 )
 noexcept -> std::vector< math::complex::properties< units::si::temperature > >
 {
-  assert( b1_beamRadius > 0 ) ;
+  assert( b > 0 ) ;
   assert( !frequencies.empty() );
   assert( L > 0 * meters ) ;
   assert( alpha.value() > 0  ) ;
-  assert( b3_view_offset > 0 );
 
   auto results =
   vector< properties< si::temperature > >( frequencies.size()  );
@@ -50,13 +49,7 @@ noexcept -> std::vector< math::complex::properties< units::si::temperature > >
   transform( frequencies, results.begin(), [&]( auto const f ) noexcept
   {
     auto const l = dimensionless::thermal_penetration( f, L, alpha ) ;
-    auto const p = offset_measurement(
-      b1_beamRadius,
-      l,
-      b2_viewRadius,
-      b3_view_offset,
-      deltaT
-    );
+    auto const p = fast_measurement( b, l, r_e );
 
     return p;
   } );
@@ -85,12 +78,11 @@ noexcept -> thermal::model::complex::Temperatures
   auto const deltaT = dimensional::deltaT( I , L, k ) ;
   
   auto const b = dimensionless::b( optics.laser_radius, L );
-  auto const b2 = dimensionless::b( optics.view_radius, L );
+  auto const r_e = dimensionless::b( optics.view_radius, L );
   auto const alpha = slab.thermal_diffusivity();
-  auto const b3 = dimensionless::b( optics.detector_offset , L );
 
   auto const temperature_properties =
-  frequency_sweep( b, deltaT, b2, frequencies, L, alpha, b3 );
+  frequency_sweep( b, deltaT, r_e, frequencies, L, alpha );
   
   assert( temperature_properties.size() == frequencies.size() );
   
@@ -108,7 +100,7 @@ noexcept -> thermal::model::complex::Temperatures
   return temperatures;
 }
 
-} // namespace offset_point
+}
 } // namespace thermal_emission
 } // namespace oneLayer2D
 } // namespace model

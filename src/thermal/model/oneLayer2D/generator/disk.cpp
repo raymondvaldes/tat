@@ -8,9 +8,10 @@
 
 #include "disk.hpp"
 #include <cassert>
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.h"
 #include "finite_disk.hpp"
 #include "infinite_disk.hpp"
+#include "thermal/model/oneLayer2D/select_emission_model.hpp"
 
 namespace thermal{
 namespace model{
@@ -61,8 +62,20 @@ const -> thermal::model::complex::Temperatures
   return out;
 }
 
-auto Disk::get_disk() const noexcept -> slab::Slab{ return slab;} ;
+auto Disk::get_emission_sweep() const -> std::function<
+  thermal::model::complex::Temperatures(
+      slab::Slab const &,
+      Optics const &,
+      equipment::laser::Modulation_frequencies const & ) >
+{
+  return select_emission_model( conduction_model, detector_model );
+}
+
+
+auto Disk::get_slab() const noexcept -> slab::Slab{ return slab;} ;
+
 auto Disk::get_optics() const noexcept -> Optics{ return optics;} ;
+
 
 } // namespace generator
 } // namespace oneLayer2D

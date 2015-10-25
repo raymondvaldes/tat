@@ -11,19 +11,24 @@
 
 #include "best_fit.hpp"
 #include "fit_selection.h"
+
+#include "thermal/equipment/laser/modulation_frequencies.h"
+#include "thermal/model/complex/temperatures.h"
+#include "thermal/model/oneLayer2D/parameter_list.hpp"
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
 
 namespace thermal{
 namespace analysis{
 namespace oneLayer2D{
 
-//auto fit(
-//  Fit_selection const fit_selection,
-//  model::oneLayer2D::generator::Disk const & initial_disk,
-//  
-//  
-//  
-//) noexcept -> Best_fit;
+auto fit(
+  equipment::laser::Modulation_frequencies const & frequencies,
+  model::complex::Temperatures const & temperatures,
+  Fit_selection const fit_selection,
+  model::oneLayer2D::generator::Disk const & initial_disk,
+  model::oneLayer2D::Parameters const & parameters  
+)
+-> Best_fit;
 
 }}}
 

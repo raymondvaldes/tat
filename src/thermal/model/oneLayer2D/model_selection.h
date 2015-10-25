@@ -13,6 +13,8 @@ namespace thermal{
 namespace model{
 namespace oneLayer2D{
 
+
+
 enum class Conduction_model {
   infinite_disk,
   finite_disk
@@ -23,6 +25,21 @@ enum class Detector_model {
   center_with_view,
   offset_point,
   offset_with_view
+};
+
+
+struct Detector_model_not_available {
+  Detector_model detector_model;
+  
+  Detector_model_not_available( Detector_model const & detector_model )
+  noexcept: detector_model( detector_model ){};
+};
+
+struct Conduction_model_not_available {
+  Conduction_model model;
+  
+  Conduction_model_not_available( Conduction_model const & model )
+  noexcept: model( model ){};
 };
 
 struct Parameter_selection {

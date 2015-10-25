@@ -11,7 +11,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/point_measurement.h"
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/fast_measurement.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/fast_measurement.h"
 #include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/offset_measurement.hpp"
 
 BOOST_AUTO_TEST_SUITE( thermal )
@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_SUITE( offset_detector )
 
 using namespace units;
 using thermal::model::oneLayer2D::thermal_emission::point_measurement;
-using thermal::model::oneLayer2D::thermal_emission::fast_measurement;
+using thermal::model::oneLayer2D::thermal_emission::centered_with_view::fast_measurement;
 using thermal::model::oneLayer2D::thermal_emission::offset_detector::offset_measurement;
 
 

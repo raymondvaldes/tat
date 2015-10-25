@@ -13,7 +13,7 @@ namespace thermal{
 namespace analysis{
 namespace oneLayer2D{
 
-enum class Fit_selection{ phase, temperature_amplitudes };
+enum class Fit_selection{ phases, amplitudes };
 
 }}}
 

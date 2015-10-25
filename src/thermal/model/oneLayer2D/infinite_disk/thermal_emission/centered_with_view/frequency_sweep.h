@@ -1,13 +1,13 @@
 //
-//  frequency_sweep.hpp
+//  frequency_sweep.h
 //  tat
 //
-//  Created by Raymond Valdes on 8/25/15.
-//  Copyright © 2015 Raymond Valdes. All rights reserved.
+//  Created by Raymond Valdes on 5/13/15.
+//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef frequency_sweep_082515_cpp
-#define frequency_sweep_082515_cpp
+#ifndef __tat_08307_frequency_sweep__
+#define __tat_08307_frequency_sweep__
 
 #include <vector>
 
@@ -22,20 +22,20 @@ namespace thermal {
 namespace model {
 namespace oneLayer2D {
 namespace thermal_emission {
-namespace offset_detector{
+namespace centered_with_view{
 
 auto
 frequency_sweep
 (
-  units::quantity< units::si::dimensionless > const b1_beamRadius ,
+  units::quantity< units::si::dimensionless > const b ,
   units::quantity< units::si::temperature > const deltaT ,
-  units::quantity< units::si::dimensionless > const b2_viewRadius ,
+  units::quantity< units::si::dimensionless > const r_e ,
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   units::quantity< units::si::length > const L,
-  units::quantity< units::si::thermal_diffusivity > const alpha,
-  units::quantity< units::si::dimensionless > const detector_offset
+  units::quantity< units::si::thermal_diffusivity > const alpha
 )
 noexcept -> std::vector< math::complex::properties< units::si::temperature > > ;
+
 
 auto
 frequency_sweeper
@@ -46,10 +46,10 @@ frequency_sweeper
 )
 noexcept -> thermal::model::complex::Temperatures ;
 
-
-} // namespace offset_point
+}
 } // namespace thermal_emission
 } // namespace oneLayer2D
 } // namespace model
 } // namespace thermal
-#endif /* frequency_sweep_cpp */
+
+#endif /* defined(__tat__frequency_sweep__) */

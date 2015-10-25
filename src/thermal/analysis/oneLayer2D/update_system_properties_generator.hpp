@@ -16,7 +16,7 @@
 
 #include "thermal/model/slab/slab.h"
 #include "thermal/model/optics/optics.h"
-#include "thermal/model/oneLayer2D/finite_disk/parameter_list.hpp"
+#include "thermal/model/oneLayer2D/parameter_list.hpp"
 
 
 namespace thermal{
@@ -26,7 +26,7 @@ namespace oneLayer2D {
 auto update_system_properties_generator(
   model::slab::Slab const & slab_initial,
   model::Optics const & optics_initial,
-  model::oneLayer2D::finite_disk::Parameters const & unknown_parameters
+  model::oneLayer2D::Parameters const & unknown_parameters
 )
  noexcept ->
   std::pair< std::vector<double> ,

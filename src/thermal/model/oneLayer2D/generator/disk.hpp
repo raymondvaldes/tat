@@ -15,6 +15,7 @@
 #include "thermal/model/complex/temperatures.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/model/optics/optics.h"
+#include <functional>
 
 namespace thermal{
 namespace model{
@@ -50,7 +51,13 @@ public:
   )
   const -> thermal::model::complex::Temperatures;
 
-  auto get_disk() const noexcept -> slab::Slab;
+  auto get_emission_sweep() const -> std::function<
+    thermal::model::complex::Temperatures(
+        slab::Slab const &,
+        Optics const &,
+        equipment::laser::Modulation_frequencies const & ) >;
+
+  auto get_slab() const noexcept -> slab::Slab;
   auto get_optics() const noexcept -> Optics;
 };
 

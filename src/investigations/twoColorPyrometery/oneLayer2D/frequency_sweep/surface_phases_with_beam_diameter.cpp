@@ -14,8 +14,8 @@
 #include "plot/gnuplot.h"
 #include "cout/vector/print.h"
 
-#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
-using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.h"
+using thermal::model::oneLayer2D::thermal_emission::centered_with_view::frequency_sweep;
 
 using namespace units;
 using cout::vector::print;
@@ -76,7 +76,7 @@ auto surface_phases_with_beam_diameter( filesystem::directory const & /*dir*/ ) 
   auto const b2 = b( detector_view_radius, L );
   
   auto const predictions =
-  thermal::model::oneLayer2D::thermal_emission::frequency_sweep(
+  thermal::model::oneLayer2D::thermal_emission::centered_with_view::frequency_sweep(
     b1, deltaT, b2, frequencies, L, alpha );
     
   auto const phases = extract_phases_from_properties( predictions  ) ;
