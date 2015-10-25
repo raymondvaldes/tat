@@ -9,6 +9,21 @@
 #ifndef make_minimization_equation_hpp_13hiuh34fi
 #define make_minimization_equation_hpp_13hiuh34fi
 
-#include <stdio.h>
+#include <functional>
+#include "thermal/analysis/oneLayer2D/theoretical_results.hpp"
 
+namespace thermal { 
+namespace analysis { 
+namespace oneLayer2D { 
+namespace amplitude_analysis{
+
+auto minimization_equation
+(
+  std::function< Theoretical_results( const double *  ) >
+  const & model_predictions
+)
+noexcept -> std::function< void( const double *, double * ) >;
+  
+
+} } } }
 #endif /* make_minimization_equation_hpp */

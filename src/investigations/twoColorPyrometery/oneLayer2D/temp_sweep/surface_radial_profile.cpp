@@ -9,7 +9,7 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/temp_sweep/surface_radial_profile.h"
 
 #include <iostream>
-#include "thermal/model/oneLayer2D/phase_amplitude/surface_radial_profile.h"
+#include "thermal/model/oneLayer2D/infinite_disk/phase_amplitude/surface_radial_profile.h"
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
 #include "algorithm/algorithm.h"
 #include "math/construct/range.h"

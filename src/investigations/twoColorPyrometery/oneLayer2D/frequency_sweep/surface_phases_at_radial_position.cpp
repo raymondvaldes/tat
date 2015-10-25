@@ -9,7 +9,7 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/frequency_sweep/surface_phases_at_radial_position.h"
 
 #include <iostream>
-#include "thermal/model/oneLayer2D/phase_amplitude/surface_frequency_profile.h"
+#include "thermal/model/oneLayer2D/infinite_disk/phase_amplitude/surface_frequency_profile.h"
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
 #include "algorithm/algorithm.h"
 #include "math/construct/range.h"
