@@ -9,7 +9,7 @@
 #ifndef fit_hpp_102415
 #define fit_hpp_102415
 
-#include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
+#include "thermal/analysis/oneLayer2D/best_fit.hpp"
 #include "thermal/model/slab/slab.h"
 #include "thermal/model/optics/optics.h"
 #include "thermal/equipment/laser/modulation_frequencies.h"
@@ -32,7 +32,7 @@ auto fit
   model::Optics const & optics_initial,
   model::oneLayer2D::finite_disk::Parameters const & parameters
 )
-noexcept -> estimate_parameters::phase_analysis::Best_fit;
+noexcept -> Best_fit;
 
 } } } } } }
 

@@ -26,69 +26,45 @@ namespace phase_analysis{
 
 Best_fit::Best_fit
 (
+  thermal::model::oneLayer2D::Conduction_model const conduction_model,
+  thermal::model::oneLayer2D::Detector_model const detector_model,
   thermal::model::slab::Slab const slab,
   thermal::model::Optics const optics,
   double const phase_goodness_of_fit
 ) noexcept :
-  bulk_slab(slab),
+  engine( conduction_model, detector_model, slab, optics ),
+  slab( slab ),
   optics( optics ),
   phase_goodness_of_fit( phase_goodness_of_fit)
 {}
 
-
-Best_fit::Best_fit
+auto Best_fit::evaluate
 (
-  thermal::model::slab::Slab const slab_,
-
-  units::quantity< units::si::dimensionless > const view_radius_nd,
-  units::quantity< units::si::dimensionless> const b,
- 
-  std::vector< units::quantity<units::si::frequency> > const frequencies_,
-  std::vector< units::quantity< units::si::plane_angle > > const model_phases_,
-  double phase_goodness_of_fit_
-) noexcept :
-  bulk_slab( slab_ ),
-  view_radius( view_radius_nd * slab_.thickness()  ),
-  beam_radius( b * slab_.thickness() ),
-
-  frequencies( frequencies_ ),
-  ls( thermalPenetrations_from_frequencies(
-        frequencies_,
-        slab_.thermal_diffusivity() ,
-        slab_.thickness()  ) ),
-  model_phases( model_phases_ ),
-  phase_goodness_of_fit( phase_goodness_of_fit_ ),
-  optics(
-    beam_radius,
-    units::quantity< units::si::heat_flux>(100000. * units::si::watt/ units::si::square_meter),
-    view_radius, 1
-  )
+  equipment::laser::Modulation_frequencies const & modulation_frequencies
+)
+const -> thermal::model::complex::Temperatures
 {
-  assert( phase_goodness_of_fit > 0 );
-  assert( !frequencies.empty() );
-  
-
+  return engine.evaluate( modulation_frequencies );
 }
 
-
-void Best_fit::plot_model_phases_against(
-  std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
-) const
-{
-  plot::simple_x_y1_y2( frequencies, model_phases, exp_phases );
-}
-
-void Best_fit::plot_model_phases_against_observations( void ) const
-{
-  assert( !frequencies.empty() );
-  assert( !model_phases.empty() );
-  assert( !observations.empty() );
-
-  assert( frequencies.size() == observations.size() ) ;
-  assert( frequencies.size() == model_phases.size() ) ;
-
-  plot::simple_x_y1_y2( frequencies, model_phases, observations );
-}
+//void Best_fit::plot_model_phases_against(
+//  std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
+//) const
+//{
+//  plot::simple_x_y1_y2( frequencies, model_phases, exp_phases );
+//}
+//
+//void Best_fit::plot_model_phases_against_observations( void ) const
+//{
+//  assert( !frequencies.empty() );
+//  assert( !model_phases.empty() );
+//  assert( !observations.empty() );
+//
+//  assert( frequencies.size() == observations.size() ) ;
+//  assert( frequencies.size() == model_phases.size() ) ;
+//
+//  plot::simple_x_y1_y2( frequencies, model_phases, observations );
+//}
 
 auto Best_fit::phase_goodness_of_fit_function() const -> double
 {

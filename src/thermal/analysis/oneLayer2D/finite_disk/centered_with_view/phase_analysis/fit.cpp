@@ -26,7 +26,7 @@ auto fit
   model::Optics const & optics_initial,
   model::oneLayer2D::finite_disk::Parameters const & parameters
 )
-noexcept -> estimate_parameters::phase_analysis::Best_fit
+noexcept -> Best_fit
 {
   Expects( frequencies.size() == temperatures.size() );
   Expects( !parameters.empty() );

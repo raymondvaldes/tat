@@ -13,6 +13,8 @@
 #include "units.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/model/optics/optics.h"
+#include "thermal/model/oneLayer2D/model_selection.h"
+#include "thermal/model/oneLayer2D/generator/disk.hpp"
 
 namespace thermal{
 namespace analysis {
@@ -21,52 +23,38 @@ namespace estimate_parameters{
 namespace phase_analysis{
 
 struct Best_fit{
-  // system properties
-  units::quantity< units::si::length > view_radius;
-  units::quantity< units::si::length > beam_radius;
-  
-  // modeled elements (reconstructed from non-dimensional parameters)
-  thermal::model::slab::Slab bulk_slab;
-  
-  // modulation frequency/thermal penetration
-  std::vector< units::quantity< units::si::frequency > > frequencies;
-  std::vector< units::quantity< units::si::dimensionless > > ls;
 
-  // model predictions
-  std::vector< units::quantity< units::si::plane_angle > > model_phases;
-
-  double phase_goodness_of_fit;
-  units::quantity< units::si::length > view_radius_offset;
-
-  std::vector< units::quantity<units::si::plane_angle > > observations;
+  private:
+  thermal::model::oneLayer2D::generator::Disk engine;
   
-  // optical parameter (holds the best-fit)
+  public:
+  thermal::model::slab::Slab slab;
   thermal::model::Optics optics;
   
+  double phase_goodness_of_fit;
+
 
   explicit Best_fit
   (
-    thermal::model::slab::Slab const slab_,
-    units::quantity< units::si::dimensionless > const view_radius_nd,
-    units::quantity< units::si::dimensionless> const b,
-    std::vector< units::quantity<units::si::frequency> > const frequencies_,
-    std::vector< units::quantity<units::si::plane_angle > > const model_phases_,
-    double const phase_goodness_of_fit_
-  ) noexcept ;
-  
-
-  explicit Best_fit
-  (
+    thermal::model::oneLayer2D::Conduction_model const conduction_model,
+    thermal::model::oneLayer2D::Detector_model const detector_model,
     thermal::model::slab::Slab const slab,
     thermal::model::Optics const optics,
     double const phase_goodness_of_fit
   ) noexcept ;
   
-  void plot_model_phases_against(
-    std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
-  ) const;
+  auto evaluate
+  (
+    equipment::laser::Modulation_frequencies const & modulation_frequencies
+  )
+  const -> thermal::model::complex::Temperatures;
   
-  void plot_model_phases_against_observations( void ) const ;
+  
+//  void plot_model_phases_against(
+//    std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
+//  ) const;
+//  
+//  void plot_model_phases_against_observations( void ) const ;
   
   auto phase_goodness_of_fit_function() const -> double;
   

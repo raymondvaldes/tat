@@ -10,6 +10,7 @@
 #include <cassert>
 #include <vector>
 #include <tuple>
+#include "thermal/model/oneLayer2D/model_selection.h"
 
 #include "algorithm/algorithm.h"
 #include "algorithm/vector/add.h"
@@ -196,7 +197,11 @@ noexcept -> estimate_parameters::phase_analysis::Best_fit
   auto const calibrated_observations = theoretical_modeling.calibrated_observations;
   auto const phase_goodness_of_fit = goodness_of_fit( calibrated_observations , phase_predictions );
 
-  auto const result = Best_fit( slab_fit, optics_fit, phase_goodness_of_fit );
+  auto const detector_model = thermal::model::oneLayer2D::Detector_model::center_point;
+  auto const conduction_model = thermal::model::oneLayer2D::Conduction_model::finite_disk;
+  
+  auto const result = Best_fit( conduction_model, detector_model,
+  slab_fit, optics_fit, phase_goodness_of_fit );
   
   std::cout << "\n" << result.phase_goodness_of_fit  << "\n";
   
