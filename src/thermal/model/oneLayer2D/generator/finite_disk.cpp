@@ -34,9 +34,7 @@ auto Finite_disk::evaluate
 const -> thermal::model::complex::Temperatures
 {
   assert( !modulation_frequencies.empty() );
-  assert( detector_model == Detector_model::center_with_view ||
-          detector_model == Detector_model::center_point
-  ) ;
+
   auto out = thermal::model::complex::Temperatures();
   
   switch( detector_model )
@@ -53,6 +51,15 @@ const -> thermal::model::complex::Temperatures
         out = frequency_sweep(slab, optics, modulation_frequencies);
         break;
       }
+    case Detector_model::offset_point: {
+      assert(false);
+      break;
+    }
+    case Detector_model::offset_with_view: {
+      assert(false);
+      break;
+    }
+      
   }
 
   assert( out.size() == modulation_frequencies.size() );
