@@ -15,6 +15,7 @@
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
 #include "thermal/model/oneLayer2D/thermal_emission/offset_point/frequency_sweep.h"
 using thermal::model::oneLayer2D::thermal_emission::offset_point::frequency_sweep;
+#include "thermal/model/oneLayer2D/model_selection.h"
 
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
@@ -152,10 +153,19 @@ noexcept -> Best_fit
   auto const phase_goodness_of_fit = goodness_of_fit( observations , phase_predictions );
   
   
-  auto const b2_dummmy = quantity<si::dimensionless>(0.999); //why am i setting the view radius to be 1???
+  auto const l_r = thermal::equipment::laser::Beam_radius(b1 * L );
+  auto const l_i = thermal::equipment::laser::Beam_intensity::from_value(42);
+  auto const d_r = thermal::equipment::detector::View_radius::from_value(42);
+  auto const l_m = thermal::equipment::laser::Modulation_depth::from_value(42);
   
-  auto const result =
-  Best_fit( fitted_slab, b2_dummmy, b1, frequencies, phase_predictions, phase_goodness_of_fit );
+  auto const optics_fitted =
+  thermal::model::Optics( l_r, l_i, d_r, l_m );
+  
+  auto const conduction_model = thermal::model::oneLayer2D::Conduction_model::infinite_disk;
+  auto const detector_model = thermal::model::oneLayer2D::Detector_model::center_with_view;
+  
+  auto const result = Best_fit( conduction_model, detector_model,
+    fitted_slab, optics_fitted, phase_goodness_of_fit );
   
   std::cout << "\n" << result.phase_goodness_of_fit << "\n";
   

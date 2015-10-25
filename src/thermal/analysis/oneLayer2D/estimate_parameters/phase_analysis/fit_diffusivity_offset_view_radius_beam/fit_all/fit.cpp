@@ -16,6 +16,7 @@
 #include "thermal/model/oneLayer2D/dimensionless/b.h"
 #include "thermal/model/oneLayer2D/thermal_emission/offset_detector/frequency_sweep.hpp"
 using thermal::model::oneLayer2D::thermal_emission::offset_detector::frequency_sweep;
+#include "thermal/model/oneLayer2D/model_selection.h"
 
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
@@ -178,7 +179,10 @@ noexcept -> Best_fit
   auto const optics_fitted =
   thermal::model::Optics( l_r, l_i, d_r, l_m );
   
-  auto const result = Best_fit(
+  auto const conduction_model = thermal::model::oneLayer2D::Conduction_model::infinite_disk;
+  auto const detector_model = thermal::model::oneLayer2D::Detector_model::center_with_view;
+  
+  auto const result = Best_fit( conduction_model, detector_model,
     fitted_slab, optics_fitted, phase_goodness_of_fit );
   
  return result;
