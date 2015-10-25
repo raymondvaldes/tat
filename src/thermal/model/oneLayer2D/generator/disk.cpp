@@ -61,6 +61,9 @@ const -> thermal::model::complex::Temperatures
   return out;
 }
 
+auto Disk::get_disk() const noexcept -> slab::Slab{ return slab;} ;
+auto Disk::get_optics() const noexcept -> Optics{ return optics;} ;
+
 } // namespace generator
 } // namespace oneLayer2D
 } // namespace model

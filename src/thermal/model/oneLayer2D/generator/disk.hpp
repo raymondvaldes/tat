@@ -50,6 +50,8 @@ public:
   )
   const -> thermal::model::complex::Temperatures;
 
+  auto get_disk() const noexcept -> slab::Slab;
+  auto get_optics() const noexcept -> Optics;
 };
 
 } // namespace generator
