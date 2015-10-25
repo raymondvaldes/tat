@@ -7,8 +7,8 @@
 //
 
 #include "thermal/model/oneLayer2D/infinite_disk/phase_amplitude/surface_frequency_profile.h"
-#include "thermal/model/oneLayer2D/complex/surface_phase_amplitude.h"
-#include "thermal/model/oneLayer2D/dimensionless/thermal_penetration.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/surface_phase_amplitude.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h"
 
 #include "algorithm/algorithm.h"
 

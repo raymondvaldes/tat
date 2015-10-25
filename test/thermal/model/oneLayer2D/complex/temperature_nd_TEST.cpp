@@ -11,7 +11,7 @@
 
 #include <cmath>
 
-#include "thermal/model/oneLayer2D/complex/temperature.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/temperature.h"
 
 BOOST_AUTO_TEST_SUITE( thermal )
 BOOST_AUTO_TEST_SUITE( model )

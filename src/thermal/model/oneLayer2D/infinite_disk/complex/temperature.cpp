@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/oneLayer2D/complex/temperature_nd.h"
-#include "thermal/model/oneLayer2D/complex/temperature.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/temperature_nd.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/temperature.h"
 
 namespace thermal {
 namespace model {

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/oneLayer2D/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
 
 namespace thermal {
 namespace model {

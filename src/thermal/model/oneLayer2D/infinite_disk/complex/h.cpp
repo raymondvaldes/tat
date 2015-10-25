@@ -7,8 +7,8 @@
 //
 
 #include <iostream>
-#include "thermal/model/oneLayer2D/complex/h.h"
-#include "thermal/model/oneLayer2D/complex/kappa.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/h.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/kappa.h"
 
 namespace thermal {
 namespace model {

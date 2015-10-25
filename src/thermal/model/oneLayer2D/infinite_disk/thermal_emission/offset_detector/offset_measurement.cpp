@@ -17,8 +17,8 @@
 using math::special_functions::bessel::J1;
 
 #include "math/numIntegration/integrate.h"
-#include "thermal/model/oneLayer2D/complex/h_surface.h"
-#include "thermal/model/oneLayer2D/thermal_emission/point_measurement.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/h_surface.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/point_measurement.h"
 #include "math/calculus/mean_value/offset_circle/offset_circle.h"
 
 namespace thermal {

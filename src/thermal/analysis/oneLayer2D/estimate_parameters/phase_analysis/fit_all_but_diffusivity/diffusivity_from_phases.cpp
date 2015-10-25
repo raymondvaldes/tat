@@ -12,13 +12,13 @@
 #include <tuple>
 #include "thermal/model/oneLayer2D/model_selection.h"
 
-#include "thermal/model/oneLayer2D/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
 
 #include "math/estimation/constrained.hpp"
 #include "math/estimation/settings.h"
 #include "math/estimation/lmdiff.hpp"
 
-#include "thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
 using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
 
 #include "statistics/uncertainty_analysis/goodness_of_fit/goodness_of_fit.h"

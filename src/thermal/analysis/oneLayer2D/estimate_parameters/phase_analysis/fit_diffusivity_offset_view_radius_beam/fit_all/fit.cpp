@@ -13,8 +13,8 @@
 #include <tuple>
 #include "algorithm/algorithm.h"
 
-#include "thermal/model/oneLayer2D/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/thermal_emission/offset_detector/frequency_sweep.hpp"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/frequency_sweep.hpp"
 using thermal::model::oneLayer2D::thermal_emission::offset_detector::frequency_sweep;
 #include "thermal/model/oneLayer2D/model_selection.h"
 

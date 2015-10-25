@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/oneLayer2D/thermal_emission/point_measurement.h"
-#include "thermal/model/oneLayer2D/complex/surface_phase_amplitude.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/point_measurement.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/surface_phase_amplitude.h"
 
 namespace thermal {
 namespace model {

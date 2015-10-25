@@ -12,8 +12,8 @@
 #include "units.h"
 #include <complex>
 
-#include "thermal/model/oneLayer2D/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/dimensionless/thermal_penetration.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h"
 
 namespace thermal {
 namespace model {

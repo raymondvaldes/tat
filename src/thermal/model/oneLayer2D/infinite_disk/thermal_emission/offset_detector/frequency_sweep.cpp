@@ -9,8 +9,8 @@
 #include "frequency_sweep.hpp"
 #include <cassert>
 #include "algorithm/algorithm.h"
-#include "thermal/model/oneLayer2D/dimensionless/thermal_penetration.h"
-#include "thermal/model/oneLayer2D/thermal_emission/offset_detector/offset_measurement.hpp"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/offset_measurement.hpp"
 
 
 namespace thermal {

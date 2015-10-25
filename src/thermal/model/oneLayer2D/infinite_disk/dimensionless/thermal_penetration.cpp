@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/oneLayer2D/dimensionless/thermal_penetration.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h"
 #include "thermal/define/lthermal.h"
 
 namespace thermal {

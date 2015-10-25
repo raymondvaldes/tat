@@ -8,7 +8,7 @@
 
 #include "disk.hpp"
 #include <cassert>
-#include "thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
 #include "finite_disk.hpp"
 #include "infinite_disk.hpp"
 

@@ -12,8 +12,6 @@
 		AB0C51BD1A97FDF400EEA759 /* calibrationGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */; };
 		AB0D6D631B8CE6120044DA61 /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0D6D611B8CE6120044DA61 /* fit.cpp */; };
 		AB0D6D641B8CE6120044DA61 /* fit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB0D6D621B8CE6120044DA61 /* fit.hpp */; };
-		AB0D6D681B8CF2210044DA61 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0D6D661B8CF2210044DA61 /* frequency_sweep.cpp */; };
-		AB0D6D691B8CF2210044DA61 /* frequency_sweep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB0D6D671B8CF2210044DA61 /* frequency_sweep.hpp */; };
 		AB0DFE01195242AA007DF69B /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFDFF195242AA007DF69B /* split.cpp */; };
 		AB0DFE02195242AA007DF69B /* split.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0DFE00195242AA007DF69B /* split.h */; };
 		AB0DFE0519524382007DF69B /* starts_with.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0DFE0319524382007DF69B /* starts_with.cpp */; };
@@ -45,12 +43,6 @@
 		AB33E74D1AC231A800A0FF53 /* surface_temperature.h in Headers */ = {isa = PBXBuildFile; fileRef = AB33E74B1AC231A800A0FF53 /* surface_temperature.h */; };
 		AB34A9841B03FFFA00CE655F /* J0.h in Headers */ = {isa = PBXBuildFile; fileRef = AB34A9831B03FFFA00CE655F /* J0.h */; };
 		AB34A9861B04000700CE655F /* J1.h in Headers */ = {isa = PBXBuildFile; fileRef = AB34A9851B04000700CE655F /* J1.h */; };
-		AB34A9901B0417A000CE655F /* fast_measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB34A98A1B0417A000CE655F /* fast_measurement.cpp */; };
-		AB34A9911B0417A000CE655F /* fast_measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = AB34A98B1B0417A000CE655F /* fast_measurement.h */; };
-		AB34A9921B0417A000CE655F /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB34A98C1B0417A000CE655F /* frequency_sweep.cpp */; };
-		AB34A9931B0417A000CE655F /* frequency_sweep.h in Headers */ = {isa = PBXBuildFile; fileRef = AB34A98D1B0417A000CE655F /* frequency_sweep.h */; };
-		AB34A9941B0417A000CE655F /* measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB34A98E1B0417A000CE655F /* measurement.cpp */; };
-		AB34A9951B0417A000CE655F /* measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = AB34A98F1B0417A000CE655F /* measurement.h */; };
 		AB370B5C1BCDBF4F00C14109 /* peak_wavelength.h in Headers */ = {isa = PBXBuildFile; fileRef = AB370B5B1BCDBF4F00C14109 /* peak_wavelength.h */; };
 		AB370B5F1BCDC09700C14109 /* meta_measurement_descriptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB370B5D1BCDC09700C14109 /* meta_measurement_descriptions.cpp */; };
 		AB370B601BCDC09700C14109 /* meta_measurement_descriptions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB370B5E1BCDC09700C14109 /* meta_measurement_descriptions.hpp */; };
@@ -198,8 +190,6 @@
 		AB6333AE1B8CF9D400418F6B /* transient_analysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6333A21B8CF9D400418F6B /* transient_analysis.cpp */; };
 		AB6333AF1B8CF9D400418F6B /* transient_analysis.h in Headers */ = {isa = PBXBuildFile; fileRef = AB6333A31B8CF9D400418F6B /* transient_analysis.h */; };
 		AB6333B11B8CFA1400418F6B /* units.h in Headers */ = {isa = PBXBuildFile; fileRef = AB6333B01B8CFA1400418F6B /* units.h */; };
-		AB6333B51B8CFC8600418F6B /* offset_measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6333B31B8CFC8600418F6B /* offset_measurement.cpp */; };
-		AB6333B61B8CFC8600418F6B /* offset_measurement.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB6333B41B8CFC8600418F6B /* offset_measurement.hpp */; };
 		AB6333BB1B8D0BC300418F6B /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6333B91B8D0BC300418F6B /* fit.cpp */; };
 		AB6333BC1B8D0BC300418F6B /* fit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = AB6333BA1B8D0BC300418F6B /* fit.hpp */; };
 		AB6367601AA941AC00AC8390 /* sum.h in Headers */ = {isa = PBXBuildFile; fileRef = AB63675F1AA941AC00AC8390 /* sum.h */; };
@@ -267,8 +257,6 @@
 		AB80FB4D1AF1993C00F88B04 /* extract_amplitudes_from_properties.h in Headers */ = {isa = PBXBuildFile; fileRef = AB80FB4C1AF1993C00F88B04 /* extract_amplitudes_from_properties.h */; };
 		AB80FB511AF1A3BB00F88B04 /* diffusivity_from_phases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB80FB4F1AF1A3BB00F88B04 /* diffusivity_from_phases.cpp */; };
 		AB80FB521AF1A3BB00F88B04 /* diffusivity_from_phases.h in Headers */ = {isa = PBXBuildFile; fileRef = AB80FB501AF1A3BB00F88B04 /* diffusivity_from_phases.h */; };
-		AB80FB551AF1B34300F88B04 /* h_surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB80FB531AF1B34300F88B04 /* h_surface.cpp */; };
-		AB80FB561AF1B34300F88B04 /* h_surface.h in Headers */ = {isa = PBXBuildFile; fileRef = AB80FB541AF1B34300F88B04 /* h_surface.h */; };
 		AB841C381AC4DB47000CE81D /* J1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB841C361AC4DB47000CE81D /* J1.cpp */; };
 		AB841C391AC4DB47000CE81D /* J1.h in Headers */ = {isa = PBXBuildFile; fileRef = AB841C371AC4DB47000CE81D /* J1.h */; };
 		AB841C3C1AC4DB53000CE81D /* J2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB841C3A1AC4DB53000CE81D /* J2.cpp */; };
@@ -440,8 +428,6 @@
 		ABB54FD219C35E300056823E /* ifzero.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB54FD019C35E300056823E /* ifzero.h */; };
 		ABB5FACB1B9212E7004855FE /* lthermal_at_frequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB5FAC91B9212E7004855FE /* lthermal_at_frequency.cpp */; };
 		ABB5FACC1B9212E7004855FE /* lthermal_at_frequency.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABB5FACA1B9212E7004855FE /* lthermal_at_frequency.hpp */; };
-		ABB5FACF1B921671004855FE /* thermal_penetration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABB5FACD1B921671004855FE /* thermal_penetration.cpp */; };
-		ABB5FAD01B921671004855FE /* thermal_penetration.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABB5FACE1B921671004855FE /* thermal_penetration.hpp */; };
 		ABC010D31AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC010D11AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp */; };
 		ABC010D41AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC010D21AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h */; };
 		ABC5B1BD1AB55D1600A6D33C /* import_slab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */; };
@@ -451,8 +437,6 @@
 		ABC648691A65B891008FA721 /* vector2cstringArray.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC648671A65B891008FA721 /* vector2cstringArray.h */; };
 		ABCC53721B9F8F1400CAB0E0 /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABCC53701B9F8F1400CAB0E0 /* fit.cpp */; };
 		ABCC53731B9F8F1400CAB0E0 /* fit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABCC53711B9F8F1400CAB0E0 /* fit.hpp */; };
-		ABCC537B1B9F937F00CAB0E0 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABCC53791B9F937F00CAB0E0 /* frequency_sweep.cpp */; };
-		ABCC537C1B9F937F00CAB0E0 /* frequency_sweep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABCC537A1B9F937F00CAB0E0 /* frequency_sweep.hpp */; };
 		ABCC53811B9F956B00CAB0E0 /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABCC537F1B9F956B00CAB0E0 /* fit.cpp */; };
 		ABCC53821B9F956B00CAB0E0 /* fit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABCC53801B9F956B00CAB0E0 /* fit.hpp */; };
 		ABCC53841B9FA2AB00CAB0E0 /* fit_a_b1_RC.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCC53831B9FA2AB00CAB0E0 /* fit_a_b1_RC.h */; };
@@ -464,10 +448,6 @@
 		ABCC53931BA1148E00CAB0E0 /* steady_state_temperature.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABCC53911BA1148E00CAB0E0 /* steady_state_temperature.hpp */; };
 		ABCC65DF1B1FC0D6001FFD47 /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABCC65DD1B1FC0D6001FFD47 /* fit.cpp */; };
 		ABCC65E01B1FC0D6001FFD47 /* fit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCC65DE1B1FC0D6001FFD47 /* fit.h */; };
-		ABCC65E41B1FC3AE001FFD47 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABCC65E21B1FC3AE001FFD47 /* frequency_sweep.cpp */; };
-		ABCC65E51B1FC3AE001FFD47 /* frequency_sweep.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCC65E31B1FC3AE001FFD47 /* frequency_sweep.h */; };
-		ABCC65E81B1FC676001FFD47 /* point_measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABCC65E61B1FC676001FFD47 /* point_measurement.cpp */; };
-		ABCC65E91B1FC676001FFD47 /* point_measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCC65E71B1FC676001FFD47 /* point_measurement.h */; };
 		ABCC65ED1B1FCB77001FFD47 /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABCC65EB1B1FCB77001FFD47 /* fit.cpp */; };
 		ABCC65EE1B1FCB77001FFD47 /* fit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCC65EC1B1FCB77001FFD47 /* fit.h */; };
 		ABCF57F21BB9BBCB0013A3B8 /* fit_models.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCF57F11BB9BBCB0013A3B8 /* fit_models.h */; };
@@ -477,24 +457,56 @@
 		ABCF57FA1BBA13760013A3B8 /* A1_rear_100degC.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCF57F91BBA13760013A3B8 /* A1_rear_100degC.h */; };
 		ABD4A3911BDC8E8A002B1596 /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A38F1BDC8E8A002B1596 /* fit.cpp */; };
 		ABD4A3921BDC8E8A002B1596 /* fit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3901BDC8E8A002B1596 /* fit.hpp */; };
-		ABD4A3961BDC9BD1002B1596 /* select_detector_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3941BDC9BD1002B1596 /* select_detector_model.cpp */; };
-		ABD4A3971BDC9BD1002B1596 /* select_detector_model.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3951BDC9BD1002B1596 /* select_detector_model.hpp */; };
 		ABD4A39C1BDC9FA0002B1596 /* surface_frequency_profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3981BDC9FA0002B1596 /* surface_frequency_profile.cpp */; };
 		ABD4A39D1BDC9FA0002B1596 /* surface_frequency_profile.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3991BDC9FA0002B1596 /* surface_frequency_profile.h */; };
 		ABD4A39E1BDC9FA0002B1596 /* surface_radial_profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A39A1BDC9FA0002B1596 /* surface_radial_profile.cpp */; };
 		ABD4A39F1BDC9FA0002B1596 /* surface_radial_profile.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A39B1BDC9FA0002B1596 /* surface_radial_profile.h */; };
+		ABD4A3B21BDCA04D002B1596 /* h_surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3A01BDCA04D002B1596 /* h_surface.cpp */; };
+		ABD4A3B31BDCA04D002B1596 /* h_surface.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3A11BDCA04D002B1596 /* h_surface.h */; };
+		ABD4A3B41BDCA04D002B1596 /* h.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3A21BDCA04D002B1596 /* h.cpp */; };
+		ABD4A3B51BDCA04D002B1596 /* h.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3A31BDCA04D002B1596 /* h.h */; };
+		ABD4A3B61BDCA04D002B1596 /* kappa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3A41BDCA04D002B1596 /* kappa.cpp */; };
+		ABD4A3B71BDCA04D002B1596 /* kappa.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3A51BDCA04D002B1596 /* kappa.h */; };
+		ABD4A3B81BDCA04D002B1596 /* phase_amplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3A61BDCA04D002B1596 /* phase_amplitude.cpp */; };
+		ABD4A3B91BDCA04D002B1596 /* phase_amplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3A71BDCA04D002B1596 /* phase_amplitude.h */; };
+		ABD4A3BA1BDCA04D002B1596 /* phases_amplitudes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3A81BDCA04D002B1596 /* phases_amplitudes.cpp */; };
+		ABD4A3BB1BDCA04D002B1596 /* phases_amplitudes.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3A91BDCA04D002B1596 /* phases_amplitudes.h */; };
+		ABD4A3BC1BDCA04D002B1596 /* surface_phase_amplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3AA1BDCA04D002B1596 /* surface_phase_amplitude.cpp */; };
+		ABD4A3BD1BDCA04D002B1596 /* surface_phase_amplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3AB1BDCA04D002B1596 /* surface_phase_amplitude.h */; };
+		ABD4A3BE1BDCA04D002B1596 /* surface_phases_amplitudes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3AC1BDCA04D002B1596 /* surface_phases_amplitudes.cpp */; };
+		ABD4A3BF1BDCA04D002B1596 /* surface_phases_amplitudes.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3AD1BDCA04D002B1596 /* surface_phases_amplitudes.h */; };
+		ABD4A3C01BDCA04D002B1596 /* temperature_nd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3AE1BDCA04D002B1596 /* temperature_nd.cpp */; };
+		ABD4A3C11BDCA04D002B1596 /* temperature_nd.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3AF1BDCA04D002B1596 /* temperature_nd.h */; };
+		ABD4A3C21BDCA04D002B1596 /* temperature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3B01BDCA04D002B1596 /* temperature.cpp */; };
+		ABD4A3C31BDCA04D002B1596 /* temperature.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3B11BDCA04D002B1596 /* temperature.h */; };
+		ABD4A3C81BDCA1E8002B1596 /* deltaT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3C41BDCA1E8002B1596 /* deltaT.cpp */; };
+		ABD4A3C91BDCA1E8002B1596 /* deltaT.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3C51BDCA1E8002B1596 /* deltaT.h */; };
+		ABD4A3CA1BDCA1E8002B1596 /* thermal_penetration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3C61BDCA1E8002B1596 /* thermal_penetration.cpp */; };
+		ABD4A3CB1BDCA1E8002B1596 /* thermal_penetration.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3C71BDCA1E8002B1596 /* thermal_penetration.hpp */; };
+		ABD4A3D01BDCA20C002B1596 /* b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3CC1BDCA20C002B1596 /* b.cpp */; };
+		ABD4A3D11BDCA20C002B1596 /* b.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3CD1BDCA20C002B1596 /* b.h */; };
+		ABD4A3D21BDCA20C002B1596 /* thermal_penetration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3CE1BDCA20C002B1596 /* thermal_penetration.cpp */; };
+		ABD4A3D31BDCA20C002B1596 /* thermal_penetration.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3CF1BDCA20C002B1596 /* thermal_penetration.h */; };
+		ABD4A3D61BDCA41E002B1596 /* point_measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3D41BDCA41E002B1596 /* point_measurement.cpp */; };
+		ABD4A3D71BDCA41E002B1596 /* point_measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3D51BDCA41E002B1596 /* point_measurement.h */; };
+		ABD4A3DA1BDCA42F002B1596 /* select_detector_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3D81BDCA42F002B1596 /* select_detector_model.cpp */; };
+		ABD4A3DB1BDCA42F002B1596 /* select_detector_model.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3D91BDCA42F002B1596 /* select_detector_model.hpp */; };
+		ABD4A3DE1BDCA43A002B1596 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3DC1BDCA43A002B1596 /* frequency_sweep.cpp */; };
+		ABD4A3DF1BDCA43A002B1596 /* frequency_sweep.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3DD1BDCA43A002B1596 /* frequency_sweep.h */; };
+		ABD4A3E41BDCA448002B1596 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3E01BDCA448002B1596 /* frequency_sweep.cpp */; };
+		ABD4A3E51BDCA448002B1596 /* frequency_sweep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3E11BDCA448002B1596 /* frequency_sweep.hpp */; };
+		ABD4A3E61BDCA448002B1596 /* offset_measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3E21BDCA448002B1596 /* offset_measurement.cpp */; };
+		ABD4A3E71BDCA448002B1596 /* offset_measurement.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3E31BDCA448002B1596 /* offset_measurement.hpp */; };
+		ABD4A3EA1BDCA4C4002B1596 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3E81BDCA4C4002B1596 /* frequency_sweep.cpp */; };
+		ABD4A3EB1BDCA4C4002B1596 /* frequency_sweep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3E91BDCA4C4002B1596 /* frequency_sweep.hpp */; };
+		ABD4A3F21BDCA4D3002B1596 /* fast_measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3EC1BDCA4D3002B1596 /* fast_measurement.cpp */; };
+		ABD4A3F31BDCA4D3002B1596 /* fast_measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3ED1BDCA4D3002B1596 /* fast_measurement.h */; };
+		ABD4A3F41BDCA4D3002B1596 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3EE1BDCA4D3002B1596 /* frequency_sweep.cpp */; };
+		ABD4A3F51BDCA4D3002B1596 /* frequency_sweep.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3EF1BDCA4D3002B1596 /* frequency_sweep.h */; };
+		ABD4A3F61BDCA4D3002B1596 /* measurement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD4A3F01BDCA4D3002B1596 /* measurement.cpp */; };
+		ABD4A3F71BDCA4D3002B1596 /* measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD4A3F11BDCA4D3002B1596 /* measurement.h */; };
 		ABD5AE971AFD6D000068FC76 /* complex_temperature_check.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD5AE951AFD6D000068FC76 /* complex_temperature_check.cpp */; };
 		ABD5AE981AFD6D000068FC76 /* complex_temperature_check.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD5AE961AFD6D000068FC76 /* complex_temperature_check.h */; };
-		ABDA1CB01AE9BD6500121C97 /* temperature_nd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CAE1AE9BD6500121C97 /* temperature_nd.cpp */; };
-		ABDA1CB11AE9BD6500121C97 /* temperature_nd.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CAF1AE9BD6500121C97 /* temperature_nd.h */; };
-		ABDA1CB41AE9BF2400121C97 /* b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CB21AE9BF2400121C97 /* b.cpp */; };
-		ABDA1CB51AE9BF2400121C97 /* b.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CB31AE9BF2400121C97 /* b.h */; };
-		ABDA1CB81AE9BF3700121C97 /* thermal_penetration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CB61AE9BF3700121C97 /* thermal_penetration.cpp */; };
-		ABDA1CB91AE9BF3700121C97 /* thermal_penetration.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CB71AE9BF3700121C97 /* thermal_penetration.h */; };
-		ABDA1CBC1AE9C2D900121C97 /* kappa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CBA1AE9C2D900121C97 /* kappa.cpp */; };
-		ABDA1CBD1AE9C2D900121C97 /* kappa.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CBB1AE9C2D900121C97 /* kappa.h */; };
-		ABDA1CC01AE9C4C200121C97 /* h.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDA1CBE1AE9C4C200121C97 /* h.cpp */; };
-		ABDA1CC11AE9C4C200121C97 /* h.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDA1CBF1AE9C4C200121C97 /* h.h */; };
 		ABDB6F161B9F4C7D001B612A /* specimenH.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABDB6F141B9F4C7D001B612A /* specimenH.hpp */; };
 		ABDB6F1E1B9F4E6E001B612A /* run.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABDB6F1C1B9F4E6E001B612A /* run.cpp */; };
 		ABDB6F1F1B9F4E6E001B612A /* run.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABDB6F1D1B9F4E6E001B612A /* run.hpp */; };
@@ -721,19 +733,7 @@
 		ABF7B4F01BD1D37700038AB0 /* measurement.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABF7B4EE1BD1D37700038AB0 /* measurement.hpp */; };
 		ABF7B4F31BD1D38C00038AB0 /* frequency_sweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABF7B4F11BD1D38C00038AB0 /* frequency_sweep.cpp */; };
 		ABF7B4F41BD1D38C00038AB0 /* frequency_sweep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ABF7B4F21BD1D38C00038AB0 /* frequency_sweep.hpp */; };
-		ABFB16351AF150E60093BF5B /* temperature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFB16331AF150E60093BF5B /* temperature.cpp */; };
-		ABFB16361AF150E60093BF5B /* temperature.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB16341AF150E60093BF5B /* temperature.h */; };
-		ABFB163E1AF156890093BF5B /* deltaT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFB163C1AF156890093BF5B /* deltaT.cpp */; };
-		ABFB163F1AF156890093BF5B /* deltaT.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB163D1AF156890093BF5B /* deltaT.h */; };
-		ABFB16421AF158E50093BF5B /* phase_amplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFB16401AF158E50093BF5B /* phase_amplitude.cpp */; };
-		ABFB16431AF158E50093BF5B /* phase_amplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB16411AF158E50093BF5B /* phase_amplitude.h */; };
-		ABFB16461AF158F90093BF5B /* phases_amplitudes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFB16441AF158F90093BF5B /* phases_amplitudes.cpp */; };
-		ABFB16471AF158F90093BF5B /* phases_amplitudes.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB16451AF158F90093BF5B /* phases_amplitudes.h */; };
-		ABFB164A1AF159590093BF5B /* surface_phases_amplitudes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFB16481AF159590093BF5B /* surface_phases_amplitudes.cpp */; };
-		ABFB164B1AF159590093BF5B /* surface_phases_amplitudes.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB16491AF159590093BF5B /* surface_phases_amplitudes.h */; };
 		ABFB16551AF15AAB0093BF5B /* properties.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB16531AF15AAB0093BF5B /* properties.h */; };
-		ABFB165C1AF164EB0093BF5B /* surface_phase_amplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFB165A1AF164EB0093BF5B /* surface_phase_amplitude.cpp */; };
-		ABFB165D1AF164EB0093BF5B /* surface_phase_amplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB165B1AF164EB0093BF5B /* surface_phase_amplitude.h */; };
 		ABFB165F1AF1726B0093BF5B /* circle_complex.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFB165E1AF1726B0093BF5B /* circle_complex.h */; };
 		ABFB16611AF17DC70093BF5B /* circle_complex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFB16601AF17DC70093BF5B /* circle_complex.cpp */; };
 		ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC2CF91A439F1D004C00AD /* twoColorPyrometery.cpp */; };
@@ -761,8 +761,6 @@
 		AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibrationGenerator.h; path = pyrometry/twoColor/calibrationGenerator.h; sourceTree = "<group>"; };
 		AB0D6D611B8CE6120044DA61 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = fit_diffusivity_offset_view_radius_beam/fit_all/fit.cpp; sourceTree = "<group>"; };
 		AB0D6D621B8CE6120044DA61 /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit.hpp; path = thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_diffusivity_offset_view_radius_beam/fit_all/fit.hpp; sourceTree = SOURCE_ROOT; };
-		AB0D6D661B8CF2210044DA61 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = offset_detector/frequency_sweep.cpp; sourceTree = "<group>"; };
-		AB0D6D671B8CF2210044DA61 /* frequency_sweep.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = frequency_sweep.hpp; path = offset_detector/frequency_sweep.hpp; sourceTree = "<group>"; };
 		AB0DFDFF195242AA007DF69B /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = split.cpp; path = algorithm/string/split.cpp; sourceTree = "<group>"; };
 		AB0DFE00195242AA007DF69B /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = algorithm/string/split.h; sourceTree = "<group>"; };
 		AB0DFE0319524382007DF69B /* starts_with.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = starts_with.cpp; path = algorithm/string/starts_with.cpp; sourceTree = "<group>"; };
@@ -794,12 +792,6 @@
 		AB33E74B1AC231A800A0FF53 /* surface_temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_temperature.h; path = two_layer/complex/surface_temperature.h; sourceTree = "<group>"; };
 		AB34A9831B03FFFA00CE655F /* J0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = J0.h; path = special_functions/bessel_j/J0.h; sourceTree = "<group>"; };
 		AB34A9851B04000700CE655F /* J1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = J1.h; path = special_functions/bessel_j/J1.h; sourceTree = "<group>"; };
-		AB34A98A1B0417A000CE655F /* fast_measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fast_measurement.cpp; sourceTree = "<group>"; };
-		AB34A98B1B0417A000CE655F /* fast_measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fast_measurement.h; sourceTree = "<group>"; };
-		AB34A98C1B0417A000CE655F /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = frequency_sweep.cpp; sourceTree = "<group>"; };
-		AB34A98D1B0417A000CE655F /* frequency_sweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frequency_sweep.h; sourceTree = "<group>"; };
-		AB34A98E1B0417A000CE655F /* measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = measurement.cpp; sourceTree = "<group>"; };
-		AB34A98F1B0417A000CE655F /* measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = measurement.h; sourceTree = "<group>"; };
 		AB370B5B1BCDBF4F00C14109 /* peak_wavelength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = peak_wavelength.h; path = detector/peak_wavelength.h; sourceTree = "<group>"; };
 		AB370B5D1BCDC09700C14109 /* meta_measurement_descriptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = meta_measurement_descriptions.cpp; path = gTBC/gMeasure/gTBD/meta_measurement_descriptions.cpp; sourceTree = "<group>"; };
 		AB370B5E1BCDC09700C14109 /* meta_measurement_descriptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = meta_measurement_descriptions.hpp; path = gTBC/gMeasure/gTBD/meta_measurement_descriptions.hpp; sourceTree = "<group>"; };
@@ -954,8 +946,6 @@
 		AB6333A21B8CF9D400418F6B /* transient_analysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = transient_analysis.cpp; path = thermal/pyrometry/twoColor/periodic/transient_analysis.cpp; sourceTree = SOURCE_ROOT; };
 		AB6333A31B8CF9D400418F6B /* transient_analysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transient_analysis.h; path = thermal/pyrometry/twoColor/periodic/transient_analysis.h; sourceTree = SOURCE_ROOT; };
 		AB6333B01B8CFA1400418F6B /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = units.h; sourceTree = "<group>"; };
-		AB6333B31B8CFC8600418F6B /* offset_measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = offset_measurement.cpp; path = offset_detector/offset_measurement.cpp; sourceTree = "<group>"; };
-		AB6333B41B8CFC8600418F6B /* offset_measurement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = offset_measurement.hpp; path = offset_detector/offset_measurement.hpp; sourceTree = "<group>"; };
 		AB6333B91B8D0BC300418F6B /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_b3/fit_all/fit.cpp; sourceTree = "<group>"; };
 		AB6333BA1B8D0BC300418F6B /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit.hpp; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_b1_b2_b3/fit_all/fit.hpp; sourceTree = "<group>"; };
 		AB63675F1AA941AC00AC8390 /* sum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sum.h; path = algorithm/vector/sum.h; sourceTree = "<group>"; };
@@ -1035,8 +1025,6 @@
 		AB80FB4C1AF1993C00F88B04 /* extract_amplitudes_from_properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = extract_amplitudes_from_properties.h; path = complex/extract_amplitudes_from_properties.h; sourceTree = "<group>"; };
 		AB80FB4F1AF1A3BB00F88B04 /* diffusivity_from_phases.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = diffusivity_from_phases.cpp; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_all/diffusivity_from_phases.cpp; sourceTree = "<group>"; };
 		AB80FB501AF1A3BB00F88B04 /* diffusivity_from_phases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diffusivity_from_phases.h; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_all/diffusivity_from_phases.h; sourceTree = "<group>"; };
-		AB80FB531AF1B34300F88B04 /* h_surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h_surface.cpp; path = oneLayer2D/complex/h_surface.cpp; sourceTree = "<group>"; };
-		AB80FB541AF1B34300F88B04 /* h_surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h_surface.h; path = oneLayer2D/complex/h_surface.h; sourceTree = "<group>"; };
 		AB841C361AC4DB47000CE81D /* J1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = J1.cpp; path = tbc2009/complexT/radiosity/J1.cpp; sourceTree = "<group>"; };
 		AB841C371AC4DB47000CE81D /* J1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = J1.h; path = tbc2009/complexT/radiosity/J1.h; sourceTree = "<group>"; };
 		AB841C3A1AC4DB53000CE81D /* J2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = J2.cpp; path = tbc2009/complexT/radiosity/J2.cpp; sourceTree = "<group>"; };
@@ -1213,8 +1201,6 @@
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
 		ABB5FAC91B9212E7004855FE /* lthermal_at_frequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lthermal_at_frequency.cpp; path = twoColorPyrometery/oneLayer2D/calculators/thermal_penetration/lthermal_at_frequency.cpp; sourceTree = "<group>"; };
 		ABB5FACA1B9212E7004855FE /* lthermal_at_frequency.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lthermal_at_frequency.hpp; path = twoColorPyrometery/oneLayer2D/calculators/thermal_penetration/lthermal_at_frequency.hpp; sourceTree = "<group>"; };
-		ABB5FACD1B921671004855FE /* thermal_penetration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thermal_penetration.cpp; path = oneLayer2D/dimensional/thermal_penetration.cpp; sourceTree = "<group>"; };
-		ABB5FACE1B921671004855FE /* thermal_penetration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = thermal_penetration.hpp; path = oneLayer2D/dimensional/thermal_penetration.hpp; sourceTree = "<group>"; };
 		ABC010D11AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = remove_grnd_if_not_in_scope_files.cpp; path = gTBC/gMeasure/remove_grnd_if_not_in_scope_files.cpp; sourceTree = "<group>"; };
 		ABC010D21AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = remove_grnd_if_not_in_scope_files.h; path = gTBC/gMeasure/remove_grnd_if_not_in_scope_files.h; sourceTree = "<group>"; };
 		ABC5B1BB1AB55D1600A6D33C /* import_slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = import_slab.cpp; path = slab/import_slab.cpp; sourceTree = "<group>"; };
@@ -1225,8 +1211,6 @@
 		ABC648671A65B891008FA721 /* vector2cstringArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector2cstringArray.h; path = algorithm/vector/vector2cstringArray.h; sourceTree = "<group>"; };
 		ABCC53701B9F8F1400CAB0E0 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = fit_a_b2_RC/fit_all/fit.cpp; sourceTree = "<group>"; };
 		ABCC53711B9F8F1400CAB0E0 /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit.hpp; path = fit_a_b2_RC/fit_all/fit.hpp; sourceTree = "<group>"; };
-		ABCC53791B9F937F00CAB0E0 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = centered_point/frequency_sweep.cpp; sourceTree = "<group>"; };
-		ABCC537A1B9F937F00CAB0E0 /* frequency_sweep.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = frequency_sweep.hpp; path = centered_point/frequency_sweep.hpp; sourceTree = "<group>"; };
 		ABCC537F1B9F956B00CAB0E0 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = fit_a_b3_RC/fit_all/fit.cpp; sourceTree = "<group>"; };
 		ABCC53801B9F956B00CAB0E0 /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit.hpp; path = fit_a_b3_RC/fit_all/fit.hpp; sourceTree = "<group>"; };
 		ABCC53831B9FA2AB00CAB0E0 /* fit_a_b1_RC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fit_a_b1_RC.h; path = bulkDiffusivityMeasurements2015/beamExpander/sept4/fit_a_b1_RC.h; sourceTree = "<group>"; };
@@ -1238,10 +1222,6 @@
 		ABCC53911BA1148E00CAB0E0 /* steady_state_temperature.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = steady_state_temperature.hpp; path = twoColorPyrometery/calculators/steady_state_temperature.hpp; sourceTree = "<group>"; };
 		ABCC65DD1B1FC0D6001FFD47 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = fit_diffusivity_offset/fit_all/fit.cpp; sourceTree = "<group>"; };
 		ABCC65DE1B1FC0D6001FFD47 /* fit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fit.h; path = fit_diffusivity_offset/fit_all/fit.h; sourceTree = "<group>"; };
-		ABCC65E21B1FC3AE001FFD47 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = offset_point/frequency_sweep.cpp; sourceTree = "<group>"; };
-		ABCC65E31B1FC3AE001FFD47 /* frequency_sweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frequency_sweep.h; path = offset_point/frequency_sweep.h; sourceTree = "<group>"; };
-		ABCC65E61B1FC676001FFD47 /* point_measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point_measurement.cpp; sourceTree = "<group>"; };
-		ABCC65E71B1FC676001FFD47 /* point_measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = point_measurement.h; sourceTree = "<group>"; };
 		ABCC65EB1B1FCB77001FFD47 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_offset/fit_all/fit.cpp; sourceTree = "<group>"; };
 		ABCC65EC1B1FCB77001FFD47 /* fit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fit.h; path = twoColorPyrometery/oneLayer2D/phase_analysis/fit_a_offset/fit_all/fit.h; sourceTree = "<group>"; };
 		ABCF57F11BB9BBCB0013A3B8 /* fit_models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fit_models.h; path = bulkDiffusivityMeasurements2015/beamExpander/adiabatic_rear/poco_edm3/fit_models.h; sourceTree = "<group>"; };
@@ -1252,24 +1232,56 @@
 		ABD4A38F1BDC8E8A002B1596 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = oneLayer2D/fit.cpp; sourceTree = "<group>"; };
 		ABD4A3901BDC8E8A002B1596 /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fit.hpp; path = oneLayer2D/fit.hpp; sourceTree = "<group>"; };
 		ABD4A3931BDC8FC5002B1596 /* parameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = parameters.h; path = oneLayer2D/parameters.h; sourceTree = "<group>"; };
-		ABD4A3941BDC9BD1002B1596 /* select_detector_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = select_detector_model.cpp; sourceTree = "<group>"; };
-		ABD4A3951BDC9BD1002B1596 /* select_detector_model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = select_detector_model.hpp; sourceTree = "<group>"; };
 		ABD4A3981BDC9FA0002B1596 /* surface_frequency_profile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_frequency_profile.cpp; path = oneLayer2D/infinite_disk/phase_amplitude/surface_frequency_profile.cpp; sourceTree = "<group>"; };
 		ABD4A3991BDC9FA0002B1596 /* surface_frequency_profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_frequency_profile.h; path = oneLayer2D/infinite_disk/phase_amplitude/surface_frequency_profile.h; sourceTree = "<group>"; };
 		ABD4A39A1BDC9FA0002B1596 /* surface_radial_profile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_radial_profile.cpp; path = oneLayer2D/infinite_disk/phase_amplitude/surface_radial_profile.cpp; sourceTree = "<group>"; };
 		ABD4A39B1BDC9FA0002B1596 /* surface_radial_profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_radial_profile.h; path = oneLayer2D/infinite_disk/phase_amplitude/surface_radial_profile.h; sourceTree = "<group>"; };
+		ABD4A3A01BDCA04D002B1596 /* h_surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h_surface.cpp; path = oneLayer2D/infinite_disk/complex/h_surface.cpp; sourceTree = "<group>"; };
+		ABD4A3A11BDCA04D002B1596 /* h_surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h_surface.h; path = oneLayer2D/infinite_disk/complex/h_surface.h; sourceTree = "<group>"; };
+		ABD4A3A21BDCA04D002B1596 /* h.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h.cpp; path = oneLayer2D/infinite_disk/complex/h.cpp; sourceTree = "<group>"; };
+		ABD4A3A31BDCA04D002B1596 /* h.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h.h; path = oneLayer2D/infinite_disk/complex/h.h; sourceTree = "<group>"; };
+		ABD4A3A41BDCA04D002B1596 /* kappa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kappa.cpp; path = oneLayer2D/infinite_disk/complex/kappa.cpp; sourceTree = "<group>"; };
+		ABD4A3A51BDCA04D002B1596 /* kappa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kappa.h; path = oneLayer2D/infinite_disk/complex/kappa.h; sourceTree = "<group>"; };
+		ABD4A3A61BDCA04D002B1596 /* phase_amplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_amplitude.cpp; path = oneLayer2D/infinite_disk/complex/phase_amplitude.cpp; sourceTree = "<group>"; };
+		ABD4A3A71BDCA04D002B1596 /* phase_amplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_amplitude.h; path = oneLayer2D/infinite_disk/complex/phase_amplitude.h; sourceTree = "<group>"; };
+		ABD4A3A81BDCA04D002B1596 /* phases_amplitudes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phases_amplitudes.cpp; path = oneLayer2D/infinite_disk/complex/phases_amplitudes.cpp; sourceTree = "<group>"; };
+		ABD4A3A91BDCA04D002B1596 /* phases_amplitudes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phases_amplitudes.h; path = oneLayer2D/infinite_disk/complex/phases_amplitudes.h; sourceTree = "<group>"; };
+		ABD4A3AA1BDCA04D002B1596 /* surface_phase_amplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_phase_amplitude.cpp; path = oneLayer2D/infinite_disk/complex/surface_phase_amplitude.cpp; sourceTree = "<group>"; };
+		ABD4A3AB1BDCA04D002B1596 /* surface_phase_amplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_phase_amplitude.h; path = oneLayer2D/infinite_disk/complex/surface_phase_amplitude.h; sourceTree = "<group>"; };
+		ABD4A3AC1BDCA04D002B1596 /* surface_phases_amplitudes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_phases_amplitudes.cpp; path = oneLayer2D/infinite_disk/complex/surface_phases_amplitudes.cpp; sourceTree = "<group>"; };
+		ABD4A3AD1BDCA04D002B1596 /* surface_phases_amplitudes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_phases_amplitudes.h; path = oneLayer2D/infinite_disk/complex/surface_phases_amplitudes.h; sourceTree = "<group>"; };
+		ABD4A3AE1BDCA04D002B1596 /* temperature_nd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature_nd.cpp; path = oneLayer2D/infinite_disk/complex/temperature_nd.cpp; sourceTree = "<group>"; };
+		ABD4A3AF1BDCA04D002B1596 /* temperature_nd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature_nd.h; path = oneLayer2D/infinite_disk/complex/temperature_nd.h; sourceTree = "<group>"; };
+		ABD4A3B01BDCA04D002B1596 /* temperature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature.cpp; path = oneLayer2D/infinite_disk/complex/temperature.cpp; sourceTree = "<group>"; };
+		ABD4A3B11BDCA04D002B1596 /* temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature.h; path = oneLayer2D/infinite_disk/complex/temperature.h; sourceTree = "<group>"; };
+		ABD4A3C41BDCA1E8002B1596 /* deltaT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = deltaT.cpp; path = oneLayer2D/infinite_disk/dimensional/deltaT.cpp; sourceTree = "<group>"; };
+		ABD4A3C51BDCA1E8002B1596 /* deltaT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deltaT.h; path = oneLayer2D/infinite_disk/dimensional/deltaT.h; sourceTree = "<group>"; };
+		ABD4A3C61BDCA1E8002B1596 /* thermal_penetration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thermal_penetration.cpp; path = oneLayer2D/infinite_disk/dimensional/thermal_penetration.cpp; sourceTree = "<group>"; };
+		ABD4A3C71BDCA1E8002B1596 /* thermal_penetration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = thermal_penetration.hpp; path = oneLayer2D/infinite_disk/dimensional/thermal_penetration.hpp; sourceTree = "<group>"; };
+		ABD4A3CC1BDCA20C002B1596 /* b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = b.cpp; path = oneLayer2D/infinite_disk/dimensionless/b.cpp; sourceTree = "<group>"; };
+		ABD4A3CD1BDCA20C002B1596 /* b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = b.h; path = oneLayer2D/infinite_disk/dimensionless/b.h; sourceTree = "<group>"; };
+		ABD4A3CE1BDCA20C002B1596 /* thermal_penetration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thermal_penetration.cpp; path = oneLayer2D/infinite_disk/dimensionless/thermal_penetration.cpp; sourceTree = "<group>"; };
+		ABD4A3CF1BDCA20C002B1596 /* thermal_penetration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thermal_penetration.h; path = oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h; sourceTree = "<group>"; };
+		ABD4A3D41BDCA41E002B1596 /* point_measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = point_measurement.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/point_measurement.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3D51BDCA41E002B1596 /* point_measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point_measurement.h; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/point_measurement.h; sourceTree = SOURCE_ROOT; };
+		ABD4A3D81BDCA42F002B1596 /* select_detector_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = select_detector_model.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/select_detector_model.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3D91BDCA42F002B1596 /* select_detector_model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = select_detector_model.hpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/select_detector_model.hpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3DC1BDCA43A002B1596 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_point/frequency_sweep.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3DD1BDCA43A002B1596 /* frequency_sweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frequency_sweep.h; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_point/frequency_sweep.h; sourceTree = SOURCE_ROOT; };
+		ABD4A3E01BDCA448002B1596 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/frequency_sweep.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3E11BDCA448002B1596 /* frequency_sweep.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = frequency_sweep.hpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/frequency_sweep.hpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3E21BDCA448002B1596 /* offset_measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = offset_measurement.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/offset_measurement.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3E31BDCA448002B1596 /* offset_measurement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = offset_measurement.hpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_detector/offset_measurement.hpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3E81BDCA4C4002B1596 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_point/frequency_sweep.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3E91BDCA4C4002B1596 /* frequency_sweep.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = frequency_sweep.hpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_point/frequency_sweep.hpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3EC1BDCA4D3002B1596 /* fast_measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fast_measurement.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/fast_measurement.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3ED1BDCA4D3002B1596 /* fast_measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fast_measurement.h; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/fast_measurement.h; sourceTree = SOURCE_ROOT; };
+		ABD4A3EE1BDCA4D3002B1596 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3EF1BDCA4D3002B1596 /* frequency_sweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frequency_sweep.h; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h; sourceTree = SOURCE_ROOT; };
+		ABD4A3F01BDCA4D3002B1596 /* measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = measurement.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/measurement.cpp; sourceTree = SOURCE_ROOT; };
+		ABD4A3F11BDCA4D3002B1596 /* measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = measurement.h; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/measurement.h; sourceTree = SOURCE_ROOT; };
 		ABD5AE951AFD6D000068FC76 /* complex_temperature_check.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = complex_temperature_check.cpp; path = twoColorPyrometery/oneLayer2D/complex_temperature_check/complex_temperature_check.cpp; sourceTree = "<group>"; };
 		ABD5AE961AFD6D000068FC76 /* complex_temperature_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = complex_temperature_check.h; path = twoColorPyrometery/oneLayer2D/complex_temperature_check/complex_temperature_check.h; sourceTree = "<group>"; };
-		ABDA1CAE1AE9BD6500121C97 /* temperature_nd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature_nd.cpp; path = oneLayer2D/complex/temperature_nd.cpp; sourceTree = "<group>"; };
-		ABDA1CAF1AE9BD6500121C97 /* temperature_nd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature_nd.h; path = oneLayer2D/complex/temperature_nd.h; sourceTree = "<group>"; };
-		ABDA1CB21AE9BF2400121C97 /* b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = b.cpp; path = oneLayer2D/dimensionless/b.cpp; sourceTree = "<group>"; };
-		ABDA1CB31AE9BF2400121C97 /* b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = b.h; path = oneLayer2D/dimensionless/b.h; sourceTree = "<group>"; };
-		ABDA1CB61AE9BF3700121C97 /* thermal_penetration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thermal_penetration.cpp; path = oneLayer2D/dimensionless/thermal_penetration.cpp; sourceTree = "<group>"; };
-		ABDA1CB71AE9BF3700121C97 /* thermal_penetration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thermal_penetration.h; path = oneLayer2D/dimensionless/thermal_penetration.h; sourceTree = "<group>"; };
-		ABDA1CBA1AE9C2D900121C97 /* kappa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kappa.cpp; path = oneLayer2D/complex/kappa.cpp; sourceTree = "<group>"; };
-		ABDA1CBB1AE9C2D900121C97 /* kappa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kappa.h; path = oneLayer2D/complex/kappa.h; sourceTree = "<group>"; };
-		ABDA1CBE1AE9C4C200121C97 /* h.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h.cpp; path = oneLayer2D/complex/h.cpp; sourceTree = "<group>"; };
-		ABDA1CBF1AE9C4C200121C97 /* h.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h.h; path = oneLayer2D/complex/h.h; sourceTree = "<group>"; };
 		ABDB6F141B9F4C7D001B612A /* specimenH.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = specimenH.hpp; path = bulkDiffusivityMeasurements2015/beamExpander/sept4/specimenH.hpp; sourceTree = "<group>"; };
 		ABDB6F1C1B9F4E6E001B612A /* run.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = run.cpp; path = bulkDiffusivityMeasurements2015/run.cpp; sourceTree = "<group>"; };
 		ABDB6F1D1B9F4E6E001B612A /* run.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = run.hpp; path = bulkDiffusivityMeasurements2015/run.hpp; sourceTree = "<group>"; };
@@ -1512,19 +1524,7 @@
 		ABF7B4EE1BD1D37700038AB0 /* measurement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = measurement.hpp; path = oneLayer2D/finite_disk/emission/centered_point/measurement.hpp; sourceTree = "<group>"; };
 		ABF7B4F11BD1D38C00038AB0 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = oneLayer2D/finite_disk/emission/centered_point/frequency_sweep.cpp; sourceTree = "<group>"; };
 		ABF7B4F21BD1D38C00038AB0 /* frequency_sweep.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = frequency_sweep.hpp; path = oneLayer2D/finite_disk/emission/centered_point/frequency_sweep.hpp; sourceTree = "<group>"; };
-		ABFB16331AF150E60093BF5B /* temperature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperature.cpp; path = oneLayer2D/complex/temperature.cpp; sourceTree = "<group>"; };
-		ABFB16341AF150E60093BF5B /* temperature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = temperature.h; path = oneLayer2D/complex/temperature.h; sourceTree = "<group>"; };
-		ABFB163C1AF156890093BF5B /* deltaT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = deltaT.cpp; path = oneLayer2D/dimensional/deltaT.cpp; sourceTree = "<group>"; };
-		ABFB163D1AF156890093BF5B /* deltaT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deltaT.h; path = oneLayer2D/dimensional/deltaT.h; sourceTree = "<group>"; };
-		ABFB16401AF158E50093BF5B /* phase_amplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phase_amplitude.cpp; path = oneLayer2D/complex/phase_amplitude.cpp; sourceTree = "<group>"; };
-		ABFB16411AF158E50093BF5B /* phase_amplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phase_amplitude.h; path = oneLayer2D/complex/phase_amplitude.h; sourceTree = "<group>"; };
-		ABFB16441AF158F90093BF5B /* phases_amplitudes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = phases_amplitudes.cpp; path = oneLayer2D/complex/phases_amplitudes.cpp; sourceTree = "<group>"; };
-		ABFB16451AF158F90093BF5B /* phases_amplitudes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phases_amplitudes.h; path = oneLayer2D/complex/phases_amplitudes.h; sourceTree = "<group>"; };
-		ABFB16481AF159590093BF5B /* surface_phases_amplitudes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_phases_amplitudes.cpp; path = oneLayer2D/complex/surface_phases_amplitudes.cpp; sourceTree = "<group>"; };
-		ABFB16491AF159590093BF5B /* surface_phases_amplitudes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_phases_amplitudes.h; path = oneLayer2D/complex/surface_phases_amplitudes.h; sourceTree = "<group>"; };
 		ABFB16531AF15AAB0093BF5B /* properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = properties.h; path = complex/properties.h; sourceTree = "<group>"; };
-		ABFB165A1AF164EB0093BF5B /* surface_phase_amplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = surface_phase_amplitude.cpp; path = oneLayer2D/complex/surface_phase_amplitude.cpp; sourceTree = "<group>"; };
-		ABFB165B1AF164EB0093BF5B /* surface_phase_amplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = surface_phase_amplitude.h; path = oneLayer2D/complex/surface_phase_amplitude.h; sourceTree = "<group>"; };
 		ABFB165E1AF1726B0093BF5B /* circle_complex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circle_complex.h; path = calculus/mean_value/circle/circle_complex.h; sourceTree = "<group>"; };
 		ABFB16601AF17DC70093BF5B /* circle_complex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = circle_complex.cpp; path = calculus/mean_value/circle/circle_complex.cpp; sourceTree = "<group>"; };
 		ABFC2CF71A438D9C004C00AD /* signal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = signal.h; path = blackBody/signal.h; sourceTree = "<group>"; };
@@ -1592,10 +1592,10 @@
 		AB0D6D651B8CF2030044DA61 /* offset_detector */ = {
 			isa = PBXGroup;
 			children = (
-				AB0D6D661B8CF2210044DA61 /* frequency_sweep.cpp */,
-				AB0D6D671B8CF2210044DA61 /* frequency_sweep.hpp */,
-				AB6333B31B8CFC8600418F6B /* offset_measurement.cpp */,
-				AB6333B41B8CFC8600418F6B /* offset_measurement.hpp */,
+				ABD4A3E01BDCA448002B1596 /* frequency_sweep.cpp */,
+				ABD4A3E11BDCA448002B1596 /* frequency_sweep.hpp */,
+				ABD4A3E21BDCA448002B1596 /* offset_measurement.cpp */,
+				ABD4A3E31BDCA448002B1596 /* offset_measurement.hpp */,
 			);
 			name = offset_detector;
 			sourceTree = "<group>";
@@ -1748,14 +1748,14 @@
 		AB34A9891B0417A000CE655F /* thermal_emission */ = {
 			isa = PBXGroup;
 			children = (
+				ABD4A3D81BDCA42F002B1596 /* select_detector_model.cpp */,
+				ABD4A3D91BDCA42F002B1596 /* select_detector_model.hpp */,
+				ABD4A3D41BDCA41E002B1596 /* point_measurement.cpp */,
+				ABD4A3D51BDCA41E002B1596 /* point_measurement.h */,
 				ABCC53781B9F91F500CAB0E0 /* centered_point */,
-				ABCC65E61B1FC676001FFD47 /* point_measurement.cpp */,
-				ABCC65E71B1FC676001FFD47 /* point_measurement.h */,
 				AB6333B21B8CFAEB00418F6B /* centered_detector_with_view */,
 				AB0D6D651B8CF2030044DA61 /* offset_detector */,
 				ABCC65E11B1FC39A001FFD47 /* offset_point */,
-				ABD4A3941BDC9BD1002B1596 /* select_detector_model.cpp */,
-				ABD4A3951BDC9BD1002B1596 /* select_detector_model.hpp */,
 			);
 			name = thermal_emission;
 			path = oneLayer2D/thermal_emission;
@@ -2358,12 +2358,12 @@
 		AB6333B21B8CFAEB00418F6B /* centered_detector_with_view */ = {
 			isa = PBXGroup;
 			children = (
-				AB34A98A1B0417A000CE655F /* fast_measurement.cpp */,
-				AB34A98B1B0417A000CE655F /* fast_measurement.h */,
-				AB34A98E1B0417A000CE655F /* measurement.cpp */,
-				AB34A98F1B0417A000CE655F /* measurement.h */,
-				AB34A98C1B0417A000CE655F /* frequency_sweep.cpp */,
-				AB34A98D1B0417A000CE655F /* frequency_sweep.h */,
+				ABD4A3EC1BDCA4D3002B1596 /* fast_measurement.cpp */,
+				ABD4A3ED1BDCA4D3002B1596 /* fast_measurement.h */,
+				ABD4A3EE1BDCA4D3002B1596 /* frequency_sweep.cpp */,
+				ABD4A3EF1BDCA4D3002B1596 /* frequency_sweep.h */,
+				ABD4A3F01BDCA4D3002B1596 /* measurement.cpp */,
+				ABD4A3F11BDCA4D3002B1596 /* measurement.h */,
 			);
 			name = centered_detector_with_view;
 			sourceTree = "<group>";
@@ -3240,8 +3240,8 @@
 		ABCC53781B9F91F500CAB0E0 /* centered_point */ = {
 			isa = PBXGroup;
 			children = (
-				ABCC53791B9F937F00CAB0E0 /* frequency_sweep.cpp */,
-				ABCC537A1B9F937F00CAB0E0 /* frequency_sweep.hpp */,
+				ABD4A3E81BDCA4C4002B1596 /* frequency_sweep.cpp */,
+				ABD4A3E91BDCA4C4002B1596 /* frequency_sweep.hpp */,
 			);
 			name = centered_point;
 			sourceTree = "<group>";
@@ -3308,8 +3308,8 @@
 		ABCC65E11B1FC39A001FFD47 /* offset_point */ = {
 			isa = PBXGroup;
 			children = (
-				ABCC65E21B1FC3AE001FFD47 /* frequency_sweep.cpp */,
-				ABCC65E31B1FC3AE001FFD47 /* frequency_sweep.h */,
+				ABD4A3DC1BDCA43A002B1596 /* frequency_sweep.cpp */,
+				ABD4A3DD1BDCA43A002B1596 /* frequency_sweep.h */,
 			);
 			name = offset_point;
 			sourceTree = "<group>";
@@ -3413,25 +3413,25 @@
 		ABDA1CAC1AE9BD1000121C97 /* complex */ = {
 			isa = PBXGroup;
 			children = (
+				ABD4A3A01BDCA04D002B1596 /* h_surface.cpp */,
+				ABD4A3A11BDCA04D002B1596 /* h_surface.h */,
+				ABD4A3A21BDCA04D002B1596 /* h.cpp */,
+				ABD4A3A31BDCA04D002B1596 /* h.h */,
+				ABD4A3A41BDCA04D002B1596 /* kappa.cpp */,
+				ABD4A3A51BDCA04D002B1596 /* kappa.h */,
+				ABD4A3A61BDCA04D002B1596 /* phase_amplitude.cpp */,
+				ABD4A3A71BDCA04D002B1596 /* phase_amplitude.h */,
+				ABD4A3A81BDCA04D002B1596 /* phases_amplitudes.cpp */,
+				ABD4A3A91BDCA04D002B1596 /* phases_amplitudes.h */,
+				ABD4A3AA1BDCA04D002B1596 /* surface_phase_amplitude.cpp */,
+				ABD4A3AB1BDCA04D002B1596 /* surface_phase_amplitude.h */,
+				ABD4A3AC1BDCA04D002B1596 /* surface_phases_amplitudes.cpp */,
+				ABD4A3AD1BDCA04D002B1596 /* surface_phases_amplitudes.h */,
+				ABD4A3AE1BDCA04D002B1596 /* temperature_nd.cpp */,
+				ABD4A3AF1BDCA04D002B1596 /* temperature_nd.h */,
+				ABD4A3B01BDCA04D002B1596 /* temperature.cpp */,
+				ABD4A3B11BDCA04D002B1596 /* temperature.h */,
 				AB4871BC1AF4148100DFD3C1 /* temperature */,
-				AB80FB531AF1B34300F88B04 /* h_surface.cpp */,
-				AB80FB541AF1B34300F88B04 /* h_surface.h */,
-				ABDA1CBE1AE9C4C200121C97 /* h.cpp */,
-				ABDA1CBF1AE9C4C200121C97 /* h.h */,
-				ABDA1CBA1AE9C2D900121C97 /* kappa.cpp */,
-				ABDA1CBB1AE9C2D900121C97 /* kappa.h */,
-				ABFB16401AF158E50093BF5B /* phase_amplitude.cpp */,
-				ABFB16411AF158E50093BF5B /* phase_amplitude.h */,
-				ABFB16441AF158F90093BF5B /* phases_amplitudes.cpp */,
-				ABFB16451AF158F90093BF5B /* phases_amplitudes.h */,
-				ABFB165A1AF164EB0093BF5B /* surface_phase_amplitude.cpp */,
-				ABFB165B1AF164EB0093BF5B /* surface_phase_amplitude.h */,
-				ABFB16481AF159590093BF5B /* surface_phases_amplitudes.cpp */,
-				ABFB16491AF159590093BF5B /* surface_phases_amplitudes.h */,
-				ABDA1CAE1AE9BD6500121C97 /* temperature_nd.cpp */,
-				ABDA1CAF1AE9BD6500121C97 /* temperature_nd.h */,
-				ABFB16331AF150E60093BF5B /* temperature.cpp */,
-				ABFB16341AF150E60093BF5B /* temperature.h */,
 			);
 			name = complex;
 			sourceTree = "<group>";
@@ -3439,10 +3439,10 @@
 		ABDA1CAD1AE9BD1600121C97 /* dimensionless */ = {
 			isa = PBXGroup;
 			children = (
-				ABDA1CB21AE9BF2400121C97 /* b.cpp */,
-				ABDA1CB31AE9BF2400121C97 /* b.h */,
-				ABDA1CB61AE9BF3700121C97 /* thermal_penetration.cpp */,
-				ABDA1CB71AE9BF3700121C97 /* thermal_penetration.h */,
+				ABD4A3CC1BDCA20C002B1596 /* b.cpp */,
+				ABD4A3CD1BDCA20C002B1596 /* b.h */,
+				ABD4A3CE1BDCA20C002B1596 /* thermal_penetration.cpp */,
+				ABD4A3CF1BDCA20C002B1596 /* thermal_penetration.h */,
 			);
 			name = dimensionless;
 			sourceTree = "<group>";
@@ -4319,10 +4319,10 @@
 		ABFB163B1AF156760093BF5B /* dimensional */ = {
 			isa = PBXGroup;
 			children = (
-				ABFB163C1AF156890093BF5B /* deltaT.cpp */,
-				ABFB163D1AF156890093BF5B /* deltaT.h */,
-				ABB5FACD1B921671004855FE /* thermal_penetration.cpp */,
-				ABB5FACE1B921671004855FE /* thermal_penetration.hpp */,
+				ABD4A3C41BDCA1E8002B1596 /* deltaT.cpp */,
+				ABD4A3C51BDCA1E8002B1596 /* deltaT.h */,
+				ABD4A3C61BDCA1E8002B1596 /* thermal_penetration.cpp */,
+				ABD4A3C71BDCA1E8002B1596 /* thermal_penetration.hpp */,
 			);
 			name = dimensional;
 			sourceTree = "<group>";
@@ -4397,15 +4397,14 @@
 			files = (
 				ABCC538A1B9FA4B300CAB0E0 /* fit.hpp in Headers */,
 				AB6B55B91BD48360007E0A4D /* view_radius.h in Headers */,
-				ABDA1CC11AE9C4C200121C97 /* h.h in Headers */,
 				AB8708F11BC1E02600B0EC67 /* is_valid_signal.hpp in Headers */,
 				AB7F19861ACC65A10086E8F8 /* from_phases.h in Headers */,
 				AB90AA4F1AB28A3B00F2535D /* get_pair_measurements_at_frequency.h in Headers */,
 				AB6087701A69B02B009B1E85 /* calibratedSignalRatio.h in Headers */,
 				AB5E9D391ACA2701003319FA /* surface_phase_amplitude.h in Headers */,
+				ABD4A3CB1BDCA1E8002B1596 /* thermal_penetration.hpp in Headers */,
 				ABCF57F81BB9E40B0013A3B8 /* B1_rear_179degC.h in Headers */,
 				AB6333AF1B8CF9D400418F6B /* transient_analysis.h in Headers */,
-				ABCC65E51B1FC3AE001FFD47 /* frequency_sweep.h in Headers */,
 				ABF7B4DE1BD1CFA900038AB0 /* modulation_depth.h in Headers */,
 				AB7F198E1ACC97E00086E8F8 /* average_surface_phases.h in Headers */,
 				ABF7B4DF1BD1CFA900038AB0 /* peak_heat_flux.h in Headers */,
@@ -4427,11 +4426,11 @@
 				AB7A69431AB24F1B00249A6E /* find_unique_labels_in_files.h in Headers */,
 				AB98B9801B9657CF00BC8B5E /* fit.hpp in Headers */,
 				ABFC80801AC67D190059E9D7 /* integrate.h in Headers */,
+				ABD4A3B51BDCA04D002B1596 /* h.h in Headers */,
 				ABEF4EC31948D4A500B44AD5 /* thermalData.hpp in Headers */,
 				ABF7B4C41BD1BF9400038AB0 /* thickness.h in Headers */,
 				AB8AA4381A5C68650065E7F8 /* getline.h in Headers */,
 				AB841C881AC4F81D000CE81D /* hat.h in Headers */,
-				ABDA1CB11AE9BD6500121C97 /* temperature_nd.h in Headers */,
 				ABEF4ED21948D4A500B44AD5 /* omega.h in Headers */,
 				AB9383C81AC1C78A00F2D2DD /* time_nd.h in Headers */,
 				ABB073431BD8175300AFCEF8 /* disk.hpp in Headers */,
@@ -4444,8 +4443,8 @@
 				AB841C3D1AC4DB53000CE81D /* J2.h in Headers */,
 				AB6333A91B8CF9D400418F6B /* results.h in Headers */,
 				ABF7816A1BB31A1C005D5376 /* fit_models.h in Headers */,
-				AB0D6D691B8CF2210044DA61 /* frequency_sweep.hpp in Headers */,
 				ABCC53821B9F956B00CAB0E0 /* fit.hpp in Headers */,
+				ABD4A3F31BDCA4D3002B1596 /* fast_measurement.h in Headers */,
 				AB8708E21BBF580A00B0EC67 /* Processed_tbd_files.hpp in Headers */,
 				AB841CB01AC5EFBC000CE81D /* h_system.h in Headers */,
 				ABEB14BF1AAA6C4200204B36 /* phase_fitting.h in Headers */,
@@ -4478,6 +4477,7 @@
 				AB841C5D1AC4E4D4000CE81D /* c.h in Headers */,
 				AB4871C41AF4196F00DFD3C1 /* surface_radial_profile.h in Headers */,
 				AB48724E1AFAC6C700DFD3C1 /* goodness_of_fit.h in Headers */,
+				ABD4A3BB1BDCA04D002B1596 /* phases_amplitudes.h in Headers */,
 				AB44BD6A1AAA43B100E0710E /* normalizedSignalRatio_from_measurement.h in Headers */,
 				AB5E9D2F1ACA1ACA003319FA /* phase_amplitude.h in Headers */,
 				AB841C411AC4DB62000CE81D /* J0.h in Headers */,
@@ -4509,14 +4509,16 @@
 				AB553C59195DF3FB00E2B7D1 /* equalto.h in Headers */,
 				AB9383E11AC22E4500F2D2DD /* time_nd.h in Headers */,
 				ABE937E11BC5E2C8002C3417 /* modulation_frequency.h in Headers */,
-				ABFB16431AF158E50093BF5B /* phase_amplitude.h in Headers */,
 				ABFC2CFC1A439F1D004C00AD /* twoColorPyrometery.h in Headers */,
 				AB370B751BCF159400C14109 /* Beam_radius.h in Headers */,
+				ABD4A3BD1BDCA04D002B1596 /* surface_phase_amplitude.h in Headers */,
+				ABD4A3E71BDCA448002B1596 /* offset_measurement.hpp in Headers */,
+				ABD4A3C11BDCA04D002B1596 /* temperature_nd.h in Headers */,
 				ABE937DF1BC5E259002C3417 /* modulation_frequencies.h in Headers */,
-				AB34A9931B0417A000CE655F /* frequency_sweep.h in Headers */,
+				ABD4A3C31BDCA04D002B1596 /* temperature.h in Headers */,
+				ABD4A3F51BDCA4D3002B1596 /* frequency_sweep.h in Headers */,
 				AB841C611AC4E4E8000CE81D /* Lambda.h in Headers */,
 				ABEF4EAC1948D4A500B44AD5 /* temperature_scale.h in Headers */,
-				AB80FB561AF1B34300F88B04 /* h_surface.h in Headers */,
 				ABF7B4B71BD1941100038AB0 /* radial_coordinate.h in Headers */,
 				ABA0B7331A9D005C00F000DA /* vector_to_valarray.h in Headers */,
 				ABB09B761AB788E2005D6BB5 /* sample.h in Headers */,
@@ -4526,7 +4528,6 @@
 				AB370B6E1BCDDBA600C14109 /* process_twoColor_TBD_meta_data.hpp in Headers */,
 				ABE937E91BC5F0C1002C3417 /* temperature.h in Headers */,
 				ABEF4E9A1948D4A500B44AD5 /* sor.h in Headers */,
-				ABCC537C1B9F937F00CAB0E0 /* frequency_sweep.hpp in Headers */,
 				AB8F0CB21A8592F70091196B /* quantityTodouble.h in Headers */,
 				AB7FBD931A9FE65E00FF714D /* prandtl_number.h in Headers */,
 				AB9383C01AC1C66B00F2D2DD /* length.h in Headers */,
@@ -4540,13 +4541,12 @@
 				AB0E72CA1AC23E8C00750B3F /* surface_phases.h in Headers */,
 				AB2BA4791AB3DA78008AF545 /* import_twoColor_scope_files.h in Headers */,
 				AB4E53CA1ABCC59800E7BA8D /* ratio.h in Headers */,
-				ABFB164B1AF159590093BF5B /* surface_phases_amplitudes.h in Headers */,
 				ABF7816D1BB362D6005D5376 /* specimenE_low_laser.h in Headers */,
 				ABCC53731B9F8F1400CAB0E0 /* fit.hpp in Headers */,
 				AB6087741A69B9FB009B1E85 /* signalRatio.h in Headers */,
-				ABDA1CB51AE9BF2400121C97 /* b.h in Headers */,
 				AB4872391AFA889100DFD3C1 /* residual.h in Headers */,
 				ABCC53861B9FA3B000CAB0E0 /* fit_models.hpp in Headers */,
+				ABD4A3E51BDCA448002B1596 /* frequency_sweep.hpp in Headers */,
 				AB7996E21AB0F6190022015B /* read_scope_file.h in Headers */,
 				AB9383E51AC22F8700F2D2DD /* a.h in Headers */,
 				ABF7B4891BCF474B00038AB0 /* infinite_disk.hpp in Headers */,
@@ -4555,10 +4555,13 @@
 				AB7EAD031A57261F00AB7E11 /* columnData.h in Headers */,
 				ABEF4EE61948D4A500B44AD5 /* analytical_2005.h in Headers */,
 				AB7F19941ACCB1300086E8F8 /* import_heating_properties.h in Headers */,
+				ABD4A3B91BDCA04D002B1596 /* phase_amplitude.h in Headers */,
+				ABD4A3B71BDCA04D002B1596 /* kappa.h in Headers */,
 				AB932DF51A6DC0E700ECF117 /* sine.h in Headers */,
 				AB62F5E21BDC35EE008C8551 /* make_minimization_equation.hpp in Headers */,
 				AB6B55A41BD455DF007E0A4D /* biot.h in Headers */,
 				AB98B98A1B96602500BC8B5E /* fit.hpp in Headers */,
+				ABD4A3EB1BDCA4C4002B1596 /* frequency_sweep.hpp in Headers */,
 				AB553C50195DE60100E2B7D1 /* interval.h in Headers */,
 				AB8F0CAE1A858D1C0091196B /* spline-quantity.h in Headers */,
 				ABDB6F261B9F55FC001B612A /* specimenF.hpp in Headers */,
@@ -4566,7 +4569,6 @@
 				ABF781761BB47BA2005D5376 /* fit_a_b1_b2_RC.h in Headers */,
 				ABC010D41AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.h in Headers */,
 				AB8B581C1AB759620055615C /* divide_each_element.h in Headers */,
-				AB6333B61B8CFC8600418F6B /* offset_measurement.hpp in Headers */,
 				ABDFEE0D1BC3092E009F8E57 /* PeriodicProperties_update_phases.h in Headers */,
 				ABF7B4A41BD01AD100038AB0 /* optics.h in Headers */,
 				ABF7B4F41BD1D38C00038AB0 /* frequency_sweep.hpp in Headers */,
@@ -4594,8 +4596,6 @@
 				ABFC80721AC629B90059E9D7 /* bessel.h in Headers */,
 				AB7F199A1ACCBBDC0086E8F8 /* si_literals.h in Headers */,
 				AB6367601AA941AC00AC8390 /* sum.h in Headers */,
-				ABFB165D1AF164EB0093BF5B /* surface_phase_amplitude.h in Headers */,
-				ABDA1CB91AE9BF3700121C97 /* thermal_penetration.h in Headers */,
 				AB44BD6E1AAA46E700E0710E /* normalizedDetectorMeasurements.h in Headers */,
 				AB6B55BE1BD49019007E0A4D /* converging_series.h in Headers */,
 				ABEF4EAD1948D4A500B44AD5 /* basedata.hpp in Headers */,
@@ -4611,7 +4611,6 @@
 				ABCC53841B9FA2AB00CAB0E0 /* fit_a_b1_RC.h in Headers */,
 				AB6B55A61BD45705007E0A4D /* lambda.h in Headers */,
 				AB80FB4D1AF1993C00F88B04 /* extract_amplitudes_from_properties.h in Headers */,
-				ABFB163F1AF156890093BF5B /* deltaT.h in Headers */,
 				ABEF4EB51948D4A500B44AD5 /* lmdiff_poptea_help.hpp in Headers */,
 				ABEF4EBD1948D4A500B44AD5 /* poptea_initialize.h in Headers */,
 				AB9383E91AC22F9300F2D2DD /* b.h in Headers */,
@@ -4643,9 +4642,8 @@
 				ABEF4F021948D4A500B44AD5 /* programoptions.hpp in Headers */,
 				ABCC65EE1B1FCB77001FFD47 /* fit.h in Headers */,
 				AB7996EA1AB10F350022015B /* scopeFiles_from_datafiles.h in Headers */,
-				AB34A9911B0417A000CE655F /* fast_measurement.h in Headers */,
-				ABD4A3971BDC9BD1002B1596 /* select_detector_model.hpp in Headers */,
 				AB62F5DE1BDC3074008C8551 /* theoretical_results.hpp in Headers */,
+				ABD4A3DB1BDCA42F002B1596 /* select_detector_model.hpp in Headers */,
 				ABFC9E641A9424C500F124F1 /* calculateCalibrationCoefficients.h in Headers */,
 				AB4E53CD1ABCDDC400E7BA8D /* csc.h in Headers */,
 				AB9383D51AC2299400F2D2DD /* Kappa.h in Headers */,
@@ -4665,10 +4663,8 @@
 				AB9383DD1AC22DB000F2D2DD /* length.h in Headers */,
 				AB9CDFD21BDAD2CA00702E53 /* optics.hpp in Headers */,
 				ABEF4EC11948D4A500B44AD5 /* temp_ss.h in Headers */,
-				ABFB16471AF158F90093BF5B /* phases_amplitudes.h in Headers */,
 				ABEB14B71AAA622600204B36 /* slab.h in Headers */,
 				ABA55F1A1BDC895C00918CFD /* fit_selection.h in Headers */,
-				AB34A9951B0417A000CE655F /* measurement.h in Headers */,
 				AB8B581A1AB752A30055615C /* sum.h in Headers */,
 				AB5FDFDB1A6EE30F0017CEBB /* bimap.h in Headers */,
 				AB7996E61AB0F6B90022015B /* is_scope_file.h in Headers */,
@@ -4676,13 +4672,13 @@
 				ABEF4EF01948D4A500B44AD5 /* one_dim.h in Headers */,
 				AB4872501AFACCD300DFD3C1 /* uncertainty_analysis.h in Headers */,
 				AB4E53B21ABB908400E7BA8D /* phase_exp_model.h in Headers */,
+				ABD4A3D31BDCA20C002B1596 /* thermal_penetration.h in Headers */,
 				AB9A3FAD1ACE09B50004882F /* if_intersect.h in Headers */,
 				AB6333B11B8CFA1400418F6B /* units.h in Headers */,
 				AB9A3F9E1ACDFECA0004882F /* circle.h in Headers */,
 				AB27973A1B96881100E7BB2B /* phase_shift_from_input.hpp in Headers */,
 				AB5E9D3D1ACA27CA003319FA /* average_surface_phase_amplitude.h in Headers */,
 				ABEF4EA01948D4A500B44AD5 /* utility.hpp in Headers */,
-				ABB5FAD01B921671004855FE /* thermal_penetration.hpp in Headers */,
 				ABEF4E9C1948D4A500B44AD5 /* tma.h in Headers */,
 				ABDB6F1F1B9F4E6E001B612A /* run.hpp in Headers */,
 				ABEF4E8C1948D4A500B44AD5 /* lmdiff.hpp in Headers */,
@@ -4718,6 +4714,7 @@
 				AB6B55C51BD55197007E0A4D /* slab_1d_model.hpp in Headers */,
 				ABF7B4AD1BD0321F00038AB0 /* model_vs_experiment_phases.hpp in Headers */,
 				ABDCB54019C934B30044553C /* inversion.h in Headers */,
+				ABD4A3DF1BDCA43A002B1596 /* frequency_sweep.h in Headers */,
 				AB370B641BCDC0C100C14109 /* meta_measurement_description.hpp in Headers */,
 				ABF7B4C51BD1C0C500038AB0 /* biot.h in Headers */,
 				AB9CDFC61BDAD0C900702E53 /* map_parameter_values.hpp in Headers */,
@@ -4746,6 +4743,7 @@
 				AB4871FC1AF708A900DFD3C1 /* calibrate_wavelengths.h in Headers */,
 				ABEF4EB91948D4A500B44AD5 /* pie.hpp in Headers */,
 				ABE937DB1BC5E129002C3417 /* amplitudes.hpp in Headers */,
+				ABD4A3BF1BDCA04D002B1596 /* surface_phases_amplitudes.h in Headers */,
 				AB9CDFCE1BDAD2A400702E53 /* disk.hpp in Headers */,
 				AB1B04FB1B96641600A8C175 /* use_engineering_prefix.hpp in Headers */,
 				AB4872091AF800D700DFD3C1 /* planks_law.h in Headers */,
@@ -4755,11 +4753,11 @@
 				ABEF4EDC1948D4A500B44AD5 /* detector.h in Headers */,
 				AB841CA61AC5CDD8000CE81D /* temperature.h in Headers */,
 				AB370B731BCF0E0000C14109 /* is_valid_frequency.h in Headers */,
+				ABD4A3F71BDCA4D3002B1596 /* measurement.h in Headers */,
 				AB841C551AC4E4B0000CE81D /* b.h in Headers */,
 				AB8708DE1BBF519F00B0EC67 /* periodic_signal_properties.hpp in Headers */,
 				AB521A061AB65EE7008FD7DC /* gnuplot.h in Headers */,
 				ABEF4ED61948D4A500B44AD5 /* emission.hpp in Headers */,
-				ABCC65E91B1FC676001FFD47 /* point_measurement.h in Headers */,
 				ABEBCE5419C737C000882E01 /* forward_difference.h in Headers */,
 				AB34A9841B03FFFA00CE655F /* J0.h in Headers */,
 				AB9A3FA31ACE01810004882F /* circle.h in Headers */,
@@ -4780,15 +4778,16 @@
 				ABF7B4C11BD1BF3E00038AB0 /* thermal_diffusivity.h in Headers */,
 				AB4871D81AF56C0A00DFD3C1 /* periodic_cosine.h in Headers */,
 				ABF5D66819DB60BD00A70476 /* predefined.h in Headers */,
-				ABFB16361AF150E60093BF5B /* temperature.h in Headers */,
 				AB932DFC1A6DC2BB00ECF117 /* cosine.h in Headers */,
 				AB48722A1AF8568D00DFD3C1 /* circle.h in Headers */,
+				ABD4A3B31BDCA04D002B1596 /* h_surface.h in Headers */,
 				ABEF4ED01948D4A500B44AD5 /* model_type.h in Headers */,
 				AB6B55AE1BD470E9007E0A4D /* thermal_penetration.h in Headers */,
 				AB370B5C1BCDBF4F00C14109 /* peak_wavelength.h in Headers */,
 				AB4872301AFA7EF200DFD3C1 /* sample_variance.h in Headers */,
 				ABE937E31BC5E38C002C3417 /* phase.h in Headers */,
 				ABEF4E7A1948D4A500B44AD5 /* num_method2014.h in Headers */,
+				ABD4A3D71BDCA41E002B1596 /* point_measurement.h in Headers */,
 				AB9CDFC21BDAD0B300702E53 /* parameter_list.hpp in Headers */,
 				AB90AA571AB298BB00F2535D /* total_calibrated_emission_pairs.h in Headers */,
 				ABCF57F61BB9D3C80013A3B8 /* A1_rear_190degC.h in Headers */,
@@ -4800,6 +4799,8 @@
 				AB4872121AF81AFC00DFD3C1 /* spot_view.h in Headers */,
 				ABDCC4CA1AB9EF2300187DD1 /* import_sweep_meta_data.h in Headers */,
 				ABEF4EE41948D4A500B44AD5 /* labels.h in Headers */,
+				ABD4A3D11BDCA20C002B1596 /* b.h in Headers */,
+				ABD4A3C91BDCA1E8002B1596 /* deltaT.h in Headers */,
 				ABB09B7D1AB79F6C005D6BB5 /* variance.h in Headers */,
 				ABEF4EA41948D4A500B44AD5 /* layer.h in Headers */,
 				ABA55F181BDC881900918CFD /* theoretical_modeling.hpp in Headers */,
@@ -4811,7 +4812,6 @@
 				AB4871D31AF5559A00DFD3C1 /* amplitudes_from_experiment.h in Headers */,
 				ABF781681BB31A06005D5376 /* specimenE.h in Headers */,
 				AB27974A1B97A0DF00E7BB2B /* adjust_phases.h in Headers */,
-				ABDA1CBD1AE9C2D900121C97 /* kappa.h in Headers */,
 				ABEF4EEC1948D4A500B44AD5 /* Numerical_Setup.h in Headers */,
 				ABDB6F161B9F4C7D001B612A /* specimenH.hpp in Headers */,
 				AB2797481B97A0CF00E7BB2B /* adjust_phase.h in Headers */,
@@ -4912,42 +4912,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB34A9901B0417A000CE655F /* fast_measurement.cpp in Sources */,
 				AB7F19851ACC65870086E8F8 /* from_phases.cpp in Sources */,
 				AB6333AE1B8CF9D400418F6B /* transient_analysis.cpp in Sources */,
-				AB6333B51B8CFC8600418F6B /* offset_measurement.cpp in Sources */,
 				ABAD559D1ABF554500D1B9A6 /* fitted_measurements.cpp in Sources */,
 				AB7996E51AB0F6B90022015B /* is_scope_file.cpp in Sources */,
 				ABEF4EEB1948D4A500B44AD5 /* Numerical_Setup.cpp in Sources */,
-				ABDA1CB41AE9BF2400121C97 /* b.cpp in Sources */,
 				AB8AA4341A5B60710065E7F8 /* columnData.cpp in Sources */,
 				ABEF4EFF1948D4A500B44AD5 /* xml.cpp in Sources */,
 				AB8708FA1BC2E78E00B0EC67 /* coefficient_is_valid.cpp in Sources */,
-				AB80FB551AF1B34300F88B04 /* h_surface.cpp in Sources */,
 				ABEF4E991948D4A500B44AD5 /* sor.cpp in Sources */,
 				ABC010D31AC0A4EE009DA2D5 /* remove_grnd_if_not_in_scope_files.cpp in Sources */,
 				AB2BA4701AB3CC45008AF545 /* Iheat.cpp in Sources */,
 				AB06EDAB1A71C6B500F9FDBD /* temperatureSteady.cpp in Sources */,
+				ABD4A3E41BDCA448002B1596 /* frequency_sweep.cpp in Sources */,
+				ABD4A3F41BDCA4D3002B1596 /* frequency_sweep.cpp in Sources */,
 				AB90AA521AB2930A00F2535D /* unique_measurement_pair.cpp in Sources */,
 				ABFF680A1BDA94EC00CF32B0 /* fitting_algorithm.cpp in Sources */,
 				AB9383D41AC2299400F2D2DD /* Kappa.cpp in Sources */,
+				ABD4A3C01BDCA04D002B1596 /* temperature_nd.cpp in Sources */,
 				ABFC9E671A94372A00F124F1 /* stringToDouble.cpp in Sources */,
 				ABEF4E8B1948D4A500B44AD5 /* lmdiff.cpp in Sources */,
 				ABB5FACB1B9212E7004855FE /* lthermal_at_frequency.cpp in Sources */,
 				ABEF4EE31948D4A500B44AD5 /* labels.cpp in Sources */,
+				ABD4A3B61BDCA04D002B1596 /* kappa.cpp in Sources */,
 				AB4871D21AF5559A00DFD3C1 /* amplitudes_from_experiment.cpp in Sources */,
 				AB4872291AF8568D00DFD3C1 /* circle.cpp in Sources */,
+				ABD4A3EA1BDCA4C4002B1596 /* frequency_sweep.cpp in Sources */,
 				AB841C501AC4E4A3000CE81D /* a.cpp in Sources */,
 				AB4871871AF2AFC300DFD3C1 /* avg_phases_at_surface.cpp in Sources */,
 				ABC648641A65B5EB008FA721 /* main-app.cpp in Sources */,
 				AB0E72C51AC23DA900750B3F /* surface_phase.cpp in Sources */,
 				AB5FDFDF1A6EE7F50017CEBB /* settings.cpp in Sources */,
-				AB0D6D681B8CF2210044DA61 /* frequency_sweep.cpp in Sources */,
+				ABD4A3B41BDCA04D002B1596 /* h.cpp in Sources */,
 				ABEF4EB41948D4A500B44AD5 /* lmdiff_poptea_help.cpp in Sources */,
 				ABEF4ECA1948D4A500B44AD5 /* effusivity.cpp in Sources */,
 				ABEF4EEF1948D4A500B44AD5 /* one_dim.cpp in Sources */,
 				ABEF4EE71948D4A500B44AD5 /* mesh.cpp in Sources */,
-				ABB5FACF1B921671004855FE /* thermal_penetration.cpp in Sources */,
 				ABEF4EC61948D4A500B44AD5 /* construct.cpp in Sources */,
 				AB3ED3C21AAF6E9B00845151 /* conductivity_from_phases.cpp in Sources */,
 				AB4E53AD1ABB4A2D00E7BA8D /* validateOpenStream.cpp in Sources */,
@@ -4962,7 +4962,6 @@
 				ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */,
 				AB9383E01AC22E4500F2D2DD /* time_nd.cpp in Sources */,
 				AB841C9A1AC5B9F0000CE81D /* ThermalProperties.cpp in Sources */,
-				ABFB16461AF158F90093BF5B /* phases_amplitudes.cpp in Sources */,
 				ABE937D61BC5E116002C3417 /* phases.cpp in Sources */,
 				ABD5AE971AFD6D000068FC76 /* complex_temperature_check.cpp in Sources */,
 				AB44BD731AAA49C600E0710E /* get_signal_from_scope_file.cpp in Sources */,
@@ -4980,7 +4979,6 @@
 				AB5E9D341ACA1E66003319FA /* phases_amplitudes.cpp in Sources */,
 				AB9A3FB01ACE0A270004882F /* angles_of_intersection.cpp in Sources */,
 				AB90AA5A1AB2A54500F2535D /* pyrometery_settings_file.cpp in Sources */,
-				ABFB16351AF150E60093BF5B /* temperature.cpp in Sources */,
 				AB9383E41AC22F8700F2D2DD /* a.cpp in Sources */,
 				AB7A69461AB24F3E00249A6E /* find_unique_frequencies_in_files.cpp in Sources */,
 				ABEF4EFB1948D4A500B44AD5 /* exportfile.cpp in Sources */,
@@ -4992,7 +4990,6 @@
 				AB62F5E51BDC3605008C8551 /* make_minimization_equation.cpp in Sources */,
 				AB7A693E1AB2465400249A6E /* Unique_scope_measurement.cpp in Sources */,
 				ABEF4ED51948D4A500B44AD5 /* emission.cpp in Sources */,
-				AB34A9921B0417A000CE655F /* frequency_sweep.cpp in Sources */,
 				AB4BEA871B72EB37006F71AE /* surface_non_dimensional.cpp in Sources */,
 				ABF7B4881BCF474B00038AB0 /* infinite_disk.cpp in Sources */,
 				ABB0733E1BD80F0700AFCEF8 /* fit.cpp in Sources */,
@@ -5011,6 +5008,7 @@
 				AB7A694A1AB253F800249A6E /* find_unique_measurements.cpp in Sources */,
 				AB80FB511AF1A3BB00F88B04 /* diffusivity_from_phases.cpp in Sources */,
 				ABEF4EA91948D4A500B44AD5 /* TBCsystem.cpp in Sources */,
+				ABD4A3BE1BDCA04D002B1596 /* surface_phases_amplitudes.cpp in Sources */,
 				ABEF4E7F1948D4A500B44AD5 /* complex.cpp in Sources */,
 				AB8708E51BBF596F00B0EC67 /* processed_scope_data.cpp in Sources */,
 				ABEF4EF71948D4A500B44AD5 /* tau_0.cpp in Sources */,
@@ -5018,7 +5016,9 @@
 				AB4871801AF290AB00DFD3C1 /* coth.cpp in Sources */,
 				ABEF4EC21948D4A500B44AD5 /* thermalData.cpp in Sources */,
 				AB4872231AF8461B00DFD3C1 /* diffusivity_from_phases.cpp in Sources */,
+				ABD4A3D61BDCA41E002B1596 /* point_measurement.cpp in Sources */,
 				AB4872611AFAE4F600DFD3C1 /* diffusivity_from_phases.cpp in Sources */,
+				ABD4A3E61BDCA448002B1596 /* offset_measurement.cpp in Sources */,
 				AB841C871AC4F81D000CE81D /* hat.cpp in Sources */,
 				ABEF4EA11948D4A500B44AD5 /* kinematics.cpp in Sources */,
 				AB44BD651AAA421700E0710E /* periodic_time_distribution.cpp in Sources */,
@@ -5037,11 +5037,11 @@
 				ABABEABA19C0FF52006D3B28 /* taylor_uncertainty.cpp in Sources */,
 				ABEF4E831948D4A500B44AD5 /* spline_cplx.cpp in Sources */,
 				AB44BD611AAA399800E0710E /* measurements.cpp in Sources */,
+				ABD4A3C21BDCA04D002B1596 /* temperature.cpp in Sources */,
 				AB62F5E11BDC35EE008C8551 /* make_minimization_equation.cpp in Sources */,
 				AB6B55C81BD56A10007E0A4D /* thermal_penetration.cpp in Sources */,
 				AB3ED3C91AAF93D100845151 /* conductivity.cpp in Sources */,
 				ABEF4E951948D4A500B44AD5 /* simpsons_3_8.cpp in Sources */,
-				ABFB164A1AF159590093BF5B /* surface_phases_amplitudes.cpp in Sources */,
 				ABCC65ED1B1FCB77001FFD47 /* fit.cpp in Sources */,
 				AB2797431B969A9A00E7BB2B /* phase_shifts_from_input.cpp in Sources */,
 				ABEF4F031948D4A500B44AD5 /* timing.cpp in Sources */,
@@ -5052,6 +5052,7 @@
 				AB4871B91AF323CF00DFD3C1 /* diffusivity_from_phases.cpp in Sources */,
 				AB6333A81B8CF9D400418F6B /* results.cpp in Sources */,
 				ABDCC4C91AB9EF2300187DD1 /* import_sweep_meta_data.cpp in Sources */,
+				ABD4A3F61BDCA4D3002B1596 /* measurement.cpp in Sources */,
 				ABEF4EDB1948D4A500B44AD5 /* detector.cpp in Sources */,
 				AB6087731A69B9FB009B1E85 /* signalRatio.cpp in Sources */,
 				AB48725D1AFAE4E700DFD3C1 /* diffusivity_from_phases.cpp in Sources */,
@@ -5059,22 +5060,25 @@
 				AB90AA561AB298BB00F2535D /* total_calibrated_emission_pairs.cpp in Sources */,
 				ABEF4EFD1948D4A500B44AD5 /* filesystem.cpp in Sources */,
 				AB841C401AC4DB62000CE81D /* J0.cpp in Sources */,
+				ABD4A3DA1BDCA42F002B1596 /* select_detector_model.cpp in Sources */,
 				ABCC53811B9F956B00CAB0E0 /* fit.cpp in Sources */,
 				ABCC53891B9FA4B300CAB0E0 /* fit.cpp in Sources */,
-				ABD4A3961BDC9BD1002B1596 /* select_detector_model.cpp in Sources */,
 				AB8708DB1BBF4DDD00B0EC67 /* periodic_properties.cpp in Sources */,
 				ABC5B1BD1AB55D1600A6D33C /* import_slab.cpp in Sources */,
 				ABDC7E081AD38D320048986B /* average_surface_phases.cpp in Sources */,
 				AB26A3DC19C12073000685DF /* gum_uncertainty.cpp in Sources */,
 				AB9A3FB91ACF0EED0004882F /* points_of_intersection.cpp in Sources */,
+				ABD4A3C81BDCA1E8002B1596 /* deltaT.cpp in Sources */,
 				AB5E9D401ACA3163003319FA /* average_surface_phases_amplitudes.cpp in Sources */,
 				AB841C3C1AC4DB53000CE81D /* J2.cpp in Sources */,
 				ABEF4ED71948D4A500B44AD5 /* noise.cpp in Sources */,
+				ABD4A3DE1BDCA43A002B1596 /* frequency_sweep.cpp in Sources */,
 				AB6B55B01BD4739E007E0A4D /* complex_lambda.cpp in Sources */,
 				AB0E72CE1AC277B400750B3F /* diffusivity_from_phases.cpp in Sources */,
 				AB841C541AC4E4B0000CE81D /* b.cpp in Sources */,
 				AB6B55BB1BD4843E007E0A4D /* view_radius.cpp in Sources */,
 				ABEF4E811948D4A500B44AD5 /* spline.cpp in Sources */,
+				ABD4A3B81BDCA04D002B1596 /* phase_amplitude.cpp in Sources */,
 				AB6333A61B8CF9D400418F6B /* analysis_from_properties.cpp in Sources */,
 				ABEF4E7B1948D4A500B44AD5 /* sensitivityvaldes2013.cpp in Sources */,
 				ABEF4EC81948D4A500B44AD5 /* diffusivity.cpp in Sources */,
@@ -5084,7 +5088,6 @@
 				AB4871FB1AF708A900DFD3C1 /* calibrate_wavelengths.cpp in Sources */,
 				ABEF4EB61948D4A500B44AD5 /* methods.cpp in Sources */,
 				AB98B97F1B9657CF00BC8B5E /* fit.cpp in Sources */,
-				ABCC65E41B1FC3AE001FFD47 /* frequency_sweep.cpp in Sources */,
 				ABB073421BD8175300AFCEF8 /* disk.cpp in Sources */,
 				ABEF4EBA1948D4A500B44AD5 /* poptea.cpp in Sources */,
 				AB841C681AC4EA66000CE81D /* temperature.cpp in Sources */,
@@ -5098,7 +5101,6 @@
 				ABEF4F011948D4A500B44AD5 /* programoptions.cpp in Sources */,
 				ABF7B4D11BD1CC5800038AB0 /* radius.cpp in Sources */,
 				ABB54FCB19C2781C0056823E /* stdVector2ublasVector.cpp in Sources */,
-				ABFB163E1AF156890093BF5B /* deltaT.cpp in Sources */,
 				AB6333BB1B8D0BC300418F6B /* fit.cpp in Sources */,
 				ABEF4EAB1948D4A500B44AD5 /* temperature_scale.cpp in Sources */,
 				AB9A3FAC1ACE09B50004882F /* if_intersect.cpp in Sources */,
@@ -5107,7 +5109,6 @@
 				ABCC53921BA1148E00CAB0E0 /* steady_state_temperature.cpp in Sources */,
 				AB370B6D1BCDDBA600C14109 /* process_twoColor_TBD_meta_data.cpp in Sources */,
 				ABF7B4F31BD1D38C00038AB0 /* frequency_sweep.cpp in Sources */,
-				ABFB16421AF158E50093BF5B /* phase_amplitude.cpp in Sources */,
 				ABEF4E771948D4A500B44AD5 /* execute.cpp in Sources */,
 				ABEB14B61AAA622600204B36 /* slab.cpp in Sources */,
 				AB8708E11BBF580A00B0EC67 /* Processed_tbd_files.cpp in Sources */,
@@ -5116,8 +5117,6 @@
 				AB7996E11AB0F6190022015B /* read_scope_file.cpp in Sources */,
 				AB59E3A01B0A588900907160 /* surface_phases_with_beam_diameter.cpp in Sources */,
 				ABDC7E0C1AD38D550048986B /* coating_diffusivity_from_a.cpp in Sources */,
-				ABFB165C1AF164EB0093BF5B /* surface_phase_amplitude.cpp in Sources */,
-				ABDA1CC01AE9C4C200121C97 /* h.cpp in Sources */,
 				ABEF4E8F1948D4A500B44AD5 /* parameterestimation.cpp in Sources */,
 				AB9383C31AC1C77900F2D2DD /* temperature.cpp in Sources */,
 				AB9CDFC51BDAD0C900702E53 /* map_parameter_values.cpp in Sources */,
@@ -5129,8 +5128,8 @@
 				ABEF4E851948D4A500B44AD5 /* bisection.cpp in Sources */,
 				AB7F198D1ACC97E00086E8F8 /* average_surface_phases.cpp in Sources */,
 				AB370B5F1BCDC09700C14109 /* meta_measurement_descriptions.cpp in Sources */,
+				ABD4A3B21BDCA04D002B1596 /* h_surface.cpp in Sources */,
 				AB76C5841ACB4C8300C4E502 /* coating_from_dimensionless.cpp in Sources */,
-				AB34A9941B0417A000CE655F /* measurement.cpp in Sources */,
 				ABEB14BE1AAA6C4200204B36 /* phase_fitting.cpp in Sources */,
 				ABA55F131BDC7F0900918CFD /* best_fit.cpp in Sources */,
 				AB5E9D311ACA1BBF003319FA /* phase_amplitude.cpp in Sources */,
@@ -5140,8 +5139,8 @@
 				ABF7B4EA1BD1D32D00038AB0 /* frequency_sweep.cpp in Sources */,
 				AB0E72C11AC23BD800750B3F /* phase.cpp in Sources */,
 				AB8708E91BBF62A700B0EC67 /* import_twoColor_TBD_files.cpp in Sources */,
+				ABD4A3BC1BDCA04D002B1596 /* surface_phase_amplitude.cpp in Sources */,
 				AB4E53B11ABB908400E7BA8D /* phase_exp_model.cpp in Sources */,
-				ABCC65E81B1FC676001FFD47 /* point_measurement.cpp in Sources */,
 				AB4871831AF29C8900DFD3C1 /* csch.cpp in Sources */,
 				AB6333AC1B8CF9D400418F6B /* transient_analysis_sweep.cpp in Sources */,
 				AB553C53195DF13200E2B7D1 /* random.cpp in Sources */,
@@ -5152,6 +5151,7 @@
 				ABEF4EA51948D4A500B44AD5 /* property.cpp in Sources */,
 				AB5E9D3C1ACA27CA003319FA /* average_surface_phase_amplitude.cpp in Sources */,
 				AB0D6D631B8CE6120044DA61 /* fit.cpp in Sources */,
+				ABD4A3F21BDCA4D3002B1596 /* fast_measurement.cpp in Sources */,
 				ABF7B48C1BCF477500038AB0 /* finite_disk.cpp in Sources */,
 				ABFC2CFB1A439F1D004C00AD /* twoColorPyrometery.cpp in Sources */,
 				ABEB14BA1AAA686500204B36 /* temperature_prediction.cpp in Sources */,
@@ -5162,25 +5162,26 @@
 				AB98B9891B96602500BC8B5E /* fit.cpp in Sources */,
 				AB7A69421AB24F1B00249A6E /* find_unique_labels_in_files.cpp in Sources */,
 				ABEF4EC41948D4A500B44AD5 /* thermalsweepoptimizer.cpp in Sources */,
+				ABD4A3BA1BDCA04D002B1596 /* phases_amplitudes.cpp in Sources */,
 				ABEF4E7D1948D4A500B44AD5 /* combinations.cpp in Sources */,
 				ABEF4EB21948D4A500B44AD5 /* lmdiff_poptea.cpp in Sources */,
 				ABE390E01AFBD56B0063E789 /* diffusivity_from_phases.cpp in Sources */,
 				AB6B55C41BD55197007E0A4D /* slab_1d_model.cpp in Sources */,
 				AB4E53BF1ABBD92C00E7BA8D /* transient_surface_amplitudes.cpp in Sources */,
-				ABDA1CBC1AE9C2D900121C97 /* kappa.cpp in Sources */,
 				ABF7B4A11BD013DB00038AB0 /* temperatures.cpp in Sources */,
 				AB44BD691AAA43B100E0710E /* normalizedSignalRatio_from_measurement.cpp in Sources */,
+				ABD4A3CA1BDCA1E8002B1596 /* thermal_penetration.cpp in Sources */,
+				ABD4A3D21BDCA20C002B1596 /* thermal_penetration.cpp in Sources */,
 				AB2797391B96881100E7BB2B /* phase_shift_from_input.cpp in Sources */,
 				AB841C381AC4DB47000CE81D /* J1.cpp in Sources */,
 				AB62F5E91BDC3A01008C8551 /* temperatures_factory_dummy_amplitudes.cpp in Sources */,
 				ABDB6F1E1B9F4E6E001B612A /* run.cpp in Sources */,
-				ABDA1CB01AE9BD6500121C97 /* temperature_nd.cpp in Sources */,
 				ABFB16611AF17DC70093BF5B /* circle_complex.cpp in Sources */,
 				ABB54FD119C35E300056823E /* ifzero.cpp in Sources */,
 				ABDC7E031AD38C9B0048986B /* from_phases.cpp in Sources */,
 				AB90AA4E1AB28A3B00F2535D /* get_pair_measurements_at_frequency.cpp in Sources */,
+				ABD4A3D01BDCA20C002B1596 /* b.cpp in Sources */,
 				ABEF4E871948D4A500B44AD5 /* constrained.cpp in Sources */,
-				ABDA1CB81AE9BF3700121C97 /* thermal_penetration.cpp in Sources */,
 				AB841C8F1AC4FD0A000CE81D /* H_tilde.cpp in Sources */,
 				ABEF4EDF1948D4A500B44AD5 /* setup.cpp in Sources */,
 				AB841C8B1AC4FA5B000CE81D /* F_tilde.cpp in Sources */,
@@ -5201,7 +5202,6 @@
 				AB4E53C71ABCB8B200E7BA8D /* wave_signals.cpp in Sources */,
 				AB4872521AFACD0B00DFD3C1 /* uncertainty_analysis.cpp in Sources */,
 				AB9383C71AC1C78A00F2D2DD /* time_nd.cpp in Sources */,
-				ABCC537B1B9F937F00CAB0E0 /* frequency_sweep.cpp in Sources */,
 				ABEF4EF91948D4A500B44AD5 /* Numerical_PhaseOfEmission.cpp in Sources */,
 				AB841C9D1AC5BE30000CE81D /* h_coat.cpp in Sources */,
 				ABEF4EE51948D4A500B44AD5 /* analytical_2005.cpp in Sources */,

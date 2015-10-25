@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/oneLayer2D/complex/temperature_nd.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/temperature_nd.h"
 #include "math/transform/inverseHankel.h"
-#include "thermal/model/oneLayer2D/complex/h.h"
-#include "thermal/model/oneLayer2D/complex/h_surface.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/h.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/h_surface.h"
 
 namespace thermal {
 namespace model {

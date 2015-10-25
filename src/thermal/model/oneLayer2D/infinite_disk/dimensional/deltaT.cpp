@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/oneLayer2D/dimensional/deltaT.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensional/deltaT.h"
 
 namespace thermal {
 namespace model {

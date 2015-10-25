@@ -14,8 +14,8 @@
 #include "thermal/model/optics/optics.h"
 #include "thermal/model/oneLayer2D/model_selection.h"
 
-#include "thermal/model/oneLayer2D/dimensionless/b.h"
-#include "thermal/model/oneLayer2D/thermal_emission/offset_point/frequency_sweep.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/offset_point/frequency_sweep.h"
 using thermal::model::oneLayer2D::thermal_emission::offset_point::frequency_sweep;
 
 #include "math/estimation/constrained.hpp"

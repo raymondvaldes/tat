@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
 
-#include "thermal/model/oneLayer2D/complex/kappa.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/kappa.h"
 
 namespace thermal {
 namespace model {

@@ -11,12 +11,12 @@
 #include "investigations/twoColorPyrometery/oneLayer2D/frequency_sweep/avg_phases_at_surface.h"
 #include "thermal/model/slab/import_slab.h"
 
-#include "thermal/model/oneLayer2D/dimensionless/b.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
 #include "units.h"
 #include "math/complex/extract_phases_from_properties.h"
 #include "plot/gnuplot.h"
 #include "cout/vector/print.h"
-#include "thermal/model/oneLayer2D/thermal_emission/frequency_sweep.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/frequency_sweep.h"
 using thermal::model::oneLayer2D::thermal_emission::frequency_sweep;
 
 using namespace units;

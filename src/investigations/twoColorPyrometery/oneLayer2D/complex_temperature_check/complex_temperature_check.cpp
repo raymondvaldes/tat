@@ -16,13 +16,13 @@ using namespace units;
 #include "thermal/define/lthermal.h"
 using thermal::define::thermal_penetration;
 
-#include "thermal/model/oneLayer2D/complex/surface_phase_amplitude.h"
+#include "thermal/model/oneLayer2D/infinite_disk/complex/surface_phase_amplitude.h"
 using thermal::model::oneLayer2D::complex::surface_phase_amplitude;
 
-#include "thermal/model/oneLayer2D/thermal_emission/measurement.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/measurement.h"
 using thermal::model::oneLayer2D::thermal_emission::measurement;
 
-#include "thermal/model/oneLayer2D/thermal_emission/fast_measurement.h"
+#include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/fast_measurement.h"
 using thermal::model::oneLayer2D::thermal_emission::fast_measurement;
 
 #include "thermal/pyrometry/twoColor/calibrate_wavelength.h"

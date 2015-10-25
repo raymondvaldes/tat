@@ -9,8 +9,8 @@
 #include <iostream>
 
 #include "lthermal_at_frequency.hpp"
-#include "thermal/model/oneLayer2D/dimensionless/thermal_penetration.h"
-#include "thermal/model/oneLayer2D/dimensional/thermal_penetration.hpp"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensionless/thermal_penetration.h"
+#include "thermal/model/oneLayer2D/infinite_disk/dimensional/thermal_penetration.hpp"
 #include "units.h"
 
 namespace investigations {
