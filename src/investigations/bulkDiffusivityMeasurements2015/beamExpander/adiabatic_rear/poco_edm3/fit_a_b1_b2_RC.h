@@ -40,21 +40,20 @@ inline auto fit_a_b1_b2_RC
 
   for_each( specimens, [ detector_radius ]( auto const & specimen ) noexcept
   {
-    auto const bestFit_results = estimate_parameters::fit_all::fit(
-      specimen, detector_radius ) ;
+    estimate_parameters::fit_all::fit( specimen, detector_radius ) ;
     
-    bestFit_results.plot_model_phases_against_observations();
+//    bestFit_results.plot_model_phases_against_observations();
     
-    auto i = 0u;
-    for_each( bestFit_results.frequencies,
-    [ &bestFit_results, &i ]( auto const frequency ) noexcept
-    {
-      auto const model_phase = bestFit_results.model_phases[i];
-      auto const observation = bestFit_results.observations[i];
-      
-      cout << frequency.value() << "\t" << model_phase.value() << "\t" << observation.value() << "\n";
-      ++i;
-    } );
+//    auto i = 0u;
+//    for_each( bestFit_results.frequencies,
+//    [ &bestFit_results, &i ]( auto const frequency ) noexcept
+//    {
+//      auto const model_phase = bestFit_results.model_phases[i];
+//      auto const observation = bestFit_results.observations[i];
+//      
+//      cout << frequency.value() << "\t" << model_phase.value() << "\t" << observation.value() << "\n";
+//      ++i;
+//    } );
   } );
 }
 

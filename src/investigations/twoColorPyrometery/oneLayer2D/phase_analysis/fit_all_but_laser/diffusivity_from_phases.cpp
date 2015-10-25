@@ -10,6 +10,7 @@
 #include "thermal/pyrometry/twoColor/calibrate_wavelength.h"
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all_but_laser/diffusivity_from_phases.h"
 #include "thermal/model/slab/import_slab.h"
+#include "thermal/model/oneLayer2D/model_selection.h"
 
 using namespace units;
 using thermal::model::slab::import ;
@@ -105,11 +106,11 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
   auto const beam_radius = quantity< length >( 4.4 * millimeters );
   auto const detector_view_radius = quantity< length>( 0.15 * millimeters  ) ; // initial value
 
-  auto const bestFit_results = diffusivity_from_phases(
+  diffusivity_from_phases(
     frequencies, experimental_phases , initial_slab, beam_radius, detector_view_radius
     ) ;
-  
-  bestFit_results.plot_model_phases_against( experimental_phases );
+//
+//  bestFit_results.plot_model_phases_against( experimental_phases );
 
 }
 

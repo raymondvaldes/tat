@@ -129,10 +129,10 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
 
   
 
-  auto const bestFit_results = diffusivity_from_phases(
+  diffusivity_from_phases(
     frequencies, experimental_phases , initial_slab, beam_radius, detector_view_radius ) ;
   
-  bestFit_results.plot_model_phases_against( experimental_phases );
+//  bestFit_results.plot_model_phases_against( experimental_phases );
   
 }
 

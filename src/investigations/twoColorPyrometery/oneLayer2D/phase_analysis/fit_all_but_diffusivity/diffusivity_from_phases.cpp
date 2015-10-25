@@ -83,7 +83,7 @@ auto diffusivity_from_phases( filesystem::directory const & dir ) -> void
   auto const beam_radius = quantity< length >( 2.11362 * millimeters );
   auto const detector_view_radius = quantity< length>( .8 * millimeters  ) ; // initial value
 
-  auto const bestFit_results = diffusivity_from_phases(
+  diffusivity_from_phases(
     frequencies, phases , initial_slab, beam_radius, detector_view_radius) ;
 }
 

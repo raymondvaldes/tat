@@ -11,6 +11,7 @@
 
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_all/diffusivity_from_phases.h"
 #include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/fit_diffusivity_offset_view_radius_beam/fit_all/fit.hpp"
+#include "thermal/model/oneLayer2D/model_selection.h"
 
 #include "thermal/model/slab/import_slab.h"
 #include "units.h"
@@ -220,10 +221,10 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
   auto const detector_view_offset = quantity< length >( 0.10 * millimeters  ) ;
 
 
-  auto const bestFit_results = fit(
+  fit(
     frequencies, experimental_phases , initial_slab, beam_radius, detector_view_radius, detector_view_offset ) ;
   
-  bestFit_results.plot_model_phases_against( experimental_phases );
+//  bestFit_results.plot_model_phases_against( experimental_phases );
   
 }
 

@@ -37,10 +37,10 @@ inline auto fit_a_b2_RC
 
   for_each( specimens, [ detector_offset ]( auto const & specimen ) noexcept
   {
-    auto const bestFit_results = estimate_parameters::fit_all::fit(
+    estimate_parameters::fit_all::fit(
       specimen, detector_offset ) ;
     
-    bestFit_results.plot_model_phases_against_observations();
+//    bestFit_results.plot_model_phases_against_observations();
   } );
   
 }

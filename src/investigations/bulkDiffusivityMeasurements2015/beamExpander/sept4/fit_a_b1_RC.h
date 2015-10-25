@@ -32,10 +32,11 @@ inline auto fit_a_b1_RC
 
   for_each( specimens, []( auto const & specimen ) noexcept
   {
-    auto const bestFit_results = estimate_parameters::fit_all::fit(
-      specimen ) ;
+    estimate_parameters::fit_all::fit(
+      specimen
+  ) ;
     
-    bestFit_results.plot_model_phases_against_observations();
+//    bestFit_results.plot_model_phases_against_observations();
   } );
   
 }

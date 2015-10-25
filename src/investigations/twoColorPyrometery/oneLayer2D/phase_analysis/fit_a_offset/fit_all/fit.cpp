@@ -12,6 +12,7 @@
 
 #include "thermal/model/slab/import_slab.h"
 #include "units.h"
+#include "thermal/model/oneLayer2D/model_selection.h"
 
 using namespace units;
 using std::vector;
@@ -336,11 +337,17 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
   auto const beam_radius = quantity< length >( 4.0 * millimeters );
   auto const detector_offset = quantity< length >( .2 * millimeters  ) ; // initial value
 
-  auto const bestFit_results = thermal::analysis::oneLayer2D::estimate_parameters::phase_analysis::fit_diffusivity_offset::fit_all::fit(
+//  auto const detector_model = thermal::model::oneLayer2D::Detector_model::offset_point;
+//  auto const conduction_model = thermal::model::oneLayer2D::Conduction_model::infinite_disk;
+  
+//  auto const result = Best_fit( detector_model, conduction_model,
+//  
+  
+  thermal::analysis::oneLayer2D::estimate_parameters::phase_analysis::fit_diffusivity_offset::fit_all::fit(
     frequencies, experimental_phases , slab_initial, beam_radius,
     detector_offset ) ;
   
-  bestFit_results.plot_model_phases_against( experimental_phases );
+//  bestFit_results.plot_model_phases_against( experimental_phases );
 
 }
 

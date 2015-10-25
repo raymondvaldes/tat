@@ -209,11 +209,11 @@ auto const experimental_phases = vector< quantity< plane_angle > >( {
   initial_slab.set_diffusivity_update_k_hold_rhoCp( diffusivity );
 
 
-  auto const bestFit_results = estimate_parameters::fit_all::fit(
+  estimate_parameters::fit_all::fit(
     frequencies, experimental_phases,
     initial_slab, beam_radius, detector_radius ) ;
   
-  bestFit_results.plot_model_phases_against_observations();
+//  bestFit_results.plot_model_phases_against_observations();
 }
 
 } // namespace fit_all
