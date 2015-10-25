@@ -18,7 +18,7 @@
 #include "thermal/model/optics/optics.h"
 #include "thermal/model/complex/temperatures.h"
 #include "thermal/equipment/laser/modulation_frequencies.h"
-#include "thermal/analysis/oneLayer2D/estimate_parameters/phase_analysis/Best_fit.h"
+#include "thermal/analysis/oneLayer2D/best_fit.hpp"
 
 namespace thermal { 
 namespace analysis { 
@@ -38,7 +38,7 @@ auto fitting_algorithm
     model::Optics  >
   ( const double * x)> const & model_evaluate
 )
-noexcept -> estimate_parameters::phase_analysis::Best_fit;
+noexcept -> Best_fit;
 
 } } } } } }
 

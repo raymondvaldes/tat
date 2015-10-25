@@ -22,16 +22,18 @@ namespace analysis{
 namespace oneLayer2D {
 
 struct Theoretical_results {
+  equipment::laser::Modulation_frequencies frequencies;
   model::complex::Temperatures observations;
   model::complex::Temperatures model_predictions;
   emission::Phases experimental_bias;
   emission::Phases calibrated_observations;
   
   Theoretical_results(
+    equipment::laser::Modulation_frequencies frequencies,
     model::complex::Temperatures const & observations_,
     model::complex::Temperatures const & model_predictions_,
     emission::Phases const & experimental_bias_
-  );
+  ) noexcept ;
   
   auto phase_goodness_of_fit() const noexcept -> double;
   

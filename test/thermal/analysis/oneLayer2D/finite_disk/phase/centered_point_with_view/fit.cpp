@@ -144,7 +144,7 @@ BOOST_AUTO_TEST_CASE( fit_all )
   auto const temperatures = temperature_factory_dummy_amplitudes( phases );
   auto const best_fit = fit( frequencies, temperatures, slab_initial, optics, parameters );
 
-  BOOST_CHECK_CLOSE_FRACTION( 7.41395e-5, best_fit.phase_goodness_of_fit, 1e-5);
+  BOOST_CHECK_CLOSE_FRACTION( 7.41395e-5, best_fit.phase_goodness_of_fit_function(), 1e-5);
 }
 
 

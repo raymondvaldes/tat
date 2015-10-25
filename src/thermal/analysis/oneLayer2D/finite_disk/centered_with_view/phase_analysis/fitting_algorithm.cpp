@@ -7,14 +7,17 @@
 //
 
 #include "fitting_algorithm.hpp"
-#include "theoretical_modeling.hpp"
 #include "make_minimization_equation.hpp"
+#include "thermal/analysis/oneLayer2D/theoretical_modeling.hpp"
 #include "thermal/analysis/oneLayer2D/phase_analysis/make_minimization_equation.hpp"
 #include "math/estimation/lmdiff.hpp"
 #include "thermal/model/complex/temperatures.h"
 #include <gsl.h>
+#include "thermal/model/oneLayer2D/model_selection.h"
+#include "thermal/model/oneLayer2D/generator/disk.hpp"
+#include "thermal/model/oneLayer2D/finite_disk/emission/centered_detector_with_view/frequency_sweep.hpp"
 
-namespace thermal { 
+namespace thermal {
 namespace analysis { 
 namespace oneLayer2D { 
 namespace finite_disk { 
@@ -24,8 +27,15 @@ namespace phase_analysis{
 using math::estimation::lmdif;
 using math::estimation::settings;
 using std::get;
-using estimate_parameters::phase_analysis::Best_fit;
 using thermal::analysis::oneLayer2D::phase_analysis::minimization_equation;
+using thermal::model::oneLayer2D::Detector_model;
+using thermal::model::oneLayer2D::Conduction_model;
+using thermal::model::oneLayer2D::generator::Disk;
+using thermal::model::oneLayer2D::finite_disk::disk::emission::centered_detector_with_view::frequency_sweep;
+
+
+auto const detector_model = Detector_model::center_with_view;
+auto const conduction_model = Conduction_model::finite_disk;
 
 auto fitting_algorithm
 (
@@ -38,12 +48,12 @@ auto fitting_algorithm
     model::Optics >
   ( const double * x)> const & system_updater
 )
-noexcept -> estimate_parameters::phase_analysis::Best_fit
+noexcept -> Best_fit
 {
   Expects( !temperatures.empty() );
 
   auto const predictions_generator =
-  theoretical_modeling( frequencies, temperatures, system_updater );
+  theoretical_modeling( frequencies, temperatures, system_updater, frequency_sweep );
 
   auto const min_equation = minimization_equation( predictions_generator );
   
@@ -57,15 +67,16 @@ noexcept -> estimate_parameters::phase_analysis::Best_fit
 
   ////// prepare output
   auto const x = model_parameters.data();
-  auto const theoretical_modeling = predictions_generator( x );
-
+  auto const final_results = predictions_generator( x );
 
   auto const t = system_updater( x );
   auto const slab_fit = get< 0 >(t);
   auto const optics_fit = get< 1 >(t);
   
-  auto const result = Best_fit(
-    slab_fit, optics_fit, theoretical_modeling.phase_goodness_of_fit() );
+  auto const best_fit_disk =
+  Disk( conduction_model, detector_model, slab_fit, optics_fit );
+  
+  auto const result = Best_fit( best_fit_disk, final_results );
   
   return result;
 }

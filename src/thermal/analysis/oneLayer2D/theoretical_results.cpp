@@ -20,11 +20,14 @@ using algorithm::vector::add;
 using statistics::uncertainty_analysis::goodness_of_fit;
 
 Theoretical_results::Theoretical_results(
+  equipment::laser::Modulation_frequencies frequencies,
   model::complex::Temperatures const & observations_,
   model::complex::Temperatures const & model_predictions_,
   emission::Phases const & experimental_bias_
-)
-: observations( observations_ ),
+) noexcept
+:
+  frequencies(frequencies),
+  observations( observations_ ),
   model_predictions( model_predictions_ ),
   experimental_bias( experimental_bias_ ),
   calibrated_observations( add( observations.phases(), experimental_bias ) )
