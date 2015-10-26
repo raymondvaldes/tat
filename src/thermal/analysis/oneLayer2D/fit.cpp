@@ -9,11 +9,11 @@
 #include "fit.hpp"
 #include <gsl.h>
 #include "thermal/model/oneLayer2D/model_selection.h"
-
 #include "thermal/model/oneLayer2D/select_emission_model.hpp"
 #include "select_minimization_function.hpp"
 #include "update_system_properties_generator.hpp"
 #include "fitting_algorithm.hpp"
+#include "check_validity_of_parameters.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -22,8 +22,8 @@ namespace oneLayer2D{
 auto fit(
   equipment::laser::Modulation_frequencies const & frequencies,
   model::complex::Temperatures const & temperatures,
-  Fit_selection const fit_selection,
-  model::oneLayer2D::generator::Disk const & initial_disk,
+  Fit_selection const to_fit,
+  model::oneLayer2D::generator::Disk const & disk,
   model::oneLayer2D::Parameters const & parameters  
 ) -> Best_fit
 {
@@ -31,14 +31,14 @@ auto fit(
   Expects( frequencies.size() == temperatures.size() );
   Expects( !parameters.empty() );
 
-  auto const frequency_sweep = initial_disk.get_emission_sweep();
-
-  auto const minimization_equation =
-  select_minimization_function( fit_selection );
+  check_validity_of_parameters( parameters, disk.valid_parameters(), to_fit );
   
-  // parameter estimation algorithm
+  auto const frequency_sweep = disk.get_emission_sweep();
+
+  auto const minimization_equation = select_minimization_function( to_fit );
+  
   auto const system = update_system_properties_generator(
-    initial_disk.get_slab(), initial_disk.get_optics() , parameters );
+    disk.get_slab(), disk.get_optics() , parameters );
   
   auto const result =
   fitting_algorithm( frequencies, temperatures,
@@ -47,7 +47,4 @@ auto fit(
   return result;
 }
 
-
-
 }}}
-

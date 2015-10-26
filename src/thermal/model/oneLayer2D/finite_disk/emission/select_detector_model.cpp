@@ -43,7 +43,7 @@ noexcept
       break;
 
     case Detector_model::center_with_view:
-      func = disk::emission::centered_detector_with_view::frequency_sweep;
+      func = disk::emission::centered_with_view::frequency_sweep;
       break;
       
     case Detector_model::offset_with_view:

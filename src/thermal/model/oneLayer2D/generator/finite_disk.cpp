@@ -41,7 +41,7 @@ const -> thermal::model::complex::Temperatures
   {
     case Detector_model::center_with_view:
       {
-        using finite_disk::disk::emission::centered_detector_with_view::frequency_sweep;
+        using finite_disk::disk::emission::centered_with_view::frequency_sweep;
         out = frequency_sweep(slab, optics, modulation_frequencies);
         break;
       }

@@ -117,7 +117,7 @@ namespace algorithm {
   using boost::algorithm::find_if_not;
 
 //adjacent_find
-//binary_search
+  using boost::binary_search;
   using boost::count;
   using boost::count_if;
 //equal

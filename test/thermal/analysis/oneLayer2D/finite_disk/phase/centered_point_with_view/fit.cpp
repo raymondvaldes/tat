@@ -138,8 +138,8 @@ BOOST_AUTO_TEST_CASE( fit_all )
 
   using thermal::model::oneLayer2D::Parameters;
   auto const parameters = Parameters({
-    thermal::model::oneLayer2D::Parameter::thermal_diffusivity,
-    thermal::model::oneLayer2D::Parameter::specimen_radius,
+    thermal::model::oneLayer2D::Parameter::disk_thermal_diffusivity,
+    thermal::model::oneLayer2D::Parameter::disk_radius,
     thermal::model::oneLayer2D::Parameter::detector_radius,
     thermal::model::oneLayer2D::Parameter::rc_filter
   });  
@@ -154,7 +154,6 @@ BOOST_AUTO_TEST_CASE( fit_all )
     slab_initial,
     optics );
   
-//  auto const temperatures = 
   auto const temperatures = temperature_factory_dummy_amplitudes( phases );
 
   auto const best_fit =

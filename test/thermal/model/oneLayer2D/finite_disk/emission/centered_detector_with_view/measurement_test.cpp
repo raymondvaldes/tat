@@ -12,7 +12,7 @@
 #include "thermal/model/oneLayer2D/finite_disk/emission/centered_detector_with_view/measurement.hpp"
 
 using thermal::model::oneLayer2D::finite_disk::seperation_of_variables::Lambda_generator;
-using thermal::model::oneLayer2D::finite_disk::disk::emission::centered_detector_with_view::measurement;
+using thermal::model::oneLayer2D::finite_disk::disk::emission::centered_with_view::measurement;
 
 #include "units.h"
 using namespace units;

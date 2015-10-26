@@ -23,8 +23,6 @@ using equipment::laser::Modulation_frequencies;
 using slab::Slab;
 using complex::Temperatures;
 
-
-
 auto select_detector_model
 (
   Detector_model const detector_model
@@ -33,7 +31,6 @@ auto select_detector_model
       Temperatures( Slab const &, Optics const &, Modulation_frequencies const & )
     >
 {
-  
   auto func = std::function <
       Temperatures( Slab const &, Optics const &, Modulation_frequencies const&)
     >();

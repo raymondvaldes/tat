@@ -17,9 +17,11 @@ namespace oneLayer2D{
 using algorithm::for_each;
 using std::make_pair;
 using equipment::detector::View_radius;
+using equipment::detector::Offset;
 using equipment::laser::Beam_radius;
 using thermal::model::slab::Radius;
 using thermal::model::slab::Thermal_diffusivity;
+using thermal::model::slab::Thermal_conductivity;
 using electronics::filter::low_pass::RC_first_order::Time_constant;
   
 auto update_disk_optics
@@ -46,17 +48,27 @@ auto update_disk_optics
         o.laser_radius = Beam_radius::from_value( value );
         break;
       }
-      case Parameter::specimen_radius : {
+      case Parameter::disk_radius : {
         d.set_radius( Radius::from_value( value )  );
         break;
       }
-      case Parameter::thermal_diffusivity : {
+      case Parameter::disk_thermal_diffusivity : {
         d.set_diffusivity_update_k_hold_rhoCp(
           Thermal_diffusivity::from_value( value ) );
         break;
       }
       case Parameter::rc_filter : {
         o.filter_constant = Time_constant::from_value( value );
+        break;
+      }
+      
+      case Parameter::disk_thermal_conductivity : {
+        d.set_conductivity( Thermal_conductivity::from_value( value ));
+        break;
+      }
+      case Parameter::detector_offset : {
+        o.detector_offset = Offset::from_value( value );
+        break;
       }
     }
   };

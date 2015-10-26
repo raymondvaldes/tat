@@ -12,6 +12,8 @@
 #include "finite_disk.hpp"
 #include "infinite_disk.hpp"
 #include "thermal/model/oneLayer2D/select_emission_model.hpp"
+#include "thermal/model/oneLayer2D/is_valid_parameters.hpp"
+#include "thermal/model/oneLayer2D/get_model_parameters.hpp"
 
 namespace thermal{
 namespace model{
@@ -75,6 +77,15 @@ auto Disk::get_emission_sweep() const -> std::function<
 auto Disk::get_slab() const noexcept -> slab::Slab{ return slab;} ;
 
 auto Disk::get_optics() const noexcept -> Optics{ return optics;} ;
+
+auto Disk::valid_parameters()
+const -> Valid_parameters
+{
+  auto const my_valid_parameters =
+  get_model_parameters( conduction_model, detector_model );
+
+  return my_valid_parameters;
+}
 
 
 } // namespace generator

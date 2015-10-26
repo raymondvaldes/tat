@@ -40,14 +40,20 @@ noexcept -> Map_parameter_values
       case Parameter::laser_radius : {
         v = optics.laser_radius.value(); break;
       }
-      case Parameter::specimen_radius : {
+      case Parameter::disk_radius : {
         v = disk.radius().value(); break;
       }
-      case Parameter::thermal_diffusivity : {
+      case Parameter::disk_thermal_diffusivity : {
         v = disk.thermal_diffusivity().value(); break;
       }
       case Parameter::rc_filter : {
         v = optics.filter_constant.value(); break;
+      }
+      case Parameter::disk_thermal_conductivity : {
+        v = disk.thermal_diffusivity().value(); break;
+      }
+      case Parameter::detector_offset : {
+        v = optics.detector_offset.value(); break;
       }
     }
   

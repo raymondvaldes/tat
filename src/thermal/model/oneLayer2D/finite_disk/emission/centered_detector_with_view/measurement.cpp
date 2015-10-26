@@ -27,7 +27,7 @@ namespace oneLayer2D{
 namespace finite_disk{
 namespace disk{
 namespace emission{
-namespace centered_detector_with_view{
+namespace centered_with_view{
 
 using namespace units;
 using math::special_functions::bessel::J0;

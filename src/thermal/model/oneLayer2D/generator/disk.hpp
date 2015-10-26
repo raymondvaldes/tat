@@ -15,6 +15,7 @@
 #include "thermal/model/complex/temperatures.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/model/optics/optics.h"
+#include "thermal/model/oneLayer2D/parameter_list.hpp"
 #include <functional>
 
 namespace thermal{
@@ -59,6 +60,10 @@ public:
 
   auto get_slab() const noexcept -> slab::Slab;
   auto get_optics() const noexcept -> Optics;
+
+  auto valid_parameters()
+  const -> Valid_parameters;
+
 };
 
 } // namespace generator

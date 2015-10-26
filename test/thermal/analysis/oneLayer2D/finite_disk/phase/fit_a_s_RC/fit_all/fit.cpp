@@ -14,19 +14,30 @@
 #include "units.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/experimental/observations/slab/slab.hpp"
-#include "thermal/analysis/oneLayer2D/finite_disk/centered_point/fit_a_s_RC/fit_all/fit.hpp"
+#include "thermal/analysis/oneLayer2D/fit.hpp"
+
+
+
 #include "thermal/model/optics/optics.h"
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
 #include "thermal/model/oneLayer2D/model_selection.h"
 #include "thermal/plot/phase/model_vs_experiment_phases.hpp"
+
+
+#include "thermal/model/oneLayer2D/parameter_list.hpp"
+#include "thermal/model/complex/temperatures_factory_dummy_amplitudes.hpp"
+#include "thermal/analysis/oneLayer2D/fit_selection.h"
 
 using namespace units;
 using std::vector;
 using namespace units;
 using thermal::experimental::observations::Slab;
 using thermal::model::Optics;
-
-using thermal::analysis::oneLayer2D::finite_disk::centered_point::fit_a_s_RC::fit_all::fit;
+using thermal::model::complex::temperature_factory_dummy_amplitudes;
+using thermal::model::oneLayer2D::generator::Disk;
+using thermal::model::oneLayer2D::Detector_model;
+using thermal::model::oneLayer2D::Conduction_model;
+using thermal::analysis::oneLayer2D::Fit_selection;
 
 BOOST_AUTO_TEST_SUITE( thermal )
 BOOST_AUTO_TEST_SUITE( analysis )
@@ -133,27 +144,31 @@ BOOST_AUTO_TEST_CASE( fit_all )
   auto const m = equipment::laser::Modulation_depth( 0.5 );
   
   auto const optics = Optics( laser_radius, laser_intensity, view_radius, m  );
-   
-//  auto const best_fit = fit( frequencies, phases, slab_initial, optics );
-//  
-//  
-//  using thermal::model::oneLayer2D::generator::Disk;
-//
-//  auto const slab_bf = best_fit.bulk_slab;
-//  auto const optics_bf = best_fit.optics;
-//  auto const model = Disk(
-//    thermal::model::oneLayer2D::Conduction_model::finite_disk,
-//    thermal::model::oneLayer2D::Detector_model::center_point,
-//    slab_bf,
-//    optics_bf );
-//
-//  auto const model_complex_temperatures = model.evaluate( frequencies );
-//
-//  auto const model_phases = model_complex_temperatures.phases();
-//  auto const experimental_phases = phases;
-//  
-//  thermal::plot::phase::model_vs_experiment_phases(
-//        frequencies, model_phases, experimental_phases );
+
+  using thermal::model::oneLayer2D::Parameters;
+  auto const parameters = Parameters({
+    thermal::model::oneLayer2D::Parameter::disk_thermal_diffusivity,
+    thermal::model::oneLayer2D::Parameter::disk_radius,
+    thermal::model::oneLayer2D::Parameter::rc_filter
+  });  
+  
+  auto const conduction_model = thermal::model::oneLayer2D::Conduction_model::finite_disk;
+  auto const detector_model = thermal::model::oneLayer2D::Detector_model::center_point;
+  auto const fit_selection = Fit_selection::phases;
+  
+  auto const initial_disk = Disk(
+    Conduction_model::finite_disk,
+    Detector_model::center_with_view,
+    slab_initial,
+    optics );
+  
+  auto const temperatures = temperature_factory_dummy_amplitudes( phases );
+
+  auto const best_fit =
+  fit( frequencies, temperatures, fit_selection, initial_disk, parameters);
+
+  BOOST_CHECK_CLOSE_FRACTION( 8.683256e-4, best_fit.phase_goodness_of_fit_function(), 1e-5);
+
 }
 
 
