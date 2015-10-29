@@ -16,6 +16,7 @@
 #include "algorithm/algorithm.h"
 #include "plot/gnuplot.h"
 #include "math/functions/cosine.h"
+#include "units/io/print_table_values.h"
 
 namespace thermal {
 namespace equipment {
@@ -109,7 +110,7 @@ auto Measurements::print_table_measurements_values( void ) const noexcept -> voi
   auto const signals = signals_electical_potential();
   auto const precision = 9;
 
-  cout::vector::print_table_values( times, signals, precision );
+  units::io::print_table_values( times, signals, precision );
 }
 
 

@@ -13,6 +13,7 @@
 
 #include "thermal/model/oneLayer2D/infinite_disk/dimensionless/b.h"
 #include "units.h"
+#include "units/io/print_table_values.h"
 #include "math/complex/extract_phases_from_properties.h"
 #include "plot/gnuplot.h"
 #include "cout/vector/print.h"
@@ -27,7 +28,7 @@ using math::complex::extract_phases_from_properties;
 using plot::simple_XY;
 using std::vector;
 using cout::vector::print;
-using cout::vector::print_table_values;
+using units::io::print_table_values;
 
 namespace investigations{
 namespace twoColorPyrometery{

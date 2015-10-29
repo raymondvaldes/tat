@@ -1292,6 +1292,7 @@
 		ABB54FD019C35E300056823E /* ifzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifzero.h; path = algorithm/vector/ifzero.h; sourceTree = "<group>"; };
 		ABB5FAC91B9212E7004855FE /* lthermal_at_frequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lthermal_at_frequency.cpp; path = twoColorPyrometery/oneLayer2D/calculators/thermal_penetration/lthermal_at_frequency.cpp; sourceTree = "<group>"; };
 		ABB5FACA1B9212E7004855FE /* lthermal_at_frequency.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lthermal_at_frequency.hpp; path = twoColorPyrometery/oneLayer2D/calculators/thermal_penetration/lthermal_at_frequency.hpp; sourceTree = "<group>"; };
+		ABBA6EC91BE2950900D6754B /* print_table_values.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = print_table_values.h; path = units/io/print_table_values.h; sourceTree = "<group>"; };
 		ABBE935F1BDD429C00D4A886 /* fast_measurement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fast_measurement.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/fast_measurement.cpp; sourceTree = SOURCE_ROOT; };
 		ABBE93601BDD429C00D4A886 /* fast_measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fast_measurement.h; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/fast_measurement.h; sourceTree = SOURCE_ROOT; };
 		ABBE93611BDD429C00D4A886 /* frequency_sweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frequency_sweep.cpp; path = thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.cpp; sourceTree = SOURCE_ROOT; };
@@ -1760,7 +1761,6 @@
 		AB0DFDFD19524268007DF69B /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
-				AB7F198F1ACCA0210086E8F8 /* pair */,
 				ABA0B7311A9D002F00F000DA /* valarray */,
 				AB7EAD131A58C3B400AB7E11 /* stream */,
 				ABB54FBA19C2215D0056823E /* vector */,
@@ -1835,6 +1835,7 @@
 			isa = PBXGroup;
 			children = (
 				AB1B04FD1B96666400A8C175 /* prefix.hpp */,
+				ABBA6EC91BE2950900D6754B /* print_table_values.h */,
 			);
 			name = io;
 			sourceTree = "<group>";
@@ -2720,13 +2721,6 @@
 			name = stream;
 			sourceTree = "<group>";
 		};
-		AB7F198F1ACCA0210086E8F8 /* pair */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = pair;
-			sourceTree = "<group>";
-		};
 		AB7FBD891A9FA64800FF714D /* thermalfluids */ = {
 			isa = PBXGroup;
 			children = (
@@ -3010,7 +3004,6 @@
 			isa = PBXGroup;
 			children = (
 				AB0DFDFD19524268007DF69B /* algorithm */,
-				ABCF57FC1BBC5E850013A3B8 /* apps */,
 				AB4871FD1AF70FFC00DFD3C1 /* cout */,
 				AB27972F1B9686B800E7BB2B /* electronics */,
 				ABA58A191A67487D00573ED8 /* filesystem */,
@@ -3530,21 +3523,6 @@
 			name = sept28;
 			sourceTree = "<group>";
 		};
-		ABCF57FC1BBC5E850013A3B8 /* apps */ = {
-			isa = PBXGroup;
-			children = (
-				ABCF57FD1BBC5E910013A3B8 /* rc_filter */,
-			);
-			name = apps;
-			sourceTree = "<group>";
-		};
-		ABCF57FD1BBC5E910013A3B8 /* rc_filter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = rc_filter;
-			sourceTree = "<group>";
-		};
 		ABD5AE921AFD4B850068FC76 /* fit_a_b1_B2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3739,13 +3717,6 @@
 			name = uncertainty_analysis;
 			sourceTree = "<group>";
 		};
-		ABE937CB1BC49F70002C3417 /* abs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = abs;
-			sourceTree = "<group>";
-		};
 		ABE937D31BC5E0E7002C3417 /* plot */ = {
 			isa = PBXGroup;
 			children = (
@@ -3855,7 +3826,6 @@
 			isa = PBXGroup;
 			children = (
 				AB6B55BC1BD49007007E0A4D /* sum */,
-				ABE937CB1BC49F70002C3417 /* abs */,
 				ABEF4DD31948D4A500B44AD5 /* algorithms */,
 				AB9A3F961ACDFB0A0004882F /* calculus */,
 				ABFB16511AF15A740093BF5B /* complex */,

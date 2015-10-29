@@ -7,9 +7,7 @@
 //
 
 #include "algorithm/vector/stdVector2ublasVector.h"
-#include <boost/assert.hpp>
 #include "algorithm/algorithm.h"
-//#include <algorithm>
 
 namespace algorithm {
 

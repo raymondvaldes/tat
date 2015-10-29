@@ -38,7 +38,7 @@ auto print_table(
   std::vector< F > const & second_list
 ) noexcept
 {
-  using namespace units ;
+//  using namespace units ;
   using algorithm::for_each ;
   using std::cout ;
   assert( first_list.size() == second_list.size() );
@@ -51,27 +51,6 @@ auto print_table(
   } ) ;
 }
 
-template< typename T , typename F >
-auto print_table_values(
-  std::vector< units::quantity<T> > const & first_list,
-  std::vector< units::quantity<F> > const & second_list,
-  size_t precision = 6
-) noexcept
-{
-  using namespace units ;
-  using algorithm::for_each ;
-  using std::cout ;
-  assert( first_list.size() == second_list.size() );
-  
-  std::cout << std::setprecision( static_cast<int>(precision) );
-  
-  auto i = 0u;
-  for_each( first_list, [&]( auto const & /*e*/ ) noexcept
-  {
-    cout << first_list[i].value() << "\t" << second_list[i].value() << "\n";
-    ++i;
-  } ) ;
-}
   
 } } // namespace
 #endif /* defined(__tat__print__) */
