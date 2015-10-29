@@ -322,19 +322,6 @@ bool checkLimits( const double center, const double range ) noexcept
 }
 
 std::pair<double, double>
-random_CR_from_limits( const Interval myInterval ) noexcept
-{
-  //generates distribution a new distrubtion limits in terms of the logspace
-  //center and decades. It used some global limits (input).
-
-  const Interval
-  mySubInterval = myInterval.get_log10_random_subInterval();
-  
-  return CRfromSweepLimits( mySubInterval.get_pair() , myInterval.get_pair() ) ;
-}
-
-
-std::pair<double, double>
 newThermalSweepLimits( const double center, const double range,
                        const std::pair<double, double> & limits ) noexcept
 {

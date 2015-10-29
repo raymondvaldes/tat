@@ -32,8 +32,6 @@ License
 #include <typeinfo>
 #include <cstddef>
 
-#include "math/geometry/interval.h"
-
 namespace math{
 
 double arrayMax( const double* x, const size_t I ) noexcept;
@@ -63,8 +61,6 @@ std::pair<double, double>
 CRfromSweepLimits( const std::pair<double, double>  & inner_bounds,
                    const std::pair<double, double>  & limits ) noexcept;
 
-std::pair<double, double>
-random_CR_from_limits( const Interval myInterval ) noexcept;
 
 std::vector<double>
 range1og10( const double l_min, const double l_max, const size_t L_end ) noexcept;

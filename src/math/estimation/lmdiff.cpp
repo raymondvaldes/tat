@@ -5,8 +5,11 @@
     || 	   T Toolbox    	| Copyright (C) 2013 Raymond Valdes
     ||   	  	          	|
 \*----------------------------------------------------------------------------*/
-#include "thermal/analysis/kernal.hpp"
 #include "math/estimation/lmdiff.hpp"
+#include <exception>
+#include <stdexcept>
+#include <string>
+#include <cmath>
 
 namespace math{
 namespace estimation{
@@ -1845,16 +1848,6 @@ BOOST_ASSERT( wa2!= nullptr ) ;
 BOOST_ASSERT( wa3!= nullptr ) ;
 BOOST_ASSERT( wa4!= nullptr ) ;
 
-if( (n <= 0) || ( m < (n-1) ) || (ldfjac < m) || (ftol < 0 )
-  || (xtol < 0 ) || (gtol < 0 ) || (maxfev <= 0)
-  || (factor <= 0 ) )
-{
-  std::cerr << (n <= 0)<< "\t" << (m < n) <<"\t" << (ldfjac < m)  <<"\t"
-            << (ftol < 0 ) << "\t" <<(xtol < 0 ) << "\t"
-            << (gtol < 0 ) << "\t" << (maxfev <= 0) <<"\t" <<(factor <= 0 )
-            << "\n";
-  throw;
-}
 
 /*
 *     **********

@@ -11,6 +11,8 @@
 
 #include <vector>
 #include <cstddef>
+#include <utility>
+
 #include "thermal/model/complex/temperature.h"
 #include "math/complex/properties.h"
 #include "thermal/equipment/laser/modulation_cutoff_frequencies.h"
@@ -41,7 +43,8 @@ class Temperatures{
     thermal::equipment::laser::Modulation_frequencies const & frequencies,
     thermal::equipment::laser::Modulation_cutoff_frequencies const & cutoff
   )
-  const noexcept -> Temperatures;
+  const noexcept ->
+  std::pair< thermal::equipment::laser::Modulation_frequencies, Temperatures>;
   };
 
 

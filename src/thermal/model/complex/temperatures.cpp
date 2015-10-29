@@ -58,19 +58,23 @@ auto Temperatures::amplitudes() const noexcept -> Amplitudes
 
 auto Temperatures::filter_using_cutoff_frequencies
 (
-  thermal::equipment::laser::Modulation_frequencies const & frequencies,
+  equipment::laser::Modulation_frequencies const & fs,
   thermal::equipment::laser::Modulation_cutoff_frequencies const & cutoff
 )
-const noexcept -> Temperatures
+const noexcept -> std::pair< equipment::laser::Modulation_frequencies, Temperatures >
 {
-  Expects( !frequencies.empty() ) ;
-  Expects( frequencies.size() == values.size() );
+  using std::make_pair;
+  Expects( !fs.empty() ) ;
+  Expects( fs.size() == values.size() );
   using thermal::equipment::laser::filter_using_cutoff_frequencies;
   
-  auto const t = filter_using_cutoff_frequencies(frequencies, cutoff, values);
+  auto const f = filter_using_cutoff_frequencies( fs, cutoff, fs);
+  auto const t = filter_using_cutoff_frequencies( fs, cutoff, values);
+
   auto const T = Temperatures(t);
 
-  return T;
+  auto const out = make_pair( f, t );
+  return out;
 }
 
 

@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE( fit_all )
 //  fit( frequencies, temperatures, Fit_selection::amplitudes, initial_disk, parameters);
 
 
-//std::cout << best_fit_phases.phase_goodness_of_fit_function() << "\n\n";
+std::cout << best_fit_phases.phase_goodness_of_fit_function() << "\n\n";
   BOOST_CHECK_CLOSE_FRACTION( 7.41395e-5, best_fit_phases.phase_goodness_of_fit_function(), 1e-5);
 }
 

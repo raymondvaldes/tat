@@ -8,11 +8,9 @@
 
 #include <algorithm>
 #include <boost/filesystem.hpp>
+#include <iostream>
 
 #include "investigations/execute.h"
-#include "investigations/num_method2014.h"
-#include "investigations/sensitivityvaldes2013.hpp"
-#include "investigations/taylor_uncertainty.h"
 #include "investigations/twoColorPyrometery.h"
 #include "investigations/bulkDiffusivityMeasurements2015/run.hpp"
 
@@ -33,22 +31,13 @@ void execute
   using filesystem::directory;
   auto const run_investigation = [ & ] ( const directory& active ) -> void
   {
-    if( investigationName == "PIE_Analsis") {
-      sensitivityvaldes2013::run( active ) ;
-    }
-    else if( investigationName == "1d_Numerical") {
-      num_method::run( active ) ;
-    }
-    else if( investigationName == "taylor_uncertainty") {
-      taylor_uncertainty::run( active ) ;
-    }
-    else if( investigationName == "twoColorPyrometery" ) {
+
+    if( investigationName == "twoColorPyrometery" ) {
       twoColorPyrometery::run( active ) ;
     }
     else if( investigationName == "bulkDiffusivityMeasurements2015" ){
       bulkDiffusivityMeasurements2015::run( active ) ;
     }
-    
     else {
       using std::cout;
       cout << "No investigation selected.\n" ;

@@ -9,10 +9,9 @@
 #ifndef optional_h_101315
 #define optional_h_101315
 
-#include <experimental/optional>
+#include <boost/optional.hpp>
 
-using std::experimental::optional;
-
-using std::experimental::make_optional;
+using boost::optional;
+using boost::make_optional;
 
 #endif /* optional_h */
