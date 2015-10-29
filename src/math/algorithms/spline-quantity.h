@@ -11,7 +11,7 @@
 
 #include <vector>
 #include "units.h"
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 
 namespace math{
 

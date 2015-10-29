@@ -16,7 +16,7 @@
 
 #include "tools/interface/filesystem.hpp"
 #include "gnuplot-iostream.h"
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 
 #include "units.h"
 
@@ -33,7 +33,7 @@ inline auto simple_XY
   assert( X.size() > 0 ) ;
 
   using std::make_pair;
-  using algorithm::vector::quantityTodouble;
+  using units::container::quantityTodouble;
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");
   
   auto const x_pts = quantityTodouble( X );
@@ -58,7 +58,7 @@ inline auto simple_x_y1_y2
   assert( X.size() > 0 ) ;
 
   using std::make_pair;
-  using algorithm::vector::quantityTodouble;
+  using units::container::quantityTodouble;
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");
   
   auto const x_pts = quantityTodouble( X );

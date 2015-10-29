@@ -8,9 +8,9 @@
 
 #include "thermal/pyrometry/twoColor/periodic/results.h"
 #include "plot/gnuplot-iostream.h"
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 
-using algorithm::vector::quantityTodouble;
+using units::container::quantityTodouble;
 
 namespace thermal {
 namespace pyrometry {

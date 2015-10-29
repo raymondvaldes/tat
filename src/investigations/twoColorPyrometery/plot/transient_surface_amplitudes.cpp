@@ -10,7 +10,7 @@
 
 #include <utility>
 #include <iostream>
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 #include "plot/gnuplot-iostream.h"
 
 namespace investigations {
@@ -18,7 +18,7 @@ namespace twoColorPyrometery {
 namespace plot {
 
 using std::make_pair;
-using algorithm::vector::quantityTodouble;
+using units::container::quantityTodouble;
 
 auto transient_surface_amplitudes(
   std::vector< units::quantity< units::si::frequency > > const & x,

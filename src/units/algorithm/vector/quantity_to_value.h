@@ -1,22 +1,23 @@
 //
-//  quantityTodouble.h
+//  quantity_to_double.h
 //  tat
 //
-//  Created by Raymond Valdes_New on 2/6/15.
-//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
+//  Created by Raymond Valdes on 10/29/15.
+//  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef __tat__quantityTodouble__
-#define __tat__quantityTodouble__
+#ifndef quantity_to_double_h
+#define quantity_to_double_h
 
 #include <vector>
 #include <algorithm>
+#include <cassert>
 
 #include "units.h"
 
-namespace algorithm {
+namespace units{
 
-namespace vector {
+namespace container {
 
 template< typename UnitType >
 auto quantityTodouble( std::vector< units::quantity< UnitType > > const & input )
@@ -30,7 +31,8 @@ noexcept -> std::vector< double >
 
   vector<double> output( input.size() ) ;
 
-  transform( begin( input ), end( input ), begin( output ), []( auto const& val )
+  transform( begin( input ), end( input ), begin( output ),
+  []( auto const& val )
   {
     return val.value();
   } );
@@ -38,8 +40,7 @@ noexcept -> std::vector< double >
   return output;
 }
   
-} // namespace vector
-  
-} // namespace algorithm
+} // namespace container
+} // namespace units
 
-#endif /* defined(__tat__quantityTodouble__) */
+#endif /* quantity_to_double_h */

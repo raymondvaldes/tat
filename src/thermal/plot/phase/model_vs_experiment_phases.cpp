@@ -7,7 +7,7 @@
 //
 
 #include "model_vs_experiment_phases.hpp"
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 #include <utility>
 #include <cassert>
 
@@ -15,7 +15,7 @@ namespace thermal{
 namespace plot{
 namespace phase{
 
-using algorithm::vector::quantityTodouble;
+using units::container::quantityTodouble;
 using std::make_pair;
 
 auto model_vs_experiment_phases

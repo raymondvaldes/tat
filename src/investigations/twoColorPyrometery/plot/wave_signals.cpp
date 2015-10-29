@@ -9,7 +9,7 @@
 #include "wave_signals.h"
 
 #include <iostream>
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 #include "algorithm/vector/ratio.h"
 
 #include "plot/gnuplot-iostream.h"
@@ -21,7 +21,7 @@ namespace twoColorPyrometery {
 namespace plot {
 
 using std::make_pair;
-using algorithm::vector::quantityTodouble;
+using units::container::quantityTodouble;
 
 auto wave_signals
 ( std::pair<

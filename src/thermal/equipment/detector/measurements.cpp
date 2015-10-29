@@ -27,7 +27,7 @@ using units::si::time;
 using units::si::electric_potential;
 using algorithm::generate;
 using algorithm::transform;
-using algorithm::vector::quantityTodouble;
+using units::container::quantityTodouble;
 
 Measurements::Measurements(
   units::quantity<units::si::wavelength> const wavelengthIn,

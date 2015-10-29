@@ -7,7 +7,7 @@
 //
 
 #include "model_vs_experiment_amplitudes.hpp"
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 
 #include <utility>
 #include <gsl.h>
@@ -16,7 +16,7 @@ namespace thermal{
 namespace plot{
 namespace amplitudes{
 
-using algorithm::vector::quantityTodouble;
+using units::container::quantityTodouble;
 using std::make_pair;
 
 auto model_vs_experiment_amplitudes

@@ -10,7 +10,7 @@
 
 #include "tools/interface/filesystem.hpp"
 #include "plot/gnuplot-iostream.h"
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 
 namespace investigations {
 
@@ -30,7 +30,7 @@ auto phase_exp_model
   assert( x.size() > 0 ) ;
 
   using std::make_pair;
-  using algorithm::vector::quantityTodouble;
+  using units::container::quantityTodouble;
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");
   
   gp << "set xlabel 'frequency (hz)'" << "\n";

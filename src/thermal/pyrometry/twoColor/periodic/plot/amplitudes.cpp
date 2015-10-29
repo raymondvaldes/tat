@@ -10,7 +10,7 @@
 
 #include "amplitudes.hpp"
 #include "plot/gnuplot-iostream.h"
-#include "algorithm/vector/quantityTodouble.h"
+#include "units/algorithm/vector/quantity_to_value.h"
 #include "algorithm/algorithm.h"
 
 namespace thermal {
@@ -21,7 +21,7 @@ namespace plot {
 
 using std::string;
 using filesystem::is_directory;
-using algorithm::vector::quantityTodouble;
+using units::container::quantityTodouble;
 using algorithm::for_each;
 using units::isfinite;
 using std::endl;
