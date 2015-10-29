@@ -9,7 +9,7 @@
 #include "tools/interface/xml.h"
 
 #include "tools/interface/import/columnData.h"
-#include "algorithm/vector/stringToQuantity.h"
+#include "units/container/string_to_quantity.h"
 
 namespace thermal {
 namespace analysis{  
@@ -33,7 +33,7 @@ auto Poptea::loadTBDfile( filesystem::directory const & dir,
   using units::si::millivolts;
   
   using tools::interface::import::columnData;
-  using algorithm::vector::stringToQuantity;
+  using units::container::string_to_quantity;
   
 
   auto const fileName_string = dir.abs( inputFileName );
@@ -42,7 +42,7 @@ auto Poptea::loadTBDfile( filesystem::directory const & dir,
   auto const strings = myData.getColumn( 3 ) ;
 
   auto const myEmissionVector =
-  stringToQuantity< electric_potential >( strings, millivolts  ) ;
+  string_to_quantity< electric_potential >( strings, millivolts  ) ;
 
   return myEmissionVector;
 }

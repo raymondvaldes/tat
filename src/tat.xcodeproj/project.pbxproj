@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AB06EDAB1A71C6B500F9FDBD /* temperatureSteady.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB06EDAA1A71C6B500F9FDBD /* temperatureSteady.cpp */; };
-		AB0A6BB01BE2862E00C4E04E /* quantity_to_value.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0A6BAF1BE2862E00C4E04E /* quantity_to_value.h */; };
+		AB0A6BB61BE2917700C4E04E /* double_to_quantity.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0A6BB31BE2917600C4E04E /* double_to_quantity.h */; };
+		AB0A6BB71BE2917700C4E04E /* quantity_to_value.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0A6BB41BE2917600C4E04E /* quantity_to_value.h */; };
+		AB0A6BB81BE2917700C4E04E /* string_to_quantity.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0A6BB51BE2917600C4E04E /* string_to_quantity.h */; };
 		AB0C51BB1A97C7B600EEA759 /* valid.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BA1A97C7B600EEA759 /* valid.h */; };
 		AB0C51BD1A97FDF400EEA759 /* calibrationGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */; };
 		AB0D6D631B8CE6120044DA61 /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB0D6D611B8CE6120044DA61 /* fit.cpp */; };
@@ -809,7 +811,6 @@
 		ABFC9E681A94372A00F124F1 /* stringToDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E661A94372A00F124F1 /* stringToDouble.h */; };
 		ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC9E691A94420300F124F1 /* doubleToString.cpp */; };
 		ABFC9E6C1A94420300F124F1 /* doubleToString.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6A1A94420300F124F1 /* doubleToString.h */; };
-		ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */; };
 		ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E711A96B53900F124F1 /* spectrum.h */; };
 		ABFD19991AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */; };
 		ABFD199A1AB1FE7600D865C7 /* find_unique_lambdas_in_files.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFD19981AB1FE7600D865C7 /* find_unique_lambdas_in_files.h */; };
@@ -821,8 +822,9 @@
 
 /* Begin PBXFileReference section */
 		AB06EDAA1A71C6B500F9FDBD /* temperatureSteady.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperatureSteady.cpp; path = pyrometry/twoColor/temperatureSteady.cpp; sourceTree = "<group>"; };
-		AB0A6BAF1BE2862E00C4E04E /* quantity_to_value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quantity_to_value.h; path = units/algorithm/vector/quantity_to_value.h; sourceTree = "<group>"; };
-		AB0A6BB11BE28C7C00C4E04E /* double_to_quantity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = double_to_quantity.h; path = units/algorithm/container/double_to_quantity.h; sourceTree = "<group>"; };
+		AB0A6BB31BE2917600C4E04E /* double_to_quantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = double_to_quantity.h; path = units/container/double_to_quantity.h; sourceTree = "<group>"; };
+		AB0A6BB41BE2917600C4E04E /* quantity_to_value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quantity_to_value.h; path = units/container/quantity_to_value.h; sourceTree = "<group>"; };
+		AB0A6BB51BE2917600C4E04E /* string_to_quantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string_to_quantity.h; path = units/container/string_to_quantity.h; sourceTree = "<group>"; };
 		AB0C51BA1A97C7B600EEA759 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = matrixAnalysis/valid.h; sourceTree = "<group>"; };
 		AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibrationGenerator.h; path = pyrometry/twoColor/calibrationGenerator.h; sourceTree = "<group>"; };
 		AB0D6D611B8CE6120044DA61 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = fit_diffusivity_offset_view_radius_beam/fit_all/fit.cpp; sourceTree = "<group>"; };
@@ -1679,7 +1681,6 @@
 		ABFC9E661A94372A00F124F1 /* stringToDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringToDouble.h; path = algorithm/vector/stringToDouble.h; sourceTree = "<group>"; };
 		ABFC9E691A94420300F124F1 /* doubleToString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = doubleToString.cpp; path = algorithm/vector/doubleToString.cpp; sourceTree = "<group>"; };
 		ABFC9E6A1A94420300F124F1 /* doubleToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = doubleToString.h; path = algorithm/vector/doubleToString.h; sourceTree = "<group>"; };
-		ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringToQuantity.h; path = algorithm/vector/stringToQuantity.h; sourceTree = "<group>"; };
 		ABFC9E711A96B53900F124F1 /* spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spectrum.h; sourceTree = "<group>"; };
 		ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = find_unique_lambdas_in_files.cpp; path = gTBC/gMeasure/find_unique_lambdas_in_files.cpp; sourceTree = "<group>"; };
 		ABFD19981AB1FE7600D865C7 /* find_unique_lambdas_in_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = find_unique_lambdas_in_files.h; path = gTBC/gMeasure/find_unique_lambdas_in_files.h; sourceTree = "<group>"; };
@@ -1706,19 +1707,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB0A6BAD1BE2860400C4E04E /* algorithm */ = {
-			isa = PBXGroup;
-			children = (
-				AB0A6BAE1BE2860B00C4E04E /* container */,
-			);
-			name = algorithm;
-			sourceTree = "<group>";
-		};
 		AB0A6BAE1BE2860B00C4E04E /* container */ = {
 			isa = PBXGroup;
 			children = (
-				AB0A6BAF1BE2862E00C4E04E /* quantity_to_value.h */,
-				AB0A6BB11BE28C7C00C4E04E /* double_to_quantity.h */,
+				AB0A6BB31BE2917600C4E04E /* double_to_quantity.h */,
+				AB0A6BB41BE2917600C4E04E /* quantity_to_value.h */,
+				AB0A6BB51BE2917600C4E04E /* string_to_quantity.h */,
 			);
 			name = container;
 			sourceTree = "<group>";
@@ -3372,27 +3366,26 @@
 		ABB54FBA19C2215D0056823E /* vector */ = {
 			isa = PBXGroup;
 			children = (
-				ABB54FBD19C221920056823E /* subtract.h */,
 				ABB54FC419C22C7E0056823E /* add.h */,
-				ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */,
-				ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */,
-				ABB54FCF19C35E300056823E /* ifzero.cpp */,
-				ABB54FD019C35E300056823E /* ifzero.h */,
-				ABC648671A65B891008FA721 /* vector2cstringArray.h */,
-				ABFC9E651A94372A00F124F1 /* stringToDouble.cpp */,
-				ABFC9E661A94372A00F124F1 /* stringToDouble.h */,
 				ABFC9E691A94420300F124F1 /* doubleToString.cpp */,
 				ABFC9E6A1A94420300F124F1 /* doubleToString.h */,
-				ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */,
 				AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */,
-				AB71A3771AA1307B003AAC84 /* repeatElements.h */,
-				AB63675F1AA941AC00AC8390 /* sum.h */,
-				AB7996EB1AB11C4B0022015B /* operator_overloads.h */,
 				AB7A69501AB267EA00249A6E /* find_all.h */,
-				AB7AD88A1ABA0C4000478726 /* reserve.h */,
-				AB4E53C91ABCC59800E7BA8D /* ratio.h */,
-				AB7F19911ACCA06D0086E8F8 /* split_vector_of_pairs.h */,
+				ABB54FCF19C35E300056823E /* ifzero.cpp */,
+				ABB54FD019C35E300056823E /* ifzero.h */,
 				ABA4CDDC1BE1932A0034E6AC /* merge_vectors_into_pairs.h */,
+				AB7996EB1AB11C4B0022015B /* operator_overloads.h */,
+				AB4E53C91ABCC59800E7BA8D /* ratio.h */,
+				AB71A3771AA1307B003AAC84 /* repeatElements.h */,
+				AB7AD88A1ABA0C4000478726 /* reserve.h */,
+				AB7F19911ACCA06D0086E8F8 /* split_vector_of_pairs.h */,
+				ABB54FC919C2781C0056823E /* stdVector2ublasVector.cpp */,
+				ABB54FCA19C2781C0056823E /* stdVector2ublasVector.h */,
+				ABFC9E651A94372A00F124F1 /* stringToDouble.cpp */,
+				ABFC9E661A94372A00F124F1 /* stringToDouble.h */,
+				ABB54FBD19C221920056823E /* subtract.h */,
+				AB63675F1AA941AC00AC8390 /* sum.h */,
+				ABC648671A65B891008FA721 /* vector2cstringArray.h */,
 			);
 			name = vector;
 			sourceTree = "<group>";
@@ -4264,7 +4257,7 @@
 		ABF5D66319DB607700A70476 /* units */ = {
 			isa = PBXGroup;
 			children = (
-				AB0A6BAD1BE2860400C4E04E /* algorithm */,
+				AB0A6BAE1BE2860B00C4E04E /* container */,
 				AB1B04FC1B96663E00A8C175 /* io */,
 				AB1B04F71B9663E800A8C175 /* cout */,
 				AB71BD6619DE724100C7F280 /* systems */,
@@ -4684,7 +4677,6 @@
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
 				AB90AA531AB2930A00F2535D /* unique_measurement_pair.h in Headers */,
-				AB0A6BB01BE2862E00C4E04E /* quantity_to_value.h in Headers */,
 				AB8708F91BC2E78E00B0EC67 /* coefficient_is_valid.hpp in Headers */,
 				AB841C5D1AC4E4D4000CE81D /* c.h in Headers */,
 				AB4871C41AF4196F00DFD3C1 /* surface_radial_profile.h in Headers */,
@@ -4843,7 +4835,6 @@
 				AB3ED3CA1AAF93D100845151 /* conductivity.h in Headers */,
 				AB6B55B21BD4781E007E0A4D /* c_coefficient.h in Headers */,
 				ABEF4F051948D4A500B44AD5 /* tools.hpp in Headers */,
-				ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */,
 				ABEF4E901948D4A500B44AD5 /* parameterestimation.hpp in Headers */,
 				ABF781731BB478F4005D5376 /* run1_rear_70degC.h in Headers */,
 				ABBE93D11BDDC67300D4A886 /* get_model_parameters.hpp in Headers */,
@@ -4861,6 +4852,7 @@
 				ABEF4E8A1948D4A500B44AD5 /* cosfit.hpp in Headers */,
 				AB4E53BC1ABBD54200E7BA8D /* steady_surface_temperature.h in Headers */,
 				ABEF4EEE1948D4A500B44AD5 /* Numerical_Temperature.h in Headers */,
+				AB0A6BB81BE2917700C4E04E /* string_to_quantity.h in Headers */,
 				ABEF4F021948D4A500B44AD5 /* programoptions.hpp in Headers */,
 				ABCC65EE1B1FCB77001FFD47 /* fit.h in Headers */,
 				AB7996EA1AB10F350022015B /* scopeFiles_from_datafiles.h in Headers */,
@@ -4868,6 +4860,7 @@
 				ABD4A3DB1BDCA42F002B1596 /* select_detector_model.hpp in Headers */,
 				ABFC9E641A9424C500F124F1 /* calculateCalibrationCoefficients.h in Headers */,
 				AB4E53CD1ABCDDC400E7BA8D /* csc.h in Headers */,
+				AB0A6BB61BE2917700C4E04E /* double_to_quantity.h in Headers */,
 				AB9383D51AC2299400F2D2DD /* Kappa.h in Headers */,
 				ABEF4E7C1948D4A500B44AD5 /* sensitivityvaldes2013.hpp in Headers */,
 				ABBE93C51BDDBF3900D4A886 /* get_model_parameters.hpp in Headers */,
@@ -5029,6 +5022,7 @@
 				ABFB16551AF15AAB0093BF5B /* properties.h in Headers */,
 				AB4872121AF81AFC00DFD3C1 /* spot_view.h in Headers */,
 				ABDCC4CA1AB9EF2300187DD1 /* import_sweep_meta_data.h in Headers */,
+				AB0A6BB71BE2917700C4E04E /* quantity_to_value.h in Headers */,
 				ABEF4EE41948D4A500B44AD5 /* labels.h in Headers */,
 				ABD4A3D11BDCA20C002B1596 /* b.h in Headers */,
 				ABBE93A81BDDB99800D4A886 /* valid_amplitude_parameters.hpp in Headers */,

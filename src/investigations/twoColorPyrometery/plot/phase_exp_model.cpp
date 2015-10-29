@@ -10,7 +10,7 @@
 
 #include "tools/interface/filesystem.hpp"
 #include "plot/gnuplot-iostream.h"
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 
 namespace investigations {
 
@@ -30,18 +30,18 @@ auto phase_exp_model
   assert( x.size() > 0 ) ;
 
   using std::make_pair;
-  using units::container::quantityTodouble;
+  using units::container::quantity_to_double;
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");
   
   gp << "set xlabel 'frequency (hz)'" << "\n";
   gp << "set ylabel 'phase (rad)'" << "\n";
   
-  auto const x_pts = quantityTodouble( x );
+  auto const x_pts = quantity_to_double( x );
   
-  auto const y1_pts = quantityTodouble( y1 );
+  auto const y1_pts = quantity_to_double( y1 );
   auto const xy1_pts = make_pair( x_pts, y1_pts );
 
-  auto const y2_pts = quantityTodouble( y2 );
+  auto const y2_pts = quantity_to_double( y2 );
   auto const xy2_pts = make_pair( x_pts, y2_pts );
   
   gp << "plot"

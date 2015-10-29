@@ -10,7 +10,7 @@
 
 #include <utility>
 #include <iostream>
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 #include "plot/gnuplot-iostream.h"
 
 namespace investigations {
@@ -20,7 +20,7 @@ namespace twoColorPyrometery {
 namespace plot {
 
 using std::make_pair;
-using units::container::quantityTodouble;
+using units::container::quantity_to_double;
 
 auto steady_surface_temperature(
   std::vector< units::quantity< units::si::frequency > > const & x,
@@ -35,8 +35,8 @@ auto steady_surface_temperature(
   gp << "set xlabel 'frequency (hz)'" << "\n";
   gp << "set ylabel 'temperature (K)'" << "\n";
   
-  auto const x_pts = quantityTodouble( x );
-  auto const y1_pts = quantityTodouble( y1 );
+  auto const x_pts = quantity_to_double( x );
+  auto const y1_pts = quantity_to_double( y1 );
   
   auto const xy1_pts = make_pair( x_pts, y1_pts );
 

@@ -11,7 +11,7 @@
 
 #include "phases.hpp"
 #include "plot/gnuplot-iostream.h"
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 #include "algorithm/algorithm.h"
 
 namespace thermal {
@@ -22,7 +22,7 @@ namespace plot {
 
 using filesystem::is_directory;
 using std::string;
-using units::container::quantityTodouble;
+using units::container::quantity_to_double;
 using algorithm::for_each;
 using std::endl;
 
@@ -58,8 +58,8 @@ auto phases_to_file(
   gp << "set output '" << plot_eps <<"'"<< std::endl;
   
   
-  auto const x_pts = quantityTodouble( frequencies );
-  auto const y_pts = quantityTodouble( phases );
+  auto const x_pts = quantity_to_double( frequencies );
+  auto const y_pts = quantity_to_double( phases );
   
   auto const xy_pts = make_pair( x_pts, y_pts );
   

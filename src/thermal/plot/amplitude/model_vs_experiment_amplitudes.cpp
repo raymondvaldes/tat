@@ -7,7 +7,7 @@
 //
 
 #include "model_vs_experiment_amplitudes.hpp"
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 
 #include <utility>
 #include <gsl.h>
@@ -16,7 +16,7 @@ namespace thermal{
 namespace plot{
 namespace amplitudes{
 
-using units::container::quantityTodouble;
+using units::container::quantity_to_double;
 using std::make_pair;
 
 auto model_vs_experiment_amplitudes
@@ -45,11 +45,11 @@ auto model_vs_experiment_amplitudes
 //  gp << "set output '"<< plot_eps <<"'"<< endl;
   
   
-  auto const x_pts = quantityTodouble( frequencies );
-  auto const y_pts = quantityTodouble( model );
+  auto const x_pts = quantity_to_double( frequencies );
+  auto const y_pts = quantity_to_double( model );
   auto const xy_pts = make_pair( x_pts, y_pts );
 
-  auto const y2_pts = quantityTodouble( experiment );
+  auto const y2_pts = quantity_to_double( experiment );
   auto const xy2_pts = make_pair( x_pts, y2_pts );
   
   //set axis labels

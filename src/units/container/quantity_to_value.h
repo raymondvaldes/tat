@@ -16,11 +16,10 @@
 #include "units.h"
 
 namespace units{
-
 namespace container {
 
 template< typename UnitType >
-auto quantityTodouble( std::vector< units::quantity< UnitType > > const & input )
+auto quantity_to_double( std::vector< units::quantity< UnitType > > const & input )
 noexcept -> std::vector< double >
 {
   using std::vector;

@@ -27,7 +27,7 @@ using units::si::time;
 using units::si::electric_potential;
 using algorithm::generate;
 using algorithm::transform;
-using units::container::quantityTodouble;
+using units::container::quantity_to_double;
 
 Measurements::Measurements(
   units::quantity<units::si::wavelength> const wavelengthIn,
@@ -124,8 +124,8 @@ auto Measurements::plot_measurements( filesystem::path const & print_file
   auto const x_vec = referenceTimes();
   auto const y_vec = signals_electical_potential();
   
-  auto const x_pts = quantityTodouble( x_vec );
-  auto const y1_pts = quantityTodouble( y_vec );
+  auto const x_pts = quantity_to_double( x_vec );
+  auto const y1_pts = quantity_to_double( y_vec );
     
   auto const xy1_pts = make_pair( x_pts, y1_pts );
 

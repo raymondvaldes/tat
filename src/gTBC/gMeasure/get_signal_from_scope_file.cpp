@@ -11,7 +11,7 @@
 #include "gTBC/gMeasure/get_signal_from_scope_file.h"
 
 
-#include "algorithm/vector/stringToQuantity.h"
+#include "units/container/string_to_quantity.h"
 
 namespace gTBC {
 
@@ -22,7 +22,7 @@ using units::si::electric_potential;
 using units::si::millivolts;
 
 using tools::interface::import::columnData;
-using algorithm::vector::stringToQuantity;
+using units::container::string_to_quantity;
 
 auto get_signal_from_scope_file( filesystem::directory const & dir,
                                   std::string const & inputFileName )
@@ -37,7 +37,7 @@ auto get_signal_from_scope_file( filesystem::directory const & dir,
   auto const list_strings = myData.getColumn( raw_signal_column ) ;
   
   auto const raw_detector_signals =
-  stringToQuantity< electric_potential >( list_strings, millivolts  ) ;
+  string_to_quantity< electric_potential >( list_strings, millivolts  ) ;
   
   return raw_detector_signals;
 }
@@ -64,7 +64,7 @@ auto get_signal_from_scope_file(  filesystem::path const & path )
 
   
   auto const raw_detector_signals =
-  stringToQuantity< electric_potential >( list_strings, millivolts  ) ;
+  string_to_quantity< electric_potential >( list_strings, millivolts  ) ;
   
   
   return raw_detector_signals;

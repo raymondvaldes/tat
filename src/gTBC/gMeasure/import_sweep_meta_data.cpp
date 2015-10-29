@@ -13,7 +13,7 @@
 #include "tools/interface/import/columnData.h"
 
 #include "algorithm/algorithm.h"
-#include "algorithm/vector/stringToQuantity.h"
+#include "units/container/string_to_quantity.h"
 #include "algorithm/vector/reserve.h"
 #include "math/utilities/even.h"
 

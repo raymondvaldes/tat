@@ -13,7 +13,7 @@
 #include "thermal/emission/signal.h"
 #include "thermal/emission/spectrum.h"
 #include "thermal/pyrometry/twoColor/calibrationGenerator.h"
-#include "algorithm/vector/stringToQuantity.h"
+#include "units/container/string_to_quantity.h"
 #include "algorithm/vector/fill_with_list_values_as_constructor_arg.h"
 #include "statistics/signal_processing/average.h"
 #include <algorithm> 
@@ -49,7 +49,7 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     using units::si::dimensionless;
     namespace celsius = units::celsius;
   
-    using algorithm::vector::stringToQuantity;
+    using units::container::string_to_quantity;
     using tools::interface::import::columnData;
     using thermal::pyrometry::twoColor::calibrationGenerator;
     using thermal::emission::Signal;
@@ -72,12 +72,12 @@ auto calculateCalibrationCoefficients( filesystem::directory const & dir )
     {
       auto const myData = columnData( myPath ) ;
     
-      auto wavelengths_raw = stringToQuantity< length >(
+      auto wavelengths_raw = string_to_quantity< length >(
         myData.getColumn( wavelengthColumn ) , micrometers ) ;
     
     
       auto const wavelengths = calibrate_wavelengths( wavelengths_raw, wavelength_offset ) ;
-      auto const emissionSignal = stringToQuantity< electric_potential >(
+      auto const emissionSignal = string_to_quantity< electric_potential >(
         myData.getColumn( emmissionColumn ) , volts ) ;
 
 

@@ -8,9 +8,9 @@
 
 #include "thermal/pyrometry/twoColor/periodic/results.h"
 #include "plot/gnuplot-iostream.h"
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 
-using units::container::quantityTodouble;
+using units::container::quantity_to_double;
 
 namespace thermal {
 namespace pyrometry {
@@ -23,8 +23,8 @@ const noexcept -> void
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");
   gp << "set xlabel 'time (s)'" << "\n";
   gp << "set ylabel 'normalized signal ratio (1/K)'" << "\n";
-  auto const x_pts = quantityTodouble( normalized_SRs.first );
-  auto const y1_pts = quantityTodouble( normalized_SRs.second );
+  auto const x_pts = quantity_to_double( normalized_SRs.first );
+  auto const y1_pts = quantity_to_double( normalized_SRs.second );
 
   auto const xy1_pts = make_pair( x_pts, y1_pts );
   auto const print_file_string = print_file.string();
@@ -45,15 +45,15 @@ const noexcept -> void
   gp << "set xlabel 'time (s)'" << "\n";
   gp << "set ylabel 'normalized signal ratio (1/K)'" << "\n";
   
-  auto const x_pts = quantityTodouble( normalized_SRs.first );
+  auto const x_pts = quantity_to_double( normalized_SRs.first );
   
-  auto const y1_pts = quantityTodouble( normalized_SRs.second );
+  auto const y1_pts = quantity_to_double( normalized_SRs.second );
   auto const xy1_pts = make_pair( x_pts, y1_pts );
   
   auto shifted_cosine = fitted_cosine_function;
   shifted_cosine.shift_phase( laser_modulation_phase );
   auto const y2 = shifted_cosine.evaluate( normalized_SRs.first );
-  auto const y2_pts = quantityTodouble( y2 );
+  auto const y2_pts = quantity_to_double( y2 );
   auto const xy2_pts = make_pair( x_pts, y2_pts );
   
   

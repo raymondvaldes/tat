@@ -17,7 +17,7 @@
 #include "physics/classical_mechanics/kinematics.h"
 
 #include "tools/interface/filesystem.hpp"
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 
 namespace thermal {
 namespace pyrometry {
@@ -35,7 +35,7 @@ using physics::classical_mechanics::frequency_to_angularFrequency;
 using std::pair;
 using std::vector;
 using std::make_pair;
-using units::container::quantityTodouble;
+using units::container::quantity_to_double;
 
 
 auto transient_analysis

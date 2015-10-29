@@ -16,7 +16,7 @@
 
 #include "tools/interface/filesystem.hpp"
 #include "gnuplot-iostream.h"
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 
 #include "units.h"
 
@@ -33,11 +33,11 @@ inline auto simple_XY
   assert( X.size() > 0 ) ;
 
   using std::make_pair;
-  using units::container::quantityTodouble;
+  using units::container::quantity_to_double;
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");
   
-  auto const x_pts = quantityTodouble( X );
-  auto const y_pts = quantityTodouble( Y );
+  auto const x_pts = quantity_to_double( X );
+  auto const y_pts = quantity_to_double( Y );
   
   auto const xy_pts = make_pair( x_pts, y_pts );
   
@@ -58,12 +58,12 @@ inline auto simple_x_y1_y2
   assert( X.size() > 0 ) ;
 
   using std::make_pair;
-  using units::container::quantityTodouble;
+  using units::container::quantity_to_double;
 	Gnuplot gp("/usr/local/bin/gnuplot --persist");
   
-  auto const x_pts = quantityTodouble( X );
-  auto const y1_pts = quantityTodouble( Y1 );
-  auto const y2_pts = quantityTodouble( Y2 );
+  auto const x_pts = quantity_to_double( X );
+  auto const y1_pts = quantity_to_double( Y1 );
+  auto const y2_pts = quantity_to_double( Y2 );
   
   auto const xy1_pts = make_pair( x_pts, y1_pts );
   auto const xy2_pts = make_pair( x_pts, y2_pts );

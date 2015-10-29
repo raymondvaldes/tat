@@ -10,7 +10,7 @@
 
 #include "amplitudes.hpp"
 #include "plot/gnuplot-iostream.h"
-#include "units/algorithm/vector/quantity_to_value.h"
+#include "units/container/quantity_to_value.h"
 #include "algorithm/algorithm.h"
 
 namespace thermal {
@@ -21,7 +21,7 @@ namespace plot {
 
 using std::string;
 using filesystem::is_directory;
-using units::container::quantityTodouble;
+using units::container::quantity_to_double;
 using algorithm::for_each;
 using units::isfinite;
 using std::endl;
@@ -56,8 +56,8 @@ auto amplitudes_to_file_log_linear(
   gp << "set output '"<< plot_eps <<"'"<< endl;
   
   
-  auto const x_pts = quantityTodouble( frequencies );
-  auto const y_pts = quantityTodouble( amplitudes );
+  auto const x_pts = quantity_to_double( frequencies );
+  auto const y_pts = quantity_to_double( amplitudes );
   
   auto const xy_pts = make_pair( x_pts, y_pts );
   
@@ -103,8 +103,8 @@ auto amplitudes_to_file_log_log(
   gp << "set output '"<< plot_eps <<"'"<< endl;
   
   
-  auto const x_pts = quantityTodouble( frequencies );
-  auto const y_pts = quantityTodouble( amplitudes );
+  auto const x_pts = quantity_to_double( frequencies );
+  auto const y_pts = quantity_to_double( amplitudes );
   
   auto const xy_pts = make_pair( x_pts, y_pts );
   
