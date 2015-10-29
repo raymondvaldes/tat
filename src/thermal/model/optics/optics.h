@@ -11,6 +11,8 @@
 
 #include "thermal/equipment/laser/Beam_radius.h"
 #include "thermal/equipment/laser/beam_intensity.h"
+#include "thermal/equipment/laser/beam_power.h"
+
 #include "thermal/equipment/detector/view_radius.h"
 #include "thermal/equipment/laser/modulation_depth.h"
 #include "electronics/filter/low-pass/RC-first-order/time_constant.h"
@@ -24,20 +26,20 @@ namespace model{
 struct Optics{
 
   equipment::laser::Beam_radius laser_radius;
-  equipment::laser::Beam_intensity  laser_intensity;
+  equipment::laser::Beam_power  laser_power;
   equipment::detector::View_radius view_radius;
   equipment::laser::Modulation_depth laser_modulation;
   electronics::filter::low_pass::RC_first_order::Time_constant filter_constant;
   equipment::detector::Offset detector_offset;
   
   Optics(
-    equipment::laser::Beam_radius const & laser_radius,
-    equipment::laser::Beam_intensity  const & laser_intensity,
-    equipment::detector::View_radius const & view_radius,
+    equipment::laser::Beam_radius const laser_radius,
+    equipment::laser::Beam_power  const laser_power,
+    equipment::detector::View_radius const view_radius,
     equipment::laser::Modulation_depth const laser_modulation
   ):
   laser_radius(laser_radius),
-  laser_intensity(laser_intensity),
+  laser_power(laser_power),
   view_radius(view_radius),
   laser_modulation( laser_modulation ),
   filter_constant(

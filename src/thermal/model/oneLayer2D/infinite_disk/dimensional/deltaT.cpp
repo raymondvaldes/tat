@@ -17,16 +17,16 @@ using namespace units;
 
 auto deltaT
 (
-  units::quantity< units::si::heat_flux > const I,
+  units::quantity< units::si::power > const I,
   units::quantity< units::si::length > const L,
   units::quantity< units::si::thermal_conductivity> const k
 ) noexcept -> units::quantity< units::si::temperature >
 {
-  assert( I > 0 * watts/square_meter );
+  assert( I > 0 * watts );
   assert( L > 0 * meter );
   assert( k > 0 * watts/ ( meter * kelvin ) );
   
-  auto const dT = I * L / k ;
+  auto const dT = I / ( L * k ) ;
   
   assert( isfinite( dT ) );
   return dT;

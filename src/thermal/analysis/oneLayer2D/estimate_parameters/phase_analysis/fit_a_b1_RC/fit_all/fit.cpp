@@ -206,7 +206,7 @@ noexcept -> Best_fit
   auto const phase_goodness_of_fit = goodness_of_fit( calibrated_observations , phase_predictions );
   
   auto const l_r = thermal::equipment::laser::Beam_radius(b1 * L );
-  auto const l_i = thermal::equipment::laser::Beam_intensity::from_value(42);
+  auto const l_i = thermal::equipment::laser::Beam_power::from_value(42);
   auto const d_r = thermal::equipment::detector::View_radius::from_value(42);
   auto const l_m = thermal::equipment::laser::Modulation_depth::from_value(42);
   

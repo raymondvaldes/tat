@@ -21,8 +21,8 @@ using namespace units;
 auto
 process_twoColor_TBD_meta_data
 (
-  meta_measurement_descriptions const meta_data_1,
-  meta_measurement_descriptions const meta_data_2,
+  meta_measurement_descriptions const meta_1,
+  meta_measurement_descriptions const meta_2,
   units::quantity< units::si::dimensionless> const gCoeff,
   units::quantity< units::si::electric_potential > const DC_1_offset,
   units::quantity< units::si::electric_potential > const DC_2_offset,
@@ -32,17 +32,20 @@ process_twoColor_TBD_meta_data
   assert( gCoeff > 0 );
   assert( DC_1_offset.value() > 0 );
   assert( DC_2_offset.value() > 0 );
+
+  if( meta_1.empty() ) { throw TBD_files_empty(); }
+  if( meta_2.empty() ) { throw TBD_files_empty(); }
+  if( meta_1.size() != meta_2.size() ) { throw TBD_files_do_not_match_size(); }
   
-  assert(  meta_data_1.laser_frequencies() == meta_data_2.laser_frequencies() );
   
-  auto const laser_frequencies = meta_data_2.laser_frequencies();
+  auto const laser_frequencies = meta_2.laser_frequencies();
  
-  auto const properties_1_raw = meta_data_1.measurement_periodic_signal_properties( DC_1_offset );
-  auto const properties_2_raw = meta_data_2.measurement_periodic_signal_properties( DC_2_offset );
+  auto const properties_1_raw = meta_1.measurement_periodic_signal_properties( DC_1_offset );
+  auto const properties_2_raw = meta_2.measurement_periodic_signal_properties( DC_2_offset );
   
 
-  auto phases_1 = meta_data_1.measurement_phases();
-  auto phases_2 = meta_data_2.measurement_phases();
+  auto phases_1 = meta_1.measurement_phases();
+  auto phases_2 = meta_2.measurement_phases();
 
 
   switch( set_phase )
@@ -68,8 +71,8 @@ process_twoColor_TBD_meta_data
   
   auto const out = Processed_tbd_files
   (
-    properties_1, meta_data_1.detector_wavelength(),
-    properties_2, meta_data_2.detector_wavelength(),
+    properties_1, meta_1.detector_wavelength(),
+    properties_2, meta_2.detector_wavelength(),
     laser_frequencies
   );
   

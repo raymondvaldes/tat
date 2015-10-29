@@ -86,6 +86,27 @@ BOOST_AUTO_TEST_CASE( matlab_check_first_n_amplitudes )
 
 }
 
+
+BOOST_AUTO_TEST_CASE( matlab_check_first_n_phases_big_R )
+{
+  auto const m = 0.5_nd;
+  auto const s = 2.2_nd;
+  auto const w = 0.64_nd;
+  auto const Bi1 = 0.1_nd;
+  auto const Bi2 = 0.1_nd;
+  auto const l = 1.1_nd;
+  
+  auto const phase_l = [=]( auto const s ) noexcept{
+    auto const p = measurement( m, s, w, Bi1, Bi2, l );
+    auto const phase = p.phase();
+    return phase.value();
+  };
+  
+//  phase_l( 500.00 );
+
+
+}
+
 BOOST_AUTO_TEST_SUITE_END()  // suite
 BOOST_AUTO_TEST_SUITE_END()  // suite
 BOOST_AUTO_TEST_SUITE_END()  // suite

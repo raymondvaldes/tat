@@ -9,6 +9,7 @@
 #ifndef process_twoColor_TBD_meta_data_hpp_101315
 #define process_twoColor_TBD_meta_data_hpp_101315
 
+#include <exception>
 #include "thermal/pyrometry/twoColor/set_phase.h"
 #include "gTBC/gMeasure/gTBD/meta_measurement_descriptions.hpp"
 #include "gTBC/gMeasure/Processed_tbd_files.hpp"
@@ -16,6 +17,23 @@
 
 namespace gTBC {
 namespace gMeasure {
+
+class TBD_files_do_not_match_size: public std::exception
+{
+  virtual const char* what() const throw()
+  {
+    return "TBD files used do not have the same number of measurements.";
+  }
+};
+
+class TBD_files_empty: public std::exception
+{
+  virtual const char* what() const throw()
+  {
+    return "At least one of the TBD files used do not have any measurements.";
+  }
+};
+
 
 auto
 process_twoColor_TBD_meta_data

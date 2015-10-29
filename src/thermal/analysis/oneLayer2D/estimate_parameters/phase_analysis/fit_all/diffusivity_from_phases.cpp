@@ -159,7 +159,7 @@ auto fit
   
   
   auto const l_r = thermal::equipment::laser::Beam_radius(b1 * L );
-  auto const l_i = thermal::equipment::laser::Beam_intensity::from_value(42);
+  auto const l_i = thermal::equipment::laser::Beam_power::from_value(42);
   auto const d_r = thermal::equipment::detector::View_radius(b2 * L);
   auto const l_m = thermal::equipment::laser::Modulation_depth::from_value(42);
   

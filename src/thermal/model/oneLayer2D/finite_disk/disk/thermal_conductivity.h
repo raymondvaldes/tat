@@ -17,7 +17,7 @@ namespace oneLayer2D{
 namespace finite_disk{
 namespace disk{
 
-using thermal_conductivity = units::quantity< units::si::thermal_conductivity >;
+using Thermal_conductivity = units::quantity< units::si::thermal_conductivity >;
 
 } // disk
 } // finite_disk

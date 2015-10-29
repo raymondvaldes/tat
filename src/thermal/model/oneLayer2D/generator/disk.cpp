@@ -7,13 +7,18 @@
 //
 
 #include "disk.hpp"
+
 #include <cassert>
+#include <gsl.h>
+
 #include "thermal/model/oneLayer2D/infinite_disk/thermal_emission/centered_with_view/frequency_sweep.h"
 #include "finite_disk.hpp"
 #include "infinite_disk.hpp"
 #include "thermal/model/oneLayer2D/select_emission_model.hpp"
 #include "thermal/model/oneLayer2D/is_valid_parameters.hpp"
 #include "thermal/model/oneLayer2D/get_model_parameters.hpp"
+#include "algorithm/algorithm.h"
+#include "thermal/model/oneLayer2D/print_quantities.hpp"
 
 namespace thermal{
 namespace model{
@@ -71,6 +76,19 @@ auto Disk::get_emission_sweep() const -> std::function<
       equipment::laser::Modulation_frequencies const & ) >
 {
   return select_emission_model( conduction_model, detector_model );
+}
+
+
+auto Disk::parameters_to_string( Parameters const & parameters)
+const noexcept -> std::string
+{
+  Expects( !parameters.empty() );
+  
+  using thermal::model::oneLayer2D::print_quantities;
+  auto const s = print_quantities( parameters, slab, optics );
+  
+  Ensures( !s.empty() );
+  return s;
 }
 
 

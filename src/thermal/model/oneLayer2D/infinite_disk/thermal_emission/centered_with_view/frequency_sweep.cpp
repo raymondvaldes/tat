@@ -30,7 +30,7 @@ auto
 frequency_sweep
 (
   units::quantity< units::si::dimensionless > const b ,
-  units::quantity< units::si::temperature > const /*deltaT*/ ,
+  units::quantity< units::si::temperature > const deltaT ,
   units::quantity< units::si::dimensionless > const r_e ,
   std::vector< units::quantity< units::si::frequency > > const & frequencies,
   units::quantity< units::si::length > const L,
@@ -46,13 +46,19 @@ noexcept -> std::vector< math::complex::properties< units::si::temperature > >
   auto results =
   vector< properties< si::temperature > >( frequencies.size()  );
   
-  transform( frequencies, results.begin(), [&]( auto const f ) noexcept
+  transform( frequencies, results.begin(), [&]( auto const f )
   {
     auto const l = dimensionless::thermal_penetration( f, L, alpha ) ;
     auto const p = fast_measurement( b, l, r_e );
+    
+    auto const phase = p.phase;
+    auto const amplitude = p.amplitude.value() * deltaT;
+    
+    auto const T = math::complex::properties< units::si::temperature >
+    (phase, amplitude);
 
-    return p;
-  } );
+    return T;
+  });
 
   return results;
 }
@@ -73,7 +79,7 @@ noexcept -> thermal::model::complex::Temperatures
   
   auto const k = slab.thermal_conductivity();
   auto const L = slab.thickness() ;
-  auto const I = optics.laser_intensity;
+  auto const I = optics.laser_power;
   
   auto const deltaT = dimensional::deltaT( I , L, k ) ;
   

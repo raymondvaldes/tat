@@ -30,12 +30,12 @@ get_model_parameters( Detector_model const detector_model )
   
     case Detector_model::center_point:
       v.phase_model = centered_point::valid_phase_parameters();
-      v.amplitude_model = centered_point::valid_phase_parameters();
+      v.amplitude_model = centered_point::valid_amplitude_parameters();
       break;
 
     case Detector_model::center_with_view:
       v.phase_model = centered_detector_with_view::valid_phase_parameters();
-      v.amplitude_model = centered_detector_with_view::valid_phase_parameters();
+      v.amplitude_model = centered_detector_with_view::valid_amplitude_parameters();
       break;
     
     case Detector_model::offset_point:

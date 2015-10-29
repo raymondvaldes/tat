@@ -17,7 +17,7 @@ namespace dimensionless{
 auto biot(
   dimensional::Heat_transfer_coefficient const h,
   dimensional::Characteristic_length const L,
-  disk::thermal_conductivity const k
+  disk::Thermal_conductivity const k
 ) noexcept -> Biot
 {
 //  auto const hL = ;

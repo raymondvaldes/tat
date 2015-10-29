@@ -5,6 +5,7 @@
 //  Created by Raymond Valdes on 5/2/15.
 //  Copyright (c) 2015 Raymond Valdes. All rights reserved.
 //
+#include <gsl.h>
 
 #include "thermal/pyrometry/twoColor/periodic/transient_analysis_sweep_results.h"
 #include "thermal/define/lthermal.h"
@@ -13,7 +14,7 @@
 #include "thermal/pyrometry/twoColor/periodic/plot/phases.hpp"
 #include "thermal/pyrometry/twoColor/periodic/plot/amplitudes.hpp"
 #include "statistics/signal_processing/average.h"
-
+using algorithm::transform;
 using algorithm::for_each;
 using namespace units;
 using std::vector;
@@ -60,6 +61,7 @@ auto transient_analysis_sweep_results::surface_temperature_amplitudes( void )
 const -> std::vector< units::quantity< units::si::temperature > >
 {
   auto surface_temperatures = vector< quantity< si::temperature > >();
+  surface_temperatures.reserve( transient_results.size() );
   
   for_each( transient_results , [&surface_temperatures]
   ( auto const & at_each_frequency)
@@ -142,8 +144,47 @@ auto transient_analysis_sweep_results::print_temperature_amplitudes(
     frequencies,
     amplitudes,
     print_directory, "amplitudes" );
+  }
   
+auto transient_analysis_sweep_results::size() const noexcept -> size_t
+{
+  return transient_results.size();
+}
+  
+auto transient_analysis_sweep_results::complex_temperatures( void ) const
+-> model::complex::Temperatures
+{
+  using thermal::model::complex::Temperature;
+  using thermal::model::complex::Temperatures;
+  using std::begin;
+  
+  auto const p = phases_frequency();
+  auto const frequencies = p.first;
+  auto const phases = p.second;
+  auto const amplitudes = surface_temperature_amplitudes();
 
+  Expects( !frequencies.empty() && !phases.empty() && !amplitudes.empty() );
+  Expects( frequencies.size() == phases.size() );
+  Expects( phases.size() == amplitudes.size() );
+
+  auto values = vector< Temperature >( size() );
+//  algorithm::transform( phases, amplitudes, begin(values),
+//  []( auto const phase, auto const amplitude )
+//  {
+//    return Temperature( phase, amplitude );
+//  });
+
+  auto i = 0u;
+  for( auto & v : values ) {
+    v = Temperature( phases.at(i), amplitudes.at(i) );
+    ++i;
+  }
+
+  
+  auto const temperatures = Temperatures( values );
+
+  Ensures( temperatures.size() == size() );
+  return temperatures;
 }
 
 auto transient_analysis_sweep_results::print_temperature_phases(
@@ -156,8 +197,6 @@ auto transient_analysis_sweep_results::print_temperature_phases(
   auto const phases = a.second;
   
   plot::phases_to_file( frequencies, phases, print_directory, "phases" );
-
-  
 }
 
 auto transient_analysis_sweep_results::print_twoColor_fittings(

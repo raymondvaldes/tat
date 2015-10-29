@@ -14,7 +14,7 @@ namespace thermal{
 namespace analysis{
 namespace oneLayer2D{
 
-auto select_minimization_function( Fit_selection const fit_selection )
+auto select_minimization_function( Fit_selection const fit )
 noexcept -> std::function<
     std::function< void( const double *, double * ) >(
       std::function< Theoretical_results( const double *  ) > const &) >
@@ -23,7 +23,7 @@ noexcept -> std::function<
     std::function< void( const double *, double * ) >(
       std::function< Theoretical_results( const double *  ) > const &) >();
 
-  switch( fit_selection )
+  switch( fit )
   {
     case Fit_selection::phases:
       fun = phase_analysis::minimization_equation;

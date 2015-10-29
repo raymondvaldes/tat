@@ -11,7 +11,7 @@
 
 #include "meta_measurement_description.hpp"
 #include "thermal/equipment/laser/modulation_cutoff_frequencies.h"
-
+#include "thermal/model/complex/temperatures.h"
 #include <vector>
 #include <utility>
 
@@ -92,6 +92,11 @@ public:
   const noexcept -> meta_measurement_descriptions;
   
   auto size(void) const noexcept -> size_t;
+  auto empty() const noexcept -> bool;
+  
+  auto temperatures_dummy_amplitudes()
+  const noexcept -> thermal::model::complex::Temperatures;
+
 };
 
 } // namespace gMeasure

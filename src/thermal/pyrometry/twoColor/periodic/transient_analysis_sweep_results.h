@@ -12,7 +12,9 @@
 #include <vector>
 #include <utility>
 #include "thermal/pyrometry/twoColor/periodic/results.h"
+#include "thermal/model/complex/temperatures.h"
 #include "units.h"
+#include "thermal/equipment/laser/modulation_frequencies.h"
 
 namespace thermal {
 namespace pyrometry {
@@ -22,7 +24,6 @@ namespace periodic {
 struct transient_analysis_sweep_results
 {
   std::vector< transient_analysis_results > transient_results;
-  std::vector< units::quantity< units::si::frequency> > laser_modulation_freq;
 
   transient_analysis_sweep_results(
     std::vector< transient_analysis_results > const & transient_results_
@@ -49,6 +50,11 @@ struct transient_analysis_sweep_results
 
   auto surface_steady_temperature( void ) const
   -> units::quantity< units::si::temperature >;
+
+  auto complex_temperatures( void ) const
+  -> model::complex::Temperatures;
+  
+  auto size() const noexcept -> size_t;
 
 
   //printers

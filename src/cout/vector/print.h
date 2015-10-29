@@ -63,7 +63,7 @@ auto print_table_values(
   using std::cout ;
   assert( first_list.size() == second_list.size() );
   
-  std::cout << std::setprecision( precision );
+  std::cout << std::setprecision( static_cast<int>(precision) );
   
   auto i = 0u;
   for_each( first_list, [&]( auto const & /*e*/ ) noexcept

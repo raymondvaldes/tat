@@ -80,7 +80,7 @@ noexcept -> thermal::model::complex::Temperatures
   
   auto const k = slab.thermal_conductivity();
   auto const L = slab.thickness() ;
-  auto const I = optics.laser_intensity;
+  auto const I = optics.laser_power;
   
   auto const deltaT = dimensional::deltaT( I , L, k ) ;
   

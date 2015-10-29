@@ -9,12 +9,13 @@
 #ifndef best_fit_hpp_102415
 #define best_fit_hpp_102415
 
-#include <vector>
+#include <string>
 #include "units.h"
 #include "thermal/model/slab/slab.h"
 #include "thermal/model/optics/optics.h"
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
 #include "theoretical_results.hpp"
+#include "thermal/model/oneLayer2D/parameter_list.hpp"
 
 namespace thermal{
 namespace analysis{
@@ -42,15 +43,9 @@ public:
   )
   const -> model::complex::Temperatures;
   
-  
-//  void plot_model_phases_against(
-//    std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
-//  ) const;
-//  
-//  void plot_model_phases_against_observations( void ) const ;
-  
   auto phase_goodness_of_fit_function() const -> double;
-  
+  auto parameters_to_string(
+    model::oneLayer2D::Parameters const & parameters ) const -> std::string;
 };
 
 

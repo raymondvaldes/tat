@@ -35,7 +35,7 @@ get_model_parameters(
     case Conduction_model::infinite_disk:
     {
       using infinite_disk::thermal_emission::get_model_parameters;
-      v = get_model_parameters( detector_model);
+      v = get_model_parameters( detector_model );
       break;
     }
   }

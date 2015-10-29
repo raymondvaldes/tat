@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <exception>
+#include <set>
 
 namespace thermal{
 namespace model{
@@ -47,12 +48,17 @@ enum class Parameter{
   rc_filter
 };
 
-using Parameters = std::vector< Parameter >;
+using Parameters = std::set< Parameter >;
 
 struct Valid_parameters {
 
   Parameters phase_model;
   Parameters amplitude_model;
+  
+  auto empty() const noexcept -> bool
+  {
+    return phase_model.empty() || amplitude_model.empty();
+  }
 
 };
 

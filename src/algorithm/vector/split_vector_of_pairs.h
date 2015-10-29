@@ -25,22 +25,20 @@ noexcept -> std::pair< std::vector< T_1 >, std::vector< T_2 > >
 {
   assert( !pairs.empty() );
   
-  auto const count = pairs.size();
   using std::make_pair;
   using algorithm::transform;
   using std::vector;
   
-  auto list_first = vector< T_1 >() ;
-  auto list_second = vector< T_1 >() ;
   
-  for_each( pairs, []( auto const & pair ) noexcept
+  auto list_first = vector< T_1 >() ;
+  auto list_second = vector< T_2 >() ;
+  
+  for_each( pairs, [&list_first, &list_second]( auto const & pair ) noexcept
   {
-    list_first.push_back( pair.first );
-    list_second.push_back( pair.second );
+    list_first.emplace_back( pair.first );
+    list_second.emplace_back( pair.second );
   } );
 
-  assert( list_first.front() == pairs.front.first ) ;
-  assert( list_second.front() == pairs.front.second ) ;
   
   return make_pair( list_first, list_second );
 }

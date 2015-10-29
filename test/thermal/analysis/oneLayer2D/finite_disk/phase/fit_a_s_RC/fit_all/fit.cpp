@@ -128,22 +128,22 @@ BOOST_AUTO_TEST_CASE( fit_all )
   
 
   auto const L = quantity< length > ( .424 * millimeters  );// sample E
-  auto const diffusivity = quantity<thermal_diffusivity>( 25 * square_millimeters / second);
+  auto const diffusivity = quantity<thermal_diffusivity>( 55 * square_millimeters / second);
   auto const conductivity_dummey =
     quantity< thermal_conductivity >( 80 * watts / meter / si::kelvin );
   
-  auto const R = quantity< length >( 5.0 * millimeters );
+  auto const R = quantity< length >( 8.0 * millimeters );
 
   auto const slab_initial =
   thermal::model::slab::Slab( L, diffusivity, conductivity_dummey, R );
   
   
   auto const laser_radius = thermal::equipment::laser::Beam_radius( 4.4 * millimeters);
-  auto const laser_intensity = thermal::equipment::laser::Beam_intensity( 5.0 * si::watts / si::square_meter );
+  auto const laser_power = thermal::equipment::laser::Beam_power( 5.0 * si::watts  );
   auto const view_radius = thermal::equipment::detector::View_radius( 1.0 * millimeters );
   auto const m = equipment::laser::Modulation_depth( 0.5 );
   
-  auto const optics = Optics( laser_radius, laser_intensity, view_radius, m  );
+  auto const optics = Optics( laser_radius, laser_power, view_radius, m  );
 
   using thermal::model::oneLayer2D::Parameters;
   auto const parameters = Parameters({
@@ -154,7 +154,6 @@ BOOST_AUTO_TEST_CASE( fit_all )
   
   auto const conduction_model = thermal::model::oneLayer2D::Conduction_model::finite_disk;
   auto const detector_model = thermal::model::oneLayer2D::Detector_model::center_point;
-  auto const fit_selection = Fit_selection::phases;
   
   auto const initial_disk = Disk(
     Conduction_model::finite_disk,
@@ -164,10 +163,15 @@ BOOST_AUTO_TEST_CASE( fit_all )
   
   auto const temperatures = temperature_factory_dummy_amplitudes( phases );
 
-  auto const best_fit =
-  fit( frequencies, temperatures, fit_selection, initial_disk, parameters);
+  auto const best_fit_phases =
+  fit( frequencies, temperatures, Fit_selection::phases, initial_disk, parameters);
 
-  BOOST_CHECK_CLOSE_FRACTION( 8.683256e-4, best_fit.phase_goodness_of_fit_function(), 1e-5);
+//  auto const best_fit_amplitudes =
+//  fit( frequencies, temperatures, Fit_selection::amplitudes, initial_disk, parameters);
+
+//  std::cout << best_fit_phases.phase_goodness_of_fit_function() << "\n\n";
+
+  BOOST_CHECK_CLOSE_FRACTION( 8.683256e-4, best_fit_phases.phase_goodness_of_fit_function(), 1e-5);
 
 }
 

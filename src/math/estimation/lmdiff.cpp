@@ -2449,8 +2449,8 @@ auto lmdif( std::function < void ( double*, double* ) > fcn,
             const size_t dataPoints, std::vector<double>& initialConditions,
             const settings &Settings) noexcept -> int
 {
-  int m = dataPoints ;
-  int n = initialConditions.size();
+  int m = static_cast<int>(dataPoints) ;
+  int n = static_cast<int>(initialConditions.size());
 
   int nfev;
   int info=0;

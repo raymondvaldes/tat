@@ -10,6 +10,7 @@
 #include "phase.h"
 #include "amplitude.h"
 #include "algorithm/algorithm.h"
+#include "thermal/equipment/laser/filter_using_cutoff_frequencies.h"
 
 namespace thermal{
 namespace model{
@@ -53,6 +54,23 @@ auto Temperatures::amplitudes() const noexcept -> Amplitudes
     return a.amplitude(); }
   );
   return out;
+}
+
+auto Temperatures::filter_using_cutoff_frequencies
+(
+  thermal::equipment::laser::Modulation_frequencies const & frequencies,
+  thermal::equipment::laser::Modulation_cutoff_frequencies const & cutoff
+)
+const noexcept -> Temperatures
+{
+  Expects( !frequencies.empty() ) ;
+  Expects( frequencies.size() == values.size() );
+  using thermal::equipment::laser::filter_using_cutoff_frequencies;
+  
+  auto const t = filter_using_cutoff_frequencies(frequencies, cutoff, values);
+  auto const T = Temperatures(t);
+
+  return T;
 }
 
 

@@ -13,6 +13,8 @@
 #include <cstddef>
 #include "thermal/model/complex/temperature.h"
 #include "math/complex/properties.h"
+#include "thermal/equipment/laser/modulation_cutoff_frequencies.h"
+#include "thermal/equipment/laser/modulation_frequencies.h"
 
 namespace thermal{
 namespace model{
@@ -33,7 +35,14 @@ class Temperatures{
   auto amplitudes() const noexcept -> Amplitudes;
   auto size() const noexcept -> size_t;
   auto empty() const noexcept -> bool;
-};
+
+  auto filter_using_cutoff_frequencies
+  (
+    thermal::equipment::laser::Modulation_frequencies const & frequencies,
+    thermal::equipment::laser::Modulation_cutoff_frequencies const & cutoff
+  )
+  const noexcept -> Temperatures;
+  };
 
 
 } // namespace complex

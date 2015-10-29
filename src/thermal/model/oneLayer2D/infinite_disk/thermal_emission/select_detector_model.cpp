@@ -35,8 +35,8 @@ auto select_detector_model
       Temperatures( Slab const &, Optics const &, Modulation_frequencies const&)
     >();
   
-  switch( detector_model ) {
-  
+  switch( detector_model )
+  {
     case Detector_model::center_point:
       func = centered_point::frequency_sweeper;
       break;
@@ -48,6 +48,7 @@ auto select_detector_model
     case Detector_model::offset_point:
       func = offset_detector::frequency_sweeper;
       break;
+      
     case Detector_model::offset_with_view:
       throw Detector_model_not_available( detector_model );
       break;

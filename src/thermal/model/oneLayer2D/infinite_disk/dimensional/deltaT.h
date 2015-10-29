@@ -18,7 +18,7 @@ namespace dimensional{
 
 auto deltaT
 (
-  units::quantity< units::si::heat_flux > const I,
+  units::quantity< units::si::power > const I,
   units::quantity< units::si::length > const L,
   units::quantity< units::si::thermal_conductivity> const k
 ) noexcept -> units::quantity< units::si::temperature >;

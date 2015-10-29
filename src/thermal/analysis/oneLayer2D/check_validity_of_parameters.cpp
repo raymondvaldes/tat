@@ -8,6 +8,7 @@
 
 #include "check_validity_of_parameters.hpp"
 #include "thermal/model/oneLayer2D/is_valid_parameters.hpp"
+#include <gsl.h>
 
 namespace thermal{
 namespace analysis{
@@ -19,18 +20,24 @@ auto check_validity_of_parameters(
   Fit_selection const fit_selection
 ) -> void
 {
+  if( valid_parameters.empty() ) {
+    throw thermal::model::oneLayer2D::Parameter_list_empty();
+  }
+  
   auto pass = false;
   
-  switch( Fit_selection::phases ) {
+  switch( fit_selection ) {
   
     case Fit_selection::phases:
     {
-      pass = is_valid_parameters( parameters, valid_parameters.phase_model );
+      auto const v = valid_parameters.phase_model;
+      pass = is_valid_parameters( parameters, v );
       break;
     }
     case Fit_selection::amplitudes:
     {
-      pass = is_valid_parameters( parameters, valid_parameters.amplitude_model );
+      auto const v = valid_parameters.phase_model;
+      pass = is_valid_parameters( parameters, v );
       break;
     }
   }

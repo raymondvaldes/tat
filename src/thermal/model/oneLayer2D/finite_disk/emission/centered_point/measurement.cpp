@@ -18,6 +18,7 @@
 #include "thermal/model/oneLayer2D/finite_disk/disk/dimensionless/thickness.hpp"
 #include "thermal/model/oneLayer2D/finite_disk/disk/dimensionless/radius.hpp"
 #include "thermal/model/oneLayer2D/finite_disk/dimensionless/thermal_penetration.h"
+#include "thermal/model/oneLayer2D/finite_disk/dimensional/deltaT.hpp"
 
 namespace thermal{
 namespace model{
@@ -53,7 +54,7 @@ noexcept -> thermal::model::complex::Temperature
   assert( Bi2 > 0 );
   assert( l > 0 );
 
-  auto const scale = ( m / ( 2. - m ) )  /  (  M_PI * pow<2>(s) ) ;
+  auto const scale = ( m / ( 2. - m ) )  /  ( M_PI * pow<2>(s) ) ;
   
   auto const a = seperation_of_variables::Lambda_generator( s , Bi2, l );
 
@@ -116,9 +117,19 @@ noexcept -> thermal::model::complex::Temperature
   auto const Bi2 = slab.Bi2;
   auto const l = thermal_penetration( alpha , frequency, R_heat );
 
+  auto const Q_heat = optics.laser_power;
 
-  auto const t = measurement( m, s, w, Bi1, Bi2, l );
-  return t;
+  auto const dT =
+  dimensional::deltaT( slab.thermal_conductivity() , R_heat, Q_heat );
+
+  auto const t_non_dim = measurement( m, s, w, Bi1, Bi2, l );
+
+  auto const phase = t_non_dim.phase();
+  auto const amplitude =  t_non_dim.amplitude().value() * dT;
+  
+  auto const T = Temperature( phase, amplitude );
+
+  return T;
 }
 
 

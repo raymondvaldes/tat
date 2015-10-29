@@ -7,6 +7,7 @@
 //
 
 #include <cassert>
+#include <gsl.h>
 
 #include "measurement.hpp"
 #include "thermal/model/oneLayer2D/finite_disk/seperation_of_variables/lambda_generator.hpp"
@@ -20,6 +21,8 @@
 #include "thermal/model/oneLayer2D/finite_disk/disk/dimensionless/thickness.hpp"
 #include "thermal/model/oneLayer2D/finite_disk/disk/dimensionless/radius.hpp"
 #include "thermal/model/oneLayer2D/finite_disk/dimensionless/thermal_penetration.h"
+
+#include "thermal/model/oneLayer2D/finite_disk/dimensional/deltaT.hpp"
 
 namespace thermal{
 namespace model{
@@ -49,13 +52,13 @@ auto measurement
 )
 noexcept -> thermal::model::complex::Temperature
 {
-  assert( m > 0 && m <= 1. );
-  assert( r_e > 0 );
-  assert( s > 0 );
-  assert( w > 0 );
-  assert( Bi1 > 0 );
-  assert( Bi2 > 0 );
-  assert( l > 0 );
+  Expects( m > 0    && m <= 1. );
+  Expects( r_e > 0  && isfinite(r_e) );
+  Expects( s > 0    && isfinite(s) );
+  Expects( w > 0    && isfinite(w));
+  Expects( Bi1 > 0  && isfinite(Bi1));
+  Expects( Bi2 > 0  && isfinite(Bi2));
+  Expects( l > 0    && isfinite(l));
 
   auto const scale = ( m / ( 2. - m ) ) * ( 2. / ( M_PI * pow<2>(s) * r_e  ) );
   
@@ -93,6 +96,7 @@ noexcept -> thermal::model::complex::Temperature
   auto const theta = scale * summation;
 
 
+
   auto const phase = Phase( -arg(theta) );
   auto const amplitude = Amplitude( abs(theta) * units::si::kelvin );
   auto const temperature = Temperature( phase, amplitude );
@@ -128,8 +132,18 @@ noexcept -> thermal::model::complex::Temperature
   auto const l = thermal_penetration( alpha , frequency, R_heat );
 
 
-  auto const t = measurement( m, r_e, s, w, Bi1, Bi2, l );
-  return t;
+  auto const Q_heat = optics.laser_power;
+  auto const dT =
+  dimensional::deltaT( slab.thermal_conductivity() , R_heat, Q_heat );
+  
+  auto const t_non_dim = measurement( m, r_e, s, w, Bi1, Bi2, l );
+  
+  auto const phase = t_non_dim.phase();
+  auto const amplitude =  t_non_dim.amplitude().value() * dT;
+  
+  auto const T = Temperature( phase, amplitude );
+
+  return T;
 }
 
 

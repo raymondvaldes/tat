@@ -9,6 +9,8 @@
 #ifndef model_selection_h_101415
 #define model_selection_h_101415
 
+#include <exception>
+
 namespace thermal{
 namespace model{
 namespace oneLayer2D{
@@ -28,18 +30,34 @@ enum class Detector_model {
 };
 
 
-struct Detector_model_not_available {
+class Detector_model_not_available: public std::exception
+{
+public:
   Detector_model detector_model;
   
   Detector_model_not_available( Detector_model const & detector_model )
   noexcept: detector_model( detector_model ){};
+
+  virtual const char* what() const throw()
+  {
+    return "Detector model not available.";
+  }
+
 };
 
-struct Conduction_model_not_available {
+class Conduction_model_not_available: public std::exception
+{
+public:
   Conduction_model model;
   
   Conduction_model_not_available( Conduction_model const & model )
   noexcept: model( model ){};
+
+  virtual const char* what() const throw()
+  {
+    return "Conduction model not available.";
+  }
+  
 };
 
 struct Parameter_selection {

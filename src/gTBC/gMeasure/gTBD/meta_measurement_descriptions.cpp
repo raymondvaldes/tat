@@ -12,6 +12,7 @@
 
 #include "algorithm/algorithm.h"
 #include "math/utilities/even.h"
+#include "thermal/model/complex/temperatures_factory_dummy_amplitudes.hpp"
 
 
 namespace gTBC {
@@ -197,6 +198,20 @@ meta_measurement_descriptions::filter_using_cutoff_frequencies(
 
 
   return sorted_filtered;
+}
+
+auto meta_measurement_descriptions::empty() const noexcept -> bool
+{
+  return meta_datas.empty();
+}
+
+auto meta_measurement_descriptions::temperatures_dummy_amplitudes()
+const noexcept -> thermal::model::complex::Temperatures
+{
+  using thermal::model::complex::temperature_factory_dummy_amplitudes;
+  
+  return temperature_factory_dummy_amplitudes( measurement_phases()  );
+
 }
 
 } // namespace gMeasure

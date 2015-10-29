@@ -17,6 +17,7 @@
 #include "thermal/model/optics/optics.h"
 #include "thermal/model/oneLayer2D/parameter_list.hpp"
 #include <functional>
+#include <string>
 
 namespace thermal{
 namespace model{
@@ -63,6 +64,9 @@ public:
 
   auto valid_parameters()
   const -> Valid_parameters;
+
+  auto parameters_to_string( Parameters const & parameters )
+  const noexcept -> std::string;
 
 };
 

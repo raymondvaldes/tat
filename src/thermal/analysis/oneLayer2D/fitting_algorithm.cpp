@@ -14,17 +14,19 @@
 #include "thermal/model/complex/temperatures.h"
 #include "thermal/model/oneLayer2D/model_selection.h"
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
+#include "math/estimation/least_square/fit.hpp"
 
 namespace thermal{
 namespace analysis{
 namespace oneLayer2D{
 
-using math::estimation::lmdif;
 using math::estimation::settings;
 using std::get;
 using thermal::model::oneLayer2D::Detector_model;
 using thermal::model::oneLayer2D::Conduction_model;
 using thermal::model::oneLayer2D::generator::Disk;
+using math::estimation::least_square::fit;
+namespace least_square = math::estimation::least_square;
 
 auto const detector_model = Detector_model::center_with_view;
 auto const conduction_model = Conduction_model::finite_disk;
@@ -70,14 +72,18 @@ noexcept -> Best_fit
   lmdif_settings.factor = 50.0 ;   // initial step size
   lmdif_settings.xtol = .00001;   // tolerance between x-iterates
   lmdif_settings.epsfcn = 1e-4; // tolerance of phase function
-
+  lmdif_settings.maxfev = 100 * model_parameters.size();
+  
   auto const size = frequencies.size();
-  lmdif(  min_equation, size, model_parameters, lmdif_settings ) ;
+  auto const fit_results =
+  least_square::fit( min_equation, size, model_parameters, lmdif_settings ) ;
+  
+  auto const x_v = fit_results.model_parameters();
+
 
   ////// prepare output
-  auto const x = model_parameters.data();
+  auto const x = x_v.data();
   auto const final_results = predictions_generator( x );
-
   auto const t = system_updater( x );
   auto const slab_fit = get< 0 >(t);
   auto const optics_fit = get< 1 >(t);
