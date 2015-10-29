@@ -809,7 +809,6 @@
 		ABFC9E681A94372A00F124F1 /* stringToDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E661A94372A00F124F1 /* stringToDouble.h */; };
 		ABFC9E6B1A94420300F124F1 /* doubleToString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFC9E691A94420300F124F1 /* doubleToString.cpp */; };
 		ABFC9E6C1A94420300F124F1 /* doubleToString.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6A1A94420300F124F1 /* doubleToString.h */; };
-		ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */; };
 		ABFC9E701A9449B700F124F1 /* stringToQuantity.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */; };
 		ABFC9E721A96B53900F124F1 /* spectrum.h in Headers */ = {isa = PBXBuildFile; fileRef = ABFC9E711A96B53900F124F1 /* spectrum.h */; };
 		ABFD19991AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */; };
@@ -823,6 +822,7 @@
 /* Begin PBXFileReference section */
 		AB06EDAA1A71C6B500F9FDBD /* temperatureSteady.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = temperatureSteady.cpp; path = pyrometry/twoColor/temperatureSteady.cpp; sourceTree = "<group>"; };
 		AB0A6BAF1BE2862E00C4E04E /* quantity_to_value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quantity_to_value.h; path = units/algorithm/vector/quantity_to_value.h; sourceTree = "<group>"; };
+		AB0A6BB11BE28C7C00C4E04E /* double_to_quantity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = double_to_quantity.h; path = units/algorithm/container/double_to_quantity.h; sourceTree = "<group>"; };
 		AB0C51BA1A97C7B600EEA759 /* valid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = valid.h; path = matrixAnalysis/valid.h; sourceTree = "<group>"; };
 		AB0C51BC1A97FDF400EEA759 /* calibrationGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calibrationGenerator.h; path = pyrometry/twoColor/calibrationGenerator.h; sourceTree = "<group>"; };
 		AB0D6D611B8CE6120044DA61 /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fit.cpp; path = fit_diffusivity_offset_view_radius_beam/fit_all/fit.cpp; sourceTree = "<group>"; };
@@ -1679,7 +1679,6 @@
 		ABFC9E661A94372A00F124F1 /* stringToDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringToDouble.h; path = algorithm/vector/stringToDouble.h; sourceTree = "<group>"; };
 		ABFC9E691A94420300F124F1 /* doubleToString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = doubleToString.cpp; path = algorithm/vector/doubleToString.cpp; sourceTree = "<group>"; };
 		ABFC9E6A1A94420300F124F1 /* doubleToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = doubleToString.h; path = algorithm/vector/doubleToString.h; sourceTree = "<group>"; };
-		ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = doubleToQuantity.h; path = algorithm/vector/doubleToQuantity.h; sourceTree = "<group>"; };
 		ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringToQuantity.h; path = algorithm/vector/stringToQuantity.h; sourceTree = "<group>"; };
 		ABFC9E711A96B53900F124F1 /* spectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spectrum.h; sourceTree = "<group>"; };
 		ABFD19971AB1FE7600D865C7 /* find_unique_lambdas_in_files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = find_unique_lambdas_in_files.cpp; path = gTBC/gMeasure/find_unique_lambdas_in_files.cpp; sourceTree = "<group>"; };
@@ -1719,6 +1718,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0A6BAF1BE2862E00C4E04E /* quantity_to_value.h */,
+				AB0A6BB11BE28C7C00C4E04E /* double_to_quantity.h */,
 			);
 			name = container;
 			sourceTree = "<group>";
@@ -3383,7 +3383,6 @@
 				ABFC9E661A94372A00F124F1 /* stringToDouble.h */,
 				ABFC9E691A94420300F124F1 /* doubleToString.cpp */,
 				ABFC9E6A1A94420300F124F1 /* doubleToString.h */,
-				ABFC9E6D1A94435500F124F1 /* doubleToQuantity.h */,
 				ABFC9E6F1A9449B700F124F1 /* stringToQuantity.h */,
 				AB564F061A9BCC9900D74E34 /* fill_with_list_values_as_constructor_arg.h */,
 				AB71A3771AA1307B003AAC84 /* repeatElements.h */,
@@ -4682,7 +4681,6 @@
 				AB370B701BCEF6C800C14109 /* view_radius.h in Headers */,
 				AB4E53CF1ABCDEB600E7BA8D /* sec.h in Headers */,
 				ABF7B4EB1BD1D32D00038AB0 /* frequency_sweep.hpp in Headers */,
-				ABFC9E6E1A94435500F124F1 /* doubleToQuantity.h in Headers */,
 				ABF5D65419DB3EED00A70476 /* signalRatio.h in Headers */,
 				ABEF4ECB1948D4A500B44AD5 /* effusivity.hpp in Headers */,
 				AB90AA531AB2930A00F2535D /* unique_measurement_pair.h in Headers */,

@@ -13,7 +13,7 @@
 #include "units.h"
 
 #include "algorithm/vector/stringToDouble.h"
-#include "algorithm/vector/doubleToQuantity.h"
+#include "units/algorithm/container/double_to_quantity.h"
 
 namespace algorithm {
 
@@ -24,7 +24,7 @@ auto stringToQuantity( std::vector< std::string > const & input, UnitDimension c
 noexcept -> std::vector< units::quantity< UnitType > >
 {
   auto const doubles = stringToDouble( input ) ;
-  auto const quantities = doubleToQuantity< UnitType >( doubles, myDim ) ;
+  auto const quantities = units::container::double_to_quantity< UnitType >( doubles, myDim ) ;
 
   return quantities;
 }

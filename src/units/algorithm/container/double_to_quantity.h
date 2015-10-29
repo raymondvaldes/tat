@@ -1,25 +1,25 @@
 //
-//  doubleToQuantity.h
+//  double_to_quantity.h
 //  tat
 //
-//  Created by Raymond Valdes_New on 2/17/15.
-//  Copyright (c) 2015 Raymond Valdes. All rights reserved.
+//  Created by Raymond Valdes on 10/29/15.
+//  Copyright © 2015 Raymond Valdes. All rights reserved.
 //
 
-#ifndef tat_doubleToQuantity_h
-#define tat_doubleToQuantity_h
+#ifndef double_to_quantity_h_102915
+#define double_to_quantity_h_102915
+
 
 #include <vector>
 #include <algorithm>
 
 #include "units.h"
 
-namespace algorithm {
-
-namespace vector {
+namespace units {
+namespace container {
 
 template< typename UnitType, typename UnitDimension>
-auto doubleToQuantity( std::vector< double > const & input, UnitDimension const & myDim  )
+auto double_to_quantity( std::vector< double > const & input, UnitDimension const & myDim  )
 noexcept -> std::vector< units::quantity< UnitType > >
 {
   using std::vector;
@@ -38,9 +38,7 @@ noexcept -> std::vector< units::quantity< UnitType > >
   
   return output;
 }
-  
-} // namespace vector
-  
-} // namespace algorithm
 
-#endif
+}} // namespace
+
+#endif /* double_to_quantity_h */
