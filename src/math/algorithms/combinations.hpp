@@ -8,8 +8,8 @@
 #ifndef COMBINATIONS_HPP
 #define COMBINATIONS_HPP
 
-#include<vector>
-#include<cstddef>
+#include <vector>
+#include <cstddef>
 
 namespace math{
 namespace algorithms{

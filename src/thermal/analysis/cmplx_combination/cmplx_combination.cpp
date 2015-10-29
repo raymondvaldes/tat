@@ -12,7 +12,7 @@
 #include "physics/classical_mechanics/kinematics.h"
 #include "math/utility.hpp"
 #include "math/estimation/cosfit.hpp"
-#include "math/algorithms/complex.h"
+#include "math/complex/mod_phase_to_complex.h"
 
 namespace thermal{
 namespace analysis{
@@ -81,8 +81,8 @@ Ttransient_to_Tcplx( const std::vector<double> & Ttransient ) noexcept
   const double arg_fitted = OAP[2] ;
   
   //use phase, amplitude data to get back cmplx temperature field
-  using math::algorithms::mod_phase_to_cmplx ;
-  const complex<double> Tcplx = mod_phase_to_cmplx( mod_fitted, arg_fitted ) ;
+  using math::complex::mod_phase_to_complex ;
+  const complex<double> Tcplx = mod_phase_to_complex( mod_fitted, arg_fitted ) ;
   
   return Tcplx;
 }
