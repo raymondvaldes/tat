@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:valdes-support/valdes-support-test.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:valdes-engineering/valdes-engineering-test.xcodeproj">
+   </FileRef>
+</Workspace>

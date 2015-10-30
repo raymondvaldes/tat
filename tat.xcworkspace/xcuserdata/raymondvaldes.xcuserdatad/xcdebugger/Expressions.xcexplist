@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<VariablesViewState
-   version = "1.0">
-   <ContextStates>
-      <ContextState
-         contextName = "thermal::model::slab::Slab::set_diffusivity_update_k_hold_rhoCp(boost::units::quantity&lt;boost::units::unit&lt;boost::units::list&lt;boost::units::dim&lt;boost::units::length_base_dimension, boost::units::static_rational&lt;2l, 1l&gt; &gt;, boost::units::list&lt;boost::units::dim&lt;boost::units::time_base_dimension, boost::units::static_rational&lt;-1l, 1l&gt; &gt;, boost::units::dimensionless_type&gt; &gt;, boost::units::homogeneous_system&lt;boost::units::list&lt;boost::units::si::meter_base_unit, boost::units::list&lt;boost::units::scaled_base_unit&lt;boost::units::cgs::gram_base_unit, boost::units::scale&lt;10l, boost::units::static_rational&lt;3l, 1l&gt; &gt; &gt;, boost::units::list&lt;boost::units::si::second_base_unit, boost::units::list&lt;boost::units::si::ampere_base_unit, boost::units::list&lt;boost::units::si::kelvin_base_unit, boost::units::list&lt;boost::units::si::mole_base_unit, boost::units::list&lt;boost::units::si::candela_base_unit, boost::units::list&lt;boost::units::angle::radian_base_unit, boost::units::list&lt;boost::units::angle::steradian_base_unit, boost::units::dimensionless_type&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt;, void&gt;, double&gt;):slab.cpp">
-      </ContextState>
-   </ContextStates>
-</VariablesViewState>
