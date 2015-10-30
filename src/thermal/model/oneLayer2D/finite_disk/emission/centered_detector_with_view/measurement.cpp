@@ -65,7 +65,6 @@ noexcept -> thermal::model::complex::Temperature
   auto const a = seperation_of_variables::Lambda_generator( s , Bi2, l );
 
   auto const func = [&a, w, Bi1, r_e, s]( size_t const i )
-  noexcept -> quantity<si::dimensionless, complex<double> >
   {
     assert( i >=0 );
     
@@ -84,16 +83,15 @@ noexcept -> thermal::model::complex::Temperature
     auto const f3 = J1( lambda * r_e ) / lambda;
     
     auto const f = f1 * f2 * f3 ;
-    return f;
+    return f.value();
   };
   
   auto const tol = 1.e-8;
-  auto const
-  tolerance = quantity<si::dimensionless, complex<double>>({ tol , tol });
+  auto const tolerance = complex<double>( tol , tol );
   
   auto const summation = math::sum::converging_series( func, tolerance );
 
-  auto const theta = scale * summation;
+  auto const theta = scale * quantity<si::dimensionless, complex<double>>(summation);
 
 
 

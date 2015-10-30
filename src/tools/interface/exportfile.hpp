@@ -14,10 +14,7 @@
 namespace tools{
 namespace interface{
 
-
 void exportfile(const std::string &fullpath, const std::string &input ) noexcept;
-
-
 
 }}
 

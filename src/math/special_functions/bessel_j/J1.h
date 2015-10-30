@@ -10,7 +10,7 @@
 #define tat_64767_J1_h
 
 #include "math/special_functions/bessel.h"
-#include "units.h"
+//#include "units.h"
 #include <cassert>
 #include <cmath>
 
@@ -21,8 +21,8 @@ namespace bessel {
 template< typename T >
 auto J1( T const x ) noexcept
 {
-  using namespace units;
-  using std::isfinite;
+//  using namespace units;
+//  using std::isfinite;
   assert( isfinite( x ) );
 
   auto constexpr v = size_t( 1 );

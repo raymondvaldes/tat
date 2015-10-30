@@ -44,6 +44,7 @@ auto Temperature::amplitude() const noexcept -> Amplitude
 
 
 
+
 } // namespace complex
 } // namespace model
 } // namespace thermal

@@ -47,25 +47,6 @@ const -> thermal::model::complex::Temperatures
   return engine.evaluate( modulation_frequencies );
 }
 
-//void Best_fit::plot_model_phases_against(
-//  std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
-//) const
-//{
-//  plot::simple_x_y1_y2( frequencies, model_phases, exp_phases );
-//}
-//
-//void Best_fit::plot_model_phases_against_observations( void ) const
-//{
-//  assert( !frequencies.empty() );
-//  assert( !model_phases.empty() );
-//  assert( !observations.empty() );
-//
-//  assert( frequencies.size() == observations.size() ) ;
-//  assert( frequencies.size() == model_phases.size() ) ;
-//
-//  plot::simple_x_y1_y2( frequencies, model_phases, observations );
-//}
-
 auto Best_fit::phase_goodness_of_fit_function() const -> double
 {
 //  auto const predictions = model_predictions.phases();
@@ -76,8 +57,11 @@ auto Best_fit::phase_goodness_of_fit_function() const -> double
 }
 
 
-
-
+//auto caliberate_experimental_temperatures(
+//  equipment::laser::Modulation_frequencies const & frequencies,
+//  model::complex::Temperatures const & temperatures
+//  ) noexcept -> model::complex::Temperatures ;
+//
 
 } // namespace phase_analysis
 } // namespace estimate_parameters

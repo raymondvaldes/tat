@@ -14,7 +14,6 @@
 #include <cmath>
 #include <cassert>
 #include <iostream>
-#include "units.h"
 
 namespace math { namespace sum{
 
@@ -25,7 +24,6 @@ auto converging_series
   T const relative_tolerance
 ) noexcept -> T
 {
-  using namespace units;
   using std::abs;
 
   auto eval_n = func(0);
@@ -35,7 +33,7 @@ auto converging_series
   noexcept
   {
     auto const error = abs( abs(a) - abs(b) )  ;
-    auto const is_not_converged = abs( error.value() )  >  abs( tol.value() );
+    auto const is_not_converged = abs( error )  >  abs( tol );
     return is_not_converged;
   };
 
@@ -55,9 +53,7 @@ auto converging_series
     assert( i < 200 );
   } while(  is_not_converged );
   
-  
-//  assert( false);
-  
+    
   return summation;
 }
 

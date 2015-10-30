@@ -9,11 +9,13 @@
 #ifndef time_constant_hh_101915
 #define time_constant_hh_101915
 
+#include "electronics/time_constant.h"
+
 #include "units.h"
 
 namespace electronics { namespace filter { namespace low_pass { namespace RC_first_order{
 
-using Time_constant = units::quantity< units::si::electrical_time_constant >;
+using Time_constant = Time_constant;
 
 } } } } // namespace
 

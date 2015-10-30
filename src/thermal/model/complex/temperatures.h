@@ -18,6 +18,7 @@
 #include "thermal/equipment/laser/modulation_cutoff_frequencies.h"
 #include "thermal/equipment/laser/modulation_frequencies.h"
 
+
 namespace thermal{
 namespace model{
 namespace complex{
@@ -45,11 +46,12 @@ class Temperatures{
   )
   const noexcept ->
   std::pair< thermal::equipment::laser::Modulation_frequencies, Temperatures>;
-  };
-
+  
+};
 
 } // namespace complex
 } // namespace model
 } // naemsapce thermal
+
 
 #endif /* Complex_temperatures_h */

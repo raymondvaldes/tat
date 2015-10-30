@@ -15,6 +15,7 @@
 #include "thermal/model/optics/optics.h"
 #include "thermal/model/oneLayer2D/model_selection.h"
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
+#include "thermal/equipment/laser/modulation_frequencies.h"
 
 namespace thermal{
 namespace analysis {
@@ -49,14 +50,12 @@ struct Best_fit{
   )
   const -> thermal::model::complex::Temperatures;
   
-  
-//  void plot_model_phases_against(
-//    std::vector< units::quantity< units::si::plane_angle > > const & exp_phases
-//  ) const;
-//  
-//  void plot_model_phases_against_observations( void ) const ;
-  
   auto phase_goodness_of_fit_function() const -> double;
+  
+  auto caliberate_experimental_temperatures(
+    equipment::laser::Modulation_frequencies const & frequencies,
+    model::complex::Temperatures const & temperatures
+  ) noexcept -> model::complex::Temperatures ;
   
 };
 

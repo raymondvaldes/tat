@@ -16,6 +16,8 @@
 #include "thermal/model/oneLayer2D/generator/disk.hpp"
 #include "theoretical_results.hpp"
 #include "thermal/model/oneLayer2D/parameter_list.hpp"
+#include "thermal/equipment/laser/modulation_frequencies.h"
+#include "thermal/model/complex/Temperatures.h"
 
 namespace thermal{
 namespace analysis{
@@ -46,6 +48,12 @@ public:
   auto phase_goodness_of_fit_function() const -> double;
   auto parameters_to_string(
     model::oneLayer2D::Parameters const & parameters ) const -> std::string;
+
+  auto caliberate_experimental_temperatures(
+    equipment::laser::Modulation_frequencies const & frequencies,
+    model::complex::Temperatures const & temperatures
+  ) noexcept -> model::complex::Temperatures ;
+
 };
 
 

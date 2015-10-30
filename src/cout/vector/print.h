@@ -15,14 +15,12 @@
 #include <iomanip>
 
 #include "algorithm/algorithm.h"
-#include "units.h"
 
 namespace cout { namespace vector {
 
 template< typename T >
 auto print( std::vector< T > const & list ) noexcept
 {
-  using namespace units ;
   using algorithm::for_each ;
   using std::cout ;
   

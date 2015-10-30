@@ -9,7 +9,6 @@
 #ifndef double_to_quantity_h_102915
 #define double_to_quantity_h_102915
 
-
 #include <vector>
 #include <algorithm>
 

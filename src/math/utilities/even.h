@@ -22,7 +22,6 @@ bool is_even( const integer x ) noexcept
 }
   
 } // namespace utilities
-  
 } // namespace math
 
 #endif

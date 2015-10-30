@@ -10,7 +10,9 @@
 #include "phase.h"
 #include "amplitude.h"
 #include "algorithm/algorithm.h"
+#include "algorithm/vector/add.h"
 #include "thermal/equipment/laser/filter_using_cutoff_frequencies.h"
+#include <gsl.h>
 
 namespace thermal{
 namespace model{
@@ -18,11 +20,10 @@ namespace complex{
 
 using algorithm::transform;
 
-
 Temperatures::Temperatures( std::vector< Temperature > const & values )
   : values( values )
 {
-
+  Ensures( !values.empty() );
 }
 
 auto Temperatures::size() const noexcept -> size_t
@@ -76,7 +77,6 @@ const noexcept -> std::pair< equipment::laser::Modulation_frequencies, Temperatu
   auto const out = make_pair( f, t );
   return out;
 }
-
 
 } // namespace complex
 } // namespace model

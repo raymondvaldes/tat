@@ -15,7 +15,6 @@
 
 #include "statistics/signal_processing/residuals/residual_square.h"
 #include "algorithm/algorithm.h"
-#include "units.h"
 
 namespace statistics {
 namespace signal_processing {
@@ -34,7 +33,6 @@ auto residuals_square
   for_each( observations , []( auto const e ){ assert( isfinite( e ) ); } );
 
   using std::vector;
-  using namespace units;
   using algorithm::transform;
 
   

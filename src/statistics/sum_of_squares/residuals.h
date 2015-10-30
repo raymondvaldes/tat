@@ -10,8 +10,6 @@
 #define tat_residuals_h
 
 #include <vector>
-
-#include "units.h"
 #include "statistics/signal_processing/sum_residuals_square.h"
 
 namespace statistics {

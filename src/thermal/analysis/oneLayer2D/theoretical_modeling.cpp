@@ -36,7 +36,6 @@ auto theoretical_modeling(
 
 ) noexcept -> std::function< Theoretical_results( const double *x  ) >
 {
-
   auto const func =
   [frequencies, &model_updater, temperatures, frequency_sweep]
   ( const double *x ) noexcept
@@ -47,8 +46,11 @@ auto theoretical_modeling(
     auto const optics = get< 1 >(t);
 
     auto const modeling = frequency_sweep( slab, optics, frequencies );
+    
     auto const phase_bias =
     phase_shifts_from_input( frequencies, optics.filter_constant );
+    
+    
     
     auto const output =
     Theoretical_results( frequencies, temperatures, modeling, phase_bias );
